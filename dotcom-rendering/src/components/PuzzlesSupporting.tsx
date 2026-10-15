@@ -9,17 +9,24 @@ import {
 	textSans12,
 	textSansBold14,
 } from '@guardian/source/foundations';
+import { LinkButton, SvgEye } from '@guardian/source/react-components';
+import { generateImageURL } from '../lib/image';
 import { puzzlesContainerStyles } from '../lib/puzzlesContainerStyles';
 import type {
 	PuzzleContainer,
 	PuzzleItem,
+	PuzzleLink,
 	PuzzlesLayoutType,
+	PuzzlesNewsletter,
 	PuzzlesSupportingContent,
 } from '../types/puzzlesPage';
 import { AdSlot } from './AdSlot.web';
 import { Island } from './Island';
 import { NewsletterSignupCard } from './NewsletterSignupCard';
-import { NewsletterSignupForm } from './NewsletterSignupForm.island';
+import {
+	NewsletterSignupForm,
+	tertiaryButtonTheme,
+} from './NewsletterSignupForm.island';
 
 type Props = {
 	adSlot?: string;
@@ -72,7 +79,7 @@ const sectionTitleStyles = css`
 	}
 `;
 
-const usefulContentStyles = (showNewsletter: boolean) => css`
+const usefulContentStyles = (hasNewsletter: boolean) => css`
 	display: grid;
 	width: 100%;
 	min-width: 0;
@@ -80,14 +87,11 @@ const usefulContentStyles = (showNewsletter: boolean) => css`
 	border-top: 1px solid ${borderColour};
 
 	${from.desktop} {
-		grid-template-columns: repeat(
-			${showNewsletter ? 4 : 2},
-			minmax(0, 1fr)
-		);
+		grid-template-columns: repeat(${hasNewsletter ? 4 : 2}, minmax(0, 1fr));
 	}
 
 	${from.wide} {
-		grid-template-columns: ${showNewsletter
+		grid-template-columns: ${hasNewsletter
 			? 'repeat(4, minmax(0, 1fr))'
 			: 'repeat(2, minmax(0, 490px))'};
 	}
@@ -116,14 +120,24 @@ const usefulLinkTitleStyles = css`
 	font: inherit;
 `;
 
+const previewStyles = css`
+	margin: ${space[3]}px 0;
+`;
+
 const newsletterStyles = css`
 	grid-column: 1 / -1;
 	min-width: 0;
-	border-top: 1px solid ${borderColour};
+
+	a ~ & {
+		border-top: 1px solid ${borderColour};
+	}
 
 	${from.desktop} {
 		grid-column: span 2;
-		border-top: 0;
+
+		a ~ & {
+			border-top: 0;
+		}
 	}
 `;
 
@@ -276,6 +290,86 @@ const externalProps = (url: string) =>
 		? { rel: 'noopener noreferrer', target: '_blank' as const }
 		: {};
 
+export const PuzzlesUsefulLinks = ({
+	id,
+	title,
+	links,
+	newsletter,
+}: {
+	id: string;
+	title: string;
+	links: PuzzleLink[];
+	newsletter?: PuzzlesNewsletter;
+}) => (
+	<section css={sectionStyles} aria-labelledby={`${id}-useful-links-title`}>
+		<h2 css={sectionTitleStyles} id={`${id}-useful-links-title`}>
+			{title}
+		</h2>
+		<div css={usefulContentStyles(newsletter !== undefined)}>
+			{links.map((link) => (
+				<a
+					css={usefulLinkStyles}
+					href={link.url}
+					key={`${link.title}-${link.url}`}
+					{...externalProps(link.url)}
+				>
+					<h3 css={usefulLinkTitleStyles}>{link.title}</h3>
+				</a>
+			))}
+			{newsletter !== undefined && (
+				<div css={newsletterStyles}>
+					<NewsletterSignupCard
+						description={newsletter.description}
+						frequency={newsletter.frequency}
+						illustrationSquare={
+							newsletter.illustrationSquare !== undefined
+								? generateImageURL({
+										mainImage:
+											newsletter.illustrationSquare,
+										imageWidth: 100,
+										resolution: 'high',
+										aspectRatio: '1:1',
+									})
+								: undefined
+						}
+						// TODO hide ilustrations when we implement this
+						// illustrationAlt={`${newsletter.name} newsletter illustration`}
+						// hideIllustrationFromScreenReaders={true}
+						isModal={true}
+						name={newsletter.name}
+					>
+						{newsletter.exampleUrl !== undefined && (
+							<div css={previewStyles}>
+								<LinkButton
+									href={newsletter.exampleUrl}
+									target="_blank"
+									rel="noreferrer"
+									priority="tertiary"
+									size="small"
+									icon={<SvgEye />}
+									iconSide="left"
+									theme={tertiaryButtonTheme}
+									data-link-name={`puzzles newsletter preview : ${newsletter.identityName}`}
+								>
+									Preview latest
+								</LinkButton>
+							</div>
+						)}
+						<Island priority="feature" defer={{ until: 'visible' }}>
+							<NewsletterSignupForm
+								componentId={`Puzzles NewsletterSignupForm ${newsletter.identityName}`}
+								frequency={newsletter.frequency}
+								newsletterId={newsletter.identityName}
+								newsletterName={newsletter.name}
+							/>
+						</Island>
+					</NewsletterSignupCard>
+				</div>
+			)}
+		</div>
+	</section>
+);
+
 export const PuzzlesSupporting = ({
 	adSlot,
 	id,
@@ -289,59 +383,16 @@ export const PuzzlesSupporting = ({
 	const itemsById = new Map(
 		flattenItems(layout.containers).map((item) => [item.id, item]),
 	);
-	const newsletter = supporting.newsletter;
 	const hasMostPopAd = renderAds && adSlot === 'mostpop';
 
 	return (
 		<>
-			<section
-				css={sectionStyles}
-				aria-labelledby={`${id}-useful-links-title`}
-			>
-				<h2 css={sectionTitleStyles} id={`${id}-useful-links-title`}>
-					{supporting.usefulLinksTitle}
-				</h2>
-				<div css={usefulContentStyles(showNewsletter)}>
-					{supporting.usefulLinks.map((link) => (
-						<a
-							css={usefulLinkStyles}
-							href={link.url}
-							key={`${link.title}-${link.url}`}
-							{...externalProps(link.url)}
-						>
-							<h3 css={usefulLinkTitleStyles}>{link.title}</h3>
-						</a>
-					))}
-					{showNewsletter && newsletter !== undefined && (
-						<div css={newsletterStyles}>
-							<NewsletterSignupCard
-								description={newsletter.description}
-								frequency={newsletter.frequency}
-								illustrationSquare={
-									newsletter.illustrationSquare
-								}
-								// TODO hide ilustrations when we implement this
-								// illustrationAlt={`${newsletter.name} newsletter illustration`}
-								// hideIllustrationFromScreenReaders={true}
-								isModal={true}
-								name={newsletter.name}
-							>
-								<Island
-									priority="feature"
-									defer={{ until: 'visible' }}
-								>
-									<NewsletterSignupForm
-										componentId={`Puzzles NewsletterSignupForm ${newsletter.identityName}`}
-										frequency={newsletter.frequency}
-										newsletterId={newsletter.identityName}
-										newsletterName={newsletter.name}
-									/>
-								</Island>
-							</NewsletterSignupCard>
-						</div>
-					)}
-				</div>
-			</section>
+			<PuzzlesUsefulLinks
+				id={id}
+				title={supporting.usefulLinksTitle}
+				links={supporting.usefulLinks}
+				newsletter={showNewsletter ? supporting.newsletter : undefined}
+			/>
 			{showPopular && (
 				<section
 					css={sectionStyles}

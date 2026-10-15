@@ -278,6 +278,7 @@ export const PuzzlesDirectory = ({ layout, renderAds }: Props) => (
 						key={container.id}
 						layout={layout}
 						renderAds={renderAds}
+						showNewsletter={true}
 						supporting={container.supporting}
 					/>
 				);
