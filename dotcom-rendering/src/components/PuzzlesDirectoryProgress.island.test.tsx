@@ -283,6 +283,7 @@ describe('PuzzlesDirectoryProgress', () => {
 							puzzleType: 'CROSSWORD_QUICK',
 							publishDate: '2020-08-03T00:00:00Z',
 							progress: 100,
+							gameStatus: 'completed',
 							setterName: 'API setter',
 							gameUrl: '/crosswords/quick/123',
 						},

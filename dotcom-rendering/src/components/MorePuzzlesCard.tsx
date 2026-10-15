@@ -8,6 +8,7 @@ import {
 	textSans14,
 	until,
 } from '@guardian/source/foundations';
+import { SvgCheckmark } from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
 import type { PuzzleItem } from '../types/puzzlesPage';
 import { useConfig } from './ConfigContext';
@@ -213,6 +214,34 @@ const setterStyles = css`
 	line-height: 1.3;
 `;
 
+const progressStyles = css`
+	position: absolute;
+	z-index: 1;
+	bottom: ${space[2]}px;
+	left: ${space[2]}px;
+	display: inline-flex;
+	align-items: center;
+	gap: ${space[1]}px;
+	${textSans14};
+	font-weight: bold;
+	line-height: 1;
+	.completed-icon {
+		display: inline-flex;
+		width: 14px;
+		height: 14px;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		background: ${palette.success[400]};
+		color: ${palette.neutral[100]};
+	}
+	svg {
+		width: 11px;
+		height: 11px;
+		fill: currentColor;
+	}
+`;
+
 const cardImageStyles = css`
 	position: absolute;
 	right: 0;
@@ -260,6 +289,14 @@ const MorePuzzlesCard = ({ item }: { item: PuzzleItem }) => {
 					css={cardImageStyles}
 					src={item.image}
 				/>
+			)}
+			{item.gameStatus === 'completed' && (
+				<span css={progressStyles}>
+					Played
+					<span aria-hidden="true" className="completed-icon">
+						<SvgCheckmark />
+					</span>
+				</span>
 			)}
 		</>
 	);
@@ -466,6 +503,15 @@ const rowStyles = (
 		}
 		${mobileScrollable &&
 		css`
+			/* Stacked layout only (until "leftCol", see RelatedPuzzlesRail.tsx):
+			   a divider above the cards, from the first card's left edge to the
+			   last card's right edge. */
+			${until.leftCol} {
+				padding-top: 8px;
+			}
+			${between.tablet.and.leftCol} {
+				border-top: 1px solid ${palette.neutral[86]};
+			}
 			> li + li::after {
 				position: absolute;
 				top: 0;
@@ -479,7 +525,7 @@ const rowStyles = (
 				display: flex;
 				/* Bleed to both screen edges: undo the host's side padding. */
 				margin: 0 calc(var(--puzzles-edge-padding, 10px) * -1);
-				padding: 0 ${space[10]}px 0 var(--puzzles-edge-padding, 10px);
+				padding: 8px ${space[10]}px 0 var(--puzzles-edge-padding, 10px);
 				scroll-padding: 0 ${space[10]}px 0
 					var(--puzzles-edge-padding, 10px);
 				overflow-x: auto;
@@ -491,6 +537,21 @@ const rowStyles = (
 				> li {
 					flex: 0 0 max(220px, calc((100% - var(--puzzles-gap)) / 2));
 					grid-column: auto;
+				}
+				/* Scrolling cards: the divider is drawn per card and joined across
+				   the gaps, so it spans the whole scrollable width and moves with
+				   the cards rather than stopping at the screen edge. */
+				> li::before {
+					position: absolute;
+					top: -8px;
+					left: 0;
+					right: calc(var(--puzzles-gap) * -1);
+					border-top: 1px solid ${palette.neutral[86]};
+					content: '';
+					pointer-events: none;
+				}
+				> li:last-child::before {
+					right: 0;
 				}
 			}
 		`}
