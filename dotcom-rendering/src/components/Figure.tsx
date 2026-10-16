@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { breakpoints, from, space, until } from '@guardian/source/foundations';
-import type { LayoutType } from '../layouts/lib/articleArrangements';
+import { type LayoutType } from '../layouts/lib/articleArrangements';
 import {
 	ArticleDesign,
 	type ArticleFormat,
@@ -63,7 +63,7 @@ const roleCss = {
 		}
 		${from.tablet} {
 			margin-left: -20px;
-			margin-right: -100px;
+			margin-right: -20px;
 		}
 		${from.desktop} {
 			margin-left: -20px;
@@ -284,10 +284,8 @@ const mainMediaFigureStyles = (
 		height: 100%;
 		${isImmersiveLandscape &&
 		css`
-			${from.desktop} {
-				height: calc(100vh - ${navAndLabsHeaderHeight});
-				min-height: calc(31.25rem - ${navAndLabsHeaderHeight});
-			}
+			height: calc(100vh - ${navAndLabsHeaderHeight});
+			min-height: calc(31.25rem - ${navAndLabsHeaderHeight});
 			${from.wide} {
 				min-height: calc(50rem - ${navAndLabsHeaderHeight});
 			}
@@ -317,10 +315,32 @@ export const Figure = ({
 			<figure
 				id={id}
 				key={id}
-				css={mainMediaFigureStyles(
-					articleArrangement === 'immersiveLandscape',
-					format.theme === ArticleSpecial.Labs,
-				)}
+				css={[
+					mainMediaFigureStyles(
+						articleArrangement === 'immersiveLandscape',
+						format.theme === ArticleSpecial.Labs,
+					),
+					articleArrangement === 'immersivePortrait' &&
+						format.design === ArticleDesign.WeekendEssay &&
+						css`
+							position: relative;
+							padding: 10px;
+							${from.wide} {
+								padding: 15px;
+							}
+							::before {
+								content: '';
+								display: block;
+								background-image: url('https://interactive.guim.co.uk/atoms/2025/04/2025-weekend-essay-test/assets/v/1791480673/frame.png');
+								background-size: contain;
+								background-position: center;
+								background-repeat: no-repeat;
+								position: absolute;
+								inset: 0;
+								pointer-events: none;
+							}
+						`,
+				]}
 			>
 				{children}
 			</figure>

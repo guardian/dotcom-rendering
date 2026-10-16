@@ -30,15 +30,25 @@ const styles = {
 		}
 		${from.desktop} {
 			justify-self: end;
-			padding-right: ${space[8]}px;
-			width: 299px;
-		}
-		${between.desktop.and.wide} {
-			width: 380px;
+			width: 100%;
 		}
 		${from.wide} {
 			align-self: start;
-			width: 380px;
+		}
+	`,
+	choiceCardsStatesGrid: css`
+		display: grid;
+		> * {
+			grid-area: 1 / 1;
+			align-self: start;
+		}
+	`,
+	hiddenChoiceCardsState: css`
+		visibility: hidden;
+		pointer-events: none;
+
+		${until.phablet} {
+			display: none;
 		}
 	`,
 	ctaContainer: (isCollapsed: boolean, backgroundColor: string) => css`
@@ -128,7 +138,8 @@ export const BannerChoiceCards = ({
 }: {
 	bannerData: BannerData;
 }): JSX.Element | null => {
-	if (!bannerData.selectors.showChoiceCardCtas || !bannerData.choices) {
+	const choices = bannerData.choices;
+	if (!bannerData.selectors.showChoiceCardCtas || !choices) {
 		return null;
 	}
 
@@ -138,20 +149,43 @@ export const BannerChoiceCards = ({
 	return (
 		<div css={styles.threeTierChoiceCardsContainer}>
 			{showChoiceCardSelector && (
-				<ThreeTierChoiceCards
-					selectedChoiceCard={bannerData.selectedChoiceCard}
-					setSelectedChoiceCard={
-						bannerData.actions.onChoiceCardChange
-					}
-					choices={bannerData.choices}
-					id={'banner'}
-					submitComponentEvent={
-						bannerData.actions.submitComponentEvent
-					}
-					choiceCardDesignSettings={
-						bannerData.settings.choiceCardSettings
-					}
-				/>
+				// All states share one grid cell so the container is as tall as the
+				// tallest state; the live group stays pinned to the top.
+				<div css={styles.choiceCardsStatesGrid}>
+					<ThreeTierChoiceCards
+						selectedChoiceCard={bannerData.selectedChoiceCard}
+						setSelectedChoiceCard={
+							bannerData.actions.onChoiceCardChange
+						}
+						choices={choices}
+						id={'banner'}
+						submitComponentEvent={
+							bannerData.actions.submitComponentEvent
+						}
+						choiceCardDesignSettings={
+							bannerData.settings.choiceCardSettings
+						}
+					/>
+					{choices.map((choice, index) => (
+						<div
+							// eslint-disable-next-line react/no-array-index-key -- static list
+							key={index}
+							aria-hidden="true"
+							css={styles.hiddenChoiceCardsState}
+						>
+							<ThreeTierChoiceCards
+								selectedChoiceCard={choice}
+								setSelectedChoiceCard={() => undefined}
+								choices={choices}
+								id={'banner'}
+								radioIdPrefix={`banner-ghost-${index}`}
+								choiceCardDesignSettings={
+									bannerData.settings.choiceCardSettings
+								}
+							/>
+						</div>
+					))}
+				</div>
 			)}
 			<div
 				css={styles.ctaContainer(
