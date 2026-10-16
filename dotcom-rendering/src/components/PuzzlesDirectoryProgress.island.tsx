@@ -67,26 +67,6 @@ export const puzzleCardCadence = (
 	return weekday && day && month ? `${weekday} ${day} ${month}` : undefined;
 };
 
-const puzzlePath = (
-	gameUrl: string | undefined,
-	crosswordSet?: string,
-): string | undefined => {
-	const url = gameUrl?.trim();
-	if (!url) return undefined;
-	try {
-		const parsed = new URL(url, 'https://puzzles.invalid');
-		const crosswordNumber = parsed.pathname.match(
-			/^\/crosswords\/[^/]+\/(\d+)\/?$/,
-		)?.[1];
-		if (crosswordSet !== undefined && crosswordNumber !== undefined) {
-			return `/crosswords/${crosswordSet}/${crosswordNumber}${parsed.search}${parsed.hash}`;
-		}
-		return `${parsed.pathname}${parsed.search}${parsed.hash}`;
-	} catch {
-		return undefined;
-	}
-};
-
 const enrichItem = (
 	item: PuzzleItem,
 	progressByType: Map<string, PuzzleProgressItem>,
@@ -110,7 +90,7 @@ const enrichItem = (
 				: item.date,
 		url:
 			item.type === 'crossword'
-				? (puzzlePath(progress.gameUrl, item.set) ?? item.url)
+				? progress.gameUrl?.trim() || item.url
 				: item.url,
 	};
 };
