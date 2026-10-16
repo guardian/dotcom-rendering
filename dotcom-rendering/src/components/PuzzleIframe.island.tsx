@@ -14,6 +14,8 @@ import type { PuzzleConfig } from '../model/puzzles/puzzleConfigs';
 import { palette as themePalette } from '../palette';
 
 interface Props {
+	/** Authoritative dated URL from GET /game, when supplied by frontend. */
+	gameUrl?: string;
 	/**
 	 * The puzzle's own `PuzzleConfig`, used to resolve the provider-specific
 	 * iframe URL (`set`/`baseUrl`, etc., see `src/lib/puzzleIframeUrl.ts`)
@@ -303,8 +305,9 @@ const buildPuzzleContext = (
 export const buildPuzzleIframeSrc = (
 	puzzleConfig: PuzzleConfig,
 	context: PuzzleContext,
+	gameUrl?: string,
 ): string => {
-	const providerUrl = resolvePuzzleIframeUrl(puzzleConfig, context);
+	const providerUrl = resolvePuzzleIframeUrl(puzzleConfig, context, gameUrl);
 	try {
 		const url = new URL(providerUrl);
 		url.searchParams.set(
@@ -386,6 +389,7 @@ const postContextMessage = (
  * above) instead of one generic guess for every puzzle.
  */
 export const PuzzleIframe = ({
+	gameUrl,
 	puzzleConfig,
 	title,
 	darkModeAvailable,
@@ -394,7 +398,7 @@ export const PuzzleIframe = ({
 	const { userId, isResolved } = usePuzzleUserId();
 	const darkMode = usePuzzleDarkMode(darkModeAvailable);
 	const context = buildPuzzleContext(userId, darkMode, puzzleDate);
-	const iframeSrc = buildPuzzleIframeSrc(puzzleConfig, context);
+	const iframeSrc = buildPuzzleIframeSrc(puzzleConfig, context, gameUrl);
 	const iframeRef = useRef<HTMLIFrameElement>(null);
 
 	usePuzzleProgressReporting(puzzleConfig, iframeRef);

@@ -140,6 +140,13 @@ const headlineFont = (format: ArticleFormat) => {
 	`;
 };
 
+const weekendReadFont = css`
+	${headlineMedium34}
+	${from.leftCol} {
+		${headlineMedium50}
+	}
+`;
+
 const invertedFontLineHeight = css`
 	line-height: 2.1875rem;
 
@@ -272,20 +279,26 @@ const darkBackground = css`
 
 const immersiveDarkBackground = css`
 	background-color: ${themePalette('--headline-background-immersive')};
-	${from.desktop} {
+
+	${from.tablet} {
+		background-color: ${themePalette('--headline-background-immersive')};
 		padding-bottom: ${space[6]}px;
 	}
 `;
 
 const invertedText = css`
 	color: white;
-	background-color: black;
 	white-space: pre-wrap;
 	padding-bottom: ${space[1]}px;
 	padding-left: 12px;
 	padding-right: 18px;
 
-	${from.desktop} {
+	${from.tablet} {
+		margin-left: -20px;
+		padding-left: 20px;
+	}
+
+	${from.leftCol} {
 		margin-left: -10px;
 		padding-left: 10px;
 		padding-right: ${space[1]}px;
@@ -420,7 +433,10 @@ const WithAgeWarning = ({
 							`,
 						snapToInverted && !isLegacyImmersive
 							? css`
-									${from.desktop} {
+									${from.tablet} {
+										margin-left: -20px;
+									}
+									${from.leftCol} {
 										margin-left: -10px;
 									}
 								`
@@ -525,6 +541,30 @@ export const ArticleHeadline = ({
 }: Props) => {
 	const isInverted = layoutType === 'immersiveLandscape';
 	const isLegacyImmersive = layoutType == null;
+	if (
+		layoutType === 'immersivePortrait' &&
+		format.design === ArticleDesign.WeekendEssay
+	) {
+		return (
+			<div css={decideBottomPadding({ format, hasAvatar })}>
+				<WithAgeWarning
+					tags={tags}
+					webPublicationDateDeprecated={webPublicationDateDeprecated}
+					format={format}
+				>
+					<h1 css={weekendReadFont}>{headlineString}</h1>
+				</WithAgeWarning>
+				{!!byline && (
+					<HeadlineByline
+						format={format}
+						byline={byline}
+						tags={tags}
+						layoutType={layoutType}
+					/>
+				)}
+			</div>
+		);
+	}
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {
