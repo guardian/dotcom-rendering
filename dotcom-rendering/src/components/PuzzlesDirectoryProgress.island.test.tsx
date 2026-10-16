@@ -46,11 +46,17 @@ const layout: PuzzlesLayoutType = {
 };
 
 describe('PuzzlesDirectoryProgress', () => {
+	const pageConfig = window.guardian.config
+		.page as typeof window.guardian.config.page & { ajaxUrl?: string };
+	const originalAjaxUrl = pageConfig.ajaxUrl;
+
 	beforeEach(() => {
+		pageConfig.ajaxUrl = '';
 		mockedSubscribeToAuthStateChange.mockReturnValue(jest.fn());
 	});
 
 	afterEach(() => {
+		pageConfig.ajaxUrl = originalAjaxUrl;
 		Reflect.deleteProperty(global, 'fetch');
 		jest.clearAllMocks();
 	});
@@ -255,44 +261,56 @@ describe('PuzzlesDirectoryProgress', () => {
 		});
 	});
 
-	it('sends the access token and renders API setter and completion data when signed in', async () => {
-		mockedGetAuthStatus.mockResolvedValue({
-			kind: 'SignedIn',
-			accessToken: { accessToken: 'access-token' },
-			idToken: {},
-		} as never);
-		const fetchMock = jest.fn().mockResolvedValue({
-			ok: true,
-			json: async () => ({
-				results: [
-					{
-						puzzleType: 'CROSSWORD_QUICK',
-						publishDate: '2020-08-03T00:00:00Z',
-						progress: 100,
-						setterName: 'API setter',
-						gameUrl: '/crosswords/quick/123',
+	it.each([
+		'',
+		'https://api.nextgen.guardianapps.co.uk',
+		'//api.nextgen.guardianapps.co.uk',
+		'https://services.code.dev-guardianapps.co.uk',
+	])(
+		'loads authenticated progress via ajaxUrl=%s and renders it',
+		async (ajaxUrl) => {
+			pageConfig.ajaxUrl = ajaxUrl;
+			mockedGetAuthStatus.mockResolvedValue({
+				kind: 'SignedIn',
+				accessToken: { accessToken: 'access-token' },
+				idToken: {},
+			} as never);
+			const fetchMock = jest.fn().mockResolvedValue({
+				ok: true,
+				json: async () => ({
+					results: [
+						{
+							puzzleType: 'CROSSWORD_QUICK',
+							publishDate: '2020-08-03T00:00:00Z',
+							progress: 100,
+							gameStatus: 'completed',
+							setterName: 'API setter',
+							gameUrl: '/crosswords/quick/123',
+						},
+					],
+				}),
+			});
+			Object.defineProperty(global, 'fetch', {
+				configurable: true,
+				value: fetchMock,
+			});
+
+			render(
+				<PuzzlesDirectoryProgress layout={layout} renderAds={false} />,
+			);
+
+			await screen.findByText('By: API setter');
+			expect(screen.getByText('Mon 3 Aug')).toBeInTheDocument();
+			expect(screen.getByText('Played')).toBeInTheDocument();
+			expect(fetchMock).toHaveBeenCalledWith(
+				`${ajaxUrl}/puzzles-and-games/progress`,
+				expect.objectContaining({
+					headers: {
+						Accept: 'application/json',
+						Authorization: 'Bearer access-token',
 					},
-				],
-			}),
-		});
-		Object.defineProperty(global, 'fetch', {
-			configurable: true,
-			value: fetchMock,
-		});
-
-		render(<PuzzlesDirectoryProgress layout={layout} renderAds={false} />);
-
-		await screen.findByText('By: API setter');
-		expect(screen.getByText('Mon 3 Aug')).toBeInTheDocument();
-		expect(screen.getByText('Played')).toBeInTheDocument();
-		expect(fetchMock).toHaveBeenCalledWith(
-			'/puzzles-and-games/progress',
-			expect.objectContaining({
-				headers: {
-					Accept: 'application/json',
-					Authorization: 'Bearer access-token',
-				},
-			}),
-		);
-	});
+				}),
+			);
+		},
+	);
 });
