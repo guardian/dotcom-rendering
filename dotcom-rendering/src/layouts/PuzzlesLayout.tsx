@@ -40,8 +40,9 @@ const brandStyles = css`
 // Sponsored artwork heights vary by breakpoint and leave room for the sponsor lockup.
 const sponsoredBrandStyles = css`
 	position: relative;
-	/* The sponsored artwork has an opaque light background, so the header stays light in dark mode. */
-	background: ${palette.opinion[800]};
+	/* Matches the opaque background in the sponsored artwork, in light and dark mode */
+	/* stylelint-disable-next-line color-no-hex */
+	background: #fef7f1;
 	${from.phablet} {
 		height: 286px;
 	}
