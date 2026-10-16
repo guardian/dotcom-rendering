@@ -29,9 +29,9 @@ describe('handlePuzzlesPage', () => {
 		});
 	});
 
-	it('renders the exact variant participation outside development', () => {
+	it('renders for the International edition outside development', () => {
 		validate.mockReturnValue({
-			config: { serverSideABTests: { 'puzzles-new-hub-v1': 'variant' } },
+			config: { edition: 'INT' },
 		} as never);
 		const res = response();
 		handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
@@ -39,24 +39,20 @@ describe('handlePuzzlesPage', () => {
 		expect(res.status).toHaveBeenCalledWith(200);
 	});
 
-	it('renders an archive payload for the V1 variant', () => {
+	it('renders an archive payload for the International edition', () => {
 		validate.mockReturnValue({
 			archive: {},
-			config: {
-				serverSideABTests: {
-					'puzzles-new-hub-v1': 'variant',
-				},
-			},
+			config: { edition: 'INT' },
 		} as never);
 		const res = response();
 		handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
 		expect(renderPage).toHaveBeenCalledTimes(1);
 	});
 
-	it('does not render an archive when V1 is absent', () => {
+	it('does not render an archive outside the International edition', () => {
 		validate.mockReturnValue({
 			archive: {},
-			config: { serverSideABTests: {} },
+			config: { edition: 'UK' },
 		} as never);
 		const res = response();
 		handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
@@ -64,11 +60,11 @@ describe('handlePuzzlesPage', () => {
 		expect(renderPage).not.toHaveBeenCalled();
 	});
 
-	it('renders without experiment participation in local development', () => {
+	it('renders outside the International edition in local development', () => {
 		const previousNodeEnvironment = process.env.NODE_ENV;
 		process.env.NODE_ENV = 'development';
 		validate.mockReturnValue({
-			config: { serverSideABTests: {} },
+			config: { edition: 'UK' },
 		} as never);
 		const res = response();
 
@@ -86,18 +82,16 @@ describe('handlePuzzlesPage', () => {
 		}
 	});
 
-	it.each([
-		['control', { 'puzzles-new-hub-v1': 'control' }],
-		['missing', {}],
-		['unknown group', { 'puzzles-new-hub-v1': 'unknown' }],
-		['unrelated', { unrelated: 'variant' }],
-	])('returns 404 without mounting the renderer for %s', (_, tests) => {
-		validate.mockReturnValue({
-			config: { serverSideABTests: tests },
-		} as never);
-		const res = response();
-		handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
-		expect(res.sendStatus).toHaveBeenCalledWith(404);
-		expect(renderPage).not.toHaveBeenCalled();
-	});
+	it.each(['UK', 'US', 'AU', 'EUR'])(
+		'returns 404 without mounting the renderer for the %s edition',
+		(edition) => {
+			validate.mockReturnValue({
+				config: { edition },
+			} as never);
+			const res = response();
+			handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
+			expect(res.sendStatus).toHaveBeenCalledWith(404);
+			expect(renderPage).not.toHaveBeenCalled();
+		},
+	);
 });
