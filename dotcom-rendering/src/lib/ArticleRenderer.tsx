@@ -4,6 +4,7 @@ import { useConfig } from '../components/ConfigContext';
 import { FeastContextualNudge } from '../components/FeastContextualNudge.island';
 import { Island } from '../components/Island';
 import { grid } from '../grid';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import type { Switches } from '../types/config';
 import type { FEElement, RecipeBlockElement } from '../types/content';
@@ -67,7 +68,7 @@ type Props = {
 	contributionsServiceUrl: string;
 	shouldHideAds: boolean;
 	idApiUrl?: string;
-	isInDeprecatedInteractiveLayout?: boolean;
+	articleArrangement?: LayoutType;
 };
 
 export const ArticleRenderer = ({
@@ -91,7 +92,7 @@ export const ArticleRenderer = ({
 	contributionsServiceUrl,
 	shouldHideAds,
 	idApiUrl,
-	isInDeprecatedInteractiveLayout = false,
+	articleArrangement,
 }: Props) => {
 	const isSectionedMiniProfilesArticle =
 		elements.filter(
@@ -120,9 +121,7 @@ export const ArticleRenderer = ({
 				isSectionedMiniProfilesArticle={isSectionedMiniProfilesArticle}
 				shouldHideAds={shouldHideAds}
 				idApiUrl={idApiUrl}
-				isInDeprecatedInteractiveLayout={
-					isInDeprecatedInteractiveLayout
-				}
+				articleArrangement={articleArrangement}
 			/>
 		);
 	});
@@ -253,6 +252,10 @@ export const ArticleRenderer = ({
 		}
 	`;
 
+	const isInDeprecatedInteractiveLayout =
+		format.design === ArticleDesign.Interactive &&
+		articleArrangement === undefined;
+
 	return (
 		<div
 			className={[
@@ -261,7 +264,6 @@ export const ArticleRenderer = ({
 
 				// Note, this class MUST be on the *direct parent* of the
 				// elements for some legacy interactive styling to work.
-				format.design === ArticleDesign.Interactive &&
 				isInDeprecatedInteractiveLayout
 					? interactiveLegacyClasses.contentMainColumn
 					: '',
