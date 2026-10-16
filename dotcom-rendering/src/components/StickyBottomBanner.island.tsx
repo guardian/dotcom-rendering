@@ -35,6 +35,7 @@ import {
 	BrazeBanner,
 	canShowBrazeBanner,
 } from './StickyBottomBanner/BrazeBanner';
+import { DEFAULT_PROMOTED_NEWSLETTER } from './StickyBottomBanner/newsletterBannerDetails';
 import {
 	canShowRRBanner,
 	ReaderRevenueBanner,
@@ -187,7 +188,11 @@ const buildRRBannerConfigWith = ({
 						inNoShowMobileAboveNavVariant,
 					}),
 				show: ({ name, props }: ModuleData<BannerProps>) => (
-					<BannerComponent name={name} props={props} />
+					<BannerComponent
+						name={name}
+						props={props}
+						promotedNewsletter={DEFAULT_PROMOTED_NEWSLETTER}
+					/>
 				),
 			},
 			timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
