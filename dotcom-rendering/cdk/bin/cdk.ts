@@ -116,8 +116,8 @@ export const TagPageRenderingPropsCODE: RenderingCDKStackProps = {
 		taskCpu: 1024,
 		taskMemoryLimitMiB: 2048,
 		scaling: {
-			minimumTasks: 1,
-			maximumTasks: 3,
+			minimumTasks: 18,
+			maximumTasks: 18,
 			cpuScaling: {
 				targetValue: 20,
 				scaleInCooldown: Duration.seconds(60),

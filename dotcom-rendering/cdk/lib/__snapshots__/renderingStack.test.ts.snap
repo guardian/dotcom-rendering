@@ -2109,8 +2109,8 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         "EcsTaskDefinitionTaskRoleB7B6D8DD",
       ],
       "Properties": {
-        "MaxCapacity": 3,
-        "MinCapacity": 1,
+        "MaxCapacity": 18,
+        "MinCapacity": 18,
         "ResourceId": {
           "Fn::Join": [
             "",
