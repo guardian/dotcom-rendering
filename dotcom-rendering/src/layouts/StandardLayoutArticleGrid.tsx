@@ -190,9 +190,6 @@ export const StandardLayoutArticleGrid = ({
 
 	const isFilterSeries = hasFilterSeriesTag(article.tags);
 
-	const tableOfContentsStyle =
-		isImmersive && isFilterSeries ? 'horizontal' : 'default';
-
 	const headlineBackgroundImmersive = themePalette(
 		'--headline-background-immersive',
 	);
@@ -234,6 +231,9 @@ export const StandardLayoutArticleGrid = ({
 	const isImmersivePortrait = layoutType === 'immersivePortrait';
 	const isImmersiveLandscape = layoutType === 'immersiveLandscape';
 	const isImmersive = isImmersivePortrait || isImmersiveLandscape;
+
+	const tableOfContentsStyle =
+		isImmersive && isFilterSeries ? 'horizontal' : 'default';
 
 	const hasMinimumImageHeight =
 		isLabs && isImmersivePortrait && isMainMediaImage;
