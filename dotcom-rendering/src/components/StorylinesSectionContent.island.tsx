@@ -13,6 +13,7 @@ import { Hide } from '@guardian/source/react-components';
 import { useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import type { EditionId } from '../lib/edition';
+import { formatStorylinesDateRange } from '../lib/formatStorylinesDateRange';
 import { parseStorylinesContentToStorylines } from '../model/enhanceTagPageStorylinesContent';
 import { palette } from '../palette';
 import type { StorylinesContent } from '../types/storylinesContent';
@@ -118,30 +119,6 @@ const footerStyle = css`
 	display: flex;
 	justify-content: end;
 `;
-
-function formatDateRangeText(
-	earliestArticleTime?: string | null,
-	latestArticleTime?: string | null,
-): string {
-	const earliest = earliestArticleTime ? new Date(earliestArticleTime) : null;
-	const latest = latestArticleTime ? new Date(latestArticleTime) : null;
-	const format = (d?: Date | null) => {
-		if (!d) return '';
-		const day = d.getDate();
-		return `${day} ${d.toLocaleDateString('en-GB', {
-			month: 'long',
-			year: 'numeric',
-		})}`;
-	};
-
-	if (earliest) {
-		return `articles published since ${format(earliest)}`;
-	} else if (latest) {
-		return `articles published up to ${format(latest)}`;
-	} else {
-		return 'recent articles in our archives';
-	}
-}
 
 /**
  * Used to display the content of the storylines section on specific tag pages.
@@ -283,7 +260,7 @@ export const StorylinesSectionContent = ({
 					</div>
 				</Hide>
 				<div>
-					{`These storylines were curated from ${formatDateRangeText(
+					{`These storylines were curated from ${formatStorylinesDateRange(
 						storylinesContent.earliestArticleTime,
 						storylinesContent.latestArticleTime,
 					)}. Some articles may be older to provide further context.`}
