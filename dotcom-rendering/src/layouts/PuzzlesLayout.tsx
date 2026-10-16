@@ -226,7 +226,13 @@ export const PuzzlesLayout = ({
 				id="maincontent"
 			>
 				<header css={[brandStyles, branding && sponsoredBrandStyles]}>
-					<h1 css={visuallyHidden}>Puzzles &amp; games</h1>
+					<h1
+						css={css`
+							${visuallyHidden}
+						`}
+					>
+						Puzzles &amp; games
+					</h1>
 					<picture css={brandPictureStyles}>
 						{header.sources.map(({ breakpoint, filename }) => (
 							<source
