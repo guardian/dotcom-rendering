@@ -1,5 +1,20 @@
 # Puzzle Page
 
+## Puzzles API URL resolution
+
+Frontend resolves each dated page with `GET /game?puzzleType=...&date=YYYY-MM-DD`
+and sends the response's `gameUrl` as `instance.gameUrl`. DCR passes it through the
+layout to `PuzzleIframe` and preserves the API's path, opaque puzzle ID and provider
+parameters. AmuseLabs URLs receive the current reader's `uid` and `darkMode`; all
+providers continue to receive `guardian-puzzle-context`.
+
+The local URL builders described below remain a compatibility fallback for older
+frontend payloads without `gameUrl`. New frontend pages always supply the API URL
+or return 404/502 before rendering. Deploy this DCR support before the frontend change.
+
+Hub progress enrichment also preserves crossword `gameUrl` values exactly, including
+absolute links and dated Genius article paths. Other puzzle card destinations are unchanged.
+
 ## What is implemented
 
 Puzzle Page is a single, generic page template for the Guardian's
@@ -139,7 +154,7 @@ import { puzzlePageFixtures } from './fixtures/manual/puzzlePage';
 
 fs.mkdirSync('/tmp/puzzle-fixtures', { recursive: true });
 for (const [slug, page] of Object.entries(puzzlePageFixtures)) {
-	fs.writeFileSync(`/tmp/puzzle-fixtures/${slug}.json`, JSON.stringify(page, null, 2));
+  fs.writeFileSync(`/tmp/puzzle-fixtures/${slug}.json`, JSON.stringify(page, null, 2));
 }
 console.log('wrote', Object.keys(puzzlePageFixtures).length, 'fixtures to /tmp/puzzle-fixtures');
 EOF
