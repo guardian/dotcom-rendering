@@ -19,9 +19,11 @@ export { getPuzzleUrl };
 type Props = {
 	layout: PuzzlesLayoutType;
 	renderAds: boolean;
+	/** Omit the black rule above the first section, e.g. below the sponsorship banner. */
+	hideTopRule?: boolean;
 };
 
-const sectionStyles = (isFeatured: boolean) => css`
+const sectionStyles = (isFeatured: boolean, hideTopRule: boolean) => css`
 	--puzzles-content-top: 8px;
 	--puzzles-content-bottom: 32px;
 	position: relative;
@@ -38,6 +40,12 @@ const sectionStyles = (isFeatured: boolean) => css`
 		content: '';
 		transform: translateX(-50%);
 	}
+	${hideTopRule &&
+	css`
+		&:first-of-type::before {
+			content: none;
+		}
+	`}
 
 	${from.leftCol} {
 		--puzzles-content-top: ${isFeatured ? 16 : 8}px;
@@ -222,14 +230,20 @@ const hasContent = (container: PuzzleContainer): boolean =>
 	container.content.items.some((row) => row.length > 0) ||
 	container.content.nestedContainers.some(hasContent);
 
-const DirectorySection = ({ container }: { container: PuzzleContainer }) => {
+const DirectorySection = ({
+	container,
+	hideTopRule,
+}: {
+	container: PuzzleContainer;
+	hideTopRule: boolean;
+}) => {
 	if (!hasContent(container)) {
 		return null;
 	}
 	return (
 		<section
 			aria-labelledby={`${container.id}-title`}
-			css={sectionStyles(container.variant === 'featured')}
+			css={sectionStyles(container.variant === 'featured', hideTopRule)}
 			id={container.id}
 		>
 			<div css={headingColumnStyles}>
@@ -263,7 +277,11 @@ const DirectorySection = ({ container }: { container: PuzzleContainer }) => {
 	);
 };
 
-export const PuzzlesDirectory = ({ layout, renderAds }: Props) => (
+export const PuzzlesDirectory = ({
+	layout,
+	renderAds,
+	hideTopRule = false,
+}: Props) => (
 	<>
 		{layout.containers.map((container) => {
 			if (
@@ -309,7 +327,11 @@ export const PuzzlesDirectory = ({ layout, renderAds }: Props) => (
 				);
 			}
 			return (
-				<DirectorySection container={container} key={container.id} />
+				<DirectorySection
+					container={container}
+					hideTopRule={hideTopRule}
+					key={container.id}
+				/>
 			);
 		})}
 	</>

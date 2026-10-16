@@ -15,6 +15,7 @@ export type { PuzzleProgressItem };
 type Props = {
 	layout: PuzzlesLayoutType;
 	renderAds: boolean;
+	hideTopRule?: boolean;
 };
 
 const londonDateFormatter = new Intl.DateTimeFormat('en-GB', {
@@ -147,12 +148,22 @@ export const enrichLayoutWithProgress = (
 	};
 };
 
-export const PuzzlesDirectoryProgress = ({ layout, renderAds }: Props) => {
+export const PuzzlesDirectoryProgress = ({
+	layout,
+	renderAds,
+	hideTopRule,
+}: Props) => {
 	const progress = usePuzzleProgress();
 	const progressLayout = useMemo(
 		() => (progress ? enrichLayoutWithProgress(layout, progress) : layout),
 		[layout, progress],
 	);
 
-	return <PuzzlesDirectory layout={progressLayout} renderAds={renderAds} />;
+	return (
+		<PuzzlesDirectory
+			layout={progressLayout}
+			renderAds={renderAds}
+			hideTopRule={hideTopRule}
+		/>
+	);
 };
