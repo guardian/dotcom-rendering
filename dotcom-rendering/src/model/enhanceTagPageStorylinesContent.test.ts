@@ -251,15 +251,15 @@ describe('parseStorylinesContentToStorylines (category-specific behaviour)', () 
 	});
 
 	/**
-	 * NOTE: This documents current behaviour, which is arguably a latent bug.
-	 * `decideFormatForArticle`/`decideGroupedTrails` match category names as
-	 * exact string literals (e.g. 'Contrasting opinions'). Any unrecognised
-	 * label silently falls through to a plain Standard card, losing the
-	 * intended styling with no error or warning. This test exists as a
-	 * tripwire: if the category-matching ever becomes stricter (e.g. throws or
-	 * logs on unknown input), update it deliberately.
+	 * Known aliases (e.g. 'Opinions') are now canonicalised, but a genuinely
+	 * unrecognised label still falls through to a plain Standard card with no
+	 * error or warning. This test is a tripwire: if category-matching becomes
+	 * stricter (e.g. throws or logs on unknown input), update it deliberately.
 	 */
-	it('silently defaults unknown categories to a standard format (documents risky fallback)', () => {
+	it('renders genuinely unknown categories with a safe standard format and preserves their label', () => {
+		const warn = jest
+			.spyOn(console, 'warn')
+			.mockImplementation(() => undefined);
 		const parsed = parseStorylinesContentToStorylines(
 			makeContent('Something New', [makeArticle()]),
 		);
@@ -268,6 +268,7 @@ describe('parseStorylinesContentToStorylines (category-specific behaviour)', () 
 		expect(card?.format).toEqual({ design: 0, display: 0, theme: 0 });
 		expect(card?.showByline).toBe(false);
 		expect(card?.boostLevel).toBe('default');
+		warn.mockRestore();
 	});
 
 	it('limits Key Stories supporting content to four articles', () => {
@@ -315,6 +316,44 @@ describe('parseStorylinesContentToStorylines (category-specific behaviour)', () 
 		expect(
 			parsed[0]?.categories[0]?.groupedTrails.standard[0]?.byline,
 		).toBe('');
+	});
+
+	it('treats the "Opinions" label as equivalent to "Contrasting opinions"', () => {
+		// Frontend may send either the raw category ('Contrasting opinions') or
+		// its display label ('Opinions'); both must produce identical opinion
+		// styling (comment format, byline shown, avatar) and the 'Opinions' title.
+		const article = makeArticle({
+			byline: 'A Columnist',
+			image: {
+				src: 'https://example.com/avatar.jpg',
+				altText: 'a',
+				isAvatar: true,
+				mediaData: null,
+			},
+		});
+
+		const fromDisplayLabel = parseStorylinesContentToStorylines(
+			makeContent('Opinions', [article]),
+		);
+		const fromRawLabel = parseStorylinesContentToStorylines(
+			makeContent('Contrasting opinions', [article]),
+		);
+
+		const displayCategory = fromDisplayLabel[0]?.categories[0];
+		const rawCategory = fromRawLabel[0]?.categories[0];
+		const displayCard = displayCategory?.groupedTrails.standard[0];
+
+		expect(displayCategory?.title).toBe('Opinions');
+		expect(displayCard?.format).toEqual({
+			design: 8,
+			display: 0,
+			theme: 1,
+		});
+		expect(displayCard?.showByline).toBe(true);
+		expect(displayCard?.avatarUrl).toBe('https://example.com/avatar.jpg');
+
+		// Both labels should yield equivalent parsed output
+		expect(displayCategory).toEqual(rawCategory);
 	});
 
 	it('only sets an avatar url for Contrasting opinions articles flagged as avatars', () => {
@@ -372,49 +411,29 @@ describe('parseStorylinesContentToStorylines (category-specific behaviour)', () 
 });
 
 /**
- * These tests pin down behaviour that is questionable rather than clearly
- * correct. They are deliberately written to describe what the code does *today*
- * so the risk is visible and any future change to it is an explicit decision,
- * not a silent one. Each corresponds to a finding worth addressing in the
- * implementation.
+ * Regression tests for the guards that harden Storylines data handling against
+ * malformed or unexpected input from Frontend.
  */
-describe('parseStorylinesContentToStorylines (known risky behaviour)', () => {
-	it('the display label "Opinions" is NOT treated as "Contrasting opinions"', () => {
-		// Frontend's raw category is 'Contrasting opinions'; 'Opinions' is only
-		// the display title. If the API ever sent the display label instead,
-		// the special opinion styling (comment format, byline, avatar) would be
-		// silently dropped. This test documents that gap.
-		const parsed = parseStorylinesContentToStorylines(
-			makeContent('Opinions', [
-				makeArticle({
-					byline: 'A Columnist',
-					image: {
-						src: 'https://example.com/avatar.jpg',
-						altText: 'a',
-						isAvatar: true,
-						mediaData: null,
-					},
-				}),
-			]),
-		);
-		const card = parsed[0]?.categories[0]?.groupedTrails.standard[0];
-		// Falls back to the default Standard format instead of { 8, 0, 1 }
-		expect(card?.format).toEqual({ design: 0, display: 0, theme: 0 });
-		// The byline and avatar that "Contrasting opinions" would enable are lost
-		expect(card?.showByline).toBe(false);
-		expect(card?.avatarUrl).toBeUndefined();
-	});
-
-	it('produces a Key Stories card with an empty url when the category has no articles', () => {
-		// An empty Key Stories group still yields a splash card whose url is ''
-		// (which would link to the site root) and which has no image.
+describe('parseStorylinesContentToStorylines (data-handling guards)', () => {
+	it('drops a Key Stories category that has no articles instead of emitting an empty-url splash card', () => {
 		const parsed = parseStorylinesContentToStorylines(
 			makeContent('Key Stories', []),
 		);
-		const card = parsed[0]?.categories[0]?.groupedTrails.splash[0];
-		expect(card).toBeDefined();
-		expect(card?.url).toBe('');
-		expect(card?.image).toBeUndefined();
-		expect(card?.supportingContent).toHaveLength(0);
+		// The category produced no renderable cards, so it is removed entirely
+		// rather than rendering a section heading with an empty-url splash card.
+		expect(parsed[0]?.categories).toHaveLength(0);
+	});
+
+	it('warns when an unknown category label is received', () => {
+		const warn = jest
+			.spyOn(console, 'warn')
+			.mockImplementation(() => undefined);
+		parseStorylinesContentToStorylines(
+			makeContent('Totally New Category', [makeArticle()]),
+		);
+		expect(warn).toHaveBeenCalledWith(
+			'Unknown storyline category received: "Totally New Category"',
+		);
+		warn.mockRestore();
 	});
 });
