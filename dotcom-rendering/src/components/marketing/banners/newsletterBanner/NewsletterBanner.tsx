@@ -1,9 +1,13 @@
 import { css } from '@emotion/react';
 import { from, neutral, space, until } from '@guardian/source/foundations';
 import { hexColourToString } from '@guardian/support-dotcom-components';
-import type { Image } from '@guardian/support-dotcom-components/dist/shared/types';
+import type { Image as SupportImage } from '@guardian/support-dotcom-components/dist/shared/types';
+import type { BannerProps } from '@guardian/support-dotcom-components/dist/shared/types';
+import type { ComponentType } from 'react';
 import { useEffect, useRef } from 'react';
+import type { Newsletter } from '../../../../types/content';
 import { NewsletterSignupForm } from '../../../NewsletterSignupForm.island';
+import { DEFAULT_PROMOTED_NEWSLETTER } from '../../../StickyBottomBanner/newsletterBannerDetails';
 import { validatedBannerWrapper } from '../common/BannerWrapper';
 import type { BannerRenderProps } from '../common/types';
 import type { BannerData } from '../designableBanner/BannerProps';
@@ -14,26 +18,6 @@ import { BannerHeader } from '../designableBanner/components/BannerHeader';
 import { BannerLogo } from '../designableBanner/components/BannerLogo';
 import { BannerVisual } from '../designableBanner/components/BannerVisual';
 import { useDesignableBannerModel } from '../designableBanner/useDesignableBannerModel';
-
-const prototypeNewsletter = {
-	newsletterId: 'saturday-edition',
-	newsletterName: 'Saturday Edition',
-	frequency: 'every Saturday',
-};
-
-const prototypeNewsletterImage: Image = {
-	mainUrl:
-		'https://i.guim.co.uk/img/media/630a3735c02e195be89ab06fd1b8192959e282ab/0_0_1172_560/500.png?width=500&quality=75&s=937595b3f471d6591475955335c7c023',
-	mobileUrl:
-		'https://i.guim.co.uk/img/media/630a3735c02e195be89ab06fd1b8192959e282ab/0_0_1172_560/500.png?width=500&quality=75&s=937595b3f471d6591475955335c7c023',
-	tabletUrl:
-		'https://i.guim.co.uk/img/media/20cc6e0fa146574bb9c4ed410ac1a089fab02ce0/0_0_1428_1344/500.png?width=500&quality=75&s=fe64f647f74a3cb671f8035a473b895f',
-	desktopUrl:
-		'https://i.guim.co.uk/img/media/6c933a058d1ce37a5ad17f79895906150812dfee/0_0_1768_1420/500.png?width=500&quality=75&s=9277532ddf184a308e14218e3576543b',
-	wideUrl:
-		'https://i.guim.co.uk/img/media/6c933a058d1ce37a5ad17f79895906150812dfee/0_0_1768_1420/500.png?width=500&quality=75&s=9277532ddf184a308e14218e3576543b',
-	altText: '',
-};
 
 const styles = {
 	container: (background: string, textColor: string) => css`
@@ -94,9 +78,24 @@ const styles = {
 	`,
 };
 
+const buildNewsletterBannerImage = (newsletter: Newsletter): SupportImage => {
+	const cardImage = newsletter.illustrationCard!;
+	const squareImage = newsletter.illustrationSquare;
+
+	return {
+		mainUrl: cardImage,
+		mobileUrl: squareImage,
+		tabletUrl: cardImage,
+		desktopUrl: cardImage,
+		wideUrl: cardImage,
+		altText: newsletter.name,
+	};
+};
+
 const NewsletterBannerComponent = (
 	props: BannerRenderProps,
 ): JSX.Element | null => {
+	const newsletter = props.promotedNewsletter ?? DEFAULT_PROMOTED_NEWSLETTER;
 	const bannerRef = useRef<HTMLDivElement>(null);
 	const { isOpen, bannerData: baseBannerData } = useDesignableBannerModel({
 		...props,
@@ -132,7 +131,7 @@ const NewsletterBannerComponent = (
 		},
 		settings: {
 			...baseBannerData.settings,
-			imageSettings: prototypeNewsletterImage,
+			imageSettings: buildNewsletterBannerImage(newsletter),
 		},
 		selectors: {
 			...baseBannerData.selectors,
@@ -161,7 +160,9 @@ const NewsletterBannerComponent = (
 					<BannerHeader bannerData={bannerData} />
 					<BannerBody bannerData={bannerData} />
 					<NewsletterSignupForm
-						{...prototypeNewsletter}
+						newsletterId={newsletter.identityName}
+						newsletterName={newsletter.name}
+						frequency={newsletter.frequency}
 						componentId="newsletter_banner"
 						abTest={{
 							name: props.tracking.abTestName,
@@ -176,7 +177,19 @@ const NewsletterBannerComponent = (
 	);
 };
 
-export const NewsletterBanner = validatedBannerWrapper(
+const ValidatedNewsletterBanner = validatedBannerWrapper(
 	NewsletterBannerComponent,
 	'newsletter-banner',
+) as ComponentType<BannerProps & { promotedNewsletter?: Newsletter }>;
+
+export const NewsletterBanner = ({
+	promotedNewsletter = DEFAULT_PROMOTED_NEWSLETTER,
+	...props
+}: BannerProps & {
+	promotedNewsletter?: Newsletter;
+}): JSX.Element => (
+	<ValidatedNewsletterBanner
+		{...props}
+		promotedNewsletter={promotedNewsletter}
+	/>
 );

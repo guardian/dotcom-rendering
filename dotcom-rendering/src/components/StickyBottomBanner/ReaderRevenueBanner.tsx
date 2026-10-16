@@ -32,8 +32,10 @@ import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
 import { getZIndex } from '../../lib/getZIndex';
 import type { CanShowResult } from '../../lib/messagePicker';
 import { getBanner } from '../../lib/sdcRequests';
+import type { Newsletter } from '../../types/content';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type { TagType } from '../../types/tag';
+import { DEFAULT_PROMOTED_NEWSLETTER } from './newsletterBannerDetails';
 
 type BaseProps = {
 	isSignedIn: boolean;
@@ -382,11 +384,13 @@ export const canShowRRBanner: CanShowFunctionType<
 };
 
 export const ReaderRevenueBanner = ({
-	//name,
+	name,
 	props,
-}: ModuleData<BannerProps>) => {
+	promotedNewsletter = DEFAULT_PROMOTED_NEWSLETTER,
+}: ModuleData<BannerProps> & {
+	promotedNewsletter?: Newsletter;
+}) => {
 	const [Banner, setBanner] = useState<React.ElementType | null>(null);
-	const name = 'NewsletterBanner';
 	useEffect(() => {
 		(name === 'SignInPromptBanner'
 			? /* webpackChunkName: "sign-in-prompt-banner" */
@@ -421,7 +425,7 @@ export const ReaderRevenueBanner = ({
 				`}
 			>
 				{}
-				<Banner {...props} />
+				<Banner {...props} promotedNewsletter={promotedNewsletter} />
 			</div>
 		);
 	}

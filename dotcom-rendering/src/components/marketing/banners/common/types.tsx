@@ -16,6 +16,7 @@ import type {
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { ChoiceCardsSettings } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/types/props/shared';
+import type { Newsletter } from '../../../../types/content';
 
 export type BannerId =
 	| 'designable-banner'
@@ -84,4 +85,5 @@ export interface BannerRenderProps {
 	design?: ConfigurableDesign;
 	promoCodes?: string[];
 	isCollapsible?: boolean;
+	promotedNewsletter?: Newsletter;
 }

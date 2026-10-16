@@ -20,6 +20,7 @@ import type {
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect } from 'react';
 import { useIsInView } from '../../../../lib/useIsInView';
+import type { Newsletter } from '../../../../types/content';
 import type { ReactComponent } from '../../lib/ReactComponent';
 import { replaceArticleCount } from '../../lib/replaceArticleCount';
 import {
@@ -128,6 +129,11 @@ const withBannerData =
 			isCollapsible,
 			contributionsServiceUrl,
 		} = bannerProps;
+		const promotedNewsletter = (
+			bannerProps as CloseableBannerProps & {
+				promotedNewsletter?: Newsletter;
+			}
+		).promotedNewsletter;
 
 		const [hasBeenSeen, setNode] = useIsInView({
 			debounce: true,
@@ -410,6 +416,7 @@ const withBannerData =
 					design,
 					promoCodes,
 					isCollapsible,
+					promotedNewsletter,
 				};
 
 				return (
