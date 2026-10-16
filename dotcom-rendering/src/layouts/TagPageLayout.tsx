@@ -1,5 +1,6 @@
 import { isUndefined, joinUrl } from '@guardian/libs';
 import { palette } from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
 import { Fragment } from 'react';
 import { Accessibility } from '../components/Accessibility.island';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
@@ -16,6 +17,7 @@ import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
+import { StorylinesSectionContent } from '../components/StorylinesSectionContent.island';
 import { SubNav } from '../components/SubNav.island';
 import { TagPageHeader } from '../components/TagPageHeader';
 import { TrendingTopics } from '../components/TrendingTopics';
@@ -142,9 +144,12 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 							)
 						: undefined;
 
-					/**
-					 * The pagination should appear at the bottom of the page; this is done by passing to FrontSection.
-					 */
+					// Storylines logic to determine where to insert the section
+					const insertStorylinesSection =
+						tagPage.storylinesContent &&
+						(!tagPage.pagination ||
+							tagPage.pagination.currentPage === 1) && // Only on the first page
+						index === 0; // Only after the first section
 
 					const isLastGroup =
 						index === tagPage.groupedTrails.length - 1;
@@ -190,6 +195,28 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 									aspectRatio="5:4"
 								/>
 							</FrontSection>
+							<Hide until="tablet">
+								{insertStorylinesSection &&
+									tagPage.storylinesContent && (
+										/* Hydrate only once visible: below tablet the Hide wrapper is display:none, so the island never intersects and never hydrates. Stays critical so adaptSite doesn't disable the tabs on slow devices */
+										<Island
+											priority="critical"
+											defer={{
+												until: 'visible',
+												rootMargin: '300px',
+											}}
+										>
+											<StorylinesSectionContent
+												index={1}
+												editionId={tagPage.editionId}
+												storylinesContent={
+													tagPage.storylinesContent
+												}
+												containerId="storylines"
+											/>
+										</Island>
+									)}
+							</Hide>
 							{mobileAdPositions.includes(index) && (
 								<MobileAdSlot
 									renderAds={renderAds}
