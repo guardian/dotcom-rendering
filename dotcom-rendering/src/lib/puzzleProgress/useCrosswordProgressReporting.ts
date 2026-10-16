@@ -1,6 +1,6 @@
 import debounce from 'lodash.debounce';
 import { useCallback, useEffect, useMemo } from 'react';
-import { isPuzzlesHubV1Enabled } from '../puzzlesHubVersionExperiment';
+import { isPuzzlesHubAvailable } from '../puzzlesHubAccess';
 import {
 	createCrosswordAdapter,
 	type CrosswordIdentityData,
@@ -17,9 +17,10 @@ export const IN_PROGRESS_DEBOUNCE_MS = 3000;
 /**
  * Returns the handler for the crossword component's `onProgressChange` prop.
  *
- * Only reports for readers in the `puzzles-new-hub-v1` experiment, the same
- * check that switches crosswords to the new design, and the only group the
- * `frontend` accepts progress from (it answers `404` to the rest). The check
+ * Only reports for readers in an edition the Puzzles & Games hub is available
+ * in (`isPuzzlesHubAvailable`), the same check that switches crosswords to the
+ * new design, and the only readers the `frontend` accepts progress from (it
+ * answers `404` to the rest). The check
  * runs when a change arrives, in the browser, because this component is also
  * rendered on the server where there is no `window`.
  *
@@ -50,7 +51,13 @@ export const useCrosswordProgressReporting = (
 
 	return useCallback(
 		(change: unknown) => {
-			if (!isPuzzlesHubV1Enabled(window.guardian.config)) return;
+			if (
+				!isPuzzlesHubAvailable({
+					edition: window.guardian.config.page.edition,
+				})
+			) {
+				return;
+			}
 
 			const event = handleCrosswordProgressChange(adapter, change);
 			if (event === null) return;

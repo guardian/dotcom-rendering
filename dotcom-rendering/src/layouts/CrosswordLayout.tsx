@@ -35,10 +35,8 @@ import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import {
-	isPuzzlesHubV1Enabled,
-	isPuzzlesHubV2Enabled,
-} from '../lib/puzzlesHubVersionExperiment';
+import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
+import { isPuzzlesHubV2Enabled } from '../lib/puzzlesHubVersionExperiment';
 import {
 	getPuzzlesSubNavLinks,
 	PUZZLES_SUBNAV_PARENT,
@@ -143,7 +141,7 @@ export const CrosswordLayout = (props: Props) => {
 	 * content") and no second sub-nav above the footer. Independent of
 	 * whether the rail has data, so the page design never depends on CAPI.
 	 */
-	const isPuzzlesHubV1 = isPuzzlesHubV1Enabled(article.config);
+	const isPuzzlesHubV1 = isPuzzlesHubAvailable(article.config);
 
 	/**
 	 * With v1 on, the title's series ("Quick") and section ("Crosswords")
