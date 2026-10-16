@@ -36,11 +36,15 @@ export interface DropdownLinkType {
 
 interface Props {
 	id: string;
-	label: string;
+	label: React.ReactNode;
 	links: DropdownLinkType[];
 	dataLinkName: string;
 	cssOverrides?: SerializedStyles;
+	linkCssOverrides?: SerializedStyles;
+	buttonCssOverrides?: SerializedStyles;
 	children?: React.ReactNode;
+	renderTrigger?: (isExpanded: boolean) => React.ReactNode;
+	ariaLabel?: string;
 }
 
 const ulStyles = css`
@@ -279,8 +283,9 @@ const NotificationMessage = ({ notification }: NotificationMessageProps) => {
 type DropdownLinkProps = {
 	link: DropdownLinkType;
 	index: number;
+	linkCssOverrides?: SerializedStyles;
 };
-const DropdownLink = ({ link, index }: DropdownLinkProps) => {
+const DropdownLink = ({ link, index, linkCssOverrides }: DropdownLinkProps) => {
 	const ophanComponent = useMemo(
 		() => buildOphanComponentWithNotifications(link),
 		[link],
@@ -357,6 +362,7 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 				href={url}
 				css={[
 					linkStyles,
+					linkCssOverrides,
 					!!link.isActive && linkActive,
 					index === 0 && linkFirst,
 				]}
@@ -395,7 +401,11 @@ export const Dropdown = ({
 	links,
 	dataLinkName,
 	cssOverrides,
+	linkCssOverrides,
+	buttonCssOverrides,
 	children,
+	renderTrigger,
+	ariaLabel,
 }: Props) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 	const [noJS, setNoJS] = useState(true);
@@ -428,7 +438,7 @@ export const Dropdown = ({
 			// If the source of the click is the button, do nothing as the
 			// button's click handler will have already toggled the isExpanded
 			// state
-			if (buttonRef === event.target) {
+			if (buttonRef?.contains(event.target as Node)) {
 				return;
 			}
 			event.stopPropagation();
@@ -490,6 +500,7 @@ export const Dropdown = ({
 									href={l.url}
 									css={[
 										linkStyles,
+										linkCssOverrides,
 										!!l.isActive && linkActive,
 										index === 0 && linkFirst,
 									]}
@@ -508,15 +519,17 @@ export const Dropdown = ({
 						css={[
 							buttonStyles,
 							cssOverrides,
+							buttonCssOverrides,
 							isExpanded && buttonExpanded,
 						]}
+						aria-label={ariaLabel}
 						aria-expanded={isExpanded ? 'true' : 'false'}
 						data-link-name={dataLinkName}
 						data-testid="dropdown-button"
 						type="button"
 						ref={setButtonRef}
 					>
-						{label}
+						{renderTrigger ? renderTrigger(isExpanded) : label}
 						{notificationCount > 0 && (
 							<div css={dropdownButtonNotificationBadgeStyles}>
 								<NotificationBadge diameter={18} />
@@ -537,6 +550,7 @@ export const Dropdown = ({
 										key={link.id}
 										link={link}
 										index={index}
+										linkCssOverrides={linkCssOverrides}
 									/>
 								))}
 							</ul>

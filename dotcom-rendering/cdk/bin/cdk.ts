@@ -109,7 +109,7 @@ export const TagPageRenderingPropsCODE: RenderingCDKStackProps = {
 	guApp: 'tag-page-rendering',
 	stage: 'CODE',
 	domainName: 'tag-page-rendering.code.dev-guardianapis.com',
-	scaling: { minimumInstances: 1, maximumInstances: 3 },
+	scaling: { minimumInstances: 0, maximumInstances: 0 },
 	instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.SMALL),
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
@@ -117,7 +117,7 @@ export const TagPageRenderingPropsCODE: RenderingCDKStackProps = {
 		taskMemoryLimitMiB: 2048,
 		scaling: {
 			minimumTasks: 1,
-			maximumTasks: 9,
+			maximumTasks: 3,
 			cpuScaling: {
 				targetValue: 20,
 				scaleInCooldown: Duration.seconds(60),
@@ -125,7 +125,7 @@ export const TagPageRenderingPropsCODE: RenderingCDKStackProps = {
 			},
 		},
 
-		// Route all traffic to ECS
+		// Route all traffic to ECS. NOTE: EC2 has 0 instances.
 		targetGroupWeights: {
 			ec2: 0,
 			ecs: 1,
@@ -144,8 +144,8 @@ export const TagPageRenderingPropsPROD: RenderingCDKStackProps = {
 	stage: 'PROD',
 	domainName: 'tag-page-rendering.guardianapis.com',
 	scaling: {
-		minimumInstances: 9,
-		maximumInstances: 90,
+		minimumInstances: 0,
+		maximumInstances: 0,
 		policies: {
 			step: {
 				cpu: cpuScalingSteps,
@@ -174,7 +174,7 @@ export const TagPageRenderingPropsPROD: RenderingCDKStackProps = {
 		taskCpu: 2048,
 		taskMemoryLimitMiB: 4096,
 		scaling: {
-			minimumTasks: 3,
+			minimumTasks: 12,
 			maximumTasks: 30,
 			cpuScaling: {
 				targetValue: 20,
@@ -185,10 +185,10 @@ export const TagPageRenderingPropsPROD: RenderingCDKStackProps = {
 			},
 		},
 
-		// Route 100% traffic to EC2
+		// Route 100% traffic to ECS. NOTE: EC2 has 0 instances.
 		targetGroupWeights: {
-			ec2: 1,
-			ecs: 0,
+			ec2: 0,
+			ecs: 1,
 		},
 	},
 };

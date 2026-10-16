@@ -600,7 +600,6 @@ const WebAdSlot = (props: { adIndex: number }) => (
 		<div
 			css={{
 				'&': css(grid.column.centre),
-				zIndex: 1,
 
 				[from.desktop]: {
 					paddingBottom: space[10],

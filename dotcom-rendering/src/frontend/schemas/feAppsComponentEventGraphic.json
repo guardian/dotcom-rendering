@@ -1,0 +1,944 @@
+{
+    "type": "object",
+    "properties": {
+        "config": {
+            "$ref": "#/definitions/FEAppsComponentConfig"
+        },
+        "eventData": {
+            "$ref": "#/definitions/{components:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};}|{kind:\"sideBySide\";left:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};right:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};})[];}"
+        },
+        "dataUrl": {
+            "type": "string"
+        },
+        "graphicKind": {
+            "const": "electionTracker",
+            "type": "string"
+        }
+    },
+    "required": [
+        "config"
+    ],
+    "definitions": {
+        "FEAppsComponentConfig": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Omit<FEFrontConfig,\"keywordIds\"|\"keywords\"|\"isFront\">"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "isFront": {
+                            "type": "boolean"
+                        },
+                        "hasSurveyAd": {
+                            "type": "boolean"
+                        }
+                    },
+                    "required": [
+                        "hasSurveyAd",
+                        "isFront"
+                    ]
+                }
+            ]
+        },
+        "Omit<FEFrontConfig,\"keywordIds\"|\"keywords\"|\"isFront\">": {
+            "type": "object",
+            "properties": {
+                "isSensitive": {
+                    "type": "boolean"
+                },
+                "edition": {
+                    "type": "string"
+                },
+                "section": {
+                    "type": "string"
+                },
+                "sharedAdTargeting": {
+                    "$ref": "#/definitions/SharedAdTargeting"
+                },
+                "adUnit": {
+                    "type": "string"
+                },
+                "ajaxUrl": {
+                    "type": "string"
+                },
+                "brazeApiKey": {
+                    "type": "string"
+                },
+                "commercialBundleUrl": {
+                    "type": "string"
+                },
+                "dcrSentryDsn": {
+                    "type": "string"
+                },
+                "dfpAccountId": {
+                    "type": "string"
+                },
+                "discussionApiClientHeader": {
+                    "type": "string"
+                },
+                "discussionApiUrl": {
+                    "type": "string"
+                },
+                "discussionD2Uid": {
+                    "type": "string"
+                },
+                "frontendAssetsFullURL": {
+                    "type": "string"
+                },
+                "googleRecaptchaSiteKey": {
+                    "type": "string"
+                },
+                "googletagUrl": {
+                    "type": "string"
+                },
+                "hasPageSkin": {
+                    "type": "boolean"
+                },
+                "host": {
+                    "type": "string"
+                },
+                "idApiUrl": {
+                    "type": "string"
+                },
+                "idUrl": {
+                    "type": "string"
+                },
+                "ipsosTag": {
+                    "type": "string"
+                },
+                "isDev": {
+                    "type": "boolean"
+                },
+                "isPaidContent": {
+                    "type": "boolean"
+                },
+                "isPreview": {
+                    "type": "boolean"
+                },
+                "mmaUrl": {
+                    "type": "string"
+                },
+                "revisionNumber": {
+                    "type": "string"
+                },
+                "sentryHost": {
+                    "type": "string"
+                },
+                "sentryPublicApiKey": {
+                    "type": "string"
+                },
+                "serverSideABTests": {
+                    "$ref": "#/definitions/Record<string,string>"
+                },
+                "stage": {
+                    "$ref": "#/definitions/StageType"
+                },
+                "switches": {
+                    "$ref": "#/definitions/Switches"
+                },
+                "pageId": {
+                    "type": "string"
+                },
+                "contentType": {
+                    "type": "string"
+                },
+                "ampIframeUrl": {
+                    "type": "string"
+                },
+                "isProd": {
+                    "type": "boolean"
+                },
+                "supportUrl": {
+                    "type": "string"
+                },
+                "webTitle": {
+                    "type": "string"
+                },
+                "a9PublisherId": {
+                    "type": "string"
+                },
+                "allowUserGeneratedContent": {
+                    "type": "boolean"
+                },
+                "assetsPath": {
+                    "type": "string"
+                },
+                "avatarApiUrl": {
+                    "type": "string"
+                },
+                "avatarImagesUrl": {
+                    "type": "string"
+                },
+                "beaconUrl": {
+                    "type": "string"
+                },
+                "buildNumber": {
+                    "type": "string"
+                },
+                "calloutsUrl": {
+                    "type": "string"
+                },
+                "cardStyle": {
+                    "type": "string"
+                },
+                "dfpAdUnitRoot": {
+                    "type": "string"
+                },
+                "dfpHost": {
+                    "type": "string"
+                },
+                "externalEmbedHost": {
+                    "type": "string"
+                },
+                "facebookIaAdUnitRoot": {
+                    "type": "string"
+                },
+                "fbAppId": {
+                    "type": "string"
+                },
+                "forecastsapiurl": {
+                    "type": "string"
+                },
+                "googleSearchId": {
+                    "type": "string"
+                },
+                "googleSearchUrl": {
+                    "type": "string"
+                },
+                "googletagJsUrl": {
+                    "type": "string"
+                },
+                "idOAuthUrl": {
+                    "type": "string"
+                },
+                "idWebAppUrl": {
+                    "type": "string"
+                },
+                "locationapiurl": {
+                    "type": "string"
+                },
+                "membershipAccess": {
+                    "type": "string"
+                },
+                "membershipUrl": {
+                    "type": "string"
+                },
+                "mobileAppsAdUnitRoot": {
+                    "type": "string"
+                },
+                "omnitureAccount": {
+                    "type": "string"
+                },
+                "omnitureAmpAccount": {
+                    "type": "string"
+                },
+                "onwardWebSocket": {
+                    "type": "string"
+                },
+                "ophanEmbedJsUrl": {
+                    "type": "string"
+                },
+                "ophanJsUrl": {
+                    "type": "string"
+                },
+                "optimizeEpicUrl": {
+                    "type": "string"
+                },
+                "pbIndexSites": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": {}
+                    }
+                },
+                "pillar": {
+                    "type": "string"
+                },
+                "plistaPublicApiKey": {
+                    "type": "string"
+                },
+                "requiresMembershipAccess": {
+                    "type": "boolean"
+                },
+                "shouldHideAdverts": {
+                    "type": "boolean"
+                },
+                "stripePublicToken": {
+                    "type": "string"
+                },
+                "thirdPartyAppsAccount": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "a9PublisherId",
+                "adUnit",
+                "ajaxUrl",
+                "allowUserGeneratedContent",
+                "ampIframeUrl",
+                "assetsPath",
+                "avatarApiUrl",
+                "avatarImagesUrl",
+                "beaconUrl",
+                "buildNumber",
+                "calloutsUrl",
+                "commercialBundleUrl",
+                "contentType",
+                "dcrSentryDsn",
+                "dfpAccountId",
+                "dfpAdUnitRoot",
+                "dfpHost",
+                "discussionApiClientHeader",
+                "discussionApiUrl",
+                "discussionD2Uid",
+                "edition",
+                "externalEmbedHost",
+                "facebookIaAdUnitRoot",
+                "fbAppId",
+                "forecastsapiurl",
+                "frontendAssetsFullURL",
+                "googleRecaptchaSiteKey",
+                "googleSearchId",
+                "googleSearchUrl",
+                "googletagJsUrl",
+                "googletagUrl",
+                "hasPageSkin",
+                "host",
+                "idApiUrl",
+                "idOAuthUrl",
+                "idUrl",
+                "idWebAppUrl",
+                "ipsosTag",
+                "isDev",
+                "isPreview",
+                "isProd",
+                "isSensitive",
+                "locationapiurl",
+                "membershipAccess",
+                "membershipUrl",
+                "mmaUrl",
+                "mobileAppsAdUnitRoot",
+                "omnitureAccount",
+                "omnitureAmpAccount",
+                "onwardWebSocket",
+                "ophanEmbedJsUrl",
+                "ophanJsUrl",
+                "optimizeEpicUrl",
+                "pageId",
+                "pbIndexSites",
+                "pillar",
+                "plistaPublicApiKey",
+                "requiresMembershipAccess",
+                "revisionNumber",
+                "section",
+                "sentryHost",
+                "sentryPublicApiKey",
+                "serverSideABTests",
+                "sharedAdTargeting",
+                "shouldHideAdverts",
+                "stage",
+                "stripePublicToken",
+                "supportUrl",
+                "switches",
+                "webTitle"
+            ]
+        },
+        "SharedAdTargeting": {
+            "type": "object"
+        },
+        "Record<string,string>": {
+            "type": "object"
+        },
+        "StageType": {
+            "enum": [
+                "CODE",
+                "DEV",
+                "PROD"
+            ],
+            "type": "string"
+        },
+        "Switches": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "boolean"
+            }
+        },
+        "{components:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};}|{kind:\"sideBySide\";left:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};right:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};})[];}": {
+            "type": "object",
+            "properties": {
+                "components": {
+                    "type": "array",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/{kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"onwardLink\";props:{link:string;text:string;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"sideBySide\";left:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};right:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};}"
+                            }
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "components"
+            ]
+        },
+        "{kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "changeBars"
+                },
+                "props": {
+                    "$ref": "#/definitions/{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];}"
+                }
+            },
+            "required": [
+                "kind",
+                "props"
+            ]
+        },
+        "{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];}": {
+            "type": "object",
+            "properties": {
+                "changes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/{name:string;abbreviation:string;change:number;colour:{name:string;};}"
+                    }
+                }
+            },
+            "required": [
+                "changes"
+            ]
+        },
+        "{name:string;abbreviation:string;change:number;colour:{name:string;};}": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "abbreviation": {
+                    "type": "string"
+                },
+                "change": {
+                    "type": "number"
+                },
+                "colour": {
+                    "$ref": "#/definitions/{name:string;}"
+                }
+            },
+            "required": [
+                "abbreviation",
+                "change",
+                "colour",
+                "name"
+            ]
+        },
+        "{name:string;}": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name"
+            ]
+        },
+        "{kind:\"onwardLink\";props:{link:string;text:string;};}": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "onwardLink"
+                },
+                "props": {
+                    "$ref": "#/definitions/{link:string;text:string;}"
+                }
+            },
+            "required": [
+                "kind",
+                "props"
+            ]
+        },
+        "{link:string;text:string;}": {
+            "type": "object",
+            "properties": {
+                "link": {
+                    "type": "string"
+                },
+                "text": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "link",
+                "text"
+            ]
+        },
+        "{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "progressNumber"
+                },
+                "props": {
+                    "$ref": "#/definitions/{progress:number;total:number;copy:string;additionalCopy:string|null;}"
+                }
+            },
+            "required": [
+                "kind",
+                "props"
+            ]
+        },
+        "{progress:number;total:number;copy:string;additionalCopy:string|null;}": {
+            "type": "object",
+            "properties": {
+                "progress": {
+                    "type": "number"
+                },
+                "total": {
+                    "type": "number"
+                },
+                "copy": {
+                    "type": "string"
+                },
+                "additionalCopy": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                }
+            },
+            "required": [
+                "additionalCopy",
+                "copy",
+                "progress",
+                "total"
+            ]
+        },
+        "{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "stackedProgress"
+                },
+                "props": {
+                    "$ref": "#/definitions/{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;}"
+                }
+            },
+            "required": [
+                "kind",
+                "props"
+            ]
+        },
+        "{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;}": {
+            "type": "object",
+            "properties": {
+                "sections": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}"
+                    }
+                },
+                "total": {
+                    "type": "number"
+                },
+                "label": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "calculateWinner": {
+                    "type": "boolean"
+                },
+                "excludedCopy": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                }
+            },
+            "required": [
+                "calculateWinner",
+                "excludedCopy",
+                "label",
+                "sections",
+                "total"
+            ]
+        },
+        "{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}": {
+            "type": "object",
+            "properties": {
+                "colour": {
+                    "$ref": "#/definitions/{name:string;}"
+                },
+                "value": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "align": {
+                    "enum": [
+                        "left",
+                        "right"
+                    ],
+                    "type": "string"
+                },
+                "exclude": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "align",
+                "colour",
+                "exclude",
+                "name",
+                "value"
+            ]
+        },
+        "{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "valuesWithChange"
+                },
+                "props": {
+                    "$ref": "#/definitions/{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;}"
+                }
+            },
+            "required": [
+                "kind",
+                "props"
+            ]
+        },
+        "{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;}": {
+            "type": "object",
+            "properties": {
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/{name:string;value:number;change:number;colour:{name:string;};}"
+                    }
+                },
+                "valueDescription": {
+                    "type": "string"
+                },
+                "changeDescription": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "changeDescription",
+                "valueDescription",
+                "values"
+            ]
+        },
+        "{name:string;value:number;change:number;colour:{name:string;};}": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "number"
+                },
+                "change": {
+                    "type": "number"
+                },
+                "colour": {
+                    "$ref": "#/definitions/{name:string;}"
+                }
+            },
+            "required": [
+                "change",
+                "colour",
+                "name",
+                "value"
+            ]
+        },
+        "{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};}": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "versus"
+                },
+                "props": {
+                    "$ref": "#/definitions/{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;}"
+                }
+            },
+            "required": [
+                "kind",
+                "props"
+            ]
+        },
+        "{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;}": {
+            "type": "object",
+            "properties": {
+                "left": {
+                    "anyOf": [
+                        {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}"
+                                },
+                                {
+                                    "$ref": "#/definitions/{change:number;}"
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}"
+                                },
+                                {
+                                    "$ref": "#/definitions/{description:string;}"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "right": {
+                    "anyOf": [
+                        {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}"
+                                },
+                                {
+                                    "$ref": "#/definitions/{change:number;}"
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}"
+                                },
+                                {
+                                    "$ref": "#/definitions/{description:string;}"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "colour": {
+                    "enum": [
+                        "name",
+                        "none",
+                        "value"
+                    ],
+                    "type": "string"
+                },
+                "faded": {
+                    "type": "boolean"
+                },
+                "banner": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                }
+            },
+            "required": [
+                "banner",
+                "colour",
+                "faded",
+                "left",
+                "right"
+            ]
+        },
+        "{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "abbreviation": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "number"
+                },
+                "image": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/{url:string;alt:string;}"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "colour": {
+                    "$ref": "#/definitions/{name:string;}"
+                }
+            },
+            "required": [
+                "abbreviation",
+                "colour",
+                "image",
+                "name",
+                "value"
+            ]
+        },
+        "{url:string;alt:string;}": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string"
+                },
+                "alt": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "alt",
+                "url"
+            ]
+        },
+        "{change:number;}": {
+            "type": "object",
+            "properties": {
+                "change": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "change"
+            ]
+        },
+        "{description:string;}": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "description"
+            ]
+        },
+        "{kind:\"sideBySide\";left:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};right:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};}": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "sideBySide"
+                },
+                "left": {
+                    "$ref": "#/definitions/{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];}"
+                },
+                "right": {
+                    "$ref": "#/definitions/{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];}_1"
+                }
+            },
+            "required": [
+                "kind",
+                "left",
+                "right"
+            ]
+        },
+        "{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];}": {
+            "type": "object",
+            "properties": {
+                "heading": {
+                    "type": "string"
+                },
+                "children": {
+                    "type": "array",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/{kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"onwardLink\";props:{link:string;text:string;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};}"
+                            }
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "children",
+                "heading"
+            ]
+        },
+        "{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"onwardLink\";props:{link:string;text:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];}_1": {
+            "type": "object",
+            "properties": {
+                "heading": {
+                    "type": "string"
+                },
+                "children": {
+                    "type": "array",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/{kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"onwardLink\";props:{link:string;text:string;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};}"
+                            }
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "children",
+                "heading"
+            ]
+        }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#"
+}

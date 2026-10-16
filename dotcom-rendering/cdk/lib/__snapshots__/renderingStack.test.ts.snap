@@ -1889,13 +1889,13 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
             ],
           },
         },
-        "MaxSize": "3",
+        "MaxSize": "0",
         "MetricsCollection": [
           {
             "Granularity": "1Minute",
           },
         ],
-        "MinSize": "1",
+        "MinSize": "0",
         "Tags": [
           {
             "Key": "App",
@@ -2109,7 +2109,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         "EcsTaskDefinitionTaskRoleB7B6D8DD",
       ],
       "Properties": {
-        "MaxCapacity": 9,
+        "MaxCapacity": 3,
         "MinCapacity": 1,
         "ResourceId": {
           "Fn::Join": [
@@ -2147,6 +2147,28 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         },
         "ScalableDimension": "ecs:service:DesiredCount",
         "ServiceNamespace": "ecs",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
       },
       "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
     },
@@ -3947,13 +3969,13 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
             ],
           },
         },
-        "MaxSize": "90",
+        "MaxSize": "0",
         "MetricsCollection": [
           {
             "Granularity": "1Minute",
           },
         ],
-        "MinSize": "9",
+        "MinSize": "0",
         "Tags": [
           {
             "Key": "App",
@@ -4279,7 +4301,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
       ],
       "Properties": {
         "MaxCapacity": 30,
-        "MinCapacity": 3,
+        "MinCapacity": 12,
         "ResourceId": {
           "Fn::Join": [
             "",
@@ -4316,6 +4338,28 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
         },
         "ScalableDimension": "ecs:service:DesiredCount",
         "ServiceNamespace": "ecs",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
       },
       "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
     },
@@ -5459,13 +5503,13 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
                   "TargetGroupArn": {
                     "Ref": "TargetGroupTagpagerendering42E428EE",
                   },
-                  "Weight": 1,
+                  "Weight": 0,
                 },
                 {
                   "TargetGroupArn": {
                     "Ref": "TagpagerenderingEcsTargetGroupTagpagerendering0976D2E5",
                   },
-                  "Weight": 0,
+                  "Weight": 1,
                 },
               ],
             },

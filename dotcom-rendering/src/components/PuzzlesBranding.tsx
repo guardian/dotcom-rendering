@@ -73,7 +73,7 @@ const aboutStyles = css`
 
 const aboutLinkStyles = css`
 	${textSans12};
-	color: ${palette.neutral[0]};
+	color: var(--puzzles-text-colour, ${palette.neutral[7]});
 `;
 
 type Props = { branding: Branding };

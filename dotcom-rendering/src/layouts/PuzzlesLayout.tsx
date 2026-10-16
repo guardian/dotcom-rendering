@@ -16,17 +16,16 @@ import {
 } from '../components/PuzzlesBranding';
 import { PuzzlesDirectoryProgress } from '../components/PuzzlesDirectoryProgress.island';
 import { Section } from '../components/Section';
+import { puzzlesPageTheme } from '../lib/puzzlesTheme';
 import type { NavType } from '../model/extract-nav';
 import type { Branding } from '../types/branding';
 import type { FEPuzzlesPageType } from '../types/puzzlesPage';
 import { Stuck } from './lib/stickiness';
 
-const mainStyles = css`
+const mainStyles = (darkModeAvailable: boolean) => css`
+	${puzzlesPageTheme(darkModeAvailable)};
 	overflow-x: clip;
 	padding-bottom: ${space[12]}px;
-	background: ${palette.neutral[100]};
-	color: ${palette.neutral[7]};
-	color-scheme: light;
 `;
 
 const brandStyles = css`
@@ -35,12 +34,14 @@ const brandStyles = css`
 	margin: 0 auto;
 	overflow: hidden;
 	/* The artwork is transparent and uses this illustrated-header background. */
-	background: ${palette.opinion[800]};
+	background: var(--puzzles-header-background, ${palette.opinion[800]});
 `;
 
 // Sponsored artwork heights vary by breakpoint and leave room for the sponsor lockup.
 const sponsoredBrandStyles = css`
 	position: relative;
+	/* The sponsored artwork has an opaque light background, so the header stays light in dark mode. */
+	background: ${palette.opinion[800]};
 	${from.phablet} {
 		height: 286px;
 	}
@@ -160,10 +161,12 @@ const sponsoredHeader = {
 };
 
 export const PuzzlesLayout = ({
+	darkModeAvailable = false,
 	puzzlesPage,
 	NAV,
 	branding,
 }: {
+	darkModeAvailable?: boolean;
 	puzzlesPage: FEPuzzlesPageType;
 	NAV: NavType;
 	/** Not yet supplied by page data; set in Storybook to preview the sponsored design. */
@@ -218,18 +221,12 @@ export const PuzzlesLayout = ({
 				/>
 			</div>
 			<main
-				css={mainStyles}
+				css={mainStyles(darkModeAvailable)}
 				data-layout="PuzzlesPageLayout"
 				id="maincontent"
 			>
 				<header css={[brandStyles, branding && sponsoredBrandStyles]}>
-					<h1
-						css={css`
-							${visuallyHidden}
-						`}
-					>
-						Puzzles and Games
-					</h1>
+					<h1 css={visuallyHidden}>Puzzles &amp; games</h1>
 					<picture css={brandPictureStyles}>
 						{header.sources.map(({ breakpoint, filename }) => (
 							<source

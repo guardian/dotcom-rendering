@@ -4,14 +4,13 @@ import {
 	headlineBold24,
 	headlineBold28,
 	palette,
-	textSans14,
 } from '@guardian/source/foundations';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { puzzlesContainerStyles } from '../lib/puzzlesContainerStyles';
 import type { PuzzleContainer, PuzzlesLayoutType } from '../types/puzzlesPage';
 import { AdSlot } from './AdSlot.web';
 import { Island } from './Island';
-import { externalProps, getPuzzleUrl, Rows } from './PuzzleCard';
+import { getPuzzleUrl, Rows } from './PuzzleCard';
 import { PuzzlesArchiveMenu } from './PuzzlesArchiveMenu.island';
 import { PuzzlesSupporting } from './PuzzlesSupporting';
 
@@ -30,13 +29,14 @@ const sectionStyles = (isFeatured: boolean, hideTopRule: boolean) => css`
 	position: relative;
 	display: grid;
 	${puzzlesContainerStyles};
-	background: ${palette.neutral[100]};
+	background: var(--puzzles-page-background, ${palette.neutral[100]});
 	::before {
 		position: absolute;
 		top: 0;
 		left: 50%;
 		width: 100vw;
-		border-top: 2px solid ${palette.neutral[7]};
+		border-top: 2px solid
+			var(--puzzles-headline-colour, ${palette.neutral[7]});
 		content: '';
 		transform: translateX(-50%);
 	}
@@ -73,6 +73,7 @@ const titleStyles = css`
 	margin: 0;
 	padding: 6px 10px 12px;
 	${headlineBold24};
+	color: var(--puzzles-headline-colour, ${palette.neutral[7]});
 	line-height: 1;
 	overflow-wrap: break-word;
 	${from.mobileMedium} {
@@ -82,6 +83,11 @@ const titleStyles = css`
 
 	${from.tablet} {
 		${headlineBold28};
+	}
+
+	${from.desktop} {
+		/* Include the 1px side border in the 20px inset, as the cards do. */
+		padding-left: 19px;
 	}
 
 	${from.leftCol} {
@@ -99,36 +105,11 @@ const headingColumnStyles = css`
 			top: var(--puzzles-content-top);
 			right: 0;
 			bottom: var(--puzzles-content-bottom);
-			border-right: 1px solid ${palette.neutral[86]};
+			border-right: 1px solid
+				var(--puzzles-border-colour, ${palette.neutral[86]});
 			content: '';
 			pointer-events: none;
 		}
-	}
-`;
-
-const crosswordLinksStyles = css`
-	display: none;
-	${from.leftCol} {
-		display: flex;
-		flex-direction: column;
-		gap: 8px;
-		margin-top: auto;
-		padding: 0 20px 24px;
-	}
-	a {
-		min-height: 24px;
-		padding: 4px 8px;
-		border-top: 1px solid ${palette.neutral[86]};
-		border-left: 1px solid ${palette.neutral[86]};
-		color: ${palette.neutral[7]};
-		text-decoration: none;
-		${textSans14};
-	}
-	a:hover {
-		text-decoration: underline;
-	}
-	a:focus-visible {
-		outline: 3px solid ${palette.brand[500]};
 	}
 `;
 
@@ -155,7 +136,8 @@ const contentStyles = css`
 			top: 0;
 			right: 10px;
 			left: 10px;
-			border-top: 1px solid ${palette.neutral[86]};
+			border-top: 1px solid
+				var(--puzzles-border-colour, ${palette.neutral[86]});
 			content: '';
 			pointer-events: none;
 		}
@@ -198,7 +180,8 @@ const nestedStyles = (span: number) => css`
 		top: calc(var(--puzzles-gap) / -2);
 		right: 0;
 		left: 0;
-		border-top: 1px solid ${palette.neutral[86]};
+		border-top: 1px solid
+			var(--puzzles-border-colour, ${palette.neutral[86]});
 		content: '';
 		pointer-events: none;
 	}
@@ -212,10 +195,12 @@ const nestedStyles = (span: number) => css`
 						right: auto;
 						left: calc(var(--puzzles-gap) / -2);
 						border-top: 0;
-						border-left: 1px solid ${palette.neutral[86]};
+						border-left: 1px solid
+							var(--puzzles-border-colour, ${palette.neutral[86]});
 					`
 				: css`
-						border-top: 1px solid ${palette.neutral[86]};
+						border-top: 1px solid
+							var(--puzzles-border-colour, ${palette.neutral[86]});
 					`}
 		}
 	}
@@ -265,29 +250,6 @@ const DirectorySection = ({
 				<h2 css={titleStyles} id={`${container.id}-title`}>
 					{container.title}
 				</h2>
-				{container.id === 'crosswords' && (
-					<nav
-						css={crosswordLinksStyles}
-						aria-label="Crossword links"
-					>
-						<a
-							href="https://support.theguardian.com"
-							{...externalProps(
-								'https://support.theguardian.com',
-							)}
-						>
-							Support the Guardian
-						</a>
-						<a
-							href="https://www.theguardian.com/crosswords/crossword-blog"
-							{...externalProps(
-								'https://www.theguardian.com/crosswords/crossword-blog',
-							)}
-						>
-							Blog
-						</a>
-					</nav>
-				)}
 			</div>
 			<div css={contentStyles}>
 				<Rows
@@ -339,6 +301,7 @@ export const PuzzlesDirectory = ({
 						key={container.id}
 						layout={layout}
 						renderAds={renderAds}
+						showNewsletter={true}
 						supporting={container.supporting}
 					/>
 				);

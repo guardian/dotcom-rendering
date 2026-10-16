@@ -55,6 +55,7 @@ type Props = {
 	shouldHideAds: boolean;
 	serverTime?: number;
 	idApiUrl?: string;
+	isInDeprecatedInteractiveLayout?: boolean;
 };
 
 const globalOlStyles = () => css`
@@ -153,6 +154,7 @@ export const ArticleBody = ({
 	shouldHideAds,
 	serverTime,
 	idApiUrl,
+	isInDeprecatedInteractiveLayout = false,
 }: Props) => {
 	const isInteractiveContent =
 		format.design === ArticleDesign.Interactive ||
@@ -274,6 +276,9 @@ export const ArticleBody = ({
 					contributionsServiceUrl={contributionsServiceUrl}
 					shouldHideAds={shouldHideAds}
 					idApiUrl={idApiUrl}
+					isInDeprecatedInteractiveLayout={
+						isInDeprecatedInteractiveLayout
+					}
 				/>
 			</div>
 			{hasObserverPublicationTag && <ObserverFooter />}
