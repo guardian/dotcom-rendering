@@ -186,16 +186,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 								toggleable={false}
 								pageId={tagPage.pageId}
 								editionId={tagPage.editionId}
-								/**
-								 * The pagination should appear at the bottom of the page; usually this is done by passing to FrontSection.
-								 * If the storylines section is being inserted when there's only one other container on the page,
-								 * we want to attach the pagination to it instead of the last trails section.
-								 */
-								pagination={
-									insertStorylinesSection
-										? undefined
-										: tagPagePagination
-								}
+								pagination={tagPagePagination}
 							>
 								<DecideContainerByTrails
 									trails={groupedTrails.trails}
@@ -222,7 +213,6 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 													tagPage.storylinesContent
 												}
 												containerId="storylines"
-												pagination={tagPagePagination}
 											/>
 										</Island>
 									)}
