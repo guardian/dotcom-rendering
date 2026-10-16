@@ -40,6 +40,7 @@ import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { safeParseURL } from '../lib/parse';
 import { parse } from '../lib/slot-machine-flags';
+import { hasFilterSeriesTag } from '../lib/theFilter';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -187,6 +188,8 @@ export const StandardLayoutArticleGrid = ({
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
+	const isFilterSeries = hasFilterSeriesTag(article.tags);
+
 	const headlineBackgroundImmersive = themePalette(
 		'--headline-background-immersive',
 	);
@@ -228,6 +231,9 @@ export const StandardLayoutArticleGrid = ({
 	const isImmersivePortrait = layoutType === 'immersivePortrait';
 	const isImmersiveLandscape = layoutType === 'immersiveLandscape';
 	const isImmersive = isImmersivePortrait || isImmersiveLandscape;
+
+	const tableOfContentsStyle =
+		isImmersive && isFilterSeries ? 'horizontal' : 'default';
 
 	const hasMinimumImageHeight =
 		isLabs && isImmersivePortrait && isMainMediaImage;
@@ -777,6 +783,7 @@ export const StandardLayoutArticleGrid = ({
 						isDev={!!article.config.isDev}
 						keywordIds={article.config.keywordIds}
 						tableOfContents={article.tableOfContents}
+						tableOfContentsStyle={tableOfContentsStyle}
 						lang={article.lang}
 						isRightToLeftLang={article.isRightToLeftLang}
 						editionId={article.editionId}
