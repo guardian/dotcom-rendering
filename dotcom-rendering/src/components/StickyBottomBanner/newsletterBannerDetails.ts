@@ -20,7 +20,7 @@ export const DEFAULT_PROMOTED_NEWSLETTER: Newsletter = {
 	identityName: 'the-stakes-us-election-edition',
 	name: 'Newsletter name placeholder',
 	description: 'Newsletter description placeholder',
-	frequency: 'Newsletter frequency placeholder',
+	frequency: 'Weekly',
 	successDescription: 'Newsletter success description placeholder',
 	theme: 'news',
 	group: 'Newsletter group placeholder',

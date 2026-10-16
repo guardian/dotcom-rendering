@@ -384,12 +384,15 @@ export const canShowRRBanner: CanShowFunctionType<
 };
 
 export const ReaderRevenueBanner = ({
-	name,
+	//name,
 	props,
+	idApiUrl,
 	promotedNewsletter = DEFAULT_PROMOTED_NEWSLETTER,
 }: ModuleData<BannerProps> & {
+	idApiUrl: string;
 	promotedNewsletter?: Newsletter;
 }) => {
+	const name: string = 'NewsletterBanner';
 	const [Banner, setBanner] = useState<React.ElementType | null>(null);
 	useEffect(() => {
 		(name === 'SignInPromptBanner'
@@ -425,7 +428,11 @@ export const ReaderRevenueBanner = ({
 				`}
 			>
 				{}
-				<Banner {...props} promotedNewsletter={promotedNewsletter} />
+				<Banner
+					{...props}
+					idApiUrl={idApiUrl}
+					promotedNewsletter={promotedNewsletter}
+				/>
 			</div>
 		);
 	}

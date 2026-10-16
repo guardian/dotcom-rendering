@@ -129,11 +129,11 @@ const withBannerData =
 			isCollapsible,
 			contributionsServiceUrl,
 		} = bannerProps;
-		const promotedNewsletter = (
+		const { promotedNewsletter, idApiUrl } =
 			bannerProps as CloseableBannerProps & {
 				promotedNewsletter?: Newsletter;
-			}
-		).promotedNewsletter;
+				idApiUrl?: string;
+			};
 
 		const [hasBeenSeen, setNode] = useIsInView({
 			debounce: true,
@@ -417,6 +417,7 @@ const withBannerData =
 					promoCodes,
 					isCollapsible,
 					promotedNewsletter,
+					idApiUrl,
 				};
 
 				return (

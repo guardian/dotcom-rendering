@@ -191,6 +191,7 @@ const buildRRBannerConfigWith = ({
 					<BannerComponent
 						name={name}
 						props={props}
+						idApiUrl={idApiUrl}
 						promotedNewsletter={DEFAULT_PROMOTED_NEWSLETTER}
 					/>
 				),
