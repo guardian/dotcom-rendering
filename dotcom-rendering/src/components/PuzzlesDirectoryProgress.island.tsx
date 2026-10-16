@@ -10,6 +10,7 @@ import { PuzzlesDirectory } from './PuzzlesDirectory';
 type Props = {
 	layout: PuzzlesLayoutType;
 	renderAds: boolean;
+	hideTopRule?: boolean;
 };
 
 export type PuzzleProgressItem = {
@@ -193,7 +194,11 @@ const progressItems = (value: unknown): PuzzleProgressItem[] | undefined => {
 	return items;
 };
 
-export const PuzzlesDirectoryProgress = ({ layout, renderAds }: Props) => {
+export const PuzzlesDirectoryProgress = ({
+	layout,
+	renderAds,
+	hideTopRule,
+}: Props) => {
 	const [progressLayout, setProgressLayout] = useState(layout);
 	const requests = useRef(0);
 
@@ -236,5 +241,11 @@ export const PuzzlesDirectoryProgress = ({ layout, renderAds }: Props) => {
 		};
 	}, [layout]);
 
-	return <PuzzlesDirectory layout={progressLayout} renderAds={renderAds} />;
+	return (
+		<PuzzlesDirectory
+			layout={progressLayout}
+			renderAds={renderAds}
+			hideTopRule={hideTopRule}
+		/>
+	);
 };

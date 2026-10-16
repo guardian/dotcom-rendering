@@ -1,5 +1,5 @@
 import { breakpoints } from '@guardian/source/foundations';
-import { puzzlesCommercialProperties } from '../../fixtures/manual/puzzlesBranding';
+import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
 import { createPuzzlesPage } from '../../fixtures/manual/puzzlesPage';
 import { PuzzlesLayout } from '../layouts/PuzzlesLayout';
 import { extractNAV } from '../model/extract-nav';
@@ -130,11 +130,12 @@ export const AdFree = () => (
 );
 
 export const Sponsored = () => {
-	const page = createPuzzlesPage({
-		layout,
-		editionId: 'AU',
-		isAdFreeUser: true,
-		commercialProperties: puzzlesCommercialProperties,
-	});
-	return <PuzzlesLayout puzzlesPage={page} NAV={extractNAV(page.nav)} />;
+	const page = createPuzzlesPage({ layout, isAdFreeUser: true });
+	return (
+		<PuzzlesLayout
+			puzzlesPage={page}
+			NAV={extractNAV(page.nav)}
+			branding={puzzlesBranding}
+		/>
+	);
 };

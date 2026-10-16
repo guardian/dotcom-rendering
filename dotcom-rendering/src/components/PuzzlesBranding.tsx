@@ -10,30 +10,45 @@ import { getOphanComponents } from '../lib/labs';
 import { puzzlesContainerStyles } from '../lib/puzzlesContainerStyles';
 import type { Branding } from '../types/branding';
 
-const stripStyles = css`
-	background: ${palette.opinion[800]};
+// Sits in the clear bottom-left area of the sponsored header artwork.
+const overlayStyles = css`
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
 	color: ${palette.neutral[7]};
 `;
 
 // Borders are hidden but kept so the text lines up with the directory titles.
-const lockupStyles = css`
+const alignedStyles = css`
 	${puzzlesContainerStyles};
-	display: flex;
-	align-items: center;
-	height: 50px;
-	padding: 0 10px;
-	white-space: nowrap;
+	padding-right: 10px;
+	padding-left: 10px;
 	${from.mobileMedium} {
-		padding: 0 20px;
+		padding-right: 20px;
+		padding-left: 20px;
 	}
 	${from.desktop} {
 		border-color: transparent;
 	}
 `;
 
+const lockupStyles = css`
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 7px;
+	padding-bottom: 15px;
+	white-space: nowrap;
+	${from.desktop} {
+		flex-direction: row;
+		align-items: center;
+		padding-bottom: ${space[5]}px;
+	}
+`;
+
 const labelStyles = css`
 	${textSansBold12};
-	margin-right: ${space[2]}px;
 `;
 
 const logoStyles = css`
@@ -43,36 +58,38 @@ const logoStyles = css`
 	max-width: 100px;
 	max-height: 40px;
 	object-fit: contain;
-	${from.mobileMedium} {
-		max-width: 120px;
+	object-position: left;
+`;
+
+const aboutStyles = css`
+	min-height: 35px;
+	padding-top: ${space[2]}px;
+	padding-bottom: ${space[2]}px;
+	text-align: right;
+	${from.wide} {
+		padding-right: 100px;
 	}
 `;
 
 const aboutLinkStyles = css`
 	${textSans12};
-	margin-left: ${space[3]}px;
-	color: inherit;
-	text-decoration: none;
-	&:hover {
-		text-decoration: underline;
-	}
-	${from.mobileMedium} {
-		margin-left: ${space[5]}px;
-	}
+	color: ${palette.neutral[0]};
 `;
 
-export const PuzzlesBranding = ({ branding }: { branding: Branding }) => {
+type Props = { branding: Branding };
+
+export const PuzzlesBranding = ({ branding }: Props) => {
 	const { ophanComponentName, ophanComponentLink } = getOphanComponents({
 		branding,
 		locationPrefix: 'front-container',
 	});
 	return (
 		<div
-			css={stripStyles}
+			css={overlayStyles}
 			data-component="puzzles-branding"
 			data-print-layout="hide"
 		>
-			<div css={lockupStyles}>
+			<div css={[alignedStyles, lockupStyles]}>
 				<span css={labelStyles}>{branding.logo.label}</span>
 				<a
 					href={branding.logo.link}
@@ -90,10 +107,15 @@ export const PuzzlesBranding = ({ branding }: { branding: Branding }) => {
 						height={branding.logo.dimensions.height}
 					/>
 				</a>
-				<a css={aboutLinkStyles} href={branding.aboutThisLink}>
-					About this content
-				</a>
 			</div>
 		</div>
 	);
 };
+
+export const PuzzlesBrandingAboutLink = ({ branding }: Props) => (
+	<div css={[alignedStyles, aboutStyles]} data-print-layout="hide">
+		<a css={aboutLinkStyles} href={branding.aboutThisLink}>
+			About this content
+		</a>
+	</div>
+);

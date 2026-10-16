@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import type { ReactNode } from 'react';
-import { puzzlesCommercialProperties } from '../../fixtures/manual/puzzlesBranding';
+import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
 import { PuzzlesLayout } from './PuzzlesLayout';
 
 jest.mock('../components/Masthead/Masthead', () => ({
@@ -11,7 +11,9 @@ jest.mock('../components/Footer', () => ({
 	Footer: () => <div data-testid="footer" />,
 }));
 jest.mock('../components/PuzzlesDirectoryProgress.island', () => ({
-	PuzzlesDirectoryProgress: () => <div data-testid="directory" />,
+	PuzzlesDirectoryProgress: ({ hideTopRule }: { hideTopRule?: boolean }) => (
+		<div data-testid="directory" data-hide-top-rule={hideTopRule} />
+	),
 }));
 jest.mock('../components/Section', () => ({
 	Section: ({ children }: { children: ReactNode }) => <div>{children}</div>,
@@ -65,36 +67,68 @@ describe('PuzzlesLayout', () => {
 			document.getElementById('dfp-ad--mobile-above-nav'),
 		).not.toBeInTheDocument();
 	});
-	it('renders a sponsorship strip below the header for the matching edition only', () => {
-		const sponsored = (editionId: string, isAdFreeUser = false) =>
-			({
-				...page(isAdFreeUser),
-				editionId,
-				commercialProperties: puzzlesCommercialProperties,
-			}) as never;
+	it('renders sponsored artwork with the lockup in the header only when branding is provided', () => {
+		const getHeader = () =>
+			screen
+				.getByRole('heading', { level: 1, name: 'Puzzles and Games' })
+				.closest('header')!;
 		const { rerender } = render(
-			<PuzzlesLayout NAV={nav} puzzlesPage={sponsored('AU')} />,
+			<PuzzlesLayout
+				NAV={nav}
+				puzzlesPage={page() as never}
+				branding={puzzlesBranding}
+			/>,
 		);
-		const header = screen
-			.getByRole('heading', { level: 1, name: 'Puzzles and Games' })
-			.closest('header')!;
-		expect(header).not.toHaveTextContent('Supported by');
-		expect(header).toHaveStyle({ height: '230px' });
-		expect(screen.getByText('Supported by')).toBeInTheDocument();
+		expect(getHeader()).toHaveTextContent('Supported by');
+		expect(getHeader().querySelector('img')).toHaveAttribute(
+			'src',
+			'https://i.guim.co.uk/img/uploads/2026/10/12/header-sponsored-mobile-360px.png?width=360&dpr=2&s=none',
+		);
+		expect(
+			Array.from(getHeader().querySelectorAll('source'), (source) =>
+				source.getAttribute('srcset'),
+			),
+		).toEqual(
+			[
+				'wide-1440px',
+				'leftcol-1280px',
+				'desktop-1024px',
+				'tablet-768px',
+				'mobile-phablet-667px',
+				'mobile-landscape-480px',
+				'mobile-medium-393px',
+			].map(
+				(name) =>
+					`https://i.guim.co.uk/img/uploads/2026/10/12/header-sponsored-${name}.png?width=${name.match(/(\d+)px$/)![1]}&dpr=2&s=none`,
+			),
+		);
 		expect(
 			screen.getByRole('link', {
 				name: 'Visit the Example sponsor website',
 			}),
 		).toHaveAttribute('href', 'https://example.com');
-		expect(
-			screen.getByRole('link', { name: 'About this content' }),
-		).toHaveAttribute('href', 'https://example.com/about');
-		rerender(
-			<PuzzlesLayout NAV={nav} puzzlesPage={sponsored('AU', true)} />,
+		const aboutLink = screen.getByRole('link', {
+			name: 'About this content',
+		});
+		expect(aboutLink).toHaveAttribute('href', 'https://example.com/about');
+		expect(getHeader()).not.toContainElement(aboutLink);
+		expect(screen.getByTestId('directory')).toHaveAttribute(
+			'data-hide-top-rule',
+			'true',
 		);
-		expect(screen.getByText('Supported by')).toBeInTheDocument();
-		rerender(<PuzzlesLayout NAV={nav} puzzlesPage={sponsored('UK')} />);
+		rerender(<PuzzlesLayout NAV={nav} puzzlesPage={page() as never} />);
 		expect(screen.queryByText('Supported by')).not.toBeInTheDocument();
+		expect(
+			screen.queryByRole('link', { name: 'About this content' }),
+		).not.toBeInTheDocument();
+		expect(screen.getByTestId('directory')).toHaveAttribute(
+			'data-hide-top-rule',
+			'false',
+		);
+		expect(getHeader().querySelector('img')).toHaveAttribute(
+			'src',
+			'https://i.guim.co.uk/img/uploads/2026/09/15/header-mobile-360px.png?width=360&dpr=2&s=none',
+		);
 	});
 
 	it('renders the illustrated header with responsive sources and a fixed height', () => {
