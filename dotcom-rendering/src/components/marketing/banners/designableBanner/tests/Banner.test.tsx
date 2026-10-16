@@ -230,8 +230,9 @@ describe('DesignableBanner V2', () => {
 
 		render(<BannerComponent {...choiceCardProps} />);
 
-		expect(screen.getByText('£10')).toBeInTheDocument();
-		expect(screen.getByText('£20')).toBeInTheDocument();
+		expect(screen.getByRole('radio', { name: /£10/ })).toBeChecked();
+		expect(screen.getByRole('radio', { name: /£20/ })).not.toBeChecked();
+		expect(screen.getAllByRole('radio')).toHaveLength(2);
 	});
 
 	it('renders article count when separateArticleCount is true and >= 5 articles', () => {
