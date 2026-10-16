@@ -75,6 +75,10 @@ describe('ThreeTierChoiceCards', () => {
 		expect(
 			screen.getByText('Unlock All-access digital benefits:')
 				.parentElement?.parentElement?.parentElement,
+		).toHaveAttribute('aria-hidden', 'false');
+		expect(
+			screen.getByText('Unlock All-access digital benefits:')
+				.parentElement?.parentElement?.parentElement,
 		).toHaveStyle({ gridTemplateRows: '1fr' });
 
 		// Check that benefits are shown for the default expanded card
@@ -123,6 +127,10 @@ describe('ThreeTierChoiceCards', () => {
 		).toBeInTheDocument();
 
 		// Benefits stay mounted so their container can animate closed.
+		expect(
+			screen.getByText('Unlock All-access digital benefits:')
+				.parentElement?.parentElement?.parentElement,
+		).toHaveAttribute('aria-hidden', 'true');
 		expect(
 			screen.getByText('Unlock All-access digital benefits:')
 				.parentElement?.parentElement?.parentElement,

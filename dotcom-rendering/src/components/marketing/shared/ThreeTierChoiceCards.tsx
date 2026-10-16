@@ -439,6 +439,9 @@ export const ThreeTierChoiceCards = ({
 											)}
 											supporting={
 												<div
+													aria-hidden={
+														isExpanded !== true
+													}
 													css={styles.benefitsContainer(
 														isExpanded,
 													)}
