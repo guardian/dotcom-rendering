@@ -9,6 +9,23 @@ const expectInvalid = (page: unknown) =>
 	);
 
 describe('validateAsPuzzlePageType', () => {
+	it('preserves the API game URL in the page instance', () => {
+		const page = createPuzzlePage('sudoku-easy');
+		page.instance.gameUrl =
+			'https://tg.amuselabs.com/guardian/date-picker?id=opaque';
+		expect(validateAsPuzzlePageType(page).instance.gameUrl).toBe(
+			page.instance.gameUrl,
+		);
+	});
+
+	it('rejects a non-string game URL', () => {
+		const page = clone(createPuzzlePage('sudoku-easy')) as unknown as {
+			instance: { gameUrl: unknown };
+		};
+		page.instance.gameUrl = 42;
+		expectInvalid(page);
+	});
+
 	it('accepts a valid iframe payload', () => {
 		const page = createPuzzlePage('sudoku-easy');
 		expect(validateAsPuzzlePageType(page).slug).toBe('sudoku-easy');
