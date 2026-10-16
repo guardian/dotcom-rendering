@@ -16,7 +16,6 @@ import type { EditionId } from '../lib/edition';
 import { parseStorylinesContentToStorylines } from '../model/enhanceTagPageStorylinesContent';
 import { palette } from '../palette';
 import type { StorylinesContent } from '../types/storylinesContent';
-import type { TagPagePagination } from '../types/tagPage';
 import { Footer } from './ExpandableAtom/Footer';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { ScrollableCarousel } from './ScrollableCarousel';
@@ -28,7 +27,6 @@ type StorylinesSectionProps = {
 	containerId?: string;
 	editionId: EditionId;
 	storylinesContent: StorylinesContent;
-	pagination?: TagPagePagination;
 };
 
 const selectedTitleStyles = css`
@@ -158,7 +156,6 @@ export const StorylinesSectionContent = ({
 	containerId,
 	storylinesContent,
 	editionId,
-	pagination,
 }: StorylinesSectionProps) => {
 	const parsedStorylines =
 		parseStorylinesContentToStorylines(storylinesContent);
@@ -203,7 +200,6 @@ export const StorylinesSectionContent = ({
 			ophanComponentLink={`container | ${containerId}`}
 			ophanComponentName={containerId}
 			editionId={editionId}
-			pagination={pagination}
 		>
 			{/* Storylines tab selector. This is a carousel on mobile. */}
 			<div css={tabsContainerStyles}>
