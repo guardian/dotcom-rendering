@@ -86,4 +86,5 @@ export interface BannerRenderProps {
 	promoCodes?: string[];
 	isCollapsible?: boolean;
 	promotedNewsletter?: Newsletter;
+	idApiUrl?: string;
 }
