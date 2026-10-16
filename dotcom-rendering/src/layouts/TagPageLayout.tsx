@@ -207,7 +207,14 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 							<Hide until="tablet">
 								{insertStorylinesSection &&
 									tagPage.storylinesContent && (
-										<Island priority="critical">
+										/* Hydrate only once visible: below tablet the Hide wrapper is display:none, so the island never intersects and never hydrates. Stays critical so adaptSite doesn't disable the tabs on slow devices */
+										<Island
+											priority="critical"
+											defer={{
+												until: 'visible',
+												rootMargin: '300px',
+											}}
+										>
 											<StorylinesSectionContent
 												index={1}
 												editionId={tagPage.editionId}
