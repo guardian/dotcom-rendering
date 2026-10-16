@@ -28,14 +28,18 @@ const STICKY_TOP = space[2];
  */
 const BAR_HEIGHT = 44;
 
+/** Backdrop below the pinned bar, so content doesn't show right under it. */
+const BACKDROP_BOTTOM = space[2];
+
 /**
  * How far below the top of the viewport a section heading sits after a reader
- * follows one of the nav's links: clear of the pinned bar, with a small gap.
- * It is also the line the reader has to scroll a heading past for its section
- * to become the current one, so that following a link always selects it.
+ * follows one of the nav's links: clear of the pinned bar and its backdrop,
+ * with a small gap. It is also the line the reader has to scroll a heading
+ * past for its section to become the current one, so that following a link
+ * always selects it.
  */
 export const HORIZONTAL_TABLE_OF_CONTENTS_SCROLL_MARGIN =
-	STICKY_TOP + BAR_HEIGHT + space[2];
+	STICKY_TOP + BAR_HEIGHT + BACKDROP_BOTTOM + space[2];
 
 /**
  * Works out which section the reader is in: the last heading whose top has
@@ -64,17 +68,26 @@ export const getCurrentSectionId = (
 const prefersReducedMotion = (): boolean =>
 	window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const wrapperStyles = css`
+/**
+ * Pins to the top of the viewport and fills the space around the bar with the
+ * page background, so the article doesn't show through as it scrolls under.
+ */
+const stickyStyles = css`
 	position: sticky;
-	top: ${STICKY_TOP}px;
+	top: 0;
 	z-index: ${getZIndex('tableOfContents')};
+	margin: ${space[4] - STICKY_TOP}px 0 ${space[6] - BACKDROP_BOTTOM}px;
+	padding: ${STICKY_TOP}px 0 ${BACKDROP_BOTTOM}px;
+	background-color: ${palette('--article-background')};
+`;
+
+const wrapperStyles = css`
+	position: relative;
 	box-sizing: border-box;
 	display: flex;
 	align-items: center;
 	width: 100%;
-	max-width: 620px;
 	height: ${BAR_HEIGHT}px;
-	margin: ${space[4]}px 0 ${space[6]}px;
 	padding: 0 10px;
 	background-color: ${palette('--table-of-contents-horizontal-background')};
 	border: 1px solid ${palette('--table-of-contents-horizontal-border')};
@@ -109,7 +122,8 @@ const wrapperStyles = css`
 		border-radius: 0 4px 4px 0;
 	}
 
-	${from.desktop} {
+	/* Wider from tablet, where the arrow buttons sit on top of the fades. */
+	${from.tablet} {
 		&::before,
 		&::after {
 			width: 90px;
@@ -336,72 +350,73 @@ export const HorizontalTableOfContents = ({ tableOfContents }: Props) => {
 	};
 
 	return (
-		<div
-			css={[
-				wrapperStyles,
-				canScrollPrev && showPrevStyles,
-				canScrollNext && showNextStyles,
-			]}
-			data-component="horizontal-table-of-contents"
-		>
-			{canScrollPrev && (
-				// Keyboard and screen reader users reach every section
-				// through the links, so the arrows are mouse-only.
-				<button
-					type="button"
-					css={[
-						buttonStyles,
-						css`
-							left: 0;
-						`,
-					]}
-					onClick={() => scrollByPage(-1)}
-					tabIndex={-1}
-					aria-hidden="true"
-					data-link-name="horizontal-table-of-contents-prev"
-				>
-					<SvgChevronLeftSingle size="xsmall" />
-				</button>
-			)}
+		<div css={stickyStyles} data-component="horizontal-table-of-contents">
+			<div
+				css={[
+					wrapperStyles,
+					canScrollPrev && showPrevStyles,
+					canScrollNext && showNextStyles,
+				]}
+			>
+				{canScrollPrev && (
+					// Keyboard and screen reader users reach every section
+					// through the links, so the arrows are mouse-only.
+					<button
+						type="button"
+						css={[
+							buttonStyles,
+							css`
+								left: 0;
+							`,
+						]}
+						onClick={() => scrollByPage(-1)}
+						tabIndex={-1}
+						aria-hidden="true"
+						data-link-name="horizontal-table-of-contents-prev"
+					>
+						<SvgChevronLeftSingle size="xsmall" />
+					</button>
+				)}
 
-			<nav ref={navRef} css={scrollStyles} aria-label="Sections">
-				<ul css={listStyles}>
-					{tableOfContents.map((item, index) => (
-						<li key={item.id} css={itemStyles}>
-							<a
-								href={`#${item.id}`}
-								css={linkStyles}
-								aria-current={
-									item.id === currentSectionId
-										? 'location'
-										: undefined
-								}
-								data-link-name={`horizontal-table-of-contents-item-${index}-${item.id}`}
-							>
-								{item.title}
-							</a>
-						</li>
-					))}
-				</ul>
-			</nav>
+				<nav ref={navRef} css={scrollStyles} aria-label="Sections">
+					<ul css={listStyles}>
+						{tableOfContents.map((item, index) => (
+							<li key={item.id} css={itemStyles}>
+								<a
+									href={`#${item.id}`}
+									css={linkStyles}
+									aria-current={
+										item.id === currentSectionId
+											? 'location'
+											: undefined
+									}
+									data-link-name={`horizontal-table-of-contents-item-${index}-${item.id}`}
+								>
+									{item.title}
+								</a>
+							</li>
+						))}
+					</ul>
+				</nav>
 
-			{canScrollNext && (
-				<button
-					type="button"
-					css={[
-						buttonStyles,
-						css`
-							right: 0;
-						`,
-					]}
-					onClick={() => scrollByPage(1)}
-					tabIndex={-1}
-					aria-hidden="true"
-					data-link-name="horizontal-table-of-contents-next"
-				>
-					<SvgChevronRightSingle size="xsmall" />
-				</button>
-			)}
+				{canScrollNext && (
+					<button
+						type="button"
+						css={[
+							buttonStyles,
+							css`
+								right: 0;
+							`,
+						]}
+						onClick={() => scrollByPage(1)}
+						tabIndex={-1}
+						aria-hidden="true"
+						data-link-name="horizontal-table-of-contents-next"
+					>
+						<SvgChevronRightSingle size="xsmall" />
+					</button>
+				)}
+			</div>
 		</div>
 	);
 };
