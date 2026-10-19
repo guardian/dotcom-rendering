@@ -50,23 +50,17 @@ export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
 	 * Optional to control which services run in an EC2-ECS hybrid mode, or EC2-only.
 	 */
 	ecsProps?: {
-		/**
-		 * Which image to run.
-		 * This should be the image digest (e.g. 'sha256:abc123') to ensure immutable deployments.
-		 *
-		 * @see https://docs.docker.com/dhi/core-concepts/digests
-		 */
-		imageIdentifier: string;
+		imageIdentifier: NonNullable<
+			GuLoadBalancedAppExperimentalProps['ecsProps']
+		>['imageIdentifier'];
 
-		/**
-		 * vCPU units for the ECS task
-		 */
-		taskCpu: number;
+		taskCpu: NonNullable<
+			GuLoadBalancedAppExperimentalProps['ecsProps']
+		>['cpu'];
 
-		/**
-		 * Memory in MB for ECS task
-		 */
-		taskMemoryLimitMiB: number;
+		taskMemoryLimitMiB: NonNullable<
+			GuLoadBalancedAppExperimentalProps['ecsProps']
+		>['memoryLimitMiB'];
 
 		scaling: NonNullable<
 			GuLoadBalancedAppExperimentalProps['ecsProps']
