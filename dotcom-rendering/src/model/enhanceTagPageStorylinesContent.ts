@@ -220,7 +220,11 @@ function parseKeyStoriesToFrontCard(
 		format: standardFormat,
 		dataLinkName: `${storylineId} | key-stories`,
 		url: leadArticle?.url ?? '',
-		headline: '',
+		// The splash card suppresses its visible headline (see the
+		// `isStorylines && isFlexSplash` guard in Card), but the headline is
+		// still used as the overlay link's accessible name, so preserve the
+		// lead article's headline rather than emitting an empty aria-label.
+		headline: leadArticle?.headline ?? '',
 		trailText: '',
 		webPublicationDate: '',
 		supportingContent,
