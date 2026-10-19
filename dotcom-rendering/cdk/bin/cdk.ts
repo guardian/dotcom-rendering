@@ -149,34 +149,6 @@ export const TagPageRenderingPropsPROD: RenderingCDKStackProps = {
 	guApp: 'tag-page-rendering',
 	stage: 'PROD',
 	domainName: 'tag-page-rendering.guardianapis.com',
-	ec2Props: {
-		scaling: {
-			minimumInstances: 0,
-			maximumInstances: 0,
-			policies: {
-				step: {
-					cpu: cpuScalingSteps,
-					latency: {
-						scalingStepsOut: [
-							// When latency is lower than 0.4s no scaling up
-							{ lower: 0, upper: 0.4, change: 0 },
-							// When latency is higher than 0.4s we scale up by 50%
-							{ lower: 0.4, change: 50 },
-							// When latency is higher than 0.5s we scale up by 80%
-							{ lower: 0.5, change: 80 },
-						],
-						scalingStepsIn: [
-							// When latency is higher than 0.35s no scaling down
-							{ lower: 0.35, change: 0 },
-							// When latency is lower than 0.35s we scale down by 1
-							{ upper: 0.35, lower: 0, change: -1 },
-						],
-					},
-				},
-			},
-		},
-		instanceType: InstanceType.of(InstanceClass.C8G, InstanceSize.MEDIUM),
-	},
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
 		taskCpu: 1024,
