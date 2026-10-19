@@ -2,13 +2,16 @@ import type {
 	FEFrontCardStyle,
 	FEMediaAsset,
 	FEMediaAtom,
+	FEMultimediaSlideshow,
 	FESupportingContent,
 } from '../frontend/feFront';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import type { Image } from '../types/content';
 import type { FrontEditorialTest, VariantMeta } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
 import {
 	decideArticleMedia,
+	decideMultimediaSlideshow,
 	decideReplacementMedia,
 	getActiveMediaAtom,
 	getFrontEditorialTestData,
@@ -532,6 +535,95 @@ describe('Enhance Cards', () => {
 				subtitleSource: undefined,
 				videoStyle: 'Loop',
 			});
+		});
+	});
+
+	describe('decideMultimediaSlideshow', () => {
+		const smallImage: Image = {
+			index: 0,
+			fields: { width: '500', height: '400' },
+			mediaType: 'image',
+			url: 'https://media.guim.co.uk/slide/500.jpg',
+		};
+		const largeImage: Image = {
+			...smallImage,
+			fields: { width: '1000', height: '800' },
+			url: 'https://media.guim.co.uk/slide/1000.jpg',
+		};
+		const multimediaSlideshow: FEMultimediaSlideshow = {
+			id: 'slideshow-id',
+			aspectRatio: '5:4',
+			slides: [
+				{
+					content: {
+						type: 'Image',
+						item: {
+							image: { allImages: [smallImage, largeImage] },
+						},
+					},
+					caption: 'Image caption',
+				},
+				{
+					content: {
+						type: 'Video',
+						item: {
+							mediaAtom: {
+								...testMediaAtom,
+								posterImage: { allImages: [largeImage] },
+							},
+						},
+					},
+					caption: 'Video caption',
+				},
+			],
+		};
+
+		it('returns undefined if multimediaSlideshowReplace is false', () => {
+			expect(
+				decideMultimediaSlideshow(false, multimediaSlideshow),
+			).toEqual(undefined);
+		});
+
+		it('converts image and self-hosted video slides in order', () => {
+			expect(
+				decideMultimediaSlideshow(true, multimediaSlideshow),
+			).toEqual([
+				{
+					type: 'image',
+					imageSrc: 'https://media.guim.co.uk/slide/1000.jpg',
+					imageCaption: 'Image caption',
+				},
+				{
+					type: 'video',
+					videoSrc: 'https://guim-example.co.uk/atomID-1.mp4',
+					mimeType: 'video/mp4',
+					posterSrc: 'https://media.guim.co.uk/slide/1000.jpg',
+					caption: 'Video caption',
+				},
+			]);
+		});
+
+		it('drops video slides without an MP4 source, and returns undefined if none remain', () => {
+			const youtubeOnly: FEMultimediaSlideshow = {
+				id: 'slideshow-id',
+				slides: [
+					{
+						content: {
+							type: 'Video',
+							item: {
+								mediaAtom: {
+									...testMediaAtom,
+									assets: [testYoutubeAsset],
+								},
+							},
+						},
+					},
+				],
+			};
+
+			expect(decideMultimediaSlideshow(true, youtubeOnly)).toEqual(
+				undefined,
+			);
 		});
 	});
 

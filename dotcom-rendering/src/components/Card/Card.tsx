@@ -22,7 +22,7 @@ import type {
 	DCRContainerPalette,
 	DCRContainerType,
 	DCRFrontImage,
-	DCRSlideshowImage,
+	DCRSlideshowMedia,
 	DCRSnapType,
 	DCRSupportingContent,
 } from '../../types/front';
@@ -134,7 +134,7 @@ export type Props = {
 	discussionApiUrl: string;
 	discussionId?: string;
 	isExternalLink: boolean;
-	slideshowImages?: DCRSlideshowImage[];
+	slideshowImages?: DCRSlideshowMedia[];
 	/** Determines if liveblog update links are displayed on a card */
 	showLivePlayable?: boolean;
 	liveUpdatesAlignment?: Alignment;
@@ -264,7 +264,7 @@ const getMedia = ({
 	imageAltText?: string;
 	avatarUrl?: string;
 	isCrossword?: boolean;
-	slideshowImages?: DCRSlideshowImage[];
+	slideshowImages?: DCRSlideshowMedia[];
 	mainMedia?: MainMedia;
 	canPlayInline?: boolean;
 	isFrontContainer: boolean;
