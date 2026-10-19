@@ -1,7 +1,13 @@
 import { App } from 'aws-cdk-lib';
-import { Template } from 'aws-cdk-lib/assertions';
-import { InstanceClass, InstanceSize, InstanceType } from 'aws-cdk-lib/aws-ec2';
+import { Match, Template } from 'aws-cdk-lib/assertions';
 import {
+	InstanceType as Ec2InstanceType,
+	InstanceClass,
+	InstanceSize,
+} from 'aws-cdk-lib/aws-ec2';
+import {
+	ArticleRenderingPropsCODE,
+	ArticleRenderingPropsPROD,
 	InteractiveRenderingPropsCODE,
 	InteractiveRenderingPropsPROD,
 	TagPageRenderingPropsCODE,
@@ -14,6 +20,26 @@ import { RenderingCDKStack } from './renderingStack';
  * from the cloudformation snapshot that has been checked into our repository.
  */
 describe('The RenderingCDKStack', () => {
+	const expectEcsWithEc2Traffic = (template: Template) => {
+		template.resourceCountIs('AWS::ECS::Service', 1);
+		template.hasResourceProperties(
+			'AWS::ElasticLoadBalancingV2::Listener',
+			{
+				DefaultActions: Match.arrayWith([
+					{
+						Type: 'forward',
+						ForwardConfig: {
+							TargetGroups: Match.arrayWith([
+								Match.objectLike({ Weight: 1 }),
+								Match.objectLike({ Weight: 0 }),
+							]),
+						},
+					},
+				]),
+			},
+		);
+	};
+
 	it('matches the snapshot', () => {
 		const app = new App();
 		const stack = new RenderingCDKStack(app, 'ArticleRendering', {
@@ -49,13 +75,33 @@ describe('The RenderingCDKStack', () => {
 					},
 				},
 			},
-			instanceType: InstanceType.of(
+			instanceType: Ec2InstanceType.of(
 				InstanceClass.T4G,
 				InstanceSize.MICRO,
 			),
 		});
 		const template = Template.fromStack(stack);
 		expect(template.toJSON()).toMatchSnapshot();
+	});
+
+	it('configures ECS for Article Rendering CODE without routing traffic to it', () => {
+		const app = new App();
+		const stack = new RenderingCDKStack(
+			app,
+			'ArticleRendering-CODE',
+			ArticleRenderingPropsCODE,
+		);
+		expectEcsWithEc2Traffic(Template.fromStack(stack));
+	});
+
+	it('configures ECS for Article Rendering PROD without routing traffic to it', () => {
+		const app = new App();
+		const stack = new RenderingCDKStack(
+			app,
+			'ArticleRendering-PROD',
+			ArticleRenderingPropsPROD,
+		);
+		expectEcsWithEc2Traffic(Template.fromStack(stack));
 	});
 
 	it('matches the snapshot for Tag Page Rendering PROD (now using ECS)', () => {
