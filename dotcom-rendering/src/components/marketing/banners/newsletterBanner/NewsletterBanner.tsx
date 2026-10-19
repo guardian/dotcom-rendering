@@ -68,6 +68,7 @@ const styles = {
 			grid-template-columns: minmax(0, 1fr) 380px auto;
 			grid-template-areas: 'copy-container main-image close-button';
 			gap: 20px;
+			padding: 0 ${space[3]}px;
 		}
 		${from.leftCol} {
 			max-width: 1140px;
@@ -91,18 +92,13 @@ const styles = {
 			justify-self: center;
 		}
 
-		${from.desktop} {
-			padding-right: ${space[5]}px;
-		}
-
 		${from.leftCol} {
-			padding-left: ${space[3]}px;
+			padding-left: 10px;
 		}
 	`,
 	content: css`
 		display: flex;
 		flex-direction: column;
-		gap: ${space[2]}px;
 		margin: 28px 0;
 		${until.desktop} {
 			margin: ${space[3]}px 10px;
@@ -205,8 +201,8 @@ const styles = {
 		}
 
 		${from.leftCol} {
-			margin-top: 28px;
-			margin-bottom: calc(-${space[3]}px - 28px);
+			margin-top: 36px;
+			margin-bottom: 0;
 		}
 	`,
 	horizontalLine: css`
@@ -235,12 +231,12 @@ const styles = {
 		}
 
 		&& h2 {
-			margin: 0;
+			margin: ${space[2]}px 0 0;
 		}
 	`,
 	subheading: css`
 		> div {
-			margin-bottom: 0;
+			margin-bottom: ${space[2]}px;
 		}
 
 		p {
