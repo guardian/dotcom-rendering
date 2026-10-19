@@ -263,6 +263,7 @@ export const StorylinesSectionContent = ({
 					{`These storylines were curated from ${formatStorylinesDateRange(
 						storylinesContent.earliestArticleTime,
 						storylinesContent.latestArticleTime,
+						editionId,
 					)}. Some articles may be older to provide further context.`}
 				</div>
 			</div>
