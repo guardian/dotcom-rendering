@@ -4301,7 +4301,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
       ],
       "Properties": {
         "MaxCapacity": 30,
-        "MinCapacity": 12,
+        "MinCapacity": 18,
         "ResourceId": {
           "Fn::Join": [
             "",
@@ -4542,7 +4542,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
             "ReadonlyRootFilesystem": true,
           },
         ],
-        "Cpu": "2048",
+        "Cpu": "1024",
         "ExecutionRoleArn": {
           "Fn::GetAtt": [
             "EcsTaskDefinitionExecutionRoleBE450C73",
@@ -4550,7 +4550,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
           ],
         },
         "Family": "TagPageRenderingPRODEcsTaskDefinition12224835",
-        "Memory": "4096",
+        "Memory": "2048",
         "NetworkMode": "awsvpc",
         "RequiresCompatibilities": [
           "FARGATE",

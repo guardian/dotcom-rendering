@@ -171,10 +171,10 @@ export const TagPageRenderingPropsPROD: RenderingCDKStackProps = {
 	instanceType: InstanceType.of(InstanceClass.C8G, InstanceSize.MEDIUM),
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
-		taskCpu: 2048,
-		taskMemoryLimitMiB: 4096,
+		taskCpu: 1024,
+		taskMemoryLimitMiB: 2048,
 		scaling: {
-			minimumTasks: 12,
+			minimumTasks: 18,
 			maximumTasks: 30,
 			cpuScaling: {
 				targetValue: 20,
