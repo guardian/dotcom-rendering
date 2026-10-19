@@ -27,6 +27,7 @@ export const OnwardLink = (props: Props) => (
 			marginTop: space[4],
 		})}
 		href={props.link.href}
+		data-ignore="global-link-styling" //This overrides the globalLinkStyles in ArticleBody.tsx to avoid the liveblog link text
 	>
 		{props.text}
 	</LinkButton>
