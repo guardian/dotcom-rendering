@@ -97,7 +97,9 @@ describe('parseStorylinesContentToStorylines (integration with Frontend fixture)
 		it('builds a boosted key-stories card with the expected data link name', () => {
 			const card = keyStories?.splash[0];
 			expect(card?.boostLevel).toBe('boost');
-			expect(card?.headline).toBe('');
+			expect(card?.headline).toBe(
+				'‘Too little, too late’: critics perplexed and suspicious of AI leaders’ call for a slowdown',
+			);
 			expect(card?.dataLinkName).toBe('storyline-1 | key-stories');
 			expect(card?.format).toEqual({ design: 0, display: 0, theme: 0 });
 		});
