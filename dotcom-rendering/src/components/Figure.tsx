@@ -63,7 +63,7 @@ const roleCss = {
 		}
 		${from.tablet} {
 			margin-left: -20px;
-			margin-right: -100px;
+			margin-right: -20px;
 		}
 		${from.desktop} {
 			margin-left: -20px;
@@ -284,10 +284,8 @@ const mainMediaFigureStyles = (
 		height: 100%;
 		${isImmersiveLandscape &&
 		css`
-			${from.desktop} {
-				height: calc(100vh - ${navAndLabsHeaderHeight});
-				min-height: calc(31.25rem - ${navAndLabsHeaderHeight});
-			}
+			height: calc(100vh - ${navAndLabsHeaderHeight});
+			min-height: calc(31.25rem - ${navAndLabsHeaderHeight});
 			${from.wide} {
 				min-height: calc(50rem - ${navAndLabsHeaderHeight});
 			}

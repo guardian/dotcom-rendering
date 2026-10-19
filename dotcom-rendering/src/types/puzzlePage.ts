@@ -14,6 +14,8 @@ import type { PuzzleGameSupporting, PuzzleItem } from './puzzlesPage';
  * `/crosswords/*` flow), so this type carries no crossword-specific fields.
  */
 export interface PuzzlePageInstance {
+	/** Dated provider URL resolved by frontend through the Puzzles API. */
+	gameUrl?: string;
 	title: string;
 	/**
 	 * Which day's puzzle the reader wants to see, as a plain date string
