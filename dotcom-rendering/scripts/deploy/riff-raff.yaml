@@ -75,17 +75,6 @@ deployments:
         PROD: TagPageRendering-PROD.template.json
       cloudFormationStackByTags: false
       cloudFormationStackName: tag-page-rendering
-      amiParameter: AMITagpagerendering
-  # tag-page-rendering autoscaling
-  tag-page-rendering:
-    type: autoscaling
-    parameters:
-      bucketSsmKey: /account/services/dotcom-artifact.bucket
-      # Default is 900 (15 mins), this is 25 mins
-      secondsToWait: 1500
-    dependencies:
-      - frontend-static
-      - tag-page-rendering-cfn
   # interactive-rendering cloudformation
   interactive-rendering-cfn:
     template: cloudformation
