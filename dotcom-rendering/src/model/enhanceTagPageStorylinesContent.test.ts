@@ -152,7 +152,7 @@ describe('parseStorylinesContentToStorylines (integration with Frontend fixture)
 			const card = opinions?.standard[0];
 			// Contrasting opinions is the second category (index 1)
 			expect(card?.dataLinkName).toBe(
-				`storyline-1 | contrasting-opinions | ${getDataLinkNameCard(
+				`storyline-1 | opinions | ${getDataLinkNameCard(
 					{ design: 8, display: 0, theme: 1 },
 					'1',
 					0,
