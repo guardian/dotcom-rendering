@@ -75,14 +75,13 @@ const tabsContainerStyles = css`
 	margin-left: -${space[2]}px;
 `;
 
-const tabStyles = (isActive: boolean, isFirst: boolean) => css`
+const tabStyles = (isActive: boolean) => css`
 	${textSans17};
 	font-weight: 700;
 	text-align: start;
 	padding: ${space[0]}px ${space[0]}px ${space[0]}px ${space[2]}px;
 	cursor: pointer;
 	border: none;
-	${!isFirst && `border-left: 1px ${palette('--storylines-border')} solid;`}
 	background-color: ${palette('--storylines-background')};
 	color: ${isActive
 		? `${palette('--storylines-active-tab')}`
@@ -189,27 +188,20 @@ export const StorylinesSectionContent = ({
 					gapSizes={{ column: 'large', row: 'medium' }}
 				>
 					{parsedStorylines.map((storyline, i) => (
-						<button
-							key={storyline.id}
-							css={tabStyles(
-								activeStorylineId === storyline.id,
-								i === 0,
-							)}
-							onClick={() => handleStorylineChange(storyline.id)}
-							type="button"
-						>
-							{activeStorylineId === storyline.id ? (
-								<>
-									<span css={numberStyles}>{i + 1}</span>
-									<span>{storyline.title}</span>
-								</>
-							) : (
-								<>
-									<span css={numberStyles}>{i + 1}</span>
-									<span>{storyline.title}</span>
-								</>
-							)}
-						</button>
+						<ScrollableCarousel.Item key={storyline.id}>
+							<button
+								css={tabStyles(
+									activeStorylineId === storyline.id,
+								)}
+								onClick={() =>
+									handleStorylineChange(storyline.id)
+								}
+								type="button"
+							>
+								<span css={numberStyles}>{i + 1}</span>
+								<span>{storyline.title}</span>
+							</button>
+						</ScrollableCarousel.Item>
 					))}
 				</ScrollableCarousel>
 			</div>
