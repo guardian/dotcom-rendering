@@ -30,34 +30,28 @@ const DISCUSSION_API_URL = 'https://discussion.theguardian.com/discussion-api';
  */
 type StorylineCategory =
 	| 'Key Stories'
-	| 'Contrasting opinions'
+	| 'Opinions'
 	| 'Explainers'
 	| 'Deep Reads'
-	| 'Find multimedia'
+	| 'Multimedia'
 	| 'Profiles and Interviews';
 
 /**
  * Maps the raw `category` label from Frontend to a known StorylineCategory.
- * Includes known aliases (e.g. 'Opinions' is the display name Frontend may send
- * for 'Contrasting opinions').
+ * Includes known aliases (e.g. It's possible that 'Opinions' might be called 'Contrasting Opinions'
+ * for some older storylines outputs).
  */
 const CATEGORY_BY_RAW_LABEL: Record<string, StorylineCategory> = {
 	'Key Stories': 'Key Stories',
-	'Contrasting opinions': 'Contrasting opinions',
-	Opinions: 'Contrasting opinions',
+	'Contrasting opinions': 'Opinions',
+	Opinions: 'Opinions',
 	Explainers: 'Explainers',
 	'Deep Reads': 'Deep Reads',
-	'Find multimedia': 'Find multimedia',
+	'Find multimedia': 'Multimedia',
 	'Profiles and Interviews': 'Profiles and Interviews',
 };
 
-/**
- * Classifies the raw category label into a known StorylineCategory, resolving
- * aliases. Returns `undefined` for genuinely unknown categories (which are then
- * rendered with safe default formatting) and warns so unexpected Frontend data
- * is observable.
- */
-function classifyCategory(raw: string): StorylineCategory | undefined {
+function parseCategoryName(raw: string): StorylineCategory | undefined {
 	const classified = CATEGORY_BY_RAW_LABEL[raw];
 	if (classified === undefined) {
 		// eslint-disable-next-line no-console -- surface unexpected data from Frontend
@@ -94,12 +88,9 @@ function decideMultimediaFormat(article: ArticleData): ArticleFormat {
 				theme,
 			};
 		case undefined:
+		default:
 			return standard;
 	}
-	// Defensive fallback: Frontend is an external source, so guard against a
-	// media type the compile-time union does not model (e.g. if the generated
-	// schema drifts) rather than returning undefined.
-	return standard;
 }
 
 function decideFormatForArticle(
@@ -107,7 +98,7 @@ function decideFormatForArticle(
 	article: ArticleData,
 ): ArticleFormat {
 	switch (category) {
-		case 'Contrasting opinions':
+		case 'Opinions':
 			return {
 				design: ArticleDesign.Comment,
 				display: ArticleDisplay.Standard,
@@ -120,18 +111,14 @@ function decideFormatForArticle(
 				theme: Pillar.News,
 			};
 		case 'Explainers':
-			// NOTE: Pillar.Sport (theme 2) is a deliberate styling choice here,
-			// not a semantic classification of the content.
 			return {
 				design: ArticleDesign.Standard,
 				display: ArticleDisplay.Standard,
 				theme: Pillar.Sport,
 			};
-		case 'Find multimedia':
+		case 'Multimedia':
 			return decideMultimediaFormat(article);
 		case 'Profiles and Interviews':
-			// NOTE: ArticleDesign.Interactive (18) + Immersive display is a
-			// deliberate styling choice, not a semantic classification.
 			return {
 				design: ArticleDesign.Interactive,
 				display: ArticleDisplay.Immersive,
@@ -168,7 +155,7 @@ function parseArticleDataToFrontCard(
 		index,
 	)}`;
 	const mainMedia =
-		classified === 'Find multimedia' && article.image?.mediaData
+		classified === 'Multimedia' && article.image?.mediaData
 			? article.image.mediaData
 			: undefined;
 	const articleMedia = mainMedia && getMediaMetadata(mainMedia);
@@ -182,7 +169,7 @@ function parseArticleDataToFrontCard(
 		supportingContent: [],
 		discussionApiUrl: DISCUSSION_API_URL,
 		byline: article.byline ?? '',
-		showByline: classified === 'Contrasting opinions',
+		showByline: classified === 'Opinions',
 		boostLevel:
 			classified === 'Profiles and Interviews' ||
 			classified === 'Deep Reads'
@@ -194,8 +181,7 @@ function parseArticleDataToFrontCard(
 		showQuotedHeadline: false,
 		showLivePlayable: false,
 		avatarUrl:
-			classified === 'Contrasting opinions' &&
-			article.image?.isAvatar === true
+			classified === 'Opinions' && article.image?.isAvatar === true
 				? article.image.src
 				: undefined,
 		mainMedia,
@@ -259,13 +245,13 @@ function parseKeyStoriesToFrontCard(
 
 function decideGroupedTrails(
 	category: CategoryContent,
-	classified: StorylineCategory | undefined,
+	parsedCategoryName: StorylineCategory | undefined,
 	categoryIndex: number,
 	storylineId: string,
 ): DCRGroupedTrails {
 	const empty: DCRGroupedTrails = { splash: [], snap: [], standard: [] };
 
-	if (classified === 'Key Stories') {
+	if (parsedCategoryName === 'Key Stories') {
 		// Guard against emitting a splash card with an empty URL when Frontend
 		// sends a Key Stories category with no articles.
 		if (category.articles.length === 0) {
@@ -278,7 +264,8 @@ function decideGroupedTrails(
 	}
 
 	const limit =
-		classified === 'Profiles and Interviews' || classified === 'Deep Reads'
+		parsedCategoryName === 'Profiles and Interviews' ||
+		parsedCategoryName === 'Deep Reads'
 			? 1
 			: 2;
 	const standard = category.articles
@@ -286,7 +273,7 @@ function decideGroupedTrails(
 		.map((article, index) =>
 			parseArticleDataToFrontCard(
 				category,
-				classified,
+				parsedCategoryName,
 				article,
 				categoryIndex,
 				index,
@@ -307,25 +294,6 @@ function hasRenderableCards(groupedTrails: DCRGroupedTrails): boolean {
 export function parseStorylinesContentToStorylines(
 	storylinesContent: StorylinesContent,
 ): ParsedStoryline[] {
-	function decideCategoryTitle(
-		classified: StorylineCategory | undefined,
-		rawCategory: string,
-	): string {
-		switch (classified) {
-			case 'Key Stories':
-				return 'Key Stories';
-			case 'Contrasting opinions':
-				return 'Opinions';
-			case 'Find multimedia':
-				return 'Multimedia';
-			case 'Explainers':
-			case 'Deep Reads':
-			case 'Profiles and Interviews':
-				return classified;
-			case undefined:
-				return rawCategory;
-		}
-	}
 	return storylinesContent.storylines.map((storyline, i) => {
 		const storylineId = `storyline-${i + 1}`;
 		return {
@@ -333,15 +301,14 @@ export function parseStorylinesContentToStorylines(
 			title: storyline.title,
 			categories: storyline.content
 				.map((category, categoryIndex) => {
-					const classified = classifyCategory(category.category);
+					const parsedCategoryName = parseCategoryName(
+						category.category,
+					);
 					return {
-						title: decideCategoryTitle(
-							classified,
-							category.category,
-						),
+						title: parsedCategoryName ?? category.category,
 						groupedTrails: decideGroupedTrails(
 							category,
-							classified,
+							parsedCategoryName,
 							categoryIndex,
 							storylineId,
 						),
