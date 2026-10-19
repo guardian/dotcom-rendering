@@ -1,4 +1,4 @@
-import { createRef } from 'react';
+import { createRef, useState } from 'react';
 import type ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { fn, mocked } from 'storybook/test';
 import preview from '../../../../../.storybook/preview';
@@ -68,10 +68,32 @@ const signedOutFormState: NewsletterSignupFormState = {
 	...noopHandlers,
 };
 
+const useInteractiveSignedOutForm = (): NewsletterSignupFormState => {
+	const [userEmail, setUserEmail] = useState('');
+	const [isInteracted, setIsInteracted] = useState(false);
+	const [marketingOptIn, setMarketingOptIn] = useState(true);
+
+	return {
+		...signedOutFormState,
+		userEmail,
+		isInteracted,
+		showMarketingToggle: isInteracted,
+		marketingOptIn,
+		handleEmailFocus: () => setIsInteracted(true),
+		handleEmailChange: (value) => {
+			setUserEmail(value);
+			setIsInteracted(true);
+		},
+		handleMarketingToggle: () => setMarketingOptIn((current) => !current),
+	};
+};
+
 export const SignedOut = meta.story({
 	beforeEach() {
 		mocked(useIsSignedIn).mockReturnValue(false);
 		mocked(useNewsletterSubscription).mockReturnValue(false);
-		mocked(useNewsletterSignupForm).mockReturnValue(signedOutFormState);
+		mocked(useNewsletterSignupForm).mockImplementation(
+			useInteractiveSignedOutForm,
+		);
 	},
 });
