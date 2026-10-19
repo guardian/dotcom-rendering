@@ -13,7 +13,6 @@ import type { ComponentType } from 'react';
 import { useEffect, useRef } from 'react';
 import { useNewsletterSubscription } from '../../../../lib/useNewsletterSubscription';
 import type { Newsletter } from '../../../../types/content';
-import { NewsletterSignupForm } from '../../../NewsletterSignupForm.island';
 import { DEFAULT_PROMOTED_NEWSLETTER } from '../../../StickyBottomBanner/newsletterBannerDetails';
 import { validatedBannerWrapper } from '../common/BannerWrapper';
 import type { BannerRenderProps } from '../common/types';
@@ -25,6 +24,7 @@ import { BannerVisual } from '../designableBanner/components/BannerVisual';
 import { useDesignableBannerModel } from '../designableBanner/useDesignableBannerModel';
 import { NewsletterBannerLogo } from './NewsletterBannerLogo';
 import { NewsletterFrequencyTag } from './NewsletterFrequencyTag';
+import { NewsletterSignupForm } from './NewsletterSignupForm';
 
 const phabletContentMaxWidth = '492px';
 
@@ -271,6 +271,7 @@ export const NewsletterBannerComponent = (
 		newsletter.listId,
 		props.idApiUrl,
 	);
+	console.log(isSubscribed);
 	const bannerRef = useRef<HTMLDivElement>(null);
 	const { isOpen, bannerData: baseBannerData } = useDesignableBannerModel({
 		...props,
@@ -368,7 +369,6 @@ export const NewsletterBannerComponent = (
 							newsletterName={newsletter.name}
 							frequency={newsletter.frequency}
 							componentId="newsletter_banner"
-							isAlreadySubscribed={isSubscribed}
 						/>
 					</div>
 				</div>
