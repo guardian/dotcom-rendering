@@ -27,22 +27,27 @@ import { Subscription, SubscriptionProtocol, Topic } from 'aws-cdk-lib/aws-sns';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import { getUserData } from './userData';
 
+interface RenderingEc2ScalingProps extends GuAsgCapacity {
+	policies?: {
+		step?: {
+			cpu?: {
+				scalingStepsOut: ScalingInterval[];
+			};
+			latency?: {
+				scalingStepsOut: ScalingInterval[];
+				scalingStepsIn: ScalingInterval[];
+			};
+		};
+	};
+}
+
 export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
 	guApp: `${'article' | 'facia' | 'interactive' | 'tag-page'}-rendering`;
 	domainName: string;
-	instanceType: InstanceType;
-	scaling: GuAsgCapacity & {
-		policies?: {
-			step?: {
-				cpu?: {
-					scalingStepsOut: ScalingInterval[];
-				};
-				latency?: {
-					scalingStepsOut: ScalingInterval[];
-					scalingStepsIn: ScalingInterval[];
-				};
-			};
-		};
+
+	ec2Props?: {
+		instanceType: InstanceType;
+		scaling: RenderingEc2ScalingProps;
 	};
 
 	/**
@@ -75,10 +80,10 @@ export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
 const addCPUStepScalingPolicy = (
 	context: RenderingCDKStack,
 	app: GuLoadBalancedAppExperimental,
-	props: RenderingCDKStackProps,
+	props: RenderingEc2ScalingProps,
 	stage: string,
 ) => {
-	if (stage === 'PROD' && props.scaling.policies?.step?.cpu) {
+	if (stage === 'PROD' && props.policies?.step?.cpu) {
 		const cpuMetric = new Metric({
 			namespace: 'AWS/EC2',
 			metricName: 'CPUUtilization',
@@ -113,7 +118,7 @@ const addCPUStepScalingPolicy = (
 			{
 				autoScalingGroup: app.autoScalingGroup!,
 				metric: cpuMetric,
-				scalingSteps: props.scaling.policies.step.cpu.scalingStepsOut,
+				scalingSteps: props.policies.step.cpu.scalingStepsOut,
 				adjustmentType: AdjustmentType.PERCENT_CHANGE_IN_CAPACITY,
 				evaluationPeriods: 2, // 1 minute = 2 × 30 seconds
 			},
@@ -135,10 +140,10 @@ const addCPUStepScalingPolicy = (
 const addLatencyStepScalingPolicy = (
 	context: RenderingCDKStack,
 	app: GuLoadBalancedAppExperimental,
-	props: RenderingCDKStackProps,
+	props: RenderingEc2ScalingProps,
 	stage: string,
 ) => {
-	if (stage === 'PROD' && props.scaling.policies?.step?.latency) {
+	if (stage === 'PROD' && props.policies?.step?.latency) {
 		const latencyMetric = new Metric({
 			dimensionsMap: {
 				LoadBalancer: app.loadBalancer.loadBalancerFullName,
@@ -172,8 +177,7 @@ const addLatencyStepScalingPolicy = (
 			{
 				autoScalingGroup: app.autoScalingGroup!,
 				metric: latencyMetric,
-				scalingSteps:
-					props.scaling.policies.step.latency.scalingStepsOut,
+				scalingSteps: props.policies.step.latency.scalingStepsOut,
 				adjustmentType: AdjustmentType.PERCENT_CHANGE_IN_CAPACITY,
 				evaluationPeriods: 2, // 1 minute = 2 × 30 seconds
 			},
@@ -197,7 +201,7 @@ const addLatencyStepScalingPolicy = (
 		new StepScalingPolicy(context, 'LatencyScaleDownPolicy', {
 			autoScalingGroup: app.autoScalingGroup!,
 			metric: latencyMetric,
-			scalingSteps: props.scaling.policies.step.latency.scalingStepsIn,
+			scalingSteps: props.policies.step.latency.scalingStepsIn,
 			adjustmentType: AdjustmentType.CHANGE_IN_CAPACITY,
 			evaluationPeriods: 10,
 		});
@@ -207,8 +211,7 @@ const addLatencyStepScalingPolicy = (
 /** DCR infrastructure provisioning via CDK */
 export class RenderingCDKStack extends CDKStack {
 	constructor(scope: CDKApp, id: string, props: RenderingCDKStackProps) {
-		const { guApp, stage, instanceType, scaling, domainName, ecsProps } =
-			props;
+		const { guApp, stage, domainName, ec2Props, ecsProps } = props;
 
 		super(scope, id, {
 			// Any version of this app should run in the eu-west-1 region
@@ -272,21 +275,25 @@ export class RenderingCDKStack extends CDKStack {
 					],
 				}),
 			],
-			ec2Props: {
-				instanceMetricGranularity: '1Minute',
-				applicationLogging: {
-					enabled: true,
-					systemdUnitName: guApp,
-				},
-				instanceType,
-				scaling,
-				userData: getUserData({
-					guApp,
-					guStack,
-					stage,
-					artifactsBucket,
-				}),
-			},
+			...(ec2Props == null
+				? {}
+				: {
+						ec2Props: {
+							instanceMetricGranularity: '1Minute',
+							applicationLogging: {
+								enabled: true,
+								systemdUnitName: guApp,
+							},
+							instanceType: ec2Props.instanceType,
+							scaling: ec2Props.scaling,
+							userData: getUserData({
+								guApp,
+								guStack,
+								stage,
+								artifactsBucket,
+							}),
+						},
+					}),
 
 			// Provision ECS resources only when `ecsProps` has been provided
 			...(ecsProps == null
@@ -408,11 +415,13 @@ export class RenderingCDKStack extends CDKStack {
 			ttl: Duration.hours(1),
 		});
 
-		/** Add CPU utilisation based STEP scaling policy for PROD only if a policy is defined */
-		addCPUStepScalingPolicy(this, app, props, stage);
+		if (ec2Props) {
+			/** Add CPU utilisation based STEP scaling policy for PROD only if a policy is defined */
+			addCPUStepScalingPolicy(this, app, ec2Props.scaling, stage);
 
-		/** Add latency-based STEP scaling policy for PROD only if a policy is defined */
-		addLatencyStepScalingPolicy(this, app, props, stage);
+			/** Add latency-based STEP scaling policy for PROD only if a policy is defined */
+			addLatencyStepScalingPolicy(this, app, ec2Props.scaling, stage);
+		}
 
 		// Saves the value of the rendering base URL to SSM for frontend apps to use
 		new StringParameter(this, 'RenderingBaseURLParam', {
