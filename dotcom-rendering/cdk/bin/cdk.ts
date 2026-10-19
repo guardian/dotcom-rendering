@@ -117,10 +117,6 @@ export const TagPageRenderingPropsCODE: RenderingCDKStackProps = {
 	guApp: 'tag-page-rendering',
 	stage: 'CODE',
 	domainName: 'tag-page-rendering.code.dev-guardianapis.com',
-	ec2Props: {
-		scaling: { minimumInstances: 0, maximumInstances: 0 },
-		instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.SMALL),
-	},
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
 		taskCpu: 1024,
