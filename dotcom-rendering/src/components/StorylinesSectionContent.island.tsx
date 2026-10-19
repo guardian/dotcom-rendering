@@ -226,7 +226,7 @@ export const StorylinesSectionContent = ({
 						)}
 						<FlexibleGeneral
 							groupedTrails={category.groupedTrails}
-							imageLoading="eager"
+							imageLoading="lazy"
 							aspectRatio="5:4"
 							hideAge={false}
 							collectionId={index}
