@@ -5410,7 +5410,7 @@ systemctl start interactive-rendering",
 }
 `;
 
-exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE (uses ECS) 1`] = `
+exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 1`] = `
 {
   "Metadata": {
     "gu:cdk:constructs": [
@@ -7488,7 +7488,7 @@ systemctl start tag-page-rendering",
 }
 `;
 
-exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD (now using ECS) 1`] = `
+exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 1`] = `
 {
   "Metadata": {
     "gu:cdk:constructs": [

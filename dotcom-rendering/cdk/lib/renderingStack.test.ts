@@ -58,7 +58,7 @@ describe('The RenderingCDKStack', () => {
 		expect(template.toJSON()).toMatchSnapshot();
 	});
 
-	it('matches the snapshot for Tag Page Rendering PROD (now using ECS)', () => {
+	it('matches the snapshot for Tag Page Rendering PROD', () => {
 		const app = new App();
 		const stack = new RenderingCDKStack(
 			app,
@@ -69,7 +69,7 @@ describe('The RenderingCDKStack', () => {
 		expect(template.toJSON()).toMatchSnapshot();
 	});
 
-	it('matches the snapshot for Tag Page Rendering CODE (uses ECS)', () => {
+	it('matches the snapshot for Tag Page Rendering CODE', () => {
 		const app = new App();
 
 		const stack = new RenderingCDKStack(
