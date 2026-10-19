@@ -187,10 +187,10 @@ function parseArticleDataToFrontCard(
 		mainMedia,
 		articleMedia,
 		isExternalLink: false,
-		image: article.image
+		image: article.image?.src
 			? {
 					src: article.image.src,
-					altText: article.image.altText || '',
+					altText: article.image.altText ?? '',
 				}
 			: undefined,
 	};
@@ -234,7 +234,7 @@ function parseKeyStoriesToFrontCard(
 		avatarUrl: undefined,
 		mainMedia: undefined,
 		isExternalLink: false,
-		image: leadArticle?.image
+		image: leadArticle?.image?.src
 			? {
 					src: leadArticle.image.src,
 					altText: leadArticle.image.altText || '',
