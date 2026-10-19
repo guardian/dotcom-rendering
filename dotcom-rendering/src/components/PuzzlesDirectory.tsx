@@ -4,14 +4,13 @@ import {
 	headlineBold24,
 	headlineBold28,
 	palette,
-	textSans14,
 } from '@guardian/source/foundations';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { puzzlesContainerStyles } from '../lib/puzzlesContainerStyles';
 import type { PuzzleContainer, PuzzlesLayoutType } from '../types/puzzlesPage';
 import { AdSlot } from './AdSlot.web';
 import { Island } from './Island';
-import { externalProps, getPuzzleUrl, Rows } from './PuzzleCard';
+import { getPuzzleUrl, Rows } from './PuzzleCard';
 import { PuzzlesArchiveMenu } from './PuzzlesArchiveMenu.island';
 import { PuzzlesSupporting } from './PuzzlesSupporting';
 
@@ -20,9 +19,11 @@ export { getPuzzleUrl };
 type Props = {
 	layout: PuzzlesLayoutType;
 	renderAds: boolean;
+	/** Omit the black rule above the first section, e.g. below the sponsorship banner. */
+	hideTopRule?: boolean;
 };
 
-const sectionStyles = (isFeatured: boolean) => css`
+const sectionStyles = (isFeatured: boolean, hideTopRule: boolean) => css`
 	--puzzles-content-top: 8px;
 	--puzzles-content-bottom: 32px;
 	position: relative;
@@ -39,6 +40,12 @@ const sectionStyles = (isFeatured: boolean) => css`
 		content: '';
 		transform: translateX(-50%);
 	}
+	${hideTopRule &&
+	css`
+		&:first-of-type::before {
+			content: none;
+		}
+	`}
 
 	${from.leftCol} {
 		--puzzles-content-top: ${isFeatured ? 16 : 8}px;
@@ -78,6 +85,11 @@ const titleStyles = css`
 		${headlineBold28};
 	}
 
+	${from.desktop} {
+		/* Include the 1px side border in the 20px inset, as the cards do. */
+		padding-left: 19px;
+	}
+
 	${from.leftCol} {
 		padding-top: var(--puzzles-content-top);
 	}
@@ -98,34 +110,6 @@ const headingColumnStyles = css`
 			content: '';
 			pointer-events: none;
 		}
-	}
-`;
-
-const crosswordLinksStyles = css`
-	display: none;
-	${from.leftCol} {
-		display: flex;
-		flex-direction: column;
-		gap: 8px;
-		margin-top: auto;
-		padding: 0 20px 24px;
-	}
-	a {
-		min-height: 24px;
-		padding: 4px 8px;
-		border-top: 1px solid
-			var(--puzzles-border-colour, ${palette.neutral[86]});
-		border-left: 1px solid
-			var(--puzzles-border-colour, ${palette.neutral[86]});
-		color: var(--puzzles-text-colour, ${palette.neutral[7]});
-		text-decoration: none;
-		${textSans14};
-	}
-	a:hover {
-		text-decoration: underline;
-	}
-	a:focus-visible {
-		outline: 3px solid ${palette.brand[500]};
 	}
 `;
 
@@ -246,43 +230,26 @@ const hasContent = (container: PuzzleContainer): boolean =>
 	container.content.items.some((row) => row.length > 0) ||
 	container.content.nestedContainers.some(hasContent);
 
-const DirectorySection = ({ container }: { container: PuzzleContainer }) => {
+const DirectorySection = ({
+	container,
+	hideTopRule,
+}: {
+	container: PuzzleContainer;
+	hideTopRule: boolean;
+}) => {
 	if (!hasContent(container)) {
 		return null;
 	}
 	return (
 		<section
 			aria-labelledby={`${container.id}-title`}
-			css={sectionStyles(container.variant === 'featured')}
+			css={sectionStyles(container.variant === 'featured', hideTopRule)}
 			id={container.id}
 		>
 			<div css={headingColumnStyles}>
 				<h2 css={titleStyles} id={`${container.id}-title`}>
 					{container.title}
 				</h2>
-				{container.id === 'crosswords' && (
-					<nav
-						css={crosswordLinksStyles}
-						aria-label="Crossword links"
-					>
-						<a
-							href="https://support.theguardian.com"
-							{...externalProps(
-								'https://support.theguardian.com',
-							)}
-						>
-							Support the Guardian
-						</a>
-						<a
-							href="https://www.theguardian.com/crosswords/crossword-blog"
-							{...externalProps(
-								'https://www.theguardian.com/crosswords/crossword-blog',
-							)}
-						>
-							Blog
-						</a>
-					</nav>
-				)}
 			</div>
 			<div css={contentStyles}>
 				<Rows
@@ -310,7 +277,11 @@ const DirectorySection = ({ container }: { container: PuzzleContainer }) => {
 	);
 };
 
-export const PuzzlesDirectory = ({ layout, renderAds }: Props) => (
+export const PuzzlesDirectory = ({
+	layout,
+	renderAds,
+	hideTopRule = false,
+}: Props) => (
 	<>
 		{layout.containers.map((container) => {
 			if (
@@ -330,6 +301,7 @@ export const PuzzlesDirectory = ({ layout, renderAds }: Props) => (
 						key={container.id}
 						layout={layout}
 						renderAds={renderAds}
+						showNewsletter={true}
 						supporting={container.supporting}
 					/>
 				);
@@ -355,7 +327,11 @@ export const PuzzlesDirectory = ({ layout, renderAds }: Props) => (
 				);
 			}
 			return (
-				<DirectorySection container={container} key={container.id} />
+				<DirectorySection
+					container={container}
+					hideTopRule={hideTopRule}
+					key={container.id}
+				/>
 			);
 		})}
 	</>

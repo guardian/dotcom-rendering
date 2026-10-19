@@ -60,16 +60,26 @@ describe('archive calendar helpers', () => {
 		);
 	});
 
-	it('maps completed, available, in-progress and missing dates', () => {
-		expect(archiveStatus({ ...archive.items[0]!, progress: 100 })).toBe(
-			'completed',
-		);
-		expect(archiveStatus({ ...archive.items[0]!, progress: 0 })).toBe(
-			'available',
-		);
-		expect(archiveStatus({ ...archive.items[0]!, progress: 50 })).toBe(
-			'available',
-		);
+	it('maps the API status, not the progress value, to the day status', () => {
+		const item = archive.items[0]!;
+		expect(
+			archiveStatus({ ...item, progress: 10, gameStatus: 'completed' }),
+		).toBe('completed');
+		expect(
+			archiveStatus({
+				...item,
+				progress: 100,
+				gameStatus: 'in-progress',
+			}),
+		).toBe('available');
+		expect(
+			archiveStatus({
+				...item,
+				progress: 100,
+				gameStatus: 'not-started',
+			}),
+		).toBe('available');
+		expect(archiveStatus({ ...item, progress: 100 })).toBe('available');
 		expect(archiveStatus(undefined)).toBe('unavailable');
 	});
 
@@ -118,7 +128,12 @@ describe('archive calendar helpers', () => {
 });
 
 describe('PuzzlesArchiveCalendar', () => {
+	const pageConfig = window.guardian.config
+		.page as typeof window.guardian.config.page & { ajaxUrl?: string };
+	const originalAjaxUrl = pageConfig.ajaxUrl;
+
 	beforeEach(() => {
+		pageConfig.ajaxUrl = '';
 		mockedGetAuthStatus.mockResolvedValue({ kind: 'SignedOut' });
 		window.history.replaceState(
 			{},
@@ -128,6 +143,7 @@ describe('PuzzlesArchiveCalendar', () => {
 	});
 
 	afterEach(() => {
+		pageConfig.ajaxUrl = originalAjaxUrl;
 		jest.useRealTimers();
 		jest.restoreAllMocks();
 		Reflect.deleteProperty(global, 'fetch');
@@ -191,62 +207,81 @@ describe('PuzzlesArchiveCalendar', () => {
 		);
 	});
 
-	it('refreshes the initial archive with authenticated progress after hydration', async () => {
-		mockedGetAuthStatus.mockResolvedValue({
-			kind: 'SignedIn',
-			accessToken: { accessToken: 'access-token' },
-			idToken: {},
-		} as never);
-		const authenticatedArchive = {
-			...archive,
-			items: [{ ...archive.items[0]!, progress: 100 }],
-		};
-		const fetchMock = jest.fn().mockResolvedValue({
-			ok: true,
-			json: async () => authenticatedArchive,
-		});
-		Object.defineProperty(global, 'fetch', {
-			configurable: true,
-			value: fetchMock,
-		});
+	it.each([
+		'',
+		'https://api.nextgen.guardianapps.co.uk',
+		'//api.nextgen.guardianapps.co.uk',
+		'https://services.code.dev-guardianapps.co.uk',
+	])(
+		'refreshes the initial archive with authenticated progress via ajaxUrl=%s',
+		async (ajaxUrl) => {
+			pageConfig.ajaxUrl = ajaxUrl;
+			mockedGetAuthStatus.mockResolvedValue({
+				kind: 'SignedIn',
+				accessToken: { accessToken: 'access-token' },
+				idToken: {},
+			} as never);
+			const authenticatedArchive = {
+				...archive,
+				items: [
+					{
+						...archive.items[0]!,
+						progress: 100,
+						gameStatus: 'completed',
+					},
+				],
+			};
+			const fetchMock = jest.fn().mockResolvedValue({
+				ok: true,
+				json: async () => authenticatedArchive,
+			});
+			Object.defineProperty(global, 'fetch', {
+				configurable: true,
+				value: fetchMock,
+			});
 
-		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
+			render(<PuzzlesArchiveCalendar initialArchive={archive} />);
 
-		await waitFor(() =>
+			await waitFor(() =>
+				expect(
+					screen.getByLabelText('2026-09-02, completed'),
+				).toBeInTheDocument(),
+			);
+			const completedCell = screen.getByLabelText(
+				'2026-09-02, completed',
+			);
+			const completedIcon = completedCell.querySelector(
+				'.completed-icon svg',
+			);
+			expect(completedIcon).toHaveAttribute('width', '18');
+			expect(completedIcon).toHaveAttribute('height', '15');
+			expect(completedIcon).toHaveAttribute('viewBox', '0 0 18 15');
+			expect(completedIcon?.querySelector('path')).toHaveAttribute(
+				'fill',
+				'#22874D',
+			);
+			const recentCard = screen.getByRole('link', {
+				name: /Latest Easy sudoku/,
+			});
+			expect(within(recentCard).getByText('Played')).toBeInTheDocument();
 			expect(
-				screen.getByLabelText('2026-09-02, completed'),
-			).toBeInTheDocument(),
-		);
-		const completedCell = screen.getByLabelText('2026-09-02, completed');
-		const completedIcon = completedCell.querySelector(
-			'.completed-icon svg',
-		);
-		expect(completedIcon).toHaveAttribute('width', '18');
-		expect(completedIcon).toHaveAttribute('height', '15');
-		expect(completedIcon).toHaveAttribute('viewBox', '0 0 18 15');
-		expect(completedIcon?.querySelector('path')).toHaveAttribute(
-			'fill',
-			'#22874D',
-		);
-		const recentCard = screen.getByRole('link', {
-			name: /Latest Easy sudoku/,
-		});
-		expect(within(recentCard).getByText('Played')).toBeInTheDocument();
-		expect(
-			within(recentCard).getByText('Played').querySelector('svg'),
-		).toBeInTheDocument();
-		expect(fetchMock).toHaveBeenCalledWith(
-			expect.objectContaining({
-				pathname:
-					'/puzzles-and-games/logic-puzzles/archive-data/sudoku-easy/2026/9',
-			}),
-			expect.objectContaining({
-				headers: expect.objectContaining({
-					Authorization: 'Bearer access-token',
+				within(recentCard).getByText('Played').querySelector('svg'),
+			).toBeInTheDocument();
+			expect(fetchMock).toHaveBeenCalledWith(
+				expect.objectContaining({
+					origin: new URL(ajaxUrl || '/', window.location.origin)
+						.origin,
+					pathname:
+						'/puzzles-and-games/logic-puzzles/archive-data/sudoku-easy/2026/9',
 				}),
-			}),
-		);
-	});
+				expect.objectContaining({
+					headers: expect.objectContaining({
+						Authorization: 'Bearer access-token',
+					}),
+				}),
+			);
+		},
+	);
 
 	it('bolds the current London weekday only in the current month', () => {
 		jest.useFakeTimers().setSystemTime(new Date('2026-10-07T12:00:00Z'));
@@ -303,6 +338,41 @@ describe('PuzzlesArchiveCalendar', () => {
 		expect(screen.getByText('Today')).toBeInTheDocument();
 		expect(screen.getByText('Yesterday')).toBeInTheDocument();
 		expect(screen.getByText('Sat 3 Oct')).toBeInTheDocument();
+	});
+
+	it('shows Played on the recent cards from the API state only', () => {
+		jest.useFakeTimers().setSystemTime(new Date('2026-10-07T12:00:00Z'));
+		const statuses = ['completed', 'in-progress', 'not-started'] as const;
+		const recentArchive: PuzzlesArchive = {
+			...archive,
+			year: 2026,
+			month: 10,
+			items: ['2026-10-07', '2026-10-06', '2026-10-03'].map(
+				(date, index) => ({
+					...archive.items[0]!,
+					date,
+					// The progress value is misleading on purpose: only the status counts.
+					progress: 50,
+					gameStatus: statuses[index],
+					url: `/puzzles-and-games/logic-puzzles/sudoku-easy/${date}`,
+				}),
+			),
+		};
+
+		render(<PuzzlesArchiveCalendar initialArchive={recentArchive} />);
+
+		const cards = Array.from(
+			document.querySelectorAll<HTMLElement>('a[href$="/2026-10-07"]'),
+		);
+		expect(
+			within(cards.find((card) => card.querySelector('time'))!).getByText(
+				'Played',
+			),
+		).toBeInTheDocument();
+		expect(screen.queryByText('In progress')).not.toBeInTheDocument();
+		expect(
+			screen.getAllByText('Played', { selector: '.played' }),
+		).toHaveLength(1);
 	});
 
 	it('keeps the calendar mounted and announces loading in the month controls', async () => {
