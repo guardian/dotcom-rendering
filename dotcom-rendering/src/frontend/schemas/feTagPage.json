@@ -1229,9 +1229,7 @@
                                                                             }
                                                                         },
                                                                         "required": [
-                                                                            "altText",
-                                                                            "isAvatar",
-                                                                            "src"
+                                                                            "isAvatar"
                                                                         ]
                                                                     },
                                                                     {
