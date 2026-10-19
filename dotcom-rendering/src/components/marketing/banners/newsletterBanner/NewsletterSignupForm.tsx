@@ -30,6 +30,10 @@ import {
 
 const newsletterFormTransition = '0.2s cubic-bezier(0.27, 1.06, 0.18, 1)';
 
+const collapsedFormStyles = css`
+	row-gap: 0;
+`;
+
 const emailFieldStyles = css`
 	${baseEmailFieldStyles};
 
@@ -42,9 +46,10 @@ const additionalFieldsStyles = (isExpanded: boolean) => css`
 	display: grid;
 	grid-column: 1 / -1;
 	grid-template-rows: ${isExpanded ? '1fr' : '0fr'};
-	margin-top: -${space[2]}px;
+	margin-top: -${isExpanded ? space[2] : 0}px;
 	transition: ${newsletterFormTransition};
 	transition-property: grid-template-rows;
+	padding-bottom: ${isExpanded ? 28 : 0}px;
 
 	> div {
 		min-height: 0;
@@ -52,7 +57,7 @@ const additionalFieldsStyles = (isExpanded: boolean) => css`
 	}
 
 	${until.tablet} {
-		margin-top: -${space[3]}px;
+		margin-top: -${isExpanded ? space[3] : 0}px;
 	}
 
 	@media (prefers-reduced-motion: reduce) {
@@ -151,6 +156,7 @@ export const NewsletterSignupForm = ({
 				css={[
 					formStyles,
 					isSignedIn ? signedInLayoutStyles : signedOutLayoutStyles,
+					!showAdditionalFields && collapsedFormStyles,
 				]}
 			>
 				{isSignedIn ? (

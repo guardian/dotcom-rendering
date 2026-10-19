@@ -9,6 +9,7 @@ const frequencyTagStyles = css`
 	gap: 6px;
 	color: ${themePalette('--newsletter-card-frequency-tag')};
 	${textSansBold15};
+	padding: ${space[2]}px 0;
 `;
 
 const frequencyTextStyles = css`

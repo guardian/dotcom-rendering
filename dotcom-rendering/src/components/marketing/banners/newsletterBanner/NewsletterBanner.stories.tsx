@@ -3,6 +3,7 @@ import type ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { fn, mocked } from 'storybook/test';
 import preview from '../../../../../.storybook/preview';
 import { useIsSignedIn } from '../../../../lib/useAuthStatus';
+import { useCountryCode } from '../../../../lib/useCountryCode';
 import { useNewsletterSignupForm } from '../../../../lib/useNewsletterSignupForm';
 import type { NewsletterSignupFormState } from '../../../../lib/useNewsletterSignupForm';
 import { useNewsletterSubscription } from '../../../../lib/useNewsletterSubscription';
@@ -24,6 +25,11 @@ const meta = preview.meta({
 			...DEFAULT_PROMOTED_NEWSLETTER,
 			illustrationSquare: prototypeNewsletterImage.mobileUrl,
 		},
+	},
+	beforeEach() {
+		mocked(useIsSignedIn).mockReturnValue(false);
+		mocked(useNewsletterSubscription).mockReturnValue(false);
+		mocked(useNewsletterSignupForm).mockReturnValue(signedOutFormState);
 	},
 });
 
@@ -90,10 +96,60 @@ const useInteractiveSignedOutForm = (): NewsletterSignupFormState => {
 
 export const SignedOut = meta.story({
 	beforeEach() {
-		mocked(useIsSignedIn).mockReturnValue(false);
-		mocked(useNewsletterSubscription).mockReturnValue(false);
 		mocked(useNewsletterSignupForm).mockImplementation(
 			useInteractiveSignedOutForm,
 		);
+	},
+});
+
+export const SignedIn = meta.story({
+	beforeEach() {
+		mocked(useIsSignedIn).mockReturnValue(true);
+		mocked(useNewsletterSignupForm).mockReturnValue({
+			...signedOutFormState,
+			userEmail: 'reader@example.com',
+			isSignedIn: true,
+			isInteracted: true,
+		});
+	},
+});
+
+export const USHideMarketingToggle = meta.story({
+	beforeEach() {
+		mocked(useCountryCode).mockReturnValue('US');
+		const previousSwitch =
+			window.guardian.config.switches['usSignupHideMarketingToggle'];
+		window.guardian.config.switches['usSignupHideMarketingToggle'] = true;
+		mocked(useNewsletterSignupForm).mockReturnValue({
+			...signedOutFormState,
+			userEmail: 'reader@example.com',
+			isInteracted: true,
+			marketingOptIn: true,
+			marketingOptInHiddenForCountry: true,
+		});
+
+		return () => {
+			mocked(useCountryCode).mockReset();
+			window.guardian.config.switches['usSignupHideMarketingToggle'] =
+				previousSwitch;
+		};
+	},
+});
+
+export const SubmissionFailed = meta.story({
+	beforeEach() {
+		mocked(useNewsletterSignupForm).mockReturnValue({
+			...signedOutFormState,
+			responseOk: false,
+		});
+	},
+});
+
+export const Success = meta.story({
+	beforeEach() {
+		mocked(useNewsletterSignupForm).mockReturnValue({
+			...signedOutFormState,
+			responseOk: true,
+		});
 	},
 });
