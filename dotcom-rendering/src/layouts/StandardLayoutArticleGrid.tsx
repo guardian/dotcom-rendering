@@ -264,6 +264,11 @@ export const StandardLayoutArticleGrid = ({
 			${avatarDisplayed && `margin-top: -28px;`}
 		}
 	`;
+	// Immersive headlines overlap the bottom of the main media, so the
+	// disclaimer goes above the standfirst instead.
+	const hasImmersiveAffiliateDisclaimer =
+		isImmersive && article.affiliateLinksDisclaimerRequired;
+
 	const hideCaptionBeneathMainMedia =
 		layoutType === 'media' || isImmersiveLandscape || isImmersivePortrait;
 
@@ -393,13 +398,14 @@ export const StandardLayoutArticleGrid = ({
 						contentLayout={contentLayoutName}
 						articleArrangement={layoutType}
 					/>
-					{article.affiliateLinksDisclaimerRequired && (
-						<AffiliateDisclaimer
-							cssOverrides={css`
-								margin: ${space[4]}px 0;
-							`}
-						/>
-					)}
+					{article.affiliateLinksDisclaimerRequired &&
+						!isImmersive && (
+							<AffiliateDisclaimer
+								cssOverrides={css`
+									margin: ${space[4]}px 0;
+								`}
+							/>
+						)}
 				</div>
 			</GridItem>
 			<GridItem
@@ -468,7 +474,9 @@ export const StandardLayoutArticleGrid = ({
 							}
 
 							${until.desktop} {
-								padding-bottom: ${space[8]}px;
+								padding-bottom: ${hasImmersiveAffiliateDisclaimer
+									? space[3]
+									: space[8]}px;
 							}
 						`,
 					isImmersivePortrait &&
@@ -544,13 +552,17 @@ export const StandardLayoutArticleGrid = ({
 					isImmersive &&
 						css`
 							${until.tablet} {
-								padding-top: ${space[2]}px;
+								padding-top: ${hasImmersiveAffiliateDisclaimer
+									? 0
+									: space[2]}px;
 							}
 						`,
 					isImmersiveLandscape &&
 						css`
 							${from.desktop} {
-								padding-top: ${space[8]}px;
+								padding-top: ${hasImmersiveAffiliateDisclaimer
+									? space[3]
+									: space[8]}px;
 							}
 
 							${from.leftCol} {
@@ -559,6 +571,13 @@ export const StandardLayoutArticleGrid = ({
 						`,
 				]}
 			>
+				{hasImmersiveAffiliateDisclaimer && (
+					<AffiliateDisclaimer
+						cssOverrides={css`
+							margin: 0 0 ${space[2]}px;
+						`}
+					/>
+				)}
 				<Standfirst
 					format={format}
 					standfirst={article.standfirst}

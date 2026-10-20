@@ -3,7 +3,8 @@ import { isNonNullable } from '@guardian/libs';
 import {
 	from,
 	space,
-	textSansBold14,
+	textSans15,
+	textSansBold15,
 	until,
 } from '@guardian/source/foundations';
 import {
@@ -26,7 +27,7 @@ const STICKY_TOP = space[2];
  * The bar's fixed height. The links can't wrap, so the bar can't grow, which
  * is what lets this be shared with the section headings' `scroll-margin-top`.
  */
-const BAR_HEIGHT = 44;
+const BAR_HEIGHT = 36;
 
 /** Backdrop below the pinned bar, so content doesn't show right under it. */
 const BACKDROP_BOTTOM = space[2];
@@ -70,7 +71,8 @@ const prefersReducedMotion = (): boolean =>
 
 /**
  * Pins to the top of the viewport and fills the space around the bar with the
- * page background, so the article doesn't show through as it scrolls under.
+ * page background at 80% opacity, so the article only faintly shows through as
+ * it scrolls under.
  */
 const stickyStyles = css`
 	position: sticky;
@@ -78,7 +80,16 @@ const stickyStyles = css`
 	z-index: ${getZIndex('tableOfContents')};
 	margin: ${space[4] - STICKY_TOP}px 0 ${space[6] - BACKDROP_BOTTOM}px;
 	padding: ${STICKY_TOP}px 0 ${BACKDROP_BOTTOM}px;
-	background-color: ${palette('--article-background')};
+
+	/* A pseudo-element, so that the opacity doesn't apply to the bar too. */
+	&::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		background-color: ${palette('--article-background')};
+		opacity: 0.8;
+	}
 `;
 
 const wrapperStyles = css`
@@ -180,7 +191,7 @@ const itemStyles = css`
 `;
 
 const linkStyles = css`
-	${textSansBold14};
+	${textSans15};
 	display: inline-flex;
 	align-items: center;
 	min-height: 24px;
@@ -190,7 +201,6 @@ const linkStyles = css`
 	text-underline-offset: 4px;
 
 	&:hover {
-		color: ${palette('--table-of-contents-horizontal-text-hover')};
 		text-decoration: underline;
 	}
 
@@ -202,6 +212,7 @@ const linkStyles = css`
 	}
 
 	&[aria-current='location'] {
+		${textSansBold15};
 		color: ${palette('--table-of-contents-horizontal-text-active')};
 	}
 `;
@@ -240,7 +251,7 @@ const buttonStyles = css`
  *
  * The section the reader is in is highlighted and kept centred in the nav. When
  * the sections don't all fit, fades show on the side(s) with more to scroll to,
- * plus arrow buttons from tablet up.
+ * plus arrow buttons from tablet up that move along one section at a time.
  *
  * Section headings need `scroll-margin-top` set to
  * `HORIZONTAL_TABLE_OF_CONTENTS_SCROLL_MARGIN` so that they don't land under the bar.
@@ -360,12 +371,29 @@ export const HorizontalTableOfContents = ({ tableOfContents }: Props) => {
 		});
 	}, [currentSectionId]);
 
-	const scrollByPage = (direction: -1 | 1) => {
+	// Scroll by the width of the next link that's cut off on that side, so
+	// each click moves along one section.
+	const scrollByItem = (direction: -1 | 1) => {
 		const nav = navRef.current;
 		if (!nav) return;
 
+		const navRect = nav.getBoundingClientRect();
+		const items = Array.from(nav.querySelectorAll('li'));
+		const item =
+			direction === 1
+				? items.find(
+						(li) =>
+							li.getBoundingClientRect().right >
+							navRect.right + 1,
+					)
+				: items.findLast(
+						(li) =>
+							li.getBoundingClientRect().left < navRect.left - 1,
+					);
+		if (!item) return;
+
 		nav.scrollBy({
-			left: direction * nav.clientWidth * 0.75,
+			left: direction * item.offsetWidth,
 			behavior: prefersReducedMotion() ? 'auto' : 'smooth',
 		});
 	};
@@ -390,7 +418,7 @@ export const HorizontalTableOfContents = ({ tableOfContents }: Props) => {
 								left: 0;
 							`,
 						]}
-						onClick={() => scrollByPage(-1)}
+						onClick={() => scrollByItem(-1)}
 						tabIndex={-1}
 						aria-hidden="true"
 						data-link-name="horizontal-table-of-contents-prev"
@@ -429,7 +457,7 @@ export const HorizontalTableOfContents = ({ tableOfContents }: Props) => {
 								right: 0;
 							`,
 						]}
-						onClick={() => scrollByPage(1)}
+						onClick={() => scrollByItem(1)}
 						tabIndex={-1}
 						aria-hidden="true"
 						data-link-name="horizontal-table-of-contents-next"
