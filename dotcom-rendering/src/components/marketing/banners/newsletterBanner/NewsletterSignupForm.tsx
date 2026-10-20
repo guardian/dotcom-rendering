@@ -14,7 +14,6 @@ import { NewsletterPrivacyMessage } from '../../../NewsletterPrivacyMessage';
 import type { NewsletterSignupFormProps } from '../../../NewsletterSignupForm.island';
 import {
 	emailFieldStyles as baseEmailFieldStyles,
-	FailureMessage,
 	formStyles,
 	getPrivacyContainerStyles as getBasePrivacyContainerStyles,
 	getToggleContainerStyles,
@@ -25,8 +24,8 @@ import {
 	signedOutLayoutStyles,
 	submitButtonContainerStyles,
 	submitButtonStyles,
-	SuccessMessage,
 } from '../../../NewsletterSignupForm.island';
+import { FailureMessage } from './ErrorMessage';
 
 const newsletterFormTransition = '0.2s cubic-bezier(0.27, 1.06, 0.18, 1)';
 
@@ -46,10 +45,9 @@ const additionalFieldsStyles = (isExpanded: boolean) => css`
 	display: grid;
 	grid-column: 1 / -1;
 	grid-template-rows: ${isExpanded ? '1fr' : '0fr'};
-	margin-top: -${isExpanded ? space[2] : 0}px;
+	margin-top: -${space[2]}px;
 	transition: ${newsletterFormTransition};
 	transition-property: grid-template-rows;
-	padding-bottom: ${isExpanded ? 28 : 0}px;
 
 	> div {
 		min-height: 0;
@@ -57,7 +55,7 @@ const additionalFieldsStyles = (isExpanded: boolean) => css`
 	}
 
 	${until.tablet} {
-		margin-top: -${isExpanded ? space[3] : 0}px;
+		margin-top: -${space[3]}px;
 	}
 
 	@media (prefers-reduced-motion: reduce) {
@@ -67,6 +65,7 @@ const additionalFieldsStyles = (isExpanded: boolean) => css`
 
 const additionalFieldsContentStyles = css`
 	padding-top: ${space[2]}px;
+	padding-bottom: 28px;
 
 	${until.tablet} {
 		padding-top: ${space[3]}px;
@@ -93,8 +92,6 @@ const getPrivacyContainerStyles = (
 
 export const NewsletterSignupForm = ({
 	newsletterId,
-	newsletterName,
-	frequency,
 	componentId,
 	abTest,
 	isModal = false,
@@ -134,7 +131,8 @@ export const NewsletterSignupForm = ({
 	const hasResponse = typeof responseOk === 'boolean';
 	const hasNonValidationError = !!errorMessage && !isValidationError;
 	const showForm = !hasResponse && !hasNonValidationError;
-	const showSuccess = hasResponse && !!responseOk;
+	const isSuccess = hasResponse && !!responseOk;
+	console.log('isSuccess:', isSuccess);
 	// Show the failure box for server errors (responseOk === false) and for
 	// reCAPTCHA / network errors that occur before a response is received.
 	const showFailure = (hasResponse && !responseOk) || hasNonValidationError;
@@ -229,12 +227,6 @@ export const NewsletterSignupForm = ({
 				</div>
 			</form>
 
-			{showSuccess && (
-				<SuccessMessage
-					newsletterName={newsletterName}
-					frequency={frequency}
-				/>
-			)}
 			{showFailure && (
 				<FailureMessage text={failureMessage} onRetry={handleReset} />
 			)}
