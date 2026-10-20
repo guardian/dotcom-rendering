@@ -39,6 +39,18 @@ const emailFieldStyles = css`
 	label div {
 		font-size: 14px;
 	}
+
+	[role='alert'] {
+		min-height: 24px;
+		line-height: 24px;
+		margin-bottom: 6px;
+
+		svg {
+			width: 24px;
+			height: 24px;
+			transform: none;
+		}
+	}
 `;
 
 const additionalFieldsStyles = (isExpanded: boolean) => css`
@@ -236,7 +248,7 @@ export const NewsletterSignupForm = ({
 						sitekey={captchaSiteKey}
 						ref={recaptchaRef}
 						onChange={handleCaptchaComplete}
-						onError={handleCaptchaLoadError}
+						onErrored={handleCaptchaLoadError}
 						size="invisible"
 					/>
 				</div>
