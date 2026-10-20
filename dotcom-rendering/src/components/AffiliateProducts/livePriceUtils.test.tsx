@@ -3,6 +3,7 @@ import {
 	createAccessibleProductLabel,
 	createStrikeThroughProductLabel,
 	formatPrice,
+	getProductCtaLivePrice,
 	rewriteLabelWithLatestPrice,
 	shouldPutOldPriceInStrikethrough,
 } from './livePriceUtils';
@@ -210,5 +211,45 @@ describe('shouldPutOldPriceInStrikethrough', () => {
 			articlePrice,
 		);
 		expect(result).toBe(true);
+	});
+});
+
+describe('getProductCtaLivePrice', () => {
+	const cta = {
+		url: 'https://example.com',
+		text: '',
+		retailer: 'Shop',
+		price: '£10',
+	};
+
+	it('returns the article price when there is no latest price', () => {
+		const { container } = render(<>{getProductCtaLivePrice(cta)}</>);
+		expect(container.textContent).toBe('£10');
+	});
+
+	it('uses the latest price for dollar prices', () => {
+		const { container } = render(
+			<>
+				{getProductCtaLivePrice({
+					...cta,
+					price: '$10',
+					latestPrice: { currencySymbol: '$', price: '11' },
+				})}
+			</>,
+		);
+		expect(container.textContent).toBe('$11');
+	});
+
+	it('handles article prices with thousands separators', () => {
+		const { container } = render(
+			<>
+				{getProductCtaLivePrice({
+					...cta,
+					price: '£1,299',
+					latestPrice: { currencySymbol: '£', price: '1300' },
+				})}
+			</>,
+		);
+		expect(container.textContent).toBe('£1,300');
 	});
 });
