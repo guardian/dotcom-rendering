@@ -3,7 +3,6 @@ import { Fragment } from 'react';
 import { useConfig } from '../components/ConfigContext';
 import { FeastContextualNudge } from '../components/FeastContextualNudge.island';
 import { Island } from '../components/Island';
-import { grid } from '../grid';
 import type { LayoutType } from '../layouts/lib/articleArrangements';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import type { Switches } from '../types/config';
@@ -245,13 +244,6 @@ export const ArticleRenderer = ({
 	// ^^ Until we decide where to do the "isomorphism split" in this this code is not safe here.
 	//    But should be soon.
 
-	const interactiveLayoutCSS = css`
-		${grid.container}
-		> * {
-			${grid.column.centre}
-		}
-	`;
-
 	const isInDeprecatedInteractiveLayout =
 		format.design === ArticleDesign.Interactive &&
 		articleArrangement === undefined;
@@ -268,14 +260,7 @@ export const ArticleRenderer = ({
 					? interactiveLegacyClasses.contentMainColumn
 					: '',
 			].join(' ')}
-			// TODO: Conditionally apply grid for interactives?
-			css={[
-				commercialPosition,
-				spacefinderAdStyles,
-				format.design === ArticleDesign.Interactive &&
-					!isInDeprecatedInteractiveLayout &&
-					interactiveLayoutCSS,
-			]}
+			css={[commercialPosition, spacefinderAdStyles]}
 		>
 			{renderingTarget === 'Apps'
 				? augmentedElements
