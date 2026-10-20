@@ -10,10 +10,11 @@ import { hexColourToString } from '@guardian/support-dotcom-components';
 import type { Image as SupportImage } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { BannerProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { ComponentType } from 'react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNewsletterSubscription } from '../../../../lib/useNewsletterSubscription';
 import type { Newsletter } from '../../../../types/content';
 import { DEFAULT_PROMOTED_NEWSLETTER } from '../../../StickyBottomBanner/newsletterBannerDetails';
+import { contentTransitionEasing } from '../../shared/transitions';
 import { validatedBannerWrapper } from '../common/BannerWrapper';
 import type { BannerRenderProps } from '../common/types';
 import type { BannerData } from '../designableBanner/BannerProps';
@@ -25,10 +26,51 @@ import { useDesignableBannerModel } from '../designableBanner/useDesignableBanne
 import { NewsletterBannerLogo } from './NewsletterBannerLogo';
 import { NewsletterFrequencyTag } from './NewsletterFrequencyTag';
 import { NewsletterSignupForm } from './NewsletterSignupForm';
+import { SuccessMessage } from './SuccessMessage';
 
 const phabletContentMaxWidth = '492px';
+const successTransition = `350ms ${contentTransitionEasing}`;
 
 const styles = {
+	panel: (isVisible: boolean) => css`
+		display: grid;
+		grid-template-rows: ${isVisible ? '1fr' : '0fr'};
+		opacity: ${isVisible ? 1 : 0};
+		transition:
+			grid-template-rows ${successTransition},
+			opacity ${successTransition};
+
+		> div {
+			min-height: 0;
+			overflow: hidden;
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			transition: none;
+		}
+	`,
+	successContent: css`
+		position: relative;
+		max-width: 1300px;
+		margin: 0 auto;
+		padding: ${space[6]}px 64px ${space[6]}px 0;
+
+		${from.leftCol} {
+			padding-top: 36px;
+			padding-left: 10px;
+		}
+	`,
+	successCloseButton: css`
+		position: absolute;
+		top: ${space[9]}px;
+		right: ${space[3]}px;
+
+		> div {
+			position: static;
+			margin: 0;
+			padding: 0;
+		}
+	`,
 	container: (background: string, textColor: string) => css`
 		background: ${background};
 		color: ${textColor};
@@ -79,6 +121,29 @@ const styles = {
 		${from.wide} {
 			max-width: 1300px;
 			grid-template-columns: 219px 1px minmax(0, 491px) 400px auto;
+		}
+	`,
+	panels: css`
+		grid-column: copy-container-start / -1;
+		min-width: 0;
+	`,
+	signupLayout: css`
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		grid-template-areas: 'copy-container';
+
+		${from.desktop} {
+			grid-template-columns: minmax(0, 1fr) 380px auto;
+			grid-template-areas: 'copy-container main-image close-button';
+			gap: 20px;
+		}
+
+		${from.leftCol} {
+			gap: 10px;
+		}
+
+		${from.wide} {
+			grid-template-columns: minmax(0, 1fr) 400px auto;
 		}
 	`,
 	contentContainer: css`
@@ -269,6 +334,7 @@ export const NewsletterBannerComponent = (
 	);
 	console.log(isSubscribed);
 	const bannerRef = useRef<HTMLDivElement>(null);
+	const [isSuccess, setIsSuccess] = useState(false);
 	const { isOpen, bannerData: baseBannerData } = useDesignableBannerModel({
 		...props,
 		isCollapsible: false,
@@ -276,7 +342,7 @@ export const NewsletterBannerComponent = (
 
 	useEffect(() => {
 		bannerRef.current?.focus();
-	}, []);
+	}, [isSuccess]);
 
 	if (!isOpen || !baseBannerData || !props.design) {
 		return null;
@@ -336,43 +402,91 @@ export const NewsletterBannerComponent = (
 			<div css={styles.layout}>
 				<NewsletterBannerLogo />
 				<div css={styles.verticalLine} />
-				<div css={styles.contentContainer}>
-					<div css={styles.content}>
-						<div css={styles.frequencyRow}>
-							<NewsletterFrequencyTag
-								frequency={newsletter.frequency}
-							/>
-							<div css={styles.inlineCloseButton}>
-								<BannerCloseButton bannerData={bannerData} />
+				<div css={styles.panels}>
+					<div
+						css={styles.panel(!isSuccess)}
+						aria-hidden={isSuccess}
+						{...(isSuccess ? { inert: '' } : {})}
+					>
+						<div>
+							<div css={styles.signupLayout}>
+								<div css={styles.contentContainer}>
+									<div css={styles.content}>
+										<div css={styles.frequencyRow}>
+											<NewsletterFrequencyTag
+												frequency={newsletter.frequency}
+											/>
+											<div css={styles.inlineCloseButton}>
+												<BannerCloseButton
+													bannerData={bannerData}
+												/>
+											</div>
+										</div>
+										<div css={styles.horizontalLine} />
+										<div css={styles.textImageRow}>
+											<div css={styles.textCopy}>
+												<div
+													css={
+														styles.headingAfterDivider
+													}
+												>
+													<BannerHeader
+														bannerData={bannerData}
+													/>
+												</div>
+												<div css={styles.subheading}>
+													<BannerBody
+														bannerData={bannerData}
+													/>
+												</div>
+											</div>
+											<div css={styles.mobileImage}>
+												<BannerVisual
+													bannerData={bannerData}
+												/>
+											</div>
+										</div>
+										<NewsletterSignupForm
+											newsletterId={
+												newsletter.identityName
+											}
+											newsletterName={newsletter.name}
+											frequency={newsletter.frequency}
+											componentId="newsletter_banner"
+											onSuccess={() => setIsSuccess(true)}
+										/>
+									</div>
+								</div>
+								<div css={styles.desktopImage}>
+									<BannerVisual bannerData={bannerData} />
+								</div>
+								<div css={styles.outerCloseButton}>
+									<BannerCloseButton
+										bannerData={bannerData}
+									/>
+								</div>
 							</div>
 						</div>
-						<div css={styles.horizontalLine} />
-						<div css={styles.textImageRow}>
-							<div css={styles.textCopy}>
-								<div css={styles.headingAfterDivider}>
-									<BannerHeader bannerData={bannerData} />
-								</div>
-								<div css={styles.subheading}>
-									<BannerBody bannerData={bannerData} />
-								</div>
-							</div>
-							<div css={styles.mobileImage}>
-								<BannerVisual bannerData={bannerData} />
-							</div>
-						</div>
-						<NewsletterSignupForm
-							newsletterId={newsletter.identityName}
-							newsletterName={newsletter.name}
-							frequency={newsletter.frequency}
-							componentId="newsletter_banner"
-						/>
 					</div>
-				</div>
-				<div css={styles.desktopImage}>
-					<BannerVisual bannerData={bannerData} />
-				</div>
-				<div css={styles.outerCloseButton}>
-					<BannerCloseButton bannerData={bannerData} />
+					<div
+						css={styles.panel(isSuccess)}
+						aria-hidden={!isSuccess}
+						{...(!isSuccess ? { inert: '' } : {})}
+					>
+						<div>
+							<div css={styles.successContent}>
+								<SuccessMessage
+									newsletterName={newsletter.name}
+									frequency={newsletter.frequency}
+								/>
+								<div css={styles.successCloseButton}>
+									<BannerCloseButton
+										bannerData={bannerData}
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
