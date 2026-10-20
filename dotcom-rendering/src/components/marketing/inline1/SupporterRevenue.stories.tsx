@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import type { Inline1Variant } from './SupporterRevenue';
 import SupporterRevenue from './SupporterRevenue';
 import { props } from './utils/storybook';
 

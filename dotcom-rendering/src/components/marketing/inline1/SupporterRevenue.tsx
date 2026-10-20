@@ -2,31 +2,25 @@ import type { SerializedStyles } from '@emotion/react';
 import { css, ThemeProvider } from '@emotion/react';
 import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import {
-	article17,
 	from,
-	headlineBold20,
+	headlineMedium24,
 	palette,
 	space,
+	textSans15,
+	textSansBold17,
 } from '@guardian/source/foundations';
 import {
 	Button as DSButton,
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
-import type { Inline1Props } from '@guardian/support-dotcom-components/dist/shared/types/props/inline1';
+import type { Inline1Props } from '@guardian/support-dotcom-components/dist/src/shared/types/props/inline1';
 import type { ReactComponent } from '../lib/ReactComponent';
 
 const wrapperStyles = css`
 	padding: ${space[1]}px ${space[2]}px ${space[3]}px;
 	border-top: 1px solid ${palette.brandAlt[400]};
 	background-color: ${palette.neutral[97]};
-
-	display: grid;
-	grid-template-columns: auto auto;
-
-	grid-template-areas:
-		'copy-container	logo-container'
-		'cta-container img-container';
 
 	* {
 		::selection {
@@ -58,14 +52,14 @@ const imageStyles = css`
 `;
 
 const headingStyles = css`
-	${headlineBold20};
+	${headlineMedium24};
 	margin-top: 0;
 	margin-bottom: ${space[3]}px;
 `;
 
 const bodyStyles = css`
 	margin: 0 auto ${space[2]}px;
-	${article17};
+	${textSans15};
 `;
 
 const copyStyles = css`
@@ -93,6 +87,7 @@ const SupporterRevenueBody: ReactComponent<BodyProps> = ({
 };
 
 const buttonStyles = {
+	fontFamily: textSansBold17,
 	textPrimary: palette.neutral[7],
 	backgroundPrimary: palette.brandAlt[400],
 	backgroundPrimaryHover: palette.brandAlt[300],
@@ -123,7 +118,7 @@ const tertiaryButtonOverrides = css`
 
 type Url = string;
 
-type Props = {
+type ButtonProps = {
 	// Accept a function or a string;
 	// A function will render a <Button>
 	// A string will render a <LinkButton>
@@ -138,8 +133,8 @@ type Props = {
 	icon?: React.ReactElement;
 };
 
-export const SupporterRevenueButton: ReactComponent<Props> = (
-	allProps: Props,
+export const SupporterRevenueButton: ReactComponent<ButtonProps> = (
+	allProps: ButtonProps,
 ) => {
 	const {
 		onClickAction,
@@ -159,21 +154,7 @@ export const SupporterRevenueButton: ReactComponent<Props> = (
 		// them so they get the same styles for 'tertiary' priority
 		return (
 			<ThemeProvider theme={contributionsTheme}>
-				<LinkButton
-					href={onClickAction}
-					icon={icon ?? <SvgArrowRightStraight />}
-					iconSide="right"
-					onClick={() => {}}
-					target="_blank"
-					rel="noopener noreferrer"
-					priority={isTertiary ? 'primary' : priority}
-					cssOverrides={css(
-						isTertiary
-							? [tertiaryButtonOverrides, cssOverrides]
-							: cssOverrides,
-					)}
-					{...props}
-				>
+				<LinkButton href={onClickAction} {...props}>
 					{children}
 				</LinkButton>
 			</ThemeProvider>
@@ -181,34 +162,27 @@ export const SupporterRevenueButton: ReactComponent<Props> = (
 	}
 	return (
 		<ThemeProvider theme={contributionsTheme}>
-			<DSButton
-				iconSide="right"
-				icon={showArrow ? <SvgArrowRightStraight /> : undefined}
-				onClick={(): void => onClickAction()}
-				priority={isTertiary ? 'primary' : priority}
-				cssOverrides={css(
-					isTertiary
-						? [tertiaryButtonOverrides, cssOverrides]
-						: cssOverrides,
-				)}
-				{...props}
-			>
+			<DSButton onClick={(): void => onClickAction()} {...props}>
 				{children}
 			</DSButton>
 		</ThemeProvider>
 	);
 };
 
-const SupporterRevenue: ReactComponent<Inline1Props> = ({
-	variant,
-}: Inline1Props) => {
-	const { image } = variant;
+const SupporterRevenue: ReactComponent<Inline1Props> = ({ variant }) => {
+	if (variant.message.type != 'Inline1SupportMessage') {
+		return;
+	}
+	const heading = variant.message.heading;
+	const body = variant.message.body;
+	const image = variant.message.image;
+	const cta = variant.message.primaryCta;
 
 	return (
 		<section css={wrapperStyles}>
 			<div css={copyStyles}>
-				<SupporterRevenueHeader text={variant.heading} />
-				<SupporterRevenueBody text={variant.body} />
+				<SupporterRevenueHeader text={heading} />
+				<SupporterRevenueBody text={body} />
 			</div>
 			{image && (
 				<div css={imageWrapperStyles}>
@@ -222,23 +196,12 @@ const SupporterRevenue: ReactComponent<Inline1Props> = ({
 
 			<div className="cta-container">
 				<SupporterRevenueButton
-					onClickAction={variant.primaryCta.baseUrl}
+					onClickAction={cta.baseUrl}
 					submitComponentEvent={undefined}
-					showArrow={true}
 				>
-					{variant.primaryCta.text}
+					{cta.text}
 				</SupporterRevenueButton>
 			</div>
-
-			{/*
-			<ContributionsEpicCtasContainer
-				variant={variant}
-				tracking={tracking}
-				countryCode={countryCode}
-				articleCounts={articleCounts}
-				fetchEmail={fetchEmail}
-				submitComponentEvent={submitComponentEvent}
-			/> */}
 		</section>
 	);
 };
