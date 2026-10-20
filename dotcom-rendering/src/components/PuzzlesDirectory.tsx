@@ -4,16 +4,17 @@ import {
 	headlineBold24,
 	headlineBold28,
 	palette,
+	space,
 } from '@guardian/source/foundations';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { puzzlesContainerStyles } from '../lib/puzzlesContainerStyles';
-import type { Branding, CollectionBranding } from '../types/branding';
+import type { Branding } from '../types/branding';
 import type { PuzzleContainer, PuzzlesLayoutType } from '../types/puzzlesPage';
 import { AdSlot } from './AdSlot.web';
-import { FrontSectionTitle } from './FrontSectionTitle';
 import { Island } from './Island';
 import { getPuzzleUrl, Rows } from './PuzzleCard';
 import { PuzzlesArchiveMenu } from './PuzzlesArchiveMenu.island';
+import { PuzzlesContainerBranding } from './PuzzlesBranding';
 import { PuzzlesSupporting } from './PuzzlesSupporting';
 
 export { getPuzzleUrl };
@@ -90,7 +91,19 @@ const titleStyles = css`
 	}
 `;
 
+// Title left with the sponsor right on one row, stacked under the title from leftCol.
+const brandedTitleStyles = css`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: ${space[2]}px;
+	${from.leftCol} {
+		display: block;
+	}
+`;
+
 const headingStyles = css`
+	min-width: 0;
 	margin: 0;
 	${headlineBold24};
 	color: var(--puzzles-headline-colour, ${palette.neutral[7]});
@@ -237,14 +250,6 @@ const hasContent = (container: PuzzleContainer): boolean =>
 	container.content.items.some((row) => row.length > 0) ||
 	container.content.nestedContainers.some(hasContent);
 
-const toCollectionBranding = (branding: Branding): CollectionBranding => ({
-	kind: branding.brandingType?.name ?? 'sponsored',
-	branding,
-	isFrontBranding: false,
-	isContainerBranding: true,
-	hasMultipleBranding: false,
-});
-
 const DirectorySection = ({
 	container,
 	hideTopRule,
@@ -257,11 +262,6 @@ const DirectorySection = ({
 	if (!hasContent(container)) {
 		return null;
 	}
-	const heading = (
-		<h2 css={headingStyles} id={`${container.id}-title`}>
-			{container.title}
-		</h2>
-	);
 	return (
 		<section
 			aria-labelledby={`${container.id}-title`}
@@ -269,16 +269,12 @@ const DirectorySection = ({
 			id={container.id}
 		>
 			<div css={headingColumnStyles}>
-				<div css={titleStyles}>
-					{branding ? (
-						<FrontSectionTitle
-							title={heading}
-							collectionBranding={toCollectionBranding(branding)}
-							// FrontSectionTitle IDs its wrapper `${sectionId}-title`, which the h2 already uses.
-							sectionId={`${container.id}-sponsor`}
-						/>
-					) : (
-						heading
+				<div css={[titleStyles, branding && brandedTitleStyles]}>
+					<h2 css={headingStyles} id={`${container.id}-title`}>
+						{container.title}
+					</h2>
+					{branding && (
+						<PuzzlesContainerBranding branding={branding} />
 					)}
 				</div>
 			</div>

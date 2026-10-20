@@ -7,7 +7,6 @@ import type {
 	PuzzleItem,
 	PuzzlesLayoutType,
 } from '../types/puzzlesPage';
-import { ConfigProvider } from './ConfigContext';
 import { Island } from './Island';
 import { getPuzzleUrl, PuzzlesDirectory } from './PuzzlesDirectory';
 
@@ -38,35 +37,28 @@ const section = (
 describe('PuzzlesDirectory', () => {
 	it('shows sponsorship only on the sponsored container', () => {
 		render(
-			<ConfigProvider
-				value={{
-					renderingTarget: 'Web',
-					darkModeAvailable: false,
-					assetOrigin: '/',
-					editionId: 'UK',
+			<PuzzlesDirectory
+				layout={{
+					containers: [
+						section({ id: 'crosswords', title: 'Crosswords' }),
+						section(),
+					],
 				}}
-			>
-				<PuzzlesDirectory
-					layout={{
-						containers: [
-							section({ id: 'crosswords', title: 'Crosswords' }),
-							section(),
-						],
-					}}
-					renderAds={false}
-					containerBranding={{ crosswords: puzzlesBranding }}
-				/>
-			</ConfigProvider>,
+				renderAds={false}
+				containerBranding={{ crosswords: puzzlesBranding }}
+			/>,
 		);
 
 		const [crosswords, wordGames] = screen.getAllByRole('region');
 		expect(crosswords).toHaveTextContent('Supported by');
 		expect(
-			screen.getByRole('img', { name: 'logo for Example sponsor' }),
-		).toBeInTheDocument();
+			screen.getByRole('link', {
+				name: 'Visit the Example sponsor website',
+			}),
+		).toHaveAttribute('href', 'https://example.com');
 		expect(
-			screen.getByRole('link', { name: 'About this content' }),
-		).toHaveAttribute('href', 'https://example.com/about');
+			screen.queryByRole('link', { name: 'About this content' }),
+		).not.toBeInTheDocument();
 		expect(
 			screen.getByRole('heading', { level: 2, name: 'Crosswords' }),
 		).toHaveAttribute('id', 'crosswords-title');
