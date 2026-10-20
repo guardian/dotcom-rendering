@@ -13,10 +13,7 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
-import type {
-	Cta,
-	Variant,
-} from '@guardian/support-dotcom-components/dist/shared/types';
+import type { Inline1Props } from '@guardian/support-dotcom-components/dist/shared/types/props/inline1';
 import type { ReactComponent } from '../lib/ReactComponent';
 
 const wrapperStyles = css`
@@ -74,26 +71,6 @@ const bodyStyles = css`
 const copyStyles = css`
 	grid-area: copy-container;
 `;
-
-// Is this the correct interface? I can't find an equivalent one in dcr.
-interface ResponsiveImage {
-	mobileUrl: string;
-	tabletUrl: string;
-	desktopUrl: string;
-	altText: string;
-}
-
-export interface Inline1Variant extends Variant {
-	type: 'Inline1SupportMessage';
-	heading: string;
-	body: string;
-	primaryCta: Cta;
-	image?: ResponsiveImage;
-}
-
-export interface Inline1Props {
-	variant: Inline1Variant;
-}
 
 interface EpicHeaderProps {
 	text: string;
