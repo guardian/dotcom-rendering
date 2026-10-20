@@ -11,13 +11,17 @@ export const isFilterPageId = (pageId: string): boolean =>
 	FILTER_PAGE_ID_PREFIXES.some((prefix) => pageId.startsWith(prefix));
 
 /**
- * The Filter's series tags. Composer identifies Filter content by these, so
- * prefer this over the pageId when deciding whether something is The Filter.
+ * Tags that identify Filter content: the Filter series tags, which Composer
+ * uses to present an article as The Filter, and the Filter commissioning desk
+ * tracking tags. Matching either one counts as Filter content, so prefer this
+ * over the pageId when deciding whether something is The Filter.
  */
-const FILTER_SERIES_TAG_IDS = [
+const FILTER_TAG_IDS = [
 	'thefilter/series/the-filter',
 	'thefilter-us/series/thefilter-us',
+	'tracking/commissioningdesk/the-filter',
+	'tracking/commissioningdesk/filter-us',
 ];
 
-export const hasFilterSeriesTag = (tags: Array<Pick<TagType, 'id'>>): boolean =>
-	tags.some((tag) => FILTER_SERIES_TAG_IDS.includes(tag.id));
+export const hasFilterTag = (tags: Array<Pick<TagType, 'id'>>): boolean =>
+	tags.some((tag) => FILTER_TAG_IDS.includes(tag.id));

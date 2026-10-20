@@ -34,6 +34,12 @@ const bottomPadding = css`
 
 const setMetaWidth = css`
 	position: relative;
+	padding-left: 10px;
+	padding-right: 10px;
+	${from.mobileLandscape} {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
 	${from.tablet} {
 		max-width: 620px;
 	}
@@ -42,12 +48,12 @@ const setMetaWidth = css`
 		margin-right: 310px;
 	}
 	${from.leftCol} {
-		margin-left: 150px;
+		margin-left: 170px;
 		padding-left: 10px;
 		border-left: 1px solid ${palette('--article-border')};
 	}
 	${from.wide} {
-		margin-left: 229px;
+		margin-left: 249px;
 	}
 `;
 
@@ -235,15 +241,6 @@ export const SubMeta = ({
 				format.design === ArticleDesign.Gallery
 					? galleryStyles
 					: bottomPadding,
-				format.design === ArticleDesign.Interactive &&
-				!isDeprecatedInteractiveLayout
-					? css`
-							${grid.container};
-							> * {
-								${grid.column.centre}
-							}
-						`
-					: undefined,
 			]}
 		>
 			{format.design === ArticleDesign.Gallery && (

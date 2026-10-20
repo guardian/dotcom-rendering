@@ -1,4 +1,4 @@
-import { hasFilterSeriesTag, isFilterPageId } from './theFilter';
+import { hasFilterTag, isFilterPageId } from './theFilter';
 
 describe('isFilterPageId', () => {
 	it('returns true for a UK Filter article pageId', () => {
@@ -30,10 +30,10 @@ describe('isFilterPageId', () => {
 	});
 });
 
-describe('hasFilterSeriesTag', () => {
+describe('hasFilterTag', () => {
 	it('returns true for the UK Filter series tag', () => {
 		expect(
-			hasFilterSeriesTag([
+			hasFilterTag([
 				{ id: 'lifeandstyle/lifeandstyle' },
 				{ id: 'thefilter/series/the-filter' },
 			]),
@@ -41,21 +41,33 @@ describe('hasFilterSeriesTag', () => {
 	});
 
 	it('returns true for the US Filter series tag', () => {
+		expect(hasFilterTag([{ id: 'thefilter-us/series/thefilter-us' }])).toBe(
+			true,
+		);
+	});
+
+	it('returns true for the UK Filter commissioning desk', () => {
 		expect(
-			hasFilterSeriesTag([{ id: 'thefilter-us/series/thefilter-us' }]),
+			hasFilterTag([{ id: 'tracking/commissioningdesk/the-filter' }]),
 		).toBe(true);
 	});
 
-	it('returns false when there is no Filter series tag', () => {
+	it('returns true for the US Filter commissioning desk', () => {
 		expect(
-			hasFilterSeriesTag([
+			hasFilterTag([{ id: 'tracking/commissioningdesk/filter-us' }]),
+		).toBe(true);
+	});
+
+	it('returns false when there is no Filter series or desk tag', () => {
+		expect(
+			hasFilterTag([
 				{ id: 'technology/technology' },
-				{ id: 'tracking/commissioningdesk/the-filter' },
+				{ id: 'tracking/commissioningdesk/newsletters' },
 			]),
 		).toBe(false);
 	});
 
 	it('returns false for no tags', () => {
-		expect(hasFilterSeriesTag([])).toBe(false);
+		expect(hasFilterTag([])).toBe(false);
 	});
 });

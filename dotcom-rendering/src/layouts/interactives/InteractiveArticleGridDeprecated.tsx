@@ -392,7 +392,6 @@ export const InteractiveArticleGridDeprecated = (
 									editionId={article.editionId}
 									shouldHideAds={article.shouldHideAds}
 									idApiUrl={article.config.idApiUrl}
-									isInDeprecatedInteractiveLayout={true}
 								/>
 							</ArticleContainer>
 						</GridItem>
@@ -424,7 +423,6 @@ export const InteractiveArticleGridDeprecated = (
 								!!article.config.switches.articleEndSlot
 							}
 							isSensitive={article.config.isSensitive}
-							isInInteractive={true}
 						/>
 					</Island>
 				)}
@@ -448,6 +446,7 @@ export const InteractiveArticleGridDeprecated = (
 						article.showBottomSocialButtons &&
 						renderingTarget === 'Web'
 					}
+					isDeprecatedInteractiveLayout={true}
 				/>
 			</Section>
 		</>

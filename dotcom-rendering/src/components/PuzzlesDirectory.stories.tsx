@@ -1,4 +1,8 @@
 import { breakpoints } from '@guardian/source/foundations';
+import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
+import { createPuzzlesPage } from '../../fixtures/manual/puzzlesPage';
+import { PuzzlesLayout } from '../layouts/PuzzlesLayout';
+import { extractNAV } from '../model/extract-nav';
 import type { PuzzlesLayoutType } from '../types/puzzlesPage';
 import { PuzzlesDirectory } from './PuzzlesDirectory';
 
@@ -124,3 +128,14 @@ export const BlueprintDirectory = () => (
 export const AdFree = () => (
 	<PuzzlesDirectory layout={layout} renderAds={false} />
 );
+
+export const Sponsored = () => {
+	const page = createPuzzlesPage({ layout, isAdFreeUser: true });
+	return (
+		<PuzzlesLayout
+			puzzlesPage={page}
+			NAV={extractNAV(page.nav)}
+			branding={puzzlesBranding}
+		/>
+	);
+};
