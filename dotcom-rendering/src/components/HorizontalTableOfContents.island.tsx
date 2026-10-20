@@ -296,25 +296,42 @@ export const HorizontalTableOfContents = ({ tableOfContents }: Props) => {
 		const nav = navRef.current;
 		if (!nav) return;
 
+		let frame: number | undefined;
+
 		const update = () => {
+			frame = undefined;
 			const maxScrollLeft = nav.scrollWidth - nav.clientWidth;
 			setCanScrollPrev(nav.scrollLeft > 1);
 			setCanScrollNext(nav.scrollLeft < maxScrollLeft - 1);
 		};
 
+		const scheduleUpdate = () => {
+			if (frame !== undefined) return;
+			frame = window.requestAnimationFrame(update);
+		};
+
 		update();
-		nav.addEventListener('scroll', update, { passive: true });
+		nav.addEventListener('scroll', scheduleUpdate, { passive: true });
 
 		// Re-measure when the nav or its links change size, e.g. on window
-		// resize or once web fonts load and widen the links.
-		const resizeObserver = new ResizeObserver(update);
-		resizeObserver.observe(nav);
-		if (nav.firstElementChild)
-			resizeObserver.observe(nav.firstElementChild);
+		// resize or once web fonts load and widen the links. Fall back to
+		// window resize where ResizeObserver isn't supported.
+		let resizeObserver: ResizeObserver | undefined;
+		if (typeof ResizeObserver !== 'undefined') {
+			resizeObserver = new ResizeObserver(scheduleUpdate);
+			resizeObserver.observe(nav);
+			if (nav.firstElementChild) {
+				resizeObserver.observe(nav.firstElementChild);
+			}
+		} else {
+			window.addEventListener('resize', scheduleUpdate);
+		}
 
 		return () => {
-			nav.removeEventListener('scroll', update);
-			resizeObserver.disconnect();
+			nav.removeEventListener('scroll', scheduleUpdate);
+			window.removeEventListener('resize', scheduleUpdate);
+			resizeObserver?.disconnect();
+			if (frame !== undefined) window.cancelAnimationFrame(frame);
 		};
 	}, []);
 
