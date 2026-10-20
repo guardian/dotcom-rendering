@@ -1,11 +1,13 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import type { ReactNode } from 'react';
+import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
 import type {
 	PuzzleContainer,
 	PuzzleItem,
 	PuzzlesLayoutType,
 } from '../types/puzzlesPage';
+import { ConfigProvider } from './ConfigContext';
 import { Island } from './Island';
 import { getPuzzleUrl, PuzzlesDirectory } from './PuzzlesDirectory';
 
@@ -34,6 +36,42 @@ const section = (
 });
 
 describe('PuzzlesDirectory', () => {
+	it('shows sponsorship only on the sponsored container', () => {
+		render(
+			<ConfigProvider
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+					editionId: 'UK',
+				}}
+			>
+				<PuzzlesDirectory
+					layout={{
+						containers: [
+							section({ id: 'crosswords', title: 'Crosswords' }),
+							section(),
+						],
+					}}
+					renderAds={false}
+					containerBranding={{ crosswords: puzzlesBranding }}
+				/>
+			</ConfigProvider>,
+		);
+
+		const [crosswords, wordGames] = screen.getAllByRole('region');
+		expect(crosswords).toHaveTextContent('Supported by');
+		expect(
+			screen.getByRole('img', { name: 'logo for Example sponsor' }),
+		).toBeInTheDocument();
+		expect(
+			screen.getByRole('link', { name: 'About this content' }),
+		).toHaveAttribute('href', 'https://example.com/about');
+		expect(
+			screen.getByRole('heading', { level: 2, name: 'Crosswords' }),
+		).toHaveAttribute('id', 'crosswords-title');
+		expect(wordGames).not.toHaveTextContent('Supported by');
+	});
 	it('renders puzzle tile titles as H3s with descriptive crossword text', () => {
 		render(
 			<PuzzlesDirectory

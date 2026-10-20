@@ -7,8 +7,10 @@ import {
 } from '@guardian/source/foundations';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { puzzlesContainerStyles } from '../lib/puzzlesContainerStyles';
+import type { Branding, CollectionBranding } from '../types/branding';
 import type { PuzzleContainer, PuzzlesLayoutType } from '../types/puzzlesPage';
 import { AdSlot } from './AdSlot.web';
+import { FrontSectionTitle } from './FrontSectionTitle';
 import { Island } from './Island';
 import { getPuzzleUrl, Rows } from './PuzzleCard';
 import { PuzzlesArchiveMenu } from './PuzzlesArchiveMenu.island';
@@ -21,6 +23,8 @@ type Props = {
 	renderAds: boolean;
 	/** Omit the black rule above the first section, e.g. below the sponsorship banner. */
 	hideTopRule?: boolean;
+	/** Sponsor per container ID, for the reader's edition. */
+	containerBranding?: Partial<Record<string, Branding>>;
 };
 
 const sectionStyles = (isFeatured: boolean, hideTopRule: boolean) => css`
@@ -70,19 +74,10 @@ const sectionStyles = (isFeatured: boolean, hideTopRule: boolean) => css`
 
 const titleStyles = css`
 	min-width: 0;
-	margin: 0;
 	padding: 6px 10px 12px;
-	${headlineBold24};
-	color: var(--puzzles-headline-colour, ${palette.neutral[7]});
-	line-height: 1;
-	overflow-wrap: break-word;
 	${from.mobileMedium} {
 		padding-right: 20px;
 		padding-left: 20px;
-	}
-
-	${from.tablet} {
-		${headlineBold28};
 	}
 
 	${from.desktop} {
@@ -92,6 +87,18 @@ const titleStyles = css`
 
 	${from.leftCol} {
 		padding-top: var(--puzzles-content-top);
+	}
+`;
+
+const headingStyles = css`
+	margin: 0;
+	${headlineBold24};
+	color: var(--puzzles-headline-colour, ${palette.neutral[7]});
+	line-height: 1;
+	overflow-wrap: break-word;
+
+	${from.tablet} {
+		${headlineBold28};
 	}
 `;
 
@@ -230,16 +237,31 @@ const hasContent = (container: PuzzleContainer): boolean =>
 	container.content.items.some((row) => row.length > 0) ||
 	container.content.nestedContainers.some(hasContent);
 
+const toCollectionBranding = (branding: Branding): CollectionBranding => ({
+	kind: branding.brandingType?.name ?? 'sponsored',
+	branding,
+	isFrontBranding: false,
+	isContainerBranding: true,
+	hasMultipleBranding: false,
+});
+
 const DirectorySection = ({
 	container,
 	hideTopRule,
+	branding,
 }: {
 	container: PuzzleContainer;
 	hideTopRule: boolean;
+	branding?: Branding;
 }) => {
 	if (!hasContent(container)) {
 		return null;
 	}
+	const heading = (
+		<h2 css={headingStyles} id={`${container.id}-title`}>
+			{container.title}
+		</h2>
+	);
 	return (
 		<section
 			aria-labelledby={`${container.id}-title`}
@@ -247,9 +269,18 @@ const DirectorySection = ({
 			id={container.id}
 		>
 			<div css={headingColumnStyles}>
-				<h2 css={titleStyles} id={`${container.id}-title`}>
-					{container.title}
-				</h2>
+				<div css={titleStyles}>
+					{branding ? (
+						<FrontSectionTitle
+							title={heading}
+							collectionBranding={toCollectionBranding(branding)}
+							// FrontSectionTitle IDs its wrapper `${sectionId}-title`, which the h2 already uses.
+							sectionId={`${container.id}-sponsor`}
+						/>
+					) : (
+						heading
+					)}
+				</div>
 			</div>
 			<div css={contentStyles}>
 				<Rows
@@ -281,6 +312,7 @@ export const PuzzlesDirectory = ({
 	layout,
 	renderAds,
 	hideTopRule = false,
+	containerBranding,
 }: Props) => (
 	<>
 		{layout.containers.map((container) => {
@@ -328,6 +360,7 @@ export const PuzzlesDirectory = ({
 			}
 			return (
 				<DirectorySection
+					branding={containerBranding?.[container.id]}
 					container={container}
 					hideTopRule={hideTopRule}
 					key={container.id}
