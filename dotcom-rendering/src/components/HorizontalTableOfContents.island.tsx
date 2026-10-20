@@ -203,8 +203,6 @@ const linkStyles = css`
 
 	&[aria-current='location'] {
 		color: ${palette('--table-of-contents-horizontal-text-active')};
-		text-decoration: underline;
-		text-decoration-thickness: 2px;
 	}
 `;
 
@@ -306,11 +304,17 @@ export const HorizontalTableOfContents = ({ tableOfContents }: Props) => {
 
 		update();
 		nav.addEventListener('scroll', update, { passive: true });
-		window.addEventListener('resize', update);
+
+		// Re-measure when the nav or its links change size, e.g. on window
+		// resize or once web fonts load and widen the links.
+		const resizeObserver = new ResizeObserver(update);
+		resizeObserver.observe(nav);
+		if (nav.firstElementChild)
+			resizeObserver.observe(nav.firstElementChild);
 
 		return () => {
 			nav.removeEventListener('scroll', update);
-			window.removeEventListener('resize', update);
+			resizeObserver.disconnect();
 		};
 	}, []);
 
