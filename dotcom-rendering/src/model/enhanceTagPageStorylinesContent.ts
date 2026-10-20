@@ -48,6 +48,7 @@ const CATEGORY_BY_RAW_LABEL: Record<string, StorylineCategory> = {
 	Explainers: 'Explainers',
 	'Deep Reads': 'Deep Reads',
 	'Find multimedia': 'Multimedia',
+	Multimedia: 'Multimedia',
 	'Profiles and Interviews': 'Profiles and Interviews',
 };
 
