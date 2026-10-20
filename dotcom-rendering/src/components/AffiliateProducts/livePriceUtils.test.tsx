@@ -246,10 +246,11 @@ describe('getProductCtaLivePrice', () => {
 				{getProductCtaLivePrice({
 					...cta,
 					price: '£1,299',
-					latestPrice: { currencySymbol: '£', price: '1300' },
+					latestPrice: { currencySymbol: '£', price: '1000' },
 				})}
 			</>,
 		);
-		expect(container.textContent).toBe('£1,300');
+		expect(container.querySelector('s')).toHaveTextContent('£1,299');
+		expect(container.textContent).toBe('£1,299 £1,000');
 	});
 });
