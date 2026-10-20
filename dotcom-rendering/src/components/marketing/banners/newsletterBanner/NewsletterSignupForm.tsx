@@ -5,7 +5,7 @@ import { ToggleSwitch } from '@guardian/source-development-kitchen/react-compone
 // Note - the package also exports a component as a named export "ReCAPTCHA",
 // that version will compile and render but is non-functional.
 // Use the default export instead.
-import type { ChangeEvent } from 'react';
+import { type ChangeEvent, useEffect } from 'react';
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { useHideMarketingToggleForCountry } from '../../../../lib/useHideMarketingToggleForCountry';
 import { useNewsletterSignupForm } from '../../../../lib/useNewsletterSignupForm';
@@ -25,9 +25,10 @@ import {
 	submitButtonContainerStyles,
 	submitButtonStyles,
 } from '../../../NewsletterSignupForm.island';
+import { contentTransitionEasing } from '../../shared/transitions';
 import { FailureMessage } from './ErrorMessage';
 
-const newsletterFormTransition = '0.2s cubic-bezier(0.27, 1.06, 0.18, 1)';
+const newsletterFormTransition = `0.2s ${contentTransitionEasing}`;
 
 const collapsedFormStyles = css`
 	row-gap: 0;
@@ -107,7 +108,10 @@ export const NewsletterSignupForm = ({
 	componentId,
 	abTest,
 	isModal = false,
-}: Omit<NewsletterSignupFormProps, 'isAlreadySubscribed'>) => {
+	onSuccess,
+}: Omit<NewsletterSignupFormProps, 'isAlreadySubscribed'> & {
+	onSuccess?: () => void;
+}) => {
 	const { renderingTarget } = useConfig();
 	const hideMarketingToggle = useHideMarketingToggleForCountry();
 
@@ -142,9 +146,13 @@ export const NewsletterSignupForm = ({
 
 	const hasResponse = typeof responseOk === 'boolean';
 	const hasNonValidationError = !!errorMessage && !isValidationError;
-	const showForm = !hasResponse && !hasNonValidationError;
 	const isSuccess = hasResponse && !!responseOk;
-	console.log('isSuccess:', isSuccess);
+	const showForm = (!hasResponse || isSuccess) && !hasNonValidationError;
+
+	useEffect(() => {
+		if (isSuccess) onSuccess?.();
+	}, [isSuccess, onSuccess]);
+
 	// Show the failure box for server errors (responseOk === false) and for
 	// reCAPTCHA / network errors that occur before a response is received.
 	const showFailure = (hasResponse && !responseOk) || hasNonValidationError;

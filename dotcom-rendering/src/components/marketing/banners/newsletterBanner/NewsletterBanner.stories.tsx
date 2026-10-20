@@ -17,6 +17,16 @@ import { NewsletterBanner } from './NewsletterBanner';
 const meta = preview.meta({
 	title: 'Components/marketing/NewsletterBanner',
 	component: NewsletterBanner,
+	parameters: {
+		layout: 'fullscreen',
+	},
+	decorators: [
+		(Story) => (
+			<div style={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}>
+				<Story />
+			</div>
+		),
+	],
 	args: {
 		...props,
 		submitComponentEvent: async () => Promise.resolve(),
@@ -151,5 +161,25 @@ export const Success = meta.story({
 			...signedOutFormState,
 			responseOk: true,
 		});
+	},
+});
+
+const useSuccessfulForm = (): NewsletterSignupFormState => {
+	const form = useInteractiveSignedOutForm();
+	const [responseOk, setResponseOk] = useState<boolean>();
+
+	return {
+		...form,
+		responseOk,
+		handleSubmit: (event) => {
+			event.preventDefault();
+			setResponseOk(true);
+		},
+	};
+};
+
+export const SuccessTransition = meta.story({
+	beforeEach() {
+		mocked(useNewsletterSignupForm).mockImplementation(useSuccessfulForm);
 	},
 });
