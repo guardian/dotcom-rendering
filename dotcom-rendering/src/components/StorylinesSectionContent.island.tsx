@@ -75,7 +75,7 @@ const tabsContainerStyles = css`
 	margin-left: -${space[2]}px;
 `;
 
-const tabStyles = (isActive: boolean) => css`
+const tabStyles = css`
 	${textSans17};
 	font-weight: 700;
 	text-align: start;
@@ -83,13 +83,16 @@ const tabStyles = (isActive: boolean) => css`
 	cursor: pointer;
 	border: none;
 	background-color: ${palette('--storylines-background')};
-	color: ${isActive
-		? `${palette('--storylines-active-tab')}`
-		: `${palette('--storylines-inactive-tab')}`};
 	flex: 1;
 	min-width: 0;
 	display: flex;
 	align-items: flex-start; /* Aligns text to the top of each tab */
+`;
+
+const tabTextStyles = (isActive: boolean) => css`
+	color: ${isActive
+		? `${palette('--storylines-active-tab')}`
+		: `${palette('--storylines-inactive-tab')}`};
 `;
 
 const contentStyles = css`
@@ -182,27 +185,38 @@ export const StorylinesSectionContent = ({
 				<ScrollableCarousel
 					carouselLength={Math.ceil(parsedStorylines.length)}
 					visibleCarouselSlidesOnMobile={2}
-					visibleCarouselSlidesOnTablet={4}
+					visibleCarouselSlidesOnTablet={3}
 					sectionId={'storylines-tabs-carousel'}
 					shouldStackCards={{ desktop: false, mobile: false }}
 					gapSizes={{ column: 'large', row: 'medium' }}
 				>
-					{parsedStorylines.map((storyline, i) => (
-						<ScrollableCarousel.Item key={storyline.id}>
-							<button
-								css={tabStyles(
-									activeStorylineId === storyline.id,
-								)}
-								onClick={() =>
-									handleStorylineChange(storyline.id)
-								}
-								type="button"
-							>
-								<span css={numberStyles}>{i + 1}</span>
-								<span>{storyline.title}</span>
-							</button>
-						</ScrollableCarousel.Item>
-					))}
+					{parsedStorylines.map((storyline, i) => {
+						const isActive = activeStorylineId === storyline.id;
+						return (
+							<ScrollableCarousel.Item key={storyline.id}>
+								<button
+									css={tabStyles}
+									onClick={() =>
+										handleStorylineChange(storyline.id)
+									}
+									aria-pressed={isActive}
+									type="button"
+								>
+									<span
+										css={[
+											numberStyles,
+											tabTextStyles(isActive),
+										]}
+									>
+										{i + 1}
+									</span>
+									<span css={tabTextStyles(isActive)}>
+										{storyline.title}
+									</span>
+								</button>
+							</ScrollableCarousel.Item>
+						);
+					})}
 				</ScrollableCarousel>
 			</div>
 			{/* Active storyline title */}
