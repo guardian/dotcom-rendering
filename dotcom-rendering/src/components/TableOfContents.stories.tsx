@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { article17, headlineBold24, space } from '@guardian/source/foundations';
 import type { StoryObj } from '@storybook/react-webpack5';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
@@ -163,6 +164,61 @@ export const filterCollapsed: StoryObj = ({
 
 filterCollapsed.storyName = 'filterCollapsed';
 filterCollapsed.decorators = [
+	splitTheme([
+		{
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Lifestyle,
+		},
+	]),
+];
+
+/**
+ * The selected state and the pinned label are both driven by where the reader
+ * is in the page, so this story renders the sections the bar points at. Scroll
+ * it to see the label take the current section's heading, then open the bar to
+ * see that section marked in the list.
+ */
+export const filterWithSections: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => {
+	return (
+		<Wrapper>
+			<TableOfContents
+				tableOfContents={tableItemsLong}
+				format={format}
+				isFilterArticle={true}
+			/>
+			{tableItemsLong.map((item) => (
+				<section key={item.id}>
+					<h2
+						id={item.id}
+						css={css`
+							${headlineBold24}
+							margin-top: ${space[6]}px;
+						`}
+					>
+						{item.title}
+					</h2>
+					<p
+						css={css`
+							${article17}
+							height: 60vh;
+						`}
+					>
+						Body copy for {item.title}, tall enough that each
+						section can be scrolled to in turn.
+					</p>
+				</section>
+			))}
+		</Wrapper>
+	);
+};
+
+filterWithSections.storyName = 'filterWithSections';
+filterWithSections.decorators = [
 	splitTheme([
 		{
 			design: ArticleDesign.Standard,

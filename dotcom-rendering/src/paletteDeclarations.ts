@@ -1983,6 +1983,16 @@ const tableOfContentsBorderLight: PaletteFunction = () =>
 	sourcePalette.neutral[86];
 const tableOfContentsBorderDark: PaletteFunction = () =>
 	sourcePalette.neutral[20];
+/**
+ * The fill behind a "Jump to" item being hovered, matching the treatment in
+ * the edition picker. One step off the bar's own surface in each scheme: the
+ * neutral scale has nothing between `20` and `38`, so the dark step is the
+ * larger of the two.
+ */
+const tableOfContentsHoverLight: PaletteFunction = () =>
+	sourcePalette.neutral[93];
+const tableOfContentsHoverDark: PaletteFunction = () =>
+	sourcePalette.neutral[38];
 
 const podcastMetaTitleLight: PaletteFunction = () => sourcePalette.neutral[97];
 const podcastMetaTitleDark: PaletteFunction = () => sourcePalette.neutral[97];
@@ -8671,6 +8681,10 @@ const paletteColours = {
 	'--table-of-contents-border': {
 		light: tableOfContentsBorderLight,
 		dark: tableOfContentsBorderDark,
+	},
+	'--table-of-contents-hover': {
+		light: tableOfContentsHoverLight,
+		dark: tableOfContentsHoverDark,
 	},
 	'--tabs-input': {
 		light: () => sourcePalette.neutral[100],

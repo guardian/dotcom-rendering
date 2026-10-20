@@ -24,7 +24,7 @@ import type { TagType } from '../types/tag';
 import { Island } from './Island';
 import { LiveBlogRenderer } from './LiveBlogRenderer';
 import {
-	FILTER_TOC_STICKY_HEIGHT,
+	FILTER_TOC_SCROLL_OFFSET,
 	TableOfContents,
 } from './TableOfContents.island';
 import { textBlockStyles } from './TextBlockComponent';
@@ -126,7 +126,7 @@ const globalLinkStyles = () => css`
  */
 const filterSubheadingOffset = css`
 	h2[id] {
-		scroll-margin-top: calc(${FILTER_TOC_STICKY_HEIGHT}px + ${remSpace[2]});
+		scroll-margin-top: ${FILTER_TOC_SCROLL_OFFSET}px;
 	}
 `;
 

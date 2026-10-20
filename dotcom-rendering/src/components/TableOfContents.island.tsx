@@ -1,13 +1,14 @@
 import { css } from '@emotion/react';
 import { isNonNullable } from '@guardian/libs';
 import {
+	article17,
+	articleBold17,
 	between,
 	from,
 	headlineBold17,
 	headlineLight17,
 	space,
 	textSansBold14,
-	textSansBold17,
 	until,
 	visuallyHidden,
 } from '@guardian/source/foundations';
@@ -39,35 +40,65 @@ interface Props {
  * This is a fixed value rather than a measured one because it is the single
  * source of truth for two separate things: the line the scroll spy measures
  * headings against, and the `scroll-margin-top` applied to subheadings in
- * `ArticleBody` so that they don't land underneath the bar. It is only valid
- * because the label is `nowrap` and ellipsised, so the bar cannot grow taller.
- * If the label is ever allowed to wrap, both of those will drift.
+ * `ArticleBody` so that they don't land underneath the bar.
+ *
+ * `filterSummaryStyles` sets it as an exact height rather than a minimum, so
+ * that it holds however tall the bar's contents are. It needs to stay above
+ * the tallest of them: today that is the chevron rather than the label, at
+ * roughly 29px plus the summary's padding and rule.
  */
-export const FILTER_TOC_STICKY_HEIGHT = 44;
+export const FILTER_TOC_STICKY_HEIGHT = 48;
+
+/**
+ * Where a section heading comes to rest when a reader jumps to it: clear of
+ * the sticky bar by a small gap.
+ *
+ * `ArticleBody` applies this as `scroll-margin-top`, and the scroll spy below
+ * measures headings against the same line, so that the section a reader jumps
+ * to is the one the bar then names. The two have to be the same number or the
+ * bar reports the section above.
+ *
+ * Deliberately in pixels, like the bar's own height, so that neither can drift
+ * against the other when the root font size changes.
+ */
+export const FILTER_TOC_SCROLL_OFFSET = FILTER_TOC_STICKY_HEIGHT + space[2];
+
+/**
+ * The line the scroll spy measures headings against.
+ *
+ * Sitting it a little below where a jump lands the heading is what stops the
+ * bar flickering to the section above. Measuring at exactly the landing point
+ * would make the test a knife edge: a heading that settles a single pixel low,
+ * because of sub-pixel rounding or an image above it loading late, would read
+ * as not yet reached. The slack is small enough that the heading is still
+ * tucked under the bar when it counts.
+ */
+const FILTER_TOC_READING_LINE = FILTER_TOC_SCROLL_OFFSET + space[3];
 
 /**
  * Works out which section the reader is currently in, given the position of
  * each section heading relative to the viewport.
  *
- * The current section is the *last* heading that has scrolled up behind the
- * sticky bar, i.e. whose bottom edge is at or above the bar. Deliberately
- * matching on `bottom` rather than `top` keeps this in step with the
- * `IntersectionObserver` that triggers it: a heading stops intersecting the
- * area below the bar at exactly the moment its bottom crosses that line, so
- * there is always a callback when the answer changes.
+ * A reader is in a section from the moment its heading reaches the reading
+ * line, so the current section is the *last* heading whose top edge is at or
+ * above that line. Matching on `top` rather than `bottom` is what makes a
+ * heading count as soon as it comes to rest below the bar: measuring the
+ * bottom edge would only count it once it had scrolled out of sight behind
+ * the bar, leaving the section above it selected in the meantime.
  *
  * Returns `undefined` when the reader is above the first heading.
  *
  * @param sections Section headings, in document order.
+ * @param line Distance from the top of the viewport, in pixels.
  */
 export const getCurrentSectionId = (
-	sections: Array<{ id: string; bottom: number }>,
-	stickyHeight: number,
+	sections: Array<{ id: string; top: number }>,
+	line: number,
 ): string | undefined => {
 	let current: string | undefined;
 
 	for (const section of sections) {
-		if (section.bottom > stickyHeight) break;
+		if (section.top > line) break;
 		current = section.id;
 	}
 
@@ -282,7 +313,8 @@ const filterSummaryStyles = css`
 
 	align-items: center;
 	gap: ${space[4]}px;
-	min-height: ${FILTER_TOC_STICKY_HEIGHT}px;
+	/* Exact, not a minimum: see FILTER_TOC_STICKY_HEIGHT. */
+	height: ${FILTER_TOC_STICKY_HEIGHT}px;
 	padding: ${space[2]}px 0;
 `;
 
@@ -291,7 +323,7 @@ const filterSummaryStyles = css`
  * exactly `FILTER_TOC_STICKY_HEIGHT` tall however long the section heading is.
  */
 const filterTitleStyles = css`
-	${textSansBold17}
+	${articleBold17}
 	color: ${palette('--table-of-contents-accent')};
 	min-width: 0;
 	overflow: hidden;
@@ -299,9 +331,58 @@ const filterTitleStyles = css`
 	text-overflow: ellipsis;
 `;
 
+/**
+ * The items are set in Egyptian regular and keep the default text colour: only
+ * the bar's own label takes the pillar accent, so that the list reads as body
+ * copy rather than as a row of links.
+ *
+ * Hover fills the row instead of growing a rule along its top edge, following
+ * the edition picker. The fill sits on the item rather than the link so that
+ * it covers the full width of the bar, including the padding that holds the
+ * text in line with the body copy.
+ */
+const filterListItemStyles = css`
+	${article17}
+
+	/* Cancels the rule the shared styles grow on hover. */
+	&:hover::before {
+		height: 0;
+	}
+
+	&:hover {
+		background-color: ${palette('--table-of-contents-hover')};
+	}
+
+	/* Hover alone gives no affordance to a reader tabbing through the list. */
+	a:focus-visible {
+		text-decoration: underline;
+	}
+`;
+
+/** The width of the rule marking the section currently being read. */
+const currentMarkerWidth = '4px';
+
+/**
+ * Marks the current section with a rule down the left of the item rather than
+ * by recolouring it, so that the list stays a single colour.
+ *
+ * The rule is inset from the text by its own width again, and spans the item's
+ * text block: tying its top and bottom to the anchor's padding keeps it the
+ * height of the text, including when a long section title wraps.
+ */
 const filterCurrentAnchorStyles = css`
-	color: ${palette('--table-of-contents-accent')};
-	text-decoration: underline;
+	position: relative;
+	padding-left: calc(${currentMarkerWidth} * 3);
+
+	&::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: ${space[1]}px;
+		bottom: ${space[4]}px;
+		width: ${currentMarkerWidth};
+		background-color: ${palette('--table-of-contents')};
+	}
 `;
 
 const visuallyHiddenStyles = css`
@@ -323,7 +404,15 @@ export const TableOfContents = ({
 	format,
 	isFilterArticle = false,
 }: Props) => {
-	const [open, setOpen] = useState(tableOfContents.length < 5);
+	/**
+	 * Short lists open by default, except on The Filter. Its bar is sticky from
+	 * the first paint, so an expanded one covers whatever a reader lands on
+	 * when they arrive on a section anchor, and it cannot collapse itself until
+	 * the island has hydrated. Starting collapsed also matches the design.
+	 */
+	const [open, setOpen] = useState(
+		!isFilterArticle && tableOfContents.length < 5,
+	);
 	const [isStuck, setIsStuck] = useState(false);
 	const [currentSectionId, setCurrentSectionId] = useState<string>();
 	const tocRef = useRef<HTMLDetailsElement>(null);
@@ -385,27 +474,43 @@ export const TableOfContents = ({
 				getCurrentSectionId(
 					sections.map((section) => ({
 						id: section.id,
-						bottom: section.getBoundingClientRect().bottom,
+						top: section.getBoundingClientRect().top,
 					})),
-					FILTER_TOC_STICKY_HEIGHT,
+					FILTER_TOC_READING_LINE,
 				),
 			);
 		};
 
 		const observer = new IntersectionObserver(updateCurrentSection, {
-			// Shrink the observed area to everything below the sticky bar, so
-			// that we're notified each time a heading passes behind it.
-			rootMargin: `-${FILTER_TOC_STICKY_HEIGHT}px 0px 0px 0px`,
+			// Shrink the observed area to everything below the reading line, so
+			// that we're notified each time a heading crosses it.
+			rootMargin: `-${FILTER_TOC_READING_LINE}px 0px 0px 0px`,
+			/**
+			 * A heading crossing the line with its lower half still showing is
+			 * only a partial change in how much of it is inside that area, so
+			 * `1` is what reports it. `0` still covers it leaving the area
+			 * entirely, and a heading taller than the area never reaches `1`.
+			 */
+			threshold: [0, 1],
 		});
 
 		for (const section of sections) {
 			observer.observe(section);
 		}
 
+		/**
+		 * Opening and closing the bar adds and removes its list from the flow
+		 * above the article, moving every heading below it. That is a layout
+		 * change rather than a scroll, so it need not cross the line for any
+		 * heading, and the observer would not report it.
+		 */
+		const frame = window.requestAnimationFrame(updateCurrentSection);
+
 		return () => {
+			window.cancelAnimationFrame(frame);
 			observer.disconnect();
 		};
-	}, [isFilterArticle, tableOfContents]);
+	}, [isFilterArticle, tableOfContents, open]);
 
 	const currentSection = tableOfContents.find(
 		({ id }) => id === currentSectionId,
@@ -455,7 +560,9 @@ export const TableOfContents = ({
 							{currentSection.title}
 						</>
 					) : (
-						'Jump to'
+						/* The Filter's bar labels itself with a colon, the
+                        other variants without. */
+						`Jump to${isFilterArticle ? ':' : ''}`
 					)}
 				</h2>
 				<span className="is-closed">
@@ -478,7 +585,10 @@ export const TableOfContents = ({
 					return (
 						<li
 							key={item.id}
-							css={listItemStyles(format)}
+							css={[
+								listItemStyles(format),
+								isFilterArticle && filterListItemStyles,
+							]}
 							data-link-name={`table-of-contents-item-${index}-${item.id}`}
 						>
 							{format.display === ArticleDisplay.NumberedList && (
