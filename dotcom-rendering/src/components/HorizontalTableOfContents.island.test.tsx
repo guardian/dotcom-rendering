@@ -1,7 +1,7 @@
 import { getCurrentSectionId } from './HorizontalTableOfContents.island';
 
 describe('getCurrentSectionId', () => {
-	const line = 60;
+	const selectionLine = 60;
 
 	it('returns undefined above the first heading', () => {
 		expect(
@@ -10,7 +10,7 @@ describe('getCurrentSectionId', () => {
 					{ id: 'a', top: 200 },
 					{ id: 'b', top: 900 },
 				],
-				line,
+				selectionLine,
 			),
 		).toBeUndefined();
 	});
@@ -23,7 +23,7 @@ describe('getCurrentSectionId', () => {
 					{ id: 'b', top: -100 },
 					{ id: 'c', top: 400 },
 				],
-				line,
+				selectionLine,
 			),
 		).toBe('b');
 	});
@@ -35,7 +35,7 @@ describe('getCurrentSectionId', () => {
 					{ id: 'a', top: -500 },
 					{ id: 'b', top: 60.5 },
 				],
-				line,
+				selectionLine,
 			),
 		).toBe('b');
 	});
@@ -47,7 +47,7 @@ describe('getCurrentSectionId', () => {
 					{ id: 'a', top: -500 },
 					{ id: 'b', top: 120 },
 				],
-				line,
+				selectionLine,
 			),
 		).toBe('a');
 	});

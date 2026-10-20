@@ -66,9 +66,9 @@ type Props = {
 
 /**
  * Stops section headings landing underneath the sticky horizontal table of
- * contents when a reader follows one of its links.
+ * contents when a reader follows one of its links. The links target h2s, plus
+ * h3s for mini profiles in a sectioned list.
  */
-// Contents links target h2s, plus h3s for mini profiles in a sectioned list.
 const horizontalTableOfContentsHeadingOffset = css`
 	h2[id],
 	h3[id] {

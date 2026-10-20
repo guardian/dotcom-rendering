@@ -1952,8 +1952,9 @@ const tableOfContentsBorderDark: PaletteFunction = () =>
 
 /**
  * The horizontal table of contents: a sticky bar of links to an article's
- * sections, e.g. on The Filter's immersive articles. A pillar-tinted bar, with the inactive links one step
- * darker than the border so that they pass AA at 14px on the light surface.
+ * sections, e.g. on The Filter's immersive articles. A pillar-tinted bar, with
+ * the inactive links one step darker than the border so that they pass AA at
+ * 14px on the light surface.
  */
 const tableOfContentsHorizontalPillar = (
 	theme: ArticleTheme,
@@ -1978,14 +1979,13 @@ const tableOfContentsHorizontalBorderLight: PaletteFunction = ({ theme }) =>
 const tableOfContentsHorizontalBorderDark: PaletteFunction = ({ theme }) =>
 	tableOfContentsHorizontalPillar(theme, 500, sourcePalette.neutral[60]);
 const tableOfContentsHorizontalTextLight: PaletteFunction = ({ theme }) =>
-	tableOfContentsHorizontalPillar(theme, 400, sourcePalette.neutral[38]);
+	tableOfContentsHorizontalPillar(theme, 300, sourcePalette.neutral[20]);
 const tableOfContentsHorizontalTextDark: PaletteFunction = ({ theme }) =>
 	tableOfContentsHorizontalPillar(theme, 500, sourcePalette.neutral[73]);
 const tableOfContentsHorizontalTextActiveLight: PaletteFunction = ({ theme }) =>
 	tableOfContentsHorizontalPillar(theme, 100, sourcePalette.neutral[7]);
 const tableOfContentsHorizontalTextActiveDark: PaletteFunction = () =>
 	sourcePalette.neutral[97];
-
 const tableOfContentsHorizontalTextHoverLight: PaletteFunction = ({ theme }) =>
 	tableOfContentsHorizontalPillar(theme, 100, sourcePalette.neutral[7]);
 const tableOfContentsHorizontalTextHoverDark: PaletteFunction = () =>

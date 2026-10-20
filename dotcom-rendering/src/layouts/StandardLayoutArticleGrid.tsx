@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
-import { from, space, until } from '@guardian/source/foundations';
+import { between, from, space, until } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AffiliateDisclaimer } from '../components/AffiliateProducts/AffiliateDisclaimer';
@@ -39,7 +39,7 @@ import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { safeParseURL } from '../lib/parse';
 import { parse } from '../lib/slot-machine-flags';
-import { hasFilterSeriesTag } from '../lib/theFilter';
+import { hasFilterTag } from '../lib/theFilter';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -194,8 +194,6 @@ export const StandardLayoutArticleGrid = ({
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
-	const isFilterSeries = hasFilterSeriesTag(article.tags);
-
 	const headlineBackgroundImmersive = themePalette(
 		'--headline-background-immersive',
 	);
@@ -238,8 +236,9 @@ export const StandardLayoutArticleGrid = ({
 	const isImmersiveLandscape = layoutType === 'immersiveLandscape';
 	const isImmersive = isImmersivePortrait || isImmersiveLandscape;
 
+	const isFilterArticle = hasFilterTag(article.tags);
 	const tableOfContentsStyle =
-		isImmersive && isFilterSeries ? 'horizontal' : 'default';
+		isImmersive && isFilterArticle ? 'horizontal' : 'default';
 
 	const hasMinimumImageHeight =
 		isLabs && isImmersivePortrait && isMainMediaImage;
@@ -264,6 +263,7 @@ export const StandardLayoutArticleGrid = ({
 			${avatarDisplayed && `margin-top: -28px;`}
 		}
 	`;
+
 	// Immersive headlines overlap the bottom of the main media, so the
 	// disclaimer goes above the standfirst instead.
 	const hasImmersiveAffiliateDisclaimer =
@@ -474,10 +474,15 @@ export const StandardLayoutArticleGrid = ({
 							}
 
 							${until.desktop} {
-								padding-bottom: ${hasImmersiveAffiliateDisclaimer
-									? space[3]
-									: space[8]}px;
+								padding-bottom: ${space[8]}px;
 							}
+
+							/* Below tablet this padding is part of the
+							headline's dark background, so keep it there. */
+							${hasImmersiveAffiliateDisclaimer &&
+							`${between.tablet.and.desktop} {
+								padding-bottom: ${space[3]}px;
+							}`}
 						`,
 					isImmersivePortrait &&
 						css`
@@ -553,7 +558,7 @@ export const StandardLayoutArticleGrid = ({
 						css`
 							${until.tablet} {
 								padding-top: ${hasImmersiveAffiliateDisclaimer
-									? 0
+									? space[3]
 									: space[2]}px;
 							}
 						`,

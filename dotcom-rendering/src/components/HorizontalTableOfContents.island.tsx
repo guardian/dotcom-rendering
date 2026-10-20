@@ -1,16 +1,18 @@
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { isNonNullable } from '@guardian/libs';
 import {
 	from,
 	space,
-	textSans15,
-	textSansBold15,
+	textSans14,
+	textSansBold14,
 	until,
 } from '@guardian/source/foundations';
 import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
+import type { RefObject } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import type { TableOfContentsItem } from '../model/enhanceTableOfContents';
@@ -19,6 +21,8 @@ import { palette } from '../palette';
 interface Props {
 	tableOfContents: TableOfContentsItem[];
 }
+
+type ScrollDirection = 'prev' | 'next';
 
 /** Distance between the top of the viewport and the pinned bar. */
 const STICKY_TOP = space[2];
@@ -32,6 +36,9 @@ const BAR_HEIGHT = 36;
 /** Backdrop below the pinned bar, so content doesn't show right under it. */
 const BACKDROP_BOTTOM = space[2];
 
+/** Allowance for sub-pixel rounding in layout measurements. */
+const ROUNDING_TOLERANCE = 1;
+
 /**
  * How far below the top of the viewport a section heading sits after a reader
  * follows one of the nav's links: clear of the pinned bar and its backdrop,
@@ -41,33 +48,6 @@ const BACKDROP_BOTTOM = space[2];
  */
 export const HORIZONTAL_TABLE_OF_CONTENTS_SCROLL_MARGIN =
 	STICKY_TOP + BAR_HEIGHT + BACKDROP_BOTTOM + space[2];
-
-/**
- * Works out which section the reader is in: the last heading whose top has
- * scrolled up to the line under the bar. Unlike observing headings as they
- * enter the viewport, this gives the right answer when scrolling up as well as
- * down. Returns `undefined` above the first heading.
- *
- * @param sections Section headings, in document order.
- */
-export const getCurrentSectionId = (
-	sections: Array<{ id: string; top: number }>,
-	line: number,
-): string | undefined => {
-	let current: string | undefined;
-
-	for (const section of sections) {
-		// Allow a pixel for rounding, so that a heading scrolled exactly to its
-		// `scroll-margin-top` counts as current.
-		if (section.top > line + 1) break;
-		current = section.id;
-	}
-
-	return current;
-};
-
-const prefersReducedMotion = (): boolean =>
-	window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /**
  * Pins to the top of the viewport and fills the space around the bar with the
@@ -142,13 +122,13 @@ const wrapperStyles = css`
 	}
 `;
 
-const showPrevStyles = css`
+const showPrevFadeStyles = css`
 	&::before {
 		visibility: visible;
 	}
 `;
 
-const showNextStyles = css`
+const showNextFadeStyles = css`
 	&::after {
 		visibility: visible;
 	}
@@ -191,7 +171,7 @@ const itemStyles = css`
 `;
 
 const linkStyles = css`
-	${textSans15};
+	${textSans14};
 	display: inline-flex;
 	align-items: center;
 	min-height: 24px;
@@ -212,7 +192,7 @@ const linkStyles = css`
 	}
 
 	&[aria-current='location'] {
-		${textSansBold15};
+		${textSansBold14};
 		color: ${palette('--table-of-contents-horizontal-text-active')};
 	}
 `;
@@ -244,6 +224,257 @@ const buttonStyles = css`
 	}
 `;
 
+const buttonPositionStyles: Record<ScrollDirection, SerializedStyles> = {
+	prev: css`
+		left: 0;
+	`,
+	next: css`
+		right: 0;
+	`,
+};
+
+/**
+ * Works out which section the reader is in: the last heading whose top has
+ * scrolled up to the selection line. Unlike observing headings as they enter
+ * the viewport, this gives the right answer when scrolling up as well as down.
+ * Returns `undefined` above the first heading.
+ *
+ * @param sections Section headings, in document order.
+ * @param selectionLine Distance from the top of the viewport that a heading
+ * has to reach for its section to become the current one.
+ */
+export const getCurrentSectionId = (
+	sections: Array<{ id: string; top: number }>,
+	selectionLine: number,
+): string | undefined => {
+	let currentSectionId: string | undefined;
+
+	for (const section of sections) {
+		// The tolerance means a heading scrolled exactly to its
+		// `scroll-margin-top` counts as current.
+		if (section.top > selectionLine + ROUNDING_TOLERANCE) break;
+		currentSectionId = section.id;
+	}
+
+	return currentSectionId;
+};
+
+const getScrollBehavior = (): ScrollBehavior =>
+	window.matchMedia('(prefers-reduced-motion: reduce)').matches
+		? 'auto'
+		: 'smooth';
+
+const getMaxScrollLeft = (nav: HTMLElement): number =>
+	nav.scrollWidth - nav.clientWidth;
+
+/**
+ * Wraps `callback` so that however often it's scheduled, e.g. on every scroll
+ * event, it runs at most once per animation frame.
+ */
+const throttleToAnimationFrame = (callback: () => void) => {
+	let frame: number | undefined;
+
+	const schedule = () => {
+		frame ??= window.requestAnimationFrame(() => {
+			frame = undefined;
+			callback();
+		});
+	};
+
+	const cancel = () => {
+		if (frame !== undefined) window.cancelAnimationFrame(frame);
+	};
+
+	return { schedule, cancel };
+};
+
+/** The scroll position that centres `link` in `nav`, within its scroll range. */
+const getCentredScrollLeft = (nav: HTMLElement, link: HTMLElement): number => {
+	const navRect = nav.getBoundingClientRect();
+	const linkRect = link.getBoundingClientRect();
+	const centredScrollLeft =
+		nav.scrollLeft +
+		(linkRect.left - navRect.left) -
+		(navRect.width - linkRect.width) / 2;
+
+	return Math.min(Math.max(centredScrollLeft, 0), getMaxScrollLeft(nav));
+};
+
+/** The first item that is cut off on the `direction` side of `nav`. */
+const findFirstHiddenItem = (
+	nav: HTMLElement,
+	direction: ScrollDirection,
+): HTMLElement | undefined => {
+	const navRect = nav.getBoundingClientRect();
+	const items = Array.from(nav.querySelectorAll('li'));
+
+	return direction === 'next'
+		? items.find(
+				(item) =>
+					item.getBoundingClientRect().right >
+					navRect.right + ROUNDING_TOLERANCE,
+			)
+		: items.findLast(
+				(item) =>
+					item.getBoundingClientRect().left <
+					navRect.left - ROUNDING_TOLERANCE,
+			);
+};
+
+/** Scrolls `nav` by the width of the next cut-off item, i.e. one section. */
+const scrollByOneItem = (nav: HTMLElement, direction: ScrollDirection) => {
+	const item = findFirstHiddenItem(nav, direction);
+	if (!item) return;
+
+	nav.scrollBy({
+		left: direction === 'next' ? item.offsetWidth : -item.offsetWidth,
+		behavior: getScrollBehavior(),
+	});
+};
+
+/** Tracks the section of the article that the reader is in. */
+const useCurrentSectionId = (
+	tableOfContents: TableOfContentsItem[],
+): string | undefined => {
+	const [currentSectionId, setCurrentSectionId] = useState<string>();
+
+	useEffect(() => {
+		const headings = tableOfContents
+			.map(({ id }) => document.getElementById(id))
+			.filter(isNonNullable);
+
+		if (headings.length === 0) return;
+
+		const updateCurrentSectionId = () =>
+			setCurrentSectionId(
+				getCurrentSectionId(
+					headings.map((heading) => ({
+						id: heading.id,
+						top: heading.getBoundingClientRect().top,
+					})),
+					HORIZONTAL_TABLE_OF_CONTENTS_SCROLL_MARGIN,
+				),
+			);
+		const { schedule, cancel } = throttleToAnimationFrame(
+			updateCurrentSectionId,
+		);
+
+		updateCurrentSectionId();
+		window.addEventListener('scroll', schedule, { passive: true });
+		window.addEventListener('resize', schedule);
+
+		return () => {
+			window.removeEventListener('scroll', schedule);
+			window.removeEventListener('resize', schedule);
+			cancel();
+		};
+	}, [tableOfContents]);
+
+	return currentSectionId;
+};
+
+/**
+ * Whether the nav has more to scroll to on each side. Read from its real
+ * scroll position, so it stays right however it was scrolled: swipe,
+ * trackpad, arrow or focus.
+ */
+const useScrollableSides = (navRef: RefObject<HTMLElement>) => {
+	const [canScrollPrev, setCanScrollPrev] = useState(false);
+	const [canScrollNext, setCanScrollNext] = useState(false);
+
+	useEffect(() => {
+		const nav = navRef.current;
+		if (!nav) return;
+
+		const updateScrollableSides = () => {
+			setCanScrollPrev(nav.scrollLeft > ROUNDING_TOLERANCE);
+			setCanScrollNext(
+				nav.scrollLeft < getMaxScrollLeft(nav) - ROUNDING_TOLERANCE,
+			);
+		};
+		const { schedule, cancel } = throttleToAnimationFrame(
+			updateScrollableSides,
+		);
+
+		updateScrollableSides();
+		nav.addEventListener('scroll', schedule, { passive: true });
+
+		// Re-measure when the nav or its links change size, e.g. on window
+		// resize or once web fonts load and widen the links. Fall back to
+		// window resize where ResizeObserver isn't supported.
+		let resizeObserver: ResizeObserver | undefined;
+		if (typeof ResizeObserver !== 'undefined') {
+			resizeObserver = new ResizeObserver(schedule);
+			resizeObserver.observe(nav);
+			if (nav.firstElementChild) {
+				resizeObserver.observe(nav.firstElementChild);
+			}
+		} else {
+			window.addEventListener('resize', schedule);
+		}
+
+		return () => {
+			nav.removeEventListener('scroll', schedule);
+			window.removeEventListener('resize', schedule);
+			resizeObserver?.disconnect();
+			cancel();
+		};
+	}, [navRef]);
+
+	return { canScrollPrev, canScrollNext };
+};
+
+/**
+ * Keeps the current section's link centred in the nav. This scrolls the nav
+ * only, unlike `scrollIntoView`, which would also scroll the page.
+ */
+const useCentredCurrentLink = (
+	navRef: RefObject<HTMLElement>,
+	currentSectionId: string | undefined,
+) => {
+	useEffect(() => {
+		const nav = navRef.current;
+		if (!nav || currentSectionId === undefined) return;
+
+		const link = nav.querySelector<HTMLAnchorElement>(
+			`a[href="#${CSS.escape(currentSectionId)}"]`,
+		);
+		if (!link) return;
+
+		nav.scrollTo({
+			left: getCentredScrollLeft(nav, link),
+			behavior: getScrollBehavior(),
+		});
+	}, [navRef, currentSectionId]);
+};
+
+/**
+ * Keyboard and screen reader users reach every section through the links, so
+ * the arrows are mouse-only.
+ */
+const ScrollButton = ({
+	direction,
+	onClick,
+}: {
+	direction: ScrollDirection;
+	onClick: () => void;
+}) => (
+	<button
+		type="button"
+		css={[buttonStyles, buttonPositionStyles[direction]]}
+		onClick={onClick}
+		tabIndex={-1}
+		aria-hidden="true"
+		data-link-name={`horizontal-table-of-contents-${direction}`}
+	>
+		{direction === 'prev' ? (
+			<SvgChevronLeftSingle size="xsmall" />
+		) : (
+			<SvgChevronRightSingle size="xsmall" />
+		)}
+	</button>
+);
+
 /**
  * A table of contents shown as a sticky, horizontally scrolling bar of the
  * article's sections: the horizontal alternative to the "Jump to" list in
@@ -254,148 +485,17 @@ const buttonStyles = css`
  * plus arrow buttons from tablet up that move along one section at a time.
  *
  * Section headings need `scroll-margin-top` set to
- * `HORIZONTAL_TABLE_OF_CONTENTS_SCROLL_MARGIN` so that they don't land under the bar.
+ * `HORIZONTAL_TABLE_OF_CONTENTS_SCROLL_MARGIN` so that they don't land under
+ * the bar.
  */
 export const HorizontalTableOfContents = ({ tableOfContents }: Props) => {
-	const [currentSectionId, setCurrentSectionId] = useState<string>();
-	const [canScrollPrev, setCanScrollPrev] = useState(false);
-	const [canScrollNext, setCanScrollNext] = useState(false);
 	const navRef = useRef<HTMLElement>(null);
+	const currentSectionId = useCurrentSectionId(tableOfContents);
+	const { canScrollPrev, canScrollNext } = useScrollableSides(navRef);
+	useCentredCurrentLink(navRef, currentSectionId);
 
-	// Track the section the reader is in.
-	useEffect(() => {
-		// Anchor ids are added to the `h2`s by `enhanceH2s`.
-		const sections = tableOfContents
-			.map(({ id }) => document.getElementById(id))
-			.filter(isNonNullable);
-
-		if (sections.length === 0) return;
-
-		let frame: number | undefined;
-
-		const update = () => {
-			frame = undefined;
-			setCurrentSectionId(
-				getCurrentSectionId(
-					sections.map((section) => ({
-						id: section.id,
-						top: section.getBoundingClientRect().top,
-					})),
-					HORIZONTAL_TABLE_OF_CONTENTS_SCROLL_MARGIN,
-				),
-			);
-		};
-
-		const scheduleUpdate = () => {
-			frame ??= window.requestAnimationFrame(update);
-		};
-
-		update();
-		window.addEventListener('scroll', scheduleUpdate, { passive: true });
-		window.addEventListener('resize', scheduleUpdate);
-
-		return () => {
-			window.removeEventListener('scroll', scheduleUpdate);
-			window.removeEventListener('resize', scheduleUpdate);
-			if (frame !== undefined) window.cancelAnimationFrame(frame);
-		};
-	}, [tableOfContents]);
-
-	// Show the fades and arrows from the nav's real scroll position, so that
-	// they stay right however it was scrolled: swipe, trackpad, arrow or focus.
-	useEffect(() => {
-		const nav = navRef.current;
-		if (!nav) return;
-
-		let frame: number | undefined;
-
-		const update = () => {
-			frame = undefined;
-			const maxScrollLeft = nav.scrollWidth - nav.clientWidth;
-			setCanScrollPrev(nav.scrollLeft > 1);
-			setCanScrollNext(nav.scrollLeft < maxScrollLeft - 1);
-		};
-
-		const scheduleUpdate = () => {
-			if (frame !== undefined) return;
-			frame = window.requestAnimationFrame(update);
-		};
-
-		update();
-		nav.addEventListener('scroll', scheduleUpdate, { passive: true });
-
-		// Re-measure when the nav or its links change size, e.g. on window
-		// resize or once web fonts load and widen the links. Fall back to
-		// window resize where ResizeObserver isn't supported.
-		let resizeObserver: ResizeObserver | undefined;
-		if (typeof ResizeObserver !== 'undefined') {
-			resizeObserver = new ResizeObserver(scheduleUpdate);
-			resizeObserver.observe(nav);
-			if (nav.firstElementChild) {
-				resizeObserver.observe(nav.firstElementChild);
-			}
-		} else {
-			window.addEventListener('resize', scheduleUpdate);
-		}
-
-		return () => {
-			nav.removeEventListener('scroll', scheduleUpdate);
-			window.removeEventListener('resize', scheduleUpdate);
-			resizeObserver?.disconnect();
-			if (frame !== undefined) window.cancelAnimationFrame(frame);
-		};
-	}, []);
-
-	// Keep the current section centred in the nav. This scrolls the nav only,
-	// unlike `scrollIntoView`, which would also scroll the page.
-	useEffect(() => {
-		const nav = navRef.current;
-		if (!nav || currentSectionId === undefined) return;
-
-		const link = nav.querySelector<HTMLAnchorElement>(
-			`a[href="#${CSS.escape(currentSectionId)}"]`,
-		);
-		if (!link) return;
-
-		const navRect = nav.getBoundingClientRect();
-		const linkRect = link.getBoundingClientRect();
-		const target =
-			nav.scrollLeft +
-			(linkRect.left - navRect.left) -
-			(navRect.width - linkRect.width) / 2;
-		const maxScrollLeft = nav.scrollWidth - nav.clientWidth;
-
-		nav.scrollTo({
-			left: Math.min(Math.max(target, 0), maxScrollLeft),
-			behavior: prefersReducedMotion() ? 'auto' : 'smooth',
-		});
-	}, [currentSectionId]);
-
-	// Scroll by the width of the next link that's cut off on that side, so
-	// each click moves along one section.
-	const scrollByItem = (direction: -1 | 1) => {
-		const nav = navRef.current;
-		if (!nav) return;
-
-		const navRect = nav.getBoundingClientRect();
-		const items = Array.from(nav.querySelectorAll('li'));
-		const item =
-			direction === 1
-				? items.find(
-						(li) =>
-							li.getBoundingClientRect().right >
-							navRect.right + 1,
-					)
-				: items.findLast(
-						(li) =>
-							li.getBoundingClientRect().left < navRect.left - 1,
-					);
-		if (!item) return;
-
-		nav.scrollBy({
-			left: direction * item.offsetWidth,
-			behavior: prefersReducedMotion() ? 'auto' : 'smooth',
-		});
+	const scrollNav = (direction: ScrollDirection) => {
+		if (navRef.current) scrollByOneItem(navRef.current, direction);
 	};
 
 	return (
@@ -403,28 +503,15 @@ export const HorizontalTableOfContents = ({ tableOfContents }: Props) => {
 			<div
 				css={[
 					wrapperStyles,
-					canScrollPrev && showPrevStyles,
-					canScrollNext && showNextStyles,
+					canScrollPrev && showPrevFadeStyles,
+					canScrollNext && showNextFadeStyles,
 				]}
 			>
 				{canScrollPrev && (
-					// Keyboard and screen reader users reach every section
-					// through the links, so the arrows are mouse-only.
-					<button
-						type="button"
-						css={[
-							buttonStyles,
-							css`
-								left: 0;
-							`,
-						]}
-						onClick={() => scrollByItem(-1)}
-						tabIndex={-1}
-						aria-hidden="true"
-						data-link-name="horizontal-table-of-contents-prev"
-					>
-						<SvgChevronLeftSingle size="xsmall" />
-					</button>
+					<ScrollButton
+						direction="prev"
+						onClick={() => scrollNav('prev')}
+					/>
 				)}
 
 				<nav ref={navRef} css={scrollStyles} aria-label="Sections">
@@ -449,21 +536,10 @@ export const HorizontalTableOfContents = ({ tableOfContents }: Props) => {
 				</nav>
 
 				{canScrollNext && (
-					<button
-						type="button"
-						css={[
-							buttonStyles,
-							css`
-								right: 0;
-							`,
-						]}
-						onClick={() => scrollByItem(1)}
-						tabIndex={-1}
-						aria-hidden="true"
-						data-link-name="horizontal-table-of-contents-next"
-					>
-						<SvgChevronRightSingle size="xsmall" />
-					</button>
+					<ScrollButton
+						direction="next"
+						onClick={() => scrollNav('next')}
+					/>
 				)}
 			</div>
 		</div>
