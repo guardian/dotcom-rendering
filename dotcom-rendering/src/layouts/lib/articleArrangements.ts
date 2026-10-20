@@ -244,38 +244,6 @@ const commentCss: LayoutCssMap = {
 	},
 };
 
-const interactiveCss: LayoutCssMap = {
-	title: {
-		tablet: 'grid-row: 1;',
-		leftCol: `grid-row: 1; ${grid.column.left}`,
-	},
-	headline: {
-		tablet: 'grid-row: 2;',
-		leftCol: 'grid-row: 1;',
-	},
-	standfirst: {
-		tablet: 'grid-row: 3;',
-		leftCol: 'grid-row: 2;',
-	},
-	media: {
-		tablet: 'grid-row: 4;',
-		leftCol: 'grid-row: 3;',
-	},
-	meta: {
-		tablet: 'grid-row: 5;',
-		leftCol: `grid-row: 3 / span 2; ${grid.column.left};`,
-	},
-	body: {
-		mobile: `${grid.column.all};`,
-		tablet: `grid-row: 6; ${grid.column.all};`,
-		leftCol: 'grid-row: 4;',
-	},
-	'right-column': {
-		desktop: `grid-row: 1 / span 6; ${grid.column.right};`,
-		leftCol: `grid-row: 1 / span 4; ${grid.column.right};`,
-	},
-};
-
 const immersivePortraitCss: LayoutCssMap = {
 	title: {
 		belowDesktop: 'grid-row: 1;',
@@ -368,7 +336,7 @@ const layoutCssMaps: Record<LayoutType, LayoutCssMap> = {
 	media: mediaCss,
 	picture: pictureCss,
 	comment: commentCss,
-	interactive: interactiveCss,
+	interactive: standardCss,
 	immersiveLandscape: immersiveLandscapeCss,
 	immersivePortrait: immersivePortraitCss,
 };
