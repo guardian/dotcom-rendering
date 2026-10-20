@@ -241,3 +241,51 @@ describe('resolvePuzzleIframeUrl', () => {
 		).toThrow();
 	});
 });
+
+describe('API game URLs', () => {
+	it('preserves the API path, opaque puzzle id and provider parameters', () => {
+		const url = new URL(
+			resolvePuzzleIframeUrl(
+				puzzleConfigs['sudoku-easy']!,
+				{
+					userId: 'reader',
+					darkMode: true,
+					puzzleDate: '2026-09-26',
+				},
+				'https://tg.amuselabs.com/guardian/date-picker?set=api-series&id=opaque-id&embed=1&token=keep',
+			),
+		);
+		expect(url.pathname).toBe('/guardian/date-picker');
+		expect(Object.fromEntries(url.searchParams)).toEqual({
+			set: 'api-series',
+			id: 'opaque-id',
+			embed: '1',
+			token: 'keep',
+			uid: 'reader',
+			darkMode: '1',
+		});
+	});
+
+	it('removes stale identity when signed out', () => {
+		const url = new URL(
+			resolvePuzzleIframeUrl(
+				puzzleConfigs['word-wheel']!,
+				{ userId: null, darkMode: false },
+				'https://tg.amuselabs.com/guardian/date-picker?id=opaque&uid=stale',
+			),
+		);
+		expect(url.searchParams.has('uid')).toBe(false);
+		expect(url.searchParams.get('id')).toBe('opaque');
+	});
+
+	it('leaves Wordiply provider parameters unchanged', () => {
+		const url = 'https://www.wordiply.com/?game=from-api';
+		expect(
+			resolvePuzzleIframeUrl(
+				puzzleConfigs.wordiply!,
+				{ userId: 'reader', darkMode: true },
+				url,
+			),
+		).toBe(url);
+	});
+});

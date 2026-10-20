@@ -30,7 +30,7 @@ const sectionStyles = css`
 `;
 
 const immersiveGridMargins = css`
-	max-width: 500px;
+	max-width: 80vw;
 	min-width: 200px;
 	margin-bottom: 0;
 	${from.desktop} {

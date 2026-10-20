@@ -9,6 +9,7 @@ import { DiscussionLayout } from '../components/DiscussionLayout';
 import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.island';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
+import { InteractivesScrollbarWidth } from '../components/InteractivesScrollbarWidth.island';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { Masthead } from '../components/Masthead/Masthead';
@@ -28,7 +29,7 @@ import {
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
-import { hasFilterSeriesTag } from '../lib/theFilter';
+import { hasFilterTag } from '../lib/theFilter';
 import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -110,12 +111,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const isWorldCup2026 = article.tags.some((tag) => tag.id === worldCupTagId);
 
-	const isFilterSeries = hasFilterSeriesTag(article.tags);
+	const isFilterArticle = hasFilterTag(article.tags);
 
 	const renderAds = canRenderAds(article);
 
 	return (
 		<>
+			{isInteractive && <InteractivesScrollbarWidth />}
 			{isWeb && (
 				<div data-print-layout="hide" id="bannerandheader">
 					{renderAds && (
@@ -153,7 +155,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						}
 						showSlimNav={
 							(format.display === ArticleDisplay.Immersive &&
-								!isFilterSeries) ||
+								!isFilterArticle) ||
 							isInteractive
 						}
 						hasPageSkinContentSelfConstrain={true}

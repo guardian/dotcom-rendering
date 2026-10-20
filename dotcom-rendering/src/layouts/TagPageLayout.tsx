@@ -1,4 +1,4 @@
-import { isUndefined, joinUrl } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import { palette } from '@guardian/source/foundations';
 import { Fragment } from 'react';
 import { Accessibility } from '../components/Accessibility.island';
@@ -131,16 +131,8 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 						.replaceAll(' ', '-')
 						.toLowerCase();
 
-					const url = groupedTrails.day
-						? '/' +
-							joinUrl(
-								tagPage.pageId,
-								groupedTrails.year,
-								groupedTrails.month.slice(0, 3).toLowerCase(),
-								groupedTrails.day.padStart(2, '0'),
-								'all',
-							)
-						: undefined;
+					// Temporarily remove links to /all pages
+					const url = undefined;
 
 					/**
 					 * The pagination should appear at the bottom of the page; this is done by passing to FrontSection.

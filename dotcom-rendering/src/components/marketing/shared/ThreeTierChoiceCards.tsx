@@ -27,6 +27,46 @@ import type { ChoiceCardDesignSettings } from '../banners/designableBanner/setti
 
 export type ChoiceCard = _ChoiceCard & { defaultExpanded?: boolean };
 
+const choiceCardTransition = '0.2s cubic-bezier(0.27, 1.06, 0.18, 1)';
+
+const styles = {
+	radioGroup: css`
+		margin-top: ${space[6]}px;
+	`,
+	card: css`
+		position: relative;
+		background-color: inherit;
+	`,
+	label: css`
+		display: grid;
+
+		/* Stack children in the same grid cell. */
+		& > span {
+			grid-area: 1 / 1;
+			transition: opacity ${choiceCardTransition};
+		}
+	`,
+	boldLabel: css`
+		font-weight: bold;
+	`,
+	labelOpacity: (isVisible: boolean) => css`
+		/* Regular weight fades out when selected; bold weight fades in. */
+		opacity: ${isVisible ? 1 : 0};
+	`,
+	benefitsContainer: (isExpanded: boolean | undefined) => css`
+		display: grid;
+		grid-template-rows: ${isExpanded === true ? '1fr' : '0fr'};
+		transition: ${choiceCardTransition};
+		transition-property: grid-template-rows;
+	`,
+	benefitsContent: css`
+		overflow: hidden;
+		/* Widen the hidden bounding box to prevent clipping negative margins. */
+		padding: 0 8px;
+		margin: 0 -8px;
+	`,
+};
+
 const benefitsStyles = css`
 	${textSans15};
 	color: ${palette.neutral[7]};
@@ -75,6 +115,10 @@ const SupportingBenefits = ({
 	benefitsTickColour?: string;
 	choiceCardDesignSettings?: ChoiceCardDesignSettings;
 }) => {
+	if (benefits.length === 0 && (benefitsLabel?.trim() ?? '') === '') {
+		return null;
+	}
+
 	const showTicks = benefits.length > 1;
 	return (
 		<div css={supportingTextStyles}>
@@ -122,6 +166,7 @@ type ThreeTierChoiceCardsProps = {
 	setSelectedChoiceCard: Dispatch<SetStateAction<ChoiceCard | undefined>>;
 	choices: ChoiceCard[];
 	id: 'epic' | 'banner'; // uniquely identify this choice cards component to avoid conflicting with others
+	radioIdPrefix?: string;
 	submitComponentEvent?: (componentEvent: ComponentEvent) => Promise<void>;
 	choiceCardDesignSettings?: ChoiceCardDesignSettings;
 };
@@ -145,6 +190,7 @@ export const ThreeTierChoiceCards = ({
 	setSelectedChoiceCard,
 	choices,
 	id,
+	radioIdPrefix = id,
 	submitComponentEvent,
 	choiceCardDesignSettings,
 }: ThreeTierChoiceCardsProps) => {
@@ -153,14 +199,19 @@ export const ThreeTierChoiceCards = ({
 		threshold: 0,
 	});
 
-	const supportTierChoiceCardStyles = (selected: boolean) => css`
+	const supportTierChoiceCardStyles = (
+		selected: boolean,
+		isEmpty: boolean,
+	) => css`
 		display: block;
-		border: ${selected
-			? `2px solid ${
+		position: relative;
+		border: none;
+		box-shadow: ${selected
+			? `inset 0 0 0 2px ${
 					choiceCardDesignSettings?.buttonSelectBorderColour ??
 					palette.brand['400']
 				}`
-			: `1px solid ${
+			: `inset 0 0 0 1px ${
 					choiceCardDesignSettings?.buttonBorderColour ??
 					palette.neutral[46]
 				}`};
@@ -172,14 +223,25 @@ export const ThreeTierChoiceCards = ({
 			? (choiceCardDesignSettings?.buttonSelectTextColour ?? 'inherit')
 			: (choiceCardDesignSettings?.buttonTextColour ?? 'inherit')};
 		border-radius: 10px;
-		padding: ${selected
-			? `6px ${space[5]}px 10px ${space[5]}px`
-			: `6px ${space[5]}px`};
+		padding: ${selected && !isEmpty
+			? `8px ${space[5] + 2}px 12px ${space[5] + 2}px`
+			: `7px ${space[5] + 1}px`};
+		transition: ${choiceCardTransition};
+		transition-property: color, background-color, box-shadow, padding;
+
+		> div {
+			position: static;
+		}
+
+		> div > label::before {
+			content: '';
+			position: absolute;
+			inset: 0;
+		}
 	`;
 
 	const labelOverrideStyles = (isSelected: boolean) => css`
 		+ label div {
-			${isSelected ? 'font-weight: bold;' : ''}
 			color: ${isSelected
 				? (choiceCardDesignSettings?.buttonSelectTextColour ??
 					'inherit')
@@ -235,6 +297,7 @@ export const ThreeTierChoiceCards = ({
 			${textSansBold14};
 			color: ${buildTextColour()};
 			position: absolute;
+			pointer-events: none;
 			top: -${space[2]}px;
 			${until.phablet} {
 				right: ${space[3]}px;
@@ -277,11 +340,7 @@ export const ThreeTierChoiceCards = ({
 
 	return (
 		<div ref={setNode}>
-			<RadioGroup
-				cssOverrides={css`
-					margin-top: ${space[6]}px;
-				`}
-			>
+			<RadioGroup cssOverrides={styles.radioGroup}>
 				<Stack space={3}>
 					{(() => {
 						// Identify the selected card by position so duplicate
@@ -321,7 +380,7 @@ export const ThreeTierChoiceCards = ({
 							// this, both OneOff cards produced
 							// id="choicecard-banner-OneOff", breaking <label
 							// htmlFor> association and React keys.
-							const radioId = `choicecard-${id}-${supportTier}${
+							const radioId = `choicecard-${radioIdPrefix}-${supportTier}${
 								supportTier !== 'OneOff'
 									? `-${product.ratePlan}`
 									: ''
@@ -330,57 +389,87 @@ export const ThreeTierChoiceCards = ({
 							const isExpanded =
 								selected ||
 								(!selectedChoiceCard && card.defaultExpanded);
+							const isEmpty =
+								benefits.length === 0 &&
+								(benefitsLabel == null || benefitsLabel === '');
 
 							return (
-								<div
-									key={radioId}
-									css={css`
-										position: relative;
-										background-color: inherit;
-									`}
-								>
-									{pill && <ChoiceCardPill pill={pill} />}
-									<label
+								<div key={radioId} css={styles.card}>
+									<div
 										css={supportTierChoiceCardStyles(
 											selected,
+											isEmpty,
 										)}
-										htmlFor={radioId}
 									>
 										<Radio
 											label={
-												<span
-													dangerouslySetInnerHTML={{
-														__html: sanitise(label),
-													}}
-												/>
+												<span css={styles.label}>
+													<span
+														css={styles.labelOpacity(
+															!selected,
+														)}
+														dangerouslySetInnerHTML={{
+															__html: sanitise(
+																label,
+															),
+														}}
+													/>
+													<span
+														aria-hidden="true"
+														css={[
+															styles.boldLabel,
+															styles.labelOpacity(
+																selected,
+															),
+														]}
+														dangerouslySetInnerHTML={{
+															__html: sanitise(
+																label,
+															),
+														}}
+													/>
+												</span>
 											}
 											id={radioId}
 											value={radioId}
-											name={`choice-cards-${id}`}
+											name={`choice-cards-${radioIdPrefix}`}
 											cssOverrides={labelOverrideStyles(
 												selected,
 											)}
 											supporting={
-												isExpanded && (
-													<SupportingBenefits
-														benefitsLabel={
-															benefitsLabel as
-																| string
-																| undefined
+												<div
+													aria-hidden={
+														isExpanded !== true
+													}
+													css={styles.benefitsContainer(
+														isExpanded,
+													)}
+												>
+													<div
+														css={
+															styles.benefitsContent
 														}
-														benefits={benefits}
-														benefitsTickColour={
-															pill
-																? getPillBackgroundColour(
-																		pill,
-																	)
-																: undefined
-														}
-														choiceCardDesignSettings={
-															choiceCardDesignSettings
-														}
-													/>
-												)
+													>
+														<SupportingBenefits
+															benefitsLabel={
+																benefitsLabel as
+																	| string
+																	| undefined
+															}
+															benefits={benefits}
+															benefitsTickColour={
+																pill
+																	? getPillBackgroundColour(
+																			pill,
+																		)
+																	: undefined
+															}
+															choiceCardDesignSettings={
+																choiceCardDesignSettings
+															}
+														/>
+													</div>
+												</div>
 											}
 											checked={selected}
 											onChange={() => {
@@ -388,7 +477,8 @@ export const ThreeTierChoiceCards = ({
 											}}
 											theme={customRadioTheme}
 										/>
-									</label>
+									</div>
+									{pill && <ChoiceCardPill pill={pill} />}
 								</div>
 							);
 						});

@@ -13,7 +13,7 @@ import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { PuzzlesArchiveCalendar } from '../components/PuzzlesArchiveCalendar.island';
 import { PuzzlesArchiveDescription } from '../components/PuzzlesArchiveDescription.island';
-import { RelatedPuzzlesRail } from '../components/RelatedPuzzlesRail';
+import { RelatedPuzzlesRailEnhanced } from '../components/RelatedPuzzlesRailEnhanced.island';
 import { Section } from '../components/Section';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { center } from '../lib/center';
@@ -256,7 +256,14 @@ export const PuzzlesArchiveLayout = ({
 					</div>
 					{archive.moreFrom.length > 0 && (
 						<section css={moreStyles}>
-							<RelatedPuzzlesRail items={archive.moreFrom} />
+							<Island
+								priority="enhancement"
+								defer={{ until: 'visible' }}
+							>
+								<RelatedPuzzlesRailEnhanced
+									items={archive.moreFrom}
+								/>
+							</Island>
 						</section>
 					)}
 					{renderAds && (

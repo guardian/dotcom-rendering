@@ -60,16 +60,26 @@ describe('archive calendar helpers', () => {
 		);
 	});
 
-	it('maps completed, available, in-progress and missing dates', () => {
-		expect(archiveStatus({ ...archive.items[0]!, progress: 100 })).toBe(
-			'completed',
-		);
-		expect(archiveStatus({ ...archive.items[0]!, progress: 0 })).toBe(
-			'available',
-		);
-		expect(archiveStatus({ ...archive.items[0]!, progress: 50 })).toBe(
-			'available',
-		);
+	it('maps the API status, not the progress value, to the day status', () => {
+		const item = archive.items[0]!;
+		expect(
+			archiveStatus({ ...item, progress: 10, gameStatus: 'completed' }),
+		).toBe('completed');
+		expect(
+			archiveStatus({
+				...item,
+				progress: 100,
+				gameStatus: 'in-progress',
+			}),
+		).toBe('available');
+		expect(
+			archiveStatus({
+				...item,
+				progress: 100,
+				gameStatus: 'not-started',
+			}),
+		).toBe('available');
+		expect(archiveStatus({ ...item, progress: 100 })).toBe('available');
 		expect(archiveStatus(undefined)).toBe('unavailable');
 	});
 
@@ -213,7 +223,13 @@ describe('PuzzlesArchiveCalendar', () => {
 			} as never);
 			const authenticatedArchive = {
 				...archive,
-				items: [{ ...archive.items[0]!, progress: 100 }],
+				items: [
+					{
+						...archive.items[0]!,
+						progress: 100,
+						gameStatus: 'completed',
+					},
+				],
 			};
 			const fetchMock = jest.fn().mockResolvedValue({
 				ok: true,
@@ -322,6 +338,41 @@ describe('PuzzlesArchiveCalendar', () => {
 		expect(screen.getByText('Today')).toBeInTheDocument();
 		expect(screen.getByText('Yesterday')).toBeInTheDocument();
 		expect(screen.getByText('Sat 3 Oct')).toBeInTheDocument();
+	});
+
+	it('shows Played on the recent cards from the API state only', () => {
+		jest.useFakeTimers().setSystemTime(new Date('2026-10-07T12:00:00Z'));
+		const statuses = ['completed', 'in-progress', 'not-started'] as const;
+		const recentArchive: PuzzlesArchive = {
+			...archive,
+			year: 2026,
+			month: 10,
+			items: ['2026-10-07', '2026-10-06', '2026-10-03'].map(
+				(date, index) => ({
+					...archive.items[0]!,
+					date,
+					// The progress value is misleading on purpose: only the status counts.
+					progress: 50,
+					gameStatus: statuses[index],
+					url: `/puzzles-and-games/logic-puzzles/sudoku-easy/${date}`,
+				}),
+			),
+		};
+
+		render(<PuzzlesArchiveCalendar initialArchive={recentArchive} />);
+
+		const cards = Array.from(
+			document.querySelectorAll<HTMLElement>('a[href$="/2026-10-07"]'),
+		);
+		expect(
+			within(cards.find((card) => card.querySelector('time'))!).getByText(
+				'Played',
+			),
+		).toBeInTheDocument();
+		expect(screen.queryByText('In progress')).not.toBeInTheDocument();
+		expect(
+			screen.getAllByText('Played', { selector: '.played' }),
+		).toHaveLength(1);
 	});
 
 	it('keeps the calendar mounted and announces loading in the month controls', async () => {

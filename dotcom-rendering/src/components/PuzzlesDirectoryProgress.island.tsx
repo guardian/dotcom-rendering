@@ -1,5 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
-import { getAuthStatus, subscribeToAuthStateChange } from '../lib/identity';
+import { useMemo } from 'react';
+import type { PuzzleProgressItem } from '../lib/puzzleCardProgress';
+import { puzzleTypeForCard } from '../lib/puzzleCardProgress';
+import { usePuzzleProgress } from '../lib/usePuzzleProgress';
 import type {
 	PuzzleContainer,
 	PuzzleItem,
@@ -7,17 +9,13 @@ import type {
 } from '../types/puzzlesPage';
 import { PuzzlesDirectory } from './PuzzlesDirectory';
 
+export { puzzleTypeForCard };
+export type { PuzzleProgressItem };
+
 type Props = {
 	layout: PuzzlesLayoutType;
 	renderAds: boolean;
-};
-
-export type PuzzleProgressItem = {
-	puzzleType: string;
-	publishDate: string;
-	progress: number;
-	setterName?: string;
-	gameUrl?: string;
+	hideTopRule?: boolean;
 };
 
 const londonDateFormatter = new Intl.DateTimeFormat('en-GB', {
@@ -69,46 +67,6 @@ export const puzzleCardCadence = (
 	return weekday && day && month ? `${weekday} ${day} ${month}` : undefined;
 };
 
-const puzzleTypesByCard = new Map<string, string>([
-	['crossword:quick', 'CROSSWORD_QUICK'],
-	['crossword:mini', 'CROSSWORD_MINI'],
-	['crossword:cryptic', 'CROSSWORD_CRYPTIC'],
-	['crossword:quick-cryptic', 'CROSSWORD_QUICKCRYPTIC'],
-	['crossword:weekend', 'CROSSWORD_WEEKEND'],
-	['crossword:prize', 'CROSSWORD_PRIZE'],
-	['crossword:quiptic', 'CROSSWORD_QUIPTIC'],
-	['crossword:sunday-quick', 'CROSSWORD_SUNDAYQUICK'],
-	['sudoku:easy', 'SUDOKU_EASY'],
-	['sudoku:medium', 'SUDOKU_MEDIUM'],
-	['sudoku:hard', 'SUDOKU_HARD'],
-	['sudoku:killer', 'SUDOKU_KILLER'],
-	['word-wheel:all', 'WORDWHEEL'],
-	['wordiply:all', 'WORDIPLY'],
-]);
-
-export const puzzleTypeForCard = (item: PuzzleItem): string | undefined =>
-	puzzleTypesByCard.get(`${item.type}:${item.set}`);
-
-const puzzlePath = (
-	gameUrl: string | undefined,
-	crosswordSet?: string,
-): string | undefined => {
-	const url = gameUrl?.trim();
-	if (!url) return undefined;
-	try {
-		const parsed = new URL(url, 'https://puzzles.invalid');
-		const crosswordNumber = parsed.pathname.match(
-			/^\/crosswords\/[^/]+\/(\d+)\/?$/,
-		)?.[1];
-		if (crosswordSet !== undefined && crosswordNumber !== undefined) {
-			return `/crosswords/${crosswordSet}/${crosswordNumber}${parsed.search}${parsed.hash}`;
-		}
-		return `${parsed.pathname}${parsed.search}${parsed.hash}`;
-	} catch {
-		return undefined;
-	}
-};
-
 const enrichItem = (
 	item: PuzzleItem,
 	progressByType: Map<string, PuzzleProgressItem>,
@@ -124,6 +82,7 @@ const enrichItem = (
 		...item,
 		cadence: puzzleCardCadence(progress.publishDate, today) ?? item.cadence,
 		progress: progress.progress,
+		gameStatus: progress.gameStatus,
 		setter: setter || item.setter,
 		date:
 			item.variant === 'iframe-page'
@@ -131,7 +90,7 @@ const enrichItem = (
 				: item.date,
 		url:
 			item.type === 'crossword'
-				? (puzzlePath(progress.gameUrl, item.set) ?? item.url)
+				? progress.gameUrl?.trim() || item.url
 				: item.url,
 	};
 };
@@ -169,84 +128,22 @@ export const enrichLayoutWithProgress = (
 	};
 };
 
-const progressItems = (value: unknown): PuzzleProgressItem[] | undefined => {
-	if (typeof value !== 'object' || value === null) return undefined;
-	const results = (value as Record<string, unknown>).results;
-	if (!Array.isArray(results)) return undefined;
+export const PuzzlesDirectoryProgress = ({
+	layout,
+	renderAds,
+	hideTopRule,
+}: Props) => {
+	const progress = usePuzzleProgress();
+	const progressLayout = useMemo(
+		() => (progress ? enrichLayoutWithProgress(layout, progress) : layout),
+		[layout, progress],
+	);
 
-	const items: PuzzleProgressItem[] = [];
-	for (const result of results) {
-		if (typeof result !== 'object' || result === null) return undefined;
-		const item = result as Record<string, unknown>;
-		if (
-			typeof item.puzzleType !== 'string' ||
-			typeof item.publishDate !== 'string' ||
-			typeof item.progress !== 'number' ||
-			(item.setterName != null && typeof item.setterName !== 'string') ||
-			(item.gameUrl != null && typeof item.gameUrl !== 'string')
-		) {
-			return undefined;
-		}
-		items.push({
-			puzzleType: item.puzzleType,
-			publishDate: item.publishDate,
-			progress: item.progress,
-			...(typeof item.setterName === 'string'
-				? { setterName: item.setterName }
-				: {}),
-			...(typeof item.gameUrl === 'string'
-				? { gameUrl: item.gameUrl }
-				: {}),
-		});
-	}
-	return items;
-};
-
-export const PuzzlesDirectoryProgress = ({ layout, renderAds }: Props) => {
-	const [progressLayout, setProgressLayout] = useState(layout);
-	const requests = useRef(0);
-
-	useEffect(() => {
-		let active = true;
-
-		const loadProgress = async () => {
-			const request = ++requests.current;
-			try {
-				const authStatus = await getAuthStatus();
-				const headers: Record<string, string> = {
-					Accept: 'application/json',
-				};
-				if (authStatus.kind === 'SignedIn') {
-					headers.Authorization = `Bearer ${authStatus.accessToken.accessToken}`;
-				}
-
-				const response = await fetch(
-					`${window.guardian.config.page.ajaxUrl}/puzzles-and-games/progress`,
-					{
-						cache: 'no-store',
-						credentials: 'same-origin',
-						headers,
-					},
-				);
-				if (!response.ok) return;
-				const items = progressItems(await response.json());
-				if (active && request === requests.current && items) {
-					setProgressLayout(enrichLayoutWithProgress(layout, items));
-				}
-			} catch {
-				// Keep the server-rendered cards when identity or progress is unavailable.
-			}
-		};
-
-		void loadProgress();
-		const unsubscribe = subscribeToAuthStateChange(() => {
-			void loadProgress();
-		});
-		return () => {
-			active = false;
-			unsubscribe();
-		};
-	}, [layout]);
-
-	return <PuzzlesDirectory layout={progressLayout} renderAds={renderAds} />;
+	return (
+		<PuzzlesDirectory
+			layout={progressLayout}
+			renderAds={renderAds}
+			hideTopRule={hideTopRule}
+		/>
+	);
 };

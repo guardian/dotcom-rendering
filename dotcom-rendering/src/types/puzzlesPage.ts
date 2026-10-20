@@ -1,4 +1,5 @@
 import type { EditionId } from '../lib/edition';
+import type { GameStatus } from '../lib/puzzleProgress/types';
 import type { ConfigType } from './config';
 import type { FooterType } from './footer';
 import type { FENavType } from './frontend';
@@ -17,6 +18,8 @@ export type PuzzleItem = {
 	imageAlt?: string;
 	setter?: string;
 	progress?: number;
+	/** The Puzzles API's state for the reader; absent when it reports nothing. */
+	gameStatus?: GameStatus;
 	date?: string;
 	slug?: string;
 	index?: number;
@@ -53,6 +56,8 @@ export type PuzzlesNewsletter = {
 	frequency: string;
 	description: string;
 	illustrationSquare?: string;
+	/** Link to a recent edition, from the newsletters tool. */
+	exampleUrl?: string;
 };
 
 export type PuzzlePopularityGroup = {
@@ -66,6 +71,12 @@ export type PuzzlesSupportingContent = {
 	newsletter?: PuzzlesNewsletter;
 	popularTitle: string;
 	popularGroups: PuzzlePopularityGroup[];
+};
+
+/** Useful links and newsletter shown above the footer on individual game pages. */
+export type PuzzleGameSupporting = {
+	usefulLinks: PuzzleLink[];
+	newsletter?: PuzzlesNewsletter;
 };
 
 export type PuzzlesLayoutType = {
@@ -83,6 +94,8 @@ export type PuzzlesArchiveItem = {
 	puzzleType: string;
 	date: string;
 	progress: number;
+	/** The Puzzles API's state for the reader; absent when it reports none. */
+	gameStatus?: GameStatus;
 	setterName?: string;
 	url: string;
 };
