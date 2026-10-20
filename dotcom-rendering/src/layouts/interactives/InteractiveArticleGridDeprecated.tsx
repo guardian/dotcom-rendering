@@ -392,7 +392,6 @@ export const InteractiveArticleGridDeprecated = (
 									editionId={article.editionId}
 									shouldHideAds={article.shouldHideAds}
 									idApiUrl={article.config.idApiUrl}
-									isInDeprecatedInteractiveLayout={true}
 								/>
 							</ArticleContainer>
 						</GridItem>

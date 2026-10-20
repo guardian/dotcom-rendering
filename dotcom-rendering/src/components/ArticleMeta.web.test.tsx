@@ -195,4 +195,69 @@ describe('ArticleMeta', () => {
 			container.querySelector(`.${interactiveLegacyClasses.shareIcons}`),
 		).toBeNull();
 	});
+
+	describe('dateline', () => {
+		const webPublicationDate = '2026-01-02T03:04:05.000Z';
+
+		const renderWithTags = (
+			tags: Array<{ id: string; type: string; title: string }>,
+		) =>
+			render(
+				<ConfigProvider
+					value={{
+						renderingTarget: 'Web',
+						darkModeAvailable: false,
+						assetOrigin: '/',
+						editionId: 'UK',
+					}}
+				>
+					<ArticleMeta
+						format={{
+							theme: Pillar.Lifestyle,
+							design: ArticleDesign.Standard,
+							display: ArticleDisplay.Standard,
+						}}
+						pageId="1234"
+						webTitle="A title"
+						byline="Observer writers"
+						tags={tags}
+						primaryDateline="primary date line"
+						secondaryDateline="secondary date line"
+						webPublicationDate={webPublicationDate}
+						isCommentable={false}
+						discussionApiUrl=""
+						shortUrlId=""
+					/>
+				</ConfigProvider>,
+			).container;
+
+		it('renders a time element with the raw publication date and no secondary dateline for a Filter series tag', () => {
+			const container = renderWithTags([
+				{
+					id: 'thefilter/series/the-filter',
+					type: 'Series',
+					title: 'The Filter',
+				},
+			]);
+
+			const time = container.querySelector('time');
+			expect(time?.getAttribute('datetime')).toBe(webPublicationDate);
+			expect(time?.textContent).toBe('primary date line');
+			expect(container.textContent).not.toContain('secondary date line');
+		});
+
+		it('renders the standard Dateline for a non-Filter tag', () => {
+			const container = renderWithTags([
+				{
+					id: 'lifeandstyle/series/observer-design',
+					type: 'Series',
+					title: 'Observer Design',
+				},
+			]);
+
+			expect(container.querySelector('time')).toBeNull();
+			expect(container.textContent).toContain('primary date line');
+			expect(container.textContent).toContain('secondary date line');
+		});
+	});
 });
