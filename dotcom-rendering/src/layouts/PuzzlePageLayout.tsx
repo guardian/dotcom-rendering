@@ -603,11 +603,12 @@ export const PuzzlePageLayout = ({
 								<div css={frameContainerStyles}>
 									<ArticleContainer format={puzzlePageFormat}>
 										{/* Not deferred until visible: the iframe has no `src`
-										    until this island hydrates and the reader is known,
-										    so waiting for the island to be seen would delay
-										    the puzzle itself. */}
+                        until this island hydrates and the reader is known,
+                        so waiting for the island to be seen would delay
+                        the puzzle itself. */}
 										<Island priority="critical">
 											<PuzzleIframe
+												gameUrl={instance.gameUrl}
 												puzzleConfig={puzzleConfig}
 												title={instance.title}
 												darkModeAvailable={

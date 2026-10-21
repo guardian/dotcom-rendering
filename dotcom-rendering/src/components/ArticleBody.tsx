@@ -6,6 +6,7 @@ import {
 	textEgyptian17,
 	textSansBold20,
 } from '@guardian/source/foundations';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -55,7 +56,7 @@ type Props = {
 	shouldHideAds: boolean;
 	serverTime?: number;
 	idApiUrl?: string;
-	isInDeprecatedInteractiveLayout?: boolean;
+	articleArrangement?: LayoutType;
 };
 
 const globalOlStyles = () => css`
@@ -154,7 +155,7 @@ export const ArticleBody = ({
 	shouldHideAds,
 	serverTime,
 	idApiUrl,
-	isInDeprecatedInteractiveLayout = false,
+	articleArrangement,
 }: Props) => {
 	const isInteractiveContent =
 		format.design === ArticleDesign.Interactive ||
@@ -276,9 +277,7 @@ export const ArticleBody = ({
 					contributionsServiceUrl={contributionsServiceUrl}
 					shouldHideAds={shouldHideAds}
 					idApiUrl={idApiUrl}
-					isInDeprecatedInteractiveLayout={
-						isInDeprecatedInteractiveLayout
-					}
+					articleArrangement={articleArrangement}
 				/>
 			</div>
 			{hasObserverPublicationTag && <ObserverFooter />}

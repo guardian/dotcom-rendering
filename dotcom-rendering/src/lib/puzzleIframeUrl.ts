@@ -117,7 +117,23 @@ export const buildWordiplyUrl = (
 export const resolvePuzzleIframeUrl = (
 	config: PuzzleConfig,
 	context: PuzzleUrlContext,
+	gameUrl?: string,
 ): string => {
+	// The API owns puzzle selection. Never replace its id, path or provider parameters.
+	if (gameUrl !== undefined) {
+		const url = new URL(gameUrl);
+		if (config.iframe.provider === 'amuselabs') {
+			if (context.userId !== null) {
+				url.searchParams.set('uid', context.userId);
+			} else {
+				url.searchParams.delete('uid');
+			}
+			url.searchParams.set('darkMode', context.darkMode ? '1' : '0');
+		}
+		return url.toString();
+	}
+	// Compatibility with older frontend payloads during rollout.
+
 	const { iframe } = config;
 	switch (iframe.provider) {
 		case 'amuselabs':
@@ -130,7 +146,9 @@ export const resolvePuzzleIframeUrl = (
 			// not a silent runtime gap.
 			const exhaustiveCheck: never = iframe;
 			throw new Error(
-				`Unhandled puzzle iframe provider: ${JSON.stringify(exhaustiveCheck)}`,
+				`Unhandled puzzle iframe provider: ${JSON.stringify(
+					exhaustiveCheck,
+				)}`,
 			);
 		}
 	}

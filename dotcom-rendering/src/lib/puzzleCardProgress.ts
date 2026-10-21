@@ -14,6 +14,7 @@ export type PuzzleProgressItem = {
 
 const puzzleTypesByCard = new Map<string, string>([
 	['crossword:quick', 'CROSSWORD_QUICK'],
+	['crossword:genius', 'CROSSWORD_GENIUS'],
 	['crossword:mini', 'CROSSWORD_MINI'],
 	['crossword:cryptic', 'CROSSWORD_CRYPTIC'],
 	['crossword:quick-cryptic', 'CROSSWORD_QUICKCRYPTIC'],
