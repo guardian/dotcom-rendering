@@ -42,16 +42,6 @@ const isInRevampedImmersiveLayoutTest = (article: Article): boolean =>
 		'articles-and-publishing-revamped-immersive-layout'
 	] === 'enable';
 
-/**
- * Guards grid-based interactive layout behind a 0% a/b test
- */
-export const INTERACTIVE_LAYOUT_AB_TEST =
-	'articles-and-publishing-migrate-interactive-layout';
-const isInInteractiveLayoutTest = (article: Article): boolean =>
-	article.frontendData.config.serverSideABTests[
-		INTERACTIVE_LAYOUT_AB_TEST
-	] === 'enable';
-
 const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 	const format = {
 		design: article.design,
@@ -188,9 +178,6 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 							format={format}
 							renderingTarget={renderingTarget}
 							serverTime={serverTime}
-							isInInteractiveLayoutTest={isInInteractiveLayoutTest(
-								article,
-							)}
 						/>
 					);
 			}
@@ -352,9 +339,6 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 							format={format}
 							renderingTarget={renderingTarget}
 							serverTime={serverTime}
-							isInInteractiveLayoutTest={isInInteractiveLayoutTest(
-								article,
-							)}
 						/>
 					);
 			}

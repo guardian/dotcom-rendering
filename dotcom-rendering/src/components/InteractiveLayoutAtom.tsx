@@ -44,7 +44,8 @@ export const InteractiveLayoutAtom = ({
 		{...(customData ? { 'data-atom-custom-data': customData } : {})}
 		{...(articleArrangement
 			? {
-					'data-spacefinder-role': role,
+					'data-spacefinder-role':
+						role === 'fullWidth' ? 'immersive' : role,
 					'data-spacefinder-type': type,
 				}
 			: {})}
