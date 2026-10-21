@@ -207,12 +207,10 @@ export const WebImmersive: Story = {
 		await expect(immersiveNav.subNavSections?.links.length).toBeGreaterThan(
 			0,
 		);
-		await expect(
-			header.getByRole('link', { name: 'News', exact: true }),
-		).toBeVisible();
+		await expect(header.getByRole('link', { name: 'News' })).toBeVisible();
 		for (const link of immersiveNav.subNavSections?.links ?? []) {
 			await expect(
-				header.queryByRole('link', { name: link.title, exact: true }),
+				header.queryByRole('link', { name: link.title }),
 			).not.toBeInTheDocument();
 		}
 	},
