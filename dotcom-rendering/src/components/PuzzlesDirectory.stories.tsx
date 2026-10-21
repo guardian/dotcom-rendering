@@ -129,6 +129,46 @@ export const AdFree = () => (
 	<PuzzlesDirectory layout={layout} renderAds={false} />
 );
 
+/** The newsletter should align with both edges of the right-hand puzzle card. */
+export const WithNewsletter = () => (
+	<PuzzlesDirectory
+		renderAds={false}
+		layout={{
+			containers: [
+				...layout.containers,
+				{
+					id: 'useful-links',
+					title: 'Useful links',
+					variant: 'supporting',
+					content: { items: [], nestedContainers: [] },
+					supporting: {
+						usefulLinksTitle: 'Useful links',
+						usefulLinks: [
+							{
+								title: 'Support the Guardian',
+								url: 'https://support.theguardian.com',
+							},
+							{
+								title: 'Help centre',
+								url: 'https://help.theguardian.com',
+							},
+						],
+						newsletter: {
+							identityName: 'cluesletter',
+							name: 'Cluesletter',
+							frequency: 'Weekly',
+							description:
+								'Get our puzzles news, clues, competitions and our exclusive Letter Adder game direct to your inbox',
+						},
+						popularTitle: 'Most popular puzzles',
+						popularGroups: [],
+					},
+				},
+			],
+		}}
+	/>
+);
+
 export const Sponsored = () => {
 	const page = createPuzzlesPage({ layout, isAdFreeUser: true });
 	return (
