@@ -79,7 +79,7 @@ const PUZZLE_MIN_HEIGHTS: Record<string, MinHeightTiers> = {
 	'sudoku-hard': { default: 620, tablet: 520, mobile: 630 },
 	'sudoku-killer': { default: 620, tablet: 520, mobile: 630 },
 	'word-wheel': { default: 600, tablet: 750, mobile: 500 },
-	wordiply: { default: 600, tablet: 600, mobile: 560 },
+	wordiply: { default: 600, tablet: 600, mobile: 600 },
 };
 
 /**
@@ -94,7 +94,7 @@ const PUZZLE_MIN_HEIGHTS: Record<string, MinHeightTiers> = {
  * simply keeps its `PUZZLE_MIN_HEIGHTS` value on touch devices too.
  */
 const PUZZLE_MIN_HEIGHTS_TOUCH: Partial<Record<string, MinHeightTiers>> = {
-	wordiply: { default: 800, tablet: 600, mobile: 500 },
+	wordiply: { default: 800, tablet: 600, mobile: 600 },
 };
 
 const DEFAULT_MIN_HEIGHT = 500;

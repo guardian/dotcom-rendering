@@ -195,7 +195,7 @@ describe('buildFrameStyles', () => {
 		expect(normalisedStyles).toContain('@media (pointer: coarse)');
 
 		// The pointer:coarse block is written last, so its min-height
-		// values (800/600/500) appear after the non-touch ones (600/600/560)
+		// values (800/600/600) appear after the non-touch ones (600/600/600)
 		// in the generated CSS text - later source order wins the cascade
 		// for a touch device.
 		const touchBlockStart = normalisedStyles.indexOf(
@@ -205,7 +205,6 @@ describe('buildFrameStyles', () => {
 
 		expect(touchBlock).toContain('min-height: 800px;');
 		expect(touchBlock).toContain('min-height: 600px;');
-		expect(touchBlock).toContain('min-height: 500px;');
 	});
 });
 
