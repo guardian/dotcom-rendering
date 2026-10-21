@@ -57,6 +57,32 @@ describe('enrichSupportUrl', () => {
 		);
 	});
 
+	it('deduplicates existing query params and repeated promo codes', () => {
+		const result = enrichSupportUrl({
+			baseUrl:
+				'https://support.theguardian.com/contribute?REFPVID=base&REFPVID=duplicate&INTCMP=campaign&INTCMP=campaign&acquisitionData=data&acquisitionData=data&label=one&label=one&label=two&promoCode=EXISTING&promoCode=EXISTING',
+			tracking,
+			promoCodes: [
+				'NEW_FIRST',
+				'EXISTING',
+				'NEW_SECOND',
+				'NEW_FIRST',
+				'EXISTING',
+			],
+		});
+		const query = new URL(result).searchParams;
+
+		expect(query.getAll('REFPVID')).toEqual(['base']);
+		expect(query.getAll('INTCMP')).toEqual(['campaign']);
+		expect(query.getAll('acquisitionData')).toEqual(['data']);
+		expect(query.getAll('label')).toEqual(['one', 'two']);
+		expect(query.getAll('promoCode')).toEqual([
+			'EXISTING',
+			'NEW_FIRST',
+			'NEW_SECOND',
+		]);
+	});
+
 	it('does not duplicate parameters when an enriched support URL is enriched again', () => {
 		const params = {
 			tracking,
