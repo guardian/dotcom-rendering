@@ -823,7 +823,6 @@ export const StandardLayoutArticleGrid = ({
 									!!article.config.switches.articleEndSlot
 								}
 								isSensitive={article.config.isSensitive}
-								isInInteractive={layoutType === 'interactive'}
 							/>
 						</Island>
 					)}
