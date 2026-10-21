@@ -9,7 +9,7 @@ const style = css`
 `;
 
 export interface Inline1Props {
-	variant: Inline1Variant;
+	variant;
 }
 
 const { variant } = props;

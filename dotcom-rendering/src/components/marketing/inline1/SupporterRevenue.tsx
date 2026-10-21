@@ -1,173 +1,107 @@
-import type { SerializedStyles } from '@emotion/react';
-import { css, ThemeProvider } from '@emotion/react';
-import type { ComponentEvent } from '@guardian/ophan-tracker-js';
+import { css } from '@emotion/react';
 import {
 	from,
 	headlineMedium24,
 	palette,
 	space,
 	textSans15,
-	textSansBold17,
+	until,
 } from '@guardian/source/foundations';
-import {
-	Button as DSButton,
-	LinkButton,
-	SvgArrowRightStraight,
-} from '@guardian/source/react-components';
+import { SvgGuardianLogo } from '@guardian/source/react-components';
+import { LinkButton } from '@guardian/source/react-components';
 import type { Inline1Props } from '@guardian/support-dotcom-components/dist/src/shared/types/props/inline1';
 import type { ReactComponent } from '../lib/ReactComponent';
 
-const wrapperStyles = css`
-	padding: ${space[1]}px ${space[2]}px ${space[3]}px;
-	border-top: 1px solid ${palette.brandAlt[400]};
+const outerContainerStyles = css`
+	border-top: 1px solid ${palette.neutral[73]};
+	padding-top: ${space[2]}px;
+`;
+
+const innerContainerStyles = css`
 	background-color: ${palette.neutral[97]};
+	padding-top: ${space[2]}px;
+	padding-left: ${space[3]}px;
+	display: flex;
+	flex-direction: column;
+	gap: ${space[3]}px;
 
-	* {
-		::selection {
-			background: ${palette.brandAlt[400]};
-		}
-		::-moz-selection {
-			background: ${palette.brandAlt[400]};
-		}
+	${until.tablet} {
+		padding-right: ${space[3]}px;
 	}
-
-	b,
-	strong {
-		font-weight: bold;
-	}
-`;
-
-const imageWrapperStyles = css`
-	margin: ${space[3]}px 0 ${space[2]}px;
-
 	${from.tablet} {
-		margin: 10px 0;
+		display: grid;
+		grid-template-columns: 1fr auto;
+		grid-template-areas:
+			'heading logo'
+			'body    image'
+			'cta	 image';
+		gap: ${space[3]}px ${space[3]}px;
 	}
-`;
-
-const imageStyles = css`
-	height: 100%;
-	width: 100%;
-	object-fit: cover;
 `;
 
 const headingStyles = css`
 	${headlineMedium24};
-	margin-top: 0;
-	margin-bottom: ${space[3]}px;
+	${from.tablet} {
+		grid-area: heading;
+	}
+`;
+
+const guardianLogoContainerStyles = css`
+	${until.tablet} {
+		padding-bottom: ${space[2]}px;
+		display: flex;
+		justify-content: flex-end;
+		border-bottom: 1px solid ${palette.neutral[73]};
+	}
+	${from.tablet} {
+		padding-right: ${space[3]}px;
+		grid-area: logo;
+		justify-self: end;
+	}
 `;
 
 const bodyStyles = css`
-	margin: 0 auto ${space[2]}px;
 	${textSans15};
+	${from.tablet} {
+		grid-area: body;
+	}
 `;
 
-const copyStyles = css`
-	grid-area: copy-container;
+const ctaContainerStyles = css`
+	padding-bottom: ${space[4]}px;
+
+	${from.tablet} {
+		grid-area: cta;
+		align-self: end;
+	}
 `;
 
-interface EpicHeaderProps {
-	text: string;
-}
-
-const SupporterRevenueHeader: ReactComponent<EpicHeaderProps> = ({
-	text,
-}: EpicHeaderProps) => {
-	return <h2 css={headingStyles}>{text}</h2>;
-};
-
-type BodyProps = {
-	text: string;
-};
-
-const SupporterRevenueBody: ReactComponent<BodyProps> = ({
-	text,
-}: BodyProps) => {
-	return <p css={bodyStyles}>{text}</p>;
-};
-
-const buttonStyles = {
-	fontFamily: textSansBold17,
+const ctaButtonTheme = {
 	textPrimary: palette.neutral[7],
 	backgroundPrimary: palette.brandAlt[400],
 	backgroundPrimaryHover: palette.brandAlt[300],
-	textSecondary: palette.neutral[7],
-	backgroundSecondary: palette.neutral[93],
-	backgroundSecondaryHover: palette.neutral[86],
-	borderSecondary: palette.neutral[86],
 };
 
-const contributionsTheme = {
-	button: buttonStyles,
-	link: buttonStyles,
-};
-
-// Overrides for tertiary button
-// Unfortunatly they all need !important :(
-const tertiaryButtonOverrides = css`
-	/* stylelint-disable-next-line declaration-no-important */
-	border: 1px solid ${palette.neutral[7]} !important;
-	/* stylelint-disable-next-line declaration-no-important */
-	background-color: transparent !important;
-
-	:hover {
-		/* stylelint-disable-next-line declaration-no-important */
-		background-color: ${palette.neutral[86]} !important;
+const ctaButtonStyles = css`
+	${until.tablet} {
+		width: 100%;
 	}
 `;
 
-type Url = string;
-
-type ButtonProps = {
-	// Accept a function or a string;
-	// A function will render a <Button>
-	// A string will render a <LinkButton>
-	// Both using the same interface
-	onClickAction: (() => void) | Url;
-	submitComponentEvent?: (event: ComponentEvent) => void;
-	children: React.ReactElement | string;
-	priority?: 'primary' | 'secondary';
-	showArrow?: boolean;
-	isTertiary?: boolean;
-	cssOverrides?: SerializedStyles;
-	icon?: React.ReactElement;
-};
-
-export const SupporterRevenueButton: ReactComponent<ButtonProps> = (
-	allProps: ButtonProps,
-) => {
-	const {
-		onClickAction,
-		submitComponentEvent,
-		children,
-		showArrow = false,
-		priority = 'primary',
-		isTertiary,
-		cssOverrides,
-		icon,
-		...props
-	} = allProps;
-
-	if (typeof onClickAction === 'string') {
-		// LinkButton doesn't support 'tertiary' priority (unlike Button)
-		// So we'll map that to 'primary' and apply a CSS override on both of
-		// them so they get the same styles for 'tertiary' priority
-		return (
-			<ThemeProvider theme={contributionsTheme}>
-				<LinkButton href={onClickAction} {...props}>
-					{children}
-				</LinkButton>
-			</ThemeProvider>
-		);
+const imageWrapperStyles = css`
+	display: flex;
+	align-items: flex-end;
+	height: 144px;
+	${from.tablet} {
+		grid-area: image;
 	}
-	return (
-		<ThemeProvider theme={contributionsTheme}>
-			<DSButton onClick={(): void => onClickAction()} {...props}>
-				{children}
-			</DSButton>
-		</ThemeProvider>
-	);
-};
+`;
+
+const imageStyles = css`
+	height: 131px;
+	width: 164px;
+	object-fit: cover;
+`;
 
 const SupporterRevenue: ReactComponent<Inline1Props> = ({ variant }) => {
 	if (variant.message.type != 'Inline1SupportMessage') {
@@ -179,30 +113,33 @@ const SupporterRevenue: ReactComponent<Inline1Props> = ({ variant }) => {
 	const cta = variant.message.primaryCta;
 
 	return (
-		<section css={wrapperStyles}>
-			<div css={copyStyles}>
-				<SupporterRevenueHeader text={heading} />
-				<SupporterRevenueBody text={body} />
-			</div>
-			{image && (
-				<div css={imageWrapperStyles}>
-					<img
-						src={image.desktopUrl}
-						css={imageStyles}
-						alt={image.altText}
-					/>
+		<div css={outerContainerStyles}>
+			<div css={innerContainerStyles}>
+				<div css={guardianLogoContainerStyles}>
+					<SvgGuardianLogo width={75} />
 				</div>
-			)}
-
-			<div className="cta-container">
-				<SupporterRevenueButton
-					onClickAction={cta.baseUrl}
-					submitComponentEvent={undefined}
-				>
-					{cta.text}
-				</SupporterRevenueButton>
+				{image && (
+					<div css={imageWrapperStyles}>
+						<img
+							src={image.desktopUrl}
+							css={imageStyles}
+							alt={image.altText}
+						/>
+					</div>
+				)}
+				<h2 css={headingStyles}>{heading}</h2>
+				<p css={bodyStyles}>{body}</p>
+				<div css={ctaContainerStyles}>
+					<LinkButton
+						cssOverrides={ctaButtonStyles}
+						theme={ctaButtonTheme}
+						href={cta.baseUrl}
+					>
+						{cta.text}
+					</LinkButton>
+				</div>
 			</div>
-		</section>
+		</div>
 	);
 };
 

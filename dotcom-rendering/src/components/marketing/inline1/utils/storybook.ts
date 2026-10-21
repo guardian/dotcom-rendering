@@ -4,11 +4,11 @@ const variant = {
 	name: 'Inline1SupportMessage',
 	message: {
 		type: 'Inline1SupportMessage',
-		heading: 'Not for sale',
-		body: 'The Guardian’s expert news coverage is funded by people like you, not a billionaire owner. Will you help us keep our independent journalism free and open to all today?',
+		heading: 'Two-line headline for the primary messaging ',
+		body: 'Lorem ipsum dolor sit amet consectetur adipiscing elit non autem quo est ullamco laboris consequat duis sunt et.',
 		primaryCta: {
 			baseUrl: '#',
-			text: 'Support us',
+			text: 'Primary md',
 		},
 		image: {
 			mainUrl:
@@ -19,7 +19,7 @@ const variant = {
 				'https://uploads.guim.co.uk/2025/06/12/not_for_sale_bg_scaled.svg',
 			desktopUrl:
 				'https://uploads.guim.co.uk/2025/06/12/not_for_sale_bg_scaled.svg',
-			altText: 'Not for sale',
+			altText: 'Optional img',
 		},
 	},
 };
