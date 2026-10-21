@@ -159,6 +159,8 @@ export const WithNewsletter = () => (
 							frequency: 'Weekly',
 							description:
 								'Get our puzzles news, clues, competitions and our exclusive Letter Adder game direct to your inbox',
+							illustrationSquare:
+								'https://uploads.guim.co.uk/2026/10/08/5_3_(eeb3139d4b747fcb8cc3674b62e545e961be7b8e).png',
 						},
 						popularTitle: 'Most popular puzzles',
 						popularGroups: [],
