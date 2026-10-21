@@ -788,6 +788,7 @@ export const StandardLayoutArticleGrid = ({
 						isRightToLeftLang={article.isRightToLeftLang}
 						editionId={article.editionId}
 						shouldHideAds={article.shouldHideAds}
+						articleArrangement={layoutType}
 						idApiUrl={article.config.idApiUrl}
 					/>
 					<MatchInfoContainer
@@ -825,7 +826,6 @@ export const StandardLayoutArticleGrid = ({
 									!!article.config.switches.articleEndSlot
 								}
 								isSensitive={article.config.isSensitive}
-								isInInteractive={layoutType === 'interactive'}
 							/>
 						</Island>
 					)}
