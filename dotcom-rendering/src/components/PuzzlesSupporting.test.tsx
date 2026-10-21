@@ -5,7 +5,7 @@ import type {
 	PuzzlesLayoutType,
 	PuzzlesSupportingContent,
 } from '../types/puzzlesPage';
-import { PuzzlesSupporting } from './PuzzlesSupporting';
+import { PuzzlesSupporting, PuzzlesUsefulLinks } from './PuzzlesSupporting';
 
 jest.mock('./AdSlot.web', () => ({
 	AdSlot: () => <div data-testid="mostpop-ad" />,
@@ -87,6 +87,51 @@ const supporting: PuzzlesSupportingContent = {
 	],
 };
 
+describe('PuzzlesUsefulLinks', () => {
+	const newsletter = {
+		identityName: 'cluesletter',
+		name: 'Cluesletter',
+		frequency: 'Weekly',
+		description: 'News and clues',
+	};
+
+	it('links to the latest edition when the newsletter has an example URL', () => {
+		render(
+			<PuzzlesUsefulLinks
+				id="game"
+				title="Useful links"
+				links={[]}
+				newsletter={{
+					...newsletter,
+					exampleUrl: '/crosswords/series/cluesletter/latest',
+				}}
+			/>,
+		);
+
+		expect(
+			screen.getByRole('link', { name: 'Preview latest' }),
+		).toHaveAttribute('href', '/crosswords/series/cluesletter/latest');
+	});
+
+	it('omits the preview link without an example URL', () => {
+		render(
+			<PuzzlesUsefulLinks
+				id="game"
+				title="Useful links"
+				links={[]}
+				newsletter={newsletter}
+			/>,
+		);
+
+		expect(
+			screen.queryByRole('link', { name: 'Preview latest' }),
+		).not.toBeInTheDocument();
+		expect(
+			screen.getByTestId('newsletter-form-cluesletter'),
+		).toBeInTheDocument();
+	});
+});
+
 describe('PuzzlesSupporting', () => {
 	it('shows only useful links by default, even when ads are enabled', () => {
 		render(
@@ -119,6 +164,18 @@ describe('PuzzlesSupporting', () => {
 		expect(
 			screen.getByRole('link', { name: 'Help Centre' }),
 		).toHaveAttribute('href', 'https://help.theguardian.com');
+		expect(
+			screen.getByRole('heading', {
+				level: 3,
+				name: 'Support the Guardian',
+			}),
+		).toBeInTheDocument();
+		expect(
+			screen.getByRole('heading', {
+				level: 3,
+				name: 'Help Centre',
+			}),
+		).toBeInTheDocument();
 		expect(screen.getAllByRole('link')).toHaveLength(2);
 		expect(
 			screen.queryByTestId('newsletter-form-saturday-edition'),

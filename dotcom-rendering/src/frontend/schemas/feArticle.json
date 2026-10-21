@@ -58,6 +58,9 @@
         "webPublicationSecondaryDateDisplay": {
             "type": "string"
         },
+        "firstPublicationDate": {
+            "type": "string"
+        },
         "editionLongForm": {
             "type": "string"
         },
@@ -557,6 +560,136 @@
                 "name",
                 "number",
                 "solutionAvailable"
+            ]
+        },
+        "moreFromPuzzlesAndGames": {
+            "description": "\"More from Puzzles & games\" rail, only sent for crossword pages.",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "set": {
+                        "type": "string"
+                    },
+                    "cardVariant": {
+                        "$ref": "#/definitions/PuzzleCardVariant"
+                    },
+                    "cadence": {
+                        "type": "string"
+                    },
+                    "url": {
+                        "type": "string"
+                    },
+                    "image": {
+                        "type": "string"
+                    },
+                    "imageAlt": {
+                        "type": "string"
+                    },
+                    "setter": {
+                        "type": "string"
+                    },
+                    "progress": {
+                        "type": "number"
+                    },
+                    "gameStatus": {
+                        "description": "The Puzzles API's state for the reader; absent when it reports nothing.",
+                        "enum": [
+                            "completed",
+                            "in-progress",
+                            "not-started"
+                        ],
+                        "type": "string"
+                    },
+                    "date": {
+                        "type": "string"
+                    },
+                    "slug": {
+                        "type": "string"
+                    },
+                    "index": {
+                        "type": "number"
+                    },
+                    "variant": {
+                        "type": "string"
+                    },
+                    "backgroundColour": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "cardVariant",
+                    "id",
+                    "set",
+                    "title",
+                    "type"
+                ]
+            }
+        },
+        "puzzlesSupporting": {
+            "description": "Useful links and newsletter, only sent for crossword pages.",
+            "type": "object",
+            "properties": {
+                "usefulLinks": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "title": {
+                                "type": "string"
+                            },
+                            "url": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "title",
+                            "url"
+                        ]
+                    }
+                },
+                "newsletter": {
+                    "type": "object",
+                    "properties": {
+                        "identityName": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "frequency": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        },
+                        "illustrationSquare": {
+                            "type": "string"
+                        },
+                        "exampleUrl": {
+                            "description": "Link to a recent edition, from the newsletters tool.",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "description",
+                        "frequency",
+                        "identityName",
+                        "name"
+                    ]
+                }
+            },
+            "required": [
+                "usefulLinks"
             ]
         }
     },
@@ -5893,7 +6026,8 @@
                 "RecipeDesign",
                 "ReviewDesign",
                 "TimelineDesign",
-                "VideoDesign"
+                "VideoDesign",
+                "WeekendEssayDesign"
             ],
             "type": "string"
         },
@@ -7373,6 +7507,9 @@
                 "headerText": {
                     "type": "string"
                 },
+                "showHeaderText": {
+                    "type": "boolean"
+                },
                 "dotcomPath": {
                     "type": "string"
                 },
@@ -7382,7 +7519,8 @@
             },
             "required": [
                 "copy",
-                "headerText"
+                "headerText",
+                "showHeaderText"
             ]
         },
         "CustomSubnavLink": {
@@ -7554,6 +7692,15 @@
                 "text",
                 "url"
             ]
+        },
+        "PuzzleCardVariant": {
+            "enum": [
+                "archive",
+                "compact",
+                "large",
+                "primary"
+            ],
+            "type": "string"
         }
     },
     "$schema": "http://json-schema.org/draft-07/schema#"

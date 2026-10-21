@@ -51,7 +51,10 @@ describe('puzzleConfigs registry', () => {
 				...puzzleConfigs,
 				'sudoku-easy': {
 					...puzzleConfigs['sudoku-easy']!,
-					iframe: { provider: 'amuselabs', set: '' },
+					iframe: {
+						...puzzleConfigs['sudoku-easy']!.iframe,
+						set: '',
+					} as never,
 				},
 			}),
 		).toThrow(TypeError);
@@ -63,7 +66,10 @@ describe('puzzleConfigs registry', () => {
 				...puzzleConfigs,
 				'sudoku-easy': {
 					...puzzleConfigs['sudoku-easy']!,
-					iframe: { provider: 'amuselabs', set: '   ' },
+					iframe: {
+						...puzzleConfigs['sudoku-easy']!.iframe,
+						set: '   ',
+					} as never,
 				},
 			}),
 		).toThrow(TypeError);
@@ -249,6 +255,8 @@ describe('puzzleConfigs registry', () => {
 			expect(puzzleConfigs['sudoku-easy']!.iframe).toEqual({
 				provider: 'amuselabs',
 				set: 'guardian-sudoku-easy',
+				idPrefix: 'guardian-sudoku-easy',
+				playerPath: 'sudoku',
 			});
 		});
 
@@ -256,6 +264,8 @@ describe('puzzleConfigs registry', () => {
 			expect(puzzleConfigs['sudoku-medium']!.iframe).toEqual({
 				provider: 'amuselabs',
 				set: 'guardian-sudoku-medium',
+				idPrefix: 'guardian-sudoku-medium',
+				playerPath: 'sudoku',
 			});
 		});
 
@@ -263,6 +273,8 @@ describe('puzzleConfigs registry', () => {
 			expect(puzzleConfigs['sudoku-hard']!.iframe).toEqual({
 				provider: 'amuselabs',
 				set: 'guardian-sudoku-hard',
+				idPrefix: 'guardian-sudoku-hard',
+				playerPath: 'sudoku',
 			});
 		});
 
@@ -270,6 +282,8 @@ describe('puzzleConfigs registry', () => {
 			expect(puzzleConfigs['sudoku-killer']!.iframe).toEqual({
 				provider: 'amuselabs',
 				set: 'guardian-killer-sudoku-medium',
+				idPrefix: 'guardian-ksudoku-medium',
+				playerPath: 'sudoku',
 			});
 		});
 
@@ -277,6 +291,8 @@ describe('puzzleConfigs registry', () => {
 			expect(puzzleConfigs['word-wheel']!.iframe).toEqual({
 				provider: 'amuselabs',
 				set: 'guardian-word-wheel',
+				idPrefix: 'guardian-wordwheel',
+				playerPath: 'wordf',
 			});
 		});
 

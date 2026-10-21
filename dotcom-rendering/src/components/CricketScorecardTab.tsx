@@ -73,7 +73,6 @@ const bodyGridStyles = css`
 			content: '';
 			position: absolute;
 			border-left: 1px solid ${palette('--article-border')};
-			z-index: 1;
 			top: 0;
 			bottom: 0;
 		}

@@ -198,6 +198,27 @@ const immersiveGridTitleBelowDesktop = css`
 	}
 `;
 
+const immersiveLandscapeTitle = css`
+	${from.tablet} {
+		margin-left: -29px;
+	}
+	${from.desktop} {
+		margin-left: -10px;
+	}
+	${from.leftCol} {
+		margin-left: 0;
+	}
+
+	span {
+		${from.tablet} {
+			padding-left: 10px;
+		}
+		${from.leftCol} {
+			padding-left: 0;
+		}
+	}
+`;
+
 const immersiveGridTitleWrapperBelowDesktop = css`
 	${until.desktop} {
 		padding-left: 9px;
@@ -381,6 +402,8 @@ export const SeriesSectionLink = ({
 							format.display === ArticleDisplay.Immersive &&
 								layoutType !== undefined &&
 								immersiveGridTitleBelowDesktop,
+							layoutType === 'immersiveLandscape' &&
+								immersiveLandscapeTitle,
 							format.design === ArticleDesign.Gallery &&
 								css`
 									position: relative;
@@ -405,35 +428,6 @@ export const SeriesSectionLink = ({
 						<span>{title}</span>
 					</a>
 				</div>
-			);
-		}
-		if (
-			layoutType === 'immersivePortrait' ||
-			layoutType === 'immersiveLandscape'
-		) {
-			return (
-				<>
-					<a
-						href={`${guardianBaseURL}/${sectionUrl}`}
-						css={[
-							sectionLabelLink,
-							css`
-								color: ${sectionTitleColour};
-								background-color: ${themePalette(
-									'--section-title-background',
-								)};
-							`,
-							marginRight,
-							fontStyles(format),
-							breakWord,
-						]}
-						data-component="section"
-						data-link-name="article section"
-						className={interactiveLegacyClasses.labelLink}
-					>
-						<span>{sectionLabel}</span>
-					</a>
-				</>
 			);
 		}
 		// Other types of immersives show nothing at all if there's no series tag

@@ -2631,6 +2631,34 @@ const standfirstTextDark: PaletteFunction = ({ design, display, theme }) => {
 	}
 };
 
+// Merge this with the above functions once the new immersive grid layouts
+// are fully rolled out and the old layout removed
+const standfirstTextImmersiveLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.Lifestyle:
+			return '#650054';
+		case Pillar.Culture:
+			return '#574835';
+		case Pillar.Sport:
+			return '#004E7C';
+		default:
+			return sourcePalette.neutral[7];
+	}
+};
+
+const standfirstTextImmersiveDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.Lifestyle:
+			return '#FFABDB';
+		case Pillar.Culture:
+			return '#EACCA0';
+		case Pillar.Sport:
+			return '#00B2FF';
+		default:
+			return sourcePalette.neutral[86];
+	}
+};
+
 const cardBorderTopLight: PaletteFunction = () => sourcePalette.neutral[73];
 const cardBorderTopDark: PaletteFunction = () => sourcePalette.neutral[46];
 
@@ -8517,6 +8545,10 @@ const paletteColours = {
 	'--standfirst-text': {
 		light: standfirstTextLight,
 		dark: standfirstTextDark,
+	},
+	'--standfirst-text-immersive': {
+		light: standfirstTextImmersiveLight,
+		dark: standfirstTextImmersiveDark,
 	},
 	'--star-rating-background': {
 		light: starRatingBackgroundColourLight,

@@ -5,7 +5,7 @@ import {
 	ElectionComponents,
 	type ElectionComponentsJson,
 } from './ElectionTrackers/electionComponent';
-import { ElectionTracker as ElectionTrackerComponent } from './ElectionTrackers/ElectionTracker';
+import { ElectionTracker } from './ElectionTrackers/ElectionTracker';
 
 type Props = {
 	electionDataUrl: string;
@@ -22,7 +22,7 @@ type Props = {
  * Wires up side-effects for the {@linkcode ElectionTrackerComponent}. In this
  * case, the Fetch API.
  */
-export const ElectionTracker = (props: Props) => {
+export const ElectionTrackerWrapper = (props: Props) => {
 	const url = safeParseURL(props.electionDataUrl);
 
 	if (!url.ok) {
@@ -34,7 +34,7 @@ export const ElectionTracker = (props: Props) => {
 	);
 
 	return (
-		<ElectionTrackerComponent
+		<ElectionTracker
 			electionDataUrl={url.value}
 			initialData={parsedData.ok ? parsedData.value.components : []}
 			refreshInterval={60}

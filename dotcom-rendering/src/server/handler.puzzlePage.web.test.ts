@@ -47,10 +47,10 @@ describe('handlePuzzlePage', () => {
 		config: { ...page.config, serverSideABTests },
 	});
 
-	it('renders the page for a known slug when the puzzles-new-hub variant is active', () => {
+	it('renders the page for a known slug when the puzzles-new-hub-v1 variant is active', () => {
 		const res = response();
 		const page = withServerSideABTests(createPuzzlePage('sudoku-easy'), {
-			'puzzles-new-hub': 'variant',
+			'puzzles-new-hub-v1': 'variant',
 		});
 
 		invokeHandler(page, res);
@@ -81,7 +81,7 @@ describe('handlePuzzlePage', () => {
 	])('renders iframe-based slug %s when in variant', (slug) => {
 		const res = response();
 		const page = withServerSideABTests(createPuzzlePage(slug), {
-			'puzzles-new-hub': 'variant',
+			'puzzles-new-hub-v1': 'variant',
 		});
 
 		invokeHandler(page, res);
@@ -110,9 +110,9 @@ describe('handlePuzzlePage', () => {
 	});
 
 	it.each([
-		['control', { 'puzzles-new-hub': 'control' }],
+		['control', { 'puzzles-new-hub-v1': 'control' }],
 		['missing', {}],
-		['unknown group', { 'puzzles-new-hub': 'unknown' }],
+		['unknown group', { 'puzzles-new-hub-v1': 'unknown' }],
 		['unrelated', { 'another-test': 'variant' }],
 	])(
 		'returns 404 without mounting the renderer for %s',
@@ -133,7 +133,7 @@ describe('handlePuzzlePage', () => {
 	it('returns 404 for an unknown slug even when in variant', () => {
 		const res = response();
 		const page = withServerSideABTests(createPuzzlePage('sudoku-easy'), {
-			'puzzles-new-hub': 'variant',
+			'puzzles-new-hub-v1': 'variant',
 		});
 		page.slug = 'not-a-real-puzzle';
 

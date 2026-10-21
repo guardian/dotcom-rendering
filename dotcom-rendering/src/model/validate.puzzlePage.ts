@@ -97,17 +97,40 @@ const isPuzzleItem = (
 	);
 };
 
+const isPuzzleLink = (value: unknown): boolean =>
+	isRecord(value) &&
+	isNonEmptyString(value.title) &&
+	isNonEmptyString(value.url);
+
+const isPuzzlesNewsletter = (value: unknown): boolean =>
+	isRecord(value) &&
+	isNonEmptyString(value.identityName) &&
+	isNonEmptyString(value.name) &&
+	isNonEmptyString(value.frequency) &&
+	isNonEmptyString(value.description) &&
+	isOptionalString(value.illustrationSquare) &&
+	isOptionalString(value.exampleUrl);
+
+const isPuzzleGameSupporting = (value: unknown): boolean =>
+	isRecord(value) &&
+	Array.isArray(value.usefulLinks) &&
+	value.usefulLinks.every(isPuzzleLink) &&
+	(value.newsletter === undefined || isPuzzlesNewsletter(value.newsletter));
+
 const isPuzzlePageInstance = (value: unknown): boolean => {
 	if (!isRecord(value)) return false;
 
 	return (
 		isNonEmptyString(value.title) &&
 		isOptionalString(value.puzzleDate) &&
+		isOptionalString(value.gameUrl) &&
 		(value.moreFromPuzzlesAndGames === undefined ||
 			(Array.isArray(value.moreFromPuzzlesAndGames) &&
 				value.moreFromPuzzlesAndGames.every((item) =>
 					isPuzzleItem(item, false),
-				)))
+				))) &&
+		(value.puzzlesSupporting === undefined ||
+			isPuzzleGameSupporting(value.puzzlesSupporting))
 	);
 };
 
