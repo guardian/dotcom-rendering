@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import {
 	between,
 	headlineBold24,
+	pxToRem,
 	remSpace,
 	textEgyptian17,
 	textSansBold20,
@@ -16,7 +17,7 @@ import { ArticleRenderer } from '../lib/ArticleRenderer';
 import type { EditionId } from '../lib/edition';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { revealStyles } from '../lib/revealStyles';
-import { isFilterPageId } from '../lib/theFilter';
+import { hasFilterTag } from '../lib/theFilter';
 import type { TableOfContentsItem } from '../model/enhanceTableOfContents';
 import { palette as themePalette } from '../palette';
 import type { Block } from '../types/blocks';
@@ -136,7 +137,7 @@ const globalLinkStyles = () => css`
  */
 const filterSubheadingOffset = css`
 	h2[id] {
-		scroll-margin-top: ${FILTER_TOC_SCROLL_OFFSET}px;
+		scroll-margin-top: ${pxToRem(FILTER_TOC_SCROLL_OFFSET)};
 	}
 `;
 
@@ -179,7 +180,9 @@ export const ArticleBody = ({
 		format.design === ArticleDesign.HostedArticle ||
 		format.design === ArticleDesign.HostedVideo ||
 		format.design === ArticleDesign.HostedGallery;
-	const isFilterArticle = isFilterPageId(pageId);
+	const isFilterArticle = hasFilterTag(tags);
+	const hasTableOfContents =
+		tableOfContents !== undefined && tableOfContents.length > 0;
 	const language = decideLanguage(lang);
 	const languageDirection = decideLanguageDirection(isRightToLeftLang);
 	const hasObserverPublicationTag = tags.find(
@@ -250,7 +253,7 @@ export const ArticleBody = ({
 	}
 	return (
 		<>
-			{tableOfContents && tableOfContents.length > 0 && (
+			{hasTableOfContents && (
 				<Island priority="critical" defer={{ until: 'visible' }}>
 					<TableOfContents
 						tableOfContents={tableOfContents}
@@ -269,7 +272,9 @@ export const ArticleBody = ({
 					globalStrongStyles,
 					globalLinkStyles(),
 					isHostedContent && [hostedContentH2Styles],
-					isFilterArticle && filterSubheadingOffset,
+					isFilterArticle &&
+						hasTableOfContents &&
+						filterSubheadingOffset,
 				]}
 				lang={language}
 				dir={languageDirection}

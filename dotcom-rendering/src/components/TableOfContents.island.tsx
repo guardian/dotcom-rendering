@@ -7,6 +7,8 @@ import {
 	from,
 	headlineBold17,
 	headlineLight17,
+	pxToRem,
+	rootPixelFontSize,
 	space,
 	textSansBold14,
 	until,
@@ -46,6 +48,10 @@ interface Props {
  * that it holds however tall the bar's contents are. It needs to stay above
  * the tallest of them: today that is the chevron rather than the label, at
  * roughly 29px plus the summary's padding and rule.
+ *
+ * Expressed in pixels at the default root font size, but applied in rems so
+ * that the bar grows with its text when a reader increases their browser's
+ * text size, rather than clipping it.
  */
 export const FILTER_TOC_STICKY_HEIGHT = 48;
 
@@ -58,8 +64,10 @@ export const FILTER_TOC_STICKY_HEIGHT = 48;
  * to is the one the bar then names. The two have to be the same number or the
  * bar reports the section above.
  *
- * Deliberately in pixels, like the bar's own height, so that neither can drift
- * against the other when the root font size changes.
+ * Like the bar's own height, this is written in pixels at the default root font
+ * size but always applied in rems (see `toRootScaledPx` for the scroll spy), so
+ * that the bar, the offset and the reading line all grow together when a reader
+ * increases their browser's text size.
  */
 export const FILTER_TOC_SCROLL_OFFSET = FILTER_TOC_STICKY_HEIGHT + space[2];
 
@@ -74,6 +82,24 @@ export const FILTER_TOC_SCROLL_OFFSET = FILTER_TOC_STICKY_HEIGHT + space[2];
  * tucked under the bar when it counts.
  */
 const FILTER_TOC_READING_LINE = FILTER_TOC_SCROLL_OFFSET + space[3];
+
+/**
+ * Converts a length written in pixels at the default root font size into the
+ * pixels it actually occupies at the reader's root font size.
+ *
+ * The bar and `scroll-margin-top` are sized in rems, but `IntersectionObserver`
+ * only accepts pixels or percentages, so the scroll spy has to scale its line
+ * to match or it would drift from where a jump lands a heading.
+ */
+const toRootScaledPx = (px: number): number => {
+	const rootFontSize = Number.parseFloat(
+		window.getComputedStyle(document.documentElement).fontSize,
+	);
+
+	return Number.isNaN(rootFontSize)
+		? px
+		: (px * rootFontSize) / rootPixelFontSize;
+};
 
 /**
  * Works out which section the reader is currently in, given the position of
@@ -314,7 +340,7 @@ const filterSummaryStyles = css`
 	align-items: center;
 	gap: ${space[4]}px;
 	/* Exact, not a minimum: see FILTER_TOC_STICKY_HEIGHT. */
-	height: ${FILTER_TOC_STICKY_HEIGHT}px;
+	height: ${pxToRem(FILTER_TOC_STICKY_HEIGHT)};
 	padding: ${space[2]}px 0;
 `;
 
@@ -469,6 +495,8 @@ export const TableOfContents = ({
 			return;
 		}
 
+		const readingLine = toRootScaledPx(FILTER_TOC_READING_LINE);
+
 		const updateCurrentSection = () => {
 			setCurrentSectionId(
 				getCurrentSectionId(
@@ -476,7 +504,7 @@ export const TableOfContents = ({
 						id: section.id,
 						top: section.getBoundingClientRect().top,
 					})),
-					FILTER_TOC_READING_LINE,
+					readingLine,
 				),
 			);
 		};
@@ -484,7 +512,7 @@ export const TableOfContents = ({
 		const observer = new IntersectionObserver(updateCurrentSection, {
 			// Shrink the observed area to everything below the reading line, so
 			// that we're notified each time a heading crosses it.
-			rootMargin: `-${FILTER_TOC_READING_LINE}px 0px 0px 0px`,
+			rootMargin: `-${readingLine}px 0px 0px 0px`,
 			/**
 			 * A heading crossing the line with its lower half still showing is
 			 * only a partial change in how much of it is inside that area, so

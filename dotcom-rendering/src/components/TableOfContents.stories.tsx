@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { article17, headlineBold24, space } from '@guardian/source/foundations';
 import type { StoryObj } from '@storybook/react-webpack5';
+import { useId } from 'react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
 	ArticleDesign,
@@ -174,24 +175,26 @@ filterCollapsed.decorators = [
 ];
 
 /**
- * The selected state and the pinned label are both driven by where the reader
- * is in the page, so this story renders the sections the bar points at. Scroll
- * it to see the label take the current section's heading, then open the bar to
- * see that section marked in the list.
+ * `splitTheme` renders a light and a dark copy of this story in the same
+ * document, so each copy prefixes its heading ids to keep them unique. Without
+ * that, the dark copy's links and scroll spy would find the light copy's
+ * headings instead of its own.
  */
-export const filterWithSections: StoryObj = ({
-	format,
-}: {
-	format: ArticleFormat;
-}) => {
+const FilterWithSections = ({ format }: { format: ArticleFormat }) => {
+	const prefix = useId();
+	const items = tableItemsLong.map((item) => ({
+		...item,
+		id: `${prefix}${item.id}`,
+	}));
+
 	return (
 		<Wrapper>
 			<TableOfContents
-				tableOfContents={tableItemsLong}
+				tableOfContents={items}
 				format={format}
 				isFilterArticle={true}
 			/>
-			{tableItemsLong.map((item) => (
+			{items.map((item) => (
 				<section key={item.id}>
 					<h2
 						id={item.id}
@@ -216,6 +219,18 @@ export const filterWithSections: StoryObj = ({
 		</Wrapper>
 	);
 };
+
+/**
+ * The selected state and the pinned label are both driven by where the reader
+ * is in the page, so this story renders the sections the bar points at. Scroll
+ * it to see the label take the current section's heading, then open the bar to
+ * see that section marked in the list.
+ */
+export const filterWithSections: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => <FilterWithSections format={format} />;
 
 filterWithSections.storyName = 'filterWithSections';
 filterWithSections.decorators = [
