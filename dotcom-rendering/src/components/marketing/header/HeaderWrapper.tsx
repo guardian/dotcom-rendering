@@ -92,12 +92,12 @@ export const headerWrapper = (
 			: secondaryCta;
 
 		const renderedMobileContent = mobileContent
-			? ({
+			? {
 					heading: mobileContent.heading,
 					subheading: mobileContent.subheading,
 					primaryCta: mobilePrimaryCta,
 					secondaryCta: mobileSecondaryCta,
-				} as HeaderRenderedContent)
+				}
 			: undefined;
 
 		const { abTestName, abTestVariant, componentType, campaignCode } =

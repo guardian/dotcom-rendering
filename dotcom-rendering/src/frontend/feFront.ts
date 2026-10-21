@@ -1,3 +1,4 @@
+import type { ElectionComponentsJson } from '../components/ElectionTrackers/electionComponent';
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
 import type { EditionBranding } from '../types/branding';
@@ -271,6 +272,9 @@ export type FEFrontCard = {
 		type: FEFrontCardStyle;
 	};
 	type: string;
+	dataUrl?: string;
+	graphicKind?: 'electionTracker';
+	eventData?: ElectionComponentsJson;
 };
 
 export type FESnap = {

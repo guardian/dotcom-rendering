@@ -2,14 +2,3 @@
 	display: none !important;
 	color: #000000;
 }
-
-/*
- * The reverse of `hide`: elements that only make sense on a printed page
- * (e.g. a print-only black-on-white logo standing in for the real, hidden
- * Masthead - sign-in state/edition switcher/pillar nav aren't meaningful on
- * paper, and the Masthead's blue background wastes ink). Kept `display:
- * none` outside of print by the element's own styles.
- */
-[data-print-layout='print-only'] {
-	display: block !important;
-}

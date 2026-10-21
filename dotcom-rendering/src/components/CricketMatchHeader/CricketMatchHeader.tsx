@@ -536,7 +536,6 @@ const Crest = (props: { name: string; paID: string }) => (
 			...circleStyles,
 			backgroundColor: 'white',
 			padding: space[1],
-			zIndex: 1,
 		}}
 	>
 		<TeamCrest

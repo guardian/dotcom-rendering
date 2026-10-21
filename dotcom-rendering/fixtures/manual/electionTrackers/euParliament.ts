@@ -1,4 +1,6 @@
-export const euParliament = {
+import type { ElectionComponentsJson } from '../../../src/components/ElectionTrackers/electionComponent';
+
+export const euParliament: ElectionComponentsJson = {
 	components: [
 		{
 			kind: 'stackedProgress',

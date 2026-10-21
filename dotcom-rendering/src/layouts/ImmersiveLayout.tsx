@@ -8,7 +8,7 @@ import {
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.island';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
-import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
+import { AffiliateDisclaimer } from '../components/AffiliateProducts/AffiliateDisclaimer';
 import { AppsFooter } from '../components/AppsFooter.island';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -622,6 +622,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 												secondaryDateline={
 													article.webPublicationSecondaryDateDisplay
 												}
+												webPublicationDate={
+													article.webPublicationDate
+												}
 												isCommentable={
 													article.isCommentable
 												}
@@ -649,6 +652,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											}
 											secondaryDateline={
 												article.webPublicationSecondaryDateDisplay
+											}
+											webPublicationDate={
+												article.webPublicationDate
 											}
 											isCommentable={
 												article.isCommentable

@@ -34,6 +34,12 @@ const bottomPadding = css`
 
 const setMetaWidth = css`
 	position: relative;
+	padding-left: 10px;
+	padding-right: 10px;
+	${from.mobileLandscape} {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
 	${from.tablet} {
 		max-width: 620px;
 	}
@@ -42,12 +48,12 @@ const setMetaWidth = css`
 		margin-right: 310px;
 	}
 	${from.leftCol} {
-		margin-left: 150px;
+		margin-left: 170px;
 		padding-left: 10px;
 		border-left: 1px solid ${palette('--article-border')};
 	}
 	${from.wide} {
-		margin-left: 229px;
+		margin-left: 249px;
 	}
 `;
 
@@ -130,6 +136,7 @@ type Props = {
 	webUrl: string;
 	webTitle: string;
 	showBottomSocialButtons: boolean;
+	isDeprecatedInteractiveLayout?: boolean;
 };
 
 const syndicationButtonOverrides = css`
@@ -205,6 +212,7 @@ export const SubMeta = ({
 	webUrl,
 	webTitle,
 	showBottomSocialButtons,
+	isDeprecatedInteractiveLayout = false,
 }: Props) => {
 	const createLinks = () => {
 		const links: BaseLinkType[] = [];
@@ -229,9 +237,7 @@ export const SubMeta = ({
 		<div
 			data-print-layout="hide"
 			css={[
-				format.design === ArticleDesign.Interactive
-					? setMetaWidth
-					: undefined,
+				isDeprecatedInteractiveLayout ? setMetaWidth : undefined,
 				format.design === ArticleDesign.Gallery
 					? galleryStyles
 					: bottomPadding,

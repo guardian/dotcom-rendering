@@ -1,4 +1,5 @@
 import type { EditionId } from '../lib/edition';
+import type { GameStatus } from '../lib/puzzleProgress/types';
 import type { ConfigType } from './config';
 import type { FooterType } from './footer';
 import type { FENavType } from './frontend';
@@ -16,6 +17,9 @@ export type PuzzleItem = {
 	image?: string;
 	imageAlt?: string;
 	setter?: string;
+	progress?: number;
+	/** The Puzzles API's state for the reader; absent when it reports nothing. */
+	gameStatus?: GameStatus;
 	date?: string;
 	slug?: string;
 	index?: number;
@@ -52,6 +56,8 @@ export type PuzzlesNewsletter = {
 	frequency: string;
 	description: string;
 	illustrationSquare?: string;
+	/** Link to a recent edition, from the newsletters tool. */
+	exampleUrl?: string;
 };
 
 export type PuzzlePopularityGroup = {
@@ -67,8 +73,45 @@ export type PuzzlesSupportingContent = {
 	popularGroups: PuzzlePopularityGroup[];
 };
 
+/** Useful links and newsletter shown above the footer on individual game pages. */
+export type PuzzleGameSupporting = {
+	usefulLinks: PuzzleLink[];
+	newsletter?: PuzzlesNewsletter;
+};
+
 export type PuzzlesLayoutType = {
 	containers: PuzzleContainer[];
+};
+export type PuzzlesArchivePuzzle = {
+	id: string;
+	title: string;
+	puzzleType: string;
+	slug?: string;
+	set: string;
+};
+
+export type PuzzlesArchiveItem = {
+	puzzleType: string;
+	date: string;
+	progress: number;
+	/** The Puzzles API's state for the reader; absent when it reports none. */
+	gameStatus?: GameStatus;
+	setterName?: string;
+	url: string;
+};
+
+export type PuzzlesArchive = {
+	category: 'crosswords' | 'word-games' | 'logic-puzzles';
+	title: string;
+	description: string;
+	selectedPuzzle: PuzzlesArchivePuzzle;
+	puzzles: PuzzlesArchivePuzzle[];
+	year: number;
+	month: number;
+	items: PuzzlesArchiveItem[];
+	recentItems?: PuzzlesArchiveItem[];
+	hasError: boolean;
+	moreFrom: PuzzleItem[];
 };
 
 export interface FEPuzzlesPageType {
@@ -84,5 +127,6 @@ export interface FEPuzzlesPageType {
 	canonicalUrl: string;
 	isAdFreeUser: boolean;
 	layout: PuzzlesLayoutType;
+	archive?: PuzzlesArchive;
 	commercialProperties?: Record<string, unknown>;
 }

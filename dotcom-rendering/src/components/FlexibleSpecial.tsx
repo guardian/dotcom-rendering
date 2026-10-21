@@ -19,6 +19,7 @@ import type { TrailTextSize } from './Card/components/TrailText';
 import { UL } from './Card/components/UL';
 import type { ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
+import { EventGraphic, type Graphic } from './EventGraphic';
 import { FrontCard } from './FrontCard';
 import type { SubtitleSize } from './SelfHostedVideoPlayer';
 import type { Alignment } from './SupportingContent';
@@ -32,6 +33,7 @@ type Props = {
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
+	graphic?: Graphic;
 };
 
 type BoostProperties = {
@@ -141,7 +143,7 @@ type OneCardLayoutProps = {
 	isSplashCard?: boolean;
 };
 
-export const OneCardLayout = ({
+const OneCardLayout = ({
 	cards,
 	containerPalette,
 	hideAge,
@@ -317,11 +319,15 @@ export const FlexibleSpecial = ({
 	aspectRatio,
 	containerLevel = 'Primary',
 	collectionId,
+	graphic,
 }: Props) => {
-	const snaps = [...groupedTrails.snap].slice(0, 1).map((snap) => ({
-		...snap,
-		uniqueId: `collection-${collectionId}-snap-0`,
-	}));
+	const snaps =
+		graphic === undefined
+			? [...groupedTrails.snap].slice(0, 1).map((snap) => ({
+					...snap,
+					uniqueId: `collection-${collectionId}-snap-0`,
+				}))
+			: [];
 	const splash = [...groupedTrails.standard].slice(0, 1).map((snap) => ({
 		...snap,
 		uniqueId: `collection-${collectionId}-splash-0`,
@@ -333,6 +339,7 @@ export const FlexibleSpecial = ({
 
 	return (
 		<>
+			<EventGraphic graphic={graphic} />
 			{isNonEmptyArray(snaps) && (
 				<OneCardLayout
 					cards={snaps}

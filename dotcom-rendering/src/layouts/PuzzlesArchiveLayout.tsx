@@ -1,0 +1,309 @@
+import { css } from '@emotion/react';
+import {
+	from,
+	headlineBold34,
+	palette,
+	space,
+	textEgyptian17,
+} from '@guardian/source/foundations';
+import { AdSlot } from '../components/AdSlot.web';
+import { Footer } from '../components/Footer';
+import { HeaderAdSlot } from '../components/HeaderAdSlot';
+import { Island } from '../components/Island';
+import { Masthead } from '../components/Masthead/Masthead';
+import { PuzzlesArchiveCalendar } from '../components/PuzzlesArchiveCalendar.island';
+import { PuzzlesArchiveDescription } from '../components/PuzzlesArchiveDescription.island';
+import { RelatedPuzzlesRailEnhanced } from '../components/RelatedPuzzlesRailEnhanced.island';
+import { Section } from '../components/Section';
+import { ArticleDisplay } from '../lib/articleFormat';
+import { center } from '../lib/center';
+import { puzzlesPageTheme } from '../lib/puzzlesTheme';
+import type { NavType } from '../model/extract-nav';
+import { palette as themePalette } from '../palette';
+import type { FEPuzzlesPageType } from '../types/puzzlesPage';
+import { Stuck } from './lib/stickiness';
+
+const mainStyles = (darkModeAvailable: boolean) => css`
+	${puzzlesPageTheme(darkModeAvailable)};
+`;
+
+/** Without the bottom ad, the page keeps its own space above the footer. */
+const mainBottomSpaceStyles = css`
+	padding-bottom: ${space[12]}px;
+`;
+
+const pageStyles = css`
+	${center};
+	box-sizing: border-box;
+	padding: 0 ${space[3]}px;
+	border-left: 1px solid var(--puzzles-border-colour);
+	border-right: 1px solid var(--puzzles-border-colour);
+	${from.tablet} {
+		padding: 0 ${space[5]}px;
+	}
+`;
+
+/**
+ * Wraps the heading and the calendar (not the "More from" rail) so the
+ * vertical line between the left column and the content starts 6px below
+ * the sub-nav and ends 28px above the rail's own top border. It sits in the
+ * middle of the gap between the two columns (`column-gap` below), where the
+ * rail draws its own divider, so the two read as one line.
+ */
+const topStyles = css`
+	position: relative;
+	padding-bottom: ${space[5]}px;
+	${from.leftCol} {
+		::before {
+			position: absolute;
+			top: 6px;
+			bottom: 28px;
+			left: 150px;
+			width: 1px;
+			background: var(--puzzles-border-colour);
+			content: '';
+			pointer-events: none;
+		}
+	}
+	${from.wide} {
+		::before {
+			left: 230px;
+		}
+	}
+`;
+
+const archiveGridStyles = css`
+	display: grid;
+	grid-template-columns: minmax(0, 760px);
+	column-gap: ${space[5]}px;
+	${from.leftCol} {
+		grid-template-columns: 140px minmax(0, 760px) minmax(0, 1fr);
+	}
+	${from.wide} {
+		grid-template-columns: 220px minmax(0, 1fr) 300px;
+	}
+`;
+
+const headingStyles = css`
+	${archiveGridStyles};
+	h1 {
+		${headlineBold34};
+		color: var(--puzzles-headline-colour);
+		margin: 0;
+		padding-top: ${space[2]}px;
+		overflow-wrap: anywhere;
+	}
+	p {
+		${textEgyptian17};
+		max-width: 620px;
+		margin: 0 0 ${space[6]}px;
+		color: var(--puzzles-text-colour);
+	}
+	${from.leftCol} {
+		h1 {
+			grid-column: 1;
+		}
+		p {
+			grid-column: 2;
+			padding-top: ${space[2]}px;
+		}
+	}
+`;
+
+const contentStyles = css`
+	${archiveGridStyles};
+	${from.desktop} {
+		grid-template-columns: minmax(0, 1fr) 300px;
+	}
+	${from.leftCol} {
+		grid-template-columns: 140px minmax(0, 1fr) 300px;
+	}
+	${from.wide} {
+		grid-template-columns: 220px minmax(0, 1fr) 300px;
+	}
+`;
+
+const calendarColumnStyles = css`
+	min-width: 0;
+	${from.leftCol} {
+		grid-column: 2;
+	}
+`;
+
+const sideAdStyles = css`
+	display: none;
+	${from.desktop} {
+		display: block;
+		grid-column: 2;
+		padding-top: 122px;
+	}
+	${from.leftCol} {
+		grid-column: 3;
+	}
+`;
+
+/**
+ * The rail's top line is light grey and runs the full width of the page
+ * frame, as on the crosswords page: the negative margin cancels the page's
+ * own side padding (`pageStyles`) and the padding puts the rail back in line
+ * with the rest of the content.
+ */
+const moreStyles = css`
+	--puzzles-edge-padding: ${space[3]}px;
+	margin: 0 -${space[3]}px;
+	padding: 0 ${space[3]}px;
+	border-top: 1px solid var(--puzzles-border-colour);
+	${from.tablet} {
+		margin: 0 -${space[5]}px;
+		padding: 0 ${space[5]}px;
+	}
+`;
+
+const mobileAdStyles = css`
+	margin: ${space[8]}px 0 ${space[5]}px;
+	background: ${palette.neutral[97]};
+	${from.tablet} {
+		display: none;
+	}
+`;
+
+export const PuzzlesArchiveLayout = ({
+	darkModeAvailable = false,
+	puzzlesPage,
+	NAV,
+}: {
+	darkModeAvailable?: boolean;
+	puzzlesPage: FEPuzzlesPageType;
+	NAV: NavType;
+}) => {
+	const archive = puzzlesPage.archive;
+	if (!archive) return null;
+	const renderAds = !puzzlesPage.isAdFreeUser;
+	const archiveNav = { ...NAV, currentNavLink: archive.title };
+
+	return (
+		<>
+			<div data-print-layout="hide" id="bannerandheader">
+				{renderAds && (
+					<Stuck>
+						<Section
+							fullWidth={true}
+							showTopBorder={false}
+							showSideBorders={false}
+							padSides={false}
+							shouldCenter={false}
+						>
+							<HeaderAdSlot />
+						</Section>
+					</Stuck>
+				)}
+				<Masthead
+					nav={archiveNav}
+					editionId={puzzlesPage.editionId}
+					idUrl={puzzlesPage.config.idUrl}
+					mmaUrl={puzzlesPage.config.mmaUrl}
+					discussionApiUrl={puzzlesPage.config.discussionApiUrl}
+					idApiUrl={puzzlesPage.config.idApiUrl}
+					contributionsServiceUrl={
+						puzzlesPage.contributionsServiceUrl
+					}
+					showSubNav={true}
+					showSlimNav={false}
+					hasPageSkin={false}
+					hasPageSkinContentSelfConstrain={false}
+				/>
+			</div>
+			<main
+				css={[
+					mainStyles(darkModeAvailable),
+					!renderAds && mainBottomSpaceStyles,
+				]}
+				id="maincontent"
+			>
+				<div css={pageStyles}>
+					<div css={topStyles}>
+						<header css={headingStyles}>
+							<h1>{archive.title} archive</h1>
+							<p>
+								<Island priority="critical">
+									<PuzzlesArchiveDescription
+										idUrl={
+											puzzlesPage.config.idUrl ??
+											'https://profile.theguardian.com'
+										}
+									/>
+								</Island>
+							</p>
+						</header>
+						<div css={contentStyles}>
+							<div css={calendarColumnStyles}>
+								<Island priority="critical">
+									<PuzzlesArchiveCalendar
+										initialArchive={archive}
+									/>
+								</Island>
+							</div>
+							{renderAds && (
+								<aside css={sideAdStyles}>
+									<AdSlot
+										display={ArticleDisplay.Standard}
+										position="right"
+										shouldHideReaderRevenue={false}
+									/>
+								</aside>
+							)}
+						</div>
+					</div>
+					{archive.moreFrom.length > 0 && (
+						<section css={moreStyles}>
+							<Island
+								priority="enhancement"
+								defer={{ until: 'visible' }}
+							>
+								<RelatedPuzzlesRailEnhanced
+									items={archive.moreFrom}
+								/>
+							</Island>
+						</section>
+					)}
+					{renderAds && (
+						<div css={mobileAdStyles}>
+							<AdSlot position="mobile-front" index={1} />
+						</div>
+					)}
+				</div>
+			</main>
+			{renderAds && (
+				<Section
+					fullWidth={true}
+					padSides={false}
+					showTopBorder={false}
+					showSideBorders={false}
+					backgroundColour={themePalette('--ad-background')}
+					element="aside"
+				>
+					<AdSlot
+						display={ArticleDisplay.Standard}
+						index={1}
+						position="fronts-banner"
+					/>
+				</Section>
+			)}
+			<Section
+				fullWidth={true}
+				padSides={false}
+				backgroundColour={palette.brand[400]}
+				borderColour={palette.brand[600]}
+				showSideBorders={false}
+				element="footer"
+			>
+				<Footer
+					pageFooter={puzzlesPage.pageFooter}
+					pillars={NAV.pillars}
+					urls={NAV.readerRevenueLinks.footer}
+					editionId={puzzlesPage.editionId}
+				/>
+			</Section>
+		</>
+	);
+};

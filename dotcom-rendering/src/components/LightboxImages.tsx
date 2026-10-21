@@ -13,10 +13,10 @@ import { Hide, Link } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { ImageForLightbox } from '../types/content';
+import { ProductCardButtons } from './AffiliateProducts/ProductCardButtons';
 import { LightboxCaption } from './LightboxCaption';
 import { LightboxLoader } from './LightboxLoader';
 import { Picture } from './Picture';
-import { ProductCardButtons } from './ProductCardButtons';
 import { StarRating } from './StarRating/StarRating';
 
 type Props = {

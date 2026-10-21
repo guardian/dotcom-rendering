@@ -5,7 +5,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
-import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
+import { AffiliateDisclaimer } from '../components/AffiliateProducts/AffiliateDisclaimer';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { InteractivesDisableArticleSwipe } from '../components/InteractivesDisableArticleSwipe.island';
@@ -28,7 +28,7 @@ import type { ArticleDeprecated } from '../types/article';
 import type { Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { temporaryBodyCopyColourOverride } from './InteractiveLayout';
+import { temporaryBodyCopyColourOverride } from './interactives/InteractiveArticleGridDeprecated';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 

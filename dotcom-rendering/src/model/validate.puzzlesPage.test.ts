@@ -6,7 +6,7 @@ const validPage = () => ({
 	editionId: 'UK',
 	canonicalUrl: 'https://www.theguardian.com/puzzles-and-games',
 	isAdFreeUser: false,
-	config: { serverSideABTests: { 'puzzles-new-hub': 'variant' } },
+	config: { serverSideABTests: { 'puzzles-new-hub-v1': 'variant' } },
 	nav: {},
 	pageFooter: {},
 	layout: {
@@ -39,6 +39,30 @@ const validPage = () => ({
 });
 
 describe('validateAsPuzzlesPageType', () => {
+	it('accepts archive data without the retired dataUrl field', () => {
+		const puzzle = {
+			id: 'archive-weekend',
+			title: 'Weekend',
+			puzzleType: 'CROSSWORD_WEEKEND',
+			set: 'weekend',
+		};
+		const archive = {
+			category: 'crosswords',
+			title: 'Crosswords',
+			description: 'Archive',
+			selectedPuzzle: puzzle,
+			puzzles: [puzzle],
+			year: 2026,
+			month: 10,
+			items: [],
+			hasError: false,
+			moreFrom: [],
+		};
+		expect(
+			validateAsPuzzlesPageType({ ...validPage(), archive }).archive,
+		).toEqual(archive);
+	});
+
 	it('accepts artwork descriptions and crossword setter names', () => {
 		const page = validPage();
 		Object.assign(page.layout.containers[0]!.content.items[0]![0]!, {
@@ -86,12 +110,12 @@ describe('validateAsPuzzlesPageType', () => {
 						}
 					: {}),
 			};
-			page.layout.containers.push(container as never);
+			page.layout.containers.push(container);
 			expect(validateAsPuzzlesPageType(page)).toBeDefined();
 			page.layout.containers.push({
 				...container,
 				id: 'second-ad',
-			} as never);
+			});
 			expect(() => validateAsPuzzlesPageType(page)).toThrow(
 				'Unable to validate request body for puzzles page',
 			);
@@ -133,6 +157,29 @@ describe('validateAsPuzzlesPageType', () => {
 		).toBe('word-games');
 	});
 
+	it('accepts a single archive choice', () => {
+		const page = validPage();
+		const content = page.layout.containers[0]!
+			.content as (typeof page.layout.containers)[0]['content'] & {
+			archiveChoices?: unknown[];
+		};
+		content.archiveChoices = [
+			{
+				id: 'archive-word-games',
+				title: 'Word games',
+				type: 'word-game',
+				set: 'all',
+				cardVariant: 'archive',
+				url: '/puzzles-and-games/word-games/archive',
+			},
+		];
+
+		expect(
+			validateAsPuzzlesPageType(page).layout.containers[0]?.content
+				.archiveChoices,
+		).toHaveLength(1);
+	});
+
 	it('accepts enabled on featured containers and rejects it elsewhere', () => {
 		const featuredPage = validPage();
 		featuredPage.layout.containers[0]!.variant = 'featured';
@@ -150,16 +197,6 @@ describe('validateAsPuzzlesPageType', () => {
 			(page: ReturnType<typeof validPage>) => {
 				page.layout.containers[0]!.content.items[0]![0]!.cardVariant =
 					'hero';
-			},
-		],
-		[
-			'missing cadence',
-			(page: ReturnType<typeof validPage>) => {
-				const card = page.layout.containers[0]!.content
-					.items[0]![0]! as {
-					cadence?: string;
-				};
-				delete card.cadence;
 			},
 		],
 		[
@@ -195,6 +232,16 @@ describe('validateAsPuzzlesPageType', () => {
 		expect(() => validateAsPuzzlesPageType(page)).toThrow(
 			'Unable to validate request body for puzzles page',
 		);
+	});
+
+	it('accepts a puzzle card without a static cadence', () => {
+		const page = validPage();
+		const card = page.layout.containers[0]!.content.items[0]![0]! as {
+			cadence?: string;
+		};
+		delete card.cadence;
+
+		expect(validateAsPuzzlesPageType(page)).toBeDefined();
 	});
 
 	it('accepts supporting content with valid puzzle references', () => {
@@ -252,7 +299,7 @@ describe('validateAsPuzzlesPageType', () => {
 			adSlot: 'inline1',
 			content: { items: [], nestedContainers: [] },
 		};
-		page.layout.containers.push(ad as never);
+		page.layout.containers.push(ad);
 		expect(validateAsPuzzlesPageType(page).layout.containers).toHaveLength(
 			2,
 		);

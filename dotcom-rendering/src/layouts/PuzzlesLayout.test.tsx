@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import type { ReactNode } from 'react';
+import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
 import { PuzzlesLayout } from './PuzzlesLayout';
 
 jest.mock('../components/Masthead/Masthead', () => ({
@@ -9,8 +10,10 @@ jest.mock('../components/Masthead/Masthead', () => ({
 jest.mock('../components/Footer', () => ({
 	Footer: () => <div data-testid="footer" />,
 }));
-jest.mock('../components/PuzzlesDirectory', () => ({
-	PuzzlesDirectory: () => <div data-testid="directory" />,
+jest.mock('../components/PuzzlesDirectoryProgress.island', () => ({
+	PuzzlesDirectoryProgress: ({ hideTopRule }: { hideTopRule?: boolean }) => (
+		<div data-testid="directory" data-hide-top-rule={hideTopRule} />
+	),
 }));
 jest.mock('../components/Section', () => ({
 	Section: ({ children }: { children: ReactNode }) => <div>{children}</div>,
@@ -32,13 +35,22 @@ const page = (isAdFreeUser = false) => ({
 
 describe('PuzzlesLayout', () => {
 	const nav = { pillars: [], readerRevenueLinks: { footer: [] } } as never;
+	const renderedCss = () =>
+		[
+			...Array.from(document.querySelectorAll('style')).map(
+				(style) => style.textContent ?? '',
+			),
+			...Array.from(document.styleSheets).flatMap((sheet) =>
+				Array.from(sheet.cssRules).map((rule) => rule.cssText),
+			),
+		].join('\n');
 
 	it('renders one branded page title without category filters', () => {
 		render(<PuzzlesLayout NAV={nav} puzzlesPage={page() as never} />);
 		expect(
 			screen.getByRole('heading', {
 				level: 1,
-				name: 'Puzzles and Games',
+				name: 'Puzzles & games',
 			}),
 		).toBeInTheDocument();
 		expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1);
@@ -47,7 +59,25 @@ describe('PuzzlesLayout', () => {
 		).not.toBeInTheDocument();
 	});
 
-	it('renders both header slots without experiment participation and respects ad-free input', () => {
+	it('uses the requested puzzle palette when dark mode is available', () => {
+		render(
+			<PuzzlesLayout
+				darkModeAvailable={true}
+				NAV={nav}
+				puzzlesPage={page() as never}
+			/>,
+		);
+		const css = renderedCss();
+
+		expect(css).toContain('prefers-color-scheme: dark');
+		expect(css).toContain('--puzzles-page-background: #1A1A1A');
+		expect(css).toContain('--puzzles-header-background: #333333');
+		expect(css).toContain('--puzzles-card-background: #333333');
+		expect(css).toContain('--puzzles-headline-colour: #F6F6F6');
+		expect(css).toContain('--puzzles-text-colour: #DCDCDC');
+	});
+
+	it('renders only the desktop header slot and respects ad-free input', () => {
 		const { rerender } = render(
 			<PuzzlesLayout NAV={nav} puzzlesPage={page(true) as never} />,
 		);
@@ -62,18 +92,84 @@ describe('PuzzlesLayout', () => {
 		).toBeInTheDocument();
 		expect(
 			document.getElementById('dfp-ad--mobile-above-nav'),
-		).toBeInTheDocument();
+		).not.toBeInTheDocument();
 	});
+	it('renders sponsored artwork with the lockup in the header only when branding is provided', () => {
+		const getHeader = () =>
+			screen
+				.getByRole('heading', { level: 1, name: 'Puzzles & games' })
+				.closest('header')!;
+		const { rerender } = render(
+			<PuzzlesLayout
+				NAV={nav}
+				puzzlesPage={page() as never}
+				branding={puzzlesBranding}
+			/>,
+		);
+		expect(getHeader()).toHaveTextContent('Supported by');
+		expect(getHeader().querySelector('img')).toHaveAttribute(
+			'src',
+			'https://i.guim.co.uk/img/uploads/2026/10/12/header-sponsored-mobile-360px.png?width=360&dpr=2&s=none',
+		);
+		expect(
+			Array.from(getHeader().querySelectorAll('source'), (source) =>
+				source.getAttribute('srcset'),
+			),
+		).toEqual(
+			[
+				'wide-1440px',
+				'leftcol-1280px',
+				'desktop-1024px',
+				'tablet-768px',
+				'mobile-phablet-667px',
+				'mobile-landscape-480px',
+				'mobile-medium-393px',
+			].map(
+				(name) =>
+					`https://i.guim.co.uk/img/uploads/2026/10/12/header-sponsored-${name}.png?width=${name.match(/(\d+)px$/)![1]}&dpr=2&s=none`,
+			),
+		);
+		expect(
+			screen.getByRole('link', {
+				name: 'Visit the Example sponsor website',
+			}),
+		).toHaveAttribute('href', 'https://example.com');
+		const aboutLink = screen.getByRole('link', {
+			name: 'About this content',
+		});
+		expect(aboutLink).toHaveAttribute('href', 'https://example.com/about');
+		expect(getHeader()).not.toContainElement(aboutLink);
+		expect(screen.getByTestId('directory')).toHaveAttribute(
+			'data-hide-top-rule',
+			'true',
+		);
+		rerender(<PuzzlesLayout NAV={nav} puzzlesPage={page() as never} />);
+		expect(screen.queryByText('Supported by')).not.toBeInTheDocument();
+		expect(
+			screen.queryByRole('link', { name: 'About this content' }),
+		).not.toBeInTheDocument();
+		expect(screen.getByTestId('directory')).toHaveAttribute(
+			'data-hide-top-rule',
+			'false',
+		);
+		expect(getHeader().querySelector('img')).toHaveAttribute(
+			'src',
+			'https://i.guim.co.uk/img/uploads/2026/09/15/header-mobile-360px.png?width=360&dpr=2&s=none',
+		);
+	});
+
 	it('renders the illustrated header with responsive sources and a fixed height', () => {
 		render(<PuzzlesLayout NAV={nav} puzzlesPage={page() as never} />);
 		const header = screen
 			.getByRole('heading', {
 				level: 1,
-				name: 'Puzzles and Games',
+				name: 'Puzzles & games',
 			})
 			.closest('header')!;
 		expect(header).toHaveStyle({ height: '230px' });
-		expect(header).toHaveStyle({ background: '#fef9f5' });
+		expect(header).toHaveStyle({
+			background: 'var(--puzzles-header-background, #fef9f5)',
+		});
 		const picture = header.querySelector('picture')!;
 		const sources = Array.from(picture.querySelectorAll('source'));
 		const expected = [

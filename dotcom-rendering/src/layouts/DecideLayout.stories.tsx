@@ -16,7 +16,9 @@ import { LabsImmersiveVictorianWater as LabsImmersiveVictorianWaterFixture } fro
 import { Live as LiveBlogStandardNewsFixture } from '../../fixtures/generated/fe-articles/Live';
 import { LiveBlogSingleContributor as LiveBlogSingleContributorFixture } from '../../fixtures/generated/fe-articles/LiveBlogSingleContributor';
 import { NewsletterSignup as NewsletterSignupStandardSportFixture } from '../../fixtures/generated/fe-articles/NewsletterSignup';
-import { Picture as PictureShowcaseOpinionFixture } from '../../fixtures/generated/fe-articles/Picture';
+import { PictureWithAvatarAndStandfirst } from '../../fixtures/generated/fe-articles/PictureWithAvatarAndStandfirst';
+import { PictureWithAvatarNoStandfirst } from '../../fixtures/generated/fe-articles/PictureWithAvatarNoStandfirst';
+import { PictureWithStandfirstNoAvatar } from '../../fixtures/generated/fe-articles/PictureWithStandfirstNoAvatar';
 import { Recipe as RecipeStandardLifestyleFixture } from '../../fixtures/generated/fe-articles/Recipe';
 import { Standard as StandardStandardNewsFixture } from '../../fixtures/generated/fe-articles/Standard';
 import { Video as VideoStandardNewsFixture } from '../../fixtures/generated/fe-articles/Video';
@@ -154,6 +156,17 @@ const standardImmersiveNewsAppsFixture: Article = {
 	display: ArticleDisplay.Immersive,
 };
 
+export const WebStandardImmersiveNewsLight: Story = {
+	args: {
+		article: {
+			...WebStandardStandardNewsLight.args.article,
+			display: ArticleDisplay.Immersive,
+		},
+		colourScheme: 'light',
+	},
+	parameters: webParameters,
+};
+
 export const AppsStandardImmersiveNewsLight: Story = {
 	args: {
 		article: standardImmersiveNewsAppsFixture,
@@ -170,6 +183,38 @@ export const AppsStandardImmersiveNewsDark: Story = {
 	parameters: appsParameters,
 };
 
+const standardShowcaseNewsAppsFixture: Article = {
+	...AppsStandardStandardNewsLight.args.article,
+	display: ArticleDisplay.Showcase,
+};
+
+export const WebStandardShowcaseNewsLight: Story = {
+	args: {
+		article: {
+			...WebStandardStandardNewsLight.args.article,
+			display: ArticleDisplay.Showcase,
+		},
+		colourScheme: 'light',
+	},
+	parameters: webParameters,
+};
+
+export const AppsStandardShowcaseNewsLight: Story = {
+	args: {
+		article: standardShowcaseNewsAppsFixture,
+		colourScheme: 'light',
+	},
+	parameters: appsParameters,
+};
+
+export const AppsStandardShowcaseNewsDark: Story = {
+	args: {
+		article: standardShowcaseNewsAppsFixture,
+		colourScheme: 'dark',
+	},
+	parameters: appsParameters,
+};
+
 export const WebNewsletterSignupStandardSportLight: Story = {
 	args: {
 		article: enhanceArticleType(
@@ -180,9 +225,23 @@ export const WebNewsletterSignupStandardSportLight: Story = {
 	parameters: webParameters,
 };
 
-export const WebPictureShowcaseOpinionLight: Story = {
+export const WebPictureWithAvatarNoStandfirstLight: Story = {
 	args: {
-		article: enhanceArticleType(PictureShowcaseOpinionFixture, 'Web'),
+		article: enhanceArticleType(PictureWithAvatarNoStandfirst, 'Web'),
+	},
+	parameters: webParameters,
+};
+
+export const WebPictureWithAvatarAndStandfirstLight: Story = {
+	args: {
+		article: enhanceArticleType(PictureWithAvatarAndStandfirst, 'Web'),
+	},
+	parameters: webParameters,
+};
+
+export const WebPictureWithStandfirstNoAvatarLight: Story = {
+	args: {
+		article: enhanceArticleType(PictureWithStandfirstNoAvatar, 'Web'),
 	},
 	parameters: webParameters,
 };
@@ -213,17 +272,49 @@ export const WebStandardNewsInterviewLight: Story = {
 	parameters: webParameters,
 };
 
-export const AppsPictureShowcaseOpinionLight = {
+export const AppsPictureWithAvatarNoStandfirstLight = {
 	args: {
-		article: enhanceArticleType(PictureShowcaseOpinionFixture, 'Apps'),
+		article: enhanceArticleType(PictureWithAvatarNoStandfirst, 'Apps'),
 		colourScheme: 'light',
 	},
 	parameters: appsParameters,
 } satisfies Story;
 
-export const AppsPictureShowcaseOpinionDark: Story = {
+export const AppsPictureWithAvatarNoStandfirstDark: Story = {
 	args: {
-		article: AppsPictureShowcaseOpinionLight.args.article,
+		article: AppsPictureWithAvatarNoStandfirstLight.args.article,
+		colourScheme: 'dark',
+	},
+	parameters: appsParameters,
+};
+
+export const AppsPictureWithAvatarAndStandfirstLight = {
+	args: {
+		article: enhanceArticleType(PictureWithAvatarAndStandfirst, 'Apps'),
+		colourScheme: 'light',
+	},
+	parameters: appsParameters,
+} satisfies Story;
+
+export const AppsPictureWithAvatarAndStandfirstDark: Story = {
+	args: {
+		article: AppsPictureWithAvatarAndStandfirstLight.args.article,
+		colourScheme: 'dark',
+	},
+	parameters: appsParameters,
+};
+
+export const AppsPictureWithStandfirstNoAvatarLight = {
+	args: {
+		article: enhanceArticleType(PictureWithStandfirstNoAvatar, 'Apps'),
+		colourScheme: 'light',
+	},
+	parameters: appsParameters,
+} satisfies Story;
+
+export const AppsPictureWithStandfirstNoAvatarDark: Story = {
+	args: {
+		article: AppsPictureWithStandfirstNoAvatarLight.args.article,
 		colourScheme: 'dark',
 	},
 	parameters: appsParameters,

@@ -107,7 +107,7 @@ if (!isServer) {
  * DOM and NodeJS versions of `TextDecoder`. This affect the running of the application and
  * allows us to update jsdom.
  */
-global.TextEncoder = TextEncoder as unknown as typeof global.TextEncoder;
+global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder as unknown as typeof global.TextDecoder;
 global.ReadableStream =
 	ReadableStream as unknown as typeof global.ReadableStream;

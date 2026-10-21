@@ -1,15 +1,13 @@
 import guardian from '@guardian/eslint-config';
-import ts from '@typescript-eslint/eslint-plugin';
 import { defineConfig, globalIgnores } from 'eslint/config';
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import customElements from 'eslint-plugin-custom-elements';
 import { createNodeResolver } from 'eslint-plugin-import-x';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
-import react from 'eslint-plugin-react';
-import hooks from 'eslint-plugin-react-hooks';
 import ssrFriendly from 'eslint-plugin-ssr-friendly';
 import unicorn from 'eslint-plugin-unicorn';
+import { noUnmanagedZIndex } from './scripts/eslint-rules/no-unmanaged-z-index.mjs';
 
 const rulesToOverrideGuardianConfig = {
 	// use `string[]` for simple arrays, `Array<string>` for complex ones
@@ -64,10 +62,14 @@ const rulesToEnforce = {
 };
 
 export default defineConfig([
-	...guardian.configs.recommended,
-	...guardian.configs.jest,
-	...guardian.configs.react,
-	...guardian.configs.storybook,
+	{
+		extends: [
+			guardian.configs.recommended,
+			guardian.configs.jest,
+			guardian.configs.react,
+			guardian.configs.storybook,
+		],
+	},
 	// eslint-plugin-prettier/recommended should be the last item in the configuration array so that eslint-config-prettier has the opportunity to override other configs
 	// https://github.com/prettier/eslint-plugin-prettier#configuration-new-eslintconfigjs
 	eslintPluginPrettierRecommended,
@@ -88,16 +90,19 @@ export default defineConfig([
 		 * They also must be the exact same version as the one used in the extended configs.
 		 */
 		plugins: {
-			'@typescript-eslint': ts,
-			react: react,
-			'react-hooks': hooks,
 			'jsx-a11y': jsxA11y,
 			'custom-elements': customElements,
+			local: {
+				rules: {
+					'no-unmanaged-z-index': noUnmanagedZIndex,
+				},
+			},
 			unicorn,
 			'ssr-friendly': ssrFriendly,
 		},
 
 		rules: {
+			'local/no-unmanaged-z-index': 'warn',
 			// React, Hooks & JSX
 			'react-hooks/exhaustive-deps': 'error',
 			'react-hooks/rules-of-hooks': 'error',
@@ -154,8 +159,8 @@ export default defineConfig([
 			// need to be explicitely added because it is disabled by extending `prettier`
 			curly: ['error', 'multi-line', 'consistent'],
 
-			/** @see https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-array-for-each.md */
-			'unicorn/no-array-for-each': 'error',
+			/** @see https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-for-each.md */
+			'unicorn/no-for-each': 'error',
 
 			'import/no-extraneous-dependencies': [
 				'error',

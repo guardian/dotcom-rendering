@@ -1,4 +1,6 @@
+import { isUndefined } from '@guardian/libs';
 import type { ImgHTMLAttributes } from 'react';
+import * as v from 'valibot';
 import type {
 	AspectRatio,
 	DCRContainerLevel,
@@ -7,6 +9,8 @@ import type {
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
+import type { Graphic } from './EventGraphic';
+import { GraphicSchema } from './EventGraphic';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { FlexibleSpecial } from './FlexibleSpecial';
 import { Island } from './Island';
@@ -31,6 +35,35 @@ type Props = {
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
+	hasPageSkin?: boolean;
+};
+
+const extractGraphic = (
+	groupedTrails: DCRGroupedTrails,
+): Graphic | undefined => {
+	const graphicCard = [
+		...groupedTrails.snap,
+		...groupedTrails.splash,
+		...groupedTrails.standard,
+	].find(
+		(card) =>
+			!isUndefined(card.dataUrl) &&
+			!isUndefined(card.graphicKind) &&
+			!isUndefined(card.eventData),
+	);
+
+	if (isUndefined(graphicCard)) {
+		return undefined;
+	}
+
+	const result = v.safeParse(GraphicSchema, {
+		electionDataUrl: graphicCard.dataUrl,
+		kind: graphicCard.graphicKind,
+		electionComponents: graphicCard.eventData,
+		liveEffects: true,
+	});
+
+	return result.success ? result.output : undefined;
 };
 
 export const DecideContainer = ({
@@ -46,6 +79,7 @@ export const DecideContainer = ({
 	frontId,
 	collectionId,
 	containerLevel,
+	hasPageSkin,
 }: Props) => {
 	switch (containerType) {
 		case 'nav/list':
@@ -55,7 +89,11 @@ export const DecideContainer = ({
 		case 'scrollable/highlights':
 			return (
 				<Island priority="critical" defer={{ until: 'visible' }}>
-					<ScrollableHighlights trails={trails} frontId={frontId} />
+					<ScrollableHighlights
+						trails={trails}
+						frontId={frontId}
+						hasPageSkin={hasPageSkin}
+					/>
 				</Island>
 			);
 		case 'flexible/special':
@@ -68,6 +106,7 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
+					graphic={extractGraphic(groupedTrails)}
 				/>
 			);
 		case 'flexible/general':
@@ -150,3 +189,4 @@ export const DecideContainer = ({
 			return null;
 	}
 };
+export { GraphicSchema };

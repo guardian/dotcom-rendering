@@ -84,7 +84,7 @@ const marginRight = css`
 	}
 `;
 
-const invertedStyle = css`
+const invertedStyle = (format: ArticleFormat) => css`
 	/* Handle text wrapping onto a new line */
 	white-space: pre-wrap;
 	box-decoration-break: clone;
@@ -92,7 +92,7 @@ const invertedStyle = css`
 	padding-right: ${space[1]}px;
 	padding-top: ${space[1]}px;
 	padding-bottom: ${space[2]}px;
-	${from.wide} {
+	${format.display === ArticleDisplay.Immersive ? from.leftCol : from.wide} {
 		line-height: 28px;
 	}
 `;
@@ -195,6 +195,27 @@ const immersiveGridTitleBelowDesktop = css`
 		color: white;
 		padding: 3px 6px 4px 6px;
 		box-shadow: none;
+	}
+`;
+
+const immersiveLandscapeTitle = css`
+	${from.tablet} {
+		margin-left: -29px;
+	}
+	${from.desktop} {
+		margin-left: -10px;
+	}
+	${from.leftCol} {
+		margin-left: 0;
+	}
+
+	span {
+		${from.tablet} {
+			padding-left: 10px;
+		}
+		${from.leftCol} {
+			padding-left: 0;
+		}
 	}
 `;
 
@@ -369,7 +390,7 @@ export const SeriesSectionLink = ({
 						css={[
 							sectionLabelLink,
 							fontStyles(format),
-							invertedStyle,
+							invertedStyle(format),
 							breakWord,
 							sectionPadding,
 							css`
@@ -381,6 +402,8 @@ export const SeriesSectionLink = ({
 							format.display === ArticleDisplay.Immersive &&
 								layoutType !== undefined &&
 								immersiveGridTitleBelowDesktop,
+							layoutType === 'immersiveLandscape' &&
+								immersiveLandscapeTitle,
 							format.design === ArticleDesign.Gallery &&
 								css`
 									position: relative;
@@ -405,35 +428,6 @@ export const SeriesSectionLink = ({
 						<span>{title}</span>
 					</a>
 				</div>
-			);
-		}
-		if (
-			layoutType === 'immersivePortrait' ||
-			layoutType === 'immersiveLandscape'
-		) {
-			return (
-				<>
-					<a
-						href={`${guardianBaseURL}/${sectionUrl}`}
-						css={[
-							sectionLabelLink,
-							css`
-								color: ${sectionTitleColour};
-								background-color: ${themePalette(
-									'--section-title-background',
-								)};
-							`,
-							marginRight,
-							fontStyles(format),
-							breakWord,
-						]}
-						data-component="section"
-						data-link-name="article section"
-						className={interactiveLegacyClasses.labelLink}
-					>
-						<span>{sectionLabel}</span>
-					</a>
-				</>
 			);
 		}
 		// Other types of immersives show nothing at all if there's no series tag

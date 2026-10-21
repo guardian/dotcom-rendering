@@ -1,4 +1,5 @@
 import { AdPlaceholder } from '../components/AdPlaceholder.apps';
+import { ProductElement } from '../components/AffiliateProducts/ProductElement';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.island';
 import { AudioPlayer } from '../components/AudioPlayer/AudioPlayer';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
@@ -38,7 +39,6 @@ import { MultiBylines } from '../components/MultiBylines';
 import { MultiImageBlockComponent } from '../components/MultiImageBlockComponent';
 import { NumberedTitleBlockComponent } from '../components/NumberedTitleBlockComponent';
 import { PersonalityQuizAtom } from '../components/PersonalityQuizAtom.island';
-import { ProductElement } from '../components/ProductElement';
 import { ProductSummary } from '../components/ProductSummary.island';
 import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.island';
 import { PullQuoteBlockComponent } from '../components/PullQuoteBlockComponent';
@@ -437,6 +437,10 @@ export const renderElement = ({
 						elementJs={element.js}
 						elementCss={element.css}
 						customData={element.customData}
+						role={element.role ?? 'inline'}
+						type={element._type}
+						format={format}
+						articleArrangement={articleArrangement}
 					/>
 				);
 			}
@@ -638,6 +642,7 @@ export const renderElement = ({
 					url={element.url}
 					linkType={element.linkType}
 					priority={element.priority}
+					latestPrice={element.latestPrice}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.ProductBlockElement':
@@ -1023,6 +1028,7 @@ const bareElements = new Set<FEElement['_type']>([
 	'model.dotcomrendering.pageElements.TextBlockElement',
 	'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
 	'model.dotcomrendering.pageElements.InteractiveBlockElement',
+	'model.dotcomrendering.pageElements.InteractiveAtomBlockElement',
 ]);
 
 // RenderArticleElement is a wrapper for renderElement that wraps elements in a
@@ -1085,7 +1091,12 @@ export const RenderArticleElement = ({
 		idApiUrl,
 	});
 
-	const needsFigure = !bareElements.has(element._type);
+	const needsFigure =
+		!bareElements.has(element._type) ||
+		(format.design === ArticleDesign.Interactive &&
+			articleArrangement === undefined &&
+			element._type ===
+				'model.dotcomrendering.pageElements.InteractiveAtomBlockElement');
 
 	const role =
 		'role' in element
@@ -1106,6 +1117,7 @@ export const RenderArticleElement = ({
 			type={element._type}
 			format={format}
 			isTimeline={isTimeline}
+			articleArrangement={articleArrangement}
 		>
 			{el}
 		</Figure>

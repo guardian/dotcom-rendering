@@ -1,4 +1,4 @@
-FROM dhi.io/node:24-alpine3.23-dev AS base
+FROM dhi.io/node:24-alpine3.24-dev AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME/bin:$PATH"
 RUN corepack enable
@@ -19,7 +19,7 @@ RUN webpack --config webpack/webpack.config.js --progress
 RUN node scripts/islands/island-descriptions.mjs
 
 # Finally, create the production image with only the necessary files
-FROM dhi.io/node:24-alpine3.23 AS application
+FROM dhi.io/node:24-alpine3.24 AS application
 WORKDIR /app
 COPY --from=builder --chown=node:node /app/dotcom-rendering/dist /app
 

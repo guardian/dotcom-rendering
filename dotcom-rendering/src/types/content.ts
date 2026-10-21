@@ -433,6 +433,7 @@ export interface LinkBlockElement {
 	label: string;
 	linkType: 'ProductButton' | 'StandardButton';
 	priority?: 'Primary' | 'Tertiary';
+	latestPrice?: AffiliateProductPrice;
 }
 
 export interface ListBlockElement {
@@ -977,6 +978,11 @@ export interface ImageSource {
 	srcSet: SrcSetItem[];
 }
 
+export type AffiliateProductPrice = {
+	currencySymbol: string;
+	price: string;
+};
+
 export type ProductDisplayType =
 	| 'InlineOnly'
 	| 'ProductCardOnly'
@@ -987,6 +993,7 @@ export type ProductCta = {
 	text: string;
 	retailer: string;
 	price: string;
+	latestPrice?: AffiliateProductPrice;
 };
 
 export type ProductCustomAttribute = {

@@ -1,11 +1,19 @@
 import { css, type SerializedStyles } from '@emotion/react';
 import { from, until } from '@guardian/source/foundations';
 import { grid } from '../../grid';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+} from '../../lib/articleFormat';
 
 export type LayoutType =
 	| 'standard'
 	| 'showcase'
 	| 'media'
+	| 'picture'
+	| 'comment'
+	| 'interactive'
 	| 'immersiveLandscape'
 	| 'immersivePortrait';
 
@@ -163,20 +171,94 @@ const mediaCss: LayoutCssMap = {
 	},
 };
 
-const immersivePortraitCss: LayoutCssMap = {
+const pictureCss: LayoutCssMap = {
 	title: {
-		belowDesktop: `${grid.column.all} grid-row: 2;`,
-		desktop: `grid-row: 1; ${grid.between('centre-column-start', 8)};`,
-		leftCol: `grid-row: 1; ${grid.between('left-column-start', 9)};`,
+		mobile: 'grid-row: 1;',
+		tablet: 'grid-row: 1;',
+		leftCol: grid.column.left,
 	},
 	headline: {
-		belowDesktop: `${grid.column.all} grid-row: 3;`,
+		mobile: 'grid-row: 2;',
+		tablet: 'grid-row: 2;',
+		desktop: grid.between('centre-column-start', 'right-column-end'),
+		leftCol: 'grid-row: 1;',
+	},
+	standfirst: {
+		mobile: 'grid-row: 4;',
+		tablet: 'grid-row: 4;',
+		leftCol: 'grid-row: 2;',
+	},
+	media: {
+		mobile: 'grid-row: 5;',
+		tablet: 'grid-row: 5;',
+		desktop: grid.between('centre-column-start', 'right-column-end'),
+		leftCol: `grid-row: 3;`,
+	},
+	meta: {
+		mobile: 'grid-row: 3;',
+		tablet: 'grid-row: 3;',
+		desktop: grid.between('centre-column-start', 'right-column-end'),
+		leftCol: `grid-row: 3 / span 2; ${grid.column.left};`,
+	},
+	body: {
+		tablet: 'grid-row: 6;',
+		desktop: grid.between('centre-column-start', 'right-column-end'),
+		leftCol: `grid-row: 5;`,
+	},
+};
+
+const commentCss: LayoutCssMap = {
+	title: {
+		mobile: 'grid-row: 1;',
+		tablet: 'grid-row: 1;',
+		leftCol: `grid-row: 1; ${grid.column.left}`,
+	},
+	headline: {
+		mobile: 'grid-row: 2;',
+		tablet: 'grid-row: 2;',
+		leftCol: 'grid-row: 1;',
+	},
+	standfirst: {
+		mobile: 'grid-row: 3;',
+		tablet: 'grid-row: 3;',
+		leftCol: 'grid-row: 2;',
+	},
+	media: {
+		mobile: 'grid-row: 5;',
+		tablet: 'grid-row: 5;',
+		leftCol: 'grid-row: 3;',
+	},
+	meta: {
+		mobile: 'grid-row: 4;',
+		tablet: 'grid-row: 4;',
+		leftCol: `grid-row: 2 / span 2; ${grid.column.left};`,
+	},
+	body: {
+		mobile: 'grid-row: 6;',
+		tablet: 'grid-row: 6;',
+		leftCol: 'grid-row: 4;',
+	},
+	'right-column': {
+		desktop: `grid-row: 1 / span 6; ${grid.column.right};`,
+		leftCol: `grid-row: 1 / span 4; ${grid.column.right};`,
+	},
+};
+
+const immersivePortraitCss: LayoutCssMap = {
+	title: {
+		belowDesktop: 'grid-row: 1;',
+		desktop: `grid-row: 1; ${grid.between('centre-column-start', 8)};`,
+		leftCol: `${grid.between('left-column-start', 9)};`,
+		wide: `${grid.between('left-column-start', 10)};`,
+	},
+	headline: {
+		belowDesktop: 'grid-row: 2;',
 		desktop: `grid-row: 2; ${grid.between('centre-column-start', 8)};`,
 		leftCol: `grid-row: 2; ${grid.between('left-column-start', 9)};`,
 		wide: `grid-row: 2; ${grid.between('left-column-start', 10)};`,
 	},
 	media: {
-		belowDesktop: `${grid.column.all} grid-row: 1 / span 2;`,
+		belowDesktop: 'grid-row: 3;',
 		desktop: `grid-row: 1 / span 4; ${grid.between(8, 'right-column-end')};`,
 		leftCol: `grid-row: 1 / span 3; ${grid.between(9, 'right-column-end')};`,
 		wide: `grid-row: 1 / span 3; ${grid.between(10, 'right-column-end')};`,
@@ -190,6 +272,7 @@ const immersivePortraitCss: LayoutCssMap = {
 	caption: {
 		belowDesktop: 'grid-row: 5;',
 		desktop: `grid-row: 5;`,
+		leftCol: `grid-row: 4; ${grid.column.left};`,
 	},
 	meta: {
 		belowDesktop: 'grid-row: 6;',
@@ -208,34 +291,38 @@ const immersivePortraitCss: LayoutCssMap = {
 
 const immersiveLandscapeCss: LayoutCssMap = {
 	title: {
-		belowDesktop: `${grid.column.all} grid-row: 2; align-self: end;`,
+		mobile: `${grid.column.all} grid-row: 2; align-self: end; padding-bottom: var(--immersive-headline-overlap);`,
+		tablet: `grid-row: 2; ${grid.between('centre-column-start', 'centre-column-end')};`,
 		desktop: 'grid-row: 2;',
 	},
 	headline: {
-		belowDesktop: `${grid.column.all} grid-row: 3;`,
+		mobile: `${grid.column.all} grid-row: 3; margin-top: calc(-1 * var(--immersive-headline-overlap));`,
+		tablet: `grid-row: 3 / span 2; ${grid.between('centre-column-start', 'centre-column-end')};`,
 		desktop: 'grid-row: 3 / span 2;',
 		wide: `${grid.between('centre-column-start', 14)};`,
 	},
 	media: {
-		belowDesktop: `${grid.column.all} grid-row: 1 / span 2;`,
+		mobile: `${grid.column.all} grid-row: 1 / span 2;`,
+		tablet: `grid-row: 1 / span 3; ${grid.between('centre-column-start', 'centre-column-end')};`,
 		desktop: `grid-row: 1 / span 3; ${grid.between('centre-column-start', 'right-column-end')};`,
 		leftCol: `grid-row: 1 / span 3; ${grid.between('left-column-start', 'right-column-end')};`,
 	},
 	standfirst: {
-		belowDesktop: 'grid-row: 4;',
-		desktop: 'grid-row: 5;',
+		mobile: 'grid-row: 4;',
+		tablet: 'grid-row: 5;',
 	},
 	caption: {
-		belowDesktop: 'grid-row: 5;',
-		desktop: 'grid-row: 6;',
+		mobile: 'grid-row: 5;',
+		tablet: 'grid-row: 6;',
 	},
 	meta: {
-		belowDesktop: 'grid-row: 6;',
-		desktop: `grid-row: 7;`,
+		mobile: 'grid-row: 6;',
+		tablet: `grid-row: 7;`,
 		leftCol: `grid-row: 5 / span 2; ${grid.column.left};`,
 	},
 	body: {
-		belowDesktop: 'grid-row: 7;',
+		mobile: 'grid-row: 7;',
+		tablet: 'grid-row: 8;',
 		leftCol: 'grid-row: 6;',
 	},
 	'right-column': {
@@ -247,6 +334,9 @@ const layoutCssMaps: Record<LayoutType, LayoutCssMap> = {
 	standard: standardCss,
 	showcase: showcaseCss,
 	media: mediaCss,
+	picture: pictureCss,
+	comment: commentCss,
+	interactive: standardCss,
 	immersiveLandscape: immersiveLandscapeCss,
 	immersivePortrait: immersivePortraitCss,
 };
@@ -295,26 +385,35 @@ export const gridItemCss = (
  * format is a Feature, since each combination has a distinct grid
  * arrangement. Non-immersive formats fall back to media/showcase/standard.
  */
-export const getLayoutType = ({
-	isImmersive,
-	orientation,
-	isMedia,
-	isShowcase,
-}: {
-	isImmersive: boolean;
-	isFeature: boolean;
-	orientation: 'portrait' | 'landscape' | 'square';
-	isMedia: boolean;
-	isShowcase: boolean;
-}): LayoutType => {
-	if (isImmersive) {
-		if (orientation === 'portrait') {
+export const getLayoutType = (
+	format: ArticleFormat,
+	mainMediaOrientation: 'portrait' | 'landscape' | 'square',
+): LayoutType => {
+	if (format.display === ArticleDisplay.Immersive) {
+		if (
+			mainMediaOrientation === 'portrait' ||
+			format.design === ArticleDesign.WeekendEssay
+		) {
 			return 'immersivePortrait';
 		}
 		// Square images are treated the same as landscape for immersive layouts.
 		return 'immersiveLandscape';
 	}
-	if (isMedia) return 'media';
-	if (isShowcase) return 'showcase';
+	if (
+		format.design === ArticleDesign.Video ||
+		format.design === ArticleDesign.Audio
+	) {
+		return 'media';
+	}
+	if (format.design === ArticleDesign.Picture) return 'picture';
+	if (format.display === ArticleDisplay.Showcase) return 'showcase';
+	if (
+		format.design === ArticleDesign.Comment ||
+		format.design === ArticleDesign.Editorial ||
+		format.design === ArticleDesign.Letter
+	) {
+		return 'comment';
+	}
+	if (format.design === ArticleDesign.Interactive) return 'interactive';
 	return 'standard';
 };

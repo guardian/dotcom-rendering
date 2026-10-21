@@ -6,6 +6,7 @@ import {
 	textEgyptian17,
 	textSansBold20,
 } from '@guardian/source/foundations';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -59,6 +60,7 @@ type Props = {
 	shouldHideAds: boolean;
 	serverTime?: number;
 	idApiUrl?: string;
+	articleArrangement?: LayoutType;
 };
 
 const globalOlStyles = () => css`
@@ -83,11 +85,19 @@ const hostedContentH2Styles = css`
 	}
 `;
 
+/**
+ * Numbered lists build their own faux h3s (see `addH3s` in
+ * enhance-numbered-lists), which predate the body copy h3 styling and must keep
+ * their own type, colour and spacing. Every property set by
+ * `subheadingLevel3Styles` is restated here so none of it leaks through.
+ */
 const globalH3Styles = (display: ArticleDisplay) => css`
 	${display === ArticleDisplay.NumberedList &&
 	`
 		h3 {
 			${headlineBold24};
+			color: ${themePalette('--textblock-text')};
+			padding: 0;
 			margin-bottom: ${remSpace[2]};
 		}
 	`}
@@ -160,6 +170,7 @@ export const ArticleBody = ({
 	shouldHideAds,
 	serverTime,
 	idApiUrl,
+	articleArrangement,
 }: Props) => {
 	const isInteractiveContent =
 		format.design === ArticleDesign.Interactive ||
@@ -284,6 +295,7 @@ export const ArticleBody = ({
 					contributionsServiceUrl={contributionsServiceUrl}
 					shouldHideAds={shouldHideAds}
 					idApiUrl={idApiUrl}
+					articleArrangement={articleArrangement}
 				/>
 			</div>
 			{hasObserverPublicationTag && <ObserverFooter />}

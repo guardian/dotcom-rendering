@@ -1,3 +1,4 @@
+import type { ElectionComponentsJson } from '../components/ElectionTrackers/electionComponent';
 import type {
 	FEAspectRatio,
 	FEContainer,
@@ -107,6 +108,9 @@ export type DCRFrontCard = {
 	serverTime?: number;
 	articleMedia?: ArticleMedia;
 	headlineTestUuid?: string;
+	dataUrl?: string;
+	graphicKind?: 'electionTracker';
+	eventData?: ElectionComponentsJson;
 };
 
 export type DCRSlideshowImage = {

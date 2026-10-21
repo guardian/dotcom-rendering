@@ -2,7 +2,7 @@
  * @file
  * This file was largely copied from https://github.com/guardian/dotcom-rendering/blob/016de51dc294d3a2895b52091258de0adbadcef5/dotcom-rendering/src/components/SubNav.importable.tsx
  */
-import { css } from '@emotion/react';
+import { css, type SerializedStyles } from '@emotion/react';
 import {
 	breakpoints,
 	from,
@@ -17,6 +17,7 @@ import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import { palette as themePalette } from '../../../palette';
 import type {
 	CustomSubnav,
+	CustomSubnavHeader,
 	CustomSubnavImage,
 	RenderingPage,
 } from '../../../types/customSubnav';
@@ -40,6 +41,7 @@ const subNavStyles = css`
 	${from.mobileMedium} {
 		margin-top: ${space[3]}px;
 	}
+
 	${from.tablet} {
 		min-height: 30px;
 	}
@@ -60,9 +62,11 @@ const articleContainerStyles = css`
 	${from.mobileMedium} {
 		min-height: 40px;
 	}
+
 	${from.tablet} {
 		min-height: 42px;
 	}
+
 	${from.leftCol} {
 		min-height: 44px;
 	}
@@ -79,6 +83,7 @@ const articleSubNavStyles = css`
 	${from.mobileMedium} {
 		margin-top: 0;
 	}
+
 	${from.leftCol} {
 		margin-top: 0;
 	}
@@ -90,6 +95,12 @@ const articleHeaderStyles = css`
 	display: flex;
 	align-items: center;
 	white-space: nowrap;
+	/** Adding top padding to align with the subnav links
+	 * due to the different default layout models unordered lists and anchor tags use
+	 * even if they have the same min-height.
+	 * The 1.1px is selected based on the alignment visually with the subnav links.
+	 */
+	padding-top: 1.1px;
 	padding-right: ${space[2]}px;
 	margin-right: ${space[2]}px;
 	border-right: 1px solid ${themePalette('--masthead-nav-lines')};
@@ -145,14 +156,15 @@ const imageListStyles = css`
 	display: flex;
 	align-items: center;
 	column-gap: ${space[2]}px;
-	min-height: 28px;
+	min-height: 39px;
 	padding: 0 ${space[3]}px;
 
 	${from.mobileLandscape} {
 		padding: 0 ${space[5]}px;
 	}
+
 	${from.tablet} {
-		min-height: 30px;
+		min-height: 44px;
 	}
 `;
 
@@ -242,12 +254,54 @@ const selectedLink = css`
 	${textSansBold14}
 `;
 
+const headerLinkStyles = css`
+	color: inherit;
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+	}
+`;
+
+const HeaderText = ({
+	header: { headerText, dotcomPath },
+	cssOverrides,
+}: {
+	header: CustomSubnavHeader;
+	cssOverrides?: SerializedStyles;
+}) =>
+	dotcomPath ? (
+		<a
+			css={[headerLinkStyles, cssOverrides]}
+			data-src-focus-disabled={true}
+			href={dotcomPath}
+			data-link-name={nestedOphanComponents(
+				'header',
+				'custom subnav',
+				headerText,
+			)}
+		>
+			{headerText}
+		</a>
+	) : (
+		<span css={cssOverrides}>{headerText}</span>
+	);
+
 /** On fronts the header sits above the links as a large stacked heading. */
 const frontContainerStyles = css`
 	${headlineBold28}
 	margin-top: ${space[2]}px;
 	color: ${themePalette('--masthead-nav-link-text')};
 `;
+
+const CustomHeader = (
+	customSubNav: CustomSubnav,
+	cssOverrides: SerializedStyles | undefined,
+) => {
+	return customSubNav.header.showHeaderText ? (
+		<HeaderText header={customSubNav.header} cssOverrides={cssOverrides} />
+	) : undefined;
+};
 
 /**
  * Renders a custom subnav (header + links, images and further data to follow) assigned to fronts or articles.
@@ -299,9 +353,7 @@ export const CustomSubNav = ({
 						images={webImages}
 						headerText={customSubNav.header.headerText}
 					/>
-					<span css={imageHeaderTextStyles}>
-						{customSubNav.header.headerText}
-					</span>
+					{CustomHeader(customSubNav, imageHeaderTextStyles)}
 				</div>
 				<ul
 					css={[imageListStyles, scrollableSubNavStyles]}
@@ -323,12 +375,9 @@ export const CustomSubNav = ({
 			data-rendering-page={renderingPage}
 			css={isArticle ? articleContainerStyles : frontContainerStyles}
 		>
-			{isArticle ? (
-				<span css={articleHeaderStyles}>
-					{customSubNav.header.headerText}
-				</span>
-			) : (
-				customSubNav.header.headerText
+			{CustomHeader(
+				customSubNav,
+				isArticle ? articleHeaderStyles : undefined,
 			)}
 			<ul
 				css={[

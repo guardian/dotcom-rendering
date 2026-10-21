@@ -31,7 +31,8 @@ const labelStyles = css`
 		position: absolute;
 		left: 268px;
 		top: 1px;
-		z-index: 10;
+		/* Make sure the "clear" link is clickable */
+		z-index: 1;
 		padding: 0;
 		border: 0;
 	}
@@ -121,11 +122,13 @@ const adSlotStyles = css`
 `;
 
 const spacefinderAdSlotContainerStyles = css`
-	.ad-slot-container {
+	.ad-slot-container-sf {
 		margin: 12px auto;
 		text-align: center;
 		display: flex;
 		justify-content: center;
+		/* TODO: Revisit ads positioning/sizing nicely in interactive body grid */
+		width: 100%;
 		max-width: 620px;
 		margin-left: 0;
 

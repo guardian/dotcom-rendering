@@ -1,12 +1,12 @@
 import type { RequestHandler } from 'express';
-import { isPuzzlesHubEnabled } from '../lib/puzzlesHubExperiment';
+import { isPuzzlesHubV1Enabled } from '../lib/puzzlesHubVersionExperiment';
 import { validateAsPuzzlesPageType } from '../model/validate';
 import { makePrefetchHeader } from './lib/header';
 import { renderPuzzlesPage } from './render.puzzlesPage.web';
 
 export const handlePuzzlesPage: RequestHandler = ({ body }, res) => {
 	const puzzlesPage = validateAsPuzzlesPageType(body);
-	if (!isPuzzlesHubEnabled(puzzlesPage.config.serverSideABTests)) {
+	if (!isPuzzlesHubV1Enabled(puzzlesPage.config)) {
 		res.sendStatus(404);
 		return;
 	}

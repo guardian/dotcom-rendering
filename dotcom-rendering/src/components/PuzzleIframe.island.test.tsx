@@ -41,6 +41,28 @@ const sudokuEasyConfig = puzzleConfigs['sudoku-easy']!;
 const wordiplyConfig = puzzleConfigs.wordiply!;
 
 describe('buildPuzzleIframeSrc', () => {
+	it('adds reader context to the API game URL without deriving a different puzzle', () => {
+		const context: PuzzleContext = {
+			userId: 'reader',
+			darkMode: true,
+			puzzleDate: '2026-09-26',
+		};
+		const url = new URL(
+			buildPuzzleIframeSrc(
+				sudokuEasyConfig,
+				context,
+				'https://tg.amuselabs.com/guardian/date-picker?set=api-series&id=opaque&embed=1',
+			),
+		);
+		expect(url.pathname).toBe('/guardian/date-picker');
+		expect(url.searchParams.get('id')).toBe('opaque');
+		expect(url.searchParams.get('set')).toBe('api-series');
+		expect(url.searchParams.get('uid')).toBe('reader');
+		expect(
+			JSON.parse(url.searchParams.get('guardian-puzzle-context')!),
+		).toEqual(context);
+	});
+
 	it('resolves the provider URL then appends guardian-puzzle-context on top', () => {
 		const context: PuzzleContext = {
 			userId: null,
@@ -48,7 +70,9 @@ describe('buildPuzzleIframeSrc', () => {
 			puzzleDate: null,
 		};
 		expect(buildPuzzleIframeSrc(sudokuEasyConfig, context)).toBe(
-			`https://tg.amuselabs.com/guardian/date-picker?set=guardian-sudoku-easy&embed=1&idx=1&darkMode=0&${contextParam(context)}`,
+			`https://tg.amuselabs.com/guardian/date-picker?set=guardian-sudoku-easy&embed=1&idx=1&darkMode=0&${contextParam(
+				context,
+			)}`,
 		);
 	});
 
@@ -207,6 +231,52 @@ describe('PuzzleIframe', () => {
 
 	const getDarkModeParamFromSrc = (src: string): string | null =>
 		new URL(src).searchParams.get('darkMode');
+
+	it('loads the API-selected puzzle after authentication resolves', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedIn('reader'));
+		render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="API puzzle"
+				darkModeAvailable={false}
+				puzzleDate="2026-09-26"
+				gameUrl="https://tg.amuselabs.com/guardian/date-picker?set=from-api&id=opaque-id&embed=1"
+			/>,
+		);
+		const iframe =
+			await screen.findByTitle<HTMLIFrameElement>('API puzzle');
+		await waitFor(() =>
+			expect(new URL(iframe.src).searchParams.get('uid')).toBe('reader'),
+		);
+		expect(new URL(iframe.src).searchParams.get('id')).toBe('opaque-id');
+		expect(new URL(iframe.src).searchParams.get('set')).toBe('from-api');
+	});
+
+	it('has no src until the auth check resolves, then loads once with the uid', async () => {
+		let resolveAuth: (status: ReturnType<typeof signedIn>) => void = () =>
+			undefined;
+		mockedGetAuthStatus.mockReturnValue(
+			new Promise((resolve) => {
+				resolveAuth = resolve;
+			}),
+		);
+
+		render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="Puzzle"
+				darkModeAvailable={false}
+				puzzleDate={null}
+			/>,
+		);
+
+		const iframe = await screen.findByTitle<HTMLIFrameElement>('Puzzle');
+		expect(iframe.getAttribute('src')).toBeNull();
+
+		resolveAuth(signedIn('user-123'));
+
+		await waitFor(() => expect(getUidFromSrc(iframe.src)).toBe('user-123'));
+	});
 
 	it('renders userId: null and darkMode: false while signed out with dark mode unavailable', async () => {
 		mockedGetAuthStatus.mockResolvedValue(signedOut());

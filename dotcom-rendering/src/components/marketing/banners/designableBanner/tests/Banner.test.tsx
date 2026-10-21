@@ -1,4 +1,3 @@
-import type { OphanComponentType } from '@guardian/libs';
 import type {
 	ConfigurableDesign,
 	HexColour,
@@ -61,7 +60,7 @@ const mockProps: BannerRenderProps = {
 		abTestName: 'test',
 		abTestVariant: 'variant',
 		campaignCode: 'campaign',
-		componentType: 'ACQUISITIONS_HEADER' as OphanComponentType,
+		componentType: 'ACQUISITIONS_HEADER',
 		products: [],
 		ophanPageId: 'page-id',
 		platformId: 'platform-id',
@@ -112,7 +111,7 @@ const mockProps: BannerRenderProps = {
 				goalColour: hex('05', '29', '62'),
 			},
 		},
-	} as ConfigurableDesign,
+	},
 	bannerChannel: 'contributions',
 };
 
@@ -214,7 +213,7 @@ describe('DesignableBanner V2', () => {
 						benefits: [],
 					},
 				],
-			} as BannerRenderProps['choiceCardsSettings'],
+			},
 			design: {
 				...mockProps.design!,
 				visual: {
@@ -231,8 +230,9 @@ describe('DesignableBanner V2', () => {
 
 		render(<BannerComponent {...choiceCardProps} />);
 
-		expect(screen.getByText('£10')).toBeInTheDocument();
-		expect(screen.getByText('£20')).toBeInTheDocument();
+		expect(screen.getByRole('radio', { name: /£10/ })).toBeChecked();
+		expect(screen.getByRole('radio', { name: /£20/ })).not.toBeChecked();
+		expect(screen.getAllByRole('radio')).toHaveLength(2);
 	});
 
 	it('renders article count when separateArticleCount is true and >= 5 articles', () => {
