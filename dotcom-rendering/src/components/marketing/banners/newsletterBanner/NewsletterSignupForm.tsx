@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space, until } from '@guardian/source/foundations';
+import { from, space, until } from '@guardian/source/foundations';
 import { Button, TextInput } from '@guardian/source/react-components';
 import { ToggleSwitch } from '@guardian/source-development-kitchen/react-components';
 // Note - the package also exports a component as a named export "ReCAPTCHA",
@@ -15,7 +15,6 @@ import type { NewsletterSignupFormProps } from '../../../NewsletterSignupForm.is
 import {
 	emailFieldStyles as baseEmailFieldStyles,
 	formStyles,
-	getPrivacyContainerStyles as getBasePrivacyContainerStyles,
 	getToggleContainerStyles,
 	marketingToggleBoxStyles,
 	primaryButtonTheme,
@@ -32,6 +31,19 @@ const newsletterFormTransition = `0.2s ${contentTransitionEasing}`;
 
 const collapsedFormStyles = css`
 	row-gap: 0;
+`;
+
+const bannerSignedInLayoutStyles = css`
+	${signedInLayoutStyles};
+	margin-top: ${space[2]}px;
+	row-gap: ${space[4]}px;
+`;
+
+const signedInButtonStyles = css`
+	max-width: 100%;
+	${from.tablet} {
+		width: 240px;
+	}
 `;
 
 const emailFieldStyles = css`
@@ -87,12 +99,16 @@ const additionalFieldsContentStyles = css`
 
 const toggleContainerStyles = getToggleContainerStyles(true);
 
-const getPrivacyContainerStyles = (
-	isSignedIn: boolean | 'Pending',
-	isModal: boolean,
-) => css`
-	${getBasePrivacyContainerStyles(isSignedIn, isModal)};
+const getPrivacyContainerStyles = (isSignedIn: boolean | 'Pending') => css`
+	margin-top: ${space[2]}px;
+	${until.tablet} {
+		margin-top: ${space[3]}px;
+	}
 	grid-column: 1 / -1;
+	${isSignedIn === true &&
+	css`
+		margin-top: 0;
+	`};
 `;
 
 /**
@@ -159,7 +175,8 @@ export const NewsletterSignupForm = ({
 	const failureMessage = hasNonValidationError
 		? errorMessage
 		: 'Sign up failed.';
-	const showAdditionalFields = isModal || isInteracted || !!userEmail;
+	const showAdditionalFields =
+		isModal || isInteracted || (userEmail ?? '') !== '';
 	// isValidationError comes from the hook — true only for inline field
 	// errors (empty / bad format), false for reCAPTCHA / network errors.
 
@@ -173,7 +190,9 @@ export const NewsletterSignupForm = ({
 				}}
 				css={[
 					formStyles,
-					isSignedIn ? signedInLayoutStyles : signedOutLayoutStyles,
+					isSignedIn
+						? bannerSignedInLayoutStyles
+						: signedOutLayoutStyles,
 					!showAdditionalFields && collapsedFormStyles,
 				]}
 			>
@@ -197,7 +216,11 @@ export const NewsletterSignupForm = ({
 				)}
 				<div css={submitButtonContainerStyles}>
 					<Button
-						cssOverrides={submitButtonStyles}
+						cssOverrides={
+							isSignedIn
+								? [submitButtonStyles, signedInButtonStyles]
+								: submitButtonStyles
+						}
 						onClick={handleSubmitButtonClick}
 						type="submit"
 						theme={primaryButtonTheme}
@@ -232,12 +255,7 @@ export const NewsletterSignupForm = ({
 									/>
 								</div>
 							</div>
-							<div
-								css={getPrivacyContainerStyles(
-									isSignedIn,
-									isModal,
-								)}
-							>
+							<div css={getPrivacyContainerStyles(isSignedIn)}>
 								<NewsletterPrivacyMessage
 									isSignedIn={isSignedIn}
 								/>
