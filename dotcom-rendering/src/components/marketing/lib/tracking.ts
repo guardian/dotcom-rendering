@@ -30,9 +30,46 @@ const trackingParamNames: (keyof LinkParams)[] = [
 	'acquisitionData',
 ];
 
+const singleValueTrackingParamNames = new Set<string>(trackingParamNames);
+
 const getQueryParams = (url: string): URLSearchParams => {
 	const queryString = url.split('?')[1]?.split('#')[0] ?? '';
 	return new URLSearchParams(queryString);
+};
+
+const deduplicateQueryParams = (url: string): string => {
+	const hashIndex = url.indexOf('#');
+	const urlWithoutHash = hashIndex === -1 ? url : url.slice(0, hashIndex);
+	const hash = hashIndex === -1 ? '' : url.slice(hashIndex);
+	const queryStart = urlWithoutHash.indexOf('?');
+	if (queryStart === -1) return url;
+
+	const queryString = urlWithoutHash.slice(queryStart + 1);
+	const seenPairs = new Set<string>();
+	const seenTrackingParams = new Set<string>();
+	const deduplicatedQuery = queryString
+		.split('&')
+		.filter((param) => {
+			if (!param) return false;
+
+			const parsedParam = new URLSearchParams(param);
+			const name = parsedParam.keys().next().value;
+			if (name === undefined) return false;
+
+			if (singleValueTrackingParamNames.has(name)) {
+				if (seenTrackingParams.has(name)) return false;
+				seenTrackingParams.add(name);
+				return true;
+			}
+
+			const pair = JSON.stringify([name, parsedParam.get(name)]);
+			if (seenPairs.has(pair)) return false;
+			seenPairs.add(pair);
+			return true;
+		})
+		.join('&');
+
+	return `${urlWithoutHash.slice(0, queryStart)}?${deduplicatedQuery}${hash}`;
 };
 
 type AbTestObject = {
@@ -154,6 +191,7 @@ export const addAbandonedBasketAndTrackingParamsToUrl = (
 const addPromoCodesToUrl = (url: string, promoCodes: string[]): string => {
 	if (!promoCodes.length) return url;
 	const existingPromoCodeCounts = new Map<string, number>();
+	const seenPromoCodes = new Set<string>();
 	for (const code of getQueryParams(url).getAll('promoCode')) {
 		existingPromoCodeCounts.set(
 			code,
@@ -161,6 +199,9 @@ const addPromoCodesToUrl = (url: string, promoCodes: string[]): string => {
 		);
 	}
 	const promoCodesToAdd = promoCodes.filter((code) => {
+		if (seenPromoCodes.has(code)) return false;
+		seenPromoCodes.add(code);
+
 		const existingCount = existingPromoCodeCounts.get(code) ?? 0;
 		if (existingCount === 0) return true;
 		existingPromoCodeCounts.set(code, existingCount - 1);
@@ -204,7 +245,7 @@ export const enrichSupportUrl = ({
 
 	const withTracking = addTrackingParams(urlWithRegion, tracking);
 
-	return addPromoCodesToUrl(withTracking, promoCodes);
+	return deduplicateQueryParams(addPromoCodesToUrl(withTracking, promoCodes));
 };
 
 const hrefRegex = /href="(.*?)"/g;
