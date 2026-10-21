@@ -65,6 +65,11 @@ export const PuzzlesPage = ({ puzzlesPage, NAV }: Props) => {
 					darkModeAvailable={darkModeAvailable}
 					puzzlesPage={puzzlesPage}
 					NAV={NAV}
+					branding={
+						puzzlesPage.commercialProperties?.[
+							puzzlesPage.editionId
+						]?.branding
+					}
 				/>
 			)}
 		</StrictMode>
