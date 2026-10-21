@@ -27,11 +27,22 @@ import { NewsletterBannerLogo } from './NewsletterBannerLogo';
 import { NewsletterFrequencyTag } from './NewsletterFrequencyTag';
 import { NewsletterSignupForm } from './NewsletterSignupForm';
 import { SuccessMessage } from './SuccessMessage';
+import { useSuccessDismissal } from './useSuccessDismissal';
 
 const phabletContentMaxWidth = '492px';
-const successTransition = `350ms ${contentTransitionEasing}`;
+const transitionDurationMs = 350;
+const successTransition = `${transitionDurationMs}ms ${contentTransitionEasing}`;
 
 const styles = {
+	dismissal: (isDismissing: boolean) => css`
+		transform: translateY(${isDismissing ? '100%' : '0'});
+		transition: transform ${successTransition};
+		pointer-events: ${isDismissing ? 'none' : 'auto'};
+
+		@media (prefers-reduced-motion: reduce) {
+			transition: none;
+		}
+	`,
 	panel: (isVisible: boolean) => css`
 		display: grid;
 		grid-template-rows: ${isVisible ? '1fr' : '0fr'};
@@ -339,6 +350,14 @@ export const NewsletterBannerComponent = (
 		...props,
 		isCollapsible: false,
 	});
+	const { isDismissing, dismiss, ...dismissalHandlers } = useSuccessDismissal(
+		{
+			isSuccess,
+			bannerRef,
+			onClose: baseBannerData?.actions.onClose,
+			durationMs: transitionDurationMs,
+		},
+	);
 
 	useEffect(() => {
 		bannerRef.current?.focus();
@@ -363,6 +382,10 @@ export const NewsletterBannerComponent = (
 	};
 	const bannerData: BannerData = {
 		...baseBannerData,
+		actions: {
+			...baseBannerData.actions,
+			onClose: isSuccess ? dismiss : baseBannerData.actions.onClose,
+		},
 		content: {
 			mainContent: newsletterCopy,
 			mobileContent: newsletterCopy,
@@ -394,10 +417,15 @@ export const NewsletterBannerComponent = (
 			ref={bannerRef}
 			role="alert"
 			tabIndex={-1}
-			css={styles.container(
-				hexColourToString(basic.background),
-				hexColourToString(basic.bodyText),
-			)}
+			{...dismissalHandlers}
+			{...(isDismissing ? { inert: '' } : {})}
+			css={[
+				styles.container(
+					hexColourToString(basic.background),
+					hexColourToString(basic.bodyText),
+				),
+				styles.dismissal(isDismissing),
+			]}
 		>
 			<div css={styles.layout}>
 				<NewsletterBannerLogo />
