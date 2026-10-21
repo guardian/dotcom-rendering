@@ -101,7 +101,7 @@ const webInteractiveArticle = enhanceArticleType(
 	{
 		...StandardFixture,
 		contentType: 'Interactive',
-		firstPublicationDate: '2026-10-01T09:00:00.000Z',
+		firstPublicationDate: '2026-10-30T09:00:00.000Z',
 		format: {
 			...StandardFixture.format,
 			design: 'InteractiveDesign',
@@ -128,7 +128,6 @@ export const WebInteractive: Story = {
 			display: webInteractiveArticle.display,
 			theme: webInteractiveArticle.theme,
 		},
-		isInInteractiveLayoutTest: true,
 	},
 	parameters: {
 		formats: [
