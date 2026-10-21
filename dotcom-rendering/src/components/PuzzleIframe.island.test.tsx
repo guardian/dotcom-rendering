@@ -206,6 +206,36 @@ describe('buildFrameStyles', () => {
 		expect(touchBlock).toContain('min-height: 800px;');
 		expect(touchBlock).toContain('min-height: 600px;');
 	});
+
+	it('uses a 600px min-height below tablet for wordiply on non-touch devices', () => {
+		const normalisedStyles = buildFrameStyles('wordiply').styles.replace(
+			/\s+/g,
+			' ',
+		);
+		// Only the part before the pointer:coarse override is non-touch.
+		const nonTouchStyles = normalisedStyles.slice(
+			0,
+			normalisedStyles.indexOf('@media (pointer: coarse)'),
+		);
+
+		expect(nonTouchStyles).toContain(
+			'@media (max-width: 739.9px){min-height:600px;}',
+		);
+	});
+
+	it('uses a 600px min-height below tablet for wordiply on touch devices', () => {
+		const normalisedStyles = buildFrameStyles('wordiply').styles.replace(
+			/\s+/g,
+			' ',
+		);
+		const touchBlock = normalisedStyles.slice(
+			normalisedStyles.indexOf('@media (pointer: coarse)'),
+		);
+
+		expect(touchBlock).toContain(
+			'@media (max-width: 739.9px) { min-height: 600px; }',
+		);
+	});
 });
 
 describe('PuzzleIframe', () => {
