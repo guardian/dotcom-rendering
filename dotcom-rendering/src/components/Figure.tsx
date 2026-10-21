@@ -362,7 +362,7 @@ export const Figure = ({
 				format.design === ArticleDesign.Interactive &&
 					articleArrangement === undefined,
 			)}
-			data-spacefinder-role={role}
+			data-spacefinder-role={role === 'fullWidth' ? 'immersive' : role}
 			data-spacefinder-type={type}
 			className={className}
 		>
