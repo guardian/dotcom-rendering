@@ -47,7 +47,9 @@ const parsePrice = (price: string): number | undefined => {
  */
 const getLowestPrice = (ctas: ProductCta[]): string | undefined => {
 	const candidates = ctas.flatMap(({ price, latestPrice }) => {
-		const display = latestPrice?.price ?? price;
+		const display = latestPrice
+			? `${latestPrice.currencySymbol}${latestPrice.price}`
+			: price;
 		const value = parsePrice(display);
 
 		return value === undefined ? [] : [{ value, display }];

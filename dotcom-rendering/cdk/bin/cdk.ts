@@ -3,6 +3,14 @@ import { InstanceClass, InstanceSize, InstanceType } from 'aws-cdk-lib/aws-ec2';
 import type { RenderingCDKStackProps } from '../lib/renderingStack';
 import { RenderingCDKStack } from '../lib/renderingStack';
 
+function getImageIdentifier(): string {
+	const imageIdentifier: string | undefined = process.env.IMAGE_DIGEST;
+	if (!imageIdentifier) {
+		throw new Error('Image identifier must be provided');
+	}
+	return imageIdentifier;
+}
+
 const cdkApp = new App();
 
 const cpuScalingSteps = {
@@ -97,19 +105,11 @@ new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
 });
 
 /** Tag pages */
-function getImageIdentifier(): string {
-	const imageIdentifier: string | undefined = process.env.IMAGE_DIGEST;
-	if (!imageIdentifier) {
-		throw new Error('Image identifier must be provided');
-	}
-	return imageIdentifier;
-}
-
 export const TagPageRenderingPropsCODE: RenderingCDKStackProps = {
 	guApp: 'tag-page-rendering',
 	stage: 'CODE',
 	domainName: 'tag-page-rendering.code.dev-guardianapis.com',
-	scaling: { minimumInstances: 1, maximumInstances: 3 },
+	scaling: { minimumInstances: 0, maximumInstances: 0 },
 	instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.SMALL),
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
@@ -117,7 +117,7 @@ export const TagPageRenderingPropsCODE: RenderingCDKStackProps = {
 		taskMemoryLimitMiB: 2048,
 		scaling: {
 			minimumTasks: 1,
-			maximumTasks: 9,
+			maximumTasks: 3,
 			cpuScaling: {
 				targetValue: 20,
 				scaleInCooldown: Duration.seconds(60),
@@ -125,7 +125,7 @@ export const TagPageRenderingPropsCODE: RenderingCDKStackProps = {
 			},
 		},
 
-		// Route all traffic to ECS
+		// Route all traffic to ECS. NOTE: EC2 has 0 instances.
 		targetGroupWeights: {
 			ec2: 0,
 			ecs: 1,
@@ -144,8 +144,8 @@ export const TagPageRenderingPropsPROD: RenderingCDKStackProps = {
 	stage: 'PROD',
 	domainName: 'tag-page-rendering.guardianapis.com',
 	scaling: {
-		minimumInstances: 9,
-		maximumInstances: 90,
+		minimumInstances: 0,
+		maximumInstances: 0,
 		policies: {
 			step: {
 				cpu: cpuScalingSteps,
@@ -185,7 +185,7 @@ export const TagPageRenderingPropsPROD: RenderingCDKStackProps = {
 			},
 		},
 
-		// Route 100% traffic to ECS
+		// Route 100% traffic to ECS. NOTE: EC2 has 0 instances.
 		targetGroupWeights: {
 			ec2: 0,
 			ecs: 1,
@@ -199,15 +199,43 @@ new RenderingCDKStack(
 	TagPageRenderingPropsPROD,
 );
 
-/** Interactive */
-new RenderingCDKStack(cdkApp, 'InteractiveRendering-CODE', {
+export const InteractiveRenderingPropsCODE: RenderingCDKStackProps = {
 	guApp: 'interactive-rendering',
 	stage: 'CODE',
 	domainName: 'interactive-rendering.code.dev-guardianapis.com',
 	scaling: { minimumInstances: 1, maximumInstances: 3 },
 	instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.MICRO),
-});
-new RenderingCDKStack(cdkApp, 'InteractiveRendering-PROD', {
+	ecsProps: {
+		imageIdentifier: getImageIdentifier(),
+		taskCpu: 1024,
+		taskMemoryLimitMiB: 2048,
+		scaling: {
+			minimumTasks: 1,
+			maximumTasks: 3,
+			cpuScaling: {
+				targetValue: 20,
+				// TODO: Tune cooldown values.
+				// https://docs.aws.amazon.com/autoscaling/application/userguide/target-tracking-scaling-policy-overview.html#target-tracking-cooldown
+				scaleInCooldown: Duration.seconds(60),
+				scaleOutCooldown: Duration.seconds(60),
+			},
+		},
+
+		// Route 100% traffic to EC2.
+		targetGroupWeights: {
+			ec2: 1,
+			ecs: 0,
+		},
+	},
+};
+/** Interactive */
+new RenderingCDKStack(
+	cdkApp,
+	'InteractiveRendering-CODE',
+	InteractiveRenderingPropsCODE,
+);
+
+export const InteractiveRenderingPropsPROD: RenderingCDKStackProps = {
 	guApp: 'interactive-rendering',
 	stage: 'PROD',
 	domainName: 'interactive-rendering.guardianapis.com',
@@ -237,4 +265,9 @@ new RenderingCDKStack(cdkApp, 'InteractiveRendering-PROD', {
 		},
 	},
 	instanceType: InstanceType.of(InstanceClass.C8G, InstanceSize.MEDIUM),
-});
+};
+new RenderingCDKStack(
+	cdkApp,
+	'InteractiveRendering-PROD',
+	InteractiveRenderingPropsPROD,
+);

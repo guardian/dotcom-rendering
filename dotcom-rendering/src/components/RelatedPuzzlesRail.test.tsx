@@ -30,12 +30,14 @@ const renderRail = () =>
 	);
 
 describe('RelatedPuzzlesRail', () => {
-	it('links its heading to the Puzzles & games hub', () => {
-		const { getByRole } = renderRail();
-		expect(getByRole('link', { name: 'Puzzles & games' })).toHaveAttribute(
-			'href',
-			'/puzzles-and-games',
-		);
+	it('renders its heading as plain text, not a link', () => {
+		const { getByRole, queryByRole } = renderRail();
+		expect(
+			getByRole('heading', { name: 'More from Puzzles & games' }),
+		).toBeInTheDocument();
+		expect(
+			queryByRole('link', { name: 'Puzzles & games' }),
+		).not.toBeInTheDocument();
 	});
 
 	it('scrolls the cards horizontally on mobile', () => {
