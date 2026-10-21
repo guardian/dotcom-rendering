@@ -56,6 +56,25 @@ describe('enrichSupportUrl', () => {
 			'https://support.theguardian.com/uk/contribute?REFPVID=123&INTCMP=test&acquisitionData=%7B%22source%22%3A%22WEB%22%2C%22componentId%22%3A%22test%22%2C%22componentType%22%3A%22ACQUISITIONS_EPIC%22%2C%22campaignCode%22%3A%22test%22%2C%22abTests%22%3A%5B%7B%22name%22%3A%22test%22%2C%22variant%22%3A%22control%22%7D%5D%2C%22referrerPageviewId%22%3A%22123%22%2C%22referrerUrl%22%3A%22https%3A%2F%2Ftheguardian.com%22%2C%22isRemote%22%3Atrue%7D&promoCode=PROMO1&promoCode=PROMO2',
 		);
 	});
+
+	it('does not duplicate parameters when an enriched support URL is enriched again', () => {
+		const params = {
+			tracking,
+			countryCode: 'GB',
+			promoCodes: ['PROMO1', 'PROMO2'],
+		};
+		const enrichedUrl = enrichSupportUrl({
+			baseUrl: 'https://support.theguardian.com/contribute',
+			...params,
+		});
+
+		const enrichedAgain = enrichSupportUrl({
+			baseUrl: enrichedUrl,
+			...params,
+		});
+
+		expect(enrichedAgain).toEqual(enrichedUrl);
+	});
 });
 
 describe('getChoiceCardUrl', () => {

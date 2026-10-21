@@ -24,6 +24,17 @@ type LinkParams = {
 	acquisitionData: string;
 };
 
+const trackingParamNames: (keyof LinkParams)[] = [
+	'REFPVID',
+	'INTCMP',
+	'acquisitionData',
+];
+
+const getQueryParams = (url: string): URLSearchParams => {
+	const queryString = url.split('?')[1]?.split('#')[0] ?? '';
+	return new URLSearchParams(queryString);
+};
+
 type AbTestObject = {
 	name: string;
 	variant: string;
@@ -93,7 +104,15 @@ const addTrackingParams = (baseUrl: string, params: Tracking): string => {
 		params.targetingAbTest,
 	);
 	const acquisitionData = encodeAcquisitionsData(params, abTests);
-	const queryString = generateQueryString(params, acquisitionData);
+	const existingQueryParams = getQueryParams(baseUrl);
+	const queryString = generateQueryString(params, acquisitionData)
+		.split('&')
+		.filter((param) => {
+			const paramName = param.split('=', 1)[0] ?? '';
+			return !existingQueryParams.has(paramName);
+		})
+		.join('&');
+	if (!queryString) return baseUrl;
 	const alreadyHasQueryString = baseUrl.includes('?');
 	return `${baseUrl}${alreadyHasQueryString ? '&' : '?'}${queryString}`;
 };
@@ -134,8 +153,22 @@ export const addAbandonedBasketAndTrackingParamsToUrl = (
 
 const addPromoCodesToUrl = (url: string, promoCodes: string[]): string => {
 	if (!promoCodes.length) return url;
+	const existingPromoCodeCounts = new Map<string, number>();
+	for (const code of getQueryParams(url).getAll('promoCode')) {
+		existingPromoCodeCounts.set(
+			code,
+			(existingPromoCodeCounts.get(code) ?? 0) + 1,
+		);
+	}
+	const promoCodesToAdd = promoCodes.filter((code) => {
+		const existingCount = existingPromoCodeCounts.get(code) ?? 0;
+		if (existingCount === 0) return true;
+		existingPromoCodeCounts.set(code, existingCount - 1);
+		return false;
+	});
+	if (!promoCodesToAdd.length) return url;
 	const separator = url.includes('?') ? '&' : '?';
-	const promoParams = promoCodes
+	const promoParams = promoCodesToAdd
 		.map((code) => `promoCode=${encodeURIComponent(code)}`)
 		.join('&');
 	return `${url}${separator}${promoParams}`;
@@ -161,7 +194,13 @@ export const enrichSupportUrl = ({
 	if (!isSupportUrl(baseUrl)) {
 		return baseUrl;
 	}
-	const urlWithRegion = addRegionIdToSupportUrl(baseUrl, countryCode);
+	const existingQueryParams = getQueryParams(baseUrl);
+	const hasTrackingParams = trackingParamNames.every((name) =>
+		existingQueryParams.has(name),
+	);
+	const urlWithRegion = hasTrackingParams
+		? baseUrl
+		: addRegionIdToSupportUrl(baseUrl, countryCode);
 
 	const withTracking = addTrackingParams(urlWithRegion, tracking);
 
