@@ -81,7 +81,7 @@ const containerLockupStyles = css`
 	align-items: center;
 	gap: 7px;
 	white-space: nowrap;
-	color: ${palette.neutral[7]};
+	color: var(--puzzles-text-colour, ${palette.neutral[7]});
 	a {
 		text-decoration: none;
 	}
