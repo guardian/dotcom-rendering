@@ -556,13 +556,27 @@ export const TableOfContents = ({
 				isFilterArticle && filterDetailsStyles,
 				isFilterArticle && filterFullBleedStyles,
 			]}
-			data-component="table-of-contents"
+			// A separate name lets tracking tell The Filter's bar apart from
+			// the standard table of contents without filtering by article.
+			data-component={
+				isFilterArticle
+					? 'table-of-contents-filter'
+					: 'table-of-contents'
+			}
+			/**
+			 * Clicks are left to the browser's own toggle rather than handled
+			 * with `setOpen`. Ophan reads `data-link-name` from a click
+			 * listener on the document, which runs after React's, and React
+			 * flushes a state update from a click before that listener runs. Set
+			 * from the click, the link name would already describe the new
+			 * state, reporting an open as a close. The native toggle only
+			 * happens once the click has finished dispatching.
+			 */
+			onToggle={(e): void => {
+				setOpen(e.currentTarget.open);
+			}}
 		>
 			<summary
-				onClick={(e): void => {
-					e.preventDefault();
-					setOpen((state) => !state);
-				}}
 				onKeyDown={(e): void => {
 					if (e.key === 'Enter' || e.key === ' ') {
 						e.preventDefault();

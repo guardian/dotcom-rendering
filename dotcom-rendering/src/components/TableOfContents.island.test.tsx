@@ -251,6 +251,63 @@ describe('TableOfContents, The Filter variant', () => {
 		).not.toHaveAttribute('aria-current');
 	});
 
+	it('names the component separately for tracking', () => {
+		const { container } = renderWithHeadings(true);
+
+		expect(container.querySelector('details')).toHaveAttribute(
+			'data-component',
+			'table-of-contents-filter',
+		);
+	});
+
+	it('keeps the standard component name on other articles', () => {
+		const { container } = renderWithHeadings(false);
+
+		expect(container.querySelector('details')).toHaveAttribute(
+			'data-component',
+			'table-of-contents',
+		);
+	});
+
+	it('names the action a click takes, as it is being clicked', async () => {
+		const { container } = renderWithHeadings(true);
+		const details = container.querySelector('details');
+
+		/** Ophan reads the link name from a click listener on the document. */
+		const trackedLinkNames: Array<string | null> = [];
+		const trackClick = (e: MouseEvent) => {
+			if (e.target instanceof Element) {
+				trackedLinkNames.push(
+					e.target.closest('summary')?.dataset.linkName ?? null,
+				);
+			}
+		};
+		document.addEventListener('click', trackClick);
+
+		const toggle = async () => {
+			const toggled = new Promise((resolve) => {
+				details?.addEventListener('toggle', resolve, { once: true });
+			});
+			await act(async () => {
+				screen.getByRole('button').click();
+				await toggled;
+			});
+		};
+
+		await toggle();
+		expect(details).toHaveAttribute('open');
+
+		await toggle();
+		expect(details).not.toHaveAttribute('open');
+
+		document.removeEventListener('click', trackClick);
+
+		expect(trackedLinkNames).toEqual([
+			'table-of-contents-open',
+			'table-of-contents-close',
+		]);
+	});
+
 	it('does not track sections on a non-filter article', () => {
 		renderWithHeadings(false);
 
