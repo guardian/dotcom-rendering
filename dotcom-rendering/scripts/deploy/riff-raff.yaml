@@ -68,13 +68,15 @@ deployments:
       - facia-rendering-cfn
   # tag-page-rendering cloudformation
   tag-page-rendering-cfn:
-    template: cloudformation
+    type: cloud-formation
     parameters:
       templateStagePaths:
         CODE: TagPageRendering-CODE.template.json
         PROD: TagPageRendering-PROD.template.json
       cloudFormationStackByTags: false
       cloudFormationStackName: tag-page-rendering
+    dependencies:
+      - frontend-static
   # interactive-rendering cloudformation
   interactive-rendering-cfn:
     template: cloudformation
