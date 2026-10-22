@@ -42,9 +42,11 @@ const topBarStyles = css`
 	justify-content: flex-end;
 	box-sizing: border-box;
 	height: 52px;
+
 	${from.tablet} {
 		height: 60px;
 	}
+
 	${from.desktop} {
 		height: 64px;
 	}
@@ -180,7 +182,7 @@ export const TopBar = ({
 
 				<Hide until="desktop">
 					<TopBarLinkContainer>
-						{
+						{['AU', 'US'].includes(editionId) && (
 							<TopBarLink
 								dataLinkName={nestedOphanComponents(
 									'header',
@@ -191,7 +193,7 @@ export const TopBar = ({
 							>
 								Newsletters
 							</TopBarLink>
-						}
+						)}
 					</TopBarLinkContainer>
 				</Hide>
 
