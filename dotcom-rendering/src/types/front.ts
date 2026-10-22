@@ -88,7 +88,6 @@ export type DCRFrontCard = {
 	kickerText?: string;
 	supportingContent?: DCRSupportingContent[];
 	snapData?: DCRSnapType;
-	isBoosted?: boolean;
 	boostLevel?: BoostLevel;
 	isImmersive: boolean;
 	isCrossword?: boolean;
