@@ -143,6 +143,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						idApiUrl={article.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
 						showSubNav={
+							format.display !== ArticleDisplay.Immersive &&
 							!isLabs &&
 							!isInteractive &&
 							!isWorldCup2026 &&
