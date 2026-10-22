@@ -16,7 +16,7 @@ import type { ScalingInterval } from 'aws-cdk-lib/aws-applicationautoscaling';
 import { AdjustmentType, StepScalingPolicy } from 'aws-cdk-lib/aws-autoscaling';
 import { Metric, Unit } from 'aws-cdk-lib/aws-cloudwatch';
 import { SnsAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
-import type { InstanceType } from 'aws-cdk-lib/aws-ec2';
+import type { InstanceType as Ec2InstanceType } from 'aws-cdk-lib/aws-ec2';
 import { Peer } from 'aws-cdk-lib/aws-ec2';
 import {
 	ContainerDependencyCondition,
@@ -30,7 +30,7 @@ import { getUserData } from './userData';
 export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
 	guApp: `${'article' | 'facia' | 'interactive' | 'tag-page'}-rendering`;
 	domainName: string;
-	instanceType: InstanceType;
+	instanceType: Ec2InstanceType;
 	scaling: GuAsgCapacity & {
 		policies?: {
 			step?: {
