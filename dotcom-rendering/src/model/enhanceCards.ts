@@ -2,6 +2,7 @@ import { isUndefined } from '@guardian/libs';
 import type {
 	FEFrontCard,
 	FEMediaAtom,
+	FEMultimediaSlideshow,
 	FESupportingContent,
 } from '../frontend/feFront';
 import {
@@ -25,6 +26,8 @@ import type { Image } from '../types/content';
 import type {
 	DCRFrontCard,
 	DCRSlideshowImage,
+	DCRSlideshowMedia,
+	DCRSlideshowVideo,
 	DCRSupportingContent,
 	FrontEditorialTest,
 } from '../types/front';
@@ -460,6 +463,52 @@ export const decideReplacementMedia = (
 	return undefined;
 };
 
+// The carousel plays a single <source>, so only self-hosted videos with an MP4 can be shown.
+const decideSlideshowVideo = (
+	mediaAtom: FEMediaAtom,
+	caption?: string,
+): DCRSlideshowVideo | undefined => {
+	const media = getActiveMediaAtom(mediaAtom);
+	if (media?.type !== 'SelfHostedVideo') return undefined;
+
+	const mp4Source = media.sources.find(
+		({ mimeType }) => mimeType === 'video/mp4',
+	);
+	if (!mp4Source) return undefined;
+
+	return {
+		type: 'video',
+		videoSrc: mp4Source.src,
+		mimeType: mp4Source.mimeType,
+		posterSrc: media.image.src,
+		caption,
+	};
+};
+
+export const decideMultimediaSlideshow = (
+	multimediaSlideshowReplace: boolean,
+	multimediaSlideshow?: FEMultimediaSlideshow,
+): DCRSlideshowMedia[] | undefined => {
+	if (!multimediaSlideshowReplace || !multimediaSlideshow) return undefined;
+
+	const slides = multimediaSlideshow.slides.flatMap(
+		({ content, caption }): DCRSlideshowMedia[] => {
+			if (content.type === 'Image') {
+				const imageSrc = getLargestImage(
+					content.item.image.allImages,
+				)?.url;
+				return isUndefined(imageSrc)
+					? []
+					: [{ type: 'image', imageSrc, imageCaption: caption }];
+			}
+			const video = decideSlideshowVideo(content.item.mediaAtom, caption);
+			return video ? [video] : [];
+		},
+	);
+
+	return slides.length > 0 ? slides : undefined;
+};
+
 export const getMediaMetadata = (
 	articleMainMedia: MainMedia,
 ): ArticleMedia | undefined => {
@@ -647,7 +696,12 @@ export const enhanceCards = (
 			isExternalLink: faciaCard.card.cardStyle.type === 'ExternalLink',
 			embedUri: faciaCard.properties.embedUri ?? undefined,
 			branding: stripBranding ? undefined : branding,
-			slideshowImages: decideSlideshowImages(faciaCard),
+			slideshowImages:
+				decideMultimediaSlideshow(
+					faciaCard.properties.mediaSelect
+						?.multimediaSlideshowReplace === true,
+					faciaCard.multimediaSlideshow,
+				) ?? decideSlideshowImages(faciaCard),
 			showVideo:
 				!!(
 					faciaCard.properties.showMainVideo ??
