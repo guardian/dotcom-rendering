@@ -44,7 +44,7 @@
 		"@guardian/shimport": "1.0.2",
 		"@guardian/source": "12.2.1",
 		"@guardian/source-development-kitchen": "29.1.0",
-		"@guardian/support-dotcom-components": "11.0.0",
+		"@guardian/support-dotcom-components": "11.1.1",
 		"@guardian/tsconfig": "catalog:",
 		"@opentelemetry/api": "1.9.1",
 		"@opentelemetry/exporter-trace-otlp-proto": "0.219.0",
