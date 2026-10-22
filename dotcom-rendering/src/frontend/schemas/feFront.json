@@ -878,9 +878,7 @@
                                         "display": {
                                             "type": "object",
                                             "properties": {
-                                                "isBoosted": {
-                                                    "type": "boolean"
-                                                },
+
                                                 "boostLevel": {
                                                     "enum": [
                                                         "boost",
@@ -908,7 +906,6 @@
                                             },
                                             "required": [
                                                 "imageHide",
-                                                "isBoosted",
                                                 "showBoostedHeadline",
                                                 "showLivePlayable",
                                                 "showQuotedHeadline"
@@ -1839,9 +1836,7 @@
                                         "display": {
                                             "type": "object",
                                             "properties": {
-                                                "isBoosted": {
-                                                    "type": "boolean"
-                                                },
+
                                                 "boostLevel": {
                                                     "enum": [
                                                         "boost",
@@ -1869,7 +1864,6 @@
                                             },
                                             "required": [
                                                 "imageHide",
-                                                "isBoosted",
                                                 "showBoostedHeadline",
                                                 "showLivePlayable",
                                                 "showQuotedHeadline"
@@ -2800,9 +2794,7 @@
                                         "display": {
                                             "type": "object",
                                             "properties": {
-                                                "isBoosted": {
-                                                    "type": "boolean"
-                                                },
+
                                                 "boostLevel": {
                                                     "enum": [
                                                         "boost",
@@ -2830,7 +2822,6 @@
                                             },
                                             "required": [
                                                 "imageHide",
-                                                "isBoosted",
                                                 "showBoostedHeadline",
                                                 "showLivePlayable",
                                                 "showQuotedHeadline"
