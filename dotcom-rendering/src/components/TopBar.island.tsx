@@ -181,7 +181,6 @@ export const TopBar = ({
 				<Hide until="desktop">
 					<TopBarLinkContainer>
 						{
-							/** We replace "Search jobs" with "Newsletters" for all editions as the UK no longer supports jobs */
 							<TopBarLink
 								dataLinkName={nestedOphanComponents(
 									'header',
