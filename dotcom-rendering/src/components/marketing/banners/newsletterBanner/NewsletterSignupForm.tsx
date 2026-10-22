@@ -37,6 +37,17 @@ const bannerSignedInLayoutStyles = css`
 	${signedInLayoutStyles};
 	margin-top: ${space[2]}px;
 	row-gap: ${space[4]}px;
+	${until.tablet} {
+		padding: 0 10px;
+		margin-top: 0;
+	}
+`;
+
+const bannerSignedOutLayoutStyles = css`
+	${signedOutLayoutStyles};
+	${until.tablet} {
+		padding: 0 10px;
+	}
 `;
 
 const signedInButtonStyles = css`
@@ -203,7 +214,7 @@ export const NewsletterSignupForm = ({
 					formStyles,
 					isSignedIn
 						? bannerSignedInLayoutStyles
-						: signedOutLayoutStyles,
+						: bannerSignedOutLayoutStyles,
 					!showAdditionalFields && collapsedFormStyles,
 				]}
 			>
