@@ -1,6 +1,11 @@
 import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
-import { from, space, until } from '@guardian/source/foundations';
+import {
+	from,
+	headlineMedium17,
+	space,
+	until,
+} from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AffiliateDisclaimer } from '../components/AffiliateProducts/AffiliateDisclaimer';
@@ -259,7 +264,10 @@ export const StandardLayoutArticleGrid = ({
 		}
 	`;
 	const hideCaptionBeneathMainMedia =
-		layoutType === 'media' || isImmersiveLandscape || isImmersivePortrait;
+		layoutType === 'media' ||
+		layoutType === 'interactiveTopHat' ||
+		isImmersiveLandscape ||
+		isImmersivePortrait;
 
 	return (
 		<article
@@ -271,7 +279,7 @@ export const StandardLayoutArticleGrid = ({
 						: themePalette('--article-background')};
 				`,
 				grid.container,
-				grid.outerRules(),
+				layoutType !== 'interactiveTopHat' && grid.outerRules(),
 				isLabs &&
 					isImmersive &&
 					css`
@@ -292,7 +300,13 @@ export const StandardLayoutArticleGrid = ({
 					layoutType !== 'interactive' &&
 					css`
 						${from.leftCol} {
-							${grid.centreRule(isImmersive ? 4 : 3)}
+							${grid.centreRule(
+								isImmersive
+									? 4
+									: layoutType === 'interactiveTopHat'
+										? 6
+										: 3,
+							)}
 						}
 					`,
 				isImmersivePortrait &&
@@ -314,6 +328,10 @@ export const StandardLayoutArticleGrid = ({
 									? '130px'
 									: '90px'} auto auto auto auto auto;
 						}
+					`,
+				layoutType === 'interactiveTopHat' &&
+					css`
+						grid-template-rows: 3fr auto auto auto auto 1fr;
 					`,
 			]}
 		>
@@ -367,6 +385,13 @@ export const StandardLayoutArticleGrid = ({
 								margin-top: ${space[2]}px;
 							`
 						: undefined,
+					layoutType === 'interactiveTopHat' &&
+						css`
+							${until.desktop} {
+								height: 70vh;
+								aspect-ratio: 4 /5;
+							}
+						`,
 				]}
 			>
 				<div>
@@ -595,6 +620,9 @@ export const StandardLayoutArticleGrid = ({
 				layoutType={layoutType}
 				element="aside"
 				css={[
+					css`
+						position: relative;
+					`,
 					isImmersive &&
 						branding != null &&
 						captionText != null &&
@@ -725,6 +753,36 @@ export const StandardLayoutArticleGrid = ({
 						/>
 					</>
 				)}
+				<div
+					css={css`
+						position: absolute;
+						display: flex;
+						flex-direction: row;
+						align-items: center;
+						top: 200px;
+						${headlineMedium17}
+						color: white;
+						gap: ${space[3]}px;
+					`}
+				>
+					<svg
+						width="40"
+						height="40"
+						viewBox="0 0 40 40"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							d="M9 15.2283L19.4977 25.726H20.5023L31 15.2283L30.0205 14.2739L20 22.7123L9.97945 14.2739L9 15.2283Z"
+							fill="white"
+						/>
+						<path
+							d="M39.5 20C39.5 30.7696 30.7696 39.5 20 39.5C9.23045 39.5 0.5 30.7696 0.5 20C0.5 9.23045 9.23045 0.5 20 0.5C30.7696 0.5 39.5 9.23045 39.5 20Z"
+							stroke="white"
+						/>
+					</svg>
+					<div>Scroll to continue</div>
+				</div>
 			</GridItem>
 			<GridItem
 				area="body"
