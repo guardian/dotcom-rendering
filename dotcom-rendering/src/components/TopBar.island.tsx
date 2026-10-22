@@ -197,9 +197,9 @@ export const TopBar = ({
 					</TopBarLinkContainer>
 				</Hide>
 
-				<Hide until="desktop">
-					<TopBarLinkContainer>
-						{['AU', 'US'].includes(editionId) && (
+				{['AU', 'US'].includes(editionId) && (
+					<Hide until="desktop">
+						<TopBarLinkContainer>
 							<TopBarLink
 								dataLinkName={nestedOphanComponents(
 									'header',
@@ -210,9 +210,9 @@ export const TopBar = ({
 							>
 								Newsletters
 							</TopBarLink>
-						)}
-					</TopBarLinkContainer>
-				</Hide>
+						</TopBarLinkContainer>
+					</Hide>
+				)}
 
 				<TopBarLinkContainer isLastChild={true} isHidden={!hasHydrated}>
 					<TopBarMyAccount
