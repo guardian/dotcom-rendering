@@ -9,7 +9,7 @@ import {
 } from '@guardian/source/foundations';
 import { SvgGuardianLogo } from '@guardian/source/react-components';
 import { LinkButton } from '@guardian/source/react-components';
-import type { Inline1Props } from '@guardian/support-dotcom-components/dist/src/shared/types/props/inline1';
+import type { Inline1Props } from '@guardian/support-dotcom-components/dist/shared/types/props/inline1';
 import type { ReactComponent } from '../lib/ReactComponent';
 
 const outerContainerStyles = css`
@@ -113,7 +113,10 @@ const SupporterRevenue: ReactComponent<Inline1Props> = ({ variant }) => {
 	const cta = variant.message.primaryCta;
 
 	return (
-		<div css={outerContainerStyles}>
+		<section
+			css={outerContainerStyles}
+			aria-labelledby="supporter-revenue-heading"
+		>
 			<div css={innerContainerStyles}>
 				<div css={guardianLogoContainerStyles}>
 					<SvgGuardianLogo width={75} />
@@ -127,7 +130,9 @@ const SupporterRevenue: ReactComponent<Inline1Props> = ({ variant }) => {
 						/>
 					</div>
 				)}
-				<h2 css={headingStyles}>{heading}</h2>
+				<h2 id="supporter-revenue-heading" css={headingStyles}>
+					{heading}
+				</h2>
 				<p css={bodyStyles}>{body}</p>
 				<div css={ctaContainerStyles}>
 					<LinkButton
@@ -139,7 +144,7 @@ const SupporterRevenue: ReactComponent<Inline1Props> = ({ variant }) => {
 					</LinkButton>
 				</div>
 			</div>
-		</div>
+		</section>
 	);
 };
 

@@ -1,4 +1,4 @@
-import type { Inline1Props } from '@guardian/support-dotcom-components/dist/src/shared/types/props/inline1';
+import type { Inline1Props } from '@guardian/support-dotcom-components/dist/shared/types/props/inline1';
 
 const variant = {
 	name: 'Inline1SupportMessage',
