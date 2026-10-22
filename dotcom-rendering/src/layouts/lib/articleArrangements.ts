@@ -14,6 +14,7 @@ export type LayoutType =
 	| 'picture'
 	| 'comment'
 	| 'interactive'
+	| 'interactiveTopHat'
 	| 'immersiveLandscape'
 	| 'immersivePortrait';
 
@@ -330,6 +331,37 @@ const immersiveLandscapeCss: LayoutCssMap = {
 	},
 };
 
+const interactiveTopHatCss: LayoutCssMap = {
+	title: {
+		mobile: 'grid-row: 2; z-index: 10;',
+		tablet: 'grid-row: 2; z-index: 10;',
+	},
+	headline: {
+		mobile: 'grid-row: 3; z-index: 10; background: rgba(255, 255, 255, 0.9); padding: 0 10px;',
+		tablet: 'grid-row: 3; z-index: 10; background: rgba(255, 255, 255, 0.9); padding: 0 10px;',
+	},
+	standfirst: {
+		mobile: 'grid-row: 4; z-index: 10; background: rgba(255, 255, 255, 0.9); padding: 0 10px;',
+		tablet: 'grid-row: 4; z-index: 10; background: rgba(255, 255, 255, 0.9); padding: 0 10px;',
+	},
+	media: {
+		mobile: 'grid-row: 1 / span 7;',
+		tablet: `grid-row: 1 / span 7; ${grid.column.all}`,
+	},
+	meta: {
+		mobile: 'grid-row: 5; z-index: 10; background: rgba(255, 255, 255, 0.9); padding: 0 10px 10px 10px;',
+		tablet: 'grid-row: 5; z-index: 10; background: rgba(255, 255, 255, 0.9); padding: 0 10px 10px 10px;',
+	},
+	body: {
+		mobile: 'grid-row: 8;',
+		tablet: 'grid-row: 8;',
+	},
+	'right-column': {
+		desktop: `grid-row: 1 / span 6; ${grid.column.right};`,
+		leftCol: `grid-row: 1 / span 4; ${grid.column.right};`,
+	},
+};
+
 const layoutCssMaps: Record<LayoutType, LayoutCssMap> = {
 	standard: standardCss,
 	showcase: showcaseCss,
@@ -337,6 +369,7 @@ const layoutCssMaps: Record<LayoutType, LayoutCssMap> = {
 	picture: pictureCss,
 	comment: commentCss,
 	interactive: standardCss,
+	interactiveTopHat: interactiveTopHatCss,
 	immersiveLandscape: immersiveLandscapeCss,
 	immersivePortrait: immersivePortraitCss,
 };
@@ -389,6 +422,7 @@ export const getLayoutType = (
 	format: ArticleFormat,
 	mainMediaOrientation: 'portrait' | 'landscape' | 'square',
 ): LayoutType => {
+	// return 'interactiveTopHat';
 	if (format.display === ArticleDisplay.Immersive) {
 		if (
 			mainMediaOrientation === 'portrait' ||
