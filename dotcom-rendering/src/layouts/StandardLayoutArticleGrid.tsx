@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
-import { palette as sourcePalette } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AffiliateDisclaimer } from '../components/AffiliateProducts/AffiliateDisclaimer';
@@ -81,7 +80,14 @@ const landscapeImmersiveMediaBelowDesktop = css`
 			z-index: ${getZIndex('mediaOverlay')};
 			background: ${themePalette('--headline-background-immersive')};
 			backdrop-filter: blur(8px);
-			mask-image: linear-gradient(180deg, transparent, black 90%);
+			mask-image: linear-gradient(
+				to bottom,
+				transparent,
+				rgb(0 0 0 / 12%) 25%,
+				rgb(0 0 0 / 50%) 55%,
+				rgb(0 0 0 / 85%) 80%,
+				black
+			);
 			pointer-events: none;
 		}
 	}
@@ -439,12 +445,8 @@ export const StandardLayoutArticleGrid = ({
 							${until.tablet} {
 								background: linear-gradient(
 									to bottom,
-									transparent
-										calc(
-											var(--immersive-headline-overlap) -
-												1px
-										),
-									${sourcePalette.neutral[10]}
+									transparent,
+									${headlineBackgroundImmersive}
 										calc(
 											var(--immersive-headline-overlap) -
 												1px
