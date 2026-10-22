@@ -5,7 +5,7 @@ import { ToggleSwitch } from '@guardian/source-development-kitchen/react-compone
 // Note - the package also exports a component as a named export "ReCAPTCHA",
 // that version will compile and render but is non-functional.
 // Use the default export instead.
-import { type ChangeEvent, useEffect } from 'react';
+import { type ChangeEvent, useEffect, useState } from 'react';
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { useHideMarketingToggleForCountry } from '../../../../lib/useHideMarketingToggleForCountry';
 import { useNewsletterSignupForm } from '../../../../lib/useNewsletterSignupForm';
@@ -130,6 +130,9 @@ export const NewsletterSignupForm = ({
 }) => {
 	const { renderingTarget } = useConfig();
 	const hideMarketingToggle = useHideMarketingToggleForCountry();
+	// Temporary local stub for manual testing; disable before shipping.
+	const [stubSignup] = useState(true);
+	const [stubSuccess, setStubSuccess] = useState(false);
 
 	const {
 		userEmail,
@@ -161,8 +164,9 @@ export const NewsletterSignupForm = ({
 	);
 
 	const hasResponse = typeof responseOk === 'boolean';
-	const hasNonValidationError = !!errorMessage && !isValidationError;
-	const isSuccess = hasResponse && !!responseOk;
+	const hasNonValidationError =
+		errorMessage !== undefined && errorMessage !== '' && !isValidationError;
+	const isSuccess = stubSuccess || (hasResponse && !!responseOk);
 	const showForm = (!hasResponse || isSuccess) && !hasNonValidationError;
 
 	useEffect(() => {
@@ -183,7 +187,14 @@ export const NewsletterSignupForm = ({
 	return (
 		<>
 			<form
-				onSubmit={handleSubmit}
+				onSubmit={
+					stubSignup
+						? (event) => {
+								event.preventDefault();
+								setStubSuccess(true);
+							}
+						: handleSubmit
+				}
 				id={`newsletter-signup-${newsletterId}`}
 				style={{
 					display: !showForm ? 'none' : undefined,
@@ -221,7 +232,9 @@ export const NewsletterSignupForm = ({
 								? [submitButtonStyles, signedInButtonStyles]
 								: submitButtonStyles
 						}
-						onClick={handleSubmitButtonClick}
+						onClick={
+							stubSignup ? undefined : handleSubmitButtonClick
+						}
 						type="submit"
 						theme={primaryButtonTheme}
 						isLoading={isWaitingForResponse}
@@ -268,17 +281,19 @@ export const NewsletterSignupForm = ({
 			{showFailure && (
 				<FailureMessage text={failureMessage} onRetry={handleReset} />
 			)}
-			{!!captchaSiteKey && (
-				<div css={recaptchaContainerStyles}>
-					<ReactGoogleRecaptcha
-						sitekey={captchaSiteKey}
-						ref={recaptchaRef}
-						onChange={handleCaptchaComplete}
-						onErrored={handleCaptchaLoadError}
-						size="invisible"
-					/>
-				</div>
-			)}
+			{!stubSignup &&
+				captchaSiteKey !== undefined &&
+				captchaSiteKey !== '' && (
+					<div css={recaptchaContainerStyles}>
+						<ReactGoogleRecaptcha
+							sitekey={captchaSiteKey}
+							ref={recaptchaRef}
+							onChange={handleCaptchaComplete}
+							onErrored={handleCaptchaLoadError}
+							size="invisible"
+						/>
+					</div>
+				)}
 		</>
 	);
 };

@@ -339,11 +339,7 @@ export const NewsletterBannerComponent = (
 	props: BannerRenderProps,
 ): JSX.Element | null => {
 	const newsletter = props.promotedNewsletter ?? DEFAULT_PROMOTED_NEWSLETTER;
-	const isSubscribed = useNewsletterSubscription(
-		newsletter.listId,
-		props.idApiUrl,
-	);
-	console.log(isSubscribed);
+	useNewsletterSubscription(newsletter.listId, props.idApiUrl);
 	const bannerRef = useRef<HTMLDivElement>(null);
 	const [isSuccess, setIsSuccess] = useState(false);
 	const { isOpen, bannerData: baseBannerData } = useDesignableBannerModel({
