@@ -39,9 +39,11 @@ import {
 	getPuzzlesSubNavLinks,
 	PUZZLES_SUBNAV_PARENT,
 } from '../lib/puzzlesSubNav';
+import { enhanceBranding } from '../model/enhanceCommercialProperties';
 import type { NavType, SubNavType } from '../model/extract-nav';
 import type { PuzzleConfig } from '../model/puzzles/puzzleConfigs';
 import { palette as themePalette } from '../palette';
+import type { Branding } from '../types/branding';
 import type { FEPuzzlePageType } from '../types/puzzlePage';
 import type { TagType } from '../types/tag';
 import { BannerWrapper } from './lib/stickiness';
@@ -322,12 +324,14 @@ interface Props {
 	puzzlePage: ResolvedPuzzlePage;
 	NAV: NavType;
 	darkModeAvailable: boolean;
+	branding?: Branding;
 }
 
 export const PuzzlePageLayout = ({
 	puzzlePage,
 	NAV,
 	darkModeAvailable,
+	branding,
 }: Props) => {
 	const { config, instance, editionId, puzzleConfig } = puzzlePage;
 	const { isPaidContent, host, hasSurveyAd } = config;
@@ -575,6 +579,10 @@ export const PuzzlePageLayout = ({
 										/>
 									</div>
 									<ArticleMeta
+										branding={
+											branding &&
+											enhanceBranding(branding)
+										}
 										format={puzzlePageFormat}
 										pageId={puzzlePage.id}
 										webTitle={puzzlePage.webTitle}
