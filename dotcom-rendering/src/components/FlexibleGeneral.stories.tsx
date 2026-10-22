@@ -197,7 +197,6 @@ export const SplashWithStandards: Story = {
 			splash: [{ ...splashCard, supportingContent: [] }],
 			standard: standardCards.map((card, index) => ({
 				...card,
-				isBoosted: index === 0,
 				boostLevel: index === 0 ? 'boost' : 'default',
 			})),
 		},
@@ -420,7 +419,6 @@ export const SplashWithSnapLinkAndStandards: Story = {
 			splash: [{ ...snapLink }, { ...splashCard, supportingContent: [] }],
 			standard: standardCards.map((card, index) => ({
 				...card,
-				isBoosted: index === 0,
 				boostLevel: index === 0 ? 'boost' : 'default',
 			})),
 		},
