@@ -183,7 +183,7 @@ export const getProductCtaLivePrice = ({ price, latestPrice }: ProductCta) => {
 	}
 
 	const formattedLatestPrice = getFormattedLatestPrice(latestPrice);
-	const numericArticlePrice = Number.parseFloat(price.replace(/£|$/, ''));
+	const numericArticlePrice = Number.parseFloat(price.replace(/[£$,]/g, ''));
 
 	if (
 		Number.isNaN(numericArticlePrice) ||

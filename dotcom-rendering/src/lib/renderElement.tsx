@@ -109,7 +109,6 @@ type Props = {
 	contentLayout?: string;
 	articleArrangement?: LayoutType;
 	idApiUrl?: string;
-	isInDeprecatedInteractiveLayout?: boolean;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -438,6 +437,10 @@ export const renderElement = ({
 						elementJs={element.js}
 						elementCss={element.css}
 						customData={element.customData}
+						role={element.role ?? 'inline'}
+						type={element._type}
+						format={format}
+						articleArrangement={articleArrangement}
 					/>
 				);
 			}
@@ -1025,6 +1028,7 @@ const bareElements = new Set<FEElement['_type']>([
 	'model.dotcomrendering.pageElements.TextBlockElement',
 	'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
 	'model.dotcomrendering.pageElements.InteractiveBlockElement',
+	'model.dotcomrendering.pageElements.InteractiveAtomBlockElement',
 ]);
 
 // RenderArticleElement is a wrapper for renderElement that wraps elements in a
@@ -1056,7 +1060,6 @@ export const RenderArticleElement = ({
 	contentLayout,
 	articleArrangement,
 	idApiUrl,
-	isInDeprecatedInteractiveLayout,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -1086,10 +1089,14 @@ export const RenderArticleElement = ({
 		contentLayout,
 		articleArrangement,
 		idApiUrl,
-		isInDeprecatedInteractiveLayout,
 	});
 
-	const needsFigure = !bareElements.has(element._type);
+	const needsFigure =
+		!bareElements.has(element._type) ||
+		(format.design === ArticleDesign.Interactive &&
+			articleArrangement === undefined &&
+			element._type ===
+				'model.dotcomrendering.pageElements.InteractiveAtomBlockElement');
 
 	const role =
 		'role' in element
@@ -1110,7 +1117,6 @@ export const RenderArticleElement = ({
 			type={element._type}
 			format={format}
 			isTimeline={isTimeline}
-			isInDeprecatedInteractiveLayout={isInDeprecatedInteractiveLayout}
 			articleArrangement={articleArrangement}
 		>
 			{el}
