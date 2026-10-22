@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space, textSansBold15 } from '@guardian/source/foundations';
+import { space, textSansBold15, until } from '@guardian/source/foundations';
 import { SvgNewsletterFilled } from '@guardian/source/react-components';
 import { palette as themePalette } from '../../../../palette';
 
@@ -10,6 +10,12 @@ const frequencyTagStyles = css`
 	color: ${themePalette('--newsletter-card-frequency-tag')};
 	${textSansBold15};
 	padding: ${space[2]}px 0;
+	${until.desktop} {
+		padding: ${space[3]}px 0 ${space[2]}px;
+	}
+	${until.tablet} {
+		padding: 18px 10px 14px 10px;
+	}
 `;
 
 const frequencyTextStyles = css`
