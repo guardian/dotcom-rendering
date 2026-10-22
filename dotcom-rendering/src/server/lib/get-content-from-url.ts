@@ -1,5 +1,4 @@
 import type { IncomingHttpHeaders } from 'node:http';
-import { isObject } from '@guardian/libs';
 import type { Handler } from 'express';
 
 const isStringTuple = (_: [string, unknown]): _ is [string, string] =>
@@ -30,18 +29,32 @@ async function getContentFromURL(
 			.filter(isStringTuple),
 	);
 
+	const response = await fetch(jsonUrl, { headers });
+
+	const text = await response.text();
+
+	if (!response.ok) {
+		throw new Error(
+			`Failed to fetch ${jsonUrl} - received ${response.status} ${
+				response.statusText
+			}: ${text.slice(0, 200)}`,
+		);
+	}
+
 	// pick all the keys from the JSON except `html`
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- we don't want `html` in the config
-	const { html, ...config } = await fetch(jsonUrl, { headers })
-		.then((response) => response.json())
-		.catch((error) => {
-			if (isObject(error) && error.type === 'invalid-json') {
-				throw new Error(
-					'Did not receive JSON response - are you sure this URL supports .json?dcr requests?',
-				);
-			}
-			throw error;
-		});
+	const { html, ...config } = ((): Record<string, unknown> => {
+		try {
+			return JSON.parse(text) as Record<string, unknown>;
+		} catch (error) {
+			throw new Error(
+				`Did not receive JSON response from ${jsonUrl} - are you sure this URL supports .json?dcr requests? Received: ${text.slice(
+					0,
+					200,
+				)}`,
+			);
+		}
+	})();
 
 	return config;
 }
