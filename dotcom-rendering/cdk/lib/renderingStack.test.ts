@@ -2,6 +2,8 @@ import { App } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
 import { InstanceClass, InstanceSize, InstanceType } from 'aws-cdk-lib/aws-ec2';
 import {
+	InteractiveRenderingPropsCODE,
+	InteractiveRenderingPropsPROD,
 	TagPageRenderingPropsCODE,
 	TagPageRenderingPropsPROD,
 } from '../bin/cdk';
@@ -74,6 +76,29 @@ describe('The RenderingCDKStack', () => {
 			app,
 			'TagPageRendering-CODE',
 			TagPageRenderingPropsCODE,
+		);
+		const template = Template.fromStack(stack);
+		expect(template.toJSON()).toMatchSnapshot();
+	});
+
+	it('matches the snapshot for Interactive Rendering PROD (not using ECS)', () => {
+		const app = new App();
+		const stack = new RenderingCDKStack(
+			app,
+			'InteractiveRendering-PROD',
+			InteractiveRenderingPropsPROD,
+		);
+		const template = Template.fromStack(stack);
+		expect(template.toJSON()).toMatchSnapshot();
+	});
+
+	it('matches the snapshot for Interactive Rendering CODE (uses ECS)', () => {
+		const app = new App();
+
+		const stack = new RenderingCDKStack(
+			app,
+			'InteractiveRendering-CODE',
+			InteractiveRenderingPropsCODE,
 		);
 		const template = Template.fromStack(stack);
 		expect(template.toJSON()).toMatchSnapshot();
