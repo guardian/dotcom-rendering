@@ -9,6 +9,7 @@ import { DiscussionLayout } from '../components/DiscussionLayout';
 import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.island';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
+import { InteractivesDisableArticleSwipe } from '../components/InteractivesDisableArticleSwipe.island';
 import { InteractivesScrollbarWidth } from '../components/InteractivesScrollbarWidth.island';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
@@ -109,7 +110,15 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	return (
 		<>
-			{isInteractive && <InteractivesScrollbarWidth />}
+			{isInteractive && (
+				<>
+					<InteractivesScrollbarWidth />
+					<Island priority="critical">
+						<InteractivesDisableArticleSwipe />
+					</Island>
+				</>
+			)}
+
 			{isWeb && (
 				<div data-print-layout="hide" id="bannerandheader">
 					{renderAds && (
