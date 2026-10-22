@@ -63,6 +63,28 @@ type BuildPayloadProps = BaseProps & {
 	hideSupportMessagingForUser: boolean;
 };
 
+const MAX_AUXIA_ROLLOUT_MVT_ID = 1_000_000;
+
+export const getAuxiaRolloutMvtId = (
+	inAuxiaVariant: boolean | undefined,
+	userConsent: boolean,
+	mvtIdCookie: string | null,
+): number | undefined => {
+	if (
+		inAuxiaVariant !== true ||
+		!userConsent ||
+		mvtIdCookie === null ||
+		!/^\d+$/.test(mvtIdCookie)
+	) {
+		return undefined;
+	}
+
+	const mvtId = Number(mvtIdCookie);
+	return Number.isInteger(mvtId) && mvtId < MAX_AUXIA_ROLLOUT_MVT_ID
+		? mvtId
+		: undefined;
+};
+
 type CanShowProps = BaseProps & {
 	countryCode: CountryCode;
 	remoteBannerConfig: boolean;
@@ -130,7 +152,7 @@ export const hasRequiredConsents = (): Promise<boolean> =>
 		.then(({ canTarget }: ConsentState) => canTarget)
 		.catch(() => false);
 
-const buildPayload = async ({
+export const buildPayload = async ({
 	isSignedIn,
 	shouldHideReaderRevenue,
 	isPaidContent,
@@ -152,7 +174,7 @@ const buildPayload = async ({
 	isSensitive,
 }: BuildPayloadProps): Promise<BannerPayload> => {
 	const getBrowserId = (): string | undefined => {
-		if (!inAuxiaVariant) {
+		if (inAuxiaVariant !== true) {
 			return undefined;
 		}
 		if (!userConsent) {
@@ -160,42 +182,51 @@ const buildPayload = async ({
 		}
 		return getCookie({ name: 'bwid', shouldMemoize: true }) ?? undefined;
 	};
+	const auxiaRolloutMvtId =
+		inAuxiaVariant === true && userConsent
+			? getAuxiaRolloutMvtId(
+					inAuxiaVariant,
+					userConsent,
+					getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
+				)
+			: undefined;
 
 	const articleCounts = await asyncArticleCounts;
 	const weeklyArticleHistory = articleCounts?.weeklyArticleHistory;
 	const articleCountToday = getArticleCountToday(articleCounts);
 
-	return {
-		targeting: {
-			shouldHideReaderRevenue,
-			isPaidContent,
-			showSupportMessaging: !hideSupportMessagingForUser,
-			engagementBannerLastClosedAt,
-			subscriptionBannerLastClosedAt,
-			signInBannerLastClosedAt,
-			abandonedBasketBannerLastClosedAt,
-			mvtId: Number(
-				getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
-			),
-			countryCode,
-			weeklyArticleHistory,
-			articleCountToday,
-			hasOptedOutOfArticleCount: optedOutOfArticleCount,
-			sectionId,
-			tagIds: tags.map((tag) => tag.id),
-			contentType,
-			purchaseInfo: getPurchaseInfo(),
-			isSignedIn,
-			hasConsented: userConsent,
-			abandonedBasket: parseAbandonedBasket(
-				getCookie({ name: 'GU_CO_INCOMPLETE', shouldMemoize: true }),
-			),
-			pageId,
-			inHoldbackGroup,
-			browserId: getBrowserId(),
-			isSensitive,
-		},
+	const targeting: BannerPayload['targeting'] & {
+		auxiaRolloutMvtId?: number;
+	} = {
+		shouldHideReaderRevenue,
+		isPaidContent,
+		showSupportMessaging: !hideSupportMessagingForUser,
+		engagementBannerLastClosedAt,
+		subscriptionBannerLastClosedAt,
+		signInBannerLastClosedAt,
+		abandonedBasketBannerLastClosedAt,
+		mvtId: Number(getCookie({ name: 'GU_mvt_id', shouldMemoize: true })),
+		countryCode,
+		weeklyArticleHistory,
+		articleCountToday,
+		hasOptedOutOfArticleCount: optedOutOfArticleCount,
+		sectionId,
+		tagIds: tags.map((tag) => tag.id),
+		contentType,
+		purchaseInfo: getPurchaseInfo(),
+		isSignedIn,
+		hasConsented: userConsent,
+		abandonedBasket: parseAbandonedBasket(
+			getCookie({ name: 'GU_CO_INCOMPLETE', shouldMemoize: true }),
+		),
+		pageId,
+		inHoldbackGroup,
+		browserId: getBrowserId(),
+		isSensitive,
+		...(auxiaRolloutMvtId === undefined ? {} : { auxiaRolloutMvtId }),
 	};
+
+	return { targeting };
 };
 
 export const canShowRRBanner: CanShowFunctionType<
