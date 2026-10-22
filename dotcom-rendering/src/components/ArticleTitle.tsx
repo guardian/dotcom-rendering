@@ -89,7 +89,8 @@ export const ArticleTitle = ({
 	>
 		<div
 			css={
-				format.display === ArticleDisplay.Immersive
+				format.display === ArticleDisplay.Immersive &&
+				format.design !== ArticleDesign.WeekendEssay
 					? layoutType == null
 						? legacyImmersiveMargins
 						: immersiveGridMargins
