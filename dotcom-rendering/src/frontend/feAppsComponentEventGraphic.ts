@@ -11,6 +11,7 @@ export type FEAppsComponentConfig = Omit<
 
 const eventGraphicNames = [
 	'election-tracker/us-general-2024/congress',
+	'election-tracker/us-general-2026/congress',
 ] as const;
 
 type EventGraphicName = (typeof eventGraphicNames)[number];

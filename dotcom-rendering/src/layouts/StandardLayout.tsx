@@ -9,6 +9,7 @@ import { DiscussionLayout } from '../components/DiscussionLayout';
 import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.island';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
+import { InteractivesDisableArticleSwipe } from '../components/InteractivesDisableArticleSwipe.island';
 import { InteractivesScrollbarWidth } from '../components/InteractivesScrollbarWidth.island';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
@@ -44,7 +45,6 @@ interface Props {
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 	serverTime?: number;
-	isInInteractiveLayoutTest?: boolean;
 }
 
 interface WebProps extends Props {
@@ -57,13 +57,7 @@ interface AppProps extends Props {
 }
 
 export const StandardLayout = (props: WebProps | AppProps) => {
-	const {
-		article,
-		format,
-		renderingTarget,
-		serverTime,
-		isInInteractiveLayoutTest,
-	} = props;
+	const { article, format, renderingTarget, serverTime } = props;
 	const {
 		config: { isPaidContent, host, hasSurveyAd },
 		editionId,
@@ -94,8 +88,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isCricketMatchReport =
 		format.design === ArticleDesign.MatchReport && !!cricketMatchHeaderUrl;
 
-	const mtID = '/p/x5ng2y';
-	const interactiveLayoutSwitchoverDate = new Date('2026-10-01T00:00:00Z');
+	const interactiveLayoutSwitchoverDate = new Date('2026-10-21T00:00:00Z');
 	const firstPublicationDate = new Date(
 		article.firstPublicationDate ?? article.webPublicationDate,
 	);
@@ -117,7 +110,15 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	return (
 		<>
-			{isInteractive && <InteractivesScrollbarWidth />}
+			{isInteractive && (
+				<>
+					<InteractivesScrollbarWidth />
+					<Island priority="critical">
+						<InteractivesDisableArticleSwipe />
+					</Island>
+				</>
+			)}
+
 			{isWeb && (
 				<div data-print-layout="hide" id="bannerandheader">
 					{renderAds && (
@@ -142,6 +143,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						idApiUrl={article.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
 						showSubNav={
+							format.display !== ArticleDisplay.Immersive &&
 							!isLabs &&
 							!isInteractive &&
 							!isWorldCup2026 &&
@@ -211,9 +213,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 				{/* This element is used to replace the article with the scorecard when the scorecard tab is clicked */}
 				<div id="article">
-					{(isLegacyInteractive ||
-						(isInteractive && !isInInteractiveLayoutTest)) &&
-					article.config.shortUrlId !== mtID ? (
+					{isLegacyInteractive ? (
 						<InteractiveArticleGridDeprecated {...props} />
 					) : (
 						<StandardLayoutArticleGrid
