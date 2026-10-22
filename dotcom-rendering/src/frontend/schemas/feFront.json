@@ -878,7 +878,6 @@
                                         "display": {
                                             "type": "object",
                                             "properties": {
-
                                                 "boostLevel": {
                                                     "enum": [
                                                         "boost",
@@ -1836,7 +1835,6 @@
                                         "display": {
                                             "type": "object",
                                             "properties": {
-
                                                 "boostLevel": {
                                                     "enum": [
                                                         "boost",
@@ -2794,7 +2792,6 @@
                                         "display": {
                                             "type": "object",
                                             "properties": {
-
                                                 "boostLevel": {
                                                     "enum": [
                                                         "boost",
