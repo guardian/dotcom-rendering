@@ -120,7 +120,6 @@ const getProviders = (stage: StageType): IdentityProviderConfig[] => {
 };
 
 const ENABLED_COUNTRIES: CountryCode[] = [
-	'US', // United States
 	'NZ', // New Zealand
 	'AU', // Australia
 	'CA', // Canada
