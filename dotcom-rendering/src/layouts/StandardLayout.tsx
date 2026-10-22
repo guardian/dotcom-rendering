@@ -9,6 +9,8 @@ import { DiscussionLayout } from '../components/DiscussionLayout';
 import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.island';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
+import { InteractivesDisableArticleSwipe } from '../components/InteractivesDisableArticleSwipe.island';
+import { InteractivesScrollbarWidth } from '../components/InteractivesScrollbarWidth.island';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { Masthead } from '../components/Masthead/Masthead';
@@ -28,11 +30,13 @@ import {
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
+import { hasFilterTag } from '../lib/theFilter';
 import { worldCupTagId } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
+import { InteractiveArticleGridDeprecated } from './interactives/InteractiveArticleGridDeprecated';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 import { StandardLayoutArticleGrid } from './StandardLayoutArticleGrid';
 
@@ -84,6 +88,14 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isCricketMatchReport =
 		format.design === ArticleDesign.MatchReport && !!cricketMatchHeaderUrl;
 
+	const interactiveLayoutSwitchoverDate = new Date('2026-10-21T00:00:00Z');
+	const firstPublicationDate = new Date(
+		article.firstPublicationDate ?? article.webPublicationDate,
+	);
+	const isInteractive = format.design === ArticleDesign.Interactive;
+	const isLegacyInteractive =
+		firstPublicationDate < interactiveLayoutSwitchoverDate && isInteractive;
+
 	const showComments = article.isCommentable && !isPaidContent;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
@@ -92,10 +104,21 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const isWorldCup2026 = article.tags.some((tag) => tag.id === worldCupTagId);
 
+	const isFilterArticle = hasFilterTag(article.tags);
+
 	const renderAds = canRenderAds(article);
 
 	return (
 		<>
+			{isInteractive && (
+				<>
+					<InteractivesScrollbarWidth />
+					<Island priority="critical">
+						<InteractivesDisableArticleSwipe />
+					</Island>
+				</>
+			)}
+
 			{isWeb && (
 				<div data-print-layout="hide" id="bannerandheader">
 					{renderAds && (
@@ -120,7 +143,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						idApiUrl={article.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
 						showSubNav={
+							format.display !== ArticleDisplay.Immersive &&
 							!isLabs &&
+							!isInteractive &&
 							!isWorldCup2026 &&
 							!props.NAV.customSubNav
 						}
@@ -131,7 +156,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							}
 						}
 						showSlimNav={
-							format.display === ArticleDisplay.Immersive
+							(format.display === ArticleDisplay.Immersive &&
+								!isFilterArticle) ||
+							isInteractive
 						}
 						hasPageSkinContentSelfConstrain={true}
 						pageId={article.pageId}
@@ -186,11 +213,15 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 				{/* This element is used to replace the article with the scorecard when the scorecard tab is clicked */}
 				<div id="article">
-					<StandardLayoutArticleGrid
-						article={article}
-						format={format}
-						renderingTarget={renderingTarget}
-					/>
+					{isLegacyInteractive ? (
+						<InteractiveArticleGridDeprecated {...props} />
+					) : (
+						<StandardLayoutArticleGrid
+							article={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					)}
 				</div>
 
 				{isWeb && renderAds && !isLabs && (

@@ -1,10 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
 import { ConfigProvider } from '../components/ConfigContext';
-import { PUZZLES_HUB_EXPERIMENT } from '../lib/puzzlesHubExperiment';
 import {
 	puzzlesHubV1Experiment,
 	puzzlesHubV1Participation,
+	puzzlesHubV2Experiment,
+	puzzlesHubV2Participation,
 } from '../lib/puzzlesHubVersionExperiment';
 import { extractNAV } from '../model/extract-nav';
 import { getPuzzleConfig } from '../model/puzzles/puzzleConfigs';
@@ -48,9 +49,10 @@ jest.mock('../lib/useAB', () => ({
 	useAB: jest.fn().mockReturnValue(null),
 }));
 
-const v0AndV1On = {
-	[PUZZLES_HUB_EXPERIMENT]: 'variant',
-	...puzzlesHubV1Participation(puzzlesHubV1Experiment.variant),
+const v1On = puzzlesHubV1Participation(puzzlesHubV1Experiment.variant);
+const v1AndV2On = {
+	...v1On,
+	...puzzlesHubV2Participation(puzzlesHubV2Experiment.variant),
 };
 
 const renderPuzzlePageLayout = (
@@ -130,26 +132,24 @@ describe('PuzzlePageLayout', () => {
 		);
 		expect(
 			container.querySelector('a[data-component="section"]'),
-		).toHaveAttribute('href', '/puzzles-and-games/logic-puzzles');
+		).toHaveAttribute('href', '/puzzles-and-games/logic-puzzles/archive');
 	});
 
 	/**
 	 * "Logic puzzles" is ambiguous by accessible name alone: the
 	 * `ArticleTitle` section kicker link (`data-component="section"`,
 	 * relative href, always rendered - see the test above) has the exact
-	 * same text as this sub-nav child link. Sub-nav child links are looked
-	 * up by their (unique) href instead of by role/name to avoid matching
+	 * same text (and, for Logic puzzles/Word games, the same archive href) as
+	 * this sub-nav child link. Sub-nav child links are looked
+	 * up by href, excluding the section kicker, instead of by role/name to avoid matching
 	 * the wrong element.
 	 */
 	const subNavChildHrefs = {
-		Crosswords:
-			'https://www.theguardian.com/puzzles-and-games/crosswords/archive',
-		'Word games':
-			'https://www.theguardian.com/puzzles-and-games/word-games/archive',
-		'Logic puzzles':
-			'https://www.theguardian.com/puzzles-and-games/logic-puzzles/archive',
-		'Trivia & quizzes': '/puzzles-and-games/trivia-and-quizzes',
+		Crosswords: '/puzzles-and-games/crosswords/archive',
+		'Word games': '/puzzles-and-games/word-games/archive',
+		'Logic puzzles': '/puzzles-and-games/logic-puzzles/archive',
 	};
+	const triviaHref = '/puzzles-and-games/trivia-and-quizzes/archive';
 
 	it('renders only the "Puzzles & games" parent sub-nav link on V0 (default fixture state)', () => {
 		const { container } = renderPuzzlePageLayout('sudoku-easy');
@@ -160,57 +160,62 @@ describe('PuzzlePageLayout', () => {
 
 		for (const href of Object.values(subNavChildHrefs)) {
 			expect(
-				container.querySelector(`a[href="${href}"]`),
+				container.querySelector(
+					`a[href="${href}"]:not([data-component="section"])`,
+				),
 			).not.toBeInTheDocument();
 		}
 	});
 
 	describe('sub-nav child links (Crosswords/Word games/Logic puzzles/Trivia & quizzes, v1-scoped feature)', () => {
-		it('does not render when v1 is enabled but v0 is not', () => {
+		it('does not render when v1 is not enabled', () => {
 			const { container } = renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: puzzlesHubV1Participation(
-						puzzlesHubV1Experiment.variant,
+					serverSideABTests: {},
+				},
+			});
+
+			for (const href of Object.values(subNavChildHrefs)) {
+				expect(
+					container.querySelector(
+						`a[href="${href}"]:not([data-component="section"])`,
 					),
-				},
-			});
-
-			for (const href of Object.values(subNavChildHrefs)) {
-				expect(
-					container.querySelector(`a[href="${href}"]`),
 				).not.toBeInTheDocument();
 			}
 		});
 
-		it('does not render when v0 is enabled but v1 is not', () => {
+		it('renders Crosswords/Word games/Logic puzzles, but not Trivia & quizzes, when only v1 is enabled', () => {
 			const { container } = renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: { [PUZZLES_HUB_EXPERIMENT]: 'variant' },
-				},
-			});
-
-			for (const href of Object.values(subNavChildHrefs)) {
-				expect(
-					container.querySelector(`a[href="${href}"]`),
-				).not.toBeInTheDocument();
-			}
-		});
-
-		it('renders all four, with the production archive URLs for Crosswords/Word games/Logic puzzles, when both v0 and v1 are enabled', () => {
-			const { container } = renderPuzzlePageLayout('sudoku-easy', {
-				config: {
-					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: v0AndV1On,
+					serverSideABTests: v1On,
 				},
 			});
 
 			for (const [name, href] of Object.entries(subNavChildHrefs)) {
-				const link = container.querySelector(`a[href="${href}"]`);
+				const link = container.querySelector(
+					`a[href="${href}"]:not([data-component="section"])`,
+				);
 				expect(link).toBeInTheDocument();
 				expect(link).toHaveTextContent(name);
 			}
+			expect(
+				container.querySelector(`a[href="${triviaHref}"]`),
+			).not.toBeInTheDocument();
+		});
+
+		it('also renders Trivia & quizzes when v2 is enabled', () => {
+			const { container } = renderPuzzlePageLayout('sudoku-easy', {
+				config: {
+					...createPuzzlePage('sudoku-easy').config,
+					serverSideABTests: v1AndV2On,
+				},
+			});
+
+			expect(
+				container.querySelector(`a[href="${triviaHref}"]`),
+			).toHaveTextContent('Trivia & quizzes');
 		});
 	});
 
@@ -241,11 +246,11 @@ describe('PuzzlePageLayout', () => {
 	});
 
 	describe('"More from Puzzles & Games" rail (v1-scoped feature)', () => {
-		it('renders the rail when data is present AND v0+v1 are both enabled', () => {
+		it('renders the rail when data is present AND v1 is enabled', () => {
 			renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: v0AndV1On,
+					serverSideABTests: v1On,
 				},
 			});
 
@@ -256,11 +261,11 @@ describe('PuzzlePageLayout', () => {
 			).toBeInTheDocument();
 		});
 
-		it('does not render the rail when moreFromPuzzlesAndGames is empty, even with v0+v1 enabled', () => {
+		it('does not render the rail when moreFromPuzzlesAndGames is empty, even with v1 enabled', () => {
 			renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: v0AndV1On,
+					serverSideABTests: v1On,
 				},
 				instance: {
 					...createPuzzlePage('sudoku-easy').instance,
@@ -275,7 +280,7 @@ describe('PuzzlePageLayout', () => {
 			).not.toBeInTheDocument();
 		});
 
-		it('does not render the rail when data is present but neither v0 nor v1 is enabled (default fixture state)', () => {
+		it('does not render the rail when data is present but v1 is not enabled (default fixture state)', () => {
 			renderPuzzlePageLayout('sudoku-easy');
 
 			expect(
@@ -285,28 +290,11 @@ describe('PuzzlePageLayout', () => {
 			).not.toBeInTheDocument();
 		});
 
-		it('does not render the rail when data is present and v1 is enabled but v0 is not', () => {
+		it('does not render the rail when data is present and v1 is not enabled', () => {
 			renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: puzzlesHubV1Participation(
-						puzzlesHubV1Experiment.variant,
-					),
-				},
-			});
-
-			expect(
-				screen.queryByRole('heading', {
-					name: 'More from Puzzles & games',
-				}),
-			).not.toBeInTheDocument();
-		});
-
-		it('does not render the rail when data is present and v0 is enabled but v1 is not', () => {
-			renderPuzzlePageLayout('sudoku-easy', {
-				config: {
-					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: { [PUZZLES_HUB_EXPERIMENT]: 'variant' },
+					serverSideABTests: {},
 				},
 			});
 

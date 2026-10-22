@@ -396,8 +396,11 @@ const immersiveGridOverrides = css`
 	padding-top: 0;
 	max-width: none;
 
+	color: ${palette('--standfirst-text-immersive')};
+
 	${from.tablet} {
 		max-width: none;
+		${headlineMedium20};
 	}
 `;
 

@@ -23,6 +23,8 @@ import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
+import { PuzzlesUsefulLinks } from '../components/PuzzlesSupporting';
+import { RelatedPuzzlesRailEnhanced } from '../components/RelatedPuzzlesRailEnhanced.island';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
@@ -33,6 +35,14 @@ import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
 import { getContributionsServiceUrl } from '../lib/contributions';
+import {
+	isPuzzlesHubV1Enabled,
+	isPuzzlesHubV2Enabled,
+} from '../lib/puzzlesHubVersionExperiment';
+import {
+	getPuzzlesSubNavLinks,
+	PUZZLES_SUBNAV_PARENT,
+} from '../lib/puzzlesSubNav';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
@@ -126,6 +136,59 @@ export const CrosswordLayout = (props: Props) => {
 
 	const renderAds = canRenderAds(article);
 
+	/**
+	 * With the puzzles hub v0 and v1 tiers both on, this page takes on the
+	 * Puzzle Page's design (see `PuzzlePageLayout`): its sub-nav, a single
+	 * straight line, no `SubMeta` (topic links, share buttons, "Reuse this
+	 * content") and no second sub-nav above the footer. Independent of
+	 * whether the rail has data, so the page design never depends on CAPI.
+	 */
+	const isPuzzlesHubV1 = isPuzzlesHubV1Enabled(article.config);
+
+	/**
+	 * With v1 on, the title's series ("Quick") and section ("Crosswords")
+	 * links resolve to root-relative paths (empty base URL), so they follow
+	 * the current domain on every environment, and both point at the Puzzles
+	 * & games crosswords archive ("Quick" filtered to its crossword type, see
+	 * `titleTags`). Without v1 both are unchanged.
+	 */
+	const PUZZLES_CROSSWORDS_ARCHIVE_PATH =
+		'puzzles-and-games/crosswords/archive';
+
+	/**
+	 * The series tag ("Quick") links to that crossword type's archive page,
+	 * `SeriesSectionLink` builds the href as `${guardianBaseURL}/${tag.id}`.
+	 */
+	const crosswordType = article.crossword?.crosswordType;
+	const titleTags =
+		isPuzzlesHubV1 && crosswordType
+			? article.tags.map((tag) =>
+					tag.type === 'Series'
+						? {
+								...tag,
+								id: `${PUZZLES_CROSSWORDS_ARCHIVE_PATH}?puzzle=${crosswordType}`,
+							}
+						: tag,
+				)
+			: article.tags;
+
+	const showRelatedPuzzles =
+		isPuzzlesHubV1 && !!article.moreFromPuzzlesAndGames?.length;
+
+	const NAV: NavType = isPuzzlesHubV1
+		? {
+				...props.NAV,
+				subNavSections: {
+					parent: PUZZLES_SUBNAV_PARENT,
+					links: getPuzzlesSubNavLinks(
+						true,
+						isPuzzlesHubV2Enabled(article.config),
+					),
+				},
+				currentNavLink: 'Crosswords',
+			}
+		: props.NAV;
+
 	return (
 		<>
 			<div data-print-layout="hide">
@@ -152,7 +215,7 @@ export const CrosswordLayout = (props: Props) => {
 				)}
 
 				<Masthead
-					nav={props.NAV}
+					nav={NAV}
 					editionId={article.editionId}
 					idUrl={article.config.idUrl}
 					mmaUrl={article.config.mmaUrl}
@@ -188,11 +251,17 @@ export const CrosswordLayout = (props: Props) => {
 								<div data-print-layout="hide">
 									<ArticleTitle
 										format={format}
-										tags={article.tags}
+										tags={titleTags}
 										sectionLabel={article.sectionLabel}
-										sectionUrl={article.sectionUrl}
+										sectionUrl={
+											isPuzzlesHubV1
+												? PUZZLES_CROSSWORDS_ARCHIVE_PATH
+												: article.sectionUrl
+										}
 										guardianBaseURL={
-											article.guardianBaseURL
+											isPuzzlesHubV1
+												? ''
+												: article.guardianBaseURL
 										}
 									/>
 								</div>
@@ -231,6 +300,7 @@ export const CrosswordLayout = (props: Props) => {
 									{article.crossword && (
 										<CrosswordLinks
 											crossword={article.crossword}
+											isPuzzlesHubV1={isPuzzlesHubV1}
 										/>
 									)}
 								</div>
@@ -378,7 +448,7 @@ export const CrosswordLayout = (props: Props) => {
 					hideFromPrintLayout={true}
 				>
 					<StraightLines
-						count={4}
+						count={isPuzzlesHubV1 ? 1 : 4}
 						color={themePalette('--straight-lines')}
 						cssOverrides={css`
 							display: block;
@@ -386,23 +456,46 @@ export const CrosswordLayout = (props: Props) => {
 					/>
 				</Section>
 
-				<Section
-					fullWidth={true}
-					showTopBorder={false}
-					backgroundColour={themePalette('--article-background')}
-				>
-					<SubMeta
-						format={format}
-						subMetaKeywordLinks={article.subMetaKeywordLinks}
-						subMetaSectionLinks={article.subMetaSectionLinks}
-						pageId={article.pageId}
-						webUrl={article.webURL}
-						webTitle={article.webTitle}
-						showBottomSocialButtons={
-							article.showBottomSocialButtons
-						}
-					/>
-				</Section>
+				{showRelatedPuzzles && article.moreFromPuzzlesAndGames && (
+					<div data-print-layout="hide">
+						<Section
+							fullWidth={true}
+							showTopBorder={false}
+							backgroundColour={themePalette(
+								'--article-background',
+							)}
+						>
+							<Island
+								priority="enhancement"
+								defer={{ until: 'visible' }}
+							>
+								<RelatedPuzzlesRailEnhanced
+									items={article.moreFromPuzzlesAndGames}
+								/>
+							</Island>
+						</Section>
+					</div>
+				)}
+
+				{!isPuzzlesHubV1 && (
+					<Section
+						fullWidth={true}
+						showTopBorder={false}
+						backgroundColour={themePalette('--article-background')}
+					>
+						<SubMeta
+							format={format}
+							subMetaKeywordLinks={article.subMetaKeywordLinks}
+							subMetaSectionLinks={article.subMetaSectionLinks}
+							pageId={article.pageId}
+							webUrl={article.webURL}
+							webTitle={article.webTitle}
+							showBottomSocialButtons={
+								article.showBottomSocialButtons
+							}
+						/>
+					</Section>
+				)}
 				{renderAds && (
 					<Section
 						fullWidth={true}
@@ -465,9 +558,20 @@ export const CrosswordLayout = (props: Props) => {
 						/>
 					</Section>
 				)}
+
+				{isPuzzlesHubV1 && article.puzzlesSupporting && (
+					<div data-print-layout="hide">
+						<PuzzlesUsefulLinks
+							id="crossword"
+							title="Useful links"
+							links={article.puzzlesSupporting.usefulLinks}
+							newsletter={article.puzzlesSupporting.newsletter}
+						/>
+					</div>
+				)}
 			</main>
 
-			{props.NAV.subNavSections && (
+			{!isPuzzlesHubV1 && props.NAV.subNavSections && (
 				<Section fullWidth={true} padSides={false} element="aside">
 					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
@@ -489,8 +593,8 @@ export const CrosswordLayout = (props: Props) => {
 			>
 				<Footer
 					pageFooter={article.pageFooter}
-					selectedPillar={props.NAV.selectedPillar}
-					pillars={props.NAV.pillars}
+					selectedPillar={NAV.selectedPillar}
+					pillars={NAV.pillars}
 					urls={article.nav.readerRevenueLinks.footer}
 					editionId={article.editionId}
 				/>

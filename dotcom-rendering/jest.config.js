@@ -27,7 +27,7 @@ module.exports = {
 	transform: {
 		'^.+\\.(mjs|js|ts|tsx)$': ['@swc/jest', swcConfig],
 	},
-	testMatch: ['**/*.test.+(ts|tsx|js)'],
+	testMatch: ['**/*.test.+(ts|tsx|js|mjs)'],
 	setupFilesAfterEnv: ['<rootDir>/scripts/jest/setup.ts'],
 	moduleNameMapper: {
 		'^svgs/(.*)$': '<rootDir>/__mocks__/svgMock.tsx',

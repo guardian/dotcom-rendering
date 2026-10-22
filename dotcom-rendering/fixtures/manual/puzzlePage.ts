@@ -61,7 +61,7 @@ export const createPuzzlePage = (
 		config: {
 			...Standard.config,
 			contentType: 'Game',
-			serverSideABTests: { 'puzzles-new-hub': 'variant' },
+			serverSideABTests: {},
 		},
 		nav: Standard.nav,
 		pageFooter: Standard.pageFooter,

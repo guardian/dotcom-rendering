@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headlineBold24,
 	headlineBold34,
 	palette,
 	space,
@@ -12,19 +11,24 @@ import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
-import { MorePuzzlesRows } from '../components/MorePuzzlesCard';
 import { PuzzlesArchiveCalendar } from '../components/PuzzlesArchiveCalendar.island';
 import { PuzzlesArchiveDescription } from '../components/PuzzlesArchiveDescription.island';
+import { RelatedPuzzlesRailEnhanced } from '../components/RelatedPuzzlesRailEnhanced.island';
 import { Section } from '../components/Section';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { center } from '../lib/center';
+import { puzzlesPageTheme } from '../lib/puzzlesTheme';
 import type { NavType } from '../model/extract-nav';
+import { palette as themePalette } from '../palette';
 import type { FEPuzzlesPageType } from '../types/puzzlesPage';
 import { Stuck } from './lib/stickiness';
 
-const mainStyles = css`
-	background: ${palette.neutral[100]};
-	color: ${palette.neutral[7]};
+const mainStyles = (darkModeAvailable: boolean) => css`
+	${puzzlesPageTheme(darkModeAvailable)};
+`;
+
+/** Without the bottom ad, the page keeps its own space above the footer. */
+const mainBottomSpaceStyles = css`
 	padding-bottom: ${space[12]}px;
 `;
 
@@ -32,26 +36,38 @@ const pageStyles = css`
 	${center};
 	box-sizing: border-box;
 	padding: 0 ${space[3]}px;
-	border-left: 1px solid ${palette.neutral[86]};
-	border-right: 1px solid ${palette.neutral[86]};
+	border-left: 1px solid var(--puzzles-border-colour);
+	border-right: 1px solid var(--puzzles-border-colour);
 	${from.tablet} {
 		padding: 0 ${space[5]}px;
 	}
+`;
+
+/**
+ * Wraps the heading and the calendar (not the "More from" rail) so the
+ * vertical line between the left column and the content starts 6px below
+ * the sub-nav and ends 28px above the rail's own top border. It sits in the
+ * middle of the gap between the two columns (`column-gap` below), where the
+ * rail draws its own divider, so the two read as one line.
+ */
+const topStyles = css`
+	position: relative;
+	padding-bottom: ${space[5]}px;
 	${from.leftCol} {
 		::before {
 			position: absolute;
-			top: 0;
-			bottom: 0;
-			left: 160px;
+			top: 6px;
+			bottom: 28px;
+			left: 150px;
 			width: 1px;
-			background: ${palette.neutral[86]};
+			background: var(--puzzles-border-colour);
 			content: '';
 			pointer-events: none;
 		}
 	}
 	${from.wide} {
 		::before {
-			left: 240px;
+			left: 230px;
 		}
 	}
 `;
@@ -72,6 +88,7 @@ const headingStyles = css`
 	${archiveGridStyles};
 	h1 {
 		${headlineBold34};
+		color: var(--puzzles-headline-colour);
 		margin: 0;
 		padding-top: ${space[2]}px;
 		overflow-wrap: anywhere;
@@ -80,7 +97,7 @@ const headingStyles = css`
 		${textEgyptian17};
 		max-width: 620px;
 		margin: 0 0 ${space[6]}px;
-		color: ${palette.neutral[46]};
+		color: var(--puzzles-text-colour);
 	}
 	${from.leftCol} {
 		h1 {
@@ -95,6 +112,15 @@ const headingStyles = css`
 
 const contentStyles = css`
 	${archiveGridStyles};
+	${from.desktop} {
+		grid-template-columns: minmax(0, 1fr) 300px;
+	}
+	${from.leftCol} {
+		grid-template-columns: 140px minmax(0, 1fr) 300px;
+	}
+	${from.wide} {
+		grid-template-columns: 220px minmax(0, 1fr) 300px;
+	}
 `;
 
 const calendarColumnStyles = css`
@@ -106,49 +132,47 @@ const calendarColumnStyles = css`
 
 const sideAdStyles = css`
 	display: none;
-	${from.wide} {
+	${from.desktop} {
 		display: block;
-		grid-column: 3;
-		padding-top: 110px;
-	}
-`;
-
-const moreStyles = css`
-	${archiveGridStyles};
-	margin-top: ${space[5]}px;
-	padding-top: ${space[2]}px;
-	border-top: 1px solid ${palette.neutral[20]};
-	h2 {
-		${headlineBold24};
-		margin: 0 0 ${space[2]}px;
-		line-height: 1;
-		span {
-			color: ${palette.news[400]};
-		}
+		grid-column: 2;
+		padding-top: 122px;
 	}
 	${from.leftCol} {
-		h2 {
-			grid-column: 1;
-			span {
-				display: block;
-			}
-		}
-		> div {
-			grid-column: 2;
-		}
+		grid-column: 3;
 	}
 `;
 
-const bottomAdStyles = css`
-	margin-top: ${space[8]}px;
-	padding: ${space[4]}px 0;
-	border-top: 1px solid ${palette.neutral[86]};
+/**
+ * The rail's top line is light grey and runs the full width of the page
+ * frame, as on the crosswords page: the negative margin cancels the page's
+ * own side padding (`pageStyles`) and the padding puts the rail back in line
+ * with the rest of the content.
+ */
+const moreStyles = css`
+	--puzzles-edge-padding: ${space[3]}px;
+	margin: 0 -${space[3]}px;
+	padding: 0 ${space[3]}px;
+	border-top: 1px solid var(--puzzles-border-colour);
+	${from.tablet} {
+		margin: 0 -${space[5]}px;
+		padding: 0 ${space[5]}px;
+	}
+`;
+
+const mobileAdStyles = css`
+	margin: ${space[8]}px 0 ${space[5]}px;
+	background: ${palette.neutral[97]};
+	${from.tablet} {
+		display: none;
+	}
 `;
 
 export const PuzzlesArchiveLayout = ({
+	darkModeAvailable = false,
 	puzzlesPage,
 	NAV,
 }: {
+	darkModeAvailable?: boolean;
 	puzzlesPage: FEPuzzlesPageType;
 	NAV: NavType;
 }) => {
@@ -169,7 +193,7 @@ export const PuzzlesArchiveLayout = ({
 							padSides={false}
 							shouldCenter={false}
 						>
-							<HeaderAdSlot includeMobile={true} />
+							<HeaderAdSlot />
 						</Section>
 					</Stuck>
 				)}
@@ -189,60 +213,82 @@ export const PuzzlesArchiveLayout = ({
 					hasPageSkinContentSelfConstrain={false}
 				/>
 			</div>
-			<main css={mainStyles} id="maincontent">
+			<main
+				css={[
+					mainStyles(darkModeAvailable),
+					!renderAds && mainBottomSpaceStyles,
+				]}
+				id="maincontent"
+			>
 				<div css={pageStyles}>
-					<header css={headingStyles}>
-						<h1>{archive.title}</h1>
-						<p>
-							<Island priority="critical">
-								<PuzzlesArchiveDescription
-									idUrl={
-										puzzlesPage.config.idUrl ??
-										'https://profile.theguardian.com'
-									}
-								/>
-							</Island>
-						</p>
-					</header>
-					<div css={contentStyles}>
-						<div css={calendarColumnStyles}>
-							<Island priority="critical">
-								<PuzzlesArchiveCalendar
-									initialArchive={archive}
-								/>
-							</Island>
+					<div css={topStyles}>
+						<header css={headingStyles}>
+							<h1>{archive.title} archive</h1>
+							<p>
+								<Island priority="critical">
+									<PuzzlesArchiveDescription
+										idUrl={
+											puzzlesPage.config.idUrl ??
+											'https://profile.theguardian.com'
+										}
+									/>
+								</Island>
+							</p>
+						</header>
+						<div css={contentStyles}>
+							<div css={calendarColumnStyles}>
+								<Island priority="critical">
+									<PuzzlesArchiveCalendar
+										initialArchive={archive}
+									/>
+								</Island>
+							</div>
+							{renderAds && (
+								<aside css={sideAdStyles}>
+									<AdSlot
+										display={ArticleDisplay.Standard}
+										position="right"
+										shouldHideReaderRevenue={false}
+									/>
+								</aside>
+							)}
 						</div>
-						{renderAds && (
-							<aside css={sideAdStyles}>
-								<AdSlot
-									position="right"
-									shouldHideReaderRevenue={false}
-								/>
-							</aside>
-						)}
 					</div>
 					{archive.moreFrom.length > 0 && (
 						<section css={moreStyles}>
-							<h2>
-								More from <span>Puzzles &amp; games</span>
-							</h2>
-							<MorePuzzlesRows
-								items={archive.moreFrom}
-								mobileScrollable={true}
-							/>
+							<Island
+								priority="enhancement"
+								defer={{ until: 'visible' }}
+							>
+								<RelatedPuzzlesRailEnhanced
+									items={archive.moreFrom}
+								/>
+							</Island>
 						</section>
 					)}
 					{renderAds && (
-						<div css={bottomAdStyles}>
-							<AdSlot
-								display={ArticleDisplay.Standard}
-								index={1}
-								position="fronts-banner"
-							/>
+						<div css={mobileAdStyles}>
+							<AdSlot position="mobile-front" index={1} />
 						</div>
 					)}
 				</div>
 			</main>
+			{renderAds && (
+				<Section
+					fullWidth={true}
+					padSides={false}
+					showTopBorder={false}
+					showSideBorders={false}
+					backgroundColour={themePalette('--ad-background')}
+					element="aside"
+				>
+					<AdSlot
+						display={ArticleDisplay.Standard}
+						index={1}
+						position="fronts-banner"
+					/>
+				</Section>
+			)}
 			<Section
 				fullWidth={true}
 				padSides={false}

@@ -14,15 +14,22 @@ import type { Config } from '../types/configContext';
 import type { FEPuzzlesPageType } from '../types/puzzlesPage';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
+export const isPuzzlesDarkModeAvailable = (
+	serverSideABTests: Record<string, string>,
+): boolean => serverSideABTests['webx-dark-mode-web'] === 'enable';
+
 export const renderPuzzlesPage = ({
 	puzzlesPage,
 }: {
 	puzzlesPage: FEPuzzlesPageType;
 }): { html: string; prefetchScripts: string[] } => {
 	const NAV = extractNAV(puzzlesPage.nav);
+	const darkModeAvailable = isPuzzlesDarkModeAvailable(
+		puzzlesPage.config.serverSideABTests,
+	);
 	const config = {
 		renderingTarget: 'Web',
-		darkModeAvailable: false,
+		darkModeAvailable,
 		assetOrigin: ASSET_ORIGIN,
 		editionId: puzzlesPage.editionId,
 	} satisfies Config;
