@@ -154,8 +154,6 @@ export const HighlightsCard = ({
 					headlineText={headlineText}
 					dataLinkName={dataLinkName}
 					isExternalLink={isExternalLink}
-					isLoopAndInLoopClickTest={false}
-					shouldRaiseZIndexForAbTest={false}
 					headlineTestUuid={headlineTestUuid}
 				/>
 

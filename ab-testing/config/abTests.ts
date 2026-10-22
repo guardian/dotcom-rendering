@@ -93,30 +93,6 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 	},
 	{
-		name: "fronts-and-curation-loop-click-through",
-		description:
-			"Test impact of click to article via loop videos on fronts",
-		owners: ["fronts.and.curation@guardian.co.uk"],
-		status: "OFF",
-		expirationDate: "2026-09-19",
-		type: "server",
-		audienceSize: 5 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: false,
-	},
-	{
-		name: "fronts-and-curation-click-to-play",
-		description: "Test click to play longform videos vs autoplay",
-		owners: ["fronts.and.curation@guardian.co.uk"],
-		status: "OFF",
-		expirationDate: "2026-09-28",
-		type: "server",
-		audienceSize: 0 / 100,
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "martech-admiral-adblock",
 		description:
 			"Control group for Admiral ad blocker - runs the detection script but does not show the modal",

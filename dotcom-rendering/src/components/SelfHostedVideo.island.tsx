@@ -11,7 +11,6 @@ import { ArticleDisplay, type ArticleFormat } from '../lib/articleFormat';
 import { getVideoClient } from '../lib/bridgetApi';
 import { getZIndex } from '../lib/getZIndex';
 import { generateImageURL } from '../lib/image';
-import { useAB } from '../lib/useAB';
 import { useFadeableControls } from '../lib/useFadeableControls';
 import { hasMinimumBridgetVersion } from '../lib/useIsBridgetCompatible';
 import { useIsInView } from '../lib/useIsInView';
@@ -313,12 +312,6 @@ type Props = {
 	role?: RoleType;
 	preventAutoplay: boolean;
 	restrictHeightOnDesktop?: boolean;
-	cardLink?: {
-		headlineText: string;
-		dataLinkName?: string;
-		isExternalLink: boolean;
-	};
-	isInLoopClickTestVariant?: boolean;
 };
 
 export const SelfHostedVideo = ({
@@ -349,23 +342,13 @@ export const SelfHostedVideo = ({
 	role,
 	preventAutoplay,
 	restrictHeightOnDesktop = false,
-	cardLink,
-	isInLoopClickTestVariant,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
-	const ab = useAB();
-	const isInClickToPlayTest =
-		Boolean(
-			ab?.isUserInTestGroup(
-				'fronts-and-curation-click-to-play',
-				'variant',
-			),
-		) && videoStyle === 'Default';
+
 	const videoStyleSettings: VideoStyleSettings = videoSettingsMap[videoStyle];
 
-	const willAttemptAutoplay =
-		videoStyleSettings.autoplay && !preventAutoplay && !isInClickToPlayTest;
+	const willAttemptAutoplay = videoStyleSettings.autoplay && !preventAutoplay;
 	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
 
 	const videoRef = useRef<HTMLVideoElement>(null);
@@ -395,21 +378,16 @@ export const SelfHostedVideo = ({
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
 
-	const isLoopClickThroughTestVariant =
-		videoStyle === 'Loop' && isInLoopClickTestVariant;
-
 	/**
 	 * The video will autoplay if all of the following are true:
 	 * - the style of video allows autoplay
 	 * - the parent allows autoplay, i.e. we may not want to autoplay on certain page types
 	 * - autoplay is allowed by the browser, e.g. if "reduce motion" is enabled then we don't autoplay
-	 * - the user is not in the click-to-play test variant
 	 */
 	const shouldAutoplay =
 		videoStyleSettings.autoplay &&
 		!preventAutoplay &&
-		isAutoplayAllowed === true &&
-		!isInClickToPlayTest;
+		isAutoplayAllowed === true;
 
 	const showProgressBar =
 		!hideProgressBar &&
@@ -1167,11 +1145,6 @@ export const SelfHostedVideo = ({
 						isInteractive={videoStyleSettings.isInteractive}
 						isFullscreen={isFullscreen}
 						isWebKitFullscreen={isWebKitFullscreen}
-						linkTo={linkTo}
-						cardLink={cardLink}
-						isLoopAndInLoopClickTestVariant={Boolean(
-							isLoopClickThroughTestVariant,
-						)}
 					/>
 				</div>
 			</div>
