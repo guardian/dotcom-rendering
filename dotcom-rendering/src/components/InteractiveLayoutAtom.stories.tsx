@@ -14,6 +14,14 @@ export const InteractiveLayoutAtom = meta.story({
 		elementHtml: interactiveLayoutAtom.html,
 		elementJs: interactiveLayoutAtom.js,
 		elementCss: interactiveLayoutAtom.css,
+		role: 'inline',
+		type: 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement',
+		format: {
+			display: 0,
+			design: 0,
+			theme: 0,
+		},
+		articleArrangement: 'interactive',
 	},
 	decorators: (StoryComponent) => (
 		<div

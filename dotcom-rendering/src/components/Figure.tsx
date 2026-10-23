@@ -19,9 +19,60 @@ type Props = {
 	className?: string;
 	type?: FEElement['_type'];
 	isTimeline?: boolean;
-	isInDeprecatedInteractiveLayout?: boolean;
 	articleArrangement?: LayoutType;
 };
+
+const fullWidthCss = ({
+	leftColMaxWidth,
+	wideMaxWidth,
+}: {
+	leftColMaxWidth: number;
+	wideMaxWidth: number;
+}) => css`
+	margin-top: ${space[3]}px;
+	margin-bottom: ${space[3]}px;
+
+	${until.tablet} {
+		margin-left: -20px;
+		margin-right: -20px;
+	}
+	${until.mobileLandscape} {
+		margin-left: -10px;
+		margin-right: -10px;
+	}
+	${from.tablet} {
+		--scrollbar-width-fallback: 15px;
+		--half-scrollbar-width-fallback: 7.5px;
+
+		width: calc(
+			100vw - var(--scrollbar-width, var(--scrollbar-width-fallback))
+		);
+		max-width: calc(
+			100vw - var(--scrollbar-width, var(--scrollbar-width-fallback))
+		);
+
+		--grid-container-max-width: 740px;
+		--grid-container-left-margin: calc(
+			((-100vw + (var(--grid-container-max-width) - 42px)) / 2) +
+				var(
+					--half-scrollbar-width,
+					var(--half-scrollbar-width-fallback)
+				)
+		);
+		margin-left: var(--grid-container-left-margin);
+	}
+	${from.desktop} {
+		--grid-container-max-width: ${breakpoints.desktop}px;
+	}
+	${from.leftCol} {
+		--grid-container-max-width: ${leftColMaxWidth}px;
+		--grid-left-col-width: 140px;
+	}
+	${from.wide} {
+		--grid-container-max-width: ${wideMaxWidth}px;
+		--grid-left-col-width: 219px;
+	}
+`;
 
 const roleCss = {
 	inline: css`
@@ -79,59 +130,15 @@ const roleCss = {
 		}
 	`,
 
-	fullWidth: css`
-		margin-top: ${space[3]}px;
-		margin-bottom: ${space[3]}px;
+	fullWidth: fullWidthCss({
+		leftColMaxWidth: 824,
+		wideMaxWidth: 824,
+	}),
 
-		grid-column: 1 / -1;
-	`,
-
-	fullWidthDeprecated: css`
-		margin-top: ${space[3]}px;
-		margin-bottom: ${space[3]}px;
-
-		${until.tablet} {
-			margin-left: -20px;
-			margin-right: -20px;
-		}
-		${until.mobileLandscape} {
-			margin-left: -10px;
-			margin-right: -10px;
-		}
-		${from.tablet} {
-			--scrollbar-width-fallback: 15px;
-			--half-scrollbar-width-fallback: 7.5px;
-
-			width: calc(
-				100vw - var(--scrollbar-width, var(--scrollbar-width-fallback))
-			);
-			max-width: calc(
-				100vw - var(--scrollbar-width, var(--scrollbar-width-fallback))
-			);
-
-			--grid-container-max-width: 740px;
-			--grid-container-left-margin: calc(
-				((-100vw + (var(--grid-container-max-width) - 42px)) / 2) +
-					var(
-						--half-scrollbar-width,
-						var(--half-scrollbar-width-fallback)
-					)
-			);
-
-			margin-left: var(--grid-container-left-margin);
-		}
-		${from.desktop} {
-			--grid-container-max-width: ${breakpoints.desktop}px;
-		}
-		${from.leftCol} {
-			--grid-container-max-width: ${breakpoints.leftCol}px;
-			--grid-left-col-width: 140px;
-		}
-		${from.wide} {
-			--grid-container-max-width: ${breakpoints.wide}px;
-			--grid-left-col-width: 219px;
-		}
-	`,
+	fullWidthDeprecated: fullWidthCss({
+		leftColMaxWidth: breakpoints.leftCol,
+		wideMaxWidth: breakpoints.wide,
+	}),
 
 	showcase: css`
 		margin-top: ${space[3]}px;
@@ -226,10 +233,9 @@ export const defaultRoleStyles = (
 		case 'immersive':
 			return roleCss.immersive;
 		case 'fullWidth':
-			if (isInDeprecatedInteractiveLayout) {
-				return roleCss.fullWidthDeprecated;
-			}
-			return roleCss.fullWidth;
+			return isInDeprecatedInteractiveLayout
+				? roleCss.fullWidthDeprecated
+				: roleCss.fullWidth;
 		case 'showcase':
 			if (isTimeline) {
 				return css`
@@ -284,8 +290,14 @@ const mainMediaFigureStyles = (
 		height: 100%;
 		${isImmersiveLandscape &&
 		css`
-			height: calc(100vh - ${navAndLabsHeaderHeight});
-			min-height: calc(31.25rem - ${navAndLabsHeaderHeight});
+			${until.tablet} {
+				height: auto;
+				aspect-ratio: 4 / 5;
+			}
+			${from.tablet} {
+				height: calc(100vh - ${navAndLabsHeaderHeight});
+				min-height: calc(31.25rem - ${navAndLabsHeaderHeight});
+			}
 			${from.wide} {
 				min-height: calc(50rem - ${navAndLabsHeaderHeight});
 			}
@@ -302,7 +314,6 @@ export const Figure = ({
 	className = '',
 	type,
 	isTimeline = false,
-	isInDeprecatedInteractiveLayout = false,
 	articleArrangement,
 }: Props) => {
 	if (isMainMedia && !isTimeline) {
@@ -354,9 +365,10 @@ export const Figure = ({
 				role,
 				format,
 				isTimeline,
-				isInDeprecatedInteractiveLayout,
+				format.design === ArticleDesign.Interactive &&
+					articleArrangement === undefined,
 			)}
-			data-spacefinder-role={role}
+			data-spacefinder-role={role === 'fullWidth' ? 'immersive' : role}
 			data-spacefinder-type={type}
 			className={className}
 		>

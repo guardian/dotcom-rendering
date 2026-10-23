@@ -7,6 +7,7 @@ import {
 	textSansBold15,
 } from '@guardian/source/foundations';
 import { SvgNewsletterFilled } from '@guardian/source/react-components';
+import { generateImageURL } from '../lib/image';
 import { palette as themePalette } from '../palette';
 
 export type NewsletterSignupCardProps = {
@@ -143,7 +144,12 @@ const NewsletterSignupHeader = (
 			{!!props.illustrationSquare && (
 				<img
 					css={illustrationStyles}
-					src={props.illustrationSquare}
+					src={generateImageURL({
+						mainImage: props.illustrationSquare,
+						imageWidth: 100,
+						resolution: 'high',
+						aspectRatio: '1:1',
+					})}
 					alt=""
 					loading="lazy"
 					decoding="async"

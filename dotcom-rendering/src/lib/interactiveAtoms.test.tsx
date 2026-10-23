@@ -54,7 +54,18 @@ describe('Interactive atom custom data attributes', () => {
 
 	it('should add custom data attribute to InteractiveLayoutAtom', () => {
 		const { container } = render(
-			<InteractiveLayoutAtom id="test-id" customData={mockCustomData} />,
+			<InteractiveLayoutAtom
+				id="test-id"
+				customData={mockCustomData}
+				role="inline"
+				type="model.dotcomrendering.pageElements.InteractiveAtomBlockElement"
+				format={{
+					display: 0,
+					design: 0,
+					theme: 0,
+				}}
+				articleArrangement="interactive"
+			/>,
 		);
 		const el = container.querySelector(
 			`[data-atom-custom-data='${mockCustomData}']`,
