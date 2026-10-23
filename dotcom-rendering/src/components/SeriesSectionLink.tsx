@@ -470,13 +470,22 @@ export const SeriesSectionLink = ({
 						marginRight,
 						fontStyles(format),
 						breakWord,
-						css`
-							box-shadow:
-								-6px 0 0 0
-									${themePalette('--series-title-background')},
-								6px 0 0 0
-									${themePalette('--series-title-background')};
-						`,
+						layoutType !== 'interactiveTopHat' &&
+							css`
+								box-shadow:
+									-6px 0 0 0
+										${themePalette(
+											'--series-title-background',
+										)},
+									6px 0 0 0
+										${themePalette(
+											'--series-title-background',
+										)};
+							`,
+						layoutType === 'interactiveTopHat' &&
+							css`
+								padding: 0 4px;
+							`,
 					]}
 					data-component="series"
 					data-link-name="article series"
