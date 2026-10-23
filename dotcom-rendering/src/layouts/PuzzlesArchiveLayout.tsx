@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import {
 	from,
+	headlineBold24,
 	headlineBold28,
-	headlineBold34,
 	palette,
 	space,
 	textEgyptian17,
@@ -88,7 +88,7 @@ const archiveGridStyles = css`
 const headingStyles = css`
 	${archiveGridStyles};
 	h1 {
-		${headlineBold34};
+		${headlineBold24};
 		color: var(--puzzles-headline-colour);
 		margin: 0;
 		padding-top: ${space[2]}px;
