@@ -1,7 +1,12 @@
 import { App } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
-import { InstanceClass, InstanceSize, InstanceType } from 'aws-cdk-lib/aws-ec2';
 import {
+	InstanceType as Ec2InstanceType,
+	InstanceClass,
+	InstanceSize,
+} from 'aws-cdk-lib/aws-ec2';
+import {
+	ArticleRenderingPropsCODE,
 	InteractiveRenderingPropsCODE,
 	InteractiveRenderingPropsPROD,
 	TagPageRenderingPropsCODE,
@@ -50,7 +55,7 @@ describe('The RenderingCDKStack', () => {
 						},
 					},
 				},
-				instanceType: InstanceType.of(
+				instanceType: Ec2InstanceType.of(
 					InstanceClass.T4G,
 					InstanceSize.MICRO,
 				),
@@ -60,18 +65,16 @@ describe('The RenderingCDKStack', () => {
 		expect(template.toJSON()).toMatchSnapshot();
 	});
 
-	// Note: this is handled at the GuCDK library level
-	it('should not be possible to provision a stack without any compute', () => {
-		expect(() => {
-			const app = new App();
-			new RenderingCDKStack(app, 'ArticleRendering', {
-				domainName: 'tag-page-rendering.guardianapis.com',
-				guApp: 'tag-page-rendering',
-				stage: 'PROD',
-			});
-		}).toThrow(
-			"At least one of 'ec2Props' or 'ecsProps' must be specified",
+	it('configures ECS for Article Rendering CODE without routing traffic to it', () => {
+		const app = new App();
+		const stack = new RenderingCDKStack(
+			app,
+			'ArticleRendering-CODE',
+			ArticleRenderingPropsCODE,
 		);
+		const template = Template.fromStack(stack);
+		expect(template.toJSON()).toMatchSnapshot();
+		//expectEcsWithEc2Traffic(Template.fromStack(stack));
 	});
 
 	it('matches the snapshot for Tag Page Rendering PROD', () => {

@@ -1,11 +1,15 @@
 import { App, Duration } from 'aws-cdk-lib';
-import { InstanceClass, InstanceSize, InstanceType } from 'aws-cdk-lib/aws-ec2';
+import {
+	InstanceType as Ec2InstanceType,
+	InstanceClass,
+	InstanceSize,
+} from 'aws-cdk-lib/aws-ec2';
 import type { RenderingCDKStackProps } from '../lib/renderingStack';
 import { RenderingCDKStack } from '../lib/renderingStack';
 
 function getImageIdentifier(): string {
 	const imageIdentifier: string | undefined = process.env.IMAGE_DIGEST;
-	if (!imageIdentifier) {
+	if (imageIdentifier == null) {
 		throw new Error('Image identifier must be provided');
 	}
 	return imageIdentifier;
@@ -24,50 +28,6 @@ const cpuScalingSteps = {
 	],
 };
 
-/** Article */
-new RenderingCDKStack(cdkApp, 'ArticleRendering-CODE', {
-	guApp: 'article-rendering',
-	stage: 'CODE',
-	domainName: 'article-rendering.code.dev-guardianapis.com',
-	ec2Props: {
-		scaling: { minimumInstances: 1, maximumInstances: 3 },
-		instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.SMALL),
-	},
-});
-new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
-	guApp: 'article-rendering',
-	stage: 'PROD',
-	domainName: 'article-rendering.guardianapis.com',
-	ec2Props: {
-		scaling: {
-			minimumInstances: 42,
-			maximumInstances: 240,
-			policies: {
-				step: {
-					cpu: cpuScalingSteps,
-					latency: {
-						scalingStepsOut: [
-							// When latency is lower than 0.2s no scaling up
-							{ lower: 0, upper: 0.2, change: 0 },
-							// When latency is higher than 0.2s we scale up by 50%
-							{ lower: 0.2, change: 50 },
-							// When latency is higher than 0.3s we scale up by 80%
-							{ lower: 0.3, change: 80 },
-						],
-						scalingStepsIn: [
-							// When latency is higher than 0.12s no scaling down
-							{ lower: 0.12, change: 0 },
-							// When latency is lower than 0.12s we scale down by 1
-							{ upper: 0.12, lower: 0, change: -1 },
-						],
-					},
-				},
-			},
-		},
-		instanceType: InstanceType.of(InstanceClass.C8G, InstanceSize.MEDIUM),
-	},
-});
-
 /** Facia */
 new RenderingCDKStack(cdkApp, 'FaciaRendering-CODE', {
 	guApp: 'facia-rendering',
@@ -75,7 +35,7 @@ new RenderingCDKStack(cdkApp, 'FaciaRendering-CODE', {
 	domainName: 'facia-rendering.code.dev-guardianapis.com',
 	ec2Props: {
 		scaling: { minimumInstances: 1, maximumInstances: 3 },
-		instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.SMALL),
+		instanceType: Ec2InstanceType.of(InstanceClass.T4G, InstanceSize.SMALL),
 	},
 });
 new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
@@ -108,7 +68,10 @@ new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
 				},
 			},
 		},
-		instanceType: InstanceType.of(InstanceClass.C8G, InstanceSize.MEDIUM),
+		instanceType: Ec2InstanceType.of(
+			InstanceClass.C8G,
+			InstanceSize.MEDIUM,
+		),
 	},
 });
 
@@ -185,7 +148,7 @@ export const InteractiveRenderingPropsCODE: RenderingCDKStackProps = {
 	domainName: 'interactive-rendering.code.dev-guardianapis.com',
 	ec2Props: {
 		scaling: { minimumInstances: 1, maximumInstances: 3 },
-		instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.MICRO),
+		instanceType: Ec2InstanceType.of(InstanceClass.T4G, InstanceSize.MICRO),
 	},
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
@@ -247,11 +210,93 @@ export const InteractiveRenderingPropsPROD: RenderingCDKStackProps = {
 				},
 			},
 		},
-		instanceType: InstanceType.of(InstanceClass.C8G, InstanceSize.MEDIUM),
+		instanceType: Ec2InstanceType.of(
+			InstanceClass.C8G,
+			InstanceSize.MEDIUM,
+		),
 	},
 };
 new RenderingCDKStack(
 	cdkApp,
 	'InteractiveRendering-PROD',
 	InteractiveRenderingPropsPROD,
+);
+
+/** Article */
+export const ArticleRenderingPropsCODE: RenderingCDKStackProps = {
+	guApp: 'article-rendering',
+	stage: 'CODE',
+	domainName: 'article-rendering.code.dev-guardianapis.com',
+	ec2Props: {
+		scaling: { minimumInstances: 1, maximumInstances: 3 },
+		instanceType: Ec2InstanceType.of(InstanceClass.T4G, InstanceSize.SMALL),
+	},
+	ecsProps: {
+		imageIdentifier: getImageIdentifier(),
+		taskCpu: 2048,
+		taskMemoryLimitMiB: 4096,
+		scaling: {
+			minimumTasks: 1,
+			maximumTasks: 3,
+			cpuScaling: {
+				targetValue: 20,
+				scaleInCooldown: Duration.seconds(60),
+				scaleOutCooldown: Duration.seconds(60),
+			},
+		},
+		// Route all traffic to EC2 while ECS is tested in CODE.
+		targetGroupWeights: {
+			ec2: 1,
+			ecs: 0,
+		},
+	},
+};
+
+export const ArticleRenderingPropsPROD: RenderingCDKStackProps = {
+	guApp: 'article-rendering',
+	stage: 'PROD',
+	domainName: 'article-rendering.dev-guardianapis.com',
+	ec2Props: {
+		scaling: {
+			minimumInstances: 42,
+			maximumInstances: 240,
+			policies: {
+				step: {
+					cpu: cpuScalingSteps,
+					latency: {
+						scalingStepsOut: [
+							// When latency is lower than 0.2s no scaling up
+							{ lower: 0, upper: 0.2, change: 0 },
+							// When latency is higher than 0.2s we scale up by 50%
+							{ lower: 0.2, change: 50 },
+							// When latency is higher than 0.3s we scale up by 80%
+							{ lower: 0.3, change: 80 },
+						],
+						scalingStepsIn: [
+							// When latency is higher than 0.12s no scaling down
+							{ lower: 0.12, change: 0 },
+							// When latency is lower than 0.12s we scale down by 1
+							{ upper: 0.12, lower: 0, change: -1 },
+						],
+					},
+				},
+			},
+		},
+		instanceType: Ec2InstanceType.of(
+			InstanceClass.C8G,
+			InstanceSize.MEDIUM,
+		),
+	},
+};
+
+new RenderingCDKStack(
+	cdkApp,
+	'ArticleRendering-CODE',
+	ArticleRenderingPropsCODE,
+);
+
+new RenderingCDKStack(
+	cdkApp,
+	'ArticleRendering-PROD',
+	ArticleRenderingPropsPROD,
 );
