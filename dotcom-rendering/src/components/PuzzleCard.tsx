@@ -81,7 +81,6 @@ const puzzleColours = (item: PuzzleItem) => {
 const cardStyles = (
 	variant: PuzzleItem['cardVariant'],
 	hasImage: boolean,
-	isFeatured: boolean,
 ) => css`
 	position: relative;
 	display: block;
@@ -111,15 +110,6 @@ const cardStyles = (
 		`}
 	}
 
-	${isFeatured &&
-	css`
-		${from.leftCol} {
-			min-height: 368px;
-			height: 368px;
-			padding-right: 0;
-		}
-	`}
-
 	:hover .puzzle-card-title {
 		text-decoration: underline;
 	}
@@ -138,9 +128,8 @@ const cardColourStyles = (background: string | undefined) => {
 	`;
 };
 
-const cardTextStyles = (isFeatured: boolean) => css`
+const cardTextStyles = css`
 	position: relative;
-	z-index: ${isFeatured ? 1 : 'auto'};
 	display: flex;
 	min-width: 0;
 	flex-direction: column;
@@ -201,7 +190,7 @@ const playedStyles = css`
 	}
 `;
 
-const cardImageStyles = (isFeatured: boolean) => css`
+const cardImageStyles = css`
 	position: absolute;
 	right: 0;
 	bottom: 0;
@@ -213,27 +202,9 @@ const cardImageStyles = (isFeatured: boolean) => css`
 		width: 220px;
 		height: 176px;
 	}
-
-	${isFeatured &&
-	css`
-		${from.leftCol} {
-			position: absolute;
-			right: 0;
-			bottom: 0;
-			width: 345px;
-			max-width: 75%;
-			height: 276px;
-		}
-	`}
 `;
 
-export const PuzzleCard = ({
-	isFeatured,
-	item,
-}: {
-	isFeatured: boolean;
-	item: PuzzleItem;
-}) => {
+export const PuzzleCard = ({ item }: { item: PuzzleItem }) => {
 	const url = getPuzzleUrl(item);
 	const colours = puzzleColours(item);
 	const setter = item.type === 'crossword' ? item.setter?.trim() : undefined;
@@ -245,7 +216,7 @@ export const PuzzleCard = ({
 		item.type === 'crossword' && !/\bcrossword\b/i.test(item.title);
 	const contents = (
 		<>
-			<div css={cardTextStyles(isFeatured)}>
+			<div css={cardTextStyles}>
 				<h3
 					className="puzzle-card-title"
 					css={cardTitleStyles(item.cardVariant, colours.title)}
@@ -267,7 +238,7 @@ export const PuzzleCard = ({
 				<img
 					alt={item.imageAlt?.trim() || `${item.title} illustration`}
 					aria-hidden="true"
-					css={cardImageStyles(isFeatured)}
+					css={cardImageStyles}
 					src={item.image}
 				/>
 			)}
@@ -282,7 +253,7 @@ export const PuzzleCard = ({
 		</>
 	);
 	const styles = [
-		cardStyles(item.cardVariant, hasImage, isFeatured),
+		cardStyles(item.cardVariant, hasImage),
 		cardColourStyles(colours.background),
 	];
 	return url !== undefined ? (
@@ -435,13 +406,7 @@ export const rowStyles = (
 	`;
 };
 
-export const Rows = ({
-	isFeatured = false,
-	rows,
-}: {
-	isFeatured?: boolean;
-	rows: PuzzleItem[][];
-}) => (
+export const Rows = ({ rows }: { rows: PuzzleItem[][] }) => (
 	<div css={rowsStyles}>
 		{rows
 			.filter((row) => row.length > 0)
@@ -455,7 +420,7 @@ export const Rows = ({
 				>
 					{row.map((item) => (
 						<li key={item.id}>
-							<PuzzleCard isFeatured={isFeatured} item={item} />
+							<PuzzleCard item={item} />
 						</li>
 					))}
 				</ul>
