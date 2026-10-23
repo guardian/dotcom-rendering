@@ -156,46 +156,14 @@ const ABTests: ABTest[] = [
 	},
 
 	/**
-	 * Puzzles & Games rollout, tier v1 (w/c 12 Oct launch).
-	 *
-	 * This is the master switch for the Puzzles & Games experience: the new
-	 * Puzzles Hub page, the V0 puzzle pages (sudoku easy/medium/hard/killer,
-	 * word-wheel, wordiply) and everything below. Turning it off (or down to
-	 * 0%) hides all of it, and (by the cumulative design) every later tier
-	 * too.
-	 *
-	 * This tier activates: the full hub sub-nav links (to
-	 * /word-games, /logic-puzzles, /trivia-and-quizzes), a
-	 * sign-in-to-track-progress message, a calendar/archive view for
-	 * crosswords/logic-puzzles/word-games (not Wordiply, which has no
-	 * archive), progress indicators (Available/Completed), the "More from
-	 * Puzzles & Games" related-content rail, newsletter signup, and
-	 * changes to the existing crossword page (print CTA repositioning, a
-	 * "play other puzzles" container).
-	 *
-	 * To roll back without a deploy: flip this test's `audienceSize` to
-	 * `0 / 100` (or `status` to `"OFF"`).
-	 */
-	{
-		name: "puzzles-new-hub-v1",
-		description: "Rollout of the v1 Puzzles & Games features (w/c 12 Oct)",
-		owners: ["puzzles.team@guardian.co.uk"],
-		status: "ON",
-		expirationDate: "2026-12-31",
-		type: "server",
-		audienceSize: 0 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: false,
-	},
-	/**
 	 * Puzzles & Games rollout, tier v2 (future, no launch date confirmed
 	 * yet as of this writing).
 	 *
-	 * Only takes effect when `puzzles-new-hub-v1` is ALSO enabled for the
-	 * reader, so the rollout can never end up in an inconsistent state.
+	 * Only takes effect when the Puzzles & Games hub is available for the
+	 * reader's edition (see `isPuzzlesHubAvailable` in DCR), so the rollout
+	 * can never end up in an inconsistent state.
 	 *
-	 * On top of v1, this tier activates: the On the Ball and Film Reveal
+	 * On top of the hub, this tier activates: the On the Ball and Film Reveal
 	 * iframe games (Trivia and Quizzes group), a "Most played" container,
 	 * EventKit-driven navigation, migrating existing crossword pages onto
 	 * the new Puzzle Page template, and search-engine mobile app nudges.
@@ -205,7 +173,7 @@ const ABTests: ABTest[] = [
 	{
 		name: "puzzles-new-hub-v2",
 		description:
-			"Rollout of the v2 Puzzles & Games features (no date confirmed yet), on top of the puzzles-new-hub-v1 baseline",
+			"Rollout of the v2 Puzzles & Games features (no date confirmed yet), on top of the Puzzles & Games hub",
 		owners: ["puzzles.team@guardian.co.uk"],
 		status: "ON",
 		expirationDate: "2026-12-31",
