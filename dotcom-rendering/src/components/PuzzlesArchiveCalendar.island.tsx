@@ -143,14 +143,14 @@ const sectionStyles = css`
 `;
 
 const linesStyles = css`
-	height: 10px;
+	height: 13px;
 	margin-bottom: ${space[4]}px;
 	background: repeating-linear-gradient(
 		to bottom,
 		var(--puzzles-border-colour, ${palette.neutral[86]}) 0,
 		var(--puzzles-border-colour, ${palette.neutral[86]}) 1px,
 		transparent 1px,
-		transparent 3px
+		transparent 4px
 	);
 `;
 
