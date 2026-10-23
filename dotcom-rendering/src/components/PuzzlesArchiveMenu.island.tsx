@@ -1,5 +1,11 @@
 import { css } from '@emotion/react';
-import { from, palette, space, textSans14 } from '@guardian/source/foundations';
+import {
+	from,
+	palette,
+	space,
+	textSans14,
+	textSans15,
+} from '@guardian/source/foundations';
 import { useEffect, useRef } from 'react';
 import type { PuzzleItem } from '../types/puzzlesPage';
 
@@ -92,7 +98,7 @@ const menuStyles = css`
 	z-index: 20;
 	top: calc(100% + ${space[1]}px);
 	left: 0;
-	min-width: 256px;
+	min-width: 209px;
 	margin: 0;
 	padding: 0;
 	border: 1px solid var(--puzzles-border-colour, ${palette.neutral[86]});
@@ -102,14 +108,16 @@ const menuStyles = css`
 
 const linkStyles = css`
 	display: flex;
-	min-height: 60px;
-	align-items: center;
-	padding: 0 ${space[5]}px;
+	box-sizing: border-box;
+	min-height: 45px;
+	align-items: flex-start;
+	padding: ${space[3]}px ${space[4]}px;
 	border-bottom: 1px solid
 		var(--puzzles-border-colour, ${palette.neutral[86]});
-	color: var(--puzzles-headline-colour, ${palette.neutral[7]});
+	color: var(--puzzles-headline-colour, ${palette.neutral[0]});
 	text-decoration: none;
-	${textSans14};
+	${textSans15};
+	line-height: 1.3;
 
 	:hover,
 	:focus-visible {
