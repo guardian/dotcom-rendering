@@ -205,7 +205,7 @@ describe('enhanceProductBlockElements', () => {
 			throw new Error('Expected a ProductBlockElement');
 		}
 
-		expect(enhanced.lowestPrice).toBe('19.99');
+		expect(enhanced.lowestPrice).toBe('£19.99');
 	});
 
 	it('uses the latestPrice for lowest price even when it is higher than the CTA price', () => {
@@ -235,7 +235,36 @@ describe('enhanceProductBlockElements', () => {
 			throw new Error('Expected a ProductBlockElement');
 		}
 
-		expect(enhanced.lowestPrice).toBe('25.99');
+		expect(enhanced.lowestPrice).toBe('£25.99');
+	});
+
+	it('includes the currency symbol of the latest price', () => {
+		const productBlockWithDollarPrice: ProductBlockElement = {
+			...productBlockElement,
+			productCtas: [
+				{
+					...productBlockElement.productCtas[0]!,
+					price: '$29.99',
+					latestPrice: {
+						currencySymbol: '$',
+						price: '9.99',
+					},
+				},
+			],
+		};
+
+		const [enhanced] = enhanceProductElement(elementsEnhancer)([
+			productBlockWithDollarPrice,
+		]);
+
+		if (
+			enhanced?._type !==
+			'model.dotcomrendering.pageElements.ProductBlockElement'
+		) {
+			throw new Error('Expected a ProductBlockElement');
+		}
+
+		expect(enhanced.lowestPrice).toBe('$9.99');
 	});
 
 	it('ignores an invalid latest price and still considers the CTA price', () => {

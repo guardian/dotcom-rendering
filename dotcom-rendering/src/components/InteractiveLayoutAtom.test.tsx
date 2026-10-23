@@ -9,6 +9,14 @@ describe('InteractiveLayoutAtom', () => {
 				elementHtml="<p>InteractiveLayoutAtomText</p>"
 				elementJs="var interactiveLayoutAtomVariable = 0"
 				elementCss=".interactive-layout-atom-class {}"
+				role="inline"
+				type="model.dotcomrendering.pageElements.InteractiveAtomBlockElement"
+				format={{
+					display: 0,
+					design: 0,
+					theme: 0,
+				}}
+				articleArrangement="interactive"
 			/>,
 		);
 

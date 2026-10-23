@@ -13,7 +13,6 @@ import type {
 } from '@guardian/support-dotcom-components/dist/dotcom/types';
 import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
-import { grid } from '../grid';
 import { getArticleCounts } from '../lib/articleCount';
 import {
 	BrazeBannersSystemPlacementId,
@@ -53,19 +52,11 @@ type Props = {
 	isLabs: boolean;
 	articleEndSlot: boolean;
 	isSensitive: boolean;
-	isInInteractive?: boolean;
 };
 
-const slotStyles = (isInInteractive: boolean) => css`
+const slotStyles = css`
 	color: ${palette.neutral[7]};
 	margin: 12px auto;
-	${isInInteractive &&
-	css`
-		${grid.container};
-		& > *:first-child {
-			${grid.column.centre};
-		}
-	`}
 `;
 
 const buildReaderRevenueEpicConfig = (
@@ -128,7 +119,6 @@ export const SlotBodyEnd = ({
 	isLabs,
 	articleEndSlot,
 	isSensitive,
-	isInInteractive = false,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const { brazeMessages, braze } = useBraze(idApiUrl, renderingTarget);
@@ -272,7 +262,7 @@ export const SlotBodyEnd = ({
 	) {
 		const { SelectedMessage } = pickMessageResult;
 		return (
-			<div id="slot-body-end" css={slotStyles(isInInteractive)}>
+			<div id="slot-body-end" css={slotStyles}>
 				<SelectedMessage />
 			</div>
 		);
@@ -281,7 +271,7 @@ export const SlotBodyEnd = ({
 		showArticleEndSlot
 	) {
 		return (
-			<div id="slot-body-end" css={slotStyles(isInInteractive)}>
+			<div id="slot-body-end" css={slotStyles}>
 				<AdSlot data-print-layout="hide" position="article-end" />
 			</div>
 		);
