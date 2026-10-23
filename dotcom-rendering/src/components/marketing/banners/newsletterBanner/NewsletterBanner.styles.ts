@@ -84,17 +84,6 @@ export const styles = {
 			padding-left: 10px;
 		}
 	`,
-	successCloseButton: css`
-		position: absolute;
-		top: ${space[9]}px;
-		right: ${space[3]}px;
-
-		> div {
-			position: static;
-			margin: 0;
-			padding: 0;
-		}
-	`,
 	container: (background: string, textColor: string): SerializedStyles => css`
 		background: ${background};
 		color: ${textColor};
@@ -113,7 +102,12 @@ export const styles = {
 	`,
 	panels: css`
 		grid-column: copy-container-start / -1;
+		grid-row: 1;
 		min-width: 0;
+
+		${from.desktop} {
+			grid-column: copy-container-start / close-button-start;
+		}
 	`,
 	signupLayout: css`
 		display: grid;
@@ -121,8 +115,8 @@ export const styles = {
 		grid-template-areas: 'copy-container';
 
 		${from.desktop} {
-			grid-template-columns: minmax(0, 1fr) 380px auto;
-			grid-template-areas: 'copy-container main-image close-button';
+			grid-template-columns: minmax(0, 1fr) 380px;
+			grid-template-areas: 'copy-container main-image';
 			gap: 20px;
 		}
 
@@ -131,7 +125,7 @@ export const styles = {
 		}
 
 		${from.wide} {
-			grid-template-columns: minmax(0, 1fr) 400px auto;
+			grid-template-columns: minmax(0, 1fr) 400px;
 		}
 	`,
 	contentContainer: css`
@@ -165,29 +159,29 @@ export const styles = {
 		align-items: center;
 		justify-content: space-between;
 		gap: ${space[2]}px;
-	`,
-	inlineCloseButton: css`
-		display: none;
 
 		${until.mobile} {
-			display: block;
-			flex-shrink: 0;
-
-			> div {
-				margin: 0;
-				padding: 0;
-				position: static;
-			}
+			min-height: 40px;
+			padding-right: 52px;
 		}
 	`,
-	outerCloseButton: css`
+	closeButton: css`
+		grid-area: close-button;
+		grid-row: 1;
+		align-self: start;
+		z-index: 1;
+
 		${until.desktop} {
 			position: absolute;
 			top: ${space[2]}px;
 			right: ${space[3]}px;
 		}
 		${until.mobile} {
-			display: none;
+			> div {
+				margin: 0;
+				padding: 0;
+				position: static;
+			}
 		}
 	`,
 	textImageRow: css`
