@@ -119,6 +119,12 @@ const menuStyles = css`
 	${until.mobileMedium} {
 		right: 10px;
 	}
+
+	/* Opens upwards when there is not enough room below (see placeMenu). */
+	&[data-placement='top'] {
+		top: auto;
+		bottom: calc(100% + ${space[1]}px);
+	}
 `;
 
 const linkStyles = css`
@@ -151,6 +157,7 @@ export const PuzzlesArchiveMenu = ({
 }: Props) => {
 	const detailsRef = useRef<HTMLDetailsElement>(null);
 	const summaryRef = useRef<HTMLElement>(null);
+	const menuRef = useRef<HTMLUListElement>(null);
 
 	useEffect(() => {
 		const close = (event: Event) => {
@@ -186,8 +193,25 @@ export const PuzzlesArchiveMenu = ({
 		return null;
 	}
 
+	/**
+	 * Opens the menu upwards when it does not fit below the label and there
+	 * is more room above it.
+	 */
+	const placeMenu = () => {
+		const menu = menuRef.current;
+		const summary = summaryRef.current;
+		if (!menu || !summary || detailsRef.current?.open !== true) return;
+		const { top, bottom } = summary.getBoundingClientRect();
+		const spaceBelow = window.innerHeight - bottom - space[1];
+		const spaceAbove = top - space[1];
+		menu.dataset.placement =
+			menu.offsetHeight > spaceBelow && spaceAbove > spaceBelow
+				? 'top'
+				: 'bottom';
+	};
+
 	return (
-		<details css={wrapperStyles} ref={detailsRef}>
+		<details css={wrapperStyles} onToggle={placeMenu} ref={detailsRef}>
 			<summary css={summaryStyles} ref={summaryRef}>
 				{label}{' '}
 				<svg
@@ -208,7 +232,7 @@ export const PuzzlesArchiveMenu = ({
 					/>
 				</svg>
 			</summary>
-			<ul aria-label={label} css={menuStyles}>
+			<ul aria-label={label} css={menuStyles} ref={menuRef}>
 				{validArchives.map(({ archive, url }) => (
 					<li key={archive.id}>
 						<a

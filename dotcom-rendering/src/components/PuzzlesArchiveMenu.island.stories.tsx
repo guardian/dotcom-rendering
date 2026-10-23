@@ -86,3 +86,20 @@ export const OpenWithLongTitles = {
 	},
 	play: Open.play,
 } satisfies Story;
+
+/** The label sits near the bottom of the viewport, so the menu opens upwards. */
+export const OpenUpwards = {
+	args: { archives, label: 'Crosswords archive' },
+	decorators: [
+		(Story) => (
+			<div
+				css={css`
+					padding-top: calc(100vh - 140px);
+				`}
+			>
+				<Story />
+			</div>
+		),
+	],
+	play: Open.play,
+} satisfies Story;
