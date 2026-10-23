@@ -172,6 +172,7 @@ const meta = {
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
 		collectionId: 1,
+		isStorylines: false,
 	},
 	render: ({ frontSectionTitle, ...args }) => (
 		<FrontSection
