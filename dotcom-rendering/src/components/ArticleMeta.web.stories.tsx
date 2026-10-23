@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	breakpoints,
 	from,
 	palette as sourcePalette,
 	space,
@@ -392,4 +393,63 @@ export const GalleryLabsWithBranding = meta.story({
 		},
 	},
 	decorators: [leftColumnDecorator],
+});
+
+const republishedFilterArgs = {
+	...Default.input.args,
+	tags: [
+		...Default.input.args.tags,
+		{
+			id: 'thefilter/series/the-filter',
+			type: 'Series' as const,
+			title: 'The Filter',
+		},
+	],
+	primaryDateline: 'Thu 8 Oct 2026 15.36 BST',
+	secondaryDateline: 'First published on Thu 8 Oct 2025 10.00 BST',
+	firstPublicationDate: '2025-10-08T09:00:00Z',
+	webPublicationDate: '2026-10-08T14:36:00Z',
+	isCommentable: true,
+};
+
+const republishedFilterFormats: ArticleFormat[] = [
+	{
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Feature,
+		theme: Pillar.Lifestyle,
+	},
+	{
+		display: ArticleDisplay.Showcase,
+		design: ArticleDesign.Standard,
+		theme: Pillar.Lifestyle,
+	},
+	{
+		display: ArticleDisplay.Immersive,
+		design: ArticleDesign.Standard,
+		theme: Pillar.Lifestyle,
+	},
+];
+
+const republishedFilterChromaticModes = {
+	'light 320': allModes['light mobile'],
+	'light 375': allModes['light mobileMedium'],
+	'light tablet': {
+		globalColourScheme: 'light',
+		viewport: breakpoints.tablet,
+	},
+	'light desktop': allModes['light desktop'],
+	'dark desktop': {
+		globalColourScheme: 'dark',
+		viewport: breakpoints.desktop,
+	},
+};
+
+export const RepublishedFilterArticle = meta.story({
+	...Default.input,
+	args: republishedFilterArgs,
+	parameters: {
+		...Default.input.parameters,
+		formats: republishedFilterFormats,
+		chromatic: { modes: republishedFilterChromaticModes },
+	},
 });
