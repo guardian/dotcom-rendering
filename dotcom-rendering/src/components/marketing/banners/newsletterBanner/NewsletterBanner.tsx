@@ -1,12 +1,9 @@
-import { neutral } from '@guardian/source/foundations';
 import { hexColourToString } from '@guardian/support-dotcom-components';
-import type { Image as SupportImage } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { BannerProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { ComponentType } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { useNewsletterSubscription } from '../../../../lib/useNewsletterSubscription';
-import type { Newsletter } from '../../../../types/content';
-import { DEFAULT_PROMOTED_NEWSLETTER } from '../../../StickyBottomBanner/newsletterBannerDetails';
+import { NEWSLETTER_BANNER_CONFIG } from '../../../StickyBottomBanner/newsletterBannerDetails';
 import { validatedBannerWrapper } from '../common/BannerWrapper';
 import type { BannerRenderProps } from '../common/types';
 import type { BannerData } from '../designableBanner/BannerProps';
@@ -22,24 +19,10 @@ import { NewsletterSignupForm } from './NewsletterSignupForm';
 import { SuccessMessage } from './SuccessMessage';
 import { useSuccessDismissal } from './useSuccessDismissal';
 
-const buildNewsletterBannerImage = (newsletter: Newsletter): SupportImage => {
-	const cardImage = newsletter.illustrationCard!;
-	const squareImage = newsletter.illustrationSquare;
-
-	return {
-		mainUrl: cardImage,
-		mobileUrl: squareImage,
-		tabletUrl: cardImage,
-		desktopUrl: cardImage,
-		wideUrl: cardImage,
-		altText: newsletter.name,
-	};
-};
-
 export const NewsletterBannerComponent = (
 	props: BannerRenderProps,
 ): JSX.Element | null => {
-	const newsletter = props.promotedNewsletter ?? DEFAULT_PROMOTED_NEWSLETTER;
+	const newsletter = NEWSLETTER_BANNER_CONFIG.promotedNewsletter;
 	useNewsletterSubscription(newsletter.listId, props.idApiUrl);
 	const bannerRef = useRef<HTMLDivElement>(null);
 	const [isSuccess, setIsSuccess] = useState(false);
@@ -65,18 +48,7 @@ export const NewsletterBannerComponent = (
 	}
 
 	const { basic } = props.design.colours;
-	const newsletterCopy = {
-		...props.content.mainContent,
-		heading: <span>Sign up to The Stakes 2026</span>,
-		paragraphs: [
-			<span key="subheading">
-				From the races and candidates to watch to the issues shaping
-				American politics, The Stakes 2026 brings you expert analysis of
-				what really matters in the US midterms.
-			</span>,
-		],
-		highlightedText: null,
-	};
+	const newsletterCopy = props.content.mainContent;
 	const bannerData: BannerData = {
 		...baseBannerData,
 		actions: {
@@ -89,15 +61,7 @@ export const NewsletterBannerComponent = (
 		},
 		settings: {
 			...baseBannerData.settings,
-			headerSettings: {
-				...baseBannerData.settings.headerSettings,
-				textColour: neutral[7],
-			},
-			highlightedTextSettings: {
-				...baseBannerData.settings.highlightedTextSettings,
-				textColour: neutral[7],
-			},
-			imageSettings: buildNewsletterBannerImage(newsletter),
+			imageSettings: NEWSLETTER_BANNER_CONFIG.imageSettings,
 		},
 		selectors: {
 			...baseBannerData.selectors,
@@ -221,19 +185,25 @@ export const NewsletterBannerComponent = (
 const ValidatedNewsletterBanner = validatedBannerWrapper(
 	NewsletterBannerComponent,
 	'newsletter-banner',
-) as ComponentType<
-	BannerProps & { promotedNewsletter?: Newsletter; idApiUrl: string }
->;
+) as ComponentType<BannerProps & { idApiUrl: string }>;
 
 export const NewsletterBanner = ({
-	promotedNewsletter = DEFAULT_PROMOTED_NEWSLETTER,
-	...props
-}: BannerProps & {
-	promotedNewsletter?: Newsletter;
-	idApiUrl: string;
-}): JSX.Element => (
+	tracking,
+	articleCounts,
+	countryCode,
+	fetchEmail,
+	submitComponentEvent,
+	contributionsServiceUrl,
+	idApiUrl,
+}: BannerProps & { idApiUrl: string }): JSX.Element => (
 	<ValidatedNewsletterBanner
-		{...props}
-		promotedNewsletter={promotedNewsletter}
+		{...NEWSLETTER_BANNER_CONFIG}
+		tracking={tracking}
+		articleCounts={articleCounts}
+		countryCode={countryCode}
+		fetchEmail={fetchEmail}
+		submitComponentEvent={submitComponentEvent}
+		contributionsServiceUrl={contributionsServiceUrl}
+		idApiUrl={idApiUrl}
 	/>
 );

@@ -28,8 +28,6 @@ export const styles = {
 		}
 		${between.phablet.and.desktop} {
 			position: static;
-			grid-template-columns: minmax(0, 1fr);
-			grid-template-areas: 'copy-container';
 		}
 		${from.desktop} {
 			padding: 0 ${space[3]}px;
