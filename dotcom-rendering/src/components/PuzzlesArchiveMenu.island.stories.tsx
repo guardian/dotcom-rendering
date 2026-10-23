@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { breakpoints } from '@guardian/source/foundations';
+import { breakpoints, until } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { userEvent, within } from 'storybook/test';
 import type { PuzzleItem } from '../types/puzzlesPage';
@@ -47,6 +47,10 @@ const meta = {
 					/* The open menu is absolutely positioned, so reserve its height. */
 					min-height: 620px;
 					padding: 20px;
+					/* Match the 10px section inset below mobileMedium. */
+					${until.mobileMedium} {
+						padding-right: 10px;
+					}
 				`}
 			>
 				<Story />
