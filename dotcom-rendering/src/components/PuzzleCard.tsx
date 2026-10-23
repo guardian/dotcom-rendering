@@ -7,6 +7,7 @@ import {
 	palette,
 	space,
 	textSans14,
+	until,
 	visuallyHidden,
 } from '@guardian/source/foundations';
 import { SvgCheckmark } from '@guardian/source/react-components';
@@ -294,32 +295,56 @@ export const PuzzleCard = ({
 	);
 };
 
+/*
+ * Horizontal separators between cards, as `[above, below]` in px: the space
+ * between the card above and the separator, and between the separator and
+ * the card below. Below the tablet breakpoint the values depend on the card
+ * size; from tablet they are the same for every card.
+ */
+const normalSeparator = [16, 8] as const;
+const smallSeparator = [8, 6] as const;
+const tabletSeparator = [16, 10] as const;
+
+const isSmallCard = (variant: PuzzleItem['cardVariant'] | undefined) =>
+	variant === 'compact';
+
 export const rowsStyles = css`
 	--puzzles-gap: 16px;
+	--puzzles-group-above: ${normalSeparator[0]}px;
+	--puzzles-group-below: ${normalSeparator[1]}px;
 	display: flex;
 	min-width: 0;
 	flex-direction: column;
-	gap: 16px;
 	${from.phablet} {
 		--puzzles-gap: 24px;
-		gap: 24px;
 	}
 
 	${from.tablet} {
 		--puzzles-gap: 20px;
-		gap: 20px;
-		/*
-     * Add 6px above each subsequent card group so its separator sits
-     * 16px below the preceding cards and 10px above this row. This is
-     * the separator immediately above the compact crossword cards.
-     */
-		> ul ~ ul {
-			margin-top: 6px;
+		--puzzles-group-above: ${tabletSeparator[0]}px;
+		--puzzles-group-below: ${tabletSeparator[1]}px;
+	}
+	/*
+	 * Each card group after the first is spaced from the previous one by the
+	 * separator above and below it. The above space follows the size of the
+	 * cards in the previous group, the below space the size of its own.
+	 */
+	${until.tablet} {
+		> ul[data-card-size='small'] + ul {
+			--puzzles-group-above: ${smallSeparator[0]}px;
 		}
+		> ul + ul[data-card-size='small'] {
+			--puzzles-group-below: ${smallSeparator[1]}px;
+		}
+	}
+	> ul ~ ul {
+		margin-top: calc(
+			var(--puzzles-group-above) + var(--puzzles-group-below)
+		);
 	}
 	> ul ~ ul::before {
 		position: absolute;
-		top: calc(var(--puzzles-gap) / -2);
+		top: calc(var(--puzzles-group-below) * -1);
 		right: 0;
 		left: 0;
 		border-top: 1px solid
@@ -342,7 +367,7 @@ const cardGridStyles = (columns: number, tracks = columns) => css`
 	}
 	> li:nth-child(n + ${columns + 1})::before {
 		position: absolute;
-		top: calc(var(--puzzles-gap) / -2);
+		top: calc(var(--puzzles-row-below) * -1);
 		right: 0;
 		left: 0;
 		border-top: 1px solid
@@ -401,13 +426,18 @@ export const rowStyles = (
 	const desktopColumns =
 		variant === 'compact' ? Math.min(count, 5) : Math.min(count, 2);
 
+	const [separatorAbove, separatorBelow] = isSmallCard(variant)
+		? smallSeparator
+		: normalSeparator;
+
 	return css`
 		position: relative;
 		display: grid;
+		--puzzles-row-below: ${separatorBelow}px;
 		${cardGridStyles(mobileColumns)};
-		gap: 16px;
+		gap: ${separatorAbove + separatorBelow}px 16px;
 		${from.phablet} {
-			gap: 24px;
+			column-gap: 24px;
 		}
 		margin: 0;
 		padding: 0;
@@ -418,8 +448,9 @@ export const rowStyles = (
 
 		${from.tablet} {
 			${cardGridStyles(tabletColumns)};
+			--puzzles-row-below: ${tabletSeparator[1]}px;
 			column-gap: 20px;
-			row-gap: 26px;
+			row-gap: ${tabletSeparator[0] + tabletSeparator[1]}px;
 			max-width: 700px;
 		}
 		${variant === 'compact' &&
@@ -447,6 +478,9 @@ export const Rows = ({
 			.filter((row) => row.length > 0)
 			.map((row) => (
 				<ul
+					data-card-size={
+						isSmallCard(row[0]?.cardVariant) ? 'small' : 'normal'
+					}
 					css={rowStyles(
 						row[0]?.cardVariant ?? 'primary',
 						row.length,
