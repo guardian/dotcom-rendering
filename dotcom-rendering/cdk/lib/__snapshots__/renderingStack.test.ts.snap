@@ -2109,8 +2109,8 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
         "EcsTaskDefinitionTaskRoleB7B6D8DD",
       ],
       "Properties": {
-        "MaxCapacity": 3,
-        "MinCapacity": 1,
+        "MaxCapacity": 6,
+        "MinCapacity": 2,
         "ResourceId": {
           "Fn::Join": [
             "",
@@ -2351,7 +2351,7 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
             "ReadonlyRootFilesystem": true,
           },
         ],
-        "Cpu": "1024",
+        "Cpu": "512",
         "ExecutionRoleArn": {
           "Fn::GetAtt": [
             "EcsTaskDefinitionExecutionRoleBE450C73",
@@ -2359,7 +2359,7 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
           ],
         },
         "Family": "InteractiveRenderingCODEEcsTaskDefinition0F808565",
-        "Memory": "2048",
+        "Memory": "1024",
         "NetworkMode": "awsvpc",
         "RequiresCompatibilities": [
           "FARGATE",

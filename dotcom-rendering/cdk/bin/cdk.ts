@@ -189,11 +189,11 @@ export const InteractiveRenderingPropsCODE: RenderingCDKStackProps = {
 	},
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
-		taskCpu: 1024,
-		taskMemoryLimitMiB: 2048,
+		taskCpu: 512,
+		taskMemoryLimitMiB: 1024,
 		scaling: {
-			minimumTasks: 1,
-			maximumTasks: 3,
+			minimumTasks: 2,
+			maximumTasks: 6,
 			cpuScaling: {
 				targetValue: 20,
 				// TODO: Tune cooldown values.
