@@ -290,8 +290,14 @@ const mainMediaFigureStyles = (
 		height: 100%;
 		${isImmersiveLandscape &&
 		css`
-			height: calc(100vh - ${navAndLabsHeaderHeight});
-			min-height: calc(31.25rem - ${navAndLabsHeaderHeight});
+			${until.tablet} {
+				height: auto;
+				aspect-ratio: 4 / 5;
+			}
+			${from.tablet} {
+				height: calc(100vh - ${navAndLabsHeaderHeight});
+				min-height: calc(31.25rem - ${navAndLabsHeaderHeight});
+			}
 			${from.wide} {
 				min-height: calc(50rem - ${navAndLabsHeaderHeight});
 			}
