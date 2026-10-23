@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	from,
+	headlineBold28,
 	headlineBold34,
 	palette,
 	space,
@@ -92,6 +93,9 @@ const headingStyles = css`
 		margin: 0;
 		padding-top: ${space[2]}px;
 		overflow-wrap: anywhere;
+		${from.tablet} {
+			${headlineBold28};
+		}
 	}
 	p {
 		${textEgyptian17};
