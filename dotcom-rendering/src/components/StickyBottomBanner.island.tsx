@@ -35,7 +35,6 @@ import {
 	BrazeBanner,
 	canShowBrazeBanner,
 } from './StickyBottomBanner/BrazeBanner';
-import { DEFAULT_PROMOTED_NEWSLETTER } from './StickyBottomBanner/newsletterBannerDetails';
 import {
 	canShowRRBanner,
 	ReaderRevenueBanner,
@@ -192,7 +191,6 @@ const buildRRBannerConfigWith = ({
 						name={name}
 						props={props}
 						idApiUrl={idApiUrl}
-						promotedNewsletter={DEFAULT_PROMOTED_NEWSLETTER}
 					/>
 				),
 			},

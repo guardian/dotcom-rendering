@@ -32,10 +32,8 @@ import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
 import { getZIndex } from '../../lib/getZIndex';
 import type { CanShowResult } from '../../lib/messagePicker';
 import { getBanner } from '../../lib/sdcRequests';
-import type { Newsletter } from '../../types/content';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type { TagType } from '../../types/tag';
-import { DEFAULT_PROMOTED_NEWSLETTER } from './newsletterBannerDetails';
 
 type BaseProps = {
 	isSignedIn: boolean;
@@ -387,10 +385,8 @@ export const ReaderRevenueBanner = ({
 	//name,
 	props,
 	idApiUrl,
-	promotedNewsletter = DEFAULT_PROMOTED_NEWSLETTER,
 }: ModuleData<BannerProps> & {
 	idApiUrl: string;
-	promotedNewsletter?: Newsletter;
 }) => {
 	const name: string = 'NewsletterBanner';
 	const [Banner, setBanner] = useState<React.ElementType | null>(null);
@@ -428,11 +424,7 @@ export const ReaderRevenueBanner = ({
 				`}
 			>
 				{}
-				<Banner
-					{...props}
-					idApiUrl={idApiUrl}
-					promotedNewsletter={promotedNewsletter}
-				/>
+				<Banner {...props} idApiUrl={idApiUrl} />
 			</div>
 		);
 	}

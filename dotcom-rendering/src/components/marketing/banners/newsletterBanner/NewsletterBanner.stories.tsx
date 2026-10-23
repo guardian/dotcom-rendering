@@ -7,10 +7,6 @@ import { useCountryCode } from '../../../../lib/useCountryCode';
 import { useNewsletterSignupForm } from '../../../../lib/useNewsletterSignupForm';
 import type { NewsletterSignupFormState } from '../../../../lib/useNewsletterSignupForm';
 import { useNewsletterSubscription } from '../../../../lib/useNewsletterSubscription';
-import {
-	DEFAULT_PROMOTED_NEWSLETTER,
-	prototypeNewsletterImage,
-} from '../../../StickyBottomBanner/newsletterBannerDetails';
 import { props } from '../utils/storybook';
 import { NewsletterBanner } from './NewsletterBanner';
 
@@ -31,10 +27,6 @@ const meta = preview.meta({
 		...props,
 		submitComponentEvent: async () => Promise.resolve(),
 		idApiUrl: 'https://idapi.theguardian.com',
-		promotedNewsletter: {
-			...DEFAULT_PROMOTED_NEWSLETTER,
-			illustrationSquare: prototypeNewsletterImage.mobileUrl,
-		},
 	},
 	beforeEach() {
 		mocked(useIsSignedIn).mockReturnValue(false);
