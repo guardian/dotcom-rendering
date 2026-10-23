@@ -189,11 +189,11 @@ export const InteractiveRenderingPropsCODE: RenderingCDKStackProps = {
 	},
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
-		taskCpu: 512,
-		taskMemoryLimitMiB: 1024,
+		taskCpu: 256,
+		taskMemoryLimitMiB: 512,
 		scaling: {
-			minimumTasks: 2,
-			maximumTasks: 6,
+			minimumTasks: 4,
+			maximumTasks: 12,
 			cpuScaling: {
 				targetValue: 20,
 				// TODO: Tune cooldown values.
@@ -205,8 +205,8 @@ export const InteractiveRenderingPropsCODE: RenderingCDKStackProps = {
 
 		// Route 100% traffic to EC2.
 		targetGroupWeights: {
-			ec2: 1,
-			ecs: 0,
+			ec2: 0,
+			ecs: 1,
 		},
 	},
 };
