@@ -72,6 +72,7 @@ import { TrailText, type TrailTextSize } from './components/TrailText';
 export type Position = 'inner' | 'outer' | 'none';
 
 export type Props = {
+	headerContent?: React.ReactNode;
 	linkTo: string;
 	format: ArticleFormat;
 	/** The format of the article holding the card */
@@ -353,6 +354,7 @@ const decideSublinkPosition = (
 };
 
 export const Card = ({
+	headerContent,
 	linkTo,
 	format,
 	contextFormat,
@@ -855,6 +857,7 @@ export const Card = ({
 			}
 			isLoopAndInLoopClickTestVariant={isLoopAndInLoopClickTestVariant}
 		>
+			{headerContent}
 			<CardLink
 				linkTo={linkTo}
 				headlineText={headlineText}

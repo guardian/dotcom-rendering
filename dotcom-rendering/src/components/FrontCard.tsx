@@ -1,8 +1,12 @@
+import { css } from '@emotion/react';
 import { ArticleDesign } from '../lib/articleFormat';
 import { isMediaCard } from '../lib/cardHelpers';
+import { getZIndex } from '../lib/getZIndex';
+import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
 import type { Props as CardProps } from './Card/Card';
 import { Card } from './Card/Card';
+import { CustomSubNav } from './Masthead/Titlepiece/CustomSubNav';
 
 type Props = {
 	trail: DCRFrontCard;
@@ -62,5 +66,32 @@ export const FrontCard = (props: Props) => {
 		headlineTestUuid: trail.headlineTestUuid,
 	};
 
-	return Card({ ...defaultProps, ...cardProps });
+	const headerContent =
+		trail.showMiniNav && trail.miniNavData ? (
+			<div
+				css={css`
+					position: relative;
+					z-index: ${getZIndex('card-nested-link')};
+					min-width: 0;
+					--masthead-nav-link-text: ${palette('--article-text')};
+					--masthead-nav-link-text-hover: ${palette(
+						'--article-text',
+					)};
+				`}
+			>
+				<CustomSubNav
+					customSubNav={trail.miniNavData}
+					currentNavLink=""
+					renderingPage="article"
+					underlineHeader={true}
+					showHeaderDivider={false}
+				/>
+			</div>
+		) : undefined;
+
+	return Card({
+		...defaultProps,
+		...cardProps,
+		...(headerContent && { headerContent }),
+	});
 };

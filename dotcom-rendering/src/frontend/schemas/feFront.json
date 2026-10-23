@@ -635,6 +635,9 @@
                                                         "theme"
                                                     ]
                                                 },
+                                                "miniNavData": {
+                                                    "$ref": "#/definitions/CustomSubnav"
+                                                },
                                                 "tests": {
                                                     "type": "array",
                                                     "items": {
@@ -900,6 +903,12 @@
                                                     "type": "boolean"
                                                 },
                                                 "showLivePlayable": {
+                                                    "type": "boolean"
+                                                },
+                                                "miniNavData": {
+                                                    "$ref": "#/definitions/CustomSubnav"
+                                                },
+                                                "showMiniNav": {
                                                     "type": "boolean"
                                                 }
                                             },
@@ -1592,6 +1601,9 @@
                                                         "theme"
                                                     ]
                                                 },
+                                                "miniNavData": {
+                                                    "$ref": "#/definitions/CustomSubnav"
+                                                },
                                                 "tests": {
                                                     "type": "array",
                                                     "items": {
@@ -1857,6 +1869,12 @@
                                                     "type": "boolean"
                                                 },
                                                 "showLivePlayable": {
+                                                    "type": "boolean"
+                                                },
+                                                "miniNavData": {
+                                                    "$ref": "#/definitions/CustomSubnav"
+                                                },
+                                                "showMiniNav": {
                                                     "type": "boolean"
                                                 }
                                             },
@@ -2549,6 +2567,9 @@
                                                         "theme"
                                                     ]
                                                 },
+                                                "miniNavData": {
+                                                    "$ref": "#/definitions/CustomSubnav"
+                                                },
                                                 "tests": {
                                                     "type": "array",
                                                     "items": {
@@ -2814,6 +2835,9 @@
                                                     "type": "boolean"
                                                 },
                                                 "showLivePlayable": {
+                                                    "type": "boolean"
+                                                },
+                                                "showMiniNav": {
                                                     "type": "boolean"
                                                 }
                                             },
@@ -3586,6 +3610,149 @@
                 "url"
             ]
         },
+        "CustomSubnav": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "header": {
+                    "$ref": "#/definitions/CustomSubnavHeader"
+                },
+                "format": {
+                    "enum": [
+                        "compact",
+                        "large"
+                    ],
+                    "type": "string"
+                },
+                "links": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomSubnavLink"
+                    }
+                },
+                "pages": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomSubnavTargetedPage"
+                    }
+                },
+                "images": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomSubnavImage"
+                    }
+                }
+            },
+            "required": [
+                "format",
+                "header",
+                "id",
+                "links",
+                "pages"
+            ]
+        },
+        "CustomSubnavHeader": {
+            "type": "object",
+            "properties": {
+                "headerText": {
+                    "type": "string"
+                },
+                "showHeaderText": {
+                    "type": "boolean"
+                },
+                "dotcomPath": {
+                    "type": "string"
+                },
+                "copy": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "copy",
+                "headerText",
+                "showHeaderText"
+            ]
+        },
+        "CustomSubnavLink": {
+            "type": "object",
+            "properties": {
+                "linkText": {
+                    "type": "string"
+                },
+                "dotcomPath": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dotcomPath",
+                "linkText"
+            ]
+        },
+        "CustomSubnavTargetedPage": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "enum": [
+                        "article",
+                        "front",
+                        "hasTag"
+                    ],
+                    "type": "string"
+                },
+                "path": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "path",
+                "type"
+            ]
+        },
+        "CustomSubnavImage": {
+            "type": "object",
+            "properties": {
+                "imageSrc": {
+                    "type": "string"
+                },
+                "breakpoint": {
+                    "$ref": "#/definitions/CustomSubnavImageBreakpoint"
+                },
+                "platforms": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomSubnavImagePlatform"
+                    }
+                }
+            },
+            "required": [
+                "breakpoint",
+                "imageSrc",
+                "platforms"
+            ]
+        },
+        "CustomSubnavImageBreakpoint": {
+            "enum": [
+                "desktop",
+                "leftCol",
+                "mobile",
+                "mobileLandscape",
+                "mobileMedium",
+                "phablet",
+                "tablet",
+                "wide"
+            ],
+            "type": "string"
+        },
+        "CustomSubnavImagePlatform": {
+            "enum": [
+                "android",
+                "ios",
+                "web"
+            ],
+            "type": "string"
+        },
         "VariantId": {
             "enum": [
                 "A",
@@ -4342,149 +4509,6 @@
                 "title",
                 "url"
             ]
-        },
-        "CustomSubnav": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "string"
-                },
-                "header": {
-                    "$ref": "#/definitions/CustomSubnavHeader"
-                },
-                "format": {
-                    "enum": [
-                        "compact",
-                        "large"
-                    ],
-                    "type": "string"
-                },
-                "links": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/CustomSubnavLink"
-                    }
-                },
-                "pages": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/CustomSubnavTargetedPage"
-                    }
-                },
-                "images": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/CustomSubnavImage"
-                    }
-                }
-            },
-            "required": [
-                "format",
-                "header",
-                "id",
-                "links",
-                "pages"
-            ]
-        },
-        "CustomSubnavHeader": {
-            "type": "object",
-            "properties": {
-                "headerText": {
-                    "type": "string"
-                },
-                "showHeaderText": {
-                    "type": "boolean"
-                },
-                "dotcomPath": {
-                    "type": "string"
-                },
-                "copy": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "copy",
-                "headerText",
-                "showHeaderText"
-            ]
-        },
-        "CustomSubnavLink": {
-            "type": "object",
-            "properties": {
-                "linkText": {
-                    "type": "string"
-                },
-                "dotcomPath": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "dotcomPath",
-                "linkText"
-            ]
-        },
-        "CustomSubnavTargetedPage": {
-            "type": "object",
-            "properties": {
-                "type": {
-                    "enum": [
-                        "article",
-                        "front",
-                        "hasTag"
-                    ],
-                    "type": "string"
-                },
-                "path": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "path",
-                "type"
-            ]
-        },
-        "CustomSubnavImage": {
-            "type": "object",
-            "properties": {
-                "imageSrc": {
-                    "type": "string"
-                },
-                "breakpoint": {
-                    "$ref": "#/definitions/CustomSubnavImageBreakpoint"
-                },
-                "platforms": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/CustomSubnavImagePlatform"
-                    }
-                }
-            },
-            "required": [
-                "breakpoint",
-                "imageSrc",
-                "platforms"
-            ]
-        },
-        "CustomSubnavImageBreakpoint": {
-            "enum": [
-                "desktop",
-                "leftCol",
-                "mobile",
-                "mobileLandscape",
-                "mobileMedium",
-                "phablet",
-                "tablet",
-                "wide"
-            ],
-            "type": "string"
-        },
-        "CustomSubnavImagePlatform": {
-            "enum": [
-                "android",
-                "ios",
-                "web"
-            ],
-            "type": "string"
         },
         "ReaderRevenuePositions": {
             "type": "object",

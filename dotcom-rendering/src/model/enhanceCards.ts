@@ -622,6 +622,10 @@ export const enhanceCards = (
 			showByline: faciaCard.properties.showByline,
 			snapData: enhanceSnaps(faciaCard.enriched),
 			boostLevel: faciaCard.display.boostLevel,
+			showMiniNav: faciaCard.display.showMiniNav ?? false,
+			miniNavData:
+				faciaCard.display.miniNavData ??
+				faciaCard.properties.miniNavData,
 			isImmersive: !!faciaCard.display.isImmersive,
 			isCrossword: faciaCard.properties.isCrossword,
 			isNewsletter,
