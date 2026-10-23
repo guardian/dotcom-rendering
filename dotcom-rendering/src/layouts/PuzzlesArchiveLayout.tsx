@@ -5,6 +5,7 @@ import {
 	headlineBold28,
 	palette,
 	space,
+	textEgyptian15,
 	textEgyptian17,
 } from '@guardian/source/foundations';
 import { AdSlot } from '../components/AdSlot.web';
@@ -98,10 +99,13 @@ const headingStyles = css`
 		}
 	}
 	p {
-		${textEgyptian17};
+		${textEgyptian15};
 		max-width: 620px;
 		margin: 0 0 ${space[6]}px;
 		color: var(--puzzles-supporting-text-colour);
+		${from.tablet} {
+			${textEgyptian17};
+		}
 	}
 	${from.leftCol} {
 		h1 {
