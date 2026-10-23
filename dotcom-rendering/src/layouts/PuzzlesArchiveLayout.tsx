@@ -231,7 +231,7 @@ export const PuzzlesArchiveLayout = ({
 				<div css={pageStyles}>
 					<div css={topStyles}>
 						<header css={headingStyles}>
-							<h1>{archive.title} archive</h1>
+							<h1>{archive.title}</h1>
 							<p>
 								<Island priority="critical">
 									<PuzzlesArchiveDescription

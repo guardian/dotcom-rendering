@@ -364,6 +364,7 @@ const calendarStyles = css`
 		);
 	}
 	.setter-name {
+		display: none;
 		position: absolute;
 		top: 50%;
 		left: 2px;
@@ -408,6 +409,9 @@ const calendarStyles = css`
 		grid-template-columns: repeat(7, 68px);
 		.day-number {
 			font-size: 12px;
+		}
+		.setter-name {
+			display: block;
 		}
 	}
 	${from.desktop} {
