@@ -294,7 +294,24 @@ export const PuzzleCard = ({
 	);
 };
 
+/*
+ * Horizontal separators sit 16px below the cards above and 8px above the
+ * cards below up to the tablet breakpoint, then 10px above the cards below.
+ */
+const separatorAbove = 16;
+const separatorBelow = 8;
+const separatorBelowTablet = 10;
+const rowGap = separatorAbove + separatorBelow;
+const rowGapTablet = separatorAbove + separatorBelowTablet;
+const separatorBelowStyles = css`
+	--puzzles-separator-below: ${separatorBelow}px;
+	${from.tablet} {
+		--puzzles-separator-below: ${separatorBelowTablet}px;
+	}
+`;
+
 export const rowsStyles = css`
+	${separatorBelowStyles};
 	--puzzles-gap: 16px;
 	display: flex;
 	min-width: 0;
@@ -302,24 +319,22 @@ export const rowsStyles = css`
 	gap: 16px;
 	${from.phablet} {
 		--puzzles-gap: 24px;
-		gap: 24px;
 	}
 
 	${from.tablet} {
 		--puzzles-gap: 20px;
 		gap: 20px;
-		/*
-     * Add 6px above each subsequent card group so its separator sits
-     * 16px below the preceding cards and 10px above this row. This is
-     * the separator immediately above the compact crossword cards.
-     */
-		> ul ~ ul {
-			margin-top: 6px;
+	}
+	/* the gap plus this margin equals the separator row gap */
+	> ul ~ ul {
+		margin-top: ${rowGap - 16}px;
+		${from.tablet} {
+			margin-top: ${rowGapTablet - 20}px;
 		}
 	}
 	> ul ~ ul::before {
 		position: absolute;
-		top: calc(var(--puzzles-gap) / -2);
+		top: calc(var(--puzzles-separator-below) * -1);
 		right: 0;
 		left: 0;
 		border-top: 1px solid
@@ -342,7 +357,7 @@ const cardGridStyles = (columns: number, tracks = columns) => css`
 	}
 	> li:nth-child(n + ${columns + 1})::before {
 		position: absolute;
-		top: calc(var(--puzzles-gap) / -2);
+		top: calc(var(--puzzles-separator-below, ${separatorBelow}px) * -1);
 		right: 0;
 		left: 0;
 		border-top: 1px solid
@@ -404,10 +419,11 @@ export const rowStyles = (
 	return css`
 		position: relative;
 		display: grid;
+		${separatorBelowStyles};
 		${cardGridStyles(mobileColumns)};
-		gap: 16px;
+		gap: ${rowGap}px 16px;
 		${from.phablet} {
-			gap: 24px;
+			column-gap: 24px;
 		}
 		margin: 0;
 		padding: 0;
@@ -419,7 +435,7 @@ export const rowStyles = (
 		${from.tablet} {
 			${cardGridStyles(tabletColumns)};
 			column-gap: 20px;
-			row-gap: 26px;
+			row-gap: ${rowGapTablet}px;
 			max-width: 700px;
 		}
 		${variant === 'compact' &&
