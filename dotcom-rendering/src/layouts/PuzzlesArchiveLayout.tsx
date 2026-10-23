@@ -101,7 +101,7 @@ const headingStyles = css`
 		${textEgyptian17};
 		max-width: 620px;
 		margin: 0 0 ${space[6]}px;
-		color: var(--puzzles-text-colour);
+		color: var(--puzzles-supporting-text-colour);
 	}
 	${from.leftCol} {
 		h1 {
