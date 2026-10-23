@@ -1,40 +1,49 @@
 import { css } from '@emotion/react';
+import type { AbTest } from '@guardian/ophan-tracker-js';
 import { from, space, until } from '@guardian/source/foundations';
 import { Button, TextInput } from '@guardian/source/react-components';
 import { ToggleSwitch } from '@guardian/source-development-kitchen/react-components';
 // Note - the package also exports a component as a named export "ReCAPTCHA",
 // that version will compile and render but is non-functional.
 // Use the default export instead.
-import { type ChangeEvent, useEffect, useState } from 'react';
+import { type ChangeEvent, useEffect } from 'react';
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { useHideMarketingToggleForCountry } from '../../../../lib/useHideMarketingToggleForCountry';
 import { useNewsletterSignupForm } from '../../../../lib/useNewsletterSignupForm';
+import { palette } from '../../../../palette';
 import { useConfig } from '../../../ConfigContext';
 import { NewsletterPrivacyMessage } from '../../../NewsletterPrivacyMessage';
-import type { NewsletterSignupFormProps } from '../../../NewsletterSignupForm.island';
-import {
-	emailFieldStyles as baseEmailFieldStyles,
-	formStyles,
-	getToggleContainerStyles,
-	marketingToggleBoxStyles,
-	primaryButtonTheme,
-	recaptchaContainerStyles,
-	signedInLayoutStyles,
-	signedOutLayoutStyles,
-	submitButtonContainerStyles,
-	submitButtonStyles,
-} from '../../../NewsletterSignupForm.island';
 import { contentTransitionEasing } from '../../shared/transitions';
 import { FailureMessage } from './ErrorMessage';
 
+type NewsletterSignupFormProps = {
+	newsletterId: string;
+	componentId: string;
+	abTest?: AbTest;
+	isModal?: boolean;
+	onSuccess?: () => void;
+};
+
 const newsletterFormTransition = `0.2s ${contentTransitionEasing}`;
+
+const formStyles = css`
+	display: grid;
+	column-gap: ${space[3]}px;
+	row-gap: ${space[2]}px;
+	align-items: end;
+
+	${until.tablet} {
+		row-gap: ${space[3]}px;
+	}
+`;
 
 const collapsedFormStyles = css`
 	row-gap: 0;
 `;
 
 const bannerSignedInLayoutStyles = css`
-	${signedInLayoutStyles};
+	grid-template-columns: minmax(0, 1fr);
+	grid-template-areas: 'submit';
 	margin-top: ${space[2]}px;
 	row-gap: ${space[4]}px;
 	${until.tablet} {
@@ -44,8 +53,14 @@ const bannerSignedInLayoutStyles = css`
 `;
 
 const bannerSignedOutLayoutStyles = css`
-	${signedOutLayoutStyles};
+	grid-template-columns: minmax(0, 1fr) auto;
+	grid-template-areas: 'email submit';
+
 	${until.tablet} {
+		grid-template-columns: 1fr;
+		grid-template-areas:
+			'email'
+			'submit';
 		padding: 0 10px;
 	}
 `;
@@ -58,10 +73,17 @@ const signedInButtonStyles = css`
 `;
 
 const emailFieldStyles = css`
-	${baseEmailFieldStyles};
+	grid-area: email;
+	min-width: 0;
 
 	label div {
+		color: ${palette('--newsletter-signup-input-text')};
 		font-size: 14px;
+	}
+
+	input {
+		color: ${palette('--newsletter-signup-input-text')};
+		background-color: ${palette('--newsletter-signup-input-background')};
 	}
 
 	[role='alert'] {
@@ -108,7 +130,30 @@ const additionalFieldsContentStyles = css`
 	}
 `;
 
-const toggleContainerStyles = getToggleContainerStyles(true);
+const toggleContainerStyles = css`
+	grid-column: 1 / -1;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: ${space[3]}px;
+	min-width: 0;
+`;
+
+const marketingToggleBoxStyles = css`
+	width: 100%;
+	padding: ${space[2]}px;
+	border: 1px solid ${palette('--card-border-supporting')};
+	border-radius: 4px;
+	label {
+		color: ${palette('--newsletter-signup-toggle-text')};
+	}
+`;
+
+const recaptchaContainerStyles = css`
+	.grecaptcha-badge {
+		visibility: hidden;
+	}
+`;
 
 const getPrivacyContainerStyles = (isSignedIn: boolean | 'Pending') => css`
 	margin-top: ${space[2]}px;
@@ -120,6 +165,23 @@ const getPrivacyContainerStyles = (isSignedIn: boolean | 'Pending') => css`
 	css`
 		margin-top: 0;
 	`};
+`;
+
+const submitButtonContainerStyles = css`
+	grid-area: submit;
+	width: 100%;
+	display: flex;
+	gap: ${space[2]}px;
+	${from.tablet} {
+		width: auto;
+	}
+`;
+
+const submitButtonStyles = css`
+	width: 100%;
+	${from.tablet} {
+		width: auto;
+	}
 `;
 
 /**
@@ -136,14 +198,9 @@ export const NewsletterSignupForm = ({
 	abTest,
 	isModal = false,
 	onSuccess,
-}: Omit<NewsletterSignupFormProps, 'isAlreadySubscribed'> & {
-	onSuccess?: () => void;
-}) => {
+}: NewsletterSignupFormProps) => {
 	const { renderingTarget } = useConfig();
 	const hideMarketingToggle = useHideMarketingToggleForCountry();
-	// Temporary local stub for manual testing; disable before shipping.
-	const [stubSignup] = useState(true);
-	const [stubSuccess, setStubSuccess] = useState(false);
 
 	const {
 		userEmail,
@@ -177,7 +234,7 @@ export const NewsletterSignupForm = ({
 	const hasResponse = typeof responseOk === 'boolean';
 	const hasNonValidationError =
 		errorMessage !== undefined && errorMessage !== '' && !isValidationError;
-	const isSuccess = stubSuccess || (hasResponse && !!responseOk);
+	const isSuccess = hasResponse && !!responseOk;
 	const showForm = (!hasResponse || isSuccess) && !hasNonValidationError;
 
 	useEffect(() => {
@@ -198,14 +255,7 @@ export const NewsletterSignupForm = ({
 	return (
 		<>
 			<form
-				onSubmit={
-					stubSignup
-						? (event) => {
-								event.preventDefault();
-								setStubSuccess(true);
-							}
-						: handleSubmit
-				}
+				onSubmit={handleSubmit}
 				id={`newsletter-signup-${newsletterId}`}
 				style={{
 					display: !showForm ? 'none' : undefined,
@@ -243,11 +293,8 @@ export const NewsletterSignupForm = ({
 								? [submitButtonStyles, signedInButtonStyles]
 								: submitButtonStyles
 						}
-						onClick={
-							stubSignup ? undefined : handleSubmitButtonClick
-						}
+						onClick={handleSubmitButtonClick}
 						type="submit"
-						theme={primaryButtonTheme}
 						isLoading={isWaitingForResponse}
 						loadingAnnouncement="Signing you up…"
 						disabled={isWaitingForResponse}
@@ -292,19 +339,17 @@ export const NewsletterSignupForm = ({
 			{showFailure && (
 				<FailureMessage text={failureMessage} onRetry={handleReset} />
 			)}
-			{!stubSignup &&
-				captchaSiteKey !== undefined &&
-				captchaSiteKey !== '' && (
-					<div css={recaptchaContainerStyles}>
-						<ReactGoogleRecaptcha
-							sitekey={captchaSiteKey}
-							ref={recaptchaRef}
-							onChange={handleCaptchaComplete}
-							onErrored={handleCaptchaLoadError}
-							size="invisible"
-						/>
-					</div>
-				)}
+			{captchaSiteKey !== undefined && captchaSiteKey !== '' && (
+				<div css={recaptchaContainerStyles}>
+					<ReactGoogleRecaptcha
+						sitekey={captchaSiteKey}
+						ref={recaptchaRef}
+						onChange={handleCaptchaComplete}
+						onErrored={handleCaptchaLoadError}
+						size="invisible"
+					/>
+				</div>
+			)}
 		</>
 	);
 };

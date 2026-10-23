@@ -436,20 +436,3 @@ const NewsletterSignupFormActive = ({
 		</>
 	);
 };
-
-export {
-	emailFieldStyles,
-	FailureMessage,
-	formStyles,
-	getPrivacyContainerStyles,
-	getToggleContainerStyles,
-	marketingToggleBoxStyles,
-	type Props as NewsletterSignupFormProps,
-	primaryButtonTheme,
-	recaptchaContainerStyles,
-	signedInLayoutStyles,
-	signedOutLayoutStyles,
-	submitButtonContainerStyles,
-	submitButtonStyles,
-	SuccessMessage,
-};

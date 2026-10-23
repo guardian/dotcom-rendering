@@ -134,8 +134,6 @@ export const NewsletterBannerComponent = (
 											newsletterId={
 												newsletter.identityName
 											}
-											newsletterName={newsletter.name}
-											frequency={newsletter.frequency}
 											componentId="newsletter_banner"
 											onSuccess={() => setIsSuccess(true)}
 										/>

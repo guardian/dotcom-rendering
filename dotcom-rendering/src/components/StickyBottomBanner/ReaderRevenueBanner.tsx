@@ -382,13 +382,12 @@ export const canShowRRBanner: CanShowFunctionType<
 };
 
 export const ReaderRevenueBanner = ({
-	//name,
+	name,
 	props,
 	idApiUrl,
 }: ModuleData<BannerProps> & {
 	idApiUrl: string;
 }) => {
-	const name: string = 'NewsletterBanner';
 	const [Banner, setBanner] = useState<React.ElementType | null>(null);
 	useEffect(() => {
 		(name === 'SignInPromptBanner'
