@@ -27,6 +27,7 @@ import type {
 import blockSchema from './block-schema.json';
 import editionsCrosswordSchema from './editions-crossword-schema.json';
 import newslettersPageSchema from './newsletter-page-schema.json';
+import { isPuzzlesCommercialProperties } from './validate.puzzlesCommercialProperties';
 
 const options: Options = {
 	verbose: false,
@@ -404,7 +405,9 @@ export const validateAsPuzzlesPageType = (data: unknown): FEPuzzlesPageType => {
 		!isObject(data.layout) ||
 		!Array.isArray(data.layout.containers) ||
 		!data.layout.containers.every(isPuzzleContainer) ||
-		(data.archive !== undefined && !isPuzzlesArchive(data.archive))
+		(data.archive !== undefined && !isPuzzlesArchive(data.archive)) ||
+		(data.commercialProperties !== undefined &&
+			!isPuzzlesCommercialProperties(data.commercialProperties))
 	) {
 		throw new TypeError(
 			'Unable to validate request body for puzzles page.',
