@@ -1,6 +1,7 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
+import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
 import {
 	puzzlesHubV1Experiment,
 	puzzlesHubV1Participation,
@@ -45,6 +46,12 @@ export const AdFree = {
 			puzzleConfig: storyPuzzleConfig,
 			isAdFreeUser: true,
 		},
+	},
+} satisfies Story;
+
+export const Sponsored = {
+	args: {
+		branding: puzzlesBranding,
 	},
 } satisfies Story;
 
