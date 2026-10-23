@@ -3261,6 +3261,8 @@ const articleBackgroundLight: PaletteFunction = ({
 	theme,
 }) => {
 	switch (design) {
+		case ArticleDesign.WeekendEssay:
+			return '#fff4f2';
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 			switch (theme) {
@@ -3326,6 +3328,8 @@ const articleBackgroundLight: PaletteFunction = ({
 
 const articleBackgroundDark: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
+		case ArticleDesign.WeekendEssay:
+			return '#fff4f2';
 		case ArticleDesign.DeadBlog:
 			return sourcePalette.neutral[7];
 		case ArticleDesign.LiveBlog:

@@ -265,10 +265,7 @@ export const StandardLayoutArticleGrid = ({
 		<article
 			css={[
 				css`
-					background-color: ${format.design ===
-					ArticleDesign.WeekendEssay
-						? '#fff4f2'
-						: themePalette('--article-background')};
+					background-color: ${themePalette('--article-background')};
 				`,
 				grid.container,
 				grid.outerRules(),
