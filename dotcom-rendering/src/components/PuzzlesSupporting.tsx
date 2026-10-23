@@ -131,6 +131,18 @@ const usefulGridStyles = (hasNewsletter: boolean) => css`
 				content: '';
 				pointer-events: none;
 			}
+
+			:not(:last-of-type)::after {
+				max-height: 52px;
+			}
+
+			:nth-of-type(even)::after {
+				content: none;
+
+				${from.desktop} {
+					content: '';
+				}
+			}
 		}
 
 		${from.tablet} {
