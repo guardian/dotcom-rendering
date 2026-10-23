@@ -382,17 +382,25 @@ export const canShowRRBanner: CanShowFunctionType<
 };
 
 export const ReaderRevenueBanner = ({
-	name,
+	//name,
 	props,
-}: ModuleData<BannerProps>) => {
+	idApiUrl,
+}: ModuleData<BannerProps> & {
+	idApiUrl: string;
+}) => {
+	const name: string = 'NewsletterBanner';
 	const [Banner, setBanner] = useState<React.ElementType | null>(null);
-
 	useEffect(() => {
 		(name === 'SignInPromptBanner'
 			? /* webpackChunkName: "sign-in-prompt-banner" */
 				import(`../marketing/banners/signInPrompt/SignInPromptBanner`)
-			: /* webpackChunkName: "designable-banner" */
-				import(`../marketing/banners/designableBanner/Banner`)
+			: name === 'NewsletterBanner'
+				? /* webpackChunkName: "newsletter-banner" */
+					import(
+						`../marketing/banners/newsletterBanner/NewsletterBanner`
+					)
+				: /* webpackChunkName: "designable-banner" */
+					import(`../marketing/banners/designableBanner/Banner`)
 		)
 			.then((bannerModule: Record<string, React.ElementType>) => {
 				setBanner(() => bannerModule[name] ?? null);
@@ -416,7 +424,7 @@ export const ReaderRevenueBanner = ({
 				`}
 			>
 				{}
-				<Banner {...props} />
+				<Banner {...props} idApiUrl={idApiUrl} />
 			</div>
 		);
 	}

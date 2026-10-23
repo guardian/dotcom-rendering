@@ -24,10 +24,11 @@ import { useEffect } from 'react';
 import sanitise from 'sanitize-html';
 import { useIsInView } from '../../../lib/useIsInView';
 import type { ChoiceCardDesignSettings } from '../banners/designableBanner/settings';
+import { contentTransitionEasing } from './transitions';
 
 export type ChoiceCard = _ChoiceCard & { defaultExpanded?: boolean };
 
-const choiceCardTransition = '0.2s cubic-bezier(0.27, 1.06, 0.18, 1)';
+const choiceCardTransition = `0.2s ${contentTransitionEasing}`;
 
 const styles = {
 	radioGroup: css`

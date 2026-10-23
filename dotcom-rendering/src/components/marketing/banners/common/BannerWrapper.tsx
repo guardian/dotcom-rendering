@@ -128,6 +128,9 @@ const withBannerData =
 			isCollapsible,
 			contributionsServiceUrl,
 		} = bannerProps;
+		const { idApiUrl } = bannerProps as CloseableBannerProps & {
+			idApiUrl?: string;
+		};
 
 		const [hasBeenSeen, setNode] = useIsInView({
 			debounce: true,
@@ -410,6 +413,7 @@ const withBannerData =
 					design,
 					promoCodes,
 					isCollapsible,
+					idApiUrl,
 				};
 
 				return (
