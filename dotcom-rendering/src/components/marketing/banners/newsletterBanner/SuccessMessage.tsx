@@ -1,11 +1,19 @@
 import { css } from '@emotion/react';
-import { palette, space, textSans15 } from '@guardian/source/foundations';
+import {
+	palette,
+	space,
+	textSans15,
+	until,
+} from '@guardian/source/foundations';
 import { LinkButton, SvgTickRound } from '@guardian/source/react-components';
 
 const successContainerStyles = css`
 	display: grid;
 	grid-template-columns: 34.5px minmax(0, 1fr);
 	color: ${palette.success[400]};
+	${until.tablet} {
+		padding: 0 10px;
+	}
 
 	> svg {
 		width: 34.5px;

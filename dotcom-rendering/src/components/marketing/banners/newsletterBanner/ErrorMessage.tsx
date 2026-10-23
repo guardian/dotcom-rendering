@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { palette, space, textSans17 } from '@guardian/source/foundations';
+import {
+	palette,
+	space,
+	textSans17,
+	until,
+} from '@guardian/source/foundations';
 import {
 	Button,
 	Link,
@@ -8,11 +13,13 @@ import {
 } from '@guardian/source/react-components';
 
 const responseBoxStyles = css`
-	width: 100%;
 	padding: 7px 12px 16px 7.5px;
 	border: 1px solid ${palette.neutral[86]};
 	border-radius: 4px;
 	margin-top: ${space[2]}px;
+	${until.tablet} {
+		margin: ${space[2]}px 10px 0 10px;
+	}
 `;
 
 const errorContainerStyles = css`

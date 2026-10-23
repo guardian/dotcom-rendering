@@ -105,11 +105,6 @@ export const NewsletterBannerComponent = (
 											<NewsletterFrequencyTag
 												frequency={newsletter.frequency}
 											/>
-											<div css={styles.inlineCloseButton}>
-												<BannerCloseButton
-													bannerData={bannerData}
-												/>
-											</div>
 										</div>
 										<div css={styles.horizontalLine} />
 										<div css={styles.textImageRow}>
@@ -149,11 +144,6 @@ export const NewsletterBannerComponent = (
 								<div css={styles.desktopImage}>
 									<BannerVisual bannerData={bannerData} />
 								</div>
-								<div css={styles.outerCloseButton}>
-									<BannerCloseButton
-										bannerData={bannerData}
-									/>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -168,14 +158,12 @@ export const NewsletterBannerComponent = (
 									newsletterName={newsletter.name}
 									frequency={newsletter.frequency}
 								/>
-								<div css={styles.successCloseButton}>
-									<BannerCloseButton
-										bannerData={bannerData}
-									/>
-								</div>
 							</div>
 						</div>
 					</div>
+				</div>
+				<div css={styles.closeButton}>
+					<BannerCloseButton bannerData={bannerData} />
 				</div>
 			</div>
 		</div>

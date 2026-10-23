@@ -3,9 +3,27 @@ import {
 	bannerSchema,
 	hexColourToString,
 } from '@guardian/support-dotcom-components';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { NEWSLETTER_BANNER_CONFIG } from '../../../StickyBottomBanner/newsletterBannerDetails';
 import { props } from '../utils/storybook';
 import { NewsletterBanner } from './NewsletterBanner';
+
+jest.mock('../../../../lib/useNewsletterSubscription', () => ({
+	useNewsletterSubscription: jest.fn(),
+}));
+
+jest.mock('../../../../lib/useMatchMedia', () => ({
+	...jest.requireActual<typeof import('../../../../lib/useMatchMedia')>(
+		'../../../../lib/useMatchMedia',
+	),
+	useMatchMedia: () => false,
+}));
+
+jest.mock('./NewsletterSignupForm', () => ({
+	NewsletterSignupForm: ({ onSuccess }: { onSuccess: () => void }) => (
+		<button onClick={onSuccess}>Sign up</button>
+	),
+}));
 
 describe('NewsletterBanner configuration', () => {
 	it('uses newsletter colours', () => {
@@ -43,5 +61,30 @@ describe('NewsletterBanner configuration', () => {
 		const banner = NewsletterBanner({ ...props, ...runtimeProps });
 
 		expect(banner.props).toMatchObject(runtimeProps);
+	});
+
+	it('keeps the same close button outside the transitioning panels after signup', () => {
+		render(
+			<NewsletterBanner
+				{...props}
+				idApiUrl="https://idapi.theguardian.com"
+			/>,
+		);
+		const closeButton = screen.getByRole('button', { name: 'Close' });
+
+		fireEvent.click(screen.getByRole('button', { name: 'Sign up' }));
+
+		expect(screen.getAllByRole('button', { name: 'Close' })).toHaveLength(
+			1,
+		);
+		expect(screen.getByRole('button', { name: 'Close' })).toBe(closeButton);
+		expect(closeButton.closest('[aria-hidden]')).toBeNull();
+		expect(closeButton.closest('[inert]')).toBeNull();
+
+		fireEvent.click(closeButton);
+
+		expect(
+			closeButton.closest('[role="alert"]')?.hasAttribute('inert'),
+		).toBe(true);
 	});
 });
