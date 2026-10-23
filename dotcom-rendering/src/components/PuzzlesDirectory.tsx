@@ -279,7 +279,10 @@ const DirectorySection = ({
 				</div>
 			</div>
 			<div css={contentStyles}>
-				<Rows rows={container.content.items} />
+				<Rows
+					isFeatured={container.variant === 'featured'}
+					rows={container.content.items}
+				/>
 				{container.content.nestedContainers.length > 0 && (
 					<div css={nestedGridStyles}>
 						{container.content.nestedContainers
