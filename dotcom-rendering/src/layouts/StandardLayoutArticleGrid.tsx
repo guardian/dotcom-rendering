@@ -235,7 +235,7 @@ export const StandardLayoutArticleGrid = ({
 	const isImmersiveLandscape = layoutType === 'immersiveLandscape';
 	const isImmersive = isImmersivePortrait || isImmersiveLandscape;
 
-	const hasMinimumImageHeight =
+	const hasLabsPortraitImage =
 		isLabs && isImmersivePortrait && isMainMediaImage;
 
 	const ageWarning = getAgeWarning(
@@ -334,23 +334,19 @@ export const StandardLayoutArticleGrid = ({
 
 								${isImmersivePortrait &&
 								css`
-									${from.desktop} {
-										aspect-ratio: 4/5;
-									}
+									aspect-ratio: 4 / 5;
 								`}
 
 								${isImmersiveLandscape &&
 								landscapeImmersiveMediaBelowDesktop}
 
-								${hasMinimumImageHeight &&
+								${hasLabsPortraitImage &&
 								css`
 									${until.tablet} {
 										position: relative;
 										width: 100%;
 										min-width: 0;
-										min-height: 469px;
-										${mainMediaAspectRatio != null &&
-										`aspect-ratio: ${mainMediaAspectRatio.replace(':', ' / ')};`}
+										aspect-ratio: 4 / 5;
 										overflow: hidden;
 										background-color: ${headlineBackgroundImmersive};
 

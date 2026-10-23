@@ -332,6 +332,11 @@ export const Figure = ({
 						format.theme === ArticleSpecial.Labs,
 					),
 					articleArrangement === 'immersivePortrait' &&
+						css`
+							height: auto;
+							aspect-ratio: 4 / 5;
+						`,
+					articleArrangement === 'immersivePortrait' &&
 						format.design === ArticleDesign.WeekendEssay &&
 						css`
 							position: relative;
