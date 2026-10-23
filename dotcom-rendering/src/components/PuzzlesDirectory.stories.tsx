@@ -171,6 +171,14 @@ export const WithNewsletter = () => (
 	/>
 );
 
+export const SponsoredContainer = () => (
+	<PuzzlesDirectory
+		layout={layout}
+		renderAds={false}
+		containerBranding={{ crosswords: puzzlesBranding }}
+	/>
+);
+
 export const Sponsored = () => {
 	const page = createPuzzlesPage({ layout, isAdFreeUser: true });
 	return (

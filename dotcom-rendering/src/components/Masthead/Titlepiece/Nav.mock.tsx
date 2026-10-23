@@ -1040,13 +1040,6 @@ export const nav: NavType = {
 	],
 	brandExtensions: [
 		{
-			title: 'Search jobs',
-			longTitle: 'Search jobs',
-			url: 'https://jobs.theguardian.com/jobs',
-			children: [],
-			mobileOnly: false,
-		},
-		{
 			title: 'Holidays',
 			longTitle: 'Holidays',
 			url: 'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',

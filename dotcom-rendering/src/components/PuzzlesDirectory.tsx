@@ -4,14 +4,17 @@ import {
 	headlineBold24,
 	headlineBold28,
 	palette,
+	space,
 } from '@guardian/source/foundations';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { puzzlesContainerStyles } from '../lib/puzzlesContainerStyles';
+import type { Branding } from '../types/branding';
 import type { PuzzleContainer, PuzzlesLayoutType } from '../types/puzzlesPage';
 import { AdSlot } from './AdSlot.web';
 import { Island } from './Island';
 import { getPuzzleUrl, Rows } from './PuzzleCard';
 import { PuzzlesArchiveMenu } from './PuzzlesArchiveMenu.island';
+import { PuzzlesContainerBranding } from './PuzzlesBranding';
 import { PuzzlesSupporting } from './PuzzlesSupporting';
 
 export { getPuzzleUrl };
@@ -21,6 +24,8 @@ type Props = {
 	renderAds: boolean;
 	/** Omit the black rule above the first section, e.g. below the sponsorship banner. */
 	hideTopRule?: boolean;
+	/** Sponsor per container ID, for the reader's edition. */
+	containerBranding?: Partial<Record<string, Branding>>;
 };
 
 const sectionStyles = (isFeatured: boolean, hideTopRule: boolean) => css`
@@ -70,19 +75,10 @@ const sectionStyles = (isFeatured: boolean, hideTopRule: boolean) => css`
 
 const titleStyles = css`
 	min-width: 0;
-	margin: 0;
 	padding: 6px 10px 12px;
-	${headlineBold24};
-	color: var(--puzzles-headline-colour, ${palette.neutral[7]});
-	line-height: 1;
-	overflow-wrap: break-word;
 	${from.mobileMedium} {
 		padding-right: 20px;
 		padding-left: 20px;
-	}
-
-	${from.tablet} {
-		${headlineBold28};
 	}
 
 	${from.desktop} {
@@ -92,6 +88,30 @@ const titleStyles = css`
 
 	${from.leftCol} {
 		padding-top: var(--puzzles-content-top);
+	}
+`;
+
+// Title left with the sponsor right on one row, stacked under the title from leftCol.
+const brandedTitleStyles = css`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: ${space[2]}px;
+	${from.leftCol} {
+		display: block;
+	}
+`;
+
+const headingStyles = css`
+	min-width: 0;
+	margin: 0;
+	${headlineBold24};
+	color: var(--puzzles-headline-colour, ${palette.neutral[7]});
+	line-height: 1;
+	overflow-wrap: break-word;
+
+	${from.tablet} {
+		${headlineBold28};
 	}
 `;
 
@@ -233,9 +253,11 @@ const hasContent = (container: PuzzleContainer): boolean =>
 const DirectorySection = ({
 	container,
 	hideTopRule,
+	branding,
 }: {
 	container: PuzzleContainer;
 	hideTopRule: boolean;
+	branding?: Branding;
 }) => {
 	if (!hasContent(container)) {
 		return null;
@@ -247,9 +269,14 @@ const DirectorySection = ({
 			id={container.id}
 		>
 			<div css={headingColumnStyles}>
-				<h2 css={titleStyles} id={`${container.id}-title`}>
-					{container.title}
-				</h2>
+				<div css={[titleStyles, branding && brandedTitleStyles]}>
+					<h2 css={headingStyles} id={`${container.id}-title`}>
+						{container.title}
+					</h2>
+					{branding && (
+						<PuzzlesContainerBranding branding={branding} />
+					)}
+				</div>
 			</div>
 			<div css={contentStyles}>
 				<Rows
@@ -281,6 +308,7 @@ export const PuzzlesDirectory = ({
 	layout,
 	renderAds,
 	hideTopRule = false,
+	containerBranding,
 }: Props) => (
 	<>
 		{layout.containers.map((container) => {
@@ -328,6 +356,7 @@ export const PuzzlesDirectory = ({
 			}
 			return (
 				<DirectorySection
+					branding={containerBranding?.[container.id]}
 					container={container}
 					hideTopRule={hideTopRule}
 					key={container.id}
