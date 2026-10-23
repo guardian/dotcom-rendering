@@ -5,6 +5,7 @@ import {
 	space,
 	textSans14,
 	textSans15,
+	until,
 } from '@guardian/source/foundations';
 import { useEffect, useRef } from 'react';
 import type { PuzzleItem } from '../types/puzzlesPage';
@@ -104,6 +105,20 @@ const menuStyles = css`
 	border: 1px solid var(--puzzles-border-colour, ${palette.neutral[86]});
 	background: var(--puzzles-card-background, ${palette.neutral[100]});
 	list-style: none;
+
+	/*
+	 * Below the tablet breakpoint the archive label sits against the right
+	 * edge, so open the menu leftwards to keep it inside the page. The
+	 * section inset is 10px below mobileMedium and 20px from it, so the menu
+	 * always ends 20px from the right edge of the viewport.
+	 */
+	${until.tablet} {
+		right: 0;
+		left: auto;
+	}
+	${until.mobileMedium} {
+		right: 10px;
+	}
 `;
 
 const linkStyles = css`
