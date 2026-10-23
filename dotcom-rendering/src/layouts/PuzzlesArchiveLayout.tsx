@@ -102,9 +102,11 @@ const headingStyles = css`
 		${textEgyptian15};
 		max-width: 620px;
 		margin: 0 0 ${space[6]}px;
+		padding-top: 10px;
 		color: var(--puzzles-supporting-text-colour);
 		${from.tablet} {
 			${textEgyptian17};
+			padding-top: ${space[2]}px;
 		}
 	}
 	${from.leftCol} {
