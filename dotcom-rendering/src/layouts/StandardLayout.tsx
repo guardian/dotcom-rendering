@@ -108,6 +108,15 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = canRenderAds(article);
 
+	// Short-term fix as weekend read atom isn't working as expected in new interactive layout
+	const isWeekendRead = article.tags.some((tag) =>
+		[
+			'news/series/the-saturday-read',
+			'news/series/the-sunday-read',
+		].includes(tag.id),
+	);
+	const isWeekendReadInteractive = isWeekendRead && isInteractive;
+
 	return (
 		<>
 			{isInteractive && (
@@ -213,7 +222,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 				{/* This element is used to replace the article with the scorecard when the scorecard tab is clicked */}
 				<div id="article">
-					{isLegacyInteractive ? (
+					{isLegacyInteractive || isWeekendReadInteractive ? (
 						<InteractiveArticleGridDeprecated {...props} />
 					) : (
 						<StandardLayoutArticleGrid
