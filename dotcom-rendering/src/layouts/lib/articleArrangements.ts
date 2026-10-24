@@ -13,8 +13,9 @@ export type LayoutType =
 	| 'media'
 	| 'picture'
 	| 'comment'
-	| 'interactive'
-	| 'interactiveTopHat'
+	| 'interactiveStandard'
+	| 'interactiveTopHatLite'
+	| 'interactiveTopHatFull'
 	| 'immersiveLandscape'
 	| 'immersivePortrait';
 
@@ -331,34 +332,62 @@ const immersiveLandscapeCss: LayoutCssMap = {
 	},
 };
 
-const interactiveTopHatCss: LayoutCssMap = {
+const interactiveTopHatLiteCss: LayoutCssMap = {
 	title: {
-		mobile: 'grid-row: 2; z-index: 10;',
-		tablet: 'grid-row: 2; z-index: 10;',
+		mobile: 'grid-row: 2;',
+		tablet: 'grid-row: 2',
 	},
 	headline: {
-		mobile: 'grid-row: 3; z-index: 10; background: rgba(255, 255, 255, 0.9); padding: 0 10px;',
-		tablet: 'grid-row: 3; z-index: 10; background: rgba(255, 255, 255, 0.9); padding: 0 10px;',
+		mobile: 'grid-row: 3;',
+		tablet: 'grid-row: 3;',
 	},
 	standfirst: {
-		mobile: 'grid-row: 4; z-index: 10; background: rgba(255, 255, 255, 0.9); padding: 0 10px;',
-		tablet: 'grid-row: 4; z-index: 10; background: rgba(255, 255, 255, 0.9); padding: 0 10px;',
+		mobile: 'grid-row: 4;',
+		tablet: 'grid-row: 4;',
 	},
 	media: {
-		mobile: 'grid-row: 1 / span 7;',
-		tablet: `grid-row: 1 / span 7; ${grid.column.all}`,
+		mobile: `grid-row: 1 / span 6; ${grid.column.all}`,
+		tablet: `grid-row: 1 / span 6; ${grid.column.all}`,
 	},
 	meta: {
-		mobile: 'grid-row: 5; z-index: 10; background: rgba(255, 255, 255, 0.9); padding: 0 10px 10px 10px;',
-		tablet: 'grid-row: 5; z-index: 10; background: rgba(255, 255, 255, 0.9); padding: 0 10px 10px 10px;',
+		mobile: 'grid-row: 7;',
+		tablet: 'grid-row: 7;',
 	},
 	body: {
 		mobile: 'grid-row: 8;',
 		tablet: 'grid-row: 8;',
 	},
 	'right-column': {
-		desktop: `grid-row: 1 / span 6; ${grid.column.right};`,
-		leftCol: `grid-row: 1 / span 4; ${grid.column.right};`,
+		desktop: `grid-row: 7 / span 2; ${grid.column.right};`,
+	},
+};
+
+const interactiveTopHatFullCss: LayoutCssMap = {
+	title: {
+		mobile: 'grid-row: 2;',
+		tablet: 'grid-row: 2;',
+	},
+	headline: {
+		mobile: 'grid-row: 3;',
+		tablet: 'grid-row: 3;',
+	},
+	standfirst: {
+		mobile: 'grid-row: 4;',
+		tablet: 'grid-row: 4;',
+	},
+	media: {
+		mobile: `grid-row: 1 / span 7; ${grid.column.all}`,
+		tablet: `grid-row: 1 / span 7; ${grid.column.all}`,
+	},
+	meta: {
+		mobile: 'grid-row: 5;',
+		tablet: 'grid-row: 5;',
+	},
+	body: {
+		tablet: 'grid-row: 8;',
+	},
+	'right-column': {
+		desktop: `grid-row: 8; ${grid.column.right};`,
 	},
 };
 
@@ -368,8 +397,9 @@ const layoutCssMaps: Record<LayoutType, LayoutCssMap> = {
 	media: mediaCss,
 	picture: pictureCss,
 	comment: commentCss,
-	interactive: standardCss,
-	interactiveTopHat: interactiveTopHatCss,
+	interactiveStandard: standardCss,
+	interactiveTopHatLite: interactiveTopHatLiteCss,
+	interactiveTopHatFull: interactiveTopHatFullCss,
 	immersiveLandscape: immersiveLandscapeCss,
 	immersivePortrait: immersivePortraitCss,
 };
@@ -422,7 +452,8 @@ export const getLayoutType = (
 	format: ArticleFormat,
 	mainMediaOrientation: 'portrait' | 'landscape' | 'square',
 ): LayoutType => {
-	// return 'interactiveTopHat';
+	// return 'interactiveTopHatLite';
+	// return 'interactiveTopHatFull';
 	if (format.display === ArticleDisplay.Immersive) {
 		if (
 			mainMediaOrientation === 'portrait' ||
@@ -448,6 +479,8 @@ export const getLayoutType = (
 	) {
 		return 'comment';
 	}
-	if (format.design === ArticleDesign.Interactive) return 'interactive';
+	if (format.design === ArticleDesign.Interactive) {
+		return 'interactiveStandard';
+	}
 	return 'standard';
 };

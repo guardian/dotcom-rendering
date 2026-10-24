@@ -168,6 +168,41 @@ const GridItem = ({
 	</Element>
 );
 
+const TopHatScrollPrompt = ({ topGap }: { topGap: number }) => (
+	<div
+		css={css`
+			position: absolute;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			top: ${topGap}px;
+			${headlineMedium17}
+			color: white;
+			gap: ${space[3]}px;
+			pointer-events: none;
+			user-select: none;
+		`}
+	>
+		<svg
+			width="40"
+			height="40"
+			viewBox="0 0 40 40"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+		>
+			<path
+				d="M9 15.2283L19.4977 25.726H20.5023L31 15.2283L30.0205 14.2739L20 22.7123L9.97945 14.2739L9 15.2283Z"
+				fill="white"
+			/>
+			<path
+				d="M39.5 20C39.5 30.7696 30.7696 39.5 20 39.5C9.23045 39.5 0.5 30.7696 0.5 20C0.5 9.23045 9.23045 0.5 20 0.5C30.7696 0.5 39.5 9.23045 39.5 20Z"
+				stroke="white"
+			/>
+		</svg>
+		<div>Scroll to continue</div>
+	</div>
+);
+
 export const StandardLayoutArticleGrid = ({
 	article,
 	format,
@@ -236,11 +271,38 @@ export const StandardLayoutArticleGrid = ({
 
 	const layoutType = getLayoutType(format, mainMediaOrientation);
 
+	const setCentreRule = (gridLayout: LayoutType) => {
+		if (isLabs || gridLayout === 'interactiveStandard') return undefined;
+
+		const getColumnCount = () => {
+			switch (gridLayout) {
+				case 'immersivePortrait':
+				case 'immersiveLandscape':
+					return 4;
+				case 'interactiveTopHatFull':
+					return 6;
+				case 'interactiveTopHatLite':
+					return 5;
+				default:
+					return 3;
+			}
+		};
+
+		return css`
+			${from.leftCol} {
+				${grid.centreRule(getColumnCount())}
+			}
+		`;
+	};
+
 	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
 
 	const isImmersivePortrait = layoutType === 'immersivePortrait';
 	const isImmersiveLandscape = layoutType === 'immersiveLandscape';
 	const isImmersive = isImmersivePortrait || isImmersiveLandscape;
+	const isInteractiveTopHat =
+		layoutType === 'interactiveTopHatLite' ||
+		layoutType === 'interactiveTopHatFull';
 
 	const isFilterArticle = hasFilterTag(article.tags);
 	const tableOfContentsStyle =
@@ -277,9 +339,15 @@ export const StandardLayoutArticleGrid = ({
 
 	const hideCaptionBeneathMainMedia =
 		layoutType === 'media' ||
-		layoutType === 'interactiveTopHat' ||
+		isInteractiveTopHat ||
 		isImmersiveLandscape ||
 		isImmersivePortrait;
+
+	const topHatFurnitureBackgroundStyles = css`
+		z-index: ${getZIndex('mediaOverlay')};
+		background: rgba(255, 255, 255, 0.9);
+		padding: 0 10px;
+	`;
 
 	return (
 		<article
@@ -288,7 +356,8 @@ export const StandardLayoutArticleGrid = ({
 					background-color: ${themePalette('--article-background')};
 				`,
 				grid.container,
-				layoutType !== 'interactiveTopHat' && grid.outerRules(),
+				!isInteractiveTopHat && grid.outerRules(),
+				setCentreRule(layoutType),
 				isLabs &&
 					isImmersive &&
 					css`
@@ -304,19 +373,6 @@ export const StandardLayoutArticleGrid = ({
 								6,
 								auto
 							);
-					`,
-				!isLabs &&
-					layoutType !== 'interactive' &&
-					css`
-						${from.leftCol} {
-							${grid.centreRule(
-								isImmersive
-									? 4
-									: layoutType === 'interactiveTopHat'
-										? 6
-										: 3,
-							)}
-						}
 					`,
 				isImmersivePortrait &&
 					css`
@@ -338,7 +394,7 @@ export const StandardLayoutArticleGrid = ({
 									: '90px'} auto auto auto auto auto;
 						}
 					`,
-				layoutType === 'interactiveTopHat' &&
+				isInteractiveTopHat &&
 					css`
 						grid-template-rows: 3fr auto auto auto auto 1fr;
 					`,
@@ -401,13 +457,6 @@ export const StandardLayoutArticleGrid = ({
 								margin-top: ${space[2]}px;
 							`
 						: undefined,
-					layoutType === 'interactiveTopHat' &&
-						css`
-							${until.desktop} {
-								height: 70vh;
-								aspect-ratio: 4 /5;
-							}
-						`,
 				]}
 			>
 				<div>
@@ -467,6 +516,10 @@ export const StandardLayoutArticleGrid = ({
 							flex-direction: column;
 							justify-content: space-between;
 						`,
+					isInteractiveTopHat &&
+						css`
+							z-index: ${getZIndex('mediaOverlay')};
+						`,
 				]}
 			>
 				<ArticleTitle
@@ -523,6 +576,7 @@ export const StandardLayoutArticleGrid = ({
 									${themePalette('--article-border')};
 							}
 						`,
+					isInteractiveTopHat && topHatFurnitureBackgroundStyles,
 				]}
 			>
 				{layoutType === 'picture' || layoutType === 'comment' ? (
@@ -584,6 +638,9 @@ export const StandardLayoutArticleGrid = ({
 				area="standfirst"
 				layoutType={layoutType}
 				css={[
+					css`
+						position: relative;
+					`,
 					isImmersive &&
 						css`
 							${until.tablet} {
@@ -604,6 +661,7 @@ export const StandardLayoutArticleGrid = ({
 								padding-bottom: 14px;
 							}
 						`,
+					isInteractiveTopHat && topHatFurnitureBackgroundStyles,
 				]}
 			>
 				{hasImmersiveAffiliateDisclaimer && (
@@ -618,6 +676,9 @@ export const StandardLayoutArticleGrid = ({
 					standfirst={article.standfirst}
 					layoutType={layoutType}
 				/>
+				{layoutType === 'interactiveTopHatLite' && (
+					<TopHatScrollPrompt topGap={100} />
+				)}
 			</GridItem>
 			{isImmersive && (
 				<GridItem
@@ -679,15 +740,21 @@ export const StandardLayoutArticleGrid = ({
 								padding-top: ${space[8]}px;
 							}
 						`,
-					layoutType === 'interactive' &&
+					layoutType === 'interactiveStandard' &&
 						css`
 							z-index: ${getZIndex('meta')};
+						`,
+					layoutType === 'interactiveTopHatFull' &&
+						css`
+							${topHatFurnitureBackgroundStyles}
+							padding-bottom: 10px;
 						`,
 				]}
 			>
 				{format.display !== ArticleDisplay.Immersive &&
 					format.design !== ArticleDesign.Audio &&
-					layoutType !== 'immersivePortrait' && (
+					layoutType !== 'immersivePortrait' &&
+					!isInteractiveTopHat && (
 						<div
 							css={[
 								(layoutType === 'picture' ||
@@ -792,36 +859,9 @@ export const StandardLayoutArticleGrid = ({
 						/>
 					</>
 				)}
-				<div
-					css={css`
-						position: absolute;
-						display: flex;
-						flex-direction: row;
-						align-items: center;
-						top: 200px;
-						${headlineMedium17}
-						color: white;
-						gap: ${space[3]}px;
-					`}
-				>
-					<svg
-						width="40"
-						height="40"
-						viewBox="0 0 40 40"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<path
-							d="M9 15.2283L19.4977 25.726H20.5023L31 15.2283L30.0205 14.2739L20 22.7123L9.97945 14.2739L9 15.2283Z"
-							fill="white"
-						/>
-						<path
-							d="M39.5 20C39.5 30.7696 30.7696 39.5 20 39.5C9.23045 39.5 0.5 30.7696 0.5 20C0.5 9.23045 9.23045 0.5 20 0.5C30.7696 0.5 39.5 9.23045 39.5 20Z"
-							stroke="white"
-						/>
-					</svg>
-					<div>Scroll to continue</div>
-				</div>
+				{layoutType === 'interactiveTopHatFull' && (
+					<TopHatScrollPrompt topGap={180} />
+				)}
 			</GridItem>
 			<GridItem
 				area="body"
@@ -982,7 +1022,7 @@ export const StandardLayoutArticleGrid = ({
 					</Hide>
 				)}
 			</GridItem>
-			{layoutType === 'interactive' && (
+			{layoutType === 'interactiveStandard' && (
 				<div
 					aria-hidden="true"
 					data-gu-name="centre-rule"
