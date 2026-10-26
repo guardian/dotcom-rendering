@@ -33,8 +33,13 @@ const trackingParamNames: (keyof LinkParams)[] = [
 const singleValueTrackingParamNames = new Set<string>(trackingParamNames);
 
 const getQueryParams = (url: string): URLSearchParams => {
-	const queryString = url.split('?')[1]?.split('#')[0] ?? '';
-	return new URLSearchParams(queryString);
+	const queryStart = url.indexOf('?');
+	const hashStart = url.indexOf('#');
+	if (queryStart === -1 || (hashStart !== -1 && hashStart < queryStart)) {
+		return new URLSearchParams();
+	}
+	const queryEnd = hashStart === -1 ? url.length : hashStart;
+	return new URLSearchParams(url.slice(queryStart + 1, queryEnd));
 };
 
 const deduplicateQueryParams = (url: string): string => {
@@ -235,13 +240,7 @@ export const enrichSupportUrl = ({
 	if (!isSupportUrl(baseUrl)) {
 		return baseUrl;
 	}
-	const existingQueryParams = getQueryParams(baseUrl);
-	const hasTrackingParams = trackingParamNames.every((name) =>
-		existingQueryParams.has(name),
-	);
-	const urlWithRegion = hasTrackingParams
-		? baseUrl
-		: addRegionIdToSupportUrl(baseUrl, countryCode);
+	const urlWithRegion = addRegionIdToSupportUrl(baseUrl, countryCode);
 
 	const withTracking = addTrackingParams(urlWithRegion, tracking);
 

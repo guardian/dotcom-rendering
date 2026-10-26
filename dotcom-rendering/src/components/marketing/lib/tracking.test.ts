@@ -83,6 +83,36 @@ describe('enrichSupportUrl', () => {
 		]);
 	});
 
+	it('preserves question marks in existing query values when adding promo codes', () => {
+		const result = enrichSupportUrl({
+			baseUrl:
+				'https://support.theguardian.com/contribute?promoCode=EXISTING?OTHER',
+			tracking,
+			promoCodes: ['EXISTING'],
+		});
+
+		expect(new URL(result).searchParams.getAll('promoCode')).toEqual([
+			'EXISTING?OTHER',
+			'EXISTING',
+		]);
+	});
+
+	it('adds a region to a support URL that already has tracking params', () => {
+		const result = enrichSupportUrl({
+			baseUrl:
+				'https://support.theguardian.com/contribute?REFPVID=base&INTCMP=campaign&acquisitionData=data',
+			tracking,
+			countryCode: 'GB',
+			promoCodes: [],
+		});
+		const url = new URL(result);
+
+		expect(url.pathname).toEqual('/uk/contribute');
+		expect(url.searchParams.getAll('REFPVID')).toEqual(['base']);
+		expect(url.searchParams.getAll('INTCMP')).toEqual(['campaign']);
+		expect(url.searchParams.getAll('acquisitionData')).toEqual(['data']);
+	});
+
 	it('does not duplicate parameters when an enriched support URL is enriched again', () => {
 		const params = {
 			tracking,
