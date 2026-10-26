@@ -2,10 +2,8 @@ import { hexColourToString } from '@guardian/support-dotcom-components';
 import type { BannerProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { ComponentType } from 'react';
 import { useEffect, useRef, useState } from 'react';
-import { useNewsletterSubscription } from '../../../../lib/useNewsletterSubscription';
-import { NEWSLETTER_BANNER_CONFIG } from '../../../StickyBottomBanner/newsletterBannerDetails';
 import { validatedBannerWrapper } from '../common/BannerWrapper';
-import type { BannerRenderProps } from '../common/types';
+import type { BannerRenderProps, PromotedNewsletter } from '../common/types';
 import type { BannerData } from '../designableBanner/BannerProps';
 import { BannerBody } from '../designableBanner/components/BannerBody';
 import { BannerCloseButton } from '../designableBanner/components/BannerCloseButton';
@@ -22,13 +20,11 @@ import { useSuccessDismissal } from './useSuccessDismissal';
 export const NewsletterBannerComponent = (
 	props: BannerRenderProps,
 ): JSX.Element | null => {
-	const newsletter = NEWSLETTER_BANNER_CONFIG.promotedNewsletter;
-	useNewsletterSubscription(newsletter.listId, props.idApiUrl);
+	const newsletter = props.promotedNewsletter;
 	const bannerRef = useRef<HTMLDivElement>(null);
 	const [isSuccess, setIsSuccess] = useState(false);
 	const { isOpen, bannerData: baseBannerData } = useDesignableBannerModel({
 		...props,
-		isCollapsible: false,
 	});
 	const { isDismissing, dismiss, ...dismissalHandlers } = useSuccessDismissal(
 		{
@@ -43,33 +39,28 @@ export const NewsletterBannerComponent = (
 		bannerRef.current?.focus();
 	}, [isSuccess]);
 
-	if (!isOpen || !baseBannerData || !props.design) {
+	if (!newsletter || !isOpen || !baseBannerData || !props.design) {
 		return null;
 	}
 
 	const { basic } = props.design.colours;
-	const newsletterCopy = props.content.mainContent;
 	const bannerData: BannerData = {
 		...baseBannerData,
 		actions: {
 			...baseBannerData.actions,
 			onClose: isSuccess ? dismiss : baseBannerData.actions.onClose,
 		},
-		content: {
-			mainContent: newsletterCopy,
-			mobileContent: newsletterCopy,
-		},
-		settings: {
-			...baseBannerData.settings,
-			imageSettings: NEWSLETTER_BANNER_CONFIG.imageSettings,
-		},
 		selectors: {
 			...baseBannerData.selectors,
-			headingCopy: newsletterCopy,
-			copyForViewport: newsletterCopy,
 			showHeaderImage: false,
 			showBody: true,
 			showBodyVisual: true,
+		},
+		settings: {
+			...baseBannerData.settings,
+			imageSettings:
+				baseBannerData.settings.headerSettings?.headerImage ??
+				baseBannerData.settings.imageSettings,
 		},
 	};
 
@@ -171,25 +162,17 @@ export const NewsletterBannerComponent = (
 const ValidatedNewsletterBanner = validatedBannerWrapper(
 	NewsletterBannerComponent,
 	'newsletter-banner',
-) as ComponentType<BannerProps & { idApiUrl: string }>;
+) as ComponentType<
+	BannerProps & {
+		idApiUrl: string;
+		promotedNewsletter?: PromotedNewsletter;
+	}
+>;
 
 export const NewsletterBanner = ({
-	tracking,
-	articleCounts,
-	countryCode,
-	fetchEmail,
-	submitComponentEvent,
-	contributionsServiceUrl,
 	idApiUrl,
-}: BannerProps & { idApiUrl: string }): JSX.Element => (
-	<ValidatedNewsletterBanner
-		{...NEWSLETTER_BANNER_CONFIG}
-		tracking={tracking}
-		articleCounts={articleCounts}
-		countryCode={countryCode}
-		fetchEmail={fetchEmail}
-		submitComponentEvent={submitComponentEvent}
-		contributionsServiceUrl={contributionsServiceUrl}
-		idApiUrl={idApiUrl}
-	/>
-);
+	...props
+}: BannerProps & {
+	idApiUrl: string;
+	promotedNewsletter?: PromotedNewsletter;
+}): JSX.Element => <ValidatedNewsletterBanner {...props} idApiUrl={idApiUrl} />;

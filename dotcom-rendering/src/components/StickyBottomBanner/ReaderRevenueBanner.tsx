@@ -30,7 +30,13 @@ import {
 import { getToday } from '../../lib/dailyArticleCount';
 import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
 import { getZIndex } from '../../lib/getZIndex';
+import { getAuthStatus } from '../../lib/identity';
 import type { CanShowResult } from '../../lib/messagePicker';
+import {
+	fetchNewsletterSubscriptions,
+	getCachedSubscriptions,
+	shouldInvalidateCache,
+} from '../../lib/newsletterSubscriptionCache';
 import { getBanner } from '../../lib/sdcRequests';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type { TagType } from '../../types/tag';
@@ -61,6 +67,7 @@ type BuildPayloadProps = BaseProps & {
 	asyncArticleCounts: Promise<ArticleCounts | undefined>;
 	userConsent: boolean;
 	hideSupportMessagingForUser: boolean;
+	userSubscriptions: number[];
 };
 
 const MAX_AUXIA_ROLLOUT_MVT_ID = 1_000_000;
@@ -172,6 +179,7 @@ export const buildPayload = async ({
 	inHoldbackGroup,
 	inAuxiaVariant,
 	isSensitive,
+	userSubscriptions,
 }: BuildPayloadProps): Promise<BannerPayload> => {
 	const getBrowserId = (): string | undefined => {
 		if (inAuxiaVariant !== true) {
@@ -197,6 +205,7 @@ export const buildPayload = async ({
 
 	const targeting: BannerPayload['targeting'] & {
 		auxiaRolloutMvtId?: number;
+		userSubscriptions: number[];
 	} = {
 		shouldHideReaderRevenue,
 		isPaidContent,
@@ -223,6 +232,7 @@ export const buildPayload = async ({
 		inHoldbackGroup,
 		browserId: getBrowserId(),
 		isSensitive,
+		userSubscriptions,
 		...(auxiaRolloutMvtId === undefined ? {} : { auxiaRolloutMvtId }),
 	};
 
@@ -248,6 +258,7 @@ export const canShowRRBanner: CanShowFunctionType<
 	signInBannerLastClosedAt,
 	abandonedBasketBannerLastClosedAt,
 	isPreview,
+	idApiUrl,
 	renderingTarget,
 	asyncArticleCounts,
 	ophanPageViewId,
@@ -310,6 +321,23 @@ export const canShowRRBanner: CanShowFunctionType<
 	const userConsent = await hasRequiredConsents();
 
 	const optedOutOfArticleCount = await hasOptedOutOfArticleCount();
+	let userSubscriptions: number[] = [];
+	if (isSignedIn) {
+		const authStatus = await getAuthStatus();
+		if (authStatus.kind === 'SignedIn') {
+			const userId = authStatus.idToken.claims.sub;
+			const cachedSubscriptions = getCachedSubscriptions();
+			userSubscriptions =
+				cachedSubscriptions &&
+				!shouldInvalidateCache(cachedSubscriptions, userId)
+					? cachedSubscriptions.listIds
+					: ((await fetchNewsletterSubscriptions(
+							idApiUrl,
+							userId,
+							authStatus,
+						)) ?? []);
+		}
+	}
 	const bannerPayload = await buildPayload({
 		isSignedIn,
 		countryCode,
@@ -329,6 +357,7 @@ export const canShowRRBanner: CanShowFunctionType<
 		asyncArticleCounts,
 		userConsent,
 		hideSupportMessagingForUser,
+		userSubscriptions,
 		pageId,
 		inHoldbackGroup,
 		inAuxiaVariant,

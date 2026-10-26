@@ -1,21 +1,44 @@
-import { neutral } from '@guardian/source/foundations';
-import {
-	bannerSchema,
-	hexColourToString,
-} from '@guardian/support-dotcom-components';
+import { bannerSchema } from '@guardian/support-dotcom-components';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { NEWSLETTER_BANNER_CONFIG } from '../../../StickyBottomBanner/newsletterBannerDetails';
-import { props } from '../utils/storybook';
+import { design, props } from '../utils/storybook';
 import { NewsletterBanner } from './NewsletterBanner';
+
+const sdcNewsletterProps = {
+	...props,
+	content: {
+		heading: 'Sign up to The Stakes 2026',
+		paragraphs: [
+			'From the races and candidates to watch to the issues shaping American politics.',
+		],
+	},
+	submitComponentEvent: async () => Promise.resolve(),
+	isCollapsible: false,
+	design: {
+		...design,
+		headerImage: {
+			mobileUrl:
+				'https://i.guim.co.uk/img/media/630a3735c02e195be89ab06fd1b8192959e282ab/0_0_1172_560/500.png?width=500&quality=75&s=937595b3f471d6591475955335c7c023',
+			tabletUrl:
+				'https://i.guim.co.uk/img/media/20cc6e0fa146574bb9c4ed410ac1a089fab02ce0/0_0_1428_1344/500.png?width=500&quality=75&s=fe64f647f74a3cb671f8035a473b895f',
+			desktopUrl:
+				'https://i.guim.co.uk/img/media/6c933a058d1ce37a5ad17f79895906150812dfee/0_0_1768_1420/500.png?width=500&quality=75&s=9277532ddf184a308e14218e3576543b',
+			altText: 'The Stakes 2026',
+		},
+	},
+	promotedNewsletter: {
+		listId: 6042,
+		identityName: 'the-stakes-us-election-edition',
+		name: 'The Stakes 2026',
+		frequency: 'Weekly',
+	},
+};
 
 jest.mock('../../../../lib/useNewsletterSubscription', () => ({
 	useNewsletterSubscription: jest.fn(),
 }));
 
 jest.mock('../../../../lib/useMatchMedia', () => ({
-	...jest.requireActual<typeof import('../../../../lib/useMatchMedia')>(
-		'../../../../lib/useMatchMedia',
-	),
+	...jest.requireActual('../../../../lib/useMatchMedia'),
 	useMatchMedia: () => false,
 }));
 
@@ -26,25 +49,13 @@ jest.mock('./NewsletterSignupForm', () => ({
 }));
 
 describe('NewsletterBanner configuration', () => {
-	it('uses newsletter colours', () => {
-		const { colours } = NEWSLETTER_BANNER_CONFIG.design;
-
-		expect(hexColourToString(colours.basic.background)).toBe('#F3F7FF');
-		expect(hexColourToString(colours.basic.headerText)).toBe(neutral[7]);
-		expect(hexColourToString(colours.basic.bodyText)).toBe(neutral[20]);
-	});
-
-	it('uses local newsletter settings instead of SDC presentation settings', () => {
+	it('passes SDC newsletter settings through to the banner wrapper', () => {
 		const banner = NewsletterBanner({
-			...props,
-			bannerChannel: 'subscriptions',
-			content: { heading: 'SDC heading' },
-			design: undefined,
-			isCollapsible: true,
+			...sdcNewsletterProps,
 			idApiUrl: 'https://idapi.theguardian.com',
 		});
 
-		expect(banner.props).toMatchObject(NEWSLETTER_BANNER_CONFIG);
+		expect(banner.props).toMatchObject(sdcNewsletterProps);
 		expect(bannerSchema.safeParse(banner.props).success).toBe(true);
 	});
 
@@ -58,7 +69,10 @@ describe('NewsletterBanner configuration', () => {
 			contributionsServiceUrl: 'https://contributions.example.com',
 			idApiUrl: 'https://idapi.theguardian.com',
 		};
-		const banner = NewsletterBanner({ ...props, ...runtimeProps });
+		const banner = NewsletterBanner({
+			...sdcNewsletterProps,
+			...runtimeProps,
+		});
 
 		expect(banner.props).toMatchObject(runtimeProps);
 	});
@@ -66,7 +80,7 @@ describe('NewsletterBanner configuration', () => {
 	it('keeps the same close button outside the transitioning panels after signup', () => {
 		render(
 			<NewsletterBanner
-				{...props}
+				{...sdcNewsletterProps}
 				idApiUrl="https://idapi.theguardian.com"
 			/>,
 		);
@@ -86,5 +100,18 @@ describe('NewsletterBanner configuration', () => {
 		expect(
 			closeButton.closest('[role="alert"]')?.hasAttribute('inert'),
 		).toBe(true);
+	});
+
+	it('uses the image from the SDC design headerImage', () => {
+		render(
+			<NewsletterBanner
+				{...sdcNewsletterProps}
+				idApiUrl="https://idapi.theguardian.com"
+			/>,
+		);
+
+		expect(
+			screen.getAllByAltText('The Stakes 2026').length,
+		).toBeGreaterThan(0);
 	});
 });

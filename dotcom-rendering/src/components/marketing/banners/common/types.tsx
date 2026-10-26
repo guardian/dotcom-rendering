@@ -16,11 +16,17 @@ import type {
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { ChoiceCardsSettings } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/types/props/shared';
+import type { Newsletter } from '../../../../types/content';
 
 export type BannerId =
 	| 'designable-banner'
 	| 'sign-in-prompt-banner'
 	| 'newsletter-banner';
+
+export type PromotedNewsletter = Pick<
+	Newsletter,
+	'listId' | 'identityName' | 'name' | 'frequency'
+>;
 
 export interface BannerEnrichedCta {
 	ctaUrl: string;
@@ -85,4 +91,5 @@ export interface BannerRenderProps {
 	promoCodes?: string[];
 	isCollapsible?: boolean;
 	idApiUrl?: string;
+	promotedNewsletter?: PromotedNewsletter;
 }

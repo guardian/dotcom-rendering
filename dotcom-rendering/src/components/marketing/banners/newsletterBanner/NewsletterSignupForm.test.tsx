@@ -75,23 +75,23 @@ describe('newsletter banner signup form', () => {
 
 	it('calls onSuccess only after the signup hook reports success', () => {
 		const onSuccess = jest.fn();
-		const form = (
+		const renderForm = () => (
 			<NewsletterSignupForm
 				newsletterId="test-newsletter"
 				componentId="test-banner"
 				onSuccess={onSuccess}
 			/>
 		);
-		const { rerender } = render(form);
+		const { rerender } = render(renderForm());
 
 		expect(onSuccess).not.toHaveBeenCalled();
 
 		mockResponseOk = false;
-		rerender(<>{form}</>);
+		rerender(renderForm());
 		expect(onSuccess).not.toHaveBeenCalled();
 
 		mockResponseOk = true;
-		rerender(form);
+		rerender(renderForm());
 		expect(onSuccess).toHaveBeenCalledTimes(1);
 	});
 });
