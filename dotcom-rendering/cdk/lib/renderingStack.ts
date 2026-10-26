@@ -70,11 +70,11 @@ export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
 		scaling: NonNullable<
 			GuLoadBalancedAppExperimentalProps['ecsProps']
 		>['scaling'];
-
-		targetGroupWeights: NonNullable<
-			GuLoadBalancedAppExperimentalProps['targetGroupWeights']
-		>;
 	};
+
+	targetGroupWeights?: NonNullable<
+		GuLoadBalancedAppExperimentalProps['targetGroupWeights']
+	>;
 }
 
 const addCPUStepScalingPolicy = (
@@ -211,7 +211,14 @@ const addLatencyStepScalingPolicy = (
 /** DCR infrastructure provisioning via CDK */
 export class RenderingCDKStack extends CDKStack {
 	constructor(scope: CDKApp, id: string, props: RenderingCDKStackProps) {
-		const { guApp, stage, domainName, ec2Props, ecsProps } = props;
+		const {
+			guApp,
+			stage,
+			domainName,
+			ec2Props,
+			ecsProps,
+			targetGroupWeights,
+		} = props;
 
 		super(scope, id, {
 			// Any version of this app should run in the eu-west-1 region
@@ -294,8 +301,6 @@ export class RenderingCDKStack extends CDKStack {
 							}),
 						},
 					}),
-
-			// Provision ECS resources only when `ecsProps` has been provided
 			...(ecsProps == null
 				? {}
 				: {
@@ -308,8 +313,8 @@ export class RenderingCDKStack extends CDKStack {
 							cpu: ecsProps.taskCpu,
 							scaling: ecsProps.scaling,
 						},
-						targetGroupWeights: ecsProps.targetGroupWeights,
 					}),
+			...(targetGroupWeights == null ? {} : { targetGroupWeights }),
 		});
 
 		if (app.ecsService) {
