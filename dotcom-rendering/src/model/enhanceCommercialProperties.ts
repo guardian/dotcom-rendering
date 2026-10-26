@@ -20,22 +20,23 @@ const cappedDimensions = ({
 	};
 };
 
+export const enhanceBranding = (branding: Branding): Branding => ({
+	...branding,
+	logo: {
+		...branding.logo,
+		dimensions: cappedDimensions(branding),
+	},
+});
+
 const enhanceEditionCommercialProperties = (
 	properties: EditionCommercialProperties,
 ): EditionCommercialProperties => {
 	const { branding } = properties;
 	if (!branding) return properties;
 
-	const dimensions = cappedDimensions(branding);
 	return {
 		...properties,
-		branding: {
-			...branding,
-			logo: {
-				...branding.logo,
-				dimensions,
-			},
-		},
+		branding: enhanceBranding(branding),
 	};
 };
 
