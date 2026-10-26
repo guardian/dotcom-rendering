@@ -125,8 +125,10 @@ function decideFormatForArticle(
 				display: ArticleDisplay.Immersive,
 				theme: Pillar.News,
 			};
-		// Key Stories is rendered via parseKeyStoriesToFrontCard and never
-		// reaches this function; the case is listed only for exhaustiveness.
+		/**
+		 * Key Stories is rendered via parseKeyStoriesToFrontCard and never
+		 * reaches this function; the case is listed only for exhaustiveness.
+		 */
 		case 'Key Stories':
 		case undefined:
 			return {
@@ -221,10 +223,12 @@ function parseKeyStoriesToFrontCard(
 		format: standardFormat,
 		dataLinkName: `${storylineId} | key-stories`,
 		url: leadArticle?.url ?? '',
-		// The splash card suppresses its visible headline (see the
-		// `isStorylines && isFlexSplash` guard in Card), but the headline is
-		// still used as the overlay link's accessible name, so preserve the
-		// lead article's headline rather than emitting an empty aria-label.
+		/**
+		 * The splash card suppresses its visible headline (see the
+		 * `isStorylines && isFlexSplash` guard in Card), but the headline is
+		 * still used as the overlay link's accessible name, so preserve the
+		 * lead article's headline rather than emitting an empty aria-label.
+		 */
 		headline: leadArticle?.headline ?? '',
 		trailText: '',
 		webPublicationDate: '',
@@ -257,8 +261,10 @@ function decideGroupedTrails(
 	const empty: DCRGroupedTrails = { splash: [], snap: [], standard: [] };
 
 	if (parsedCategoryName === 'Key Stories') {
-		// Guard against emitting a splash card with an empty URL when Frontend
-		// sends a Key Stories category with no articles.
+		/**
+		 * Guard against emitting a splash card with an empty URL when Frontend
+		 * sends a Key Stories category with no articles.
+		 */
 		if (category.articles.length === 0) {
 			return empty;
 		}
@@ -319,9 +325,11 @@ export function parseStorylinesContentToStorylines(
 						),
 					};
 				})
-				// Drop categories that produced no renderable cards (e.g. an
-				// empty Key Stories group) rather than rendering an empty
-				// section heading.
+				/**
+				 * Drop categories that produced no renderable cards (e.g. an
+				 * empty Key Stories group) rather than rendering an empty
+				 * section heading.
+				 */
 				.filter((category) =>
 					hasRenderableCards(category.groupedTrails),
 				),

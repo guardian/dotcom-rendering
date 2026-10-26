@@ -13,8 +13,10 @@ export type ParsedCategory = {
 	groupedTrails: DCRGroupedTrails;
 };
 
-// The types below should match up with those defined in the tool:
-// https://github.com/guardian/tag-page-supercharger/blob/main/app/models/FrontendContent.scala#L9
+/**
+ * The types below should match up with those defined in the tool:
+ * https://github.com/guardian/tag-page-supercharger/blob/main/app/models/FrontendContent.scala#L9
+ */
 export type ImageData = {
 	src?: string;
 	altText?: string;

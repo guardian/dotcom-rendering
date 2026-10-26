@@ -170,9 +170,11 @@ export const StorylinesSectionContent = ({
 	return (
 		<StorylinesSection
 			title="Storylines"
-			// Feels a bit hacky to hard code the container palette like this, but this provides some styling (notably the greyed background)
-			// Without having to add more palette variations and still sticking to the “container overrides” pattern in a section.
-			// Future improvement would be to add the palette variation specifically for this case.
+			/**
+			 * Feels a bit hacky to hard code the container palette like this, but this provides some styling (notably the greyed background)
+			 * Without having to add more palette variations and still sticking to the “container overrides” pattern in a section.
+			 * Future improvement would be to add the palette variation specifically for this case.
+			 */
 			containerPalette="LongRunningAltPalette"
 			url={url}
 			isTagPage={true}

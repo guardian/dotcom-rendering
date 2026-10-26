@@ -158,7 +158,7 @@ export type DCRSupportingContent = {
 	kickerText?: string;
 	format: ArticleFormat;
 	headlineTestUuid?: string;
-	/** // Storylines: The date is shown in the supporting content for the key stories container in a tag page */
+	/** Storylines: The date is shown in the supporting content for the key stories container in a tag page */
 	webPublicationDate?: string;
 };
 

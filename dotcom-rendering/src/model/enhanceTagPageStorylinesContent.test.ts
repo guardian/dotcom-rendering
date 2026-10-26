@@ -116,7 +116,7 @@ describe('parseStorylinesContentToStorylines (integration with Frontend fixture)
 
 		it('exposes the first four articles as supporting content including publication dates', () => {
 			const card = keyStories?.splash[0];
-			// The fixture category has 5 articles; only 4 should be shown
+			/** The fixture category has 5 articles; only 4 should be shown */
 			expect(card?.supportingContent).toHaveLength(4);
 			expect(card?.supportingContent?.[0]).toMatchObject({
 				headline:
@@ -129,7 +129,7 @@ describe('parseStorylinesContentToStorylines (integration with Frontend fixture)
 		});
 
 		it('falls back to an empty byline when the lead article has none', () => {
-			// The lead Key Stories article in the fixture has a null byline
+			/** The lead Key Stories article in the fixture has a null byline */
 			expect(keyStories?.splash[0]?.byline).toBe('');
 		});
 	});
@@ -152,7 +152,7 @@ describe('parseStorylinesContentToStorylines (integration with Frontend fixture)
 
 		it('builds the data link name from the category index and card format', () => {
 			const card = opinions?.standard[0];
-			// Contrasting opinions is the second category (index 1)
+			/** Contrasting opinions is the second category (index 1) */
 			expect(card?.dataLinkName).toBe(
 				`storyline-1 | opinions | ${getDataLinkNameCard(
 					{ design: 8, display: 0, theme: 1 },
@@ -163,7 +163,7 @@ describe('parseStorylinesContentToStorylines (integration with Frontend fixture)
 		});
 
 		it('sets the avatar url only for articles flagged as avatars', () => {
-			// First opinion article has isAvatar: true, the second isAvatar: false
+			/** First opinion article has isAvatar: true, the second isAvatar: false */
 			expect(opinions?.standard[0]?.avatarUrl).toBe(
 				'https://static.guim.co.uk/sys-images/Guardian/Pix/contributor/2014/9/12/1410533773838/Gaby-Hinsliff.jpg',
 			);
@@ -230,7 +230,7 @@ describe('parseStorylinesContentToStorylines (category-specific behaviour)', () 
 			[selfHostedMedia, 4, 7],
 			[audioMedia, 3, 7],
 			[galleryMedia, 2, 7],
-			// No media data falls back to a standard article design within the media theme
+			/** No media data falls back to a standard article design within the media theme */
 			[null, 0, 7],
 		];
 
@@ -321,9 +321,11 @@ describe('parseStorylinesContentToStorylines (category-specific behaviour)', () 
 	});
 
 	it('treats the "Opinions" label as equivalent to "Contrasting opinions"', () => {
-		// Frontend may send either the raw category ('Contrasting opinions') or
-		// its display label ('Opinions'); both must produce identical opinion
-		// styling (comment format, byline shown, avatar) and the 'Opinions' title.
+		/**
+		 * Frontend may send either the raw category ('Contrasting opinions') or
+		 * its display label ('Opinions'); both must produce identical opinion
+		 * styling (comment format, byline shown, avatar) and the 'Opinions' title.
+		 */
 		const article = makeArticle({
 			byline: 'A Columnist',
 			image: {
@@ -354,7 +356,7 @@ describe('parseStorylinesContentToStorylines (category-specific behaviour)', () 
 		expect(displayCard?.showByline).toBe(true);
 		expect(displayCard?.avatarUrl).toBe('https://example.com/avatar.jpg');
 
-		// Both labels should yield equivalent parsed output
+		/** Both labels should yield equivalent parsed output */
 		expect(displayCategory).toEqual(rawCategory);
 	});
 
@@ -421,8 +423,10 @@ describe('parseStorylinesContentToStorylines (data-handling guards)', () => {
 		const parsed = parseStorylinesContentToStorylines(
 			makeContent('Key Stories', []),
 		);
-		// The category produced no renderable cards, so it is removed entirely
-		// rather than rendering a section heading with an empty-url splash card.
+		/**
+		 * The category produced no renderable cards, so it is removed entirely
+		 * rather than rendering a section heading with an empty-url splash card.
+		 */
 		expect(parsed[0]?.categories).toHaveLength(0);
 	});
 

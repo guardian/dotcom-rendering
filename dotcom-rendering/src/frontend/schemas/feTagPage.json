@@ -1192,6 +1192,7 @@
                                                             "image": {
                                                                 "anyOf": [
                                                                     {
+                                                                        "description": "The types below should match up with those defined in the tool:\nhttps://github.com/guardian/tag-page-supercharger/blob/main/app/models/FrontendContent.scala#L9",
                                                                         "type": "object",
                                                                         "properties": {
                                                                             "src": {

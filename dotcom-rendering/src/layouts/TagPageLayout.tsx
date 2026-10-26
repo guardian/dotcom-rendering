@@ -136,12 +136,13 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					// Temporarily remove links to /all pages
 					const url = undefined;
 
-					// Storylines logic to determine where to insert the section
 					const insertStorylinesSection =
 						tagPage.storylinesContent &&
+						/** Only on the first page */
 						(!tagPage.pagination ||
-							tagPage.pagination.currentPage === 1) && // Only on the first page
-						index === 0; // Only after the first section
+							tagPage.pagination.currentPage === 1) &&
+						/** Only after the first section */
+						index === 0;
 
 					const isLastGroup =
 						index === tagPage.groupedTrails.length - 1;
