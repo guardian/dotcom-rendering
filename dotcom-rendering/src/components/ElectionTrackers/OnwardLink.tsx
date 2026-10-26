@@ -36,7 +36,6 @@ export const OnwardLink = (props: Props) => (
 			},
 		})}
 		href={props.link.href}
-		data-ignore="global-link-styling" //This overrides the globalLinkStyles in ArticleBody.tsx to avoid the liveblog link text
 		title={props.description}
 		data-ignore="global-link-styling" //This overrides the globalLinkStyles in ArticleBody.tsx to avoid the liveblog link text
 	>
