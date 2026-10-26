@@ -2122,6 +2122,8 @@ const clickToViewButtonHoverDark: PaletteFunction = () =>
 
 const brandingLabelLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
+		case ArticleDesign.Crossword:
+			return sourcePalette.neutral[7];
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Picture:
@@ -2145,6 +2147,9 @@ const brandingLabelDark: PaletteFunction = () => sourcePalette.neutral[86];
 const brandingBorderLight: PaletteFunction = () => sourcePalette.neutral[86];
 const brandingBorderDark: PaletteFunction = () => sourcePalette.neutral[20];
 const brandingLinkLight: PaletteFunction = ({ design, theme }) => {
+	if (design === ArticleDesign.Crossword) {
+		return sourcePalette.neutral[7];
+	}
 	if (design === ArticleDesign.Gallery) {
 		return sourcePalette.neutral[86];
 	}
@@ -2172,6 +2177,8 @@ const brandingLinkLight: PaletteFunction = ({ design, theme }) => {
 };
 const brandingLinkDark: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
+		case ArticleDesign.Crossword:
+			return sourcePalette.neutral[86];
 		case ArticleDesign.Gallery:
 			switch (theme) {
 				case Pillar.News:

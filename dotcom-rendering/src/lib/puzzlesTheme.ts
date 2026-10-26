@@ -13,6 +13,7 @@ export const puzzlesPageTheme = (
 	--puzzles-header-background: ${palette.opinion[800]};
 	--puzzles-headline-colour: ${palette.neutral[7]};
 	--puzzles-text-colour: ${palette.neutral[7]};
+	--puzzles-supporting-text-colour: ${palette.neutral[46]};
 	--puzzles-border-colour: ${palette.neutral[86]};
 
 	background: var(--puzzles-page-background);
@@ -30,6 +31,7 @@ export const puzzlesPageTheme = (
 				--puzzles-card-text-colour: ${palette.neutral[86]};
 				--puzzles-headline-colour: ${palette.neutral[97]};
 				--puzzles-text-colour: ${palette.neutral[86]};
+				--puzzles-supporting-text-colour: ${palette.neutral[86]};
 				--puzzles-border-colour: ${palette.neutral[46]};
 			}
 		}

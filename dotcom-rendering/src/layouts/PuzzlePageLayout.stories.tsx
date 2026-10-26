@@ -1,6 +1,7 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
+import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
 import {
 	puzzlesHubV1Experiment,
 	puzzlesHubV1Participation,
@@ -48,6 +49,12 @@ export const AdFree = {
 	},
 } satisfies Story;
 
+export const Sponsored = {
+	args: {
+		branding: puzzlesBranding,
+	},
+} satisfies Story;
+
 // Production Saturday Edition data, standing in for the Cluesletter (which has no exampleUrl yet).
 const saturdayEdition = {
 	identityName: 'saturday-edition',
@@ -67,23 +74,6 @@ const v1Config = {
 	),
 };
 
-export const WithNewsletter = {
-	args: {
-		puzzlePage: {
-			...puzzlePage,
-			config: v1Config,
-			puzzleConfig: storyPuzzleConfig,
-			instance: {
-				...puzzlePage.instance,
-				puzzlesSupporting: {
-					usefulLinks: [],
-					newsletter: saturdayEdition,
-				},
-			},
-		},
-	},
-} satisfies Story;
-
 export const WithUsefulLinksAndNewsletter = {
 	args: {
 		puzzlePage: {
@@ -95,12 +85,12 @@ export const WithUsefulLinksAndNewsletter = {
 				puzzlesSupporting: {
 					usefulLinks: [
 						{
-							title: 'Crossword setter A-Z',
-							url: 'https://www.theguardian.com/crosswords/search',
+							title: 'Support the Guardian',
+							url: 'https://support.theguardian.com',
 						},
 						{
-							title: 'Crossword blog',
-							url: 'https://www.theguardian.com/crosswords/crossword-blog',
+							title: 'Help centre',
+							url: 'https://help.theguardian.com',
 						},
 					],
 					newsletter: saturdayEdition,

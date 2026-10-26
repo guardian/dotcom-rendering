@@ -5,6 +5,7 @@ import {
 	headlineBold28,
 	palette,
 	space,
+	textEgyptian15,
 	textEgyptian17,
 } from '@guardian/source/foundations';
 import { AdSlot } from '../components/AdSlot.web';
@@ -98,10 +99,15 @@ const headingStyles = css`
 		}
 	}
 	p {
-		${textEgyptian17};
+		${textEgyptian15};
 		max-width: 620px;
 		margin: 0 0 ${space[6]}px;
-		color: var(--puzzles-text-colour);
+		padding-top: 10px;
+		color: var(--puzzles-supporting-text-colour);
+		${from.tablet} {
+			${textEgyptian17};
+			padding-top: ${space[2]}px;
+		}
 	}
 	${from.leftCol} {
 		h1 {
@@ -227,7 +233,7 @@ export const PuzzlesArchiveLayout = ({
 				<div css={pageStyles}>
 					<div css={topStyles}>
 						<header css={headingStyles}>
-							<h1>{archive.title} archive</h1>
+							<h1>{archive.title}</h1>
 							<p>
 								<Island priority="critical">
 									<PuzzlesArchiveDescription
