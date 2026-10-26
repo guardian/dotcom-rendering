@@ -173,6 +173,6 @@
 		"webpack-messages": "2.0.4",
 		"webpack-node-externals": "3.0.0",
 		"webpack-sources": "3.6.0",
-		"zod": "4.1.12"
+		"zod": "4.6.6"
 	}
 }

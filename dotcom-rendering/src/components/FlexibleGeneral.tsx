@@ -1,4 +1,5 @@
 import { isUndefined } from '@guardian/libs';
+import { safeParse } from 'valibot';
 import { ArticleDesign } from '../lib/articleFormat';
 import { isMediaCard } from '../lib/cardHelpers';
 import { isWithinTwelveHours } from '../lib/formatTime';
@@ -22,6 +23,7 @@ import type { TrailTextSize } from './Card/components/TrailText';
 import { UL } from './Card/components/UL';
 import type { ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
+import { EventGraphic, GraphicSchema } from './EventGraphic';
 import { FeatureCard } from './FeatureCard';
 import { FrontCard } from './FrontCard';
 import type { SubtitleSize } from './SelfHostedVideoPlayer';
@@ -295,6 +297,17 @@ const SplashCardLayout = ({
 	containerLevel,
 	collectionId,
 }: SplashCardLayoutProps) => {
+	const graphic = safeParse(GraphicSchema, {
+		electionDataUrl: card.dataUrl,
+		kind: card.graphicKind,
+		electionComponents: card.eventData,
+		liveEffects: true,
+	});
+
+	if (graphic.success) {
+		return <EventGraphic graphic={graphic.output} />;
+	}
+
 	const isSnapLink = card.snapData?.embedHtml;
 	if (!isUndefined(isSnapLink)) {
 		return (
