@@ -91,17 +91,23 @@ export const LiveBlock = ({
 						'model.dotcomrendering.pageElements.InteractiveAtomBlockElement'
 				) {
 					return (
-						<Island
+						<div
 							key={element.id}
-							priority="feature"
-							defer={{ until: 'visible' }}
+							css={css`
+								margin-bottom: 12px;
+							`}
 						>
-							<ElectionTrackerWrapper
-								electionDataUrl="https://zug.code.dev-guardianapis.com/views/elections/us-general-2026/congress-liveblog-tracker/all/v1"
-								electionComponents={{ components: [] }}
-								liveEffects={true}
-							/>
-						</Island>
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
+								<ElectionTrackerWrapper
+									electionDataUrl="https://zug.code.dev-guardianapis.com/views/elections/us-general-2026/congress-liveblog-tracker/all/v1"
+									electionComponents={{ components: [] }}
+									liveEffects={true}
+								/>
+							</Island>
+						</div>
 					);
 				}
 
