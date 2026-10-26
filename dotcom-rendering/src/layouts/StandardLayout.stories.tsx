@@ -3,7 +3,7 @@ import { expect, within } from 'storybook/test';
 import { allModes } from '../../.storybook/modes';
 import { Audio as AudioFixture } from '../../fixtures/generated/fe-articles/Audio';
 import { Standard as StandardFixture } from '../../fixtures/generated/fe-articles/Standard';
-import { ArticleDesign } from '../lib/articleFormat';
+import { ArticleDesign, ArticleDisplay } from '../lib/articleFormat';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { extractNAV } from '../model/extract-nav';
 import { enhanceArticleType } from '../types/article';
@@ -101,7 +101,7 @@ const webInteractiveArticle = enhanceArticleType(
 	{
 		...StandardFixture,
 		contentType: 'Interactive',
-		firstPublicationDate: '2026-10-01T09:00:00.000Z',
+		firstPublicationDate: '2026-10-30T09:00:00.000Z',
 		format: {
 			...StandardFixture.format,
 			design: 'InteractiveDesign',
@@ -128,7 +128,6 @@ export const WebInteractive: Story = {
 			display: webInteractiveArticle.display,
 			theme: webInteractiveArticle.theme,
 		},
-		isInInteractiveLayoutTest: true,
 	},
 	parameters: {
 		formats: [
@@ -170,5 +169,75 @@ export const WebInteractiveMobile: Story = {
 
 		await expect(logo).not.toBeNull();
 		await expect(window.getComputedStyle(logo!).width).toBe('130px');
+	},
+};
+
+const webImmersiveArticle = enhanceArticleType(StandardFixture, 'Web');
+const immersiveFormat = {
+	design: webImmersiveArticle.design,
+	display: ArticleDisplay.Immersive,
+	theme: webImmersiveArticle.theme,
+};
+const immersiveNav = extractNAV(webImmersiveArticle.frontendData.nav);
+
+export const WebImmersive: Story = {
+	args: {
+		renderingTarget: 'Web',
+		NAV: {
+			...immersiveNav,
+			selectedPillar: getCurrentPillar(webImmersiveArticle.frontendData),
+		},
+		article: {
+			...webImmersiveArticle.frontendData,
+			shouldHideAds: true,
+		},
+		format: immersiveFormat,
+	},
+	parameters: {
+		formats: [immersiveFormat],
+		chromatic: {
+			modes: {
+				'light wide': allModes['light wide'],
+			},
+		},
+	},
+	play: async ({ canvasElement }) => {
+		const header = within(within(canvasElement).getByRole('banner'));
+
+		await expect(immersiveNav.subNavSections?.links.length).toBeGreaterThan(
+			0,
+		);
+		await expect(header.getByRole('link', { name: 'News' })).toBeVisible();
+		for (const link of immersiveNav.subNavSections?.links ?? []) {
+			await expect(
+				header.queryByRole('link', { name: link.title }),
+			).not.toBeInTheDocument();
+		}
+	},
+};
+
+export const WebImmersiveMobile: Story = {
+	args: WebImmersive.args,
+	globals: {
+		viewport: { value: 'mobileMedium', isRotated: false },
+	},
+	parameters: {
+		...WebImmersive.parameters,
+		chromatic: {
+			modes: {
+				'light mobileMedium': allModes['light mobileMedium'],
+			},
+		},
+	},
+	play: async ({ canvasElement }) => {
+		const media = canvasElement.querySelector<HTMLElement>(
+			'[data-gu-name="media"]',
+		);
+		await expect(media).not.toBeNull();
+		const image = within(media!).getByRole('img');
+		await expect(image).toBeVisible();
+		const { width, height } = image.getBoundingClientRect();
+		await expect(width).toBeGreaterThan(0);
+		await expect(height).toBeCloseTo((width * 5) / 4, 0);
 	},
 };

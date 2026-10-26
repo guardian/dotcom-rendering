@@ -1,7 +1,8 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headlineBold34,
+	headlineBold24,
+	headlineBold28,
 	palette,
 	space,
 	textEgyptian17,
@@ -13,7 +14,7 @@ import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { PuzzlesArchiveCalendar } from '../components/PuzzlesArchiveCalendar.island';
 import { PuzzlesArchiveDescription } from '../components/PuzzlesArchiveDescription.island';
-import { RelatedPuzzlesRail } from '../components/RelatedPuzzlesRail';
+import { RelatedPuzzlesRailEnhanced } from '../components/RelatedPuzzlesRailEnhanced.island';
 import { Section } from '../components/Section';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { center } from '../lib/center';
@@ -87,11 +88,14 @@ const archiveGridStyles = css`
 const headingStyles = css`
 	${archiveGridStyles};
 	h1 {
-		${headlineBold34};
+		${headlineBold24};
 		color: var(--puzzles-headline-colour);
 		margin: 0;
 		padding-top: ${space[2]}px;
 		overflow-wrap: anywhere;
+		${from.tablet} {
+			${headlineBold28};
+		}
 	}
 	p {
 		${textEgyptian17};
@@ -256,7 +260,14 @@ export const PuzzlesArchiveLayout = ({
 					</div>
 					{archive.moreFrom.length > 0 && (
 						<section css={moreStyles}>
-							<RelatedPuzzlesRail items={archive.moreFrom} />
+							<Island
+								priority="enhancement"
+								defer={{ until: 'visible' }}
+							>
+								<RelatedPuzzlesRailEnhanced
+									items={archive.moreFrom}
+								/>
+							</Island>
 						</section>
 					)}
 					{renderAds && (

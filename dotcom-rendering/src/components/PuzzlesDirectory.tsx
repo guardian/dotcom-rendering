@@ -4,15 +4,17 @@ import {
 	headlineBold24,
 	headlineBold28,
 	palette,
-	textSans14,
+	space,
 } from '@guardian/source/foundations';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { puzzlesContainerStyles } from '../lib/puzzlesContainerStyles';
+import type { Branding } from '../types/branding';
 import type { PuzzleContainer, PuzzlesLayoutType } from '../types/puzzlesPage';
 import { AdSlot } from './AdSlot.web';
 import { Island } from './Island';
-import { externalProps, getPuzzleUrl, Rows } from './PuzzleCard';
+import { getPuzzleUrl, Rows } from './PuzzleCard';
 import { PuzzlesArchiveMenu } from './PuzzlesArchiveMenu.island';
+import { PuzzlesContainerBranding } from './PuzzlesBranding';
 import { PuzzlesSupporting } from './PuzzlesSupporting';
 
 export { getPuzzleUrl };
@@ -20,9 +22,13 @@ export { getPuzzleUrl };
 type Props = {
 	layout: PuzzlesLayoutType;
 	renderAds: boolean;
+	/** Omit the black rule above the first section, e.g. below the sponsorship banner. */
+	hideTopRule?: boolean;
+	/** Sponsor per container ID, for the reader's edition. */
+	containerBranding?: Partial<Record<string, Branding>>;
 };
 
-const sectionStyles = (isFeatured: boolean) => css`
+const sectionStyles = (hideTopRule: boolean) => css`
 	--puzzles-content-top: 8px;
 	--puzzles-content-bottom: 32px;
 	position: relative;
@@ -39,9 +45,15 @@ const sectionStyles = (isFeatured: boolean) => css`
 		content: '';
 		transform: translateX(-50%);
 	}
+	${hideTopRule &&
+	css`
+		&:first-of-type::before {
+			content: none;
+		}
+	`}
 
 	${from.leftCol} {
-		--puzzles-content-top: ${isFeatured ? 16 : 8}px;
+		--puzzles-content-top: 8px;
 		grid-template-columns: 170px minmax(0, 1fr);
 	}
 
@@ -63,23 +75,43 @@ const sectionStyles = (isFeatured: boolean) => css`
 
 const titleStyles = css`
 	min-width: 0;
-	margin: 0;
 	padding: 6px 10px 12px;
-	${headlineBold24};
-	color: var(--puzzles-headline-colour, ${palette.neutral[7]});
-	line-height: 1;
-	overflow-wrap: break-word;
 	${from.mobileMedium} {
 		padding-right: 20px;
 		padding-left: 20px;
 	}
 
-	${from.tablet} {
-		${headlineBold28};
+	${from.desktop} {
+		/* Include the 1px side border in the 20px inset, as the cards do. */
+		padding-left: 19px;
 	}
 
 	${from.leftCol} {
 		padding-top: var(--puzzles-content-top);
+	}
+`;
+
+// Title left with the sponsor right on one row, stacked under the title from leftCol.
+const brandedTitleStyles = css`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: ${space[2]}px;
+	${from.leftCol} {
+		display: block;
+	}
+`;
+
+const headingStyles = css`
+	min-width: 0;
+	margin: 0;
+	${headlineBold24};
+	color: var(--puzzles-headline-colour, ${palette.neutral[7]});
+	line-height: 1;
+	overflow-wrap: break-word;
+
+	${from.tablet} {
+		${headlineBold28};
 	}
 `;
 
@@ -98,34 +130,6 @@ const headingColumnStyles = css`
 			content: '';
 			pointer-events: none;
 		}
-	}
-`;
-
-const crosswordLinksStyles = css`
-	display: none;
-	${from.leftCol} {
-		display: flex;
-		flex-direction: column;
-		gap: 8px;
-		margin-top: auto;
-		padding: 0 20px 24px;
-	}
-	a {
-		min-height: 24px;
-		padding: 4px 8px;
-		border-top: 1px solid
-			var(--puzzles-border-colour, ${palette.neutral[86]});
-		border-left: 1px solid
-			var(--puzzles-border-colour, ${palette.neutral[86]});
-		color: var(--puzzles-text-colour, ${palette.neutral[7]});
-		text-decoration: none;
-		${textSans14};
-	}
-	a:hover {
-		text-decoration: underline;
-	}
-	a:focus-visible {
-		outline: 3px solid ${palette.brand[500]};
 	}
 `;
 
@@ -246,43 +250,33 @@ const hasContent = (container: PuzzleContainer): boolean =>
 	container.content.items.some((row) => row.length > 0) ||
 	container.content.nestedContainers.some(hasContent);
 
-const DirectorySection = ({ container }: { container: PuzzleContainer }) => {
+const DirectorySection = ({
+	container,
+	hideTopRule,
+	branding,
+}: {
+	container: PuzzleContainer;
+	hideTopRule: boolean;
+	branding?: Branding;
+}) => {
 	if (!hasContent(container)) {
 		return null;
 	}
 	return (
 		<section
 			aria-labelledby={`${container.id}-title`}
-			css={sectionStyles(container.variant === 'featured')}
+			css={sectionStyles(hideTopRule)}
 			id={container.id}
 		>
 			<div css={headingColumnStyles}>
-				<h2 css={titleStyles} id={`${container.id}-title`}>
-					{container.title}
-				</h2>
-				{container.id === 'crosswords' && (
-					<nav
-						css={crosswordLinksStyles}
-						aria-label="Crossword links"
-					>
-						<a
-							href="https://support.theguardian.com"
-							{...externalProps(
-								'https://support.theguardian.com',
-							)}
-						>
-							Support the Guardian
-						</a>
-						<a
-							href="https://www.theguardian.com/crosswords/crossword-blog"
-							{...externalProps(
-								'https://www.theguardian.com/crosswords/crossword-blog',
-							)}
-						>
-							Blog
-						</a>
-					</nav>
-				)}
+				<div css={[titleStyles, branding && brandedTitleStyles]}>
+					<h2 css={headingStyles} id={`${container.id}-title`}>
+						{container.title}
+					</h2>
+					{branding && (
+						<PuzzlesContainerBranding branding={branding} />
+					)}
+				</div>
 			</div>
 			<div css={contentStyles}>
 				<Rows
@@ -310,7 +304,12 @@ const DirectorySection = ({ container }: { container: PuzzleContainer }) => {
 	);
 };
 
-export const PuzzlesDirectory = ({ layout, renderAds }: Props) => (
+export const PuzzlesDirectory = ({
+	layout,
+	renderAds,
+	hideTopRule = false,
+	containerBranding,
+}: Props) => (
 	<>
 		{layout.containers.map((container) => {
 			if (
@@ -330,6 +329,7 @@ export const PuzzlesDirectory = ({ layout, renderAds }: Props) => (
 						key={container.id}
 						layout={layout}
 						renderAds={renderAds}
+						showNewsletter={true}
 						supporting={container.supporting}
 					/>
 				);
@@ -355,7 +355,12 @@ export const PuzzlesDirectory = ({ layout, renderAds }: Props) => (
 				);
 			}
 			return (
-				<DirectorySection container={container} key={container.id} />
+				<DirectorySection
+					branding={containerBranding?.[container.id]}
+					container={container}
+					hideTopRule={hideTopRule}
+					key={container.id}
+				/>
 			);
 		})}
 	</>

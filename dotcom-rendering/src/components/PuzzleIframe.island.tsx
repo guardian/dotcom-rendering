@@ -14,6 +14,8 @@ import type { PuzzleConfig } from '../model/puzzles/puzzleConfigs';
 import { palette as themePalette } from '../palette';
 
 interface Props {
+	/** Authoritative dated URL from GET /game, when supplied by frontend. */
+	gameUrl?: string;
 	/**
 	 * The puzzle's own `PuzzleConfig`, used to resolve the provider-specific
 	 * iframe URL (`set`/`baseUrl`, etc., see `src/lib/puzzleIframeUrl.ts`)
@@ -77,7 +79,7 @@ const PUZZLE_MIN_HEIGHTS: Record<string, MinHeightTiers> = {
 	'sudoku-hard': { default: 620, tablet: 520, mobile: 630 },
 	'sudoku-killer': { default: 620, tablet: 520, mobile: 630 },
 	'word-wheel': { default: 600, tablet: 750, mobile: 500 },
-	wordiply: { default: 600, tablet: 600, mobile: 560 },
+	wordiply: { default: 600, tablet: 600, mobile: 600 },
 };
 
 /**
@@ -92,7 +94,7 @@ const PUZZLE_MIN_HEIGHTS: Record<string, MinHeightTiers> = {
  * simply keeps its `PUZZLE_MIN_HEIGHTS` value on touch devices too.
  */
 const PUZZLE_MIN_HEIGHTS_TOUCH: Partial<Record<string, MinHeightTiers>> = {
-	wordiply: { default: 800, tablet: 600, mobile: 500 },
+	wordiply: { default: 800, tablet: 600, mobile: 600 },
 };
 
 const DEFAULT_MIN_HEIGHT = 500;
@@ -303,8 +305,9 @@ const buildPuzzleContext = (
 export const buildPuzzleIframeSrc = (
 	puzzleConfig: PuzzleConfig,
 	context: PuzzleContext,
+	gameUrl?: string,
 ): string => {
-	const providerUrl = resolvePuzzleIframeUrl(puzzleConfig, context);
+	const providerUrl = resolvePuzzleIframeUrl(puzzleConfig, context, gameUrl);
 	try {
 		const url = new URL(providerUrl);
 		url.searchParams.set(
@@ -386,6 +389,7 @@ const postContextMessage = (
  * above) instead of one generic guess for every puzzle.
  */
 export const PuzzleIframe = ({
+	gameUrl,
 	puzzleConfig,
 	title,
 	darkModeAvailable,
@@ -394,7 +398,7 @@ export const PuzzleIframe = ({
 	const { userId, isResolved } = usePuzzleUserId();
 	const darkMode = usePuzzleDarkMode(darkModeAvailable);
 	const context = buildPuzzleContext(userId, darkMode, puzzleDate);
-	const iframeSrc = buildPuzzleIframeSrc(puzzleConfig, context);
+	const iframeSrc = buildPuzzleIframeSrc(puzzleConfig, context, gameUrl);
 	const iframeRef = useRef<HTMLIFrameElement>(null);
 
 	usePuzzleProgressReporting(puzzleConfig, iframeRef);

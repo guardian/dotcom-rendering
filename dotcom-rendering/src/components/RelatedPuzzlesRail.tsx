@@ -4,11 +4,8 @@ import {
 	headlineBold20,
 	palette as sourcePalette,
 } from '@guardian/source/foundations';
-import { palette as themePalette } from '../palette';
 import type { PuzzleItem } from '../types/puzzlesPage';
 import { MorePuzzlesRows } from './MorePuzzlesCard';
-
-const PUZZLES_HUB_URL = '/puzzles-and-games';
 
 /**
  * The heading column's width matches `PuzzleGrid`'s own `title`/`meta`
@@ -37,9 +34,12 @@ const relatedRailStyles = css`
  * `relatedRailStyles`), so it gets its own divider on its right edge to
  * separate it from them - the lateral equivalent of the vertical dividers
  * between the cards themselves (`MorePuzzlesCard.tsx`). Below "leftCol"
- * the heading stacks above the cards instead, and per explicit design
- * direction there is no horizontal divider anywhere in this rail, so no
- * divider is drawn there at all.
+ * the heading stacks above the cards instead. The horizontal divider the
+ * design draws between the heading and the cards there belongs to the cards
+ * list rather than to the heading, since it must span exactly from the
+ * first card to the last one, not the heading's own width (see
+ * `MorePuzzlesCard.tsx`'s `mobileScrollable` styles). Per explicit design
+ * direction there is no horizontal divider between rows of cards.
  *
  * `right: -10px` (half of `relatedRailStyles`'s own 20px column gap from
  * "leftCol" up) centres the line in that gap, the same distance from the
@@ -74,13 +74,7 @@ const relatedRailHeading = css`
  * on one line there; `display: block` only kicks in from "leftCol" up,
  * where that column width forces them onto their own lines.
  */
-const relatedRailHeadingLink = css`
-	${headlineBold20};
-	color: ${themePalette('--article-section-link-text')};
-	text-decoration: none;
-	:hover {
-		text-decoration: underline;
-	}
+const relatedRailHeadingName = css`
 	${from.leftCol} {
 		display: block;
 	}
@@ -100,19 +94,14 @@ const relatedRailHeadingLink = css`
  * shares it - see `MorePuzzlesCard.tsx`'s own doc comment for what that
  * means for the two staying visually in sync.
  *
- * The heading itself ("More from" / "Puzzles & games") reuses
- * `--article-section-link-text` - the same pink/lifestyle-pillar token this
- * page's own `ArticleTitle` section link ("Logic puzzles" etc, see
- * `puzzleFamilyTag`) already resolves to - rather than a second, hardcoded
- * colour, so the two pink links on this page can never drift apart.
+ * The heading itself ("More from" / "Puzzles & games") is plain text in a
+ * single colour, not a link.
  */
 export const RelatedPuzzlesRail = ({ items }: { items: PuzzleItem[] }) => (
 	<div css={relatedRailStyles}>
 		<h2 css={relatedRailHeading}>
 			More from{' '}
-			<a css={relatedRailHeadingLink} href={PUZZLES_HUB_URL}>
-				Puzzles &amp; games
-			</a>
+			<span css={relatedRailHeadingName}>Puzzles &amp; games</span>
 		</h2>
 		<MorePuzzlesRows items={items} mobileScrollable={true} />
 	</div>

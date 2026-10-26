@@ -1979,7 +1979,6 @@
 				"discussionId": "/p/x5g4cv"
 			},
 			"display": {
-				"isBoosted": false,
 				"boostLevel": "default",
 				"isImmersive": false,
 				"showBoostedHeadline": false,
@@ -3803,7 +3802,6 @@
 				"discussionId": "/p/x5g55e"
 			},
 			"display": {
-				"isBoosted": false,
 				"boostLevel": "default",
 				"isImmersive": false,
 				"showBoostedHeadline": false,
@@ -5951,7 +5949,6 @@
 				"discussionId": "/p/x5g4cp"
 			},
 			"display": {
-				"isBoosted": false,
 				"boostLevel": "default",
 				"isImmersive": false,
 				"showBoostedHeadline": false,
@@ -10819,7 +10816,6 @@
 				"discussionId": "/p/x5g94c"
 			},
 			"display": {
-				"isBoosted": false,
 				"boostLevel": "default",
 				"isImmersive": false,
 				"showBoostedHeadline": false,
@@ -14865,7 +14861,6 @@
 				"discussionId": "/p/x5g54e"
 			},
 			"display": {
-				"isBoosted": false,
 				"boostLevel": "default",
 				"isImmersive": false,
 				"showBoostedHeadline": false,
@@ -16717,7 +16712,6 @@
 				"discussionId": "/p/x5g9bb"
 			},
 			"display": {
-				"isBoosted": false,
 				"boostLevel": "default",
 				"isImmersive": false,
 				"showBoostedHeadline": false,
@@ -19936,7 +19930,6 @@
 				"discussionId": "/p/x5g9k7"
 			},
 			"display": {
-				"isBoosted": false,
 				"boostLevel": "default",
 				"isImmersive": false,
 				"showBoostedHeadline": false,
@@ -23696,7 +23689,6 @@
 				"discussionId": "/p/x5g96z"
 			},
 			"display": {
-				"isBoosted": false,
 				"boostLevel": "default",
 				"isImmersive": false,
 				"showBoostedHeadline": false,
@@ -27308,7 +27300,6 @@
 				"discussionId": "/p/x5g838"
 			},
 			"display": {
-				"isBoosted": false,
 				"boostLevel": "default",
 				"isImmersive": false,
 				"showBoostedHeadline": false,
@@ -29844,7 +29835,6 @@
 				"discussionId": "/p/x5g8p3"
 			},
 			"display": {
-				"isBoosted": false,
 				"boostLevel": "default",
 				"isImmersive": false,
 				"showBoostedHeadline": false,
@@ -36263,7 +36253,6 @@
 				"discussionId": "/p/x5g4tx"
 			},
 			"display": {
-				"isBoosted": false,
 				"boostLevel": "default",
 				"isImmersive": false,
 				"showBoostedHeadline": false,
@@ -40229,7 +40218,6 @@
 				"discussionId": "/p/x5gxpn"
 			},
 			"display": {
-				"isBoosted": false,
 				"boostLevel": "default",
 				"isImmersive": false,
 				"showBoostedHeadline": false,
@@ -44458,7 +44446,6 @@
 				"discussionId": "/p/x5g4vc"
 			},
 			"display": {
-				"isBoosted": false,
 				"boostLevel": "default",
 				"isImmersive": false,
 				"showBoostedHeadline": false,
@@ -50019,7 +50006,6 @@
 				"discussionId": "/p/x5fkqg"
 			},
 			"display": {
-				"isBoosted": false,
 				"boostLevel": "default",
 				"isImmersive": false,
 				"showBoostedHeadline": false,
@@ -55386,7 +55372,6 @@
 				"discussionId": "/p/x5g3d5"
 			},
 			"display": {
-				"isBoosted": false,
 				"boostLevel": "default",
 				"isImmersive": false,
 				"showBoostedHeadline": false,
@@ -57040,7 +57025,6 @@
 				"discussionId": "/p/x5fyv8"
 			},
 			"display": {
-				"isBoosted": false,
 				"boostLevel": "default",
 				"isImmersive": false,
 				"showBoostedHeadline": false,
@@ -60212,7 +60196,6 @@
 				"discussionId": "/p/x5g38p"
 			},
 			"display": {
-				"isBoosted": false,
 				"boostLevel": "default",
 				"isImmersive": false,
 				"showBoostedHeadline": false,
@@ -63289,7 +63272,6 @@
 				"discussionId": "/p/x5g3fm"
 			},
 			"display": {
-				"isBoosted": false,
 				"boostLevel": "default",
 				"isImmersive": false,
 				"showBoostedHeadline": false,
@@ -65486,7 +65468,6 @@
 				"discussionId": "/p/x5g386"
 			},
 			"display": {
-				"isBoosted": false,
 				"boostLevel": "default",
 				"isImmersive": false,
 				"showBoostedHeadline": false,
@@ -68309,7 +68290,6 @@
 				"discussionId": "/p/x5fpe2"
 			},
 			"display": {
-				"isBoosted": false,
 				"boostLevel": "default",
 				"isImmersive": false,
 				"showBoostedHeadline": false,
@@ -68872,11 +68852,6 @@
 			{ "title": "Tips", "url": "https://www.theguardian.com/tips" }
 		],
 		"brandExtensions": [
-			{ "title": "Search jobs", "url": "https://jobs.theguardian.com" },
-			{
-				"title": "Hire with Guardian Jobs",
-				"url": "https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs"
-			},
 			{
 				"title": "Holidays",
 				"url": "https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader"
@@ -69338,12 +69313,6 @@
 					"text": "Guardian Labs",
 					"url": "/guardian-labs",
 					"dataLinkName": "uk : footer : guardian labs",
-					"extraClasses": ""
-				},
-				{
-					"text": "Search jobs",
-					"url": "https://jobs.theguardian.com",
-					"dataLinkName": "uk : footer : jobs",
 					"extraClasses": ""
 				},
 				{

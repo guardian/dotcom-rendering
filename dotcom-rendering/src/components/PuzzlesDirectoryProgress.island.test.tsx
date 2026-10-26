@@ -84,7 +84,7 @@ describe('PuzzlesDirectoryProgress', () => {
 			cadence: 'Mon 3 Aug',
 			progress: 100,
 			setter: 'API setter',
-			url: '/crosswords/quick/123',
+			url: 'https://www.theguardian.com/crosswords/quick/123',
 		});
 		expect(original).toMatchObject({
 			setter: 'Server setter',
@@ -92,11 +92,28 @@ describe('PuzzlesDirectoryProgress', () => {
 		expect(original).not.toHaveProperty('progress');
 	});
 
+	it('preserves a Genius article URL supplied by the API', () => {
+		const geniusLayout = JSON.parse(
+			JSON.stringify(layout),
+		) as PuzzlesLayoutType;
+		geniusLayout.containers[0]!.content.items[0]![0]!.set = 'genius';
+		const gameUrl = '/crosswords/2026/oct/05/genius-crossword-no-280';
+		const enriched = enrichLayoutWithProgress(geniusLayout, [
+			{
+				puzzleType: 'CROSSWORD_GENIUS',
+				publishDate: '2026-10-05',
+				progress: 0,
+				gameUrl,
+			},
+		]);
+		expect(enriched.containers[0]!.content.items[0]![0]!.url).toBe(gameUrl);
+	});
+
 	it.each([
 		['Mini', 'mini', 'CROSSWORD_MINI', '295', 'mini-crossword'],
 		['Weekend', 'weekend', 'CROSSWORD_WEEKEND', '821', 'weekend-crossword'],
 	])(
-		'uses the canonical route for %s crossword URLs',
+		'preserves the API route for %s crossword URLs',
 		(title, set, puzzleType, number, apiPath) => {
 			const quick = layout.containers[0]!.content.items[0]![0]!;
 			const crosswordLayout: PuzzlesLayoutType = {
@@ -130,7 +147,7 @@ describe('PuzzlesDirectoryProgress', () => {
 			]);
 
 			expect(enriched.containers[0]!.content.items[0]![0]!.url).toBe(
-				`/crosswords/${set}/${number}`,
+				`/crosswords/${apiPath}/${number}`,
 			);
 		},
 	);
@@ -283,6 +300,7 @@ describe('PuzzlesDirectoryProgress', () => {
 							puzzleType: 'CROSSWORD_QUICK',
 							publishDate: '2020-08-03T00:00:00Z',
 							progress: 100,
+							gameStatus: 'completed',
 							setterName: 'API setter',
 							gameUrl: '/crosswords/quick/123',
 						},

@@ -123,7 +123,7 @@ const ABTests: ABTest[] = [
 		owners: ["martech.dev@guardian.co.uk"],
 		expirationDate: "2027-01-21",
 		type: "client",
-		status: "ON",
+		status: "OFF",
 		audienceSize: 20 / 100,
 		audienceSpace: "A",
 		groups: ["control", "variant"],
@@ -149,8 +149,8 @@ const ABTests: ABTest[] = [
 		status: "ON",
 		expirationDate: "2026-11-10",
 		type: "client",
-		audienceSize: 0 / 100,
-		audienceSpace: "D",
+		audienceSize: 90 / 100,
+		audienceSpace: "A",
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
 	},
@@ -243,18 +243,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "articles-and-publishing-migrate-interactive-layout",
-		description:
-			"Migrate interactive articles to the new grid-based layout",
-		owners: ["articles.and.publishing@guardian.co.uk "],
-		status: "ON",
-		expirationDate: "2027-08-31",
-		type: "server",
-		audienceSize: 0 / 100,
-		groups: ["enable"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "articles-and-publishing-revamped-immersive-layout",
 		description: "New grid-based immersive layout for all articles",
 		owners: ["articles.and.publishing@guardian.co.uk "],
@@ -272,7 +260,7 @@ const ABTests: ABTest[] = [
 		expirationDate: "2026-11-30",
 		type: "server",
 		status: "ON",
-		audienceSize: 50 / 100,
+		audienceSize: 0 / 100,
 		audienceSpace: "B",
 		groups: ["control", "variant", "variant2"],
 		shouldForceMetricsCollection: true,
@@ -315,7 +303,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Test opening up the article-end ad slot in the US region for HeaderBidding",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-10-14",
+		expirationDate: "2026-10-28",
 		type: "client",
 		status: "ON",
 		audienceSize: 40 / 100,
@@ -337,19 +325,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "webx-display-custom-subnavs",
-		description:
-			"Show the custom subnav in place of the standard subnav, opt-in only",
-		owners: ["dotcom.platform@guardian.co.uk"],
-		expirationDate: "2026-11-30",
-		type: "server",
-		status: "ON",
-		audienceSize: 0,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: true,
-	},
-	{
 		name: "commercial-spacefinder-highvalue-sections-aus-nz",
 		description:
 			"Test the impact on ad density of regionalising Spacefinder for high value sections in Australia and New Zealand",
@@ -361,6 +336,16 @@ const ABTests: ABTest[] = [
 		audienceSpace: "C",
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
+	},
+	{
+		name: "commercial-next-best-action",
+		description: "Next Best Action Features",
+		owners: ["commercial.dev@guardian.co.uk", "martech.dev@guardian.co.uk"],
+		expirationDate: "2027-01-06",
+		type: "client",
+		status: "ON",
+		audienceSize: 0,
+		groups: ["enable"],
 	},
 ];
 

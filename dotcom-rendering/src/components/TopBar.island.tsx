@@ -14,6 +14,7 @@ import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { useAB } from '../lib/useAB';
 import { useAuthStatus } from '../lib/useAuthStatus';
+import { useHydrated } from '../lib/useHydrated';
 import { usePageViewId } from '../lib/usePageViewId';
 import { palette as themePalette } from '../palette';
 import { useConfig } from './ConfigContext';
@@ -43,9 +44,11 @@ const topBarStyles = css`
 	justify-content: flex-end;
 	box-sizing: border-box;
 	height: 52px;
+
 	${from.tablet} {
 		height: 60px;
 	}
+
 	${from.desktop} {
 		height: 64px;
 	}
@@ -75,11 +78,13 @@ const TopBarLinkContainer = ({
 	alignLeft = false,
 	showVerticalDivider = true,
 	isLastChild = false,
+	isHidden = false,
 	children,
 }: {
 	alignLeft?: boolean;
 	showVerticalDivider?: boolean;
 	isLastChild?: boolean;
+	isHidden?: boolean;
 	children: React.ReactNode;
 }) => (
 	<div
@@ -91,6 +96,10 @@ const TopBarLinkContainer = ({
 				: css`
 						align-items: center;
 					`,
+			isHidden &&
+				css`
+					visibility: hidden;
+				`,
 		]}
 		style={{ paddingRight: isLastChild ? 0 : `${space[3]}px` }}
 	>
@@ -127,6 +136,7 @@ export const TopBar = ({
 	const pageViewId = usePageViewId(renderingTarget);
 
 	const [referrerUrl, setReferrerUrl] = useState('');
+	const hasHydrated = useHydrated();
 
 	const abTests = useAB();
 
@@ -187,38 +197,24 @@ export const TopBar = ({
 					</TopBarLinkContainer>
 				</Hide>
 
-				<Hide until="desktop">
-					<TopBarLinkContainer>
-						{
-							/** We replace "Search jobs" with "Newsletters" for AU and US editions */
-							['AU', 'US'].includes(editionId) ? (
-								<TopBarLink
-									dataLinkName={nestedOphanComponents(
-										'header',
-										'topbar',
-										'newsletters',
-									)}
-									href="/email-newsletters"
-								>
-									Newsletters
-								</TopBarLink>
-							) : (
-								<TopBarLink
-									dataLinkName={nestedOphanComponents(
-										'header',
-										'topbar',
-										'job-cta',
-									)}
-									href="https://jobs.theguardian.com"
-								>
-									Search jobs
-								</TopBarLink>
-							)
-						}
-					</TopBarLinkContainer>
-				</Hide>
+				{['AU', 'US'].includes(editionId) && (
+					<Hide until="desktop">
+						<TopBarLinkContainer>
+							<TopBarLink
+								dataLinkName={nestedOphanComponents(
+									'header',
+									'topbar',
+									'newsletters',
+								)}
+								href="/email-newsletters"
+							>
+								Newsletters
+							</TopBarLink>
+						</TopBarLinkContainer>
+					</Hide>
+				)}
 
-				<TopBarLinkContainer isLastChild={true}>
+				<TopBarLinkContainer isLastChild={true} isHidden={!hasHydrated}>
 					<TopBarMyAccount
 						mmaUrl={mmaUrl ?? 'https://manage.theguardian.com'}
 						idUrl={idUrl ?? 'https://profile.theguardian.com'}

@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import type { ReactNode } from 'react';
+import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
 import type {
 	PuzzleContainer,
 	PuzzleItem,
@@ -34,6 +35,35 @@ const section = (
 });
 
 describe('PuzzlesDirectory', () => {
+	it('shows sponsorship only on the sponsored container', () => {
+		render(
+			<PuzzlesDirectory
+				layout={{
+					containers: [
+						section({ id: 'crosswords', title: 'Crosswords' }),
+						section(),
+					],
+				}}
+				renderAds={false}
+				containerBranding={{ crosswords: puzzlesBranding }}
+			/>,
+		);
+
+		const [crosswords, wordGames] = screen.getAllByRole('region');
+		expect(crosswords).toHaveTextContent('Supported by');
+		expect(
+			screen.getByRole('link', {
+				name: 'Visit the Example sponsor website',
+			}),
+		).toHaveAttribute('href', 'https://example.com');
+		expect(
+			screen.queryByRole('link', { name: 'About this content' }),
+		).not.toBeInTheDocument();
+		expect(
+			screen.getByRole('heading', { level: 2, name: 'Crosswords' }),
+		).toHaveAttribute('id', 'crosswords-title');
+		expect(wordGames).not.toHaveTextContent('Supported by');
+	});
 	it('renders puzzle tile titles as H3s with descriptive crossword text', () => {
 		render(
 			<PuzzlesDirectory
@@ -66,34 +96,18 @@ describe('PuzzlesDirectory', () => {
 		).toBeInTheDocument();
 	});
 
-	it('keeps the crossword sidebar links hidden below leftCol and scoped to crosswords', () => {
+	it('does not render sidebar links in the crosswords container', () => {
 		const { container } = render(
 			<PuzzlesDirectory
 				layout={{
 					containers: [
 						section({ id: 'crosswords', title: 'Crosswords' }),
-						section({
-							id: 'logic-puzzles',
-							title: 'Logic puzzles',
-						}),
 					],
 				}}
 				renderAds={false}
 			/>,
 		);
-		const links = container.querySelector(
-			'nav[aria-label="Crossword links"]',
-		)!;
-		expect(links).not.toBeVisible();
-		expect(
-			links.querySelector('a[href="https://support.theguardian.com"]'),
-		).toHaveTextContent('Support the Guardian');
-		expect(
-			links.querySelector(
-				'a[href="https://www.theguardian.com/crosswords/crossword-blog"]',
-			),
-		).toHaveTextContent('Blog');
-		expect(container.querySelector('#logic-puzzles nav')).toBeNull();
+		expect(container.querySelector('#crosswords nav')).toBeNull();
 	});
 	it.each([
 		['crossword', '#fff4f2', '#ab0613'],
@@ -252,7 +266,7 @@ describe('PuzzlesDirectory', () => {
 		expect(screen.queryByText('Played')).not.toBeInTheDocument();
 	});
 
-	it('shows Played with an icon only when progress is complete', () => {
+	it('shows Played from the API state, not the progress value', () => {
 		render(
 			<PuzzlesDirectory
 				layout={{
@@ -260,8 +274,20 @@ describe('PuzzlesDirectory', () => {
 						section({
 							content: {
 								items: [
-									[item({ id: 'complete', progress: 100 })],
-									[item({ id: 'started', progress: 99 })],
+									[
+										item({
+											id: 'complete',
+											gameStatus: 'completed',
+											progress: 10,
+										}),
+									],
+									[
+										item({
+											id: 'started',
+											gameStatus: 'in-progress',
+											progress: 100,
+										}),
+									],
 								],
 								nestedContainers: [],
 							},
@@ -275,7 +301,37 @@ describe('PuzzlesDirectory', () => {
 		const played = screen.getByText('Played');
 		expect(played).toBeInTheDocument();
 		expect(played.querySelector('svg')).toBeInTheDocument();
+		expect(screen.getAllByText('Played')).toHaveLength(1);
 		expect(screen.getAllByText('Daily puzzle')).toHaveLength(2);
+	});
+
+	it('shows no state for a card the API reports nothing or not-started on', () => {
+		render(
+			<PuzzlesDirectory
+				layout={{
+					containers: [
+						section({
+							content: {
+								items: [
+									[item({ id: 'none' })],
+									[
+										item({
+											id: 'zero',
+											gameStatus: 'not-started',
+											progress: 50,
+										}),
+									],
+								],
+								nestedContainers: [],
+							},
+						}),
+					],
+				}}
+				renderAds={false}
+			/>,
+		);
+
+		expect(screen.queryByText('Played')).not.toBeInTheDocument();
 	});
 	it('renders unique desktop and mobile IDs for multiple blueprint slots', () => {
 		const layout: PuzzlesLayoutType = {

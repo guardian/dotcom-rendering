@@ -113,9 +113,9 @@ const paddedContainer = `
  */
 const centreRule = (
 	n: number,
-	{ color, clip = true }: { color?: string; clip?: boolean } = {},
+	{ color }: { color?: string } = {},
 ): string => `/* CENTRE RULE */
-    ${clip ? 'contain: paint;' : 'overflow: hidden;'}
+    contain: paint;
 
     & > *:nth-child(${n}) {
       position: relative;
