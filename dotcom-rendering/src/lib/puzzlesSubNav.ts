@@ -17,7 +17,7 @@ import type { LinkType } from '../model/extract-nav';
  * a real V0 equivalent (per explicit design direction, V0 is scoped to the
  * single puzzle instance itself), so the whole row of child links is only
  * shown once the v1 rollout tier is active for this request
- * (`isPuzzlesHubV1Enabled`, the same flag gating the "More from Puzzles &
+ * (`isPuzzlesHubAvailable`, the same flag gating the "More from Puzzles &
  * Games" rail) - the `PUZZLES_SUBNAV_PARENT` "Puzzles & games" link
  * is the only one still shown on V0. "Crosswords"/"Word games"/"Logic
  * puzzles" link to their existing production archive pages (`frontend`,

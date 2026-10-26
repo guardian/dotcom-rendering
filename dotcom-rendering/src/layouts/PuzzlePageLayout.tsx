@@ -31,10 +31,8 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
 import { formatPuzzleDate } from '../lib/puzzleDate';
-import {
-	isPuzzlesHubV1Enabled,
-	isPuzzlesHubV2Enabled,
-} from '../lib/puzzlesHubVersionExperiment';
+import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
+import { isPuzzlesHubV2Enabled } from '../lib/puzzlesHubVersionExperiment';
 import {
 	getPuzzlesSubNavLinks,
 	PUZZLES_SUBNAV_PARENT,
@@ -341,8 +339,8 @@ export const PuzzlePageLayout = ({
 	const showComments = false;
 
 	// The "More from Puzzles & Games" rail is a v1-scoped feature (per the
-	// Puzzles & Games rollout plan - see abTests.ts's puzzles-new-hub-v1
-	// JSDoc), not a v0 one - so it must not render just because
+	// Puzzles & Games rollout plan - see `isPuzzlesHubAvailable`), not a v0
+	// one - so it must not render just because
 	// instance.moreFromPuzzlesAndGames happens to be non-empty.
 	// if (instance.moreFromPuzzlesAndGames?.length === 0) {
 	//  instance.moreFromPuzzlesAndGames = [
@@ -355,7 +353,7 @@ export const PuzzlePageLayout = ({
 	//    },
 	//  ];
 	// }
-	const isV1Enabled = isPuzzlesHubV1Enabled(config);
+	const isV1Enabled = isPuzzlesHubAvailable(config);
 
 	const showRelated =
 		!!instance.moreFromPuzzlesAndGames?.length && isV1Enabled;
