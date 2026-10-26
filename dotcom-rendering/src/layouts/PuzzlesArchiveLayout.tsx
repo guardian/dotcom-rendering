@@ -22,11 +22,14 @@ import { center } from '../lib/center';
 import { puzzlesPageTheme } from '../lib/puzzlesTheme';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
-import type { FEPuzzlesPageType } from '../types/puzzlesPage';
+import type { FEPuzzlesPageType, PuzzlesArchive } from '../types/puzzlesPage';
 import { Stuck } from './lib/stickiness';
 
-const mainStyles = (darkModeAvailable: boolean) => css`
-	${puzzlesPageTheme(darkModeAvailable)};
+const mainStyles = (
+	darkModeAvailable: boolean,
+	category: PuzzlesArchive['category'],
+) => css`
+	${puzzlesPageTheme(darkModeAvailable, category)};
 `;
 
 /** Without the bottom ad, the page keeps its own space above the footer. */
@@ -225,7 +228,7 @@ export const PuzzlesArchiveLayout = ({
 			</div>
 			<main
 				css={[
-					mainStyles(darkModeAvailable),
+					mainStyles(darkModeAvailable, archive.category),
 					!renderAds && mainBottomSpaceStyles,
 				]}
 				id="maincontent"

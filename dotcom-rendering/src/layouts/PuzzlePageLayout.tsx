@@ -27,10 +27,15 @@ import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+} from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
 import { formatPuzzleDate } from '../lib/puzzleDate';
+import { getPuzzleGroupPalette } from '../lib/puzzleGroupPalette';
 import {
 	isPuzzlesHubV1Enabled,
 	isPuzzlesHubV2Enabled,
@@ -176,11 +181,11 @@ const AGE_WARNING_SUPPRESSION_TAGS: TagType[] = [
  * `width: 100%` styling needs too, so this reuses that existing,
  * documented case rather than inventing a new one.
  *
- * `theme: Pillar.Lifestyle` matches the real crossword page (Crosswords
- * sits under the Lifestyle pillar/section) - this is what makes
- * `pillarPalette`-driven colours (the share button, print button border,
- * etc, see `paletteDeclarations.ts`) resolve to the pink/purple
- * "lifestyle 400" the design expects, not `Pillar.News`'s red.
+ * `theme` follows the puzzle's group (`getPuzzleGroupPalette`): news for
+ * crosswords, opinion for word games, sport for logic puzzles. This is what
+ * makes `pillarPalette`-driven colours (the share button, print button
+ * border, comments, etc, see `paletteDeclarations.ts`) resolve to the
+ * group's colour across the whole page.
  *
  * **Exported** so `PuzzlePage.tsx` can pass this exact same value to
  * `rootStyles()` for its page-wide `<Global>` styles. `themePalette()`
@@ -194,11 +199,13 @@ const AGE_WARNING_SUPPRESSION_TAGS: TagType[] = [
  * with red instead of Lifestyle pink, regardless of what `puzzlePageFormat`
  * itself said.
  */
-export const puzzlePageFormat = {
+export const getPuzzlePageFormat = (
+	puzzleGroup: PuzzleConfig['puzzleGroup'],
+): ArticleFormat => ({
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Crossword,
-	theme: Pillar.Lifestyle,
-} as const;
+	theme: getPuzzleGroupPalette(puzzleGroup).theme,
+});
 
 /**
  * Identical to `CrosswordLayout.tsx`'s own `CrosswordGrid`: the same grid
@@ -335,6 +342,7 @@ export const PuzzlePageLayout = ({
 }: Props) => {
 	const { config, instance, editionId, puzzleConfig } = puzzlePage;
 	const { isPaidContent, host, hasSurveyAd } = config;
+	const puzzlePageFormat = getPuzzlePageFormat(puzzleConfig.puzzleGroup);
 
 	// Puzzle Page instances have no comments/discussion concept at all:
 	// `FEPuzzlePageType` carries no `isCommentable` flag or per-instance
@@ -456,7 +464,7 @@ export const PuzzlePageLayout = ({
 					discussionApiUrl={config.discussionApiUrl}
 					idApiUrl={config.idApiUrl}
 					contributionsServiceUrl={contributionsServiceUrl}
-					// `puzzlePageFormat.theme` is always `Pillar.News`
+					// `puzzlePageFormat.theme` is never `ArticleSpecial.Labs`
 					// (never `ArticleSpecial.Labs`), so `CrosswordLayout`'s
 					// derived `format.theme !== ArticleSpecial.Labs` check
 					// always evaluates `true` here - hardcoded directly
