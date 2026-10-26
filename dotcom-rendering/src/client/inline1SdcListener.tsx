@@ -37,12 +37,14 @@ export const inline1SdcListener = (): Promise<void> => {
 	window.addEventListener(
 		'commercial.sdc-render',
 		(event: CustomEvent<{ props: Inline1Props }>) => {
+			// The event should have been dispatched on the ad slot element -
+			const slot = event.target;
+			if (!(slot instanceof HTMLElement)) return;
+
 			void fetchComponent(event.detail.props.variant.message).then(
 				(Component) => {
 					if (Component) {
-						const slot = event.target as HTMLElement;
-						const props = event.detail.props;
-						render(Component, props, slot);
+						render(Component, event.detail.props, slot);
 					}
 				},
 			);
