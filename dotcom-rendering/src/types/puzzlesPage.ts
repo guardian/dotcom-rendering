@@ -1,5 +1,6 @@
 import type { EditionId } from '../lib/edition';
 import type { GameStatus } from '../lib/puzzleProgress/types';
+import type { CommercialProperties } from './commercial';
 import type { ConfigType } from './config';
 import type { FooterType } from './footer';
 import type { FENavType } from './frontend';
@@ -128,5 +129,6 @@ export interface FEPuzzlesPageType {
 	isAdFreeUser: boolean;
 	layout: PuzzlesLayoutType;
 	archive?: PuzzlesArchive;
-	commercialProperties?: Record<string, unknown>;
+	/** Sponsorship per edition; editions without a sponsor may be omitted. */
+	commercialProperties?: Partial<CommercialProperties>;
 }
