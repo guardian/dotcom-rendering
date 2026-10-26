@@ -167,14 +167,11 @@ new RenderingCDKStack(
 	TagPageRenderingPropsPROD,
 );
 
+/** Interactive */
 export const InteractiveRenderingPropsCODE: RenderingCDKStackProps = {
 	guApp: 'interactive-rendering',
 	stage: 'CODE',
 	domainName: 'interactive-rendering.code.dev-guardianapis.com',
-	ec2Props: {
-		scaling: { minimumInstances: 1, maximumInstances: 3 },
-		instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.MICRO),
-	},
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
 		taskCpu: 1024,
@@ -191,13 +188,7 @@ export const InteractiveRenderingPropsCODE: RenderingCDKStackProps = {
 			},
 		},
 	},
-	// Route 100% traffic to ECS.
-	targetGroupWeights: {
-		ec2: 0,
-		ecs: 1,
-	},
 };
-/** Interactive */
 new RenderingCDKStack(
 	cdkApp,
 	'InteractiveRendering-CODE',
