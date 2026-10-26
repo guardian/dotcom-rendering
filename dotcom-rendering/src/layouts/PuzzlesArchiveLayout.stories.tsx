@@ -1,7 +1,6 @@
 import { css, Global } from '@emotion/react';
 import { breakpoints, palette } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { allModes } from '../../.storybook/modes';
 import { createPuzzlesPage } from '../../fixtures/manual/puzzlesPage';
 import { extractNAV } from '../model/extract-nav';
 import type { PuzzlesArchive } from '../types/puzzlesPage';
@@ -100,27 +99,50 @@ const meta = {
 			</>
 		),
 	],
-	parameters: {
-		chromatic: {
-			viewports: [
-				breakpoints.mobileMedium,
-				breakpoints.tablet,
-				breakpoints.desktop,
-				breakpoints.wide,
-			],
-		},
-	},
 } satisfies Meta<typeof PuzzlesArchiveLayout>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const WithAds = {} satisfies Story;
+/**
+ * Chromatic does not support `viewports` and `modes` on the same story, so
+ * the viewports live on the light stories and the dark stories use modes.
+ */
+const lightParameters = {
+	chromatic: {
+		viewports: [
+			breakpoints.mobileMedium,
+			breakpoints.tablet,
+			breakpoints.desktop,
+			breakpoints.wide,
+		],
+	},
+};
+
+const darkParameters = {
+	chromatic: {
+		modes: {
+			'dark mobileMedium': {
+				globalColourScheme: 'dark',
+				viewport: breakpoints.mobileMedium,
+			},
+			'dark desktop': {
+				globalColourScheme: 'dark',
+				viewport: breakpoints.desktop,
+			},
+		},
+	},
+};
+
+export const WithAds = {
+	parameters: lightParameters,
+} satisfies Story;
 
 export const AdFree = {
 	args: {
 		puzzlesPage: { ...puzzlesPage, isAdFreeUser: true },
 	},
+	parameters: lightParameters,
 } satisfies Story;
 
 const archiveItems = (
@@ -182,19 +204,19 @@ export const WordGames = {
 	args: {
 		puzzlesPage: createPuzzlesPage({ archive: wordGamesArchive }),
 	},
+	parameters: lightParameters,
 } satisfies Story;
 
 export const LogicPuzzles = {
 	args: {
 		puzzlesPage: createPuzzlesPage({ archive: logicPuzzlesArchive }),
 	},
+	parameters: lightParameters,
 } satisfies Story;
 
 export const CrosswordsDark = {
 	args: { darkModeAvailable: true },
-	parameters: {
-		chromatic: { modes: { dark: allModes.dark } },
-	},
+	parameters: darkParameters,
 } satisfies Story;
 
 export const WordGamesDark = {
@@ -202,9 +224,7 @@ export const WordGamesDark = {
 		darkModeAvailable: true,
 		puzzlesPage: createPuzzlesPage({ archive: wordGamesArchive }),
 	},
-	parameters: {
-		chromatic: { modes: { dark: allModes.dark } },
-	},
+	parameters: darkParameters,
 } satisfies Story;
 
 export const LogicPuzzlesDark = {
@@ -212,7 +232,5 @@ export const LogicPuzzlesDark = {
 		darkModeAvailable: true,
 		puzzlesPage: createPuzzlesPage({ archive: logicPuzzlesArchive }),
 	},
-	parameters: {
-		chromatic: { modes: { dark: allModes.dark } },
-	},
+	parameters: darkParameters,
 } satisfies Story;
