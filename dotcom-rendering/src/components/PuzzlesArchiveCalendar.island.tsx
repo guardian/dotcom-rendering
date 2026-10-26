@@ -2,7 +2,8 @@ import { css } from '@emotion/react';
 import {
 	from,
 	headlineBold20,
-	headlineBold34,
+	headlineMedium28,
+	headlineMedium34,
 	palette,
 	space,
 	textSans14,
@@ -181,10 +182,12 @@ const tabsStyles = css`
 `;
 
 const titleStyles = css`
-	${headlineBold34};
+	${headlineMedium28};
 	margin: ${space[3]}px 0 ${space[3]}px;
 	color: var(--puzzles-headline-colour, ${palette.neutral[7]});
-	line-height: 1.05;
+	${from.tablet} {
+		${headlineMedium34};
+	}
 `;
 
 const recentStyles = css`

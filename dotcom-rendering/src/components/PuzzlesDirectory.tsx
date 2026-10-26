@@ -28,7 +28,7 @@ type Props = {
 	containerBranding?: Partial<Record<string, Branding>>;
 };
 
-const sectionStyles = (isFeatured: boolean, hideTopRule: boolean) => css`
+const sectionStyles = (hideTopRule: boolean) => css`
 	--puzzles-content-top: 8px;
 	--puzzles-content-bottom: 32px;
 	position: relative;
@@ -53,7 +53,7 @@ const sectionStyles = (isFeatured: boolean, hideTopRule: boolean) => css`
 	`}
 
 	${from.leftCol} {
-		--puzzles-content-top: ${isFeatured ? 16 : 8}px;
+		--puzzles-content-top: 8px;
 		grid-template-columns: 170px minmax(0, 1fr);
 	}
 
@@ -265,7 +265,7 @@ const DirectorySection = ({
 	return (
 		<section
 			aria-labelledby={`${container.id}-title`}
-			css={sectionStyles(container.variant === 'featured', hideTopRule)}
+			css={sectionStyles(hideTopRule)}
 			id={container.id}
 		>
 			<div css={headingColumnStyles}>

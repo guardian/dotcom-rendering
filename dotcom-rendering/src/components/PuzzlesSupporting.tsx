@@ -10,7 +10,6 @@ import {
 	textSansBold14,
 } from '@guardian/source/foundations';
 import { LinkButton, SvgEye } from '@guardian/source/react-components';
-import { generateImageURL } from '../lib/image';
 import { puzzlesContainerStyles } from '../lib/puzzlesContainerStyles';
 import type {
 	PuzzleContainer,
@@ -340,17 +339,7 @@ export const PuzzlesUsefulLinks = ({
 					<NewsletterSignupCard
 						description={newsletter.description}
 						frequency={newsletter.frequency}
-						illustrationSquare={
-							newsletter.illustrationSquare !== undefined
-								? generateImageURL({
-										mainImage:
-											newsletter.illustrationSquare,
-										imageWidth: 100,
-										resolution: 'high',
-										aspectRatio: '1:1',
-									})
-								: undefined
-						}
+						illustrationSquare={newsletter.illustrationSquare}
 						// TODO hide ilustrations when we implement this
 						// illustrationAlt={`${newsletter.name} newsletter illustration`}
 						// hideIllustrationFromScreenReaders={true}
