@@ -343,13 +343,6 @@ export const StandardLayoutArticleGrid = ({
 									margin-right: -20px;`}
 								}
 
-								${isImmersivePortrait &&
-								css`
-									${from.desktop} {
-										aspect-ratio: 4/5;
-									}
-								`}
-
 								${isImmersiveLandscape &&
 								landscapeImmersiveMediaBelowDesktop}
 
@@ -373,6 +366,20 @@ export const StandardLayoutArticleGrid = ({
 								`}
 							`
 						: undefined,
+					isImmersiveLandscape &&
+						css`
+							${until.phablet} {
+								aspect-ratio: 4 / 5;
+							}
+
+							${between.phablet.and.tablet} {
+								aspect-ratio: 3 / 4;
+							}
+
+							${between.tablet.and.desktop} {
+								aspect-ratio: 5 / 4;
+							}
+						`,
 					displayAvatarUrl && layoutType === 'picture'
 						? css`
 								margin-top: ${space[2]}px;
