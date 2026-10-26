@@ -9,6 +9,7 @@ import { palette } from '../../palette';
 type Props = {
 	link: URL;
 	text: string;
+	description: string;
 };
 
 /**
@@ -35,6 +36,7 @@ export const OnwardLink = (props: Props) => (
 			},
 		})}
 		href={props.link.href}
+		title={props.description}
 	>
 		{props.text}
 	</LinkButton>

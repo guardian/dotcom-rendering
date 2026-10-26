@@ -53,6 +53,7 @@ export const ukLocal: ElectionComponentsJson = {
 			props: {
 				text: 'See full results',
 				link: 'https://www.theguardian.com',
+				description: 'Full local council results for England 2024',
 			},
 		},
 	],
