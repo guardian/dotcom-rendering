@@ -130,12 +130,6 @@ export const TagPageRenderingPropsCODE: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
-
-		// Route all traffic to ECS. NOTE: EC2 has 0 instances.
-		targetGroupWeights: {
-			ec2: 0,
-			ecs: 1,
-		},
 	},
 };
 
@@ -163,12 +157,6 @@ export const TagPageRenderingPropsPROD: RenderingCDKStackProps = {
 				scaleInCooldown: Duration.seconds(60),
 				scaleOutCooldown: Duration.seconds(60),
 			},
-		},
-
-		// Route 100% traffic to ECS. NOTE: EC2 has 0 instances.
-		targetGroupWeights: {
-			ec2: 0,
-			ecs: 1,
 		},
 	},
 };
@@ -202,12 +190,11 @@ export const InteractiveRenderingPropsCODE: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
-
-		// Route 100% traffic to EC2.
-		targetGroupWeights: {
-			ec2: 1,
-			ecs: 0,
-		},
+	},
+	// Route 100% traffic to EC2.
+	targetGroupWeights: {
+		ec2: 1,
+		ecs: 0,
 	},
 };
 /** Interactive */
