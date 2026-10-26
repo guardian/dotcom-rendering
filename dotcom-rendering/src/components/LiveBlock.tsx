@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import { usCongressEmpty } from '../../fixtures/manual/electionTrackers/usCongressEmpty';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
 import { RenderArticleElement } from '../lib/renderElement';
@@ -64,51 +63,13 @@ export const LiveBlock = ({
 
 	const isOriginalPinnedPost = !isPinnedPost && block.id === pinnedPostId;
 
-	const fakeElectionTrackerBlock: Block = {
-		id: '6ad0dc4782632f8a1f31ed92',
-		elements: [
-			{
-				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-				html: '<p>In other news,</p>',
-				elementId: 'f6cbd149-3940-4616-a3ce-8102dfe7afe9',
-			},
-			{
-				_type: 'model.dotcomrendering.pageElements.GenericAtomBlockElement',
-				url: 'www.example.com',
-				elementId: 'fake-element-id',
-			},
-			{
-				_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
-				prefix: 'Related: ',
-				text: 'Russia and Ukraine trade strikes as Trump ‘energy ceasefire’ collapses',
-				elementId: '857e5c0a-4c6c-41de-9bed-526c68389524',
-				role: 'thumbnail',
-				url: 'https://www.theguardian.com/world/2026/oct/15/us-effort-to-get-russia-ukraine-energy-ceasefire-collapses',
-			},
-		],
-		attributes: { pinned: false, keyEvent: false, summary: false },
-		blockCreatedOn: 1792072775000,
-		blockCreatedOnDisplay: '14.59 BST',
-		blockLastUpdated: 1792073013000,
-		blockLastUpdatedDisplay: '15.03 BST',
-		blockFirstPublished: 1792073014000,
-		blockFirstPublishedDisplay: '15.03 BST',
-		blockFirstPublishedDisplayNoTimezone: '15.03',
-		title: 'US midterms 2026 results',
-		contributors: [],
-		primaryDateLine: 'Thu 15 Oct 2026 16.25 BST',
-		secondaryDateLine: 'First published on Thu 15 Oct 2026 08.45 BST',
-	};
-
-	/** Determine if the election tracker should be shown based on the presence of the correct element.id
-	 * @TODO: Replace the fake election tracker block with the block property
-	 * after we've got the actual data passed to the component
-	 * to determine if the election tracker should be shown based on the real block elements.
-	 */
-	const showElectionTracker = fakeElectionTrackerBlock.elements.some(
+	// Determine if the election tracker should be shown based on the presence of the correct element.id
+	const showElectionTracker = block.elements.some(
 		(element) =>
 			element._type ===
-			'model.dotcomrendering.pageElements.GenericAtomBlockElement',
+				'model.dotcomrendering.pageElements.InteractiveAtomBlockElement' &&
+			element.id ===
+				'interactives/2026/11/election-trackers/us-election-tracker-2026',
 	);
 
 	return (
