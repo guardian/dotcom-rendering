@@ -11,7 +11,6 @@ import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
-import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
@@ -327,6 +326,21 @@ export type ResolvedPuzzlePage = FEPuzzlePageType & {
 	puzzleConfig: PuzzleConfig;
 };
 
+/**
+ * The separator lines around the meta. Always straight, whatever the group's
+ * theme: `DecideLines` would switch to dotted lines for the sport theme
+ * (logic puzzles), and these pages look the same across groups.
+ */
+const MetaLines = () => (
+	<StraightLines
+		count={4}
+		color={themePalette('--article-meta-lines')}
+		cssOverrides={css`
+			display: block;
+		`}
+	/>
+);
+
 interface Props {
 	puzzlePage: ResolvedPuzzlePage;
 	NAV: NavType;
@@ -530,12 +544,7 @@ export const PuzzlePageLayout = ({
 							<GridItem area="standfirst">
 								<div data-print-layout="hide">
 									<Hide until="leftCol">
-										<DecideLines
-											format={puzzlePageFormat}
-											color={themePalette(
-												'--article-meta-lines',
-											)}
-										/>
+										<MetaLines />
 									</Hide>
 									<Hide from="desktop">
 										<Standfirst
@@ -579,12 +588,7 @@ export const PuzzlePageLayout = ({
 							<GridItem area="meta" element="aside">
 								<div css={maxWidth}>
 									<div css={stretchLines}>
-										<DecideLines
-											format={puzzlePageFormat}
-											color={themePalette(
-												'--article-meta-lines',
-											)}
-										/>
+										<MetaLines />
 									</div>
 									<ArticleMeta
 										branding={
