@@ -143,14 +143,14 @@ const sectionStyles = css`
 `;
 
 const linesStyles = css`
-	height: 10px;
+	height: 13px;
 	margin-bottom: ${space[4]}px;
 	background: repeating-linear-gradient(
 		to bottom,
 		var(--puzzles-border-colour, ${palette.neutral[86]}) 0,
 		var(--puzzles-border-colour, ${palette.neutral[86]}) 1px,
 		transparent 1px,
-		transparent 3px
+		transparent 4px
 	);
 `;
 
@@ -364,6 +364,7 @@ const calendarStyles = css`
 		);
 	}
 	.setter-name {
+		display: none;
 		position: absolute;
 		top: 50%;
 		left: 2px;
@@ -408,6 +409,9 @@ const calendarStyles = css`
 		grid-template-columns: repeat(7, 68px);
 		.day-number {
 			font-size: 12px;
+		}
+		.setter-name {
+			display: block;
 		}
 	}
 	${from.desktop} {

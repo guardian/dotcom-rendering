@@ -65,7 +65,7 @@ describe('PuzzlesArchiveLayout', () => {
 		expect(
 			screen.getByRole('heading', {
 				level: 1,
-				name: 'Word games archive',
+				name: 'Word games',
 			}),
 		).toBeInTheDocument();
 	});
