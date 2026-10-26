@@ -67,23 +67,6 @@ const v1Config = {
 	),
 };
 
-export const WithNewsletter = {
-	args: {
-		puzzlePage: {
-			...puzzlePage,
-			config: v1Config,
-			puzzleConfig: storyPuzzleConfig,
-			instance: {
-				...puzzlePage.instance,
-				puzzlesSupporting: {
-					usefulLinks: [],
-					newsletter: saturdayEdition,
-				},
-			},
-		},
-	},
-} satisfies Story;
-
 export const WithUsefulLinksAndNewsletter = {
 	args: {
 		puzzlePage: {
@@ -95,12 +78,12 @@ export const WithUsefulLinksAndNewsletter = {
 				puzzlesSupporting: {
 					usefulLinks: [
 						{
-							title: 'Crossword setter A-Z',
-							url: 'https://www.theguardian.com/crosswords/search',
+							title: 'Support the Guardian',
+							url: 'https://support.theguardian.com',
 						},
 						{
-							title: 'Crossword blog',
-							url: 'https://www.theguardian.com/crosswords/crossword-blog',
+							title: 'Help centre',
+							url: 'https://help.theguardian.com',
 						},
 					],
 					newsletter: saturdayEdition,

@@ -215,3 +215,29 @@ export const WebImmersive: Story = {
 		}
 	},
 };
+
+export const WebImmersiveMobile: Story = {
+	args: WebImmersive.args,
+	globals: {
+		viewport: { value: 'mobileMedium', isRotated: false },
+	},
+	parameters: {
+		...WebImmersive.parameters,
+		chromatic: {
+			modes: {
+				'light mobileMedium': allModes['light mobileMedium'],
+			},
+		},
+	},
+	play: async ({ canvasElement }) => {
+		const media = canvasElement.querySelector<HTMLElement>(
+			'[data-gu-name="media"]',
+		);
+		await expect(media).not.toBeNull();
+		const image = within(media!).getByRole('img');
+		await expect(image).toBeVisible();
+		const { width, height } = image.getBoundingClientRect();
+		await expect(width).toBeGreaterThan(0);
+		await expect(height).toBeCloseTo((width * 5) / 4, 0);
+	},
+};
