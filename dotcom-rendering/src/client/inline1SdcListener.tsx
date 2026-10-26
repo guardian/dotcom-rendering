@@ -8,7 +8,7 @@ const fetchComponent = (
 ): Promise<ReactComponent<Inline1Props> | undefined> => {
 	if (message.type === 'Inline1SupportMessage') {
 		return import(
-			/* webpackChunkName: "contributions-liveblog-epic" */ `../components/marketing/inline1/SupporterRevenue`
+			/* webpackChunkName: "SupporterRevenue" */ `../components/marketing/inline1/SupporterRevenue`
 		)
 			.then((module) => {
 				return module.SupporterRevenue;
