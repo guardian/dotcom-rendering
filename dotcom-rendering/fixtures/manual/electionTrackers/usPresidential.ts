@@ -71,6 +71,7 @@ export const usPresidential: ElectionComponentsJson = {
 			props: {
 				text: 'Full US election results',
 				link: 'https://www.theguardian.com',
+				description: 'US election results 2024: live tracker',
 			},
 		},
 	],

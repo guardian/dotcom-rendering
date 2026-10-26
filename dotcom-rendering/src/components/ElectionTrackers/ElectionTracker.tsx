@@ -121,6 +121,7 @@ const Component = ({ component }: { component: ElectionComponent }) => {
 				<OnwardLink
 					link={component.props.link}
 					text={component.props.text}
+					description={component.props.description}
 				/>
 			);
 		case 'progressNumber':
