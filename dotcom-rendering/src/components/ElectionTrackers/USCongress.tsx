@@ -23,6 +23,11 @@ type Props = {
 	 * Onward link to the full results page.
 	 */
 	link: URL;
+	/**
+	 * Description of the results page the onward link is pointing to. For
+	 * example: "US election results 2024: live tracker".
+	 */
+	linkDescription: string;
 };
 
 /**
@@ -44,6 +49,10 @@ export const USCongress = (props: Props) => (
 				children: <USHouse {...props.house} />,
 			}}
 		/>
-		<OnwardLink link={props.link} text={props.linkText} />
+		<OnwardLink
+			link={props.link}
+			text={props.linkText}
+			description={props.linkDescription}
+		/>
 	</>
 );

@@ -86,14 +86,14 @@ const renderPuzzlePageLayout = (
 };
 
 describe('PuzzlePageLayout', () => {
-	it.each([false, true])(
-		'renders the sponsor with a capped logo (ad-free: %s)',
-		(isAdFreeUser) => {
-			renderPuzzlePageLayout(
-				'word-wheel',
-				{ isAdFreeUser },
-				puzzlesBranding,
-			);
+	it.each([
+		{ slug: 'word-wheel', isAdFreeUser: false },
+		{ slug: 'word-wheel', isAdFreeUser: true },
+		{ slug: 'sudoku-easy', isAdFreeUser: false },
+	])(
+		'renders the sponsor with a capped logo for $slug (ad-free: $isAdFreeUser)',
+		({ slug, isAdFreeUser }) => {
+			renderPuzzlePageLayout(slug, { isAdFreeUser }, puzzlesBranding);
 			expect(screen.getByText('Supported by')).toBeInTheDocument();
 			expect(
 				screen.getByRole('img', { name: 'Example sponsor' }),
@@ -116,10 +116,13 @@ describe('PuzzlePageLayout', () => {
 		).not.toBeInTheDocument();
 	});
 
-	it('renders no sponsor when no branding is provided', () => {
-		renderPuzzlePageLayout('word-wheel');
-		expect(screen.queryByText('Supported by')).not.toBeInTheDocument();
-	});
+	it.each(['word-wheel', 'sudoku-easy'])(
+		'renders no sponsor for %s when no branding is provided',
+		(slug) => {
+			renderPuzzlePageLayout(slug);
+			expect(screen.queryByText('Supported by')).not.toBeInTheDocument();
+		},
+	);
 
 	it('renders the design-provided headline text, not raw instance.title', () => {
 		renderPuzzlePageLayout('sudoku-easy');

@@ -81,6 +81,7 @@ export const Empty = meta.story({
 		},
 		link: new URL('https://www.theguardian.com'),
 		linkText: 'Full results',
+		linkDescription: 'Full US Senate, House and governor election results',
 	},
 	async play({ args, canvasElement }) {
 		const canvas = within(canvasElement);

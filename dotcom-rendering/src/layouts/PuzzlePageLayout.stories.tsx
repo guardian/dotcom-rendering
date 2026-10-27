@@ -1,13 +1,14 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
+import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
 import {
 	puzzlesHubV1Experiment,
 	puzzlesHubV1Participation,
 } from '../lib/puzzlesHubVersionExperiment';
 import { extractNAV } from '../model/extract-nav';
 import { getPuzzleConfig } from '../model/puzzles/puzzleConfigs';
-import { puzzlePageFormat, PuzzlePageLayout } from './PuzzlePageLayout';
+import { getPuzzlePageFormat, PuzzlePageLayout } from './PuzzlePageLayout';
 
 const puzzlePage = createPuzzlePage('word-wheel');
 const puzzleConfig = getPuzzleConfig('word-wheel');
@@ -26,7 +27,7 @@ const meta = {
 		darkModeAvailable: false,
 	},
 	parameters: {
-		formats: [puzzlePageFormat],
+		formats: [getPuzzlePageFormat(storyPuzzleConfig.puzzleGroup)],
 		chromatic: {
 			viewports: [breakpoints.mobileMedium, breakpoints.wide],
 		},
@@ -45,6 +46,12 @@ export const AdFree = {
 			puzzleConfig: storyPuzzleConfig,
 			isAdFreeUser: true,
 		},
+	},
+} satisfies Story;
+
+export const Sponsored = {
+	args: {
+		branding: puzzlesBranding,
 	},
 } satisfies Story;
 
@@ -90,5 +97,25 @@ export const WithUsefulLinksAndNewsletter = {
 				},
 			},
 		},
+	},
+} satisfies Story;
+
+const sudokuPage = createPuzzlePage('sudoku-easy');
+const sudokuConfig = getPuzzleConfig('sudoku-easy');
+if (!sudokuConfig) throw new Error('Missing Sudoku easy configuration');
+
+/** Logic puzzles take the sport theme, word games (above) the opinion theme. */
+export const LogicPuzzle = {
+	args: {
+		puzzlePage: {
+			...sudokuPage,
+			puzzleConfig: {
+				...sudokuConfig,
+				iframe: { provider: 'wordiply', baseUrl: 'about:blank' },
+			},
+		},
+	},
+	parameters: {
+		formats: [getPuzzlePageFormat(sudokuConfig.puzzleGroup)],
 	},
 } satisfies Story;

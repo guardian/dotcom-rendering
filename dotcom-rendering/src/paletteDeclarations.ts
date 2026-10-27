@@ -1950,6 +1950,47 @@ const tableOfContentsBorderLight: PaletteFunction = () =>
 const tableOfContentsBorderDark: PaletteFunction = () =>
 	sourcePalette.neutral[20];
 
+/**
+ * The horizontal table of contents: a sticky bar of links to an article's
+ * sections, e.g. on The Filter's immersive articles. A pillar-tinted bar, with
+ * the inactive links one step darker than the border so that they pass AA at
+ * 14px on the light surface.
+ */
+const tableOfContentsHorizontalPillar = (
+	theme: ArticleTheme,
+	lightness: 100 | 200 | 300 | 400 | 500 | 600 | 800,
+	fallback: string,
+): string => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.SpecialReportAlt:
+			return fallback;
+		default:
+			return pillarPalette(theme, lightness);
+	}
+};
+const tableOfContentsHorizontalBackgroundLight: PaletteFunction = ({ theme }) =>
+	tableOfContentsHorizontalPillar(theme, 800, sourcePalette.neutral[97]);
+const tableOfContentsHorizontalBackgroundDark: PaletteFunction = ({ theme }) =>
+	tableOfContentsHorizontalPillar(theme, 100, sourcePalette.neutral[10]);
+const tableOfContentsHorizontalBorderLight: PaletteFunction = ({ theme }) =>
+	tableOfContentsHorizontalPillar(theme, 400, sourcePalette.neutral[46]);
+const tableOfContentsHorizontalBorderDark: PaletteFunction = ({ theme }) =>
+	tableOfContentsHorizontalPillar(theme, 500, sourcePalette.neutral[60]);
+const tableOfContentsHorizontalTextLight: PaletteFunction = ({ theme }) =>
+	tableOfContentsHorizontalPillar(theme, 300, sourcePalette.neutral[20]);
+const tableOfContentsHorizontalTextDark: PaletteFunction = ({ theme }) =>
+	tableOfContentsHorizontalPillar(theme, 500, sourcePalette.neutral[73]);
+const tableOfContentsHorizontalTextActiveLight: PaletteFunction = ({ theme }) =>
+	tableOfContentsHorizontalPillar(theme, 100, sourcePalette.neutral[7]);
+const tableOfContentsHorizontalTextActiveDark: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const tableOfContentsHorizontalTextHoverLight: PaletteFunction = ({ theme }) =>
+	tableOfContentsHorizontalPillar(theme, 100, sourcePalette.neutral[7]);
+const tableOfContentsHorizontalTextHoverDark: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+
 const podcastMetaTitleLight: PaletteFunction = () => sourcePalette.neutral[97];
 const podcastMetaTitleDark: PaletteFunction = () => sourcePalette.neutral[97];
 const podcastMetaButtonTextLight: PaletteFunction = () =>
@@ -2081,6 +2122,8 @@ const clickToViewButtonHoverDark: PaletteFunction = () =>
 
 const brandingLabelLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
+		case ArticleDesign.Crossword:
+			return sourcePalette.neutral[7];
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Picture:
@@ -2104,6 +2147,9 @@ const brandingLabelDark: PaletteFunction = () => sourcePalette.neutral[86];
 const brandingBorderLight: PaletteFunction = () => sourcePalette.neutral[86];
 const brandingBorderDark: PaletteFunction = () => sourcePalette.neutral[20];
 const brandingLinkLight: PaletteFunction = ({ design, theme }) => {
+	if (design === ArticleDesign.Crossword) {
+		return sourcePalette.neutral[7];
+	}
 	if (design === ArticleDesign.Gallery) {
 		return sourcePalette.neutral[86];
 	}
@@ -2131,6 +2177,8 @@ const brandingLinkLight: PaletteFunction = ({ design, theme }) => {
 };
 const brandingLinkDark: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
+		case ArticleDesign.Crossword:
+			return sourcePalette.neutral[86];
 		case ArticleDesign.Gallery:
 			switch (theme) {
 				case Pillar.News:
@@ -8665,6 +8713,26 @@ const paletteColours = {
 	'--table-of-contents-border': {
 		light: tableOfContentsBorderLight,
 		dark: tableOfContentsBorderDark,
+	},
+	'--table-of-contents-horizontal-background': {
+		light: tableOfContentsHorizontalBackgroundLight,
+		dark: tableOfContentsHorizontalBackgroundDark,
+	},
+	'--table-of-contents-horizontal-border': {
+		light: tableOfContentsHorizontalBorderLight,
+		dark: tableOfContentsHorizontalBorderDark,
+	},
+	'--table-of-contents-horizontal-text': {
+		light: tableOfContentsHorizontalTextLight,
+		dark: tableOfContentsHorizontalTextDark,
+	},
+	'--table-of-contents-horizontal-text-active': {
+		light: tableOfContentsHorizontalTextActiveLight,
+		dark: tableOfContentsHorizontalTextActiveDark,
+	},
+	'--table-of-contents-horizontal-text-hover': {
+		light: tableOfContentsHorizontalTextHoverLight,
+		dark: tableOfContentsHorizontalTextHoverDark,
 	},
 	'--tabs-input': {
 		light: () => sourcePalette.neutral[100],
