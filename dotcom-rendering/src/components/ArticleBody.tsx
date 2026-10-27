@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import {
 	between,
 	headlineBold24,
+	pxToRem,
 	remSpace,
 	textEgyptian17,
 	textSansBold20,
@@ -16,6 +17,7 @@ import { ArticleRenderer } from '../lib/ArticleRenderer';
 import type { EditionId } from '../lib/edition';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { revealStyles } from '../lib/revealStyles';
+import { hasFilterTag } from '../lib/theFilter';
 import type { TableOfContentsItem } from '../model/enhanceTableOfContents';
 import { palette as themePalette } from '../palette';
 import type { Block } from '../types/blocks';
@@ -27,7 +29,10 @@ import {
 } from './HorizontalTableOfContents.island';
 import { Island } from './Island';
 import { LiveBlogRenderer } from './LiveBlogRenderer';
-import { TableOfContents } from './TableOfContents.island';
+import {
+	FILTER_TOC_SCROLL_OFFSET,
+	TableOfContents,
+} from './TableOfContents.island';
 import { textBlockStyles } from './TextBlockComponent';
 
 type Props = {
@@ -142,6 +147,17 @@ const globalLinkStyles = () => css`
 	}
 `;
 
+/**
+ * Stops subheadings landing underneath The Filter's sticky "Jump to" bar when
+ * a reader follows one of its links. Native fragment navigation honours
+ * `scroll-margin-top`, so this needs no JavaScript.
+ */
+const filterSubheadingOffset = css`
+	h2[id] {
+		scroll-margin-top: ${pxToRem(FILTER_TOC_SCROLL_OFFSET)};
+	}
+`;
+
 export const ArticleBody = ({
 	format,
 	blocks,
@@ -182,6 +198,9 @@ export const ArticleBody = ({
 		format.design === ArticleDesign.HostedArticle ||
 		format.design === ArticleDesign.HostedVideo ||
 		format.design === ArticleDesign.HostedGallery;
+	const isFilterArticle = hasFilterTag(tags);
+	const hasTableOfContents =
+		tableOfContents !== undefined && tableOfContents.length > 0;
 	const language = decideLanguage(lang);
 	const languageDirection = decideLanguageDirection(isRightToLeftLang);
 	const hasObserverPublicationTag = tags.find(
@@ -252,7 +271,7 @@ export const ArticleBody = ({
 	}
 	return (
 		<>
-			{tableOfContents && tableOfContents.length > 0 && (
+			{hasTableOfContents && (
 				<Island priority="critical" defer={{ until: 'visible' }}>
 					{tableOfContentsStyle === 'horizontal' ? (
 						<HorizontalTableOfContents
@@ -262,6 +281,7 @@ export const ArticleBody = ({
 						<TableOfContents
 							tableOfContents={tableOfContents}
 							format={format}
+							isFilterArticle={isFilterArticle}
 						></TableOfContents>
 					)}
 				</Island>
@@ -276,8 +296,11 @@ export const ArticleBody = ({
 					globalStrongStyles,
 					globalLinkStyles(),
 					isHostedContent && [hostedContentH2Styles],
-					tableOfContentsStyle === 'horizontal' &&
-						horizontalTableOfContentsHeadingOffset,
+					tableOfContentsStyle === 'horizontal'
+						? horizontalTableOfContentsHeadingOffset
+						: isFilterArticle &&
+							hasTableOfContents &&
+							filterSubheadingOffset,
 				]}
 				lang={language}
 				dir={languageDirection}
