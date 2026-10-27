@@ -44,6 +44,7 @@ export type PuzzleContainer = {
 	desktopSpan?: number;
 	adSlot?: string;
 	supporting?: PuzzlesSupportingContent;
+	commercialProperties?: Partial<CommercialProperties>;
 };
 
 export type PuzzleLink = {

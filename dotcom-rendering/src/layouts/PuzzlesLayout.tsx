@@ -261,6 +261,14 @@ export const PuzzlesLayout = ({
 						layout={puzzlesPage.layout}
 						renderAds={renderAds}
 						hideTopRule={!!branding}
+						containerBranding={Object.fromEntries(
+							puzzlesPage.layout.containers.map((container) => [
+								container.id,
+								container.commercialProperties?.[
+									puzzlesPage.editionId
+								]?.branding,
+							]),
+						)}
 					/>
 				</Island>
 			</main>
