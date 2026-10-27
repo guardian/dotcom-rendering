@@ -143,14 +143,14 @@ const sectionStyles = css`
 `;
 
 const linesStyles = css`
-	height: 10px;
+	height: 13px;
 	margin-bottom: ${space[4]}px;
 	background: repeating-linear-gradient(
 		to bottom,
 		var(--puzzles-border-colour, ${palette.neutral[86]}) 0,
 		var(--puzzles-border-colour, ${palette.neutral[86]}) 1px,
 		transparent 1px,
-		transparent 3px
+		transparent 4px
 	);
 `;
 
@@ -166,17 +166,21 @@ const tabsStyles = css`
 	}
 	a {
 		${textSans14};
-		border: 1px solid ${palette.news[400]};
+		border: 1px solid var(--puzzles-primary, ${palette.news[300]});
 		border-radius: 18px;
 		padding: 2px ${space[3]}px;
-		color: ${palette.news[400]};
+		color: var(--puzzles-primary, ${palette.news[300]});
 		font-weight: bold;
 		line-height: 18px;
 		text-decoration: none;
 	}
-	a[aria-current='page'] {
-		background: ${palette.news[400]};
-		color: ${palette.neutral[100]};
+	a:hover {
+		background: var(--puzzles-hover, ${palette.news[800]});
+	}
+	a[aria-current='page'],
+	a[aria-current='page']:hover {
+		background: var(--puzzles-primary, ${palette.news[300]});
+		color: var(--puzzles-on-primary, ${palette.neutral[100]});
 		font-weight: bold;
 	}
 `;
@@ -212,12 +216,19 @@ const recentStyles = css`
 		flex: 0 0 calc((100% - var(--recent-gap)) / 2);
 		min-height: 104px;
 		padding: ${space[2]}px ${space[2]}px 30px;
-		background: var(--puzzles-card-background, ${palette.news[800]});
+		background: var(
+			--puzzles-card-background,
+			var(--puzzles-tint, ${palette.news[800]})
+		);
 		color: var(--puzzles-card-text-colour, ${palette.neutral[7]});
 		text-decoration: none;
 		${from.phablet} {
 			min-width: 0;
 		}
+	}
+	.setter {
+		display: block;
+		color: var(--puzzles-primary, ${palette.news[300]});
 	}
 	a + a::before {
 		position: absolute;
@@ -231,7 +242,10 @@ const recentStyles = css`
 	}
 	strong {
 		display: block;
-		color: var(--puzzles-card-headline-colour, ${palette.news[400]});
+		color: var(
+			--puzzles-card-headline-colour,
+			var(--puzzles-primary, ${palette.news[300]})
+		);
 		${headlineBold20};
 	}
 	span {
@@ -364,6 +378,7 @@ const calendarStyles = css`
 		);
 	}
 	.setter-name {
+		display: none;
 		position: absolute;
 		top: 50%;
 		left: 2px;
@@ -409,6 +424,9 @@ const calendarStyles = css`
 		.day-number {
 			font-size: 12px;
 		}
+		.setter-name {
+			display: block;
+		}
 	}
 	${from.desktop} {
 		grid-template-columns: repeat(7, 78px);
@@ -436,7 +454,7 @@ const emptyMonthStyles = css`
 	${textSans14};
 	margin-top: ${space[4]}px;
 	a {
-		color: ${palette.news[400]};
+		color: var(--puzzles-primary, ${palette.news[300]});
 		text-decoration: underline;
 	}
 `;
@@ -829,7 +847,9 @@ export const PuzzlesArchiveCalendar = ({
 							</time>
 						</span>
 						{item.setterName && (
-							<span> · By: {item.setterName}</span>
+							<span className="setter">
+								By: {item.setterName}
+							</span>
 						)}
 						{item.gameStatus === 'completed' && (
 							<span className="played">

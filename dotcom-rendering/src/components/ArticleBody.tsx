@@ -23,6 +23,10 @@ import { palette as themePalette } from '../palette';
 import type { Block } from '../types/blocks';
 import type { Switches } from '../types/config';
 import type { TagType } from '../types/tag';
+import {
+	HORIZONTAL_TABLE_OF_CONTENTS_SCROLL_MARGIN,
+	HorizontalTableOfContents,
+} from './HorizontalTableOfContents.island';
 import { Island } from './Island';
 import { LiveBlogRenderer } from './LiveBlogRenderer';
 import {
@@ -56,6 +60,7 @@ type Props = {
 	onFirstPage?: boolean;
 	keyEvents?: Block[];
 	tableOfContents?: TableOfContentsItem[];
+	tableOfContentsStyle?: 'default' | 'horizontal';
 	lang?: string;
 	isRightToLeftLang?: boolean;
 	shouldHideAds: boolean;
@@ -63,6 +68,18 @@ type Props = {
 	idApiUrl?: string;
 	articleArrangement?: LayoutType;
 };
+
+/**
+ * Stops section headings landing underneath the sticky horizontal table of
+ * contents when a reader follows one of its links. The links target h2s, plus
+ * h3s for mini profiles in a sectioned list.
+ */
+const horizontalTableOfContentsHeadingOffset = css`
+	h2[id],
+	h3[id] {
+		scroll-margin-top: ${HORIZONTAL_TABLE_OF_CONTENTS_SCROLL_MARGIN}px;
+	}
+`;
 
 const globalOlStyles = () => css`
 	ol:not([data-ignore='global-ol-styling']) {
@@ -165,6 +182,7 @@ export const ArticleBody = ({
 	keyEvents = [],
 	keywordIds,
 	tableOfContents,
+	tableOfContentsStyle = 'default',
 	lang,
 	isRightToLeftLang = false,
 	editionId,
@@ -255,11 +273,17 @@ export const ArticleBody = ({
 		<>
 			{hasTableOfContents && (
 				<Island priority="critical" defer={{ until: 'visible' }}>
-					<TableOfContents
-						tableOfContents={tableOfContents}
-						format={format}
-						isFilterArticle={isFilterArticle}
-					></TableOfContents>
+					{tableOfContentsStyle === 'horizontal' ? (
+						<HorizontalTableOfContents
+							tableOfContents={tableOfContents}
+						/>
+					) : (
+						<TableOfContents
+							tableOfContents={tableOfContents}
+							format={format}
+							isFilterArticle={isFilterArticle}
+						></TableOfContents>
+					)}
 				</Island>
 			)}
 			<div
@@ -272,9 +296,11 @@ export const ArticleBody = ({
 					globalStrongStyles,
 					globalLinkStyles(),
 					isHostedContent && [hostedContentH2Styles],
-					isFilterArticle &&
-						hasTableOfContents &&
-						filterSubheadingOffset,
+					tableOfContentsStyle === 'horizontal'
+						? horizontalTableOfContentsHeadingOffset
+						: isFilterArticle &&
+							hasTableOfContents &&
+							filterSubheadingOffset,
 				]}
 				lang={language}
 				dir={languageDirection}

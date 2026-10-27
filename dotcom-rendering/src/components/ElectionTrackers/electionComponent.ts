@@ -38,6 +38,7 @@ const OnwardLink = v.object({
 		v.transform((l) => new URL(l)),
 	),
 	text: v.string(),
+	description: v.string(),
 });
 
 const ProgressNumber = v.object({

@@ -191,10 +191,10 @@ export const InteractiveRenderingPropsCODE: RenderingCDKStackProps = {
 			},
 		},
 	},
-	// Route 100% traffic to EC2.
+	// Route 100% traffic to ECS.
 	targetGroupWeights: {
-		ec2: 1,
-		ecs: 0,
+		ec2: 0,
+		ecs: 1,
 	},
 };
 /** Interactive */
@@ -235,6 +235,27 @@ export const InteractiveRenderingPropsPROD: RenderingCDKStackProps = {
 			},
 		},
 		instanceType: InstanceType.of(InstanceClass.C8G, InstanceSize.MEDIUM),
+	},
+	ecsProps: {
+		imageIdentifier: getImageIdentifier(),
+		taskCpu: 1024,
+		taskMemoryLimitMiB: 2048,
+		scaling: {
+			minimumTasks: 3,
+			maximumTasks: 30,
+			cpuScaling: {
+				targetValue: 20,
+				// TODO: Tune cooldown values.
+				// https://docs.aws.amazon.com/autoscaling/application/userguide/target-tracking-scaling-policy-overview.html#target-tracking-cooldown
+				scaleInCooldown: Duration.seconds(60),
+				scaleOutCooldown: Duration.seconds(60),
+			},
+		},
+	},
+	// Route 90% traffic to EC2, 10% to ECS.
+	targetGroupWeights: {
+		ec2: 90,
+		ecs: 10,
 	},
 };
 new RenderingCDKStack(

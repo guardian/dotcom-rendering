@@ -158,6 +158,20 @@ describe('PuzzlesLayout', () => {
 		);
 	});
 
+	it('omits the About link when the sponsor has no about URL', () => {
+		render(
+			<PuzzlesLayout
+				NAV={nav}
+				puzzlesPage={page() as never}
+				branding={{ ...puzzlesBranding, aboutThisLink: '' }}
+			/>,
+		);
+		expect(screen.getByText('Supported by')).toBeInTheDocument();
+		expect(
+			screen.queryByRole('link', { name: 'About this content' }),
+		).not.toBeInTheDocument();
+	});
+
 	it('renders the illustrated header with responsive sources and a fixed height', () => {
 		render(<PuzzlesLayout NAV={nav} puzzlesPage={page() as never} />);
 		const header = screen
