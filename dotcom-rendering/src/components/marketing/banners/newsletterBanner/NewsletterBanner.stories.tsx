@@ -7,7 +7,7 @@ import { useCountryCode } from '../../../../lib/useCountryCode';
 import { useNewsletterSignupForm } from '../../../../lib/useNewsletterSignupForm';
 import type { NewsletterSignupFormState } from '../../../../lib/useNewsletterSignupForm';
 import { useNewsletterSubscription } from '../../../../lib/useNewsletterSubscription';
-import { design, props } from '../utils/storybook';
+import { newsletterDesign, props } from '../utils/storybook';
 import { NewsletterBanner } from './NewsletterBanner';
 
 const meta = preview.meta({
@@ -28,7 +28,13 @@ const meta = preview.meta({
 		content: {
 			heading: 'Sign up to The Stakes 2026',
 			paragraphs: [
-				'From the races and candidates to watch to the issues shaping American politics.',
+				'From the races and candidates to watch to the issues shaping American politics, The Stakes 2026 brings you expert analysis of what really matters in the US midterms.',
+			],
+		},
+		mobileContent: {
+			heading: 'Sign up to The Stakes 2026',
+			paragraphs: [
+				'From the races and candidates to watch to the issues shaping American politics, The Stakes 2026 brings you expert analysis of what really matters in the US midterms.',
 			],
 		},
 		isCollapsible: false,
@@ -39,7 +45,7 @@ const meta = preview.meta({
 			frequency: 'Weekly',
 		},
 		design: {
-			...design,
+			...newsletterDesign,
 			headerImage: {
 				mobileUrl:
 					'https://i.guim.co.uk/img/media/630a3735c02e195be89ab06fd1b8192959e282ab/0_0_1172_560/500.png?width=500&quality=75&s=937595b3f471d6591475955335c7c023',

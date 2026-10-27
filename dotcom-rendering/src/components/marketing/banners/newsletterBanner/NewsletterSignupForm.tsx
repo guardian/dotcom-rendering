@@ -158,7 +158,7 @@ const recaptchaContainerStyles = css`
 const getPrivacyContainerStyles = (isSignedIn: boolean | 'Pending') => css`
 	margin-top: ${space[2]}px;
 	${until.tablet} {
-		margin-top: ${space[3]}px;
+		margin-top: ${isSignedIn ? 0 : space[3]}px;
 	}
 	grid-column: 1 / -1;
 	${isSignedIn === true &&
