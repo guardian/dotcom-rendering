@@ -241,7 +241,7 @@ export const InteractiveRenderingPropsPROD: RenderingCDKStackProps = {
 		taskCpu: 1024,
 		taskMemoryLimitMiB: 2048,
 		scaling: {
-			minimumTasks: 6,
+			minimumTasks: 3,
 			maximumTasks: 30,
 			cpuScaling: {
 				targetValue: 20,
