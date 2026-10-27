@@ -516,3 +516,16 @@ export const WithReplacementMediaOnPodcastCard = {
 		},
 	},
 } satisfies Story;
+
+export const WithStorylines = {
+	name: 'With Storylines (should always show story age)',
+	args: {
+		/** The effect of isStorylines is to always show the age of the story
+		 * regardless of the age of the story.
+		 */
+		webPublicationDate: new Date(
+			Date.now() - 24 * 60 * 60 * 1000,
+		).toString(),
+		isStorylines: true,
+	},
+} satisfies Story;
