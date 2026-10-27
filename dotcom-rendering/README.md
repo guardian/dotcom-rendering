@@ -38,15 +38,21 @@ Add mise activation to your shell profile to run mise automatically when you cha
 
 The first time mise runs in a project it may, depending on the configuration, need to be trusted with:
 
-`mise trust`
+```
+$ mise trust
+```
 
 Optional but recommended, globally configure mise to auto update:
 
-`mise settings set self_update.auto true`
+```
+$ mise settings set self_update.auto true
+```
 
 Optional but recommended, globally configure mise to auto update given a minimum release age e.g.:
 
-`mise settings set self_update.minimum_release_age 48h`
+```
+$ mise settings set self_update.minimum_release_age 48h
+```
 
 > [!IMPORTANT]
 > If you have previously used fnm, nvm or asdf please disable any configuration that automatically sets tool versions on directory changes. This ensures any previous version management tool does not conflict with mise.
@@ -56,7 +62,7 @@ Optional but recommended, globally configure mise to auto update given a minimum
 Ensure you're at the root directory of the project:
 
 ```
-cd ~/code/dotcom-rendering
+$ cd ~/code/dotcom-rendering
 ```
 
 If mise has been configured to activate on directory changes the correct tool versions should now be installed and confirmation output to the terminal.
@@ -65,6 +71,12 @@ Otherwise you can manually install the required tooling with:
 
 ```
 $ mise install
+```
+
+On the first run of mise confirm the requested versions of each tool are installed with:
+
+```
+$ mise ls --current
 ```
 
 Confirm the active Node version matches the version in [.nvmrc](../.nvmrc)
@@ -97,7 +109,7 @@ If you get an Node version error then check your mise setup.
 
 ### Run
 
-```sh
+```
 $ make dev
 ```
 
@@ -192,7 +204,7 @@ There are some concepts to learn, that will make working with Dotcom Rendering c
 
 You can ensure your code passes code quality tests by running:
 
-```sh
+```
 $ make validate
 ```
 
@@ -200,7 +212,7 @@ This runs our linting tool, the TypeScript compiler and our tests, before finall
 
 You can also run these tasks individually:
 
-```sh
+```
 $ make lint
 $ make stylelint
 $ make tsc
@@ -209,7 +221,7 @@ $ make test
 
 If you get lint errors, you can attempt to automatically fix them with:
 
-```sh
+```
 $ make fix
 ```
 
@@ -233,6 +245,6 @@ To monitor vulnerabilities from GitHub, you can use [Dependabot alerts in the se
 
 To check for vulnerabilities in development, you can run:
 
-```sh
+```
 $ make audit
 ```
