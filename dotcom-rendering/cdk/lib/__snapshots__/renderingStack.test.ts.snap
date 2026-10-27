@@ -4301,7 +4301,7 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
       ],
       "Properties": {
         "MaxCapacity": 30,
-        "MinCapacity": 3,
+        "MinCapacity": 6,
         "ResourceId": {
           "Fn::Join": [
             "",
