@@ -164,7 +164,19 @@ export const WebStandardImmersiveNewsLight: Story = {
 		},
 		colourScheme: 'light',
 	},
-	parameters: webParameters,
+	parameters: {
+		...webParameters,
+		chromatic: {
+			viewports: [
+				breakpoints.mobile,
+				breakpoints.mobileMedium,
+				breakpoints.mobileLandscape,
+				breakpoints.phablet,
+				breakpoints.tablet,
+				breakpoints.desktop,
+			],
+		},
+	},
 };
 
 export const AppsStandardImmersiveNewsLight: Story = {
