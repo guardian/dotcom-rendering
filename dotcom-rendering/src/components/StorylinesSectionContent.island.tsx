@@ -68,7 +68,6 @@ const tabsContainerStyles = css`
 	display: flex;
 	width: 100%;
 	${from.wide} {
-		width: 110%; /* bit hacky, but looks a touch better on wide. */
 		margin-bottom: ${space[2]}px;
 	}
 	align-items: stretch; /* Makes all tabs the same height */
