@@ -286,6 +286,8 @@ const isPuzzleContainer = (data: unknown): data is PuzzleContainer => {
 					data.adSlot !== 'mostpop'))) ||
 		(data.supporting !== undefined &&
 			!isSupportingContent(data.supporting)) ||
+		(data.commercialProperties !== undefined &&
+			!isPuzzlesCommercialProperties(data.commercialProperties)) ||
 		!isObject(data.content)
 	) {
 		return false;
@@ -435,13 +437,21 @@ export const validateAsPuzzlesPageType = (data: unknown): FEPuzzlesPageType => {
 	const topLevelOnlyContainersValid = containers
 		.slice(page.layout.containers.length)
 		.every(({ variant }) => variant !== 'ad' && variant !== 'supporting');
+	const containerSponsorshipValid = containers.every(
+		(container) =>
+			container.commercialProperties === undefined ||
+			(page.layout.containers.includes(container) &&
+				container.variant !== 'ad' &&
+				container.variant !== 'supporting'),
+	);
 
 	if (
 		!unique(containerIds) ||
 		!unique(itemIds) ||
 		!unique(adSlots) ||
 		!popularReferencesValid ||
-		!topLevelOnlyContainersValid
+		!topLevelOnlyContainersValid ||
+		!containerSponsorshipValid
 	) {
 		throw new TypeError(
 			'Unable to validate request body for puzzles page.',
