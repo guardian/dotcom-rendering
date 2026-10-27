@@ -54,10 +54,14 @@ export const ElectionTracker = (props: Props) => {
 	);
 
 	return (
-		<>
+		<div
+			css={{
+				position: 'relative',
+			}}
+		>
 			<Refresh remaining={remaining} error={error !== undefined} />
 			<Components components={data ?? props.initialData} />
-		</>
+		</div>
 	);
 };
 
@@ -117,6 +121,7 @@ const Component = ({ component }: { component: ElectionComponent }) => {
 				<OnwardLink
 					link={component.props.link}
 					text={component.props.text}
+					description={component.props.description}
 				/>
 			);
 		case 'progressNumber':

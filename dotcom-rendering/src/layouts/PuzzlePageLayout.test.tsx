@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
+import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
 import { ConfigProvider } from '../components/ConfigContext';
 import {
 	puzzlesHubV1Experiment,
@@ -9,6 +10,7 @@ import {
 } from '../lib/puzzlesHubVersionExperiment';
 import { extractNAV } from '../model/extract-nav';
 import { getPuzzleConfig } from '../model/puzzles/puzzleConfigs';
+import type { Branding } from '../types/branding';
 import { PuzzlePageLayout } from './PuzzlePageLayout';
 
 jest.mock('../lib/bridgetApi', () => jest.fn());
@@ -58,6 +60,7 @@ const v1AndV2On = {
 const renderPuzzlePageLayout = (
 	slug: string,
 	overrides: Parameters<typeof createPuzzlePage>[1] = {},
+	branding?: Branding,
 ) => {
 	const puzzlePage = createPuzzlePage(slug, overrides);
 	const puzzleConfig = getPuzzleConfig(slug);
@@ -76,12 +79,31 @@ const renderPuzzlePageLayout = (
 				puzzlePage={{ ...puzzlePage, puzzleConfig }}
 				NAV={extractNAV(puzzlePage.nav)}
 				darkModeAvailable={false}
+				branding={branding}
 			/>
 		</ConfigProvider>,
 	);
 };
 
 describe('PuzzlePageLayout', () => {
+	it('renders the sponsor with the logo capped at 140px wide', () => {
+		renderPuzzlePageLayout('sudoku-easy', {}, puzzlesBranding);
+
+		expect(screen.getByText('Supported by')).toBeInTheDocument();
+		expect(
+			screen.getByRole('img', { name: 'Example sponsor' }),
+		).toHaveAttribute('width', '140');
+		expect(
+			screen.getByRole('link', { name: 'About this content' }),
+		).toHaveAttribute('href', 'https://example.com/about');
+	});
+
+	it('renders no sponsor without branding', () => {
+		renderPuzzlePageLayout('sudoku-easy');
+
+		expect(screen.queryByText('Supported by')).not.toBeInTheDocument();
+	});
+
 	it('renders the design-provided headline text, not raw instance.title', () => {
 		renderPuzzlePageLayout('sudoku-easy');
 
