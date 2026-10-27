@@ -1,0 +1,4 @@
+[settings]
+# Read node version from .nvmrc
+# Read pnpm version from package.json
+idiomatic_version_file_enable_tools = ["node", "pnpm"]
