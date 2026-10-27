@@ -99,25 +99,138 @@ const meta = {
 			</>
 		),
 	],
-	parameters: {
-		chromatic: {
-			viewports: [
-				breakpoints.mobileMedium,
-				breakpoints.tablet,
-				breakpoints.desktop,
-				breakpoints.wide,
-			],
-		},
-	},
 } satisfies Meta<typeof PuzzlesArchiveLayout>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const WithAds = {} satisfies Story;
+/**
+ * Chromatic does not support `viewports` and `modes` on the same story, so
+ * the viewports live on the light stories and the dark stories use modes.
+ */
+const lightParameters = {
+	chromatic: {
+		viewports: [
+			breakpoints.mobileMedium,
+			breakpoints.tablet,
+			breakpoints.desktop,
+			breakpoints.wide,
+		],
+	},
+};
+
+const darkParameters = {
+	chromatic: {
+		modes: {
+			'dark mobileMedium': {
+				globalColourScheme: 'dark',
+				viewport: breakpoints.mobileMedium,
+			},
+			'dark desktop': {
+				globalColourScheme: 'dark',
+				viewport: breakpoints.desktop,
+			},
+		},
+	},
+};
+
+export const WithAds = {
+	parameters: lightParameters,
+} satisfies Story;
 
 export const AdFree = {
 	args: {
 		puzzlesPage: { ...puzzlesPage, isAdFreeUser: true },
 	},
+	parameters: lightParameters,
+} satisfies Story;
+
+const archiveItems = (
+	puzzle: { puzzleType: string; slug?: string },
+	setterName?: string,
+) =>
+	Array.from({ length: 26 }, (_, index) => {
+		const day = String(index + 1).padStart(2, '0');
+		return {
+			puzzleType: puzzle.puzzleType,
+			date: `2026-08-${day}`,
+			progress: [15, 21, 24, 25].includes(index + 1) ? 100 : 0,
+			...(setterName && { setterName }),
+			url: `/puzzles-and-games/${puzzle.slug}/2026-08-${day}`,
+		};
+	});
+
+const wordWheel = {
+	id: 'word-wheel',
+	title: 'Word wheel',
+	puzzleType: 'WORD_WHEEL',
+	slug: 'word-games/word-wheel',
+	set: 'word-wheel',
+};
+
+const wordGamesArchive: PuzzlesArchive = {
+	...archive,
+	category: 'word-games',
+	title: 'Word games',
+	description: 'Choose a word game from our archive.',
+	selectedPuzzle: wordWheel,
+	puzzles: [wordWheel],
+	items: archiveItems(wordWheel),
+};
+
+const sudokuPuzzles = ['Easy', 'Medium', 'Hard', 'Killer'].map((title) => {
+	const id = `sudoku-${title.toLowerCase()}`;
+	return {
+		id,
+		title,
+		puzzleType: id.toUpperCase().replace('-', '_'),
+		slug: `logic-puzzles/${id}`,
+		set: id,
+	};
+});
+const sudokuMedium = sudokuPuzzles[1]!;
+
+const logicPuzzlesArchive: PuzzlesArchive = {
+	...archive,
+	category: 'logic-puzzles',
+	title: 'Logic puzzles',
+	description: 'Choose a logic puzzle from our archive.',
+	selectedPuzzle: { ...sudokuMedium, title: 'Medium sudoku' },
+	puzzles: sudokuPuzzles,
+	items: archiveItems(sudokuMedium),
+};
+
+export const WordGames = {
+	args: {
+		puzzlesPage: createPuzzlesPage({ archive: wordGamesArchive }),
+	},
+	parameters: lightParameters,
+} satisfies Story;
+
+export const LogicPuzzles = {
+	args: {
+		puzzlesPage: createPuzzlesPage({ archive: logicPuzzlesArchive }),
+	},
+	parameters: lightParameters,
+} satisfies Story;
+
+export const CrosswordsDark = {
+	args: { darkModeAvailable: true },
+	parameters: darkParameters,
+} satisfies Story;
+
+export const WordGamesDark = {
+	args: {
+		darkModeAvailable: true,
+		puzzlesPage: createPuzzlesPage({ archive: wordGamesArchive }),
+	},
+	parameters: darkParameters,
+} satisfies Story;
+
+export const LogicPuzzlesDark = {
+	args: {
+		darkModeAvailable: true,
+		puzzlesPage: createPuzzlesPage({ archive: logicPuzzlesArchive }),
+	},
+	parameters: darkParameters,
 } satisfies Story;

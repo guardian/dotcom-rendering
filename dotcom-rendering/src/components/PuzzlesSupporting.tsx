@@ -10,7 +10,6 @@ import {
 	textSansBold14,
 } from '@guardian/source/foundations';
 import { LinkButton, SvgEye } from '@guardian/source/react-components';
-import { generateImageURL } from '../lib/image';
 import { puzzlesContainerStyles } from '../lib/puzzlesContainerStyles';
 import type {
 	PuzzleContainer,
@@ -86,10 +85,72 @@ const sectionTitleStyles = css`
 
 const usefulContentStyles = (hasNewsletter: boolean) => css`
 	display: grid;
-	width: 100%;
+	min-width: 0;
+	border-top: 1px solid ${borderColour};
+
+	${hasNewsletter &&
+	css`
+		/* Match the puzzle content insets, including the container's side borders. */
+		padding: 8px 10px 0;
+		${from.mobileMedium} {
+			padding-right: 20px;
+			padding-left: 20px;
+		}
+		${from.desktop} {
+			padding-right: 19px;
+			padding-left: 19px;
+		}
+		${from.leftCol} {
+			padding-left: 9px;
+		}
+	`}
+`;
+
+const usefulGridStyles = (hasNewsletter: boolean) => css`
+	display: grid;
 	min-width: 0;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
-	border-top: 1px solid ${borderColour};
+
+	${hasNewsletter &&
+	css`
+		column-gap: 20px;
+
+		> a,
+		> a:first-of-type {
+			position: relative;
+			padding: 0 0 ${space[2]}px;
+			border-right: 0;
+
+			::after {
+				position: absolute;
+				top: 0;
+				right: -10px;
+				bottom: 0;
+				border-right: 1px solid ${borderColour};
+				content: '';
+				pointer-events: none;
+			}
+
+			:not(:last-of-type)::after {
+				max-height: 52px;
+			}
+
+			:nth-of-type(even)::after {
+				content: none;
+
+				${from.desktop} {
+					content: '';
+				}
+			}
+		}
+
+		${from.tablet} {
+			max-width: 700px;
+		}
+		${from.desktop} {
+			max-width: 940px;
+		}
+	`}
 
 	${from.desktop} {
 		grid-template-columns: repeat(${hasNewsletter ? 4 : 2}, minmax(0, 1fr));
@@ -325,66 +386,61 @@ export const PuzzlesUsefulLinks = ({
 			{title}
 		</h2>
 		<div css={usefulContentStyles(newsletter !== undefined)}>
-			{links.map((link) => (
-				<a
-					css={usefulLinkStyles}
-					href={link.url}
-					key={`${link.title}-${link.url}`}
-					{...externalProps(link.url)}
-				>
-					<h3 css={usefulLinkTitleStyles}>{link.title}</h3>
-				</a>
-			))}
-			{newsletter !== undefined && (
-				<div css={newsletterStyles}>
-					<NewsletterSignupCard
-						description={newsletter.description}
-						frequency={newsletter.frequency}
-						illustrationSquare={
-							newsletter.illustrationSquare !== undefined
-								? generateImageURL({
-										mainImage:
-											newsletter.illustrationSquare,
-										imageWidth: 100,
-										resolution: 'high',
-										aspectRatio: '1:1',
-									})
-								: undefined
-						}
-						// TODO hide ilustrations when we implement this
-						// illustrationAlt={`${newsletter.name} newsletter illustration`}
-						// hideIllustrationFromScreenReaders={true}
-						isModal={true}
-						name={newsletter.name}
+			<div css={usefulGridStyles(newsletter !== undefined)}>
+				{links.map((link) => (
+					<a
+						css={usefulLinkStyles}
+						href={link.url}
+						key={`${link.title}-${link.url}`}
+						{...externalProps(link.url)}
 					>
-						{newsletter.exampleUrl !== undefined && (
-							<div css={previewStyles}>
-								<LinkButton
-									href={newsletter.exampleUrl}
-									target="_blank"
-									rel="noreferrer"
-									priority="tertiary"
-									size="small"
-									icon={<SvgEye />}
-									iconSide="left"
-									theme={tertiaryButtonTheme}
-									data-link-name={`puzzles newsletter preview : ${newsletter.identityName}`}
-								>
-									Preview latest
-								</LinkButton>
-							</div>
-						)}
-						<Island priority="feature" defer={{ until: 'visible' }}>
-							<NewsletterSignupForm
-								componentId={`Puzzles NewsletterSignupForm ${newsletter.identityName}`}
-								frequency={newsletter.frequency}
-								newsletterId={newsletter.identityName}
-								newsletterName={newsletter.name}
-							/>
-						</Island>
-					</NewsletterSignupCard>
-				</div>
-			)}
+						<h3 css={usefulLinkTitleStyles}>{link.title}</h3>
+					</a>
+				))}
+				{newsletter !== undefined && (
+					<div css={newsletterStyles}>
+						<NewsletterSignupCard
+							description={newsletter.description}
+							frequency={newsletter.frequency}
+							illustrationSquare={newsletter.illustrationSquare}
+							// TODO hide ilustrations when we implement this
+							// illustrationAlt={`${newsletter.name} newsletter illustration`}
+							// hideIllustrationFromScreenReaders={true}
+							isModal={true}
+							name={newsletter.name}
+						>
+							{newsletter.exampleUrl !== undefined && (
+								<div css={previewStyles}>
+									<LinkButton
+										href={newsletter.exampleUrl}
+										target="_blank"
+										rel="noreferrer"
+										priority="tertiary"
+										size="small"
+										icon={<SvgEye />}
+										iconSide="left"
+										theme={tertiaryButtonTheme}
+										data-link-name={`puzzles newsletter preview : ${newsletter.identityName}`}
+									>
+										Preview latest
+									</LinkButton>
+								</div>
+							)}
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
+								<NewsletterSignupForm
+									componentId={`Puzzles NewsletterSignupForm ${newsletter.identityName}`}
+									frequency={newsletter.frequency}
+									newsletterId={newsletter.identityName}
+									newsletterName={newsletter.name}
+								/>
+							</Island>
+						</NewsletterSignupCard>
+					</div>
+				)}
+			</div>
 		</div>
 	</section>
 );
