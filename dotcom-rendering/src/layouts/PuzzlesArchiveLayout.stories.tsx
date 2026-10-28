@@ -229,10 +229,8 @@ const manyCrosswords = [
 ];
 
 /**
- * More puzzle types than fit on one line, so the chips wrap onto extra lines
- * (mouse) instead of being cut off. Touch devices get a swipeable carousel
- * faded at both edges, which Chromatic can't show: it can't emulate a touch
- * pointer, so check it with a touch device or the browser's device mode.
+ * More puzzle types than fit on one line: from "tablet" the chips wrap onto
+ * extra lines, and below it they scroll as a carousel faded at the edges.
  */
 export const ManyPuzzleTypes = {
 	args: {

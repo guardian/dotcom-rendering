@@ -8,6 +8,7 @@ import {
 	space,
 	textSans14,
 	textSans17,
+	until,
 	visuallyHidden,
 } from '@guardian/source/foundations';
 import {
@@ -154,35 +155,22 @@ const linesStyles = css`
 	);
 `;
 
-/**
- * With a mouse the chips wrap onto extra lines, so none are ever hidden
- * (there is no scrollbar or wheel gesture to reach them in a carousel). On
- * touch devices they become a swipeable carousel (`tabsStyles`), faded at
- * both edges (`chipsFadeLeftStyles`, `chipsFadeRightStyles`).
- */
-const touchInput = '@media (hover: none), (pointer: coarse)';
-
 const CHIPS_FADE_WIDTH = space[10];
 
 /**
- * Same mechanism as the "More from Puzzles & games" rail (`MorePuzzlesCard`):
- * the carousel bleeds to the page's vertical lines by undoing the page's side
- * padding (`pageStyles`), and the fades follow the chips' scroll position.
+ * From "tablet" the chips wrap onto extra lines, so none are ever hidden.
+ * Below it they become a swipeable carousel (`tabsStyles`), faded at both
+ * edges (`chipsFadeLeftStyles`, `chipsFadeRightStyles`). Same mechanism as the
+ * "More from Puzzles & games" rail (`MorePuzzlesCard`): the carousel bleeds to
+ * the page's vertical lines by undoing the page's side padding (`pageStyles`),
+ * and the fades follow the chips' scroll position.
  */
 const chipsStyles = css`
 	--chips-edge-padding: ${space[3]}px;
 	position: relative;
 	/* Lets the fades follow the scroll position of the chips. */
 	timeline-scope: --puzzles-chips-scroll;
-	${from.tablet} {
-		--chips-edge-padding: ${space[5]}px;
-	}
-	/* From "desktop" the calendar sits beside the ad column rather than
-	   against the page's vertical lines, so there is no edge to bleed to. */
-	${from.desktop} {
-		--chips-edge-padding: 0px;
-	}
-	${touchInput} {
+	${until.tablet} {
 		margin: 0 calc(var(--chips-edge-padding) * -1);
 	}
 `;
@@ -194,7 +182,7 @@ const chipsFadeInKeyframes = keyframes`
 
 const chipsFadeStyles = css`
 	display: none;
-	${touchInput} {
+	${until.tablet} {
 		position: absolute;
 		top: 0;
 		bottom: ${space[3]}px;
@@ -208,7 +196,7 @@ const chipsFadeStyles = css`
  * clear of it.
  */
 const chipsFadeRightStyles = css`
-	${touchInput} {
+	${until.tablet} {
 		display: block;
 		right: 0;
 		background: linear-gradient(
@@ -226,7 +214,7 @@ const chipsFadeRightStyles = css`
  */
 const chipsFadeLeftStyles = css`
 	@supports (animation-timeline: scroll()) {
-		${touchInput} {
+		${until.tablet} {
 			display: block;
 			left: 0;
 			background: linear-gradient(
@@ -250,7 +238,7 @@ const tabsStyles = css`
 	flex-wrap: wrap;
 	gap: ${space[3]}px;
 	padding: 0 0 ${space[3]}px;
-	${touchInput} {
+	${until.tablet} {
 		flex-wrap: nowrap;
 		overflow-x: auto;
 		padding: 0 ${CHIPS_FADE_WIDTH}px ${space[3]}px var(--chips-edge-padding);
