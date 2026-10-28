@@ -16,7 +16,7 @@ import type { ScalingInterval } from 'aws-cdk-lib/aws-applicationautoscaling';
 import { AdjustmentType, StepScalingPolicy } from 'aws-cdk-lib/aws-autoscaling';
 import { Metric, Unit } from 'aws-cdk-lib/aws-cloudwatch';
 import { SnsAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
-import type { InstanceType } from 'aws-cdk-lib/aws-ec2';
+import type { InstanceType as EC2InstanceType } from 'aws-cdk-lib/aws-ec2';
 import { Peer } from 'aws-cdk-lib/aws-ec2';
 import {
 	ContainerDependencyCondition,
@@ -46,7 +46,7 @@ export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
 	domainName: string;
 
 	ec2Props?: {
-		instanceType: InstanceType;
+		instanceType: EC2InstanceType;
 		scaling: RenderingEc2ScalingProps;
 	};
 
