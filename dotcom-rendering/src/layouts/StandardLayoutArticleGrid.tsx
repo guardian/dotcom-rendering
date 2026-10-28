@@ -422,30 +422,33 @@ export const StandardLayoutArticleGrid = ({
 						: undefined,
 				]}
 			>
-				<MainMedia
-					format={format}
-					elements={article.mainMediaElements}
-					host={host}
-					pageId={article.pageId}
-					webTitle={article.webTitle}
-					ajaxUrl={article.config.ajaxUrl}
-					switches={article.config.switches}
-					isAdFreeUser={article.isAdFreeUser}
-					isSensitive={article.config.isSensitive}
-					editionId={article.editionId}
-					hideCaption={hideCaptionBeneathMainMedia}
-					shouldHideAds={article.shouldHideAds}
-					contentType={article.contentType}
-					contentLayout={contentLayoutName}
-					articleArrangement={layoutType}
-				/>
-				{article.affiliateLinksDisclaimerRequired && !isImmersive && (
-					<AffiliateDisclaimer
-						cssOverrides={css`
-							margin: ${space[4]}px 0;
-						`}
+				<div>
+					<MainMedia
+						format={format}
+						elements={article.mainMediaElements}
+						host={host}
+						pageId={article.pageId}
+						webTitle={article.webTitle}
+						ajaxUrl={article.config.ajaxUrl}
+						switches={article.config.switches}
+						isAdFreeUser={article.isAdFreeUser}
+						isSensitive={article.config.isSensitive}
+						editionId={article.editionId}
+						hideCaption={hideCaptionBeneathMainMedia}
+						shouldHideAds={article.shouldHideAds}
+						contentType={article.contentType}
+						contentLayout={contentLayoutName}
+						articleArrangement={layoutType}
 					/>
-				)}
+					{article.affiliateLinksDisclaimerRequired &&
+						!isImmersive && (
+							<AffiliateDisclaimer
+								cssOverrides={css`
+									margin: ${space[4]}px 0;
+								`}
+							/>
+						)}
+				</div>
 			</GridItem>
 			<GridItem
 				area="title"
@@ -598,9 +601,6 @@ export const StandardLayoutArticleGrid = ({
 				area="standfirst"
 				layoutType={layoutType}
 				css={[
-					css`
-						position: relative;
-					`,
 					isImmersive &&
 						css`
 							${until.tablet} {
@@ -673,9 +673,6 @@ export const StandardLayoutArticleGrid = ({
 				layoutType={layoutType}
 				element="aside"
 				css={[
-					css`
-						position: relative;
-					`,
 					isImmersive &&
 						branding != null &&
 						captionText != null &&
