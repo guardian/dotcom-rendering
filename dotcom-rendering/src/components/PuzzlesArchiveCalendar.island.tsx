@@ -304,6 +304,8 @@ const controlsStyles = css`
 		svg {
 			width: 26px;
 			height: 26px;
+			/* The icon has no fill of its own, so it would stay black. */
+			fill: currentColor;
 		}
 		:last-child {
 			justify-self: end;
@@ -313,10 +315,6 @@ const controlsStyles = css`
 			border-color: var(--puzzles-border-colour, ${palette.neutral[86]});
 			color: ${palette.neutral[60]};
 			cursor: not-allowed;
-			/* The icon has no fill of its own, so it would stay black. */
-			svg {
-				fill: currentColor;
-			}
 		}
 	}
 	strong {
@@ -438,8 +436,11 @@ const calendarStyles = css`
 	${from.desktop} {
 		grid-template-columns: repeat(7, 78px);
 		.day[data-status='unavailable'] {
-			border-color: ${palette.neutral[93]};
-			color: ${palette.neutral[46]};
+			border-color: var(
+				--puzzles-unavailable-day-border,
+				${palette.neutral[93]}
+			);
+			color: var(--puzzles-unavailable-day-text, ${palette.neutral[46]});
 		}
 	}
 `;
