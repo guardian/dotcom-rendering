@@ -277,7 +277,7 @@ const immersivePortraitCss: LayoutCssMap = {
 	meta: {
 		belowDesktop: 'grid-row: 6;',
 		desktop: `grid-row: 4; ${grid.between('centre-column-start', 8)};`,
-		leftCol: `grid-row: 3 / span 2; ${grid.column.left};`,
+		leftCol: `grid-row: 3; ${grid.column.left};`,
 	},
 	body: {
 		belowDesktop: 'grid-row: 7;',
