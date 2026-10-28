@@ -1,3 +1,4 @@
+import { customSubnav } from '../../fixtures/manual/customSubnav';
 import type { FEFrontCard } from '../frontend/feFront';
 import type { CustomSubnav } from '../types/customSubnav';
 import { enhanceCards } from './enhanceCards';
@@ -61,7 +62,7 @@ describe('enhanceCards mini navigation', () => {
 		'preserves configuration when showMiniNav is %s',
 		(showMiniNav) => {
 			const miniNavData: CustomSubnav = {
-				id: 'election',
+				...customSubnav,
 				format: 'compact',
 				pages: [{ type: 'front', path: '/uk' }],
 				images: [
@@ -71,13 +72,6 @@ describe('enhanceCards mini navigation', () => {
 						platforms: ['web'],
 					},
 				],
-				header: {
-					headerText: 'Election',
-					showHeaderText: true,
-					dotcomPath: '/election',
-					copy: 'Additional election information',
-				},
-				links: [{ linkText: 'Latest', dotcomPath: '/election/latest' }],
 			};
 			const enhancedCard = enhance({
 				...card,
@@ -91,13 +85,12 @@ describe('enhanceCards mini navigation', () => {
 
 	it('preserves a hidden, non-linked header and editorial link order', () => {
 		const miniNavData: CustomSubnav = {
-			id: 'election',
+			...customSubnav,
 			format: 'compact',
-			pages: [],
 			header: {
-				headerText: 'Election',
+				...customSubnav.header,
 				showHeaderText: false,
-				copy: '',
+				dotcomPath: undefined,
 			},
 			links: [
 				{ linkText: 'Results', dotcomPath: '/election/results' },

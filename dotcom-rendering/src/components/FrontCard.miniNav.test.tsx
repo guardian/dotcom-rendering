@@ -1,229 +1,182 @@
 import { render, screen } from '@testing-library/react';
-import type { FEFrontCard } from '../frontend/feFront';
-import { enhanceCards } from '../model/enhanceCards';
-import type { BoostLevel } from '../types/content';
-import type { DCRContainerType } from '../types/front';
+import { customSubnav } from '../../fixtures/manual/customSubnav';
+import { trails } from '../../fixtures/manual/trails';
+import type { CustomSubnav } from '../types/customSubnav';
+import type { DCRContainerType, DCRFrontCard } from '../types/front';
 import { ConfigProvider } from './ConfigContext';
 import { FrontCard } from './FrontCard';
 
-const response = `{
-  "pressedPage": {
-    "collections": [{
-      "curated": [{
-        "properties": {
-          "isBreaking": false,
-          "showKickerTag": false,
-          "showByline": false,
-          "isLiveBlog": false,
-          "isCrossword": false,
-          "webTitle": "PSG beat Barça, Rio’s grand for Liverpool and Ronaldo’s CV | Football Weekly – video",
-          "editionBrandings": []
-        },
-        "header": {
-          "isVideo": false,
-          "isComment": false,
-          "isGallery": false,
-          "isAudio": false,
-          "headline": "PSG beat Barça, Rio’s grand for Liverpool and Ronaldo’s CV | Football Weekly – video",
-          "url": "/test/2026/oct/27/article-17712690",
-          "hasMainVideoElement": false
-        },
-        "card": {
-          "id": "test/2026/oct/27/article-17712690",
-          "cardStyle": { "type": "DefaultCardstyle" },
-          "shortUrl": "",
-          "group": "3",
-          "isLive": false
-        },
-        "discussion": {
-          "isCommentable": false,
-          "isClosedForComments": true
-        },
-        "display": {
-          "isBoosted": false,
-          "showBoostedHeadline": false,
-          "showQuotedHeadline": false,
-          "imageHide": false,
-          "showLivePlayable": false,
-          "showMiniNav": true,
-          "miniNavData": {
-            "id": "4c1bf2d9-ee4f-4d4c-829a-9bcc2c25b9fb",
-            "header": {
-              "headerText": "Football",
-              "dotcomPath": "/football",
-              "copy": "Football navigation",
-              "showHeaderText": true
-            },
-            "format": "compact",
-            "links": [{
-              "linkText": "More Football",
-              "dotcomPath": "/football"
-            }],
-            "pages": [],
-            "lastUpdated": 1793031866891,
-            "updatedBy": "Test editor",
-            "updatedEmail": "editor@example.com"
-          }
-        },
-        "enriched": {},
-        "type": "CuratedContent"
-      }]
-    }]
-  }
-}`;
+const miniNavData = {
+	...customSubnav,
+	id: 'football-mini-nav',
+	header: {
+		...customSubnav.header,
+		headerText: 'Football',
+		dotcomPath: '/football',
+		copy: 'Football navigation',
+	},
+	format: 'compact',
+	links: [{ linkText: 'More Football', dotcomPath: '/football' }],
+} satisfies CustomSubnav;
 
-type Scenario = {
+const defaultTrail = {
+	...trails[0],
+	boostLevel: 'boost',
+	showMiniNav: true,
+	miniNavData,
+} satisfies DCRFrontCard;
+
+const renderCard = ({
+	trail = defaultTrail,
+	...props
+}: {
+	trail?: DCRFrontCard;
 	containerType?: DCRContainerType;
-	boostLevel?: BoostLevel;
-	showMiniNav: boolean;
-	hasData: boolean;
-	expected: boolean;
+} = {}) =>
+	render(
+		<ConfigProvider
+			value={{
+				renderingTarget: 'Web',
+				darkModeAvailable: false,
+				assetOrigin: '/',
+				editionId: 'UK',
+			}}
+		>
+			<FrontCard
+				trail={trail}
+				containerType="flexible/general"
+				imageLoading="eager"
+				serverTime={1793031866891}
+				{...props}
+			/>
+		</ConfigProvider>,
+	);
+
+const expectMiniNavAbsent = () => {
+	expect(screen.queryByText('Football')).not.toBeInTheDocument();
+	expect(
+		screen.queryByRole('link', { name: 'More Football' }),
+	).not.toBeInTheDocument();
+	expect(screen.getByText(defaultTrail.headline)).toBeInTheDocument();
 };
 
-const scenarios: Scenario[] = [
-	...(['boost', 'megaboost', 'gigaboost'] as const).map((boostLevel) => ({
-		containerType: 'flexible/general' as const,
-		boostLevel,
-		showMiniNav: true,
-		hasData: true,
-		expected: true,
-	})),
-	...([undefined, 'default'] as const).map((boostLevel) => ({
-		containerType: 'flexible/general' as const,
-		boostLevel,
-		showMiniNav: true,
-		hasData: true,
-		expected: false,
-	})),
-	...([undefined, 'static/medium/4', 'flexible/special'] as const).map(
-		(containerType) => ({
-			containerType,
-			boostLevel: 'boost' as const,
-			showMiniNav: true,
-			hasData: true,
-			expected: false,
-		}),
-	),
-	{
-		containerType: 'flexible/general',
-		boostLevel: 'boost',
-		showMiniNav: false,
-		hasData: true,
-		expected: false,
-	},
-	{
-		containerType: 'flexible/general',
-		boostLevel: 'boost',
-		showMiniNav: true,
-		hasData: false,
-		expected: false,
-	},
-];
+describe('FrontCard mini navigation', () => {
+	it.each(['boost', 'megaboost', 'gigaboost'] as const)(
+		'renders mini navigation for a %s card',
+		(boostLevel) => {
+			renderCard({ trail: { ...defaultTrail, boostLevel } });
 
-describe.each(scenarios)(
-	'FrontCard mini navigation: $containerType / $boostLevel / enabled=$showMiniNav / data=$hasData',
-	({ containerType, boostLevel, showMiniNav, hasData, expected }) => {
-		it.each([true, false])(
-			'renders the mini nav with showHeaderText set to %s',
-			(showHeaderText) => {
-				const parsedResponse = JSON.parse(response) as {
-					pressedPage: {
-						collections: {
-							curated: FEFrontCard[];
-						}[];
-					};
-				};
-				const [frontCard] =
-					parsedResponse.pressedPage.collections[0]!.curated;
-				if (!frontCard) {
-					throw new Error('DCR response has no curated card');
-				}
+			expect(
+				screen.getByRole('link', { name: 'More Football' }),
+			).toHaveAttribute('href', '/football');
+			expect(screen.getByText(defaultTrail.headline)).toBeInTheDocument();
+		},
+	);
 
-				const [enhancedCard] = enhanceCards([frontCard], {
-					cardInTagPage: false,
-					editionId: 'UK',
-					discussionApiUrl: '',
-					serverSideABTests: {},
-					featureSwitches: {},
-				});
-				if (!enhancedCard) {
-					throw new Error('DCR card could not be enhanced');
-				}
-				if (!enhancedCard.miniNavData) {
-					throw new Error('Mini nav data is missing');
-				}
-				enhancedCard.miniNavData.header.showHeaderText = showHeaderText;
-				enhancedCard.boostLevel = boostLevel;
-				enhancedCard.showMiniNav = showMiniNav;
-				if (!hasData) enhancedCard.miniNavData = undefined;
+	it.each([undefined, 'default'] as const)(
+		'does not render mini navigation with boost level %s',
+		(boostLevel) => {
+			renderCard({ trail: { ...defaultTrail, boostLevel } });
 
-				render(
-					<ConfigProvider
-						value={{
-							renderingTarget: 'Web',
-							darkModeAvailable: false,
-							assetOrigin: '/',
-							editionId: 'UK',
-						}}
-					>
-						<FrontCard
-							trail={enhancedCard}
-							containerType={containerType}
-							imageLoading="eager"
-							serverTime={1793031866891}
-						/>
-					</ConfigProvider>,
-				);
+			expectMiniNavAbsent();
+		},
+	);
 
-				if (!expected) {
-					expect(
-						screen.queryByText('Football'),
-					).not.toBeInTheDocument();
-					expect(
-						screen.queryByRole('link', { name: 'More Football' }),
-					).not.toBeInTheDocument();
-					expect(
-						screen.getByText(/PSG beat Barça/),
-					).toBeInTheDocument();
-					return;
-				}
+	it.each([undefined, 'static/medium/4', 'flexible/special'] as const)(
+		'does not render mini navigation in container %s',
+		(containerType) => {
+			renderCard({ containerType });
 
-				if (showHeaderText) {
-					const header = screen.getByRole('link', {
-						name: 'Football',
-					});
-					expect(header).toHaveAttribute('href', '/football');
-					expect(header).toHaveStyle('text-decoration: underline');
-				} else {
-					expect(
-						screen.queryByText('Football'),
-					).not.toBeInTheDocument();
-				}
-				expect(
-					screen.getByRole('link', { name: 'More Football' }),
-				).toHaveAttribute('href', '/football');
-				expect(screen.getByText(/PSG beat Barça/)).toBeInTheDocument();
+			expectMiniNavAbsent();
+		},
+	);
 
-				const miniNav = screen
-					.getByRole('link', { name: 'More Football' })
-					.closest('[data-component-id]');
-				const navWrapper = miniNav?.parentElement;
-				const cardWrapper = navWrapper?.parentElement;
+	it('does not render mini navigation when disabled', () => {
+		renderCard({ trail: { ...defaultTrail, showMiniNav: false } });
 
-				expect(cardWrapper).toHaveStyle({
-					display: 'flex',
-					flexDirection: 'column',
-					width: '100%',
-				});
-				expect(cardWrapper?.firstElementChild).toBe(navWrapper);
-				expect(cardWrapper).toContainElement(
-					screen.getByText(/PSG beat Barça/),
-				);
-				expect(navWrapper).toHaveStyle({
-					'--masthead-nav-link-text': 'var(--article-text)',
-					'--masthead-nav-link-text-hover': 'var(--article-text)',
-				});
+		expectMiniNavAbsent();
+	});
+
+	it('does not render mini navigation when configuration is missing', () => {
+		renderCard({ trail: { ...defaultTrail, miniNavData: undefined } });
+
+		expectMiniNavAbsent();
+	});
+
+	it('renders an underlined header link when header text is enabled', () => {
+		renderCard();
+
+		const header = screen.getByRole('link', { name: 'Football' });
+		expect(header).toHaveAttribute('href', '/football');
+		expect(header).toHaveStyle('text-decoration: underline');
+	});
+
+	it('renders header text without a link when the header has no path', () => {
+		renderCard({
+			trail: {
+				...defaultTrail,
+				miniNavData: {
+					...miniNavData,
+					header: { ...miniNavData.header, dotcomPath: undefined },
+				},
 			},
+		});
+
+		expect(screen.getByText('Football')).toBeInTheDocument();
+		expect(screen.getByText('Football').closest('a')).toBeNull();
+		expect(
+			screen.getByRole('link', { name: 'More Football' }),
+		).toHaveAttribute('href', '/football');
+	});
+
+	it('hides the header without hiding navigation links when header text is disabled', () => {
+		renderCard({
+			trail: {
+				...defaultTrail,
+				miniNavData: {
+					...miniNavData,
+					header: { ...miniNavData.header, showHeaderText: false },
+				},
+			},
+		});
+
+		expect(screen.queryByText('Football')).not.toBeInTheDocument();
+		expect(
+			screen.getByRole('link', { name: 'More Football' }),
+		).toHaveAttribute('href', '/football');
+		expect(screen.getByText(defaultTrail.headline)).toBeInTheDocument();
+	});
+
+	it('places mini navigation before the card content in a full-width column', () => {
+		renderCard();
+
+		const miniNav = screen
+			.getByRole('link', { name: 'More Football' })
+			.closest('[data-component-id]');
+		const navWrapper = miniNav?.parentElement;
+		const cardWrapper = navWrapper?.parentElement;
+
+		expect(cardWrapper).toHaveStyle({
+			display: 'flex',
+			flexDirection: 'column',
+			width: '100%',
+		});
+		expect(cardWrapper?.firstElementChild).toBe(navWrapper);
+		expect(cardWrapper).toContainElement(
+			screen.getByText(defaultTrail.headline),
 		);
-	},
-);
+	});
+
+	it('uses article text colours for mini navigation links', () => {
+		renderCard();
+
+		const miniNav = screen
+			.getByRole('link', { name: 'More Football' })
+			.closest('[data-component-id]');
+
+		expect(miniNav?.parentElement).toHaveStyle({
+			'--masthead-nav-link-text': 'var(--article-text)',
+			'--masthead-nav-link-text-hover': 'var(--article-text)',
+		});
+	});
+});
