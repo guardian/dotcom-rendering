@@ -3,7 +3,7 @@ import type { BannerProps } from '@guardian/support-dotcom-components/dist/share
 import type { ComponentType } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { validatedBannerWrapper } from '../common/BannerWrapper';
-import type { BannerRenderProps, PromotedNewsletter } from '../common/types';
+import type { BannerRenderProps } from '../common/types';
 import type { BannerData } from '../designableBanner/BannerProps';
 import { BannerBody } from '../designableBanner/components/BannerBody';
 import { BannerCloseButton } from '../designableBanner/components/BannerCloseButton';
@@ -162,17 +162,11 @@ export const NewsletterBannerComponent = (
 const ValidatedNewsletterBanner = validatedBannerWrapper(
 	NewsletterBannerComponent,
 	'newsletter-banner',
-) as ComponentType<
-	BannerProps & {
-		idApiUrl: string;
-		promotedNewsletter?: PromotedNewsletter;
-	}
->;
+) as ComponentType<BannerProps & { idApiUrl: string }>;
 
 export const NewsletterBanner = ({
 	idApiUrl,
 	...props
-}: BannerProps & {
-	idApiUrl: string;
-	promotedNewsletter?: PromotedNewsletter;
-}): JSX.Element => <ValidatedNewsletterBanner {...props} idApiUrl={idApiUrl} />;
+}: BannerProps & { idApiUrl: string }): JSX.Element => (
+	<ValidatedNewsletterBanner {...props} idApiUrl={idApiUrl} />
+);

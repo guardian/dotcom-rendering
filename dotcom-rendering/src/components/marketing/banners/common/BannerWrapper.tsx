@@ -39,7 +39,6 @@ import type {
 	BannerId,
 	BannerRenderedContent,
 	BannerRenderProps,
-	PromotedNewsletter,
 } from './types';
 
 function getComponentIds(bannerId: BannerId) {
@@ -127,13 +126,12 @@ const withBannerData =
 			abandonedBasket,
 			promoCodes,
 			isCollapsible,
+			promotedNewsletter,
 			contributionsServiceUrl,
 		} = bannerProps;
-		const { idApiUrl, promotedNewsletter } =
-			bannerProps as CloseableBannerProps & {
-				idApiUrl?: string;
-				promotedNewsletter?: PromotedNewsletter;
-			};
+		const { idApiUrl } = bannerProps as CloseableBannerProps & {
+			idApiUrl?: string;
+		};
 
 		const [hasBeenSeen, setNode] = useIsInView({
 			debounce: true,

@@ -205,7 +205,6 @@ export const buildPayload = async ({
 
 	const targeting: BannerPayload['targeting'] & {
 		auxiaRolloutMvtId?: number;
-		userSubscriptions: number[];
 	} = {
 		shouldHideReaderRevenue,
 		isPaidContent,
