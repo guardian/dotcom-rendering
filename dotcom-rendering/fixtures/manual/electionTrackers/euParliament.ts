@@ -144,6 +144,8 @@ export const euParliament: ElectionComponentsJson = {
 			props: {
 				text: 'See full results',
 				link: 'https://www.theguardian.com',
+				description:
+					'Full live results from the European parliament elections 2024',
 			},
 		},
 	],

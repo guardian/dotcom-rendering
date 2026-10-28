@@ -91,8 +91,8 @@ describe('MorePuzzlesCard dark mode title colours', () => {
 	};
 
 	it('maps each group title to its lighter dark mode tint', () => {
-		// sudoku: sport[600]; crossword: news[550]
-		expect(titleDarkColours()).toEqual(['#90DCFF', '#FF9081']);
+		// sudoku: sport[500]; crossword: news[550]
+		expect(titleDarkColours()).toEqual(['#00B2FF', '#FF9081']);
 	});
 });
 

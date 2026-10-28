@@ -570,7 +570,6 @@ describe('Enhance Cards', () => {
 				isClosedForComments: false,
 			},
 			display: {
-				isBoosted: false,
 				showBoostedHeadline: false,
 				showQuotedHeadline: false,
 				imageHide: false,

@@ -243,18 +243,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "articles-and-publishing-migrate-interactive-layout",
-		description:
-			"Migrate interactive articles to the new grid-based layout",
-		owners: ["articles.and.publishing@guardian.co.uk "],
-		status: "ON",
-		expirationDate: "2027-08-31",
-		type: "server",
-		audienceSize: 0 / 100,
-		groups: ["enable"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "articles-and-publishing-revamped-immersive-layout",
 		description: "New grid-based immersive layout for all articles",
 		owners: ["articles.and.publishing@guardian.co.uk "],
@@ -358,6 +346,19 @@ const ABTests: ABTest[] = [
 		status: "ON",
 		audienceSize: 0,
 		groups: ["enable"],
+	},
+	{
+		name: "newsroom-ai-tag-page-storylines",
+		description:
+			"Testing the AI generated storylines component on tag pages",
+		owners: ["ai.dev@guardian.co.uk"],
+		expirationDate: `2026-11-30`,
+		type: "server",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "B",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
 	},
 ];
 

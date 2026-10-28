@@ -25,3 +25,10 @@ const FILTER_TAG_IDS = [
 
 export const hasFilterTag = (tags: Array<Pick<TagType, 'id'>>): boolean =>
 	tags.some((tag) => FILTER_TAG_IDS.includes(tag.id));
+
+export const isRepublished = (
+	firstPublicationDate: string | undefined,
+	webPublicationDate: string,
+): boolean =>
+	firstPublicationDate !== undefined &&
+	Date.parse(firstPublicationDate) !== Date.parse(webPublicationDate);

@@ -35,7 +35,7 @@ export const Default = meta.story({
 			"An exclusive roundup of the week's best Guardian journalism from the editor-in-chief, Katharine Viner, free to your inbox every Saturday.",
 		frequency: 'Weekly',
 		illustrationSquare:
-			'https://i.guim.co.uk/img/uploads/2023/11/01/SaturdayEdition_-_5-3.jpg?width=220&dpr=2&s=none&crop=5%3A3',
+			'https://media.guim.co.uk/efd4be7a85fd7fb5118c712b7087c758bbf45e6b/0_0_1000_1000/500.jpg',
 		children: <></>,
 	},
 });

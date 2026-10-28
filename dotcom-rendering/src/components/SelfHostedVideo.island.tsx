@@ -424,13 +424,19 @@ export const SelfHostedVideo = ({
 		(hasAudio || videoStyleSettings.supportsFullscreen) &&
 		playerState !== 'NOT_STARTED';
 
+	/**
+	 * When the controls are at the top, the bottom of the video is typically obscured
+	 * by other content, e.g. the headline overlay on a feature card, so the subtitles
+	 * are anchored to the top alongside the controls.
+	 */
 	const subtitlesPosition: SubtitlesPosition =
-		videoStyleSettings.useInteractiveProgressBar === true &&
-		controlsPosition === 'bottom'
-			? 'bottom-elevated'
-			: isMainMedia && format?.display === ArticleDisplay.Immersive
-				? 'top-on-mobile'
-				: 'bottom';
+		controlsPosition === 'top'
+			? 'top'
+			: videoStyleSettings.useInteractiveProgressBar === true
+				? 'bottom-elevated'
+				: isMainMedia && format?.display === ArticleDisplay.Immersive
+					? 'top-on-mobile'
+					: 'bottom';
 
 	/**
 	 * Show the play icon when the video is not playing, except for when it is scrolled out of view,

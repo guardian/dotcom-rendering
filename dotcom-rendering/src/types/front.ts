@@ -88,7 +88,6 @@ export type DCRFrontCard = {
 	kickerText?: string;
 	supportingContent?: DCRSupportingContent[];
 	snapData?: DCRSnapType;
-	isBoosted?: boolean;
 	boostLevel?: BoostLevel;
 	isImmersive: boolean;
 	isCrossword?: boolean;
@@ -159,6 +158,8 @@ export type DCRSupportingContent = {
 	kickerText?: string;
 	format: ArticleFormat;
 	headlineTestUuid?: string;
+	/** Storylines: The date is shown in the supporting content for the key stories container in a tag page */
+	webPublicationDate?: string;
 };
 
 export type TreatType = {

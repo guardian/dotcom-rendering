@@ -1,3 +1,5 @@
+import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
+import type { PuzzleContainer } from '../types/puzzlesPage';
 import { validateAsPuzzlesPageType } from './validate';
 
 const validPage = () => ({
@@ -306,5 +308,135 @@ describe('validateAsPuzzlesPageType', () => {
 		page.layout.containers.pop();
 		page.layout.containers[0]!.content.nestedContainers.push(ad as never);
 		expect(() => validateAsPuzzlesPageType(page)).toThrow();
+	});
+
+	it('accepts commercial properties for a subset of editions', () => {
+		const page = {
+			...validPage(),
+			commercialProperties: {
+				AU: { adTargeting: [], branding: puzzlesBranding },
+				UK: { adTargeting: [] },
+			},
+		};
+		expect(
+			validateAsPuzzlesPageType(page).commercialProperties?.AU?.branding
+				?.sponsorName,
+		).toBe('Example sponsor');
+	});
+
+	it.each([undefined, 'featured', 'standard'])(
+		'accepts per-edition sponsorship on top-level %s containers',
+		(variant) => {
+			const page = validPage();
+			Object.assign(page.layout.containers[0]!, {
+				variant,
+				commercialProperties: {
+					AU: { adTargeting: [], branding: puzzlesBranding },
+				},
+			});
+			expect(validateAsPuzzlesPageType(page)).toBeDefined();
+		},
+	);
+
+	it.each([1, 2])('rejects sponsorship at nested depth %s', (depth) => {
+		const page = validPage();
+		const nested: PuzzleContainer = {
+			id: 'nested-games',
+			title: 'Nested games',
+			content: { items: [], nestedContainers: [] },
+		};
+		let container = nested;
+		for (let parentIndex = 0; parentIndex < depth; parentIndex++) {
+			container = {
+				id: `parent-${parentIndex}`,
+				title: 'Parent',
+				content: { items: [], nestedContainers: [container] },
+			};
+		}
+		page.layout.containers = [container as never];
+		expect(validateAsPuzzlesPageType(page)).toBeDefined();
+		nested.commercialProperties = {
+			AU: { adTargeting: [], branding: puzzlesBranding },
+		};
+		expect(() => validateAsPuzzlesPageType(page)).toThrow();
+	});
+
+	it.each([
+		{
+			id: 'ad-container',
+			title: '',
+			variant: 'ad',
+			adSlot: 'inline1',
+			content: { items: [], nestedContainers: [] },
+		},
+		{
+			id: 'supporting-container',
+			title: '',
+			variant: 'supporting',
+			content: { items: [], nestedContainers: [] },
+			supporting: {
+				usefulLinksTitle: 'Useful links',
+				usefulLinks: [],
+				popularTitle: 'Popular puzzles',
+				popularGroups: [],
+			},
+		},
+	])(
+		'rejects sponsorship on otherwise valid $variant containers',
+		(container) => {
+			const page = validPage();
+			page.layout.containers = [container];
+			expect(validateAsPuzzlesPageType(page)).toBeDefined();
+			Object.assign(container, {
+				commercialProperties: {
+					AU: { adTargeting: [], branding: puzzlesBranding },
+				},
+			});
+			expect(() => validateAsPuzzlesPageType(page)).toThrow();
+		},
+	);
+
+	it.each([
+		null,
+		{ XX: { adTargeting: [] } },
+		{ AU: { adTargeting: [], branding: { sponsorName: 'Missing logo' } } },
+	])(
+		'rejects invalid container commercial properties: %j',
+		(commercialProperties) => {
+			for (const nested of [false, true]) {
+				const page = validPage();
+				const container = {
+					id: 'invalid-sponsor',
+					title: 'Invalid sponsor',
+					content: { items: [], nestedContainers: [] },
+					commercialProperties,
+				};
+				if (nested) {
+					page.layout.containers[0]!.content.nestedContainers.push(
+						container as never,
+					);
+				} else {
+					Object.assign(page.layout.containers[0]!, container);
+				}
+				expect(() => validateAsPuzzlesPageType(page)).toThrow();
+			}
+		},
+	);
+
+	it.each([
+		[
+			'branding without a logo',
+			{
+				AU: {
+					adTargeting: [],
+					branding: { sponsorName: 'x', aboutThisLink: '' },
+				},
+			},
+		],
+		['an unknown edition', { XX: { adTargeting: [] } }],
+	])('rejects commercial properties with %s', (_, commercialProperties) => {
+		expect(() =>
+			validateAsPuzzlesPageType({ ...validPage(), commercialProperties }),
+		).toThrow();
 	});
 });

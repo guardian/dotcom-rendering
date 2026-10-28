@@ -16,6 +16,7 @@ import {
 } from '../components/PuzzlesBranding';
 import { PuzzlesDirectoryProgress } from '../components/PuzzlesDirectoryProgress.island';
 import { Section } from '../components/Section';
+import { has } from '../lib/has-string';
 import { puzzlesPageTheme } from '../lib/puzzlesTheme';
 import type { NavType } from '../model/extract-nav';
 import type { Branding } from '../types/branding';
@@ -170,7 +171,6 @@ export const PuzzlesLayout = ({
 	darkModeAvailable?: boolean;
 	puzzlesPage: FEPuzzlesPageType;
 	NAV: NavType;
-	/** Not yet supplied by page data; set in Storybook to preview the sponsored design. */
 	branding?: Branding;
 }) => {
 	const renderAds = !puzzlesPage.isAdFreeUser;
@@ -253,12 +253,22 @@ export const PuzzlesLayout = ({
 					</picture>
 					{branding && <PuzzlesBranding branding={branding} />}
 				</header>
-				{branding && <PuzzlesBrandingAboutLink branding={branding} />}
+				{branding && has(branding.aboutThisLink) && (
+					<PuzzlesBrandingAboutLink branding={branding} />
+				)}
 				<Island priority="critical">
 					<PuzzlesDirectoryProgress
 						layout={puzzlesPage.layout}
 						renderAds={renderAds}
 						hideTopRule={!!branding}
+						containerBranding={Object.fromEntries(
+							puzzlesPage.layout.containers.map((container) => [
+								container.id,
+								container.commercialProperties?.[
+									puzzlesPage.editionId
+								]?.branding,
+							]),
+						)}
 					/>
 				</Island>
 			</main>
