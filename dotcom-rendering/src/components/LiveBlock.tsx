@@ -6,7 +6,6 @@ import { RenderArticleElement } from '../lib/renderElement';
 import type { Block } from '../types/blocks';
 import type { Switches } from '../types/config';
 import { ElectionTrackerWrapper } from './ElectionTrackerWrapper.island';
-import { ElectionTrackerWrapper } from './ElectionTrackerWrapper.island';
 import { Island } from './Island';
 import { LastUpdated } from './LastUpdated';
 import { LiveBlockContainer } from './LiveBlockContainer';

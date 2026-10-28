@@ -141,9 +141,15 @@ type Props = {
 	pinnedPost: Block;
 	children: React.ReactNode;
 	serverTime?: number;
+	shouldExpandPinnedPost?: boolean;
 };
 
-export const PinnedPost = ({ pinnedPost, children, serverTime }: Props) => {
+export const PinnedPost = ({
+	pinnedPost,
+	children,
+	serverTime,
+	shouldExpandPinnedPost,
+}: Props) => {
 	return (
 		<div
 			id="pinned-post"
@@ -161,6 +167,7 @@ export const PinnedPost = ({ pinnedPost, children, serverTime }: Props) => {
 				name="pinned-post-checkbox"
 				tabIndex={-1}
 				key="PinnedPostCheckbox"
+				defaultChecked={shouldExpandPinnedPost}
 			/>
 			<div css={rowStyles}>
 				<SvgPinned />
