@@ -228,7 +228,11 @@ export const StandardLayoutArticleGrid = ({
 		? 'auto'
 		: `max(calc(80vh - ${immersiveHeaderHeight}px), calc(25rem - ${immersiveHeaderHeight}px))`;
 
-	const layoutType = getLayoutType(format, mainMediaOrientation);
+	const topHatTestingPage = 'p/x4zt8y';
+	const layoutType =
+		article.config.shortUrlId === topHatTestingPage
+			? 'interactiveTopHatFull'
+			: getLayoutType(format, mainMediaOrientation);
 
 	const setCentreRule = (gridLayout: LayoutType) => {
 		if (isLabs || gridLayout === 'interactiveStandard') return undefined;
