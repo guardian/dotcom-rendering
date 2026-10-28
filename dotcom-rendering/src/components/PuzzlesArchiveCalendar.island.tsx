@@ -437,6 +437,10 @@ const calendarStyles = css`
 	}
 	${from.desktop} {
 		grid-template-columns: repeat(7, 78px);
+		.day[data-status='unavailable'] {
+			border-color: ${palette.neutral[93]};
+			color: ${palette.neutral[46]};
+		}
 	}
 `;
 
