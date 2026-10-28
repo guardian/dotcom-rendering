@@ -14,8 +14,8 @@ const outerContainerStyles = css`
 `;
 
 const innerContainerStyles = css`
-	--background-color: #fef6f0;
-	background-color: var(--background-color);
+	/* stylelint-disable-next-line color-no-hex */
+	background-color: #fef6f0;
 	position: relative;
 `;
 
