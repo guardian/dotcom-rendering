@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '../lib/articleFormat';
-import { isMediaCard } from '../lib/cardHelpers';
+import { isMediaCard, isMiniNavSupported } from '../lib/cardHelpers';
 import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
@@ -67,7 +67,9 @@ export const FrontCard = (props: Props) => {
 	};
 
 	const headerContent =
-		trail.showMiniNav && trail.miniNavData ? (
+		isMiniNavSupported(cardProps.containerType, trail.boostLevel) &&
+		trail.showMiniNav &&
+		trail.miniNavData ? (
 			<div
 				css={css`
 					position: relative;

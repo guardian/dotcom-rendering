@@ -74,6 +74,7 @@ const trail: DCRFrontCard = {
 	discussionApiUrl: '',
 	webPublicationDate: '2022-01-01T10:00:00.000Z',
 	showMiniNav: true,
+	boostLevel: 'boost',
 	miniNavData,
 };
 
@@ -82,6 +83,7 @@ const meta = {
 	title: 'Components/FrontCard/MiniNav',
 	args: {
 		trail,
+		containerType: 'flexible/general',
 		trailText: trail.trailText,
 		mediaPositionOnMobile: 'left',
 		mediaPositionOnDesktop: 'right',
@@ -169,6 +171,24 @@ const meta = {
 export default meta;
 
 type Story = StoryObj<typeof meta>;
+
+export const BelowBoostedLevel = {
+	args: {
+		trail: {
+			...trail,
+			boostLevel: 'default',
+		},
+	},
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement);
+		await expect(canvas.getByText(trail.headline)).toBeVisible();
+		await expect(
+			canvasElement.querySelector(
+				'[data-component-id="environment-mini-nav"]',
+			),
+		).toBeNull();
+	},
+} satisfies Story;
 
 export const HeaderIsLink = {
 	play: async (context) => {
