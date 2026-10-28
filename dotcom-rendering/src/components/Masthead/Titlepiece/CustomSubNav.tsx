@@ -29,6 +29,7 @@ type Props = {
 	hasPageSkin?: boolean;
 	underlineHeader?: boolean;
 	showHeaderDivider?: boolean;
+	scrollHeaderWithLinks?: boolean;
 };
 
 const subNavStyles = css`
@@ -329,6 +330,7 @@ export const CustomSubNav = ({
 	hasPageSkin,
 	underlineHeader,
 	showHeaderDivider = true,
+	scrollHeaderWithLinks = false,
 }: Props) => {
 	const isArticle = renderingPage === 'article';
 	/** DCR receives images for all platforms; only web images are rendered here. */
@@ -395,7 +397,17 @@ export const CustomSubNav = ({
 			data-component={`custom-subnav-${customSubNav.header.headerText}`}
 			data-component-id={customSubNav.id}
 			data-rendering-page={renderingPage}
-			css={isArticle ? articleContainerStyles : frontContainerStyles}
+			css={[
+				isArticle ? articleContainerStyles : frontContainerStyles,
+				scrollHeaderWithLinks &&
+					css`
+						${scrollableSubNavStyles}
+						& > a,
+						& > span {
+							flex-shrink: 0;
+						}
+					`,
+			]}
 		>
 			{CustomHeader(
 				customSubNav,
@@ -411,8 +423,13 @@ export const CustomSubNav = ({
 				css={[
 					subNavStyles,
 					!hasPageSkin && subNavStylesFromLeftCol,
-					scrollableSubNavStyles,
+					!scrollHeaderWithLinks && scrollableSubNavStyles,
 					isArticle && articleSubNavStyles,
+					scrollHeaderWithLinks &&
+						css`
+							flex-shrink: 0;
+							width: max-content;
+						`,
 				]}
 				role="list"
 				style={{

@@ -143,9 +143,17 @@ const meta = {
 			await expect(
 				miniNav.getBoundingClientRect().right,
 			).toBeLessThanOrEqual(card.getBoundingClientRect().right);
-			const links = miniNav.querySelector('ul');
-			if (!links) throw new Error('Mini nav has no links list');
-			await expect(links.scrollWidth).toBeGreaterThan(links.clientWidth);
+			await expect(miniNav.scrollWidth).toBeGreaterThan(
+				miniNav.clientWidth,
+			);
+			const firstItem = miniNav.firstElementChild;
+			if (!firstItem) throw new Error('Mini nav has no content');
+			const initialLeft = firstItem.getBoundingClientRect().left;
+			miniNav.scrollLeft = 100;
+			await expect(firstItem.getBoundingClientRect().left).toBeLessThan(
+				initialLeft,
+			);
+			miniNav.scrollLeft = 0;
 		}
 		for (const { linkText, dotcomPath } of miniNavData.links) {
 			for (const link of canvas.getAllByRole('link', {

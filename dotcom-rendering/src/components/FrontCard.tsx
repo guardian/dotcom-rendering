@@ -85,6 +85,7 @@ export const FrontCard = (props: Props) => {
 					renderingPage="article"
 					underlineHeader={true}
 					showHeaderDivider={false}
+					scrollHeaderWithLinks={true}
 				/>
 			</div>
 		) : undefined;
