@@ -214,6 +214,35 @@ export const LogicPuzzles = {
 	parameters: lightParameters,
 } satisfies Story;
 
+const manyCrosswords = [
+	...puzzles,
+	...['Genius', 'Prize', 'Everyman', 'Azed', 'Speedy'].map((title) => {
+		const id = title.toLowerCase();
+		return {
+			id,
+			title,
+			puzzleType: id.toUpperCase(),
+			slug: `crosswords/${id}`,
+			set: id,
+		};
+	}),
+];
+
+/**
+ * More puzzle types than fit on one line, so the chips wrap onto extra lines
+ * (mouse) instead of being cut off. Touch devices get a swipeable carousel
+ * faded at both edges, which Chromatic can't show: it can't emulate a touch
+ * pointer, so check it with a touch device or the browser's device mode.
+ */
+export const ManyPuzzleTypes = {
+	args: {
+		puzzlesPage: createPuzzlesPage({
+			archive: { ...archive, puzzles: manyCrosswords },
+		}),
+	},
+	parameters: lightParameters,
+} satisfies Story;
+
 export const CrosswordsDark = {
 	args: { darkModeAvailable: true },
 	parameters: darkParameters,
