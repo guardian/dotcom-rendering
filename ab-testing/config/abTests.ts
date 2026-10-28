@@ -370,7 +370,7 @@ const ABTests: ABTest[] = [
 		status: "ON",
 		audienceSize: 0,
 		audienceSpace: "A",
-		groups: ["control", "variant"],
+		groups: ["control", "variant-primary", "variant-primary-secondary"],
 	},
 ];
 
