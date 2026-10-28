@@ -4301,7 +4301,7 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
       ],
       "Properties": {
         "MaxCapacity": 30,
-        "MinCapacity": 6,
+        "MinCapacity": 3,
         "ResourceId": {
           "Fn::Join": [
             "",
@@ -5552,13 +5552,13 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
                   "TargetGroupArn": {
                     "Ref": "TargetGroupInteractiverenderingB3F5F6D3",
                   },
-                  "Weight": 90,
+                  "Weight": 50,
                 },
                 {
                   "TargetGroupArn": {
                     "Ref": "InteractiverenderingEcsTargetGroupInteractiverendering62D942CE",
                   },
-                  "Weight": 10,
+                  "Weight": 50,
                 },
               ],
             },
