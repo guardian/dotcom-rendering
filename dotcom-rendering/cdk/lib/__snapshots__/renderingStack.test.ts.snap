@@ -1689,6 +1689,8 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
       "GuHttpsEgressSecurityGroup",
       "GuAutoScalingGroup",
       "GuApplicationTargetGroup",
+      "GuRepository",
+      "GuArtifactsAccountId",
       "GuRiffRaffDeploymentIdParameterExperimental",
       "GuHttpsEgressSecurityGroup",
       "GuApplicationTargetGroup",
@@ -1722,8 +1724,9 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
       "Description": "S3 bucket to store your access logs",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
-    "ArtifactAccountIdParameter": {
+    "ArtifactsAccountId": {
       "Default": "/organisation/accounts/artifacts",
+      "Description": "Account ID of the Artifacts account. Useful as some shared resources live here.",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
     "DistributionBucketName": {
@@ -2239,7 +2242,7 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
                 "",
                 [
                   {
-                    "Ref": "ArtifactAccountIdParameter",
+                    "Ref": "ArtifactsAccountId",
                   },
                   ".dkr.ecr.eu-west-1.",
                   {
@@ -2464,7 +2467,7 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
                     },
                     ":ecr:eu-west-1:",
                     {
-                      "Ref": "ArtifactAccountIdParameter",
+                      "Ref": "ArtifactsAccountId",
                     },
                     ":repository/guardian/dotcom-rendering/dotcom-rendering",
                   ],
@@ -3767,6 +3770,8 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
       "GuHttpsEgressSecurityGroup",
       "GuAutoScalingGroup",
       "GuApplicationTargetGroup",
+      "GuRepository",
+      "GuArtifactsAccountId",
       "GuRiffRaffDeploymentIdParameterExperimental",
       "GuHttpsEgressSecurityGroup",
       "GuApplicationTargetGroup",
@@ -3802,8 +3807,9 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
       "Description": "S3 bucket to store your access logs",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
-    "ArtifactAccountIdParameter": {
+    "ArtifactsAccountId": {
       "Default": "/organisation/accounts/artifacts",
+      "Description": "Account ID of the Artifacts account. Useful as some shared resources live here.",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
     "DistributionBucketName": {
@@ -4430,7 +4436,7 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
                 "",
                 [
                   {
-                    "Ref": "ArtifactAccountIdParameter",
+                    "Ref": "ArtifactsAccountId",
                   },
                   ".dkr.ecr.eu-west-1.",
                   {
@@ -4655,7 +4661,7 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
                     },
                     ":ecr:eu-west-1:",
                     {
-                      "Ref": "ArtifactAccountIdParameter",
+                      "Ref": "ArtifactsAccountId",
                     },
                     ":repository/guardian/dotcom-rendering/dotcom-rendering",
                   ],
@@ -6390,6 +6396,8 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
       "GuSubnetListParameter",
       "GuSubnetListParameter",
       "GuLoadBalancedAppExperimental",
+      "GuRepository",
+      "GuArtifactsAccountId",
       "GuLoggingStreamNameParameter",
       "GuRiffRaffDeploymentIdParameterExperimental",
       "GuLogShippingPolicy",
@@ -6422,8 +6430,9 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
       "Description": "S3 bucket to store your access logs",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
-    "ArtifactAccountIdParameter": {
+    "ArtifactsAccountId": {
       "Default": "/organisation/accounts/artifacts",
+      "Description": "Account ID of the Artifacts account. Useful as some shared resources live here.",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
     "DistributionBucketName": {
@@ -6830,7 +6839,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
                 "",
                 [
                   {
-                    "Ref": "ArtifactAccountIdParameter",
+                    "Ref": "ArtifactsAccountId",
                   },
                   ".dkr.ecr.eu-west-1.",
                   {
@@ -7055,7 +7064,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
                     },
                     ":ecr:eu-west-1:",
                     {
-                      "Ref": "ArtifactAccountIdParameter",
+                      "Ref": "ArtifactsAccountId",
                     },
                     ":repository/guardian/dotcom-rendering/dotcom-rendering",
                   ],
@@ -7762,6 +7771,8 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
       "GuSubnetListParameter",
       "GuSubnetListParameter",
       "GuLoadBalancedAppExperimental",
+      "GuRepository",
+      "GuArtifactsAccountId",
       "GuLoggingStreamNameParameter",
       "GuRiffRaffDeploymentIdParameterExperimental",
       "GuLogShippingPolicy",
@@ -7795,8 +7806,9 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
       "Description": "S3 bucket to store your access logs",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
-    "ArtifactAccountIdParameter": {
+    "ArtifactsAccountId": {
       "Default": "/organisation/accounts/artifacts",
+      "Description": "Account ID of the Artifacts account. Useful as some shared resources live here.",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
     "DistributionBucketName": {
@@ -8203,7 +8215,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
                 "",
                 [
                   {
-                    "Ref": "ArtifactAccountIdParameter",
+                    "Ref": "ArtifactsAccountId",
                   },
                   ".dkr.ecr.eu-west-1.",
                   {
@@ -8428,7 +8440,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
                     },
                     ":ecr:eu-west-1:",
                     {
-                      "Ref": "ArtifactAccountIdParameter",
+                      "Ref": "ArtifactsAccountId",
                     },
                     ":repository/guardian/dotcom-rendering/dotcom-rendering",
                   ],
