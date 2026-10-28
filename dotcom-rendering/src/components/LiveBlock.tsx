@@ -62,15 +62,6 @@ export const LiveBlock = ({
 
 	const isOriginalPinnedPost = !isPinnedPost && block.id === pinnedPostId;
 
-	// Determine if the election tracker should be shown based on the presence of the correct element.id
-	const showElectionTracker = block.elements.some(
-		(element) =>
-			element._type ===
-				'model.dotcomrendering.pageElements.InteractiveAtomBlockElement' &&
-			element.id ===
-				'interactives/2026/11/election-trackers/us-election-tracker-2026',
-	);
-
 	return (
 		<LiveBlockContainer
 			id={block.id}
@@ -86,9 +77,10 @@ export const LiveBlock = ({
 		>
 			{block.elements.map((element, index) => {
 				if (
-					showElectionTracker &&
 					element._type ===
-						'model.dotcomrendering.pageElements.InteractiveAtomBlockElement'
+						'model.dotcomrendering.pageElements.InteractiveAtomBlockElement' &&
+					element.id ===
+						'interactives/2026/11/election-trackers/us-election-tracker-2026'
 				) {
 					return (
 						<div
