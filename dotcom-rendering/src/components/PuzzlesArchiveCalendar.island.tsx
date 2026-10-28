@@ -248,6 +248,9 @@ const recentStyles = css`
 		);
 		${headlineBold20};
 	}
+	a:hover strong {
+		text-decoration: underline;
+	}
 	span {
 		${textSans14};
 	}
