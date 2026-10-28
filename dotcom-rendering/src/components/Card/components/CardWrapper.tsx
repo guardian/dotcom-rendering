@@ -13,6 +13,7 @@ type Props = {
 	showTopBarMobile: boolean;
 	containerPalette?: DCRContainerPalette;
 	topBarColour?: string;
+	topBarPadding?: number;
 	isLoopAndInLoopClickTestVariant?: boolean;
 };
 
@@ -77,23 +78,23 @@ const hoverStyles = (isLoopAndInLoopClickTestVariant: boolean) => css`
 	}
 `;
 
-const topBarStyles = (colour: string) => css`
+const topBarStyles = (colour: string, padding: number) => css`
 	::before {
 		border-top: 1px solid ${colour};
 		content: '';
 		width: 100%;
-		padding-bottom: ${space[2]}px;
+		padding-bottom: ${padding}px;
 		background-color: unset;
 	}
 `;
-const mobileTopBarStyles = (colour: string) => css`
+const mobileTopBarStyles = (colour: string, padding: number) => css`
 	${until.tablet} {
-		${topBarStyles(colour)}
+		${topBarStyles(colour, padding)}
 	}
 `;
-const desktopTopBarStyles = (colour: string) => css`
+const desktopTopBarStyles = (colour: string, padding: number) => css`
 	${from.tablet} {
-		${topBarStyles(colour)}
+		${topBarStyles(colour, padding)}
 	}
 `;
 
@@ -104,6 +105,7 @@ export const CardWrapper = ({
 	showTopBarMobile,
 	containerPalette,
 	topBarColour = palette('--card-border-top'),
+	topBarPadding = space[2],
 	isLoopAndInLoopClickTestVariant,
 }: Props) => {
 	return (
@@ -113,8 +115,10 @@ export const CardWrapper = ({
 					css={[
 						baseCardStyles,
 						hoverStyles(isLoopAndInLoopClickTestVariant === true),
-						showTopBarDesktop && desktopTopBarStyles(topBarColour),
-						showTopBarMobile && mobileTopBarStyles(topBarColour),
+						showTopBarDesktop &&
+							desktopTopBarStyles(topBarColour, topBarPadding),
+						showTopBarMobile &&
+							mobileTopBarStyles(topBarColour, topBarPadding),
 					]}
 				>
 					{children}
