@@ -233,3 +233,31 @@ export const HiddenHeader = {
 		).not.toBeInTheDocument();
 	},
 } satisfies Story;
+
+export const NavImageIsNotRendered = {
+	args: {
+		trail: {
+			...trail,
+			miniNavData: {
+				...miniNavData,
+				images: [
+					{
+						breakpoint: 'mobile',
+						platforms: ['web'],
+						imageSrc:
+							'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_210_5472_3283/master/5472.jpg',
+					},
+				],
+			},
+		},
+	},
+	play: async (context) => {
+		await HeaderIsLink.play(context);
+		const miniNavs = context.canvasElement.querySelectorAll(
+			'[data-component-id="environment-mini-nav"]',
+		);
+		for (const miniNav of miniNavs) {
+			await expect(miniNav.querySelector('picture, img')).toBeNull();
+		}
+	},
+} satisfies Story;
