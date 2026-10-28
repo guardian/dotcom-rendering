@@ -117,7 +117,7 @@ const Puzzles: ReactComponent<Inline1Props> = ({ variant }) => {
 						</h2>
 						<p css={bodyStyles}>
 							Whether you have one minute or all day, our new
-							puzzles and games hub has something you&apos;ll
+							puzzles and games hub has something you&rsquo;ll
 							love.
 						</p>
 						<LinkButton
