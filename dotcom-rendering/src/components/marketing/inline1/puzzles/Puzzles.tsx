@@ -14,7 +14,8 @@ const outerContainerStyles = css`
 `;
 
 const innerContainerStyles = css`
-	background-color: #fef6f0;
+	--background-color: #fef6f0;
+	background-color: var(--background-color);
 	position: relative;
 `;
 
