@@ -665,14 +665,6 @@ export const navWorld = {
 	],
 	brandExtensions: [
 		{
-			title: 'Search jobs',
-			url: 'https://jobs.theguardian.com',
-		},
-		{
-			title: 'Hire with Guardian Jobs',
-			url: 'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
-		},
-		{
 			title: 'Holidays',
 			url: 'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
 		},

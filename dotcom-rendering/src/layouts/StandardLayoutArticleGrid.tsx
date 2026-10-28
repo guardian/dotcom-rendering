@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
-import { from, space, until } from '@guardian/source/foundations';
-import { palette as sourcePalette } from '@guardian/source/foundations';
+import { between, from, space, until } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AffiliateDisclaimer } from '../components/AffiliateProducts/AffiliateDisclaimer';
@@ -40,6 +39,7 @@ import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { safeParseURL } from '../lib/parse';
 import { parse } from '../lib/slot-machine-flags';
+import { hasFilterTag } from '../lib/theFilter';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -81,7 +81,14 @@ const landscapeImmersiveMediaBelowDesktop = css`
 			z-index: ${getZIndex('mediaOverlay')};
 			background: ${themePalette('--headline-background-immersive')};
 			backdrop-filter: blur(8px);
-			mask-image: linear-gradient(180deg, transparent, black 90%);
+			mask-image: linear-gradient(
+				to bottom,
+				transparent,
+				rgb(0 0 0 / 12%) 25%,
+				rgb(0 0 0 / 50%) 55%,
+				rgb(0 0 0 / 85%) 80%,
+				black
+			);
 			pointer-events: none;
 		}
 	}
@@ -229,6 +236,10 @@ export const StandardLayoutArticleGrid = ({
 	const isImmersiveLandscape = layoutType === 'immersiveLandscape';
 	const isImmersive = isImmersivePortrait || isImmersiveLandscape;
 
+	const isFilterArticle = hasFilterTag(article.tags);
+	const tableOfContentsStyle =
+		isImmersive && isFilterArticle ? 'horizontal' : 'default';
+
 	const hasMinimumImageHeight =
 		isLabs && isImmersivePortrait && isMainMediaImage;
 
@@ -252,6 +263,12 @@ export const StandardLayoutArticleGrid = ({
 			${avatarDisplayed && `margin-top: -28px;`}
 		}
 	`;
+
+	// Immersive headlines overlap the bottom of the main media, so the
+	// disclaimer goes above the standfirst instead.
+	const hasImmersiveAffiliateDisclaimer =
+		isImmersive && article.affiliateLinksDisclaimerRequired;
+
 	const hideCaptionBeneathMainMedia =
 		layoutType === 'media' || isImmersiveLandscape || isImmersivePortrait;
 
@@ -259,10 +276,7 @@ export const StandardLayoutArticleGrid = ({
 		<article
 			css={[
 				css`
-					background-color: ${format.design ===
-					ArticleDesign.WeekendEssay
-						? '#fff4f2'
-						: themePalette('--article-background')};
+					background-color: ${themePalette('--article-background')};
 				`,
 				grid.container,
 				grid.outerRules(),
@@ -326,13 +340,6 @@ export const StandardLayoutArticleGrid = ({
 									margin-right: -20px;`}
 								}
 
-								${isImmersivePortrait &&
-								css`
-									${from.desktop} {
-										aspect-ratio: 4/5;
-									}
-								`}
-
 								${isImmersiveLandscape &&
 								landscapeImmersiveMediaBelowDesktop}
 
@@ -356,6 +363,20 @@ export const StandardLayoutArticleGrid = ({
 								`}
 							`
 						: undefined,
+					isImmersiveLandscape &&
+						css`
+							${until.phablet} {
+								aspect-ratio: 4 / 5;
+							}
+
+							${between.phablet.and.tablet} {
+								aspect-ratio: 3 / 4;
+							}
+
+							${between.tablet.and.desktop} {
+								aspect-ratio: 5 / 4;
+							}
+						`,
 					displayAvatarUrl && layoutType === 'picture'
 						? css`
 								margin-top: ${space[2]}px;
@@ -381,13 +402,14 @@ export const StandardLayoutArticleGrid = ({
 						contentLayout={contentLayoutName}
 						articleArrangement={layoutType}
 					/>
-					{article.affiliateLinksDisclaimerRequired && (
-						<AffiliateDisclaimer
-							cssOverrides={css`
-								margin: ${space[4]}px 0;
-							`}
-						/>
-					)}
+					{article.affiliateLinksDisclaimerRequired &&
+						!isImmersive && (
+							<AffiliateDisclaimer
+								cssOverrides={css`
+									margin: ${space[4]}px 0;
+								`}
+							/>
+						)}
 				</div>
 			</GridItem>
 			<GridItem
@@ -442,12 +464,8 @@ export const StandardLayoutArticleGrid = ({
 							${until.tablet} {
 								background: linear-gradient(
 									to bottom,
-									transparent
-										calc(
-											var(--immersive-headline-overlap) -
-												1px
-										),
-									${sourcePalette.neutral[10]}
+									transparent,
+									${headlineBackgroundImmersive}
 										calc(
 											var(--immersive-headline-overlap) -
 												1px
@@ -462,6 +480,13 @@ export const StandardLayoutArticleGrid = ({
 							${until.desktop} {
 								padding-bottom: ${space[8]}px;
 							}
+
+							/* Below tablet this padding is part of the
+							headline's dark background, so keep it there. */
+							${hasImmersiveAffiliateDisclaimer &&
+							`${between.tablet.and.desktop} {
+								padding-bottom: ${space[3]}px;
+							}`}
 						`,
 					isImmersivePortrait &&
 						css`
@@ -536,13 +561,17 @@ export const StandardLayoutArticleGrid = ({
 					isImmersive &&
 						css`
 							${until.tablet} {
-								padding-top: ${space[2]}px;
+								padding-top: ${hasImmersiveAffiliateDisclaimer
+									? space[3]
+									: space[2]}px;
 							}
 						`,
 					isImmersiveLandscape &&
 						css`
 							${from.desktop} {
-								padding-top: ${space[8]}px;
+								padding-top: ${hasImmersiveAffiliateDisclaimer
+									? space[3]
+									: space[8]}px;
 							}
 
 							${from.leftCol} {
@@ -551,6 +580,13 @@ export const StandardLayoutArticleGrid = ({
 						`,
 				]}
 			>
+				{hasImmersiveAffiliateDisclaimer && (
+					<AffiliateDisclaimer
+						cssOverrides={css`
+							margin: 0 0 ${space[2]}px;
+						`}
+					/>
+				)}
 				<Standfirst
 					format={format}
 					standfirst={article.standfirst}
@@ -691,6 +727,9 @@ export const StandardLayoutArticleGrid = ({
 									article.webPublicationSecondaryDateDisplay
 								}
 								webPublicationDate={article.webPublicationDate}
+								firstPublicationDate={
+									article.firstPublicationDate
+								}
 								isCommentable={article.isCommentable}
 								discussionApiUrl={
 									article.config.discussionApiUrl
@@ -716,6 +755,7 @@ export const StandardLayoutArticleGrid = ({
 								article.webPublicationSecondaryDateDisplay
 							}
 							webPublicationDate={article.webPublicationDate}
+							firstPublicationDate={article.firstPublicationDate}
 							isCommentable={article.isCommentable}
 							discussionApiUrl={article.config.discussionApiUrl}
 							shortUrlId={article.config.shortUrlId}
@@ -777,6 +817,7 @@ export const StandardLayoutArticleGrid = ({
 						isDev={!!article.config.isDev}
 						keywordIds={article.config.keywordIds}
 						tableOfContents={article.tableOfContents}
+						tableOfContentsStyle={tableOfContentsStyle}
 						lang={article.lang}
 						isRightToLeftLang={article.isRightToLeftLang}
 						editionId={article.editionId}

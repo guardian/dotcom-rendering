@@ -94,6 +94,7 @@ export const ukGeneralFinal: ElectionComponentsJson = {
 			props: {
 				text: 'See full results',
 				link: 'https://www.theguardian.com',
+				description: 'UK general election results 2024: live tracker',
 			},
 		},
 	],

@@ -274,7 +274,6 @@ export type FEFrontCard = {
 		discussionId?: string;
 	};
 	display: {
-		isBoosted: boolean;
 		boostLevel?: BoostLevel;
 		isImmersive?: boolean;
 		showBoostedHeadline: boolean;

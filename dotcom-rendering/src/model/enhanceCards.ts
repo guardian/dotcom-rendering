@@ -572,9 +572,7 @@ export const enhanceCards = (
 				display: 'StandardDisplay',
 			},
 		);
-		const group: Group = `${Number(faciaCard.card.group)}${
-			faciaCard.display.isBoosted ? '+' : ''
-		}`;
+		const group: Group = `${Number(faciaCard.card.group)}`;
 
 		const dataLinkName = getDataLinkNameCard(
 			format,
@@ -672,7 +670,6 @@ export const enhanceCards = (
 			byline: faciaCard.properties.byline ?? undefined,
 			showByline: faciaCard.properties.showByline,
 			snapData: enhanceSnaps(faciaCard.enriched),
-			isBoosted: faciaCard.display.isBoosted,
 			boostLevel: faciaCard.display.boostLevel,
 			isImmersive: !!faciaCard.display.isImmersive,
 			isCrossword: faciaCard.properties.isCrossword,

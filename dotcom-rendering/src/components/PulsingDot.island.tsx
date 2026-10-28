@@ -55,5 +55,10 @@ export const PulsingDot = ({ colour }: Props) => {
 		setShouldFlash(flashingPreferences !== false);
 	}, []);
 
-	return <span css={[dotStyles(colour), shouldFlash && animate]} />;
+	return (
+		<span
+			css={[dotStyles(colour), shouldFlash && animate]}
+			data-chromatic="ignore"
+		/>
+	);
 };
