@@ -87,7 +87,7 @@ const ctaButtonStyles = css`
 `;
 
 const ctaButtonTheme = {
-	textPrimary: '#FFFFFF',
+	textPrimary: palette.neutral[100],
 	backgroundPrimary: palette.neutral[0],
 };
 
