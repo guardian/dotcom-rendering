@@ -177,6 +177,11 @@ const chipsStyles = css`
 	${from.tablet} {
 		--chips-edge-padding: ${space[5]}px;
 	}
+	/* From "desktop" the calendar sits beside the ad column rather than
+	   against the page's vertical lines, so there is no edge to bleed to. */
+	${from.desktop} {
+		--chips-edge-padding: 0px;
+	}
 	${touchInput} {
 		margin: 0 calc(var(--chips-edge-padding) * -1);
 	}
