@@ -133,11 +133,28 @@ const mediaOverlayStyles = css`
 	width: 100%;
 `;
 
+/** Same 5:4 box as CardPicture, so video slides match the image slides */
+const videoBoxStyles = css`
+	position: relative;
+	padding-top: 80%;
+`;
+
 const videoStyles = css`
-	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
 	width: 100%;
-	aspect-ratio: 5 / 4;
+	height: 100%;
 	object-fit: cover;
+`;
+
+const slideLinkStyles = css`
+	display: block;
+`;
+
+/** Lets clicks through to the video controls under the caption */
+const videoCaptionStyles = css`
+	pointer-events: none;
 `;
 
 type Props = {
@@ -251,30 +268,28 @@ export const SlideshowCarousel = ({
 			aria-label="Slideshow"
 			aria-live="polite"
 		>
-			<a
-				href={linkTo}
-				aria-label={linkAriaLabel}
-				data-link-name={dataLinkName}
+			<ul
+				ref={carouselRef}
+				css={carouselStyles}
+				data-heatphan-type="carousel"
 			>
-				<ul
-					ref={carouselRef}
-					css={carouselStyles}
-					data-heatphan-type="carousel"
-				>
-					{slides.map((slide, index) => {
-						const loading = index > 0 ? 'lazy' : 'eager';
-						const caption = getSlideCaption(slide);
-						return (
-							<li
-								css={carouselItemStyles}
-								key={getSlideKey(slide)}
-								role="group"
-								aria-roledescription="slide"
-								aria-label={caption}
-								aria-hidden={index !== currentPage}
-							>
+				{slides.map((slide, index) => {
+					const loading = index > 0 ? 'lazy' : 'eager';
+					const caption = getSlideCaption(slide);
+					const isCurrentSlide = index === currentPage;
+					return (
+						<li
+							css={carouselItemStyles}
+							key={getSlideKey(slide)}
+							role="group"
+							aria-roledescription="slide"
+							aria-label={caption}
+							aria-hidden={!isCurrentSlide}
+						>
+							{/* Video slides aren't links, so clicks reach the video controls */}
+							{isVideoSlide(slide) ? (
 								<figure>
-									{isVideoSlide(slide) ? (
+									<div css={videoBoxStyles}>
 										<video
 											css={videoStyles}
 											poster={slide.posterSrc}
@@ -282,6 +297,7 @@ export const SlideshowCarousel = ({
 											muted={true}
 											loop={true}
 											playsInline={true}
+											controls={true}
 											preload={
 												index > 0 ? 'none' : 'metadata'
 											}
@@ -295,7 +311,27 @@ export const SlideshowCarousel = ({
 												}
 											/>
 										</video>
-									) : (
+									</div>
+									{!!caption && (
+										<figcaption
+											css={[
+												captionStyles,
+												videoCaptionStyles,
+											]}
+										>
+											{caption}
+										</figcaption>
+									)}
+								</figure>
+							) : (
+								<a
+									href={linkTo}
+									aria-label={linkAriaLabel}
+									data-link-name={dataLinkName}
+									tabIndex={isCurrentSlide ? undefined : -1}
+									css={slideLinkStyles}
+								>
+									<figure>
 										<CardPicture
 											mainImage={slide.imageSrc}
 											imageSize={imageSize}
@@ -303,22 +339,22 @@ export const SlideshowCarousel = ({
 											alt={caption}
 											loading={loading}
 										/>
-									)}
-									{!!caption && (
-										<figcaption css={captionStyles}>
-											{caption}
-										</figcaption>
-									)}
-								</figure>
-								<div
-									css={mediaOverlayStyles}
-									className="media-overlay"
-								/>
-							</li>
-						);
-					})}
-				</ul>
-			</a>
+										{!!caption && (
+											<figcaption css={captionStyles}>
+												{caption}
+											</figcaption>
+										)}
+									</figure>
+									<div
+										css={mediaOverlayStyles}
+										className="media-overlay"
+									/>
+								</a>
+							)}
+						</li>
+					);
+				})}
+			</ul>
 
 			{slideCount > 1 && (
 				<div
