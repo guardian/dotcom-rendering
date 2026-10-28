@@ -313,6 +313,10 @@ const controlsStyles = css`
 			border-color: var(--puzzles-border-colour, ${palette.neutral[86]});
 			color: ${palette.neutral[60]};
 			cursor: not-allowed;
+			/* The icon has no fill of its own, so it would stay black. */
+			svg {
+				fill: currentColor;
+			}
 		}
 	}
 	strong {
