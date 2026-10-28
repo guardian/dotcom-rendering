@@ -521,8 +521,8 @@ importers:
         specifier: 29.1.0
         version: 29.1.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1)(supports-color@8.1.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@5.2.0)(tslib@2.6.2)(typescript@6.0.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1)(supports-color@8.1.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@6.0.3))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@6.0.3)
       '@guardian/support-dotcom-components':
-        specifier: 11.0.0
-        version: 11.0.0(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@5.2.0)(tslib@2.6.2)(typescript@6.0.3))(@guardian/ophan-tracker-js@5.2.0)(zod@4.6.6)
+        specifier: 11.1.2
+        version: 11.1.2(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@5.2.0)(tslib@2.6.2)(typescript@6.0.3))(@guardian/ophan-tracker-js@5.2.0)(zod@4.1.12)
       '@guardian/tsconfig':
         specifier: 'catalog:'
         version: 1.0.1
@@ -2329,8 +2329,8 @@ packages:
       typescript:
         optional: true
 
-  '@guardian/support-dotcom-components@11.0.0':
-    resolution: {integrity: sha512-2o3SCD9ln//7jxKQ7VlSW5MIfQEoZZ41tXny6folwRyTIcnhXchXt9ZUYuhtr5Y5d+8BeWSZG/zI75Lzy5r5KQ==}
+  '@guardian/support-dotcom-components@11.1.2':
+    resolution: {integrity: sha512-gPR6GAzKBdRqwmVV4gD5F03TTXskx/wDt8k5qI7Pa0NzQJUtlOxgQ5Yy6XjuwcVQ+uDgmJKjsNi7Sc5gnkeyVQ==}
     peerDependencies:
       '@guardian/libs': ^22.0.0
       '@guardian/ophan-tracker-js': 2.8.0
@@ -11588,7 +11588,7 @@ snapshots:
       react: 18.3.1
       typescript: 6.0.3
 
-  '@guardian/support-dotcom-components@11.0.0(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@5.2.0)(tslib@2.6.2)(typescript@6.0.3))(@guardian/ophan-tracker-js@5.2.0)(zod@4.6.6)':
+  '@guardian/support-dotcom-components@11.1.2(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@5.2.0)(tslib@2.6.2)(typescript@6.0.3))(@guardian/ophan-tracker-js@5.2.0)(zod@4.1.12)':
     dependencies:
       '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@5.2.0)(tslib@2.6.2)(typescript@6.0.3)
       '@guardian/ophan-tracker-js': 5.2.0
