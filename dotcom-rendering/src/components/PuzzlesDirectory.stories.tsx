@@ -1,6 +1,10 @@
 import { breakpoints } from '@guardian/source/foundations';
 import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
-import { createPuzzlesPage } from '../../fixtures/manual/puzzlesPage';
+import {
+	createPuzzlesPage,
+	featuredTriviaPuzzlesContainer,
+	triviaPuzzlesContainer,
+} from '../../fixtures/manual/puzzlesPage';
 import { PuzzlesLayout } from '../layouts/PuzzlesLayout';
 import { extractNAV } from '../model/extract-nav';
 import type { PuzzlesLayoutType } from '../types/puzzlesPage';
@@ -127,6 +131,20 @@ export const BlueprintDirectory = () => (
 );
 export const AdFree = () => (
 	<PuzzlesDirectory layout={layout} renderAds={false} />
+);
+
+export const TriviaAndQuizzes = () => (
+	<PuzzlesDirectory
+		layout={{ containers: [triviaPuzzlesContainer] }}
+		renderAds={false}
+	/>
+);
+
+export const MovieGridFeatured = () => (
+	<PuzzlesDirectory
+		layout={{ containers: [featuredTriviaPuzzlesContainer] }}
+		renderAds={false}
+	/>
 );
 
 /** The newsletter should align with both edges of the right-hand puzzle card. */
