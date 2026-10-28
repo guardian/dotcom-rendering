@@ -1,12 +1,6 @@
 import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
-import {
-	between,
-	from,
-	headlineMedium17,
-	space,
-	until,
-} from '@guardian/source/foundations';
+import { between, from, space, until } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AffiliateDisclaimer } from '../components/AffiliateProducts/AffiliateDisclaimer';
@@ -166,41 +160,6 @@ const GridItem = ({
 	>
 		{children}
 	</Element>
-);
-
-const TopHatScrollPrompt = ({ topGap }: { topGap: number }) => (
-	<div
-		css={css`
-			position: absolute;
-			display: flex;
-			flex-direction: row;
-			align-items: center;
-			top: ${topGap}px;
-			${headlineMedium17}
-			color: white;
-			gap: ${space[3]}px;
-			pointer-events: none;
-			user-select: none;
-		`}
-	>
-		<svg
-			width="40"
-			height="40"
-			viewBox="0 0 40 40"
-			fill="none"
-			xmlns="http://www.w3.org/2000/svg"
-		>
-			<path
-				d="M9 15.2283L19.4977 25.726H20.5023L31 15.2283L30.0205 14.2739L20 22.7123L9.97945 14.2739L9 15.2283Z"
-				fill="white"
-			/>
-			<path
-				d="M39.5 20C39.5 30.7696 30.7696 39.5 20 39.5C9.23045 39.5 0.5 30.7696 0.5 20C0.5 9.23045 9.23045 0.5 20 0.5C30.7696 0.5 39.5 9.23045 39.5 20Z"
-				stroke="white"
-			/>
-		</svg>
-		<div>Scroll to continue</div>
-	</div>
 );
 
 export const StandardLayoutArticleGrid = ({
@@ -459,33 +418,30 @@ export const StandardLayoutArticleGrid = ({
 						: undefined,
 				]}
 			>
-				<div>
-					<MainMedia
-						format={format}
-						elements={article.mainMediaElements}
-						host={host}
-						pageId={article.pageId}
-						webTitle={article.webTitle}
-						ajaxUrl={article.config.ajaxUrl}
-						switches={article.config.switches}
-						isAdFreeUser={article.isAdFreeUser}
-						isSensitive={article.config.isSensitive}
-						editionId={article.editionId}
-						hideCaption={hideCaptionBeneathMainMedia}
-						shouldHideAds={article.shouldHideAds}
-						contentType={article.contentType}
-						contentLayout={contentLayoutName}
-						articleArrangement={layoutType}
+				<MainMedia
+					format={format}
+					elements={article.mainMediaElements}
+					host={host}
+					pageId={article.pageId}
+					webTitle={article.webTitle}
+					ajaxUrl={article.config.ajaxUrl}
+					switches={article.config.switches}
+					isAdFreeUser={article.isAdFreeUser}
+					isSensitive={article.config.isSensitive}
+					editionId={article.editionId}
+					hideCaption={hideCaptionBeneathMainMedia}
+					shouldHideAds={article.shouldHideAds}
+					contentType={article.contentType}
+					contentLayout={contentLayoutName}
+					articleArrangement={layoutType}
+				/>
+				{article.affiliateLinksDisclaimerRequired && !isImmersive && (
+					<AffiliateDisclaimer
+						cssOverrides={css`
+							margin: ${space[4]}px 0;
+						`}
 					/>
-					{article.affiliateLinksDisclaimerRequired &&
-						!isImmersive && (
-							<AffiliateDisclaimer
-								cssOverrides={css`
-									margin: ${space[4]}px 0;
-								`}
-							/>
-						)}
-				</div>
+				)}
 			</GridItem>
 			<GridItem
 				area="title"
@@ -676,9 +632,6 @@ export const StandardLayoutArticleGrid = ({
 					standfirst={article.standfirst}
 					layoutType={layoutType}
 				/>
-				{layoutType === 'interactiveTopHatLite' && (
-					<TopHatScrollPrompt topGap={100} />
-				)}
 			</GridItem>
 			{isImmersive && (
 				<GridItem
@@ -858,9 +811,6 @@ export const StandardLayoutArticleGrid = ({
 							mainMediaElements={article.mainMediaElements}
 						/>
 					</>
-				)}
-				{layoutType === 'interactiveTopHatFull' && (
-					<TopHatScrollPrompt topGap={180} />
 				)}
 			</GridItem>
 			<GridItem
