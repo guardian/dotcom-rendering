@@ -244,7 +244,9 @@ type LinkProps = {
 	href: string;
 	format: ArticleFormat;
 	colour: string;
+	fontCss?: SerializedStyles;
 	extraCss?: (SerializedStyles | false)[];
+	className?: string;
 	'data-component': string;
 	'data-link-name': string;
 	children: React.ReactNode;
@@ -254,15 +256,18 @@ const TitleLink = ({
 	href,
 	format,
 	colour,
+	fontCss = fontStyles(format),
 	extraCss = [],
+	className,
 	children,
 	...dataProps
 }: LinkProps) => (
 	<a
 		href={href}
+		className={className}
 		css={[
 			sectionLabelLink,
-			fontStyles(format),
+			fontCss,
 			breakWord,
 			css`
 				color: ${colour};
@@ -478,15 +483,14 @@ export const SeriesSectionLink = ({
 					{tag.title}
 				</TitleLink>
 				<Hide when="below" breakpoint="tablet">
-					<a
+					<TitleLink
 						href={`${guardianBaseURL}/${sectionUrl}`}
-						css={[
-							sectionLabelLink,
-							secondaryFontStyles(format),
+						format={format}
+						colour={sectionTitleColour}
+						fontCss={secondaryFontStyles(format)}
+						extraCss={[
 							displayBlock,
-							breakWord,
 							css`
-								color: ${sectionTitleColour};
 								background-color: ${themePalette(
 									'--section-title-background',
 								)};
@@ -495,8 +499,8 @@ export const SeriesSectionLink = ({
 						data-component="section"
 						data-link-name="article section"
 					>
-						<span>{sectionLabel}</span>
-					</a>
+						{sectionLabel}
+					</TitleLink>
 				</Hide>
 			</div>
 		);
@@ -505,23 +509,17 @@ export const SeriesSectionLink = ({
 	return (
 		<>
 			<LiveBlogPulsingDot format={format} />
-			<a
+			<TitleLink
 				href={`${guardianBaseURL}/${sectionUrl}`}
-				css={[
-					sectionLabelLink,
-					fontStyles(format),
-					breakWord,
-					marginRight,
-					css`
-						color: ${sectionTitleColour};
-					`,
-				]}
+				format={format}
+				colour={sectionTitleColour}
+				extraCss={[marginRight]}
+				className={interactiveLegacyClasses.labelLink}
 				data-component="section"
 				data-link-name="article section"
-				className={interactiveLegacyClasses.labelLink}
 			>
-				<span>{sectionLabel}</span>
-			</a>
+				{sectionLabel}
+			</TitleLink>
 		</>
 	);
 };
