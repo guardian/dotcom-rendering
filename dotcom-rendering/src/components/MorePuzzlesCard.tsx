@@ -9,6 +9,11 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { SvgCheckmark } from '@guardian/source/react-components';
+import {
+	getPuzzleGroupPalette,
+	puzzleGroupForItemType,
+	type PuzzleGroupKey,
+} from '../lib/puzzleGroupPalette';
 import { palette as themePalette } from '../palette';
 import type { PuzzleItem } from '../types/puzzlesPage';
 import { useConfig } from './ConfigContext';
@@ -53,61 +58,35 @@ type PuzzleGroupColours = {
 
 /**
  * Light mode -> dark mode title colours for each Puzzles & games group
- * (crosswords, logic puzzles, word games, trivia). The light-mode title
- * colours are too dark to read on the dark mode card background (see
+ * (crosswords, logic puzzles, word games, trivia), taken from the shared
+ * group palette (`puzzleGroupPalette.ts`). The light-mode title colours are
+ * too dark to read on the dark mode card background (see
  * `DARK_MODE_CARD_BACKGROUND`), so each group has its lighter counterpart.
  */
-const puzzleGroupColours = {
-	crosswords: {
-		background: palette.news[800],
-		title: palette.news[300],
-		// Design reference: #FF9081, which is `news[550]` (`news[500]` is #FF5943).
-		darkTitle: palette.news[550],
-	},
-	logicPuzzles: {
-		background: palette.sport[800],
-		title: palette.sport[400],
-		darkTitle: palette.sport[600],
-	},
-	wordGames: {
-		background: palette.opinion[800],
-		title: palette.opinion[400],
-		darkTitle: palette.opinion[600],
-	},
-	// No trivia card is sent to the rail yet, so its light-mode colours are
-	// provisional; only `darkTitle` comes from design.
-	trivia: {
-		background: palette.labs[700],
-		title: palette.labs[200],
-		darkTitle: palette.labs[600],
-	},
-} satisfies Record<string, PuzzleGroupColours>;
+const groupColours = (group: PuzzleGroupKey): PuzzleGroupColours => {
+	const groupPalette = getPuzzleGroupPalette(group);
+	return {
+		background: groupPalette.tint,
+		title: groupPalette.primary,
+		darkTitle: groupPalette.accent,
+	};
+};
 
 const puzzleColours = (item: PuzzleItem): PuzzleGroupColours => {
-	switch (item.type) {
-		case 'crossword':
-			return puzzleGroupColours.crosswords;
-		case 'sudoku':
-			return puzzleGroupColours.logicPuzzles;
-		case 'wordiply':
-		case 'word-wheel':
-			return puzzleGroupColours.wordGames;
-		case 'trivia':
-			return puzzleGroupColours.trivia;
-		default:
-			return {
-				background: item.backgroundColour,
-				title: palette.neutral[7],
-				darkTitle: palette.neutral[93],
-			};
-	}
+	const group = puzzleGroupForItemType(item.type);
+	if (group) return groupColours(group);
+	return {
+		background: item.backgroundColour,
+		title: palette.neutral[7],
+		darkTitle: palette.neutral[93],
+	};
 };
 
 /**
  * In dark mode every card in the rail shares one neutral background, in
  * place of the per-type light-mode colours (`puzzleColours`). Only the
  * background changes, the title switches to the lighter tint of its group's
- * colour (`puzzleGroupColours`), and the remaining (cadence) text is
+ * colour (`groupColours`), and the remaining (cadence) text is
  * lightened, as it would otherwise be near-black on the dark background. Only applied when dark mode is available
  * for the page (`darkModeAvailable`), mirroring how the page's own dark
  * palette is gated (`rootStyles`), and not when the reader has forced the

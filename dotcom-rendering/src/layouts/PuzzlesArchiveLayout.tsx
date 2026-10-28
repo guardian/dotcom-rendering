@@ -1,9 +1,11 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headlineBold34,
+	headlineBold24,
+	headlineBold28,
 	palette,
 	space,
+	textEgyptian15,
 	textEgyptian17,
 } from '@guardian/source/foundations';
 import { AdSlot } from '../components/AdSlot.web';
@@ -20,11 +22,14 @@ import { center } from '../lib/center';
 import { puzzlesPageTheme } from '../lib/puzzlesTheme';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
-import type { FEPuzzlesPageType } from '../types/puzzlesPage';
+import type { FEPuzzlesPageType, PuzzlesArchive } from '../types/puzzlesPage';
 import { Stuck } from './lib/stickiness';
 
-const mainStyles = (darkModeAvailable: boolean) => css`
-	${puzzlesPageTheme(darkModeAvailable)};
+const mainStyles = (
+	darkModeAvailable: boolean,
+	category: PuzzlesArchive['category'],
+) => css`
+	${puzzlesPageTheme(darkModeAvailable, category)};
 `;
 
 /** Without the bottom ad, the page keeps its own space above the footer. */
@@ -87,17 +92,25 @@ const archiveGridStyles = css`
 const headingStyles = css`
 	${archiveGridStyles};
 	h1 {
-		${headlineBold34};
+		${headlineBold24};
 		color: var(--puzzles-headline-colour);
 		margin: 0;
 		padding-top: ${space[2]}px;
 		overflow-wrap: anywhere;
+		${from.tablet} {
+			${headlineBold28};
+		}
 	}
 	p {
-		${textEgyptian17};
+		${textEgyptian15};
 		max-width: 620px;
 		margin: 0 0 ${space[6]}px;
-		color: var(--puzzles-text-colour);
+		padding-top: 10px;
+		color: var(--puzzles-supporting-text-colour);
+		${from.tablet} {
+			${textEgyptian17};
+			padding-top: ${space[2]}px;
+		}
 	}
 	${from.leftCol} {
 		h1 {
@@ -215,7 +228,7 @@ export const PuzzlesArchiveLayout = ({
 			</div>
 			<main
 				css={[
-					mainStyles(darkModeAvailable),
+					mainStyles(darkModeAvailable, archive.category),
 					!renderAds && mainBottomSpaceStyles,
 				]}
 				id="maincontent"
@@ -223,7 +236,7 @@ export const PuzzlesArchiveLayout = ({
 				<div css={pageStyles}>
 					<div css={topStyles}>
 						<header css={headingStyles}>
-							<h1>{archive.title} archive</h1>
+							<h1>{archive.title}</h1>
 							<p>
 								<Island priority="critical">
 									<PuzzlesArchiveDescription

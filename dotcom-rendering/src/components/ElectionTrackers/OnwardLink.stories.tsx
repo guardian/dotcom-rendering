@@ -18,5 +18,6 @@ export const OnwardLink = meta.story({
 	args: {
 		link: new URL('https://www.theguardian.com'),
 		text: 'Full results',
+		description: 'Description of the results page',
 	},
 });

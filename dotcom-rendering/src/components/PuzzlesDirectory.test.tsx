@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import type { ReactNode } from 'react';
+import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
 import type {
 	PuzzleContainer,
 	PuzzleItem,
@@ -34,6 +35,35 @@ const section = (
 });
 
 describe('PuzzlesDirectory', () => {
+	it('shows sponsorship only on the sponsored container', () => {
+		render(
+			<PuzzlesDirectory
+				layout={{
+					containers: [
+						section({ id: 'crosswords', title: 'Crosswords' }),
+						section(),
+					],
+				}}
+				renderAds={false}
+				containerBranding={{ crosswords: puzzlesBranding }}
+			/>,
+		);
+
+		const [crosswords, wordGames] = screen.getAllByRole('region');
+		expect(crosswords).toHaveTextContent('Supported by');
+		expect(
+			screen.getByRole('link', {
+				name: 'Visit the Example sponsor website',
+			}),
+		).toHaveAttribute('href', 'https://example.com');
+		expect(
+			screen.queryByRole('link', { name: 'About this content' }),
+		).not.toBeInTheDocument();
+		expect(
+			screen.getByRole('heading', { level: 2, name: 'Crosswords' }),
+		).toHaveAttribute('id', 'crosswords-title');
+		expect(wordGames).not.toHaveTextContent('Supported by');
+	});
 	it('renders puzzle tile titles as H3s with descriptive crossword text', () => {
 		render(
 			<PuzzlesDirectory

@@ -256,6 +256,7 @@ export const SeriesSectionLink = ({
 	const hasSeriesTag = tag?.type === 'Series';
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
+	const isWeekendEssay = format.design === ArticleDesign.WeekendEssay;
 
 	const titleColour = isMatch
 		? themePalette('--series-title-match-text')
@@ -270,7 +271,8 @@ export const SeriesSectionLink = ({
 		format.display === ArticleDisplay.Immersive &&
 		(format.design === ArticleDesign.Comment ||
 			format.design === ArticleDesign.Editorial ||
-			format.design === ArticleDesign.Letter)
+			format.design === ArticleDesign.Letter ||
+			isWeekendEssay)
 	) {
 		if (tag) {
 			// We have a tag, we're not immersive, show both series and section titles
@@ -284,21 +286,27 @@ export const SeriesSectionLink = ({
 							marginRight,
 							fontStyles(format),
 							breakWord,
-							css`
-								color: ${titleColour};
-								background-color: ${themePalette(
-									'--series-title-background',
-								)};
-								box-shadow:
-									-6px 0 0 0
-										${themePalette(
-											'--series-title-background',
-										)},
-									6px 0 0 0
-										${themePalette(
+							isWeekendEssay
+								? css`
+										color: ${themePalette(
 											'--series-title-background',
 										)};
-							`,
+									`
+								: css`
+										color: ${titleColour};
+										background-color: ${themePalette(
+											'--series-title-background',
+										)};
+										box-shadow:
+											-6px 0 0 0
+												${themePalette(
+													'--series-title-background',
+												)},
+											6px 0 0 0
+												${themePalette(
+													'--series-title-background',
+												)};
+									`,
 						]}
 						data-component="series"
 						data-link-name="article series"
@@ -311,24 +319,34 @@ export const SeriesSectionLink = ({
 							href={`${guardianBaseURL}/${sectionUrl}`}
 							css={[
 								sectionLabelLink,
-								fontStyles(format),
+								isWeekendEssay
+									? css`
+											${headlineMedium17}
+										`
+									: fontStyles(format),
 								displayBlock,
 								breakWord,
-								css`
-									color: ${sectionTitleColour};
-									background-color: ${themePalette(
-										'--section-title-background',
-									)};
-									box-shadow:
-										-6px 0 0 0
-											${themePalette(
-												'--series-title-background',
-											)},
-										6px 0 0 0
-											${themePalette(
+								isWeekendEssay
+									? css`
+											color: ${themePalette(
 												'--series-title-background',
 											)};
-								`,
+										`
+									: css`
+											color: ${sectionTitleColour};
+											background-color: ${themePalette(
+												'--section-title-background',
+											)};
+											box-shadow:
+												-6px 0 0 0
+													${themePalette(
+														'--series-title-background',
+													)},
+												6px 0 0 0
+													${themePalette(
+														'--series-title-background',
+													)};
+										`,
 							]}
 							data-component="section"
 							data-link-name="article section"

@@ -1945,10 +1945,112 @@ const tableBlockBorderTopDark: PaletteFunction = () =>
 
 const tableOfContentsLight: PaletteFunction = () => sourcePalette.neutral[7];
 const tableOfContentsDark: PaletteFunction = () => sourcePalette.neutral[86];
+/**
+ * The pillar accent used throughout The Filter's "Jump to" bar: its label,
+ * chevron, rules and the item for the section currently being read. Mirrors
+ * `--article-link-text`, the established treatment for pillar-tinted text,
+ * with the two steps adjusted where they fall short of AA on this surface.
+ */
+const tableOfContentsAccentLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		/** `lifestyle[400]` is too light to sit on the bar's surface. */
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[300];
+		case ArticleSpecial.Labs:
+			return sourcePalette.neutral[7];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[400];
+		default:
+			return pillarPalette(theme, 400);
+	}
+};
+const tableOfContentsAccentDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		/**
+		 * `news[500]` only reaches 4.07:1 against the bar's dark surface, so
+		 * the label would fall below AA. The next step up clears it at 7.89:1.
+		 */
+		case Pillar.News:
+			return sourcePalette.news[600];
+		case Pillar.Sport:
+		case Pillar.Lifestyle:
+		case Pillar.Culture:
+		case Pillar.Opinion:
+			return pillarPalette(theme, 500);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[500];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[300];
+	}
+};
+/**
+ * A raised surface for The Filter's sticky "Jump to" bar. Only the filter
+ * variant of the table of contents uses this; the default table of contents
+ * sits directly on `--article-background`.
+ */
+const tableOfContentsBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const tableOfContentsBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
 const tableOfContentsBorderLight: PaletteFunction = () =>
 	sourcePalette.neutral[86];
 const tableOfContentsBorderDark: PaletteFunction = () =>
 	sourcePalette.neutral[20];
+/**
+ * The fill behind a "Jump to" item being hovered, matching the treatment in
+ * the edition picker. One step off the bar's own surface in each scheme: the
+ * neutral scale has nothing between `20` and `38`, so the dark step is the
+ * larger of the two.
+ */
+const tableOfContentsHoverLight: PaletteFunction = () =>
+	sourcePalette.neutral[93];
+const tableOfContentsHoverDark: PaletteFunction = () =>
+	sourcePalette.neutral[38];
+
+/**
+ * The horizontal table of contents: a sticky bar of links to an article's
+ * sections, e.g. on The Filter's immersive articles. A pillar-tinted bar, with
+ * the inactive links one step darker than the border so that they pass AA at
+ * 14px on the light surface.
+ */
+const tableOfContentsHorizontalPillar = (
+	theme: ArticleTheme,
+	lightness: 100 | 200 | 300 | 400 | 500 | 600 | 800,
+	fallback: string,
+): string => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.SpecialReportAlt:
+			return fallback;
+		default:
+			return pillarPalette(theme, lightness);
+	}
+};
+const tableOfContentsHorizontalBackgroundLight: PaletteFunction = ({ theme }) =>
+	tableOfContentsHorizontalPillar(theme, 800, sourcePalette.neutral[97]);
+const tableOfContentsHorizontalBackgroundDark: PaletteFunction = ({ theme }) =>
+	tableOfContentsHorizontalPillar(theme, 100, sourcePalette.neutral[10]);
+const tableOfContentsHorizontalBorderLight: PaletteFunction = ({ theme }) =>
+	tableOfContentsHorizontalPillar(theme, 400, sourcePalette.neutral[46]);
+const tableOfContentsHorizontalBorderDark: PaletteFunction = ({ theme }) =>
+	tableOfContentsHorizontalPillar(theme, 500, sourcePalette.neutral[60]);
+const tableOfContentsHorizontalTextLight: PaletteFunction = ({ theme }) =>
+	tableOfContentsHorizontalPillar(theme, 300, sourcePalette.neutral[20]);
+const tableOfContentsHorizontalTextDark: PaletteFunction = ({ theme }) =>
+	tableOfContentsHorizontalPillar(theme, 500, sourcePalette.neutral[73]);
+const tableOfContentsHorizontalTextActiveLight: PaletteFunction = ({ theme }) =>
+	tableOfContentsHorizontalPillar(theme, 100, sourcePalette.neutral[7]);
+const tableOfContentsHorizontalTextActiveDark: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const tableOfContentsHorizontalTextHoverLight: PaletteFunction = ({ theme }) =>
+	tableOfContentsHorizontalPillar(theme, 100, sourcePalette.neutral[7]);
+const tableOfContentsHorizontalTextHoverDark: PaletteFunction = () =>
+	sourcePalette.neutral[97];
 
 const podcastMetaTitleLight: PaletteFunction = () => sourcePalette.neutral[97];
 const podcastMetaTitleDark: PaletteFunction = () => sourcePalette.neutral[97];
@@ -2081,6 +2183,8 @@ const clickToViewButtonHoverDark: PaletteFunction = () =>
 
 const brandingLabelLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
+		case ArticleDesign.Crossword:
+			return sourcePalette.neutral[7];
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Picture:
@@ -2104,6 +2208,9 @@ const brandingLabelDark: PaletteFunction = () => sourcePalette.neutral[86];
 const brandingBorderLight: PaletteFunction = () => sourcePalette.neutral[86];
 const brandingBorderDark: PaletteFunction = () => sourcePalette.neutral[20];
 const brandingLinkLight: PaletteFunction = ({ design, theme }) => {
+	if (design === ArticleDesign.Crossword) {
+		return sourcePalette.neutral[7];
+	}
 	if (design === ArticleDesign.Gallery) {
 		return sourcePalette.neutral[86];
 	}
@@ -2131,6 +2238,8 @@ const brandingLinkLight: PaletteFunction = ({ design, theme }) => {
 };
 const brandingLinkDark: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
+		case ArticleDesign.Crossword:
+			return sourcePalette.neutral[86];
 		case ArticleDesign.Gallery:
 			switch (theme) {
 				case Pillar.News:
@@ -3261,6 +3370,8 @@ const articleBackgroundLight: PaletteFunction = ({
 	theme,
 }) => {
 	switch (design) {
+		case ArticleDesign.WeekendEssay:
+			return sourcePalette.news[800];
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 			switch (theme) {
@@ -3326,6 +3437,8 @@ const articleBackgroundLight: PaletteFunction = ({
 
 const articleBackgroundDark: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
+		case ArticleDesign.WeekendEssay:
+			return sourcePalette.news[800];
 		case ArticleDesign.DeadBlog:
 			return sourcePalette.neutral[7];
 		case ArticleDesign.LiveBlog:
@@ -6639,6 +6752,12 @@ const crosswordCluesHeaderBorderBottom: PaletteFunction = () =>
 const crosswordTextLight: PaletteFunction = () => sourcePalette.neutral[7];
 const crosswordTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
+const storylinesBackground: PaletteFunction = () => sourcePalette.neutral[93];
+const storylinesBorder: PaletteFunction = () => sourcePalette.neutral[86];
+const storylinesTitles: PaletteFunction = () => sourcePalette.brand[400];
+const storylinesActiveTab: PaletteFunction = () => sourcePalette.neutral[60];
+const storylinesInactiveTab: PaletteFunction = () => sourcePalette.neutral[38];
+
 const customSubnavHeaderTextLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.News:
@@ -8566,6 +8685,26 @@ const paletteColours = {
 		light: starRatingFillColourLight,
 		dark: starRatingFillColourDark,
 	},
+	'--storylines-active-tab': {
+		light: storylinesActiveTab,
+		dark: storylinesActiveTab,
+	},
+	'--storylines-background': {
+		light: storylinesBackground,
+		dark: storylinesBackground,
+	},
+	'--storylines-border': {
+		light: storylinesBorder,
+		dark: storylinesBorder,
+	},
+	'--storylines-inactive-tab': {
+		light: storylinesInactiveTab,
+		dark: storylinesInactiveTab,
+	},
+	'--storylines-titles': {
+		light: storylinesTitles,
+		dark: storylinesTitles,
+	},
 	'--straight-lines': {
 		light: straightLinesLight,
 		dark: straightLinesDark,
@@ -8662,9 +8801,41 @@ const paletteColours = {
 		light: tableOfContentsLight,
 		dark: tableOfContentsDark,
 	},
+	'--table-of-contents-accent': {
+		light: tableOfContentsAccentLight,
+		dark: tableOfContentsAccentDark,
+	},
+	'--table-of-contents-background': {
+		light: tableOfContentsBackgroundLight,
+		dark: tableOfContentsBackgroundDark,
+	},
 	'--table-of-contents-border': {
 		light: tableOfContentsBorderLight,
 		dark: tableOfContentsBorderDark,
+	},
+	'--table-of-contents-horizontal-background': {
+		light: tableOfContentsHorizontalBackgroundLight,
+		dark: tableOfContentsHorizontalBackgroundDark,
+	},
+	'--table-of-contents-horizontal-border': {
+		light: tableOfContentsHorizontalBorderLight,
+		dark: tableOfContentsHorizontalBorderDark,
+	},
+	'--table-of-contents-horizontal-text': {
+		light: tableOfContentsHorizontalTextLight,
+		dark: tableOfContentsHorizontalTextDark,
+	},
+	'--table-of-contents-horizontal-text-active': {
+		light: tableOfContentsHorizontalTextActiveLight,
+		dark: tableOfContentsHorizontalTextActiveDark,
+	},
+	'--table-of-contents-horizontal-text-hover': {
+		light: tableOfContentsHorizontalTextHoverLight,
+		dark: tableOfContentsHorizontalTextHoverDark,
+	},
+	'--table-of-contents-hover': {
+		light: tableOfContentsHoverLight,
+		dark: tableOfContentsHoverDark,
 	},
 	'--tabs-input': {
 		light: () => sourcePalette.neutral[100],
