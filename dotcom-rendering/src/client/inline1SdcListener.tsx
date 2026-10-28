@@ -30,9 +30,17 @@ const render = <P extends object>(
 	props: P,
 	slot: HTMLElement,
 ) => {
+	slot.innerHTML = '';
+	// override ad-slot-container style in parent element
+	slot.style.textAlign = 'left';
 	createRoot(slot).render(createElement(Component, props));
 };
 
+/**
+ * Set up an event handler for the inline1 slot.
+ * If the commercial bundle wants the page to render a component from SDC then it will send an event on the ad slot element.
+ * This handler then renders the required component into the ad slot.
+ */
 export const inline1SdcListener = (): Promise<void> => {
 	window.addEventListener(
 		'commercial.sdc-render',
