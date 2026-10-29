@@ -133,9 +133,9 @@ const ABTests: ABTest[] = [
 		name: "webx-monitor-group-contamination-v2",
 		description:
 			"V2 of test to measure the impact of contamination between groups in ab tests",
-		owners: ["dotcom.platform@theguardian.com"],
+		owners: ["commercial.dev@theguardian.com"],
 		status: "ON",
-		expirationDate: "2026-10-28",
+		expirationDate: "2026-11-11",
 		type: "client",
 		audienceSize: 10 / 100,
 		audienceSpace: "A",
@@ -346,6 +346,19 @@ const ABTests: ABTest[] = [
 		status: "ON",
 		audienceSize: 0,
 		groups: ["enable"],
+	},
+	{
+		name: "newsroom-ai-tag-page-storylines",
+		description:
+			"Testing the AI generated storylines component on tag pages",
+		owners: ["ai.dev@guardian.co.uk"],
+		expirationDate: `2026-11-30`,
+		type: "server",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "B",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
 	},
 ];
 
