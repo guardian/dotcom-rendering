@@ -463,31 +463,28 @@ export const decideReplacementMedia = (
 	return undefined;
 };
 
-// The carousel plays a single <source>, so only self-hosted videos with an MP4 can be shown.
+// Same player and poster fallback as video cards; the player needs a source and a poster.
 const decideSlideshowVideo = (
 	mediaAtom: FEMediaAtom,
 	caption?: string,
+	cardImage?: string,
 ): DCRSlideshowVideo | undefined => {
-	const media = getActiveMediaAtom(mediaAtom);
-	if (media?.type !== 'SelfHostedVideo') return undefined;
+	const video = getActiveMediaAtom(mediaAtom, cardImage);
+	if (
+		video?.type !== 'SelfHostedVideo' ||
+		video.sources.length === 0 ||
+		!video.image.src
+	) {
+		return undefined;
+	}
 
-	const mp4Source = media.sources.find(
-		({ mimeType }) => mimeType === 'video/mp4',
-	);
-	if (!mp4Source) return undefined;
-
-	return {
-		type: 'video',
-		videoSrc: mp4Source.src,
-		mimeType: mp4Source.mimeType,
-		posterSrc: media.image.src,
-		caption,
-	};
+	return { type: 'video', video, caption };
 };
 
 export const decideMultimediaSlideshow = (
 	multimediaSlideshowReplace: boolean,
 	multimediaSlideshow?: FEMultimediaSlideshow,
+	cardImage?: string,
 ): DCRSlideshowMedia[] | undefined => {
 	if (!multimediaSlideshowReplace || !multimediaSlideshow) return undefined;
 
@@ -501,7 +498,11 @@ export const decideMultimediaSlideshow = (
 					? []
 					: [{ type: 'image', imageSrc, imageCaption: caption }];
 			}
-			const video = decideSlideshowVideo(content.item.mediaAtom, caption);
+			const video = decideSlideshowVideo(
+				content.item.mediaAtom,
+				caption,
+				cardImage,
+			);
 			return video ? [video] : [];
 		},
 	);
@@ -698,6 +699,7 @@ export const enhanceCards = (
 					faciaCard.properties.mediaSelect
 						?.multimediaSlideshowReplace === true,
 					faciaCard.multimediaSlideshow,
+					imageSrc,
 				) ?? decideSlideshowImages(faciaCard),
 			showVideo:
 				!!(

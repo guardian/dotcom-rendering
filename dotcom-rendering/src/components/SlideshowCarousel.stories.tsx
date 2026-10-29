@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { breakpoints, space, textSans17 } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import type { ReactNode } from 'react';
+import { selfHostedLoopVideo54Card } from '../../fixtures/manual/trails';
 import { palette } from '../palette';
 import type {
 	DCRContainerPalette,
@@ -56,10 +57,7 @@ const images = [
  */
 const videoSlide = {
 	type: 'video',
-	videoSrc:
-		'https://uploads.guim.co.uk/2025%2F06%2F20%2Ftesting+only%2C+please+ignore--3cb22b60-2c3f-48d6-8bce-38c956907cce-3.mp4',
-	posterSrc:
-		'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_210_5472_3283/master/5472.jpg',
+	video: selfHostedLoopVideo54Card.mainMedia,
 	caption: 'A self-hosted looping video slide',
 } as const satisfies DCRSlideshowMedia;
 
@@ -118,6 +116,8 @@ const meta = {
 		linkTo: 'https://www.theguardian.com',
 		linkAriaLabel: 'news | group-3 | card-@1 | media-slideshow',
 		dataLinkName: 'slideshow-carousel',
+		uniqueId: 'slideshow-carousel',
+		subtitleSize: 'small',
 	},
 	render: (args) => (
 		<Wrapper>

@@ -19,6 +19,8 @@ import { palette } from '../palette';
 import type { DCRSlideshowMedia } from '../types/front';
 import type { MediaSizeType } from './Card/components/MediaWrapper';
 import { CardPicture } from './CardPicture';
+import { SelfHostedVideo } from './SelfHostedVideo.island';
+import type { SubtitleSize } from './SelfHostedVideoPlayer';
 import { SlideshowCarouselScrollingDots } from './SlideshowCarouselScrollingDots';
 
 /**
@@ -31,7 +33,7 @@ const isVideoSlide = (
 	slide.type === 'video';
 
 const getSlideKey = (slide: DCRSlideshowMedia): string =>
-	isVideoSlide(slide) ? slide.videoSrc : slide.imageSrc;
+	isVideoSlide(slide) ? slide.video.atomId : slide.imageSrc;
 
 const getSlideCaption = (slide: DCRSlideshowMedia): string | undefined =>
 	isVideoSlide(slide) ? slide.caption : slide.imageCaption;
@@ -133,26 +135,16 @@ const mediaOverlayStyles = css`
 	width: 100%;
 `;
 
-/** Same 5:4 box as CardPicture, so video slides match the image slides */
-const videoBoxStyles = css`
-	position: relative;
-	padding-top: 80%;
-`;
-
-const videoStyles = css`
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
+/** Contains the player's z-index, so the caption can sit on top */
+const videoPlayerStyles = css`
+	isolation: isolate;
 `;
 
 const slideLinkStyles = css`
 	display: block;
 `;
 
-/** Lets clicks through to the video controls under the caption */
+/** Lets clicks through to the video under the caption */
 const videoCaptionStyles = css`
 	pointer-events: none;
 `;
@@ -168,6 +160,8 @@ type Props = {
 	linkTo: string;
 	linkAriaLabel: string;
 	dataLinkName?: string;
+	uniqueId: string;
+	subtitleSize: SubtitleSize;
 };
 
 export const SlideshowCarousel = ({
@@ -177,6 +171,8 @@ export const SlideshowCarousel = ({
 	linkTo,
 	linkAriaLabel,
 	dataLinkName,
+	uniqueId,
+	subtitleSize,
 }: Props) => {
 	const carouselRef = useRef<HTMLUListElement | null>(null);
 	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
@@ -289,28 +285,43 @@ export const SlideshowCarousel = ({
 							{/* Video slides aren't links, so clicks reach the video controls */}
 							{isVideoSlide(slide) ? (
 								<figure>
-									<div css={videoBoxStyles}>
-										<video
-											css={videoStyles}
-											poster={slide.posterSrc}
-											autoPlay={true}
-											muted={true}
-											loop={true}
-											playsInline={true}
-											controls={true}
-											preload={
-												index > 0 ? 'none' : 'metadata'
+									<div css={videoPlayerStyles}>
+										<SelfHostedVideo
+											sources={slide.video.sources}
+											atomId={slide.video.atomId}
+											uniqueId={`${uniqueId}-slide-${index}`}
+											videoStyle={slide.video.videoStyle}
+											aspectRatio={
+												slide.video.aspectRatio
 											}
-											aria-label={caption}
-										>
-											<source
-												src={slide.videoSrc}
-												type={
-													slide.mimeType ??
-													'video/mp4'
-												}
-											/>
-										</video>
+											posterImage={
+												slide.video.image.src ?? ''
+											}
+											posterImageAspectRatio={
+												slide.video.image.aspectRatio
+											}
+											fallbackImage={
+												slide.video.image.src ?? ''
+											}
+											fallbackImageSize={imageSize}
+											fallbackImageLoading={loading}
+											fallbackImageAlt={caption}
+											fallbackImageAspectRatio="5:4"
+											linkTo={linkTo}
+											subtitleSource={
+												slide.video.subtitleSource
+											}
+											subtitleSize={subtitleSize}
+											// Keeps the caption clear of the controls and subtitles
+											controlsPosition={
+												caption ? 'top' : 'bottom'
+											}
+											hideProgressBar={!!caption}
+											// Cropped to 5:4 like the image slides
+											minAspectRatio={5 / 4}
+											maxAspectRatio={5 / 4}
+											preventAutoplay={false}
+										/>
 									</div>
 									{!!caption && (
 										<figcaption

@@ -933,7 +933,14 @@ export const Card = ({
 					>
 						{media.type === 'slideshow' && (
 							<Island
-								priority="feature"
+								// Critical like other video islands: the player renders nothing until hydrated
+								priority={
+									media.slideshowImages.some(
+										({ type }) => type === 'video',
+									)
+										? 'critical'
+										: 'feature'
+								}
 								defer={{ until: 'visible' }}
 							>
 								<SlideshowCarousel
@@ -945,6 +952,8 @@ export const Card = ({
 									linkTo={linkTo}
 									linkAriaLabel={headlineText}
 									dataLinkName={resolvedDataLinkName}
+									uniqueId={uniqueId}
+									subtitleSize={subtitleSize}
 								/>
 							</Island>
 						)}

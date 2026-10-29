@@ -569,6 +569,7 @@ describe('Enhance Cards', () => {
 						item: {
 							mediaAtom: {
 								...testMediaAtom,
+								assets: [testMp4Asset],
 								posterImage: { allImages: [largeImage] },
 							},
 						},
@@ -595,16 +596,60 @@ describe('Enhance Cards', () => {
 				},
 				{
 					type: 'video',
-					videoSrc: 'https://guim-example.co.uk/atomID-1.mp4',
-					mimeType: 'video/mp4',
-					posterSrc: 'https://media.guim.co.uk/slide/1000.jpg',
+					video: {
+						type: 'SelfHostedVideo',
+						videoStyle: 'Loop',
+						atomId: 'atomID',
+						sources: [
+							{
+								mimeType: 'video/mp4',
+								src: 'https://guim-example.co.uk/atomID-1.mp4',
+								height: 400,
+								width: 500,
+								hasAudio: true,
+							},
+						],
+						subtitleSource: undefined,
+						aspectRatio: 5 / 4,
+						duration: 15,
+						image: {
+							src: 'https://media.guim.co.uk/slide/1000.jpg',
+							aspectRatio: '5:4',
+						},
+					},
 					caption: 'Video caption',
 				},
 			]);
 		});
 
-		it('drops video slides without an MP4 source, and returns undefined if none remain', () => {
-			const youtubeOnly: FEMultimediaSlideshow = {
+		it('uses the card image as the poster of a video without one, like video cards', () => {
+			const slideshow: FEMultimediaSlideshow = {
+				id: 'slideshow-id',
+				slides: [
+					{
+						content: {
+							type: 'Video',
+							item: { mediaAtom: testMediaAtom },
+						},
+					},
+				],
+			};
+
+			expect(
+				decideMultimediaSlideshow(
+					true,
+					slideshow,
+					'https://media.guim.co.uk/card.jpg',
+				)?.[0],
+			).toMatchObject({
+				type: 'video',
+				video: { image: { src: 'https://media.guim.co.uk/card.jpg' } },
+			});
+		});
+
+		it('drops video slides the player cannot show, and returns undefined if none remain', () => {
+			const posterImage = { allImages: [largeImage] };
+			const unplayable: FEMultimediaSlideshow = {
 				id: 'slideshow-id',
 				slides: [
 					{
@@ -613,15 +658,39 @@ describe('Enhance Cards', () => {
 							item: {
 								mediaAtom: {
 									...testMediaAtom,
+									posterImage,
 									assets: [testYoutubeAsset],
 								},
 							},
 						},
 					},
+					{
+						content: {
+							type: 'Video',
+							item: {
+								mediaAtom: {
+									...testMediaAtom,
+									posterImage,
+									assets: [
+										{
+											...testMp4Asset,
+											mimeType: 'video/webm',
+										},
+									],
+								},
+							},
+						},
+					},
+					{
+						content: {
+							type: 'Video',
+							item: { mediaAtom: testMediaAtom },
+						},
+					},
 				],
 			};
 
-			expect(decideMultimediaSlideshow(true, youtubeOnly)).toEqual(
+			expect(decideMultimediaSlideshow(true, unplayable)).toEqual(
 				undefined,
 			);
 		});

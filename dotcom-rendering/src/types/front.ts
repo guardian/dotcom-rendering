@@ -123,19 +123,11 @@ export type DCRSlideshowImage = {
 };
 
 /**
- * Spike: a video slide within a media slideshow.
- *
- * Kept intentionally lightweight while we explore supporting non-image media in
- * slideshows. Videos autoplay muted and loop, matching the "loop video" style
- * used elsewhere on fronts.
+ * Spike: a self-hosted video slide, played with the same player as video cards.
  */
 export type DCRSlideshowVideo = {
 	type: 'video';
-	videoSrc: string;
-	/** MIME type of the video source, defaults to `video/mp4` when rendered. */
-	mimeType?: string;
-	/** Poster image shown before the video loads. */
-	posterSrc?: string;
+	video: Extract<MainMedia, { type: 'SelfHostedVideo' }>;
 	caption?: string;
 };
 
