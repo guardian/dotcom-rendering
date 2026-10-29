@@ -25,6 +25,7 @@ export const NewsletterBannerComponent = (
 	const [isSuccess, setIsSuccess] = useState(false);
 	const { isOpen, bannerData: baseBannerData } = useDesignableBannerModel({
 		...props,
+		isCollapsible: false,
 	});
 	const { isDismissing, dismiss, ...dismissalHandlers } = useSuccessDismissal(
 		{
