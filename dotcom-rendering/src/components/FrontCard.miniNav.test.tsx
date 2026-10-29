@@ -167,7 +167,7 @@ describe('FrontCard mini navigation', () => {
 		);
 	});
 
-	it('uses article text colours for mini navigation links', () => {
+	it('uses the card kicker colour for the header and headline colour for links', () => {
 		renderCard();
 
 		const miniNav = screen
@@ -175,8 +175,9 @@ describe('FrontCard mini navigation', () => {
 			.closest('[data-component-id]');
 
 		expect(miniNav?.parentElement).toHaveStyle({
-			'--masthead-nav-link-text': 'var(--article-text)',
-			'--masthead-nav-link-text-hover': 'var(--article-text)',
+			'--custom-subnav-header-text': 'var(--card-kicker-text)',
+			'--masthead-nav-link-text': 'var(--card-headline)',
+			'--masthead-nav-link-text-hover': 'var(--card-headline)',
 		});
 	});
 });

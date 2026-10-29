@@ -75,9 +75,12 @@ export const FrontCard = (props: Props) => {
 					position: relative;
 					z-index: ${getZIndex('card-nested-link')};
 					min-width: 0;
-					--masthead-nav-link-text: ${palette('--article-text')};
+					--custom-subnav-header-text: ${palette(
+						'--card-kicker-text',
+					)};
+					--masthead-nav-link-text: ${palette('--card-headline')};
 					--masthead-nav-link-text-hover: ${palette(
-						'--article-text',
+						'--card-headline',
 					)};
 				`}
 			>
