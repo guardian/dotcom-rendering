@@ -20,9 +20,14 @@ const meta = {
 	args: {
 		trail,
 		containerType: 'flexible/general',
-		mediaPositionOnMobile: 'left',
+		headlineSizes: {
+			desktop: 'large',
+			tablet: 'large',
+			mobile: 'large',
+		},
+		mediaPositionOnMobile: 'bottom',
 		mediaPositionOnDesktop: 'right',
-		mediaSize: 'small',
+		mediaSize: 'xlarge',
 		imageLoading: 'eager',
 		serverTime: 1641038400000,
 	},
@@ -30,7 +35,7 @@ const meta = {
 		(Story) => (
 			<div
 				css={css`
-					max-width: 620px;
+					max-width: 940px;
 					margin: 20px;
 				`}
 			>
