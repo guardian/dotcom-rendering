@@ -78,6 +78,8 @@ describe('handlePuzzlePage', () => {
 		'sudoku-killer',
 		'word-wheel',
 		'wordiply',
+		'film-reveal',
+		'on-the-ball',
 	])('renders iframe-based slug %s when in variant', (slug) => {
 		const res = response();
 		const page = withServerSideABTests(createPuzzlePage(slug), {
@@ -89,6 +91,26 @@ describe('handlePuzzlePage', () => {
 		expect(mockedRenderPuzzlePage).toHaveBeenCalled();
 		expect(res.status).toHaveBeenCalledWith(200);
 	});
+
+	it.each(['film-reveal', 'on-the-ball'])(
+		'requires a non-empty API gameUrl for %s',
+		(slug) => {
+			for (const gameUrl of [undefined, '', '   ']) {
+				const res = response();
+				const page = withServerSideABTests(
+					createPuzzlePage(slug, {
+						instance: { title: slug, gameUrl },
+					}),
+					{ 'puzzles-new-hub-v1': 'variant' },
+				);
+
+				invokeHandler(page, res);
+
+				expect(res.sendStatus).toHaveBeenCalledWith(404);
+			}
+			expect(mockedRenderPuzzlePage).not.toHaveBeenCalled();
+		},
+	);
 
 	it('renders without experiment participation in local development', () => {
 		const previousNodeEnvironment = process.env.NODE_ENV;

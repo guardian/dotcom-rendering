@@ -15,7 +15,11 @@ export const handlePuzzlePage: RequestHandler = ({ body }, res) => {
 
 	const puzzleConfig = getPuzzleConfig(puzzlePage.slug);
 
-	if (!puzzleConfig) {
+	if (
+		!puzzleConfig ||
+		(puzzleConfig.iframe.provider === 'moviegrid' &&
+			!puzzlePage.instance.gameUrl?.trim())
+	) {
 		res.sendStatus(404);
 		return;
 	}

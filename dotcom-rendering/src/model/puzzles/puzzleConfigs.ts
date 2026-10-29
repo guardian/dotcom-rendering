@@ -10,11 +10,9 @@ import { formatPuzzleDateShort } from '../../lib/puzzleDate';
  * unrelated to this registry and is not unified into Puzzle Page. See
  * `docs/puzzle-page.md` for the full picture.
  *
- * This registry currently only contains the V0 puzzle set (per PR #16700
- * review feedback): sudoku (4 difficulties), word wheel, and wordiply.
- * Codeword, futoshiki, suguru, and the trivia/quizzes puzzles
- * (on-the-ball, film-reveal) were removed for V0 and may return later once
- * the team is ready to support them.
+ * The registry contains sudoku (4 difficulties), word wheel, Wordiply,
+ * and MovieGrid's Film reveal and On the ball. MovieGrid games require an
+ * API-provided `instance.gameUrl`; DCR does not construct their URLs.
  *
  * `iframe` is a discriminated union keyed by `provider`, each entry holds
  * only the minimal, provider-specific identity data needed to build its
@@ -25,19 +23,16 @@ import { formatPuzzleDateShort } from '../../lib/puzzleDate';
  * comment for why this split exists.
  */
 
-export const puzzleGroups = ['logic-puzzles', 'word-games'] as const;
+export const puzzleGroups = ['logic-puzzles', 'word-games', 'trivia'] as const;
 
 export type PuzzleGroup = (typeof puzzleGroups)[number];
 
 /**
  * The set of puzzle iframe providers DCR knows how to build a URL for.
- * Adding a new provider (e.g. `'moviegrid'`/`'sportsreveal'`, documented
- * but not yet in the V0 registry) means adding it here, a new
- * `PuzzleIframeConfig` union variant below, and a new builder function in
- * `src/lib/puzzleIframeUrl.ts`, an additive change, not a rewrite of the
- * existing providers.
+ * Adding a provider means adding a `PuzzleIframeConfig` union variant and
+ * handling its URLs in `src/lib/puzzleIframeUrl.ts`.
  */
-export type PuzzleProvider = 'amuselabs' | 'wordiply';
+export type PuzzleProvider = 'amuselabs' | 'wordiply' | 'moviegrid';
 
 /**
  * AmuseLabs-hosted puzzles (the sudoku variants, word-wheel) are
@@ -82,7 +77,15 @@ export interface WordiplyIframeConfig {
 	baseUrl: string;
 }
 
-export type PuzzleIframeConfig = AmuseLabsIframeConfig | WordiplyIframeConfig;
+/** MovieGrid's dated URLs are supplied by the Puzzles API, never derived here. */
+export interface MovieGridIframeConfig {
+	provider: 'moviegrid';
+}
+
+export type PuzzleIframeConfig =
+	| AmuseLabsIframeConfig
+	| WordiplyIframeConfig
+	| MovieGridIframeConfig;
 
 export interface PuzzleConfig {
 	slug: string;
@@ -103,9 +106,7 @@ export interface PuzzleConfig {
 	printEnabled: boolean;
 	hasArchive: boolean;
 	/**
-	 * The SEO title template for this puzzle, sourced verbatim from the
-	 * product team's SEO spreadsheet (confirmed against a 60-character
-	 * budget, date included). May contain a `{date}` placeholder token,
+	 * The SEO title template for this puzzle. May contain a `{date}` token,
 	 * substituted at render time (via `resolvePuzzleTitle`) with the
 	 * puzzle's `instance.puzzleDate` formatted as a short "d MMM yy" date
 	 * (e.g. `"15 Sep 26"`, see `formatPuzzleDateShort`). Used for the
@@ -117,10 +118,8 @@ export interface PuzzleConfig {
 	 */
 	title: string;
 	/**
-	 * The SEO meta description template for this puzzle, sourced verbatim
-	 * from the product team's SEO spreadsheet (confirmed against a
-	 * 157-character budget, date included). May contain a `{date}`
-	 * placeholder token, substituted at render time (via
+	 * The SEO meta description template for this puzzle. May contain a
+	 * `{date}` placeholder token, substituted at render time (via
 	 * `resolvePuzzleDescription`) the same way as `title` above. Used as
 	 * the page's `<meta name="description">` (and, derived from it, its
 	 * Open Graph/Twitter card description) - see `render.puzzlePage.web.tsx`.
@@ -169,11 +168,9 @@ const amuseLabsPuzzle = (
  * The full set of supported Puzzle Page slugs. Keys match each entry's
  * `slug` field (validated at load time by `validatePuzzleConfigs` below).
  *
- * The `title`/`description` copy on every entry below is sourced verbatim
- * from the product team's SEO spreadsheet, do not paraphrase or "improve"
- * it, the wording and character counts have already been confirmed against
- * the spreadsheet's per-page budgets. Each entry's "target search terms"
- * comment is likewise from that spreadsheet's "Search terms" column: it is
+ * AmuseLabs/Wordiply `title`/`description` copy is sourced verbatim from the
+ * product team's SEO spreadsheet: do not paraphrase it. Their "target search
+ * terms" comments are from that spreadsheet's "Search terms" column: each is
  * reference-only context for future copy/content work, not implemented as
  * a `<meta name="keywords">` tag (major search engines ignore that tag
  * entirely, so it provides no real SEO benefit today, see
@@ -272,6 +269,28 @@ export const puzzleConfigs: Record<string, PuzzleConfig> = {
 		description:
 			'Wordiply {date}. Guess the longest word in five guesses that includes the starter word. The closer you are, the higher your length score.',
 	},
+	'film-reveal': {
+		slug: 'film-reveal',
+		puzzleGroup: 'trivia',
+		iframe: { provider: 'moviegrid' },
+		shareEnabled: true,
+		printEnabled: false,
+		hasArchive: true,
+		title: 'Film reveal {date} - film quiz | The Guardian',
+		description:
+			'Play Film reveal for {date}, the Guardian’s daily film quiz.',
+	},
+	'on-the-ball': {
+		slug: 'on-the-ball',
+		puzzleGroup: 'trivia',
+		iframe: { provider: 'moviegrid' },
+		shareEnabled: true,
+		printEnabled: false,
+		hasArchive: true,
+		title: 'On the ball {date} - football quiz | The Guardian',
+		description:
+			'Play On the ball for {date}, the Guardian’s daily football quiz.',
+	},
 };
 
 /**
@@ -336,6 +355,8 @@ const isValidPuzzleIframeConfig = (iframe: PuzzleIframeConfig): boolean => {
 			return !!iframe.set.trim();
 		case 'wordiply':
 			return !!iframe.baseUrl.trim() && isAbsoluteUrl(iframe.baseUrl);
+		case 'moviegrid':
+			return true;
 		default: {
 			// Exhaustiveness check: adding a new PuzzleProvider without also
 			// adding a validation branch here is a compile error, not a

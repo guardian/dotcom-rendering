@@ -92,6 +92,7 @@ import { BannerWrapper } from './lib/stickiness';
 const puzzleGroupLabels: Record<PuzzleConfig['puzzleGroup'], string> = {
 	'logic-puzzles': 'Logic puzzles',
 	'word-games': 'Word games',
+	trivia: 'Trivia & quizzes',
 };
 
 /**
@@ -111,6 +112,8 @@ const puzzleFamilyNames: Record<string, string> = {
 	'sudoku-killer': 'Sudoku',
 	'word-wheel': 'Word wheel',
 	wordiply: 'Wordiply',
+	'film-reveal': 'Film reveal',
+	'on-the-ball': 'On the ball',
 };
 
 /**
@@ -131,6 +134,8 @@ const puzzleHeadlineNames: Record<string, string> = {
 	'sudoku-killer': 'Killer sudoku',
 	'word-wheel': 'Word wheel',
 	wordiply: 'Wordiply',
+	'film-reveal': 'Film reveal',
+	'on-the-ball': 'On the ball',
 };
 
 /**
@@ -400,6 +405,10 @@ export const PuzzlePageLayout = ({
 	const contributionsServiceUrl = '';
 
 	const labelText = puzzleGroupLabels[puzzleConfig.puzzleGroup];
+	const puzzleGroupPath =
+		puzzleConfig.puzzleGroup === 'trivia'
+			? 'trivia-and-quizzes'
+			: puzzleConfig.puzzleGroup;
 	const displayDate = formatPuzzleDate(instance.puzzleDate);
 	const puzzleFamilyName =
 		puzzleFamilyNames[puzzleConfig.slug] ?? instance.title;
@@ -417,7 +426,7 @@ export const PuzzlePageLayout = ({
 	 */
 	const puzzleFamilyTag: TagType[] = [
 		{
-			id: `puzzles-and-games/${puzzleConfig.puzzleGroup}/${puzzleConfig.slug}`,
+			id: `puzzles-and-games/${puzzleGroupPath}/${puzzleConfig.slug}`,
 			type: 'Series',
 			title: puzzleFamilyName,
 		},
@@ -525,7 +534,7 @@ export const PuzzlePageLayout = ({
 									format={puzzlePageFormat}
 									tags={puzzleFamilyTag}
 									sectionLabel={labelText}
-									sectionUrl={`puzzles-and-games/${puzzleConfig.puzzleGroup}/archive`}
+									sectionUrl={`puzzles-and-games/${puzzleGroupPath}/archive`}
 									guardianBaseURL={GUARDIAN_BASE_URL}
 								/>
 							</GridItem>

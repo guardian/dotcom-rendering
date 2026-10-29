@@ -41,29 +41,36 @@ const validPage = () => ({
 });
 
 describe('validateAsPuzzlesPageType', () => {
-	it('accepts archive data without the retired dataUrl field', () => {
-		const puzzle = {
-			id: 'archive-weekend',
-			title: 'Weekend',
-			puzzleType: 'CROSSWORD_WEEKEND',
-			set: 'weekend',
-		};
-		const archive = {
-			category: 'crosswords',
-			title: 'Crosswords',
-			description: 'Archive',
-			selectedPuzzle: puzzle,
-			puzzles: [puzzle],
-			year: 2026,
-			month: 10,
-			items: [],
-			hasError: false,
-			moreFrom: [],
-		};
-		expect(
-			validateAsPuzzlesPageType({ ...validPage(), archive }).archive,
-		).toEqual(archive);
-	});
+	it.each([
+		['crosswords', 'Weekend', 'CROSSWORD_WEEKEND', 'weekend'],
+		['trivia-and-quizzes', 'Film reveal', 'FILMREVEAL', 'all'],
+		['trivia-and-quizzes', 'On the ball', 'ONTHEBALL', 'all'],
+	])(
+		'accepts %s archive data for %s without the retired dataUrl field',
+		(category, title, puzzleType, set) => {
+			const puzzle = {
+				id: `archive-${puzzleType.toLowerCase()}`,
+				title,
+				puzzleType,
+				set,
+			};
+			const archive = {
+				category,
+				title: 'Crosswords',
+				description: 'Archive',
+				selectedPuzzle: puzzle,
+				puzzles: [puzzle],
+				year: 2026,
+				month: 10,
+				items: [],
+				hasError: false,
+				moreFrom: [],
+			};
+			expect(
+				validateAsPuzzlesPageType({ ...validPage(), archive }).archive,
+			).toEqual(archive);
+		},
+	);
 
 	it('accepts artwork descriptions and crossword setter names', () => {
 		const page = validPage();

@@ -29,7 +29,10 @@ const mainStyles = (
 	darkModeAvailable: boolean,
 	category: PuzzlesArchive['category'],
 ) => css`
-	${puzzlesPageTheme(darkModeAvailable, category)};
+	${puzzlesPageTheme(
+		darkModeAvailable,
+		category === 'trivia-and-quizzes' ? 'trivia' : category,
+	)};
 `;
 
 /** Without the bottom ad, the page keeps its own space above the footer. */

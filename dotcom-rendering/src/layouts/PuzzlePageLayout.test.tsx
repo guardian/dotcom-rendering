@@ -86,6 +86,29 @@ const renderPuzzlePageLayout = (
 };
 
 describe('PuzzlePageLayout', () => {
+	it.each([
+		['film-reveal', 'Film reveal'],
+		['on-the-ball', 'On the ball'],
+	])(
+		'renders the %s headline and trivia section link without print',
+		(slug, title) => {
+			renderPuzzlePageLayout(slug);
+
+			expect(
+				screen.getByRole('heading', { level: 1, name: title }),
+			).toBeInTheDocument();
+			expect(
+				screen.getByRole('link', { name: 'Trivia & quizzes' }),
+			).toHaveAttribute(
+				'href',
+				'/puzzles-and-games/trivia-and-quizzes/archive',
+			);
+			expect(
+				screen.queryByRole('button', { name: /print/i }),
+			).not.toBeInTheDocument();
+		},
+	);
+
 	it('renders the sponsor with the logo capped at 140px wide', () => {
 		renderPuzzlePageLayout('sudoku-easy', {}, puzzlesBranding);
 
