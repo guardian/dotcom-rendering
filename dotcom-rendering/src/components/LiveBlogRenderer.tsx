@@ -67,6 +67,16 @@ export const LiveBlogRenderer = ({
 	const { renderingTarget } = useConfig();
 	const isWeb = renderingTarget === 'Web';
 
+	// Determine if the pinned post should expand automatically if it contains the election tracker
+	const shouldExpandPinnedPost =
+		pinnedPost?.elements.some(
+			(element) =>
+				element._type ===
+					'model.dotcomrendering.pageElements.InteractiveAtomBlockElement' &&
+				element.id ===
+					'interactives/2026/11/election-trackers/us-election-tracker-2026',
+		) ?? false;
+
 	return (
 		<>
 			{pinnedPost && onFirstPage && (
@@ -74,7 +84,11 @@ export const LiveBlogRenderer = ({
 					<Island defer={{ until: 'idle' }} priority="feature">
 						<EnhancePinnedPost />
 					</Island>
-					<PinnedPost pinnedPost={pinnedPost} serverTime={serverTime}>
+					<PinnedPost
+						pinnedPost={pinnedPost}
+						serverTime={serverTime}
+						shouldExpandPinnedPost={shouldExpandPinnedPost}
+					>
 						<LiveBlock
 							format={format}
 							block={pinnedPost}
