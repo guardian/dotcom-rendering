@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { until } from '@guardian/source/foundations';
 import { useEffect, useRef, useState } from 'react';
+import { getIdapiUserIdentifiers } from '../lib/getIdapiUserData';
 import { getAuthStatus, subscribeToAuthStateChange } from '../lib/identity';
 import { resolvePuzzleIframeUrl } from '../lib/puzzleIframeUrl';
 import {
@@ -177,16 +178,9 @@ export const buildFrameStyles = (slug: string) => {
  */
 export interface PuzzleContext {
 	/**
-	 * The reader's `idToken.claims.legacy_identity_id` (their Guardian
-	 * "identity ID", the same identifier already used to build MyAccount
-	 * links elsewhere in DCR - see `TopBarMyAccount.tsx`) - not the OIDC
-	 * `sub` claim some newer API integrations elsewhere in DCR use instead.
-	 * `null` when the reader is signed out (or the auth check hasn't
-	 * resolved yet).
-	 *
-	 * Whether `legacy_identity_id` is actually the ID format
-	 * AmuseLabs/Wordiply expect has not been confirmed with those providers
-	 * - see the "Open questions" section of docs/puzzle-page.md.
+	 * The reader's `puzzleId` from `/user/me/identifiers`, matching the
+	 * identifier native apps pass to AmuseLabs. `null` when signed out,
+	 * unresolved, or the identifiers request fails.
 	 */
 	userId: string | null;
 	/**
@@ -212,13 +206,14 @@ export interface PuzzleContextMessage {
 }
 
 /**
- * Reactively resolves the current signed-in user's Guardian identity ID (or
+ * Reactively resolves the current signed-in user's puzzle ID (or
  * `undefined` if signed out), re-checking whenever the underlying
  * identity-auth client reports an auth state change (e.g. the reader signs
  * in or out while already on this page, via a sign-in modal or another
  * tab) - not just once on mount.
  *
- * `isResolved` is `false` until the first auth check has finished, so that
+ * `isResolved` is `false` until authentication and the identifiers request
+ * have finished, so that
  * "not signed in" can be told apart from "not known yet": the iframe must
  * not be given a `src` before that, or it would load once without the `uid`
  * and then again with it.
@@ -232,17 +227,31 @@ const usePuzzleUserId = (): {
 
 	useEffect(() => {
 		let isMounted = true;
+		let refreshVersion = 0;
 
 		const refresh = () => {
-			void getAuthStatus().then((authStatus) => {
-				if (!isMounted) return;
-				setUserId(
-					authStatus.kind === 'SignedIn'
-						? authStatus.idToken.claims.legacy_identity_id
-						: undefined,
-				);
+			const version = ++refreshVersion;
+			setIsResolved(false);
+			setUserId(undefined);
+			void (async () => {
+				let puzzleId: string | undefined;
+				try {
+					const authStatus = await getAuthStatus();
+					if (!isMounted || version !== refreshVersion) return;
+					if (authStatus.kind === 'SignedIn') {
+						const identifiers = await getIdapiUserIdentifiers(
+							window.guardian.config.page.ajaxUrl,
+							{ cacheResponse: false },
+						);
+						puzzleId = identifiers.puzzleId || undefined;
+					}
+				} catch {
+					// Load anonymously if identity is unavailable; never substitute another ID.
+				}
+				if (!isMounted || version !== refreshVersion) return;
+				setUserId(puzzleId);
 				setIsResolved(true);
-			});
+			})();
 		};
 
 		refresh();

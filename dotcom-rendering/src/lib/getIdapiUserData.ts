@@ -49,7 +49,12 @@ export const getIdApiUserData = (ajaxUrl: string): Promise<IdApiUserData> => {
 
 export const getIdapiUserIdentifiers = (
 	ajaxUrl: string,
+	{ cacheResponse = true }: { cacheResponse?: boolean } = {},
 ): Promise<IdApiUserIdentifiers> => {
+	// Auth-reactive consumers must not reuse identifiers from a previous session.
+	if (!cacheResponse) {
+		return callApi(joinUrl(ajaxUrl, 'user/me/identifiers'));
+	}
 	if (!cache.idapiUserIdentifiersResponse) {
 		const url = joinUrl(ajaxUrl, 'user/me/identifiers');
 		cache.idapiUserIdentifiersResponse = callApi(url);
