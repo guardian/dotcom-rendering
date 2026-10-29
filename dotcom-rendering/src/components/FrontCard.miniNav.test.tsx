@@ -103,12 +103,12 @@ describe('FrontCard mini navigation', () => {
 		expectMiniNavAbsent();
 	});
 
-	it('renders an underlined header link when header text is enabled', () => {
+	it('renders a header link without an underline when header text is enabled', () => {
 		renderCard();
 
 		const header = screen.getByRole('link', { name: 'Football' });
 		expect(header).toHaveAttribute('href', '/football');
-		expect(header).toHaveStyle('text-decoration: underline');
+		expect(header).toHaveStyle('text-decoration: none');
 	});
 
 	it('renders header text without a link when the header has no path', () => {
@@ -124,6 +124,9 @@ describe('FrontCard mini navigation', () => {
 
 		expect(screen.getByText('Football')).toBeInTheDocument();
 		expect(screen.getByText('Football').closest('a')).toBeNull();
+		expect(screen.getByText('Football').closest('.mini-nav')).toHaveStyle({
+			'--custom-subnav-header-text': 'var(--card-headline)',
+		});
 		expect(
 			screen.getByRole('link', { name: 'More Football' }),
 		).toHaveAttribute('href', '/football');

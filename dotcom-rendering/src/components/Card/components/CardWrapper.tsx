@@ -61,6 +61,7 @@ const hoverStyles = (isLoopAndInLoopClickTestVariant: boolean) => css`
 	*/
 	:has(
 		ul.sublinks:hover,
+		.mini-nav:hover,
 		.video-container:not(
 				${isLoopAndInLoopClickTestVariant
 					? `.cinemagraph, .loop`

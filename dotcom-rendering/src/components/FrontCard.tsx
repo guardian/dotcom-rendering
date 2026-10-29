@@ -71,12 +71,15 @@ export const FrontCard = (props: Props) => {
 		trail.showMiniNav &&
 		trail.miniNavData ? (
 			<div
+				className="mini-nav"
 				css={css`
 					position: relative;
 					z-index: ${getZIndex('card-nested-link')};
 					min-width: 0;
 					--custom-subnav-header-text: ${palette(
-						'--card-kicker-text',
+						trail.miniNavData.header.dotcomPath
+							? '--card-kicker-text'
+							: '--card-headline',
 					)};
 					--masthead-nav-link-text: ${palette('--card-headline')};
 					--masthead-nav-link-text-hover: ${palette(
@@ -88,7 +91,6 @@ export const FrontCard = (props: Props) => {
 					customSubNav={trail.miniNavData}
 					currentNavLink=""
 					renderingPage="article"
-					underlineHeader={true}
 					showHeaderDivider={false}
 					scrollHeaderWithLinks={true}
 				/>
