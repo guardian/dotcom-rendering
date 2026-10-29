@@ -304,6 +304,8 @@ const controlsStyles = css`
 		svg {
 			width: 26px;
 			height: 26px;
+			/* The icon has no fill of its own, so it would stay black. */
+			fill: currentColor;
 		}
 		:last-child {
 			justify-self: end;
@@ -408,9 +410,12 @@ const calendarStyles = css`
 		}
 	}
 	.day[data-status='unavailable'] {
-		border-color: ${palette.neutral[97]};
+		border-color: var(
+			--puzzles-unavailable-day-border,
+			${palette.neutral[93]}
+		);
 		background: var(--puzzles-page-background, ${palette.neutral[100]});
-		color: ${palette.neutral[60]};
+		color: var(--puzzles-unavailable-day-text, ${palette.neutral[46]});
 	}
 	${from.phablet} {
 		grid-template-columns: repeat(7, 60px);
