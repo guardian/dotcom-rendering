@@ -1028,7 +1028,6 @@ const bareElements = new Set<FEElement['_type']>([
 	'model.dotcomrendering.pageElements.TextBlockElement',
 	'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
 	'model.dotcomrendering.pageElements.InteractiveBlockElement',
-	'model.dotcomrendering.pageElements.InteractiveAtomBlockElement',
 ]);
 
 // RenderArticleElement is a wrapper for renderElement that wraps elements in a
@@ -1092,11 +1091,13 @@ export const RenderArticleElement = ({
 	});
 
 	const needsFigure =
-		!bareElements.has(element._type) ||
-		(format.design === ArticleDesign.Interactive &&
-			articleArrangement === undefined &&
+		!bareElements.has(element._type) &&
+		!(
+			format.design === ArticleDesign.Interactive &&
+			articleArrangement !== undefined &&
 			element._type ===
-				'model.dotcomrendering.pageElements.InteractiveAtomBlockElement');
+				'model.dotcomrendering.pageElements.InteractiveAtomBlockElement'
+		);
 
 	const role =
 		'role' in element
