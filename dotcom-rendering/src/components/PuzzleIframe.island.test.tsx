@@ -249,7 +249,7 @@ describe('PuzzleIframe', () => {
 
 	beforeEach(() => {
 		jest.resetAllMocks();
-		window.guardian.config.page.ajaxUrl = 'https://ajax.example.test';
+		window.guardian.config.page.idApiUrl = 'https://identity.example.test';
 		unsubscribe = jest.fn();
 		mockedSubscribeToAuthStateChange.mockReturnValue(unsubscribe);
 		mockedUseMatchMedia.mockReturnValue(false);
@@ -345,7 +345,7 @@ describe('PuzzleIframe', () => {
 		const iframe = await screen.findByTitle<HTMLIFrameElement>('Puzzle');
 		await waitFor(() =>
 			expect(mockedGetIdentifiers).toHaveBeenCalledWith(
-				window.guardian.config.page.ajaxUrl,
+				window.guardian.config.page.idApiUrl,
 				{ cacheResponse: false },
 			),
 		);

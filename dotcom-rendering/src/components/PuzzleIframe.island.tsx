@@ -238,9 +238,14 @@ const usePuzzleUserId = (): {
 				try {
 					const authStatus = await getAuthStatus();
 					if (!isMounted || version !== refreshVersion) return;
-					if (authStatus.kind === 'SignedIn') {
+					const idApiUrl = window.guardian.config.page.idApiUrl;
+					if (
+						authStatus.kind === 'SignedIn' &&
+						idApiUrl != '' &&
+						idApiUrl != undefined
+					) {
 						const identifiers = await getIdapiUserIdentifiers(
-							window.guardian.config.page.ajaxUrl,
+							idApiUrl,
 							{ cacheResponse: false },
 						);
 						puzzleId = identifiers.puzzleId || undefined;
