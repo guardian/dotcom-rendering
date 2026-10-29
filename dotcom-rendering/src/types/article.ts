@@ -134,6 +134,7 @@ export const enhanceArticleType = (
 		pageId: data.pageId,
 		serverSideABTests: data.config.serverSideABTests,
 		switches: data.config.switches,
+		stage: data.config.stage,
 	});
 
 	const crosswordBlock = buildCrosswordBlock(data);

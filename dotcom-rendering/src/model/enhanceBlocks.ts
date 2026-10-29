@@ -1,7 +1,7 @@
 import { isUndefined } from '@guardian/libs';
 import { type ArticleFormat } from '../lib/articleFormat';
 import type { Block } from '../types/blocks';
-import type { Switches } from '../types/config';
+import type { StageType, Switches } from '../types/config';
 import type {
 	FEElement,
 	ImageBlockElement,
@@ -39,6 +39,7 @@ type Options = {
 	pageId: string;
 	serverSideABTests?: Record<string, string>;
 	switches?: Switches;
+	stage: StageType;
 };
 
 const enhanceNewsletterSignup =
