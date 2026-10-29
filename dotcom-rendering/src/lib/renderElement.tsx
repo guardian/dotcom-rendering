@@ -1090,14 +1090,14 @@ export const RenderArticleElement = ({
 		idApiUrl,
 	});
 
+	const isInteractiveAtomInInteractiveGrid =
+		format.design === ArticleDesign.Interactive &&
+		articleArrangement !== undefined &&
+		element._type ===
+			'model.dotcomrendering.pageElements.InteractiveAtomBlockElement';
+
 	const needsFigure =
-		!bareElements.has(element._type) &&
-		!(
-			format.design === ArticleDesign.Interactive &&
-			articleArrangement !== undefined &&
-			element._type ===
-				'model.dotcomrendering.pageElements.InteractiveAtomBlockElement'
-		);
+		!bareElements.has(element._type) && !isInteractiveAtomInInteractiveGrid;
 
 	const role =
 		'role' in element
