@@ -41,7 +41,7 @@ const isInRevampedImmersiveLayoutTest = (article: Article): boolean =>
 	article.frontendData.config.serverSideABTests[
 		'articles-and-publishing-revamped-immersive-layout'
 	] === 'enable';
-const immersiveTestArticle = 'p/x6adat';
+const immersiveTestArticle = '/p/x6adat';
 
 const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 	const format = {
