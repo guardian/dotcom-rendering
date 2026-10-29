@@ -333,7 +333,8 @@ export const StandardLayoutArticleGrid = ({
 						? css`
 								${from.tablet} {
 									align-self: start;
-									${mainMediaAspectRatio != null &&
+									${!isImmersiveLandscape &&
+									mainMediaAspectRatio != null &&
 									`aspect-ratio: ${mainMediaAspectRatio.replace(':', ' / ')};`}
 									${isImmersiveLandscape &&
 									`margin-left: -20px;
@@ -367,16 +368,21 @@ export const StandardLayoutArticleGrid = ({
 						: undefined,
 					isImmersiveLandscape &&
 						css`
-							${until.phablet} {
-								aspect-ratio: 4 / 5;
+							position: relative;
+							aspect-ratio: 4 / 5;
+
+							> div {
+								position: absolute;
+								inset: 0;
 							}
 
-							${between.phablet.and.tablet} {
-								aspect-ratio: 3 / 4;
-							}
-
-							${between.tablet.and.desktop} {
+							${from.mobileLandscape} {
 								aspect-ratio: 5 / 4;
+							}
+
+							${from.desktop} {
+								aspect-ratio: auto;
+								height: 100vh;
 							}
 						`,
 					displayAvatarUrl && layoutType === 'picture'

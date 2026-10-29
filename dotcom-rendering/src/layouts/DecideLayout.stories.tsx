@@ -90,7 +90,7 @@ const HydratedLayout: Decorator<
 };
 
 export default {
-	title: 'Components/DecideLayout',
+	title: 'Layouts/DecideLayout',
 	component: DecideLayout,
 	parameters: {
 		chromatic: {
@@ -156,10 +156,21 @@ const standardImmersiveNewsAppsFixture: Article = {
 	display: ArticleDisplay.Immersive,
 };
 
+const immersiveLandscapeFixture = {
+	...StandardStandardNewsFixture,
+	config: {
+		...StandardStandardNewsFixture.config,
+		serverSideABTests: {
+			...StandardStandardNewsFixture.config.serverSideABTests,
+			'articles-and-publishing-revamped-immersive-layout': 'enable',
+		},
+	},
+};
+
 export const WebStandardImmersiveNewsLight: Story = {
 	args: {
 		article: {
-			...WebStandardStandardNewsLight.args.article,
+			...enhanceArticleType(immersiveLandscapeFixture, 'Web'),
 			display: ArticleDisplay.Immersive,
 		},
 		colourScheme: 'light',
@@ -174,9 +185,51 @@ export const WebStandardImmersiveNewsLight: Story = {
 				breakpoints.phablet,
 				breakpoints.tablet,
 				breakpoints.desktop,
+				breakpoints.leftCol,
+				breakpoints.wide,
 			],
 		},
 	},
+};
+
+export const WebStandardImmersiveNewsFiveByFour: Story = {
+	args: {
+		article: {
+			...enhanceArticleType(
+				{
+					...immersiveLandscapeFixture,
+					mainMediaElements:
+						immersiveLandscapeFixture.mainMediaElements.map(
+							(element) =>
+								element._type ===
+								'model.dotcomrendering.pageElements.ImageBlockElement'
+									? {
+											...element,
+											media: {
+												...element.media,
+												allImages:
+													element.media.allImages.map(
+														(image) => ({
+															...image,
+															fields: {
+																...image.fields,
+																width: '460',
+																height: '368',
+															},
+														}),
+													),
+											},
+										}
+									: element,
+						),
+				},
+				'Web',
+			),
+			display: ArticleDisplay.Immersive,
+		},
+		colourScheme: 'light',
+	},
+	parameters: WebStandardImmersiveNewsLight.parameters,
 };
 
 const weekendEssayArticle: Article = {

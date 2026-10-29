@@ -1,14 +1,8 @@
 import { css } from '@emotion/react';
 import { breakpoints, from, space, until } from '@guardian/source/foundations';
 import { type LayoutType } from '../layouts/lib/articleArrangements';
-import {
-	ArticleDesign,
-	type ArticleFormat,
-	ArticleSpecial,
-} from '../lib/articleFormat';
-import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
+import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import type { FEElement, RoleType } from '../types/content';
-import { minHeaderHeightPx } from './Masthead/Titlepiece/constants';
 
 type Props = {
 	children: React.ReactNode;
@@ -276,34 +270,9 @@ export const defaultRoleStyles = (
 	}
 };
 
-const mainMediaFigureStyles = (
-	isImmersiveLandscape: boolean,
-	isLabs: boolean,
-) => {
-	const labsHeaderHeight = LABS_HEADER_HEIGHT;
-	const combinedHeight = (minHeaderHeightPx + labsHeaderHeight).toString();
-
-	const navAndLabsHeaderHeight = isLabs
-		? `${combinedHeight}px`
-		: `${minHeaderHeightPx}px`;
-	return css`
-		height: 100%;
-		${isImmersiveLandscape &&
-		css`
-			${until.tablet} {
-				height: auto;
-				aspect-ratio: 4 / 5;
-			}
-			${from.tablet} {
-				height: calc(100vh - ${navAndLabsHeaderHeight});
-				min-height: calc(31.25rem - ${navAndLabsHeaderHeight});
-			}
-			${from.wide} {
-				min-height: calc(50rem - ${navAndLabsHeaderHeight});
-			}
-		`}
-	`;
-};
+const mainMediaFigureStyles = css`
+	height: 100%;
+`;
 
 export const Figure = ({
 	role = 'inline',
@@ -327,10 +296,7 @@ export const Figure = ({
 				id={id}
 				key={id}
 				css={[
-					mainMediaFigureStyles(
-						articleArrangement === 'immersiveLandscape',
-						format.theme === ArticleSpecial.Labs,
-					),
+					mainMediaFigureStyles,
 					articleArrangement === 'immersivePortrait' &&
 						css`
 							height: auto;
