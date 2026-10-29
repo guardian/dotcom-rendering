@@ -158,6 +158,22 @@ const standardImmersiveNewsAppsFixture: Article = {
 
 const immersiveLandscapeFixture = {
 	...StandardStandardNewsFixture,
+	mainMediaElements: StandardStandardNewsFixture.mainMediaElements.map(
+		(element) =>
+			element._type ===
+			'model.dotcomrendering.pageElements.ImageBlockElement'
+				? {
+						...element,
+						media: {
+							...element.media,
+							allImages: element.media.allImages.map((image) => ({
+								...image,
+								fields: { ...image.fields, aspectRatio: '5:3' },
+							})),
+						},
+					}
+				: element,
+	),
 	config: {
 		...StandardStandardNewsFixture.config,
 		serverSideABTests: {
@@ -192,36 +208,70 @@ export const WebStandardImmersiveNewsLight: Story = {
 	},
 };
 
+const fiveByFourMainMedia = AffiliateProductShowcaseFixture.blocks
+	.flatMap((block) => block.elements)
+	.find(
+		(element): element is ImageBlockElement =>
+			element._type ===
+				'model.dotcomrendering.pageElements.ImageBlockElement' &&
+			element.media.allImages[0]?.fields.aspectRatio === '5:4',
+	);
+
+if (fiveByFourMainMedia == null) {
+	throw new Error('The affiliate showcase fixture must contain a 5:4 image');
+}
+
 export const WebStandardImmersiveNewsFiveByFour: Story = {
 	args: {
 		article: {
 			...enhanceArticleType(
 				{
 					...immersiveLandscapeFixture,
-					mainMediaElements:
-						immersiveLandscapeFixture.mainMediaElements.map(
-							(element) =>
-								element._type ===
-								'model.dotcomrendering.pageElements.ImageBlockElement'
-									? {
-											...element,
-											media: {
-												...element.media,
-												allImages:
-													element.media.allImages.map(
-														(image) => ({
-															...image,
-															fields: {
-																...image.fields,
-																width: '460',
-																height: '368',
-															},
-														}),
-													),
-											},
-										}
-									: element,
-						),
+					mainMediaElements: [fiveByFourMainMedia],
+				},
+				'Web',
+			),
+			display: ArticleDisplay.Immersive,
+		},
+		colourScheme: 'light',
+	},
+	parameters: WebStandardImmersiveNewsLight.parameters,
+};
+
+const recentImmersiveNewsFixture = {
+	...immersiveLandscapeFixture,
+	tags: immersiveLandscapeFixture.tags.filter(
+		(tag) =>
+			tag.type !== 'Series' &&
+			tag.type !== 'Blog' &&
+			!(tag.type === 'Publication' && tag.title === 'The Observer'),
+	),
+	webPublicationDate: '2021-12-31T10:00:00.000Z',
+	webPublicationDateDeprecated: '2021-12-31T10:00:00.000Z',
+	webPublicationDateDisplay: 'Fri 31 Dec 2021 10.00 GMT',
+	webPublicationSecondaryDateDisplay: '',
+};
+
+export const WebRecentImmersiveNewsWithoutSeriesFiveByThree: Story = {
+	name: 'Web Recent Immersive News Without Series (5:3)',
+	args: {
+		article: {
+			...enhanceArticleType(recentImmersiveNewsFixture, 'Web'),
+			display: ArticleDisplay.Immersive,
+		},
+		colourScheme: 'light',
+	},
+	parameters: WebStandardImmersiveNewsLight.parameters,
+};
+
+export const WebRecentImmersiveNewsWithoutSeries: Story = {
+	name: 'Web Recent Immersive News Without Series (5:4)',
+	args: {
+		article: {
+			...enhanceArticleType(
+				{
+					...recentImmersiveNewsFixture,
+					mainMediaElements: [fiveByFourMainMedia],
 				},
 				'Web',
 			),
@@ -428,6 +478,24 @@ const portraitMainMedia = PhotoEssayImmersiveLabsFixture.blocks
 if (portraitMainMedia == null) {
 	throw new Error('The Labs fixture must contain a portrait image');
 }
+
+export const WebRecentImmersiveNewsWithoutSeriesFourByFive: Story = {
+	name: 'Web Recent Immersive News Without Series (4:5)',
+	args: {
+		article: {
+			...enhanceArticleType(
+				{
+					...recentImmersiveNewsFixture,
+					mainMediaElements: [portraitMainMedia],
+				},
+				'Web',
+			),
+			display: ArticleDisplay.Immersive,
+		},
+		colourScheme: 'light',
+	},
+	parameters: WebStandardImmersiveNewsLight.parameters,
+};
 
 const photoEssayImmersiveLabsPortraitArticle = enhanceArticleType(
 	{
