@@ -27,4 +27,32 @@ describe('buildChoiceCardSettings', () => {
 			buttonSelectOpacity: undefined,
 		});
 	});
+
+	it('treats null opacities as absent and preserves zero', () => {
+		const designWithNullOpacities = {
+			visual: {
+				kind: 'ChoiceCards',
+				buttonOpacity: null,
+				buttonSelectOpacity: null,
+			},
+		} as unknown as ConfigurableDesign;
+
+		expect(buildChoiceCardSettings(designWithNullOpacities)).toMatchObject({
+			buttonOpacity: undefined,
+			buttonSelectOpacity: undefined,
+		});
+
+		const designWithZeroOpacity = {
+			visual: {
+				kind: 'ChoiceCards',
+				buttonOpacity: 0,
+				buttonSelectOpacity: 0,
+			},
+		} as ConfigurableDesign;
+
+		expect(buildChoiceCardSettings(designWithZeroOpacity)).toMatchObject({
+			buttonOpacity: 0,
+			buttonSelectOpacity: 0,
+		});
+	});
 });

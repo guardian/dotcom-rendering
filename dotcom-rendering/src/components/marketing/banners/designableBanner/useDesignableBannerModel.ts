@@ -78,7 +78,7 @@ export const buildChoiceCardSettings = (
 		buttonColour: buttonColour
 			? hexColourToString(buttonColour)
 			: undefined,
-		buttonOpacity,
+		buttonOpacity: buttonOpacity ?? undefined,
 		buttonTextColour: buttonTextColour
 			? hexColourToString(buttonTextColour)
 			: undefined,
@@ -88,7 +88,7 @@ export const buildChoiceCardSettings = (
 		buttonSelectColour: buttonSelectColour
 			? hexColourToString(buttonSelectColour)
 			: undefined,
-		buttonSelectOpacity,
+		buttonSelectOpacity: buttonSelectOpacity ?? undefined,
 		buttonSelectTextColour: buttonSelectTextColour
 			? hexColourToString(buttonSelectTextColour)
 			: undefined,
