@@ -68,8 +68,8 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 	},
 });
 
-/** Facia */
-new RenderingCDKStack(cdkApp, 'FaciaRendering-CODE', {
+/** Facia aka Fronts */
+export const FaciaRenderingPropsCODE: RenderingCDKStackProps = {
 	guApp: 'facia-rendering',
 	stage: 'CODE',
 	domainName: 'facia-rendering.code.dev-guardianapis.com',
@@ -77,8 +77,31 @@ new RenderingCDKStack(cdkApp, 'FaciaRendering-CODE', {
 		scaling: { minimumInstances: 1, maximumInstances: 3 },
 		instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.SMALL),
 	},
-});
-new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
+	ecsProps: {
+		imageIdentifier: getImageIdentifier(),
+		taskCpu: 1024,
+		taskMemoryLimitMiB: 2048,
+		scaling: {
+			minimumTasks: 1,
+			maximumTasks: 3,
+			cpuScaling: {
+				targetValue: 20,
+				// TODO: Tune cooldown values.
+				// https://docs.aws.amazon.com/autoscaling/application/userguide/target-tracking-scaling-policy-overview.html#target-tracking-cooldown
+				scaleInCooldown: Duration.seconds(60),
+				scaleOutCooldown: Duration.seconds(60),
+			},
+		},
+	},
+	// Route 100% traffic to EC2.
+	targetGroupWeights: {
+		ec2: 1,
+		ecs: 0,
+	},
+};
+new RenderingCDKStack(cdkApp, 'FaciaRendering-CODE', FaciaRenderingPropsCODE);
+
+export const FaciaRenderingPropsPROD: RenderingCDKStackProps = {
 	guApp: 'facia-rendering',
 	stage: 'PROD',
 	domainName: 'facia-rendering.guardianapis.com',
@@ -110,7 +133,29 @@ new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
 		},
 		instanceType: InstanceType.of(InstanceClass.C8G, InstanceSize.MEDIUM),
 	},
-});
+	ecsProps: {
+		imageIdentifier: getImageIdentifier(),
+		taskCpu: 1024,
+		taskMemoryLimitMiB: 2048,
+		scaling: {
+			minimumTasks: 21,
+			maximumTasks: 210,
+			cpuScaling: {
+				targetValue: 20,
+				// TODO: Tune cooldown values.
+				// https://docs.aws.amazon.com/autoscaling/application/userguide/target-tracking-scaling-policy-overview.html#target-tracking-cooldown
+				scaleInCooldown: Duration.seconds(60),
+				scaleOutCooldown: Duration.seconds(60),
+			},
+		},
+	},
+	// Route 100% traffic to EC2.
+	targetGroupWeights: {
+		ec2: 1,
+		ecs: 0,
+	},
+};
+new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', FaciaRenderingPropsPROD);
 
 /** Tag pages */
 export const TagPageRenderingPropsCODE: RenderingCDKStackProps = {
