@@ -235,17 +235,19 @@ export const StandardLayoutArticleGrid = ({
 			: getLayoutType(format, mainMediaOrientation);
 
 	const setCentreRule = (gridLayout: LayoutType) => {
-		if (isLabs || gridLayout === 'interactiveStandard') return undefined;
-
+		if (
+			isLabs ||
+			gridLayout === 'interactiveStandard' ||
+			gridLayout === 'interactiveTopHatLite' ||
+			gridLayout === 'interactiveTopHatFull'
+		) {
+			return undefined;
+		}
 		const getColumnCount = () => {
 			switch (gridLayout) {
 				case 'immersivePortrait':
 				case 'immersiveLandscape':
 					return 4;
-				case 'interactiveTopHatFull':
-					return 6;
-				case 'interactiveTopHatLite':
-					return 5;
 				default:
 					return 3;
 			}
@@ -319,7 +321,7 @@ export const StandardLayoutArticleGrid = ({
 					background-color: ${themePalette('--article-background')};
 				`,
 				grid.container,
-				!isInteractiveTopHat && grid.outerRules(),
+				grid.outerRules(),
 				setCentreRule(layoutType),
 				isLabs &&
 					isImmersive &&
@@ -359,7 +361,7 @@ export const StandardLayoutArticleGrid = ({
 					`,
 				isInteractiveTopHat &&
 					css`
-						grid-template-rows: 3fr auto auto auto auto 1fr;
+						grid-template-rows: 300px auto;
 					`,
 			]}
 		>
@@ -539,7 +541,11 @@ export const StandardLayoutArticleGrid = ({
 									${themePalette('--article-border')};
 							}
 						`,
-					isInteractiveTopHat && topHatFurnitureBackgroundStyles,
+					isInteractiveTopHat &&
+						css`
+							${topHatFurnitureBackgroundStyles}
+							padding-top: 10px;
+						`,
 				]}
 			>
 				{layoutType === 'picture' || layoutType === 'comment' ? (
@@ -973,7 +979,7 @@ export const StandardLayoutArticleGrid = ({
 					</Hide>
 				)}
 			</GridItem>
-			{layoutType === 'interactiveStandard' && (
+			{format.design === ArticleDesign.Interactive && (
 				<div
 					aria-hidden="true"
 					data-gu-name="centre-rule"
@@ -982,7 +988,11 @@ export const StandardLayoutArticleGrid = ({
 						${from.leftCol} {
 							display: block;
 							grid-column: centre-column-start;
-							grid-row: 1 / 5;
+							grid-row: ${layoutType === 'interactiveStandard'
+								? '1 / 5'
+								: layoutType === 'interactiveTopHatFull'
+									? '8'
+									: '7 / span 2'};
 							position: relative;
 
 							&::before {
