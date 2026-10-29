@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { customSubnav } from '../../fixtures/manual/customSubnav';
-import { trails as highlightsTrails } from '../../fixtures/manual/highlights-trails';
 import { trails } from '../../fixtures/manual/trails';
 import type { DCRFrontCard } from '../types/front';
 import { LI } from './Card/components/LI';
@@ -9,7 +8,7 @@ import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
 
 const trail = {
-	...highlightsTrails[6]!,
+	...trails[4],
 	showMiniNav: true,
 	boostLevel: 'boost',
 	miniNavData: { ...customSubnav, format: 'compact' },
