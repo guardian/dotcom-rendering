@@ -48,7 +48,9 @@ export const SideBySide = (props: Props) => (
 		</div>
 		<div
 			css={{
+				paddingTop: space[4],
 				[from[props.from]]: {
+					paddingTop: 0,
 					flexBasis: '50%',
 					paddingLeft: space[2],
 					borderLeftStyle: 'solid',

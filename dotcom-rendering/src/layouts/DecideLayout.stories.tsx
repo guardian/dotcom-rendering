@@ -179,6 +179,28 @@ export const WebStandardImmersiveNewsLight: Story = {
 	},
 };
 
+const weekendEssayArticle: Article = {
+	...WebStandardStandardNewsLight.args.article,
+	design: ArticleDesign.WeekendEssay,
+	display: ArticleDisplay.Standard,
+};
+
+export const WebWeekendEssayWithSeriesAndSection: Story = {
+	args: {
+		article: weekendEssayArticle,
+	},
+	parameters: {
+		...webParameters,
+		chromatic: {
+			viewports: [
+				breakpoints.mobile,
+				breakpoints.tablet,
+				breakpoints.desktop,
+			],
+		},
+	},
+};
+
 export const AppsStandardImmersiveNewsLight: Story = {
 	args: {
 		article: standardImmersiveNewsAppsFixture,
