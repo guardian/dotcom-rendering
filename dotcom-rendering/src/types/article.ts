@@ -222,6 +222,7 @@ export const enhanceArticleType = (
 				renderingTarget,
 				data.pinnedPost,
 				data.pageId,
+				data.config.stage,
 			),
 			standfirst: enhanceStandfirst(data.standfirst),
 			commercialProperties: enhanceCommercialProperties(

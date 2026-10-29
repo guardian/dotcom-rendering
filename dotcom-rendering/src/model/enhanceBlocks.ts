@@ -23,6 +23,7 @@ import { enhanceNumberedLists } from './enhance-numbered-lists';
 import { enhanceProductSummary } from './enhance-product-summary';
 import { enhanceTweets } from './enhance-tweets';
 import { enhanceGuVideos } from './enhance-videos';
+import { enhanceEventGraphics } from './enhanceEventGraphics';
 import { enhanceLists } from './enhanceLists';
 import { enhanceProductElement } from './enhanceProductElement';
 import { enhanceTimeline } from './enhanceTimeline';
@@ -82,6 +83,7 @@ export const enhanceElements =
 			enhanceDividers,
 			enhanceH2s,
 			enhanceProductSummary,
+			enhanceEventGraphics(options.stage, format),
 			enhanceInteractiveAtomElements(format),
 			enhanceInteractiveContentsElements,
 			enhanceBlockquotes(format),

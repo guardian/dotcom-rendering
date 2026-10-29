@@ -5,7 +5,7 @@ import type { FEElement } from '../types/content';
 export const enhanceEventGraphics =
 	(stage: StageType, format: ArticleFormat) =>
 	(elements: FEElement[]): FEElement[] => {
-		elements.map((element) => {
+		elements.flatMap<FEElement>((element) => {
 			if (
 				element._type ===
 					'model.dotcomrendering.pageElements.InteractiveAtomBlockElement' &&
@@ -16,17 +16,19 @@ export const enhanceEventGraphics =
 					format.design === ArticleDesign.LiveBlog ||
 					format.design === ArticleDesign.DeadBlog
 				) {
-					return {
-						_type: 'model.dotcomrendering.pageElements.EventGraphicBlockElement',
-						elementId: element.elementId,
-						components: { components: [] },
-						dataUrl: zugUrl(stage).href,
-					};
+					return [
+						{
+							_type: 'model.dotcomrendering.pageElements.EventGraphicBlockElement',
+							elementId: element.elementId,
+							components: { components: [] },
+							dataUrl: zugUrl(stage),
+						},
+					];
 				} else {
 					return [];
 				}
 			}
-			return element;
+			return [element];
 		});
 		return elements;
 	};
