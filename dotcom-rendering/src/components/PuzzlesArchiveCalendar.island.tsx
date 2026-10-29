@@ -302,7 +302,7 @@ const recentStyles = css`
 		box-sizing: border-box;
 		flex: 0 0 calc((100% - var(--recent-gap)) / 2);
 		min-height: 104px;
-		padding: ${space[2]}px ${space[2]}px 30px;
+		padding: ${space[1]}px ${space[2]}px 30px;
 		background: var(
 			--puzzles-card-background,
 			var(--puzzles-tint, ${palette.news[800]})
@@ -334,6 +334,9 @@ const recentStyles = css`
 			var(--puzzles-primary, ${palette.news[300]})
 		);
 		${headlineBold20};
+	}
+	a:hover strong {
+		text-decoration: underline;
 	}
 	span {
 		${textSans14};
@@ -388,6 +391,8 @@ const controlsStyles = css`
 		svg {
 			width: 26px;
 			height: 26px;
+			/* The icon has no fill of its own, so it would stay black. */
+			fill: currentColor;
 		}
 		:last-child {
 			justify-self: end;
@@ -492,9 +497,12 @@ const calendarStyles = css`
 		}
 	}
 	.day[data-status='unavailable'] {
-		border-color: ${palette.neutral[97]};
+		border-color: var(
+			--puzzles-unavailable-day-border,
+			${palette.neutral[93]}
+		);
 		background: var(--puzzles-page-background, ${palette.neutral[100]});
-		color: ${palette.neutral[60]};
+		color: var(--puzzles-unavailable-day-text, ${palette.neutral[46]});
 	}
 	${from.phablet} {
 		grid-template-columns: repeat(7, 60px);
