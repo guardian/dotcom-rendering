@@ -410,9 +410,12 @@ const calendarStyles = css`
 		}
 	}
 	.day[data-status='unavailable'] {
-		border-color: ${palette.neutral[97]};
+		border-color: var(
+			--puzzles-unavailable-day-border,
+			${palette.neutral[93]}
+		);
 		background: var(--puzzles-page-background, ${palette.neutral[100]});
-		color: ${palette.neutral[60]};
+		color: var(--puzzles-unavailable-day-text, ${palette.neutral[46]});
 	}
 	${from.phablet} {
 		grid-template-columns: repeat(7, 60px);
@@ -435,13 +438,6 @@ const calendarStyles = css`
 	}
 	${from.desktop} {
 		grid-template-columns: repeat(7, 78px);
-		.day[data-status='unavailable'] {
-			border-color: var(
-				--puzzles-unavailable-day-border,
-				${palette.neutral[93]}
-			);
-			color: var(--puzzles-unavailable-day-text, ${palette.neutral[46]});
-		}
 	}
 `;
 
