@@ -19,7 +19,7 @@ import { MorePuzzlesRows } from './MorePuzzlesCard';
 const relatedRailStyles = css`
 	display: grid;
 	gap: 16px;
-	padding: 16px 0;
+	padding: 8px 0 16px;
 	${from.leftCol} {
 		grid-template-columns: 140px minmax(0, 1fr);
 		gap: 20px;
