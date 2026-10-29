@@ -26,13 +26,13 @@ type Line =
 const mobileColumns =
 	'[grid-start] 0px [centre-column-start] repeat(6, 1fr) [centre-column-end] 0px [grid-end]';
 const tabletColumns =
-	'[grid-start] 1fr [centre-column-start] repeat(12, 40px) [centre-column-end] 1fr [grid-end]';
+	'[grid-start] 1fr [centre-column-start] repeat(12, minmax(0, 40px)) [centre-column-end] 1fr [grid-end]';
 const desktopColumns =
-	'[grid-start] 1fr [centre-column-start] repeat(8, 60px) [centre-column-end right-column-start] repeat(4, 60px) [right-column-end] 1fr [grid-end]';
+	'[grid-start] 1fr [centre-column-start] repeat(8, minmax(0, 60px)) [centre-column-end right-column-start] repeat(4, minmax(0, 60px)) [right-column-end] 1fr [grid-end]';
 const leftColColumns =
-	'[grid-start] 1fr [left-column-start] repeat(2, 60px) [left-column-end centre-column-start] repeat(8, 60px) [centre-column-end right-column-start] repeat(4, 60px) [right-column-end] 1fr [grid-end]';
+	'[grid-start] 1fr [left-column-start] repeat(2, minmax(0, 60px)) [left-column-end centre-column-start] repeat(8, minmax(0, 60px)) [centre-column-end right-column-start] repeat(4, minmax(0, 60px)) [right-column-end] 1fr [grid-end]';
 const wideColumns =
-	'[grid-start] 1fr [left-column-start] repeat(3, 60px) [left-column-end centre-column-start] repeat(8, 60px) [centre-column-end] 60px [right-column-start] repeat(4, 60px) [right-column-end] 1fr [grid-end]';
+	'[grid-start] 1fr [left-column-start] repeat(3, minmax(0, 60px)) [left-column-end centre-column-start] repeat(8, minmax(0, 60px)) [centre-column-end] minmax(0, 60px) [right-column-start] repeat(4, minmax(0, 60px)) [right-column-end] 1fr [grid-end]';
 const mobileColumnGap = '10px';
 const columnGap = '20px';
 
