@@ -272,17 +272,19 @@ export const Branding = ({ branding, format }: Props) => {
 				</a>
 			</div>
 
-			<a
-				href={branding.aboutThisLink}
-				css={[
-					aboutLinkStyle,
-					isAdvertisingPartnerOrExclusive &&
-						aboutLinkAdvertisingPartnerStyle,
-					isLiveBlog && liveBlogAboutLinkStyle,
-				]}
-			>
-				About this content
-			</a>
+			{branding.aboutThisLink.length > 0 && (
+				<a
+					href={branding.aboutThisLink}
+					css={[
+						aboutLinkStyle,
+						isAdvertisingPartnerOrExclusive &&
+							aboutLinkAdvertisingPartnerStyle,
+						isLiveBlog && liveBlogAboutLinkStyle,
+					]}
+				>
+					About this content
+				</a>
+			)}
 		</div>
 	);
 };
