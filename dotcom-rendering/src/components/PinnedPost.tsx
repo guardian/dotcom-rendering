@@ -148,9 +148,7 @@ export const PinnedPost = ({ pinnedPost, children, serverTime }: Props) => {
 	const shouldExpandPinnedPost = pinnedPost.elements.some(
 		(element) =>
 			element._type ===
-				'model.dotcomrendering.pageElements.InteractiveAtomBlockElement' &&
-			element.id ===
-				'interactives/2026/11/election-trackers/us-election-tracker-2026',
+			'model.dotcomrendering.pageElements.EventGraphicBlockElement',
 	);
 
 	return (
