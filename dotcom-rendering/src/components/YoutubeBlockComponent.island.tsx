@@ -18,7 +18,7 @@ const adTargetingDisabled: AdTargeting = { disableAds: true };
 type Props = {
 	id: string;
 	assetId: string;
-	index: number;
+	index: number | string;
 	mediaTitle?: string;
 	altText?: string;
 	expired: boolean;

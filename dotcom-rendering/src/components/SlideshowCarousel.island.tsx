@@ -288,6 +288,7 @@ export const SlideshowCarousel = ({
 					const loading = index > 0 ? 'lazy' : 'eager';
 					const caption = getSlideCaption(slide);
 					const isCurrentSlide = index === currentPage;
+					const slideId = `${uniqueId}-slide-${index}`;
 					return (
 						<li
 							css={carouselItemStyles}
@@ -296,6 +297,8 @@ export const SlideshowCarousel = ({
 							aria-roledescription="slide"
 							aria-label={caption}
 							aria-hidden={!isCurrentSlide}
+							// @ts-expect-error -- `inert` is only typed from React 19, where it becomes a boolean
+							inert={isCurrentSlide ? undefined : ''}
 						>
 							{/* Video slides aren't links, so clicks reach the video controls */}
 							{isVideoSlide(slide) ? (
@@ -311,7 +314,7 @@ export const SlideshowCarousel = ({
 											<YoutubeBlockComponent
 												id={slide.video.id}
 												assetId={slide.video.videoId}
-												index={index}
+												index={slideId}
 												duration={slide.video.duration}
 												posterImage={slide.video.image}
 												width={slide.video.width}
@@ -333,7 +336,7 @@ export const SlideshowCarousel = ({
 											<SelfHostedVideo
 												sources={slide.video.sources}
 												atomId={slide.video.atomId}
-												uniqueId={`${uniqueId}-slide-${index}`}
+												uniqueId={slideId}
 												videoStyle={
 													slide.video.videoStyle
 												}
@@ -387,7 +390,6 @@ export const SlideshowCarousel = ({
 									href={linkTo}
 									aria-label={linkAriaLabel}
 									data-link-name={dataLinkName}
-									tabIndex={isCurrentSlide ? undefined : -1}
 									css={slideLinkStyles}
 								>
 									<figure>
