@@ -66,6 +66,9 @@ const getLoaders = (build) => {
  * @returns {import('webpack').Configuration}
  */
 module.exports = ({ build }) => ({
+	experiments: {
+		css: true,
+	},
 	entry: {
 		index: getEntryIndex(build),
 		debug: './src/client/debug/debug.ts',
@@ -136,7 +139,10 @@ module.exports = ({ build }) => ({
 			},
 			{
 				test: /\.css$/,
-				use: ['to-string-loader', 'css-loader'],
+				type: 'css/auto',
+				parser: {
+					exportType: 'text',
+				},
 			},
 			svgr,
 		],
