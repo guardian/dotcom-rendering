@@ -9,17 +9,15 @@
 		"typecheck": "tsc --project deno/tsconfig.json"
 	},
 	"dependencies": {
-		"jsdom": "catalog:",
-		"octokit": "4.1.4",
-		"pretty-bytes": "6.1.1",
-		"zod": "catalog:"
-	},
-	"devDependencies": {
 		"@guardian/tsconfig": "catalog:",
 		"@types/jsdom": "catalog:",
 		"@types/node": "catalog:",
 		"eslint": "catalog:",
+		"jsdom": "catalog:",
+		"octokit": "4.1.4",
+		"pretty-bytes": "6.1.1",
 		"tsx": "catalog:",
-		"typescript": "catalog:"
+		"typescript": "catalog:",
+		"zod": "catalog:"
 	}
 }

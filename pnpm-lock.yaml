@@ -925,19 +925,6 @@ importers:
 
   scripts:
     dependencies:
-      jsdom:
-        specifier: 'catalog:'
-        version: 29.1.1(@noble/hashes@1.8.0)
-      octokit:
-        specifier: 4.1.4
-        version: 4.1.4
-      pretty-bytes:
-        specifier: 6.1.1
-        version: 6.1.1
-      zod:
-        specifier: 'catalog:'
-        version: 4.6.6
-    devDependencies:
       '@guardian/tsconfig':
         specifier: 'catalog:'
         version: 1.0.1
@@ -950,12 +937,24 @@ importers:
       eslint:
         specifier: 'catalog:'
         version: 9.39.1(supports-color@8.1.1)
+      jsdom:
+        specifier: 'catalog:'
+        version: 29.1.1(@noble/hashes@1.8.0)
+      octokit:
+        specifier: 4.1.4
+        version: 4.1.4
+      pretty-bytes:
+        specifier: 6.1.1
+        version: 6.1.1
       tsx:
         specifier: 'catalog:'
         version: 4.23.15
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
+      zod:
+        specifier: 'catalog:'
+        version: 4.6.6
 
 packages:
 
