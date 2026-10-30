@@ -27,6 +27,7 @@ type Props = {
 	currentNavLink: string;
 	renderingPage: RenderingPage;
 	hasPageSkin?: boolean;
+	underlineHeader?: boolean;
 };
 
 const subNavStyles = css`
@@ -103,7 +104,19 @@ const articleHeaderStyles = css`
 	padding-top: 1.1px;
 	padding-right: ${space[2]}px;
 	margin-right: ${space[2]}px;
-	border-right: 1px solid ${themePalette('--masthead-nav-lines')};
+`;
+
+const headerTextWrapperStyles = css`
+	display: flex;
+	align-items: center;
+	flex-shrink: 0;
+`;
+
+/** On fronts the header sits above the links as a large stacked heading. */
+const frontContainerStyles = css`
+	${headlineBold28}
+	margin-top: ${space[2]}px;
+	color: ${themePalette('--masthead-nav-link-text')};
 `;
 
 /**
@@ -225,7 +238,15 @@ const HeaderImage = ({
 
 /** Sets horizontal scrolling behaviour and removes the scrollbar */
 const scrollableSubNavStyles = css`
-	overflow-x: scroll;
+	display: flex;
+	flex-wrap: nowrap;
+	overflow-x: auto;
+	-webkit-mask-image: linear-gradient(
+		to right,
+		black calc(100% - 40px),
+		transparent
+	);
+	mask-image: linear-gradient(to right, black calc(100% - 40px), transparent);
 
 	@supports selector(::-webkit-scrollbar) {
 		&::-webkit-scrollbar {
@@ -233,6 +254,10 @@ const scrollableSubNavStyles = css`
 		}
 	}
 	scrollbar-width: none; /* Firefox */
+
+	& > * {
+		flex-shrink: 0;
+	}
 `;
 
 const subnavListItemStyles = css`
@@ -266,13 +291,22 @@ const headerLinkStyles = css`
 const HeaderText = ({
 	header: { headerText, dotcomPath },
 	cssOverrides,
+	underlineHeader,
 }: {
 	header: CustomSubnavHeader;
 	cssOverrides?: SerializedStyles;
-}) =>
-	dotcomPath ? (
+	underlineHeader?: boolean;
+}) => {
+	const link = dotcomPath ? (
 		<a
-			css={[headerLinkStyles, cssOverrides]}
+			css={[
+				headerLinkStyles,
+				cssOverrides,
+				underlineHeader &&
+					css`
+						text-decoration: underline;
+					`,
+			]}
 			data-src-focus-disabled={true}
 			href={dotcomPath}
 			data-link-name={nestedOphanComponents(
@@ -287,19 +321,20 @@ const HeaderText = ({
 		<span css={cssOverrides}>{headerText}</span>
 	);
 
-/** On fronts the header sits above the links as a large stacked heading. */
-const frontContainerStyles = css`
-	${headlineBold28}
-	margin-top: ${space[2]}px;
-	color: ${themePalette('--masthead-nav-link-text')};
-`;
+	return <span css={headerTextWrapperStyles}>{link}</span>;
+};
 
 const CustomHeader = (
 	customSubNav: CustomSubnav,
 	cssOverrides: SerializedStyles | undefined,
+	underlineHeader?: boolean,
 ) => {
 	return customSubNav.header.showHeaderText ? (
-		<HeaderText header={customSubNav.header} cssOverrides={cssOverrides} />
+		<HeaderText
+			header={customSubNav.header}
+			cssOverrides={cssOverrides}
+			underlineHeader={underlineHeader}
+		/>
 	) : undefined;
 };
 
@@ -311,6 +346,7 @@ export const CustomSubNav = ({
 	currentNavLink,
 	renderingPage,
 	hasPageSkin,
+	underlineHeader,
 }: Props) => {
 	const isArticle = renderingPage === 'article';
 	/** DCR receives images for all platforms; only web images are rendered here. */
@@ -353,10 +389,48 @@ export const CustomSubNav = ({
 						images={webImages}
 						headerText={customSubNav.header.headerText}
 					/>
-					{CustomHeader(customSubNav, imageHeaderTextStyles)}
+					{CustomHeader(
+						customSubNav,
+						imageHeaderTextStyles,
+						underlineHeader,
+					)}
 				</div>
 				<ul
 					css={[imageListStyles, scrollableSubNavStyles]}
+					role="list"
+					style={{
+						'--sub-nav-link': themePalette('--sub-nav-link-header'),
+					}}
+				>
+					{linkItems}
+				</ul>
+			</div>
+		);
+	}
+
+	if (isArticle) {
+		return (
+			<div
+				data-component={`custom-subnav-${customSubNav.header.headerText}`}
+				data-component-id={customSubNav.id}
+				data-rendering-page={renderingPage}
+				css={[articleContainerStyles, scrollableSubNavStyles]}
+			>
+				{CustomHeader(
+					customSubNav,
+					articleHeaderStyles,
+					underlineHeader,
+				)}
+				<ul
+					css={[
+						subNavStyles,
+						!hasPageSkin && subNavStylesFromLeftCol,
+						articleSubNavStyles,
+						css`
+							flex-shrink: 0;
+							width: max-content;
+						`,
+					]}
 					role="list"
 					style={{
 						'--sub-nav-link': themePalette('--sub-nav-link-header'),
@@ -373,18 +447,14 @@ export const CustomSubNav = ({
 			data-component={`custom-subnav-${customSubNav.header.headerText}`}
 			data-component-id={customSubNav.id}
 			data-rendering-page={renderingPage}
-			css={isArticle ? articleContainerStyles : frontContainerStyles}
+			css={frontContainerStyles}
 		>
-			{CustomHeader(
-				customSubNav,
-				isArticle ? articleHeaderStyles : undefined,
-			)}
+			{CustomHeader(customSubNav, undefined, underlineHeader)}
 			<ul
 				css={[
 					subNavStyles,
 					!hasPageSkin && subNavStylesFromLeftCol,
 					scrollableSubNavStyles,
-					isArticle && articleSubNavStyles,
 				]}
 				role="list"
 				style={{
