@@ -1,4 +1,5 @@
 import { act, render, screen, waitFor } from '@testing-library/react';
+import { getIdapiUserIdentifiers } from '../lib/getIdapiUserData';
 import { getAuthStatus, subscribeToAuthStateChange } from '../lib/identity';
 import { useMatchMedia } from '../lib/useMatchMedia';
 import { puzzleConfigs } from '../model/puzzles/puzzleConfigs';
@@ -9,6 +10,10 @@ import {
 	PuzzleIframe,
 } from './PuzzleIframe.island';
 
+jest.mock('../lib/getIdapiUserData', () => ({
+	getIdapiUserIdentifiers: jest.fn(),
+}));
+
 jest.mock('../lib/identity', () => ({
 	getAuthStatus: jest.fn(),
 	subscribeToAuthStateChange: jest.fn(),
@@ -18,6 +23,7 @@ jest.mock('../lib/useMatchMedia', () => ({
 	useMatchMedia: jest.fn(() => false),
 }));
 
+const mockedGetIdentifiers = jest.mocked(getIdapiUserIdentifiers);
 const mockedGetAuthStatus = jest.mocked(getAuthStatus);
 const mockedSubscribeToAuthStateChange = jest.mocked(
 	subscribeToAuthStateChange,
@@ -243,9 +249,16 @@ describe('PuzzleIframe', () => {
 
 	beforeEach(() => {
 		jest.resetAllMocks();
+		window.guardian.config.page.idApiUrl = 'https://identity.example.test';
 		unsubscribe = jest.fn();
 		mockedSubscribeToAuthStateChange.mockReturnValue(unsubscribe);
 		mockedUseMatchMedia.mockReturnValue(false);
+		mockedGetIdentifiers.mockResolvedValue({
+			id: 'legacy-id',
+			puzzleId: 'puzzle-user-123',
+			brazeUuid: 'braze',
+			googleTagId: 'tag',
+		});
 	});
 
 	const getContextFromSrc = (src: string): PuzzleContext => {
@@ -261,7 +274,7 @@ describe('PuzzleIframe', () => {
 	const getDarkModeParamFromSrc = (src: string): string | null =>
 		new URL(src).searchParams.get('darkMode');
 
-	it('loads the API-selected puzzle after authentication resolves', async () => {
+	it('replaces the API URL uid with the puzzleId from user identifiers', async () => {
 		mockedGetAuthStatus.mockResolvedValue(signedIn('reader'));
 		render(
 			<PuzzleIframe
@@ -269,13 +282,15 @@ describe('PuzzleIframe', () => {
 				title="API puzzle"
 				darkModeAvailable={false}
 				puzzleDate="2026-09-26"
-				gameUrl="https://tg.amuselabs.com/guardian/date-picker?set=from-api&id=opaque-id&embed=1"
+				gameUrl="https://tg.amuselabs.com/guardian/date-picker?set=from-api&id=opaque-id&embed=1&uid=incorrect-api-user"
 			/>,
 		);
 		const iframe =
 			await screen.findByTitle<HTMLIFrameElement>('API puzzle');
 		await waitFor(() =>
-			expect(new URL(iframe.src).searchParams.get('uid')).toBe('reader'),
+			expect(new URL(iframe.src).searchParams.get('uid')).toBe(
+				'puzzle-user-123',
+			),
 		);
 		expect(new URL(iframe.src).searchParams.get('id')).toBe('opaque-id');
 		expect(new URL(iframe.src).searchParams.get('set')).toBe('from-api');
@@ -304,7 +319,99 @@ describe('PuzzleIframe', () => {
 
 		resolveAuth(signedIn('user-123'));
 
-		await waitFor(() => expect(getUidFromSrc(iframe.src)).toBe('user-123'));
+		await waitFor(() =>
+			expect(getUidFromSrc(iframe.src)).toBe('puzzle-user-123'),
+		);
+	});
+
+	it('waits for puzzle identifiers before loading the iframe', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedIn('legacy-id'));
+		let resolveIdentifiers!: (
+			value: Awaited<ReturnType<typeof getIdapiUserIdentifiers>>,
+		) => void;
+		mockedGetIdentifiers.mockReturnValue(
+			new Promise((resolve) => {
+				resolveIdentifiers = resolve;
+			}),
+		);
+		render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="Puzzle"
+				darkModeAvailable={false}
+				puzzleDate={null}
+			/>,
+		);
+		const iframe = await screen.findByTitle<HTMLIFrameElement>('Puzzle');
+		await waitFor(() =>
+			expect(mockedGetIdentifiers).toHaveBeenCalledWith(
+				window.guardian.config.page.idApiUrl,
+				{ cacheResponse: false },
+			),
+		);
+		expect(iframe.getAttribute('src')).toBeNull();
+		resolveIdentifiers({
+			id: 'legacy-id',
+			puzzleId: 'puzzle-id',
+			brazeUuid: 'braze',
+			googleTagId: 'tag',
+		});
+		await waitFor(() =>
+			expect(getUidFromSrc(iframe.src)).toBe('puzzle-id'),
+		);
+	});
+
+	it('loads without uid if the identifiers request fails', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedIn('legacy-id'));
+		mockedGetIdentifiers.mockRejectedValue(new Error('Unavailable'));
+		render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="Puzzle"
+				darkModeAvailable={false}
+				puzzleDate={null}
+			/>,
+		);
+		const iframe = await screen.findByTitle<HTMLIFrameElement>('Puzzle');
+		await waitFor(() => expect(iframe.getAttribute('src')).not.toBeNull());
+		expect(getUidFromSrc(iframe.src)).toBeNull();
+		expect(getContextFromSrc(iframe.src).userId).toBeNull();
+	});
+
+	it('ignores an identifiers response arriving after sign-out', async () => {
+		mockedGetAuthStatus.mockResolvedValueOnce(signedIn('legacy-id'));
+		let resolveIdentifiers!: (
+			value: Awaited<ReturnType<typeof getIdapiUserIdentifiers>>,
+		) => void;
+		mockedGetIdentifiers.mockReturnValue(
+			new Promise((resolve) => {
+				resolveIdentifiers = resolve;
+			}),
+		);
+		render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="Puzzle"
+				darkModeAvailable={false}
+				puzzleDate={null}
+			/>,
+		);
+		const iframe = await screen.findByTitle<HTMLIFrameElement>('Puzzle');
+		await waitFor(() => expect(mockedGetIdentifiers).toHaveBeenCalled());
+		mockedGetAuthStatus.mockResolvedValueOnce(signedOut());
+		await act(async () => {
+			mockedSubscribeToAuthStateChange.mock.calls[0]![0]();
+		});
+		await waitFor(() => expect(iframe.getAttribute('src')).not.toBeNull());
+		await act(async () => {
+			resolveIdentifiers({
+				id: 'legacy-id',
+				puzzleId: 'old-user',
+				brazeUuid: 'braze',
+				googleTagId: 'tag',
+			});
+		});
+		expect(getUidFromSrc(iframe.src)).toBeNull();
 	});
 
 	it('renders userId: null and darkMode: false while signed out with dark mode unavailable', async () => {
@@ -344,7 +451,7 @@ describe('PuzzleIframe', () => {
 		const iframe = await screen.findByTitle<HTMLIFrameElement>('Puzzle');
 		await waitFor(() =>
 			expect(getContextFromSrc(iframe.src)).toEqual({
-				userId: 'user-123',
+				userId: 'puzzle-user-123',
 				darkMode: false,
 				puzzleDate: null,
 			}),
@@ -441,6 +548,11 @@ describe('PuzzleIframe', () => {
 		);
 
 		const iframe = await screen.findByTitle<HTMLIFrameElement>('Puzzle');
+		await waitFor(() =>
+			expect(getContextFromSrc(iframe.src).userId).toBe(
+				'puzzle-user-123',
+			),
+		);
 		const postMessage = jest.fn();
 		Object.defineProperty(iframe, 'contentWindow', {
 			value: { postMessage },
@@ -455,7 +567,7 @@ describe('PuzzleIframe', () => {
 			{
 				type: 'guardian-puzzle-context',
 				context: {
-					userId: 'user-123',
+					userId: 'puzzle-user-123',
 					darkMode: true,
 					puzzleDate: null,
 				},
@@ -478,7 +590,9 @@ describe('PuzzleIframe', () => {
 
 		const iframe = await screen.findByTitle<HTMLIFrameElement>('Puzzle');
 		await waitFor(() =>
-			expect(getContextFromSrc(iframe.src).userId).toBe('user-123'),
+			expect(getContextFromSrc(iframe.src).userId).toBe(
+				'puzzle-user-123',
+			),
 		);
 
 		expect(mockedSubscribeToAuthStateChange).toHaveBeenCalledTimes(1);
@@ -563,7 +677,9 @@ describe('PuzzleIframe', () => {
 		);
 
 		const iframe = await screen.findByTitle<HTMLIFrameElement>('Puzzle');
-		await waitFor(() => expect(getUidFromSrc(iframe.src)).toBe('user-123'));
+		await waitFor(() =>
+			expect(getUidFromSrc(iframe.src)).toBe('puzzle-user-123'),
+		);
 		expect(getDarkModeParamFromSrc(iframe.src)).toBe('1');
 		expect(
 			new URL(iframe.src).searchParams.has('guardian-puzzle-context'),
@@ -587,6 +703,7 @@ describe('PuzzleIframe', () => {
 			expect(getContextFromSrc(iframe.src).userId).toBeNull(),
 		);
 		expect(new URL(iframe.src).searchParams.has('uid')).toBe(false);
+		expect(mockedGetIdentifiers).not.toHaveBeenCalled();
 		expect(getDarkModeParamFromSrc(iframe.src)).toBe('0');
 		expect(
 			new URL(iframe.src).searchParams.has('guardian-puzzle-context'),
@@ -606,7 +723,9 @@ describe('PuzzleIframe', () => {
 		);
 
 		const iframe = await screen.findByTitle<HTMLIFrameElement>('Puzzle');
-		await waitFor(() => expect(getUidFromSrc(iframe.src)).toBe('user-123'));
+		await waitFor(() =>
+			expect(getUidFromSrc(iframe.src)).toBe('puzzle-user-123'),
+		);
 
 		const onAuthStateChange =
 			mockedSubscribeToAuthStateChange.mock.calls[0]![0];
@@ -616,6 +735,36 @@ describe('PuzzleIframe', () => {
 		});
 
 		await waitFor(() => expect(getUidFromSrc(iframe.src)).toBeNull());
+	});
+
+	it('fetches the new puzzle ID when switching accounts', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedIn('legacy-first'));
+		render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="Puzzle"
+				darkModeAvailable={false}
+				puzzleDate={null}
+			/>,
+		);
+		const iframe = await screen.findByTitle<HTMLIFrameElement>('Puzzle');
+		await waitFor(() =>
+			expect(getUidFromSrc(iframe.src)).toBe('puzzle-user-123'),
+		);
+		mockedGetAuthStatus.mockResolvedValue(signedIn('legacy-second'));
+		mockedGetIdentifiers.mockResolvedValue({
+			id: 'legacy-second',
+			puzzleId: 'puzzle-second',
+			brazeUuid: 'braze',
+			googleTagId: 'tag',
+		});
+		await act(async () => {
+			mockedSubscribeToAuthStateChange.mock.calls[0]![0]();
+		});
+		await waitFor(() =>
+			expect(getUidFromSrc(iframe.src)).toBe('puzzle-second'),
+		);
+		expect(mockedGetIdentifiers).toHaveBeenCalledTimes(2);
 	});
 
 	it('does not add uid/darkMode query params for a non-AmuseLabs provider (wordiply)', async () => {
