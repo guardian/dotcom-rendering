@@ -1666,6 +1666,4724 @@ systemctl start article-rendering",
 }
 `;
 
+exports[`The RenderingCDKStack matches the snapshot for Facia Rendering CODE (uses ECS) 1`] = `
+{
+  "Metadata": {
+    "gu:cdk:constructs": [
+      "GuDistributionBucketParameter",
+      "GuAllowPolicy",
+      "GuAllowPolicy",
+      "GuAllowPolicy",
+      "GuVpcParameter",
+      "GuSubnetListParameter",
+      "GuSubnetListParameter",
+      "GuLoadBalancedAppExperimental",
+      "GuInstanceRole",
+      "GuSsmSshPolicy",
+      "GuDescribeEC2Policy",
+      "GuLoggingStreamNameParameter",
+      "GuLogShippingPolicy",
+      "GuGetDistributablePolicy",
+      "GuParameterStoreReadPolicy",
+      "GuAmiParameter",
+      "GuHttpsEgressSecurityGroup",
+      "GuAutoScalingGroup",
+      "GuApplicationTargetGroup",
+      "GuRepository",
+      "GuArtifactsAccountId",
+      "GuRiffRaffDeploymentIdParameterExperimental",
+      "GuHttpsEgressSecurityGroup",
+      "GuApplicationTargetGroup",
+      "GuCertificate",
+      "GuApplicationLoadBalancer",
+      "GuAccessLoggingBucketParameter",
+      "GuHttpsApplicationListener",
+      "GuSecurityGroup",
+      "GuCname",
+    ],
+    "gu:cdk:version": "TEST",
+  },
+  "Outputs": {
+    "LoadBalancerFaciarenderingDnsName": {
+      "Description": "DNS entry for LoadBalancerFaciarendering",
+      "Value": {
+        "Fn::GetAtt": [
+          "LoadBalancerFaciarenderingF8FB9D5C",
+          "DNSName",
+        ],
+      },
+    },
+  },
+  "Parameters": {
+    "AMIFaciarendering": {
+      "Description": "Amazon Machine Image ID for the app facia-rendering. Use this in conjunction with AMIgo to keep AMIs up to date.",
+      "Type": "AWS::EC2::Image::Id",
+    },
+    "AccessLoggingBucket": {
+      "Default": "/account/services/access-logging/bucket",
+      "Description": "S3 bucket to store your access logs",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "ArtifactsAccountId": {
+      "Default": "/organisation/accounts/artifacts",
+      "Description": "Account ID of the Artifacts account. Useful as some shared resources live here.",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "DistributionBucketName": {
+      "Default": "/account/services/artifact.bucket",
+      "Description": "SSM parameter containing the S3 bucket name holding distribution artifacts",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "LoggingStreamName": {
+      "Default": "/account/services/logging.stream.name",
+      "Description": "SSM parameter containing the Name (not ARN) on the kinesis stream",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "RiffRaffDeploymentId": {
+      "Description": "Used by Riff-Raff to inject the deployment ID.",
+      "Type": "String",
+    },
+    "VpcId": {
+      "Default": "/account/vpc/primary/id",
+      "Description": "Virtual Private Cloud to run EC2 instances within. Should NOT be the account default VPC.",
+      "Type": "AWS::SSM::Parameter::Value<AWS::EC2::VPC::Id>",
+    },
+    "faciarenderingPrivateSubnets": {
+      "Default": "/account/vpc/primary/subnets/private",
+      "Description": "A list of private subnets",
+      "Type": "AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>",
+    },
+    "faciarenderingPublicSubnets": {
+      "Default": "/account/vpc/primary/subnets/public",
+      "Description": "A list of public subnets",
+      "Type": "AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>",
+    },
+  },
+  "Resources": {
+    "AllowPolicyCloudwatchLogsA783E5B4": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "cloudwatch:*",
+                "logs:*",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "AllowPolicyCloudwatchLogsA783E5B4",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleFaciarenderingF958A79D",
+          },
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "AllowPolicyDescribeDecryptKmsE91286F3": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "kms:Decrypt",
+                "kms:DescribeKey",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:kms:eu-west-1:",
+                    {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":FrontendConfigKey",
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "AllowPolicyDescribeDecryptKmsE91286F3",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleFaciarenderingF958A79D",
+          },
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "AllowPolicyGetSsmParamsByPathB54B2DE8": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "ssm:GetParametersByPath",
+                "ssm:GetParameter",
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:ssm:eu-west-1:",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":parameter/frontend/*",
+                    ],
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:ssm:eu-west-1:",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":parameter/dotcom/*",
+                    ],
+                  ],
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "AllowPolicyGetSsmParamsByPathB54B2DE8",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleFaciarenderingF958A79D",
+          },
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "AutoScalingGroupFaciarenderingASG90F9F17A": {
+      "Properties": {
+        "HealthCheckGracePeriod": 120,
+        "HealthCheckType": "ELB",
+        "LaunchTemplate": {
+          "LaunchTemplateId": {
+            "Ref": "frontendCODEfaciarenderingF61C1452",
+          },
+          "Version": {
+            "Fn::GetAtt": [
+              "frontendCODEfaciarenderingF61C1452",
+              "LatestVersionNumber",
+            ],
+          },
+        },
+        "MaxSize": "3",
+        "MetricsCollection": [
+          {
+            "Granularity": "1Minute",
+          },
+        ],
+        "MinSize": "1",
+        "Tags": [
+          {
+            "Key": "App",
+            "PropagateAtLaunch": true,
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "PropagateAtLaunch": true,
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "PropagateAtLaunch": true,
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "LogKinesisStreamName",
+            "PropagateAtLaunch": true,
+            "Value": {
+              "Ref": "LoggingStreamName",
+            },
+          },
+          {
+            "Key": "Stack",
+            "PropagateAtLaunch": true,
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "PropagateAtLaunch": true,
+            "Value": "CODE",
+          },
+          {
+            "Key": "SystemdUnit",
+            "PropagateAtLaunch": true,
+            "Value": "facia-rendering.service",
+          },
+        ],
+        "TargetGroupARNs": [
+          {
+            "Ref": "TargetGroupFaciarendering9388BE24",
+          },
+        ],
+        "VPCZoneIdentifier": {
+          "Ref": "faciarenderingPrivateSubnets",
+        },
+      },
+      "Type": "AWS::AutoScaling::AutoScalingGroup",
+    },
+    "CertificateFaciarendering1F268475": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "DomainName": "facia-rendering.code.dev-guardianapis.com",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Name",
+            "Value": "FaciaRendering-CODE/CertificateFaciarendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "ValidationMethod": "DNS",
+      },
+      "Type": "AWS::CertificateManager::Certificate",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "DescribeEC2PolicyFF5F9295": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "autoscaling:DescribeAutoScalingInstances",
+                "autoscaling:DescribeAutoScalingGroups",
+                "ec2:DescribeTags",
+                "ec2:DescribeInstances",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "describe-ec2-policy",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleFaciarenderingF958A79D",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "EcsService81FC6EF6": {
+      "DependsOn": [
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+        "ListenerFaciarenderingDeterministicRouteToEc2Rule715F6B64",
+        "ListenerFaciarenderingDeterministicRouteToEcsRule9195083E",
+        "ListenerFaciarendering08D44551",
+      ],
+      "Properties": {
+        "Cluster": {
+          "Ref": "faciarenderingEcsClusterCBCA917A",
+        },
+        "DeploymentConfiguration": {
+          "Alarms": {
+            "AlarmNames": [],
+            "Enable": false,
+            "Rollback": false,
+          },
+          "DeploymentCircuitBreaker": {
+            "Enable": true,
+            "Rollback": true,
+          },
+          "MaximumPercent": 200,
+          "MinimumHealthyPercent": 100,
+        },
+        "DeploymentController": {
+          "Type": "ECS",
+        },
+        "EnableECSManagedTags": false,
+        "HealthCheckGracePeriodSeconds": 60,
+        "LaunchType": "FARGATE",
+        "LoadBalancers": [
+          {
+            "ContainerName": "facia-rendering",
+            "ContainerPort": 9000,
+            "TargetGroupArn": {
+              "Ref": "FaciarenderingEcsTargetGroupFaciarendering79A36F0A",
+            },
+          },
+        ],
+        "Monitoring": {
+          "MetricConfigurations": [
+            {
+              "MetricNames": [
+                "CPUUtilization",
+                "MemoryUtilization",
+              ],
+              "ResolutionSeconds": 20,
+            },
+          ],
+        },
+        "NetworkConfiguration": {
+          "AwsvpcConfiguration": {
+            "AssignPublicIp": "DISABLED",
+            "SecurityGroups": [
+              {
+                "Fn::GetAtt": [
+                  "GuHttpsEgressSecurityGroupFaciarenderingecsEDA89EA5",
+                  "GroupId",
+                ],
+              },
+            ],
+            "Subnets": {
+              "Ref": "faciarenderingPrivateSubnets",
+            },
+          },
+        },
+        "PropagateTags": "SERVICE",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "TaskDefinition": {
+          "Ref": "EcsTaskDefinition63157ED3",
+        },
+      },
+      "Type": "AWS::ECS::Service",
+    },
+    "EcsServiceTaskCountTarget02FCCE22": {
+      "DependsOn": [
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+      ],
+      "Properties": {
+        "MaxCapacity": 3,
+        "MinCapacity": 1,
+        "ResourceId": {
+          "Fn::Join": [
+            "",
+            [
+              "service/",
+              {
+                "Ref": "faciarenderingEcsClusterCBCA917A",
+              },
+              "/",
+              {
+                "Fn::GetAtt": [
+                  "EcsService81FC6EF6",
+                  "Name",
+                ],
+              },
+            ],
+          ],
+        },
+        "RoleARN": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":iam::",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService",
+            ],
+          ],
+        },
+        "ScalableDimension": "ecs:service:DesiredCount",
+        "ServiceNamespace": "ecs",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+    },
+    "EcsTaskDefinition63157ED3": {
+      "Properties": {
+        "ContainerDefinitions": [
+          {
+            "DependsOn": [
+              {
+                "Condition": "START",
+                "ContainerName": "aws-otel-collector",
+              },
+            ],
+            "DockerLabels": {
+              "RiffRaffDeploymentId": {
+                "Ref": "RiffRaffDeploymentId",
+              },
+            },
+            "Environment": [
+              {
+                "Name": "STACK",
+                "Value": "frontend",
+              },
+              {
+                "Name": "STAGE",
+                "Value": "CODE",
+              },
+              {
+                "Name": "APP",
+                "Value": "facia-rendering",
+              },
+              {
+                "Name": "TASK_NAME",
+                "Value": "facia-rendering",
+              },
+              {
+                "Name": "GU_REPO",
+                "Value": "guardian/dotcom-rendering",
+              },
+              {
+                "Name": "NODE_ENV",
+                "Value": "production",
+              },
+              {
+                "Name": "GU_STAGE",
+                "Value": "CODE",
+              },
+              {
+                "Name": "GU_APP",
+                "Value": "facia-rendering",
+              },
+              {
+                "Name": "GU_STACK",
+                "Value": "frontend",
+              },
+              {
+                "Name": "OTEL_EXPORTER_OTLP_ENDPOINT",
+                "Value": "http://localhost:4318",
+              },
+              {
+                "Name": "OTEL_SERVICE_NAME",
+                "Value": "facia-rendering",
+              },
+            ],
+            "Essential": true,
+            "Image": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Ref": "ArtifactsAccountId",
+                  },
+                  ".dkr.ecr.eu-west-1.",
+                  {
+                    "Ref": "AWS::URLSuffix",
+                  },
+                  "/guardian/dotcom-rendering/dotcom-rendering@sha256:12345",
+                ],
+              ],
+            },
+            "LogConfiguration": {
+              "LogDriver": "awsfirelens",
+              "Options": {
+                "Name": "kinesis_streams",
+                "region": "eu-west-1",
+                "retry_limit": "2",
+                "stream": {
+                  "Ref": "LoggingStreamName",
+                },
+              },
+            },
+            "Name": "facia-rendering",
+            "PortMappings": [
+              {
+                "ContainerPort": 9000,
+                "Protocol": "tcp",
+              },
+            ],
+            "ReadonlyRootFilesystem": true,
+            "VersionConsistency": "disabled",
+          },
+          {
+            "Environment": [
+              {
+                "Name": "STACK",
+                "Value": "frontend",
+              },
+              {
+                "Name": "STAGE",
+                "Value": "CODE",
+              },
+              {
+                "Name": "APP",
+                "Value": "facia-rendering",
+              },
+              {
+                "Name": "TASK_NAME",
+                "Value": "facia-rendering",
+              },
+              {
+                "Name": "GU_REPO",
+                "Value": "guardian/dotcom-rendering",
+              },
+            ],
+            "Essential": true,
+            "FirelensConfiguration": {
+              "Type": "fluentbit",
+            },
+            "Image": "ghcr.io/guardian/devx-logs@sha256:cf91724a5166f1c143e07958820aa2122afb61c164b68555d15cb92abb5acda0",
+            "LogConfiguration": {
+              "LogDriver": "awslogs",
+              "Options": {
+                "awslogs-group": {
+                  "Ref": "EcsTaskDefinitionLogShippingLogGroup0E405BD0",
+                },
+                "awslogs-region": "eu-west-1",
+                "awslogs-stream-prefix": "frontend/CODE/facia-rendering/devx-logs-sidecar",
+              },
+            },
+            "MountPoints": [
+              {
+                "ContainerPath": "/init",
+                "ReadOnly": false,
+                "SourceVolume": "logging-volume",
+              },
+            ],
+            "Name": "LogShipping",
+            "ReadonlyRootFilesystem": true,
+            "VersionConsistency": "disabled",
+          },
+          {
+            "Command": [
+              "--config=/etc/ecs/ecs-default-config.yaml",
+            ],
+            "Cpu": 256,
+            "Essential": false,
+            "HealthCheck": {
+              "Command": [
+                "CMD",
+                "/healthcheck",
+              ],
+              "Interval": 5,
+              "Retries": 2,
+              "Timeout": 3,
+            },
+            "Image": "public.ecr.aws/aws-observability/aws-otel-collector@sha256:90b3180c21acb9497110480371a413ed91f2836077f8a8fb4507b019d3c481c0",
+            "LogConfiguration": {
+              "LogDriver": "awsfirelens",
+              "Options": {
+                "Name": "kinesis_streams",
+                "region": "eu-west-1",
+                "retry_limit": "2",
+                "stream": {
+                  "Ref": "LoggingStreamName",
+                },
+              },
+            },
+            "Memory": 512,
+            "Name": "aws-otel-collector",
+            "ReadonlyRootFilesystem": true,
+          },
+        ],
+        "Cpu": "1024",
+        "ExecutionRoleArn": {
+          "Fn::GetAtt": [
+            "EcsTaskDefinitionExecutionRoleBE450C73",
+            "Arn",
+          ],
+        },
+        "Family": "FaciaRenderingCODEEcsTaskDefinitionC6AC86CD",
+        "Memory": "2048",
+        "NetworkMode": "awsvpc",
+        "RequiresCompatibilities": [
+          "FARGATE",
+        ],
+        "RuntimePlatform": {
+          "CpuArchitecture": "ARM64",
+          "OperatingSystemFamily": "LINUX",
+        },
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "TaskRoleArn": {
+          "Fn::GetAtt": [
+            "EcsTaskDefinitionTaskRoleB7B6D8DD",
+            "Arn",
+          ],
+        },
+        "Volumes": [
+          {
+            "Name": "logging-volume",
+          },
+        ],
+      },
+      "Type": "AWS::ECS::TaskDefinition",
+    },
+    "EcsTaskDefinitionExecutionRoleBE450C73": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "EcsTaskDefinitionExecutionRoleDefaultPolicy1611A942": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":ecr:eu-west-1:",
+                    {
+                      "Ref": "ArtifactsAccountId",
+                    },
+                    ":repository/guardian/dotcom-rendering/dotcom-rendering",
+                  ],
+                ],
+              },
+            },
+            {
+              "Action": "ecr:GetAuthorizationToken",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            {
+              "Action": [
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage",
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:ecr:eu-west-1:694911143906:repository/aws-guardduty-agent-fargate",
+            },
+            {
+              "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "EcsTaskDefinitionLogShippingLogGroup0E405BD0",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "EcsTaskDefinitionExecutionRoleDefaultPolicy1611A942",
+        "Roles": [
+          {
+            "Ref": "EcsTaskDefinitionExecutionRoleBE450C73",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "EcsTaskDefinitionLogShippingLogGroup0E405BD0": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "RetentionInDays": 1,
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "EcsTaskDefinitionTaskRoleB7B6D8DD": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:PutLogEvents",
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:DescribeLogStreams",
+                "logs:DescribeLogGroups",
+                "logs:PutRetentionPolicy",
+                "xray:PutTraceSegments",
+                "xray:PutTelemetryRecords",
+                "xray:GetSamplingRules",
+                "xray:GetSamplingTargets",
+                "xray:GetSamplingStatisticSummaries",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "Roles": [
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "FaciarenderingEcsTargetGroupFaciarendering79A36F0A": {
+      "Properties": {
+        "HealthCheckIntervalSeconds": 10,
+        "HealthCheckPath": "/_healthcheck",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 5,
+        "HealthyThresholdCount": 5,
+        "Port": 9000,
+        "Protocol": "HTTP",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "TargetGroupAttributes": [
+          {
+            "Key": "deregistration_delay.timeout_seconds",
+            "Value": "30",
+          },
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false",
+          },
+        ],
+        "TargetType": "ip",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+    },
+    "GetDistributablePolicyFaciarenderingAA3BB1F7": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:GetObject",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:s3:::",
+                    {
+                      "Ref": "DistributionBucketName",
+                    },
+                    "/frontend/CODE/facia-rendering/*",
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "GetDistributablePolicyFaciarenderingAA3BB1F7",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleFaciarenderingF958A79D",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "GuHttpsEgressSecurityGroupFaciarendering60580ECC": {
+      "Properties": {
+        "GroupDescription": "Allow all outbound HTTPS traffic",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound HTTPS traffic",
+            "FromPort": 443,
+            "IpProtocol": "tcp",
+            "ToPort": 443,
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "GuHttpsEgressSecurityGroupFaciarenderingecsEDA89EA5": {
+      "Properties": {
+        "GroupDescription": "Allow all outbound HTTPS traffic",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound HTTPS traffic",
+            "FromPort": 443,
+            "IpProtocol": "tcp",
+            "ToPort": 443,
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering-ecs",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "GuHttpsEgressSecurityGroupFaciarenderingecsfromFaciaRenderingCODEInternalIngressSecurityGroupFaciarenderingB17DBE3C9000ACAE434A": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupFaciarenderingecsEDA89EA5",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "InternalIngressSecurityGroupFaciarendering8C803402",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "GuHttpsEgressSecurityGroupFaciarenderingecsfromFaciaRenderingCODELoadBalancerFaciarenderingSecurityGroup069B331E90000C3C1460": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupFaciarenderingecsEDA89EA5",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "LoadBalancerFaciarenderingSecurityGroup18FA4240",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "GuHttpsEgressSecurityGroupFaciarenderingfromFaciaRenderingCODEInternalIngressSecurityGroupFaciarenderingB17DBE3C9000A42B2532": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupFaciarendering60580ECC",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "InternalIngressSecurityGroupFaciarendering8C803402",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "GuHttpsEgressSecurityGroupFaciarenderingfromFaciaRenderingCODELoadBalancerFaciarenderingSecurityGroup069B331E9000B1E4AA63": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupFaciarendering60580ECC",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "LoadBalancerFaciarenderingSecurityGroup18FA4240",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "GuLogShippingPolicy981BFE5A": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "kinesis:Describe*",
+                "kinesis:Put*",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:kinesis:eu-west-1:",
+                    {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":stream/",
+                    {
+                      "Ref": "LoggingStreamName",
+                    },
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "GuLogShippingPolicy981BFE5A",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleFaciarenderingF958A79D",
+          },
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "InstanceRoleFaciarenderingF958A79D": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Path": "/",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "InternalIngressSecurityGroupFaciarendering8C803402": {
+      "Properties": {
+        "GroupDescription": "Allow restricted ingress from CIDR ranges",
+        "SecurityGroupIngress": [
+          {
+            "CidrIp": "10.0.0.0/8",
+            "Description": "Allow access on port 443 from 10.0.0.0/8",
+            "FromPort": 443,
+            "IpProtocol": "tcp",
+            "ToPort": 443,
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "InternalIngressSecurityGroupFaciarenderingtoFaciaRenderingCODEGuHttpsEgressSecurityGroupFaciarendering04034B8C900093D1CA7E": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupFaciarendering60580ECC",
+            "GroupId",
+          ],
+        },
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "InternalIngressSecurityGroupFaciarendering8C803402",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "InternalIngressSecurityGroupFaciarenderingtoFaciaRenderingCODEGuHttpsEgressSecurityGroupFaciarenderingecs99880E7E90003EEF4C72": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupFaciarenderingecsEDA89EA5",
+            "GroupId",
+          ],
+        },
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "InternalIngressSecurityGroupFaciarendering8C803402",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "ListenerFaciarendering08D44551": {
+      "Properties": {
+        "Certificates": [
+          {
+            "CertificateArn": {
+              "Ref": "CertificateFaciarendering1F268475",
+            },
+          },
+        ],
+        "DefaultActions": [
+          {
+            "ForwardConfig": {
+              "TargetGroups": [
+                {
+                  "TargetGroupArn": {
+                    "Ref": "TargetGroupFaciarendering9388BE24",
+                  },
+                  "Weight": 1,
+                },
+                {
+                  "TargetGroupArn": {
+                    "Ref": "FaciarenderingEcsTargetGroupFaciarendering79A36F0A",
+                  },
+                  "Weight": 0,
+                },
+              ],
+            },
+            "Type": "forward",
+          },
+        ],
+        "LoadBalancerArn": {
+          "Ref": "LoadBalancerFaciarenderingF8FB9D5C",
+        },
+        "Port": 443,
+        "Protocol": "HTTPS",
+        "SslPolicy": "ELBSecurityPolicy-TLS13-1-2-2021-06",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::Listener",
+    },
+    "ListenerFaciarenderingDeterministicRouteToEc2Rule715F6B64": {
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "TargetGroupFaciarendering9388BE24",
+            },
+            "Type": "forward",
+          },
+        ],
+        "Conditions": [
+          {
+            "Field": "http-header",
+            "HttpHeaderConfig": {
+              "HttpHeaderName": "X-Gu-Target-Group",
+              "Values": [
+                "ec2",
+              ],
+            },
+          },
+        ],
+        "ListenerArn": {
+          "Ref": "ListenerFaciarendering08D44551",
+        },
+        "Priority": 10,
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+    },
+    "ListenerFaciarenderingDeterministicRouteToEcsRule9195083E": {
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "FaciarenderingEcsTargetGroupFaciarendering79A36F0A",
+            },
+            "Type": "forward",
+          },
+        ],
+        "Conditions": [
+          {
+            "Field": "http-header",
+            "HttpHeaderConfig": {
+              "HttpHeaderName": "X-Gu-Target-Group",
+              "Values": [
+                "ecs",
+              ],
+            },
+          },
+        ],
+        "ListenerArn": {
+          "Ref": "ListenerFaciarendering08D44551",
+        },
+        "Priority": 11,
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+    },
+    "LoadBalancerDNS": {
+      "Properties": {
+        "Name": "facia-rendering.code.dev-guardianapis.com",
+        "RecordType": "CNAME",
+        "ResourceRecords": [
+          {
+            "Fn::GetAtt": [
+              "LoadBalancerFaciarenderingF8FB9D5C",
+              "DNSName",
+            ],
+          },
+        ],
+        "Stage": "CODE",
+        "TTL": 3600,
+      },
+      "Type": "Guardian::DNS::RecordSet",
+    },
+    "LoadBalancerFaciarenderingF8FB9D5C": {
+      "Properties": {
+        "LoadBalancerAttributes": [
+          {
+            "Key": "deletion_protection.enabled",
+            "Value": "true",
+          },
+          {
+            "Key": "routing.http.x_amzn_tls_version_and_cipher_suite.enabled",
+            "Value": "true",
+          },
+          {
+            "Key": "routing.http.drop_invalid_header_fields.enabled",
+            "Value": "true",
+          },
+          {
+            "Key": "access_logs.s3.enabled",
+            "Value": "true",
+          },
+          {
+            "Key": "access_logs.s3.bucket",
+            "Value": {
+              "Ref": "AccessLoggingBucket",
+            },
+          },
+          {
+            "Key": "access_logs.s3.prefix",
+            "Value": "application-load-balancer/CODE/frontend/facia-rendering",
+          },
+          {
+            "Key": "idle_timeout.timeout_seconds",
+            "Value": "4",
+          },
+        ],
+        "Scheme": "internal",
+        "SecurityGroups": [
+          {
+            "Fn::GetAtt": [
+              "LoadBalancerFaciarenderingSecurityGroup18FA4240",
+              "GroupId",
+            ],
+          },
+          {
+            "Fn::GetAtt": [
+              "InternalIngressSecurityGroupFaciarendering8C803402",
+              "GroupId",
+            ],
+          },
+        ],
+        "Subnets": {
+          "Ref": "faciarenderingPrivateSubnets",
+        },
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "Type": "application",
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+    },
+    "LoadBalancerFaciarenderingSecurityGroup18FA4240": {
+      "Properties": {
+        "GroupDescription": "Automatically created Security Group for ELB FaciaRenderingCODELoadBalancerFaciarendering3D9D3EE9",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "LoadBalancerFaciarenderingSecurityGrouptoFaciaRenderingCODEGuHttpsEgressSecurityGroupFaciarendering04034B8C90004084400E": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupFaciarendering60580ECC",
+            "GroupId",
+          ],
+        },
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "LoadBalancerFaciarenderingSecurityGroup18FA4240",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "LoadBalancerFaciarenderingSecurityGrouptoFaciaRenderingCODEGuHttpsEgressSecurityGroupFaciarenderingecs99880E7E9000CD7F60E2": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupFaciarenderingecsEDA89EA5",
+            "GroupId",
+          ],
+        },
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "LoadBalancerFaciarenderingSecurityGroup18FA4240",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "ParameterStoreReadFaciarendering42966589": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "ssm:GetParametersByPath",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:ssm:eu-west-1:",
+                    {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":parameter/CODE/frontend/facia-rendering",
+                  ],
+                ],
+              },
+            },
+            {
+              "Action": [
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:ssm:eu-west-1:",
+                    {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":parameter/CODE/frontend/facia-rendering/*",
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "parameter-store-read-policy",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleFaciarenderingF958A79D",
+          },
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "RenderingBaseURLParamAE11E777": {
+      "Properties": {
+        "Description": "The rendering base URL for frontend to call the facia-rendering app in the CODE environment",
+        "Name": "/frontend/code/facia-rendering.baseURL",
+        "Tags": {
+          "App": "facia-rendering",
+          "Stack": "frontend",
+          "Stage": "CODE",
+          "gu:cdk:version": "TEST",
+          "gu:repo": "guardian/dotcom-rendering",
+        },
+        "Type": "String",
+        "Value": "https://facia-rendering.code.dev-guardianapis.com",
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "SsmSshPolicy4CFC977E": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "ec2messages:AcknowledgeMessage",
+                "ec2messages:DeleteMessage",
+                "ec2messages:FailMessage",
+                "ec2messages:GetEndpoint",
+                "ec2messages:GetMessages",
+                "ec2messages:SendReply",
+                "ssm:UpdateInstanceInformation",
+                "ssm:ListInstanceAssociations",
+                "ssm:DescribeInstanceProperties",
+                "ssm:DescribeDocumentParameters",
+                "ssmmessages:CreateControlChannel",
+                "ssmmessages:CreateDataChannel",
+                "ssmmessages:OpenControlChannel",
+                "ssmmessages:OpenDataChannel",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "ssm-ssh-policy",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleFaciarenderingF958A79D",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "TargetGroupFaciarendering9388BE24": {
+      "Properties": {
+        "HealthCheckIntervalSeconds": 10,
+        "HealthCheckPath": "/_healthcheck",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 5,
+        "HealthyThresholdCount": 5,
+        "Port": 9000,
+        "Protocol": "HTTP",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "TargetGroupAttributes": [
+          {
+            "Key": "deregistration_delay.timeout_seconds",
+            "Value": "30",
+          },
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false",
+          },
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+    },
+    "faciarenderingCpuScaling43A1B995": {
+      "Properties": {
+        "PolicyName": "FaciaRenderingCODEfaciarenderingCpuScaling33834096",
+        "PolicyType": "TargetTrackingScaling",
+        "ScalingTargetId": {
+          "Ref": "EcsServiceTaskCountTarget02FCCE22",
+        },
+        "TargetTrackingScalingPolicyConfiguration": {
+          "PredefinedMetricSpecification": {
+            "PredefinedMetricType": "ECSServiceAverageCPUUtilizationHighResolution",
+          },
+          "ScaleInCooldown": 60,
+          "ScaleOutCooldown": 60,
+          "TargetValue": 20,
+        },
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+    },
+    "faciarenderingEcsClusterCBCA917A": {
+      "Properties": {
+        "ClusterSettings": [
+          {
+            "Name": "containerInsights",
+            "Value": "enhanced",
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::ECS::Cluster",
+    },
+    "frontendCODEfaciarenderingF61C1452": {
+      "DependsOn": [
+        "InstanceRoleFaciarenderingF958A79D",
+      ],
+      "Properties": {
+        "LaunchTemplateData": {
+          "IamInstanceProfile": {
+            "Arn": {
+              "Fn::GetAtt": [
+                "frontendCODEfaciarenderingProfile5D5041F0",
+                "Arn",
+              ],
+            },
+          },
+          "ImageId": {
+            "Ref": "AMIFaciarendering",
+          },
+          "InstanceType": "t4g.small",
+          "MetadataOptions": {
+            "HttpTokens": "required",
+            "InstanceMetadataTags": "enabled",
+          },
+          "Monitoring": {
+            "Enabled": true,
+          },
+          "SecurityGroupIds": [
+            {
+              "Fn::GetAtt": [
+                "GuHttpsEgressSecurityGroupFaciarendering60580ECC",
+                "GroupId",
+              ],
+            },
+          ],
+          "TagSpecifications": [
+            {
+              "ResourceType": "instance",
+              "Tags": [
+                {
+                  "Key": "App",
+                  "Value": "facia-rendering",
+                },
+                {
+                  "Key": "gu:cdk:version",
+                  "Value": "TEST",
+                },
+                {
+                  "Key": "gu:repo",
+                  "Value": "guardian/dotcom-rendering",
+                },
+                {
+                  "Key": "Name",
+                  "Value": "FaciaRendering-CODE/frontend-CODE-facia-rendering",
+                },
+                {
+                  "Key": "Stack",
+                  "Value": "frontend",
+                },
+                {
+                  "Key": "Stage",
+                  "Value": "CODE",
+                },
+              ],
+            },
+            {
+              "ResourceType": "volume",
+              "Tags": [
+                {
+                  "Key": "App",
+                  "Value": "facia-rendering",
+                },
+                {
+                  "Key": "gu:cdk:version",
+                  "Value": "TEST",
+                },
+                {
+                  "Key": "gu:repo",
+                  "Value": "guardian/dotcom-rendering",
+                },
+                {
+                  "Key": "Name",
+                  "Value": "FaciaRendering-CODE/frontend-CODE-facia-rendering",
+                },
+                {
+                  "Key": "Stack",
+                  "Value": "frontend",
+                },
+                {
+                  "Key": "Stage",
+                  "Value": "CODE",
+                },
+              ],
+            },
+          ],
+          "UserData": {
+            "Fn::Base64": {
+              "Fn::Join": [
+                "",
+                [
+                  "#!/bin/bash
+set -ev
+groupadd frontend
+useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering
+cd /home/dotcom-rendering
+aws --region eu-west-1 s3 cp s3://",
+                  {
+                    "Ref": "DistributionBucketName",
+                  },
+                  "/frontend/CODE/facia-rendering/facia-rendering.tar.gz ./
+tar -zxf facia-rendering.tar.gz facia-rendering
+chown -R dotcom-rendering:frontend facia-rendering
+cd facia-rendering
+mkdir /var/log/dotcom-rendering
+chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
+cat > /etc/systemd/system/facia-rendering.service << EOF
+[Unit]
+Description=facia-rendering
+After=network.target
+[Service]
+WorkingDirectory=/home/dotcom-rendering/facia-rendering
+Type=simple
+User=dotcom-rendering
+Group=frontend
+StandardError=journal
+StandardOutput=journal
+Environment=TERM=xterm-256color
+Environment=NODE_ENV=production
+Environment=GU_STAGE=CODE
+Environment=GU_APP=facia-rendering
+Environment=GU_STACK=frontend
+ExecStart=make prod
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target
+EOF
+systemctl enable facia-rendering
+systemctl start facia-rendering",
+                ],
+              ],
+            },
+          },
+        },
+        "TagSpecifications": [
+          {
+            "ResourceType": "launch-template",
+            "Tags": [
+              {
+                "Key": "App",
+                "Value": "facia-rendering",
+              },
+              {
+                "Key": "gu:cdk:version",
+                "Value": "TEST",
+              },
+              {
+                "Key": "gu:repo",
+                "Value": "guardian/dotcom-rendering",
+              },
+              {
+                "Key": "Name",
+                "Value": "FaciaRendering-CODE/frontend-CODE-facia-rendering",
+              },
+              {
+                "Key": "Stack",
+                "Value": "frontend",
+              },
+              {
+                "Key": "Stage",
+                "Value": "CODE",
+              },
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::EC2::LaunchTemplate",
+    },
+    "frontendCODEfaciarenderingProfile5D5041F0": {
+      "Properties": {
+        "Roles": [
+          {
+            "Ref": "InstanceRoleFaciarenderingF958A79D",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::InstanceProfile",
+    },
+  },
+}
+`;
+
+exports[`The RenderingCDKStack matches the snapshot for Facia Rendering PROD (uses ECS) 1`] = `
+{
+  "Metadata": {
+    "gu:cdk:constructs": [
+      "GuDistributionBucketParameter",
+      "GuAllowPolicy",
+      "GuAllowPolicy",
+      "GuAllowPolicy",
+      "GuVpcParameter",
+      "GuSubnetListParameter",
+      "GuSubnetListParameter",
+      "GuLoadBalancedAppExperimental",
+      "GuInstanceRole",
+      "GuSsmSshPolicy",
+      "GuDescribeEC2Policy",
+      "GuLoggingStreamNameParameter",
+      "GuLogShippingPolicy",
+      "GuGetDistributablePolicy",
+      "GuParameterStoreReadPolicy",
+      "GuAmiParameter",
+      "GuHttpsEgressSecurityGroup",
+      "GuAutoScalingGroup",
+      "GuApplicationTargetGroup",
+      "GuRepository",
+      "GuArtifactsAccountId",
+      "GuRiffRaffDeploymentIdParameterExperimental",
+      "GuHttpsEgressSecurityGroup",
+      "GuApplicationTargetGroup",
+      "GuCertificate",
+      "GuApplicationLoadBalancer",
+      "GuAccessLoggingBucketParameter",
+      "GuHttpsApplicationListener",
+      "GuSecurityGroup",
+      "GuAlb5xxPercentageAlarm",
+      "GuUnhealthyInstancesAlarm",
+      "GuCname",
+    ],
+    "gu:cdk:version": "TEST",
+  },
+  "Outputs": {
+    "LoadBalancerFaciarenderingDnsName": {
+      "Description": "DNS entry for LoadBalancerFaciarendering",
+      "Value": {
+        "Fn::GetAtt": [
+          "LoadBalancerFaciarenderingF8FB9D5C",
+          "DNSName",
+        ],
+      },
+    },
+  },
+  "Parameters": {
+    "AMIFaciarendering": {
+      "Description": "Amazon Machine Image ID for the app facia-rendering. Use this in conjunction with AMIgo to keep AMIs up to date.",
+      "Type": "AWS::EC2::Image::Id",
+    },
+    "AccessLoggingBucket": {
+      "Default": "/account/services/access-logging/bucket",
+      "Description": "S3 bucket to store your access logs",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "ArtifactsAccountId": {
+      "Default": "/organisation/accounts/artifacts",
+      "Description": "Account ID of the Artifacts account. Useful as some shared resources live here.",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "DistributionBucketName": {
+      "Default": "/account/services/artifact.bucket",
+      "Description": "SSM parameter containing the S3 bucket name holding distribution artifacts",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "LoggingStreamName": {
+      "Default": "/account/services/logging.stream.name",
+      "Description": "SSM parameter containing the Name (not ARN) on the kinesis stream",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "RiffRaffDeploymentId": {
+      "Description": "Used by Riff-Raff to inject the deployment ID.",
+      "Type": "String",
+    },
+    "VpcId": {
+      "Default": "/account/vpc/primary/id",
+      "Description": "Virtual Private Cloud to run EC2 instances within. Should NOT be the account default VPC.",
+      "Type": "AWS::SSM::Parameter::Value<AWS::EC2::VPC::Id>",
+    },
+    "faciarenderingPrivateSubnets": {
+      "Default": "/account/vpc/primary/subnets/private",
+      "Description": "A list of private subnets",
+      "Type": "AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>",
+    },
+    "faciarenderingPublicSubnets": {
+      "Default": "/account/vpc/primary/subnets/public",
+      "Description": "A list of public subnets",
+      "Type": "AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>",
+    },
+  },
+  "Resources": {
+    "AllowPolicyCloudwatchLogsA783E5B4": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "cloudwatch:*",
+                "logs:*",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "AllowPolicyCloudwatchLogsA783E5B4",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleFaciarenderingF958A79D",
+          },
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "AllowPolicyDescribeDecryptKmsE91286F3": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "kms:Decrypt",
+                "kms:DescribeKey",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:kms:eu-west-1:",
+                    {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":FrontendConfigKey",
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "AllowPolicyDescribeDecryptKmsE91286F3",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleFaciarenderingF958A79D",
+          },
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "AllowPolicyGetSsmParamsByPathB54B2DE8": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "ssm:GetParametersByPath",
+                "ssm:GetParameter",
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:ssm:eu-west-1:",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":parameter/frontend/*",
+                    ],
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:ssm:eu-west-1:",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":parameter/dotcom/*",
+                    ],
+                  ],
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "AllowPolicyGetSsmParamsByPathB54B2DE8",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleFaciarenderingF958A79D",
+          },
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "AutoScalingGroupFaciarenderingASG90F9F17A": {
+      "Properties": {
+        "HealthCheckGracePeriod": 120,
+        "HealthCheckType": "ELB",
+        "LaunchTemplate": {
+          "LaunchTemplateId": {
+            "Ref": "frontendPRODfaciarendering17EBBF5B",
+          },
+          "Version": {
+            "Fn::GetAtt": [
+              "frontendPRODfaciarendering17EBBF5B",
+              "LatestVersionNumber",
+            ],
+          },
+        },
+        "MaxSize": "210",
+        "MetricsCollection": [
+          {
+            "Granularity": "1Minute",
+          },
+        ],
+        "MinSize": "21",
+        "Tags": [
+          {
+            "Key": "App",
+            "PropagateAtLaunch": true,
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "PropagateAtLaunch": true,
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "PropagateAtLaunch": true,
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "LogKinesisStreamName",
+            "PropagateAtLaunch": true,
+            "Value": {
+              "Ref": "LoggingStreamName",
+            },
+          },
+          {
+            "Key": "Stack",
+            "PropagateAtLaunch": true,
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "PropagateAtLaunch": true,
+            "Value": "PROD",
+          },
+          {
+            "Key": "SystemdUnit",
+            "PropagateAtLaunch": true,
+            "Value": "facia-rendering.service",
+          },
+        ],
+        "TargetGroupARNs": [
+          {
+            "Ref": "TargetGroupFaciarendering9388BE24",
+          },
+        ],
+        "VPCZoneIdentifier": {
+          "Ref": "faciarenderingPrivateSubnets",
+        },
+      },
+      "Type": "AWS::AutoScaling::AutoScalingGroup",
+    },
+    "CPUScaleUpPolicyUpperAlarm7E15DD91": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "CPUScaleUpPolicyUpperPolicyDEE5DA77",
+          },
+          {
+            "Ref": "CPUScalingAlertsTopic9D0083F7",
+          },
+        ],
+        "AlarmDescription": "Upper threshold scaling alarm",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "AutoScalingGroupName",
+            "Value": {
+              "Ref": "AutoScalingGroupFaciarenderingASG90F9F17A",
+            },
+          },
+        ],
+        "EvaluationPeriods": 2,
+        "ExtendedStatistic": "p90",
+        "MetricName": "CPUUtilization",
+        "Namespace": "AWS/EC2",
+        "Period": 30,
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+        "Threshold": 60,
+        "Unit": "Percent",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "CPUScaleUpPolicyUpperPolicyDEE5DA77": {
+      "Properties": {
+        "AdjustmentType": "PercentChangeInCapacity",
+        "AutoScalingGroupName": {
+          "Ref": "AutoScalingGroupFaciarenderingASG90F9F17A",
+        },
+        "MetricAggregationType": "Average",
+        "PolicyType": "StepScaling",
+        "StepAdjustments": [
+          {
+            "MetricIntervalLowerBound": 0,
+            "MetricIntervalUpperBound": 20,
+            "ScalingAdjustment": 50,
+          },
+          {
+            "MetricIntervalLowerBound": 20,
+            "ScalingAdjustment": 80,
+          },
+        ],
+      },
+      "Type": "AWS::AutoScaling::ScalingPolicy",
+    },
+    "CPUScalingAlertsSubscriptionEmail170D6D82": {
+      "Properties": {
+        "Endpoint": "dotcom.platform@theguardian.com",
+        "Protocol": "email",
+        "TopicArn": {
+          "Ref": "CPUScalingAlertsTopic9D0083F7",
+        },
+      },
+      "Type": "AWS::SNS::Subscription",
+    },
+    "CPUScalingAlertsTopic9D0083F7": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::SNS::Topic",
+    },
+    "CertificateFaciarendering1F268475": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "DomainName": "facia-rendering.guardianapis.com",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Name",
+            "Value": "FaciaRendering-PROD/CertificateFaciarendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+        "ValidationMethod": "DNS",
+      },
+      "Type": "AWS::CertificateManager::Certificate",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "DescribeEC2PolicyFF5F9295": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "autoscaling:DescribeAutoScalingInstances",
+                "autoscaling:DescribeAutoScalingGroups",
+                "ec2:DescribeTags",
+                "ec2:DescribeInstances",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "describe-ec2-policy",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleFaciarenderingF958A79D",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "EcsService81FC6EF6": {
+      "DependsOn": [
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+        "ListenerFaciarenderingDeterministicRouteToEc2Rule715F6B64",
+        "ListenerFaciarenderingDeterministicRouteToEcsRule9195083E",
+        "ListenerFaciarendering08D44551",
+      ],
+      "Properties": {
+        "Cluster": {
+          "Ref": "faciarenderingEcsClusterCBCA917A",
+        },
+        "DeploymentConfiguration": {
+          "Alarms": {
+            "AlarmNames": [],
+            "Enable": false,
+            "Rollback": false,
+          },
+          "DeploymentCircuitBreaker": {
+            "Enable": true,
+            "Rollback": true,
+          },
+          "MaximumPercent": 200,
+          "MinimumHealthyPercent": 100,
+        },
+        "DeploymentController": {
+          "Type": "ECS",
+        },
+        "EnableECSManagedTags": false,
+        "HealthCheckGracePeriodSeconds": 60,
+        "LaunchType": "FARGATE",
+        "LoadBalancers": [
+          {
+            "ContainerName": "facia-rendering",
+            "ContainerPort": 9000,
+            "TargetGroupArn": {
+              "Ref": "FaciarenderingEcsTargetGroupFaciarendering79A36F0A",
+            },
+          },
+        ],
+        "Monitoring": {
+          "MetricConfigurations": [
+            {
+              "MetricNames": [
+                "CPUUtilization",
+                "MemoryUtilization",
+              ],
+              "ResolutionSeconds": 20,
+            },
+          ],
+        },
+        "NetworkConfiguration": {
+          "AwsvpcConfiguration": {
+            "AssignPublicIp": "DISABLED",
+            "SecurityGroups": [
+              {
+                "Fn::GetAtt": [
+                  "GuHttpsEgressSecurityGroupFaciarenderingecsEDA89EA5",
+                  "GroupId",
+                ],
+              },
+            ],
+            "Subnets": {
+              "Ref": "faciarenderingPrivateSubnets",
+            },
+          },
+        },
+        "PropagateTags": "SERVICE",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+        "TaskDefinition": {
+          "Ref": "EcsTaskDefinition63157ED3",
+        },
+      },
+      "Type": "AWS::ECS::Service",
+    },
+    "EcsServiceTaskCountTarget02FCCE22": {
+      "DependsOn": [
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+      ],
+      "Properties": {
+        "MaxCapacity": 210,
+        "MinCapacity": 21,
+        "ResourceId": {
+          "Fn::Join": [
+            "",
+            [
+              "service/",
+              {
+                "Ref": "faciarenderingEcsClusterCBCA917A",
+              },
+              "/",
+              {
+                "Fn::GetAtt": [
+                  "EcsService81FC6EF6",
+                  "Name",
+                ],
+              },
+            ],
+          ],
+        },
+        "RoleARN": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":iam::",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService",
+            ],
+          ],
+        },
+        "ScalableDimension": "ecs:service:DesiredCount",
+        "ServiceNamespace": "ecs",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+    },
+    "EcsTaskDefinition63157ED3": {
+      "Properties": {
+        "ContainerDefinitions": [
+          {
+            "DependsOn": [
+              {
+                "Condition": "START",
+                "ContainerName": "aws-otel-collector",
+              },
+            ],
+            "DockerLabels": {
+              "RiffRaffDeploymentId": {
+                "Ref": "RiffRaffDeploymentId",
+              },
+            },
+            "Environment": [
+              {
+                "Name": "STACK",
+                "Value": "frontend",
+              },
+              {
+                "Name": "STAGE",
+                "Value": "PROD",
+              },
+              {
+                "Name": "APP",
+                "Value": "facia-rendering",
+              },
+              {
+                "Name": "TASK_NAME",
+                "Value": "facia-rendering",
+              },
+              {
+                "Name": "GU_REPO",
+                "Value": "guardian/dotcom-rendering",
+              },
+              {
+                "Name": "NODE_ENV",
+                "Value": "production",
+              },
+              {
+                "Name": "GU_STAGE",
+                "Value": "PROD",
+              },
+              {
+                "Name": "GU_APP",
+                "Value": "facia-rendering",
+              },
+              {
+                "Name": "GU_STACK",
+                "Value": "frontend",
+              },
+              {
+                "Name": "OTEL_EXPORTER_OTLP_ENDPOINT",
+                "Value": "http://localhost:4318",
+              },
+              {
+                "Name": "OTEL_SERVICE_NAME",
+                "Value": "facia-rendering",
+              },
+            ],
+            "Essential": true,
+            "Image": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Ref": "ArtifactsAccountId",
+                  },
+                  ".dkr.ecr.eu-west-1.",
+                  {
+                    "Ref": "AWS::URLSuffix",
+                  },
+                  "/guardian/dotcom-rendering/dotcom-rendering@sha256:12345",
+                ],
+              ],
+            },
+            "LogConfiguration": {
+              "LogDriver": "awsfirelens",
+              "Options": {
+                "Name": "kinesis_streams",
+                "region": "eu-west-1",
+                "retry_limit": "2",
+                "stream": {
+                  "Ref": "LoggingStreamName",
+                },
+              },
+            },
+            "Name": "facia-rendering",
+            "PortMappings": [
+              {
+                "ContainerPort": 9000,
+                "Protocol": "tcp",
+              },
+            ],
+            "ReadonlyRootFilesystem": true,
+            "VersionConsistency": "disabled",
+          },
+          {
+            "Environment": [
+              {
+                "Name": "STACK",
+                "Value": "frontend",
+              },
+              {
+                "Name": "STAGE",
+                "Value": "PROD",
+              },
+              {
+                "Name": "APP",
+                "Value": "facia-rendering",
+              },
+              {
+                "Name": "TASK_NAME",
+                "Value": "facia-rendering",
+              },
+              {
+                "Name": "GU_REPO",
+                "Value": "guardian/dotcom-rendering",
+              },
+            ],
+            "Essential": true,
+            "FirelensConfiguration": {
+              "Type": "fluentbit",
+            },
+            "Image": "ghcr.io/guardian/devx-logs@sha256:cf91724a5166f1c143e07958820aa2122afb61c164b68555d15cb92abb5acda0",
+            "LogConfiguration": {
+              "LogDriver": "awslogs",
+              "Options": {
+                "awslogs-group": {
+                  "Ref": "EcsTaskDefinitionLogShippingLogGroup0E405BD0",
+                },
+                "awslogs-region": "eu-west-1",
+                "awslogs-stream-prefix": "frontend/PROD/facia-rendering/devx-logs-sidecar",
+              },
+            },
+            "MountPoints": [
+              {
+                "ContainerPath": "/init",
+                "ReadOnly": false,
+                "SourceVolume": "logging-volume",
+              },
+            ],
+            "Name": "LogShipping",
+            "ReadonlyRootFilesystem": true,
+            "VersionConsistency": "disabled",
+          },
+          {
+            "Command": [
+              "--config=/etc/ecs/ecs-default-config.yaml",
+            ],
+            "Cpu": 256,
+            "Essential": false,
+            "HealthCheck": {
+              "Command": [
+                "CMD",
+                "/healthcheck",
+              ],
+              "Interval": 5,
+              "Retries": 2,
+              "Timeout": 3,
+            },
+            "Image": "public.ecr.aws/aws-observability/aws-otel-collector@sha256:90b3180c21acb9497110480371a413ed91f2836077f8a8fb4507b019d3c481c0",
+            "LogConfiguration": {
+              "LogDriver": "awsfirelens",
+              "Options": {
+                "Name": "kinesis_streams",
+                "region": "eu-west-1",
+                "retry_limit": "2",
+                "stream": {
+                  "Ref": "LoggingStreamName",
+                },
+              },
+            },
+            "Memory": 512,
+            "Name": "aws-otel-collector",
+            "ReadonlyRootFilesystem": true,
+          },
+        ],
+        "Cpu": "1024",
+        "ExecutionRoleArn": {
+          "Fn::GetAtt": [
+            "EcsTaskDefinitionExecutionRoleBE450C73",
+            "Arn",
+          ],
+        },
+        "Family": "FaciaRenderingPRODEcsTaskDefinition9EA5D92F",
+        "Memory": "2048",
+        "NetworkMode": "awsvpc",
+        "RequiresCompatibilities": [
+          "FARGATE",
+        ],
+        "RuntimePlatform": {
+          "CpuArchitecture": "ARM64",
+          "OperatingSystemFamily": "LINUX",
+        },
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+        "TaskRoleArn": {
+          "Fn::GetAtt": [
+            "EcsTaskDefinitionTaskRoleB7B6D8DD",
+            "Arn",
+          ],
+        },
+        "Volumes": [
+          {
+            "Name": "logging-volume",
+          },
+        ],
+      },
+      "Type": "AWS::ECS::TaskDefinition",
+    },
+    "EcsTaskDefinitionExecutionRoleBE450C73": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "EcsTaskDefinitionExecutionRoleDefaultPolicy1611A942": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":ecr:eu-west-1:",
+                    {
+                      "Ref": "ArtifactsAccountId",
+                    },
+                    ":repository/guardian/dotcom-rendering/dotcom-rendering",
+                  ],
+                ],
+              },
+            },
+            {
+              "Action": "ecr:GetAuthorizationToken",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            {
+              "Action": [
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage",
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:ecr:eu-west-1:694911143906:repository/aws-guardduty-agent-fargate",
+            },
+            {
+              "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "EcsTaskDefinitionLogShippingLogGroup0E405BD0",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "EcsTaskDefinitionExecutionRoleDefaultPolicy1611A942",
+        "Roles": [
+          {
+            "Ref": "EcsTaskDefinitionExecutionRoleBE450C73",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "EcsTaskDefinitionLogShippingLogGroup0E405BD0": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "RetentionInDays": 1,
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "EcsTaskDefinitionTaskRoleB7B6D8DD": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:PutLogEvents",
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:DescribeLogStreams",
+                "logs:DescribeLogGroups",
+                "logs:PutRetentionPolicy",
+                "xray:PutTraceSegments",
+                "xray:PutTelemetryRecords",
+                "xray:GetSamplingRules",
+                "xray:GetSamplingTargets",
+                "xray:GetSamplingStatisticSummaries",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "Roles": [
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "FaciarenderingEcsTargetGroupFaciarendering79A36F0A": {
+      "Properties": {
+        "HealthCheckIntervalSeconds": 10,
+        "HealthCheckPath": "/_healthcheck",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 5,
+        "HealthyThresholdCount": 5,
+        "Port": 9000,
+        "Protocol": "HTTP",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+        "TargetGroupAttributes": [
+          {
+            "Key": "deregistration_delay.timeout_seconds",
+            "Value": "30",
+          },
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false",
+          },
+        ],
+        "TargetType": "ip",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+    },
+    "GetDistributablePolicyFaciarenderingAA3BB1F7": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:GetObject",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:s3:::",
+                    {
+                      "Ref": "DistributionBucketName",
+                    },
+                    "/frontend/PROD/facia-rendering/*",
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "GetDistributablePolicyFaciarenderingAA3BB1F7",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleFaciarenderingF958A79D",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "GuHttpsEgressSecurityGroupFaciarendering60580ECC": {
+      "Properties": {
+        "GroupDescription": "Allow all outbound HTTPS traffic",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound HTTPS traffic",
+            "FromPort": 443,
+            "IpProtocol": "tcp",
+            "ToPort": 443,
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "GuHttpsEgressSecurityGroupFaciarenderingecsEDA89EA5": {
+      "Properties": {
+        "GroupDescription": "Allow all outbound HTTPS traffic",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound HTTPS traffic",
+            "FromPort": 443,
+            "IpProtocol": "tcp",
+            "ToPort": 443,
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering-ecs",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "GuHttpsEgressSecurityGroupFaciarenderingecsfromFaciaRenderingPRODInternalIngressSecurityGroupFaciarenderingCE33A0499000F87D358E": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupFaciarenderingecsEDA89EA5",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "InternalIngressSecurityGroupFaciarendering8C803402",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "GuHttpsEgressSecurityGroupFaciarenderingecsfromFaciaRenderingPRODLoadBalancerFaciarenderingSecurityGroup62AE4BD590005ECE0A2B": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupFaciarenderingecsEDA89EA5",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "LoadBalancerFaciarenderingSecurityGroup18FA4240",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "GuHttpsEgressSecurityGroupFaciarenderingfromFaciaRenderingPRODInternalIngressSecurityGroupFaciarenderingCE33A0499000BC3E9A8D": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupFaciarendering60580ECC",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "InternalIngressSecurityGroupFaciarendering8C803402",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "GuHttpsEgressSecurityGroupFaciarenderingfromFaciaRenderingPRODLoadBalancerFaciarenderingSecurityGroup62AE4BD59000C8BC9E7F": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupFaciarendering60580ECC",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "LoadBalancerFaciarenderingSecurityGroup18FA4240",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "GuLogShippingPolicy981BFE5A": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "kinesis:Describe*",
+                "kinesis:Put*",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:kinesis:eu-west-1:",
+                    {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":stream/",
+                    {
+                      "Ref": "LoggingStreamName",
+                    },
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "GuLogShippingPolicy981BFE5A",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleFaciarenderingF958A79D",
+          },
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "High5xxPercentageAlarmFaciarendering2990D1F5": {
+      "Properties": {
+        "ActionsEnabled": true,
+        "AlarmActions": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:aws:sns:eu-west-1:",
+                {
+                  "Ref": "AWS::AccountId",
+                },
+                ":Frontend-PROD-CriticalAlerts",
+              ],
+            ],
+          },
+        ],
+        "AlarmDescription": "facia-rendering exceeded 0.5% error rate",
+        "AlarmName": "High 5XX error percentage from facia-rendering in PROD",
+        "ComparisonOperator": "GreaterThanThreshold",
+        "EvaluationPeriods": 1,
+        "Metrics": [
+          {
+            "Expression": "100*(m1+m2)/m3",
+            "Id": "expr_1",
+            "Label": "% of 5XX responses served for facia-rendering (load balancer and instances combined)",
+            "ReturnData": true,
+          },
+          {
+            "Id": "m1",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "LoadBalancer",
+                    "Value": {
+                      "Fn::GetAtt": [
+                        "LoadBalancerFaciarenderingF8FB9D5C",
+                        "LoadBalancerFullName",
+                      ],
+                    },
+                  },
+                ],
+                "MetricName": "HTTPCode_ELB_5XX_Count",
+                "Namespace": "AWS/ApplicationELB",
+              },
+              "Period": 60,
+              "Stat": "Sum",
+            },
+            "ReturnData": false,
+          },
+          {
+            "Id": "m2",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "LoadBalancer",
+                    "Value": {
+                      "Fn::GetAtt": [
+                        "LoadBalancerFaciarenderingF8FB9D5C",
+                        "LoadBalancerFullName",
+                      ],
+                    },
+                  },
+                ],
+                "MetricName": "HTTPCode_Target_5XX_Count",
+                "Namespace": "AWS/ApplicationELB",
+              },
+              "Period": 60,
+              "Stat": "Sum",
+            },
+            "ReturnData": false,
+          },
+          {
+            "Id": "m3",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "LoadBalancer",
+                    "Value": {
+                      "Fn::GetAtt": [
+                        "LoadBalancerFaciarenderingF8FB9D5C",
+                        "LoadBalancerFullName",
+                      ],
+                    },
+                  },
+                ],
+                "MetricName": "RequestCount",
+                "Namespace": "AWS/ApplicationELB",
+              },
+              "Period": 60,
+              "Stat": "Sum",
+            },
+            "ReturnData": false,
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+        "Threshold": 0.5,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "InstanceRoleFaciarenderingF958A79D": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Path": "/",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "InternalIngressSecurityGroupFaciarendering8C803402": {
+      "Properties": {
+        "GroupDescription": "Allow restricted ingress from CIDR ranges",
+        "SecurityGroupIngress": [
+          {
+            "CidrIp": "10.0.0.0/8",
+            "Description": "Allow access on port 443 from 10.0.0.0/8",
+            "FromPort": 443,
+            "IpProtocol": "tcp",
+            "ToPort": 443,
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "InternalIngressSecurityGroupFaciarenderingtoFaciaRenderingPRODGuHttpsEgressSecurityGroupFaciarendering46B0F7F890004A1A7599": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupFaciarendering60580ECC",
+            "GroupId",
+          ],
+        },
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "InternalIngressSecurityGroupFaciarendering8C803402",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "InternalIngressSecurityGroupFaciarenderingtoFaciaRenderingPRODGuHttpsEgressSecurityGroupFaciarenderingecs46500B30900015ECEC55": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupFaciarenderingecsEDA89EA5",
+            "GroupId",
+          ],
+        },
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "InternalIngressSecurityGroupFaciarendering8C803402",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "LatencyScaleDownPolicyLowerAlarm3AAA79CF": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "LatencyScaleDownPolicyLowerPolicy5B8C5A01",
+          },
+        ],
+        "AlarmDescription": "Lower threshold scaling alarm",
+        "ComparisonOperator": "LessThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "LoadBalancer",
+            "Value": {
+              "Fn::GetAtt": [
+                "LoadBalancerFaciarenderingF8FB9D5C",
+                "LoadBalancerFullName",
+              ],
+            },
+          },
+          {
+            "Name": "TargetGroup",
+            "Value": {
+              "Fn::GetAtt": [
+                "TargetGroupFaciarendering9388BE24",
+                "TargetGroupFullName",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 10,
+        "MetricName": "TargetResponseTime",
+        "Namespace": "AWS/ApplicationELB",
+        "Period": 30,
+        "Statistic": "Average",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+        "Threshold": 0.35,
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "LatencyScaleDownPolicyLowerPolicy5B8C5A01": {
+      "Properties": {
+        "AdjustmentType": "ChangeInCapacity",
+        "AutoScalingGroupName": {
+          "Ref": "AutoScalingGroupFaciarenderingASG90F9F17A",
+        },
+        "MetricAggregationType": "Average",
+        "PolicyType": "StepScaling",
+        "StepAdjustments": [
+          {
+            "MetricIntervalUpperBound": 0,
+            "ScalingAdjustment": -1,
+          },
+        ],
+      },
+      "Type": "AWS::AutoScaling::ScalingPolicy",
+    },
+    "LatencyScaleUpPolicyUpperAlarmB2CCE62D": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "LatencyScaleUpPolicyUpperPolicy4A22B34C",
+          },
+          {
+            "Ref": "LatencyScalingAlertsTopic1A322157",
+          },
+        ],
+        "AlarmDescription": "Upper threshold scaling alarm",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "LoadBalancer",
+            "Value": {
+              "Fn::GetAtt": [
+                "LoadBalancerFaciarenderingF8FB9D5C",
+                "LoadBalancerFullName",
+              ],
+            },
+          },
+          {
+            "Name": "TargetGroup",
+            "Value": {
+              "Fn::GetAtt": [
+                "TargetGroupFaciarendering9388BE24",
+                "TargetGroupFullName",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 2,
+        "MetricName": "TargetResponseTime",
+        "Namespace": "AWS/ApplicationELB",
+        "Period": 30,
+        "Statistic": "Average",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+        "Threshold": 0.4,
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "LatencyScaleUpPolicyUpperPolicy4A22B34C": {
+      "Properties": {
+        "AdjustmentType": "PercentChangeInCapacity",
+        "AutoScalingGroupName": {
+          "Ref": "AutoScalingGroupFaciarenderingASG90F9F17A",
+        },
+        "MetricAggregationType": "Average",
+        "PolicyType": "StepScaling",
+        "StepAdjustments": [
+          {
+            "MetricIntervalLowerBound": 0,
+            "MetricIntervalUpperBound": 0.09999999999999998,
+            "ScalingAdjustment": 50,
+          },
+          {
+            "MetricIntervalLowerBound": 0.09999999999999998,
+            "ScalingAdjustment": 80,
+          },
+        ],
+      },
+      "Type": "AWS::AutoScaling::ScalingPolicy",
+    },
+    "LatencyScalingAlertsSubscriptionEmailF1826DAB": {
+      "Properties": {
+        "Endpoint": "dotcom.platform@theguardian.com",
+        "Protocol": "email",
+        "TopicArn": {
+          "Ref": "LatencyScalingAlertsTopic1A322157",
+        },
+      },
+      "Type": "AWS::SNS::Subscription",
+    },
+    "LatencyScalingAlertsTopic1A322157": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::SNS::Topic",
+    },
+    "ListenerFaciarendering08D44551": {
+      "Properties": {
+        "Certificates": [
+          {
+            "CertificateArn": {
+              "Ref": "CertificateFaciarendering1F268475",
+            },
+          },
+        ],
+        "DefaultActions": [
+          {
+            "ForwardConfig": {
+              "TargetGroups": [
+                {
+                  "TargetGroupArn": {
+                    "Ref": "TargetGroupFaciarendering9388BE24",
+                  },
+                  "Weight": 1,
+                },
+                {
+                  "TargetGroupArn": {
+                    "Ref": "FaciarenderingEcsTargetGroupFaciarendering79A36F0A",
+                  },
+                  "Weight": 0,
+                },
+              ],
+            },
+            "Type": "forward",
+          },
+        ],
+        "LoadBalancerArn": {
+          "Ref": "LoadBalancerFaciarenderingF8FB9D5C",
+        },
+        "Port": 443,
+        "Protocol": "HTTPS",
+        "SslPolicy": "ELBSecurityPolicy-TLS13-1-2-2021-06",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::Listener",
+    },
+    "ListenerFaciarenderingDeterministicRouteToEc2Rule715F6B64": {
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "TargetGroupFaciarendering9388BE24",
+            },
+            "Type": "forward",
+          },
+        ],
+        "Conditions": [
+          {
+            "Field": "http-header",
+            "HttpHeaderConfig": {
+              "HttpHeaderName": "X-Gu-Target-Group",
+              "Values": [
+                "ec2",
+              ],
+            },
+          },
+        ],
+        "ListenerArn": {
+          "Ref": "ListenerFaciarendering08D44551",
+        },
+        "Priority": 10,
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+    },
+    "ListenerFaciarenderingDeterministicRouteToEcsRule9195083E": {
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "FaciarenderingEcsTargetGroupFaciarendering79A36F0A",
+            },
+            "Type": "forward",
+          },
+        ],
+        "Conditions": [
+          {
+            "Field": "http-header",
+            "HttpHeaderConfig": {
+              "HttpHeaderName": "X-Gu-Target-Group",
+              "Values": [
+                "ecs",
+              ],
+            },
+          },
+        ],
+        "ListenerArn": {
+          "Ref": "ListenerFaciarendering08D44551",
+        },
+        "Priority": 11,
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+    },
+    "LoadBalancerDNS": {
+      "Properties": {
+        "Name": "facia-rendering.guardianapis.com",
+        "RecordType": "CNAME",
+        "ResourceRecords": [
+          {
+            "Fn::GetAtt": [
+              "LoadBalancerFaciarenderingF8FB9D5C",
+              "DNSName",
+            ],
+          },
+        ],
+        "Stage": "PROD",
+        "TTL": 3600,
+      },
+      "Type": "Guardian::DNS::RecordSet",
+    },
+    "LoadBalancerFaciarenderingF8FB9D5C": {
+      "Properties": {
+        "LoadBalancerAttributes": [
+          {
+            "Key": "deletion_protection.enabled",
+            "Value": "true",
+          },
+          {
+            "Key": "routing.http.x_amzn_tls_version_and_cipher_suite.enabled",
+            "Value": "true",
+          },
+          {
+            "Key": "routing.http.drop_invalid_header_fields.enabled",
+            "Value": "true",
+          },
+          {
+            "Key": "access_logs.s3.enabled",
+            "Value": "true",
+          },
+          {
+            "Key": "access_logs.s3.bucket",
+            "Value": {
+              "Ref": "AccessLoggingBucket",
+            },
+          },
+          {
+            "Key": "access_logs.s3.prefix",
+            "Value": "application-load-balancer/PROD/frontend/facia-rendering",
+          },
+          {
+            "Key": "idle_timeout.timeout_seconds",
+            "Value": "4",
+          },
+        ],
+        "Scheme": "internal",
+        "SecurityGroups": [
+          {
+            "Fn::GetAtt": [
+              "LoadBalancerFaciarenderingSecurityGroup18FA4240",
+              "GroupId",
+            ],
+          },
+          {
+            "Fn::GetAtt": [
+              "InternalIngressSecurityGroupFaciarendering8C803402",
+              "GroupId",
+            ],
+          },
+        ],
+        "Subnets": {
+          "Ref": "faciarenderingPrivateSubnets",
+        },
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+        "Type": "application",
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+    },
+    "LoadBalancerFaciarenderingSecurityGroup18FA4240": {
+      "Properties": {
+        "GroupDescription": "Automatically created Security Group for ELB FaciaRenderingPRODLoadBalancerFaciarenderingC209FBB5",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "LoadBalancerFaciarenderingSecurityGrouptoFaciaRenderingPRODGuHttpsEgressSecurityGroupFaciarendering46B0F7F89000457DF4F4": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupFaciarendering60580ECC",
+            "GroupId",
+          ],
+        },
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "LoadBalancerFaciarenderingSecurityGroup18FA4240",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "LoadBalancerFaciarenderingSecurityGrouptoFaciaRenderingPRODGuHttpsEgressSecurityGroupFaciarenderingecs46500B3090000DB10C20": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupFaciarenderingecsEDA89EA5",
+            "GroupId",
+          ],
+        },
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "LoadBalancerFaciarenderingSecurityGroup18FA4240",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "ParameterStoreReadFaciarendering42966589": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "ssm:GetParametersByPath",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:ssm:eu-west-1:",
+                    {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":parameter/PROD/frontend/facia-rendering",
+                  ],
+                ],
+              },
+            },
+            {
+              "Action": [
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:ssm:eu-west-1:",
+                    {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":parameter/PROD/frontend/facia-rendering/*",
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "parameter-store-read-policy",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleFaciarenderingF958A79D",
+          },
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "RenderingBaseURLParamAE11E777": {
+      "Properties": {
+        "Description": "The rendering base URL for frontend to call the facia-rendering app in the PROD environment",
+        "Name": "/frontend/prod/facia-rendering.baseURL",
+        "Tags": {
+          "App": "facia-rendering",
+          "Stack": "frontend",
+          "Stage": "PROD",
+          "gu:cdk:version": "TEST",
+          "gu:repo": "guardian/dotcom-rendering",
+        },
+        "Type": "String",
+        "Value": "https://facia-rendering.guardianapis.com",
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "SsmSshPolicy4CFC977E": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "ec2messages:AcknowledgeMessage",
+                "ec2messages:DeleteMessage",
+                "ec2messages:FailMessage",
+                "ec2messages:GetEndpoint",
+                "ec2messages:GetMessages",
+                "ec2messages:SendReply",
+                "ssm:UpdateInstanceInformation",
+                "ssm:ListInstanceAssociations",
+                "ssm:DescribeInstanceProperties",
+                "ssm:DescribeDocumentParameters",
+                "ssmmessages:CreateControlChannel",
+                "ssmmessages:CreateDataChannel",
+                "ssmmessages:OpenControlChannel",
+                "ssmmessages:OpenDataChannel",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "ssm-ssh-policy",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleFaciarenderingF958A79D",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "TargetGroupFaciarendering9388BE24": {
+      "Properties": {
+        "HealthCheckIntervalSeconds": 10,
+        "HealthCheckPath": "/_healthcheck",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 5,
+        "HealthyThresholdCount": 5,
+        "Port": 9000,
+        "Protocol": "HTTP",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+        "TargetGroupAttributes": [
+          {
+            "Key": "deregistration_delay.timeout_seconds",
+            "Value": "30",
+          },
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false",
+          },
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+    },
+    "UnhealthyInstancesAlarmFaciarenderingC2583549": {
+      "Properties": {
+        "ActionsEnabled": true,
+        "AlarmActions": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:aws:sns:eu-west-1:",
+                {
+                  "Ref": "AWS::AccountId",
+                },
+                ":Frontend-PROD-CriticalAlerts",
+              ],
+            ],
+          },
+        ],
+        "AlarmDescription": "facia-rendering's instances have failed healthchecks several times over the last 1 hour.
+      This typically results in the AutoScaling Group cycling instances and can lead to problems with deployment,
+      scaling or handling traffic spikes.
+
+      Check facia-rendering's application logs or ssh onto an unhealthy instance in order to debug these problems.",
+        "AlarmName": "Unhealthy instances for facia-rendering in PROD",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "DatapointsToAlarm": 30,
+        "Dimensions": [
+          {
+            "Name": "LoadBalancer",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Fn::Select": [
+                      1,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "ListenerFaciarendering08D44551",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  "/",
+                  {
+                    "Fn::Select": [
+                      2,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "ListenerFaciarendering08D44551",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  "/",
+                  {
+                    "Fn::Select": [
+                      3,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "ListenerFaciarendering08D44551",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              ],
+            },
+          },
+          {
+            "Name": "TargetGroup",
+            "Value": {
+              "Fn::GetAtt": [
+                "TargetGroupFaciarendering9388BE24",
+                "TargetGroupFullName",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 60,
+        "MetricName": "UnHealthyHostCount",
+        "Namespace": "AWS/ApplicationELB",
+        "Period": 60,
+        "Statistic": "Maximum",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+        "Threshold": 1,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "faciarenderingCpuScaling43A1B995": {
+      "Properties": {
+        "PolicyName": "FaciaRenderingPRODfaciarenderingCpuScaling7D063B5A",
+        "PolicyType": "TargetTrackingScaling",
+        "ScalingTargetId": {
+          "Ref": "EcsServiceTaskCountTarget02FCCE22",
+        },
+        "TargetTrackingScalingPolicyConfiguration": {
+          "PredefinedMetricSpecification": {
+            "PredefinedMetricType": "ECSServiceAverageCPUUtilizationHighResolution",
+          },
+          "ScaleInCooldown": 60,
+          "ScaleOutCooldown": 60,
+          "TargetValue": 20,
+        },
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+    },
+    "faciarenderingEcsClusterCBCA917A": {
+      "Properties": {
+        "ClusterSettings": [
+          {
+            "Name": "containerInsights",
+            "Value": "enhanced",
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::ECS::Cluster",
+    },
+    "frontendPRODfaciarendering17EBBF5B": {
+      "DependsOn": [
+        "InstanceRoleFaciarenderingF958A79D",
+      ],
+      "Properties": {
+        "LaunchTemplateData": {
+          "IamInstanceProfile": {
+            "Arn": {
+              "Fn::GetAtt": [
+                "frontendPRODfaciarenderingProfile3477577A",
+                "Arn",
+              ],
+            },
+          },
+          "ImageId": {
+            "Ref": "AMIFaciarendering",
+          },
+          "InstanceType": "c8g.medium",
+          "MetadataOptions": {
+            "HttpTokens": "required",
+            "InstanceMetadataTags": "enabled",
+          },
+          "Monitoring": {
+            "Enabled": true,
+          },
+          "SecurityGroupIds": [
+            {
+              "Fn::GetAtt": [
+                "GuHttpsEgressSecurityGroupFaciarendering60580ECC",
+                "GroupId",
+              ],
+            },
+          ],
+          "TagSpecifications": [
+            {
+              "ResourceType": "instance",
+              "Tags": [
+                {
+                  "Key": "App",
+                  "Value": "facia-rendering",
+                },
+                {
+                  "Key": "gu:cdk:version",
+                  "Value": "TEST",
+                },
+                {
+                  "Key": "gu:repo",
+                  "Value": "guardian/dotcom-rendering",
+                },
+                {
+                  "Key": "Name",
+                  "Value": "FaciaRendering-PROD/frontend-PROD-facia-rendering",
+                },
+                {
+                  "Key": "Stack",
+                  "Value": "frontend",
+                },
+                {
+                  "Key": "Stage",
+                  "Value": "PROD",
+                },
+              ],
+            },
+            {
+              "ResourceType": "volume",
+              "Tags": [
+                {
+                  "Key": "App",
+                  "Value": "facia-rendering",
+                },
+                {
+                  "Key": "gu:cdk:version",
+                  "Value": "TEST",
+                },
+                {
+                  "Key": "gu:repo",
+                  "Value": "guardian/dotcom-rendering",
+                },
+                {
+                  "Key": "Name",
+                  "Value": "FaciaRendering-PROD/frontend-PROD-facia-rendering",
+                },
+                {
+                  "Key": "Stack",
+                  "Value": "frontend",
+                },
+                {
+                  "Key": "Stage",
+                  "Value": "PROD",
+                },
+              ],
+            },
+          ],
+          "UserData": {
+            "Fn::Base64": {
+              "Fn::Join": [
+                "",
+                [
+                  "#!/bin/bash
+set -ev
+groupadd frontend
+useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering
+cd /home/dotcom-rendering
+aws --region eu-west-1 s3 cp s3://",
+                  {
+                    "Ref": "DistributionBucketName",
+                  },
+                  "/frontend/PROD/facia-rendering/facia-rendering.tar.gz ./
+tar -zxf facia-rendering.tar.gz facia-rendering
+chown -R dotcom-rendering:frontend facia-rendering
+cd facia-rendering
+mkdir /var/log/dotcom-rendering
+chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
+cat > /etc/systemd/system/facia-rendering.service << EOF
+[Unit]
+Description=facia-rendering
+After=network.target
+[Service]
+WorkingDirectory=/home/dotcom-rendering/facia-rendering
+Type=simple
+User=dotcom-rendering
+Group=frontend
+StandardError=journal
+StandardOutput=journal
+Environment=TERM=xterm-256color
+Environment=NODE_ENV=production
+Environment=GU_STAGE=PROD
+Environment=GU_APP=facia-rendering
+Environment=GU_STACK=frontend
+ExecStart=make prod
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target
+EOF
+systemctl enable facia-rendering
+systemctl start facia-rendering",
+                ],
+              ],
+            },
+          },
+        },
+        "TagSpecifications": [
+          {
+            "ResourceType": "launch-template",
+            "Tags": [
+              {
+                "Key": "App",
+                "Value": "facia-rendering",
+              },
+              {
+                "Key": "gu:cdk:version",
+                "Value": "TEST",
+              },
+              {
+                "Key": "gu:repo",
+                "Value": "guardian/dotcom-rendering",
+              },
+              {
+                "Key": "Name",
+                "Value": "FaciaRendering-PROD/frontend-PROD-facia-rendering",
+              },
+              {
+                "Key": "Stack",
+                "Value": "frontend",
+              },
+              {
+                "Key": "Stage",
+                "Value": "PROD",
+              },
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::EC2::LaunchTemplate",
+    },
+    "frontendPRODfaciarenderingProfile3477577A": {
+      "Properties": {
+        "Roles": [
+          {
+            "Ref": "InstanceRoleFaciarenderingF958A79D",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::InstanceProfile",
+    },
+  },
+}
+`;
+
 exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CODE (uses ECS) 1`] = `
 {
   "Metadata": {
@@ -1689,6 +6407,8 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
       "GuHttpsEgressSecurityGroup",
       "GuAutoScalingGroup",
       "GuApplicationTargetGroup",
+      "GuRepository",
+      "GuArtifactsAccountId",
       "GuRiffRaffDeploymentIdParameterExperimental",
       "GuHttpsEgressSecurityGroup",
       "GuApplicationTargetGroup",
@@ -1722,8 +6442,9 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
       "Description": "S3 bucket to store your access logs",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
-    "ArtifactAccountIdParameter": {
+    "ArtifactsAccountId": {
       "Default": "/organisation/accounts/artifacts",
+      "Description": "Account ID of the Artifacts account. Useful as some shared resources live here.",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
     "DistributionBucketName": {
@@ -2239,7 +6960,7 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
                 "",
                 [
                   {
-                    "Ref": "ArtifactAccountIdParameter",
+                    "Ref": "ArtifactsAccountId",
                   },
                   ".dkr.ecr.eu-west-1.",
                   {
@@ -2464,7 +7185,7 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
                     },
                     ":ecr:eu-west-1:",
                     {
-                      "Ref": "ArtifactAccountIdParameter",
+                      "Ref": "ArtifactsAccountId",
                     },
                     ":repository/guardian/dotcom-rendering/dotcom-rendering",
                   ],
@@ -3744,7 +8465,7 @@ systemctl start interactive-rendering",
 }
 `;
 
-exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PROD (not using ECS) 1`] = `
+exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PROD (uses ECS) 1`] = `
 {
   "Metadata": {
     "gu:cdk:constructs": [
@@ -3767,6 +8488,8 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
       "GuHttpsEgressSecurityGroup",
       "GuAutoScalingGroup",
       "GuApplicationTargetGroup",
+      "GuRepository",
+      "GuArtifactsAccountId",
       "GuRiffRaffDeploymentIdParameterExperimental",
       "GuHttpsEgressSecurityGroup",
       "GuApplicationTargetGroup",
@@ -3802,8 +8525,9 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
       "Description": "S3 bucket to store your access logs",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
-    "ArtifactAccountIdParameter": {
+    "ArtifactsAccountId": {
       "Default": "/organisation/accounts/artifacts",
+      "Description": "Account ID of the Artifacts account. Useful as some shared resources live here.",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
     "DistributionBucketName": {
@@ -4430,7 +9154,7 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
                 "",
                 [
                   {
-                    "Ref": "ArtifactAccountIdParameter",
+                    "Ref": "ArtifactsAccountId",
                   },
                   ".dkr.ecr.eu-west-1.",
                   {
@@ -4655,7 +9379,7 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
                     },
                     ":ecr:eu-west-1:",
                     {
-                      "Ref": "ArtifactAccountIdParameter",
+                      "Ref": "ArtifactsAccountId",
                     },
                     ":repository/guardian/dotcom-rendering/dotcom-rendering",
                   ],
@@ -5552,13 +10276,13 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
                   "TargetGroupArn": {
                     "Ref": "TargetGroupInteractiverenderingB3F5F6D3",
                   },
-                  "Weight": 50,
+                  "Weight": 1,
                 },
                 {
                   "TargetGroupArn": {
                     "Ref": "InteractiverenderingEcsTargetGroupInteractiverendering62D942CE",
                   },
-                  "Weight": 50,
+                  "Weight": 0,
                 },
               ],
             },
@@ -6390,6 +11114,8 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
       "GuSubnetListParameter",
       "GuSubnetListParameter",
       "GuLoadBalancedAppExperimental",
+      "GuRepository",
+      "GuArtifactsAccountId",
       "GuLoggingStreamNameParameter",
       "GuRiffRaffDeploymentIdParameterExperimental",
       "GuLogShippingPolicy",
@@ -6422,8 +11148,9 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
       "Description": "S3 bucket to store your access logs",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
-    "ArtifactAccountIdParameter": {
+    "ArtifactsAccountId": {
       "Default": "/organisation/accounts/artifacts",
+      "Description": "Account ID of the Artifacts account. Useful as some shared resources live here.",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
     "DistributionBucketName": {
@@ -6830,7 +11557,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
                 "",
                 [
                   {
-                    "Ref": "ArtifactAccountIdParameter",
+                    "Ref": "ArtifactsAccountId",
                   },
                   ".dkr.ecr.eu-west-1.",
                   {
@@ -7055,7 +11782,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
                     },
                     ":ecr:eu-west-1:",
                     {
-                      "Ref": "ArtifactAccountIdParameter",
+                      "Ref": "ArtifactsAccountId",
                     },
                     ":repository/guardian/dotcom-rendering/dotcom-rendering",
                   ],
@@ -7762,6 +12489,8 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
       "GuSubnetListParameter",
       "GuSubnetListParameter",
       "GuLoadBalancedAppExperimental",
+      "GuRepository",
+      "GuArtifactsAccountId",
       "GuLoggingStreamNameParameter",
       "GuRiffRaffDeploymentIdParameterExperimental",
       "GuLogShippingPolicy",
@@ -7795,8 +12524,9 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
       "Description": "S3 bucket to store your access logs",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
-    "ArtifactAccountIdParameter": {
+    "ArtifactsAccountId": {
       "Default": "/organisation/accounts/artifacts",
+      "Description": "Account ID of the Artifacts account. Useful as some shared resources live here.",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
     "DistributionBucketName": {
@@ -8203,7 +12933,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
                 "",
                 [
                   {
-                    "Ref": "ArtifactAccountIdParameter",
+                    "Ref": "ArtifactsAccountId",
                   },
                   ".dkr.ecr.eu-west-1.",
                   {
@@ -8428,7 +13158,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
                     },
                     ":ecr:eu-west-1:",
                     {
-                      "Ref": "ArtifactAccountIdParameter",
+                      "Ref": "ArtifactsAccountId",
                     },
                     ":repository/guardian/dotcom-rendering/dotcom-rendering",
                   ],

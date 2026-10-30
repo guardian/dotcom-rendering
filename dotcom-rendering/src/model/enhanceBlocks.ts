@@ -1,7 +1,7 @@
 import { isUndefined } from '@guardian/libs';
 import { type ArticleFormat } from '../lib/articleFormat';
 import type { Block } from '../types/blocks';
-import type { Switches } from '../types/config';
+import type { StageType, Switches } from '../types/config';
 import type {
 	FEElement,
 	ImageBlockElement,
@@ -23,6 +23,7 @@ import { enhanceNumberedLists } from './enhance-numbered-lists';
 import { enhanceProductSummary } from './enhance-product-summary';
 import { enhanceTweets } from './enhance-tweets';
 import { enhanceGuVideos } from './enhance-videos';
+import { enhanceEventGraphics } from './enhanceEventGraphics';
 import { enhanceLists } from './enhanceLists';
 import { enhanceProductElement } from './enhanceProductElement';
 import { enhanceTimeline } from './enhanceTimeline';
@@ -39,6 +40,7 @@ type Options = {
 	pageId: string;
 	serverSideABTests?: Record<string, string>;
 	switches?: Switches;
+	stage: StageType;
 };
 
 const enhanceNewsletterSignup =
@@ -81,6 +83,7 @@ export const enhanceElements =
 			enhanceDividers,
 			enhanceH2s,
 			enhanceProductSummary,
+			enhanceEventGraphics(options.stage, format),
 			enhanceInteractiveAtomElements(format),
 			enhanceInteractiveContentsElements,
 			enhanceBlockquotes(format),

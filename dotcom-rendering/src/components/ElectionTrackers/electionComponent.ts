@@ -32,6 +32,10 @@ const ChangeBars = v.object({
 	changes: v.array(Change),
 });
 
+const Heading = v.object({
+	text: v.string(),
+});
+
 const OnwardLink = v.object({
 	link: v.pipe(
 		v.string(),
@@ -118,6 +122,10 @@ const ElectionElement = v.variant('kind', [
 		},
 		'Not a ChangeBars element',
 	),
+	v.object({
+		kind: v.literal('heading'),
+		props: Heading,
+	}),
 	v.object(
 		{
 			kind: v.literal('onwardLink'),

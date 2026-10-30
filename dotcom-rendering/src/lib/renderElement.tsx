@@ -13,6 +13,7 @@ import { CommentBlockComponent } from '../components/CommentBlockComponent';
 import { CrosswordComponent } from '../components/CrosswordComponent.island';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.island';
+import { ElectionTrackerWrapper } from '../components/ElectionTrackerWrapper.island';
 import { EmailSignUpWrapper } from '../components/EmailSignUpWrapper.island';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.island';
 import { ExplainerAtom } from '../components/ExplainerAtom';
@@ -1006,6 +1007,22 @@ export const renderElement = ({
 					isAcastEnabled={!!switches.acast}
 				/>
 			);
+		case 'model.dotcomrendering.pageElements.EventGraphicBlockElement':
+			return (
+				<div
+					css={{
+						marginBottom: 12,
+					}}
+				>
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<ElectionTrackerWrapper
+							electionDataUrl={element.dataUrl.href}
+							electionComponents={element.components}
+							liveEffects={true}
+						/>
+					</Island>
+				</div>
+			);
 		case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.VideoBlockElement':
@@ -1029,7 +1046,6 @@ const bareElements = new Set<FEElement['_type']>([
 	'model.dotcomrendering.pageElements.TextBlockElement',
 	'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
 	'model.dotcomrendering.pageElements.InteractiveBlockElement',
-	'model.dotcomrendering.pageElements.InteractiveAtomBlockElement',
 ]);
 
 // RenderArticleElement is a wrapper for renderElement that wraps elements in a
@@ -1092,12 +1108,14 @@ export const RenderArticleElement = ({
 		idApiUrl,
 	});
 
+	const isInteractiveAtomInInteractiveGrid =
+		format.design === ArticleDesign.Interactive &&
+		articleArrangement !== undefined &&
+		element._type ===
+			'model.dotcomrendering.pageElements.InteractiveAtomBlockElement';
+
 	const needsFigure =
-		!bareElements.has(element._type) ||
-		(format.design === ArticleDesign.Interactive &&
-			articleArrangement === undefined &&
-			element._type ===
-				'model.dotcomrendering.pageElements.InteractiveAtomBlockElement');
+		!bareElements.has(element._type) && !isInteractiveAtomInInteractiveGrid;
 
 	const role =
 		'role' in element

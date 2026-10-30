@@ -187,7 +187,11 @@ const buildRRBannerConfigWith = ({
 						inNoShowMobileAboveNavVariant,
 					}),
 				show: ({ name, props }: ModuleData<BannerProps>) => (
-					<BannerComponent name={name} props={props} />
+					<BannerComponent
+						name={name}
+						props={props}
+						idApiUrl={idApiUrl}
+					/>
 				),
 			},
 			timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,

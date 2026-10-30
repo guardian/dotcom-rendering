@@ -7,6 +7,7 @@ import {
 	type ElectionComponent,
 	ElectionComponents,
 } from './electionComponent';
+import { Heading } from './Heading';
 import { OnwardLink } from './OnwardLink';
 import { ProgressNumber } from './ProgressNumber';
 import { Refresh } from './Refresh';
@@ -114,6 +115,8 @@ const Component = ({ component }: { component: ElectionComponent }) => {
 					}}
 				/>
 			);
+		case 'heading':
+			return <Heading from="tablet">{component.props.text}</Heading>;
 		case 'changeBars':
 			return <ChangeBars changes={component.props.changes} />;
 		case 'onwardLink':
