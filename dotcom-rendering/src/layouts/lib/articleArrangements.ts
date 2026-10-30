@@ -420,6 +420,7 @@ export const getLayoutType = (
 	format: ArticleFormat,
 	mainMediaOrientation: 'portrait' | 'landscape' | 'square',
 ): LayoutType => {
+	// Pending: Display hint for interactive top hat articles, maybe 'Showcase'?
 	// return 'interactiveTopHat';
 	if (format.display === ArticleDisplay.Immersive) {
 		if (
