@@ -1028,7 +1028,6 @@ const bareElements = new Set<FEElement['_type']>([
 	'model.dotcomrendering.pageElements.TextBlockElement',
 	'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
 	'model.dotcomrendering.pageElements.InteractiveBlockElement',
-	'model.dotcomrendering.pageElements.InteractiveAtomBlockElement',
 ]);
 
 // RenderArticleElement is a wrapper for renderElement that wraps elements in a
@@ -1091,12 +1090,14 @@ export const RenderArticleElement = ({
 		idApiUrl,
 	});
 
+	const isInteractiveAtomInInteractiveGrid =
+		format.design === ArticleDesign.Interactive &&
+		articleArrangement !== undefined &&
+		element._type ===
+			'model.dotcomrendering.pageElements.InteractiveAtomBlockElement';
+
 	const needsFigure =
-		!bareElements.has(element._type) ||
-		(format.design === ArticleDesign.Interactive &&
-			articleArrangement === undefined &&
-			element._type ===
-				'model.dotcomrendering.pageElements.InteractiveAtomBlockElement');
+		!bareElements.has(element._type) && !isInteractiveAtomInInteractiveGrid;
 
 	const role =
 		'role' in element
