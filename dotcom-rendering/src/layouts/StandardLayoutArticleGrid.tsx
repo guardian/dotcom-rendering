@@ -231,15 +231,14 @@ export const StandardLayoutArticleGrid = ({
 	const topHatTestingPage = 'p/x4zt8y';
 	const layoutType =
 		article.config.shortUrlId === topHatTestingPage
-			? 'interactiveTopHatFull'
+			? 'interactiveTopHat'
 			: getLayoutType(format, mainMediaOrientation);
 
 	const setCentreRule = (gridLayout: LayoutType) => {
 		if (
 			isLabs ||
 			gridLayout === 'interactiveStandard' ||
-			gridLayout === 'interactiveTopHatLite' ||
-			gridLayout === 'interactiveTopHatFull'
+			gridLayout === 'interactiveTopHat'
 		) {
 			return undefined;
 		}
@@ -265,9 +264,8 @@ export const StandardLayoutArticleGrid = ({
 	const isImmersivePortrait = layoutType === 'immersivePortrait';
 	const isImmersiveLandscape = layoutType === 'immersiveLandscape';
 	const isImmersive = isImmersivePortrait || isImmersiveLandscape;
-	const isInteractiveTopHat =
-		layoutType === 'interactiveTopHatLite' ||
-		layoutType === 'interactiveTopHatFull';
+
+	const isInteractiveTopHat = layoutType === 'interactiveTopHat';
 
 	const isFilterArticle = hasFilterTag(article.tags);
 	const tableOfContentsStyle =
@@ -704,7 +702,7 @@ export const StandardLayoutArticleGrid = ({
 						css`
 							z-index: ${getZIndex('meta')};
 						`,
-					layoutType === 'interactiveTopHatFull' &&
+					layoutType === 'interactiveTopHat' &&
 						css`
 							${topHatFurnitureBackgroundStyles}
 							padding-bottom: 10px;
@@ -714,7 +712,7 @@ export const StandardLayoutArticleGrid = ({
 				{format.display !== ArticleDisplay.Immersive &&
 					format.design !== ArticleDesign.Audio &&
 					layoutType !== 'immersivePortrait' &&
-					!isInteractiveTopHat && (
+					layoutType !== 'interactiveTopHat' && (
 						<div
 							css={[
 								(layoutType === 'picture' ||
@@ -990,9 +988,7 @@ export const StandardLayoutArticleGrid = ({
 							grid-column: centre-column-start;
 							grid-row: ${layoutType === 'interactiveStandard'
 								? '1 / 5'
-								: layoutType === 'interactiveTopHatFull'
-									? '8'
-									: '7 / span 2'};
+								: layoutType === 'interactiveTopHat' && '8'};
 							position: relative;
 
 							&::before {

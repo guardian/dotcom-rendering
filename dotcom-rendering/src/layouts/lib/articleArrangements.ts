@@ -14,8 +14,7 @@ export type LayoutType =
 	| 'picture'
 	| 'comment'
 	| 'interactiveStandard'
-	| 'interactiveTopHatLite'
-	| 'interactiveTopHatFull'
+	| 'interactiveTopHat'
 	| 'immersiveLandscape'
 	| 'immersivePortrait';
 
@@ -332,37 +331,7 @@ const immersiveLandscapeCss: LayoutCssMap = {
 	},
 };
 
-const interactiveTopHatLiteCss: LayoutCssMap = {
-	title: {
-		mobile: 'grid-row: 2;',
-		tablet: 'grid-row: 2',
-	},
-	headline: {
-		mobile: 'grid-row: 3;',
-		tablet: 'grid-row: 3;',
-	},
-	standfirst: {
-		mobile: 'grid-row: 4;',
-		tablet: 'grid-row: 4;',
-	},
-	media: {
-		mobile: `grid-row: 1 / span 6; ${grid.column.all}`,
-		tablet: `grid-row: 1 / span 6; ${grid.column.all}`,
-	},
-	meta: {
-		mobile: 'grid-row: 7;',
-		tablet: 'grid-row: 7;',
-	},
-	body: {
-		mobile: 'grid-row: 8;',
-		tablet: 'grid-row: 8;',
-	},
-	'right-column': {
-		desktop: `grid-row: 7 / span 2; ${grid.column.right};`,
-	},
-};
-
-const interactiveTopHatFullCss: LayoutCssMap = {
+const interactiveTopHatCss: LayoutCssMap = {
 	title: {
 		mobile: 'grid-row: 2;',
 		tablet: 'grid-row: 2;',
@@ -398,8 +367,7 @@ const layoutCssMaps: Record<LayoutType, LayoutCssMap> = {
 	picture: pictureCss,
 	comment: commentCss,
 	interactiveStandard: standardCss,
-	interactiveTopHatLite: interactiveTopHatLiteCss,
-	interactiveTopHatFull: interactiveTopHatFullCss,
+	interactiveTopHat: interactiveTopHatCss,
 	immersiveLandscape: immersiveLandscapeCss,
 	immersivePortrait: immersivePortraitCss,
 };
@@ -452,8 +420,7 @@ export const getLayoutType = (
 	format: ArticleFormat,
 	mainMediaOrientation: 'portrait' | 'landscape' | 'square',
 ): LayoutType => {
-	// return 'interactiveTopHatLite';
-	// return 'interactiveTopHatFull';
+	// return 'interactiveTopHat';
 	if (format.display === ArticleDisplay.Immersive) {
 		if (
 			mainMediaOrientation === 'portrait' ||
