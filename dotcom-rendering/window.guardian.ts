@@ -7,6 +7,7 @@ import type {
 } from '@guardian/consent-manager';
 import type ophan from '@guardian/ophan-tracker-js';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/types';
+import type { Inline1Props } from '@guardian/support-dotcom-components/dist/shared/types/props/inline1';
 import type { google } from './src/components/YoutubeAtom/ima';
 import type { DailyArticleHistory } from './src/lib/dailyArticleCount';
 import type { ReaderRevenueDevUtils } from './src/lib/readerRevenueDevUtils';
@@ -64,6 +65,9 @@ declare global {
 		google?: typeof google;
 		YT?: typeof YT;
 		onYouTubeIframeAPIReady?: () => void;
+	}
+	interface WindowEventMap {
+		'commercial.sdc-render': CustomEvent<{ props: Inline1Props }>;
 	}
 }
 /* ~ this line is required as per TypeScript's global-modifying-module.d.ts instructions */

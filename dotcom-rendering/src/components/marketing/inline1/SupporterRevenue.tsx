@@ -103,7 +103,7 @@ const imageStyles = css`
 	object-fit: cover;
 `;
 
-const SupporterRevenue: ReactComponent<Inline1Props> = ({ variant }) => {
+export const SupporterRevenue: ReactComponent<Inline1Props> = ({ variant }) => {
 	if (variant.message.type != 'Inline1SupportMessage') {
 		return;
 	}
@@ -147,5 +147,3 @@ const SupporterRevenue: ReactComponent<Inline1Props> = ({ variant }) => {
 		</section>
 	);
 };
-
-export default SupporterRevenue;
