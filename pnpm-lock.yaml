@@ -521,8 +521,8 @@ importers:
         specifier: 29.1.0
         version: 29.1.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1)(supports-color@8.1.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@5.2.0)(tslib@2.6.2)(typescript@6.0.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1)(supports-color@8.1.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@6.0.3))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@6.0.3)
       '@guardian/support-dotcom-components':
-        specifier: 11.1.2
-        version: 11.1.2(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@5.2.0)(tslib@2.6.2)(typescript@6.0.3))(@guardian/ophan-tracker-js@5.2.0)(zod@4.6.6)
+        specifier: 11.2.0
+        version: 11.2.0(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@5.2.0)(tslib@2.6.2)(typescript@6.0.3))(@guardian/newsletter-types@5.0.0(tslib@2.6.2)(typescript@6.0.3))(@guardian/ophan-tracker-js@5.2.0)(zod@4.6.6)
       '@guardian/tsconfig':
         specifier: 'catalog:'
         version: 1.0.1
@@ -2263,6 +2263,15 @@ packages:
       typescript:
         optional: true
 
+  '@guardian/newsletter-types@5.0.0':
+    resolution: {integrity: sha512-00bky7f8YteH25BQ26vwUe/Puy6Z6DGvDN3XQ+h40P0HvVKJ6ZZnVDtZd6GEruS0nKT+4LwBMPV7GH4T/0m+oQ==}
+    peerDependencies:
+      tslib: ^2.8.1
+      typescript: ~6.0.3
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
   '@guardian/ophan-tracker-js@5.2.0':
     resolution: {integrity: sha512-gxV1hXjunmilqVaJC5Z0TDO1+xlrAsrS0pq9iPff/ETSbhwCGM0+F6CpqqGRk0vqL+pK9QeX+BUzReFyhCAKgA==}
     engines: {node: '>=16'}
@@ -2329,10 +2338,11 @@ packages:
       typescript:
         optional: true
 
-  '@guardian/support-dotcom-components@11.1.2':
-    resolution: {integrity: sha512-gPR6GAzKBdRqwmVV4gD5F03TTXskx/wDt8k5qI7Pa0NzQJUtlOxgQ5Yy6XjuwcVQ+uDgmJKjsNi7Sc5gnkeyVQ==}
+  '@guardian/support-dotcom-components@11.2.0':
+    resolution: {integrity: sha512-1JlgeMBeNLKjr7inpFtQzLQCFXx8seAEt372hMxcSKe5101K4qSXrGjAzE925hF6C2TpvlxZiRmypCDvRjgr8g==}
     peerDependencies:
       '@guardian/libs': ^22.0.0
+      '@guardian/newsletter-types': 5.0.0
       '@guardian/ophan-tracker-js': 2.8.0
       zod: ^4.1.12
 
@@ -11554,6 +11564,12 @@ snapshots:
     optionalDependencies:
       typescript: 6.0.3
 
+  '@guardian/newsletter-types@5.0.0(tslib@2.6.2)(typescript@6.0.3)':
+    dependencies:
+      tslib: 2.6.2
+    optionalDependencies:
+      typescript: 6.0.3
+
   '@guardian/ophan-tracker-js@5.2.0':
     dependencies:
       '@guardian/tsconfig': 1.0.1
@@ -11602,9 +11618,10 @@ snapshots:
       react: 18.3.1
       typescript: 6.0.3
 
-  '@guardian/support-dotcom-components@11.1.2(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@5.2.0)(tslib@2.6.2)(typescript@6.0.3))(@guardian/ophan-tracker-js@5.2.0)(zod@4.6.6)':
+  '@guardian/support-dotcom-components@11.2.0(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@5.2.0)(tslib@2.6.2)(typescript@6.0.3))(@guardian/newsletter-types@5.0.0(tslib@2.6.2)(typescript@6.0.3))(@guardian/ophan-tracker-js@5.2.0)(zod@4.6.6)':
     dependencies:
       '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@5.2.0)(tslib@2.6.2)(typescript@6.0.3)
+      '@guardian/newsletter-types': 5.0.0(tslib@2.6.2)(typescript@6.0.3)
       '@guardian/ophan-tracker-js': 5.2.0
       zod: 4.6.6
 
