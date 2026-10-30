@@ -19,7 +19,18 @@ jest.mock('../../lib/fetchEmail', () => ({
 	lazyFetchEmailWithTimeout: jest.fn(),
 }));
 
+jest.mock('../../lib/identity', () => ({
+	getAuthStatus: jest.fn(),
+}));
+
+jest.mock('../../lib/newsletterSubscriptionCache', () => ({
+	fetchNewsletterSubscriptions: jest.fn(),
+	getCachedSubscriptions: jest.fn(),
+	shouldInvalidateCache: jest.fn(),
+}));
+
 const mockGetCookie = jest.mocked(getCookie);
+mockGetCookie.mockReturnValue(null);
 
 const buildBannerPayload = async (
 	inAuxiaVariant: boolean,
@@ -47,6 +58,7 @@ const buildBannerPayload = async (
 		userConsent,
 		hideSupportMessagingForUser: false,
 		inAuxiaVariant,
+		userSubscriptions: [],
 	});
 };
 
@@ -71,6 +83,54 @@ describe('getAuxiaRolloutMvtId', () => {
 });
 
 describe('banner request targeting payload', () => {
+	it.each([[[6042, 1234]], [[]]])(
+		'includes user subscriptions in the SDC payload: %j',
+		async (userSubscriptions: number[]) => {
+			const payload = await buildPayload({
+				isSignedIn: false,
+				contentType: 'Article',
+				shouldHideReaderRevenue: false,
+				isMinuteArticle: false,
+				isPaidContent: false,
+				isSensitive: false,
+				tags: [],
+				contributionsServiceUrl: 'https://contributions.example.com',
+				countryCode: 'GB',
+				optedOutOfArticleCount: false,
+				asyncArticleCounts: Promise.resolve(undefined),
+				userConsent: true,
+				hideSupportMessagingForUser: false,
+				userSubscriptions,
+			});
+
+			expect(payload.targeting).toHaveProperty(
+				'userSubscriptions',
+				userSubscriptions,
+			);
+		},
+	);
+
+	it('sends an empty subscription list when there are no subscriptions', async () => {
+		const payload = await buildPayload({
+			isSignedIn: true,
+			contentType: 'Article',
+			shouldHideReaderRevenue: false,
+			isMinuteArticle: false,
+			isPaidContent: false,
+			isSensitive: false,
+			tags: [],
+			contributionsServiceUrl: 'https://contributions.example.com',
+			countryCode: 'GB',
+			optedOutOfArticleCount: false,
+			asyncArticleCounts: Promise.resolve(undefined),
+			userConsent: true,
+			hideSupportMessagingForUser: false,
+			userSubscriptions: [],
+		});
+
+		expect(payload.targeting).toHaveProperty('userSubscriptions', []);
+	});
+
 	it.each([
 		['valid MVT ID', '123456', 123456],
 		['missing MVT ID', null, undefined],
