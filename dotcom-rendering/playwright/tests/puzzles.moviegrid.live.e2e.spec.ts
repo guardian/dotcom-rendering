@@ -71,6 +71,15 @@ test.describe('Live MovieGrid frontend integration', () => {
 					exact: true,
 				}),
 			).toBeVisible();
+			await expect(
+				page.getByRole('link', {
+					name: 'Prefer the Guardian on Google',
+					exact: true,
+				}),
+			).toHaveAttribute(
+				'href',
+				'https://www.google.com/preferences/source?q=theguardian.com',
+			);
 			const selector = `iframe[title="${title}"]`;
 			const iframe = page.locator(selector);
 			await expect(iframe).toHaveCSS('min-height', `${desktopHeight}px`);

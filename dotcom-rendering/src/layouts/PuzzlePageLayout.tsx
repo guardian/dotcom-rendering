@@ -616,6 +616,7 @@ export const PuzzlePageLayout = ({
 										}
 										shortUrlId={config.shortUrlId}
 										hidePreferredSourceOnPrint={true}
+										isPuzzlePage={true}
 									/>
 								</div>
 							</GridItem>

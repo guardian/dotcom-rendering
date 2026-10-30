@@ -103,6 +103,17 @@ describe('PuzzlePageLayout', () => {
 				'href',
 				'/puzzles-and-games/trivia-and-quizzes/archive',
 			);
+			const preferredSource = screen.getByRole('link', {
+				name: 'Prefer the Guardian on Google',
+			});
+			expect(preferredSource).toHaveAttribute(
+				'href',
+				'https://www.google.com/preferences/source?q=theguardian.com',
+			);
+			expect(preferredSource).toHaveAttribute(
+				'data-print-layout',
+				'hide',
+			);
 			expect(
 				screen.queryByRole('button', { name: /print/i }),
 			).not.toBeInTheDocument();
