@@ -62,7 +62,7 @@ const stretchLines = css`
 	}
 `;
 
-const landscapeImmersiveMediaBelowDesktop = css`
+const immersiveMediaBelowTablet = css`
 	${until.tablet} {
 		position: relative;
 
@@ -212,6 +212,12 @@ export const StandardLayoutArticleGrid = ({
 	const isMainMediaAtom =
 		mainMediaType ===
 		'model.dotcomrendering.pageElements.MediaAtomBlockElement';
+	const isMainMediaLoopOrCinemagraph =
+		isMainMediaAtom &&
+		(mainMedia.videoPlayerFormat === 'Loop' ||
+			mainMedia.videoPlayerFormat === 'Cinemagraph');
+	const usesImmersiveImageProportions =
+		isMainMediaImage || isMainMediaLoopOrCinemagraph;
 
 	const mainMediaAspectRatio = isMainMediaImage
 		? mainMedia.media.allImages[0]?.fields.aspectRatio
@@ -225,7 +231,7 @@ export const StandardLayoutArticleGrid = ({
 			: 'landscape';
 	const immersiveHeaderHeight =
 		minHeaderHeightPx + (isLabs ? LABS_HEADER_HEIGHT : 0);
-	const immersiveMediaRowHeight = isMainMediaImage
+	const immersiveMediaRowHeight = usesImmersiveImageProportions
 		? 'auto'
 		: `max(calc(80vh - ${immersiveHeaderHeight}px), calc(25rem - ${immersiveHeaderHeight}px))`;
 
@@ -272,7 +278,7 @@ export const StandardLayoutArticleGrid = ({
 		isImmersive && isFilterArticle ? 'horizontal' : 'default';
 
 	const hasLabsPortraitImage =
-		isLabs && isImmersivePortrait && isMainMediaImage;
+		isLabs && isImmersivePortrait && usesImmersiveImageProportions;
 
 	const ageWarning = getAgeWarning(
 		article.tags,
@@ -337,20 +343,16 @@ export const StandardLayoutArticleGrid = ({
 								auto
 							);
 					`,
-				isImmersivePortrait &&
-					css`
-						${from.desktop} {
-							grid-template-rows: 0.25fr 1fr auto;
-						}
-					`,
-				isImmersiveLandscape &&
+				isImmersive &&
 					css`
 						${until.tablet} {
 							--immersive-headline-overlap: ${ageWarning != null
 								? '96px'
 								: '24px'};
 						}
-
+					`,
+				isImmersiveLandscape &&
+					css`
 						${from.desktop} {
 							grid-template-rows: auto auto ${ageWarning != null
 									? '130px'
@@ -372,7 +374,7 @@ export const StandardLayoutArticleGrid = ({
 								${from.tablet} {
 									align-self: start;
 									${(!isImmersiveLandscape ||
-										!isMainMediaImage) &&
+										!usesImmersiveImageProportions) &&
 									mainMediaAspectRatio != null &&
 									`aspect-ratio: ${mainMediaAspectRatio.replace(':', ' / ')};`}
 									${isImmersiveLandscape &&
@@ -384,8 +386,7 @@ export const StandardLayoutArticleGrid = ({
 								css`
 									aspect-ratio: 4 / 5;
 								`}
-								${isImmersiveLandscape &&
-								landscapeImmersiveMediaBelowDesktop}
+								${isImmersive && immersiveMediaBelowTablet}
 
 								${hasLabsPortraitImage &&
 								css`
@@ -406,7 +407,7 @@ export const StandardLayoutArticleGrid = ({
 							`
 						: undefined,
 					isImmersiveLandscape &&
-						isMainMediaImage &&
+						usesImmersiveImageProportions &&
 						css`
 							position: relative;
 							aspect-ratio: 4 / 5;
@@ -425,6 +426,13 @@ export const StandardLayoutArticleGrid = ({
 								height: calc(
 									100vh - ${immersiveHeaderHeight}px
 								);
+							}
+						`,
+					isImmersivePortrait &&
+						usesImmersiveImageProportions &&
+						css`
+							> div {
+								height: 100%;
 							}
 						`,
 					displayAvatarUrl && layoutType === 'picture'
@@ -467,7 +475,7 @@ export const StandardLayoutArticleGrid = ({
 				layoutType={layoutType}
 				element="aside"
 				css={[
-					isImmersiveLandscape &&
+					isImmersive &&
 						css`
 							z-index: ${getZIndex('articleHeadline')};
 						`,
@@ -516,7 +524,7 @@ export const StandardLayoutArticleGrid = ({
 				area="headline"
 				layoutType={layoutType}
 				css={[
-					isImmersiveLandscape &&
+					isImmersive &&
 						css`
 							z-index: ${getZIndex('articleHeadline')};
 
@@ -536,7 +544,13 @@ export const StandardLayoutArticleGrid = ({
 								}
 							}
 
-							${until.desktop} {
+							${until.tablet} {
+								padding-bottom: ${space[8]}px;
+							}
+						`,
+					isImmersiveLandscape &&
+						css`
+							${between.tablet.and.desktop} {
 								padding-bottom: ${space[8]}px;
 							}
 
