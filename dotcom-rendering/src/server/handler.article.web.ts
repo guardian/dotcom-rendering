@@ -60,6 +60,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		switches,
 		keywordIds,
 		shouldHideAds,
+		stage,
 	} =
 		// The content if body is not checked
 		body as FEBlocksRequest;
@@ -74,6 +75,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		pageId,
 		serverSideABTests,
 		switches,
+		stage,
 	});
 	const html = renderBlocks({
 		blocks: enhancedBlocks,
@@ -93,6 +95,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		serverSideABTests,
 		keywordIds,
 		shouldHideAds,
+		stage,
 	});
 
 	res.status(200).send(html);
