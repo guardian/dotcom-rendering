@@ -15,6 +15,10 @@ or return 404/502 before rendering. Deploy this DCR support before the frontend 
 Hub progress enrichment also preserves crossword `gameUrl` values exactly, including
 absolute links and dated Genius article paths. Other puzzle card destinations are unchanged.
 
+Film reveal and On the ball hub cards require both `puzzles-new-hub-v1` and
+`puzzles-new-hub-v2`. V1-only payloads omit them, including featured placements;
+existing V1 puzzles are unchanged. Local development retains its gate bypass.
+
 ## What is implemented
 
 Puzzle Page is a single, generic page template for the Guardian's
