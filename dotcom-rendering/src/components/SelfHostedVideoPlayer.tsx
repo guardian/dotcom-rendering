@@ -170,10 +170,9 @@ export type Props = {
  * Note that in React 19, forwardRef is no longer necessary:
  * https://react.dev/reference/react/forwardRef
  *
- * NB: When DEVELOPING LOCALLY, use `https://r.thegulocal.com/` instead of `localhost`.
- * This is required because CORS restrictions prevent accessing the subtitles and video file from localhost.
- * Alternatively, you can remove `crossOrigin="anonymous"` from the video element, which will not enable
- * CORS. You can then develop using localhost, but note that subtitles will not work in this scenario.
+ * Local development omits the crossorigin attribute because uploads.guim.co.uk
+ * does not allow requests from localhost. Subtitles therefore remain unavailable
+ * locally, while production keeps anonymous CORS enabled.
  */
 export const SelfHostedVideoPlayer = forwardRef(
 	(
@@ -252,7 +251,11 @@ export const SelfHostedVideoPlayer = forwardRef(
 						showSubtitles && subtitleFontStyles(subtitleSize),
 						showCustomSubtitles && hideNativeSubtitlesStyles,
 					]}
-					crossOrigin="anonymous"
+					crossOrigin={
+						process.env.NODE_ENV === 'development'
+							? undefined
+							: 'anonymous'
+					}
 					ref={ref}
 					tabIndex={0}
 					data-testid="self-hosted-video-player"

@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
-import { space } from '@guardian/source/foundations';
+import { space, until } from '@guardian/source/foundations';
 import type { FEAspectRatio } from '../frontend/feFront';
 import { isInteractive } from '../layouts/lib/interactiveLegacyStyling';
-import type { ArticleFormat } from '../lib/articleFormat';
+import { ArticleDisplay, type ArticleFormat } from '../lib/articleFormat';
 import {
 	extractValidSourcesFromAssets,
 	getAspectRatioFromSources,
@@ -15,6 +15,32 @@ import { SelfHostedVideo } from './SelfHostedVideo.island';
 
 const containerStyles = css`
 	margin-bottom: ${space[3]}px;
+`;
+
+const immersiveMainMediaStyles = css`
+	&& {
+		height: 100%;
+		margin-bottom: 0;
+
+		> gu-island,
+		.video-container,
+		.video-container > div,
+		.video-container > div > div {
+			display: block;
+			height: 100%;
+			aspect-ratio: auto;
+		}
+
+		video {
+			height: 100%;
+			aspect-ratio: auto;
+			object-fit: cover;
+
+			${until.tablet} {
+				object-position: center top;
+			}
+		}
+	}
 `;
 
 type SelfHostedVideoInArticleProps = {
@@ -43,13 +69,23 @@ export const SelfHostedVideoInArticle = ({
 	const aspectRatio = getAspectRatioFromSources(sources);
 	const isVerticalVideo = aspectRatio < 1;
 	const firstVideoSource = sources[0];
+	const useImmersiveMainMediaStyles =
+		isMainMedia &&
+		format.display === ArticleDisplay.Immersive &&
+		(videoStyle === 'Loop' || videoStyle === 'Cinemagraph');
 
 	if (!posterImageUrl) {
 		return null;
 	}
 
 	return (
-		<div css={containerStyles} data-spacefinder-role="inline">
+		<div
+			css={[
+				containerStyles,
+				useImmersiveMainMediaStyles && immersiveMainMediaStyles,
+			]}
+			data-spacefinder-role="inline"
+		>
 			<Island priority="critical" defer={{ until: 'visible' }}>
 				<SelfHostedVideo
 					atomId={element.id}
@@ -78,7 +114,9 @@ export const SelfHostedVideoInArticle = ({
 					role={role}
 					preventAutoplay={videoStyle === 'Default'}
 					restrictHeightOnDesktop={
-						isVerticalVideo && !isInteractive(format.design)
+						!useImmersiveMainMediaStyles &&
+						isVerticalVideo &&
+						!isInteractive(format.design)
 					}
 				/>
 			</Island>
