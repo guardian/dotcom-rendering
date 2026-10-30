@@ -1,4 +1,7 @@
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
+import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type {
+	BannerProps,
 	ConfigurableDesign,
 	HexColour,
 	TickerName,
@@ -6,7 +9,7 @@ import type {
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import type { BannerRenderProps } from '../../common/types';
-import { BannerComponent } from '../exports';
+import { BannerComponent, BannerUnvalidated } from '../exports';
 
 jest.mock('../../../../../lib/useMatchMedia', () => ({
 	useMatchMedia: jest.fn(() => true),
@@ -268,5 +271,174 @@ describe('DesignableBanner V2', () => {
 		// Should not be in the document
 		expect(screen.queryByText(/You've read/)).not.toBeInTheDocument();
 		expect(screen.queryByText(/4/)).not.toBeInTheDocument();
+	});
+});
+
+describe('DesignableBanner tracking through BannerWrapper', () => {
+	const bannerProps: BannerProps = {
+		tracking: {
+			...mockProps.tracking,
+			componentType: 'ACQUISITIONS_ENGAGEMENT_BANNER',
+		},
+		bannerChannel: mockProps.bannerChannel,
+		articleCounts: mockProps.articleCounts,
+		design: mockProps.design,
+		countryCode: 'GB',
+		content: {
+			heading: 'Support journalism',
+			paragraphs: ['Reader support makes our journalism possible.'],
+			cta: {
+				text: 'Support us',
+				baseUrl: 'https://support.theguardian.com/contribute',
+			},
+			secondaryCta: {
+				type: SecondaryCtaType.Custom,
+				cta: {
+					text: 'Other ways to support',
+					baseUrl: 'https://support.theguardian.com',
+				},
+			},
+		},
+	};
+	const primaryClickEvent: ComponentEvent = {
+		action: 'CLICK',
+		component: {
+			id: 'designable-banner : cta',
+			componentType: 'ACQUISITIONS_ENGAGEMENT_BANNER',
+			campaignCode: 'campaign',
+			products: [],
+			labels: [],
+		},
+		abTest: { name: 'test', variant: 'variant' },
+	};
+
+	it.each([
+		{ scenario: 'standard CTA', cardDefault: undefined },
+		{ scenario: 'choice cards without a selection', cardDefault: false },
+		{ scenario: 'choice cards with a selection', cardDefault: true },
+	])('submits one Ophan CLICK for $scenario', ({ cardDefault }) => {
+		const submitComponentEvent = jest
+			.fn<Promise<void>, [ComponentEvent]>()
+			.mockResolvedValue(undefined);
+		render(
+			<BannerUnvalidated
+				{...bannerProps}
+				submitComponentEvent={submitComponentEvent}
+				design={
+					cardDefault === undefined
+						? bannerProps.design
+						: {
+								...bannerProps.design!,
+								visual: { kind: 'ChoiceCards' },
+							}
+				}
+				choiceCardsSettings={
+					cardDefault === undefined
+						? undefined
+						: {
+								choiceCards: [
+									{
+										product: {
+											supportTier: 'SupporterPlus',
+											ratePlan: 'Monthly',
+										},
+										destination: 'Checkout',
+										label: 'Monthly support',
+										isDefault: cardDefault,
+										benefits: [],
+									},
+								],
+							}
+				}
+			/>,
+		);
+		if (cardDefault !== undefined) {
+			expect(screen.getByRole('radio')).toHaveProperty(
+				'checked',
+				cardDefault,
+			);
+		}
+		// Exclude the INSERT event emitted when the banner mounts.
+		submitComponentEvent.mockClear();
+
+		fireEvent.click(
+			screen.getByRole('link', {
+				name: cardDefault === undefined ? 'Support us' : 'Continue',
+			}),
+		);
+
+		expect(submitComponentEvent).toHaveBeenCalledTimes(1);
+		expect(submitComponentEvent).toHaveBeenCalledWith(primaryClickEvent);
+		expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+	});
+
+	it.each([
+		{
+			role: 'link',
+			name: 'Other ways to support',
+			component: 'secondary-cta',
+		},
+		{ role: 'button', name: 'Close', component: 'close' },
+	])('submits one Ophan CLICK for $name', ({ role, name, component }) => {
+		const submitComponentEvent = jest
+			.fn<Promise<void>, [ComponentEvent]>()
+			.mockResolvedValue(undefined);
+		render(
+			<BannerUnvalidated
+				{...bannerProps}
+				submitComponentEvent={submitComponentEvent}
+			/>,
+		);
+		submitComponentEvent.mockClear();
+
+		fireEvent.click(screen.getByRole(role, { name }));
+
+		expect(submitComponentEvent).toHaveBeenCalledTimes(1);
+		expect(submitComponentEvent).toHaveBeenCalledWith({
+			...primaryClickEvent,
+			component: {
+				...primaryClickEvent.component,
+				id: `designable-banner : ${component}`,
+			},
+		});
+		expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+	});
+
+	it('tracks collapse and expand once while retaining the banner', () => {
+		const submitComponentEvent = jest
+			.fn<Promise<void>, [ComponentEvent]>()
+			.mockResolvedValue(undefined);
+		render(
+			<BannerUnvalidated
+				{...bannerProps}
+				isCollapsible={true}
+				submitComponentEvent={submitComponentEvent}
+			/>,
+		);
+		submitComponentEvent.mockClear();
+
+		fireEvent.click(
+			screen.getByRole('button', { name: 'Collapse banner' }),
+		);
+		expect(
+			screen.queryByText('Reader support makes our journalism possible.'),
+		).not.toBeInTheDocument();
+		fireEvent.click(screen.getByRole('button', { name: 'Expand banner' }));
+		expect(
+			screen.getByText('Reader support makes our journalism possible.'),
+		).toBeInTheDocument();
+
+		expect(submitComponentEvent.mock.calls).toEqual(
+			['collapse', 'expand'].map((component) => [
+				{
+					...primaryClickEvent,
+					component: {
+						...primaryClickEvent.component,
+						id: `designable-banner : ${component}`,
+					},
+				},
+			]),
+		);
+		expect(screen.getByRole('alert')).toBeInTheDocument();
 	});
 });

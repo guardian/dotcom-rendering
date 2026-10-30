@@ -24,6 +24,59 @@ type LinkParams = {
 	acquisitionData: string;
 };
 
+const trackingParamNames: (keyof LinkParams)[] = [
+	'REFPVID',
+	'INTCMP',
+	'acquisitionData',
+];
+
+const singleValueTrackingParamNames = new Set<string>(trackingParamNames);
+
+const getQueryParams = (url: string): URLSearchParams => {
+	const queryStart = url.indexOf('?');
+	const hashStart = url.indexOf('#');
+	if (queryStart === -1 || (hashStart !== -1 && hashStart < queryStart)) {
+		return new URLSearchParams();
+	}
+	const queryEnd = hashStart === -1 ? url.length : hashStart;
+	return new URLSearchParams(url.slice(queryStart + 1, queryEnd));
+};
+
+const deduplicateQueryParams = (url: string): string => {
+	const hashIndex = url.indexOf('#');
+	const urlWithoutHash = hashIndex === -1 ? url : url.slice(0, hashIndex);
+	const hash = hashIndex === -1 ? '' : url.slice(hashIndex);
+	const queryStart = urlWithoutHash.indexOf('?');
+	if (queryStart === -1) return url;
+
+	const queryString = urlWithoutHash.slice(queryStart + 1);
+	const seenPairs = new Set<string>();
+	const seenTrackingParams = new Set<string>();
+	const deduplicatedQuery = queryString
+		.split('&')
+		.filter((param) => {
+			if (!param) return false;
+
+			const parsedParam = new URLSearchParams(param);
+			const name = parsedParam.keys().next().value;
+			if (name === undefined) return false;
+
+			if (singleValueTrackingParamNames.has(name)) {
+				if (seenTrackingParams.has(name)) return false;
+				seenTrackingParams.add(name);
+				return true;
+			}
+
+			const pair = JSON.stringify([name, parsedParam.get(name)]);
+			if (seenPairs.has(pair)) return false;
+			seenPairs.add(pair);
+			return true;
+		})
+		.join('&');
+
+	return `${urlWithoutHash.slice(0, queryStart)}?${deduplicatedQuery}${hash}`;
+};
+
 type AbTestObject = {
 	name: string;
 	variant: string;
@@ -93,7 +146,15 @@ const addTrackingParams = (baseUrl: string, params: Tracking): string => {
 		params.targetingAbTest,
 	);
 	const acquisitionData = encodeAcquisitionsData(params, abTests);
-	const queryString = generateQueryString(params, acquisitionData);
+	const existingQueryParams = getQueryParams(baseUrl);
+	const queryString = generateQueryString(params, acquisitionData)
+		.split('&')
+		.filter((param) => {
+			const paramName = param.split('=', 1)[0] ?? '';
+			return !existingQueryParams.has(paramName);
+		})
+		.join('&');
+	if (!queryString) return baseUrl;
 	const alreadyHasQueryString = baseUrl.includes('?');
 	return `${baseUrl}${alreadyHasQueryString ? '&' : '?'}${queryString}`;
 };
@@ -134,8 +195,26 @@ export const addAbandonedBasketAndTrackingParamsToUrl = (
 
 const addPromoCodesToUrl = (url: string, promoCodes: string[]): string => {
 	if (!promoCodes.length) return url;
+	const existingPromoCodeCounts = new Map<string, number>();
+	const seenPromoCodes = new Set<string>();
+	for (const code of getQueryParams(url).getAll('promoCode')) {
+		existingPromoCodeCounts.set(
+			code,
+			(existingPromoCodeCounts.get(code) ?? 0) + 1,
+		);
+	}
+	const promoCodesToAdd = promoCodes.filter((code) => {
+		if (seenPromoCodes.has(code)) return false;
+		seenPromoCodes.add(code);
+
+		const existingCount = existingPromoCodeCounts.get(code) ?? 0;
+		if (existingCount === 0) return true;
+		existingPromoCodeCounts.set(code, existingCount - 1);
+		return false;
+	});
+	if (!promoCodesToAdd.length) return url;
 	const separator = url.includes('?') ? '&' : '?';
-	const promoParams = promoCodes
+	const promoParams = promoCodesToAdd
 		.map((code) => `promoCode=${encodeURIComponent(code)}`)
 		.join('&');
 	return `${url}${separator}${promoParams}`;
@@ -165,7 +244,7 @@ export const enrichSupportUrl = ({
 
 	const withTracking = addTrackingParams(urlWithRegion, tracking);
 
-	return addPromoCodesToUrl(withTracking, promoCodes);
+	return deduplicateQueryParams(addPromoCodesToUrl(withTracking, promoCodes));
 };
 
 const hrefRegex = /href="(.*?)"/g;

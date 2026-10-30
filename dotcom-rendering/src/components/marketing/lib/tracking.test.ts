@@ -56,6 +56,81 @@ describe('enrichSupportUrl', () => {
 			'https://support.theguardian.com/uk/contribute?REFPVID=123&INTCMP=test&acquisitionData=%7B%22source%22%3A%22WEB%22%2C%22componentId%22%3A%22test%22%2C%22componentType%22%3A%22ACQUISITIONS_EPIC%22%2C%22campaignCode%22%3A%22test%22%2C%22abTests%22%3A%5B%7B%22name%22%3A%22test%22%2C%22variant%22%3A%22control%22%7D%5D%2C%22referrerPageviewId%22%3A%22123%22%2C%22referrerUrl%22%3A%22https%3A%2F%2Ftheguardian.com%22%2C%22isRemote%22%3Atrue%7D&promoCode=PROMO1&promoCode=PROMO2',
 		);
 	});
+
+	it('deduplicates existing query params and repeated promo codes', () => {
+		const result = enrichSupportUrl({
+			baseUrl:
+				'https://support.theguardian.com/contribute?REFPVID=base&REFPVID=duplicate&INTCMP=campaign&INTCMP=campaign&acquisitionData=data&acquisitionData=data&label=one&label=one&label=two&promoCode=EXISTING&promoCode=EXISTING',
+			tracking,
+			promoCodes: [
+				'NEW_FIRST',
+				'EXISTING',
+				'NEW_SECOND',
+				'NEW_FIRST',
+				'EXISTING',
+			],
+		});
+		const query = new URL(result).searchParams;
+
+		expect(query.getAll('REFPVID')).toEqual(['base']);
+		expect(query.getAll('INTCMP')).toEqual(['campaign']);
+		expect(query.getAll('acquisitionData')).toEqual(['data']);
+		expect(query.getAll('label')).toEqual(['one', 'two']);
+		expect(query.getAll('promoCode')).toEqual([
+			'EXISTING',
+			'NEW_FIRST',
+			'NEW_SECOND',
+		]);
+	});
+
+	it('preserves question marks in existing query values when adding promo codes', () => {
+		const result = enrichSupportUrl({
+			baseUrl:
+				'https://support.theguardian.com/contribute?promoCode=EXISTING?OTHER',
+			tracking,
+			promoCodes: ['EXISTING'],
+		});
+
+		expect(new URL(result).searchParams.getAll('promoCode')).toEqual([
+			'EXISTING?OTHER',
+			'EXISTING',
+		]);
+	});
+
+	it('adds a region to a support URL that already has tracking params', () => {
+		const result = enrichSupportUrl({
+			baseUrl:
+				'https://support.theguardian.com/contribute?REFPVID=base&INTCMP=campaign&acquisitionData=data',
+			tracking,
+			countryCode: 'GB',
+			promoCodes: [],
+		});
+		const url = new URL(result);
+
+		expect(url.pathname).toEqual('/uk/contribute');
+		expect(url.searchParams.getAll('REFPVID')).toEqual(['base']);
+		expect(url.searchParams.getAll('INTCMP')).toEqual(['campaign']);
+		expect(url.searchParams.getAll('acquisitionData')).toEqual(['data']);
+	});
+
+	it('does not duplicate parameters when an enriched support URL is enriched again', () => {
+		const params = {
+			tracking,
+			countryCode: 'GB',
+			promoCodes: ['PROMO1', 'PROMO2'],
+		};
+		const enrichedUrl = enrichSupportUrl({
+			baseUrl: 'https://support.theguardian.com/contribute',
+			...params,
+		});
+
+		const enrichedAgain = enrichSupportUrl({
+			baseUrl: enrichedUrl,
+			...params,
+		});
+
+		expect(enrichedAgain).toEqual(enrichedUrl);
+	});
 });
 
 describe('getChoiceCardUrl', () => {
