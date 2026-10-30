@@ -39,18 +39,6 @@ const immersiveGridMargins = css`
 	}
 `;
 
-const legacyImmersiveMargins = css`
-	max-width: 400px;
-	min-width: 200px;
-	margin-bottom: 4px;
-	${from.tablet} {
-		margin-left: 16px;
-	}
-	${from.leftCol} {
-		margin-left: 25px;
-	}
-`;
-
 const galleryStyles = css`
 	${grid.column.all}
 
@@ -91,9 +79,7 @@ export const ArticleTitle = ({
 			css={
 				format.display === ArticleDisplay.Immersive &&
 				format.design !== ArticleDesign.WeekendEssay
-					? layoutType == null
-						? legacyImmersiveMargins
-						: immersiveGridMargins
+					? immersiveGridMargins
 					: undefined
 			}
 		>
