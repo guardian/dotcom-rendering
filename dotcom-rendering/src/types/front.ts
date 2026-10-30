@@ -101,7 +101,7 @@ export type DCRFrontCard = {
 	mainMedia?: MainMedia;
 	embedUri?: string;
 	branding?: Branding;
-	slideshowImages?: DCRSlideshowImage[];
+	slideshowImages?: DCRSlideshowMedia[];
 	showVideo?: boolean;
 	uniqueId?: string;
 	serverTime?: number;
@@ -113,9 +113,28 @@ export type DCRFrontCard = {
 };
 
 export type DCRSlideshowImage = {
+	/**
+	 * Discriminant for slideshow media. Optional for backwards compatibility:
+	 * a slide without a `type` is treated as an image.
+	 */
+	type?: 'image';
 	imageSrc: string;
 	imageCaption?: string;
 };
+
+/**
+ * A self-hosted or YouTube video slide, played with the same players as video cards.
+ */
+export type DCRSlideshowVideo = {
+	type: 'video';
+	video: Extract<MainMedia, { type: 'SelfHostedVideo' | 'YoutubeVideo' }>;
+	caption?: string;
+};
+
+/**
+ * A single slide in a media slideshow, which may be an image or a video.
+ */
+export type DCRSlideshowMedia = DCRSlideshowImage | DCRSlideshowVideo;
 
 export type DCRSnapType = {
 	embedHtml?: string;

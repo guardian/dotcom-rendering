@@ -2,6 +2,7 @@ import { isUndefined } from '@guardian/libs';
 import type {
 	FEFrontCard,
 	FEMediaAtom,
+	FEMultimediaSlideshow,
 	FESupportingContent,
 } from '../frontend/feFront';
 import {
@@ -25,6 +26,8 @@ import type { Image } from '../types/content';
 import type {
 	DCRFrontCard,
 	DCRSlideshowImage,
+	DCRSlideshowMedia,
+	DCRSlideshowVideo,
 	DCRSupportingContent,
 	FrontEditorialTest,
 } from '../types/front';
@@ -460,6 +463,54 @@ export const decideReplacementMedia = (
 	return undefined;
 };
 
+// Same players and poster fallback as video cards; the self-hosted player needs a source and a poster.
+const decideSlideshowVideo = (
+	mediaAtom: FEMediaAtom,
+	caption?: string,
+	cardImage?: string,
+): DCRSlideshowVideo | undefined => {
+	const video = getActiveMediaAtom(mediaAtom, cardImage);
+	if (
+		video?.type === 'YoutubeVideo' ||
+		(video?.type === 'SelfHostedVideo' &&
+			video.sources.length > 0 &&
+			!!video.image.src)
+	) {
+		return { type: 'video', video, caption };
+	}
+
+	return undefined;
+};
+
+export const decideMultimediaSlideshow = (
+	multimediaSlideshowReplace: boolean,
+	multimediaSlideshow?: FEMultimediaSlideshow,
+	cardImage?: string,
+): DCRSlideshowMedia[] | undefined => {
+	if (!multimediaSlideshowReplace || !multimediaSlideshow) return undefined;
+
+	const slides = multimediaSlideshow.slides.flatMap(
+		({ content, caption }): DCRSlideshowMedia[] => {
+			if (content.type === 'Image') {
+				const imageSrc = getLargestImage(
+					content.item.image.allImages,
+				)?.url;
+				return isUndefined(imageSrc)
+					? []
+					: [{ type: 'image', imageSrc, imageCaption: caption }];
+			}
+			const video = decideSlideshowVideo(
+				content.item.mediaAtom,
+				caption,
+				cardImage,
+			);
+			return video ? [video] : [];
+		},
+	);
+
+	return slides.length > 0 ? slides : undefined;
+};
+
 export const getMediaMetadata = (
 	articleMainMedia: MainMedia,
 ): ArticleMedia | undefined => {
@@ -644,7 +695,13 @@ export const enhanceCards = (
 			isExternalLink: faciaCard.card.cardStyle.type === 'ExternalLink',
 			embedUri: faciaCard.properties.embedUri ?? undefined,
 			branding: stripBranding ? undefined : branding,
-			slideshowImages: decideSlideshowImages(faciaCard),
+			slideshowImages:
+				decideMultimediaSlideshow(
+					faciaCard.properties.mediaSelect
+						?.multimediaSlideshowReplace === true,
+					faciaCard.multimediaSlideshow,
+					imageSrc,
+				) ?? decideSlideshowImages(faciaCard),
 			showVideo:
 				!!(
 					faciaCard.properties.showMainVideo ??

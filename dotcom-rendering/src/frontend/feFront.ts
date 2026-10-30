@@ -126,6 +126,23 @@ export interface FEMediaAtom {
 	// channelId?: string; // currently unused
 }
 
+export type FEMultimediaSlideshowSlide = {
+	content:
+		| { type: 'Image'; item: { image: { allImages: Image[] } } }
+		| { type: 'Video'; item: { mediaAtom: FEMediaAtom } };
+	caption?: string;
+	label?: string;
+	credit?: string;
+};
+
+/** Pressed by frontend from fapi-client's resolved slideshow (model.content.MultimediaSlideshowAtom) */
+export type FEMultimediaSlideshow = {
+	id: string;
+	title?: string;
+	aspectRatio?: string;
+	slides: FEMultimediaSlideshowSlide[];
+};
+
 export type FEFrontCard = {
 	properties: {
 		isBreaking: boolean;
@@ -139,6 +156,7 @@ export type FEFrontCard = {
 			showMainVideo: boolean;
 			imageSlideshowReplace: boolean;
 			videoReplace: boolean;
+			multimediaSlideshowReplace?: boolean;
 		};
 		showKickerTag: boolean;
 		showByline: boolean;
@@ -266,6 +284,7 @@ export type FEFrontCard = {
 	format?: FEFormat;
 	enriched?: FESnap;
 	mediaAtom?: FEMediaAtom;
+	multimediaSlideshow?: FEMultimediaSlideshow;
 	supportingContent?: FESupportingContent[];
 	cardStyle?: {
 		type: FEFrontCardStyle;

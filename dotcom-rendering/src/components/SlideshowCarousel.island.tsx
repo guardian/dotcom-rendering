@@ -13,13 +13,36 @@ import {
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
 import { useEffect, useRef, useState } from 'react';
+import type { ArticleFormat } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import { takeFirst } from '../lib/tuple';
 import { palette } from '../palette';
-import type { DCRSlideshowImage } from '../types/front';
+import type { DCRSlideshowMedia } from '../types/front';
 import type { MediaSizeType } from './Card/components/MediaWrapper';
 import { CardPicture } from './CardPicture';
+import { SelfHostedVideo } from './SelfHostedVideo.island';
+import type { SubtitleSize } from './SelfHostedVideoPlayer';
 import { SlideshowCarouselScrollingDots } from './SlideshowCarouselScrollingDots';
+import { YoutubeBlockComponent } from './YoutubeBlockComponent.island';
+
+/**
+ * Spike helpers for supporting mixed media (images and videos) in a slideshow.
+ * A slide is treated as an image unless it is explicitly typed as a video.
+ */
+const isVideoSlide = (
+	slide: DCRSlideshowMedia,
+): slide is Extract<DCRSlideshowMedia, { type: 'video' }> =>
+	slide.type === 'video';
+
+const getSlideKey = (slide: DCRSlideshowMedia): string => {
+	if (!isVideoSlide(slide)) return slide.imageSrc;
+	return slide.video.type === 'YoutubeVideo'
+		? slide.video.id
+		: slide.video.atomId;
+};
+
+const getSlideCaption = (slide: DCRSlideshowMedia): string | undefined =>
+	isVideoSlide(slide) ? slide.caption : slide.imageCaption;
 
 const themeButton: Partial<ThemeButton> = {
 	borderTertiary: palette('--carousel-chevron-border'),
@@ -118,13 +141,41 @@ const mediaOverlayStyles = css`
 	width: 100%;
 `;
 
+/** Contains the player's z-index, so the caption can sit on top */
+const videoPlayerStyles = css`
+	isolation: isolate;
+`;
+
+const slideLinkStyles = css`
+	display: block;
+`;
+
+/** Lets clicks through to the video under the caption */
+const videoCaptionStyles = css`
+	pointer-events: none;
+`;
+
+/** Hides the caption once play is clicked, like YouTube's own overlays, so it doesn't cover YouTube's controls */
+const youtubeSlideStyles = css`
+	&:has(iframe, [data-name^='youtube-placeholder']) > figcaption {
+		display: none;
+	}
+`;
+
 type Props = {
-	images: readonly DCRSlideshowImage[];
+	/**
+	 * Slides may be images or videos. The prop retains the `images` name for
+	 * backwards compatibility while we spike mixed-media slideshows.
+	 */
+	images: readonly DCRSlideshowMedia[];
 	imageSize: MediaSizeType;
 	hasNavigationBackgroundColour: boolean;
 	linkTo: string;
 	linkAriaLabel: string;
 	dataLinkName?: string;
+	uniqueId: string;
+	subtitleSize: SubtitleSize;
+	format: ArticleFormat;
 };
 
 export const SlideshowCarousel = ({
@@ -134,6 +185,9 @@ export const SlideshowCarousel = ({
 	linkTo,
 	linkAriaLabel,
 	dataLinkName,
+	uniqueId,
+	subtitleSize,
+	format,
 }: Props) => {
 	const carouselRef = useRef<HTMLUListElement | null>(null);
 	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
@@ -212,10 +266,10 @@ export const SlideshowCarousel = ({
 	}, []);
 
 	/**
-	 * Restrict slideshow to a maximum of 10 images
+	 * Restrict slideshow to a maximum of 10 slides
 	 */
-	const slideshowImages = takeFirst(images, 10);
-	const slideshowImageCount = slideshowImages.length;
+	const slides = takeFirst(images, 10);
+	const slideCount = slides.length;
 
 	return (
 		<div
@@ -225,52 +279,145 @@ export const SlideshowCarousel = ({
 			aria-label="Slideshow"
 			aria-live="polite"
 		>
-			<a
-				href={linkTo}
-				aria-label={linkAriaLabel}
-				data-link-name={dataLinkName}
+			<ul
+				ref={carouselRef}
+				css={carouselStyles}
+				data-heatphan-type="carousel"
 			>
-				<ul
-					ref={carouselRef}
-					css={carouselStyles}
-					data-heatphan-type="carousel"
-				>
-					{slideshowImages.map((image, index) => {
-						const loading = index > 0 ? 'lazy' : 'eager';
-						return (
-							<li
-								css={carouselItemStyles}
-								key={image.imageSrc}
-								role="group"
-								aria-roledescription="slide"
-								aria-label={image.imageCaption}
-								aria-hidden={index !== currentPage}
-							>
-								<figure>
-									<CardPicture
-										mainImage={image.imageSrc}
-										imageSize={imageSize}
-										aspectRatio="5:4"
-										alt={image.imageCaption}
-										loading={loading}
-									/>
-									{!!image.imageCaption && (
-										<figcaption css={captionStyles}>
-											{image.imageCaption}
+				{slides.map((slide, index) => {
+					const loading = index > 0 ? 'lazy' : 'eager';
+					const caption = getSlideCaption(slide);
+					const isCurrentSlide = index === currentPage;
+					const slideId = `${uniqueId}-slide-${index}`;
+					return (
+						<li
+							css={carouselItemStyles}
+							key={getSlideKey(slide)}
+							role="group"
+							aria-roledescription="slide"
+							aria-label={caption}
+							aria-hidden={!isCurrentSlide}
+							// @ts-expect-error -- `inert` is only typed from React 19, where it becomes a boolean
+							inert={isCurrentSlide ? undefined : ''}
+						>
+							{/* Video slides aren't links, so clicks reach the video controls */}
+							{isVideoSlide(slide) ? (
+								<figure
+									css={
+										slide.video.type === 'YoutubeVideo'
+											? youtubeSlideStyles
+											: undefined
+									}
+								>
+									<div css={videoPlayerStyles}>
+										{slide.video.type === 'YoutubeVideo' ? (
+											<YoutubeBlockComponent
+												id={slide.video.id}
+												assetId={slide.video.videoId}
+												index={slideId}
+												duration={slide.video.duration}
+												posterImage={slide.video.image}
+												width={slide.video.width}
+												height={slide.video.height}
+												origin={slide.video.origin}
+												mediaTitle={slide.video.title}
+												altText={caption}
+												expired={slide.video.expired}
+												format={format}
+												hideCaption={true}
+												stickyVideos={false}
+												pauseOffscreenVideo={true}
+												hidePillOnMobile={false}
+												enableAds={false}
+												aspectRatio="5:4"
+												isLive={slide.video.isLive}
+											/>
+										) : (
+											<SelfHostedVideo
+												sources={slide.video.sources}
+												atomId={slide.video.atomId}
+												uniqueId={slideId}
+												videoStyle={
+													slide.video.videoStyle
+												}
+												aspectRatio={
+													slide.video.aspectRatio
+												}
+												posterImage={
+													slide.video.image.src ?? ''
+												}
+												posterImageAspectRatio={
+													slide.video.image
+														.aspectRatio
+												}
+												fallbackImage={
+													slide.video.image.src ?? ''
+												}
+												fallbackImageSize={imageSize}
+												fallbackImageLoading={loading}
+												fallbackImageAlt={caption}
+												fallbackImageAspectRatio="5:4"
+												linkTo={linkTo}
+												subtitleSource={
+													slide.video.subtitleSource
+												}
+												subtitleSize={subtitleSize}
+												// Keeps the caption clear of the controls and subtitles
+												controlsPosition={
+													caption ? 'top' : 'bottom'
+												}
+												hideProgressBar={!!caption}
+												// Cropped to 5:4 like the image slides
+												minAspectRatio={5 / 4}
+												maxAspectRatio={5 / 4}
+												preventAutoplay={false}
+											/>
+										)}
+									</div>
+									{!!caption && (
+										<figcaption
+											css={[
+												captionStyles,
+												videoCaptionStyles,
+											]}
+										>
+											{caption}
 										</figcaption>
 									)}
 								</figure>
-								<div
-									css={mediaOverlayStyles}
-									className="media-overlay"
-								/>
-							</li>
-						);
-					})}
-				</ul>
-			</a>
+							) : (
+								<a
+									href={linkTo}
+									aria-label={linkAriaLabel}
+									data-link-name={dataLinkName}
+									css={slideLinkStyles}
+								>
+									<figure>
+										<CardPicture
+											mainImage={slide.imageSrc}
+											imageSize={imageSize}
+											aspectRatio="5:4"
+											alt={caption}
+											loading={loading}
+										/>
+										{!!caption && (
+											<figcaption css={captionStyles}>
+												{caption}
+											</figcaption>
+										)}
+									</figure>
+									<div
+										css={mediaOverlayStyles}
+										className="media-overlay"
+									/>
+								</a>
+							)}
+						</li>
+					);
+				})}
+			</ul>
 
-			{slideshowImageCount > 1 && (
+			{slideCount > 1 && (
 				<div
 					className="slideshow-carousel-footer"
 					css={navigationStyles(hasNavigationBackgroundColour)}
@@ -279,7 +426,7 @@ export const SlideshowCarousel = ({
 				>
 					<div css={scrollingDotStyles}>
 						<SlideshowCarouselScrollingDots
-							total={slideshowImageCount}
+							total={slideCount}
 							current={currentPage}
 						/>
 					</div>
@@ -297,7 +444,7 @@ export const SlideshowCarousel = ({
 							}
 							size="small"
 							disabled={!previousButtonEnabled}
-							aria-label="Previous image"
+							aria-label="Previous slide"
 							// TODO: data-link-name="slideshow carousel left chevron"
 						/>
 
@@ -314,7 +461,7 @@ export const SlideshowCarousel = ({
 							}
 							size="small"
 							disabled={!nextButtonEnabled}
-							aria-label="Next image"
+							aria-label="Next slide"
 							// TODO: data-link-name="slideshow carousel right chevron"
 						/>
 					</div>
