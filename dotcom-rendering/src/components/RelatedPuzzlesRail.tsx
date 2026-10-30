@@ -3,6 +3,7 @@ import {
 	from,
 	headlineBold20,
 	palette as sourcePalette,
+	space,
 } from '@guardian/source/foundations';
 import type { PuzzleItem } from '../types/puzzlesPage';
 import { MorePuzzlesRows } from './MorePuzzlesCard';
@@ -19,7 +20,7 @@ import { MorePuzzlesRows } from './MorePuzzlesCard';
 const relatedRailStyles = css`
 	display: grid;
 	gap: 16px;
-	padding: 16px 0;
+	padding: ${space[2]}px 0 ${space[4]}px;
 	${from.leftCol} {
 		grid-template-columns: 140px minmax(0, 1fr);
 		gap: 20px;

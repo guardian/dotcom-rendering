@@ -40,7 +40,8 @@ export type Props = WebProps | AppProps;
 const isInRevampedImmersiveLayoutTest = (article: Article): boolean =>
 	article.frontendData.config.serverSideABTests[
 		'articles-and-publishing-revamped-immersive-layout'
-	] === 'enable';
+	] === 'variant';
+const immersiveTestArticle = '/p/x6adat';
 
 const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 	const format = {
@@ -65,6 +66,8 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 				}
 				default: {
 					return isInRevampedImmersiveLayoutTest(article) ||
+						article.frontendData.config.shortUrlId ===
+							immersiveTestArticle ||
 						(article.theme === ArticleSpecial.Labs &&
 							article.design === ArticleDesign.Standard) ? (
 						<StandardLayout
@@ -209,6 +212,8 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 				}
 				default: {
 					return isInRevampedImmersiveLayoutTest(article) ||
+						article.frontendData.config.shortUrlId ===
+							immersiveTestArticle ||
 						(article.theme === ArticleSpecial.Labs &&
 							article.design === ArticleDesign.Standard) ? (
 						<StandardLayout
