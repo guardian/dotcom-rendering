@@ -59,6 +59,14 @@ const customSubNavWithImages: CustomSubnav = {
 	],
 };
 
+const customSubNavWithNonClickableHeader: CustomSubnav = {
+	...customSubNav,
+	header: {
+		...customSubNav.header,
+		dotcomPath: undefined,
+	},
+};
+
 const meta = {
 	component: CustomSubNav,
 	title: 'Components/Masthead/Titlepiece/CustomSubNav',
@@ -130,8 +138,31 @@ export const FrontWithImageAndHiddenHeader = {
 	},
 } satisfies Story;
 
+export const FrontWithNonClickableHeader = {
+	args: {
+		renderingPage: 'front',
+		customSubNav: customSubNavWithNonClickableHeader,
+	},
+} satisfies Story;
+
 export const Article = {
 	args: { renderingPage: 'article' },
+	parameters: {
+		formats: [
+			{
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.News,
+			},
+		],
+	},
+} satisfies Story;
+
+export const ArticleWithNonClickableHeader = {
+	args: {
+		renderingPage: 'article',
+		customSubNav: customSubNavWithNonClickableHeader,
+	},
 	parameters: {
 		formats: [
 			{

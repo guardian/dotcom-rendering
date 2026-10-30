@@ -27,6 +27,8 @@ type Props = {
 	currentNavLink: string;
 	renderingPage: RenderingPage;
 	hasPageSkin?: boolean;
+	underlineHeader?: boolean;
+	showHeaderDivider?: boolean;
 };
 
 const subNavStyles = css`
@@ -103,9 +105,30 @@ const articleHeaderStyles = css`
 	padding-top: 1.1px;
 	padding-right: ${space[2]}px;
 	margin-right: ${space[2]}px;
-	border-right: 1px solid ${themePalette('--masthead-nav-lines')};
 `;
 
+const headerTextWrapperStyles = css`
+	display: flex;
+	align-items: center;
+	flex-shrink: 0;
+`;
+
+const headerDividerStyles = css`
+	width: 1px;
+	height: calc(100% - ${space[1]}px);
+	background-color: ${themePalette('--masthead-nav-lines')};
+	align-self: stretch;
+	margin-left: ${space[2]}px;
+	pointer-events: none;
+	flex-shrink: 0;
+`;
+
+/**
+ * On fronts, when an image is present the subnav mirrors DirectoryPageNav: a
+ * fixed-width, centred grid (blue) with the image spanning the full width on the
+ * top row and the links beneath it. The surrounding row is white (set by the
+ * Titlepiece wrapper), so only this padded container shows blue.
+ */
 const imageNavStyles = css`
 	${grid.paddedContainer}
 	position: relative;
@@ -219,7 +242,15 @@ const HeaderImage = ({
 
 /** Sets horizontal scrolling behaviour and removes the scrollbar */
 const scrollableSubNavStyles = css`
-	overflow-x: scroll;
+	display: flex;
+	flex-wrap: nowrap;
+	overflow-x: auto;
+	-webkit-mask-image: linear-gradient(
+		to right,
+		black calc(100% - 40px),
+		transparent
+	);
+	mask-image: linear-gradient(to right, black calc(100% - 40px), transparent);
 
 	@supports selector(::-webkit-scrollbar) {
 		&::-webkit-scrollbar {
@@ -227,6 +258,10 @@ const scrollableSubNavStyles = css`
 		}
 	}
 	scrollbar-width: none; /* Firefox */
+
+	& > * {
+		flex-shrink: 0;
+	}
 `;
 
 const subnavListItemStyles = css`
@@ -260,13 +295,28 @@ const headerLinkStyles = css`
 const HeaderText = ({
 	header: { headerText, dotcomPath },
 	cssOverrides,
+	underlineHeader,
+	showHeaderDivider = false,
 }: {
 	header: CustomSubnavHeader;
 	cssOverrides?: SerializedStyles;
-}) =>
-	dotcomPath ? (
+	underlineHeader?: boolean;
+	showHeaderDivider?: boolean;
+}) => {
+	const shouldShowHeaderDivider = showHeaderDivider && !dotcomPath;
+	const divider = shouldShowHeaderDivider ? (
+		<span aria-hidden="true" css={headerDividerStyles} />
+	) : null;
+	const link = dotcomPath ? (
 		<a
-			css={[headerLinkStyles, cssOverrides]}
+			css={[
+				headerLinkStyles,
+				cssOverrides,
+				underlineHeader &&
+					css`
+						text-decoration: underline;
+					`,
+			]}
 			data-src-focus-disabled={true}
 			href={dotcomPath}
 			data-link-name={nestedOphanComponents(
@@ -281,9 +331,20 @@ const HeaderText = ({
 		<span css={cssOverrides}>{headerText}</span>
 	);
 
+	return (
+		<span css={headerTextWrapperStyles}>
+			{link}
+			{divider}
+		</span>
+	);
+};
+
 /** On fronts the header sits above the links as a large stacked heading. */
 const frontContainerStyles = css`
 	${headlineBold28}
+	display: flex;
+	align-items: center;
+	column-gap: ${space[2]}px;
 	margin-top: ${space[2]}px;
 	color: ${themePalette('--masthead-nav-link-text')};
 `;
@@ -291,9 +352,16 @@ const frontContainerStyles = css`
 const CustomHeader = (
 	customSubNav: CustomSubnav,
 	cssOverrides: SerializedStyles | undefined,
+	underlineHeader?: boolean,
+	showHeaderDivider = false,
 ) => {
 	return customSubNav.header.showHeaderText ? (
-		<HeaderText header={customSubNav.header} cssOverrides={cssOverrides} />
+		<HeaderText
+			header={customSubNav.header}
+			cssOverrides={cssOverrides}
+			underlineHeader={underlineHeader}
+			showHeaderDivider={showHeaderDivider}
+		/>
 	) : undefined;
 };
 
@@ -305,6 +373,8 @@ export const CustomSubNav = ({
 	currentNavLink,
 	renderingPage,
 	hasPageSkin,
+	underlineHeader,
+	showHeaderDivider = false,
 }: Props) => {
 	const isArticle = renderingPage === 'article';
 	/** DCR receives images for all platforms; only web images are rendered here. */
@@ -347,7 +417,12 @@ export const CustomSubNav = ({
 						images={webImages}
 						headerText={customSubNav.header.headerText}
 					/>
-					{CustomHeader(customSubNav, imageHeaderTextStyles)}
+					{CustomHeader(
+						customSubNav,
+						imageHeaderTextStyles,
+						underlineHeader,
+						showHeaderDivider,
+					)}
 				</div>
 				<ul
 					css={[imageListStyles, scrollableSubNavStyles]}
@@ -369,28 +444,14 @@ export const CustomSubNav = ({
 			data-rendering-page={renderingPage}
 			css={[
 				isArticle ? articleContainerStyles : frontContainerStyles,
-				css`
-					${scrollableSubNavStyles}
-					-webkit-mask-image: linear-gradient(
-						to right,
-						black calc(100% - 40px),
-						transparent
-					);
-					mask-image: linear-gradient(
-						to right,
-						black calc(100% - 40px),
-						transparent
-					);
-					& > a,
-					& > span {
-						flex-shrink: 0;
-					}
-				`,
+				scrollableSubNavStyles,
 			]}
 		>
 			{CustomHeader(
 				customSubNav,
 				isArticle ? articleHeaderStyles : undefined,
+				underlineHeader,
+				showHeaderDivider,
 			)}
 			<ul
 				css={[
