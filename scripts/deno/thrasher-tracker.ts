@@ -1,6 +1,6 @@
-import { array, object, string } from 'npm:zod@4.1.12';
+import prettyBytes from 'pretty-bytes';
+import { array, object, string } from 'zod';
 import { fetchJSON } from './json.ts';
-import prettyBytes from 'npm:pretty-bytes@6';
 import { octokit } from './github.ts';
 
 // -- Constants -- //
@@ -33,12 +33,6 @@ const frontSchema = object({
 	}),
 });
 
-/**
- * We ignore all fonts extensions because browsers will only load
- * `woff2`one of these resources at a time.
- */
-const _fontsExtensions = ['woff', 'ttf'];
-
 const supportedResourceExtensions = [
 	'js',
 	'png',
@@ -51,7 +45,7 @@ const supportedResourceExtensions = [
 
 // -- Methods -- //
 
-const getExtension = (url: URL) => url.pathname.split('.').slice(-1)[0];
+const getExtension = (url: URL) => url.pathname.split('.').at(-1) ?? '';
 
 const isSupportedResourceType = (url: URL): boolean =>
 	supportedResourceExtensions.includes(getExtension(url));
@@ -81,16 +75,26 @@ const getFrontThrashers = async (path: string) => {
 	);
 
 	const thrashersWithResources = thrashers.flatMap(
-		async ({ displayName, curated: [{ enriched }] }) => {
-			const resourceUrls = Object.values(enriched)
+		async ({ displayName, curated }) => {
+			const enriched = curated[0]?.enriched;
+			if (!enriched) {
+				throw new Error(
+					`Missing curated item for thrasher: ${displayName}`,
+				);
+			}
+
+			const embeds = Object.values(enriched).filter(
+				(embed): embed is string => embed !== undefined,
+			);
+			const resourceUrls = embeds
 				.flatMap((embed) =>
-					[...embed.matchAll(regex)].map(([url]) => new URL(url))
+					[...embed.matchAll(regex)].map(([url]) => new URL(url)),
 				)
 				.filter(isSupportedResourceType);
 
 			const resources = await getThrasherResources(resourceUrls);
 
-			const embedSize = new Blob([...Object.values(enriched)]).size;
+			const embedSize = new Blob(embeds).size;
 
 			const resourceSize = resources.reduce((map, { url, size }) => {
 				const ext = getExtension(url);
@@ -104,7 +108,8 @@ const getFrontThrashers = async (path: string) => {
 				resources,
 				embedSize,
 				resourceSize,
-				totalSize: embedSize +
+				totalSize:
+					embedSize +
 					[...resourceSize.values()].reduce(
 						(acc, next) => acc + next,
 						0,
@@ -163,18 +168,15 @@ const body = lines.join('\n');
 
 if (!octokit) {
 	console.log(body);
-	Deno.exit();
+} else {
+	const {
+		data: { html_url },
+	} = await octokit.rest.issues.update({
+		owner: 'guardian',
+		repo: 'dotcom-rendering',
+		issue_number: 5856,
+		body,
+	});
+
+	console.log('Updated issue:', html_url);
 }
-
-const {
-	data: { html_url },
-} = await octokit.rest.issues.update({
-	owner: 'guardian',
-	repo: 'dotcom-rendering',
-	issue_number: 5856,
-	body,
-});
-
-console.log('Updated issue:', html_url);
-
-Deno.exit();

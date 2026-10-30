@@ -18,32 +18,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      # https://github.com/denoland/setup-deno#latest-stable-for-a-major
-      - uses: denoland/setup-deno@v1
-        with:
-          deno-version: v1.44
+      - name: Setup Node environment
+        uses: ./.github/actions/setup-node-env
 
       - name: Thrasher tracker
-        working-directory: scripts/deno
-        run: |
-          deno run \
-            --allow-read \
-            --allow-net \
-            --allow-env=HOME,GITHUB_TOKEN \
-            --allow-sys=homedir \
-            thrasher-tracker.ts
+        run: pnpm --filter scripts thrasher-tracker
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: iFrame titles tracker
-        working-directory: scripts/deno
-        run: |
-          deno run \
-            --allow-read \
-            --allow-net \
-            --allow-env=HOME,GITHUB_TOKEN,CAPI_KEY \
-            --allow-sys=homedir \
-            iframe-titles.ts
+        run: pnpm --filter scripts iframe-titles
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CAPI_KEY: ${{ secrets.CAPI_KEY }}

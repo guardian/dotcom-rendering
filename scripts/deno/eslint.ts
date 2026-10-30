@@ -1,26 +1,48 @@
-const path = '.eslint/dotcom-rendering-report.json';
+import { spawnSync } from 'node:child_process';
+import { createRequire } from 'node:module';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 
-const shouldLint = Deno.args.includes('--lint');
+const require = createRequire(import.meta.url);
+const repositoryRoot = fileURLToPath(new URL('../..', import.meta.url));
+const dotcomRenderingRoot = join(repositoryRoot, 'dotcom-rendering');
+const reportDirectory = join(repositoryRoot, '.eslint');
+const reportPath = join(reportDirectory, 'dotcom-rendering-report.json');
+const outputPath = join(reportDirectory, 'dotcom-report.md');
+
+const shouldLint = process.argv.includes('--lint');
 
 const lint = () => {
-	const command = new Deno.Command(
-		new URL(import.meta.resolve('../../node_modules/.bin/eslint')),
-		{
-			args: [
-				'.',
-				...['--ext', '.ts,.tsx'],
-				...['--format', 'json'],
-				...['--output-file', '../' + path],
-			],
-		},
+	mkdirSync(reportDirectory, { recursive: true });
+	const eslintPackage = require.resolve('eslint/package.json');
+	const eslintBin = join(dirname(eslintPackage), 'bin', 'eslint.js');
+	const result = spawnSync(
+		process.execPath,
+		[
+			eslintBin,
+			'.',
+			'--ext',
+			'.ts,.tsx',
+			'--format',
+			'json',
+			'--output-file',
+			reportPath,
+		],
+		{ cwd: dotcomRenderingRoot, stdio: 'inherit' },
 	);
 
-	return command.output();
+	if (result.error) throw result.error;
+	if (result.status === null || result.status > 1) {
+		throw new Error(
+			`ESLint failed with exit code ${result.status ?? 'unknown'}`,
+		);
+	}
 };
 
-if (shouldLint) await lint();
+if (shouldLint) lint();
 
-const file = Deno.readTextFileSync(path);
+const file = readFileSync(reportPath, 'utf8');
 
 type LintedFile = {
 	filePath: string;
@@ -50,7 +72,7 @@ const files = rules.map(({ filePath, messages }) => {
 	);
 
 	return {
-		path: filePath.replace(Deno.cwd(), '.'),
+		path: filePath.replace(repositoryRoot, '.'),
 		brokenRules,
 	};
 });
@@ -68,7 +90,7 @@ const counts = files.reduce<Count>((prev, { path, brokenRules }) => {
 
 		const { count, files } = prev[ruleId];
 		prev[ruleId] = {
-			count: count + brokenRules[ruleId],
+			count: count + (brokenRules[ruleId] ?? 0),
 			files: files.concat(path),
 		};
 	});
@@ -93,4 +115,4 @@ const output = Object.entries(counts)
 	})
 	.join('\n\n');
 
-Deno.writeTextFileSync('.eslint/dotcom-report.md', output);
+writeFileSync(outputPath, output);

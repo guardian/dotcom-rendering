@@ -1,0 +1,21 @@
+{
+	"extends": "@guardian/tsconfig/tsconfig.json",
+	"compilerOptions": {
+		"allowImportingTsExtensions": true,
+		"lib": ["ES2024", "DOM", "DOM.Iterable"],
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+		"noEmit": true,
+		"noUncheckedIndexedAccess": true,
+		"skipLibCheck": true,
+		"target": "ES2024",
+		"types": ["node"]
+	},
+	"include": [
+		"eslint.ts",
+		"github.ts",
+		"iframe-titles.ts",
+		"json.ts",
+		"thrasher-tracker.ts"
+	]
+}
