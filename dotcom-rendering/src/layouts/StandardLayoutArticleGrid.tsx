@@ -240,7 +240,7 @@ export const StandardLayoutArticleGrid = ({
 	const tableOfContentsStyle =
 		isImmersive && isFilterArticle ? 'horizontal' : 'default';
 
-	const hasMinimumImageHeight =
+	const hasLabsPortraitImage =
 		isLabs && isImmersivePortrait && isMainMediaImage;
 
 	const ageWarning = getAgeWarning(
@@ -276,10 +276,7 @@ export const StandardLayoutArticleGrid = ({
 		<article
 			css={[
 				css`
-					background-color: ${format.design ===
-					ArticleDesign.WeekendEssay
-						? '#fff4f2'
-						: themePalette('--article-background')};
+					background-color: ${themePalette('--article-background')};
 				`,
 				grid.container,
 				grid.outerRules(),
@@ -336,7 +333,9 @@ export const StandardLayoutArticleGrid = ({
 						? css`
 								${from.tablet} {
 									align-self: start;
-									${mainMediaAspectRatio != null &&
+									${(!isImmersiveLandscape ||
+										!isMainMediaImage) &&
+									mainMediaAspectRatio != null &&
 									`aspect-ratio: ${mainMediaAspectRatio.replace(':', ' / ')};`}
 									${isImmersiveLandscape &&
 									`margin-left: -20px;
@@ -345,23 +344,18 @@ export const StandardLayoutArticleGrid = ({
 
 								${isImmersivePortrait &&
 								css`
-									${from.desktop} {
-										aspect-ratio: 4/5;
-									}
+									aspect-ratio: 4 / 5;
 								`}
-
 								${isImmersiveLandscape &&
 								landscapeImmersiveMediaBelowDesktop}
 
-								${hasMinimumImageHeight &&
+								${hasLabsPortraitImage &&
 								css`
 									${until.tablet} {
 										position: relative;
 										width: 100%;
 										min-width: 0;
-										min-height: 469px;
-										${mainMediaAspectRatio != null &&
-										`aspect-ratio: ${mainMediaAspectRatio.replace(':', ' / ')};`}
+										aspect-ratio: 4 / 5;
 										overflow: hidden;
 										background-color: ${headlineBackgroundImmersive};
 
@@ -373,6 +367,28 @@ export const StandardLayoutArticleGrid = ({
 								`}
 							`
 						: undefined,
+					isImmersiveLandscape &&
+						isMainMediaImage &&
+						css`
+							position: relative;
+							aspect-ratio: 4 / 5;
+
+							> div {
+								position: absolute;
+								inset: 0;
+							}
+
+							${from.mobileLandscape} {
+								aspect-ratio: 5 / 4;
+							}
+
+							${from.desktop} {
+								aspect-ratio: auto;
+								height: calc(
+									100vh - ${immersiveHeaderHeight}px
+								);
+							}
+						`,
 					displayAvatarUrl && layoutType === 'picture'
 						? css`
 								margin-top: ${space[2]}px;

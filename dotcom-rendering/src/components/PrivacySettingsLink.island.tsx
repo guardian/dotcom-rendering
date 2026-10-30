@@ -11,6 +11,8 @@ const footerLink = css`
 	padding-bottom: 12px;
 	display: block;
 	line-height: 19px;
+	text-align: left;
+	justify-content: flex-start;
 
 	:hover {
 		text-decoration: underline;
@@ -62,7 +64,7 @@ export const PrivacySettingsLink = ({ extraClasses }: Props) => {
 			}}
 		>
 			{framework === 'usnat'
-				? 'US resident - Do Not Sell or Share'
+				? 'Do Not Sell or Share my personal information'
 				: 'Privacy settings'}
 		</ButtonLink>
 	);

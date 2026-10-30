@@ -7,9 +7,11 @@ import {
 	validateAsFEFront,
 	validateAsPuzzlesPageType,
 } from '../../src/model/validate';
+import { validateAsPuzzlePageType } from '../../src/model/validate.puzzlePage';
+import type { FEPuzzlePageType } from '../../src/types/puzzlePage';
 import type { FEPuzzlesPageType } from '../../src/types/puzzlesPage';
 
-type FEModel = FEArticle | FEFront | FEPuzzlesPageType;
+type FEModel = FEArticle | FEFront | FEPuzzlesPageType | FEPuzzlePageType;
 
 type LoadPageOptions = {
 	queryParams?: Record<string, string>;
@@ -96,6 +98,8 @@ const validateJson = (path: string, json: unknown): FEModel => {
 		return validateAsFEFront(json);
 	} else if (path.startsWith('/PuzzlesPage')) {
 		return validateAsPuzzlesPageType(json);
+	} else if (path.startsWith('/PuzzlePage')) {
+		return validateAsPuzzlePageType(json);
 	}
 	throw new Error(`Unsupported URL for validating payload for: ${path}`);
 };

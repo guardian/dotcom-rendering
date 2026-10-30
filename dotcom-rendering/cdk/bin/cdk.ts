@@ -252,10 +252,10 @@ export const InteractiveRenderingPropsPROD: RenderingCDKStackProps = {
 			},
 		},
 	},
-	// Route 99% traffic to EC2, 1% to ECS.
+	// Route 50% traffic to EC2, 50% to ECS.
 	targetGroupWeights: {
-		ec2: 99,
-		ecs: 1,
+		ec2: 50,
+		ecs: 50,
 	},
 };
 new RenderingCDKStack(

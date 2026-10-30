@@ -74,26 +74,28 @@ export const LiveBlock = ({
 			isOriginalPinnedPost={isOriginalPinnedPost}
 			serverTime={serverTime}
 		>
-			{block.elements.map((element, index) => (
-				<RenderArticleElement
-					key={index}
-					format={format}
-					element={element}
-					ajaxUrl={ajaxUrl}
-					host={host}
-					index={index}
-					isMainMedia={false}
-					pageId={pageId}
-					webTitle={webTitle}
-					isAdFreeUser={isAdFreeUser}
-					isSensitive={isSensitive}
-					switches={switches}
-					isPinnedPost={isPinnedPost}
-					editionId={editionId}
-					shouldHideAds={shouldHideAds}
-					idApiUrl={idApiUrl}
-				/>
-			))}
+			{block.elements.map((element, index) => {
+				return (
+					<RenderArticleElement
+						key={index}
+						format={format}
+						element={element}
+						ajaxUrl={ajaxUrl}
+						host={host}
+						index={index}
+						isMainMedia={false}
+						pageId={pageId}
+						webTitle={webTitle}
+						isAdFreeUser={isAdFreeUser}
+						isSensitive={isSensitive}
+						switches={switches}
+						isPinnedPost={isPinnedPost}
+						editionId={editionId}
+						shouldHideAds={shouldHideAds}
+						idApiUrl={idApiUrl}
+					/>
+				);
+			})}
 			<footer
 				css={css`
 					display: flex;

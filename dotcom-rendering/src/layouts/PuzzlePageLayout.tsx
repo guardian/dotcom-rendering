@@ -24,7 +24,6 @@ import { PuzzlesUsefulLinks } from '../components/PuzzlesSupporting';
 import { RelatedPuzzlesRailEnhanced } from '../components/RelatedPuzzlesRailEnhanced.island';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
-import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import {
 	ArticleDesign,
@@ -545,14 +544,6 @@ export const PuzzlePageLayout = ({
 								<div data-print-layout="hide">
 									<Hide until="leftCol">
 										<MetaLines />
-									</Hide>
-									<Hide from="desktop">
-										<Standfirst
-											format={puzzlePageFormat}
-											standfirst={
-												'<a href="https://app.adjust.com/16xt6hai" data-link-name="crossword-mobile-link">Download the Guardian app</a> for a better puzzles experience'
-											}
-										/>
 									</Hide>
 									{/*
 									 * `CrosswordLinks`' one job is a
