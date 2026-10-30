@@ -28,7 +28,6 @@ type Props = {
 	renderingPage: RenderingPage;
 	hasPageSkin?: boolean;
 	underlineHeader?: boolean;
-	showHeaderDivider?: boolean;
 };
 
 const subNavStyles = css`
@@ -113,14 +112,14 @@ const headerTextWrapperStyles = css`
 	flex-shrink: 0;
 `;
 
-const headerDividerStyles = css`
-	width: 1px;
-	height: calc(100% - ${space[1]}px);
-	background-color: ${themePalette('--masthead-nav-lines')};
-	align-self: stretch;
-	margin-left: ${space[2]}px;
-	pointer-events: none;
-	flex-shrink: 0;
+/** On fronts the header sits above the links as a large stacked heading. */
+const frontContainerStyles = css`
+	${headlineBold28}
+	display: flex;
+	align-items: center;
+	column-gap: ${space[2]}px;
+	margin-top: ${space[2]}px;
+	color: ${themePalette('--masthead-nav-link-text')};
 `;
 
 /**
@@ -296,17 +295,11 @@ const HeaderText = ({
 	header: { headerText, dotcomPath },
 	cssOverrides,
 	underlineHeader,
-	showHeaderDivider = false,
 }: {
 	header: CustomSubnavHeader;
 	cssOverrides?: SerializedStyles;
 	underlineHeader?: boolean;
-	showHeaderDivider?: boolean;
 }) => {
-	const shouldShowHeaderDivider = showHeaderDivider && !dotcomPath;
-	const divider = shouldShowHeaderDivider ? (
-		<span aria-hidden="true" css={headerDividerStyles} />
-	) : null;
 	const link = dotcomPath ? (
 		<a
 			css={[
@@ -331,36 +324,19 @@ const HeaderText = ({
 		<span css={cssOverrides}>{headerText}</span>
 	);
 
-	return (
-		<span css={headerTextWrapperStyles}>
-			{link}
-			{divider}
-		</span>
-	);
+	return <span css={headerTextWrapperStyles}>{link}</span>;
 };
-
-/** On fronts the header sits above the links as a large stacked heading. */
-const frontContainerStyles = css`
-	${headlineBold28}
-	display: flex;
-	align-items: center;
-	column-gap: ${space[2]}px;
-	margin-top: ${space[2]}px;
-	color: ${themePalette('--masthead-nav-link-text')};
-`;
 
 const CustomHeader = (
 	customSubNav: CustomSubnav,
 	cssOverrides: SerializedStyles | undefined,
 	underlineHeader?: boolean,
-	showHeaderDivider = false,
 ) => {
 	return customSubNav.header.showHeaderText ? (
 		<HeaderText
 			header={customSubNav.header}
 			cssOverrides={cssOverrides}
 			underlineHeader={underlineHeader}
-			showHeaderDivider={showHeaderDivider}
 		/>
 	) : undefined;
 };
@@ -374,7 +350,6 @@ export const CustomSubNav = ({
 	renderingPage,
 	hasPageSkin,
 	underlineHeader,
-	showHeaderDivider = false,
 }: Props) => {
 	const isArticle = renderingPage === 'article';
 	/** DCR receives images for all platforms; only web images are rendered here. */
@@ -421,7 +396,6 @@ export const CustomSubNav = ({
 						customSubNav,
 						imageHeaderTextStyles,
 						underlineHeader,
-						showHeaderDivider,
 					)}
 				</div>
 				<ul
@@ -451,7 +425,6 @@ export const CustomSubNav = ({
 				customSubNav,
 				isArticle ? articleHeaderStyles : undefined,
 				underlineHeader,
-				showHeaderDivider,
 			)}
 			<ul
 				css={[
