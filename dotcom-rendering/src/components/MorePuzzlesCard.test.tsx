@@ -1,4 +1,5 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import type { GameStatus } from '../lib/puzzleProgress/types';
 import type { PuzzleItem } from '../types/puzzlesPage';
 import { ConfigProvider } from './ConfigContext';
 import { MorePuzzlesRows } from './MorePuzzlesCard';
@@ -90,7 +91,45 @@ describe('MorePuzzlesCard dark mode title colours', () => {
 	};
 
 	it('maps each group title to its lighter dark mode tint', () => {
-		// sudoku: sport[600]; crossword: news[550]
-		expect(titleDarkColours()).toEqual(['#90DCFF', '#FF9081']);
+		// sudoku: sport[500]; crossword: news[550]
+		expect(titleDarkColours()).toEqual(['#00B2FF', '#FF9081']);
 	});
+});
+
+describe('MorePuzzlesCard progress', () => {
+	// The progress value is deliberately misleading: only the status counts.
+	const renderWithStatus = (gameStatus: GameStatus | undefined) =>
+		render(
+			<ConfigProvider
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+					editionId: 'UK',
+				}}
+			>
+				<MorePuzzlesRows
+					items={items.map((item) => ({
+						...item,
+						progress: 50,
+						gameStatus,
+					}))}
+				/>
+			</ConfigProvider>,
+		);
+
+	it('shows Played with an icon for a completed puzzle', () => {
+		renderWithStatus('completed');
+		const played = screen.getAllByText('Played');
+		expect(played).toHaveLength(2);
+		expect(played[0]?.querySelector('svg')).toBeInTheDocument();
+	});
+
+	it.each([undefined, 'not-started' as const, 'in-progress' as const])(
+		'shows nothing for status %s',
+		(status) => {
+			renderWithStatus(status);
+			expect(screen.queryByText('Played')).not.toBeInTheDocument();
+		},
+	);
 });

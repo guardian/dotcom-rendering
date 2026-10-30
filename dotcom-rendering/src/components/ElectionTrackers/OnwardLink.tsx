@@ -9,6 +9,7 @@ import { palette } from '../../palette';
 type Props = {
 	link: URL;
 	text: string;
+	description: string;
 };
 
 /**
@@ -25,8 +26,18 @@ export const OnwardLink = (props: Props) => (
 		}}
 		cssOverrides={css({
 			marginTop: space[4],
+			'::before': {
+				position: 'absolute',
+				content: '""',
+				top: 0,
+				right: 0,
+				bottom: 0,
+				left: 0,
+			},
 		})}
 		href={props.link.href}
+		title={props.description}
+		data-ignore="global-link-styling" //This overrides the globalLinkStyles in ArticleBody.tsx to avoid the liveblog link text
 	>
 		{props.text}
 	</LinkButton>

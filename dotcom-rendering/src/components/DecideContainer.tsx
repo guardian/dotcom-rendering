@@ -9,7 +9,8 @@ import type {
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
-import { ElectionComponents } from './ElectionTrackers/electionComponent';
+import type { Graphic } from './EventGraphic';
+import { GraphicSchema } from './EventGraphic';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { FlexibleSpecial } from './FlexibleSpecial';
 import { Island } from './Island';
@@ -34,24 +35,8 @@ type Props = {
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
+	hasPageSkin?: boolean;
 };
-
-export const ElectionComponentsJsonSchema = v.custom<
-	v.InferInput<typeof ElectionComponents>
->((input) => v.is(ElectionComponents, input));
-
-export const GraphicSchema = v.object({
-	kind: v.literal('electionTracker'),
-	electionDataUrl: v.pipe(
-		v.string(),
-		v.url(),
-		v.transform((url) => new URL(url)),
-	),
-	electionComponents: ElectionComponentsJsonSchema,
-	liveEffects: v.boolean(),
-});
-
-export type Graphic = v.InferOutput<typeof GraphicSchema>;
 
 const extractGraphic = (
 	groupedTrails: DCRGroupedTrails,
@@ -94,6 +79,7 @@ export const DecideContainer = ({
 	frontId,
 	collectionId,
 	containerLevel,
+	hasPageSkin,
 }: Props) => {
 	switch (containerType) {
 		case 'nav/list':
@@ -103,7 +89,11 @@ export const DecideContainer = ({
 		case 'scrollable/highlights':
 			return (
 				<Island priority="critical" defer={{ until: 'visible' }}>
-					<ScrollableHighlights trails={trails} frontId={frontId} />
+					<ScrollableHighlights
+						trails={trails}
+						frontId={frontId}
+						hasPageSkin={hasPageSkin}
+					/>
 				</Island>
 			);
 		case 'flexible/special':
@@ -130,6 +120,7 @@ export const DecideContainer = ({
 					aspectRatio={aspectRatio}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
+					isStorylines={false}
 				/>
 			);
 		case 'scrollable/small':
@@ -199,3 +190,4 @@ export const DecideContainer = ({
 			return null;
 	}
 };
+export { GraphicSchema };

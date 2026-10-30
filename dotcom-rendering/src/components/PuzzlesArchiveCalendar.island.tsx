@@ -1,12 +1,14 @@
-import { css } from '@emotion/react';
+import { css, keyframes } from '@emotion/react';
 import {
 	from,
 	headlineBold20,
-	headlineBold34,
+	headlineMedium28,
+	headlineMedium34,
 	palette,
 	space,
 	textSans14,
 	textSans17,
+	until,
 	visuallyHidden,
 } from '@guardian/source/foundations';
 import {
@@ -16,6 +18,8 @@ import {
 	SvgCheckmark,
 } from '@guardian/source/react-components';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { getAuthStatus } from '../lib/identity';
+import { isGameStatus } from '../lib/puzzleCardProgress';
 import type { PuzzlesArchive, PuzzlesArchiveItem } from '../types/puzzlesPage';
 
 export type CalendarCell = {
@@ -23,6 +27,46 @@ export type CalendarCell = {
 	date: string;
 	item?: PuzzlesArchiveItem;
 };
+
+const CalendarCompletedIcon = () => (
+	<svg
+		width="18"
+		height="15"
+		viewBox="0 0 18 15"
+		fill="none"
+		xmlns="http://www.w3.org/2000/svg"
+	>
+		<path
+			d="M1.35439 6.91457L5.20392 10.7352L16.6088 0L18 1.40926L5.36046 15H4.59147L0 8.32169L1.35439 6.91457Z"
+			fill="#22874D"
+		/>
+	</svg>
+);
+
+const PlayedLegendIcon = () => (
+	<svg
+		aria-hidden="true"
+		width="13.3"
+		height="13.3"
+		viewBox="0 0 14 14"
+		fill="none"
+		focusable="false"
+		xmlns="http://www.w3.org/2000/svg"
+	>
+		<mask id="puzzles-played-icon-mask" fill="white">
+			<path d="M6.65039 0C10.3229 0.000211049 13.2998 2.97783 13.2998 6.65039C13.2996 10.3228 10.3228 13.2996 6.65039 13.2998C2.97783 13.2998 0.000211052 10.3229 0 6.65039C0 2.9777 2.9777 0 6.65039 0Z" />
+		</mask>
+		<path
+			d="M6.65039 0L6.65045 -1H6.65039V0ZM13.2998 6.65039L14.2998 6.65045V6.65039H13.2998ZM6.65039 13.2998V14.2998H6.65045L6.65039 13.2998ZM0 6.65039H-1V6.65045L0 6.65039ZM6.65039 0L6.65033 1C9.77047 1.00018 12.2998 3.52998 12.2998 6.65039H13.2998H14.2998C14.2998 2.42568 10.8753 -0.999757 6.65045 -1L6.65039 0ZM13.2998 6.65039L12.2998 6.65033C12.2996 9.77048 9.77048 12.2996 6.65033 12.2998L6.65039 13.2998L6.65045 14.2998C10.8751 14.2996 14.2996 10.8751 14.2998 6.65045L13.2998 6.65039ZM6.65039 13.2998V12.2998C3.52998 12.2998 1.00018 9.77047 1 6.65033L0 6.65039L-1 6.65045C-0.999757 10.8753 2.42568 14.2998 6.65039 14.2998V13.2998ZM0 6.65039H1C1 3.52998 3.52998 1 6.65039 1V0V-1C2.42541 -1 -1 2.42541 -1 6.65039H0Z"
+			fill="#22874D"
+			mask="url(#puzzles-played-icon-mask)"
+		/>
+		<path
+			d="M10.5 4.56348L5.58496 10H5.28516L3.5 7.3291L4.02637 6.76562L5.52344 8.29395L9.95898 4L10.5 4.56348Z"
+			fill="#22874D"
+		/>
+	</svg>
+);
 
 export const daysInMonth = (year: number, month: number): number =>
 	new Date(Date.UTC(year, month, 0)).getUTCDate();
@@ -53,7 +97,7 @@ export const archiveStatus = (
 ): 'completed' | 'available' | 'unavailable' =>
 	item === undefined
 		? 'unavailable'
-		: item.progress === 100
+		: item.gameStatus === 'completed'
 			? 'completed'
 			: 'available';
 
@@ -64,6 +108,9 @@ const isArchiveItem = (value: unknown): value is PuzzlesArchiveItem => {
 		typeof item.puzzleType === 'string' &&
 		typeof item.date === 'string' &&
 		typeof item.progress === 'number' &&
+		(item.gameStatus === undefined ||
+			item.gameStatus === null ||
+			isGameStatus(item.gameStatus)) &&
 		typeof item.url === 'string'
 	);
 };
@@ -81,7 +128,10 @@ const isArchive = (value: unknown): value is PuzzlesArchive => {
 		Array.isArray(archive.puzzles) &&
 		typeof archive.hasError === 'boolean' &&
 		Array.isArray(archive.items) &&
-		archive.items.every(isArchiveItem)
+		archive.items.every(isArchiveItem) &&
+		(archive.recentItems === undefined ||
+			(Array.isArray(archive.recentItems) &&
+				archive.recentItems.every(isArchiveItem)))
 	);
 };
 
@@ -94,48 +144,141 @@ const sectionStyles = css`
 `;
 
 const linesStyles = css`
-	height: 10px;
+	height: 13px;
 	margin-bottom: ${space[4]}px;
 	background: repeating-linear-gradient(
 		to bottom,
-		${palette.neutral[86]} 0,
-		${palette.neutral[86]} 1px,
+		var(--puzzles-border-colour, ${palette.neutral[86]}) 0,
+		var(--puzzles-border-colour, ${palette.neutral[86]}) 1px,
 		transparent 1px,
-		transparent 3px
+		transparent 4px
 	);
+`;
+
+const CHIPS_FADE_WIDTH = space[10];
+
+/**
+ * From "tablet" the chips wrap onto extra lines, so none are ever hidden.
+ * Below it they become a swipeable carousel (`tabsStyles`), faded at both
+ * edges (`chipsFadeLeftStyles`, `chipsFadeRightStyles`). Same mechanism as the
+ * "More from Puzzles & games" rail (`MorePuzzlesCard`): the carousel bleeds to
+ * the page's vertical lines by undoing the page's side padding (`pageStyles`),
+ * and the fades follow the chips' scroll position.
+ */
+const chipsStyles = css`
+	--chips-edge-padding: ${space[3]}px;
+	position: relative;
+	/* Lets the fades follow the scroll position of the chips. */
+	timeline-scope: --puzzles-chips-scroll;
+	${until.tablet} {
+		margin: 0 calc(var(--chips-edge-padding) * -1);
+	}
+`;
+
+const chipsFadeInKeyframes = keyframes`
+	from { opacity: 0; }
+	to { opacity: 1; }
+`;
+
+const chipsFadeStyles = css`
+	display: none;
+	${until.tablet} {
+		position: absolute;
+		top: 0;
+		bottom: ${space[3]}px;
+		width: ${CHIPS_FADE_WIDTH}px;
+		pointer-events: none;
+	}
+`;
+
+/**
+ * Always visible, since the list's right padding lets the last chip scroll
+ * clear of it.
+ */
+const chipsFadeRightStyles = css`
+	${until.tablet} {
+		display: block;
+		right: 0;
+		background: linear-gradient(
+			to right,
+			transparent 0%,
+			var(--puzzles-page-background, ${palette.neutral[100]}) 100%
+		);
+	}
+`;
+
+/**
+ * Must not cover the first chip at rest, so it only appears once the reader
+ * has scrolled (a scroll-driven animation). Browsers without scroll-driven
+ * animations don't show it.
+ */
+const chipsFadeLeftStyles = css`
+	@supports (animation-timeline: scroll()) {
+		${until.tablet} {
+			display: block;
+			left: 0;
+			background: linear-gradient(
+				to left,
+				transparent 0%,
+				var(--puzzles-page-background, ${palette.neutral[100]}) 100%
+			);
+			opacity: 0;
+			animation-name: ${chipsFadeInKeyframes};
+			animation-duration: 1ms;
+			animation-timing-function: linear;
+			animation-fill-mode: both;
+			animation-timeline: --puzzles-chips-scroll;
+			animation-range: 0 ${CHIPS_FADE_WIDTH}px;
+		}
+	}
 `;
 
 const tabsStyles = css`
 	display: flex;
+	flex-wrap: wrap;
 	gap: ${space[3]}px;
-	overflow-x: auto;
 	padding: 0 0 ${space[3]}px;
-	scrollbar-width: none;
-	white-space: nowrap;
-	::-webkit-scrollbar {
-		display: none;
+	${until.tablet} {
+		flex-wrap: nowrap;
+		overflow-x: auto;
+		padding: 0 ${CHIPS_FADE_WIDTH}px ${space[3]}px var(--chips-edge-padding);
+		scroll-padding: 0 ${CHIPS_FADE_WIDTH}px 0 var(--chips-edge-padding);
+		scroll-timeline: --puzzles-chips-scroll inline;
+		scrollbar-width: none;
+		white-space: nowrap;
+		::-webkit-scrollbar {
+			display: none;
+		}
 	}
 	a {
+		flex: none;
 		${textSans14};
-		border: 1px solid ${palette.news[400]};
+		border: 1px solid var(--puzzles-primary, ${palette.news[300]});
 		border-radius: 18px;
 		padding: 2px ${space[3]}px;
-		color: ${palette.news[400]};
+		color: var(--puzzles-primary, ${palette.news[300]});
 		font-weight: bold;
 		line-height: 18px;
 		text-decoration: none;
 	}
-	a[aria-current='page'] {
-		background: ${palette.news[400]};
-		color: ${palette.neutral[100]};
+	a:hover {
+		background: var(--puzzles-hover, ${palette.news[800]});
+	}
+	a[aria-current='page'],
+	a[aria-current='page']:hover {
+		background: var(--puzzles-primary, ${palette.news[300]});
+		color: var(--puzzles-on-primary, ${palette.neutral[100]});
 		font-weight: bold;
 	}
 `;
 
 const titleStyles = css`
-	${headlineBold34};
+	${headlineMedium28};
 	margin: ${space[3]}px 0 ${space[3]}px;
-	line-height: 1.05;
+	color: var(--puzzles-headline-colour, ${palette.neutral[7]});
+	${from.tablet} {
+		${headlineMedium34};
+	}
 `;
 
 const recentStyles = css`
@@ -159,30 +302,69 @@ const recentStyles = css`
 		box-sizing: border-box;
 		flex: 0 0 calc((100% - var(--recent-gap)) / 2);
 		min-height: 104px;
-		padding: ${space[2]}px;
-		background: ${palette.news[800]};
-		color: ${palette.neutral[7]};
+		padding: ${space[1]}px ${space[2]}px 30px;
+		background: var(
+			--puzzles-card-background,
+			var(--puzzles-tint, ${palette.news[800]})
+		);
+		color: var(--puzzles-card-text-colour, ${palette.neutral[7]});
 		text-decoration: none;
 		${from.phablet} {
 			min-width: 0;
 		}
+	}
+	.setter {
+		display: block;
+		color: var(--puzzles-primary, ${palette.news[300]});
 	}
 	a + a::before {
 		position: absolute;
 		top: 0;
 		bottom: 0;
 		left: calc(var(--recent-gap) / -2);
-		border-left: 1px solid ${palette.neutral[86]};
+		border-left: 1px solid
+			var(--puzzles-border-colour, ${palette.neutral[86]});
 		content: '';
 		pointer-events: none;
 	}
 	strong {
 		display: block;
-		color: ${palette.news[400]};
+		color: var(
+			--puzzles-card-headline-colour,
+			var(--puzzles-primary, ${palette.news[300]})
+		);
 		${headlineBold20};
+	}
+	a:hover strong {
+		text-decoration: underline;
 	}
 	span {
 		${textSans14};
+	}
+	.played {
+		position: absolute;
+		bottom: ${space[2]}px;
+		left: ${space[2]}px;
+		display: inline-flex;
+		align-items: center;
+		gap: ${space[1]}px;
+		font-weight: bold;
+		line-height: 1;
+	}
+	.completed-icon {
+		display: inline-flex;
+		width: 14px;
+		height: 14px;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		background: ${palette.success[400]};
+		color: ${palette.neutral[100]};
+		svg {
+			width: 11px;
+			height: 11px;
+			fill: currentColor;
+		}
 	}
 `;
 
@@ -190,7 +372,7 @@ const controlsStyles = css`
 	display: grid;
 	grid-template-columns: 44px 1fr 44px;
 	align-items: center;
-	border-top: 1px solid ${palette.neutral[86]};
+	border-top: 1px solid var(--puzzles-border-colour, ${palette.neutral[86]});
 	padding-top: ${space[3]}px;
 	button,
 	a {
@@ -202,20 +384,22 @@ const controlsStyles = css`
 		padding: 0;
 		border: 1px solid ${palette.neutral[20]};
 		border-radius: 50%;
-		background: ${palette.neutral[100]};
-		color: ${palette.neutral[7]};
+		background: var(--puzzles-card-background, ${palette.neutral[100]});
+		color: var(--puzzles-text-colour, ${palette.neutral[7]});
 		cursor: pointer;
 		text-decoration: none;
 		svg {
 			width: 26px;
 			height: 26px;
+			/* The icon has no fill of its own, so it would stay black. */
+			fill: currentColor;
 		}
 		:last-child {
 			justify-self: end;
 		}
 		:disabled,
 		&[aria-disabled='true'] {
-			border-color: ${palette.neutral[86]};
+			border-color: var(--puzzles-border-colour, ${palette.neutral[86]});
 			color: ${palette.neutral[60]};
 			cursor: not-allowed;
 		}
@@ -223,11 +407,15 @@ const controlsStyles = css`
 	strong {
 		text-align: center;
 		${textSans17};
+		color: var(--puzzles-headline-colour, ${palette.neutral[7]});
+		font-weight: bold;
 	}
 `;
 
 const calendarStyles = css`
 	--calendar-gap: 8px;
+	--calendar-day-padding-block: 3px;
+	--calendar-day-padding-inline: 6px;
 	display: grid;
 	grid-template-columns: repeat(7, minmax(0, 1fr));
 	column-gap: var(--calendar-gap);
@@ -238,23 +426,31 @@ const calendarStyles = css`
 		padding-bottom: ${space[2]}px;
 		text-align: center;
 	}
+	.weekday.is-today {
+		font-weight: bold;
+	}
 	.empty,
 	.day {
 		aspect-ratio: 1;
 	}
 	.day {
 		position: relative;
-		display: flex;
 		box-sizing: border-box;
-		align-items: flex-end;
-		justify-content: center;
 		min-width: 0;
-		padding-bottom: ${space[1]}px;
-		border: 1px solid ${palette.neutral[93]};
-		background: ${palette.neutral[97]};
-		color: ${palette.neutral[7]};
+		padding: var(--calendar-day-padding-block)
+			var(--calendar-day-padding-inline);
+		border: 1px solid transparent;
+		background: var(--puzzles-card-background, ${palette.neutral[97]});
+		color: var(--puzzles-card-text-colour, ${palette.neutral[7]});
 		text-decoration: none;
 		${textSans14};
+	}
+	.day-number {
+		display: block;
+		font-size: 10px;
+	}
+	.day.is-today .day-number {
+		font-weight: 700;
 	}
 	.day[data-status='available']::after {
 		position: absolute;
@@ -263,20 +459,20 @@ const calendarStyles = css`
 		width: 5px;
 		height: 5px;
 		border-radius: 50%;
-		background: ${palette.brand[500]};
+		background: ${palette.notificationBlue[400]};
 		content: '';
 	}
 	.day[data-status='completed'] {
-		border: 1px solid ${palette.success[400]};
 		background: color-mix(
 			in srgb,
-			${palette.success[500]} 35%,
+			${palette.success[500]} 9%,
 			${palette.neutral[100]}
 		);
 	}
 	.setter-name {
+		display: none;
 		position: absolute;
-		top: 13px;
+		top: 50%;
 		left: 2px;
 		right: 2px;
 		overflow: hidden;
@@ -284,49 +480,48 @@ const calendarStyles = css`
 		line-height: 10px;
 		text-align: center;
 		text-overflow: ellipsis;
+		transform: translateY(-50%);
 		white-space: nowrap;
-	}
-	.day[data-status='completed'] .setter-name {
-		top: 19px;
 	}
 	.completed-icon {
 		position: absolute;
-		top: ${space[1]}px;
-		left: 50%;
+		right: ${space[1]}px;
+		bottom: ${space[1]}px;
 		display: flex;
-		width: clamp(12px, 3.5vw, 18px);
-		height: clamp(12px, 3.5vw, 18px);
-		transform: translateX(-50%);
+		width: 18px;
+		height: 15px;
 		align-items: center;
 		justify-content: center;
-		border-radius: 50%;
-		background: ${palette.success[400]};
-		color: ${palette.neutral[100]};
 		svg {
-			width: 75%;
-			height: 75%;
-			fill: currentColor;
+			display: block;
 		}
 	}
 	.day[data-status='unavailable'] {
-		border-color: transparent;
-		background: transparent;
-		color: ${palette.neutral[60]};
+		border-color: var(
+			--puzzles-unavailable-day-border,
+			${palette.neutral[93]}
+		);
+		background: var(--puzzles-page-background, ${palette.neutral[100]});
+		color: var(--puzzles-unavailable-day-text, ${palette.neutral[46]});
 	}
 	${from.phablet} {
 		grid-template-columns: repeat(7, 60px);
 		justify-content: space-between;
 		.setter-name {
-			top: 20px;
 			font-size: 10px;
 			line-height: 12px;
 		}
-		.day[data-status='completed'] .setter-name {
-			top: 28px;
-		}
 	}
 	${from.tablet} {
+		--calendar-day-padding-block: 4px;
+		--calendar-day-padding-inline: 4px;
 		grid-template-columns: repeat(7, 68px);
+		.day-number {
+			font-size: 12px;
+		}
+		.setter-name {
+			display: block;
+		}
 	}
 	${from.desktop} {
 		grid-template-columns: repeat(7, 78px);
@@ -354,7 +549,7 @@ const emptyMonthStyles = css`
 	${textSans14};
 	margin-top: ${space[4]}px;
 	a {
-		color: ${palette.news[400]};
+		color: var(--puzzles-primary, ${palette.news[300]});
 		text-decoration: underline;
 	}
 `;
@@ -369,25 +564,20 @@ const legendStyles = css`
 		align-items: center;
 		gap: 5px;
 	}
-	span::before {
+	.available::before {
 		display: inline-flex;
 		flex: 0 0 auto;
-		width: 16px;
-		height: 16px;
+		width: 13.3px;
+		height: 13.3px;
 		align-items: center;
 		justify-content: center;
 		border-radius: 50%;
 		content: '';
+		background: ${palette.notificationBlue[400]};
 	}
-	.available::before {
-		background: ${palette.brand[500]};
-	}
-	.completed::before {
-		background: ${palette.success[400]};
-		color: ${palette.neutral[100]};
-		content: '✓';
-		font-size: 11px;
-		font-weight: bold;
+	.completed svg {
+		display: block;
+		flex: 0 0 auto;
 	}
 	${from.leftCol} {
 		position: absolute;
@@ -406,6 +596,62 @@ const monthName = (year: number, month: number) =>
 	new Intl.DateTimeFormat('en-GB', { month: 'long', year: 'numeric' }).format(
 		new Date(Date.UTC(year, month - 1, 1)),
 	);
+
+const londonDateFormatter = new Intl.DateTimeFormat('en-GB', {
+	timeZone: 'Europe/London',
+	year: 'numeric',
+	month: '2-digit',
+	day: '2-digit',
+});
+
+const archiveDateFormatter = new Intl.DateTimeFormat('en-GB', {
+	timeZone: 'Europe/London',
+	weekday: 'short',
+	month: 'short',
+	day: 'numeric',
+});
+
+const datePart = (
+	parts: Intl.DateTimeFormatPart[],
+	type: 'year' | 'month' | 'day' | 'weekday',
+) => parts.find((part) => part.type === type)?.value;
+
+const londonDate = (date: Date): string | undefined => {
+	const parts = londonDateFormatter.formatToParts(date);
+	const year = datePart(parts, 'year');
+	const month = datePart(parts, 'month');
+	const day = datePart(parts, 'day');
+	return year && month && day ? `${year}-${month}-${day}` : undefined;
+};
+
+const previousDate = (date: string): string | undefined => {
+	const value = new Date(`${date}T12:00:00Z`);
+	if (Number.isNaN(value.getTime())) return undefined;
+	value.setUTCDate(value.getUTCDate() - 1);
+	return value.toISOString().slice(0, 10);
+};
+
+export const archiveCardDate = (date: string, today = new Date()): string => {
+	const todayDate = londonDate(today);
+	if (date === todayDate) return 'Today';
+	if (todayDate && date === previousDate(todayDate)) return 'Yesterday';
+
+	const value = new Date(`${date}T12:00:00Z`);
+	if (Number.isNaN(value.getTime())) return date;
+	const parts = archiveDateFormatter.formatToParts(value);
+	const weekday = datePart(parts, 'weekday');
+	const day = datePart(parts, 'day');
+	const month = datePart(parts, 'month')?.slice(0, 3);
+	return weekday && day && month ? `${weekday} ${day} ${month}` : date;
+};
+
+export const currentWeekdayLabel = (today = new Date()): string =>
+	new Intl.DateTimeFormat('en-GB', {
+		timeZone: 'Europe/London',
+		weekday: 'short',
+	})
+		.format(today)
+		.slice(0, 2);
 
 const moveMonth = (year: number, month: number, delta: number) => {
 	const value = new Date(Date.UTC(year, month - 1 + delta, 1));
@@ -468,24 +714,37 @@ export const PuzzlesArchiveCalendar = ({
 		archive.category === 'crosswords'
 			? `${archive.selectedPuzzle.title.replace(/ crosswords?$/i, '')} crosswords`
 			: `${archive.selectedPuzzle.title} puzzles`;
-	const recent = [...archive.items]
+	const puzzleHeading =
+		archive.category === 'crosswords' &&
+		!/\bcrosswords?\b/i.test(archive.selectedPuzzle.title)
+			? `${archive.selectedPuzzle.title} crossword`
+			: archive.selectedPuzzle.title;
+	// Fall back for Frontend versions that have not yet added recentItems.
+	const recent = [...(archive.recentItems ?? archive.items)]
 		.sort((left, right) => right.date.localeCompare(left.date))
 		.slice(0, 3);
 	const canSelectNextMonth = canNavigateToNextMonth(
 		archive.year,
 		archive.month,
 	);
+	const today = new Date();
+	const todayDate = londonDate(today);
+	const displayedMonth = `${archive.year}-${String(archive.month).padStart(2, '0')}`;
+	const todayWeekday = todayDate?.startsWith(`${displayedMonth}-`)
+		? currentWeekdayLabel(today)
+		: undefined;
 
 	const loadArchive = useCallback(
 		async (
 			year: number,
 			month: number,
 			puzzleId: string,
+			force = false,
 		): Promise<PuzzlesArchive | undefined> => {
 			const currentRequest = ++requests.current.id;
 			const key = cacheKey(puzzleId, year, month);
 			const cached = cache.current.get(key);
-			if (cached && !cached.hasError) {
+			if (!force && cached && !cached.hasError) {
 				setArchive(cached);
 				setError(cached.hasError);
 				setLoading(false);
@@ -497,11 +756,20 @@ export const PuzzlesArchiveCalendar = ({
 			try {
 				// Query parameters are stripped by the CDN in CODE/PROD.
 				const url = new URL(
-					`/puzzles-and-games/${initialArchive.category}/archive-data/${encodeURIComponent(puzzleId)}/${year}/${month}`,
+					`${window.guardian.config.page.ajaxUrl}/puzzles-and-games/${initialArchive.category}/archive-data/${encodeURIComponent(puzzleId)}/${year}/${month}`,
 					window.location.origin,
 				);
+				const authStatus = await getAuthStatus();
+				const headers: Record<string, string> = {
+					Accept: 'application/json',
+				};
+				if (authStatus.kind === 'SignedIn') {
+					headers.Authorization = `Bearer ${authStatus.accessToken.accessToken}`;
+				}
 				const response = await fetch(url, {
+					cache: 'no-store',
 					credentials: 'same-origin',
+					headers,
 				});
 				if (!response.ok) {
 					throw new Error(
@@ -538,7 +806,8 @@ export const PuzzlesArchiveCalendar = ({
 		const pendingRequests = requests.current;
 		// The browser retains the query even when the CDN removes it upstream.
 		// Restore deep links after hydration, and Back/Forward without a reload.
-		const restoreSelection = () => {
+		const restoreSelection = async () => {
+			const requestAtStart = requests.current.id;
 			const params = new URLSearchParams(window.location.search);
 			const puzzle = params.get('puzzle');
 			const selectedPuzzle =
@@ -550,26 +819,30 @@ export const PuzzlesArchiveCalendar = ({
 				) ?? initialArchive.selectedPuzzle;
 			const year = Number(params.get('year'));
 			const month = Number(params.get('month'));
-			const today = new Date();
+			const selectionDate = new Date();
 			const validMonth =
 				Number.isInteger(year) &&
 				year > 0 &&
 				Number.isInteger(month) &&
 				month >= 1 &&
 				month <= 12 &&
-				(year < today.getFullYear() ||
-					(year === today.getFullYear() &&
-						month <= today.getMonth() + 1));
+				(year < selectionDate.getFullYear() ||
+					(year === selectionDate.getFullYear() &&
+						month <= selectionDate.getMonth() + 1));
+			const authStatus = await getAuthStatus();
+			if (requestAtStart !== requests.current.id) return;
 			void loadArchive(
 				validMonth ? year : initialArchive.year,
 				validMonth ? month : initialArchive.month,
 				selectedPuzzle.id,
+				authStatus.kind === 'SignedIn',
 			);
 		};
-		restoreSelection();
-		window.addEventListener('popstate', restoreSelection);
+		void restoreSelection();
+		const onPopState = () => void restoreSelection();
+		window.addEventListener('popstate', onPopState);
 		return () => {
-			window.removeEventListener('popstate', restoreSelection);
+			window.removeEventListener('popstate', onPopState);
 			++pendingRequests.id;
 		};
 	}, [initialArchive, loadArchive]);
@@ -618,43 +891,53 @@ export const PuzzlesArchiveCalendar = ({
 			css={sectionStyles}
 		>
 			<div aria-hidden="true" css={linesStyles} />
-			<nav aria-label="Puzzle types" css={tabsStyles}>
-				{archive.puzzles.map((puzzle) => {
-					const href = archivePageUrl(
-						archive.category,
-						puzzle.id,
-						archive.year,
-						archive.month,
-					);
-					return (
-						<a
-							aria-current={
-								puzzle.id === archive.selectedPuzzle.id
-									? 'page'
-									: undefined
-							}
-							href={href}
-							key={puzzle.id}
-							onClick={(event) => {
-								if (
-									event.button !== 0 ||
-									event.metaKey ||
-									event.ctrlKey ||
-									event.shiftKey ||
-									event.altKey
-								) {
-									return;
+			<div css={chipsStyles}>
+				<nav aria-label="Puzzle types" css={tabsStyles}>
+					{archive.puzzles.map((puzzle) => {
+						const href = archivePageUrl(
+							archive.category,
+							puzzle.id,
+							archive.year,
+							archive.month,
+						);
+						return (
+							<a
+								aria-current={
+									puzzle.id === archive.selectedPuzzle.id
+										? 'page'
+										: undefined
 								}
-								event.preventDefault();
-								void selectPuzzle(puzzle.id, href);
-							}}
-						>
-							{puzzle.title}
-						</a>
-					);
-				})}
-			</nav>
-			<h2 css={titleStyles}>{archive.selectedPuzzle.title}</h2>
+								href={href}
+								key={puzzle.id}
+								onClick={(event) => {
+									if (
+										event.button !== 0 ||
+										event.metaKey ||
+										event.ctrlKey ||
+										event.shiftKey ||
+										event.altKey
+									) {
+										return;
+									}
+									event.preventDefault();
+									void selectPuzzle(puzzle.id, href);
+								}}
+							>
+								{puzzle.title}
+							</a>
+						);
+					})}
+				</nav>
+				<div
+					aria-hidden="true"
+					css={[chipsFadeStyles, chipsFadeLeftStyles]}
+				/>
+				<div
+					aria-hidden="true"
+					css={[chipsFadeStyles, chipsFadeRightStyles]}
+				/>
+			</div>
+			<h2 css={titleStyles}>{puzzleHeading}</h2>
 			<div css={recentStyles}>
 				{recent.map((item, index) => (
 					<a href={item.url} key={`${item.date}-${item.puzzleType}`}>
@@ -664,10 +947,25 @@ export const PuzzlesArchiveCalendar = ({
 								: archive.selectedPuzzle.title}
 						</strong>
 						<span>
-							<time dateTime={item.date}>{item.date}</time>
+							<time dateTime={item.date}>
+								{archiveCardDate(item.date, today)}
+							</time>
 						</span>
 						{item.setterName && (
-							<span> · By: {item.setterName}</span>
+							<span className="setter">
+								By: {item.setterName}
+							</span>
+						)}
+						{item.gameStatus === 'completed' && (
+							<span className="played">
+								Played
+								<span
+									aria-hidden="true"
+									className="completed-icon"
+								>
+									<SvgCheckmark />
+								</span>
+							</span>
 						)}
 					</a>
 				))}
@@ -757,7 +1055,10 @@ export const PuzzlesArchiveCalendar = ({
 				aria-busy={loading}
 			>
 				{['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map((day) => (
-					<div className="weekday" key={day}>
+					<div
+						className={`weekday${day === todayWeekday ? ' is-today' : ''}`}
+						key={day}
+					>
 						{day}
 					</div>
 				))}
@@ -768,10 +1069,11 @@ export const PuzzlesArchiveCalendar = ({
 						);
 					}
 					const status = archiveStatus(cell.item);
+					const isToday = cell.date === todayDate;
 					return cell.item ? (
 						<a
 							aria-label={`${cell.date}, ${status}`}
-							className="day"
+							className={`day${isToday ? ' is-today' : ''}`}
 							data-date={cell.date}
 							data-status={status}
 							href={cell.item.url}
@@ -787,25 +1089,25 @@ export const PuzzlesArchiveCalendar = ({
 										{cell.item.setterName}
 									</span>
 								)}
-							{cell.day}
+							<span className="day-number">{cell.day}</span>
 							{status === 'completed' && (
 								<span
 									aria-hidden="true"
 									className="completed-icon"
 								>
-									<SvgCheckmark />
+									<CalendarCompletedIcon />
 								</span>
 							)}
 						</a>
 					) : (
 						<span
 							aria-disabled="true"
-							className="day"
+							className={`day${isToday ? ' is-today' : ''}`}
 							data-date={cell.date}
 							data-status="unavailable"
 							key={cell.date}
 						>
-							{cell.day}
+							<span className="day-number">{cell.day}</span>
 						</span>
 					);
 				})}
@@ -847,7 +1149,10 @@ export const PuzzlesArchiveCalendar = ({
 			)}
 			<div css={legendStyles}>
 				<span className="available">Available</span>
-				<span className="completed">Played</span>
+				<span className="completed">
+					<PlayedLegendIcon />
+					Played
+				</span>
 			</div>
 		</section>
 	);

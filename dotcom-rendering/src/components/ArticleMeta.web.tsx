@@ -5,7 +5,7 @@ import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { CSSProperties } from 'react';
 import type { FEArticle } from '../frontend/feArticle';
-import type { LayoutType } from '../layouts/lib/articleArrangements';
+import { type LayoutType } from '../layouts/lib/articleArrangements';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
 	ArticleDesign,
@@ -23,6 +23,7 @@ import {
 import { getAudioData } from '../lib/audio-data';
 import { getSoleContributor } from '../lib/byline';
 import { decideMainMediaCaption } from '../lib/decide-caption';
+import { hasFilterTag, isRepublished } from '../lib/theFilter';
 import { palette as themePalette } from '../palette';
 import { hasPreferredSourceButton } from '../preferredSource';
 import type { Branding as BrandingType } from '../types/branding';
@@ -53,6 +54,7 @@ type Props = {
 	primaryDateline: string;
 	secondaryDateline: string;
 	webPublicationDate?: string;
+	firstPublicationDate?: string;
 	branding?: BrandingType;
 	discussionApiUrl: string;
 	shortUrlId: string;
@@ -307,6 +309,7 @@ export const ArticleMeta = ({
 	primaryDateline,
 	secondaryDateline,
 	webPublicationDate,
+	firstPublicationDate,
 	discussionApiUrl,
 	shortUrlId,
 	isCommentable,
@@ -330,8 +333,6 @@ export const ArticleMeta = ({
 
 	const isPictureContent = format.design === ArticleDesign.Picture;
 
-	const isImmersive = format.display === ArticleDisplay.Immersive;
-
 	const isAudio = format.design === ArticleDesign.Audio;
 
 	const seriesTag = getSeriesTag(tags);
@@ -339,11 +340,11 @@ export const ArticleMeta = ({
 	const podcast = getPodcast(tags);
 	const rssFeedUrl = getRssFeedUrl(tags);
 
-	const isFilterArticle = tags.some(
-		(tag) =>
-			tag.id === 'tracking/commissioningdesk/the-filter' ||
-			tag.id === 'tracking/commissioningdesk/filter-us',
-	);
+	const isFilterArticle = hasFilterTag(tags);
+	const showUpdatedLabel =
+		isFilterArticle &&
+		webPublicationDate !== undefined &&
+		isRepublished(firstPublicationDate, webPublicationDate);
 
 	const mediaType:
 		| 'YouTubeVideo'
@@ -441,6 +442,7 @@ export const ArticleMeta = ({
 									primaryDateline={primaryDateline}
 									webPublicationDate={webPublicationDate}
 									format={format}
+									showUpdatedLabel={showUpdatedLabel}
 								/>
 							) : (
 								<Dateline
@@ -501,6 +503,7 @@ export const ArticleMeta = ({
 										primaryDateline={primaryDateline}
 										webPublicationDate={webPublicationDate}
 										format={format}
+										showUpdatedLabel={showUpdatedLabel}
 									/>
 								) : (
 									<Dateline
@@ -593,27 +596,28 @@ export const ArticleMeta = ({
 						hidePreferredSourceOnPrint={hidePreferredSourceOnPrint}
 					/>
 				) : null}
-				{isImmersive && mainMediaElements?.[0] && (
-					<Hide until="leftCol">
-						<div
-							css={css`
-								margin-top: ${space[2]}px;
-							`}
-						>
-							<Caption
-								captionText={decideMainMediaCaption(
-									mainMediaElements[0],
-								)}
-								format={format}
-								shouldLimitWidth={false}
-								isLeftCol={true}
-								isMainMedia={true}
-								layoutType={layoutType}
-								mediaType={mediaType}
-							/>
-						</div>
-					</Hide>
-				)}
+				{layoutType === 'immersiveLandscape' &&
+					mainMediaElements?.[0] && (
+						<Hide until="leftCol">
+							<div
+								css={css`
+									margin-top: ${space[2]}px;
+								`}
+							>
+								<Caption
+									captionText={decideMainMediaCaption(
+										mainMediaElements[0],
+									)}
+									format={format}
+									shouldLimitWidth={false}
+									isLeftCol={true}
+									isMainMedia={true}
+									layoutType={layoutType}
+									mediaType={mediaType}
+								/>
+							</div>
+						</Hide>
+					)}
 			</div>
 		</div>
 	);

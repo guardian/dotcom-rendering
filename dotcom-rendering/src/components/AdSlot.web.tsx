@@ -160,6 +160,7 @@ const topAboveNavContainerStyles = css`
 			position: absolute;
 			height: 250px;
 			width: 728px;
+			max-width: 100%;
 			top: ${labelHeight}px;
 			left: 50%;
 			transform: translateX(-50%);

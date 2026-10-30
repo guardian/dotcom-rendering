@@ -58,6 +58,9 @@ const indices = [
 	// Edition selector in nav - needs to be below stickyAdWrapper
 	'editionDropdown',
 
+	// Used liveblogs, needs to appear over other content
+	'stickyYoutubePlayer',
+
 	// Interscroller ads need their own stacking context to force the background image below the ad to stop it capturing mouse events
 	'interscrollerAd',
 
@@ -82,6 +85,9 @@ const indices = [
 	// Sticky table of contents element
 	'tableOfContents',
 
+	// Furniture
+	'meta',
+
 	// Body
 	'bodyArea',
 	'rightColumnArea',
@@ -103,9 +109,6 @@ const indices = [
 	'video-card-link',
 	'video-container',
 
-	// Main media
-	'mainMedia',
-
 	// The carousel buttons of the highlights container that sits above the header.
 	// Needs to be above 'card-link'.
 	'highlights-carousel-buttons',
@@ -115,6 +118,9 @@ const indices = [
 	'card-nested-link',
 	'card-link',
 	'card-podcast-image',
+
+	// discussion modals and dropdowns
+	'discussion',
 ] as const;
 
 // Implementation code - you don't need to change this to get a new index

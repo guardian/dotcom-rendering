@@ -7,7 +7,10 @@ import {
 	palette,
 	space,
 	textSans14,
+	until,
+	visuallyHidden,
 } from '@guardian/source/foundations';
+import { SvgCheckmark } from '@guardian/source/react-components';
 import type { PuzzleItem } from '../types/puzzlesPage';
 
 /**
@@ -92,7 +95,7 @@ const cardStyles = (
 		padding-right: 181px;
 	`}
 	box-sizing: border-box;
-	color: ${palette.neutral[7]};
+	color: var(--puzzles-card-text-colour, ${palette.neutral[7]});
 	text-decoration: none;
 
 	${from.tablet} {
@@ -128,6 +131,14 @@ const cardStyles = (
 	}
 `;
 
+const cardColourStyles = (background: string | undefined) => {
+	const lightBackground = background ?? palette.neutral[100];
+	return css`
+		background-color: ${lightBackground};
+		background-color: var(--puzzles-card-background, ${lightBackground});
+	`;
+};
+
 const cardTextStyles = (isFeatured: boolean) => css`
 	position: relative;
 	z-index: ${isFeatured ? 1 : 'auto'};
@@ -137,22 +148,58 @@ const cardTextStyles = (isFeatured: boolean) => css`
 	padding: ${space[1]}px ${space[2]}px ${space[2]}px;
 `;
 
-const cardTitleStyles = (variant: PuzzleItem['cardVariant']) => css`
+const cardTitleStyles = (
+	variant: PuzzleItem['cardVariant'],
+	lightColour: string,
+) => css`
+	margin: 0;
 	${variant === 'compact' ? headlineBold20 : headlineBold24};
+	color: var(--puzzles-card-headline-colour, ${lightColour});
 	line-height: 1.15;
 `;
 
+const hiddenCrosswordSuffixStyles = css`
+	${visuallyHidden};
+`;
+
 const cadenceStyles = css`
-	margin-top: ${space[1]}px;
+	color: var(--puzzles-card-cadence-colour, ${palette.neutral[7]});
 	${textSans14};
 	line-height: 1.3;
 `;
 
 const setterStyles = css`
-	margin-top: ${space[1]}px;
-	color: ${palette.news[300]};
+	color: var(--puzzles-card-text-colour, ${palette.news[300]});
 	${textSans14};
 	line-height: 1.3;
+`;
+
+const playedStyles = css`
+	position: absolute;
+	z-index: 1;
+	bottom: ${space[2]}px;
+	left: ${space[2]}px;
+	display: inline-flex;
+	align-items: center;
+	gap: ${space[1]}px;
+	${textSans14};
+	font-weight: bold;
+	line-height: 1;
+	.completed-icon {
+		display: inline-flex;
+		width: 14px;
+		height: 14px;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		background: ${palette.success[400]};
+		color: ${palette.neutral[100]};
+	}
+	svg {
+		width: 11px;
+		height: 11px;
+		fill: currentColor;
+	}
 `;
 
 const cardImageStyles = (isFeatured: boolean) => css`
@@ -195,16 +242,23 @@ export const PuzzleCard = ({
 		item.image !== undefined &&
 		item.image.length > 0 &&
 		item.cardVariant !== 'compact';
+	const needsCrosswordSuffix =
+		item.type === 'crossword' && !/\bcrossword\b/i.test(item.title);
 	const contents = (
 		<>
 			<div css={cardTextStyles(isFeatured)}>
-				<span
+				<h3
 					className="puzzle-card-title"
-					css={cardTitleStyles(item.cardVariant)}
-					style={{ color: colours.title }}
+					css={cardTitleStyles(item.cardVariant, colours.title)}
 				>
 					{item.title}
-				</span>
+					{needsCrosswordSuffix && (
+						<span css={hiddenCrosswordSuffixStyles}>
+							{' '}
+							crossword
+						</span>
+					)}
+				</h3>
 				{item.cadence !== undefined && item.cadence.length > 0 && (
 					<span css={cadenceStyles}>{item.cadence}</span>
 				)}
@@ -218,57 +272,83 @@ export const PuzzleCard = ({
 					src={item.image}
 				/>
 			)}
+			{item.gameStatus === 'completed' && (
+				<span css={playedStyles}>
+					Played
+					<span aria-hidden="true" className="completed-icon">
+						<SvgCheckmark />
+					</span>
+				</span>
+			)}
 		</>
 	);
-	const style = { backgroundColor: colours.background };
+	const styles = [
+		cardStyles(item.cardVariant, hasImage, isFeatured),
+		cardColourStyles(colours.background),
+	];
 	return url !== undefined ? (
-		<a
-			css={cardStyles(item.cardVariant, hasImage, isFeatured)}
-			href={url}
-			style={style}
-			{...externalProps(url)}
-		>
+		<a css={styles} href={url} {...externalProps(url)}>
 			{contents}
 		</a>
 	) : (
-		<article
-			css={cardStyles(item.cardVariant, hasImage, isFeatured)}
-			style={style}
-		>
-			{contents}
-		</article>
+		<article css={styles}>{contents}</article>
 	);
 };
 
+/*
+ * Horizontal separators between cards, as `[above, below]` in px: the space
+ * between the card above and the separator, and between the separator and
+ * the card below. Below the tablet breakpoint the values depend on the card
+ * size; from tablet they are the same for every card.
+ */
+const normalSeparator = [16, 8] as const;
+const smallSeparator = [8, 6] as const;
+const tabletSeparator = [16, 10] as const;
+
+const isSmallCard = (variant: PuzzleItem['cardVariant'] | undefined) =>
+	variant === 'compact';
+
 export const rowsStyles = css`
 	--puzzles-gap: 16px;
+	--puzzles-group-above: ${normalSeparator[0]}px;
+	--puzzles-group-below: ${normalSeparator[1]}px;
 	display: flex;
 	min-width: 0;
 	flex-direction: column;
-	gap: 16px;
 	${from.phablet} {
 		--puzzles-gap: 24px;
-		gap: 24px;
 	}
 
 	${from.tablet} {
 		--puzzles-gap: 20px;
-		gap: 20px;
-		/*
-     * Add 6px above each subsequent card group so its separator sits
-     * 16px below the preceding cards and 10px above this row. This is
-     * the separator immediately above the compact crossword cards.
-     */
-		> ul ~ ul {
-			margin-top: 6px;
+		--puzzles-group-above: ${tabletSeparator[0]}px;
+		--puzzles-group-below: ${tabletSeparator[1]}px;
+	}
+	/*
+	 * Each card group after the first is spaced from the previous one by the
+	 * separator above and below it. The above space follows the size of the
+	 * cards in the previous group, the below space the size of its own.
+	 */
+	${until.tablet} {
+		> ul[data-card-size='small'] + ul {
+			--puzzles-group-above: ${smallSeparator[0]}px;
 		}
+		> ul + ul[data-card-size='small'] {
+			--puzzles-group-below: ${smallSeparator[1]}px;
+		}
+	}
+	> ul ~ ul {
+		margin-top: calc(
+			var(--puzzles-group-above) + var(--puzzles-group-below)
+		);
 	}
 	> ul ~ ul::before {
 		position: absolute;
-		top: calc(var(--puzzles-gap) / -2);
+		top: calc(var(--puzzles-group-below) * -1);
 		right: 0;
 		left: 0;
-		border-top: 1px solid ${palette.neutral[86]};
+		border-top: 1px solid
+			var(--puzzles-border-colour, ${palette.neutral[86]});
 		content: '';
 		pointer-events: none;
 	}
@@ -287,10 +367,11 @@ const cardGridStyles = (columns: number, tracks = columns) => css`
 	}
 	> li:nth-child(n + ${columns + 1})::before {
 		position: absolute;
-		top: calc(var(--puzzles-gap) / -2);
+		top: calc(var(--puzzles-row-below) * -1);
 		right: 0;
 		left: 0;
-		border-top: 1px solid ${palette.neutral[86]};
+		border-top: 1px solid
+			var(--puzzles-border-colour, ${palette.neutral[86]});
 		content: '';
 		pointer-events: none;
 	}
@@ -301,7 +382,8 @@ const cardGridStyles = (columns: number, tracks = columns) => css`
 			top: 0;
 			bottom: 0;
 			left: calc(var(--puzzles-gap) / -2);
-			border-left: 1px solid ${palette.neutral[86]};
+			border-left: 1px solid
+				var(--puzzles-border-colour, ${palette.neutral[86]});
 			content: '';
 			pointer-events: none;
 		}
@@ -344,13 +426,18 @@ export const rowStyles = (
 	const desktopColumns =
 		variant === 'compact' ? Math.min(count, 5) : Math.min(count, 2);
 
+	const [separatorAbove, separatorBelow] = isSmallCard(variant)
+		? smallSeparator
+		: normalSeparator;
+
 	return css`
 		position: relative;
 		display: grid;
+		--puzzles-row-below: ${separatorBelow}px;
 		${cardGridStyles(mobileColumns)};
-		gap: 16px;
+		gap: ${separatorAbove + separatorBelow}px 16px;
 		${from.phablet} {
-			gap: 24px;
+			column-gap: 24px;
 		}
 		margin: 0;
 		padding: 0;
@@ -361,8 +448,9 @@ export const rowStyles = (
 
 		${from.tablet} {
 			${cardGridStyles(tabletColumns)};
+			--puzzles-row-below: ${tabletSeparator[1]}px;
 			column-gap: 20px;
-			row-gap: 26px;
+			row-gap: ${tabletSeparator[0] + tabletSeparator[1]}px;
 			max-width: 700px;
 		}
 		${variant === 'compact' &&
@@ -390,6 +478,9 @@ export const Rows = ({
 			.filter((row) => row.length > 0)
 			.map((row) => (
 				<ul
+					data-card-size={
+						isSmallCard(row[0]?.cardVariant) ? 'small' : 'normal'
+					}
 					css={rowStyles(
 						row[0]?.cardVariant ?? 'primary',
 						row.length,

@@ -1,8 +1,9 @@
 import type { EditionId } from '../lib/edition';
+import type { CommercialProperties } from './commercial';
 import type { ConfigType } from './config';
 import type { FooterType } from './footer';
 import type { FENavType } from './frontend';
-import type { PuzzleItem } from './puzzlesPage';
+import type { PuzzleGameSupporting, PuzzleItem } from './puzzlesPage';
 
 /**
  * The instance-specific data for a single Puzzle Page: the concrete content
@@ -14,6 +15,8 @@ import type { PuzzleItem } from './puzzlesPage';
  * `/crosswords/*` flow), so this type carries no crossword-specific fields.
  */
 export interface PuzzlePageInstance {
+	/** Dated provider URL resolved by frontend through the Puzzles API. */
+	gameUrl?: string;
 	title: string;
 	/**
 	 * Which day's puzzle the reader wants to see, as a plain date string
@@ -34,6 +37,7 @@ export interface PuzzlePageInstance {
 	 */
 	puzzleDate?: string;
 	moreFromPuzzlesAndGames?: PuzzleItem[];
+	puzzlesSupporting?: PuzzleGameSupporting;
 }
 
 /**
@@ -77,4 +81,5 @@ export interface FEPuzzlePageType {
 	 * behaviour (ads always rendered) until `frontend` is updated.
 	 */
 	isAdFreeUser?: boolean;
+	commercialProperties?: Partial<CommercialProperties>;
 }

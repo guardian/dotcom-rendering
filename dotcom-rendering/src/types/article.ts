@@ -3,9 +3,12 @@ import type { FEArticle } from '../frontend/feArticle';
 import {
 	ArticleDesign,
 	type ArticleDisplay,
+	type ArticleFormat,
 	type ArticleTheme,
 	decideFormat,
 } from '../lib/articleFormat';
+import { getPuzzleGroupPalette } from '../lib/puzzleGroupPalette';
+import { isPuzzlesHubV1Enabled } from '../lib/puzzlesHubVersionExperiment';
 import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import { appsLightboxImages } from '../model/appsLightboxImages';
 import { buildCrosswordBlock } from '../model/buildCrosswordBlock';
@@ -86,11 +89,27 @@ export const getGalleryMainMedia = (
 	return mainMedia;
 };
 
+/**
+ * Crosswords take the colour of the crosswords group (news) instead of the
+ * theme Frontend sends, but only for readers in the `puzzles-new-hub-v1`
+ * experiment.
+ */
+const decideArticleFormat = (data: FEArticle): ArticleFormat => {
+	const format = decideFormat(data.format);
+	if (
+		format.design === ArticleDesign.Crossword &&
+		isPuzzlesHubV1Enabled(data.config)
+	) {
+		return { ...format, theme: getPuzzleGroupPalette('crosswords').theme };
+	}
+	return format;
+};
+
 export const enhanceArticleType = (
 	data: FEArticle,
 	renderingTarget: RenderingTarget,
 ): Article => {
-	const format = decideFormat(data.format);
+	const format = decideArticleFormat(data);
 
 	const serverTime = Date.now();
 
@@ -115,6 +134,7 @@ export const enhanceArticleType = (
 		pageId: data.pageId,
 		serverSideABTests: data.config.serverSideABTests,
 		switches: data.config.switches,
+		stage: data.config.stage,
 	});
 
 	const crosswordBlock = buildCrosswordBlock(data);
@@ -202,6 +222,7 @@ export const enhanceArticleType = (
 				renderingTarget,
 				data.pinnedPost,
 				data.pageId,
+				data.config.stage,
 			),
 			standfirst: enhanceStandfirst(data.standfirst),
 			commercialProperties: enhanceCommercialProperties(

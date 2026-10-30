@@ -1,6 +1,7 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
+import { ukGeneralFinal } from '../../fixtures/manual/electionTrackers/ukGeneralFinal';
 import {
 	audioTrails,
 	galleryTrails,
@@ -17,6 +18,7 @@ import {
 	selfHostedLoopVideo54Card,
 	selfHostedLoopVideo916Card,
 	slideshowCard,
+	snapLink,
 	trails,
 	youtubeVideoTrails,
 } from '../../fixtures/manual/trails';
@@ -171,6 +173,7 @@ const meta = {
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
 		collectionId: 1,
+		isStorylines: false,
 	},
 	render: ({ frontSectionTitle, ...args }) => (
 		<FrontSection
@@ -196,7 +199,6 @@ export const SplashWithStandards: Story = {
 			splash: [{ ...splashCard, supportingContent: [] }],
 			standard: standardCards.map((card, index) => ({
 				...card,
-				isBoosted: index === 0,
 				boostLevel: index === 0 ? 'boost' : 'default',
 			})),
 		},
@@ -407,6 +409,21 @@ export const SplashWithLiveUpdates: Story = {
 				<Section title="Giga boosted" boostLevel="gigaboost" />
 			</>
 		);
+	},
+};
+
+export const SplashWithSnapLinkAndStandards: Story = {
+	name: 'Splash with snap link and big and standard cards',
+	args: {
+		frontSectionTitle: 'Splash with snap link and standards',
+		groupedTrails: {
+			...emptyGroupedTrails,
+			splash: [{ ...snapLink }, { ...splashCard, supportingContent: [] }],
+			standard: standardCards.map((card, index) => ({
+				...card,
+				boostLevel: index === 0 ? 'boost' : 'default',
+			})),
+		},
 	},
 };
 
@@ -882,3 +899,34 @@ export const StandardCardsWithSlideshow: Story = {
 		collectionId: 1,
 	},
 };
+
+export const EventGraphic = {
+	args: {
+		frontSectionTitle: 'Event graphic example',
+		groupedTrails: {
+			...emptyGroupedTrails,
+			splash: [
+				{
+					...splashCard,
+					graphicKind: 'electionTracker',
+					dataUrl: 'https://www.theguardian.com/mock-event-graphic',
+					eventData: ukGeneralFinal,
+				},
+				splashCard,
+			],
+			standard: trails.slice(4, 9),
+		},
+		collectionId: 1,
+	},
+	decorators: (Story) => {
+		global.fetch = customMockFetch([
+			{
+				mockedMethod: 'GET',
+				mockedUrl: 'https://www.theguardian.com/mock-event-graphic',
+				mockedStatus: 200,
+				mockedBody: ukGeneralFinal,
+			},
+		]);
+		return <Story />;
+	},
+} satisfies Story;

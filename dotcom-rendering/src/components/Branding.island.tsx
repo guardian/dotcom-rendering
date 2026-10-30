@@ -68,11 +68,7 @@ const liveBlogLabelStyle = css`
 	}
 `;
 
-const galleryLabelStyle = css`
-	${textSansBold12}
-`;
-
-const labsLabelStyle = css`
+const boldLabelStyle = css`
 	${textSansBold12}
 `;
 
@@ -219,6 +215,7 @@ export const Branding = ({ branding, format }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 	const isGallery = format.design === ArticleDesign.Gallery;
 	const isLabs = format.theme === ArticleSpecial.Labs;
+	const isCrossword = format.design === ArticleDesign.Crossword;
 
 	const { ophanComponentName, ophanComponentLink } = getOphanComponents({
 		branding,
@@ -246,8 +243,7 @@ export const Branding = ({ branding, format }: Props) => {
 			<div
 				css={[
 					labelStyle,
-					isGallery && galleryLabelStyle,
-					isLabs && labsLabelStyle,
+					(isGallery || isLabs || isCrossword) && boldLabelStyle,
 					isAdvertisingPartnerOrExclusive &&
 						labelAdvertisingPartnerStyle,
 					isLiveBlog && liveBlogLabelStyle,
@@ -276,17 +272,19 @@ export const Branding = ({ branding, format }: Props) => {
 				</a>
 			</div>
 
-			<a
-				href={branding.aboutThisLink}
-				css={[
-					aboutLinkStyle,
-					isAdvertisingPartnerOrExclusive &&
-						aboutLinkAdvertisingPartnerStyle,
-					isLiveBlog && liveBlogAboutLinkStyle,
-				]}
-			>
-				About this content
-			</a>
+			{branding.aboutThisLink.length > 0 && (
+				<a
+					href={branding.aboutThisLink}
+					css={[
+						aboutLinkStyle,
+						isAdvertisingPartnerOrExclusive &&
+							aboutLinkAdvertisingPartnerStyle,
+						isLiveBlog && liveBlogAboutLinkStyle,
+					]}
+				>
+					About this content
+				</a>
+			)}
 		</div>
 	);
 };

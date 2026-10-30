@@ -43,7 +43,11 @@ const DottedLines = ({
 
 export const DecideLines = ({ format, color, displayingAvatar }: Props) => {
 	const count =
-		format.design === ArticleDesign.Comment || displayingAvatar ? 8 : 4;
+		format.design === ArticleDesign.Comment ||
+		format.design === ArticleDesign.Letter ||
+		displayingAvatar
+			? 8
+			: 4;
 
 	switch (format.theme) {
 		case Pillar.Sport:

@@ -7,6 +7,7 @@ import {
 	textSansBold15,
 } from '@guardian/source/foundations';
 import { SvgNewsletterFilled } from '@guardian/source/react-components';
+import { generateImageURL } from '../lib/image';
 import { palette as themePalette } from '../palette';
 
 export type NewsletterSignupCardProps = {
@@ -19,10 +20,15 @@ export type NewsletterSignupCardProps = {
 	isModal?: boolean;
 };
 
+/**
+ * The side padding is a variable so a host can tighten it (the Puzzles pages
+ * use 8px); `innerDividerStyles` bleeds by the same amount.
+ */
 const containerStyles = css`
 	clear: left;
 	background-color: ${themePalette('--newsletter-card-background')};
-	padding: ${space[2]}px ${space[3]}px ${space[4]}px ${space[3]}px;
+	padding: ${space[2]}px var(--newsletter-card-inline-padding, ${space[3]}px)
+		${space[4]}px;
 `;
 
 const dividerStyles = css`
@@ -91,7 +97,8 @@ const badgeStyles = css`
 const innerDividerStyles = css`
 	border: none;
 	border-top: 1px solid ${themePalette('--newsletter-card-divider')};
-	margin: 0 -${space[3]}px ${space[2]}px;
+	margin: 0 calc(var(--newsletter-card-inline-padding, ${space[3]}px) * -1)
+		${space[2]}px;
 `;
 
 const descriptionStyles = css`
@@ -143,7 +150,12 @@ const NewsletterSignupHeader = (
 			{!!props.illustrationSquare && (
 				<img
 					css={illustrationStyles}
-					src={props.illustrationSquare}
+					src={generateImageURL({
+						mainImage: props.illustrationSquare,
+						imageWidth: 100,
+						resolution: 'high',
+						aspectRatio: '1:1',
+					})}
 					alt=""
 					loading="lazy"
 					decoding="async"

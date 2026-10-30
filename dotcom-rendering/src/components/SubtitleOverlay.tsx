@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	from,
 	space,
 	textSans15,
 	textSans17,
@@ -9,12 +10,19 @@ import { palette } from '../palette';
 import type { SubtitleSize } from './SelfHostedVideoPlayer';
 
 export type SubtitlesPosition =
+	/**
+	 * Subtitles are anchored to the top, leaving enough room for controls positioned at the top
+	 */
 	| 'top'
 	| 'bottom'
 	/**
 	 * Subtitles are anchored to the bottom, but leave enough room for a tall progress bar
 	 */
-	| 'bottom-elevated';
+	| 'bottom-elevated'
+	/**
+	 * Subtitles are anchored to the top on mobile and bottom on larger screens
+	 */
+	| 'top-on-mobile';
 
 const subtitleOverlayStyles = css`
 	width: 100%;
@@ -28,6 +36,14 @@ const subtitlePositionStyles = (position: SubtitlesPosition) => css`
 	${position === 'top' && `top: ${space[4]}px;`};
 	${position === 'bottom' && `bottom: ${space[4]}px;`};
 	${position === 'bottom-elevated' && `bottom: ${space[12]}px;`};
+	${position === 'top-on-mobile' &&
+	`
+		top: ${space[4]}px;
+		${from.tablet} {
+			top: auto;
+			bottom: ${space[4]}px;
+		}
+	`};
 `;
 
 const cueBoxStyles = css`

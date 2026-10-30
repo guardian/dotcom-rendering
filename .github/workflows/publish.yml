@@ -28,7 +28,7 @@ jobs:
         uses: ./.github/actions/setup-node-env
 
       - name: Pull Image
-        uses: guardian/actions-ecr/pull@v1.0.0
+        uses: guardian/actions-ecr/pull@v1.0.2
         id: pull-image
         with:
           app: dotcom-rendering
@@ -72,13 +72,6 @@ jobs:
           rm -r facia-rendering/*
           mv facia-rendering.tar.gz facia-rendering/
 
-      - name: Compress tag-page-rendering app server files
-        working-directory: dotcom-rendering/target
-        run: |
-          tar -zcf tag-page-rendering.tar.gz tag-page-rendering
-          rm -r tag-page-rendering/*
-          mv tag-page-rendering.tar.gz tag-page-rendering/
-
       - name: Compress interactive-rendering app server files
         working-directory: dotcom-rendering/target
         run: |
@@ -88,7 +81,7 @@ jobs:
 
       # All rendering apps deployment
       - name: Upload rendering apps to RiffRaff
-        uses: guardian/actions-riff-raff@v4.3.6
+        uses: guardian/actions-riff-raff@v4.3.7
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           roleArn: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
@@ -105,8 +98,6 @@ jobs:
               - dotcom-rendering/target/facia-rendering
             tag-page-rendering-cfn:
               - dotcom-rendering/target/tag-page-rendering-cfn
-            tag-page-rendering:
-              - dotcom-rendering/target/tag-page-rendering
             interactive-rendering-cfn:
               - dotcom-rendering/target/interactive-rendering-cfn
             interactive-rendering:

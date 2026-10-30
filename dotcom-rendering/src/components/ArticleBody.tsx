@@ -2,10 +2,12 @@ import { css } from '@emotion/react';
 import {
 	between,
 	headlineBold24,
+	pxToRem,
 	remSpace,
 	textEgyptian17,
 	textSansBold20,
 } from '@guardian/source/foundations';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -15,14 +17,22 @@ import { ArticleRenderer } from '../lib/ArticleRenderer';
 import type { EditionId } from '../lib/edition';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { revealStyles } from '../lib/revealStyles';
+import { hasFilterTag } from '../lib/theFilter';
 import type { TableOfContentsItem } from '../model/enhanceTableOfContents';
 import { palette as themePalette } from '../palette';
 import type { Block } from '../types/blocks';
 import type { Switches } from '../types/config';
 import type { TagType } from '../types/tag';
+import {
+	HORIZONTAL_TABLE_OF_CONTENTS_SCROLL_MARGIN,
+	HorizontalTableOfContents,
+} from './HorizontalTableOfContents.island';
 import { Island } from './Island';
 import { LiveBlogRenderer } from './LiveBlogRenderer';
-import { TableOfContents } from './TableOfContents.island';
+import {
+	FILTER_TOC_SCROLL_OFFSET,
+	TableOfContents,
+} from './TableOfContents.island';
 import { textBlockStyles } from './TextBlockComponent';
 
 type Props = {
@@ -50,12 +60,26 @@ type Props = {
 	onFirstPage?: boolean;
 	keyEvents?: Block[];
 	tableOfContents?: TableOfContentsItem[];
+	tableOfContentsStyle?: 'default' | 'horizontal';
 	lang?: string;
 	isRightToLeftLang?: boolean;
 	shouldHideAds: boolean;
 	serverTime?: number;
 	idApiUrl?: string;
+	articleArrangement?: LayoutType;
 };
+
+/**
+ * Stops section headings landing underneath the sticky horizontal table of
+ * contents when a reader follows one of its links. The links target h2s, plus
+ * h3s for mini profiles in a sectioned list.
+ */
+const horizontalTableOfContentsHeadingOffset = css`
+	h2[id],
+	h3[id] {
+		scroll-margin-top: ${HORIZONTAL_TABLE_OF_CONTENTS_SCROLL_MARGIN}px;
+	}
+`;
 
 const globalOlStyles = () => css`
 	ol:not([data-ignore='global-ol-styling']) {
@@ -123,6 +147,17 @@ const globalLinkStyles = () => css`
 	}
 `;
 
+/**
+ * Stops subheadings landing underneath The Filter's sticky "Jump to" bar when
+ * a reader follows one of its links. Native fragment navigation honours
+ * `scroll-margin-top`, so this needs no JavaScript.
+ */
+const filterSubheadingOffset = css`
+	h2[id] {
+		scroll-margin-top: ${pxToRem(FILTER_TOC_SCROLL_OFFSET)};
+	}
+`;
+
 export const ArticleBody = ({
 	format,
 	blocks,
@@ -147,12 +182,14 @@ export const ArticleBody = ({
 	keyEvents = [],
 	keywordIds,
 	tableOfContents,
+	tableOfContentsStyle = 'default',
 	lang,
 	isRightToLeftLang = false,
 	editionId,
 	shouldHideAds,
 	serverTime,
 	idApiUrl,
+	articleArrangement,
 }: Props) => {
 	const isInteractiveContent =
 		format.design === ArticleDesign.Interactive ||
@@ -161,6 +198,9 @@ export const ArticleBody = ({
 		format.design === ArticleDesign.HostedArticle ||
 		format.design === ArticleDesign.HostedVideo ||
 		format.design === ArticleDesign.HostedGallery;
+	const isFilterArticle = hasFilterTag(tags);
+	const hasTableOfContents =
+		tableOfContents !== undefined && tableOfContents.length > 0;
 	const language = decideLanguage(lang);
 	const languageDirection = decideLanguageDirection(isRightToLeftLang);
 	const hasObserverPublicationTag = tags.find(
@@ -231,12 +271,19 @@ export const ArticleBody = ({
 	}
 	return (
 		<>
-			{tableOfContents && tableOfContents.length > 0 && (
+			{hasTableOfContents && (
 				<Island priority="critical" defer={{ until: 'visible' }}>
-					<TableOfContents
-						tableOfContents={tableOfContents}
-						format={format}
-					></TableOfContents>
+					{tableOfContentsStyle === 'horizontal' ? (
+						<HorizontalTableOfContents
+							tableOfContents={tableOfContents}
+						/>
+					) : (
+						<TableOfContents
+							tableOfContents={tableOfContents}
+							format={format}
+							isFilterArticle={isFilterArticle}
+						></TableOfContents>
+					)}
 				</Island>
 			)}
 			<div
@@ -249,6 +296,11 @@ export const ArticleBody = ({
 					globalStrongStyles,
 					globalLinkStyles(),
 					isHostedContent && [hostedContentH2Styles],
+					tableOfContentsStyle === 'horizontal'
+						? horizontalTableOfContentsHeadingOffset
+						: isFilterArticle &&
+							hasTableOfContents &&
+							filterSubheadingOffset,
 				]}
 				lang={language}
 				dir={languageDirection}
@@ -274,6 +326,7 @@ export const ArticleBody = ({
 					contributionsServiceUrl={contributionsServiceUrl}
 					shouldHideAds={shouldHideAds}
 					idApiUrl={idApiUrl}
+					articleArrangement={articleArrangement}
 				/>
 			</div>
 			{hasObserverPublicationTag && <ObserverFooter />}

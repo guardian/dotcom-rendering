@@ -23,7 +23,8 @@ import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
-import { RelatedPuzzlesRail } from '../components/RelatedPuzzlesRail';
+import { PuzzlesUsefulLinks } from '../components/PuzzlesSupporting';
+import { RelatedPuzzlesRailEnhanced } from '../components/RelatedPuzzlesRailEnhanced.island';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
@@ -288,14 +289,16 @@ export const CrosswordLayout = (props: Props) => {
 											)}
 										/>
 									</Hide>
-									<Hide from="desktop">
-										<Standfirst
-											format={format}
-											standfirst={
-												'<a href="https://app.adjust.com/16xt6hai" data-link-name="crossword-mobile-link">Download the Guardian app</a> for a better puzzles experience'
-											}
-										/>
-									</Hide>
+									{!isPuzzlesHubV1 && (
+										<Hide from="desktop">
+											<Standfirst
+												format={format}
+												standfirst={
+													'<a href="https://app.adjust.com/16xt6hai" data-link-name="crossword-mobile-link">Download the Guardian app</a> for a better puzzles experience'
+												}
+											/>
+										</Hide>
+									)}
 									{article.crossword && (
 										<CrosswordLinks
 											crossword={article.crossword}
@@ -464,9 +467,14 @@ export const CrosswordLayout = (props: Props) => {
 								'--article-background',
 							)}
 						>
-							<RelatedPuzzlesRail
-								items={article.moreFromPuzzlesAndGames}
-							/>
+							<Island
+								priority="enhancement"
+								defer={{ until: 'visible' }}
+							>
+								<RelatedPuzzlesRailEnhanced
+									items={article.moreFromPuzzlesAndGames}
+								/>
+							</Island>
 						</Section>
 					</div>
 				)}
@@ -551,6 +559,17 @@ export const CrosswordLayout = (props: Props) => {
 							display={format.display}
 						/>
 					</Section>
+				)}
+
+				{isPuzzlesHubV1 && article.puzzlesSupporting && (
+					<div data-print-layout="hide">
+						<PuzzlesUsefulLinks
+							id="crossword"
+							title="Useful links"
+							links={article.puzzlesSupporting.usefulLinks}
+							newsletter={article.puzzlesSupporting.newsletter}
+						/>
+					</div>
 				)}
 			</main>
 

@@ -1,4 +1,5 @@
 import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
+import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
 import { validateAsPuzzlePageType } from './validate.puzzlePage';
 
 const clone = <T>(value: T): T => JSON.parse(JSON.stringify(value)) as T;
@@ -9,6 +10,49 @@ const expectInvalid = (page: unknown) =>
 	);
 
 describe('validateAsPuzzlePageType', () => {
+	it('accepts commercial properties for only sponsored editions', () => {
+		const page = createPuzzlePage('word-wheel', {
+			commercialProperties: {
+				AU: { adTargeting: [], branding: puzzlesBranding },
+			},
+		});
+		expect(
+			validateAsPuzzlePageType(page).commercialProperties?.AU?.branding,
+		).toEqual(puzzlesBranding);
+	});
+
+	it.each([
+		null,
+		[],
+		{ XX: { adTargeting: [] } },
+		{ AU: { adTargeting: [], branding: { sponsorName: 'Missing logo' } } },
+	])(
+		'rejects invalid game commercial properties: %j',
+		(commercialProperties) => {
+			expectInvalid({
+				...createPuzzlePage('word-wheel'),
+				commercialProperties,
+			});
+		},
+	);
+
+	it('preserves the API game URL in the page instance', () => {
+		const page = createPuzzlePage('sudoku-easy');
+		page.instance.gameUrl =
+			'https://tg.amuselabs.com/guardian/date-picker?id=opaque';
+		expect(validateAsPuzzlePageType(page).instance.gameUrl).toBe(
+			page.instance.gameUrl,
+		);
+	});
+
+	it('rejects a non-string game URL', () => {
+		const page = clone(createPuzzlePage('sudoku-easy')) as unknown as {
+			instance: { gameUrl: unknown };
+		};
+		page.instance.gameUrl = 42;
+		expectInvalid(page);
+	});
+
 	it('accepts a valid iframe payload', () => {
 		const page = createPuzzlePage('sudoku-easy');
 		expect(validateAsPuzzlePageType(page).slug).toBe('sudoku-easy');
@@ -85,6 +129,32 @@ describe('validateAsPuzzlePageType', () => {
 		page.instance.moreFromPuzzlesAndGames = [
 			{ id: 'bad' },
 		] as unknown as typeof page.instance.moreFromPuzzlesAndGames;
+		expectInvalid(page);
+	});
+
+	it('accepts a newsletter-only puzzlesSupporting', () => {
+		const page = clone(createPuzzlePage('sudoku-easy'));
+		page.instance.puzzlesSupporting = {
+			usefulLinks: [],
+			newsletter: {
+				identityName: 'cluesletter',
+				name: 'Cluesletter',
+				frequency: 'Weekly',
+				description: 'News and clues',
+			},
+		};
+		expect(
+			validateAsPuzzlePageType(page).instance.puzzlesSupporting
+				?.newsletter?.identityName,
+		).toBe('cluesletter');
+	});
+
+	it('rejects an incomplete newsletter in puzzlesSupporting', () => {
+		const page = clone(createPuzzlePage('sudoku-easy'));
+		page.instance.puzzlesSupporting = {
+			usefulLinks: [],
+			newsletter: { identityName: 'cluesletter' },
+		} as unknown as typeof page.instance.puzzlesSupporting;
 		expectInvalid(page);
 	});
 

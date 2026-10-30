@@ -55,9 +55,22 @@ export const PuzzlesPage = ({ puzzlesPage, NAV }: Props) => {
 				/>
 			</Island>
 			{puzzlesPage.archive ? (
-				<PuzzlesArchiveLayout puzzlesPage={puzzlesPage} NAV={NAV} />
+				<PuzzlesArchiveLayout
+					darkModeAvailable={darkModeAvailable}
+					puzzlesPage={puzzlesPage}
+					NAV={NAV}
+				/>
 			) : (
-				<PuzzlesLayout puzzlesPage={puzzlesPage} NAV={NAV} />
+				<PuzzlesLayout
+					darkModeAvailable={darkModeAvailable}
+					puzzlesPage={puzzlesPage}
+					NAV={NAV}
+					branding={
+						puzzlesPage.commercialProperties?.[
+							puzzlesPage.editionId
+						]?.branding
+					}
+				/>
 			)}
 		</StrictMode>
 	);

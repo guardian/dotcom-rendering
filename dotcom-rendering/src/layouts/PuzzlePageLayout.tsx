@@ -11,7 +11,6 @@ import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
-import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
@@ -21,15 +20,20 @@ import { Masthead } from '../components/Masthead/Masthead';
 import { Logo } from '../components/Masthead/Titlepiece/Logo';
 import { PrintButton } from '../components/PrintButton.island';
 import { PuzzleIframe } from '../components/PuzzleIframe.island';
-import { RelatedPuzzlesRail } from '../components/RelatedPuzzlesRail';
+import { PuzzlesUsefulLinks } from '../components/PuzzlesSupporting';
+import { RelatedPuzzlesRailEnhanced } from '../components/RelatedPuzzlesRailEnhanced.island';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
-import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+} from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
 import { formatPuzzleDate } from '../lib/puzzleDate';
+import { getPuzzleGroupPalette } from '../lib/puzzleGroupPalette';
 import {
 	isPuzzlesHubV1Enabled,
 	isPuzzlesHubV2Enabled,
@@ -38,9 +42,11 @@ import {
 	getPuzzlesSubNavLinks,
 	PUZZLES_SUBNAV_PARENT,
 } from '../lib/puzzlesSubNav';
+import { enhanceBranding } from '../model/enhanceCommercialProperties';
 import type { NavType, SubNavType } from '../model/extract-nav';
 import type { PuzzleConfig } from '../model/puzzles/puzzleConfigs';
 import { palette as themePalette } from '../palette';
+import type { Branding } from '../types/branding';
 import type { FEPuzzlePageType } from '../types/puzzlePage';
 import type { TagType } from '../types/tag';
 import { BannerWrapper } from './lib/stickiness';
@@ -173,11 +179,11 @@ const AGE_WARNING_SUPPRESSION_TAGS: TagType[] = [
  * `width: 100%` styling needs too, so this reuses that existing,
  * documented case rather than inventing a new one.
  *
- * `theme: Pillar.Lifestyle` matches the real crossword page (Crosswords
- * sits under the Lifestyle pillar/section) - this is what makes
- * `pillarPalette`-driven colours (the share button, print button border,
- * etc, see `paletteDeclarations.ts`) resolve to the pink/purple
- * "lifestyle 400" the design expects, not `Pillar.News`'s red.
+ * `theme` follows the puzzle's group (`getPuzzleGroupPalette`): news for
+ * crosswords, opinion for word games, sport for logic puzzles. This is what
+ * makes `pillarPalette`-driven colours (the share button, print button
+ * border, comments, etc, see `paletteDeclarations.ts`) resolve to the
+ * group's colour across the whole page.
  *
  * **Exported** so `PuzzlePage.tsx` can pass this exact same value to
  * `rootStyles()` for its page-wide `<Global>` styles. `themePalette()`
@@ -191,11 +197,13 @@ const AGE_WARNING_SUPPRESSION_TAGS: TagType[] = [
  * with red instead of Lifestyle pink, regardless of what `puzzlePageFormat`
  * itself said.
  */
-export const puzzlePageFormat = {
+export const getPuzzlePageFormat = (
+	puzzleGroup: PuzzleConfig['puzzleGroup'],
+): ArticleFormat => ({
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Crossword,
-	theme: Pillar.Lifestyle,
-} as const;
+	theme: getPuzzleGroupPalette(puzzleGroup).theme,
+});
 
 /**
  * Identical to `CrosswordLayout.tsx`'s own `CrosswordGrid`: the same grid
@@ -317,19 +325,37 @@ export type ResolvedPuzzlePage = FEPuzzlePageType & {
 	puzzleConfig: PuzzleConfig;
 };
 
+/**
+ * The separator lines around the meta. Always straight, whatever the group's
+ * theme: `DecideLines` would switch to dotted lines for the sport theme
+ * (logic puzzles), and these pages look the same across groups.
+ */
+const MetaLines = () => (
+	<StraightLines
+		count={4}
+		color={themePalette('--article-meta-lines')}
+		cssOverrides={css`
+			display: block;
+		`}
+	/>
+);
+
 interface Props {
 	puzzlePage: ResolvedPuzzlePage;
 	NAV: NavType;
 	darkModeAvailable: boolean;
+	branding?: Branding;
 }
 
 export const PuzzlePageLayout = ({
 	puzzlePage,
 	NAV,
 	darkModeAvailable,
+	branding,
 }: Props) => {
 	const { config, instance, editionId, puzzleConfig } = puzzlePage;
 	const { isPaidContent, host, hasSurveyAd } = config;
+	const puzzlePageFormat = getPuzzlePageFormat(puzzleConfig.puzzleGroup);
 
 	// Puzzle Page instances have no comments/discussion concept at all:
 	// `FEPuzzlePageType` carries no `isCommentable` flag or per-instance
@@ -451,7 +477,7 @@ export const PuzzlePageLayout = ({
 					discussionApiUrl={config.discussionApiUrl}
 					idApiUrl={config.idApiUrl}
 					contributionsServiceUrl={contributionsServiceUrl}
-					// `puzzlePageFormat.theme` is always `Pillar.News`
+					// `puzzlePageFormat.theme` is never `ArticleSpecial.Labs`
 					// (never `ArticleSpecial.Labs`), so `CrosswordLayout`'s
 					// derived `format.theme !== ArticleSpecial.Labs` check
 					// always evaluates `true` here - hardcoded directly
@@ -517,20 +543,7 @@ export const PuzzlePageLayout = ({
 							<GridItem area="standfirst">
 								<div data-print-layout="hide">
 									<Hide until="leftCol">
-										<DecideLines
-											format={puzzlePageFormat}
-											color={themePalette(
-												'--article-meta-lines',
-											)}
-										/>
-									</Hide>
-									<Hide from="desktop">
-										<Standfirst
-											format={puzzlePageFormat}
-											standfirst={
-												'<a href="https://app.adjust.com/16xt6hai" data-link-name="crossword-mobile-link">Download the Guardian app</a> for a better puzzles experience'
-											}
-										/>
+										<MetaLines />
 									</Hide>
 									{/*
 									 * `CrosswordLinks`' one job is a
@@ -566,14 +579,13 @@ export const PuzzlePageLayout = ({
 							<GridItem area="meta" element="aside">
 								<div css={maxWidth}>
 									<div css={stretchLines}>
-										<DecideLines
-											format={puzzlePageFormat}
-											color={themePalette(
-												'--article-meta-lines',
-											)}
-										/>
+										<MetaLines />
 									</div>
 									<ArticleMeta
+										branding={
+											branding &&
+											enhanceBranding(branding)
+										}
 										format={puzzlePageFormat}
 										pageId={puzzlePage.id}
 										webTitle={puzzlePage.webTitle}
@@ -603,11 +615,13 @@ export const PuzzlePageLayout = ({
 							<GridItem area="body" element="article">
 								<div css={frameContainerStyles}>
 									<ArticleContainer format={puzzlePageFormat}>
-										<Island
-											priority="critical"
-											defer={{ until: 'visible' }}
-										>
+										{/* Not deferred until visible: the iframe has no `src`
+                        until this island hydrates and the reader is known,
+                        so waiting for the island to be seen would delay
+                        the puzzle itself. */}
+										<Island priority="critical">
 											<PuzzleIframe
+												gameUrl={instance.gameUrl}
 												puzzleConfig={puzzleConfig}
 												title={instance.title}
 												darkModeAvailable={
@@ -688,9 +702,16 @@ export const PuzzlePageLayout = ({
 								'--article-background',
 							)}
 						>
-							<RelatedPuzzlesRail
-								items={instance.moreFromPuzzlesAndGames ?? []}
-							/>
+							<Island
+								priority="enhancement"
+								defer={{ until: 'visible' }}
+							>
+								<RelatedPuzzlesRailEnhanced
+									items={
+										instance.moreFromPuzzlesAndGames ?? []
+									}
+								/>
+							</Island>
 						</Section>
 					</div>
 				)}
@@ -784,6 +805,17 @@ export const PuzzlePageLayout = ({
 							display={puzzlePageFormat.display}
 						/>
 					</Section>
+				)}
+
+				{isV1Enabled && instance.puzzlesSupporting && (
+					<div data-print-layout="hide">
+						<PuzzlesUsefulLinks
+							id="puzzle-page"
+							title="Useful links"
+							links={instance.puzzlesSupporting.usefulLinks}
+							newsletter={instance.puzzlesSupporting.newsletter}
+						/>
+					</div>
 				)}
 			</main>
 

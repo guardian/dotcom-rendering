@@ -1,12 +1,7 @@
-import {
-	type Breakpoint,
-	from,
-	headlineBold20Object,
-	headlineBold24Object,
-	space,
-} from '@guardian/source/foundations';
+import { type Breakpoint, from, space } from '@guardian/source/foundations';
 import type { ReactNode } from 'react';
 import { palette } from '../../palette';
+import { Heading } from './Heading';
 
 type Props = {
 	/**
@@ -48,7 +43,9 @@ export const SideBySide = (props: Props) => (
 		</div>
 		<div
 			css={{
+				paddingTop: space[4],
 				[from[props.from]]: {
+					paddingTop: 0,
 					flexBasis: '50%',
 					paddingLeft: space[2],
 					borderLeftStyle: 'solid',
@@ -61,19 +58,4 @@ export const SideBySide = (props: Props) => (
 			{props.right.children}
 		</div>
 	</div>
-);
-
-const Heading = (props: { children: string; from: Breakpoint }) => (
-	<h3
-		css={{
-			...headlineBold20Object,
-			paddingBottom: space[2],
-			[from[props.from]]: {
-				...headlineBold24Object,
-				paddingTop: 0,
-			},
-		}}
-	>
-		{props.children}
-	</h3>
 );

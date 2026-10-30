@@ -1,6 +1,6 @@
 # Dotcom Rendering
 
-This repository contains the rendering logic for theguardian.com and for a subset of articles in the live apps.
+This repository contains the rendering logic for theguardian.com website and a subset of content on the Guardian iOS and Android apps.
 
 It primarily uses [TypeScript](https://www.typescriptlang.org/), [Node.js](https://nodejs.org/en), [Express](https://expressjs.com/), [React](https://reactjs.org/) and [Emotion](https://emotion.sh).
 
@@ -28,63 +28,68 @@ Change directory to the repository root:
 $ cd dotcom-rendering
 ```
 
-### Install Node.js
+### Install mise
 
-We highly recommend installing a Node version manager such as [fnm](https://github.com/Schniz/fnm) (preferred), [nvm](https://github.com/nvm-sh/nvm) or [asdf](https://asdf-vm.com/guide/getting-started.html).
+To install the correct versions of tools required to run dotcom-rendering, we _only_ support [mise](https://mise.jdx.dev/).
 
-Install the Node version manager of your choice.
+Follow the official documentation to install mise:<br>https://mise.jdx.dev/installing-mise.html#installing-mise
+
+Add mise activation to your shell profile to run mise automatically when you change directories:<br>https://mise.jdx.dev/shell-setup.html#activate-mise-in-your-shell
+
+The first time mise runs in a project it may, depending on the configuration, need to be trusted with:
+
+```
+$ mise trust
+```
+
+Optional but recommended, globally configure mise to auto update:
+
+```
+$ mise settings set self_update.auto true
+```
+
+Optional but recommended, globally configure mise to auto update given a minimum release age e.g.:
+
+```
+$ mise settings set self_update.minimum_release_age 48h
+```
+
+> [!IMPORTANT]
+> If you have previously used fnm, nvm or asdf please disable any configuration that automatically sets tool versions on directory changes. This ensures any previous version management tool does not conflict with mise.
+
+### Install tools
 
 Ensure you're at the root directory of the project:
 
 ```
-cd ~/code/dotcom-rendering
+$ cd ~/code/dotcom-rendering
 ```
 
-Run the command for your version manager to use the Node version as specified in [.nvmrc](../.nvmrc).
+If mise has been configured to activate on directory changes the correct tool versions should now be installed and confirmation output to the terminal.
 
-For `fnm` this will be:
-
-```
-$ fnm use
-```
-
-For `nvm` this will be:
+Otherwise you can manually install the required tooling with:
 
 ```
-$ nvm use
+$ mise install
 ```
 
-Once installed, check the running Node version (ignoring any 'v' prefix) matches the version in [.nvmrc](../.nvmrc)
+On the first run of mise confirm the requested versions of each tool are installed with:
 
 ```
-$ node --version
+$ mise ls --current
 ```
 
-#### fnm
+Confirm the active Node version matches the version in [.nvmrc](../.nvmrc)
 
-[fnm](https://github.com/Schniz/fnm) has some useful features which we recommend to make Node version detection as seamless as possible:
-
-##### --use-on-cd
-
-This configuration automatically detects and changes to the required Node version when changing directories.
-
-https://github.com/Schniz/fnm/blob/master/docs/configuration.md#--use-on-cd
-
-##### --version-file-strategyrecursive
-
-This configuration allows the Node version detection to scan all parent directories.
-
-https://github.com/Schniz/fnm/blob/master/docs/configuration.md#--version-file-strategyrecursive
-
-### Enable corepack
-
-Enable [corepack](https://github.com/nodejs/corepack) to install the correct package manager and version:
-
-```sh
-$ corepack enable
+```
+$ node -v
 ```
 
-If you're using `asdf`, you'll need to run `asdf reshim nodejs` after running `corepack enable`.
+Confirm the active pnpm version matches the `packageManager` property in [../package.json](../package.json)
+
+```
+$ pnpm -v
+```
 
 ### Install dependencies
 
@@ -100,11 +105,11 @@ Run
 $ make install
 ```
 
-If you get an Node version error then check the setup for your version manager.
+If you get an Node version error then check your mise setup.
 
 ### Run
 
-```sh
+```
 $ make dev
 ```
 
@@ -112,11 +117,9 @@ The development server will start on [http://localhost:3030](http://localhost:30
 
 The development server home page lists examples of the various page and content types.
 
-You can render a specific article by appending the production URL to the `Article` endpoint, for example:
-http://localhost:3030/Article/https://www.theguardian.com/sport/2019/jul/28/tour-de-france-key-moments-egan-bernal-yellow-jersey
+You can render a specific article by appending the production URL to the `Article` endpoint, for example:<br>http://localhost:3030/Article/https://www.theguardian.com/sport/2019/jul/28/tour-de-france-key-moments-egan-bernal-yellow-jersey
 
-You can view the JSON data model of a page as sent by [Frontend](https://github.com/guardian/frontend) to DCR by appending `.json?dcr=true` to the production URL, for example:
-https://www.theguardian.com/sport/2019/jul/28/tour-de-france-key-moments-egan-bernal-yellow-jersey.json?dcr=true
+You can view the JSON data model of a page as sent by [Frontend](https://github.com/guardian/frontend) to DCR by appending `.json?dcr=true` to the production URL, for example:<br>https://www.theguardian.com/sport/2019/jul/28/tour-de-france-key-moments-egan-bernal-yellow-jersey.json?dcr=true
 
 ### Detailed setup
 
@@ -134,7 +137,7 @@ Recommended VS Code settings are in the file `.vscode/settings.json.recommended`
 
 Copy the required settings and any recommended settings you wish to use over to `.vscode/settings.json` to activate them.
 
-The `settings.json` file is git ignored to prevent it from overriding any indivdiual developer's settings.
+The `settings.json` file is git ignored to prevent it from overriding any individual developer's settings.
 
 ### TypeScript Version
 
@@ -170,7 +173,7 @@ You can also find these extensions by searching for `@recommended` in the extens
 | Technology                                                                                                                 | Description                                                                                                                                                                                                                                                                                                                                       |
 | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | <img alt="Typescript" src="./docs/images/logo-typescript.png" width="350" />                                               | DCR is written in [TypeScript](https://www.typescriptlang.org/)                                                                                                                                                                                                                                                                                   |
-| <img alt="Preact" src="./docs/images/logo-preact.jpg" width="350" />                                                       | DCR is rendered on the server with Preact and uses Preact as the Client-side framework. We use preact-compat to ensure compatability with React.                                                                                                                                                                                                  |
+| <img alt="Preact" src="./docs/images/logo-preact.jpg" width="350" />                                                       | DCR is rendered on the server with Preact and uses Preact as the Client-side framework. We use preact-compat to ensure compatibility with React.                                                                                                                                                                                                  |
 | <img alt="Emotion CSS-in-JS" src="./docs/images/logo-emotion.png" width="350" />                                           | [Emotion](https://emotion.sh) is a [css-in-js library](https://en.wikipedia.org/wiki/CSS-in-JS). DCR uses the [css](https://emotion.sh/docs/css-prop#string-styles) tagged template literal style to enable the use of vanilla CSS properties.                                                                                                    |
 | <img alt="Express" src="./docs/images/logo-express.png" width="350" />                                                     | We use [Express](https://expressjs.com/) as a thin server to handle requests from Frontend.                                                                                                                                                                                                                                                       |
 | <img alt="Webpack" src="./docs/images/logo-webpack.png" width="350" />                                                     | [Webpack](https://webpack.js.org/) is used for its dev server and as a bundler for our production code.                                                                                                                                                                                                                                           |
@@ -201,7 +204,7 @@ There are some concepts to learn, that will make working with Dotcom Rendering c
 
 You can ensure your code passes code quality tests by running:
 
-```sh
+```
 $ make validate
 ```
 
@@ -209,7 +212,7 @@ This runs our linting tool, the TypeScript compiler and our tests, before finall
 
 You can also run these tasks individually:
 
-```sh
+```
 $ make lint
 $ make stylelint
 $ make tsc
@@ -218,7 +221,7 @@ $ make test
 
 If you get lint errors, you can attempt to automatically fix them with:
 
-```sh
+```
 $ make fix
 ```
 
@@ -242,6 +245,6 @@ To monitor vulnerabilities from GitHub, you can use [Dependabot alerts in the se
 
 To check for vulnerabilities in development, you can run:
 
-```sh
+```
 $ make audit
 ```

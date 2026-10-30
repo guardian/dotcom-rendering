@@ -2,12 +2,14 @@ import { isObject, isString } from '@guardian/libs';
 import type { Options } from 'ajv';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
+import type { FEAppsComponentEventGraphic } from '../frontend/feAppsComponentEventGraphic';
 import type { FEArticle } from '../frontend/feArticle';
 import type { FEFootballMatchInfoPage } from '../frontend/feFootballMatchInfoPage';
 import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPage';
 import type { FEFootballTablesPage } from '../frontend/feFootballTablesPage';
 import type { FEFront } from '../frontend/feFront';
 import type { FETagPage } from '../frontend/feTagPage';
+import feAppsComponentEventGraphicSchema from '../frontend/schemas/feAppsComponentEventGraphic.json';
 import articleSchema from '../frontend/schemas/feArticle.json';
 import footballMatchInfoPageSchema from '../frontend/schemas/feFootballMatchInfoPage.json';
 import footballMatchListPageSchema from '../frontend/schemas/feFootballMatchListPage.json';
@@ -25,6 +27,7 @@ import type {
 import blockSchema from './block-schema.json';
 import editionsCrosswordSchema from './editions-crossword-schema.json';
 import newslettersPageSchema from './newsletter-page-schema.json';
+import { isPuzzlesCommercialProperties } from './validate.puzzlesCommercialProperties';
 
 const options: Options = {
 	verbose: false,
@@ -57,6 +60,9 @@ const validateFootballTablesPage = ajv.compile<FEFootballTablesPage>(
 const validateFootballMatchInfoPage = ajv.compile<FEFootballMatchInfoPage>(
 	footballMatchInfoPageSchema,
 );
+
+const validateFEAppsComponentEventGraphic =
+	ajv.compile<FEAppsComponentEventGraphic>(feAppsComponentEventGraphicSchema);
 
 export const validateAsFEArticle = (data: unknown): FEArticle => {
 	if (validateArticle(data)) return data;
@@ -171,6 +177,21 @@ export const validateAsFootballMatchPageType = (
             ${JSON.stringify(validateFootballMatchInfoPage.errors, null, 2)}`,
 	);
 };
+
+export const validateAsFEAppsComponentEventGraphic = (
+	data: unknown,
+): FEAppsComponentEventGraphic => {
+	if (validateFEAppsComponentEventGraphic(data)) return data;
+
+	const url =
+		isObject(data) && isString(data.webURL) ? data.webURL : 'unknown url';
+
+	throw new TypeError(
+		`Unable to validate request body for url ${url}.\n
+            ${JSON.stringify(validateFEAppsComponentEventGraphic.errors, null, 2)}`,
+	);
+};
+
 const identifier = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const colour = /^#[0-9a-f]{6}$/i;
 const isoDate = /^\d{4}-\d{2}-\d{2}$/;
@@ -190,7 +211,7 @@ const isPuzzleItem = (data: unknown): data is PuzzleItem =>
 	isString(data.set) &&
 	isString(data.cardVariant) &&
 	cardVariants.has(data.cardVariant) &&
-	(data.cardVariant === 'archive' ||
+	(data.cadence === undefined ||
 		(isString(data.cadence) && data.cadence.trim().length > 0)) &&
 	(data.url === undefined || isString(data.url)) &&
 	(data.image === undefined || isString(data.image)) &&
@@ -229,7 +250,9 @@ const isSupportingContent = (data: unknown): boolean =>
 			isString(data.newsletter.description) &&
 			data.newsletter.description.trim().length > 0 &&
 			(data.newsletter.illustrationSquare === undefined ||
-				isString(data.newsletter.illustrationSquare)))) &&
+				isString(data.newsletter.illustrationSquare)) &&
+			(data.newsletter.exampleUrl === undefined ||
+				isString(data.newsletter.exampleUrl)))) &&
 	isString(data.popularTitle) &&
 	data.popularTitle.trim().length > 0 &&
 	Array.isArray(data.popularGroups) &&
@@ -263,6 +286,8 @@ const isPuzzleContainer = (data: unknown): data is PuzzleContainer => {
 					data.adSlot !== 'mostpop'))) ||
 		(data.supporting !== undefined &&
 			!isSupportingContent(data.supporting)) ||
+		(data.commercialProperties !== undefined &&
+			!isPuzzlesCommercialProperties(data.commercialProperties)) ||
 		!isObject(data.content)
 	) {
 		return false;
@@ -281,7 +306,7 @@ const isPuzzleContainer = (data: unknown): data is PuzzleContainer => {
 		(content.archive === undefined || isPuzzleItem(content.archive)) &&
 		(content.archiveChoices === undefined ||
 			(Array.isArray(content.archiveChoices) &&
-				content.archiveChoices.length >= 2 &&
+				content.archiveChoices.length >= 1 &&
 				content.archiveChoices.every(isPuzzleItem))) &&
 		!(
 			content.archive !== undefined &&
@@ -361,6 +386,9 @@ const isPuzzlesArchive = (value: unknown): boolean =>
 	Number(value.month) <= 12 &&
 	Array.isArray(value.items) &&
 	value.items.every(isArchiveItem) &&
+	(value.recentItems === undefined ||
+		(Array.isArray(value.recentItems) &&
+			value.recentItems.every(isArchiveItem))) &&
 	typeof value.hasError === 'boolean' &&
 	Array.isArray(value.moreFrom) &&
 	value.moreFrom.every((item) => isPuzzleItem(item));
@@ -379,7 +407,9 @@ export const validateAsPuzzlesPageType = (data: unknown): FEPuzzlesPageType => {
 		!isObject(data.layout) ||
 		!Array.isArray(data.layout.containers) ||
 		!data.layout.containers.every(isPuzzleContainer) ||
-		(data.archive !== undefined && !isPuzzlesArchive(data.archive))
+		(data.archive !== undefined && !isPuzzlesArchive(data.archive)) ||
+		(data.commercialProperties !== undefined &&
+			!isPuzzlesCommercialProperties(data.commercialProperties))
 	) {
 		throw new TypeError(
 			'Unable to validate request body for puzzles page.',
@@ -407,13 +437,21 @@ export const validateAsPuzzlesPageType = (data: unknown): FEPuzzlesPageType => {
 	const topLevelOnlyContainersValid = containers
 		.slice(page.layout.containers.length)
 		.every(({ variant }) => variant !== 'ad' && variant !== 'supporting');
+	const containerSponsorshipValid = containers.every(
+		(container) =>
+			container.commercialProperties === undefined ||
+			(page.layout.containers.includes(container) &&
+				container.variant !== 'ad' &&
+				container.variant !== 'supporting'),
+	);
 
 	if (
 		!unique(containerIds) ||
 		!unique(itemIds) ||
 		!unique(adSlots) ||
 		!popularReferencesValid ||
-		!topLevelOnlyContainersValid
+		!topLevelOnlyContainersValid ||
+		!containerSponsorshipValid
 	) {
 		throw new TypeError(
 			'Unable to validate request body for puzzles page.',

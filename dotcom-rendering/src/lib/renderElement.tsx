@@ -13,6 +13,7 @@ import { CommentBlockComponent } from '../components/CommentBlockComponent';
 import { CrosswordComponent } from '../components/CrosswordComponent.island';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.island';
+import { ElectionTrackerWrapper } from '../components/ElectionTrackerWrapper.island';
 import { EmailSignUpWrapper } from '../components/EmailSignUpWrapper.island';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.island';
 import { ExplainerAtom } from '../components/ExplainerAtom';
@@ -437,6 +438,10 @@ export const renderElement = ({
 						elementJs={element.js}
 						elementCss={element.css}
 						customData={element.customData}
+						role={element.role ?? 'inline'}
+						type={element._type}
+						format={format}
+						articleArrangement={articleArrangement}
 					/>
 				);
 			}
@@ -1001,6 +1006,22 @@ export const renderElement = ({
 					isAcastEnabled={!!switches.acast}
 				/>
 			);
+		case 'model.dotcomrendering.pageElements.EventGraphicBlockElement':
+			return (
+				<div
+					css={{
+						marginBottom: 12,
+					}}
+				>
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<ElectionTrackerWrapper
+							electionDataUrl={element.dataUrl.href}
+							electionComponents={element.components}
+							liveEffects={true}
+						/>
+					</Island>
+				</div>
+			);
 		case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.VideoBlockElement':
@@ -1086,7 +1107,14 @@ export const RenderArticleElement = ({
 		idApiUrl,
 	});
 
-	const needsFigure = !bareElements.has(element._type);
+	const isInteractiveAtomInInteractiveGrid =
+		format.design === ArticleDesign.Interactive &&
+		articleArrangement !== undefined &&
+		element._type ===
+			'model.dotcomrendering.pageElements.InteractiveAtomBlockElement';
+
+	const needsFigure =
+		!bareElements.has(element._type) && !isInteractiveAtomInInteractiveGrid;
 
 	const role =
 		'role' in element
@@ -1107,6 +1135,7 @@ export const RenderArticleElement = ({
 			type={element._type}
 			format={format}
 			isTimeline={isTimeline}
+			articleArrangement={articleArrangement}
 		>
 			{el}
 		</Figure>

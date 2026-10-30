@@ -622,6 +622,12 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 												secondaryDateline={
 													article.webPublicationSecondaryDateDisplay
 												}
+												webPublicationDate={
+													article.webPublicationDate
+												}
+												firstPublicationDate={
+													article.firstPublicationDate
+												}
 												isCommentable={
 													article.isCommentable
 												}
@@ -649,6 +655,12 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											}
 											secondaryDateline={
 												article.webPublicationSecondaryDateDisplay
+											}
+											webPublicationDate={
+												article.webPublicationDate
+											}
+											firstPublicationDate={
+												article.firstPublicationDate
 											}
 											isCommentable={
 												article.isCommentable

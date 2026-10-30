@@ -15,6 +15,7 @@ import { Hide } from '@guardian/source/react-components';
 import libDebounce from 'lodash.debounce';
 import type { ReactNode } from 'react';
 import { memo, useEffect, useRef, useState } from 'react';
+import { useCrosswordProgressReporting } from '../lib/puzzleProgress/useCrosswordProgressReporting';
 import { removeMediaRulePrefix, useMatchMedia } from '../lib/useMatchMedia';
 import { palette } from '../palette';
 import { AdSlot } from './AdSlot.web';
@@ -254,14 +255,19 @@ export const CrosswordComponent = ({
 }: {
 	data: CrosswordProps['data'];
 	canRenderAds?: boolean;
-}) => (
-	<ReactCrossword
-		data={data}
-		Layout={Layout}
-		MobileBannerAd={canRenderAds ? MobileBannerAdComponent : undefined}
-		textColor={palette('--crossword-text')}
-		anagramHelperBackgroundColor={palette(
-			'--crossword-anagram-helper-background',
-		)}
-	/>
-);
+}) => {
+	const onProgressChange = useCrosswordProgressReporting(data);
+
+	return (
+		<ReactCrossword
+			data={data}
+			Layout={Layout}
+			MobileBannerAd={canRenderAds ? MobileBannerAdComponent : undefined}
+			onProgressChange={onProgressChange}
+			textColor={palette('--crossword-text')}
+			anagramHelperBackgroundColor={palette(
+				'--crossword-anagram-helper-background',
+			)}
+		/>
+	);
+};

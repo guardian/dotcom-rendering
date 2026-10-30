@@ -1,6 +1,7 @@
 import { isString } from '@guardian/libs';
 import type { FEPuzzlePageType } from '../types/puzzlePage';
 import type { PuzzleCardVariant, PuzzleItem } from '../types/puzzlesPage';
+import { isPuzzlesCommercialProperties } from './validate.puzzlesCommercialProperties';
 
 /**
  * Puzzle Page's own validation, split out from the general `validate.ts`
@@ -97,17 +98,40 @@ const isPuzzleItem = (
 	);
 };
 
+const isPuzzleLink = (value: unknown): boolean =>
+	isRecord(value) &&
+	isNonEmptyString(value.title) &&
+	isNonEmptyString(value.url);
+
+const isPuzzlesNewsletter = (value: unknown): boolean =>
+	isRecord(value) &&
+	isNonEmptyString(value.identityName) &&
+	isNonEmptyString(value.name) &&
+	isNonEmptyString(value.frequency) &&
+	isNonEmptyString(value.description) &&
+	isOptionalString(value.illustrationSquare) &&
+	isOptionalString(value.exampleUrl);
+
+const isPuzzleGameSupporting = (value: unknown): boolean =>
+	isRecord(value) &&
+	Array.isArray(value.usefulLinks) &&
+	value.usefulLinks.every(isPuzzleLink) &&
+	(value.newsletter === undefined || isPuzzlesNewsletter(value.newsletter));
+
 const isPuzzlePageInstance = (value: unknown): boolean => {
 	if (!isRecord(value)) return false;
 
 	return (
 		isNonEmptyString(value.title) &&
 		isOptionalString(value.puzzleDate) &&
+		isOptionalString(value.gameUrl) &&
 		(value.moreFromPuzzlesAndGames === undefined ||
 			(Array.isArray(value.moreFromPuzzlesAndGames) &&
 				value.moreFromPuzzlesAndGames.every((item) =>
 					isPuzzleItem(item, false),
-				)))
+				))) &&
+		(value.puzzlesSupporting === undefined ||
+			isPuzzleGameSupporting(value.puzzlesSupporting))
 	);
 };
 
@@ -132,7 +156,9 @@ export const validateAsPuzzlePageType = (data: unknown): FEPuzzlePageType => {
 		// coordinated follow-up change - see `FEPuzzlePageType.isAdFreeUser`'s
 		// doc comment), so requiring it here would 500 every real request
 		// until then.
-		isOptionalBoolean(data.isAdFreeUser)
+		isOptionalBoolean(data.isAdFreeUser) &&
+		(data.commercialProperties === undefined ||
+			isPuzzlesCommercialProperties(data.commercialProperties))
 	) {
 		return data as unknown as FEPuzzlePageType;
 	}

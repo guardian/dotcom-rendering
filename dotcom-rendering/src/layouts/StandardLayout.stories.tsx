@@ -1,7 +1,11 @@
+import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import { expect, within } from 'storybook/test';
 import { allModes } from '../../.storybook/modes';
 import { Audio as AudioFixture } from '../../fixtures/generated/fe-articles/Audio';
-import { ArticleDesign } from '../lib/articleFormat';
+import { Recipe as RecipeFixture } from '../../fixtures/generated/fe-articles/Recipe';
+import { Standard as StandardFixture } from '../../fixtures/generated/fe-articles/Standard';
+import { ArticleDesign, ArticleDisplay } from '../lib/articleFormat';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { extractNAV } from '../model/extract-nav';
 import { enhanceArticleType } from '../types/article';
@@ -69,7 +73,10 @@ export const WebAudio: Story = {
 			...extractNAV(webAudioArticle.frontendData.nav),
 			selectedPillar: getCurrentPillar(webAudioArticle.frontendData),
 		},
-		article: webAudioArticle.frontendData,
+		article: {
+			...webAudioArticle.frontendData,
+			shouldHideAds: true,
+		},
 		format: {
 			design: webAudioArticle.design,
 			display: webAudioArticle.display,
@@ -87,6 +94,226 @@ export const WebAudio: Story = {
 		chromatic: {
 			modes: {
 				'light leftCol': allModes['light leftCol'],
+			},
+		},
+	},
+};
+
+const webInteractiveArticle = enhanceArticleType(
+	{
+		...StandardFixture,
+		contentType: 'Interactive',
+		firstPublicationDate: '2026-10-30T09:00:00.000Z',
+		format: {
+			...StandardFixture.format,
+			design: 'InteractiveDesign',
+		},
+	},
+	'Web',
+);
+
+export const WebInteractive: Story = {
+	args: {
+		renderingTarget: 'Web',
+		NAV: {
+			...extractNAV(webInteractiveArticle.frontendData.nav),
+			selectedPillar: getCurrentPillar(
+				webInteractiveArticle.frontendData,
+			),
+		},
+		article: {
+			...webInteractiveArticle.frontendData,
+			shouldHideAds: true,
+		},
+		format: {
+			design: webInteractiveArticle.design,
+			display: webInteractiveArticle.display,
+			theme: webInteractiveArticle.theme,
+		},
+	},
+	parameters: {
+		formats: [
+			{
+				design: webInteractiveArticle.design,
+				display: webInteractiveArticle.display,
+				theme: webInteractiveArticle.theme,
+			},
+		],
+		chromatic: {
+			modes: {
+				'light wide': allModes['light wide'],
+			},
+		},
+	},
+};
+
+export const WebInteractiveMobile: Story = {
+	args: WebInteractive.args,
+	globals: {
+		viewport: { value: 'mobileMedium', isRotated: false },
+	},
+	parameters: {
+		...WebInteractive.parameters,
+		chromatic: {
+			modes: {
+				'light mobileMedium': allModes['light mobileMedium'],
+			},
+		},
+	},
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement);
+		const homeLink = await canvas.findByRole(
+			'link',
+			{ name: /The Guardian - Back to home/ },
+			{ timeout: 5_000 },
+		);
+		const logo = homeLink.querySelector('svg');
+
+		await expect(logo).not.toBeNull();
+		await expect(window.getComputedStyle(logo!).width).toBe('130px');
+	},
+};
+
+const webImmersiveArticle = enhanceArticleType(StandardFixture, 'Web');
+const immersiveFormat = {
+	design: webImmersiveArticle.design,
+	display: ArticleDisplay.Immersive,
+	theme: webImmersiveArticle.theme,
+};
+const immersiveNav = extractNAV(webImmersiveArticle.frontendData.nav);
+
+export const WebImmersive: Story = {
+	args: {
+		renderingTarget: 'Web',
+		NAV: {
+			...immersiveNav,
+			selectedPillar: getCurrentPillar(webImmersiveArticle.frontendData),
+		},
+		article: {
+			...webImmersiveArticle.frontendData,
+			shouldHideAds: true,
+		},
+		format: immersiveFormat,
+	},
+	parameters: {
+		formats: [immersiveFormat],
+		chromatic: {
+			modes: {
+				'light wide': allModes['light wide'],
+			},
+		},
+	},
+	play: async ({ canvasElement }) => {
+		const header = within(within(canvasElement).getByRole('banner'));
+
+		await expect(immersiveNav.subNavSections?.links.length).toBeGreaterThan(
+			0,
+		);
+		await expect(header.getByRole('link', { name: 'News' })).toBeVisible();
+		for (const link of immersiveNav.subNavSections?.links ?? []) {
+			await expect(
+				header.queryByRole('link', { name: link.title }),
+			).not.toBeInTheDocument();
+		}
+	},
+};
+
+export const WebImmersiveMobile: Story = {
+	args: WebImmersive.args,
+	globals: {
+		viewport: { value: 'mobileMedium', isRotated: false },
+	},
+	parameters: {
+		...WebImmersive.parameters,
+		chromatic: {
+			modes: {
+				'light mobileMedium': allModes['light mobileMedium'],
+			},
+		},
+	},
+	play: async ({ canvasElement }) => {
+		const media = canvasElement.querySelector<HTMLElement>(
+			'[data-gu-name="media"]',
+		);
+		await expect(media).not.toBeNull();
+		const image = within(media!).getByRole('img');
+		await expect(image).toBeVisible();
+		const { width, height } = image.getBoundingClientRect();
+		await expect(width).toBeGreaterThan(0);
+		await expect(height).toBeCloseTo((width * 5) / 4, 0);
+	},
+};
+
+const webImmersivePortraitArticle = enhanceArticleType(
+	{
+		...RecipeFixture,
+		format: {
+			...RecipeFixture.format,
+			display: 'ImmersiveDisplay',
+		},
+		mainMediaElements: RecipeFixture.mainMediaElements.map((element) =>
+			element._type ===
+			'model.dotcomrendering.pageElements.ImageBlockElement'
+				? {
+						...element,
+						media: {
+							...element.media,
+							allImages: element.media.allImages.map((image) => ({
+								...image,
+								fields: {
+									...image.fields,
+									aspectRatio: `${image.fields.width}:${image.fields.height}`,
+								},
+							})),
+						},
+					}
+				: element,
+		),
+	},
+	'Web',
+);
+const immersivePortraitFormat = {
+	design: webImmersivePortraitArticle.design,
+	display: webImmersivePortraitArticle.display,
+	theme: webImmersivePortraitArticle.theme,
+};
+
+export const WebImmersivePortrait: Story = {
+	args: {
+		renderingTarget: 'Web',
+		NAV: {
+			...extractNAV(webImmersivePortraitArticle.frontendData.nav),
+			selectedPillar: getCurrentPillar(
+				webImmersivePortraitArticle.frontendData,
+			),
+		},
+		article: {
+			...webImmersivePortraitArticle.frontendData,
+			shouldHideAds: true,
+		},
+		format: immersivePortraitFormat,
+	},
+	parameters: {
+		formats: [immersivePortraitFormat],
+		chromatic: {
+			modes: {
+				'light mobile': allModes['light mobile'],
+				'light mobileMedium': allModes['light mobileMedium'],
+				'light mobileLandscape': {
+					...allModes.light,
+					viewport: breakpoints.mobileLandscape,
+				},
+				'light phablet': {
+					...allModes.light,
+					viewport: breakpoints.phablet,
+				},
+				'light tablet': {
+					...allModes.light,
+					viewport: breakpoints.tablet,
+				},
+				'light desktop': allModes['light desktop'],
+				'light leftCol': allModes['light leftCol'],
+				'light wide': allModes['light wide'],
 			},
 		},
 	},

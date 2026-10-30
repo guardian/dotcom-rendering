@@ -1,15 +1,25 @@
 import { css } from '@emotion/react';
+import { isNonNullable } from '@guardian/libs';
 import {
+	article17,
+	articleBold17,
+	between,
+	from,
 	headlineBold17,
 	headlineLight17,
+	pxToRem,
+	rootPixelFontSize,
 	space,
 	textSansBold14,
+	until,
+	visuallyHidden,
 } from '@guardian/source/foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
 } from '@guardian/source/react-components';
 import { useEffect, useRef, useState } from 'react';
+import { grid } from '../grid';
 import { ArticleDisplay, type ArticleFormat } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import type { TableOfContentsItem } from '../model/enhanceTableOfContents';
@@ -18,7 +28,108 @@ import { palette } from '../palette';
 interface Props {
 	tableOfContents: TableOfContentsItem[];
 	format: ArticleFormat;
+	/**
+	 * Renders the more prominent variant used by The Filter: a taller bar on
+	 * its own surface, whose label is replaced by the heading of the section
+	 * currently being read once it pins to the top of the viewport.
+	 */
+	isFilterArticle?: boolean;
 }
+
+/**
+ * The height of The Filter's collapsed "Jump to" bar.
+ *
+ * This is a fixed value rather than a measured one because it is the single
+ * source of truth for two separate things: the line the scroll spy measures
+ * headings against, and the `scroll-margin-top` applied to subheadings in
+ * `ArticleBody` so that they don't land underneath the bar.
+ *
+ * `filterSummaryStyles` sets it as an exact height rather than a minimum, so
+ * that it holds however tall the bar's contents are. It needs to stay above
+ * the tallest of them: today that is the chevron rather than the label, at
+ * roughly 29px plus the summary's padding and rule.
+ *
+ * Expressed in pixels at the default root font size, but applied in rems so
+ * that the bar grows with its text when a reader increases their browser's
+ * text size, rather than clipping it.
+ */
+export const FILTER_TOC_STICKY_HEIGHT = 48;
+
+/**
+ * Where a section heading comes to rest when a reader jumps to it: clear of
+ * the sticky bar by a small gap.
+ *
+ * `ArticleBody` applies this as `scroll-margin-top`, and the scroll spy below
+ * measures headings against the same line, so that the section a reader jumps
+ * to is the one the bar then names. The two have to be the same number or the
+ * bar reports the section above.
+ *
+ * Like the bar's own height, this is written in pixels at the default root font
+ * size but always applied in rems (see `toRootScaledPx` for the scroll spy), so
+ * that the bar, the offset and the reading line all grow together when a reader
+ * increases their browser's text size.
+ */
+export const FILTER_TOC_SCROLL_OFFSET = FILTER_TOC_STICKY_HEIGHT + space[2];
+
+/**
+ * The line the scroll spy measures headings against.
+ *
+ * Sitting it a little below where a jump lands the heading is what stops the
+ * bar flickering to the section above. Measuring at exactly the landing point
+ * would make the test a knife edge: a heading that settles a single pixel low,
+ * because of sub-pixel rounding or an image above it loading late, would read
+ * as not yet reached. The slack is small enough that the heading is still
+ * tucked under the bar when it counts.
+ */
+const FILTER_TOC_READING_LINE = FILTER_TOC_SCROLL_OFFSET + space[3];
+
+/**
+ * Converts a length written in pixels at the default root font size into the
+ * pixels it actually occupies at the reader's root font size.
+ *
+ * The bar and `scroll-margin-top` are sized in rems, but `IntersectionObserver`
+ * only accepts pixels or percentages, so the scroll spy has to scale its line
+ * to match or it would drift from where a jump lands a heading.
+ */
+const toRootScaledPx = (px: number): number => {
+	const rootFontSize = Number.parseFloat(
+		window.getComputedStyle(document.documentElement).fontSize,
+	);
+
+	return Number.isNaN(rootFontSize)
+		? px
+		: (px * rootFontSize) / rootPixelFontSize;
+};
+
+/**
+ * Works out which section the reader is currently in, given the position of
+ * each section heading relative to the viewport.
+ *
+ * A reader is in a section from the moment its heading reaches the reading
+ * line, so the current section is the *last* heading whose top edge is at or
+ * above that line. Matching on `top` rather than `bottom` is what makes a
+ * heading count as soon as it comes to rest below the bar: measuring the
+ * bottom edge would only count it once it had scrolled out of sight behind
+ * the bar, leaving the section above it selected in the meantime.
+ *
+ * Returns `undefined` when the reader is above the first heading.
+ *
+ * @param sections Section headings, in document order.
+ * @param line Distance from the top of the viewport, in pixels.
+ */
+export const getCurrentSectionId = (
+	sections: Array<{ id: string; top: number }>,
+	line: number,
+): string | undefined => {
+	let current: string | undefined;
+
+	for (const section of sections) {
+		if (section.top > line) break;
+		current = section.id;
+	}
+
+	return current;
+};
 
 const anchorStyles = css`
 	color: ${palette('--table-of-contents')};
@@ -126,6 +237,185 @@ const verticalStyle = css`
 `;
 
 /**
+ * Lifts The Filter's bar off the page onto its own surface. The background is
+ * set on the summary as well as the details because the summary sits in its
+ * own stacking context (see `stickyStyles`), and it has to stay opaque as the
+ * article scrolls underneath it.
+ *
+ * The bar deliberately stays within the centre column at every breakpoint.
+ * Breaking out over the left column reads as a jarring jump as it pins, and
+ * would cover the article meta (byline, date, share buttons) that sits there.
+ */
+/**
+ * The width of the pillar rules. Shared so that the side rules can be taken
+ * back off the bleed padding, keeping the label aligned with the body copy.
+ */
+const accentRuleWidth = '1px';
+
+const filterDetailsStyles = css`
+	background: ${palette('--table-of-contents-background')};
+
+	summary {
+		background: ${palette('--table-of-contents-background')};
+	}
+
+	/* Every rule in the component takes the pillar accent. */
+	border-left: ${accentRuleWidth} solid
+		${palette('--table-of-contents-accent')};
+	border-right: ${accentRuleWidth} solid
+		${palette('--table-of-contents-accent')};
+
+	/**
+	 * The base styles only draw a bottom rule while collapsed, so this closes
+	 * the box when expanded. The rule below still has to recolour the
+	 * collapsed one separately, being the more specific selector.
+	 */
+	border-bottom: ${accentRuleWidth} solid
+		${palette('--table-of-contents-accent')};
+
+	&:not([open]) {
+		border-bottom-color: ${palette('--table-of-contents-accent')};
+	}
+
+	summary,
+	li {
+		border-top-color: ${palette('--table-of-contents-accent')};
+	}
+
+	/* The bar that grows out of an item's rule on hover. */
+	li::before {
+		background-color: ${palette('--table-of-contents-accent')};
+	}
+`;
+
+/**
+ * Widens the bar's surface out to the vertical rules that frame the article,
+ * so that it doesn't float inside them with a sliver of the page showing down
+ * either side. How far that is depends on what sits alongside the centre
+ * column at each breakpoint:
+ *
+ * - below `tablet` the centre column is inset from the article's edges by one
+ *   column gap while inline images bleed past it, so the bar goes full width;
+ * - between `tablet` and `desktop` the outer rules sit one full column gap
+ *   out on either side;
+ * - from `desktop` the centre rule sits half a column gap out, matching the
+ *   offset in `grid.centreRule`, and the right edge follows it for symmetry.
+ *
+ * The padding goes on the `summary` and list items rather than the `details`,
+ * so that the text and chevron keep their alignment with the body copy while
+ * the background and the horizontal rules still run the full width.
+ */
+const bleedBy = (amount: string): string => `
+	margin-left: calc(-1 * ${amount});
+	margin-right: calc(-1 * ${amount});
+
+	summary,
+	li {
+		padding-left: calc(${amount} - ${accentRuleWidth});
+		padding-right: calc(${amount} - ${accentRuleWidth});
+	}
+`;
+
+const filterFullBleedStyles = css`
+	${until.mobileLandscape} {
+		${bleedBy(grid.mobileColumnGap)}
+	}
+
+	${between.mobileLandscape.and.desktop} {
+		${bleedBy(grid.columnGap)}
+	}
+
+	${from.desktop} {
+		${bleedBy(`calc(${grid.columnGap} / 2)`)}
+	}
+`;
+
+const filterSummaryStyles = css`
+	box-sizing: border-box;
+
+	path {
+		fill: ${palette('--table-of-contents-accent')};
+	}
+
+	align-items: center;
+	gap: ${space[4]}px;
+	/* Exact, not a minimum: see FILTER_TOC_STICKY_HEIGHT. */
+	height: ${pxToRem(FILTER_TOC_STICKY_HEIGHT)};
+	padding: ${space[2]}px 0;
+`;
+
+/**
+ * Truncating to a single line is load bearing: it's what guarantees the bar is
+ * exactly `FILTER_TOC_STICKY_HEIGHT` tall however long the section heading is.
+ */
+const filterTitleStyles = css`
+	${articleBold17}
+	color: ${palette('--table-of-contents-accent')};
+	min-width: 0;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+`;
+
+/**
+ * The items are set in Egyptian regular and keep the default text colour: only
+ * the bar's own label takes the pillar accent, so that the list reads as body
+ * copy rather than as a row of links.
+ *
+ * Hover fills the row instead of growing a rule along its top edge, following
+ * the edition picker. The fill sits on the item rather than the link so that
+ * it covers the full width of the bar, including the padding that holds the
+ * text in line with the body copy.
+ */
+const filterListItemStyles = css`
+	${article17}
+
+	/* Cancels the rule the shared styles grow on hover. */
+	&:hover::before {
+		height: 0;
+	}
+
+	&:hover {
+		background-color: ${palette('--table-of-contents-hover')};
+	}
+
+	/* Hover alone gives no affordance to a reader tabbing through the list. */
+	a:focus-visible {
+		text-decoration: underline;
+	}
+`;
+
+/** The width of the rule marking the section currently being read. */
+const currentMarkerWidth = '4px';
+
+/**
+ * Marks the current section with a rule down the left of the item rather than
+ * by recolouring it, so that the list stays a single colour.
+ *
+ * The rule is inset from the text by its own width again, and spans the item's
+ * text block: tying its top and bottom to the anchor's padding keeps it the
+ * height of the text, including when a long section title wraps.
+ */
+const filterCurrentAnchorStyles = css`
+	position: relative;
+	padding-left: calc(${currentMarkerWidth} * 3);
+
+	&::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: ${space[1]}px;
+		bottom: ${space[4]}px;
+		width: ${currentMarkerWidth};
+		background-color: ${palette('--table-of-contents')};
+	}
+`;
+
+const visuallyHiddenStyles = css`
+	${visuallyHidden}
+`;
+
+/**
  * A table of contents, shown at the top of an article
  * to allow readers to quickly navigate though articles.
  *
@@ -135,8 +425,22 @@ const verticalStyle = css`
  *
  */
 
-export const TableOfContents = ({ tableOfContents, format }: Props) => {
-	const [open, setOpen] = useState(tableOfContents.length < 5);
+export const TableOfContents = ({
+	tableOfContents,
+	format,
+	isFilterArticle = false,
+}: Props) => {
+	/**
+	 * Short lists open by default, except on The Filter. Its bar is sticky from
+	 * the first paint, so an expanded one covers whatever a reader lands on
+	 * when they arrive on a section anchor, and it cannot collapse itself until
+	 * the island has hydrated. Starting collapsed also matches the design.
+	 */
+	const [open, setOpen] = useState(
+		!isFilterArticle && tableOfContents.length < 5,
+	);
+	const [isStuck, setIsStuck] = useState(false);
+	const [currentSectionId, setCurrentSectionId] = useState<string>();
 	const tocRef = useRef<HTMLDetailsElement>(null);
 
 	// Automatically collapse the ToC when it becomes sticky (i.e. when it reaches the top of the viewport). This
@@ -153,9 +457,14 @@ export const TableOfContents = ({ tableOfContents, format }: Props) => {
 			([e]) => {
 				// Verify whether the ToC is at the top of the viewport or the bottom. It should only collapse when it
 				// reaches the top.
-				if (e && e.boundingClientRect.top < 0) {
+				if (!e) {
+					return;
+				}
+				const isPinned = e.boundingClientRect.top < 0;
+				if (isPinned) {
 					setOpen(false);
 				}
+				setIsStuck(isPinned);
 			},
 			{ threshold: [1] },
 		);
@@ -167,18 +476,107 @@ export const TableOfContents = ({ tableOfContents, format }: Props) => {
 		};
 	}, []);
 
+	// Track which section the reader is currently in, so that The Filter's bar
+	// can show its heading once pinned. The observer is only used as a cheap
+	// signal that something crossed the bar; the answer itself is worked out by
+	// measuring every heading, which keeps it correct no matter how many
+	// crossed in a single scroll.
+	useEffect(() => {
+		if (!isFilterArticle) {
+			return;
+		}
+
+		// Anchor ids are added to the `h2`s by `enhanceH2s`.
+		const sections = tableOfContents
+			.map(({ id }) => document.getElementById(id))
+			.filter(isNonNullable);
+
+		if (sections.length === 0) {
+			return;
+		}
+
+		const readingLine = toRootScaledPx(FILTER_TOC_READING_LINE);
+
+		const updateCurrentSection = () => {
+			setCurrentSectionId(
+				getCurrentSectionId(
+					sections.map((section) => ({
+						id: section.id,
+						top: section.getBoundingClientRect().top,
+					})),
+					readingLine,
+				),
+			);
+		};
+
+		const observer = new IntersectionObserver(updateCurrentSection, {
+			// Shrink the observed area to everything below the reading line, so
+			// that we're notified each time a heading crosses it.
+			rootMargin: `-${readingLine}px 0px 0px 0px`,
+			/**
+			 * A heading crossing the line with its lower half still showing is
+			 * only a partial change in how much of it is inside that area, so
+			 * `1` is what reports it. `0` still covers it leaving the area
+			 * entirely, and a heading taller than the area never reaches `1`.
+			 */
+			threshold: [0, 1],
+		});
+
+		for (const section of sections) {
+			observer.observe(section);
+		}
+
+		/**
+		 * Opening and closing the bar adds and removes its list from the flow
+		 * above the article, moving every heading below it. That is a layout
+		 * change rather than a scroll, so it need not cross the line for any
+		 * heading, and the observer would not report it.
+		 */
+		const frame = window.requestAnimationFrame(updateCurrentSection);
+
+		return () => {
+			window.cancelAnimationFrame(frame);
+			observer.disconnect();
+		};
+	}, [isFilterArticle, tableOfContents, open]);
+
+	const currentSection = tableOfContents.find(
+		({ id }) => id === currentSectionId,
+	);
+	const showCurrentSection =
+		isFilterArticle && isStuck && !open && currentSection !== undefined;
+
 	return (
 		<details
 			ref={tocRef}
 			open={open}
-			css={[detailsStyles, stickyStyles]}
-			data-component="table-of-contents"
+			css={[
+				detailsStyles,
+				stickyStyles,
+				isFilterArticle && filterDetailsStyles,
+				isFilterArticle && filterFullBleedStyles,
+			]}
+			// A separate name lets tracking tell The Filter's bar apart from
+			// the standard table of contents without filtering by article.
+			data-component={
+				isFilterArticle
+					? 'table-of-contents-filter'
+					: 'table-of-contents'
+			}
+			/**
+			 * Clicks are left to the browser's own toggle rather than handled
+			 * with `setOpen`. Ophan reads `data-link-name` from a click
+			 * listener on the document, which runs after React's, and React
+			 * flushes a state update from a click before that listener runs. Set
+			 * from the click, the link name would already describe the new
+			 * state, reporting an open as a close. The native toggle only
+			 * happens once the click has finished dispatching.
+			 */
+			onToggle={(e): void => {
+				setOpen(e.currentTarget.open);
+			}}
 		>
 			<summary
-				onClick={(e): void => {
-					e.preventDefault();
-					setOpen((state) => !state);
-				}}
 				onKeyDown={(e): void => {
 					if (e.key === 'Enter' || e.key === ' ') {
 						e.preventDefault();
@@ -188,44 +586,79 @@ export const TableOfContents = ({ tableOfContents, format }: Props) => {
 				data-link-name={
 					open ? 'table-of-contents-close' : 'table-of-contents-open'
 				}
-				css={summaryStyles}
+				css={[summaryStyles, isFilterArticle && filterSummaryStyles]}
 				tabIndex={0}
 				role="button"
 			>
-				<h2 css={titleStyle}>Jump to</h2>
+				<h2 css={[titleStyle, isFilterArticle && filterTitleStyles]}>
+					{showCurrentSection ? (
+						<>
+							{/* Keeps the control's purpose in its accessible
+                            name, so that it doesn't read as just a section
+                            title when focused. */}
+							<span css={visuallyHiddenStyles}>
+								Jump to. Current section:{' '}
+							</span>
+							{currentSection.title}
+						</>
+					) : (
+						/* The Filter's bar labels itself with a colon, the
+                        other variants without. */
+						`Jump to${isFilterArticle ? ':' : ''}`
+					)}
+				</h2>
 				<span className="is-closed">
-					<SvgChevronDownSingle size="xsmall" />
+					<SvgChevronDownSingle
+						size={isFilterArticle ? 'small' : 'xsmall'}
+					/>
 				</span>
 				<span className="is-open">
-					<SvgChevronUpSingle size="xsmall" />
+					<SvgChevronUpSingle
+						size={isFilterArticle ? 'small' : 'xsmall'}
+					/>
 				</span>
 			</summary>
 
 			<ul>
-				{tableOfContents.map((item, index) => (
-					<li
-						key={item.id}
-						css={listItemStyles(format)}
-						data-link-name={`table-of-contents-item-${index}-${item.id}`}
-					>
-						{format.display === ArticleDisplay.NumberedList && (
-							<div css={paddingStyles}>
-								<span css={indexStyle}>{index + 1}</span>
-								<div css={verticalStyle}></div>
-							</div>
-						)}
+				{tableOfContents.map((item, index) => {
+					const isCurrent =
+						isFilterArticle && item.id === currentSectionId;
 
-						<a
-							href={`#${item.id}`}
-							css={[anchorStyles, paddingStyles]}
-							onClick={(): void => {
-								setOpen((state) => !state);
-							}}
+					return (
+						<li
+							key={item.id}
+							css={[
+								listItemStyles(format),
+								isFilterArticle && filterListItemStyles,
+							]}
+							data-link-name={`table-of-contents-item-${index}-${item.id}`}
 						>
-							{item.title}
-						</a>
-					</li>
-				))}
+							{format.display === ArticleDisplay.NumberedList && (
+								<div css={paddingStyles}>
+									<span css={indexStyle}>{index + 1}</span>
+									<div css={verticalStyle}></div>
+								</div>
+							)}
+
+							<a
+								href={`#${item.id}`}
+								aria-current={
+									isCurrent ? 'location' : undefined
+								}
+								css={[
+									anchorStyles,
+									paddingStyles,
+									isCurrent && filterCurrentAnchorStyles,
+								]}
+								onClick={(): void => {
+									setOpen((state) => !state);
+								}}
+							>
+								{item.title}
+							</a>
+						</li>
+					);
+				})}
 			</ul>
 		</details>
 	);
