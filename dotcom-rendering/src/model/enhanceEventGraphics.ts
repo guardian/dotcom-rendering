@@ -4,7 +4,7 @@ import type { FEElement } from '../types/content';
 
 export const enhanceEventGraphics =
 	(stage: StageType, format: ArticleFormat) =>
-	(elements: FEElement[]): FEElement[] => {
+	(elements: FEElement[]): FEElement[] =>
 		elements.flatMap<FEElement>((element) => {
 			if (
 				element._type ===
@@ -24,14 +24,11 @@ export const enhanceEventGraphics =
 							dataUrl: zugUrl(stage),
 						},
 					];
-				} else {
-					return [];
 				}
+				return [];
 			}
 			return [element];
 		});
-		return elements;
-	};
 
 const zugUrl = (stage: StageType): URL => {
 	switch (stage) {
