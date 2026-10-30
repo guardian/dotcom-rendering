@@ -2,7 +2,11 @@ import { css } from '@emotion/react';
 import { breakpoints, space, textSans17 } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import type { ReactNode } from 'react';
-import { selfHostedLoopVideo54Card } from '../../fixtures/manual/trails';
+import {
+	selfHostedDefaultVideo54Card,
+	selfHostedLoopVideo54Card,
+} from '../../fixtures/manual/trails';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { palette } from '../palette';
 import type {
 	DCRContainerPalette,
@@ -51,21 +55,56 @@ const images = [
 	},
 ] as const satisfies readonly DCRSlideshowImage[];
 
-/**
- * Spike: video slides that can be mixed into a slideshow. Reuses the self-hosted
- * loop video assets already used elsewhere on fronts.
- */
-const videoSlide = {
+/** One slide per self-hosted video style, using the same 5:4 video as the SelfHostedVideo stories */
+const loopVideoSlide = {
 	type: 'video',
 	video: selfHostedLoopVideo54Card.mainMedia,
-	caption: 'A self-hosted looping video slide',
+} as const satisfies DCRSlideshowMedia;
+
+// Distinct atom ids keep the slide keys unique
+const cinemagraphVideoSlide = {
+	type: 'video',
+	video: {
+		...selfHostedLoopVideo54Card.mainMedia,
+		atomId: 'cinemagraph-atom-id',
+		videoStyle: 'Cinemagraph',
+	},
+} as const satisfies DCRSlideshowMedia;
+
+const defaultVideoSlide = {
+	type: 'video',
+	video: {
+		...selfHostedDefaultVideo54Card.mainMedia,
+		atomId: 'default-atom-id',
+	},
+} as const satisfies DCRSlideshowMedia;
+
+// Same video as the FlexibleGeneral YouTube card stories
+const youtubeVideoSlide = {
+	type: 'video',
+	video: {
+		type: 'YoutubeVideo',
+		id: 'fa2ee832-c5e7-4305-8387-f0277d2d9e27',
+		videoId: '9kIN--VV2LQ',
+		duration: 117,
+		title: "Rashford and Garnacho omission from team to 'push them harder' says Amorim – video ",
+		width: 500,
+		height: 300,
+		origin: 'SNTV',
+		expired: false,
+		image: 'https://media.guim.co.uk/0cab2d745b3423b0fac318c9ee09b79678f568f8/0_56_3000_1688/3000.jpg',
+		isLive: false,
+	},
 } as const satisfies DCRSlideshowMedia;
 
 const mixedMedia = [
 	images[0],
-	videoSlide,
+	loopVideoSlide,
 	images[1],
+	cinemagraphVideoSlide,
 	images[2],
+	defaultVideoSlide,
+	youtubeVideoSlide,
 ] as const satisfies readonly DCRSlideshowMedia[];
 
 const Wrapper = ({
@@ -118,6 +157,11 @@ const meta = {
 		dataLinkName: 'slideshow-carousel',
 		uniqueId: 'slideshow-carousel',
 		subtitleSize: 'small',
+		format: {
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.News,
+		},
 	},
 	render: (args) => (
 		<Wrapper>
@@ -148,12 +192,24 @@ export const WithVideoAndImages = {
 	args: {
 		images: mixedMedia,
 	},
+	render: (args) => (
+		<Wrapper heading="Slides: image, loop video, image, cinemagraph video, image, default video, YouTube video">
+			<SlideshowCarousel {...args} />
+		</Wrapper>
+	),
 } satisfies Story;
 
 export const WithOneVideo = {
 	args: {
-		images: [videoSlide],
+		images: [
+			{ ...loopVideoSlide, caption: 'A self-hosted looping video slide' },
+		],
 	},
+	render: (args) => (
+		<Wrapper heading="Loop video with a caption: the controls move to the top and the progress bar is hidden">
+			<SlideshowCarousel {...args} />
+		</Wrapper>
+	),
 } satisfies Story;
 
 const containerPalettes = [

@@ -123,11 +123,11 @@ export type DCRSlideshowImage = {
 };
 
 /**
- * Spike: a self-hosted video slide, played with the same player as video cards.
+ * Spike: a self-hosted or YouTube video slide, played with the same players as video cards.
  */
 export type DCRSlideshowVideo = {
 	type: 'video';
-	video: Extract<MainMedia, { type: 'SelfHostedVideo' }>;
+	video: Extract<MainMedia, { type: 'SelfHostedVideo' | 'YoutubeVideo' }>;
 	caption?: string;
 };
 

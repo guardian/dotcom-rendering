@@ -933,7 +933,7 @@ export const Card = ({
 					>
 						{media.type === 'slideshow' && (
 							<Island
-								// Critical like other video islands: the player renders nothing until hydrated
+								// Critical like other video islands, as video slides need hydrating to play
 								priority={
 									media.slideshowImages.some(
 										({ type }) => type === 'video',
@@ -954,6 +954,7 @@ export const Card = ({
 									dataLinkName={resolvedDataLinkName}
 									uniqueId={uniqueId}
 									subtitleSize={subtitleSize}
+									format={format}
 								/>
 							</Island>
 						)}

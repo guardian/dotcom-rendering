@@ -463,7 +463,7 @@ export const decideReplacementMedia = (
 	return undefined;
 };
 
-// Same player and poster fallback as video cards; the player needs a source and a poster.
+// Same players and poster fallback as video cards; the self-hosted player needs a source and a poster.
 const decideSlideshowVideo = (
 	mediaAtom: FEMediaAtom,
 	caption?: string,
@@ -471,14 +471,15 @@ const decideSlideshowVideo = (
 ): DCRSlideshowVideo | undefined => {
 	const video = getActiveMediaAtom(mediaAtom, cardImage);
 	if (
-		video?.type !== 'SelfHostedVideo' ||
-		video.sources.length === 0 ||
-		!video.image.src
+		video?.type === 'YoutubeVideo' ||
+		(video?.type === 'SelfHostedVideo' &&
+			video.sources.length > 0 &&
+			!!video.image.src)
 	) {
-		return undefined;
+		return { type: 'video', video, caption };
 	}
 
-	return { type: 'video', video, caption };
+	return undefined;
 };
 
 export const decideMultimediaSlideshow = (

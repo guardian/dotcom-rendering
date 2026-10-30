@@ -647,8 +647,46 @@ describe('Enhance Cards', () => {
 			});
 		});
 
-		it('drops video slides the player cannot show, and returns undefined if none remain', () => {
-			const posterImage = { allImages: [largeImage] };
+		it('converts YouTube video slides', () => {
+			const slideshow: FEMultimediaSlideshow = {
+				id: 'slideshow-id',
+				slides: [
+					{
+						content: {
+							type: 'Video',
+							item: {
+								mediaAtom: {
+									...testMediaAtom,
+									assets: [testYoutubeAsset],
+								},
+							},
+						},
+						caption: 'YouTube caption',
+					},
+				],
+			};
+
+			expect(decideMultimediaSlideshow(true, slideshow)).toEqual([
+				{
+					type: 'video',
+					video: {
+						type: 'YoutubeVideo',
+						id: 'atomID',
+						videoId: 'test-youtube-id',
+						duration: 15,
+						title: 'Example video',
+						width: 500,
+						height: 300,
+						origin: '',
+						expired: false,
+						isLive: false,
+					},
+					caption: 'YouTube caption',
+				},
+			]);
+		});
+
+		it('drops self-hosted video slides the player cannot show, and returns undefined if none remain', () => {
 			const unplayable: FEMultimediaSlideshow = {
 				id: 'slideshow-id',
 				slides: [
@@ -658,19 +696,7 @@ describe('Enhance Cards', () => {
 							item: {
 								mediaAtom: {
 									...testMediaAtom,
-									posterImage,
-									assets: [testYoutubeAsset],
-								},
-							},
-						},
-					},
-					{
-						content: {
-							type: 'Video',
-							item: {
-								mediaAtom: {
-									...testMediaAtom,
-									posterImage,
+									posterImage: { allImages: [largeImage] },
 									assets: [
 										{
 											...testMp4Asset,

@@ -13,6 +13,7 @@ import {
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
 import { useEffect, useRef, useState } from 'react';
+import type { ArticleFormat } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import { takeFirst } from '../lib/tuple';
 import { palette } from '../palette';
@@ -22,6 +23,7 @@ import { CardPicture } from './CardPicture';
 import { SelfHostedVideo } from './SelfHostedVideo.island';
 import type { SubtitleSize } from './SelfHostedVideoPlayer';
 import { SlideshowCarouselScrollingDots } from './SlideshowCarouselScrollingDots';
+import { YoutubeBlockComponent } from './YoutubeBlockComponent.island';
 
 /**
  * Spike helpers for supporting mixed media (images and videos) in a slideshow.
@@ -32,8 +34,12 @@ const isVideoSlide = (
 ): slide is Extract<DCRSlideshowMedia, { type: 'video' }> =>
 	slide.type === 'video';
 
-const getSlideKey = (slide: DCRSlideshowMedia): string =>
-	isVideoSlide(slide) ? slide.video.atomId : slide.imageSrc;
+const getSlideKey = (slide: DCRSlideshowMedia): string => {
+	if (!isVideoSlide(slide)) return slide.imageSrc;
+	return slide.video.type === 'YoutubeVideo'
+		? slide.video.id
+		: slide.video.atomId;
+};
 
 const getSlideCaption = (slide: DCRSlideshowMedia): string | undefined =>
 	isVideoSlide(slide) ? slide.caption : slide.imageCaption;
@@ -149,6 +155,13 @@ const videoCaptionStyles = css`
 	pointer-events: none;
 `;
 
+/** Hides the caption once play is clicked, like YouTube's own overlays, so it doesn't cover YouTube's controls */
+const youtubeSlideStyles = css`
+	&:has(iframe, [data-name^='youtube-placeholder']) > figcaption {
+		display: none;
+	}
+`;
+
 type Props = {
 	/**
 	 * Slides may be images or videos. The prop retains the `images` name for
@@ -162,6 +175,7 @@ type Props = {
 	dataLinkName?: string;
 	uniqueId: string;
 	subtitleSize: SubtitleSize;
+	format: ArticleFormat;
 };
 
 export const SlideshowCarousel = ({
@@ -173,6 +187,7 @@ export const SlideshowCarousel = ({
 	dataLinkName,
 	uniqueId,
 	subtitleSize,
+	format,
 }: Props) => {
 	const carouselRef = useRef<HTMLUListElement | null>(null);
 	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
@@ -284,44 +299,77 @@ export const SlideshowCarousel = ({
 						>
 							{/* Video slides aren't links, so clicks reach the video controls */}
 							{isVideoSlide(slide) ? (
-								<figure>
+								<figure
+									css={
+										slide.video.type === 'YoutubeVideo'
+											? youtubeSlideStyles
+											: undefined
+									}
+								>
 									<div css={videoPlayerStyles}>
-										<SelfHostedVideo
-											sources={slide.video.sources}
-											atomId={slide.video.atomId}
-											uniqueId={`${uniqueId}-slide-${index}`}
-											videoStyle={slide.video.videoStyle}
-											aspectRatio={
-												slide.video.aspectRatio
-											}
-											posterImage={
-												slide.video.image.src ?? ''
-											}
-											posterImageAspectRatio={
-												slide.video.image.aspectRatio
-											}
-											fallbackImage={
-												slide.video.image.src ?? ''
-											}
-											fallbackImageSize={imageSize}
-											fallbackImageLoading={loading}
-											fallbackImageAlt={caption}
-											fallbackImageAspectRatio="5:4"
-											linkTo={linkTo}
-											subtitleSource={
-												slide.video.subtitleSource
-											}
-											subtitleSize={subtitleSize}
-											// Keeps the caption clear of the controls and subtitles
-											controlsPosition={
-												caption ? 'top' : 'bottom'
-											}
-											hideProgressBar={!!caption}
-											// Cropped to 5:4 like the image slides
-											minAspectRatio={5 / 4}
-											maxAspectRatio={5 / 4}
-											preventAutoplay={false}
-										/>
+										{slide.video.type === 'YoutubeVideo' ? (
+											<YoutubeBlockComponent
+												id={slide.video.id}
+												assetId={slide.video.videoId}
+												index={index}
+												duration={slide.video.duration}
+												posterImage={slide.video.image}
+												width={slide.video.width}
+												height={slide.video.height}
+												origin={slide.video.origin}
+												mediaTitle={slide.video.title}
+												altText={caption}
+												expired={slide.video.expired}
+												format={format}
+												hideCaption={true}
+												stickyVideos={false}
+												pauseOffscreenVideo={true}
+												hidePillOnMobile={false}
+												enableAds={false}
+												aspectRatio="5:4"
+												isLive={slide.video.isLive}
+											/>
+										) : (
+											<SelfHostedVideo
+												sources={slide.video.sources}
+												atomId={slide.video.atomId}
+												uniqueId={`${uniqueId}-slide-${index}`}
+												videoStyle={
+													slide.video.videoStyle
+												}
+												aspectRatio={
+													slide.video.aspectRatio
+												}
+												posterImage={
+													slide.video.image.src ?? ''
+												}
+												posterImageAspectRatio={
+													slide.video.image
+														.aspectRatio
+												}
+												fallbackImage={
+													slide.video.image.src ?? ''
+												}
+												fallbackImageSize={imageSize}
+												fallbackImageLoading={loading}
+												fallbackImageAlt={caption}
+												fallbackImageAspectRatio="5:4"
+												linkTo={linkTo}
+												subtitleSource={
+													slide.video.subtitleSource
+												}
+												subtitleSize={subtitleSize}
+												// Keeps the caption clear of the controls and subtitles
+												controlsPosition={
+													caption ? 'top' : 'bottom'
+												}
+												hideProgressBar={!!caption}
+												// Cropped to 5:4 like the image slides
+												minAspectRatio={5 / 4}
+												maxAspectRatio={5 / 4}
+												preventAutoplay={false}
+											/>
+										)}
 									</div>
 									{!!caption && (
 										<figcaption
