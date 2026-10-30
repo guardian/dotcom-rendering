@@ -57,19 +57,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "commercial-prebid-price-floor-holdback",
-		description:
-			"This test will be the 5% holdback group for the prebid price floor",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-07-16",
-		type: "client",
-		status: "OFF",
-		audienceSize: 5 / 100,
-		audienceSpace: "A",
-		groups: ["holdback"],
-		shouldForceMetricsCollection: true,
-	},
-	{
 		name: "commercial-ozone-hashed-email",
 		description:
 			"Pass hashed email to Ozone via pubProvidedId for audience matching",
