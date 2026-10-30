@@ -31,7 +31,6 @@ catalog:
   rollup: 4.59.0
   rollup-plugin-esbuild: 6.2.1
   tslib: 2.6.2
-  tsx: 4.23.15
   type-fest: 5.10.0
   typescript: 6.0.3
   valibot: 1.4.2
