@@ -13,6 +13,7 @@ import { CommentBlockComponent } from '../components/CommentBlockComponent';
 import { CrosswordComponent } from '../components/CrosswordComponent.island';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.island';
+import { ElectionTrackerWrapper } from '../components/ElectionTrackerWrapper.island';
 import { EmailSignUpWrapper } from '../components/EmailSignUpWrapper.island';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.island';
 import { ExplainerAtom } from '../components/ExplainerAtom';
@@ -1004,6 +1005,22 @@ export const renderElement = ({
 					isSensitive={isSensitive}
 					isAcastEnabled={!!switches.acast}
 				/>
+			);
+		case 'model.dotcomrendering.pageElements.EventGraphicBlockElement':
+			return (
+				<div
+					css={{
+						marginBottom: 12,
+					}}
+				>
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<ElectionTrackerWrapper
+							electionDataUrl={element.dataUrl.href}
+							electionComponents={element.components}
+							liveEffects={true}
+						/>
+					</Island>
+				</div>
 			);
 		case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':

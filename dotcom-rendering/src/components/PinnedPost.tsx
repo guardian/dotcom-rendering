@@ -144,6 +144,13 @@ type Props = {
 };
 
 export const PinnedPost = ({ pinnedPost, children, serverTime }: Props) => {
+	// Determine if the pinned post should expand automatically if it contains the election tracker
+	const shouldExpandPinnedPost = pinnedPost.elements.some(
+		(element) =>
+			element._type ===
+			'model.dotcomrendering.pageElements.EventGraphicBlockElement',
+	);
+
 	return (
 		<div
 			id="pinned-post"
@@ -161,6 +168,7 @@ export const PinnedPost = ({ pinnedPost, children, serverTime }: Props) => {
 				name="pinned-post-checkbox"
 				tabIndex={-1}
 				key="PinnedPostCheckbox"
+				defaultChecked={shouldExpandPinnedPost}
 			/>
 			<div css={rowStyles}>
 				<SvgPinned />

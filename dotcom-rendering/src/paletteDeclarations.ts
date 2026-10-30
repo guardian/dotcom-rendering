@@ -4591,12 +4591,12 @@ const syndicationButtonTextDark: PaletteFunction = ({ design, theme }) => {
 			switch (design) {
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
-					return sourcePalette.neutral[46];
+					return sourcePalette.neutral[86];
 				default:
 					return sourcePalette.specialReportAlt[100];
 			}
 		default:
-			return sourcePalette.neutral[46];
+			return sourcePalette.neutral[86];
 	}
 };
 
