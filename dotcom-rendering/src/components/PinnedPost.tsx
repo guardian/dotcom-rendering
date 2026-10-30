@@ -141,15 +141,18 @@ type Props = {
 	pinnedPost: Block;
 	children: React.ReactNode;
 	serverTime?: number;
-	shouldExpandPinnedPost?: boolean;
 };
 
-export const PinnedPost = ({
-	pinnedPost,
-	children,
-	serverTime,
-	shouldExpandPinnedPost,
-}: Props) => {
+export const PinnedPost = ({ pinnedPost, children, serverTime }: Props) => {
+	// Determine if the pinned post should expand automatically if it contains the election tracker
+	const shouldExpandPinnedPost = pinnedPost.elements.some(
+		(element) =>
+			element._type ===
+				'model.dotcomrendering.pageElements.InteractiveAtomBlockElement' &&
+			element.id ===
+				'interactives/2026/11/election-trackers/us-election-tracker-2026',
+	);
+
 	return (
 		<div
 			id="pinned-post"
