@@ -1,3 +1,4 @@
+import { css, Global } from '@emotion/react';
 import { palette as sourcePalette } from '@guardian/source/foundations';
 import { AdPortals } from '../components/AdPortals.island';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
@@ -21,6 +22,7 @@ import { OnwardsUpper } from '../components/OnwardsUpper.island';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { SubNav } from '../components/SubNav.island';
+import { grid } from '../grid';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -116,6 +118,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					<Island priority="critical">
 						<InteractivesDisableArticleSwipe />
 					</Island>
+					<Global
+						styles={css`
+							.gu-grid {
+								${grid.container}
+							}
+						`}
+					/>
 				</>
 			)}
 
