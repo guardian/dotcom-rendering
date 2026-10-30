@@ -36,6 +36,7 @@ for (const isFeatured of [false, true]) {
 					configOverrides: {
 						serverSideABTests: {
 							'puzzles-new-hub-v1': 'variant',
+							'puzzles-new-hub-v2': 'variant',
 						},
 					},
 				},

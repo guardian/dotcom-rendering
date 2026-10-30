@@ -283,6 +283,43 @@ describe('PuzzlesArchiveCalendar', () => {
 		},
 	);
 
+	it('keeps trivia calendar requests same-origin so V2 participation cookies are sent', async () => {
+		pageConfig.ajaxUrl = 'https://api.nextgen.guardianapps.co.uk';
+		const trivia: PuzzlesArchive = {
+			...archive,
+			category: 'trivia-and-quizzes',
+			selectedPuzzle: {
+				id: 'film-reveal',
+				title: 'Film reveal',
+				puzzleType: 'FILMREVEAL',
+				slug: 'trivia-and-quizzes/film-reveal',
+				set: 'all',
+			},
+			items: [],
+		};
+		const fetchMock = jest.fn().mockResolvedValue({
+			ok: true,
+			json: async () => ({ ...trivia, month: 8 }),
+		});
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		render(<PuzzlesArchiveCalendar initialArchive={trivia} />);
+		fireEvent.click(screen.getByRole('link', { name: 'Previous month' }));
+
+		await waitFor(() =>
+			expect(fetchMock).toHaveBeenCalledWith(
+				expect.objectContaining({
+					origin: window.location.origin,
+					pathname:
+						'/puzzles-and-games/trivia-and-quizzes/archive-data/film-reveal/2026/8',
+				}),
+				expect.objectContaining({ credentials: 'same-origin' }),
+			),
+		);
+	});
+
 	it('bolds the current London weekday only in the current month', () => {
 		jest.useFakeTimers().setSystemTime(new Date('2026-10-07T12:00:00Z'));
 		const currentMonthArchive = {

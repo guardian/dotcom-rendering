@@ -1,5 +1,6 @@
 import type { Request, Response } from 'express';
 import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
+import { triviaPuzzlesContainer } from '../../fixtures/manual/puzzlesPage';
 import { handlePuzzlePage } from './handler.puzzlePage.web';
 import { renderPuzzlePage } from './render.puzzlePage.web';
 
@@ -47,6 +48,24 @@ describe('handlePuzzlePage', () => {
 		config: { ...page.config, serverSideABTests },
 	});
 
+	it('omits V2 recommendations from existing V1 puzzle pages', () => {
+		const page = withServerSideABTests(createPuzzlePage('sudoku-easy'), {
+			'puzzles-new-hub-v1': 'variant',
+		});
+		const existing = page.instance.moreFromPuzzlesAndGames!;
+		page.instance.moreFromPuzzlesAndGames = [
+			...existing,
+			...triviaPuzzlesContainer.content.items[0]!,
+		];
+		const res = response();
+		invokeHandler(page, res);
+		expect(res.status).toHaveBeenCalledWith(200);
+		expect(
+			mockedRenderPuzzlePage.mock.calls[0]![0].puzzlePage.instance
+				.moreFromPuzzlesAndGames,
+		).toEqual(existing);
+	});
+
 	it('renders the page for a known slug when the puzzles-new-hub-v1 variant is active', () => {
 		const res = response();
 		const page = withServerSideABTests(createPuzzlePage('sudoku-easy'), {
@@ -78,9 +97,7 @@ describe('handlePuzzlePage', () => {
 		'sudoku-killer',
 		'word-wheel',
 		'wordiply',
-		'film-reveal',
-		'on-the-ball',
-	])('renders iframe-based slug %s when in variant', (slug) => {
+	])('renders V1 iframe-based slug %s when in variant', (slug) => {
 		const res = response();
 		const page = withServerSideABTests(createPuzzlePage(slug), {
 			'puzzles-new-hub-v1': 'variant',
@@ -93,6 +110,54 @@ describe('handlePuzzlePage', () => {
 	});
 
 	it.each(['film-reveal', 'on-the-ball'])(
+		'gates %s behind cumulative V2 participation',
+		(slug) => {
+			for (const [serverSideABTests, allowed] of [
+				[{ 'puzzles-new-hub-v1': 'variant' }, false],
+				[{ 'puzzles-new-hub-v2': 'variant' }, false],
+				[
+					{
+						'puzzles-new-hub-v1': 'variant',
+						'puzzles-new-hub-v2': 'control',
+					},
+					false,
+				],
+				[
+					{
+						'puzzles-new-hub-v1': 'variant',
+						'puzzles-new-hub-v2': 'unknown',
+					},
+					false,
+				],
+				[
+					{
+						'puzzles-new-hub-v1': 'variant',
+						'puzzles-new-hub-v2': 'variant',
+					},
+					true,
+				],
+			] as const) {
+				mockedRenderPuzzlePage.mockClear();
+				const res = response();
+				invokeHandler(
+					withServerSideABTests(
+						createPuzzlePage(slug),
+						serverSideABTests,
+					),
+					res,
+				);
+				if (allowed) {
+					expect(res.status).toHaveBeenCalledWith(200);
+					expect(mockedRenderPuzzlePage).toHaveBeenCalledTimes(1);
+				} else {
+					expect(res.sendStatus).toHaveBeenCalledWith(404);
+					expect(mockedRenderPuzzlePage).not.toHaveBeenCalled();
+				}
+			}
+		},
+	);
+
+	it.each(['film-reveal', 'on-the-ball'])(
 		'requires a non-empty API gameUrl for %s',
 		(slug) => {
 			for (const gameUrl of [undefined, '', '   ']) {
@@ -101,7 +166,10 @@ describe('handlePuzzlePage', () => {
 					createPuzzlePage(slug, {
 						instance: { title: slug, gameUrl },
 					}),
-					{ 'puzzles-new-hub-v1': 'variant' },
+					{
+						'puzzles-new-hub-v1': 'variant',
+						'puzzles-new-hub-v2': 'variant',
+					},
 				);
 
 				invokeHandler(page, res);
