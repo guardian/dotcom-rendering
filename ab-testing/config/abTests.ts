@@ -361,6 +361,18 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
 	},
+	{
+		name: "commercial-iab-taxonomy",
+		description:
+			"Test the impact of using IAB Taxonomy tags for ad targeting",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-11-25",
+		type: "client",
+		status: "ON",
+		audienceSize: 0,
+		audienceSpace: "A",
+		groups: ["control", "variant-primary", "variant-primary-secondary"],
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
