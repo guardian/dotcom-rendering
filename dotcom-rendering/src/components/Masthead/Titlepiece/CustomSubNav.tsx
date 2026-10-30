@@ -115,9 +115,6 @@ const headerTextWrapperStyles = css`
 /** On fronts the header sits above the links as a large stacked heading. */
 const frontContainerStyles = css`
 	${headlineBold28}
-	display: flex;
-	align-items: center;
-	column-gap: ${space[2]}px;
 	margin-top: ${space[2]}px;
 	color: ${themePalette('--masthead-nav-link-text')};
 `;
@@ -411,30 +408,53 @@ export const CustomSubNav = ({
 		);
 	}
 
+	if (isArticle) {
+		return (
+			<div
+				data-component={`custom-subnav-${customSubNav.header.headerText}`}
+				data-component-id={customSubNav.id}
+				data-rendering-page={renderingPage}
+				css={[articleContainerStyles, scrollableSubNavStyles]}
+			>
+				{CustomHeader(
+					customSubNav,
+					articleHeaderStyles,
+					underlineHeader,
+				)}
+				<ul
+					css={[
+						subNavStyles,
+						!hasPageSkin && subNavStylesFromLeftCol,
+						articleSubNavStyles,
+						css`
+							flex-shrink: 0;
+							width: max-content;
+						`,
+					]}
+					role="list"
+					style={{
+						'--sub-nav-link': themePalette('--sub-nav-link-header'),
+					}}
+				>
+					{linkItems}
+				</ul>
+			</div>
+		);
+	}
+
 	return (
 		<div
 			data-component={`custom-subnav-${customSubNav.header.headerText}`}
 			data-component-id={customSubNav.id}
 			data-rendering-page={renderingPage}
-			css={[
-				isArticle ? articleContainerStyles : frontContainerStyles,
-				scrollableSubNavStyles,
-			]}
+			css={frontContainerStyles}
 		>
-			{CustomHeader(
-				customSubNav,
-				isArticle ? articleHeaderStyles : undefined,
-				underlineHeader,
-			)}
+			{CustomHeader(customSubNav, undefined, underlineHeader)}
 			<ul
 				css={[
 					subNavStyles,
 					!hasPageSkin && subNavStylesFromLeftCol,
-					isArticle && articleSubNavStyles,
-					css`
-						flex-shrink: 0;
-						width: max-content;
-					`,
+					scrollableSubNavStyles,
 				]}
 				role="list"
 				style={{
