@@ -106,12 +106,6 @@ const articleHeaderStyles = css`
 	border-right: 1px solid ${themePalette('--masthead-nav-lines')};
 `;
 
-/**
- * On fronts, when an image is present the subnav mirrors DirectoryPageNav: a
- * fixed-width, centred grid (blue) with the image spanning the full width on the
- * top row and the links beneath it. The surrounding row is white (set by the
- * Titlepiece wrapper), so only this padded container shows blue.
- */
 const imageNavStyles = css`
 	${grid.paddedContainer}
 	position: relative;
@@ -373,7 +367,26 @@ export const CustomSubNav = ({
 			data-component={`custom-subnav-${customSubNav.header.headerText}`}
 			data-component-id={customSubNav.id}
 			data-rendering-page={renderingPage}
-			css={isArticle ? articleContainerStyles : frontContainerStyles}
+			css={[
+				isArticle ? articleContainerStyles : frontContainerStyles,
+				css`
+					${scrollableSubNavStyles}
+					-webkit-mask-image: linear-gradient(
+						to right,
+						black calc(100% - 40px),
+						transparent
+					);
+					mask-image: linear-gradient(
+						to right,
+						black calc(100% - 40px),
+						transparent
+					);
+					& > a,
+					& > span {
+						flex-shrink: 0;
+					}
+				`,
+			]}
 		>
 			{CustomHeader(
 				customSubNav,
@@ -383,8 +396,11 @@ export const CustomSubNav = ({
 				css={[
 					subNavStyles,
 					!hasPageSkin && subNavStylesFromLeftCol,
-					scrollableSubNavStyles,
 					isArticle && articleSubNavStyles,
+					css`
+						flex-shrink: 0;
+						width: max-content;
+					`,
 				]}
 				role="list"
 				style={{
