@@ -206,7 +206,6 @@ export const styles = {
 		justify-self: end;
 		align-self: start;
 		overflow: hidden;
-		border-radius: 50%;
 
 		> div {
 			grid-area: auto;
