@@ -54,8 +54,8 @@ type MinHeightTiers = { default: number; tablet: number; mobile: number };
  * not confirmed pixel-for-pixel against a real AmuseLabs/Wordiply embed
  * (see docs/puzzle-page.md's "Iframe height at narrower viewports" -
  * platform access for real measurement is being arranged separately), but
- * are deliberately tuned per puzzle instead of one generic guess for all
- * six.
+ * are deliberately tuned per puzzle instead of one generic guess for every
+ * game.
  *
  * Three tiers, matching AmuseLabs' own responsive reflow breakpoints:
  * - `default`: from `desktop` (980px) up.
@@ -80,6 +80,8 @@ const PUZZLE_MIN_HEIGHTS: Record<string, MinHeightTiers> = {
 	'sudoku-killer': { default: 620, tablet: 520, mobile: 630 },
 	'word-wheel': { default: 600, tablet: 750, mobile: 500 },
 	wordiply: { default: 600, tablet: 600, mobile: 600 },
+	'film-reveal': { default: 700, tablet: 700, mobile: 900 },
+	'on-the-ball': { default: 640, tablet: 700, mobile: 900 },
 };
 
 /**

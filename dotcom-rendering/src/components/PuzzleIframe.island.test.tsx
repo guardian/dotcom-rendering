@@ -41,6 +41,33 @@ const sudokuEasyConfig = puzzleConfigs['sudoku-easy']!;
 const wordiplyConfig = puzzleConfigs.wordiply!;
 
 describe('buildPuzzleIframeSrc', () => {
+	it.each(['film-reveal', 'on-the-ball'])(
+		'adds context and dark mode to the API-provided %s URL without adding uid',
+		(slug) => {
+			const context: PuzzleContext = {
+				userId: 'reader',
+				darkMode: true,
+				puzzleDate: '2026-10-28',
+			};
+			const url = new URL(
+				buildPuzzleIframeSrc(
+					puzzleConfigs[slug]!,
+					context,
+					`https://example.com/${slug}?id=opaque&embed=1`,
+				),
+			);
+
+			expect(url.pathname).toBe(`/${slug}`);
+			expect(url.searchParams.get('id')).toBe('opaque');
+			expect(url.searchParams.get('embed')).toBe('1');
+			expect(url.searchParams.get('darkMode')).toBe('1');
+			expect(url.searchParams.has('uid')).toBe(false);
+			expect(
+				JSON.parse(url.searchParams.get('guardian-puzzle-context')!),
+			).toEqual(context);
+		},
+	);
+
 	it('adds reader context to the API game URL without deriving a different puzzle', () => {
 		const context: PuzzleContext = {
 			userId: 'reader',
@@ -154,6 +181,25 @@ describe('buildFrameStyles', () => {
 		);
 	});
 
+	it.each([
+		['film-reveal', 700],
+		['on-the-ball', 640],
+	] as const)(
+		'uses the measured desktop height for %s and preserves the narrower tiers',
+		(slug, desktopHeight) => {
+			const styles = buildFrameStyles(slug).styles.replace(/\s+/g, '');
+			expect(styles.split('@media')[0]).toContain(
+				`min-height:${desktopHeight}px;`,
+			);
+			expect(styles).toContain(
+				'@media(max-width:979.9px){min-height:700px;}',
+			);
+			expect(styles).toContain(
+				'@media(max-width:739.9px){min-height:900px;}',
+			);
+		},
+	);
+
 	it('falls back to the default min-heights for an unrecognised slug', () => {
 		expect(buildFrameStyles('unknown-slug').styles).toContain(
 			'min-height:500px;',
@@ -260,6 +306,38 @@ describe('PuzzleIframe', () => {
 
 	const getDarkModeParamFromSrc = (src: string): string | null =>
 		new URL(src).searchParams.get('darkMode');
+
+	it.each(['film-reveal', 'on-the-ball'])(
+		'loads %s in the shared sandbox after authentication resolves',
+		async (slug) => {
+			mockedGetAuthStatus.mockResolvedValue(signedIn('reader'));
+			mockedUseMatchMedia.mockReturnValue(true);
+			render(
+				<PuzzleIframe
+					puzzleConfig={puzzleConfigs[slug]!}
+					title={slug}
+					darkModeAvailable={true}
+					puzzleDate="2026-10-28"
+					gameUrl={`https://example.com/${slug}?id=opaque`}
+				/>,
+			);
+			const iframe = screen.getByTitle<HTMLIFrameElement>(slug);
+			expect(iframe).not.toHaveAttribute('src');
+			await waitFor(() =>
+				expect(getDarkModeParamFromSrc(iframe.src)).toBe('1'),
+			);
+			expect(iframe).toHaveAttribute(
+				'sandbox',
+				'allow-scripts allow-same-origin allow-popups allow-forms',
+			);
+			expect(getUidFromSrc(iframe.src)).toBeNull();
+			expect(getContextFromSrc(iframe.src)).toEqual({
+				userId: 'reader',
+				darkMode: true,
+				puzzleDate: '2026-10-28',
+			});
+		},
+	);
 
 	it('loads the API-selected puzzle after authentication resolves', async () => {
 		mockedGetAuthStatus.mockResolvedValue(signedIn('reader'));

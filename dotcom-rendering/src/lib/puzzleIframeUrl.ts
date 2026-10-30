@@ -7,8 +7,8 @@ import type {
 /**
  * Per-provider strategy for building a puzzle iframe's `src` URL.
  *
- * Each puzzle iframe provider (AmuseLabs, Wordiply, and, in future,
- * MovieGrid/SportsReveal) has its own, independently-confirmed rules for
+ * Each puzzle iframe provider (AmuseLabs, Wordiply and MovieGrid)
+ * has its own, independently-confirmed rules for
  * what query params it accepts and in what form (see the "Puzzles hub 3P
  * API requirements" architecture document): AmuseLabs accepts `set`, `id`
  * (vs `idx=1` for "latest"), `embed=1`, an optional `uid`, and an optional
@@ -129,6 +129,8 @@ export const resolvePuzzleIframeUrl = (
 				url.searchParams.delete('uid');
 			}
 			url.searchParams.set('darkMode', context.darkMode ? '1' : '0');
+		} else if (config.iframe.provider === 'moviegrid') {
+			url.searchParams.set('darkMode', context.darkMode ? '1' : '0');
 		}
 		return url.toString();
 	}
@@ -140,6 +142,8 @@ export const resolvePuzzleIframeUrl = (
 			return buildAmuseLabsUrl(iframe, context);
 		case 'wordiply':
 			return buildWordiplyUrl(iframe, context);
+		case 'moviegrid':
+			throw new TypeError('MovieGrid requires an API-provided gameUrl.');
 		default: {
 			// Exhaustiveness check: adding a new PuzzleProvider without also
 			// adding a case (and builder function) here is a compile error,

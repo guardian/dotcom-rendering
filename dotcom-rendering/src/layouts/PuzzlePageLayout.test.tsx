@@ -87,6 +87,40 @@ const renderPuzzlePageLayout = (
 
 describe('PuzzlePageLayout', () => {
 	it.each([
+		['film-reveal', 'Film reveal'],
+		['on-the-ball', 'On the ball'],
+	])(
+		'renders the %s headline and trivia section link without print',
+		(slug, title) => {
+			renderPuzzlePageLayout(slug);
+
+			expect(
+				screen.getByRole('heading', { level: 1, name: title }),
+			).toBeInTheDocument();
+			expect(
+				screen.getByRole('link', { name: 'Trivia & quizzes' }),
+			).toHaveAttribute(
+				'href',
+				'/puzzles-and-games/trivia-and-quizzes/archive',
+			);
+			const preferredSource = screen.getByRole('link', {
+				name: 'Prefer the Guardian on Google',
+			});
+			expect(preferredSource).toHaveAttribute(
+				'href',
+				'https://www.google.com/preferences/source?q=theguardian.com',
+			);
+			expect(preferredSource).toHaveAttribute(
+				'data-print-layout',
+				'hide',
+			);
+			expect(
+				screen.queryByRole('button', { name: /print/i }),
+			).not.toBeInTheDocument();
+		},
+	);
+
+	it.each([
 		{ slug: 'word-wheel', isAdFreeUser: false },
 		{ slug: 'word-wheel', isAdFreeUser: true },
 		{ slug: 'sudoku-easy', isAdFreeUser: false },

@@ -16,9 +16,24 @@ describe('puzzleConfigs registry', () => {
 				'sudoku-medium',
 				'word-wheel',
 				'wordiply',
+				'film-reveal',
+				'on-the-ball',
 			].sort(),
 		);
 	});
+
+	it.each(['film-reveal', 'on-the-ball'])(
+		'configures %s as a shareable MovieGrid trivia game without print',
+		(slug) => {
+			expect(getPuzzleConfig(slug)).toMatchObject({
+				slug,
+				puzzleGroup: 'trivia',
+				iframe: { provider: 'moviegrid' },
+				shareEnabled: true,
+				printEnabled: false,
+			});
+		},
+	);
 
 	it('does not throw for the current registry', () => {
 		expect(() => validatePuzzleConfigs(puzzleConfigs)).not.toThrow();

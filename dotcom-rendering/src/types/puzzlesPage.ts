@@ -103,7 +103,11 @@ export type PuzzlesArchiveItem = {
 };
 
 export type PuzzlesArchive = {
-	category: 'crosswords' | 'word-games' | 'logic-puzzles';
+	category:
+		| 'crosswords'
+		| 'word-games'
+		| 'logic-puzzles'
+		| 'trivia-and-quizzes';
 	title: string;
 	description: string;
 	selectedPuzzle: PuzzlesArchivePuzzle;

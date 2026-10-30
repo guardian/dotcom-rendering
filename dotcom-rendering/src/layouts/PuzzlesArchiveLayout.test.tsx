@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom';
+import { palette } from '@guardian/source/foundations';
 import { render, screen } from '@testing-library/react';
 import type { ReactNode } from 'react';
 import { PuzzlesArchiveLayout } from './PuzzlesArchiveLayout';
@@ -41,6 +42,33 @@ const slotIds = () =>
 
 describe('PuzzlesArchiveLayout', () => {
 	const nav = { pillars: [], readerRevenueLinks: { footer: [] } } as never;
+
+	it('renders the trivia archive with its Labs palette', () => {
+		const puzzlesPage = page(true);
+		render(
+			<PuzzlesArchiveLayout
+				NAV={nav}
+				puzzlesPage={
+					{
+						...puzzlesPage,
+						archive: {
+							...puzzlesPage.archive,
+							category: 'trivia-and-quizzes',
+							title: 'Trivia & quizzes',
+						},
+					} as never
+				}
+			/>,
+		);
+
+		expect(
+			screen.getByRole('heading', { level: 1, name: 'Trivia & quizzes' }),
+		).toBeInTheDocument();
+		expect(screen.getByRole('main')).toHaveStyle({
+			'--puzzles-primary': palette.labs[200],
+			'--puzzles-tint': palette.labs[700],
+		});
+	});
 
 	it('renders the header, right, bottom banner and mobile slots', () => {
 		render(

@@ -62,6 +62,7 @@ type Props = {
 	mainMediaElements?: FEElement[];
 	crossword?: FEArticle['crossword'];
 	hidePreferredSourceOnPrint?: boolean;
+	isPuzzlePage?: boolean;
 };
 
 const meta = (format: ArticleFormat) => {
@@ -316,11 +317,13 @@ export const ArticleMeta = ({
 	mainMediaElements,
 	crossword,
 	hidePreferredSourceOnPrint,
+	isPuzzlePage = false,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const showPreferredSource = hasPreferredSourceButton(
 		renderingTarget,
 		format,
+		isPuzzlePage,
 	);
 	const isImmersiveGrid = layoutType?.startsWith('immersive') ?? false;
 	const soleContributor = getSoleContributor(tags, byline);
