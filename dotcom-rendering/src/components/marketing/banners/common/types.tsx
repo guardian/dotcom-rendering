@@ -61,6 +61,14 @@ export interface BannerTextContent {
 	mobileContent: BannerRenderedContent;
 }
 
+export type NewsletterBannerDesign = Omit<ConfigurableDesign, 'colours'> & {
+	colours: ConfigurableDesign['colours'] & {
+		newsletterBanner: {
+			divider: ConfigurableDesign['colours']['basic']['background'];
+		};
+	};
+};
+
 export interface BannerRenderProps {
 	onCtaClick: () => void;
 	onSecondaryCtaClick: () => void;

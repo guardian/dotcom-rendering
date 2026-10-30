@@ -8,7 +8,7 @@ import type {
 	removeMediaRulePrefix,
 	useMatchMedia,
 } from '../../../../lib/useMatchMedia';
-import { design, props } from '../utils/storybook';
+import { newsletterDesign, props } from '../utils/storybook';
 import { NewsletterBanner } from './NewsletterBanner';
 
 const squareIllustration = 'https://example.com/newsletter-square.jpg';
@@ -24,7 +24,7 @@ const sdcNewsletterProps = {
 	submitComponentEvent: async () => Promise.resolve(),
 	isCollapsible: false,
 	design: {
-		...design,
+		...newsletterDesign,
 		headerImage: {
 			mobileUrl:
 				'https://i.guim.co.uk/img/media/630a3735c02e195be89ab06fd1b8192959e282ab/0_0_1172_560/500.png?width=500&quality=75&s=937595b3f471d6591475955335c7c023',
