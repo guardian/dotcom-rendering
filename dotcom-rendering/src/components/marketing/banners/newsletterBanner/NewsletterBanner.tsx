@@ -1,5 +1,6 @@
 import { hexColourToString } from '@guardian/support-dotcom-components';
 import type { BannerProps } from '@guardian/support-dotcom-components/dist/shared/types';
+import type { PromotedNewsletter } from '@guardian/support-dotcom-components/dist/shared/types/props/banner';
 import type { ComponentType } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { validatedBannerWrapper } from '../common/BannerWrapper';
@@ -16,6 +17,56 @@ import { NewsletterFrequencyTag } from './NewsletterFrequencyTag';
 import { NewsletterSignupForm } from './NewsletterSignupForm';
 import { SuccessMessage } from './SuccessMessage';
 import { useSuccessDismissal } from './useSuccessDismissal';
+
+const buildNewsletterBannerData = (
+	baseBannerData: BannerData,
+	newsletter: PromotedNewsletter,
+	onClose: () => void,
+): BannerData => {
+	const baseImageSettings =
+		baseBannerData.settings.headerSettings?.headerImage ??
+		baseBannerData.settings.imageSettings;
+	const illustrationSquare: unknown = newsletter.illustrationSquare;
+	const hasIllustrationSquare =
+		typeof illustrationSquare === 'string' && illustrationSquare.length > 0;
+	const imageSettings =
+		baseImageSettings !== undefined && hasIllustrationSquare
+			? {
+					...baseImageSettings,
+					mobileUrl: illustrationSquare,
+					tabletUrl: illustrationSquare,
+				}
+			: baseImageSettings;
+
+	return {
+		...baseBannerData,
+		actions: {
+			...baseBannerData.actions,
+			onClose,
+		},
+		selectors: {
+			...baseBannerData.selectors,
+			copyForViewport: {
+				...baseBannerData.selectors.copyForViewport,
+				paragraphs:
+					newsletter.signUpDescription !== undefined
+						? [<>{newsletter.signUpDescription}</>]
+						: baseBannerData.selectors.copyForViewport.paragraphs,
+			},
+			headingCopy: {
+				...baseBannerData.selectors.headingCopy,
+				heading: <>Sign up to {newsletter.name}</>,
+			},
+			showHeaderImage: false,
+			showBody: true,
+			showBodyVisual: true,
+		},
+		settings: {
+			...baseBannerData.settings,
+			imageSettings,
+		},
+	};
+};
 
 export const NewsletterBannerComponent = (
 	props: BannerRenderProps,
@@ -45,25 +96,11 @@ export const NewsletterBannerComponent = (
 	}
 
 	const { basic } = props.design.colours;
-	const bannerData: BannerData = {
-		...baseBannerData,
-		actions: {
-			...baseBannerData.actions,
-			onClose: isSuccess ? dismiss : baseBannerData.actions.onClose,
-		},
-		selectors: {
-			...baseBannerData.selectors,
-			showHeaderImage: false,
-			showBody: true,
-			showBodyVisual: true,
-		},
-		settings: {
-			...baseBannerData.settings,
-			imageSettings:
-				baseBannerData.settings.headerSettings?.headerImage ??
-				baseBannerData.settings.imageSettings,
-		},
-	};
+	const bannerData = buildNewsletterBannerData(
+		baseBannerData,
+		newsletter,
+		isSuccess ? dismiss : baseBannerData.actions.onClose,
+	);
 
 	return (
 		<div

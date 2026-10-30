@@ -1,12 +1,22 @@
 import { bannerSchema } from '@guardian/support-dotcom-components';
-import { fireEvent, render, screen } from '@testing-library/react';
+import {
+	fireEvent,
+	render,
+	screen as testingScreen,
+} from '@testing-library/react';
+import type {
+	removeMediaRulePrefix,
+	useMatchMedia,
+} from '../../../../lib/useMatchMedia';
 import { design, props } from '../utils/storybook';
 import { NewsletterBanner } from './NewsletterBanner';
+
+const squareIllustration = 'https://example.com/newsletter-square.jpg';
 
 const sdcNewsletterProps = {
 	...props,
 	content: {
-		heading: 'Sign up to The Stakes 2026',
+		heading: 'Configured banner heading',
 		paragraphs: [
 			'From the races and candidates to watch to the issues shaping American politics.',
 		],
@@ -30,15 +40,19 @@ const sdcNewsletterProps = {
 		identityName: 'the-stakes-us-election-edition',
 		name: 'The Stakes 2026',
 		frequency: 'Weekly',
+		signUpDescription: 'Get our weekly guide to the 2026 election.',
+		illustrationSquare: squareIllustration,
 	},
 };
 
 jest.mock('../../../../lib/useNewsletterSubscription', () => ({
 	useNewsletterSubscription: jest.fn(),
 }));
-
 jest.mock('../../../../lib/useMatchMedia', () => ({
-	...jest.requireActual('../../../../lib/useMatchMedia'),
+	...jest.requireActual<{
+		removeMediaRulePrefix: typeof removeMediaRulePrefix;
+		useMatchMedia: typeof useMatchMedia;
+	}>('../../../../lib/useMatchMedia'),
 	useMatchMedia: () => false,
 }));
 
@@ -84,14 +98,18 @@ describe('NewsletterBanner configuration', () => {
 				idApiUrl="https://idapi.theguardian.com"
 			/>,
 		);
-		const closeButton = screen.getByRole('button', { name: 'Close' });
+		const closeButton = testingScreen.getByRole('button', {
+			name: 'Close',
+		});
 
-		fireEvent.click(screen.getByRole('button', { name: 'Sign up' }));
+		fireEvent.click(testingScreen.getByRole('button', { name: 'Sign up' }));
 
-		expect(screen.getAllByRole('button', { name: 'Close' })).toHaveLength(
-			1,
+		expect(
+			testingScreen.getAllByRole('button', { name: 'Close' }),
+		).toHaveLength(1);
+		expect(testingScreen.getByRole('button', { name: 'Close' })).toBe(
+			closeButton,
 		);
-		expect(screen.getByRole('button', { name: 'Close' })).toBe(closeButton);
 		expect(closeButton.closest('[aria-hidden]')).toBeNull();
 		expect(closeButton.closest('[inert]')).toBeNull();
 
@@ -102,8 +120,8 @@ describe('NewsletterBanner configuration', () => {
 		).toBe(true);
 	});
 
-	it('uses the image from the SDC design headerImage', () => {
-		render(
+	it('uses the newsletter square illustration on mobile and tablet', () => {
+		const { container } = render(
 			<NewsletterBanner
 				{...sdcNewsletterProps}
 				idApiUrl="https://idapi.theguardian.com"
@@ -111,7 +129,54 @@ describe('NewsletterBanner configuration', () => {
 		);
 
 		expect(
-			screen.getAllByAltText('The Stakes 2026').length,
+			testingScreen.getByRole('heading', {
+				name: 'Sign up to The Stakes 2026',
+			}),
+		).toBeInTheDocument();
+		expect(
+			testingScreen.queryByRole('heading', {
+				name: 'Configured banner heading',
+			}),
+		).not.toBeInTheDocument();
+		expect(
+			testingScreen.getByText(
+				'Get our weekly guide to the 2026 election.',
+			),
+		).toBeInTheDocument();
+		expect(
+			testingScreen.queryByText(
+				'From the races and candidates to watch to the issues shaping American politics.',
+			),
+		).not.toBeInTheDocument();
+		expect(
+			testingScreen.getAllByAltText('The Stakes 2026').length,
 		).toBeGreaterThan(0);
+
+		const mobileSources = container.querySelectorAll(
+			'source[media="(max-width: 739px)"]',
+		);
+		expect(mobileSources.length).toBeGreaterThan(0);
+		mobileSources.forEach((source) =>
+			expect(source).toHaveAttribute('srcset', squareIllustration),
+		);
+
+		const tabletSources = container.querySelectorAll(
+			'source[media="(max-width: 979px)"]',
+		);
+		expect(tabletSources.length).toBeGreaterThan(0);
+		tabletSources.forEach((source) =>
+			expect(source).toHaveAttribute('srcset', squareIllustration),
+		);
+
+		const desktopSources = container.querySelectorAll(
+			'source[media="(max-width: 1139px)"]',
+		);
+		expect(desktopSources.length).toBeGreaterThan(0);
+		desktopSources.forEach((source) =>
+			expect(source).toHaveAttribute(
+				'srcset',
+				sdcNewsletterProps.design.headerImage.desktopUrl,
+			),
+		);
 	});
 });
