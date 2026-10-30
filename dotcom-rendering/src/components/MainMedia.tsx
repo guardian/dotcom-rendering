@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { breakpoints, space, until } from '@guardian/source/foundations';
+import { breakpoints, from, space, until } from '@guardian/source/foundations';
 import type { LayoutType } from '../layouts/lib/articleArrangements';
 import {
 	ArticleDesign,
@@ -86,6 +86,25 @@ const chooseWrapper = (format: ArticleFormat) => {
 	}
 };
 
+const weekendReadFrame = css`
+	position: relative;
+	padding: 10px;
+	${from.wide} {
+		padding: 15px;
+	}
+	::before {
+		content: '';
+		display: block;
+		background-image: url('https://interactive.guim.co.uk/atoms/2025/04/2025-weekend-essay-test/assets/v/1791480673/frame.png');
+		background-size: contain;
+		background-position: center;
+		background-repeat: no-repeat;
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+	}
+`;
+
 type Props = {
 	format: ArticleFormat;
 	elements: FEElement[];
@@ -122,7 +141,15 @@ export const MainMedia = ({
 	articleArrangement,
 }: Props) => {
 	return (
-		<div css={[mainMedia, chooseWrapper(format)]}>
+		<div
+			css={[
+				mainMedia,
+				chooseWrapper(format),
+				articleArrangement === 'immersivePortrait' &&
+					format.design === ArticleDesign.WeekendEssay &&
+					weekendReadFrame,
+			]}
+		>
 			{elements.map((element, index) => (
 				<RenderArticleElement
 					key={index}
