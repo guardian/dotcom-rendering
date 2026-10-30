@@ -14,7 +14,7 @@ const frequencyTagStyles = css`
 		padding: ${space[3]}px 0 ${space[2]}px;
 	}
 	${until.tablet} {
-		padding: 18px 10px 14px 10px;
+		padding: 18px 52px 14px 10px;
 	}
 `;
 

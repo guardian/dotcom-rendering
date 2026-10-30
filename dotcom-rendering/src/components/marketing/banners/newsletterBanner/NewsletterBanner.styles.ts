@@ -162,7 +162,6 @@ export const styles = {
 
 		${until.mobile} {
 			min-height: 40px;
-			padding-right: 52px;
 		}
 	`,
 	closeButton: css`

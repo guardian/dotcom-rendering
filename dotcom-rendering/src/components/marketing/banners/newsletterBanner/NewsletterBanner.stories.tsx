@@ -42,7 +42,7 @@ const meta = preview.meta({
 			listId: 6042,
 			identityName: 'the-stakes-us-election-edition',
 			name: 'The Stakes 2026',
-			frequency: 'Weekly',
+			frequency: 'Weekly, plus breaking news alerts',
 		},
 		design: {
 			...newsletterDesign,
