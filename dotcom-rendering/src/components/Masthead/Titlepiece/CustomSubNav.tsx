@@ -27,6 +27,9 @@ type Props = {
 	currentNavLink: string;
 	renderingPage: RenderingPage;
 	hasPageSkin?: boolean;
+	underlineHeader?: boolean;
+	showHeaderDivider?: boolean;
+	scrollHeaderWithLinks?: boolean;
 };
 
 const subNavStyles = css`
@@ -266,13 +269,22 @@ const headerLinkStyles = css`
 const HeaderText = ({
 	header: { headerText, dotcomPath },
 	cssOverrides,
+	underlineHeader,
 }: {
 	header: CustomSubnavHeader;
 	cssOverrides?: SerializedStyles;
+	underlineHeader?: boolean;
 }) =>
 	dotcomPath ? (
 		<a
-			css={[headerLinkStyles, cssOverrides]}
+			css={[
+				headerLinkStyles,
+				cssOverrides,
+				underlineHeader &&
+					css`
+						text-decoration: underline;
+					`,
+			]}
 			data-src-focus-disabled={true}
 			href={dotcomPath}
 			data-link-name={nestedOphanComponents(
@@ -297,9 +309,14 @@ const frontContainerStyles = css`
 const CustomHeader = (
 	customSubNav: CustomSubnav,
 	cssOverrides: SerializedStyles | undefined,
+	underlineHeader?: boolean,
 ) => {
 	return customSubNav.header.showHeaderText ? (
-		<HeaderText header={customSubNav.header} cssOverrides={cssOverrides} />
+		<HeaderText
+			header={customSubNav.header}
+			cssOverrides={cssOverrides}
+			underlineHeader={underlineHeader}
+		/>
 	) : undefined;
 };
 
@@ -311,6 +328,9 @@ export const CustomSubNav = ({
 	currentNavLink,
 	renderingPage,
 	hasPageSkin,
+	underlineHeader,
+	showHeaderDivider = true,
+	scrollHeaderWithLinks = false,
 }: Props) => {
 	const isArticle = renderingPage === 'article';
 	/** DCR receives images for all platforms; only web images are rendered here. */
@@ -353,7 +373,11 @@ export const CustomSubNav = ({
 						images={webImages}
 						headerText={customSubNav.header.headerText}
 					/>
-					{CustomHeader(customSubNav, imageHeaderTextStyles)}
+					{CustomHeader(
+						customSubNav,
+						imageHeaderTextStyles,
+						underlineHeader,
+					)}
 				</div>
 				<ul
 					css={[imageListStyles, scrollableSubNavStyles]}
@@ -373,18 +397,39 @@ export const CustomSubNav = ({
 			data-component={`custom-subnav-${customSubNav.header.headerText}`}
 			data-component-id={customSubNav.id}
 			data-rendering-page={renderingPage}
-			css={isArticle ? articleContainerStyles : frontContainerStyles}
+			css={[
+				isArticle ? articleContainerStyles : frontContainerStyles,
+				scrollHeaderWithLinks &&
+					css`
+						${scrollableSubNavStyles}
+						& > a,
+						& > span {
+							flex-shrink: 0;
+						}
+					`,
+			]}
 		>
 			{CustomHeader(
 				customSubNav,
-				isArticle ? articleHeaderStyles : undefined,
+				isArticle
+					? css`
+							${articleHeaderStyles}
+							${!showHeaderDivider && 'border-right: none;'}
+						`
+					: undefined,
+				underlineHeader,
 			)}
 			<ul
 				css={[
 					subNavStyles,
 					!hasPageSkin && subNavStylesFromLeftCol,
-					scrollableSubNavStyles,
+					!scrollHeaderWithLinks && scrollableSubNavStyles,
 					isArticle && articleSubNavStyles,
+					scrollHeaderWithLinks &&
+						css`
+							flex-shrink: 0;
+							width: max-content;
+						`,
 				]}
 				role="list"
 				style={{

@@ -1,8 +1,12 @@
+import { css } from '@emotion/react';
 import { ArticleDesign } from '../lib/articleFormat';
-import { isMediaCard } from '../lib/cardHelpers';
+import { isMediaCard, isMiniNavSupported } from '../lib/cardHelpers';
+import { getZIndex } from '../lib/getZIndex';
+import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
 import type { Props as CardProps } from './Card/Card';
 import { Card } from './Card/Card';
+import { CustomSubNav } from './Masthead/Titlepiece/CustomSubNav';
 
 type Props = {
 	trail: DCRFrontCard;
@@ -62,5 +66,40 @@ export const FrontCard = (props: Props) => {
 		headlineTestUuid: trail.headlineTestUuid,
 	};
 
-	return Card({ ...defaultProps, ...cardProps });
+	const headerContent =
+		isMiniNavSupported(cardProps.containerType, trail.boostLevel) &&
+		trail.showMiniNav &&
+		trail.miniNavData ? (
+			<div
+				className="mini-nav"
+				css={css`
+					position: relative;
+					z-index: ${getZIndex('card-nested-link')};
+					min-width: 0;
+					--custom-subnav-header-text: ${palette(
+						trail.miniNavData.header.dotcomPath
+							? '--card-kicker-text'
+							: '--card-headline',
+					)};
+					--masthead-nav-link-text: ${palette('--card-headline')};
+					--masthead-nav-link-text-hover: ${palette(
+						'--card-headline',
+					)};
+				`}
+			>
+				<CustomSubNav
+					customSubNav={trail.miniNavData}
+					currentNavLink=""
+					renderingPage="article"
+					showHeaderDivider={false}
+					scrollHeaderWithLinks={true}
+				/>
+			</div>
+		) : undefined;
+
+	return Card({
+		...defaultProps,
+		...cardProps,
+		...(headerContent && { headerContent }),
+	});
 };

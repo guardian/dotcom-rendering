@@ -635,6 +635,9 @@
                                                         "theme"
                                                     ]
                                                 },
+                                                "miniNavData": {
+                                                    "$ref": "#/definitions/CustomSubnav"
+                                                },
                                                 "tests": {
                                                     "type": "array",
                                                     "items": {
@@ -900,6 +903,12 @@
                                                     "type": "boolean"
                                                 },
                                                 "showLivePlayable": {
+                                                    "type": "boolean"
+                                                },
+                                                "miniNavData": {
+                                                    "$ref": "#/definitions/CustomSubnav"
+                                                },
+                                                "showMiniNav": {
                                                     "type": "boolean"
                                                 }
                                             },
@@ -1592,6 +1601,9 @@
                                                         "theme"
                                                     ]
                                                 },
+                                                "miniNavData": {
+                                                    "$ref": "#/definitions/CustomSubnav"
+                                                },
                                                 "tests": {
                                                     "type": "array",
                                                     "items": {
@@ -1857,6 +1869,12 @@
                                                     "type": "boolean"
                                                 },
                                                 "showLivePlayable": {
+                                                    "type": "boolean"
+                                                },
+                                                "miniNavData": {
+                                                    "$ref": "#/definitions/CustomSubnav"
+                                                },
+                                                "showMiniNav": {
                                                     "type": "boolean"
                                                 }
                                             },
@@ -2549,6 +2567,9 @@
                                                         "theme"
                                                     ]
                                                 },
+                                                "miniNavData": {
+                                                    "$ref": "#/definitions/CustomSubnav"
+                                                },
                                                 "tests": {
                                                     "type": "array",
                                                     "items": {
@@ -2814,6 +2835,9 @@
                                                     "type": "boolean"
                                                 },
                                                 "showLivePlayable": {
+                                                    "type": "boolean"
+                                                },
+                                                "showMiniNav": {
                                                     "type": "boolean"
                                                 }
                                             },
