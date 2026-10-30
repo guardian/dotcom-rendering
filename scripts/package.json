@@ -1,0 +1,25 @@
+{
+	"name": "scripts",
+	"private": true,
+	"version": "0.0.0",
+	"scripts": {
+		"eslint-report": "tsx deno/eslint.ts",
+		"iframe-titles": "tsx deno/iframe-titles.ts",
+		"thrasher-tracker": "tsx deno/thrasher-tracker.ts",
+		"typecheck": "tsc --project deno/tsconfig.json"
+	},
+	"dependencies": {
+		"jsdom": "catalog:",
+		"octokit": "4.1.4",
+		"pretty-bytes": "6.1.1",
+		"zod": "catalog:"
+	},
+	"devDependencies": {
+		"@guardian/tsconfig": "catalog:",
+		"@types/jsdom": "catalog:",
+		"@types/node": "catalog:",
+		"eslint": "catalog:",
+		"tsx": "catalog:",
+		"typescript": "catalog:"
+	}
+}

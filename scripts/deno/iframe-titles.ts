@@ -1,13 +1,9 @@
-import { array, object, string } from 'npm:zod@4.1.12';
-import {
-	DOMParser,
-	Element,
-	Node,
-} from 'https://deno.land/x/deno_dom@v0.1.22-alpha/deno-dom-wasm.ts';
+import { JSDOM } from 'jsdom';
+import { array, object, string } from 'zod';
 import { octokit } from './github.ts';
 
 const searchParams = new URLSearchParams({
-	'api-key': Deno.env.get('CAPI_KEY') ?? 'test',
+	'api-key': process.env.CAPI_KEY ?? 'test',
 	'query-fields': 'body',
 	q: 'iframe',
 	'show-fields': 'body',
@@ -39,10 +35,6 @@ const {
 	.then((r) => r.json())
 	.then(schema.parse);
 
-const parser = new DOMParser();
-
-const isElement = (n: Node): n is Element => n instanceof Element;
-
 type Status = 'ok' | 'warning' | 'missing';
 type Info = {
 	status: Status;
@@ -68,56 +60,52 @@ const getStatus = (iframes: Article['iframes']): Status => {
 const promises = results.map(async ({ id, webTitle: title }) => {
 	const url = `https://www.theguardian.com/${id}`;
 	const body = await fetch(url).then((r) => r.text());
-	const document = parser.parseFromString(body, 'text/html');
+	const document = new JSDOM(body).window.document;
 	const attrs = ['title', 'srcDoc', 'src'] as const;
 	const iframes: Article['iframes'] = [
-		...(document?.querySelectorAll('iframe') ?? []),
-	]
-		.filter(isElement)
-		.map((iframe) => {
-			const attr = attrs.find((attr) => iframe.getAttribute(attr));
-			if (!attr) throw new Error('could not get any attribute');
+		...document.querySelectorAll('iframe'),
+	].map((iframe) => {
+		const attr = attrs.find((attr) => iframe.getAttribute(attr));
+		if (!attr) throw new Error('could not get any attribute');
 
-			const value = iframe.getAttribute(attr) ?? '';
+		const value = iframe.getAttribute(attr) ?? '';
 
-			switch (attr) {
-				case 'title': {
-					// Check if the title contains less than 9 different letters
-					const warning = attr === 'title' &&
-						new Set(value?.split('')).size < 9;
-					return {
-						status: warning ? 'warning' : 'ok',
-						attr,
-						value,
-					};
-				}
-
-				case 'srcDoc': {
-					return {
-						status: 'missing',
-						attr,
-						// `srcdoc` are too long for github issues!
-						value: value
-							.replace(/<head>.+<\/head>/i, '')
-							.slice(0, 420),
-					};
-				}
-
-				case 'src':
-					return {
-						status: 'missing',
-						attr,
-						value,
-					};
-
-				default:
-					return {
-						status: 'missing',
-						attr: '???',
-						value: '???',
-					};
+		switch (attr) {
+			case 'title': {
+				// Check if the title contains less than 9 different letters
+				const warning =
+					attr === 'title' && new Set(value?.split('')).size < 9;
+				return {
+					status: warning ? 'warning' : 'ok',
+					attr,
+					value,
+				};
 			}
-		});
+
+			case 'srcDoc': {
+				return {
+					status: 'missing',
+					attr,
+					// `srcdoc` are too long for github issues!
+					value: value.replace(/<head>.+<\/head>/i, '').slice(0, 420),
+				};
+			}
+
+			case 'src':
+				return {
+					status: 'missing',
+					attr,
+					value,
+				};
+
+			default:
+				return {
+					status: 'missing',
+					attr: '???',
+					value: '???',
+				};
+		}
+	});
 
 	const result = {
 		url,
@@ -146,14 +134,14 @@ const formatter = (articles: Article[], checked: boolean): string =>
 		.flatMap(({ url, title, iframes }) => {
 			const frames = iframes.length
 				? iframes.map(
-					({ attr, value, status }) =>
-						`  - ${statusEmoji[status]} \`${attr}\`: \`${value}\``,
-				)
+						({ attr, value, status }) =>
+							`  - ${statusEmoji[status]} \`${attr}\`: \`${value}\``,
+					)
 				: [
-					`  - ${
-						statusEmoji['missing']
-					} All iframes are renderd Client-side`,
-				];
+						`  - ${
+							statusEmoji['missing']
+						} All iframes are renderd Client-side`,
+					];
 			return [`- [${checked ? 'X' : ' '}] [${title}](${url})`, ...frames];
 		})
 		.join('\n');
@@ -180,27 +168,25 @@ const issue_number = 5510;
 
 if (!octokit) {
 	console.log(body);
-	Deno.exit();
+} else {
+	try {
+		const {
+			data: { html_url },
+		} = await octokit.rest.issues.update({
+			owner: 'guardian',
+			repo: 'dotcom-rendering',
+			issue_number,
+			body,
+		});
+
+		console.info(
+			`Updated list of issues for dotcom-rendering#${issue_number}`,
+		);
+		console.info(html_url);
+	} catch (error) {
+		console.warn(`Failed to update issue #${issue_number}`);
+		console.error(error);
+
+		console.log(body);
+	}
 }
-
-try {
-	const {
-		data: { html_url },
-	} = await octokit.rest.issues.update({
-		owner: 'guardian',
-		repo: 'dotcom-rendering',
-		issue_number,
-		body,
-	});
-
-	console.info(`Updated list of issues for dotcom-rendering#${issue_number}`);
-	console.info(html_url);
-} catch (error) {
-	// do_something
-	console.warn(`Failed to update issue #${issue_number}`);
-	console.error(error);
-
-	console.log(body);
-}
-
-Deno.exit();
