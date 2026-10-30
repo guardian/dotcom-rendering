@@ -10,6 +10,7 @@ import type {
 	HexColour,
 	Tracking,
 } from '@guardian/support-dotcom-components/dist/shared/types';
+import type { NewsletterBannerDesign } from '../common/types';
 
 export const tracking: Tracking = {
 	ophanPageId: 'kbluzw2csbf83eabedel',
@@ -139,7 +140,7 @@ export const design: ConfigurableDesign = {
 	},
 };
 
-export const newsletterDesign: ConfigurableDesign = {
+export const newsletterDesign: NewsletterBannerDesign = {
 	colours: {
 		basic: {
 			background: { r: 'F3', g: 'F7', b: 'FF', kind: 'hex' },
@@ -147,6 +148,9 @@ export const newsletterDesign: ConfigurableDesign = {
 			headerText: { r: '12', g: '12', b: '12', kind: 'hex' },
 			articleCountText: { r: '00', g: '00', b: '00', kind: 'hex' },
 			logo: { r: '00', g: '00', b: '00', kind: 'hex' },
+		},
+		newsletterBanner: {
+			divider: stringToHexColour('DCDCDC'),
 		},
 		highlightedText: {
 			text: { r: '33', g: '33', b: '33', kind: 'hex' },
@@ -178,6 +182,51 @@ export const newsletterDesign: ConfigurableDesign = {
 			headlineColour: { r: '33', g: '33', b: '33', kind: 'hex' },
 			totalColour: { r: '33', g: '33', b: '33', kind: 'hex' },
 			goalColour: { r: '33', g: '33', b: '33', kind: 'hex' },
+		},
+	},
+};
+
+export const newsletterDesignDark: ConfigurableDesign = {
+	...newsletterDesign,
+	colours: {
+		...newsletterDesign.colours,
+		basic: {
+			background: stringToHexColour('1A1A1A'),
+			bodyText: stringToHexColour('E8E8E8'),
+			headerText: stringToHexColour('FFFFFF'),
+			articleCountText: stringToHexColour('FFFFFF'),
+			logo: stringToHexColour('FFFFFF'),
+		},
+		highlightedText: {
+			text: stringToHexColour('FFFFFF'),
+			highlight: stringToHexColour('FFE500'),
+		},
+		primaryCta: {
+			default: {
+				text: stringToHexColour('1A1A1A'),
+				background: stringToHexColour('C4A484'),
+			},
+		},
+		secondaryCta: {
+			default: {
+				text: stringToHexColour('FFFFFF'),
+				background: stringToHexColour('333333'),
+				border: stringToHexColour('FFFFFF'),
+			},
+		},
+		closeButton: {
+			default: {
+				text: stringToHexColour('FFFFFF'),
+				background: stringToHexColour('333333'),
+				border: stringToHexColour('333333'),
+			},
+		},
+		ticker: {
+			filledProgress: stringToHexColour('FFE500'),
+			progressBarBackground: stringToHexColour('333333'),
+			headlineColour: stringToHexColour('FFE500'),
+			totalColour: stringToHexColour('FFFFFF'),
+			goalColour: stringToHexColour('FFE500'),
 		},
 	},
 };
