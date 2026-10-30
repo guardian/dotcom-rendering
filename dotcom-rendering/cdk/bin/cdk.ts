@@ -241,7 +241,7 @@ export const InteractiveRenderingPropsPROD: RenderingCDKStackProps = {
 		taskCpu: 1024,
 		taskMemoryLimitMiB: 2048,
 		scaling: {
-			minimumTasks: 6,
+			minimumTasks: 3,
 			maximumTasks: 30,
 			cpuScaling: {
 				targetValue: 20,
@@ -252,10 +252,10 @@ export const InteractiveRenderingPropsPROD: RenderingCDKStackProps = {
 			},
 		},
 	},
-	// Route 90% traffic to EC2, 10% to ECS.
+	// Route 50% traffic to EC2, 50% to ECS.
 	targetGroupWeights: {
-		ec2: 90,
-		ecs: 10,
+		ec2: 50,
+		ecs: 50,
 	},
 };
 new RenderingCDKStack(

@@ -215,7 +215,7 @@ const recentStyles = css`
 		box-sizing: border-box;
 		flex: 0 0 calc((100% - var(--recent-gap)) / 2);
 		min-height: 104px;
-		padding: ${space[2]}px ${space[2]}px 30px;
+		padding: ${space[1]}px ${space[2]}px 30px;
 		background: var(
 			--puzzles-card-background,
 			var(--puzzles-tint, ${palette.news[800]})
@@ -247,6 +247,9 @@ const recentStyles = css`
 			var(--puzzles-primary, ${palette.news[300]})
 		);
 		${headlineBold20};
+	}
+	a:hover strong {
+		text-decoration: underline;
 	}
 	span {
 		${textSans14};

@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, type SerializedStyles } from '@emotion/react';
 import {
 	from,
 	headlineBold17,
@@ -226,6 +226,79 @@ const immersiveGridTitleWrapperBelowDesktop = css`
 	}
 `;
 
+const seriesTitleBackground = css`
+	background-color: ${themePalette('--series-title-background')};
+	box-shadow:
+		-6px 0 0 0 ${themePalette('--series-title-background')},
+		6px 0 0 0 ${themePalette('--series-title-background')};
+`;
+
+const sectionTitleBackground = css`
+	background-color: ${themePalette('--section-title-background')};
+	box-shadow:
+		-6px 0 0 0 ${themePalette('--series-title-background')},
+		6px 0 0 0 ${themePalette('--series-title-background')};
+`;
+
+type LinkProps = {
+	href: string;
+	format: ArticleFormat;
+	colour: string;
+	fontCss?: SerializedStyles;
+	extraCss?: (SerializedStyles | false)[];
+	className?: string;
+	'data-component': string;
+	'data-link-name': string;
+	children: React.ReactNode;
+};
+
+const TitleLink = ({
+	href,
+	format,
+	colour,
+	fontCss = fontStyles(format),
+	extraCss = [],
+	className,
+	children,
+	...dataProps
+}: LinkProps) => (
+	<a
+		href={href}
+		className={className}
+		css={[
+			sectionLabelLink,
+			fontCss,
+			breakWord,
+			css`
+				color: ${colour};
+			`,
+			...extraCss,
+		]}
+		{...dataProps}
+	>
+		<span>{children}</span>
+	</a>
+);
+
+const LiveBlogPulsingDot = ({ format }: { format: ArticleFormat }) => (
+	<Hide when="above" breakpoint="desktop">
+		{format.design === ArticleDesign.LiveBlog && (
+			<span
+				css={[
+					fontStyles(format),
+					css`
+						color: ${themePalette('--series-title-text')};
+					`,
+				]}
+			>
+				<Island priority="enhancement" defer={{ until: 'visible' }}>
+					<PulsingDot />
+				</Island>
+			</span>
+		)}
+	</Hide>
+);
+
 export const SeriesSectionLink = ({
 	format,
 	layoutType,
@@ -248,270 +321,176 @@ export const SeriesSectionLink = ({
 			(tag.type === 'Publication' && tag.title === 'The Observer'),
 	);
 
-	// If we have a tag, use it to show 2 section titles
-	// Observer opinion (commentisfree) articles should prioritise
-	// the publication tag over the commentisfree tag.
 	const tag = observerTag && isCommentIsFree ? observerTag : seriesTag;
-
 	const hasSeriesTag = tag?.type === 'Series';
-
 	const isLabs = format.theme === ArticleSpecial.Labs;
 	const isWeekendEssay = format.design === ArticleDesign.WeekendEssay;
 
 	const titleColour = isMatch
 		? themePalette('--series-title-match-text')
 		: themePalette('--series-title-text');
-
-	/** Used by the separate 'article section' link, kept distinct from the series tag's colour */
 	const sectionTitleColour = isMatch
 		? themePalette('--series-title-match-text')
 		: themePalette('--article-section-link-text');
 
-	if (
-		format.display === ArticleDisplay.Immersive &&
+	const isImmersive = format.display === ArticleDisplay.Immersive;
+	const isImmersiveOpinion =
+		isImmersive &&
 		(format.design === ArticleDesign.Comment ||
 			format.design === ArticleDesign.Editorial ||
 			format.design === ArticleDesign.Letter ||
-			isWeekendEssay)
-	) {
+			isWeekendEssay);
+	const isGallery = format.design === ArticleDesign.Gallery;
+
+	// Immersive opinion articles get a distinct treatment: highlighted links
+	// with both series and section shown (or just section if no tag).
+	if (isImmersiveOpinion) {
 		if (tag) {
-			// We have a tag, we're not immersive, show both series and section titles
 			return (
-				// Sometimes the tags/titles are shown inline, sometimes stacked
 				<div css={rowBelowLeftCol(format)}>
-					<a
+					<TitleLink
 						href={`${guardianBaseURL}/${tag.id}`}
-						css={[
-							sectionLabelLink,
+						format={format}
+						colour={titleColour}
+						extraCss={[
 							marginRight,
-							fontStyles(format),
-							breakWord,
 							isWeekendEssay
 								? css`
 										color: ${themePalette(
 											'--series-title-background',
 										)};
 									`
-								: css`
-										color: ${titleColour};
-										background-color: ${themePalette(
-											'--series-title-background',
-										)};
-										box-shadow:
-											-6px 0 0 0
-												${themePalette(
-													'--series-title-background',
-												)},
-											6px 0 0 0
-												${themePalette(
-													'--series-title-background',
-												)};
-									`,
+								: seriesTitleBackground,
 						]}
 						data-component="series"
 						data-link-name="article series"
 					>
-						<span>{tag.title}</span>
-					</a>
-
+						{tag.title}
+					</TitleLink>
 					<Hide when="below" breakpoint="tablet">
-						<a
+						<TitleLink
 							href={`${guardianBaseURL}/${sectionUrl}`}
-							css={[
-								sectionLabelLink,
-								isWeekendEssay
-									? css`
-											${headlineMedium17}
-										`
-									: fontStyles(format),
+							format={format}
+							colour={sectionTitleColour}
+							extraCss={[
 								displayBlock,
-								breakWord,
 								isWeekendEssay
 									? css`
+											${headlineMedium17};
 											color: ${themePalette(
 												'--series-title-background',
 											)};
 										`
-									: css`
-											color: ${sectionTitleColour};
-											background-color: ${themePalette(
-												'--section-title-background',
-											)};
-											box-shadow:
-												-6px 0 0 0
-													${themePalette(
-														'--series-title-background',
-													)},
-												6px 0 0 0
-													${themePalette(
-														'--series-title-background',
-													)};
-										`,
+									: sectionTitleBackground,
 							]}
 							data-component="section"
 							data-link-name="article section"
 						>
-							<span>{sectionLabel}</span>
-						</a>
+							{sectionLabel}
+						</TitleLink>
 					</Hide>
 				</div>
 			);
 		}
-		// There's no tag so fallback to section title
+
 		return (
 			<div css={marginBottom}>
-				<a
+				<TitleLink
 					href={`${guardianBaseURL}/${sectionUrl}`}
-					css={[
-						sectionLabelLink,
-						marginRight,
-						fontStyles(format),
-						breakWord,
-						css`
-							color: ${sectionTitleColour};
-							background-color: ${themePalette(
-								'--section-title-background',
-							)};
-							box-shadow:
-								-6px 0 0 0
-									${themePalette('--series-title-background')},
-								6px 0 0 0
-									${themePalette('--series-title-background')};
-						`,
-					]}
+					format={format}
+					colour={sectionTitleColour}
+					extraCss={[marginRight, sectionTitleBackground]}
 					data-component="section"
 					data-link-name="article section"
 				>
-					<span>{sectionLabel}</span>
-				</a>
+					{sectionLabel}
+				</TitleLink>
 			</div>
 		);
 	}
 
-	if (
-		format.display === ArticleDisplay.Immersive ||
-		format.design === ArticleDesign.Gallery
-	) {
-		if (!!hasSeriesTag || isLabs) {
-			const title = tag?.title ? tag.title : sectionLabel;
-			const linkExt = tag?.id ? tag.id : sectionUrl;
-			return (
-				<div
-					css={
-						format.display === ArticleDisplay.Immersive &&
-						layoutType !== undefined
-							? immersiveGridTitleWrapperBelowDesktop
-							: undefined
-					}
-				>
-					<a
-						css={[
-							sectionLabelLink,
-							fontStyles(format),
-							invertedStyle(format),
-							breakWord,
-							sectionPadding,
-							css`
-								color: ${titleColour};
-								background-color: ${themePalette(
-									'--series-title-background',
-								)};
-							`,
-							format.display === ArticleDisplay.Immersive &&
-								layoutType !== undefined &&
-								immersiveGridTitleBelowDesktop,
-							layoutType === 'immersiveLandscape' &&
-								immersiveLandscapeTitle,
-							format.design === ArticleDesign.Gallery &&
-								css`
-									position: relative;
-								`,
-							format.display === ArticleDisplay.Immersive &&
-								css`
-									box-shadow:
-										-6px 0 0 0
-											${themePalette(
-												'--series-title-background',
-											)},
-										6px 0 0 0
-											${themePalette(
-												'--series-title-background',
-											)};
-								`,
-						]}
-						href={`${guardianBaseURL}/${linkExt}`}
-						data-component="series"
-						data-link-name="article series"
-					>
-						<span>{title}</span>
-					</a>
-				</div>
-			);
-		}
-		// Other types of immersives show nothing at all if there's no series tag
-		return null;
-	}
-	if (tag) {
-		// We have a tag, we're not immersive, show both series and section titles
+	// Other immersives and galleries show an inverted title block,
+	// but only when there's a series tag or it's a Labs article.
+	if (isImmersive || isGallery) {
+		if (!hasSeriesTag && !isLabs) return null;
+
+		const title = tag?.title ?? sectionLabel;
+		const linkExt = tag?.id ?? sectionUrl;
+		const hasLayoutType = isImmersive && layoutType !== undefined;
+
 		return (
-			// Sometimes the tags/titles are shown inline, sometimes stacked
-			<div css={rowBelowLeftCol(format)}>
-				<Hide when="above" breakpoint="desktop">
-					{format.design === ArticleDesign.LiveBlog && (
-						<span
-							css={[
-								fontStyles(format),
-								css`
-									color: ${titleColour};
-								`,
-							]}
-						>
-							<Island
-								priority="enhancement"
-								defer={{ until: 'visible' }}
-							>
-								<PulsingDot />
-							</Island>
-						</span>
-					)}
-				</Hide>
-				<a
-					href={`${guardianBaseURL}/${tag.id}`}
-					css={[
-						sectionLabelLink,
+			<div
+				css={
+					hasLayoutType
+						? immersiveGridTitleWrapperBelowDesktop
+						: undefined
+				}
+			>
+				<TitleLink
+					href={`${guardianBaseURL}/${linkExt}`}
+					format={format}
+					colour={titleColour}
+					extraCss={[
+						invertedStyle(format),
+						sectionPadding,
 						css`
-							color: ${titleColour};
 							background-color: ${themePalette(
 								'--series-title-background',
 							)};
 						`,
-						marginRight,
-						fontStyles(format),
-						breakWord,
-						css`
-							box-shadow:
-								-6px 0 0 0
-									${themePalette('--series-title-background')},
-								6px 0 0 0
-									${themePalette('--series-title-background')};
-						`,
-					]}
+						hasLayoutType && immersiveGridTitleBelowDesktop,
+						layoutType === 'immersiveLandscape' &&
+							immersiveLandscapeTitle,
+						isGallery &&
+							css`
+								position: relative;
+							`,
+						isImmersive &&
+							css`
+								box-shadow:
+									-6px 0 0 0
+										${themePalette(
+											'--series-title-background',
+										)},
+									6px 0 0 0
+										${themePalette(
+											'--series-title-background',
+										)};
+							`,
+					].filter(Boolean)}
 					data-component="series"
 					data-link-name="article series"
 				>
-					<span>{tag.title}</span>
-				</a>
+					{title}
+				</TitleLink>
+			</div>
+		);
+	}
 
+	// Standard layout: series tag + section label, or just section label.
+	if (tag) {
+		return (
+			<div css={rowBelowLeftCol(format)}>
+				<LiveBlogPulsingDot format={format} />
+				<TitleLink
+					href={`${guardianBaseURL}/${tag.id}`}
+					format={format}
+					colour={titleColour}
+					extraCss={[marginRight, seriesTitleBackground]}
+					data-component="series"
+					data-link-name="article series"
+				>
+					{tag.title}
+				</TitleLink>
 				<Hide when="below" breakpoint="tablet">
-					<a
+					<TitleLink
 						href={`${guardianBaseURL}/${sectionUrl}`}
-						css={[
-							sectionLabelLink,
-							secondaryFontStyles(format),
+						format={format}
+						colour={sectionTitleColour}
+						fontCss={secondaryFontStyles(format)}
+						extraCss={[
 							displayBlock,
-							breakWord,
 							css`
-								color: ${sectionTitleColour};
 								background-color: ${themePalette(
 									'--section-title-background',
 								)};
@@ -520,51 +499,27 @@ export const SeriesSectionLink = ({
 						data-component="section"
 						data-link-name="article section"
 					>
-						<span>{sectionLabel}</span>
-					</a>
+						{sectionLabel}
+					</TitleLink>
 				</Hide>
 			</div>
 		);
 	}
-	// There's no tag so fallback to section title
+
 	return (
 		<>
-			<Hide when="above" breakpoint="desktop">
-				{format.design === ArticleDesign.LiveBlog && (
-					<span
-						css={[
-							fontStyles(format),
-							css`
-								color: ${titleColour};
-							`,
-						]}
-					>
-						<Island
-							priority="enhancement"
-							defer={{ until: 'visible' }}
-						>
-							<PulsingDot />
-						</Island>
-					</span>
-				)}
-			</Hide>
-			<a
+			<LiveBlogPulsingDot format={format} />
+			<TitleLink
 				href={`${guardianBaseURL}/${sectionUrl}`}
-				css={[
-					sectionLabelLink,
-					css`
-						color: ${sectionTitleColour};
-					`,
-					marginRight,
-					fontStyles(format),
-					breakWord,
-				]}
+				format={format}
+				colour={sectionTitleColour}
+				extraCss={[marginRight]}
+				className={interactiveLegacyClasses.labelLink}
 				data-component="section"
 				data-link-name="article section"
-				className={interactiveLegacyClasses.labelLink}
 			>
-				<span>{sectionLabel}</span>
-			</a>
+				{sectionLabel}
+			</TitleLink>
 		</>
 	);
 };
