@@ -242,19 +242,16 @@ export const StandardLayoutArticleGrid = ({
 		) {
 			return undefined;
 		}
-		const getColumnCount = () => {
-			switch (gridLayout) {
-				case 'immersivePortrait':
-				case 'immersiveLandscape':
-					return 4;
-				default:
-					return 3;
-			}
-		};
+
+		const columnCount =
+			gridLayout === 'immersivePortrait' ||
+			gridLayout === 'immersiveLandscape'
+				? 4
+				: 3;
 
 		return css`
 			${from.leftCol} {
-				${grid.centreRule(getColumnCount())}
+				${grid.centreRule(columnCount)}
 			}
 		`;
 	};
