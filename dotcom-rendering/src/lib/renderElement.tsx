@@ -442,6 +442,7 @@ export const renderElement = ({
 						type={element._type}
 						format={format}
 						articleArrangement={articleArrangement}
+						isMainMedia={isMainMedia}
 					/>
 				);
 			}

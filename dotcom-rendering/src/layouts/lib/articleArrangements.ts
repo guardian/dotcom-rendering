@@ -13,7 +13,8 @@ export type LayoutType =
 	| 'media'
 	| 'picture'
 	| 'comment'
-	| 'interactive'
+	| 'interactiveStandard'
+	| 'interactiveTopHat'
 	| 'immersiveLandscape'
 	| 'immersivePortrait';
 
@@ -330,13 +331,43 @@ const immersiveLandscapeCss: LayoutCssMap = {
 	},
 };
 
+const interactiveTopHatCss: LayoutCssMap = {
+	title: {
+		mobile: 'grid-row: 2;',
+		tablet: 'grid-row: 2;',
+	},
+	headline: {
+		mobile: 'grid-row: 3;',
+		tablet: 'grid-row: 3;',
+	},
+	standfirst: {
+		mobile: 'grid-row: 4;',
+		tablet: 'grid-row: 4;',
+	},
+	media: {
+		mobile: `grid-row: 1 / span 7; ${grid.column.all}`,
+		tablet: `grid-row: 1 / span 7; ${grid.column.all}`,
+	},
+	meta: {
+		mobile: 'grid-row: 5;',
+		tablet: 'grid-row: 5;',
+	},
+	body: {
+		tablet: 'grid-row: 8;',
+	},
+	'right-column': {
+		desktop: `grid-row: 8; ${grid.column.right};`,
+	},
+};
+
 const layoutCssMaps: Record<LayoutType, LayoutCssMap> = {
 	standard: standardCss,
 	showcase: showcaseCss,
 	media: mediaCss,
 	picture: pictureCss,
 	comment: commentCss,
-	interactive: standardCss,
+	interactiveStandard: standardCss,
+	interactiveTopHat: interactiveTopHatCss,
 	immersiveLandscape: immersiveLandscapeCss,
 	immersivePortrait: immersivePortraitCss,
 };
@@ -389,6 +420,8 @@ export const getLayoutType = (
 	format: ArticleFormat,
 	mainMediaOrientation: 'portrait' | 'landscape' | 'square',
 ): LayoutType => {
+	// Pending: Display hint for interactive top hat articles, maybe 'Showcase'?
+	// return 'interactiveTopHat';
 	if (format.display === ArticleDisplay.Immersive) {
 		if (
 			mainMediaOrientation === 'portrait' ||
@@ -414,6 +447,8 @@ export const getLayoutType = (
 	) {
 		return 'comment';
 	}
-	if (format.design === ArticleDesign.Interactive) return 'interactive';
+	if (format.design === ArticleDesign.Interactive) {
+		return 'interactiveStandard';
+	}
 	return 'standard';
 };

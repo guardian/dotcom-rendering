@@ -228,13 +228,41 @@ export const StandardLayoutArticleGrid = ({
 		? 'auto'
 		: `max(calc(80vh - ${immersiveHeaderHeight}px), calc(25rem - ${immersiveHeaderHeight}px))`;
 
-	const layoutType = getLayoutType(format, mainMediaOrientation);
+	const topHatTestingPage = 'p/x4zt8y';
+	const layoutType =
+		article.config.shortUrlId === topHatTestingPage
+			? 'interactiveTopHat'
+			: getLayoutType(format, mainMediaOrientation);
+
+	const setCentreRule = (gridLayout: LayoutType) => {
+		if (
+			isLabs ||
+			gridLayout === 'interactiveStandard' ||
+			gridLayout === 'interactiveTopHat'
+		) {
+			return undefined;
+		}
+
+		const columnCount =
+			gridLayout === 'immersivePortrait' ||
+			gridLayout === 'immersiveLandscape'
+				? 4
+				: 3;
+
+		return css`
+			${from.leftCol} {
+				${grid.centreRule(columnCount)}
+			}
+		`;
+	};
 
 	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
 
 	const isImmersivePortrait = layoutType === 'immersivePortrait';
 	const isImmersiveLandscape = layoutType === 'immersiveLandscape';
 	const isImmersive = isImmersivePortrait || isImmersiveLandscape;
+
+	const isInteractiveTopHat = layoutType === 'interactiveTopHat';
 
 	const isFilterArticle = hasFilterTag(article.tags);
 	const tableOfContentsStyle =
@@ -270,7 +298,16 @@ export const StandardLayoutArticleGrid = ({
 		isImmersive && article.affiliateLinksDisclaimerRequired;
 
 	const hideCaptionBeneathMainMedia =
-		layoutType === 'media' || isImmersiveLandscape || isImmersivePortrait;
+		layoutType === 'media' ||
+		isInteractiveTopHat ||
+		isImmersiveLandscape ||
+		isImmersivePortrait;
+
+	const topHatFurnitureBackgroundStyles = css`
+		z-index: ${getZIndex('mediaOverlay')};
+		background: rgba(255, 255, 255, 0.9);
+		padding: 0 10px;
+	`;
 
 	return (
 		<article
@@ -280,6 +317,7 @@ export const StandardLayoutArticleGrid = ({
 				`,
 				grid.container,
 				grid.outerRules(),
+				setCentreRule(layoutType),
 				isLabs &&
 					isImmersive &&
 					css`
@@ -295,13 +333,6 @@ export const StandardLayoutArticleGrid = ({
 								6,
 								auto
 							);
-					`,
-				!isLabs &&
-					layoutType !== 'interactive' &&
-					css`
-						${from.leftCol} {
-							${grid.centreRule(isImmersive ? 4 : 3)}
-						}
 					`,
 				isImmersivePortrait &&
 					css`
@@ -322,6 +353,10 @@ export const StandardLayoutArticleGrid = ({
 									? '130px'
 									: '90px'} auto auto auto auto auto;
 						}
+					`,
+				isInteractiveTopHat &&
+					css`
+						grid-template-rows: 300px auto;
 					`,
 			]}
 		>
@@ -453,6 +488,10 @@ export const StandardLayoutArticleGrid = ({
 							flex-direction: column;
 							justify-content: space-between;
 						`,
+					isInteractiveTopHat &&
+						css`
+							z-index: ${getZIndex('mediaOverlay')};
+						`,
 				]}
 			>
 				<ArticleTitle
@@ -508,6 +547,11 @@ export const StandardLayoutArticleGrid = ({
 								border-top: 1px solid
 									${themePalette('--article-border')};
 							}
+						`,
+					isInteractiveTopHat &&
+						css`
+							${topHatFurnitureBackgroundStyles}
+							padding-top: 10px;
 						`,
 				]}
 			>
@@ -590,6 +634,7 @@ export const StandardLayoutArticleGrid = ({
 								padding-bottom: 14px;
 							}
 						`,
+					isInteractiveTopHat && topHatFurnitureBackgroundStyles,
 				]}
 			>
 				{hasImmersiveAffiliateDisclaimer && (
@@ -662,15 +707,21 @@ export const StandardLayoutArticleGrid = ({
 								padding-top: ${space[8]}px;
 							}
 						`,
-					layoutType === 'interactive' &&
+					layoutType === 'interactiveStandard' &&
 						css`
 							z-index: ${getZIndex('meta')};
+						`,
+					layoutType === 'interactiveTopHat' &&
+						css`
+							${topHatFurnitureBackgroundStyles}
+							padding-bottom: 10px;
 						`,
 				]}
 			>
 				{format.display !== ArticleDisplay.Immersive &&
 					format.design !== ArticleDesign.Audio &&
-					layoutType !== 'immersivePortrait' && (
+					layoutType !== 'immersivePortrait' &&
+					layoutType !== 'interactiveTopHat' && (
 						<div
 							css={[
 								(layoutType === 'picture' ||
@@ -935,7 +986,7 @@ export const StandardLayoutArticleGrid = ({
 					</Hide>
 				)}
 			</GridItem>
-			{layoutType === 'interactive' && (
+			{format.design === ArticleDesign.Interactive && (
 				<div
 					aria-hidden="true"
 					data-gu-name="centre-rule"
@@ -944,7 +995,9 @@ export const StandardLayoutArticleGrid = ({
 						${from.leftCol} {
 							display: block;
 							grid-column: centre-column-start;
-							grid-row: 1 / 5;
+							grid-row: ${layoutType === 'interactiveStandard'
+								? '1 / 5'
+								: layoutType === 'interactiveTopHat' && '8'};
 							position: relative;
 
 							&::before {
