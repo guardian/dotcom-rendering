@@ -90,6 +90,13 @@ const articleSubNavStyles = css`
 	}
 `;
 
+/** Article subnavs have a divider separating the header text from the scrollable list. */
+const articleDividerStyles = css`
+	margin-left: ${space[2]}px;
+	padding-left: ${space[2]}px;
+	border-left: 1px solid ${themePalette('--masthead-nav-lines')};
+`;
+
 const articleHeaderStyles = css`
 	${textSansBold14}
 	color: ${themePalette('--custom-subnav-header-text')};
@@ -426,6 +433,7 @@ export const CustomSubNav = ({
 						subNavStyles,
 						!hasPageSkin && subNavStylesFromLeftCol,
 						articleSubNavStyles,
+						articleDividerStyles,
 						css`
 							flex-shrink: 0;
 							width: max-content;
