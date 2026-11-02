@@ -176,6 +176,9 @@ export const NewsletterBannerComponent = (
 												newsletter.identityName
 											}
 											componentId="newsletter_banner"
+											headingColor={hexColourToString(
+												basic.headerText,
+											)}
 											actionColor={hexColourToString(
 												newsletterBanner.actionColor,
 											)}
