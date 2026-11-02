@@ -65,12 +65,16 @@ describe('newsletter banner signup form', () => {
 				componentId="test-banner"
 				actionColor="#052962"
 				errorColor="#C70000"
+				headingColor="#FFFFFF"
 				onSuccess={onSuccess}
 			/>,
 		);
 
 		expect(ReactGoogleRecaptcha).toHaveBeenCalled();
 		expect(onSuccess).not.toHaveBeenCalled();
+		expect(testingScreen.getByText('Enter your email')).toHaveStyle({
+			color: '#FFFFFF',
+		});
 		expect(
 			testingScreen.getByRole('button', { name: 'Sign up' }),
 		).toHaveStyle({ backgroundColor: '#052962' });
@@ -92,6 +96,7 @@ describe('newsletter banner signup form', () => {
 				componentId="test-banner"
 				actionColor="#052962"
 				errorColor="#FF9081"
+				headingColor="#FFFFFF"
 			/>,
 		);
 
@@ -100,6 +105,9 @@ describe('newsletter banner signup form', () => {
 		});
 		expect(testingScreen.getByRole('textbox')).toHaveStyle({
 			borderColor: '#FF9081',
+		});
+		expect(testingScreen.getByText('Enter your email')).toHaveStyle({
+			color: '#FFFFFF',
 		});
 	});
 
@@ -111,6 +119,7 @@ describe('newsletter banner signup form', () => {
 				componentId="test-banner"
 				actionColor="#8F6A70"
 				errorColor="#FF9081"
+				headingColor="#FFFFFF"
 			/>,
 		);
 
@@ -132,6 +141,7 @@ describe('newsletter banner signup form', () => {
 				componentId="test-banner"
 				actionColor="#052962"
 				errorColor="#C70000"
+				headingColor="#FFFFFF"
 				onSuccess={onSuccess}
 			/>
 		);

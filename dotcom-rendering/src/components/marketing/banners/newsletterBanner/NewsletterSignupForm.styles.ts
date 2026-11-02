@@ -53,12 +53,12 @@ export const styles = {
 			width: 240px;
 		}
 	`,
-	emailField: css`
+	emailField: (headingColor: string): SerializedStyles => css`
 		grid-area: email;
 		min-width: 0;
 
 		label div {
-			color: ${palette('--newsletter-signup-input-text')};
+			color: ${headingColor};
 			font-size: 14px;
 		}
 

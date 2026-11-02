@@ -15,6 +15,7 @@ type NewsletterSignupFormProps = {
 	componentId: string;
 	actionColor: string;
 	errorColor: string;
+	headingColor: string;
 	abTest?: AbTest;
 	isModal?: boolean;
 	onSuccess?: () => void;
@@ -33,6 +34,7 @@ export const NewsletterSignupForm = ({
 	componentId,
 	actionColor,
 	errorColor,
+	headingColor,
 	abTest,
 	isModal = false,
 	onSuccess,
@@ -111,7 +113,7 @@ export const NewsletterSignupForm = ({
 				) : (
 					<div
 						css={[
-							styles.emailField,
+							styles.emailField(headingColor),
 							styles.validationError(errorColor),
 						]}
 					>
