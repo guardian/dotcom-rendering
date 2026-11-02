@@ -205,6 +205,7 @@ const previewStyles = css`
 `;
 
 const newsletterStyles = css`
+	--newsletter-card-inline-padding: ${space[2]}px;
 	grid-column: 1 / -1;
 	min-width: 0;
 

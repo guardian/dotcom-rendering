@@ -54,6 +54,8 @@ export const puzzlesPageTheme = (
 					--puzzles-text-colour: ${palette.neutral[86]};
 					--puzzles-supporting-text-colour: ${palette.neutral[86]};
 					--puzzles-border-colour: ${palette.neutral[46]};
+					--puzzles-unavailable-day-border: ${palette.neutral[20]};
+					--puzzles-unavailable-day-text: ${palette.neutral[60]};
 					${groupPalette &&
 					css`
 						--puzzles-primary: ${groupPalette.accent};

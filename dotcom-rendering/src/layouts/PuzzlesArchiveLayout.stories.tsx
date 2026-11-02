@@ -214,6 +214,33 @@ export const LogicPuzzles = {
 	parameters: lightParameters,
 } satisfies Story;
 
+const manyCrosswords = [
+	...puzzles,
+	...['Genius', 'Prize', 'Everyman', 'Azed', 'Speedy'].map((title) => {
+		const id = title.toLowerCase();
+		return {
+			id,
+			title,
+			puzzleType: id.toUpperCase(),
+			slug: `crosswords/${id}`,
+			set: id,
+		};
+	}),
+];
+
+/**
+ * More puzzle types than fit on one line: from "tablet" the chips wrap onto
+ * extra lines, and below it they scroll as a carousel faded at the edges.
+ */
+export const ManyPuzzleTypes = {
+	args: {
+		puzzlesPage: createPuzzlesPage({
+			archive: { ...archive, puzzles: manyCrosswords },
+		}),
+	},
+	parameters: lightParameters,
+} satisfies Story;
+
 export const CrosswordsDark = {
 	args: { darkModeAvailable: true },
 	parameters: darkParameters,

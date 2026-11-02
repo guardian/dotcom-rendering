@@ -1,4 +1,5 @@
 import type { EditionId } from '../lib/edition';
+import type { CommercialProperties } from './commercial';
 import type { ConfigType } from './config';
 import type { FooterType } from './footer';
 import type { FENavType } from './frontend';
@@ -80,4 +81,5 @@ export interface FEPuzzlePageType {
 	 * behaviour (ads always rendered) until `frontend` is updated.
 	 */
 	isAdFreeUser?: boolean;
+	commercialProperties?: Partial<CommercialProperties>;
 }
