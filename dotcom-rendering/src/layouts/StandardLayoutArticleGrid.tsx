@@ -32,7 +32,6 @@ export const StandardLayoutArticleGrid = ({
 	const layout = deriveArticleGridLayout({
 		article,
 		format,
-		renderingTarget,
 		layoutType,
 		mainMediaAspectRatio,
 		hasPageSkin,
@@ -152,6 +151,7 @@ export const StandardLayoutArticleGrid = ({
 			<ArticleGridRightRail
 				article={article}
 				format={format}
+				renderingTarget={renderingTarget}
 				layout={layout}
 			/>
 			{format.design === ArticleDesign.Interactive && (

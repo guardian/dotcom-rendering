@@ -63,26 +63,27 @@ export const ArticleGridFooter = ({
 	layout: ArticleGridLayout;
 }) => {
 	const {
+		avatarUrl,
 		captionText,
-		displayAvatarUrl,
-		hasImmersiveAffiliateDisclaimer,
 		hasPageSkin,
-		isApps,
 		isImmersive,
 		isImmersiveLandscape,
 		isImmersivePortrait,
 		isInteractiveTopHat,
-		isWeb,
 		layoutType,
 	} = layout;
 	const { branding } = article.commercialProperties[article.editionId];
+	const isWeb = renderingTarget === 'Web';
+	const isApps = renderingTarget === 'Apps';
+	const displayAvatarUrl = avatarUrl != null;
+	const hasImmersiveAffiliateDisclaimer =
+		isImmersive && article.affiliateLinksDisclaimerRequired;
 
 	const articleMeta = (
 		<ArticleMeta
 			branding={branding}
 			layoutType={layoutType}
 			format={format}
-			hasPageSkin={hasPageSkin}
 			pageId={article.pageId}
 			webTitle={article.webTitle}
 			byline={article.byline}
@@ -115,7 +116,6 @@ export const ArticleGridFooter = ({
 						<Caption
 							captionText={captionText}
 							format={format}
-							hasPageSkin={hasPageSkin}
 							shouldLimitWidth={false}
 							isLeftCol={true}
 							isMainMedia={true}
@@ -139,6 +139,7 @@ export const ArticleGridFooter = ({
 				area="standfirst"
 				layoutType={layoutType}
 				format={format}
+				hasPageSkin={hasPageSkin}
 				css={[
 					isImmersive &&
 						css`
@@ -180,6 +181,7 @@ export const ArticleGridFooter = ({
 				area="meta"
 				layoutType={layoutType}
 				format={format}
+				hasPageSkin={hasPageSkin}
 				element="aside"
 				css={[
 					isImmersive &&
