@@ -1,6 +1,5 @@
 packages:
   - 'dotcom-rendering'
-  - 'scripts'
   - 'ab-testing'
   - 'ab-testing/*'
 allowBuilds:
