@@ -1,3 +1,4 @@
+import type { Inline1Variant } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { Inline1Props } from '@guardian/support-dotcom-components/dist/shared/types/props/inline1';
 
 const variant = {
@@ -24,6 +25,19 @@ const variant = {
 	},
 };
 
+const newsletterVariant: Inline1Variant = {
+	name: 'Inline1NewsletterMessage',
+	message: {
+		type: 'Inline1NewsletterMessage' as const,
+		newsletterId: 'saturday-edition',
+		frequency: 'Weekly',
+		heading: 'Saturday Edition', //newsletter name
+		body: 'An exclusive look at the week’s best Guardian journalism from the editor-in-chief, Katharine Viner',
+		imageUrl:
+			'https://uploads.guim.co.uk/2023/11/01/SaturdayEdition_-_5-3.jpg',
+	},
+};
+
 const tracking = {
 	abTestName: '',
 	abTestVariant: '',
@@ -36,5 +50,10 @@ const tracking = {
 
 export const props: Inline1Props = {
 	variant,
+	tracking,
+};
+
+export const newsletterProps: Inline1Props = {
+	variant: newsletterVariant,
 	tracking,
 };
