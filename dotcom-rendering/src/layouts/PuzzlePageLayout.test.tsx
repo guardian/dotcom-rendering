@@ -86,6 +86,24 @@ const renderPuzzlePageLayout = (
 };
 
 describe('PuzzlePageLayout', () => {
+	it('passes the API progress identity into the iframe island for hydration', () => {
+		const page = createPuzzlePage('film-reveal');
+		const progressIdentity = {
+			puzzleId: 'moviegrid-filmreveal-394',
+			puzzleType: 'FILMREVEAL',
+			publishDate: '2026-11-02T00:00:00Z',
+		};
+		const { container } = renderPuzzlePageLayout('film-reveal', {
+			instance: { ...page.instance, progressIdentity },
+		});
+		const props = container
+			.querySelector('gu-island[name="PuzzleIframe"]')
+			?.getAttribute('props');
+		expect(JSON.parse(props!)).toEqual(
+			expect.objectContaining({ progressIdentity }),
+		);
+	});
+
 	it.each([
 		['film-reveal', 'Film reveal'],
 		['on-the-ball', 'On the ball'],

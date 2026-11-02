@@ -755,13 +755,8 @@ export const PuzzlesArchiveCalendar = ({
 			setError(false);
 			try {
 				// Query parameters are stripped by the CDN in CODE/PROD.
-				// V2 selection is cookie-based; keep trivia requests on the page's origin.
-				const apiOrigin =
-					initialArchive.category === 'trivia-and-quizzes'
-						? ''
-						: window.guardian.config.page.ajaxUrl;
 				const url = new URL(
-					`${apiOrigin}/puzzles-and-games/${initialArchive.category}/archive-data/${encodeURIComponent(puzzleId)}/${year}/${month}`,
+					`${window.guardian.config.page.ajaxUrl}/puzzles-and-games/${initialArchive.category}/archive-data/${encodeURIComponent(puzzleId)}/${year}/${month}`,
 					window.location.origin,
 				);
 				const authStatus = await getAuthStatus();

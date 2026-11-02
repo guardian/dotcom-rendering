@@ -656,6 +656,9 @@ export const PuzzlePageLayout = ({
 										<Island priority="critical">
 											<PuzzleIframe
 												gameUrl={instance.gameUrl}
+												progressIdentity={
+													instance.progressIdentity
+												}
 												puzzleConfig={puzzleConfig}
 												title={instance.title}
 												darkModeAvailable={
