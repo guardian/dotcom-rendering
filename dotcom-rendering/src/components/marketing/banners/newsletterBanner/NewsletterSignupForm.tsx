@@ -14,6 +14,7 @@ type NewsletterSignupFormProps = {
 	newsletterId: string;
 	componentId: string;
 	actionColor: string;
+	errorColor: string;
 	abTest?: AbTest;
 	isModal?: boolean;
 	onSuccess?: () => void;
@@ -31,6 +32,7 @@ export const NewsletterSignupForm = ({
 	newsletterId,
 	componentId,
 	actionColor,
+	errorColor,
 	abTest,
 	isModal = false,
 	onSuccess,
@@ -107,8 +109,17 @@ export const NewsletterSignupForm = ({
 				{isSignedIn ? (
 					<input type="hidden" name="email" value={userEmail ?? ''} />
 				) : (
-					<div css={styles.emailField}>
+					<div
+						css={[
+							styles.emailField,
+							styles.validationError(errorColor),
+						]}
+					>
 						<TextInput
+							theme={{
+								textError: errorColor,
+								borderError: errorColor,
+							}}
 							name="email"
 							label="Enter your email"
 							type="email"
@@ -177,7 +188,12 @@ export const NewsletterSignupForm = ({
 			</form>
 
 			{showFailure && (
-				<FailureMessage text={failureMessage} onRetry={handleReset} />
+				<FailureMessage
+					text={failureMessage}
+					actionColor={actionColor}
+					onRetry={handleReset}
+					errorColor={errorColor}
+				/>
 			)}
 			{captchaSiteKey !== undefined && captchaSiteKey !== '' && (
 				<div css={styles.recaptchaContainer}>

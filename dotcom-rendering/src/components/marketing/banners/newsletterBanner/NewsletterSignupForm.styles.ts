@@ -20,6 +20,11 @@ export const styles = {
 	collapsedForm: css`
 		row-gap: 0;
 	`,
+	validationError: (errorColor: string): SerializedStyles => css`
+		[role='alert'] {
+			color: ${errorColor};
+		}
+	`,
 	bannerSignedInLayout: css`
 		grid-template-columns: minmax(0, 1fr);
 		grid-template-areas: 'submit';

@@ -22,11 +22,11 @@ const responseBoxStyles = css`
 	}
 `;
 
-const errorContainerStyles = css`
+const errorContainerStyles = (errorColor: string) => css`
 	display: grid;
 	grid-template-columns: 32px minmax(0, 1fr);
 	column-gap: 7.5px;
-	color: ${palette.error[400]};
+	color: ${errorColor};
 
 	> svg {
 		width: 32px;
@@ -70,11 +70,15 @@ const retryButtonStyles = css`
 export const FailureMessage = ({
 	onRetry,
 	text,
+	errorColor,
+	actionColor,
 }: {
 	onRetry: React.MouseEventHandler<HTMLButtonElement>;
 	text: string;
+	errorColor: string;
+	actionColor: string;
 }) => (
-	<div css={[responseBoxStyles, errorContainerStyles]}>
+	<div css={[responseBoxStyles, errorContainerStyles(errorColor)]}>
 		<SvgAlertRound />
 		<div css={errorContentStyles}>
 			<span css={errorTextStyles} role="alert">
@@ -89,6 +93,10 @@ export const FailureMessage = ({
 				</Link>
 			</span>
 			<Button
+				theme={{
+					backgroundPrimary: actionColor,
+					backgroundPrimaryHover: actionColor,
+				}}
 				size="small"
 				priority="primary"
 				icon={<SvgReload />}

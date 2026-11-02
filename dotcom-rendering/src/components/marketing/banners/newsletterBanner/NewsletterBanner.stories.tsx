@@ -14,9 +14,31 @@ import {
 } from '../utils/storybook';
 import { NewsletterBanner } from './NewsletterBanner';
 
+const headerImage = {
+	mobileUrl:
+		'https://i.guim.co.uk/img/media/630a3735c02e195be89ab06fd1b8192959e282ab/0_0_1172_560/500.png?width=500&quality=75&s=937595b3f471d6591475955335c7c023',
+	tabletUrl:
+		'https://i.guim.co.uk/img/media/20cc6e0fa146574bb9c4ed410ac1a089fab02ce0/0_0_1428_1344/500.png?width=500&quality=75&s=fe64f647f74a3cb671f8035a473b895f',
+	desktopUrl:
+		'https://i.guim.co.uk/img/media/6c933a058d1ce37a5ad17f79895906150812dfee/0_0_1768_1420/500.png?width=500&quality=75&s=9277532ddf184a308e14218e3576543b',
+	altText: 'The Stakes newsletter',
+};
+
+const designs = {
+	Light: { ...newsletterDesign, headerImage },
+	Dark: { ...newsletterDesignDark, headerImage },
+};
+
 const meta = preview.meta({
 	title: 'Components/marketing/NewsletterBanner',
 	component: NewsletterBanner,
+	argTypes: {
+		design: {
+			control: { type: 'select' },
+			options: Object.keys(designs),
+			mapping: designs,
+		},
+	},
 	parameters: {
 		layout: 'fullscreen',
 	},
@@ -48,18 +70,7 @@ const meta = preview.meta({
 			name: 'The Stakes 2026',
 			frequency: 'Weekly, plus breaking news alerts',
 		},
-		design: {
-			...newsletterDesign,
-			headerImage: {
-				mobileUrl:
-					'https://i.guim.co.uk/img/media/630a3735c02e195be89ab06fd1b8192959e282ab/0_0_1172_560/500.png?width=500&quality=75&s=937595b3f471d6591475955335c7c023',
-				tabletUrl:
-					'https://i.guim.co.uk/img/media/20cc6e0fa146574bb9c4ed410ac1a089fab02ce0/0_0_1428_1344/500.png?width=500&quality=75&s=fe64f647f74a3cb671f8035a473b895f',
-				desktopUrl:
-					'https://i.guim.co.uk/img/media/6c933a058d1ce37a5ad17f79895906150812dfee/0_0_1768_1420/500.png?width=500&quality=75&s=9277532ddf184a308e14218e3576543b',
-				altText: 'The Stakes newsletter',
-			},
-		},
+		design: designs.Light,
 		submitComponentEvent: async () => Promise.resolve(),
 		idApiUrl: 'https://idapi.theguardian.com',
 	},
@@ -208,27 +219,5 @@ const useSuccessfulForm = (): NewsletterSignupFormState => {
 export const SuccessTransition = meta.story({
 	beforeEach() {
 		mocked(useNewsletterSignupForm).mockImplementation(useSuccessfulForm);
-	},
-});
-
-export const Dark = meta.story({
-	args: {
-		design: {
-			...newsletterDesignDark,
-			headerImage: {
-				mobileUrl:
-					'https://i.guim.co.uk/img/media/630a3735c02e195be89ab06fd1b8192959e282ab/0_0_1172_560/500.png?width=500&quality=75&s=937595b3f471d6591475955335c7c023',
-				tabletUrl:
-					'https://i.guim.co.uk/img/media/20cc6e0fa146574bb9c4ed410ac1a089fab02ce0/0_0_1428_1344/500.png?width=500&quality=75&s=fe64f647f74a3cb671f8035a473b895f',
-				desktopUrl:
-					'https://i.guim.co.uk/img/media/6c933a058d1ce37a5ad17f79895906150812dfee/0_0_1768_1420/500.png?width=500&quality=75&s=9277532ddf184a308e14218e3576543b',
-				altText: 'The Stakes newsletter',
-			},
-		},
-	},
-	beforeEach() {
-		mocked(useNewsletterSignupForm).mockImplementation(
-			useInteractiveSignedOutForm,
-		);
 	},
 });

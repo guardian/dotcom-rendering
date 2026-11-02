@@ -179,6 +179,9 @@ export const NewsletterBannerComponent = (
 											actionColor={hexColourToString(
 												newsletterBanner.actionColor,
 											)}
+											errorColor={hexColourToString(
+												newsletterBanner.errorColor,
+											)}
 											onSuccess={() => setIsSuccess(true)}
 										/>
 									</div>
