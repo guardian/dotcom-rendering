@@ -29,7 +29,7 @@ type Props = {
  */
 export const ElectionTrackerWrapper = (props: Props) => {
 	const hasTrackedView = useRef(false);
-	const [isInView] = useIsInView({});
+	const [isInView, setNode] = useIsInView({});
 	const { renderingTarget } = useConfig();
 	const TRACKING_ID = 'election-tracker';
 
@@ -63,16 +63,18 @@ export const ElectionTrackerWrapper = (props: Props) => {
 	);
 
 	return (
-		<ElectionTracker
-			electionDataUrl={url.value}
-			initialData={parsedData.ok ? parsedData.value.components : []}
-			refreshInterval={60}
-			getElectionData={
-				props.liveEffects
-					? getElectionData
-					: () => Promise.resolve(props.electionComponents)
-			}
-		/>
+		<div ref={setNode}>
+			<ElectionTracker
+				electionDataUrl={url.value}
+				initialData={parsedData.ok ? parsedData.value.components : []}
+				refreshInterval={60}
+				getElectionData={
+					props.liveEffects
+						? getElectionData
+						: () => Promise.resolve(props.electionComponents)
+				}
+			/>
+		</div>
 	);
 };
 
