@@ -12,6 +12,7 @@ const mockHandleSubmit = jest.fn((event: React.FormEvent<HTMLFormElement>) =>
 const mockHandleSubmitButtonClick = jest.fn();
 const mockHandleEmailFocus = jest.fn();
 let mockResponseOk: boolean | undefined;
+let mockIsValidationError = false;
 
 jest.mock('../../../ConfigContext', () => ({
 	useConfig: () => ({ renderingTarget: 'Web' }),
@@ -30,6 +31,10 @@ jest.mock('../../../../lib/useNewsletterSignupForm', () => ({
 		isWaitingForResponse: false,
 		captchaSiteKey: 'test-site-key',
 		responseOk: mockResponseOk,
+		isValidationError: mockIsValidationError,
+		errorMessage: mockIsValidationError
+			? 'Enter a valid email address'
+			: undefined,
 		handleSubmit: mockHandleSubmit,
 		handleSubmitButtonClick: mockHandleSubmitButtonClick,
 		handleEmailFocus: mockHandleEmailFocus,
@@ -49,6 +54,7 @@ describe('newsletter banner signup form', () => {
 	beforeEach(() => {
 		jest.clearAllMocks();
 		mockResponseOk = undefined;
+		mockIsValidationError = false;
 	});
 
 	it('renders CAPTCHA and delegates submission to the signup hook', () => {
@@ -58,6 +64,7 @@ describe('newsletter banner signup form', () => {
 				newsletterId="test-newsletter"
 				componentId="test-banner"
 				actionColor="#052962"
+				errorColor="#C70000"
 				onSuccess={onSuccess}
 			/>,
 		);
@@ -77,6 +84,46 @@ describe('newsletter banner signup form', () => {
 		expect(onSuccess).not.toHaveBeenCalled();
 	});
 
+	it('uses the configured validation error color', () => {
+		mockIsValidationError = true;
+		render(
+			<NewsletterSignupForm
+				newsletterId="test-newsletter"
+				componentId="test-banner"
+				actionColor="#052962"
+				errorColor="#FF9081"
+			/>,
+		);
+
+		expect(testingScreen.getByRole('alert')).toHaveStyle({
+			color: '#FF9081',
+		});
+		expect(testingScreen.getByRole('textbox')).toHaveStyle({
+			borderColor: '#FF9081',
+		});
+	});
+
+	it('uses the configured error and action colors for the failure message', () => {
+		mockResponseOk = false;
+		render(
+			<NewsletterSignupForm
+				newsletterId="test-newsletter"
+				componentId="test-banner"
+				actionColor="#8F6A70"
+				errorColor="#FF9081"
+			/>,
+		);
+
+		const alert = testingScreen.getByRole('alert');
+		expect(alert).toHaveTextContent('Sign up failed.');
+		expect(alert.parentElement?.parentElement).toHaveStyle({
+			color: '#FF9081',
+		});
+		expect(
+			testingScreen.getByRole('button', { name: 'Try again' }),
+		).toHaveStyle({ backgroundColor: '#8F6A70' });
+	});
+
 	it('calls onSuccess only after the signup hook reports success', () => {
 		const onSuccess = jest.fn();
 		const renderForm = () => (
@@ -84,6 +131,7 @@ describe('newsletter banner signup form', () => {
 				newsletterId="test-newsletter"
 				componentId="test-banner"
 				actionColor="#052962"
+				errorColor="#C70000"
 				onSuccess={onSuccess}
 			/>
 		);

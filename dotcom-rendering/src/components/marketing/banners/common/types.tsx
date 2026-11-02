@@ -67,6 +67,7 @@ export type NewsletterBannerDesign = Omit<ConfigurableDesign, 'colours'> & {
 		newsletterBanner: {
 			divider: HexColour;
 			actionColor: HexColour;
+			errorColor: HexColour;
 		};
 	};
 };
