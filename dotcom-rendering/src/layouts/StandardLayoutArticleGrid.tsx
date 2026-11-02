@@ -105,7 +105,7 @@ const immersivePortraitFooter = css`
 	display: contents;
 
 	${from.leftCol} {
-		${grid.between('left-column-start', 8)}
+		${grid.between('left-column-start', 9)}
 		display: grid;
 		grid-row: 3;
 		grid-template-columns: subgrid;
@@ -120,7 +120,7 @@ const immersivePortraitFooter = css`
 	}
 
 	${from.wide} {
-		${grid.between('left-column-start', 9)}
+		${grid.between('left-column-start', 10)}
 	}
 `;
 
