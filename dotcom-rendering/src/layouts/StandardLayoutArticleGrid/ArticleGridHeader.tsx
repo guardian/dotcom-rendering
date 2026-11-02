@@ -7,12 +7,17 @@ import {
 } from '../../components/ArticleHeadline';
 import { ArticleTitle } from '../../components/ArticleTitle';
 import { ContributorAvatar } from '../../components/ContributorAvatar';
-import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	hasImmersiveGridTitleRule,
+} from '../../lib/articleFormat';
 import { getZIndex } from '../../lib/getZIndex';
 import { palette as themePalette } from '../../palette';
 import type { ArticleDeprecated } from '../../types/article';
 import type { ArticleGridLayout } from './deriveArticleGridLayout';
 import { GridItem } from './GridItem';
+import { topHatFurnitureBackgroundStyles } from './styles';
 
 const avatarHeadlineWrapper = css`
 	display: flex;
@@ -60,7 +65,6 @@ export const ArticleGridHeader = ({
 	const {
 		ageWarning,
 		avatarUrl,
-		hasImmersivePortraitTitleRule,
 		hasPageSkin,
 		isImmersive,
 		isImmersiveLandscape,
@@ -69,6 +73,8 @@ export const ArticleGridHeader = ({
 		isInteractiveTopHat,
 		layoutType,
 	} = layout;
+	const hasImmersivePortraitTitleRule =
+		isImmersivePortrait && hasImmersiveGridTitleRule(format, article.tags);
 	const displayAvatarUrl = avatarUrl != null;
 	const hasImmersiveAffiliateDisclaimer =
 		isImmersive && article.affiliateLinksDisclaimerRequired;
@@ -76,9 +82,7 @@ export const ArticleGridHeader = ({
 		format.design === ArticleDesign.MatchReport &&
 		article.matchType === 'FootballMatchType' &&
 		article.matchStatsUrl != null;
-	const headlineBackgroundImmersive = themePalette(
-		'--headline-background',
-	);
+	const headlineBackgroundImmersive = themePalette('--headline-background');
 	const immersiveHeadlineOverlayBreakpoint = isImmersivePortrait
 		? until.desktop
 		: until.tablet;
@@ -264,13 +268,8 @@ export const ArticleGridHeader = ({
 						`,
 					isInteractiveTopHat &&
 						css`
-							z-index: ${getZIndex('mediaOverlay')};
-							background-color: color-mix(
-								in srgb,
-								${themePalette('--article-background')} 90%,
-								transparent
-							);
-							padding: ${space[1]}px 10px 0;
+							${topHatFurnitureBackgroundStyles}
+							padding-top: ${space[1]}px;
 						`,
 				]}
 			>

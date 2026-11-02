@@ -1,8 +1,32 @@
 import { Recipe as RecipeFixture } from '../../../fixtures/generated/fe-articles/Recipe';
-import { ArticleDisplay } from '../../lib/articleFormat';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+} from '../../lib/articleFormat';
 import { enhanceArticleType } from '../../types/article';
+import type { ArticleDeprecated } from '../../types/article';
 import type { MediaAtomBlockElement } from '../../types/content';
-import { deriveArticleGridLayout } from './deriveArticleGridLayout';
+import { getLayoutType, getMainMediaInfo } from '../lib/articleArrangements';
+import { deriveArticleGridLayout as deriveLayout } from './deriveArticleGridLayout';
+
+const deriveArticleGridLayout = ({
+	article,
+	format,
+}: {
+	article: ArticleDeprecated;
+	format: ArticleFormat;
+}) => {
+	const { mainMediaAspectRatio, mainMediaOrientation } =
+		getMainMediaInfo(article);
+	return deriveLayout({
+		article,
+		format,
+		layoutType: getLayoutType(format, mainMediaOrientation),
+		mainMediaAspectRatio,
+		hasPageSkin: false,
+	});
+};
 
 const enhancedRecipe = enhanceArticleType(RecipeFixture, 'Web');
 const article = enhancedRecipe.frontendData;
@@ -138,6 +162,21 @@ describe('deriveArticleGridLayout', () => {
 			);
 		},
 	);
+
+	it('uses the interactive top hat layout for showcase interactives', () => {
+		const layout = deriveArticleGridLayout({
+			article,
+			format: {
+				...immersiveFormat,
+				design: ArticleDesign.Interactive,
+				display: ArticleDisplay.Showcase,
+			},
+		});
+
+		expect(layout.layoutType).toBe('interactiveTopHat');
+		expect(layout.isInteractiveTopHat).toBe(true);
+		expect(layout.isImmersive).toBe(false);
+	});
 
 	it('falls back to immersive landscape when main media is missing', () => {
 		const layout = deriveArticleGridLayout({
