@@ -11,6 +11,7 @@ import type {
 	ArticleCountType,
 	BannerChannel,
 	ConfigurableDesign,
+	HexColour,
 	SeparateArticleCount,
 	TickerSettings,
 } from '@guardian/support-dotcom-components/dist/shared/types';
@@ -64,7 +65,8 @@ export interface BannerTextContent {
 export type NewsletterBannerDesign = Omit<ConfigurableDesign, 'colours'> & {
 	colours: ConfigurableDesign['colours'] & {
 		newsletterBanner: {
-			divider: ConfigurableDesign['colours']['basic']['background'];
+			divider: HexColour;
+			actionColor: HexColour;
 		};
 	};
 };

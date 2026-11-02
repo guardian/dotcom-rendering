@@ -138,6 +138,9 @@ export const NewsletterBannerComponent = (
 										<div css={styles.frequencyRow}>
 											<NewsletterFrequencyTag
 												frequency={newsletter.frequency}
+												actionColor={hexColourToString(
+													newsletterBanner.actionColor,
+												)}
 											/>
 										</div>
 										<div
@@ -173,6 +176,9 @@ export const NewsletterBannerComponent = (
 												newsletter.identityName
 											}
 											componentId="newsletter_banner"
+											actionColor={hexColourToString(
+												newsletterBanner.actionColor,
+											)}
 											onSuccess={() => setIsSuccess(true)}
 										/>
 									</div>

@@ -151,6 +151,7 @@ export const newsletterDesign: NewsletterBannerDesign = {
 		},
 		newsletterBanner: {
 			divider: stringToHexColour('DCDCDC'),
+			actionColor: stringToHexColour('052962'),
 		},
 		highlightedText: {
 			text: { r: '33', g: '33', b: '33', kind: 'hex' },
@@ -186,10 +187,14 @@ export const newsletterDesign: NewsletterBannerDesign = {
 	},
 };
 
-export const newsletterDesignDark: ConfigurableDesign = {
+export const newsletterDesignDark: NewsletterBannerDesign = {
 	...newsletterDesign,
 	colours: {
 		...newsletterDesign.colours,
+		newsletterBanner: {
+			...newsletterDesign.colours.newsletterBanner,
+			actionColor: stringToHexColour('c4aa81'),
+		},
 		basic: {
 			background: stringToHexColour('1A1A1A'),
 			bodyText: stringToHexColour('E8E8E8'),

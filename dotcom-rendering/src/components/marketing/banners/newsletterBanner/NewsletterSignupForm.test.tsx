@@ -57,12 +57,16 @@ describe('newsletter banner signup form', () => {
 			<NewsletterSignupForm
 				newsletterId="test-newsletter"
 				componentId="test-banner"
+				actionColor="#052962"
 				onSuccess={onSuccess}
 			/>,
 		);
 
 		expect(ReactGoogleRecaptcha).toHaveBeenCalled();
 		expect(onSuccess).not.toHaveBeenCalled();
+		expect(
+			testingScreen.getByRole('button', { name: 'Sign up' }),
+		).toHaveStyle({ backgroundColor: '#052962' });
 
 		fireEvent.focus(testingScreen.getByRole('textbox'));
 		fireEvent.click(testingScreen.getByRole('button', { name: 'Sign up' }));
@@ -79,6 +83,7 @@ describe('newsletter banner signup form', () => {
 			<NewsletterSignupForm
 				newsletterId="test-newsletter"
 				componentId="test-banner"
+				actionColor="#052962"
 				onSuccess={onSuccess}
 			/>
 		);

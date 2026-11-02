@@ -3,11 +3,11 @@ import { space, textSansBold15, until } from '@guardian/source/foundations';
 import { SvgNewsletterFilled } from '@guardian/source/react-components';
 import { palette as themePalette } from '../../../../palette';
 
-const frequencyTagStyles = css`
+const frequencyTagStyles = (actionColor: string) => css`
 	display: flex;
 	align-items: center;
 	gap: 6px;
-	color: ${themePalette('--newsletter-card-frequency-tag')};
+	color: ${actionColor};
 	${textSansBold15};
 	padding: ${space[2]}px 0;
 	${until.desktop} {
@@ -28,7 +28,7 @@ const frequencyLabelStyles = css`
 	white-space: nowrap;
 `;
 
-const badgeStyles = css`
+const badgeStyles = (actionColor: string) => css`
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -36,7 +36,7 @@ const badgeStyles = css`
 	width: 24px;
 	height: 24px;
 	border-radius: 50%;
-	background-color: ${themePalette('--newsletter-card-badge-background')};
+	background-color: ${actionColor};
 
 	svg {
 		fill: ${themePalette('--newsletter-card-badge-icon')};
@@ -47,11 +47,13 @@ const badgeStyles = css`
 
 export const NewsletterFrequencyTag = ({
 	frequency,
+	actionColor,
 }: {
 	frequency: string;
+	actionColor: string;
 }) => (
-	<div css={frequencyTagStyles}>
-		<span css={badgeStyles}>
+	<div css={frequencyTagStyles(actionColor)}>
+		<span css={badgeStyles(actionColor)}>
 			<SvgNewsletterFilled />
 		</span>
 		<span css={frequencyTextStyles}>
