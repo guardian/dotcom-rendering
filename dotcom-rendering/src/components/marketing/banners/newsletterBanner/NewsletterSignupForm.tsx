@@ -181,6 +181,7 @@ export const NewsletterSignupForm = ({
 						onChange={handleCaptchaComplete}
 						onErrored={handleCaptchaLoadError}
 						size="invisible"
+						badge="inline"
 					/>
 				</div>
 			)}

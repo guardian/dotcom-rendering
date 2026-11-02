@@ -861,7 +861,7 @@ export const slideshowCard: DCRFrontCard = {
 	url: '/uk-news/2025/jan/22/prince-harry-says-sun-publisher-made-historic-admission-as-he-settles-case',
 	headline: 'Headline for slideshow card',
 	trailText: 'Trail text for slideshow card',
-	slideshowImages: [
+	slideshowMedia: [
 		{
 			imageSrc:
 				'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/1000.jpg',
