@@ -12,6 +12,7 @@ runs:
     - run: corepack enable
       shell: bash
 
+    # Then run setup again to get pnpm configured correctly
     - uses: actions/setup-node@v7
       with:
         node-version-file: '.nvmrc'
