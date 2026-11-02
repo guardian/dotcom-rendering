@@ -2,13 +2,16 @@ import type {
 	FEFrontCardStyle,
 	FEMediaAsset,
 	FEMediaAtom,
+	FEMultimediaSlideshow,
 	FESupportingContent,
 } from '../frontend/feFront';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import type { Image } from '../types/content';
 import type { FrontEditorialTest, VariantMeta } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
 import {
 	decideArticleMedia,
+	decideMultimediaSlideshow,
 	decideReplacementMedia,
 	getActiveMediaAtom,
 	getFrontEditorialTestData,
@@ -532,6 +535,190 @@ describe('Enhance Cards', () => {
 				subtitleSource: undefined,
 				videoStyle: 'Loop',
 			});
+		});
+	});
+
+	describe('decideMultimediaSlideshow', () => {
+		const smallImage: Image = {
+			index: 0,
+			fields: { width: '500', height: '400' },
+			mediaType: 'image',
+			url: 'https://media.guim.co.uk/slide/500.jpg',
+		};
+		const largeImage: Image = {
+			...smallImage,
+			fields: { width: '1000', height: '800' },
+			url: 'https://media.guim.co.uk/slide/1000.jpg',
+		};
+		const multimediaSlideshow: FEMultimediaSlideshow = {
+			id: 'slideshow-id',
+			aspectRatio: '5:4',
+			slides: [
+				{
+					content: {
+						type: 'Image',
+						item: {
+							image: { allImages: [smallImage, largeImage] },
+						},
+					},
+					caption: 'Image caption',
+				},
+				{
+					content: {
+						type: 'Video',
+						item: {
+							mediaAtom: {
+								...testMediaAtom,
+								assets: [testMp4Asset],
+								posterImage: { allImages: [largeImage] },
+							},
+						},
+					},
+					caption: 'Video caption',
+				},
+			],
+		};
+
+		it('returns undefined if multimediaSlideshowReplace is false', () => {
+			expect(
+				decideMultimediaSlideshow(false, multimediaSlideshow),
+			).toEqual(undefined);
+		});
+
+		it('converts image and self-hosted video slides in order', () => {
+			expect(
+				decideMultimediaSlideshow(true, multimediaSlideshow),
+			).toEqual([
+				{
+					type: 'image',
+					imageSrc: 'https://media.guim.co.uk/slide/1000.jpg',
+					imageCaption: 'Image caption',
+				},
+				{
+					type: 'video',
+					video: {
+						type: 'SelfHostedVideo',
+						videoStyle: 'Loop',
+						atomId: 'atomID',
+						sources: [
+							{
+								mimeType: 'video/mp4',
+								src: 'https://guim-example.co.uk/atomID-1.mp4',
+								height: 400,
+								width: 500,
+								hasAudio: true,
+							},
+						],
+						subtitleSource: undefined,
+						aspectRatio: 5 / 4,
+						duration: 15,
+						image: {
+							src: 'https://media.guim.co.uk/slide/1000.jpg',
+							aspectRatio: '5:4',
+						},
+					},
+					caption: 'Video caption',
+				},
+			]);
+		});
+
+		it('uses the card image as the poster of a video without one, like video cards', () => {
+			const slideshow: FEMultimediaSlideshow = {
+				id: 'slideshow-id',
+				slides: [
+					{
+						content: {
+							type: 'Video',
+							item: { mediaAtom: testMediaAtom },
+						},
+					},
+				],
+			};
+
+			expect(
+				decideMultimediaSlideshow(
+					true,
+					slideshow,
+					'https://media.guim.co.uk/card.jpg',
+				)?.[0],
+			).toMatchObject({
+				type: 'video',
+				video: { image: { src: 'https://media.guim.co.uk/card.jpg' } },
+			});
+		});
+
+		it('converts YouTube video slides', () => {
+			const slideshow: FEMultimediaSlideshow = {
+				id: 'slideshow-id',
+				slides: [
+					{
+						content: {
+							type: 'Video',
+							item: {
+								mediaAtom: {
+									...testMediaAtom,
+									assets: [testYoutubeAsset],
+								},
+							},
+						},
+						caption: 'YouTube caption',
+					},
+				],
+			};
+
+			expect(decideMultimediaSlideshow(true, slideshow)).toEqual([
+				{
+					type: 'video',
+					video: {
+						type: 'YoutubeVideo',
+						id: 'atomID',
+						videoId: 'test-youtube-id',
+						duration: 15,
+						title: 'Example video',
+						width: 500,
+						height: 300,
+						origin: '',
+						expired: false,
+						isLive: false,
+					},
+					caption: 'YouTube caption',
+				},
+			]);
+		});
+
+		it('drops self-hosted video slides the player cannot show, and returns undefined if none remain', () => {
+			const unplayable: FEMultimediaSlideshow = {
+				id: 'slideshow-id',
+				slides: [
+					{
+						content: {
+							type: 'Video',
+							item: {
+								mediaAtom: {
+									...testMediaAtom,
+									posterImage: { allImages: [largeImage] },
+									assets: [
+										{
+											...testMp4Asset,
+											mimeType: 'video/webm',
+										},
+									],
+								},
+							},
+						},
+					},
+					{
+						content: {
+							type: 'Video',
+							item: { mediaAtom: testMediaAtom },
+						},
+					},
+				],
+			};
+
+			expect(decideMultimediaSlideshow(true, unplayable)).toEqual(
+				undefined,
+			);
 		});
 	});
 
