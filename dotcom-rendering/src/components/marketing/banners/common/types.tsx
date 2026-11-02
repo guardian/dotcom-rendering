@@ -14,10 +14,14 @@ import type {
 	SeparateArticleCount,
 	TickerSettings,
 } from '@guardian/support-dotcom-components/dist/shared/types';
+import type { PromotedNewsletter } from '@guardian/support-dotcom-components/dist/shared/types/props/banner';
 import type { ChoiceCardsSettings } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/types/props/shared';
 
-export type BannerId = 'designable-banner' | 'sign-in-prompt-banner';
+export type BannerId =
+	| 'designable-banner'
+	| 'sign-in-prompt-banner'
+	| 'newsletter-banner';
 
 export interface BannerEnrichedCta {
 	ctaUrl: string;
@@ -81,4 +85,6 @@ export interface BannerRenderProps {
 	design?: ConfigurableDesign;
 	promoCodes?: string[];
 	isCollapsible?: boolean;
+	idApiUrl?: string;
+	promotedNewsletter?: PromotedNewsletter;
 }
