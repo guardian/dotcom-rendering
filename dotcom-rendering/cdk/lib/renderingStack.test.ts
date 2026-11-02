@@ -2,6 +2,8 @@ import { App } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
 import { InstanceClass, InstanceSize, InstanceType } from 'aws-cdk-lib/aws-ec2';
 import {
+	FaciaRenderingPropsCODE,
+	FaciaRenderingPropsPROD,
 	InteractiveRenderingPropsCODE,
 	InteractiveRenderingPropsPROD,
 	TagPageRenderingPropsCODE,
@@ -97,7 +99,7 @@ describe('The RenderingCDKStack', () => {
 		expect(template.toJSON()).toMatchSnapshot();
 	});
 
-	it('matches the snapshot for Interactive Rendering PROD (not using ECS)', () => {
+	it('matches the snapshot for Interactive Rendering PROD (uses ECS)', () => {
 		const app = new App();
 		const stack = new RenderingCDKStack(
 			app,
@@ -115,6 +117,29 @@ describe('The RenderingCDKStack', () => {
 			app,
 			'InteractiveRendering-CODE',
 			InteractiveRenderingPropsCODE,
+		);
+		const template = Template.fromStack(stack);
+		expect(template.toJSON()).toMatchSnapshot();
+	});
+
+	it('matches the snapshot for Facia Rendering PROD (uses ECS)', () => {
+		const app = new App();
+		const stack = new RenderingCDKStack(
+			app,
+			'FaciaRendering-PROD',
+			FaciaRenderingPropsPROD,
+		);
+		const template = Template.fromStack(stack);
+		expect(template.toJSON()).toMatchSnapshot();
+	});
+
+	it('matches the snapshot for Facia Rendering CODE (uses ECS)', () => {
+		const app = new App();
+
+		const stack = new RenderingCDKStack(
+			app,
+			'FaciaRendering-CODE',
+			FaciaRenderingPropsCODE,
 		);
 		const template = Template.fromStack(stack);
 		expect(template.toJSON()).toMatchSnapshot();

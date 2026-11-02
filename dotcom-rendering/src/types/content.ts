@@ -1,4 +1,5 @@
 import { type CrosswordProps } from '@guardian/react-crossword';
+import { type ElectionComponentsJson } from '../components/ElectionTrackers/electionComponent';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { VideoPlayerFormat } from './mainMedia';
 
@@ -565,6 +566,13 @@ export interface RecipeFeaturedImage {
 	mediaApiUri?: string;
 }
 
+export interface EventGraphicBlockElement {
+	_type: 'model.dotcomrendering.pageElements.EventGraphicBlockElement';
+	elementId: string;
+	components: ElectionComponentsJson;
+	dataUrl: URL;
+}
+
 export interface RecipeBlockElement {
 	_type: 'model.dotcomrendering.pageElements.RecipeBlockElement';
 	elementId?: string;
@@ -946,7 +954,8 @@ export type FEElement =
 	| ProductBlockElement
 	| ProductSummaryBlockElement
 	| EnhancedProductSummaryElement
-	| RecipeBlockElement;
+	| RecipeBlockElement
+	| EventGraphicBlockElement;
 
 // -------------------------------------
 // Misc
