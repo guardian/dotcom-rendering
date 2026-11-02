@@ -27,7 +27,6 @@ type Props = {
 	currentNavLink: string;
 	renderingPage: RenderingPage;
 	hasPageSkin?: boolean;
-	underlineHeader?: boolean;
 };
 
 const subNavStyles = css`
@@ -298,22 +297,13 @@ const headerLinkStyles = css`
 const HeaderText = ({
 	header: { headerText, dotcomPath },
 	cssOverrides,
-	underlineHeader,
 }: {
 	header: CustomSubnavHeader;
 	cssOverrides?: SerializedStyles;
-	underlineHeader?: boolean;
 }) => {
 	const link = dotcomPath ? (
 		<a
-			css={[
-				headerLinkStyles,
-				cssOverrides,
-				underlineHeader &&
-					css`
-						text-decoration: underline;
-					`,
-			]}
+			css={[headerLinkStyles, cssOverrides]}
 			data-src-focus-disabled={true}
 			href={dotcomPath}
 			data-link-name={nestedOphanComponents(
@@ -334,14 +324,9 @@ const HeaderText = ({
 const CustomHeader = (
 	customSubNav: CustomSubnav,
 	cssOverrides: SerializedStyles | undefined,
-	underlineHeader?: boolean,
 ) => {
 	return customSubNav.header.showHeaderText ? (
-		<HeaderText
-			header={customSubNav.header}
-			cssOverrides={cssOverrides}
-			underlineHeader={underlineHeader}
-		/>
+		<HeaderText header={customSubNav.header} cssOverrides={cssOverrides} />
 	) : undefined;
 };
 
@@ -353,7 +338,6 @@ export const CustomSubNav = ({
 	currentNavLink,
 	renderingPage,
 	hasPageSkin,
-	underlineHeader,
 }: Props) => {
 	const isArticle = renderingPage === 'article';
 	/** DCR receives images for all platforms; only web images are rendered here. */
@@ -396,11 +380,7 @@ export const CustomSubNav = ({
 						images={webImages}
 						headerText={customSubNav.header.headerText}
 					/>
-					{CustomHeader(
-						customSubNav,
-						imageHeaderTextStyles,
-						underlineHeader,
-					)}
+					{CustomHeader(customSubNav, imageHeaderTextStyles)}
 				</div>
 				<ul
 					css={[imageListStyles, scrollableSubNavStyles]}
@@ -423,11 +403,7 @@ export const CustomSubNav = ({
 				data-rendering-page={renderingPage}
 				css={[articleContainerStyles, scrollableSubNavStyles]}
 			>
-				{CustomHeader(
-					customSubNav,
-					articleHeaderStyles,
-					underlineHeader,
-				)}
+				{CustomHeader(customSubNav, articleHeaderStyles)}
 				<ul
 					css={[
 						subNavStyles,
@@ -457,7 +433,7 @@ export const CustomSubNav = ({
 			data-rendering-page={renderingPage}
 			css={frontContainerStyles}
 		>
-			{CustomHeader(customSubNav, undefined, underlineHeader)}
+			{CustomHeader(customSubNav, undefined)}
 			<ul
 				css={[
 					subNavStyles,
