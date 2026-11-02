@@ -2,6 +2,7 @@ import { log } from '@guardian/libs';
 import type ophan from '@guardian/ophan-tracker-js';
 import type { ComponentEvent, TAction } from '@guardian/ophan-tracker-js';
 import type { RenderingTarget } from '../../types/renderingTarget';
+import { startOphanShadowTesting } from './shadow';
 
 type Ophan = typeof ophan;
 
@@ -53,11 +54,13 @@ export const getOphan = async (
 	}
 
 	// We've taken '@guardian/ophan-tracker-js' out of the apps client bundle (made it external in webpack) because we don't ever expect this method to be called. Tracking in apps is done natively.
-	const { default: ophan } = await import(
+	const trackerModule = await import(
 		/* webpackMode: "eager" */ '@guardian/ophan-tracker-js'
 	);
+	const { default: ophan } = trackerModule;
 
 	ophan.init('ng');
+	startOphanShadowTesting(trackerModule);
 
 	const record: (typeof ophan)['record'] = (event, callback) => {
 		ophan.record(event, callback);
