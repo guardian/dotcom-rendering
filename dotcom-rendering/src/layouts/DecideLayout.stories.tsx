@@ -90,7 +90,7 @@ const HydratedLayout: Decorator<
 };
 
 export default {
-	title: 'Components/DecideLayout',
+	title: 'Layouts/DecideLayout',
 	component: DecideLayout,
 	parameters: {
 		chromatic: {
