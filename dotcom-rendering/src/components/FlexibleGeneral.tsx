@@ -315,7 +315,9 @@ const SplashCardLayout = ({
 	});
 
 	if (graphic.success) {
-		return <EventGraphic graphic={graphic.output} />;
+		return (
+			<EventGraphic graphic={graphic.output} trackingLabel={'front'} />
+		);
 	}
 
 	const isSnapLink = card.snapData?.embedHtml;

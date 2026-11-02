@@ -60,8 +60,8 @@ export const ElectionTracker = (props: Props) => {
 			css={{
 				position: 'relative',
 			}}
-			data-gu-marker="election-tracker"
 			data-component="election-tracker"
+			data-link-name="election-tracker"
 		>
 			<Refresh remaining={remaining} error={error !== undefined} />
 			<Components components={data ?? props.initialData} />

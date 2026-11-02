@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { safeParse } from 'valibot';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { safeParseURL } from '../lib/parse';
@@ -20,6 +20,7 @@ type Props = {
 	 * in tests and storybook.
 	 */
 	liveEffects: boolean;
+	trackingLabel: 'liveblog' | 'front';
 };
 
 /**
@@ -27,27 +28,15 @@ type Props = {
  * case, the Fetch API.
  */
 export const ElectionTrackerWrapper = (props: Props) => {
-	const [eventGraphic, setEventGraphic] = useState<HTMLElement | null>(null);
 	const hasTrackedView = useRef(false);
-	const [isInView] = useIsInView({
-		threshold: 0.1,
-		repeat: true,
-		node: eventGraphic ?? undefined,
-	});
+	const [isInView] = useIsInView({});
 	const { renderingTarget } = useConfig();
+	const TRACKING_ID = 'election-tracker';
 
 	const url = safeParseURL(props.electionDataUrl);
 
 	useEffect(() => {
-		setEventGraphic(
-			document.querySelector<HTMLElement>(
-				'[data-gu-marker=election-tracker]',
-			),
-		);
-	}, []);
-
-	useEffect(() => {
-		if (!eventGraphic || isInView !== true || hasTrackedView.current) {
+		if (isInView !== true || hasTrackedView.current) {
 			return;
 		}
 
@@ -56,45 +45,14 @@ export const ElectionTrackerWrapper = (props: Props) => {
 			{
 				component: {
 					componentType: 'EVENT_GRAPHIC',
-					id: eventGraphic.id,
-					labels: ['liveblog'],
+					id: TRACKING_ID,
+					labels: [props.trackingLabel],
 				},
 				action: 'VIEW',
 			},
 			renderingTarget,
 		);
-	}, [eventGraphic, isInView, renderingTarget]);
-
-	useEffect(() => {
-		if (!eventGraphic) {
-			return;
-		}
-
-		const handleClick = (event: MouseEvent) => {
-			if (
-				!(event.target instanceof Element) ||
-				!event.target.closest('[election-tracker-link]')
-			) {
-				return;
-			}
-
-			void submitComponentEvent(
-				{
-					component: {
-						componentType: 'EVENT_GRAPHIC',
-						id: eventGraphic.id,
-						labels: ['liveblog'],
-					},
-					action: 'CLICK',
-				},
-				renderingTarget,
-			);
-		};
-
-		eventGraphic.addEventListener('click', handleClick);
-
-		return () => eventGraphic.removeEventListener('click', handleClick);
-	}, [eventGraphic, renderingTarget]);
+	}, [isInView, renderingTarget, props.trackingLabel]);
 
 	if (!url.ok) {
 		return null;
