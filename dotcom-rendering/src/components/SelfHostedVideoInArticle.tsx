@@ -43,6 +43,12 @@ const immersiveMainMediaStyles = css`
 	}
 `;
 
+const verticalImmersiveMainMediaStyles = css`
+	&& video {
+		object-position: center top;
+	}
+`;
+
 type SelfHostedVideoInArticleProps = {
 	element: MediaAtomBlockElement;
 	format: ArticleFormat;
@@ -83,6 +89,9 @@ export const SelfHostedVideoInArticle = ({
 			css={[
 				containerStyles,
 				useImmersiveMainMediaStyles && immersiveMainMediaStyles,
+				useImmersiveMainMediaStyles &&
+					isVerticalVideo &&
+					verticalImmersiveMainMediaStyles,
 			]}
 			data-spacefinder-role="inline"
 		>

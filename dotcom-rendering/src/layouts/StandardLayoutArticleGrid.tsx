@@ -274,10 +274,11 @@ export const StandardLayoutArticleGrid = ({
 		}
 
 		const columnCount =
-			gridLayout === 'immersivePortrait' ||
-			gridLayout === 'immersiveLandscape'
-				? 4
-				: 3;
+			gridLayout === 'immersivePortrait'
+				? 5
+				: gridLayout === 'immersiveLandscape'
+					? 4
+					: 3;
 
 		return css`
 			${from.leftCol} {
