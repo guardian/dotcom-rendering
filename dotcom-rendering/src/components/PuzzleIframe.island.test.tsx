@@ -41,7 +41,7 @@ const sudokuEasyConfig = puzzleConfigs['sudoku-easy']!;
 const wordiplyConfig = puzzleConfigs.wordiply!;
 
 describe('buildPuzzleIframeSrc', () => {
-	it('adds reader context to the API game URL without deriving a different puzzle', () => {
+	it('adds reader context to the API game URL while preserving its puzzle and uid', () => {
 		const context: PuzzleContext = {
 			userId: 'reader',
 			darkMode: true,
@@ -51,13 +51,13 @@ describe('buildPuzzleIframeSrc', () => {
 			buildPuzzleIframeSrc(
 				sudokuEasyConfig,
 				context,
-				'https://tg.amuselabs.com/guardian/date-picker?set=api-series&id=opaque&embed=1',
+				'https://tg.amuselabs.com/guardian/date-picker?set=api-series&id=opaque&embed=1&uid=api-user',
 			),
 		);
 		expect(url.pathname).toBe('/guardian/date-picker');
 		expect(url.searchParams.get('id')).toBe('opaque');
 		expect(url.searchParams.get('set')).toBe('api-series');
-		expect(url.searchParams.get('uid')).toBe('reader');
+		expect(url.searchParams.get('uid')).toBe('api-user');
 		expect(
 			JSON.parse(url.searchParams.get('guardian-puzzle-context')!),
 		).toEqual(context);
