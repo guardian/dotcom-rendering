@@ -254,7 +254,7 @@ describe('PuzzleIframe', () => {
 		unsubscribe = jest.fn();
 		mockedSubscribeToAuthStateChange.mockReturnValue(unsubscribe);
 		mockedUseMatchMedia.mockReturnValue(false);
-		pageConfig.ajaxUrl = '';
+		pageConfig.ajaxUrl = 'https://code.api.nextgen.guardianapps.co.uk';
 		Object.defineProperty(global, 'fetch', {
 			configurable: true,
 			writable: true,
@@ -315,6 +315,7 @@ describe('PuzzleIframe', () => {
 			'/puzzles-and-games/game/sudoku-easy/2026-09-26.json',
 			expect.objectContaining({
 				cache: 'no-store',
+				credentials: 'same-origin',
 				headers: {
 					Accept: 'application/json',
 					Authorization: 'Bearer reader-access-token',

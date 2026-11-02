@@ -41,7 +41,7 @@ export const usePuzzleGame = (
 				) {
 					controller = new AbortController();
 					const response = await fetch(
-						`${window.guardian.config.page.ajaxUrl}/puzzles-and-games/game/${encodeURIComponent(slug)}/${encodeURIComponent(puzzleDate)}.json`,
+						`/puzzles-and-games/game/${encodeURIComponent(slug)}/${encodeURIComponent(puzzleDate)}.json`,
 						{
 							cache: 'no-store',
 							credentials: 'same-origin',
