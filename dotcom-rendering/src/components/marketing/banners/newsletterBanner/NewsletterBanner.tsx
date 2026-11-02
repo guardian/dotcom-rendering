@@ -185,6 +185,12 @@ export const NewsletterBannerComponent = (
 											errorColor={hexColourToString(
 												newsletterBanner.errorColor,
 											)}
+											privacyTextColor={hexColourToString(
+												newsletterBanner.privacyTextColor,
+											)}
+											toggleTextColor={hexColourToString(
+												newsletterBanner.toggleTextColor,
+											)}
 											onSuccess={() => setIsSuccess(true)}
 										/>
 									</div>
@@ -205,6 +211,15 @@ export const NewsletterBannerComponent = (
 								<SuccessMessage
 									newsletterName={newsletter.name}
 									frequency={newsletter.frequency}
+									textColor={hexColourToString(
+										newsletterBanner.successTextColor,
+									)}
+									browseButtonTextColor={hexColourToString(
+										newsletterBanner.browseButtonTextColor,
+									)}
+									browseButtonBorderColor={hexColourToString(
+										newsletterBanner.browseButtonBorderColor,
+									)}
 								/>
 							</div>
 						</div>

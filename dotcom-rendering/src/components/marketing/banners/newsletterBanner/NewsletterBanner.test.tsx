@@ -8,7 +8,11 @@ import type {
 	removeMediaRulePrefix,
 	useMatchMedia,
 } from '../../../../lib/useMatchMedia';
-import { newsletterDesign, props } from '../utils/storybook';
+import {
+	newsletterDesign,
+	newsletterDesignDark,
+	props,
+} from '../utils/storybook';
 import { NewsletterBanner } from './NewsletterBanner';
 
 const squareIllustration = 'https://example.com/newsletter-square.jpg';
@@ -119,6 +123,50 @@ describe('NewsletterBanner configuration', () => {
 			closeButton.closest('[role="alert"]')?.hasAttribute('inert'),
 		).toBe(true);
 	});
+
+	it.each([
+		{
+			theme: 'light',
+			design: newsletterDesign,
+			textColor: '#333333',
+			browseColor: '#052962',
+		},
+		{
+			theme: 'dark',
+			design: newsletterDesignDark,
+			textColor: '#DCDCDC',
+			browseColor: '#DCDCDC',
+		},
+	])(
+		'uses the $theme design colors for success content',
+		({ design, textColor, browseColor }) => {
+			render(
+				<NewsletterBanner
+					{...sdcNewsletterProps}
+					design={{
+						...sdcNewsletterProps.design,
+						colours: design.colours,
+					}}
+					idApiUrl="https://idapi.theguardian.com"
+				/>,
+			);
+
+			fireEvent.click(
+				testingScreen.getByRole('button', { name: 'Sign up' }),
+			);
+
+			expect(
+				testingScreen
+					.getByText("You're signed up!")
+					.closest('[role="alert"]'),
+			).toHaveStyle({ color: textColor });
+			expect(
+				testingScreen.getByRole('link', {
+					name: 'Browse more newsletters',
+				}),
+			).toHaveStyle({ color: browseColor, borderColor: browseColor });
+		},
+	);
 
 	it('uses the newsletter square illustration on mobile and tablet', () => {
 		const { container } = render(

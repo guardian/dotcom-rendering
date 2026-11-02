@@ -46,10 +46,6 @@ jest.mock('react-google-recaptcha', () => ({
 	default: jest.fn(() => null),
 }));
 
-jest.mock('../../../NewsletterPrivacyMessage', () => ({
-	NewsletterPrivacyMessage: () => null,
-}));
-
 describe('newsletter banner signup form', () => {
 	beforeEach(() => {
 		jest.clearAllMocks();
@@ -66,6 +62,8 @@ describe('newsletter banner signup form', () => {
 				actionColor="#052962"
 				errorColor="#C70000"
 				headingColor="#FFFFFF"
+				privacyTextColor="#707070"
+				toggleTextColor="#333333"
 				onSuccess={onSuccess}
 			/>,
 		);
@@ -97,6 +95,8 @@ describe('newsletter banner signup form', () => {
 				actionColor="#052962"
 				errorColor="#FF9081"
 				headingColor="#FFFFFF"
+				privacyTextColor="#707070"
+				toggleTextColor="#333333"
 			/>,
 		);
 
@@ -120,6 +120,8 @@ describe('newsletter banner signup form', () => {
 				actionColor="#8F6A70"
 				errorColor="#FF9081"
 				headingColor="#FFFFFF"
+				privacyTextColor="#BABABA"
+				toggleTextColor="#DCDCDC"
 			/>,
 		);
 
@@ -133,6 +135,58 @@ describe('newsletter banner signup form', () => {
 		).toHaveStyle({ backgroundColor: '#8F6A70' });
 	});
 
+	it.each(['#707070', '#BABABA'])(
+		'uses %s for privacy text, links and the bold label',
+		(privacyTextColor) => {
+			render(
+				<NewsletterSignupForm
+					newsletterId="test-newsletter"
+					componentId="test-banner"
+					actionColor="#052962"
+					errorColor="#C70000"
+					headingColor="#FFFFFF"
+					privacyTextColor={privacyTextColor}
+					toggleTextColor="#333333"
+				/>,
+			);
+
+			const label = testingScreen.getByText('Privacy Notice:');
+			expect(label).toHaveStyle({ color: privacyTextColor });
+			expect(label.parentElement).toHaveStyle({
+				color: privacyTextColor,
+			});
+			expect(testingScreen.getByText('Privacy Policy')).toHaveStyle({
+				color: privacyTextColor,
+			});
+			expect(testingScreen.getByText('theguardian.com')).toHaveStyle({
+				color: privacyTextColor,
+			});
+		},
+	);
+
+	it.each(['#333333', '#DCDCDC'])(
+		'uses %s for the marketing toggle label',
+		(toggleTextColor) => {
+			render(
+				<NewsletterSignupForm
+					newsletterId="test-newsletter"
+					componentId="test-banner"
+					actionColor="#052962"
+					errorColor="#C70000"
+					headingColor="#FFFFFF"
+					privacyTextColor="#707070"
+					toggleTextColor={toggleTextColor}
+				/>,
+			);
+
+			expect(
+				testingScreen.getByText(
+					'Get updates about our journalism and ways to support and enjoy our work. Toggle to opt out.',
+				),
+			).toHaveStyle({ color: toggleTextColor });
+		},
+	);
+
 	it('calls onSuccess only after the signup hook reports success', () => {
 		const onSuccess = jest.fn();
 		const renderForm = () => (
@@ -142,6 +196,8 @@ describe('newsletter banner signup form', () => {
 				actionColor="#052962"
 				errorColor="#C70000"
 				headingColor="#FFFFFF"
+				privacyTextColor="#707070"
+				toggleTextColor="#333333"
 				onSuccess={onSuccess}
 			/>
 		);

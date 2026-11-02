@@ -30,9 +30,9 @@ const successContentStyles = css`
 	gap: ${space[2]}px;
 `;
 
-const successTextStyles = css`
+const successTextStyles = (textColor: string) => css`
 	${textSans15};
-	color: ${palette.neutral[20]};
+	color: ${textColor};
 
 	strong {
 		font-weight: 700;
@@ -42,15 +42,21 @@ const successTextStyles = css`
 export const SuccessMessage = ({
 	newsletterName,
 	frequency,
+	textColor,
+	browseButtonTextColor,
+	browseButtonBorderColor,
 }: {
 	newsletterName: string;
 	frequency: string;
+	textColor: string;
+	browseButtonTextColor: string;
+	browseButtonBorderColor: string;
 }) => {
 	return (
 		<div css={successContainerStyles}>
 			<SvgTickRound />
 			<div css={successContentStyles}>
-				<span css={successTextStyles} role="alert">
+				<span css={successTextStyles(textColor)} role="alert">
 					<strong>You're signed up!</strong>
 					&nbsp;
 					<span>
@@ -59,6 +65,10 @@ export const SuccessMessage = ({
 					</span>
 				</span>
 				<LinkButton
+					theme={{
+						textTertiary: browseButtonTextColor,
+						borderTertiary: browseButtonBorderColor,
+					}}
 					href="/email-newsletters?INTCMP=DOTCOM_NEWSLETTER_SIGNUP_CARD"
 					priority="tertiary"
 					data-ignore="global-link-styling"
