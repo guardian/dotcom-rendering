@@ -130,7 +130,7 @@ describe('NewsletterBanner configuration', () => {
 
 		expect(
 			testingScreen.getByRole('heading', {
-				name: 'Sign up to The Stakes 2026',
+				name: 'Sign up for The Stakes 2026',
 			}),
 		).toBeInTheDocument();
 		expect(
