@@ -32,6 +32,11 @@ declare global {
 			 * e.g. https://github.com/search?q=org%3Aguardian+window.guardian.queue&type=code
 			 */
 			queue: Array<() => void>;
+			/**
+			 * For the commercial bundle to request rendering of SDC components
+			 * into ad slots.
+			 */
+			sdc?: { inline1?: { slotId: string; props: Inline1Props } };
 			// Olly N 10/01/2022:
 			// The 'emotionCache' property would better live as a singleton package/chunk, but we're currently limited
 			// by having multiple entrypoints in webpack, meaning we can't guarantee singleton behavior

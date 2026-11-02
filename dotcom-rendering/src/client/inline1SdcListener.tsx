@@ -36,28 +36,42 @@ const render = <P extends object>(
 	createRoot(slot).render(createElement(Component, props));
 };
 
+const fetchAndRender = (slot: HTMLElement, props: Inline1Props): void => {
+	void fetchComponent(props.variant.message).then((Component) => {
+		if (Component) {
+			render(Component, props, slot);
+		}
+	});
+};
+
+const handleEvent = (event: CustomEvent<{ props: Inline1Props }>): void => {
+	// The event should have been dispatched on the ad slot element
+	const slot = event.target;
+	if (!(slot instanceof HTMLElement)) return;
+
+	fetchAndRender(slot, event.detail.props);
+};
+
 /**
- * Set up an event handler for the inline1 slot.
- * If the commercial bundle wants the page to render a component from SDC then it will send an event on the ad slot element.
- * This handler then renders the required component into the ad slot.
+ * Set up rendering for the inline1 slot.
+ *
+ * If the commercial bundle wants the page to render a component from SDC then
+ * it sends an event on the ad slot element, and also records the request on
+ * `window.guardian.sdc.inline1`. This is to avoid a race between this
+ * function and the commercial script.
  */
 export const inline1SdcListener = (): Promise<void> => {
-	window.addEventListener(
-		'commercial.sdc-render',
-		(event: CustomEvent<{ props: Inline1Props }>) => {
-			// The event should have been dispatched on the ad slot element -
-			const slot = event.target;
-			if (!(slot instanceof HTMLElement)) return;
-
-			void fetchComponent(event.detail.props.variant.message).then(
-				(Component) => {
-					if (Component) {
-						render(Component, event.detail.props, slot);
-					}
-				},
-			);
-		},
-	);
+	// Check if the commercial bundle has already sent an event
+	const request = window.guardian.sdc?.inline1;
+	if (request) {
+		const slot = document.getElementById(request.slotId);
+		if (slot) {
+			fetchAndRender(slot, request.props);
+		}
+	} else {
+		// No event yet, set up the listener
+		window.addEventListener('commercial.sdc-render', handleEvent);
+	}
 
 	return Promise.resolve();
 };
