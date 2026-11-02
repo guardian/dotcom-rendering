@@ -108,8 +108,8 @@ const articleHeaderStyles = css`
 	 * The 1.1px is selected based on the alignment visually with the subnav links.
 	 */
 	padding-top: 1.1px;
-	padding-right: ${space[2]}px;
-	margin-right: ${space[2]}px;
+	padding-right: 0;
+	margin-right: 0;
 `;
 
 const headerTextWrapperStyles = css`
