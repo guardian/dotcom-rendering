@@ -695,7 +695,7 @@ export const enhanceCards = (
 			isExternalLink: faciaCard.card.cardStyle.type === 'ExternalLink',
 			embedUri: faciaCard.properties.embedUri ?? undefined,
 			branding: stripBranding ? undefined : branding,
-			slideshowImages:
+			slideshowMedia:
 				decideMultimediaSlideshow(
 					faciaCard.properties.mediaSelect
 						?.multimediaSlideshowReplace === true,

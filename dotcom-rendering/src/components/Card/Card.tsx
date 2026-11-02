@@ -135,7 +135,7 @@ export type Props = {
 	discussionApiUrl: string;
 	discussionId?: string;
 	isExternalLink: boolean;
-	slideshowImages?: DCRSlideshowMedia[];
+	slideshowMedia?: DCRSlideshowMedia[];
 	/** Determines if liveblog update links are displayed on a card */
 	showLivePlayable?: boolean;
 	liveUpdatesAlignment?: Alignment;
@@ -257,7 +257,7 @@ const getMedia = ({
 	imageAltText,
 	avatarUrl,
 	isCrossword,
-	slideshowImages,
+	slideshowMedia,
 	mainMedia,
 	canPlayInline,
 	isFrontContainer,
@@ -266,7 +266,7 @@ const getMedia = ({
 	imageAltText?: string;
 	avatarUrl?: string;
 	isCrossword?: boolean;
-	slideshowImages?: DCRSlideshowMedia[];
+	slideshowMedia?: DCRSlideshowMedia[];
 	mainMedia?: MainMedia;
 	canPlayInline?: boolean;
 	isFrontContainer: boolean;
@@ -298,8 +298,8 @@ const getMedia = ({
 		} as const;
 	}
 
-	if (slideshowImages && canPlayInline) {
-		return { type: 'slideshow', slideshowImages } as const;
+	if (slideshowMedia && canPlayInline) {
+		return { type: 'slideshow', slideshowMedia } as const;
 	}
 
 	if (avatarUrl) {
@@ -392,7 +392,7 @@ export const Card = ({
 	isNewsletter = false,
 	isOnwardContent = false,
 	isExternalLink,
-	slideshowImages,
+	slideshowMedia,
 	showLivePlayable = false,
 	liveUpdatesAlignment = 'vertical',
 	liveUpdatesPosition = 'inner',
@@ -540,7 +540,7 @@ export const Card = ({
 		imageAltText: image?.altText,
 		avatarUrl,
 		isCrossword,
-		slideshowImages,
+		slideshowMedia,
 		mainMedia,
 		canPlayInline,
 		isFrontContainer,
@@ -935,7 +935,7 @@ export const Card = ({
 							<Island
 								// Critical like other video islands, as video slides need hydrating to play
 								priority={
-									media.slideshowImages.some(
+									media.slideshowMedia.some(
 										({ type }) => type === 'video',
 									)
 										? 'critical'
@@ -944,7 +944,7 @@ export const Card = ({
 								defer={{ until: 'visible' }}
 							>
 								<SlideshowCarousel
-									images={media.slideshowImages}
+									images={media.slideshowMedia}
 									imageSize={mediaSize}
 									hasNavigationBackgroundColour={
 										!!hasSublinks

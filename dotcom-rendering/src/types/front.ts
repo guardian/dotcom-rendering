@@ -101,7 +101,7 @@ export type DCRFrontCard = {
 	mainMedia?: MainMedia;
 	embedUri?: string;
 	branding?: Branding;
-	slideshowImages?: DCRSlideshowMedia[];
+	slideshowMedia?: DCRSlideshowMedia[];
 	showVideo?: boolean;
 	uniqueId?: string;
 	serverTime?: number;
