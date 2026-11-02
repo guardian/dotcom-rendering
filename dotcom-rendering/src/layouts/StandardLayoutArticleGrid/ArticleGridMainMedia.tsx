@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { between, from, space, until } from '@guardian/source/foundations';
 import { AffiliateDisclaimer } from '../../components/AffiliateProducts/AffiliateDisclaimer';
 import { MainMedia } from '../../components/MainMedia';
-import type { ArticleFormat } from '../../lib/articleFormat';
+import { ArticleDisplay, type ArticleFormat } from '../../lib/articleFormat';
 import { palette as themePalette } from '../../palette';
 import type { ArticleDeprecated } from '../../types/article';
 import type { ArticleGridLayout } from './deriveArticleGridLayout';
@@ -29,10 +29,7 @@ export const ArticleGridMainMedia = ({
 	layout: ArticleGridLayout;
 }) => {
 	const {
-		contentLayoutName,
-		displayAvatarUrl,
-		hasLabsPortraitImage,
-		hideCaptionBeneathMainMedia,
+		avatarUrl,
 		immersiveHeaderHeight,
 		isImmersive,
 		isImmersiveLandscape,
@@ -42,6 +39,12 @@ export const ArticleGridMainMedia = ({
 		mainMediaAspectRatio,
 		usesImmersiveImageProportions,
 	} = layout;
+	const displayAvatarUrl = avatarUrl != null;
+	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
+	const hasLabsPortraitImage =
+		layout.isLabs && isImmersivePortrait && usesImmersiveImageProportions;
+	const hideCaptionBeneathMainMedia =
+		layoutType === 'media' || isImmersiveLandscape || isImmersivePortrait;
 
 	return (
 		<GridItem

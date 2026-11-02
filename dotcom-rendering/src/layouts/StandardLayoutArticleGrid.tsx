@@ -25,7 +25,6 @@ export const StandardLayoutArticleGrid = ({
 	const layout = deriveArticleGridLayout({
 		article,
 		format,
-		renderingTarget,
 	});
 	const {
 		ageWarning,
@@ -126,6 +125,7 @@ export const StandardLayoutArticleGrid = ({
 			<ArticleGridRightRail
 				article={article}
 				format={format}
+				renderingTarget={renderingTarget}
 				layout={layout}
 			/>
 			{format.design === ArticleDesign.Interactive && (

@@ -5,19 +5,24 @@ import { Island } from '../../components/Island';
 import { MostViewedRightWithAd } from '../../components/MostViewedRightWithAd.island';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
 import type { ArticleDeprecated } from '../../types/article';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import type { ArticleGridLayout } from './deriveArticleGridLayout';
 import { GridItem } from './GridItem';
 
 export const ArticleGridRightRail = ({
 	article,
 	format,
+	renderingTarget,
 	layout,
 }: {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
+	renderingTarget: RenderingTarget;
 	layout: ArticleGridLayout;
 }) => {
-	const { isWeb, layoutType, renderAds } = layout;
+	const { layoutType } = layout;
+	const isWeb = renderingTarget === 'Web';
+	const renderAds = isWeb && !article.shouldHideAds;
 
 	return (
 		<GridItem

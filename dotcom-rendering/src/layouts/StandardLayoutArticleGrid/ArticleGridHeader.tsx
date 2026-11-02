@@ -60,10 +60,7 @@ export const ArticleGridHeader = ({
 	const {
 		ageWarning,
 		avatarUrl,
-		displayAvatarUrl,
-		hasImmersiveAffiliateDisclaimer,
 		hasImmersivePortraitTitleRule,
-		isFootballMatchReport,
 		isImmersive,
 		isImmersiveLandscape,
 		isImmersivePortrait,
@@ -71,6 +68,13 @@ export const ArticleGridHeader = ({
 		isInteractiveTopHat,
 		layoutType,
 	} = layout;
+	const displayAvatarUrl = avatarUrl != null;
+	const hasImmersiveAffiliateDisclaimer =
+		isImmersive && article.affiliateLinksDisclaimerRequired;
+	const isFootballMatchReport =
+		format.design === ArticleDesign.MatchReport &&
+		article.matchType === 'FootballMatchType' &&
+		article.matchStatsUrl != null;
 	const headlineBackgroundImmersive = themePalette(
 		'--headline-background-immersive',
 	);

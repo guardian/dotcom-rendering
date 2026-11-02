@@ -59,18 +59,20 @@ export const ArticleGridFooter = ({
 	layout: ArticleGridLayout;
 }) => {
 	const {
+		avatarUrl,
 		captionText,
-		displayAvatarUrl,
-		hasImmersiveAffiliateDisclaimer,
-		isApps,
 		isImmersive,
 		isImmersiveLandscape,
 		isImmersivePortrait,
 		isInteractiveTopHat,
-		isWeb,
 		layoutType,
 	} = layout;
 	const { branding } = article.commercialProperties[article.editionId];
+	const isWeb = renderingTarget === 'Web';
+	const isApps = renderingTarget === 'Apps';
+	const displayAvatarUrl = avatarUrl != null;
+	const hasImmersiveAffiliateDisclaimer =
+		isImmersive && article.affiliateLinksDisclaimerRequired;
 
 	const articleMeta = (
 		<ArticleMeta
