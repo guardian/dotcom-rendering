@@ -13,6 +13,7 @@ import { styles } from './NewsletterSignupForm.styles';
 type NewsletterSignupFormProps = {
 	newsletterId: string;
 	componentId: string;
+	actionColor: string;
 	abTest?: AbTest;
 	isModal?: boolean;
 	onSuccess?: () => void;
@@ -29,6 +30,7 @@ type NewsletterSignupFormProps = {
 export const NewsletterSignupForm = ({
 	newsletterId,
 	componentId,
+	actionColor,
 	abTest,
 	isModal = false,
 	onSuccess,
@@ -122,6 +124,10 @@ export const NewsletterSignupForm = ({
 				)}
 				<div css={styles.submitButtonContainer}>
 					<Button
+						theme={{
+							backgroundPrimary: actionColor,
+							backgroundPrimaryHover: actionColor,
+						}}
 						cssOverrides={
 							isSignedIn
 								? [styles.submitButton, styles.signedInButton]
