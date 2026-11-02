@@ -269,13 +269,15 @@ describe('PuzzleIframe', () => {
 				title="API puzzle"
 				darkModeAvailable={false}
 				puzzleDate="2026-09-26"
-				gameUrl="https://tg.amuselabs.com/guardian/date-picker?set=from-api&id=opaque-id&embed=1"
+				gameUrl="https://tg.amuselabs.com/guardian/date-picker?set=from-api&id=opaque-id&embed=1&uid=api-user"
 			/>,
 		);
 		const iframe =
 			await screen.findByTitle<HTMLIFrameElement>('API puzzle');
 		await waitFor(() =>
-			expect(new URL(iframe.src).searchParams.get('uid')).toBe('reader'),
+			expect(new URL(iframe.src).searchParams.get('uid')).toBe(
+				'api-user',
+			),
 		);
 		expect(new URL(iframe.src).searchParams.get('id')).toBe('opaque-id');
 		expect(new URL(iframe.src).searchParams.get('set')).toBe('from-api');

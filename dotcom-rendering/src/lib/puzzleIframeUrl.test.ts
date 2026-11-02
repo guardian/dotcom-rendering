@@ -252,7 +252,7 @@ describe('API game URLs', () => {
 					darkMode: true,
 					puzzleDate: '2026-09-26',
 				},
-				'https://tg.amuselabs.com/guardian/date-picker?set=api-series&id=opaque-id&embed=1&token=keep',
+				'https://tg.amuselabs.com/guardian/date-picker?set=api-series&id=opaque-id&embed=1&token=keep&uid=api-user',
 			),
 		);
 		expect(url.pathname).toBe('/guardian/date-picker');
@@ -261,21 +261,32 @@ describe('API game URLs', () => {
 			id: 'opaque-id',
 			embed: '1',
 			token: 'keep',
-			uid: 'reader',
+			uid: 'api-user',
 			darkMode: '1',
 		});
 	});
 
-	it('removes stale identity when signed out', () => {
+	it('preserves the API identity when signed out', () => {
 		const url = new URL(
 			resolvePuzzleIframeUrl(
 				puzzleConfigs['word-wheel']!,
 				{ userId: null, darkMode: false },
-				'https://tg.amuselabs.com/guardian/date-picker?id=opaque&uid=stale',
+				'https://tg.amuselabs.com/guardian/date-picker?id=opaque&uid=api-user',
+			),
+		);
+		expect(url.searchParams.get('uid')).toBe('api-user');
+		expect(url.searchParams.get('id')).toBe('opaque');
+	});
+
+	it('does not add a session identity when the API URL has no uid', () => {
+		const url = new URL(
+			resolvePuzzleIframeUrl(
+				puzzleConfigs['sudoku-easy']!,
+				{ userId: 'reader', darkMode: false },
+				'https://tg.amuselabs.com/guardian/date-picker?id=opaque',
 			),
 		);
 		expect(url.searchParams.has('uid')).toBe(false);
-		expect(url.searchParams.get('id')).toBe('opaque');
 	});
 
 	it('leaves Wordiply provider parameters unchanged', () => {
