@@ -4,13 +4,18 @@ description: 'Sets up Node.js environment and installs dependencies'
 runs:
   using: 'composite'
   steps:
+    # Setup first without pnpm so corepack uses the latest version of Node.js specified in .nvmrc
+    - uses: actions/setup-node@v7
+      with:
+        node-version-file: '.nvmrc'
+
+    - run: corepack enable
+      shell: bash
+
     - uses: actions/setup-node@v7
       with:
         node-version-file: '.nvmrc'
         cache: 'pnpm'
-
-    - run: corepack enable
-      shell: bash
 
     - run: pnpm install --frozen-lockfile
       shell: bash
