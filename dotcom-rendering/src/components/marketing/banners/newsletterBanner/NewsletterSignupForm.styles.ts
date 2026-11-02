@@ -53,12 +53,11 @@ export const styles = {
 			width: 240px;
 		}
 	`,
-	emailField: (headingColor: string): SerializedStyles => css`
+	emailField: css`
 		grid-area: email;
 		min-width: 0;
 
 		label div {
-			color: ${headingColor};
 			font-size: 14px;
 		}
 
@@ -123,13 +122,25 @@ export const styles = {
 		padding: ${space[2]}px;
 		border: 1px solid ${palette('--card-border-supporting')};
 		border-radius: 4px;
-		label {
-			color: ${palette('--newsletter-signup-toggle-text')};
-		}
+	`,
+	toggleText: (textColor: string): SerializedStyles => css`
+		color: ${textColor};
 	`,
 	recaptchaContainer: css`
 		.grecaptcha-badge {
 			visibility: hidden;
+		}
+	`,
+	privacyText: (textColor: string): SerializedStyles => css`
+		&,
+		a,
+		a:link,
+		a:visited,
+		a:hover,
+		a:active,
+		a:focus,
+		strong {
+			color: ${textColor};
 		}
 	`,
 	privacyContainer: (

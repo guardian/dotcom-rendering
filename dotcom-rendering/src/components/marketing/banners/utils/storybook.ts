@@ -3,6 +3,7 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/0a2439b701586a7a2cc60dce10b4d96cf7a828db/packages/modules/src/modules/banners/utils/storybook.ts
  */
+import { neutral } from '@guardian/source/foundations';
 import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type {
 	BannerProps,
@@ -153,6 +154,11 @@ export const newsletterDesign: NewsletterBannerDesign = {
 			divider: stringToHexColour('DCDCDC'),
 			actionColor: stringToHexColour('052962'),
 			errorColor: stringToHexColour('C70000'),
+			privacyTextColor: stringToHexColour(neutral[46].slice(1)),
+			toggleTextColor: stringToHexColour(neutral[20].slice(1)),
+			successTextColor: stringToHexColour(neutral[20].slice(1)),
+			browseButtonTextColor: stringToHexColour('052962'),
+			browseButtonBorderColor: stringToHexColour('052962'),
 		},
 		highlightedText: {
 			text: { r: '33', g: '33', b: '33', kind: 'hex' },
@@ -196,6 +202,11 @@ export const newsletterDesignDark: NewsletterBannerDesign = {
 			...newsletterDesign.colours.newsletterBanner,
 			actionColor: stringToHexColour('c4aa81'),
 			errorColor: stringToHexColour('FF9081'),
+			privacyTextColor: stringToHexColour(neutral[73].slice(1)),
+			toggleTextColor: stringToHexColour(neutral[86].slice(1)),
+			successTextColor: stringToHexColour(neutral[86].slice(1)),
+			browseButtonTextColor: stringToHexColour(neutral[86].slice(1)),
+			browseButtonBorderColor: stringToHexColour(neutral[86].slice(1)),
 		},
 		basic: {
 			background: stringToHexColour('1A1A1A'),

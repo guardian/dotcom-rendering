@@ -68,6 +68,11 @@ export type NewsletterBannerDesign = Omit<ConfigurableDesign, 'colours'> & {
 			divider: HexColour;
 			actionColor: HexColour;
 			errorColor: HexColour;
+			privacyTextColor: HexColour;
+			toggleTextColor: HexColour;
+			successTextColor: HexColour;
+			browseButtonTextColor: HexColour;
+			browseButtonBorderColor: HexColour;
 		};
 	};
 };

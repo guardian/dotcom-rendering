@@ -16,6 +16,8 @@ type NewsletterSignupFormProps = {
 	actionColor: string;
 	errorColor: string;
 	headingColor: string;
+	privacyTextColor: string;
+	toggleTextColor: string;
 	abTest?: AbTest;
 	isModal?: boolean;
 	onSuccess?: () => void;
@@ -35,6 +37,8 @@ export const NewsletterSignupForm = ({
 	actionColor,
 	errorColor,
 	headingColor,
+	privacyTextColor,
+	toggleTextColor,
 	abTest,
 	isModal = false,
 	onSuccess,
@@ -113,12 +117,13 @@ export const NewsletterSignupForm = ({
 				) : (
 					<div
 						css={[
-							styles.emailField(headingColor),
+							styles.emailField,
 							styles.validationError(errorColor),
 						]}
 					>
 						<TextInput
 							theme={{
+								textLabel: headingColor,
 								textError: errorColor,
 								borderError: errorColor,
 							}}
@@ -171,6 +176,9 @@ export const NewsletterSignupForm = ({
 							>
 								<div css={styles.marketingToggleBox}>
 									<ToggleSwitch
+										cssOverrides={styles.toggleText(
+											toggleTextColor,
+										)}
 										id={`marketing-opt-in-${newsletterId}`}
 										checked={marketingOptIn ?? false}
 										onClick={handleMarketingToggle}
@@ -182,6 +190,9 @@ export const NewsletterSignupForm = ({
 							<div css={styles.privacyContainer(isSignedIn)}>
 								<NewsletterPrivacyMessage
 									isSignedIn={isSignedIn}
+									cssOverrides={styles.privacyText(
+										privacyTextColor,
+									)}
 								/>
 							</div>
 						</div>
