@@ -28,7 +28,7 @@ jobs:
         uses: ./.github/actions/setup-node-env
 
       - name: Pull Image
-        uses: guardian/actions-ecr/pull@v1.0.2
+        uses: guardian/actions-ecr/pull@v1.0.3
         id: pull-image
         with:
           app: dotcom-rendering
