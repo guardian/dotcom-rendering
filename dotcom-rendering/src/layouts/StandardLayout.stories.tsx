@@ -441,8 +441,9 @@ export const WebImmersivePortraitLoop: Story = {
 		await expect(video).not.toBeNull();
 
 		const view = canvasElement.ownerDocument.defaultView;
-		if (view == null)
+		if (view == null) {
 			throw new Error('Expected a window for the story canvas');
+		}
 
 		const videoStyles = view.getComputedStyle(video!);
 		await expect(videoStyles.objectFit).toBe('cover');

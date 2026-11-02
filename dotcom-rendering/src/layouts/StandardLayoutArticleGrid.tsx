@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { from, until } from '@guardian/source/foundations';
 import { grid } from '../grid';
-import type { ArticleFormat } from '../lib/articleFormat';
+import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
@@ -32,6 +32,7 @@ export const StandardLayoutArticleGrid = ({
 		isImmersive,
 		isImmersiveLandscape,
 		isImmersivePortrait,
+		isInteractiveTopHat,
 		isLabs,
 		layoutType,
 	} = layout;
@@ -64,7 +65,8 @@ export const StandardLayoutArticleGrid = ({
 							);
 					`,
 				!isLabs &&
-					layoutType !== 'interactive' &&
+					layoutType !== 'interactiveStandard' &&
+					!isInteractiveTopHat &&
 					css`
 						${from.leftCol} {
 							${centreRuleStyles}
@@ -85,6 +87,10 @@ export const StandardLayoutArticleGrid = ({
 									? '130px'
 									: '90px'} auto auto auto auto auto;
 						}
+					`,
+				isInteractiveTopHat &&
+					css`
+						grid-template-rows: 300px auto;
 					`,
 			]}
 		>
@@ -116,7 +122,7 @@ export const StandardLayoutArticleGrid = ({
 				renderingTarget={renderingTarget}
 				layout={layout}
 			/>
-			{layoutType === 'interactive' && (
+			{format.design === ArticleDesign.Interactive && (
 				<div
 					aria-hidden="true"
 					data-gu-name="centre-rule"
@@ -125,7 +131,9 @@ export const StandardLayoutArticleGrid = ({
 						${from.leftCol} {
 							display: block;
 							grid-column: centre-column-start;
-							grid-row: 1 / 5;
+							grid-row: ${layoutType === 'interactiveStandard'
+								? '1 / 5'
+								: isInteractiveTopHat && '8'};
 							position: relative;
 
 							&::before {

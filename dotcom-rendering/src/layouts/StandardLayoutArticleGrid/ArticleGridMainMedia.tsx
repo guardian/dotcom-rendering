@@ -65,7 +65,10 @@ export const ArticleGridMainMedia = ({
 	const hasLabsPortraitImage =
 		layout.isLabs && isImmersivePortrait && usesImmersiveImageProportions;
 	const hideCaptionBeneathMainMedia =
-		layoutType === 'media' || isImmersiveLandscape || isImmersivePortrait;
+		layoutType === 'media' ||
+		layout.isInteractiveTopHat ||
+		isImmersiveLandscape ||
+		isImmersivePortrait;
 
 	return (
 		<GridItem

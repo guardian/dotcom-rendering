@@ -4,12 +4,17 @@ import { StraightLines } from '@guardian/source-development-kitchen/react-compon
 import { ArticleHeadline } from '../../components/ArticleHeadline';
 import { ArticleTitle } from '../../components/ArticleTitle';
 import { ContributorAvatar } from '../../components/ContributorAvatar';
-import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	hasImmersiveGridTitle,
+} from '../../lib/articleFormat';
 import { getZIndex } from '../../lib/getZIndex';
 import { palette as themePalette } from '../../palette';
 import type { ArticleDeprecated } from '../../types/article';
 import type { ArticleGridLayout } from './deriveArticleGridLayout';
 import { GridItem } from './GridItem';
+import { topHatFurnitureBackgroundStyles } from './styles';
 
 const avatarHeadlineWrapper = css`
 	display: flex;
@@ -59,8 +64,11 @@ export const ArticleGridHeader = ({
 		isImmersive,
 		isImmersiveLandscape,
 		isImmersivePortrait,
+		isInteractiveTopHat,
 		layoutType,
 	} = layout;
+	const hasImmersivePortraitTitleRule =
+		isImmersivePortrait && hasImmersiveGridTitle(format, article.tags);
 	const displayAvatarUrl = avatarUrl != null;
 	const hasImmersiveAffiliateDisclaimer =
 		isImmersive && article.affiliateLinksDisclaimerRequired;
@@ -88,15 +96,22 @@ export const ArticleGridHeader = ({
 							align-content: flex-start;
 							margin-bottom: 0;
 
-							${from.desktop} {
-								align-content: flex-end;
-							}
+							${format.design !== ArticleDesign.WeekendEssay &&
+							css`
+								${from.desktop} {
+									align-content: flex-end;
+								}
+							`}
 						`,
 					layoutType === 'picture' &&
 						css`
 							display: flex;
 							flex-direction: column;
 							justify-content: space-between;
+						`,
+					isInteractiveTopHat &&
+						css`
+							z-index: ${getZIndex('mediaOverlay')};
 						`,
 				]}
 			>
@@ -150,9 +165,21 @@ export const ArticleGridHeader = ({
 					isImmersivePortrait &&
 						css`
 							${from.desktop} {
-								border-top: 1px solid
+								${!hasImmersivePortraitTitleRule &&
+								`border-top: 1px solid ${themePalette(
+									'--article-border',
+								)};`}
+							}
+
+							${between.desktop.and.leftCol} {
+								border-bottom: 1px solid
 									${themePalette('--article-border')};
 							}
+						`,
+					isInteractiveTopHat &&
+						css`
+							${topHatFurnitureBackgroundStyles}
+							padding-top: 10px;
 						`,
 				]}
 			>

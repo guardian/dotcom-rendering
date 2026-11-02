@@ -5,7 +5,23 @@ import { getSoleContributor } from '../../lib/byline';
 import { decideMainMediaCaption } from '../../lib/decide-caption';
 import { LABS_HEADER_HEIGHT } from '../../lib/labs-constants';
 import type { ArticleDeprecated } from '../../types/article';
-import { getLayoutType } from '../lib/articleArrangements';
+import { getLayoutType, type LayoutType } from '../lib/articleArrangements';
+
+export type ArticleGridLayout = {
+	ageWarning: ReturnType<typeof getAgeWarning>;
+	avatarUrl: string | undefined;
+	captionText: ReturnType<typeof decideMainMediaCaption>;
+	immersiveHeaderHeight: number;
+	immersiveMediaRowHeight: string;
+	isImmersive: boolean;
+	isImmersiveLandscape: boolean;
+	isImmersivePortrait: boolean;
+	isInteractiveTopHat: boolean;
+	isLabs: boolean;
+	layoutType: LayoutType;
+	mainMediaAspectRatio: string | undefined;
+	usesImmersiveImageProportions: boolean;
+};
 
 const getImageOrientation = (
 	aspectRatio: string,
@@ -23,7 +39,7 @@ export const deriveArticleGridLayout = ({
 }: {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
-}) => {
+}): ArticleGridLayout => {
 	const isLabs = format.theme === ArticleSpecial.Labs;
 	const mainMedia = article.mainMediaElements[0];
 	const mainMediaType = mainMedia?._type;
@@ -50,7 +66,11 @@ export const deriveArticleGridLayout = ({
 			: 'landscape';
 	const immersiveHeaderHeight =
 		minHeaderHeightPx + (isLabs ? LABS_HEADER_HEIGHT : 0);
-	const layoutType = getLayoutType(format, mainMediaOrientation);
+	const topHatTestingPage = '/p/x4zt8y';
+	const layoutType =
+		article.config.shortUrlId === topHatTestingPage
+			? 'interactiveTopHat'
+			: getLayoutType(format, mainMediaOrientation);
 	const isImmersivePortrait = layoutType === 'immersivePortrait';
 	const isImmersiveLandscape = layoutType === 'immersiveLandscape';
 
@@ -69,11 +89,10 @@ export const deriveArticleGridLayout = ({
 		isImmersive: isImmersivePortrait || isImmersiveLandscape,
 		isImmersiveLandscape,
 		isImmersivePortrait,
+		isInteractiveTopHat: layoutType === 'interactiveTopHat',
 		isLabs,
 		layoutType,
 		mainMediaAspectRatio,
 		usesImmersiveImageProportions,
 	} as const;
 };
-
-export type ArticleGridLayout = ReturnType<typeof deriveArticleGridLayout>;

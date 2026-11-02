@@ -15,12 +15,12 @@ import {
 	type ArticleFormat,
 	ArticleSpecial,
 } from '../../lib/articleFormat';
-import { getZIndex } from '../../lib/getZIndex';
 import { palette as themePalette } from '../../palette';
 import type { ArticleDeprecated } from '../../types/article';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type { ArticleGridLayout } from './deriveArticleGridLayout';
 import { GridItem } from './GridItem';
+import { topHatFurnitureBackgroundStyles } from './styles';
 
 const stretchLines = css`
 	${until.phablet} {
@@ -82,6 +82,7 @@ export const ArticleGridFooter = ({
 		isImmersive,
 		isImmersiveLandscape,
 		isImmersivePortrait,
+		isInteractiveTopHat,
 		layoutType,
 	} = layout;
 	const { branding } = article.commercialProperties[article.editionId];
@@ -178,6 +179,7 @@ export const ArticleGridFooter = ({
 									padding-bottom: 14px;
 								}
 							`,
+						isInteractiveTopHat && topHatFurnitureBackgroundStyles,
 					]}
 				>
 					{hasImmersiveAffiliateDisclaimer && (
@@ -219,15 +221,17 @@ export const ArticleGridFooter = ({
 									padding-top: ${space[8]}px;
 								}
 							`,
-						layoutType === 'interactive' &&
+						isInteractiveTopHat &&
 							css`
-								z-index: ${getZIndex('meta')};
+								${topHatFurnitureBackgroundStyles}
+								padding-bottom: 10px;
 							`,
 					]}
 				>
 					{format.display !== ArticleDisplay.Immersive &&
 						format.design !== ArticleDesign.Audio &&
-						layoutType !== 'immersivePortrait' && (
+						layoutType !== 'immersivePortrait' &&
+						!isInteractiveTopHat && (
 							<div
 								css={[
 									(layoutType === 'picture' ||
