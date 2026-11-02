@@ -1,5 +1,11 @@
 import { css } from '@emotion/react';
-import { from, palette, space, textSans15 } from '@guardian/source/foundations';
+import {
+	from,
+	palette,
+	space,
+	textSans15,
+	until,
+} from '@guardian/source/foundations';
 import {
 	LinkButton,
 	SvgArrowRightStraight,
@@ -11,6 +17,7 @@ import type { ReactComponent } from '../../lib/ReactComponent';
 const outerContainerStyles = css`
 	border-top: 1px solid ${palette.neutral[73]};
 	padding-top: ${space[2]}px;
+	background-color: transparent;
 `;
 
 const innerContainerStyles = css`
@@ -26,6 +33,10 @@ const mainContentContainerStyles = css`
 	padding-bottom: 16px;
 	margin-left: 10px;
 	margin-right: 10px;
+
+	${until.tablet} {
+		padding-top: 0px;
+	}
 `;
 
 const guardianLogoContainerStyles = css`
@@ -50,7 +61,7 @@ const imageStyles = css`
 	width: 340px;
 	position: absolute;
 	right: 0px;
-	top: 60px;
+	top: 48px;
 
 	${from.phablet} {
 		width: 628px;
@@ -69,11 +80,11 @@ const bodyStyles = css`
 	margin-top: 65px;
 
 	${from.phablet} {
-		margin-top: 140px;
+		margin-top: 150px;
 	}
 	${from.tablet} {
 		width: 300px;
-		margin-top: 16px;
+		margin-top: 12px;
 	}
 `;
 
@@ -97,48 +108,47 @@ const Puzzles: ReactComponent<Inline1Props> = ({ variant }) => {
 		return null;
 	}
 
+	const isArticle = window.guardian.config.page.section;
+
 	return (
-		<>
-			<section
-				css={outerContainerStyles}
-				aria-label="Guardian Puzzles and Games"
-			>
-				<div css={innerContainerStyles}>
-					<div css={guardianLogoContainerStyles}>
-						<SvgGuardianLogo width={75} aria-hidden="true" />
-					</div>
-					<div css={mainContentContainerStyles}>
-						<h2>
-							<img
-								src="https://media.guim.co.uk/06a5eec896bfae86e67f2faed6de8945d73eb9e7/0_0_1060_448/1060.png"
-								css={puzzlesLogoStyles}
-								alt="Guardian Puzzles and Games Logo"
-							/>
-						</h2>
-						<p css={bodyStyles}>
-							Whether you have one minute or all day, our new
-							puzzles and games hub has something you&rsquo;ll
-							love.
-						</p>
-						<LinkButton
-							cssOverrides={ctaButtonStyles}
-							theme={ctaButtonTheme}
-							href={''}
-							icon={<SvgArrowRightStraight />}
-							iconSide="right"
-							aria-label="Visit the Guardian puzzles and games hub."
-						>
-							Play now
-						</LinkButton>
-					</div>
-					<img
-						src="https://media.guim.co.uk/dc77e5a7f6057e1cabee32291fe13e87b1876186/0_0_3875_1447/3875.png"
-						css={imageStyles}
-						alt="An octopus leaning against an owl. The owl is attempting a crossword."
-					></img>
+		<section
+			css={outerContainerStyles}
+			aria-label="Guardian Puzzles and Games"
+		>
+			<div css={innerContainerStyles}>
+				<div css={guardianLogoContainerStyles}>
+					<SvgGuardianLogo width={75} aria-hidden="true" />
 				</div>
-			</section>
-		</>
+				<div css={mainContentContainerStyles}>
+					<h2>
+						<img
+							src="https://media.guim.co.uk/06a5eec896bfae86e67f2faed6de8945d73eb9e7/0_0_1060_448/1060.png"
+							css={puzzlesLogoStyles}
+							alt="Guardian Puzzles and Games Logo"
+						/>
+					</h2>
+					<p css={bodyStyles}>
+						Whether you have one minute or all day, our new puzzles
+						and games hub has something you&rsquo;ll love.
+					</p>
+					<LinkButton
+						cssOverrides={ctaButtonStyles}
+						theme={ctaButtonTheme}
+						href={''}
+						icon={<SvgArrowRightStraight />}
+						iconSide="right"
+						aria-label="Visit the Guardian puzzles and games hub."
+					>
+						Play now
+					</LinkButton>
+				</div>
+				<img
+					src="https://media.guim.co.uk/dc77e5a7f6057e1cabee32291fe13e87b1876186/0_0_3875_1447/3875.png"
+					css={imageStyles}
+					alt="An octopus leaning against an owl. The owl is attempting a crossword."
+				></img>
+			</div>
+		</section>
 	);
 };
 
