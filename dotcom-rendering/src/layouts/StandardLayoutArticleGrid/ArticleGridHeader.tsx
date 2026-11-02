@@ -7,12 +7,17 @@ import {
 } from '../../components/ArticleHeadline';
 import { ArticleTitle } from '../../components/ArticleTitle';
 import { ContributorAvatar } from '../../components/ContributorAvatar';
-import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	hasImmersiveGridTitleRule,
+} from '../../lib/articleFormat';
 import { getZIndex } from '../../lib/getZIndex';
 import { palette as themePalette } from '../../palette';
 import type { ArticleDeprecated } from '../../types/article';
 import type { ArticleGridLayout } from './deriveArticleGridLayout';
 import { GridItem } from './GridItem';
+import { topHatFurnitureBackgroundStyles } from './styles';
 
 const avatarHeadlineWrapper = css`
 	display: flex;
@@ -60,7 +65,6 @@ export const ArticleGridHeader = ({
 	const {
 		ageWarning,
 		avatarUrl,
-		hasImmersivePortraitTitleRule,
 		isImmersive,
 		isImmersiveLandscape,
 		isImmersivePortrait,
@@ -68,6 +72,8 @@ export const ArticleGridHeader = ({
 		isInteractiveTopHat,
 		layoutType,
 	} = layout;
+	const hasImmersivePortraitTitleRule =
+		isImmersivePortrait && hasImmersiveGridTitleRule(format, article.tags);
 	const displayAvatarUrl = avatarUrl != null;
 	const hasImmersiveAffiliateDisclaimer =
 		isImmersive && article.affiliateLinksDisclaimerRequired;
@@ -261,9 +267,8 @@ export const ArticleGridHeader = ({
 						`,
 					isInteractiveTopHat &&
 						css`
-							z-index: ${getZIndex('mediaOverlay')};
-							background: rgba(255, 255, 255, 0.9);
-							padding: 10px 10px 0;
+							${topHatFurnitureBackgroundStyles}
+							padding-top: 10px;
 						`,
 				]}
 			>

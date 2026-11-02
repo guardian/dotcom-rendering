@@ -4,13 +4,28 @@ import {
 	ArticleDesign,
 	type ArticleFormat,
 	ArticleSpecial,
-	hasImmersiveGridTitleRule,
 } from '../../lib/articleFormat';
 import { getSoleContributor } from '../../lib/byline';
 import { decideMainMediaCaption } from '../../lib/decide-caption';
 import { LABS_HEADER_HEIGHT } from '../../lib/labs-constants';
 import type { ArticleDeprecated } from '../../types/article';
-import { getLayoutType } from '../lib/articleArrangements';
+import { getLayoutType, type LayoutType } from '../lib/articleArrangements';
+
+export type ArticleGridLayout = {
+	ageWarning: ReturnType<typeof getAgeWarning>;
+	avatarUrl: string | undefined;
+	captionText: ReturnType<typeof decideMainMediaCaption>;
+	immersiveHeaderHeight: number;
+	isImmersive: boolean;
+	isImmersiveLandscape: boolean;
+	isImmersivePortrait: boolean;
+	isImmersiveWeekendRead: boolean;
+	isInteractiveTopHat: boolean;
+	isLabs: boolean;
+	layoutType: LayoutType;
+	mainMediaAspectRatio: string | undefined;
+	usesImmersiveImageProportions: boolean;
+};
 
 const getImageOrientation = (
 	aspectRatio: string,
@@ -28,7 +43,7 @@ export const deriveArticleGridLayout = ({
 }: {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
-}) => {
+}): ArticleGridLayout => {
 	const isLabs = format.theme === ArticleSpecial.Labs;
 	const mainMedia = article.mainMediaElements[0];
 	const mainMediaType = mainMedia?._type;
@@ -55,8 +70,9 @@ export const deriveArticleGridLayout = ({
 			: 'landscape';
 	const immersiveHeaderHeight =
 		minHeaderHeightPx + (isLabs ? LABS_HEADER_HEIGHT : 0);
+	const topHatTestingPage = '/p/x4zt8y';
 	const layoutType =
-		article.config.shortUrlId === '/p/x4zt8y'
+		article.config.shortUrlId === topHatTestingPage
 			? 'interactiveTopHat'
 			: getLayoutType(format, mainMediaOrientation);
 	const isImmersivePortrait = layoutType === 'immersivePortrait';
@@ -75,16 +91,11 @@ export const deriveArticleGridLayout = ({
 		isImmersiveLandscape,
 		isImmersiveWeekendRead:
 			isImmersivePortrait && format.design === ArticleDesign.WeekendEssay,
-		isInteractiveTopHat: layoutType === 'interactiveTopHat',
-		hasImmersivePortraitTitleRule:
-			isImmersivePortrait &&
-			hasImmersiveGridTitleRule(format, article.tags),
 		isImmersivePortrait,
+		isInteractiveTopHat: layoutType === 'interactiveTopHat',
 		isLabs,
 		layoutType,
 		mainMediaAspectRatio,
 		usesImmersiveImageProportions,
 	} as const;
 };
-
-export type ArticleGridLayout = ReturnType<typeof deriveArticleGridLayout>;

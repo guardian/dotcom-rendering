@@ -49,7 +49,7 @@ export const StandardLayoutArticleGrid = ({
 				grid.outerRules(),
 				!isLabs &&
 					layoutType !== 'interactiveStandard' &&
-					layoutType !== 'interactiveTopHat' &&
+					!isInteractiveTopHat &&
 					css`
 						${from.leftCol} {
 							${centreRuleStyles}
@@ -137,7 +137,9 @@ export const StandardLayoutArticleGrid = ({
 						${from.leftCol} {
 							display: block;
 							grid-column: centre-column-start;
-							grid-row: 1 / 5;
+							grid-row: ${layoutType === 'interactiveStandard'
+								? '1 / 5'
+								: isInteractiveTopHat && '8'};
 							position: relative;
 							&::before {
 								position: absolute;

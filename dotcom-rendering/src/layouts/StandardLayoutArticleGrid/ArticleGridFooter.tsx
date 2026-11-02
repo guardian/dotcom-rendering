@@ -14,12 +14,12 @@ import {
 	type ArticleFormat,
 	ArticleSpecial,
 } from '../../lib/articleFormat';
-import { getZIndex } from '../../lib/getZIndex';
 import { palette as themePalette } from '../../palette';
 import type { ArticleDeprecated } from '../../types/article';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type { ArticleGridLayout } from './deriveArticleGridLayout';
 import { GridItem } from './GridItem';
+import { topHatFurnitureBackgroundStyles } from './styles';
 
 const stretchLines = css`
 	${until.phablet} {
@@ -30,12 +30,6 @@ const stretchLines = css`
 		margin-left: -10px;
 		margin-right: -10px;
 	}
-`;
-
-const topHatFurnitureBackgroundStyles = css`
-	z-index: ${getZIndex('mediaOverlay')};
-	background: rgba(255, 255, 255, 0.9);
-	padding: 0 10px;
 `;
 
 const picAndCommentLeftColLines = (avatarDisplayed: boolean) => css`

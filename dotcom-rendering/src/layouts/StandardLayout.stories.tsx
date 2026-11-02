@@ -300,9 +300,6 @@ const immersivePortraitModes = {
 };
 
 const assertImmersivePortraitFooter = async (canvasElement: HTMLElement) => {
-	const footer = canvasElement.querySelector<HTMLElement>(
-		'[data-grid-centre-rule-anchor]',
-	);
 	const media = canvasElement.querySelector<HTMLElement>(
 		'[data-gu-name="media"]',
 	);
@@ -313,23 +310,21 @@ const assertImmersivePortraitFooter = async (canvasElement: HTMLElement) => {
 		'[data-gu-name="meta"]',
 	);
 
-	await expect(footer).not.toBeNull();
 	await expect(media).not.toBeNull();
 	await expect(standfirst).not.toBeNull();
 	await expect(metadata).not.toBeNull();
+	await expect(standfirst!.parentElement).toBe(media!.parentElement);
+	await expect(metadata!.parentElement).toBe(media!.parentElement);
 
 	const view = canvasElement.ownerDocument.defaultView;
 	if (view == null) throw new Error('Expected a window for the story canvas');
 
 	if (view.innerWidth >= breakpoints.leftCol) {
-		const footerStyles = view.getComputedStyle(footer!);
-		const centreRuleStyles = view.getComputedStyle(footer!, '::before');
+		const centreRuleStyles = view.getComputedStyle(standfirst!, '::before');
 		const mediaRect = media!.getBoundingClientRect();
 		const standfirstRect = standfirst!.getBoundingClientRect();
 		const metadataRect = metadata!.getBoundingClientRect();
 
-		await expect(footerStyles.display).toBe('grid');
-		await expect(footerStyles.borderTopWidth).toBe('1px');
 		await expect(centreRuleStyles.width).toBe('1px');
 		await expect(
 			Math.abs(standfirstRect.top - metadataRect.top),
@@ -340,8 +335,6 @@ const assertImmersivePortraitFooter = async (canvasElement: HTMLElement) => {
 		await expect(
 			Math.abs(metadataRect.bottom - mediaRect.bottom),
 		).toBeLessThan(1);
-	} else {
-		await expect(view.getComputedStyle(footer!).display).toBe('contents');
 	}
 };
 
@@ -443,8 +436,9 @@ export const WebImmersivePortraitLoop: Story = {
 		await expect(video).not.toBeNull();
 
 		const view = canvasElement.ownerDocument.defaultView;
-		if (view == null)
+		if (view == null) {
 			throw new Error('Expected a window for the story canvas');
+		}
 
 		const videoStyles = view.getComputedStyle(video!);
 		await expect(videoStyles.objectFit).toBe('cover');

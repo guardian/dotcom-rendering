@@ -139,6 +139,20 @@ describe('deriveArticleGridLayout', () => {
 		},
 	);
 
+	it('preserves the interactive top hat testing-page override', () => {
+		const layout = deriveArticleGridLayout({
+			article: {
+				...article,
+				config: { ...article.config, shortUrlId: '/p/x4zt8y' },
+			},
+			format: immersiveFormat,
+		});
+
+		expect(layout.layoutType).toBe('interactiveTopHat');
+		expect(layout.isInteractiveTopHat).toBe(true);
+		expect(layout.isImmersive).toBe(false);
+	});
+
 	it('falls back to immersive landscape when main media is missing', () => {
 		const layout = deriveArticleGridLayout({
 			article: {
