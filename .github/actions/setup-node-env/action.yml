@@ -8,6 +8,7 @@ runs:
     - uses: actions/setup-node@v7
       with:
         node-version-file: '.nvmrc'
+        check-latest: true
 
     - run: corepack enable
       shell: bash
@@ -16,6 +17,7 @@ runs:
     - uses: actions/setup-node@v7
       with:
         node-version-file: '.nvmrc'
+        check-latest: true
         cache: 'pnpm'
 
     - run: pnpm install --frozen-lockfile
