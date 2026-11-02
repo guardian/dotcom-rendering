@@ -11,9 +11,12 @@ import { Island } from '../../components/Island';
 import { ListenToArticle } from '../../components/ListenToArticle.island';
 import { SlotBodyEnd } from '../../components/SlotBodyEnd.island';
 import { SubMeta } from '../../components/SubMeta';
-import type { ArticleFormat } from '../../lib/articleFormat';
+import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
+import { getContributionsServiceUrl } from '../../lib/contributions';
 import { getZIndex } from '../../lib/getZIndex';
 import { safeParseURL } from '../../lib/parse';
+import { parse } from '../../lib/slot-machine-flags';
+import { hasFilterTag } from '../../lib/theFilter';
 import { palette as themePalette } from '../../palette';
 import type { ArticleDeprecated } from '../../types/article';
 import type { RenderingTarget } from '../../types/renderingTarget';
@@ -31,17 +34,23 @@ export const ArticleGridBody = ({
 	renderingTarget: RenderingTarget;
 	layout: ArticleGridLayout;
 }) => {
-	const {
-		contributionsServiceUrl,
-		footballMatchStatsUrl,
-		isApps,
-		isFootballMatchReport,
-		isLabs,
-		layoutType,
-		renderAds,
-		showBodyEndSlot,
-		tableOfContentsStyle,
-	} = layout;
+	const { isImmersive, isLabs, layoutType } = layout;
+	const isWeb = renderingTarget === 'Web';
+	const isApps = renderingTarget === 'Apps';
+	const renderAds = isWeb && !article.shouldHideAds;
+	const contributionsServiceUrl = getContributionsServiceUrl(article);
+	const showBodyEndSlot =
+		isWeb &&
+		(parse(article.slotMachineFlags ?? '').showBodyEnd ||
+			article.config.switches.slotBodyEnd);
+	const footballMatchStatsUrl =
+		article.matchType === 'FootballMatchType'
+			? article.matchStatsUrl
+			: undefined;
+	const isFootballMatchReport =
+		format.design === ArticleDesign.MatchReport && !!footballMatchStatsUrl;
+	const tableOfContentsStyle =
+		isImmersive && hasFilterTag(article.tags) ? 'horizontal' : 'default';
 
 	return (
 		<GridItem

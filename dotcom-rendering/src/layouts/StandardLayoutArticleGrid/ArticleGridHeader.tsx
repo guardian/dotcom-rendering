@@ -4,7 +4,7 @@ import { StraightLines } from '@guardian/source-development-kitchen/react-compon
 import { ArticleHeadline } from '../../components/ArticleHeadline';
 import { ArticleTitle } from '../../components/ArticleTitle';
 import { ContributorAvatar } from '../../components/ContributorAvatar';
-import type { ArticleFormat } from '../../lib/articleFormat';
+import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
 import { getZIndex } from '../../lib/getZIndex';
 import { palette as themePalette } from '../../palette';
 import type { ArticleDeprecated } from '../../types/article';
@@ -56,14 +56,18 @@ export const ArticleGridHeader = ({
 }) => {
 	const {
 		avatarUrl,
-		displayAvatarUrl,
-		hasImmersiveAffiliateDisclaimer,
-		isFootballMatchReport,
 		isImmersive,
 		isImmersiveLandscape,
 		isImmersivePortrait,
 		layoutType,
 	} = layout;
+	const displayAvatarUrl = avatarUrl != null;
+	const hasImmersiveAffiliateDisclaimer =
+		isImmersive && article.affiliateLinksDisclaimerRequired;
+	const isFootballMatchReport =
+		format.design === ArticleDesign.MatchReport &&
+		article.matchType === 'FootballMatchType' &&
+		article.matchStatsUrl != null;
 	const headlineBackgroundImmersive = themePalette(
 		'--headline-background-immersive',
 	);
