@@ -437,6 +437,18 @@ gap later.
 
 ### User/context info passed to the puzzle iframe
 
+For pages with `instance.gameUrl` and a puzzle date, `usePuzzleGame` waits for
+Identity authentication. Signed-in readers then request
+`{ajaxUrl}/puzzles-and-games/game/{slug}/{date}.json`, sending the access token
+in the `Authorization` header. Frontend forwards it to the Puzzles API's
+`GET /game` and returns a response that cannot be cached. The iframe waits for
+the resulting `gameUrl` and preserves the API's `id` and `uid`; DCR does not
+replace `uid` with `legacy_identity_id` or send the token to the iframe.
+Signed-out readers use the anonymous server-provided URL. Authentication
+changes refresh the selection and discard pending responses from the previous
+session. Failed authenticated lookups show an error instead of loading an
+anonymous fallback. Older payloads without `gameUrl` retain the local URL builder.
+
 `src/components/PuzzleIframe.island.tsx` passes a combined `PuzzleContext`
 about the current reader to the puzzle provider two ways:
 
