@@ -191,9 +191,6 @@ catalogs:
     '@types/aws-lambda':
       specifier: 8.10.163
       version: 8.10.163
-    '@types/jsdom':
-      specifier: 21.1.1
-      version: 21.1.1
     '@types/node':
       specifier: 24.12.4
       version: 24.12.4
@@ -212,9 +209,6 @@ catalogs:
     eslint:
       specifier: 9.39.1
       version: 9.39.1
-    jsdom:
-      specifier: 29.1.1
-      version: 29.1.1
     rollup:
       specifier: 4.59.0
       version: 4.59.0
@@ -233,9 +227,6 @@ catalogs:
     valibot:
       specifier: 1.4.2
       version: 1.4.2
-    zod:
-      specifier: 4.6.6
-      version: 4.6.6
 
 importers:
 
@@ -617,7 +608,7 @@ importers:
         specifier: 29.5.14
         version: 29.5.14
       '@types/jsdom':
-        specifier: 'catalog:'
+        specifier: 21.1.1
         version: 21.1.1
       '@types/k6':
         specifier: 0.52.0
@@ -767,7 +758,7 @@ importers:
         specifier: 29.7.0
         version: 29.7.0(supports-color@8.1.1)
       jsdom:
-        specifier: 'catalog:'
+        specifier: 29.1.1
         version: 29.1.1(@noble/hashes@1.8.0)
       lodash.debounce:
         specifier: 4.0.8
@@ -917,7 +908,7 @@ importers:
         specifier: 3.6.0
         version: 3.6.0
       zod:
-        specifier: 'catalog:'
+        specifier: 4.6.6
         version: 4.6.6
 
 packages:
