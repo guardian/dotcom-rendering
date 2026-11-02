@@ -29,6 +29,7 @@ import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
+	Pillar,
 } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
@@ -185,8 +186,10 @@ const AGE_WARNING_SUPPRESSION_TAGS: TagType[] = [
  * documented case rather than inventing a new one.
  *
  * `theme` follows the puzzle's group (`getPuzzleGroupPalette`): news for
- * crosswords, opinion for word games, sport for logic puzzles. This is what
- * makes `pillarPalette`-driven colours (the share button, print button
+ * crosswords, opinion for word games, sport for logic puzzles and Labs for
+ * trivia colours only. The layout overrides trivia's component theme and
+ * background to retain editorial typography and puzzle-page styling.
+ * This makes `pillarPalette`-driven colours (the share button, print button
  * border, comments, etc, see `paletteDeclarations.ts`) resolve to the
  * group's colour across the whole page.
  *
@@ -209,6 +212,25 @@ export const getPuzzlePageFormat = (
 	design: ArticleDesign.Crossword,
 	theme: getPuzzleGroupPalette(puzzleGroup).theme,
 });
+
+const triviaPageStyles = (darkModeAvailable: boolean) => css`
+	--article-background: ${sourcePalette.neutral[100]};
+	--article-border: ${sourcePalette.neutral[86]};
+	--article-meta-lines: ${themePalette('--article-border')};
+	--straight-lines: ${themePalette('--article-border')};
+	--series-title-text: ${themePalette('--share-button')};
+	--article-section-link-text: ${themePalette('--share-button')};
+
+	${darkModeAvailable &&
+	css`
+		@media (prefers-color-scheme: dark) {
+			html:not([data-color-scheme='light']) & {
+				--article-background: ${sourcePalette.neutral[10]};
+				--article-border: ${sourcePalette.neutral[20]};
+			}
+		}
+	`}
+`;
 
 /**
  * Identical to `CrosswordLayout.tsx`'s own `CrosswordGrid`: the same grid
@@ -360,7 +382,12 @@ export const PuzzlePageLayout = ({
 }: Props) => {
 	const { config, instance, editionId, puzzleConfig } = puzzlePage;
 	const { isPaidContent, host, hasSurveyAd } = config;
-	const puzzlePageFormat = getPuzzlePageFormat(puzzleConfig.puzzleGroup);
+	const isTrivia = puzzleConfig.puzzleGroup === 'trivia';
+	// Labs supplies accent colours through rootStyles, not branded typography or layout.
+	const puzzlePageFormat: ArticleFormat = {
+		...getPuzzlePageFormat(puzzleConfig.puzzleGroup),
+		...(isTrivia && { theme: Pillar.News }),
+	};
 
 	// Puzzle Page instances have no comments/discussion concept at all:
 	// `FEPuzzlePageType` carries no `isCommentable` flag or per-instance
@@ -486,12 +513,6 @@ export const PuzzlePageLayout = ({
 					discussionApiUrl={config.discussionApiUrl}
 					idApiUrl={config.idApiUrl}
 					contributionsServiceUrl={contributionsServiceUrl}
-					// `puzzlePageFormat.theme` is never `ArticleSpecial.Labs`
-					// (never `ArticleSpecial.Labs`), so `CrosswordLayout`'s
-					// derived `format.theme !== ArticleSpecial.Labs` check
-					// always evaluates `true` here - hardcoded directly
-					// rather than keeping a comparison TypeScript can prove
-					// is always true.
 					showSubNav={true}
 					showSlimNav={false}
 					hasPageSkin={false}
@@ -518,7 +539,10 @@ export const PuzzlePageLayout = ({
 				)}
 			</div>
 
-			<main data-layout="PuzzlePageLayout">
+			<main
+				data-layout="PuzzlePageLayout"
+				css={isTrivia && triviaPageStyles(darkModeAvailable)}
+			>
 				<Section
 					fullWidth={true}
 					showTopBorder={false}
