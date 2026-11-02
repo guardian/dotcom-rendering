@@ -1,13 +1,16 @@
 # Ophan shadow testing
 
 This adds the Dotcom integration for [Ophan's shadow testing](https://github.com/guardian/ophan/pull/8523).
-The aim is to compare a candidate TrackerJS release with the installed version on
-sampled page loads. Both use the same browser observations, and normal analytics
-are sent once.
+The first pass compares pageview counts with the installed TrackerJS version on
+sampled page loads. Both versions make independent decisions from the same browser
+lifecycle events. Only the installed tracker sends normal analytics. Attention and
+payload fields are outside this comparison.
 
 Normal tracking starts first. If the Frontend-provided
 `window.guardian.config.switches.ophanShadowTesting` is `true`, DCR calls the shadow
-API once for the page. It does not wait for the candidate to load. Startup errors
+API once for the page. It does not wait for the candidate policy to load. Ophan
+retains a bounded history so a late candidate can also compare the initial
+pageview. Startup errors
 are logged without preventing normal tracking, and Apps skip this integration.
 
 The current TrackerJS 5.2.0 package does not have this API. The optional check keeps
