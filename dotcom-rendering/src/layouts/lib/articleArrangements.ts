@@ -5,6 +5,7 @@ import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
+	isOpinionDesign,
 } from '../../lib/articleFormat';
 
 export type LayoutType =
@@ -440,11 +441,7 @@ export const getLayoutType = (
 	}
 	if (format.design === ArticleDesign.Picture) return 'picture';
 	if (format.display === ArticleDisplay.Showcase) return 'showcase';
-	if (
-		format.design === ArticleDesign.Comment ||
-		format.design === ArticleDesign.Editorial ||
-		format.design === ArticleDesign.Letter
-	) {
+	if (isOpinionDesign(format.design)) {
 		return 'comment';
 	}
 	if (format.design === ArticleDesign.Interactive) {

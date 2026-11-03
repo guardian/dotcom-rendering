@@ -18,6 +18,7 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 	ArticleSpecial,
+	isImmersiveOpinion,
 } from '../lib/articleFormat';
 import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
@@ -345,17 +346,12 @@ export const SeriesSectionLink = ({
 			: themePalette('--article-section-link-text');
 
 	const isImmersive = format.display === ArticleDisplay.Immersive;
-	const isImmersiveOpinion =
-		isImmersive &&
-		(format.design === ArticleDesign.Comment ||
-			format.design === ArticleDesign.Editorial ||
-			format.design === ArticleDesign.Letter ||
-			isWeekendEssay);
+	const immersiveOpinion = isImmersiveOpinion(format);
 	const isGallery = format.design === ArticleDesign.Gallery;
 
 	// Immersive opinion articles get a distinct treatment: highlighted links
 	// with both series and section shown (or just section if no tag).
-	if (isImmersiveOpinion || isInteractiveTopHat) {
+	if (immersiveOpinion || isInteractiveTopHat) {
 		if (tag) {
 			return (
 				<div css={rowBelowLeftCol(format)}>

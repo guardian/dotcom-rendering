@@ -31,6 +31,7 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 	ArticleSpecial,
+	hasImmersiveGridTitle,
 } from '../lib/articleFormat';
 import { getSoleContributor } from '../lib/byline';
 import { getContributionsServiceUrl } from '../lib/contributions';
@@ -261,6 +262,8 @@ export const StandardLayoutArticleGrid = ({
 	const isImmersivePortrait = layoutType === 'immersivePortrait';
 	const isImmersiveLandscape = layoutType === 'immersiveLandscape';
 	const isImmersive = isImmersivePortrait || isImmersiveLandscape;
+	const hasImmersivePortraitTitleRule =
+		isImmersivePortrait && hasImmersiveGridTitle(format, article.tags);
 
 	const isInteractiveTopHat = layoutType === 'interactiveTopHat';
 
@@ -474,8 +477,10 @@ export const StandardLayoutArticleGrid = ({
 							margin-bottom: 0;
 
 							${until.desktop} {
-								border-bottom: 1px solid
-									${themePalette('--article-border')};
+								${!hasImmersivePortraitTitleRule &&
+								`border-bottom: 1px solid ${themePalette(
+									'--article-border',
+								)};`}
 							}
 
 							${format.design !== ArticleDesign.WeekendEssay &&
@@ -547,8 +552,10 @@ export const StandardLayoutArticleGrid = ({
 							${from.desktop} {
 								border-bottom: 1px solid
 									${themePalette('--article-border')};
-								border-top: 1px solid
-									${themePalette('--article-border')};
+								${!hasImmersivePortraitTitleRule &&
+								`border-top: 1px solid ${themePalette(
+									'--article-border',
+								)};`}
 							}
 						`,
 					isInteractiveTopHat &&
