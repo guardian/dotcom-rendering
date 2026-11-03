@@ -596,6 +596,11 @@ export const StandardLayoutArticleGrid = ({
 									'--article-border',
 								)};`}
 							}
+
+							${between.desktop.and.leftCol} {
+								border-bottom: 1px solid
+									${themePalette('--article-border')};
+							}
 						`,
 					isInteractiveTopHat &&
 						css`
