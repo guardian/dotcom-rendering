@@ -443,9 +443,12 @@ export const StandardLayoutArticleGrid = ({
 									${themePalette('--article-border')};
 							}
 
-							${from.desktop} {
-								align-content: flex-end;
-							}
+							${format.design !== ArticleDesign.WeekendEssay &&
+							css`
+								${from.desktop} {
+									align-content: flex-end;
+								}
+							`}
 						`,
 					layoutType === 'picture' &&
 						css`
