@@ -118,6 +118,8 @@ const articleHeaderStyles = css`
 	padding-top: 1.1px;
 	padding-right: 0;
 	margin-right: 0;
+	//todo should only be on mini nav
+	margin-left: 1px;
 `;
 
 const headerTextWrapperStyles = css`
@@ -424,6 +426,7 @@ export const CustomSubNav = ({
 		);
 	}
 
+	//todo is there a better way to slice this, e.g. a isCard view. Check how much duplication it would involve
 	if (isArticle) {
 		return (
 			<div
@@ -438,7 +441,7 @@ export const CustomSubNav = ({
 						subNavStyles,
 						!hasPageSkin && subNavStylesFromLeftCol,
 						articleSubNavStyles,
-						articleHeaderGapStyles,
+						!showHeaderDivider && articleHeaderGapStyles,
 						showHeaderDivider && articleDividerStyles,
 						css`
 							flex-shrink: 0;
