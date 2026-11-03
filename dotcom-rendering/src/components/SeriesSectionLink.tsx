@@ -240,6 +240,12 @@ const sectionTitleBackground = css`
 		6px 0 0 0 ${themePalette('--series-title-background')};
 `;
 
+// Temporary until top hat has a format display hint
+const topHatTitleBackground = css`
+	padding: 3px 6px 4px 6px;
+	background-color: ${themePalette('--series-title-text')};
+`;
+
 type LinkProps = {
 	href: string;
 	format: ArticleFormat;
@@ -325,13 +331,18 @@ export const SeriesSectionLink = ({
 	const hasSeriesTag = tag?.type === 'Series';
 	const isLabs = format.theme === ArticleSpecial.Labs;
 	const isWeekendEssay = format.design === ArticleDesign.WeekendEssay;
+	const isInteractiveTopHat = layoutType === 'interactiveTopHat';
 
 	const titleColour = isMatch
 		? themePalette('--series-title-match-text')
-		: themePalette('--series-title-text');
+		: isInteractiveTopHat
+			? '#ffffff'
+			: themePalette('--series-title-text');
 	const sectionTitleColour = isMatch
 		? themePalette('--series-title-match-text')
-		: themePalette('--article-section-link-text');
+		: isInteractiveTopHat
+			? '#ffffff'
+			: themePalette('--article-section-link-text');
 
 	const isImmersive = format.display === ArticleDisplay.Immersive;
 	const isImmersiveOpinion =
@@ -344,7 +355,7 @@ export const SeriesSectionLink = ({
 
 	// Immersive opinion articles get a distinct treatment: highlighted links
 	// with both series and section shown (or just section if no tag).
-	if (isImmersiveOpinion) {
+	if (isImmersiveOpinion || isInteractiveTopHat) {
 		if (tag) {
 			return (
 				<div css={rowBelowLeftCol(format)}>
@@ -360,7 +371,9 @@ export const SeriesSectionLink = ({
 											'--series-title-background',
 										)};
 									`
-								: seriesTitleBackground,
+								: isInteractiveTopHat
+									? topHatTitleBackground
+									: seriesTitleBackground,
 						]}
 						data-component="series"
 						data-link-name="article series"
@@ -381,7 +394,9 @@ export const SeriesSectionLink = ({
 												'--series-title-background',
 											)};
 										`
-									: sectionTitleBackground,
+									: isInteractiveTopHat
+										? topHatTitleBackground
+										: seriesTitleBackground,
 							]}
 							data-component="section"
 							data-link-name="article section"
@@ -399,7 +414,12 @@ export const SeriesSectionLink = ({
 					href={`${guardianBaseURL}/${sectionUrl}`}
 					format={format}
 					colour={sectionTitleColour}
-					extraCss={[marginRight, sectionTitleBackground]}
+					extraCss={[
+						marginRight,
+						isInteractiveTopHat
+							? topHatTitleBackground
+							: sectionTitleBackground,
+					]}
 					data-component="section"
 					data-link-name="article section"
 				>
