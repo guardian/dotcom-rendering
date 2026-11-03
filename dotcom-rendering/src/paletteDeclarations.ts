@@ -6361,8 +6361,7 @@ const endNoteTextSubduedLight: PaletteFunction = () =>
 const endNoteTextSubduedDark: PaletteFunction = () => sourcePalette.neutral[86];
 
 const interactiveAtomBackgroundLight: PaletteFunction = () => 'transparent';
-const interactiveAtomBackgroundDark: PaletteFunction = () =>
-	sourcePalette.neutral[100];
+const interactiveAtomBackgroundDark: PaletteFunction = () => 'transparent';
 
 const discussionPreModLight: PaletteFunction = () => sourcePalette.brand[500];
 const discussionPreModDark: PaletteFunction = () => sourcePalette.brand[800];
