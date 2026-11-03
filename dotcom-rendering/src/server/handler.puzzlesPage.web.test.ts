@@ -132,10 +132,71 @@ describe('handlePuzzlesPage', () => {
 		expect(res.status).toHaveBeenCalledWith(200);
 	});
 
+	it.each([
+		['V1 only', { 'puzzles-new-hub-v1': 'variant' }, false],
+		['V2 alone', { 'puzzles-new-hub-v2': 'variant' }, false],
+		[
+			'V2 control',
+			{
+				'puzzles-new-hub-v1': 'variant',
+				'puzzles-new-hub-v2': 'control',
+			},
+			false,
+		],
+		[
+			'both variants',
+			{
+				'puzzles-new-hub-v1': 'variant',
+				'puzzles-new-hub-v2': 'variant',
+			},
+			true,
+		],
+	] as const)(
+		'gates the trivia archive for %s',
+		(_, serverSideABTests, allowed) => {
+			validate.mockReturnValue({
+				layout: { containers: [] },
+				archive: { category: 'trivia-and-quizzes' },
+				config: { serverSideABTests },
+			} as never);
+			const res = response();
+			handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
+			if (allowed) {
+				expect(renderPage).toHaveBeenCalledTimes(1);
+			} else {
+				expect(res.sendStatus).toHaveBeenCalledWith(404);
+				expect(renderPage).not.toHaveBeenCalled();
+			}
+		},
+	);
+
+	it('keeps V2 recommendations out of existing V1 archives', () => {
+		const existing = {
+			...triviaPuzzlesContainer.content.items[0]![0]!,
+			type: 'word-wheel',
+		};
+		validate.mockReturnValue({
+			layout: { containers: [] },
+			archive: {
+				category: 'word-games',
+				moreFrom: [
+					existing,
+					...triviaPuzzlesContainer.content.items[0]!,
+				],
+			},
+			config: { serverSideABTests: { 'puzzles-new-hub-v1': 'variant' } },
+		} as never);
+		const res = response();
+		handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
+		expect(
+			renderPage.mock.calls[0]![0].puzzlesPage.archive?.moreFrom,
+		).toEqual([existing]);
+	});
+
 	it('renders an archive payload for the V1 variant', () => {
 		validate.mockReturnValue({
 			layout: { containers: [] },
-			archive: {},
+			archive: { moreFrom: [] },
 			config: {
 				serverSideABTests: {
 					'puzzles-new-hub-v1': 'variant',
@@ -150,7 +211,7 @@ describe('handlePuzzlesPage', () => {
 	it('does not render an archive when V1 is absent', () => {
 		validate.mockReturnValue({
 			layout: { containers: [] },
-			archive: {},
+			archive: { moreFrom: [] },
 			config: { serverSideABTests: {} },
 		} as never);
 		const res = response();
