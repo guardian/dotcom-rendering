@@ -42,15 +42,17 @@ const immersiveGridMargins = css`
 `;
 
 const immersivePortraitSeriesRule = css`
-	display: flex;
-	align-items: flex-end;
-	width: 100%;
-	max-width: none;
-
 	${from.desktop} {
+		display: flex;
+		align-items: flex-end;
 		width: calc(100% + 4px);
+		max-width: none;
 
 		&::after {
+			content: '';
+			flex: 1;
+			margin-left: 6px;
+			border-bottom: 1px solid ${themePalette('--article-border')};
 			position: relative;
 			top: 4px;
 		}
@@ -60,13 +62,6 @@ const immersivePortraitSeriesRule = css`
 		&::after {
 			top: 6px;
 		}
-	}
-
-	&::after {
-		content: '';
-		flex: 1;
-		margin-left: 6px;
-		border-bottom: 1px solid ${themePalette('--article-border')};
 	}
 `;
 
