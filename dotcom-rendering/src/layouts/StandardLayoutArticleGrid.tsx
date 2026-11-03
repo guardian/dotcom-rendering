@@ -31,6 +31,7 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 	ArticleSpecial,
+	hasImmersiveGridTitle,
 } from '../lib/articleFormat';
 import { getSoleContributor } from '../lib/byline';
 import { getContributionsServiceUrl } from '../lib/contributions';
@@ -261,17 +262,8 @@ export const StandardLayoutArticleGrid = ({
 	const isImmersivePortrait = layoutType === 'immersivePortrait';
 	const isImmersiveLandscape = layoutType === 'immersiveLandscape';
 	const isImmersive = isImmersivePortrait || isImmersiveLandscape;
-	const isImmersiveOpinion =
-		isImmersive &&
-		[
-			ArticleDesign.Comment,
-			ArticleDesign.Editorial,
-			ArticleDesign.Letter,
-			ArticleDesign.WeekendEssay,
-		].includes(format.design);
-	const hasSeriesTag = article.tags.some((tag) => tag.type === 'Series');
 	const hasImmersivePortraitTitleRule =
-		isImmersivePortrait && (isImmersiveOpinion || hasSeriesTag || isLabs);
+		isImmersivePortrait && hasImmersiveGridTitle(format, article.tags);
 
 	const isInteractiveTopHat = layoutType === 'interactiveTopHat';
 

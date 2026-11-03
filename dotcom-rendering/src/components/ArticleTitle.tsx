@@ -6,7 +6,7 @@ import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
-	ArticleSpecial,
+	hasImmersiveGridTitle,
 } from '../lib/articleFormat';
 import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
@@ -103,20 +103,9 @@ export const ArticleTitle = ({
 	guardianBaseURL,
 	isMatch,
 }: Props) => {
-	const isImmersiveOpinion =
-		format.display === ArticleDisplay.Immersive &&
-		[
-			ArticleDesign.Comment,
-			ArticleDesign.Editorial,
-			ArticleDesign.Letter,
-			ArticleDesign.WeekendEssay,
-		].includes(format.design);
-	const hasSeriesTag = tags.some((tag) => tag.type === 'Series');
 	const hasImmersivePortraitTitleRule =
 		layoutType === 'immersivePortrait' &&
-		(isImmersiveOpinion ||
-			hasSeriesTag ||
-			format.theme === ArticleSpecial.Labs);
+		hasImmersiveGridTitle(format, tags);
 
 	return (
 		<div

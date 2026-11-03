@@ -6,6 +6,7 @@ import {
 	ArticleDesign,
 	type ArticleFormat,
 	ArticleSpecial,
+	isOpinionDesign,
 } from '../../lib/articleFormat';
 import { isMediaCard } from '../../lib/cardHelpers';
 import { isWithinTwelveHours, secondsToDuration } from '../../lib/formatTime';
@@ -440,10 +441,7 @@ export const Card = ({
 	);
 	const showQuotes = !!showQuotedHeadline;
 
-	const isOpinion =
-		format.design === ArticleDesign.Comment ||
-		format.design === ArticleDesign.Editorial ||
-		format.design === ArticleDesign.Letter;
+	const isOpinion = isOpinionDesign(format.design);
 
 	/**
 	 * A "video article" refers to standalone video content presented as the main focus of the article.
