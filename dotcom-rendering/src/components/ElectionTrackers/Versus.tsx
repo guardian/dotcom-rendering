@@ -100,6 +100,7 @@ export const Versus = (props: Props) => (
 		css={{
 			display: 'flex',
 			justifyContent: 'space-between',
+			paddingBottom: space[1],
 		}}
 	>
 		<GroupComponent

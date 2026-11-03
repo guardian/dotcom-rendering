@@ -1,4 +1,5 @@
 import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
+import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
 import { validateAsPuzzlePageType } from './validate.puzzlePage';
 
 const clone = <T>(value: T): T => JSON.parse(JSON.stringify(value)) as T;
@@ -9,6 +10,32 @@ const expectInvalid = (page: unknown) =>
 	);
 
 describe('validateAsPuzzlePageType', () => {
+	it('accepts commercial properties for only sponsored editions', () => {
+		const page = createPuzzlePage('word-wheel', {
+			commercialProperties: {
+				AU: { adTargeting: [], branding: puzzlesBranding },
+			},
+		});
+		expect(
+			validateAsPuzzlePageType(page).commercialProperties?.AU?.branding,
+		).toEqual(puzzlesBranding);
+	});
+
+	it.each([
+		null,
+		[],
+		{ XX: { adTargeting: [] } },
+		{ AU: { adTargeting: [], branding: { sponsorName: 'Missing logo' } } },
+	])(
+		'rejects invalid game commercial properties: %j',
+		(commercialProperties) => {
+			expectInvalid({
+				...createPuzzlePage('word-wheel'),
+				commercialProperties,
+			});
+		},
+	);
+
 	it('preserves the API game URL in the page instance', () => {
 		const page = createPuzzlePage('sudoku-easy');
 		page.instance.gameUrl =
@@ -16,6 +43,40 @@ describe('validateAsPuzzlePageType', () => {
 		expect(validateAsPuzzlePageType(page).instance.gameUrl).toBe(
 			page.instance.gameUrl,
 		);
+	});
+
+	it('preserves the authoritative progress identity when present and accepts older payloads without it', () => {
+		const page = createPuzzlePage('film-reveal');
+		expect(
+			validateAsPuzzlePageType(page).instance.progressIdentity,
+		).toBeUndefined();
+		page.instance.progressIdentity = {
+			puzzleId: 'moviegrid-filmreveal-394',
+			puzzleType: 'FILMREVEAL',
+			publishDate: '2026-11-02T00:00:00Z',
+		};
+		expect(
+			validateAsPuzzlePageType(page).instance.progressIdentity,
+		).toEqual(page.instance.progressIdentity);
+	});
+
+	it.each([
+		null,
+		[],
+		{},
+		{
+			puzzleId: '',
+			puzzleType: 'FILMREVEAL',
+			publishDate: '2026-11-02T00:00:00Z',
+		},
+		{ puzzleId: 'id', puzzleType: 42, publishDate: '2026-11-02T00:00:00Z' },
+		{ puzzleId: 'id', puzzleType: 'FILMREVEAL' },
+	])('rejects a malformed progress identity: %j', (progressIdentity) => {
+		const page = createPuzzlePage('film-reveal');
+		expectInvalid({
+			...page,
+			instance: { ...page.instance, progressIdentity },
+		});
 	});
 
 	it('rejects a non-string game URL', () => {

@@ -339,7 +339,7 @@ export const FlexibleSpecial = ({
 
 	return (
 		<>
-			<EventGraphic graphic={graphic} />
+			<EventGraphic graphic={graphic} trackingLabel={'front'} />
 			{isNonEmptyArray(snaps) && (
 				<OneCardLayout
 					cards={snaps}

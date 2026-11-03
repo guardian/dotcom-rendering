@@ -118,6 +118,9 @@ const indices = [
 	'card-nested-link',
 	'card-link',
 	'card-podcast-image',
+
+	// discussion modals and dropdowns
+	'discussion',
 ] as const;
 
 // Implementation code - you don't need to change this to get a new index

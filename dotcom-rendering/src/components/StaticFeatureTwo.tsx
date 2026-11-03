@@ -81,6 +81,7 @@ export const StaticFeatureTwo = ({
 							starRatingSize={'medium'}
 							articleMedia={card.articleMedia}
 							headlineTestUuid={card.headlineTestUuid}
+							isStorylines={false}
 						/>
 					</LI>
 				);

@@ -44,9 +44,11 @@ const topBarStyles = css`
 	justify-content: flex-end;
 	box-sizing: border-box;
 	height: 52px;
+
 	${from.tablet} {
 		height: 60px;
 	}
+
 	${from.desktop} {
 		height: 64px;
 	}
@@ -195,36 +197,22 @@ export const TopBar = ({
 					</TopBarLinkContainer>
 				</Hide>
 
-				<Hide until="desktop">
-					<TopBarLinkContainer>
-						{
-							/** We replace "Search jobs" with "Newsletters" for AU and US editions */
-							['AU', 'US'].includes(editionId) ? (
-								<TopBarLink
-									dataLinkName={nestedOphanComponents(
-										'header',
-										'topbar',
-										'newsletters',
-									)}
-									href="/email-newsletters"
-								>
-									Newsletters
-								</TopBarLink>
-							) : (
-								<TopBarLink
-									dataLinkName={nestedOphanComponents(
-										'header',
-										'topbar',
-										'job-cta',
-									)}
-									href="https://jobs.theguardian.com"
-								>
-									Search jobs
-								</TopBarLink>
-							)
-						}
-					</TopBarLinkContainer>
-				</Hide>
+				{['AU', 'US'].includes(editionId) && (
+					<Hide until="desktop">
+						<TopBarLinkContainer>
+							<TopBarLink
+								dataLinkName={nestedOphanComponents(
+									'header',
+									'topbar',
+									'newsletters',
+								)}
+								href="/email-newsletters"
+							>
+								Newsletters
+							</TopBarLink>
+						</TopBarLinkContainer>
+					</Hide>
+				)}
 
 				<TopBarLinkContainer isLastChild={true} isHidden={!hasHydrated}>
 					<TopBarMyAccount

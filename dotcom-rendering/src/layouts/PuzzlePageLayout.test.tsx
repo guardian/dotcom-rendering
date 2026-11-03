@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
+import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
 import { ConfigProvider } from '../components/ConfigContext';
 import {
 	puzzlesHubV2Experiment,
@@ -7,6 +8,7 @@ import {
 } from '../lib/puzzlesHubVersionExperiment';
 import { extractNAV } from '../model/extract-nav';
 import { getPuzzleConfig } from '../model/puzzles/puzzleConfigs';
+import type { Branding } from '../types/branding';
 import { PuzzlePageLayout } from './PuzzlePageLayout';
 
 jest.mock('../lib/bridgetApi', () => jest.fn());
@@ -52,6 +54,7 @@ const v2On = puzzlesHubV2Participation(puzzlesHubV2Experiment.variant);
 const renderPuzzlePageLayout = (
 	slug: string,
 	overrides: Parameters<typeof createPuzzlePage>[1] = {},
+	branding?: Branding,
 ) => {
 	const puzzlePage = createPuzzlePage(slug, overrides);
 	const puzzleConfig = getPuzzleConfig(slug);
@@ -70,12 +73,103 @@ const renderPuzzlePageLayout = (
 				puzzlePage={{ ...puzzlePage, puzzleConfig }}
 				NAV={extractNAV(puzzlePage.nav)}
 				darkModeAvailable={false}
+				branding={branding}
 			/>
 		</ConfigProvider>,
 	);
 };
 
 describe('PuzzlePageLayout', () => {
+	it('passes the API progress identity into the iframe island for hydration', () => {
+		const page = createPuzzlePage('film-reveal');
+		const progressIdentity = {
+			puzzleId: 'moviegrid-filmreveal-394',
+			puzzleType: 'FILMREVEAL',
+			publishDate: '2026-11-02T00:00:00Z',
+		};
+		const { container } = renderPuzzlePageLayout('film-reveal', {
+			instance: { ...page.instance, progressIdentity },
+		});
+		const props = container
+			.querySelector('gu-island[name="PuzzleIframe"]')
+			?.getAttribute('props');
+		expect(JSON.parse(props!)).toEqual(
+			expect.objectContaining({ progressIdentity }),
+		);
+	});
+
+	it.each([
+		['film-reveal', 'Film reveal'],
+		['on-the-ball', 'On the ball'],
+	])(
+		'renders the %s headline and trivia section link without print',
+		(slug, title) => {
+			renderPuzzlePageLayout(slug);
+
+			expect(
+				screen.getByRole('heading', { level: 1, name: title }),
+			).toBeInTheDocument();
+			expect(
+				screen.getByRole('link', { name: 'Trivia & quizzes' }),
+			).toHaveAttribute(
+				'href',
+				'/puzzles-and-games/trivia-and-quizzes/archive',
+			);
+			const preferredSource = screen.getByRole('link', {
+				name: 'Prefer the Guardian on Google',
+			});
+			expect(preferredSource).toHaveAttribute(
+				'href',
+				'https://www.google.com/preferences/source?q=theguardian.com',
+			);
+			expect(preferredSource).toHaveAttribute(
+				'data-print-layout',
+				'hide',
+			);
+			expect(
+				screen.queryByRole('button', { name: /print/i }),
+			).not.toBeInTheDocument();
+		},
+	);
+
+	it.each([
+		{ slug: 'word-wheel', isAdFreeUser: false },
+		{ slug: 'word-wheel', isAdFreeUser: true },
+		{ slug: 'sudoku-easy', isAdFreeUser: false },
+	])(
+		'renders the sponsor with a capped logo for $slug (ad-free: $isAdFreeUser)',
+		({ slug, isAdFreeUser }) => {
+			renderPuzzlePageLayout(slug, { isAdFreeUser }, puzzlesBranding);
+			expect(screen.getByText('Supported by')).toBeInTheDocument();
+			expect(
+				screen.getByRole('img', { name: 'Example sponsor' }),
+			).toHaveAttribute('width', '140');
+			expect(
+				screen.getByRole('link', { name: 'About this content' }),
+			).toHaveAttribute('href', 'https://example.com/about');
+		},
+	);
+
+	it('omits the About link when the game sponsor has no about URL', () => {
+		renderPuzzlePageLayout(
+			'word-wheel',
+			{},
+			{ ...puzzlesBranding, aboutThisLink: '' },
+		);
+		expect(screen.getByText('Supported by')).toBeInTheDocument();
+		expect(
+			screen.queryByRole('link', { name: 'About this content' }),
+		).not.toBeInTheDocument();
+	});
+
+	it.each(['word-wheel', 'sudoku-easy'])(
+		'renders no sponsor for %s when no branding is provided',
+		(slug) => {
+			renderPuzzlePageLayout(slug);
+			expect(screen.queryByText('Supported by')).not.toBeInTheDocument();
+		},
+	);
+
 	it('renders the design-provided headline text, not raw instance.title', () => {
 		renderPuzzlePageLayout('sudoku-easy');
 

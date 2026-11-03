@@ -2,6 +2,7 @@ import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import type { ReactNode } from 'react';
 import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
+import type { Branding } from '../types/branding';
 import { PuzzlesLayout } from './PuzzlesLayout';
 
 jest.mock('../components/Masthead/Masthead', () => ({
@@ -11,8 +12,18 @@ jest.mock('../components/Footer', () => ({
 	Footer: () => <div data-testid="footer" />,
 }));
 jest.mock('../components/PuzzlesDirectoryProgress.island', () => ({
-	PuzzlesDirectoryProgress: ({ hideTopRule }: { hideTopRule?: boolean }) => (
-		<div data-testid="directory" data-hide-top-rule={hideTopRule} />
+	PuzzlesDirectoryProgress: ({
+		hideTopRule,
+		containerBranding,
+	}: {
+		hideTopRule?: boolean;
+		containerBranding?: Partial<Record<string, Branding>>;
+	}) => (
+		<div
+			data-testid="directory"
+			data-hide-top-rule={hideTopRule}
+			data-container-branding={JSON.stringify(containerBranding)}
+		/>
 	),
 }));
 jest.mock('../components/Section', () => ({
@@ -58,6 +69,57 @@ describe('PuzzlesLayout', () => {
 			screen.queryByRole('navigation', { name: 'Puzzles categories' }),
 		).not.toBeInTheDocument();
 	});
+
+	it.each(['AU', 'UK'])(
+		'selects only %s container branding independently of hub branding',
+		(editionId) => {
+			render(
+				<PuzzlesLayout
+					NAV={nav}
+					branding={puzzlesBranding}
+					puzzlesPage={
+						{
+							...page(true),
+							editionId,
+							layout: {
+								containers: [
+									{
+										id: 'crosswords',
+										title: 'Crosswords',
+										content: {
+											items: [],
+											nestedContainers: [],
+										},
+										commercialProperties: {
+											AU: {
+												adTargeting: [],
+												branding: puzzlesBranding,
+											},
+										},
+									},
+									{
+										id: 'word-games',
+										title: 'Word games',
+										content: {
+											items: [],
+											nestedContainers: [],
+										},
+									},
+								],
+							},
+						} as never
+					}
+				/>,
+			);
+
+			expect(screen.getByTestId('directory')).toHaveAttribute(
+				'data-container-branding',
+				JSON.stringify(
+					editionId === 'AU' ? { crosswords: puzzlesBranding } : {},
+				),
+			);
+		},
+	);
 
 	it('uses the requested puzzle palette when dark mode is available', () => {
 		render(
@@ -156,6 +218,20 @@ describe('PuzzlesLayout', () => {
 			'src',
 			'https://i.guim.co.uk/img/uploads/2026/09/15/header-mobile-360px.png?width=360&dpr=2&s=none',
 		);
+	});
+
+	it('omits the About link when the sponsor has no about URL', () => {
+		render(
+			<PuzzlesLayout
+				NAV={nav}
+				puzzlesPage={page() as never}
+				branding={{ ...puzzlesBranding, aboutThisLink: '' }}
+			/>,
+		);
+		expect(screen.getByText('Supported by')).toBeInTheDocument();
+		expect(
+			screen.queryByRole('link', { name: 'About this content' }),
+		).not.toBeInTheDocument();
 	});
 
 	it('renders the illustrated header with responsive sources and a fixed height', () => {

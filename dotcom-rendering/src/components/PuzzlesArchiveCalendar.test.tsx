@@ -283,6 +283,70 @@ describe('PuzzlesArchiveCalendar', () => {
 		},
 	);
 
+	it.each([
+		['film-reveal', 'FILMREVEAL'],
+		['on-the-ball', 'ONTHEBALL'],
+	])(
+		'refreshes %s completion through the uncached AJAX host',
+		async (slug, puzzleType) => {
+			pageConfig.ajaxUrl = 'https://api.nextgen.guardianapps.co.uk';
+			mockedGetAuthStatus.mockResolvedValue({
+				kind: 'SignedIn',
+				accessToken: { accessToken: 'access-token' },
+				idToken: {},
+			} as never);
+			const trivia: PuzzlesArchive = {
+				...archive,
+				category: 'trivia-and-quizzes',
+				selectedPuzzle: {
+					id: slug,
+					title: slug,
+					puzzleType,
+					slug: `trivia-and-quizzes/${slug}`,
+					set: 'all',
+				},
+				items: [{ ...archive.items[0]!, puzzleType }],
+			};
+			const fetchMock = jest.fn().mockResolvedValue({
+				ok: true,
+				json: async () => ({
+					...trivia,
+					items: [
+						{
+							...trivia.items[0],
+							progress: 100,
+							gameStatus: 'completed',
+						},
+					],
+				}),
+			});
+			Object.defineProperty(global, 'fetch', {
+				configurable: true,
+				value: fetchMock,
+			});
+			render(<PuzzlesArchiveCalendar initialArchive={trivia} />);
+
+			await waitFor(() =>
+				expect(
+					screen.getByLabelText('2026-09-02, completed'),
+				).toBeInTheDocument(),
+			);
+			expect(fetchMock).toHaveBeenCalledWith(
+				expect.objectContaining({
+					origin: 'https://api.nextgen.guardianapps.co.uk',
+					pathname: `/puzzles-and-games/trivia-and-quizzes/archive-data/${slug}/2026/9`,
+				}),
+				expect.objectContaining({
+					cache: 'no-store',
+					credentials: 'same-origin',
+					headers: expect.objectContaining({
+						Authorization: 'Bearer access-token',
+					}),
+				}),
+			);
+		},
+	);
+
 	it('bolds the current London weekday only in the current month', () => {
 		jest.useFakeTimers().setSystemTime(new Date('2026-10-07T12:00:00Z'));
 		const currentMonthArchive = {

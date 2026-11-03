@@ -88,7 +88,6 @@ export type DCRFrontCard = {
 	kickerText?: string;
 	supportingContent?: DCRSupportingContent[];
 	snapData?: DCRSnapType;
-	isBoosted?: boolean;
 	boostLevel?: BoostLevel;
 	isImmersive: boolean;
 	isCrossword?: boolean;
@@ -102,7 +101,7 @@ export type DCRFrontCard = {
 	mainMedia?: MainMedia;
 	embedUri?: string;
 	branding?: Branding;
-	slideshowImages?: DCRSlideshowImage[];
+	slideshowMedia?: DCRSlideshowMedia[];
 	showVideo?: boolean;
 	uniqueId?: string;
 	serverTime?: number;
@@ -114,9 +113,28 @@ export type DCRFrontCard = {
 };
 
 export type DCRSlideshowImage = {
+	/**
+	 * Discriminant for slideshow media. Optional for backwards compatibility:
+	 * a slide without a `type` is treated as an image.
+	 */
+	type?: 'image';
 	imageSrc: string;
 	imageCaption?: string;
 };
+
+/**
+ * A self-hosted or YouTube video slide, played with the same players as video cards.
+ */
+export type DCRSlideshowVideo = {
+	type: 'video';
+	video: Extract<MainMedia, { type: 'SelfHostedVideo' | 'YoutubeVideo' }>;
+	caption?: string;
+};
+
+/**
+ * A single slide in a media slideshow, which may be an image or a video.
+ */
+export type DCRSlideshowMedia = DCRSlideshowImage | DCRSlideshowVideo;
 
 export type DCRSnapType = {
 	embedHtml?: string;
@@ -159,6 +177,8 @@ export type DCRSupportingContent = {
 	kickerText?: string;
 	format: ArticleFormat;
 	headlineTestUuid?: string;
+	/** Storylines: The date is shown in the supporting content for the key stories container in a tag page */
+	webPublicationDate?: string;
 };
 
 export type TreatType = {

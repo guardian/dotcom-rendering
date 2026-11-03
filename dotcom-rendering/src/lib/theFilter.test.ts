@@ -1,4 +1,4 @@
-import { hasFilterTag, isFilterPageId } from './theFilter';
+import { hasFilterTag, isFilterPageId, isRepublished } from './theFilter';
 
 describe('isFilterPageId', () => {
 	it('returns true for a UK Filter article pageId', () => {
@@ -69,5 +69,23 @@ describe('hasFilterTag', () => {
 
 	it('returns false for no tags', () => {
 		expect(hasFilterTag([])).toBe(false);
+	});
+});
+
+describe('isRepublished', () => {
+	it('returns true when first and latest publication dates differ', () => {
+		expect(
+			isRepublished('2025-01-01T00:00:00Z', '2026-01-01T00:00:00Z'),
+		).toBe(true);
+	});
+
+	it('returns false when first and latest publication dates match', () => {
+		expect(
+			isRepublished('2026-01-01T00:00:00Z', '2026-01-01T00:00:00Z'),
+		).toBe(false);
+	});
+
+	it('returns false when the first publication date is missing', () => {
+		expect(isRepublished(undefined, '2026-01-01T00:00:00Z')).toBe(false);
 	});
 });

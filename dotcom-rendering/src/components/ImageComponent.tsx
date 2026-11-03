@@ -480,6 +480,7 @@ export const ImageComponent = ({
 					isMainMedia={isMainMedia}
 					padCaption={role === 'showcase' && isTimeline}
 					isImmersive={role === 'immersive'}
+					showIconBelowLeftCol={true}
 				/>
 			)}
 		</>

@@ -1,9 +1,10 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
+import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
 import { extractNAV } from '../model/extract-nav';
 import { getPuzzleConfig } from '../model/puzzles/puzzleConfigs';
-import { puzzlePageFormat, PuzzlePageLayout } from './PuzzlePageLayout';
+import { getPuzzlePageFormat, PuzzlePageLayout } from './PuzzlePageLayout';
 
 const puzzlePage = createPuzzlePage('word-wheel');
 const puzzleConfig = getPuzzleConfig('word-wheel');
@@ -22,7 +23,7 @@ const meta = {
 		darkModeAvailable: false,
 	},
 	parameters: {
-		formats: [puzzlePageFormat],
+		formats: [getPuzzlePageFormat(storyPuzzleConfig.puzzleGroup)],
 		chromatic: {
 			viewports: [breakpoints.mobileMedium, breakpoints.wide],
 		},
@@ -44,6 +45,12 @@ export const AdFree = {
 	},
 } satisfies Story;
 
+export const Sponsored = {
+	args: {
+		branding: puzzlesBranding,
+	},
+} satisfies Story;
+
 // Production Saturday Edition data, standing in for the Cluesletter (which has no exampleUrl yet).
 const saturdayEdition = {
 	identityName: 'saturday-edition',
@@ -61,23 +68,6 @@ const v1Config = {
 	edition: 'INT' as const,
 };
 
-export const WithNewsletter = {
-	args: {
-		puzzlePage: {
-			...puzzlePage,
-			config: v1Config,
-			puzzleConfig: storyPuzzleConfig,
-			instance: {
-				...puzzlePage.instance,
-				puzzlesSupporting: {
-					usefulLinks: [],
-					newsletter: saturdayEdition,
-				},
-			},
-		},
-	},
-} satisfies Story;
-
 export const WithUsefulLinksAndNewsletter = {
 	args: {
 		puzzlePage: {
@@ -89,17 +79,37 @@ export const WithUsefulLinksAndNewsletter = {
 				puzzlesSupporting: {
 					usefulLinks: [
 						{
-							title: 'Crossword setter A-Z',
-							url: 'https://www.theguardian.com/crosswords/search',
+							title: 'Support the Guardian',
+							url: 'https://support.theguardian.com',
 						},
 						{
-							title: 'Crossword blog',
-							url: 'https://www.theguardian.com/crosswords/crossword-blog',
+							title: 'Help centre',
+							url: 'https://help.theguardian.com',
 						},
 					],
 					newsletter: saturdayEdition,
 				},
 			},
 		},
+	},
+} satisfies Story;
+
+const sudokuPage = createPuzzlePage('sudoku-easy');
+const sudokuConfig = getPuzzleConfig('sudoku-easy');
+if (!sudokuConfig) throw new Error('Missing Sudoku easy configuration');
+
+/** Logic puzzles take the sport theme, word games (above) the opinion theme. */
+export const LogicPuzzle = {
+	args: {
+		puzzlePage: {
+			...sudokuPage,
+			puzzleConfig: {
+				...sudokuConfig,
+				iframe: { provider: 'wordiply', baseUrl: 'about:blank' },
+			},
+		},
+	},
+	parameters: {
+		formats: [getPuzzlePageFormat(sudokuConfig.puzzleGroup)],
 	},
 } satisfies Story;

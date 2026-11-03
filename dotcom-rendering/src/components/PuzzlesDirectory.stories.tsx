@@ -1,6 +1,10 @@
 import { breakpoints } from '@guardian/source/foundations';
 import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
-import { createPuzzlesPage } from '../../fixtures/manual/puzzlesPage';
+import {
+	createPuzzlesPage,
+	featuredTriviaPuzzlesContainer,
+	triviaPuzzlesContainer,
+} from '../../fixtures/manual/puzzlesPage';
 import { PuzzlesLayout } from '../layouts/PuzzlesLayout';
 import { extractNAV } from '../model/extract-nav';
 import type { PuzzlesLayoutType } from '../types/puzzlesPage';
@@ -127,6 +131,70 @@ export const BlueprintDirectory = () => (
 );
 export const AdFree = () => (
 	<PuzzlesDirectory layout={layout} renderAds={false} />
+);
+
+export const TriviaAndQuizzes = () => (
+	<PuzzlesDirectory
+		layout={{ containers: [triviaPuzzlesContainer] }}
+		renderAds={false}
+	/>
+);
+
+export const MovieGridFeatured = () => (
+	<PuzzlesDirectory
+		layout={{ containers: [featuredTriviaPuzzlesContainer] }}
+		renderAds={false}
+	/>
+);
+
+/** The newsletter should align with both edges of the right-hand puzzle card. */
+export const WithNewsletter = () => (
+	<PuzzlesDirectory
+		renderAds={false}
+		layout={{
+			containers: [
+				...layout.containers,
+				{
+					id: 'useful-links',
+					title: 'Useful links',
+					variant: 'supporting',
+					content: { items: [], nestedContainers: [] },
+					supporting: {
+						usefulLinksTitle: 'Useful links',
+						usefulLinks: [
+							{
+								title: 'Support the Guardian',
+								url: 'https://support.theguardian.com',
+							},
+							{
+								title: 'Help centre',
+								url: 'https://help.theguardian.com',
+							},
+						],
+						newsletter: {
+							identityName: 'cluesletter',
+							name: 'Cluesletter',
+							frequency: 'Weekly',
+							description:
+								'Get our puzzles news, clues, competitions and our exclusive Letter Adder game direct to your inbox',
+							illustrationSquare:
+								'https://uploads.guim.co.uk/2026/10/08/5_3_(eeb3139d4b747fcb8cc3674b62e545e961be7b8e).png',
+						},
+						popularTitle: 'Most popular puzzles',
+						popularGroups: [],
+					},
+				},
+			],
+		}}
+	/>
+);
+
+export const SponsoredContainer = () => (
+	<PuzzlesDirectory
+		layout={layout}
+		renderAds={false}
+		containerBranding={{ crosswords: puzzlesBranding }}
+	/>
 );
 
 export const Sponsored = () => {

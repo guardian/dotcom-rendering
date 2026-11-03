@@ -1,12 +1,14 @@
-import { css } from '@emotion/react';
+import { css, keyframes } from '@emotion/react';
 import {
 	from,
 	headlineBold20,
-	headlineBold34,
+	headlineMedium28,
+	headlineMedium34,
 	palette,
 	space,
 	textSans14,
 	textSans17,
+	until,
 	visuallyHidden,
 } from '@guardian/source/foundations';
 import {
@@ -142,49 +144,141 @@ const sectionStyles = css`
 `;
 
 const linesStyles = css`
-	height: 10px;
+	height: 13px;
 	margin-bottom: ${space[4]}px;
 	background: repeating-linear-gradient(
 		to bottom,
 		var(--puzzles-border-colour, ${palette.neutral[86]}) 0,
 		var(--puzzles-border-colour, ${palette.neutral[86]}) 1px,
 		transparent 1px,
-		transparent 3px
+		transparent 4px
 	);
+`;
+
+const CHIPS_FADE_WIDTH = space[10];
+
+/**
+ * From "tablet" the chips wrap onto extra lines, so none are ever hidden.
+ * Below it they become a swipeable carousel (`tabsStyles`), faded at both
+ * edges (`chipsFadeLeftStyles`, `chipsFadeRightStyles`). Same mechanism as the
+ * "More from Puzzles & games" rail (`MorePuzzlesCard`): the carousel bleeds to
+ * the page's vertical lines by undoing the page's side padding (`pageStyles`),
+ * and the fades follow the chips' scroll position.
+ */
+const chipsStyles = css`
+	--chips-edge-padding: ${space[3]}px;
+	position: relative;
+	/* Lets the fades follow the scroll position of the chips. */
+	timeline-scope: --puzzles-chips-scroll;
+	${until.tablet} {
+		margin: 0 calc(var(--chips-edge-padding) * -1);
+	}
+`;
+
+const chipsFadeInKeyframes = keyframes`
+	from { opacity: 0; }
+	to { opacity: 1; }
+`;
+
+const chipsFadeStyles = css`
+	display: none;
+	${until.tablet} {
+		position: absolute;
+		top: 0;
+		bottom: ${space[3]}px;
+		width: ${CHIPS_FADE_WIDTH}px;
+		pointer-events: none;
+	}
+`;
+
+/**
+ * Always visible, since the list's right padding lets the last chip scroll
+ * clear of it.
+ */
+const chipsFadeRightStyles = css`
+	${until.tablet} {
+		display: block;
+		right: 0;
+		background: linear-gradient(
+			to right,
+			transparent 0%,
+			var(--puzzles-page-background, ${palette.neutral[100]}) 100%
+		);
+	}
+`;
+
+/**
+ * Must not cover the first chip at rest, so it only appears once the reader
+ * has scrolled (a scroll-driven animation). Browsers without scroll-driven
+ * animations don't show it.
+ */
+const chipsFadeLeftStyles = css`
+	@supports (animation-timeline: scroll()) {
+		${until.tablet} {
+			display: block;
+			left: 0;
+			background: linear-gradient(
+				to left,
+				transparent 0%,
+				var(--puzzles-page-background, ${palette.neutral[100]}) 100%
+			);
+			opacity: 0;
+			animation-name: ${chipsFadeInKeyframes};
+			animation-duration: 1ms;
+			animation-timing-function: linear;
+			animation-fill-mode: both;
+			animation-timeline: --puzzles-chips-scroll;
+			animation-range: 0 ${CHIPS_FADE_WIDTH}px;
+		}
+	}
 `;
 
 const tabsStyles = css`
 	display: flex;
+	flex-wrap: wrap;
 	gap: ${space[3]}px;
-	overflow-x: auto;
 	padding: 0 0 ${space[3]}px;
-	scrollbar-width: none;
-	white-space: nowrap;
-	::-webkit-scrollbar {
-		display: none;
+	${until.tablet} {
+		flex-wrap: nowrap;
+		overflow-x: auto;
+		padding: 0 ${CHIPS_FADE_WIDTH}px ${space[3]}px var(--chips-edge-padding);
+		scroll-padding: 0 ${CHIPS_FADE_WIDTH}px 0 var(--chips-edge-padding);
+		scroll-timeline: --puzzles-chips-scroll inline;
+		scrollbar-width: none;
+		white-space: nowrap;
+		::-webkit-scrollbar {
+			display: none;
+		}
 	}
 	a {
+		flex: none;
 		${textSans14};
-		border: 1px solid ${palette.news[400]};
+		border: 1px solid var(--puzzles-primary, ${palette.news[300]});
 		border-radius: 18px;
 		padding: 2px ${space[3]}px;
-		color: ${palette.news[400]};
+		color: var(--puzzles-primary, ${palette.news[300]});
 		font-weight: bold;
 		line-height: 18px;
 		text-decoration: none;
 	}
-	a[aria-current='page'] {
-		background: ${palette.news[400]};
-		color: ${palette.neutral[100]};
+	a:hover {
+		background: var(--puzzles-hover, ${palette.news[800]});
+	}
+	a[aria-current='page'],
+	a[aria-current='page']:hover {
+		background: var(--puzzles-primary, ${palette.news[300]});
+		color: var(--puzzles-on-primary, ${palette.neutral[100]});
 		font-weight: bold;
 	}
 `;
 
 const titleStyles = css`
-	${headlineBold34};
+	${headlineMedium28};
 	margin: ${space[3]}px 0 ${space[3]}px;
 	color: var(--puzzles-headline-colour, ${palette.neutral[7]});
-	line-height: 1.05;
+	${from.tablet} {
+		${headlineMedium34};
+	}
 `;
 
 const recentStyles = css`
@@ -208,13 +302,20 @@ const recentStyles = css`
 		box-sizing: border-box;
 		flex: 0 0 calc((100% - var(--recent-gap)) / 2);
 		min-height: 104px;
-		padding: ${space[2]}px ${space[2]}px 30px;
-		background: var(--puzzles-card-background, ${palette.news[800]});
+		padding: ${space[1]}px ${space[2]}px 30px;
+		background: var(
+			--puzzles-card-background,
+			var(--puzzles-tint, ${palette.news[800]})
+		);
 		color: var(--puzzles-card-text-colour, ${palette.neutral[7]});
 		text-decoration: none;
 		${from.phablet} {
 			min-width: 0;
 		}
+	}
+	.setter {
+		display: block;
+		color: var(--puzzles-primary, ${palette.news[300]});
 	}
 	a + a::before {
 		position: absolute;
@@ -228,8 +329,14 @@ const recentStyles = css`
 	}
 	strong {
 		display: block;
-		color: var(--puzzles-card-headline-colour, ${palette.news[400]});
+		color: var(
+			--puzzles-card-headline-colour,
+			var(--puzzles-primary, ${palette.news[300]})
+		);
 		${headlineBold20};
+	}
+	a:hover strong {
+		text-decoration: underline;
 	}
 	span {
 		${textSans14};
@@ -284,6 +391,8 @@ const controlsStyles = css`
 		svg {
 			width: 26px;
 			height: 26px;
+			/* The icon has no fill of its own, so it would stay black. */
+			fill: currentColor;
 		}
 		:last-child {
 			justify-self: end;
@@ -361,6 +470,7 @@ const calendarStyles = css`
 		);
 	}
 	.setter-name {
+		display: none;
 		position: absolute;
 		top: 50%;
 		left: 2px;
@@ -387,9 +497,12 @@ const calendarStyles = css`
 		}
 	}
 	.day[data-status='unavailable'] {
-		border-color: ${palette.neutral[97]};
+		border-color: var(
+			--puzzles-unavailable-day-border,
+			${palette.neutral[93]}
+		);
 		background: var(--puzzles-page-background, ${palette.neutral[100]});
-		color: ${palette.neutral[60]};
+		color: var(--puzzles-unavailable-day-text, ${palette.neutral[46]});
 	}
 	${from.phablet} {
 		grid-template-columns: repeat(7, 60px);
@@ -405,6 +518,9 @@ const calendarStyles = css`
 		grid-template-columns: repeat(7, 68px);
 		.day-number {
 			font-size: 12px;
+		}
+		.setter-name {
+			display: block;
 		}
 	}
 	${from.desktop} {
@@ -433,7 +549,7 @@ const emptyMonthStyles = css`
 	${textSans14};
 	margin-top: ${space[4]}px;
 	a {
-		color: ${palette.news[400]};
+		color: var(--puzzles-primary, ${palette.news[300]});
 		text-decoration: underline;
 	}
 `;
@@ -775,42 +891,52 @@ export const PuzzlesArchiveCalendar = ({
 			css={sectionStyles}
 		>
 			<div aria-hidden="true" css={linesStyles} />
-			<nav aria-label="Puzzle types" css={tabsStyles}>
-				{archive.puzzles.map((puzzle) => {
-					const href = archivePageUrl(
-						archive.category,
-						puzzle.id,
-						archive.year,
-						archive.month,
-					);
-					return (
-						<a
-							aria-current={
-								puzzle.id === archive.selectedPuzzle.id
-									? 'page'
-									: undefined
-							}
-							href={href}
-							key={puzzle.id}
-							onClick={(event) => {
-								if (
-									event.button !== 0 ||
-									event.metaKey ||
-									event.ctrlKey ||
-									event.shiftKey ||
-									event.altKey
-								) {
-									return;
+			<div css={chipsStyles}>
+				<nav aria-label="Puzzle types" css={tabsStyles}>
+					{archive.puzzles.map((puzzle) => {
+						const href = archivePageUrl(
+							archive.category,
+							puzzle.id,
+							archive.year,
+							archive.month,
+						);
+						return (
+							<a
+								aria-current={
+									puzzle.id === archive.selectedPuzzle.id
+										? 'page'
+										: undefined
 								}
-								event.preventDefault();
-								void selectPuzzle(puzzle.id, href);
-							}}
-						>
-							{puzzle.title}
-						</a>
-					);
-				})}
-			</nav>
+								href={href}
+								key={puzzle.id}
+								onClick={(event) => {
+									if (
+										event.button !== 0 ||
+										event.metaKey ||
+										event.ctrlKey ||
+										event.shiftKey ||
+										event.altKey
+									) {
+										return;
+									}
+									event.preventDefault();
+									void selectPuzzle(puzzle.id, href);
+								}}
+							>
+								{puzzle.title}
+							</a>
+						);
+					})}
+				</nav>
+				<div
+					aria-hidden="true"
+					css={[chipsFadeStyles, chipsFadeLeftStyles]}
+				/>
+				<div
+					aria-hidden="true"
+					css={[chipsFadeStyles, chipsFadeRightStyles]}
+				/>
+			</div>
 			<h2 css={titleStyles}>{puzzleHeading}</h2>
 			<div css={recentStyles}>
 				{recent.map((item, index) => (
@@ -826,7 +952,9 @@ export const PuzzlesArchiveCalendar = ({
 							</time>
 						</span>
 						{item.setterName && (
-							<span> · By: {item.setterName}</span>
+							<span className="setter">
+								By: {item.setterName}
+							</span>
 						)}
 						{item.gameStatus === 'completed' && (
 							<span className="played">

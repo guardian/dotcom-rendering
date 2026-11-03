@@ -26,7 +26,9 @@ const sampling = 1 / 100;
 /** defining this here allows to share this with other metrics */
 const willRecordCoreWebVitals = Math.random() < sampling;
 
-const shouldCollectMetricsForTests = (userTestParticipations: string[]) => {
+export const shouldCollectMetricsForTests = (
+	userTestParticipations: string[],
+) => {
 	const userParticipationConfigs = activeABtests.filter((test) =>
 		userTestParticipations.includes(test.name),
 	);

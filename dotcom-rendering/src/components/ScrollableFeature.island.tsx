@@ -92,6 +92,7 @@ export const ScrollableFeature = ({
 						starRatingSize={'small'}
 						articleMedia={card.articleMedia}
 						headlineTestUuid={card.headlineTestUuid}
+						isStorylines={false}
 					/>
 				</ScrollableCarousel.Item>
 			))}

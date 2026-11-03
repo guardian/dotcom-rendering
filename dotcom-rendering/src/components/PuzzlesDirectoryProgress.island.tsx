@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import type { PuzzleProgressItem } from '../lib/puzzleCardProgress';
 import { puzzleTypeForCard } from '../lib/puzzleCardProgress';
 import { usePuzzleProgress } from '../lib/usePuzzleProgress';
+import type { Branding } from '../types/branding';
 import type {
 	PuzzleContainer,
 	PuzzleItem,
@@ -16,6 +17,7 @@ type Props = {
 	layout: PuzzlesLayoutType;
 	renderAds: boolean;
 	hideTopRule?: boolean;
+	containerBranding?: Partial<Record<string, Branding>>;
 };
 
 const londonDateFormatter = new Intl.DateTimeFormat('en-GB', {
@@ -132,6 +134,7 @@ export const PuzzlesDirectoryProgress = ({
 	layout,
 	renderAds,
 	hideTopRule,
+	containerBranding,
 }: Props) => {
 	const progress = usePuzzleProgress();
 	const progressLayout = useMemo(
@@ -144,6 +147,7 @@ export const PuzzlesDirectoryProgress = ({
 			layout={progressLayout}
 			renderAds={renderAds}
 			hideTopRule={hideTopRule}
+			containerBranding={containerBranding}
 		/>
 	);
 };

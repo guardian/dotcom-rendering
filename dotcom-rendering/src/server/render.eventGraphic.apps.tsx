@@ -98,7 +98,7 @@ export const renderEventGraphic = (
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
 			<Global styles={rootStyles(format, config.darkModeAvailable)} />
-			<EventGraphic graphic={graphic} />
+			<EventGraphic graphic={graphic} trackingLabel={'front'} />
 		</ConfigProvider>,
 	);
 

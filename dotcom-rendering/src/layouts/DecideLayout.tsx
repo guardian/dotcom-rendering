@@ -40,17 +40,8 @@ export type Props = WebProps | AppProps;
 const isInRevampedImmersiveLayoutTest = (article: Article): boolean =>
 	article.frontendData.config.serverSideABTests[
 		'articles-and-publishing-revamped-immersive-layout'
-	] === 'enable';
-
-/**
- * Guards grid-based interactive layout behind a 0% a/b test
- */
-export const INTERACTIVE_LAYOUT_AB_TEST =
-	'articles-and-publishing-migrate-interactive-layout';
-const isInInteractiveLayoutTest = (article: Article): boolean =>
-	article.frontendData.config.serverSideABTests[
-		INTERACTIVE_LAYOUT_AB_TEST
-	] === 'enable';
+	] === 'variant';
+const immersiveTestArticle = '/p/x6adat';
 
 const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 	const format = {
@@ -75,6 +66,8 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 				}
 				default: {
 					return isInRevampedImmersiveLayoutTest(article) ||
+						article.frontendData.config.shortUrlId ===
+							immersiveTestArticle ||
 						(article.theme === ArticleSpecial.Labs &&
 							article.design === ArticleDesign.Standard) ? (
 						<StandardLayout
@@ -188,9 +181,6 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 							format={format}
 							renderingTarget={renderingTarget}
 							serverTime={serverTime}
-							isInInteractiveLayoutTest={isInInteractiveLayoutTest(
-								article,
-							)}
 						/>
 					);
 			}
@@ -222,6 +212,8 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 				}
 				default: {
 					return isInRevampedImmersiveLayoutTest(article) ||
+						article.frontendData.config.shortUrlId ===
+							immersiveTestArticle ||
 						(article.theme === ArticleSpecial.Labs &&
 							article.design === ArticleDesign.Standard) ? (
 						<StandardLayout
@@ -352,9 +344,6 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 							format={format}
 							renderingTarget={renderingTarget}
 							serverTime={serverTime}
-							isInInteractiveLayoutTest={isInInteractiveLayoutTest(
-								article,
-							)}
 						/>
 					);
 			}

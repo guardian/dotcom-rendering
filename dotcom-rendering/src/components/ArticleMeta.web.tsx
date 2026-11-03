@@ -23,7 +23,7 @@ import {
 import { getAudioData } from '../lib/audio-data';
 import { getSoleContributor } from '../lib/byline';
 import { decideMainMediaCaption } from '../lib/decide-caption';
-import { hasFilterTag } from '../lib/theFilter';
+import { hasFilterTag, isRepublished } from '../lib/theFilter';
 import { palette as themePalette } from '../palette';
 import { hasPreferredSourceButton } from '../preferredSource';
 import type { Branding as BrandingType } from '../types/branding';
@@ -54,6 +54,7 @@ type Props = {
 	primaryDateline: string;
 	secondaryDateline: string;
 	webPublicationDate?: string;
+	firstPublicationDate?: string;
 	branding?: BrandingType;
 	discussionApiUrl: string;
 	shortUrlId: string;
@@ -61,6 +62,7 @@ type Props = {
 	mainMediaElements?: FEElement[];
 	crossword?: FEArticle['crossword'];
 	hidePreferredSourceOnPrint?: boolean;
+	isPuzzlePage?: boolean;
 };
 
 const meta = (format: ArticleFormat) => {
@@ -308,17 +310,20 @@ export const ArticleMeta = ({
 	primaryDateline,
 	secondaryDateline,
 	webPublicationDate,
+	firstPublicationDate,
 	discussionApiUrl,
 	shortUrlId,
 	isCommentable,
 	mainMediaElements,
 	crossword,
 	hidePreferredSourceOnPrint,
+	isPuzzlePage = false,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const showPreferredSource = hasPreferredSourceButton(
 		renderingTarget,
 		format,
+		isPuzzlePage,
 	);
 	const isImmersiveGrid = layoutType?.startsWith('immersive') ?? false;
 	const soleContributor = getSoleContributor(tags, byline);
@@ -339,6 +344,10 @@ export const ArticleMeta = ({
 	const rssFeedUrl = getRssFeedUrl(tags);
 
 	const isFilterArticle = hasFilterTag(tags);
+	const showUpdatedLabel =
+		isFilterArticle &&
+		webPublicationDate !== undefined &&
+		isRepublished(firstPublicationDate, webPublicationDate);
 
 	const mediaType:
 		| 'YouTubeVideo'
@@ -436,6 +445,7 @@ export const ArticleMeta = ({
 									primaryDateline={primaryDateline}
 									webPublicationDate={webPublicationDate}
 									format={format}
+									showUpdatedLabel={showUpdatedLabel}
 								/>
 							) : (
 								<Dateline
@@ -496,6 +506,7 @@ export const ArticleMeta = ({
 										primaryDateline={primaryDateline}
 										webPublicationDate={webPublicationDate}
 										format={format}
+										showUpdatedLabel={showUpdatedLabel}
 									/>
 								) : (
 									<Dateline

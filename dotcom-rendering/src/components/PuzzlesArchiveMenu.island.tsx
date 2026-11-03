@@ -1,5 +1,12 @@
 import { css } from '@emotion/react';
-import { from, palette, space, textSans14 } from '@guardian/source/foundations';
+import {
+	from,
+	palette,
+	space,
+	textSans14,
+	textSans15,
+	until,
+} from '@guardian/source/foundations';
 import { useEffect, useRef } from 'react';
 import type { PuzzleItem } from '../types/puzzlesPage';
 
@@ -92,24 +99,46 @@ const menuStyles = css`
 	z-index: 20;
 	top: calc(100% + ${space[1]}px);
 	left: 0;
-	min-width: 256px;
+	min-width: 209px;
 	margin: 0;
 	padding: 0;
 	border: 1px solid var(--puzzles-border-colour, ${palette.neutral[86]});
 	background: var(--puzzles-card-background, ${palette.neutral[100]});
 	list-style: none;
+
+	/*
+	 * Below the tablet breakpoint the archive label sits against the right
+	 * edge, so open the menu leftwards to keep it inside the page. The
+	 * section inset is 10px below mobileMedium and 20px from it, so the menu
+	 * always ends 20px from the right edge of the viewport.
+	 */
+	${until.tablet} {
+		right: 0;
+		left: auto;
+	}
+	${until.mobileMedium} {
+		right: 10px;
+	}
+
+	/* Opens upwards when there is not enough room below (see placeMenu). */
+	&[data-placement='top'] {
+		top: auto;
+		bottom: calc(100% + ${space[1]}px);
+	}
 `;
 
 const linkStyles = css`
 	display: flex;
-	min-height: 60px;
-	align-items: center;
-	padding: 0 ${space[5]}px;
+	box-sizing: border-box;
+	min-height: 45px;
+	align-items: flex-start;
+	padding: ${space[3]}px ${space[4]}px;
 	border-bottom: 1px solid
 		var(--puzzles-border-colour, ${palette.neutral[86]});
-	color: var(--puzzles-headline-colour, ${palette.neutral[7]});
+	color: var(--puzzles-headline-colour, ${palette.neutral[0]});
 	text-decoration: none;
-	${textSans14};
+	${textSans15};
+	line-height: 1.3;
 
 	:hover,
 	:focus-visible {
@@ -128,6 +157,7 @@ export const PuzzlesArchiveMenu = ({
 }: Props) => {
 	const detailsRef = useRef<HTMLDetailsElement>(null);
 	const summaryRef = useRef<HTMLElement>(null);
+	const menuRef = useRef<HTMLUListElement>(null);
 
 	useEffect(() => {
 		const close = (event: Event) => {
@@ -163,8 +193,25 @@ export const PuzzlesArchiveMenu = ({
 		return null;
 	}
 
+	/**
+	 * Opens the menu upwards when it does not fit below the label and there
+	 * is more room above it.
+	 */
+	const placeMenu = () => {
+		const menu = menuRef.current;
+		const summary = summaryRef.current;
+		if (!menu || !summary || detailsRef.current?.open !== true) return;
+		const { top, bottom } = summary.getBoundingClientRect();
+		const spaceBelow = window.innerHeight - bottom - space[1];
+		const spaceAbove = top - space[1];
+		menu.dataset.placement =
+			menu.offsetHeight > spaceBelow && spaceAbove > spaceBelow
+				? 'top'
+				: 'bottom';
+	};
+
 	return (
-		<details css={wrapperStyles} ref={detailsRef}>
+		<details css={wrapperStyles} onToggle={placeMenu} ref={detailsRef}>
 			<summary css={summaryStyles} ref={summaryRef}>
 				{label}{' '}
 				<svg
@@ -185,7 +232,7 @@ export const PuzzlesArchiveMenu = ({
 					/>
 				</svg>
 			</summary>
-			<ul aria-label={label} css={menuStyles}>
+			<ul aria-label={label} css={menuStyles} ref={menuRef}>
 				{validArchives.map(({ archive, url }) => (
 					<li key={archive.id}>
 						<a

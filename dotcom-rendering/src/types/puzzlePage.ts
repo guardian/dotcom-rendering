@@ -1,4 +1,6 @@
 import type { EditionId } from '../lib/edition';
+import type { PuzzleProgressIdentity } from '../lib/puzzleProgress/types';
+import type { CommercialProperties } from './commercial';
 import type { ConfigType } from './config';
 import type { FooterType } from './footer';
 import type { FENavType } from './frontend';
@@ -16,6 +18,8 @@ import type { PuzzleGameSupporting, PuzzleItem } from './puzzlesPage';
 export interface PuzzlePageInstance {
 	/** Dated provider URL resolved by frontend through the Puzzles API. */
 	gameUrl?: string;
+	/** Authoritative anonymous identity for reporting the reader's progress. */
+	progressIdentity?: PuzzleProgressIdentity;
 	title: string;
 	/**
 	 * Which day's puzzle the reader wants to see, as a plain date string
@@ -80,4 +84,5 @@ export interface FEPuzzlePageType {
 	 * behaviour (ads always rendered) until `frontend` is updated.
 	 */
 	isAdFreeUser?: boolean;
+	commercialProperties?: Partial<CommercialProperties>;
 }

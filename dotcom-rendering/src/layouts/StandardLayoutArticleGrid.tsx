@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
-import { from, space, until } from '@guardian/source/foundations';
-import { palette as sourcePalette } from '@guardian/source/foundations';
+import { between, from, space, until } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AffiliateDisclaimer } from '../components/AffiliateProducts/AffiliateDisclaimer';
@@ -32,6 +31,7 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 	ArticleSpecial,
+	hasImmersiveGridTitle,
 } from '../lib/articleFormat';
 import { getSoleContributor } from '../lib/byline';
 import { getContributionsServiceUrl } from '../lib/contributions';
@@ -40,6 +40,7 @@ import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { safeParseURL } from '../lib/parse';
 import { parse } from '../lib/slot-machine-flags';
+import { hasFilterTag } from '../lib/theFilter';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -61,7 +62,7 @@ const stretchLines = css`
 	}
 `;
 
-const landscapeImmersiveMediaBelowDesktop = css`
+const immersiveMediaBelowTablet = css`
 	${until.tablet} {
 		position: relative;
 
@@ -81,7 +82,14 @@ const landscapeImmersiveMediaBelowDesktop = css`
 			z-index: ${getZIndex('mediaOverlay')};
 			background: ${themePalette('--headline-background-immersive')};
 			backdrop-filter: blur(8px);
-			mask-image: linear-gradient(180deg, transparent, black 90%);
+			mask-image: linear-gradient(
+				to bottom,
+				transparent,
+				rgb(0 0 0 / 12%) 25%,
+				rgb(0 0 0 / 50%) 55%,
+				rgb(0 0 0 / 85%) 80%,
+				black
+			);
 			pointer-events: none;
 		}
 	}
@@ -91,6 +99,29 @@ const avatarHeadlineWrapper = css`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+`;
+
+const immersivePortraitFooter = css`
+	display: contents;
+
+	${from.leftCol} {
+		${grid.between('left-column-start', 9)}
+		display: grid;
+		grid-row: 3;
+		grid-template-columns: subgrid;
+		grid-template-rows: auto;
+		align-self: end;
+		border-top: 1px solid ${themePalette('--article-border')};
+
+		> [data-gu-name='standfirst'],
+		> [data-gu-name='meta'] {
+			grid-row: 1;
+		}
+	}
+
+	${from.wide} {
+		${grid.between('left-column-start', 10)}
+	}
 `;
 
 const avatarPositionStyles = (isPicture: boolean) => css`
@@ -204,6 +235,12 @@ export const StandardLayoutArticleGrid = ({
 	const isMainMediaAtom =
 		mainMediaType ===
 		'model.dotcomrendering.pageElements.MediaAtomBlockElement';
+	const isMainMediaLoopOrCinemagraph =
+		isMainMediaAtom &&
+		(mainMedia.videoPlayerFormat === 'Loop' ||
+			mainMedia.videoPlayerFormat === 'Cinemagraph');
+	const usesImmersiveImageProportions =
+		isMainMediaImage || isMainMediaLoopOrCinemagraph;
 
 	const mainMediaAspectRatio = isMainMediaImage
 		? mainMedia.media.allImages[0]?.fields.aspectRatio
@@ -217,20 +254,55 @@ export const StandardLayoutArticleGrid = ({
 			: 'landscape';
 	const immersiveHeaderHeight =
 		minHeaderHeightPx + (isLabs ? LABS_HEADER_HEIGHT : 0);
-	const immersiveMediaRowHeight = isMainMediaImage
+	const immersiveMediaRowHeight = usesImmersiveImageProportions
 		? 'auto'
 		: `max(calc(80vh - ${immersiveHeaderHeight}px), calc(25rem - ${immersiveHeaderHeight}px))`;
 
-	const layoutType = getLayoutType(format, mainMediaOrientation);
+	const topHatTestingPage = '/p/x4zt8y';
+	const layoutType =
+		article.config.shortUrlId === topHatTestingPage
+			? 'interactiveTopHat'
+			: getLayoutType(format, mainMediaOrientation);
+
+	const setCentreRule = (gridLayout: LayoutType) => {
+		if (
+			isLabs ||
+			gridLayout === 'interactiveStandard' ||
+			gridLayout === 'interactiveTopHat'
+		) {
+			return undefined;
+		}
+
+		const columnCount =
+			gridLayout === 'immersivePortrait'
+				? 5
+				: gridLayout === 'immersiveLandscape'
+					? 4
+					: 3;
+
+		return css`
+			${from.leftCol} {
+				${grid.centreRule(columnCount)}
+			}
+		`;
+	};
 
 	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
 
 	const isImmersivePortrait = layoutType === 'immersivePortrait';
 	const isImmersiveLandscape = layoutType === 'immersiveLandscape';
 	const isImmersive = isImmersivePortrait || isImmersiveLandscape;
+	const hasImmersivePortraitTitleRule =
+		isImmersivePortrait && hasImmersiveGridTitle(format, article.tags);
 
-	const hasMinimumImageHeight =
-		isLabs && isImmersivePortrait && isMainMediaImage;
+	const isInteractiveTopHat = layoutType === 'interactiveTopHat';
+
+	const isFilterArticle = hasFilterTag(article.tags);
+	const tableOfContentsStyle =
+		isImmersive && isFilterArticle ? 'horizontal' : 'default';
+
+	const hasLabsPortraitImage =
+		isLabs && isImmersivePortrait && usesImmersiveImageProportions;
 
 	const ageWarning = getAgeWarning(
 		article.tags,
@@ -252,20 +324,33 @@ export const StandardLayoutArticleGrid = ({
 			${avatarDisplayed && `margin-top: -28px;`}
 		}
 	`;
+
+	// Immersive headlines overlap the bottom of the main media, so the
+	// disclaimer goes above the standfirst instead.
+	const hasImmersiveAffiliateDisclaimer =
+		isImmersive && article.affiliateLinksDisclaimerRequired;
+
 	const hideCaptionBeneathMainMedia =
-		layoutType === 'media' || isImmersiveLandscape || isImmersivePortrait;
+		layoutType === 'media' ||
+		isInteractiveTopHat ||
+		isImmersiveLandscape ||
+		isImmersivePortrait;
+
+	const topHatFurnitureBackgroundStyles = css`
+		z-index: ${getZIndex('mediaOverlay')};
+		background: rgba(255, 255, 255, 0.9);
+		padding: 0 10px;
+	`;
 
 	return (
 		<article
 			css={[
 				css`
-					background-color: ${format.design ===
-					ArticleDesign.WeekendEssay
-						? '#fff4f2'
-						: themePalette('--article-background')};
+					background-color: ${themePalette('--article-background')};
 				`,
 				grid.container,
 				grid.outerRules(),
+				setCentreRule(layoutType),
 				isLabs &&
 					isImmersive &&
 					css`
@@ -282,32 +367,25 @@ export const StandardLayoutArticleGrid = ({
 								auto
 							);
 					`,
-				!isLabs &&
-					layoutType !== 'interactive' &&
-					css`
-						${from.leftCol} {
-							${grid.centreRule(isImmersive ? 4 : 3)}
-						}
-					`,
-				isImmersivePortrait &&
-					css`
-						${from.desktop} {
-							grid-template-rows: 0.25fr 1fr auto;
-						}
-					`,
-				isImmersiveLandscape &&
+				isImmersive &&
 					css`
 						${until.tablet} {
 							--immersive-headline-overlap: ${ageWarning != null
 								? '96px'
 								: '24px'};
 						}
-
+					`,
+				isImmersiveLandscape &&
+					css`
 						${from.desktop} {
 							grid-template-rows: auto auto ${ageWarning != null
 									? '130px'
 									: '90px'} auto auto auto auto auto;
 						}
+					`,
+				isInteractiveTopHat &&
+					css`
+						grid-template-rows: 300px auto;
 					`,
 			]}
 		>
@@ -319,7 +397,9 @@ export const StandardLayoutArticleGrid = ({
 						? css`
 								${from.tablet} {
 									align-self: start;
-									${mainMediaAspectRatio != null &&
+									${(!isImmersiveLandscape ||
+										!usesImmersiveImageProportions) &&
+									mainMediaAspectRatio != null &&
 									`aspect-ratio: ${mainMediaAspectRatio.replace(':', ' / ')};`}
 									${isImmersiveLandscape &&
 									`margin-left: -20px;
@@ -328,23 +408,17 @@ export const StandardLayoutArticleGrid = ({
 
 								${isImmersivePortrait &&
 								css`
-									${from.desktop} {
-										aspect-ratio: 4/5;
-									}
+									aspect-ratio: 4 / 5;
 								`}
+								${isImmersive && immersiveMediaBelowTablet}
 
-								${isImmersiveLandscape &&
-								landscapeImmersiveMediaBelowDesktop}
-
-								${hasMinimumImageHeight &&
+								${hasLabsPortraitImage &&
 								css`
 									${until.tablet} {
 										position: relative;
 										width: 100%;
 										min-width: 0;
-										min-height: 469px;
-										${mainMediaAspectRatio != null &&
-										`aspect-ratio: ${mainMediaAspectRatio.replace(':', ' / ')};`}
+										aspect-ratio: 4 / 5;
 										overflow: hidden;
 										background-color: ${headlineBackgroundImmersive};
 
@@ -356,6 +430,45 @@ export const StandardLayoutArticleGrid = ({
 								`}
 							`
 						: undefined,
+					isImmersiveLandscape &&
+						usesImmersiveImageProportions &&
+						css`
+							position: relative;
+							aspect-ratio: 4 / 5;
+
+							> div {
+								position: absolute;
+								inset: 0;
+							}
+
+							${from.mobileLandscape} {
+								aspect-ratio: 5 / 4;
+							}
+
+							${from.desktop} {
+								aspect-ratio: auto;
+								height: calc(
+									100vh - ${immersiveHeaderHeight}px
+								);
+							}
+						`,
+					isImmersivePortrait &&
+						css`
+							${from.leftCol} {
+								grid-template-rows: auto 1fr max-content;
+							}
+						`,
+					isImmersivePortrait &&
+						usesImmersiveImageProportions &&
+						css`
+							> div {
+								height: 100%;
+							}
+
+							${from.leftCol} {
+								aspect-ratio: 4 / 5;
+							}
+						`,
 					displayAvatarUrl && layoutType === 'picture'
 						? css`
 								margin-top: ${space[2]}px;
@@ -381,13 +494,14 @@ export const StandardLayoutArticleGrid = ({
 						contentLayout={contentLayoutName}
 						articleArrangement={layoutType}
 					/>
-					{article.affiliateLinksDisclaimerRequired && (
-						<AffiliateDisclaimer
-							cssOverrides={css`
-								margin: ${space[4]}px 0;
-							`}
-						/>
-					)}
+					{article.affiliateLinksDisclaimerRequired &&
+						!isImmersive && (
+							<AffiliateDisclaimer
+								cssOverrides={css`
+									margin: ${space[4]}px 0;
+								`}
+							/>
+						)}
 				</div>
 			</GridItem>
 			<GridItem
@@ -395,7 +509,7 @@ export const StandardLayoutArticleGrid = ({
 				layoutType={layoutType}
 				element="aside"
 				css={[
-					isImmersiveLandscape &&
+					isImmersive &&
 						css`
 							z-index: ${getZIndex('articleHeadline')};
 						`,
@@ -404,20 +518,22 @@ export const StandardLayoutArticleGrid = ({
 							align-content: flex-start;
 							margin-bottom: 0;
 
-							${until.desktop} {
-								border-bottom: 1px solid
-									${themePalette('--article-border')};
-							}
-
-							${from.desktop} {
-								align-content: flex-end;
-							}
+							${format.design !== ArticleDesign.WeekendEssay &&
+							css`
+								${from.desktop} {
+									align-content: flex-end;
+								}
+							`}
 						`,
 					layoutType === 'picture' &&
 						css`
 							display: flex;
 							flex-direction: column;
 							justify-content: space-between;
+						`,
+					isInteractiveTopHat &&
+						css`
+							z-index: ${getZIndex('mediaOverlay')};
 						`,
 				]}
 			>
@@ -435,19 +551,15 @@ export const StandardLayoutArticleGrid = ({
 				area="headline"
 				layoutType={layoutType}
 				css={[
-					isImmersiveLandscape &&
+					isImmersive &&
 						css`
 							z-index: ${getZIndex('articleHeadline')};
 
 							${until.tablet} {
 								background: linear-gradient(
 									to bottom,
-									transparent
-										calc(
-											var(--immersive-headline-overlap) -
-												1px
-										),
-									${sourcePalette.neutral[10]}
+									transparent,
+									${headlineBackgroundImmersive}
 										calc(
 											var(--immersive-headline-overlap) -
 												1px
@@ -459,18 +571,41 @@ export const StandardLayoutArticleGrid = ({
 								}
 							}
 
-							${until.desktop} {
+							${until.tablet} {
 								padding-bottom: ${space[8]}px;
 							}
+						`,
+					isImmersiveLandscape &&
+						css`
+							${between.tablet.and.desktop} {
+								padding-bottom: ${space[8]}px;
+							}
+
+							/* Below tablet this padding is part of the
+							headline's dark background, so keep it there. */
+							${hasImmersiveAffiliateDisclaimer &&
+							`${between.tablet.and.desktop} {
+								padding-bottom: ${space[3]}px;
+							}`}
 						`,
 					isImmersivePortrait &&
 						css`
 							${from.desktop} {
+								${!hasImmersivePortraitTitleRule &&
+								`border-top: 1px solid ${themePalette(
+									'--article-border',
+								)};`}
+							}
+
+							${between.desktop.and.leftCol} {
 								border-bottom: 1px solid
 									${themePalette('--article-border')};
-								border-top: 1px solid
-									${themePalette('--article-border')};
 							}
+						`,
+					isInteractiveTopHat &&
+						css`
+							${topHatFurnitureBackgroundStyles}
+							padding-top: 10px;
 						`,
 				]}
 			>
@@ -529,34 +664,6 @@ export const StandardLayoutArticleGrid = ({
 					/>
 				)}
 			</GridItem>
-			<GridItem
-				area="standfirst"
-				layoutType={layoutType}
-				css={[
-					isImmersive &&
-						css`
-							${until.tablet} {
-								padding-top: ${space[2]}px;
-							}
-						`,
-					isImmersiveLandscape &&
-						css`
-							${from.desktop} {
-								padding-top: ${space[8]}px;
-							}
-
-							${from.leftCol} {
-								padding-bottom: 14px;
-							}
-						`,
-				]}
-			>
-				<Standfirst
-					format={format}
-					standfirst={article.standfirst}
-					layoutType={layoutType}
-				/>
-			</GridItem>
 			{isImmersive && (
 				<GridItem
 					area="caption"
@@ -588,93 +695,181 @@ export const StandardLayoutArticleGrid = ({
 					)}
 				</GridItem>
 			)}
-			<GridItem
-				area="meta"
-				layoutType={layoutType}
-				element="aside"
+			<div
 				css={[
-					isImmersive &&
-						branding != null &&
-						captionText != null &&
-						css`
-							${until.desktop} {
-								padding-top: ${space[3]}px;
-							}
-						`,
-					isImmersivePortrait
-						? css`
-								${from.leftCol} {
-									margin-right: -10px;
-								}
-							`
-						: undefined,
-					isImmersiveLandscape &&
-						css`
-							${from.leftCol} {
-								padding-top: ${space[8]}px;
-							}
-						`,
-					layoutType === 'interactive' &&
-						css`
-							z-index: ${getZIndex('meta')};
-						`,
+					css`
+						display: contents;
+					`,
+					isImmersivePortrait && immersivePortraitFooter,
 				]}
 			>
-				{format.display !== ArticleDisplay.Immersive &&
-					format.design !== ArticleDesign.Audio &&
-					layoutType !== 'immersivePortrait' && (
-						<div
-							css={[
-								(layoutType === 'picture' ||
-									layoutType === 'comment') &&
-									picAndCommentLeftColLines(
-										displayAvatarUrl ||
-											layoutType === 'comment',
-									),
-								stretchLines,
-							]}
-						>
-							{isWeb &&
-							format.theme === ArticleSpecial.Labs &&
-							format.design !== ArticleDesign.Video ? (
-								<GuardianLabsLines />
-							) : (
-								<DecideLines
+				<GridItem
+					area="standfirst"
+					layoutType={layoutType}
+					css={[
+						isImmersive &&
+							css`
+								${until.tablet} {
+									padding-top: ${hasImmersiveAffiliateDisclaimer
+										? space[3]
+										: space[2]}px;
+								}
+							`,
+						isImmersiveLandscape &&
+							css`
+								${from.desktop} {
+									padding-top: ${hasImmersiveAffiliateDisclaimer
+										? space[3]
+										: space[8]}px;
+								}
+
+								${from.leftCol} {
+									padding-bottom: 14px;
+								}
+							`,
+						isInteractiveTopHat && topHatFurnitureBackgroundStyles,
+					]}
+				>
+					{hasImmersiveAffiliateDisclaimer && (
+						<AffiliateDisclaimer
+							cssOverrides={css`
+								margin: 0 0 ${space[2]}px;
+							`}
+						/>
+					)}
+					<Standfirst
+						format={format}
+						standfirst={article.standfirst}
+						layoutType={layoutType}
+					/>
+				</GridItem>
+				<GridItem
+					area="meta"
+					layoutType={layoutType}
+					element="aside"
+					css={[
+						isImmersive &&
+							branding != null &&
+							captionText != null &&
+							css`
+								${until.desktop} {
+									padding-top: ${space[3]}px;
+								}
+							`,
+						isImmersivePortrait
+							? css`
+									${from.leftCol} {
+										margin-right: -10px;
+									}
+								`
+							: undefined,
+						isImmersiveLandscape &&
+							css`
+								${from.leftCol} {
+									padding-top: ${space[8]}px;
+								}
+							`,
+						layoutType === 'interactiveStandard' &&
+							css`
+								z-index: ${getZIndex('meta')};
+							`,
+						layoutType === 'interactiveTopHat' &&
+							css`
+								${topHatFurnitureBackgroundStyles}
+								padding-bottom: 10px;
+							`,
+					]}
+				>
+					{format.display !== ArticleDisplay.Immersive &&
+						format.design !== ArticleDesign.Audio &&
+						layoutType !== 'immersivePortrait' &&
+						layoutType !== 'interactiveTopHat' && (
+							<div
+								css={[
+									(layoutType === 'picture' ||
+										layoutType === 'comment') &&
+										picAndCommentLeftColLines(
+											displayAvatarUrl ||
+												layoutType === 'comment',
+										),
+									stretchLines,
+								]}
+							>
+								{isWeb &&
+								format.theme === ArticleSpecial.Labs &&
+								format.design !== ArticleDesign.Video ? (
+									<GuardianLabsLines />
+								) : (
+									<DecideLines
+										format={format}
+										color={themePalette('--article-border')}
+										displayingAvatar={
+											displayAvatarUrl &&
+											(layoutType === 'picture' ||
+												layoutType === 'comment')
+										}
+									/>
+								)}
+							</div>
+						)}
+					{isApps ? (
+						<>
+							<Hide from="leftCol">
+								<ArticleMetaApps
+									branding={branding}
 									format={format}
-									color={themePalette('--article-border')}
-									displayingAvatar={
-										displayAvatarUrl &&
-										(layoutType === 'picture' ||
-											layoutType === 'comment')
+									layoutType={layoutType}
+									byline={article.byline}
+									tags={article.tags}
+									primaryDateline={
+										article.webPublicationDateDisplay
+									}
+									secondaryDateline={
+										article.webPublicationSecondaryDateDisplay
+									}
+									isCommentable={article.isCommentable}
+									discussionApiUrl={
+										article.config.discussionApiUrl
+									}
+									shortUrlId={article.config.shortUrlId}
+									pageId={article.config.pageId}
+								></ArticleMetaApps>
+							</Hide>
+							<Hide until="leftCol">
+								<ArticleMeta
+									branding={branding}
+									layoutType={layoutType}
+									format={format}
+									pageId={article.pageId}
+									webTitle={article.webTitle}
+									byline={article.byline}
+									source={article.config.source}
+									tags={article.tags}
+									primaryDateline={
+										article.webPublicationDateDisplay
+									}
+									secondaryDateline={
+										article.webPublicationSecondaryDateDisplay
+									}
+									webPublicationDate={
+										article.webPublicationDate
+									}
+									firstPublicationDate={
+										article.firstPublicationDate
+									}
+									isCommentable={article.isCommentable}
+									discussionApiUrl={
+										article.config.discussionApiUrl
+									}
+									shortUrlId={article.config.shortUrlId}
+									mainMediaElements={
+										article.mainMediaElements
 									}
 								/>
-							)}
-						</div>
-					)}
-				{isApps ? (
-					<>
-						<Hide from="leftCol">
-							<ArticleMetaApps
-								branding={branding}
-								format={format}
-								layoutType={layoutType}
-								byline={article.byline}
-								tags={article.tags}
-								primaryDateline={
-									article.webPublicationDateDisplay
-								}
-								secondaryDateline={
-									article.webPublicationSecondaryDateDisplay
-								}
-								isCommentable={article.isCommentable}
-								discussionApiUrl={
-									article.config.discussionApiUrl
-								}
-								shortUrlId={article.config.shortUrlId}
-								pageId={article.config.pageId}
-							></ArticleMetaApps>
-						</Hide>
-						<Hide until="leftCol">
+							</Hide>
+						</>
+					) : (
+						<>
 							<ArticleMeta
 								branding={branding}
 								layoutType={layoutType}
@@ -691,6 +886,9 @@ export const StandardLayoutArticleGrid = ({
 									article.webPublicationSecondaryDateDisplay
 								}
 								webPublicationDate={article.webPublicationDate}
+								firstPublicationDate={
+									article.firstPublicationDate
+								}
 								isCommentable={article.isCommentable}
 								discussionApiUrl={
 									article.config.discussionApiUrl
@@ -698,32 +896,10 @@ export const StandardLayoutArticleGrid = ({
 								shortUrlId={article.config.shortUrlId}
 								mainMediaElements={article.mainMediaElements}
 							/>
-						</Hide>
-					</>
-				) : (
-					<>
-						<ArticleMeta
-							branding={branding}
-							layoutType={layoutType}
-							format={format}
-							pageId={article.pageId}
-							webTitle={article.webTitle}
-							byline={article.byline}
-							source={article.config.source}
-							tags={article.tags}
-							primaryDateline={article.webPublicationDateDisplay}
-							secondaryDateline={
-								article.webPublicationSecondaryDateDisplay
-							}
-							webPublicationDate={article.webPublicationDate}
-							isCommentable={article.isCommentable}
-							discussionApiUrl={article.config.discussionApiUrl}
-							shortUrlId={article.config.shortUrlId}
-							mainMediaElements={article.mainMediaElements}
-						/>
-					</>
-				)}
-			</GridItem>
+						</>
+					)}
+				</GridItem>
+			</div>
 			<GridItem
 				area="body"
 				layoutType={layoutType}
@@ -777,6 +953,7 @@ export const StandardLayoutArticleGrid = ({
 						isDev={!!article.config.isDev}
 						keywordIds={article.config.keywordIds}
 						tableOfContents={article.tableOfContents}
+						tableOfContentsStyle={tableOfContentsStyle}
 						lang={article.lang}
 						isRightToLeftLang={article.isRightToLeftLang}
 						editionId={article.editionId}
@@ -882,7 +1059,7 @@ export const StandardLayoutArticleGrid = ({
 					</Hide>
 				)}
 			</GridItem>
-			{layoutType === 'interactive' && (
+			{format.design === ArticleDesign.Interactive && (
 				<div
 					aria-hidden="true"
 					data-gu-name="centre-rule"
@@ -891,7 +1068,9 @@ export const StandardLayoutArticleGrid = ({
 						${from.leftCol} {
 							display: block;
 							grid-column: centre-column-start;
-							grid-row: 1 / 5;
+							grid-row: ${layoutType === 'interactiveStandard'
+								? '1 / 5'
+								: layoutType === 'interactiveTopHat' && '8'};
 							position: relative;
 
 							&::before {

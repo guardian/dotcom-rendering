@@ -1,14 +1,8 @@
 import { css } from '@emotion/react';
 import { breakpoints, from, space, until } from '@guardian/source/foundations';
 import { type LayoutType } from '../layouts/lib/articleArrangements';
-import {
-	ArticleDesign,
-	type ArticleFormat,
-	ArticleSpecial,
-} from '../lib/articleFormat';
-import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
+import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import type { FEElement, RoleType } from '../types/content';
-import { minHeaderHeightPx } from './Masthead/Titlepiece/constants';
 
 type Props = {
 	children: React.ReactNode;
@@ -276,28 +270,9 @@ export const defaultRoleStyles = (
 	}
 };
 
-const mainMediaFigureStyles = (
-	isImmersiveLandscape: boolean,
-	isLabs: boolean,
-) => {
-	const labsHeaderHeight = LABS_HEADER_HEIGHT;
-	const combinedHeight = (minHeaderHeightPx + labsHeaderHeight).toString();
-
-	const navAndLabsHeaderHeight = isLabs
-		? `${combinedHeight}px`
-		: `${minHeaderHeightPx}px`;
-	return css`
-		height: 100%;
-		${isImmersiveLandscape &&
-		css`
-			height: calc(100vh - ${navAndLabsHeaderHeight});
-			min-height: calc(31.25rem - ${navAndLabsHeaderHeight});
-			${from.wide} {
-				min-height: calc(50rem - ${navAndLabsHeaderHeight});
-			}
-		`}
-	`;
-};
+const mainMediaFigureStyles = css`
+	height: 100%;
+`;
 
 export const Figure = ({
 	role = 'inline',
@@ -321,29 +296,11 @@ export const Figure = ({
 				id={id}
 				key={id}
 				css={[
-					mainMediaFigureStyles(
-						articleArrangement === 'immersiveLandscape',
-						format.theme === ArticleSpecial.Labs,
-					),
+					mainMediaFigureStyles,
 					articleArrangement === 'immersivePortrait' &&
-						format.design === ArticleDesign.WeekendEssay &&
 						css`
-							position: relative;
-							padding: 10px;
-							${from.wide} {
-								padding: 15px;
-							}
-							::before {
-								content: '';
-								display: block;
-								background-image: url('https://interactive.guim.co.uk/atoms/2025/04/2025-weekend-essay-test/assets/v/1791480673/frame.png');
-								background-size: contain;
-								background-position: center;
-								background-repeat: no-repeat;
-								position: absolute;
-								inset: 0;
-								pointer-events: none;
-							}
+							height: auto;
+							aspect-ratio: 4 / 5;
 						`,
 				]}
 			>
@@ -362,7 +319,7 @@ export const Figure = ({
 				format.design === ArticleDesign.Interactive &&
 					articleArrangement === undefined,
 			)}
-			data-spacefinder-role={role}
+			data-spacefinder-role={role === 'fullWidth' ? 'immersive' : role}
 			data-spacefinder-type={type}
 			className={className}
 		>

@@ -2774,14 +2774,6 @@ export const hostedArticle: FEArticle = {
 		],
 		brandExtensions: [
 			{
-				title: 'Search jobs',
-				url: 'https://jobs.theguardian.com',
-			},
-			{
-				title: 'Hire with Guardian Jobs',
-				url: 'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
-			},
-			{
 				title: 'Holidays',
 				url: 'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
 			},
@@ -3013,12 +3005,6 @@ export const hostedArticle: FEArticle = {
 					text: 'Guardian Labs',
 					url: '/guardian-labs',
 					dataLinkName: 'uk : footer : guardian labs',
-					extraClasses: '',
-				},
-				{
-					text: 'Search jobs',
-					url: 'https://jobs.theguardian.com',
-					dataLinkName: 'uk : footer : jobs',
 					extraClasses: '',
 				},
 				{

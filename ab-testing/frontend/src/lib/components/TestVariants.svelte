@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getOrigin } from "$lib/stores/environment";
+	import { getOrigin } from "#lib/stores/environment.ts";
 
 	interface Props {
 		testName: string;

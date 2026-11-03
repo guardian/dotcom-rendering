@@ -197,6 +197,8 @@ export const usCongressEmpty: ElectionComponentsJson = {
 			props: {
 				text: 'Full results',
 				link: 'https://www.theguardian.com',
+				description:
+					'Full US Senate, House and governor election results',
 			},
 		},
 	],

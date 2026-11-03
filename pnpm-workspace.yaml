@@ -12,7 +12,7 @@ blockExoticSubdeps: true
 catalog:
   '@aws-sdk/client-s3': 3.995.0
   '@aws-sdk/client-ssm': 3.995.0
-  '@guardian/cdk': 65.3.0
+  '@guardian/cdk': 66.0.0
   '@guardian/eslint-config': 16.0.0
   '@guardian/tsconfig': 1.0.1
   '@rollup/plugin-commonjs': 29.0.3
@@ -20,15 +20,15 @@ catalog:
   '@rollup/plugin-node-resolve': 16.0.3
   '@types/aws-lambda': 8.10.163
   '@types/node': 24.12.4
-  aws-cdk: 2.1145.0
-  aws-cdk-lib: 2.273.0
+  aws-cdk: 2.1146.1
+  aws-cdk-lib: 2.274.0
   constructs: 10.8.1
   esbuild: 0.28.1
   eslint: 9.39.1
   rollup: 4.59.0
   rollup-plugin-esbuild: 6.2.1
   tslib: 2.6.2
-  type-fest: 5.9.0
+  type-fest: 5.10.0
   typescript: 6.0.3
   valibot: 1.4.2
 minimumReleaseAge: 2880 # 2 day minimum package version age

@@ -5,7 +5,13 @@ import type { FEFront } from '../../src/frontend/feFront';
 import {
 	validateAsFEArticle,
 	validateAsFEFront,
+	validateAsPuzzlesPageType,
 } from '../../src/model/validate';
+import { validateAsPuzzlePageType } from '../../src/model/validate.puzzlePage';
+import type { FEPuzzlePageType } from '../../src/types/puzzlePage';
+import type { FEPuzzlesPageType } from '../../src/types/puzzlesPage';
+
+type FEModel = FEArticle | FEFront | FEPuzzlesPageType | FEPuzzlePageType;
 
 type LoadPageOptions = {
 	queryParams?: Record<string, string>;
@@ -17,7 +23,7 @@ type LoadPageOptions = {
 	overrides?: {
 		configOverrides?: Record<string, unknown>;
 		switchOverrides?: Record<string, unknown>;
-		feFixture?: FEArticle | FEFront;
+		feFixture?: FEModel;
 	};
 };
 
@@ -83,13 +89,17 @@ const getFrontendJson = async (
  * @param path The path for a DCR endpoint, used to determine the content type.
  *		e.g. `/Article/https://www.theguardian.com/world/2025/aug/19/the-big-church-move-sweden-kiruna-kyrka`
  * @param json The JSON response from the Frontend URL
- * @returns The validated `FEArticle` or `FEFront` object
+ * @returns The validated `FEArticle`, `FEFront` or `FEPuzzlesPageType` object
  */
-const validateJson = (path: string, json: unknown): FEArticle | FEFront => {
+const validateJson = (path: string, json: unknown): FEModel => {
 	if (path.startsWith('/Article')) {
 		return validateAsFEArticle(json);
 	} else if (path.startsWith('/Front')) {
 		return validateAsFEFront(json);
+	} else if (path.startsWith('/PuzzlesPage')) {
+		return validateAsPuzzlesPageType(json);
+	} else if (path.startsWith('/PuzzlePage')) {
+		return validateAsPuzzlePageType(json);
 	}
 	throw new Error(`Unsupported URL for validating payload for: ${path}`);
 };

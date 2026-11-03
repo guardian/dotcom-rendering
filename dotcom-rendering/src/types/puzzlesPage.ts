@@ -1,5 +1,6 @@
 import type { EditionId } from '../lib/edition';
 import type { GameStatus } from '../lib/puzzleProgress/types';
+import type { CommercialProperties } from './commercial';
 import type { ConfigType } from './config';
 import type { FooterType } from './footer';
 import type { FENavType } from './frontend';
@@ -43,6 +44,7 @@ export type PuzzleContainer = {
 	desktopSpan?: number;
 	adSlot?: string;
 	supporting?: PuzzlesSupportingContent;
+	commercialProperties?: Partial<CommercialProperties>;
 };
 
 export type PuzzleLink = {
@@ -101,7 +103,11 @@ export type PuzzlesArchiveItem = {
 };
 
 export type PuzzlesArchive = {
-	category: 'crosswords' | 'word-games' | 'logic-puzzles';
+	category:
+		| 'crosswords'
+		| 'word-games'
+		| 'logic-puzzles'
+		| 'trivia-and-quizzes';
 	title: string;
 	description: string;
 	selectedPuzzle: PuzzlesArchivePuzzle;
@@ -128,5 +134,6 @@ export interface FEPuzzlesPageType {
 	isAdFreeUser: boolean;
 	layout: PuzzlesLayoutType;
 	archive?: PuzzlesArchive;
-	commercialProperties?: Record<string, unknown>;
+	/** Sponsorship per edition; editions without a sponsor may be omitted. */
+	commercialProperties?: Partial<CommercialProperties>;
 }

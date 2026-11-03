@@ -10,6 +10,9 @@ import { palette } from '../palette';
 import type { SubtitleSize } from './SelfHostedVideoPlayer';
 
 export type SubtitlesPosition =
+	/**
+	 * Subtitles are anchored to the top, leaving enough room for controls positioned at the top
+	 */
 	| 'top'
 	| 'bottom'
 	/**

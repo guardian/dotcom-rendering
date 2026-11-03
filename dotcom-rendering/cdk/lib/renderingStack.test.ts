@@ -2,6 +2,10 @@ import { App } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
 import { InstanceClass, InstanceSize, InstanceType } from 'aws-cdk-lib/aws-ec2';
 import {
+	FaciaRenderingPropsCODE,
+	FaciaRenderingPropsPROD,
+	InteractiveRenderingPropsCODE,
+	InteractiveRenderingPropsPROD,
 	TagPageRenderingPropsCODE,
 	TagPageRenderingPropsPROD,
 } from '../bin/cdk';
@@ -18,45 +22,61 @@ describe('The RenderingCDKStack', () => {
 			stage: 'PROD',
 			guApp: 'article-rendering',
 			domainName: 'article-rendering.test.dev-guardianapis.com',
-			scaling: {
-				minimumInstances: 1,
-				maximumInstances: 4,
-				policies: {
-					step: {
-						cpu: {
-							scalingStepsOut: [
-								// No scaling up effect when p90 CPU is lower than 70%
-								{ lower: 0, upper: 70, change: 0 },
-								// When p90 CPU is higher than 70% we scale up by 50%
-								{ lower: 70, change: 50 },
-								// When p90 CPU is higher than 90% we scale up by 80%
-								{ lower: 90, change: 80 },
-							],
-						},
-						latency: {
-							scalingStepsOut: [
-								{ lower: 0, upper: 0.2, change: 0 },
-								{ lower: 0.2, change: 50 },
-								{ lower: 0.3, change: 80 },
-							],
-							scalingStepsIn: [
-								{ lower: 0.15, change: 0 },
-								{ upper: 0.15, lower: 0, change: -1 },
-							],
+			ec2Props: {
+				scaling: {
+					minimumInstances: 1,
+					maximumInstances: 4,
+					policies: {
+						step: {
+							cpu: {
+								scalingStepsOut: [
+									// No scaling up effect when p90 CPU is lower than 70%
+									{ lower: 0, upper: 70, change: 0 },
+									// When p90 CPU is higher than 70% we scale up by 50%
+									{ lower: 70, change: 50 },
+									// When p90 CPU is higher than 90% we scale up by 80%
+									{ lower: 90, change: 80 },
+								],
+							},
+							latency: {
+								scalingStepsOut: [
+									{ lower: 0, upper: 0.2, change: 0 },
+									{ lower: 0.2, change: 50 },
+									{ lower: 0.3, change: 80 },
+								],
+								scalingStepsIn: [
+									{ lower: 0.15, change: 0 },
+									{ upper: 0.15, lower: 0, change: -1 },
+								],
+							},
 						},
 					},
 				},
+				instanceType: InstanceType.of(
+					InstanceClass.T4G,
+					InstanceSize.MICRO,
+				),
 			},
-			instanceType: InstanceType.of(
-				InstanceClass.T4G,
-				InstanceSize.MICRO,
-			),
 		});
 		const template = Template.fromStack(stack);
 		expect(template.toJSON()).toMatchSnapshot();
 	});
 
-	it('matches the snapshot for Tag Page Rendering PROD (now using ECS)', () => {
+	// Note: this is handled at the GuCDK library level
+	it('should not be possible to provision a stack without any compute', () => {
+		expect(() => {
+			const app = new App();
+			new RenderingCDKStack(app, 'ArticleRendering', {
+				domainName: 'tag-page-rendering.guardianapis.com',
+				guApp: 'tag-page-rendering',
+				stage: 'PROD',
+			});
+		}).toThrow(
+			"At least one of 'ec2Props' or 'ecsProps' must be specified",
+		);
+	});
+
+	it('matches the snapshot for Tag Page Rendering PROD', () => {
 		const app = new App();
 		const stack = new RenderingCDKStack(
 			app,
@@ -67,13 +87,59 @@ describe('The RenderingCDKStack', () => {
 		expect(template.toJSON()).toMatchSnapshot();
 	});
 
-	it('matches the snapshot for Tag Page Rendering CODE (uses ECS)', () => {
+	it('matches the snapshot for Tag Page Rendering CODE', () => {
 		const app = new App();
 
 		const stack = new RenderingCDKStack(
 			app,
 			'TagPageRendering-CODE',
 			TagPageRenderingPropsCODE,
+		);
+		const template = Template.fromStack(stack);
+		expect(template.toJSON()).toMatchSnapshot();
+	});
+
+	it('matches the snapshot for Interactive Rendering PROD (uses ECS)', () => {
+		const app = new App();
+		const stack = new RenderingCDKStack(
+			app,
+			'InteractiveRendering-PROD',
+			InteractiveRenderingPropsPROD,
+		);
+		const template = Template.fromStack(stack);
+		expect(template.toJSON()).toMatchSnapshot();
+	});
+
+	it('matches the snapshot for Interactive Rendering CODE (uses ECS)', () => {
+		const app = new App();
+
+		const stack = new RenderingCDKStack(
+			app,
+			'InteractiveRendering-CODE',
+			InteractiveRenderingPropsCODE,
+		);
+		const template = Template.fromStack(stack);
+		expect(template.toJSON()).toMatchSnapshot();
+	});
+
+	it('matches the snapshot for Facia Rendering PROD (uses ECS)', () => {
+		const app = new App();
+		const stack = new RenderingCDKStack(
+			app,
+			'FaciaRendering-PROD',
+			FaciaRenderingPropsPROD,
+		);
+		const template = Template.fromStack(stack);
+		expect(template.toJSON()).toMatchSnapshot();
+	});
+
+	it('matches the snapshot for Facia Rendering CODE (uses ECS)', () => {
+		const app = new App();
+
+		const stack = new RenderingCDKStack(
+			app,
+			'FaciaRendering-CODE',
+			FaciaRenderingPropsCODE,
 		);
 		const template = Template.fromStack(stack);
 		expect(template.toJSON()).toMatchSnapshot();

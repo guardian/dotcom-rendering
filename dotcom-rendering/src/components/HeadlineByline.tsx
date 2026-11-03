@@ -86,6 +86,7 @@ const weekendReadStyles = css`
 	${from.leftCol} {
 		${headlineMedium50}
 		line-height: 54px;
+		font-style: italic;
 	}
 
 	a {

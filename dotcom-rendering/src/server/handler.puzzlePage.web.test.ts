@@ -1,5 +1,6 @@
 import type { Request, Response } from 'express';
 import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
+import { triviaPuzzlesContainer } from '../../fixtures/manual/puzzlesPage';
 import type { EditionId } from '../lib/edition';
 import { handlePuzzlePage } from './handler.puzzlePage.web';
 import { renderPuzzlePage } from './render.puzzlePage.web';
@@ -40,17 +41,34 @@ describe('handlePuzzlePage', () => {
 		});
 	});
 
-	const withEdition = (
+	const withConfig = (
 		page: ReturnType<typeof createPuzzlePage>,
 		edition: EditionId,
+		serverSideABTests: Record<string, string> = {},
 	) => ({
 		...page,
-		config: { ...page.config, edition },
+		config: { ...page.config, edition, serverSideABTests },
+	});
+
+	it('omits V2 recommendations from existing puzzle pages', () => {
+		const page = withConfig(createPuzzlePage('sudoku-easy'), 'INT');
+		const existing = page.instance.moreFromPuzzlesAndGames!;
+		page.instance.moreFromPuzzlesAndGames = [
+			...existing,
+			...triviaPuzzlesContainer.content.items[0]!,
+		];
+		const res = response();
+		invokeHandler(page, res);
+		expect(res.status).toHaveBeenCalledWith(200);
+		expect(
+			mockedRenderPuzzlePage.mock.calls[0]![0].puzzlePage.instance
+				.moreFromPuzzlesAndGames,
+		).toEqual(existing);
 	});
 
 	it('renders the page for a known slug when the edition is International', () => {
 		const res = response();
-		const page = withEdition(createPuzzlePage('sudoku-easy'), 'INT');
+		const page = withConfig(createPuzzlePage('sudoku-easy'), 'INT');
 
 		invokeHandler(page, res);
 
@@ -79,7 +97,7 @@ describe('handlePuzzlePage', () => {
 		'wordiply',
 	])('renders iframe-based slug %s in the International edition', (slug) => {
 		const res = response();
-		const page = withEdition(createPuzzlePage(slug), 'INT');
+		const page = withConfig(createPuzzlePage(slug), 'INT');
 
 		invokeHandler(page, res);
 
@@ -87,11 +105,63 @@ describe('handlePuzzlePage', () => {
 		expect(res.status).toHaveBeenCalledWith(200);
 	});
 
+	it.each(['film-reveal', 'on-the-ball'])(
+		'gates %s behind the International edition and V2 participation',
+		(slug) => {
+			for (const [edition, serverSideABTests, allowed] of [
+				['INT', {}, false],
+				['UK', { 'puzzles-new-hub-v2': 'variant' }, false],
+				['INT', { 'puzzles-new-hub-v2': 'control' }, false],
+				['INT', { 'puzzles-new-hub-v2': 'unknown' }, false],
+				['INT', { 'puzzles-new-hub-v2': 'variant' }, true],
+			] as const) {
+				mockedRenderPuzzlePage.mockClear();
+				const res = response();
+				invokeHandler(
+					withConfig(
+						createPuzzlePage(slug),
+						edition,
+						serverSideABTests,
+					),
+					res,
+				);
+				if (allowed) {
+					expect(res.status).toHaveBeenCalledWith(200);
+					expect(mockedRenderPuzzlePage).toHaveBeenCalledTimes(1);
+				} else {
+					expect(res.sendStatus).toHaveBeenCalledWith(404);
+					expect(mockedRenderPuzzlePage).not.toHaveBeenCalled();
+				}
+			}
+		},
+	);
+
+	it.each(['film-reveal', 'on-the-ball'])(
+		'requires a non-empty API gameUrl for %s',
+		(slug) => {
+			for (const gameUrl of [undefined, '', '   ']) {
+				const res = response();
+				const page = withConfig(
+					createPuzzlePage(slug, {
+						instance: { title: slug, gameUrl },
+					}),
+					'INT',
+					{ 'puzzles-new-hub-v2': 'variant' },
+				);
+
+				invokeHandler(page, res);
+
+				expect(res.sendStatus).toHaveBeenCalledWith(404);
+			}
+			expect(mockedRenderPuzzlePage).not.toHaveBeenCalled();
+		},
+	);
+
 	it('renders outside the International edition in local development', () => {
 		const previousNodeEnvironment = process.env.NODE_ENV;
 		process.env.NODE_ENV = 'development';
 		const res = response();
-		const page = withEdition(createPuzzlePage('sudoku-easy'), 'UK');
+		const page = withConfig(createPuzzlePage('sudoku-easy'), 'UK');
 
 		try {
 			invokeHandler(page, res);
@@ -115,7 +185,7 @@ describe('handlePuzzlePage', () => {
 		'returns 404 without mounting the renderer for the %s edition',
 		(_, edition) => {
 			const res = response();
-			const page = withEdition(createPuzzlePage('sudoku-easy'), edition);
+			const page = withConfig(createPuzzlePage('sudoku-easy'), edition);
 
 			invokeHandler(page, res);
 
@@ -126,7 +196,7 @@ describe('handlePuzzlePage', () => {
 
 	it('returns 404 for an unknown slug even when in the International edition', () => {
 		const res = response();
-		const page = withEdition(createPuzzlePage('sudoku-easy'), 'INT');
+		const page = withConfig(createPuzzlePage('sudoku-easy'), 'INT');
 		page.slug = 'not-a-real-puzzle';
 
 		invokeHandler(page, res);

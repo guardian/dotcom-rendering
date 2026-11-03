@@ -7,6 +7,7 @@ import {
 	type ElectionComponent,
 	ElectionComponents,
 } from './electionComponent';
+import { Heading } from './Heading';
 import { OnwardLink } from './OnwardLink';
 import { ProgressNumber } from './ProgressNumber';
 import { Refresh } from './Refresh';
@@ -54,10 +55,16 @@ export const ElectionTracker = (props: Props) => {
 	);
 
 	return (
-		<>
+		<div
+			css={{
+				position: 'relative',
+			}}
+			data-component="election-tracker"
+			data-link-name="election-tracker"
+		>
 			<Refresh remaining={remaining} error={error !== undefined} />
 			<Components components={data ?? props.initialData} />
-		</>
+		</div>
 	);
 };
 
@@ -110,6 +117,8 @@ const Component = ({ component }: { component: ElectionComponent }) => {
 					}}
 				/>
 			);
+		case 'heading':
+			return <Heading from="tablet">{component.props.text}</Heading>;
 		case 'changeBars':
 			return <ChangeBars changes={component.props.changes} />;
 		case 'onwardLink':
@@ -117,6 +126,7 @@ const Component = ({ component }: { component: ElectionComponent }) => {
 				<OnwardLink
 					link={component.props.link}
 					text={component.props.text}
+					description={component.props.description}
 				/>
 			);
 		case 'progressNumber':
