@@ -34,6 +34,10 @@ export const OnwardLink = (props: Props) => (
 				bottom: 0,
 				left: 0,
 			},
+			// Removes the global `html:not(.src-focus-disabled) *:focus` halo
+			'&&:focus': {
+				boxShadow: 'none',
+			},
 		})}
 		href={props.link.href}
 		title={props.description}
