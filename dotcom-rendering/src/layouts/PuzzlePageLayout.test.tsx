@@ -86,23 +86,43 @@ const renderPuzzlePageLayout = (
 };
 
 describe('PuzzlePageLayout', () => {
-	it('renders the sponsor with the logo capped at 140px wide', () => {
-		renderPuzzlePageLayout('sudoku-easy', {}, puzzlesBranding);
+	it.each([
+		{ slug: 'word-wheel', isAdFreeUser: false },
+		{ slug: 'word-wheel', isAdFreeUser: true },
+		{ slug: 'sudoku-easy', isAdFreeUser: false },
+	])(
+		'renders the sponsor with a capped logo for $slug (ad-free: $isAdFreeUser)',
+		({ slug, isAdFreeUser }) => {
+			renderPuzzlePageLayout(slug, { isAdFreeUser }, puzzlesBranding);
+			expect(screen.getByText('Supported by')).toBeInTheDocument();
+			expect(
+				screen.getByRole('img', { name: 'Example sponsor' }),
+			).toHaveAttribute('width', '140');
+			expect(
+				screen.getByRole('link', { name: 'About this content' }),
+			).toHaveAttribute('href', 'https://example.com/about');
+		},
+	);
 
+	it('omits the About link when the game sponsor has no about URL', () => {
+		renderPuzzlePageLayout(
+			'word-wheel',
+			{},
+			{ ...puzzlesBranding, aboutThisLink: '' },
+		);
 		expect(screen.getByText('Supported by')).toBeInTheDocument();
 		expect(
-			screen.getByRole('img', { name: 'Example sponsor' }),
-		).toHaveAttribute('width', '140');
-		expect(
-			screen.getByRole('link', { name: 'About this content' }),
-		).toHaveAttribute('href', 'https://example.com/about');
+			screen.queryByRole('link', { name: 'About this content' }),
+		).not.toBeInTheDocument();
 	});
 
-	it('renders no sponsor without branding', () => {
-		renderPuzzlePageLayout('sudoku-easy');
-
-		expect(screen.queryByText('Supported by')).not.toBeInTheDocument();
-	});
+	it.each(['word-wheel', 'sudoku-easy'])(
+		'renders no sponsor for %s when no branding is provided',
+		(slug) => {
+			renderPuzzlePageLayout(slug);
+			expect(screen.queryByText('Supported by')).not.toBeInTheDocument();
+		},
+	);
 
 	it('renders the design-provided headline text, not raw instance.title', () => {
 		renderPuzzlePageLayout('sudoku-easy');

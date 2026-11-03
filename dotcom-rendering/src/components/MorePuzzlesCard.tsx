@@ -181,7 +181,6 @@ const cardTitleStyles = css`
 `;
 
 const cadenceStyles = css`
-	margin-top: ${space[1]}px;
 	${textSans14};
 	line-height: 1.3;
 `;

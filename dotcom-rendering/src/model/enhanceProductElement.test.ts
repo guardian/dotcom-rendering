@@ -83,6 +83,7 @@ const elementsEnhancer = enhanceElements(
 		hasAffiliateLinksDisclaimer: false,
 		shouldHideAds: false,
 		pageId: '',
+		stage: 'DEV',
 	},
 	true,
 );

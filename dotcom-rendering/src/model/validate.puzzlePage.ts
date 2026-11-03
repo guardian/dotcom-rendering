@@ -1,6 +1,7 @@
 import { isString } from '@guardian/libs';
 import type { FEPuzzlePageType } from '../types/puzzlePage';
 import type { PuzzleCardVariant, PuzzleItem } from '../types/puzzlesPage';
+import { isPuzzlesCommercialProperties } from './validate.puzzlesCommercialProperties';
 
 /**
  * Puzzle Page's own validation, split out from the general `validate.ts`
@@ -155,7 +156,9 @@ export const validateAsPuzzlePageType = (data: unknown): FEPuzzlePageType => {
 		// coordinated follow-up change - see `FEPuzzlePageType.isAdFreeUser`'s
 		// doc comment), so requiring it here would 500 every real request
 		// until then.
-		isOptionalBoolean(data.isAdFreeUser)
+		isOptionalBoolean(data.isAdFreeUser) &&
+		(data.commercialProperties === undefined ||
+			isPuzzlesCommercialProperties(data.commercialProperties))
 	) {
 		return data as unknown as FEPuzzlePageType;
 	}
