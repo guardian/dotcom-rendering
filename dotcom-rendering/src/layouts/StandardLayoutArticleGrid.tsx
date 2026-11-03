@@ -518,13 +518,6 @@ export const StandardLayoutArticleGrid = ({
 							align-content: flex-start;
 							margin-bottom: 0;
 
-							${until.desktop} {
-								${!hasImmersivePortraitTitleRule &&
-								`border-bottom: 1px solid ${themePalette(
-									'--article-border',
-								)};`}
-							}
-
 							${format.design !== ArticleDesign.WeekendEssay &&
 							css`
 								${from.desktop} {
