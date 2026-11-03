@@ -170,4 +170,14 @@ void (async () => {
 			{ priority: 'feature' },
 		);
 	}
+
+	void startup(
+		'inline1SdcListener',
+		() =>
+			import(
+				/* webpackMode: 'lazy' */
+				'./inline1SdcListener'
+			).then(({ inline1SdcListener }) => inline1SdcListener()),
+		{ priority: 'feature' },
+	);
 })();
