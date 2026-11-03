@@ -92,10 +92,15 @@ const articleSubNavStyles = css`
 	}
 `;
 
+/** Article subnavs keep a small horizontal gap between the header and the list items. */
+const articleHeaderGapStyles = css`
+	margin-left: ${space[1]}px;
+	padding-left: ${space[1]}px;
+`;
+
 /** Article subnavs have a divider separating the header text from the scrollable list. */
 const articleDividerStyles = css`
-	margin-left: ${space[2]}px;
-	padding-left: ${space[2]}px;
+	${articleHeaderGapStyles}
 	border-left: 1px solid ${themePalette('--masthead-nav-lines')};
 `;
 
@@ -433,7 +438,8 @@ export const CustomSubNav = ({
 						subNavStyles,
 						!hasPageSkin && subNavStylesFromLeftCol,
 						articleSubNavStyles,
-						articleDividerStyles,
+						articleHeaderGapStyles,
+						showHeaderDivider && articleDividerStyles,
 						css`
 							flex-shrink: 0;
 							width: max-content;
