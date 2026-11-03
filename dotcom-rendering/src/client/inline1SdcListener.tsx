@@ -19,7 +19,7 @@ const fetchComponent = (
 					new Error(msg),
 					'inline1',
 				);
-				throw err;
+				return undefined;
 			});
 	}
 	return Promise.resolve(undefined);
