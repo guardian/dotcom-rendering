@@ -477,7 +477,6 @@ export const StandardLayoutArticleGrid = ({
 							css`
 								${from.desktop} {
 									align-content: flex-end;
-									padding-bottom: 3px;
 								}
 							`}
 						`,
