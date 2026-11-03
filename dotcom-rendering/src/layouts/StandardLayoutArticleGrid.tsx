@@ -261,6 +261,17 @@ export const StandardLayoutArticleGrid = ({
 	const isImmersivePortrait = layoutType === 'immersivePortrait';
 	const isImmersiveLandscape = layoutType === 'immersiveLandscape';
 	const isImmersive = isImmersivePortrait || isImmersiveLandscape;
+	const isImmersiveOpinion =
+		isImmersive &&
+		[
+			ArticleDesign.Comment,
+			ArticleDesign.Editorial,
+			ArticleDesign.Letter,
+			ArticleDesign.WeekendEssay,
+		].includes(format.design);
+	const hasSeriesTag = article.tags.some((tag) => tag.type === 'Series');
+	const hasImmersivePortraitTitleRule =
+		isImmersivePortrait && (isImmersiveOpinion || hasSeriesTag || isLabs);
 
 	const isInteractiveTopHat = layoutType === 'interactiveTopHat';
 
@@ -542,6 +553,10 @@ export const StandardLayoutArticleGrid = ({
 							${from.desktop} {
 								border-bottom: 1px solid
 									${themePalette('--article-border')};
+								${!hasImmersivePortraitTitleRule &&
+								`border-top: 1px solid ${themePalette(
+									'--article-border',
+								)};`}
 							}
 						`,
 					isInteractiveTopHat &&

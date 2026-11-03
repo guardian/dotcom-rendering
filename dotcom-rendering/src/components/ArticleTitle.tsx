@@ -1,11 +1,12 @@
 import { css } from '@emotion/react';
-import { from, until } from '@guardian/source/foundations';
+import { from, headlineBold17 } from '@guardian/source/foundations';
 import { grid } from '../../src/grid';
 import { type LayoutType } from '../layouts/lib/articleArrangements';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
+	ArticleSpecial,
 } from '../lib/articleFormat';
 import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
@@ -41,22 +42,30 @@ const immersiveGridMargins = css`
 `;
 
 const immersivePortraitSeriesRule = css`
-	> div {
-		display: flex;
-		align-items: flex-end;
-		width: 100%;
+	display: flex;
+	align-items: flex-end;
+	width: 100%;
+	max-width: none;
 
-		&::after {
-			content: '';
-			flex: 1;
-			margin-left: 6px;
-			border-bottom: 1px solid ${themePalette('--article-border')};
-		}
+	${from.desktop} {
+		width: calc(100% + 4px);
 	}
 
-	${until.desktop} {
-		width: 100%;
-		max-width: none;
+	> div {
+		line-height: 0;
+	}
+
+	> div > a {
+		display: inline-block;
+		${headlineBold17};
+		line-height: 21px;
+	}
+
+	&::after {
+		content: '';
+		flex: 1;
+		margin-left: 6px;
+		border-bottom: 1px solid ${themePalette('--article-border')};
 	}
 `;
 
@@ -93,61 +102,78 @@ export const ArticleTitle = ({
 	sectionUrl,
 	guardianBaseURL,
 	isMatch,
-}: Props) => (
-	<div
-		css={[
-			[ArticleDesign.Gallery, ArticleDesign.HostedGallery].includes(
-				format.design,
-			) && galleryStyles,
-			sectionStyles,
-			layoutType === 'immersivePortrait' &&
-				format.design === ArticleDesign.WeekendEssay &&
-				css`
-					position: relative;
-					min-height: 71px;
-					height: 100%;
-				`,
-		]}
-	>
+}: Props) => {
+	const isImmersiveOpinion =
+		format.display === ArticleDisplay.Immersive &&
+		[
+			ArticleDesign.Comment,
+			ArticleDesign.Editorial,
+			ArticleDesign.Letter,
+			ArticleDesign.WeekendEssay,
+		].includes(format.design);
+	const hasSeriesTag = tags.some((tag) => tag.type === 'Series');
+	const hasImmersivePortraitTitleRule =
+		layoutType === 'immersivePortrait' &&
+		(isImmersiveOpinion ||
+			hasSeriesTag ||
+			format.theme === ArticleSpecial.Labs);
+
+	return (
 		<div
 			css={[
-				format.display === ArticleDisplay.Immersive &&
-				format.design !== ArticleDesign.WeekendEssay
-					? layoutType == null
-						? legacyImmersiveMargins
-						: immersiveGridMargins
-					: undefined,
+				[ArticleDesign.Gallery, ArticleDesign.HostedGallery].includes(
+					format.design,
+				) && galleryStyles,
+				sectionStyles,
 				layoutType === 'immersivePortrait' &&
-					immersivePortraitSeriesRule,
+					format.design === ArticleDesign.WeekendEssay &&
+					css`
+						position: relative;
+						min-height: 71px;
+						height: 100%;
+					`,
 			]}
 		>
-			<SeriesSectionLink
-				format={format}
-				layoutType={layoutType}
-				tags={tags}
-				sectionLabel={sectionLabel}
-				sectionUrl={sectionUrl}
-				guardianBaseURL={guardianBaseURL}
-				isMatch={isMatch}
-			/>
-		</div>
-		{layoutType === 'immersivePortrait' &&
-			format.design === ArticleDesign.WeekendEssay && (
-				<img
-					src="https://interactive.guim.co.uk/atoms/2025/04/2025-weekend-essay-test/assets/v/1791480673/book.gif"
-					alt="Book"
-					css={css`
-						position: absolute;
-						right: 0;
-						bottom: 0;
-						width: 70px;
-						height: 70px;
-						${from.leftCol} {
-							width: 110px;
-							height: 110px;
-						}
-					`}
+			<div
+				css={[
+					format.display === ArticleDisplay.Immersive &&
+					format.design !== ArticleDesign.WeekendEssay
+						? layoutType == null
+							? legacyImmersiveMargins
+							: immersiveGridMargins
+						: undefined,
+					hasImmersivePortraitTitleRule &&
+						immersivePortraitSeriesRule,
+				]}
+			>
+				<SeriesSectionLink
+					format={format}
+					layoutType={layoutType}
+					tags={tags}
+					sectionLabel={sectionLabel}
+					sectionUrl={sectionUrl}
+					guardianBaseURL={guardianBaseURL}
+					isMatch={isMatch}
 				/>
-			)}
-	</div>
-);
+			</div>
+			{layoutType === 'immersivePortrait' &&
+				format.design === ArticleDesign.WeekendEssay && (
+					<img
+						src="https://interactive.guim.co.uk/atoms/2025/04/2025-weekend-essay-test/assets/v/1791480673/book.gif"
+						alt="Book"
+						css={css`
+							position: absolute;
+							right: 0;
+							bottom: 0;
+							width: 70px;
+							height: 70px;
+							${from.leftCol} {
+								width: 110px;
+								height: 110px;
+							}
+						`}
+					/>
+				)}
+		</div>
+	);
+};
