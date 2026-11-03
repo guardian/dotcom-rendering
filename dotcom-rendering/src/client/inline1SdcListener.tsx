@@ -1,7 +1,9 @@
 import type { Inline1Props } from '@guardian/support-dotcom-components/dist/shared/types/props/inline1';
 import { createElement } from 'react';
 import { createRoot } from 'react-dom/client';
+import { ConfigProvider } from '../components/ConfigContext';
 import type { ReactComponent } from '../components/marketing/lib/ReactComponent';
+import { getConfig } from './islands/getConfig';
 
 const fetchComponent = (
 	message: Inline1Props['variant']['message'],
@@ -12,6 +14,22 @@ const fetchComponent = (
 		)
 			.then((module) => {
 				return module.SupporterRevenue;
+			})
+			.catch((err) => {
+				const msg = `Error importing inline1 component: ${String(err)}`;
+				window.guardian.modules.sentry.reportError(
+					new Error(msg),
+					'inline1',
+				);
+				return undefined;
+			});
+	}
+	if (message.type === 'Inline1NewsletterMessage') {
+		return import(
+			/* webpackChunkName: "Newsletter" */ `../components/marketing/inline1/Newsletter`
+		)
+			.then((module) => {
+				return module.Newsletter;
 			})
 			.catch((err) => {
 				const msg = `Error importing inline1 component: ${String(err)}`;
@@ -33,7 +51,11 @@ const render = <P extends object>(
 	slot.innerHTML = '';
 	// override ad-slot-container style in parent element
 	slot.style.textAlign = 'left';
-	createRoot(slot).render(createElement(Component, props));
+	createRoot(slot).render(
+		<ConfigProvider value={getConfig()}>
+			{createElement(Component, props)}
+		</ConfigProvider>,
+	);
 };
 
 const fetchAndRender = (slot: HTMLElement, props: Inline1Props): void => {
