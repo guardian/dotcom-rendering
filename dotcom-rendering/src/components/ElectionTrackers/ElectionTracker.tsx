@@ -56,7 +56,6 @@ export const ElectionTracker = (props: Props) => {
 
 	return (
 		<div
-			id="election-tracker"
 			css={{
 				position: 'relative',
 			}}
