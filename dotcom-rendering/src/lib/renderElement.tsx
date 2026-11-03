@@ -1023,6 +1023,8 @@ export const renderElement = ({
 							electionDataUrl={element.dataUrl.href}
 							electionComponents={element.components}
 							liveEffects={true}
+							// This trackingLabel is currently just used for liveblog and it's temporary
+							trackingLabel={'liveblog'}
 						/>
 					</Island>
 				</div>
