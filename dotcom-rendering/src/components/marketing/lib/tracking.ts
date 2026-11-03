@@ -195,22 +195,11 @@ export const addAbandonedBasketAndTrackingParamsToUrl = (
 
 const addPromoCodesToUrl = (url: string, promoCodes: string[]): string => {
 	if (!promoCodes.length) return url;
-	const existingPromoCodeCounts = new Map<string, number>();
-	const seenPromoCodes = new Set<string>();
-	for (const code of getQueryParams(url).getAll('promoCode')) {
-		existingPromoCodeCounts.set(
-			code,
-			(existingPromoCodeCounts.get(code) ?? 0) + 1,
-		);
-	}
+	const seenPromoCodes = new Set(getQueryParams(url).getAll('promoCode'));
 	const promoCodesToAdd = promoCodes.filter((code) => {
 		if (seenPromoCodes.has(code)) return false;
 		seenPromoCodes.add(code);
-
-		const existingCount = existingPromoCodeCounts.get(code) ?? 0;
-		if (existingCount === 0) return true;
-		existingPromoCodeCounts.set(code, existingCount - 1);
-		return false;
+		return true;
 	});
 	if (!promoCodesToAdd.length) return url;
 	const separator = url.includes('?') ? '&' : '?';
