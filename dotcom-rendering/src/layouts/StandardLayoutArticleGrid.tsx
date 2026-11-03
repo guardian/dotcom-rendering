@@ -473,11 +473,6 @@ export const StandardLayoutArticleGrid = ({
 							align-content: flex-start;
 							margin-bottom: 0;
 
-							${until.desktop} {
-								border-bottom: 1px solid
-									${themePalette('--article-border')};
-							}
-
 							${format.design !== ArticleDesign.WeekendEssay &&
 							css`
 								${from.desktop} {
@@ -547,8 +542,6 @@ export const StandardLayoutArticleGrid = ({
 						css`
 							${from.desktop} {
 								border-bottom: 1px solid
-									${themePalette('--article-border')};
-								border-top: 1px solid
 									${themePalette('--article-border')};
 							}
 						`,

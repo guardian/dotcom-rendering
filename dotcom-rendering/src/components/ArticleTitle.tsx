@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from } from '@guardian/source/foundations';
+import { from, until } from '@guardian/source/foundations';
 import { grid } from '../../src/grid';
 import { type LayoutType } from '../layouts/lib/articleArrangements';
 import {
@@ -7,6 +7,7 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 } from '../lib/articleFormat';
+import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
 import { SeriesSectionLink } from './SeriesSectionLink';
 
@@ -36,6 +37,26 @@ const immersiveGridMargins = css`
 	${from.desktop} {
 		margin-bottom: 4px;
 		margin-left: -4px;
+	}
+`;
+
+const immersivePortraitSeriesRule = css`
+	> div {
+		display: flex;
+		align-items: flex-end;
+		width: 100%;
+
+		&::after {
+			content: '';
+			flex: 1;
+			margin-left: 6px;
+			border-bottom: 1px solid ${themePalette('--article-border')};
+		}
+	}
+
+	${until.desktop} {
+		width: 100%;
+		max-width: none;
 	}
 `;
 
@@ -89,14 +110,16 @@ export const ArticleTitle = ({
 		]}
 	>
 		<div
-			css={
+			css={[
 				format.display === ArticleDisplay.Immersive &&
 				format.design !== ArticleDesign.WeekendEssay
 					? layoutType == null
 						? legacyImmersiveMargins
 						: immersiveGridMargins
-					: undefined
-			}
+					: undefined,
+				layoutType === 'immersivePortrait' &&
+					immersivePortraitSeriesRule,
+			]}
 		>
 			<SeriesSectionLink
 				format={format}
