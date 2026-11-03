@@ -49,6 +49,7 @@ const handleEvent = (event: CustomEvent<{ props: Inline1Props }>): void => {
 	const slot = event.target;
 	if (!(slot instanceof HTMLElement)) return;
 
+	window.removeEventListener('commercial.sdc-render', handleEvent);
 	fetchAndRender(slot, event.detail.props);
 };
 
