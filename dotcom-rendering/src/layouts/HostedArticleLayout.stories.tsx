@@ -1,3 +1,5 @@
+import { breakpoints } from '@guardian/source/foundations';
+import { expect, within } from 'storybook/test';
 import { hostedPaletteDecorator } from '../../.storybook/decorators/themeDecorator';
 import { allModes } from '../../.storybook/modes';
 import preview from '../../.storybook/preview';
@@ -77,7 +79,89 @@ export const Web = meta.story({
 		},
 		chromatic: {
 			modes: {
+				'light mobile': allModes['light mobile'],
+				'light mobileMedium': allModes['light mobileMedium'],
+				'light mobileLandscape': {
+					globalColourScheme: 'light',
+					viewport: breakpoints.mobileLandscape,
+				},
+				'light phablet': {
+					globalColourScheme: 'light',
+					viewport: breakpoints.phablet,
+				},
+				'light tablet': {
+					globalColourScheme: 'light',
+					viewport: breakpoints.tablet,
+				},
+				'light desktop': allModes['light desktop'],
 				'light leftCol': allModes['light leftCol'],
+				'light wide': allModes['light wide'],
+			},
+		},
+	},
+	play: async ({ canvasElement, args }) => {
+		await expect(
+			within(canvasElement).getByRole('heading', {
+				name: args.content.frontendData.headline,
+				level: 1,
+			}),
+		).toBeVisible();
+		const { documentElement } = canvasElement.ownerDocument;
+		await expect(documentElement.scrollWidth).toBeLessThanOrEqual(
+			documentElement.clientWidth,
+		);
+	},
+});
+
+export const WithTallMainMedia = Web.extend({
+	args: {
+		content: {
+			...webHostedArticle,
+			frontendData: {
+				...webHostedArticle.frontendData,
+				mainMediaElements: hostedArticle.mainMediaElements.map(
+					(element) => {
+						if (
+							element._type !==
+							'model.dotcomrendering.pageElements.ImageBlockElement'
+						) {
+							return element;
+						}
+						return {
+							...element,
+							data: {
+								alt: 'Fortnite convergence art with 4 characters in a purple swirl of color',
+								credit: 'Composite: Fortnite',
+							},
+							media: {
+								allImages: [
+									{
+										index: 0,
+										fields: {
+											isMaster: 'true',
+											width: '1920',
+											height: '1152',
+										},
+										mediaType: 'Image',
+										mimeType: 'image/jpeg',
+										url: 'https://media.guim.co.uk/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg',
+									},
+								],
+							},
+							imageSources: element.imageSources.map(
+								(source) => ({
+									...source,
+									srcSet: [
+										{
+											src: 'https://i.guim.co.uk/img/media/4bcf63ebab3bfeda5701f957f6a7b13f2597c976/0_0_1920_1152/master/1920.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=1bdc26f4ed1b54dfdcd6fa96b5f77f84',
+											width: 1400,
+										},
+									],
+								}),
+							),
+						};
+					},
+				),
 			},
 		},
 	},

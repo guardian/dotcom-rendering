@@ -5,15 +5,23 @@
 Frontend resolves each dated page with `GET /game?puzzleType=...&date=YYYY-MM-DD`
 and sends the response's `gameUrl` as `instance.gameUrl`. DCR passes it through the
 layout to `PuzzleIframe` and preserves the API's path, opaque puzzle ID and provider
-parameters. AmuseLabs URLs receive the current reader's `uid` and `darkMode`; all
-providers continue to receive `guardian-puzzle-context`.
+parameters. AmuseLabs URLs receive the current reader's `uid` and `darkMode`;
+MovieGrid URLs receive `darkMode=0|1` without adding `uid`. All providers continue
+to receive `guardian-puzzle-context`.
 
 The local URL builders described below remain a compatibility fallback for older
 frontend payloads without `gameUrl`. New frontend pages always supply the API URL
 or return 404/502 before rendering. Deploy this DCR support before the frontend change.
+MovieGrid pages require `instance.gameUrl`; missing or blank URLs return 404.
+DCR never derives MovieGrid puzzle URLs or IDs.
 
 Hub progress enrichment also preserves crossword `gameUrl` values exactly, including
 absolute links and dated Genius article paths. Other puzzle card destinations are unchanged.
+
+Film reveal and On the ball require both `puzzles-new-hub-v1` and
+`puzzles-new-hub-v2` for hub cards, game pages and trivia archives. V1-only requests
+omit the cards and receive 404 for those pages; existing V1 puzzles are unchanged.
+Local development retains its gate bypass.
 
 ## Sponsorship
 
@@ -122,10 +130,10 @@ participation itself (via `isPuzzlesHubV1Enabled`, mirroring
 request, so the endpoint isn't left relying solely on `frontend` never
 calling it (see "Hitting it locally" below).
 
-### The V0 puzzle set
+### Supported puzzle set
 
 The `PuzzleConfig` registry (`src/model/puzzles/puzzleConfigs.ts`) currently
-contains exactly 6 slugs, all rendered via the generic sandboxed
+contains 8 slugs, all rendered via the generic sandboxed
 `PuzzleIframe.island.tsx` component:
 
 | `slug`          | `puzzleGroup`   | provider               |
@@ -136,15 +144,18 @@ contains exactly 6 slugs, all rendered via the generic sandboxed
 | `sudoku-killer` | `logic-puzzles` | AmuseLabs              |
 | `word-wheel`    | `word-games`    | AmuseLabs              |
 | `wordiply`      | `word-games`    | bespoke (wordiply.com) |
+| `film-reveal`   | `trivia`        | MovieGrid              |
+| `on-the-ball`   | `trivia`        | MovieGrid              |
 
-Codeword, futoshiki, suguru, and the trivia/quizzes puzzles (on-the-ball,
-film-reveal) were removed from the registry for V0 and may return later.
+The `trivia` group uses the public `trivia-and-quizzes` route and archive category.
+Codeword, futoshiki and suguru remain outside the registry.
 **`iframe` is a discriminated union keyed by `provider`
-(`PuzzleProvider = 'amuselabs' | 'wordiply'`), each entry holds only the
+(`PuzzleProvider = 'amuselabs' | 'wordiply' | 'moviegrid'`), each entry holds only the
 minimal, provider-specific identity data needed to build its iframe URL,
 not a pre-baked final URL string.** AmuseLabs entries carry a `set`
 identifier (e.g. `'guardian-sudoku-easy'`, `'guardian-killer-sudoku-medium'`);
-Wordiply carries its `baseUrl`. Building the actual URL, including which
+Wordiply carries its `baseUrl`; MovieGrid relies entirely on the API URL.
+Building the actual URL, including which
 query params a given provider does or doesn't accept, is the job of a
 per-provider strategy module, `src/lib/puzzleIframeUrl.ts`, not this
 registry:
@@ -211,7 +222,7 @@ then renders. Fixtures generated below set `serverSideABTests` to
 `{ 'puzzles-new-hub-v1': 'variant' }` so they pass this gate; `NODE_ENV=development`
 also bypasses it locally.
 
-Generate fixture JSON for all 6 slugs using the `tsx` devDependency (no
+Generate fixture JSON for all 8 slugs using the `tsx` devDependency (no
 extra install needed) and `fixtures/manual/puzzlePage.ts`'s
 `createPuzzlePage`/`puzzlePageFixtures`:
 
@@ -250,9 +261,12 @@ For fixture-based testing, POST the generated JSON directly:
 | `sudoku-killer` | `curl -i -X POST http://localhost:3030/PuzzlePage -H "Content-Type: application/json" --data @/tmp/puzzle-fixtures/sudoku-killer.json` |
 | `word-wheel`    | `curl -i -X POST http://localhost:3030/PuzzlePage -H "Content-Type: application/json" --data @/tmp/puzzle-fixtures/word-wheel.json`    |
 | `wordiply`      | `curl -i -X POST http://localhost:3030/PuzzlePage -H "Content-Type: application/json" --data @/tmp/puzzle-fixtures/wordiply.json`      |
+| `film-reveal`   | `curl -i -X POST http://localhost:3030/PuzzlePage -H "Content-Type: application/json" --data @/tmp/puzzle-fixtures/film-reveal.json`   |
+| `on-the-ball`   | `curl -i -X POST http://localhost:3030/PuzzlePage -H "Content-Type: application/json" --data @/tmp/puzzle-fixtures/on-the-ball.json`   |
 
-All six should return `200`, hydrating into a sandboxed iframe pointed at
-that slug's resolved provider URL. An unknown slug (or a known slug renamed
+All eight should return `200`. MovieGrid fixtures use illustrative `example.com`
+URLs; replace `instance.gameUrl` with an API response to preview the real game.
+Other fixtures hydrate into a sandboxed iframe pointed at the resolved provider URL. An unknown slug (or a known slug renamed
 to something else in the request body) returns `404`.
 
 ### How to configure/add a new puzzle
@@ -284,8 +298,7 @@ iframe-based slug already using a supported provider:
       own naming convention matches our internal slug: the killer-sudoku
       incident is a direct, confirmed example of that assumption silently
       being wrong.
-    - **A genuinely new provider** (e.g. MovieGrid, returning in a future
-      version, not in the V0 registry today): needs its own
+    - **A genuinely new provider**: needs its own
       `PuzzleIframeConfig` union variant, its own builder function in
       `src/lib/puzzleIframeUrl.ts`, and a new case in
       `resolvePuzzleIframeUrl`'s dispatcher (the `never` exhaustiveness

@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import lzstring from 'lz-string';
-import SupporterRevenue from './SupporterRevenue';
+import { SupporterRevenue } from './SupporterRevenue';
 import { props } from './utils/storybook';
 
 const style = css`
