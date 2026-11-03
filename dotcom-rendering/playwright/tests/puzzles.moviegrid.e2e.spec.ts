@@ -34,8 +34,8 @@ for (const isFeatured of [false, true]) {
 						},
 					}),
 					configOverrides: {
+						edition: 'INT',
 						serverSideABTests: {
-							'puzzles-new-hub-v1': 'variant',
 							'puzzles-new-hub-v2': 'variant',
 						},
 					},
