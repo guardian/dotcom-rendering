@@ -1192,6 +1192,7 @@ export const SelfHostedVideo = ({
 						format={format}
 						isMainMedia={isMainMedia}
 						mediaType="SelfHostedVideo"
+						showIconBelowLeftCol={!isMainMedia}
 					/>
 				)}
 		</figure>

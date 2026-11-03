@@ -8,7 +8,6 @@ import { isFilterPageId } from '../lib/theFilter';
 import type { NavType } from '../model/extract-nav';
 import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { AdmiralScript } from './AdmiralScript.island';
 import { AlreadyVisited } from './AlreadyVisited.island';
 import { BrazeMessaging } from './BrazeMessaging.island';
 import { useConfig } from './ConfigContext';
@@ -106,9 +105,6 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 				<>
 					<Island priority="feature" defer={{ until: 'idle' }}>
 						<AlreadyVisited />
-					</Island>
-					<Island priority="feature" defer={{ until: 'idle' }}>
-						<AdmiralScript />
 					</Island>
 					<Island priority="critical">
 						<Metrics
