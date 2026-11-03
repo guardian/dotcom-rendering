@@ -9,6 +9,7 @@ import {
 	selfHostedLoopVideo54Card as loop54Card,
 	selfHostedLoopVideo916Card as loop916Card,
 } from '../../fixtures/manual/trails';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { SelfHostedVideo } from './SelfHostedVideo.island';
 
 const meta = {
@@ -68,6 +69,24 @@ export const Default: Story = {
 	args: {
 		...Loop.args,
 		videoStyle: 'Default',
+	},
+} satisfies Story;
+
+export const InlineImmersiveCaption: Story = {
+	args: {
+		...Default.args,
+		caption: 'Inline self-hosted video caption',
+		format: {
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Immersive,
+			theme: Pillar.News,
+		},
+		isMainMedia: false,
+	},
+	play: async ({ canvasElement }) => {
+		const caption = canvasElement.querySelector('figcaption');
+		await expect(caption).not.toBeNull();
+		await expect(caption?.querySelector('svg')).toBeVisible();
 	},
 } satisfies Story;
 
