@@ -84,6 +84,7 @@ export const ArticleTitle = ({
 				css`
 					position: relative;
 					min-height: 71px;
+					height: 100%;
 				`,
 		]}
 	>
