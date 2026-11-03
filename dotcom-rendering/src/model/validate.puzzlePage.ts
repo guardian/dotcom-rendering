@@ -118,6 +118,12 @@ const isPuzzleGameSupporting = (value: unknown): boolean =>
 	value.usefulLinks.every(isPuzzleLink) &&
 	(value.newsletter === undefined || isPuzzlesNewsletter(value.newsletter));
 
+const isPuzzleProgressIdentity = (value: unknown): boolean =>
+	isRecord(value) &&
+	isNonEmptyString(value.puzzleId) &&
+	isNonEmptyString(value.puzzleType) &&
+	isNonEmptyString(value.publishDate);
+
 const isPuzzlePageInstance = (value: unknown): boolean => {
 	if (!isRecord(value)) return false;
 
@@ -125,6 +131,8 @@ const isPuzzlePageInstance = (value: unknown): boolean => {
 		isNonEmptyString(value.title) &&
 		isOptionalString(value.puzzleDate) &&
 		isOptionalString(value.gameUrl) &&
+		(value.progressIdentity === undefined ||
+			isPuzzleProgressIdentity(value.progressIdentity)) &&
 		(value.moreFromPuzzlesAndGames === undefined ||
 			(Array.isArray(value.moreFromPuzzlesAndGames) &&
 				value.moreFromPuzzlesAndGames.every((item) =>

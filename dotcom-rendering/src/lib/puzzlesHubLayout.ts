@@ -7,7 +7,7 @@ import type {
 const isV2Puzzle = (item: PuzzleItem): boolean =>
 	item.type === 'film-reveal' || item.type === 'on-the-ball';
 
-const withoutV2PuzzleItems = (items: PuzzleItem[]): PuzzleItem[] =>
+export const withoutV2PuzzleItems = (items: PuzzleItem[]): PuzzleItem[] =>
 	items.filter((item) => !isV2Puzzle(item));
 
 /** Remove V2 games from every hub placement, including featured cards. */
