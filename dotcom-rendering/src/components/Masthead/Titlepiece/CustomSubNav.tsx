@@ -26,6 +26,7 @@ type Props = {
 	customSubNav: CustomSubnav;
 	currentNavLink: string;
 	renderingPage: RenderingPage;
+	pageId: string;
 	hasPageSkin?: boolean;
 };
 
@@ -338,6 +339,7 @@ export const CustomSubNav = ({
 	currentNavLink,
 	renderingPage,
 	hasPageSkin,
+	pageId,
 }: Props) => {
 	const isArticle = renderingPage === 'article';
 	/** DCR receives images for all platforms; only web images are rendered here. */
@@ -358,7 +360,8 @@ export const CustomSubNav = ({
 					linkText,
 				)}
 			>
-				{linkText === currentNavLink ? (
+				{linkText === currentNavLink ||
+				(pageId.length > 0 && dotcomPath.includes(pageId)) ? (
 					<span css={selectedLink}>{linkText}</span>
 				) : (
 					linkText
