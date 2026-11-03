@@ -42,10 +42,10 @@ const immersiveGridMargins = css`
 `;
 
 const immersivePortraitSeriesRule = css`
-	${from.tablet} {
+	${from.desktop} {
 		display: flex;
 		align-items: flex-end;
-		width: 100%;
+		width: calc(100% + 4px);
 		max-width: none;
 
 		&::after {
@@ -53,13 +53,6 @@ const immersivePortraitSeriesRule = css`
 			flex: 1;
 			margin-left: 6px;
 			border-bottom: 1px solid ${themePalette('--article-border')};
-		}
-	}
-
-	${from.desktop} {
-		width: calc(100% + 4px);
-
-		&::after {
 			position: relative;
 			top: 4px;
 		}
