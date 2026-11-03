@@ -119,7 +119,7 @@ const renderCrosswordLayout = ({
 };
 
 describe('CrosswordLayout app download link', () => {
-	it('renders the link when v1 is disabled', () => {
+	it('renders the link when the hub is unavailable', () => {
 		renderCrosswordLayout({});
 
 		expect(
@@ -127,8 +127,8 @@ describe('CrosswordLayout app download link', () => {
 		).toBeInTheDocument();
 	});
 
-	it('does not render the link when v1 is enabled', () => {
-		renderCrosswordLayout({ serverSideABTests: v1On });
+	it('does not render the link when the hub is available', () => {
+		renderCrosswordLayout({ edition: 'INT' });
 
 		expect(
 			screen.queryByRole('link', { name: 'Download the Guardian app' }),

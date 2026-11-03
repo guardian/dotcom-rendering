@@ -18,9 +18,10 @@ DCR never derives MovieGrid puzzle URLs or IDs.
 Hub progress enrichment also preserves crossword `gameUrl` values exactly, including
 absolute links and dated Genius article paths. Other puzzle card destinations are unchanged.
 
-Film reveal and On the ball require both `puzzles-new-hub-v1` and
-`puzzles-new-hub-v2` for hub cards, game pages and trivia archives. V1-only requests
-omit the cards and receive 404 for those pages; existing V1 puzzles are unchanged.
+Film reveal and On the ball require both an edition the hub is available in and
+`puzzles-new-hub-v2` for hub cards, game pages and trivia archives. Requests with
+only the edition gate omit the cards and receive 404 for those pages; existing
+puzzles are unchanged.
 Local development retains its gate bypass.
 
 ## Sponsorship
