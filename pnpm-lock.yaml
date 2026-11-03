@@ -521,8 +521,8 @@ importers:
         specifier: 29.1.0
         version: 29.1.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1)(supports-color@8.1.1))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@5.2.0)(tslib@2.6.2)(typescript@6.0.3))(@guardian/source@12.2.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1)(supports-color@8.1.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@6.0.3))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@6.0.3)
       '@guardian/support-dotcom-components':
-        specifier: 11.2.0
-        version: 11.2.0(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@5.2.0)(tslib@2.6.2)(typescript@6.0.3))(@guardian/newsletter-types@5.0.0(tslib@2.6.2)(typescript@6.0.3))(@guardian/ophan-tracker-js@5.2.0)(zod@4.6.6)
+        specifier: 11.3.0
+        version: 11.3.0(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@5.2.0)(tslib@2.6.2)(typescript@6.0.3))(@guardian/newsletter-types@5.0.0(tslib@2.6.2)(typescript@6.0.3))(@guardian/ophan-tracker-js@5.2.0)(zod@4.6.6)
       '@guardian/tsconfig':
         specifier: 'catalog:'
         version: 1.0.1
@@ -2338,8 +2338,8 @@ packages:
       typescript:
         optional: true
 
-  '@guardian/support-dotcom-components@11.2.0':
-    resolution: {integrity: sha512-1JlgeMBeNLKjr7inpFtQzLQCFXx8seAEt372hMxcSKe5101K4qSXrGjAzE925hF6C2TpvlxZiRmypCDvRjgr8g==}
+  '@guardian/support-dotcom-components@11.3.0':
+    resolution: {integrity: sha512-uzhFaEeryRw5pWpZT9VYrmfMMmfPs4jkZWE9CcF5LukqVRBFc4+9CUFFeh/eFk0khpX5wKJURLv1t09YuVedgg==}
     peerDependencies:
       '@guardian/libs': ^22.0.0
       '@guardian/newsletter-types': 5.0.0
@@ -11618,7 +11618,7 @@ snapshots:
       react: 18.3.1
       typescript: 6.0.3
 
-  '@guardian/support-dotcom-components@11.2.0(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@5.2.0)(tslib@2.6.2)(typescript@6.0.3))(@guardian/newsletter-types@5.0.0(tslib@2.6.2)(typescript@6.0.3))(@guardian/ophan-tracker-js@5.2.0)(zod@4.6.6)':
+  '@guardian/support-dotcom-components@11.3.0(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@5.2.0)(tslib@2.6.2)(typescript@6.0.3))(@guardian/newsletter-types@5.0.0(tslib@2.6.2)(typescript@6.0.3))(@guardian/ophan-tracker-js@5.2.0)(zod@4.6.6)':
     dependencies:
       '@guardian/libs': 32.0.0(@guardian/ophan-tracker-js@5.2.0)(tslib@2.6.2)(typescript@6.0.3)
       '@guardian/newsletter-types': 5.0.0(tslib@2.6.2)(typescript@6.0.3)
