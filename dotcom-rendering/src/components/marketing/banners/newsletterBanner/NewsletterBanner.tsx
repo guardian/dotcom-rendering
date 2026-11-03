@@ -55,7 +55,7 @@ const buildNewsletterBannerData = (
 			},
 			headingCopy: {
 				...baseBannerData.selectors.headingCopy,
-				heading: <>Sign up to {newsletter.name}</>,
+				heading: <>Sign up for {newsletter.name}</>,
 			},
 			showHeaderImage: false,
 			showBody: true,

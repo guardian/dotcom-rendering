@@ -8,6 +8,7 @@ import {
 	space,
 	until,
 } from '@guardian/source/foundations';
+import { getZIndex } from '../../../../lib/getZIndex';
 import { contentTransitionEasing } from '../../shared/transitions';
 
 const phabletContentMaxWidth = '492px';
@@ -168,12 +169,16 @@ export const styles = {
 		grid-area: close-button;
 		grid-row: 1;
 		align-self: start;
-		z-index: 1;
+		position: sticky;
+		top: 0;
+		z-index: ${getZIndex('banner')};
 
 		${until.desktop} {
-			position: absolute;
+			grid-column: 1 / -1;
+			justify-self: end;
+			margin-top: ${space[2]}px;
+			margin-right: ${space[3]}px;
 			top: ${space[2]}px;
-			right: ${space[3]}px;
 		}
 		${until.mobile} {
 			> div {
@@ -206,7 +211,6 @@ export const styles = {
 		justify-self: end;
 		align-self: start;
 		overflow: hidden;
-		border-radius: 50%;
 
 		> div {
 			grid-area: auto;
