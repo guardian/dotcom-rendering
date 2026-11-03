@@ -22,6 +22,11 @@ import type {
 	CustomSubnavImage,
 	RenderingPage,
 } from '../../../types/customSubnav';
+import { useRef } from 'storybook/internal/preview-api';
+import { useIsInView } from '../../../lib/useIsInView';
+import { useEffect } from 'react';
+import { submitComponentEvent } from '../../../client/ophan/ophan';
+import { useConfig } from '../../ConfigContext';
 
 type Props = {
 	customSubNav: CustomSubnav;
@@ -342,8 +347,31 @@ export const CustomSubNav = ({
 	pageId,
 	canonicalUrl,
 }: Props) => {
+	const hasTrackedView = useRef(false);
+	const [isInView, setNode] = useIsInView({});
+	const { renderingTarget } = useConfig();
 	const isNetworkFront = isANetworkFront(pageId);
 	const isArticle = renderingPage === 'article';
+	const TRACKING_ID = `custom-subnav-${customSubNav.header.headerText}`;
+
+	useEffect(() => {
+		if (isInView !== true || hasTrackedView.current) {
+			return;
+		}
+
+		hasTrackedView.current = true;
+		void submitComponentEvent(
+			{
+				component: {
+					componentType: 'EVENT_GRAPHIC', // TODO: Change this
+					id: TRACKING_ID,
+					labels: [], // TODO: Check with Petter
+				},
+				action: 'VIEW',
+			},
+			renderingTarget,
+		);
+	}, [isInView, renderingTarget, TRACKING_ID]);
 	/** DCR receives images for all platforms; only web images are rendered here. */
 	const webImages = (customSubNav.images ?? []).filter((image) =>
 		image.platforms.includes('web'),
@@ -375,6 +403,7 @@ export const CustomSubNav = ({
 	if (hasHeaderImage) {
 		return (
 			<div
+				ref={setNode}
 				data-component={`custom-subnav-${customSubNav.header.headerText}`}
 				data-component-id={customSubNav.id}
 				data-rendering-page={renderingPage}
@@ -403,6 +432,7 @@ export const CustomSubNav = ({
 	if (isArticle) {
 		return (
 			<div
+				ref={setNode}
 				data-component={`custom-subnav-${customSubNav.header.headerText}`}
 				data-component-id={customSubNav.id}
 				data-rendering-page={renderingPage}
@@ -433,6 +463,7 @@ export const CustomSubNav = ({
 
 	return (
 		<div
+			ref={setNode}
 			data-component={`custom-subnav-${customSubNav.header.headerText}`}
 			data-component-id={customSubNav.id}
 			data-rendering-page={renderingPage}
