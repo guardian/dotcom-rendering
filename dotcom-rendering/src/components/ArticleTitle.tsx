@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, headlineBold17 } from '@guardian/source/foundations';
+import { from } from '@guardian/source/foundations';
 import { grid } from '../../src/grid';
 import { type LayoutType } from '../layouts/lib/articleArrangements';
 import {
@@ -49,16 +49,17 @@ const immersivePortraitSeriesRule = css`
 
 	${from.desktop} {
 		width: calc(100% + 4px);
+
+		&::after {
+			position: relative;
+			top: 4px;
+		}
 	}
 
-	> div {
-		line-height: 0;
-	}
-
-	> div > a {
-		display: inline-block;
-		${headlineBold17};
-		line-height: 21px;
+	${from.wide} {
+		&::after {
+			top: 6px;
+		}
 	}
 
 	&::after {

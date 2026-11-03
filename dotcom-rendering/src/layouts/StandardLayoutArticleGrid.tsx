@@ -129,70 +129,6 @@ const avatarPositionStyles = (isPicture: boolean) => css`
 	}
 `;
 
-const stackedPortraitGridOverrides = {
-	media: css`
-		${from.leftCol} {
-			&& {
-				grid-row: 1 / span 4;
-				${grid.between(9, 'right-column-end')};
-			}
-		}
-		${from.wide} {
-			&& {
-				${grid.between(10, 'right-column-end')};
-			}
-		}
-	`,
-	standfirst: css`
-		${from.leftCol} {
-			&& {
-				grid-row: 3;
-				${grid.between('left-column-start', 9)};
-			}
-		}
-		${from.wide} {
-			&& {
-				${grid.between('left-column-start', 10)};
-			}
-		}
-	`,
-	caption: css`
-		${from.leftCol} {
-			&& {
-				grid-row: 5;
-				${grid.column.left};
-			}
-		}
-	`,
-	meta: css`
-		${from.leftCol} {
-			&& {
-				grid-row: 4;
-				${grid.between('left-column-start', 9)};
-			}
-		}
-		${from.wide} {
-			&& {
-				${grid.between('left-column-start', 10)};
-			}
-		}
-	`,
-	body: css`
-		${from.leftCol} {
-			&& {
-				grid-row: 5;
-			}
-		}
-	`,
-	rightColumn: css`
-		${from.leftCol} {
-			&& {
-				grid-row: 5;
-			}
-		}
-	`,
-};
-
 interface GridItemProps {
 	area: Area;
 	layoutType: LayoutType;
@@ -496,8 +432,6 @@ export const StandardLayoutArticleGrid = ({
 								margin-top: ${space[2]}px;
 							`
 						: undefined,
-					hasImmersivePortraitTitleRule &&
-						stackedPortraitGridOverrides.media,
 				]}
 			>
 				<div>
@@ -541,6 +475,13 @@ export const StandardLayoutArticleGrid = ({
 						css`
 							align-content: flex-start;
 							margin-bottom: 0;
+
+							${until.desktop} {
+								${!hasImmersivePortraitTitleRule &&
+								`border-bottom: 1px solid ${themePalette(
+									'--article-border',
+								)};`}
+							}
 
 							${format.design !== ArticleDesign.WeekendEssay &&
 							css`
@@ -704,8 +645,6 @@ export const StandardLayoutArticleGrid = ({
 							}
 						`,
 					isInteractiveTopHat && topHatFurnitureBackgroundStyles,
-					hasImmersivePortraitTitleRule &&
-						stackedPortraitGridOverrides.standfirst,
 				]}
 			>
 				{hasImmersiveAffiliateDisclaimer && (
@@ -725,13 +664,9 @@ export const StandardLayoutArticleGrid = ({
 				<GridItem
 					area="caption"
 					layoutType={layoutType}
-					css={[
-						css`
-							padding-top: ${space[2]}px;
-						`,
-						hasImmersivePortraitTitleRule &&
-							stackedPortraitGridOverrides.caption,
-					]}
+					css={css`
+						padding-top: ${space[2]}px;
+					`}
 				>
 					{isImmersivePortrait ? (
 						<Caption
@@ -791,8 +726,6 @@ export const StandardLayoutArticleGrid = ({
 							${topHatFurnitureBackgroundStyles}
 							padding-bottom: 10px;
 						`,
-					hasImmersivePortraitTitleRule &&
-						stackedPortraitGridOverrides.meta,
 				]}
 			>
 				{format.display !== ArticleDisplay.Immersive &&
@@ -907,13 +840,9 @@ export const StandardLayoutArticleGrid = ({
 			<GridItem
 				area="body"
 				layoutType={layoutType}
-				css={[
-					css`
-						z-index: ${getZIndex('bodyArea')};
-					`,
-					hasImmersivePortraitTitleRule &&
-						stackedPortraitGridOverrides.body,
-				]}
+				css={css`
+					z-index: ${getZIndex('bodyArea')};
+				`}
 			>
 				{/* Only show Listen to Article button on App landscape views */}
 				{isApps && (
@@ -1032,18 +961,12 @@ export const StandardLayoutArticleGrid = ({
 			<GridItem
 				area="right-column"
 				layoutType={layoutType}
-				css={[
-					css`
-						padding-top: ${layoutType === 'media' ? 0 : 6}px;
-						${from.desktop} {
-							padding-bottom: ${layoutType === 'media'
-								? 41
-								: 0}px;
-						}
-					`,
-					hasImmersivePortraitTitleRule &&
-						stackedPortraitGridOverrides.rightColumn,
-				]}
+				css={css`
+					padding-top: ${layoutType === 'media' ? 0 : 6}px;
+					${from.desktop} {
+						padding-bottom: ${layoutType === 'media' ? 41 : 0}px;
+					}
+				`}
 			>
 				{layoutType !== 'picture' && (
 					<Hide until="desktop">
