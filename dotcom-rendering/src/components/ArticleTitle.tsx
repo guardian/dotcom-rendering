@@ -78,25 +78,25 @@ export const ArticleTitle = ({
 			[ArticleDesign.Gallery, ArticleDesign.HostedGallery].includes(
 				format.design,
 			) && galleryStyles,
+			sectionStyles,
 			layoutType === 'immersivePortrait' &&
 				format.design === ArticleDesign.WeekendEssay &&
 				css`
-					display: flex;
-					flex-direction: row;
-					justify-content: space-between;
+					position: relative;
+					min-height: 71px;
+					height: 100%;
 				`,
 		]}
 	>
 		<div
-			css={[
-				sectionStyles,
+			css={
 				format.display === ArticleDisplay.Immersive &&
 				format.design !== ArticleDesign.WeekendEssay
 					? layoutType == null
 						? legacyImmersiveMargins
 						: immersiveGridMargins
-					: undefined,
-			]}
+					: undefined
+			}
 		>
 			<SeriesSectionLink
 				format={format}
@@ -114,6 +114,9 @@ export const ArticleTitle = ({
 					src="https://interactive.guim.co.uk/atoms/2025/04/2025-weekend-essay-test/assets/v/1791480673/book.gif"
 					alt="Book"
 					css={css`
+						position: absolute;
+						right: 0;
+						bottom: 0;
 						width: 70px;
 						height: 70px;
 						${from.leftCol} {
