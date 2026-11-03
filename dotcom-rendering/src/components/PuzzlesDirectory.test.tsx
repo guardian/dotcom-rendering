@@ -1,7 +1,12 @@
 import '@testing-library/jest-dom';
+import { palette } from '@guardian/source/foundations';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import type { ReactNode } from 'react';
 import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
+import {
+	featuredTriviaPuzzlesContainer,
+	triviaPuzzlesContainer,
+} from '../../fixtures/manual/puzzlesPage';
 import type {
 	PuzzleContainer,
 	PuzzleItem,
@@ -35,6 +40,62 @@ const section = (
 });
 
 describe('PuzzlesDirectory', () => {
+	it.each([false, true])(
+		'renders the supplied MovieGrid artwork (featured: %s)',
+		(isFeatured) => {
+			const { container } = render(
+				<PuzzlesDirectory
+					layout={{
+						containers: [
+							isFeatured
+								? featuredTriviaPuzzlesContainer
+								: triviaPuzzlesContainer,
+						],
+					}}
+					renderAds={false}
+				/>,
+			);
+
+			const images = container.querySelectorAll('img');
+			expect(images).toHaveLength(2);
+			for (const [index, type] of [
+				'film-reveal',
+				'on-the-ball',
+			].entries()) {
+				expect(images[index]).toHaveAttribute(
+					'src',
+					`https://i.guim.co.uk/img/uploads/2026/10/28/${type}-${isFeatured ? 'featured' : 'standard'}.png?width=440&dpr=2&s=none`,
+				);
+				expect(images[index]).toHaveAttribute('aria-hidden', 'true');
+			}
+		},
+	);
+
+	it('links both trivia cards to their dated Guardian pages without invented progress', () => {
+		render(
+			<PuzzlesDirectory
+				layout={{ containers: [triviaPuzzlesContainer] }}
+				renderAds={false}
+			/>,
+		);
+
+		expect(
+			screen.getByRole('heading', { level: 2, name: 'Trivia & quizzes' }),
+		).toBeInTheDocument();
+		for (const [slug, title] of [
+			['film-reveal', 'Film reveal'],
+			['on-the-ball', 'On the ball'],
+		]) {
+			expect(
+				screen.getByRole('link', { name: `${title} Daily` }),
+			).toHaveAttribute(
+				'href',
+				`/puzzles-and-games/trivia-and-quizzes/${slug}/2026-10-28`,
+			);
+		}
+		expect(screen.queryByText('Played')).not.toBeInTheDocument();
+	});
+
 	it('shows sponsorship only on the sponsored container', () => {
 		render(
 			<PuzzlesDirectory
@@ -114,6 +175,9 @@ describe('PuzzlesDirectory', () => {
 		['sudoku', '#f1f8fc', '#0077b6'],
 		['wordiply', '#fef9f5', '#c74600'],
 		['word-wheel', '#fef9f5', '#c74600'],
+		['film-reveal', palette.labs[700], palette.labs[200]],
+		['on-the-ball', palette.labs[700], palette.labs[200]],
+		['trivia', palette.labs[700], palette.labs[200]],
 	])(
 		'uses the %s type colours instead of legacy configured colours',
 		(type, background, title) => {
