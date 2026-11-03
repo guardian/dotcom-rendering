@@ -28,8 +28,7 @@ type Props = {
 	renderingPage: RenderingPage;
 	hasPageSkin?: boolean;
 	underlineHeader?: boolean;
-	showHeaderDivider?: boolean;
-	scrollHeaderWithLinks?: boolean;
+	isCard?: boolean;
 };
 
 const subNavStyles = css`
@@ -118,8 +117,6 @@ const articleHeaderStyles = css`
 	padding-top: 1.1px;
 	padding-right: 0;
 	margin-right: 0;
-	//todo should only be on mini nav
-	margin-left: 1px;
 `;
 
 const headerTextWrapperStyles = css`
@@ -363,10 +360,10 @@ export const CustomSubNav = ({
 	renderingPage,
 	hasPageSkin,
 	underlineHeader,
-	showHeaderDivider = true,
-	scrollHeaderWithLinks = false,
+	isCard = false,
 }: Props) => {
 	const isArticle = renderingPage === 'article';
+
 	/** DCR receives images for all platforms; only web images are rendered here. */
 	const webImages = (customSubNav.images ?? []).filter((image) =>
 		image.platforms.includes('web'),
@@ -426,8 +423,8 @@ export const CustomSubNav = ({
 		);
 	}
 
-	//todo is there a better way to slice this, e.g. a isCard view. Check how much duplication it would involve
-	if (isArticle) {
+	if (isArticle || isCard) {
+		const showHeaderDivider = !isCard;
 		return (
 			<div
 				data-component={`custom-subnav-${customSubNav.header.headerText}`}
@@ -442,7 +439,9 @@ export const CustomSubNav = ({
 						!hasPageSkin && subNavStylesFromLeftCol,
 						articleSubNavStyles,
 						!showHeaderDivider && articleHeaderGapStyles,
-						showHeaderDivider && articleDividerStyles,
+						showHeaderDivider
+							? articleDividerStyles
+							: articleHeaderGapStyles,
 						css`
 							flex-shrink: 0;
 							width: max-content;
@@ -464,39 +463,14 @@ export const CustomSubNav = ({
 			data-component={`custom-subnav-${customSubNav.header.headerText}`}
 			data-component-id={customSubNav.id}
 			data-rendering-page={renderingPage}
-			css={[
-				isArticle ? articleContainerStyles : frontContainerStyles,
-				scrollHeaderWithLinks &&
-					css`
-						${scrollableSubNavStyles}
-						& > a,
-						& > span {
-							flex-shrink: 0;
-						}
-					`,
-			]}
+			css={frontContainerStyles}
 		>
-			{CustomHeader(
-				customSubNav,
-				isArticle
-					? css`
-							${articleHeaderStyles}
-							${!showHeaderDivider && 'border-right: none;'}
-						`
-					: undefined,
-				underlineHeader,
-			)}
+			{CustomHeader(customSubNav, undefined)}
 			<ul
 				css={[
 					subNavStyles,
 					!hasPageSkin && subNavStylesFromLeftCol,
-					!scrollHeaderWithLinks && scrollableSubNavStyles,
-					isArticle && articleSubNavStyles,
-					scrollHeaderWithLinks &&
-						css`
-							flex-shrink: 0;
-							width: max-content;
-						`,
+					scrollableSubNavStyles,
 				]}
 				role="list"
 				style={{

@@ -91,8 +91,7 @@ export const FrontCard = (props: Props) => {
 					customSubNav={trail.miniNavData}
 					currentNavLink=""
 					renderingPage="article"
-					showHeaderDivider={false}
-					scrollHeaderWithLinks={true}
+					isCard={true}
 				/>
 			</div>
 		) : undefined;
