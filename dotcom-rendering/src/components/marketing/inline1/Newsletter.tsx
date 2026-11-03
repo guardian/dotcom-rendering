@@ -1,53 +1,22 @@
 import type { Inline1Props } from '@guardian/support-dotcom-components/dist/shared/types';
-import { useIsSignedIn } from '../../../lib/useAuthStatus';
-import { useNewsletterSubscription } from '../../../lib/useNewsletterSubscription';
-import { NewsletterSignupCard } from '../../NewsletterSignupCard';
-import { NewsletterSignupForm } from '../../NewsletterSignupForm.island';
+import { EmailSignUpWrapper } from '../../EmailSignUpWrapper.island';
 import type { ReactComponent } from '../lib/ReactComponent';
-
-type NewsletterMessage = Extract<
-	Inline1Props['variant']['message'],
-	{ type: 'Inline1NewsletterMessage' }
->;
 
 export const Newsletter: ReactComponent<Inline1Props> = ({ variant }) => {
 	if (variant.message.type !== 'Inline1NewsletterMessage') {
 		return;
 	}
+	const emailSignUpProps = {
+		index: 0, // TBD how to get, used for the skip link
+		listId: 6031, // We need the newsletter numerical ID from the API
+		identityName: variant.message.heading,
+		idApiUrl: window.guardian.config.page.idApiUrl ?? '',
+		name: variant.message.heading,
+		description: variant.message.body,
+		illustrationSquare: variant.message.imageUrl,
+		frequency: variant.message.frequency,
+		theme: '',
+	};
 
-	return <NewsletterForm message={variant.message} />;
-};
-
-const NewsletterForm: ReactComponent<{ message: NewsletterMessage }> = ({
-	message,
-}) => {
-	const newsletterId = message.newsletterId;
-	const frequency = message.frequency;
-	const newsletterName = message.heading; // SDC and SAC model to be changed to newsletter name
-	const body = message.body;
-	const imageUrl = message.imageUrl;
-	const componentId = ``; // TBD
-	const isSignedIn = useIsSignedIn();
-	const isSubscribed = useNewsletterSubscription(
-		Number(newsletterId),
-		window.guardian.config.page.idApiUrl,
-	);
-
-	return (
-		<NewsletterSignupCard
-			name={newsletterName}
-			frequency={frequency}
-			description={body}
-			illustrationSquare={imageUrl}
-			isSignedIn={isSignedIn}
-		>
-			<NewsletterSignupForm
-				newsletterId={newsletterId}
-				newsletterName={newsletterName}
-				frequency={frequency}
-				isAlreadySubscribed={isSubscribed}
-				componentId={componentId}
-			/>
-		</NewsletterSignupCard>
-	);
+	return <EmailSignUpWrapper {...emailSignUpProps} />;
 };
