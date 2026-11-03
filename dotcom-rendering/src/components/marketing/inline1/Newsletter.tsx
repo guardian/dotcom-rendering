@@ -9,7 +9,7 @@ export const Newsletter: ReactComponent<Inline1Props> = ({ variant }) => {
 	const emailSignUpProps = {
 		index: 0, // TBD how to get, used for the skip link
 		listId: 6031, // We need the newsletter numerical ID from the API
-		identityName: variant.message.heading,
+		identityName: variant.message.heading, // Need to handle option to have a configurable heading
 		idApiUrl: window.guardian.config.page.idApiUrl ?? '',
 		name: variant.message.heading,
 		description: variant.message.body,
