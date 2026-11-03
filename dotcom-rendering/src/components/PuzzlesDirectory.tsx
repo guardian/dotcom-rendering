@@ -282,6 +282,7 @@ const DirectorySection = ({
 				<Rows
 					isFeatured={container.variant === 'featured'}
 					rows={container.content.items}
+					ophanComponentName={`puzzles-hub:${container.id}`}
 				/>
 				{container.content.nestedContainers.length > 0 && (
 					<div css={nestedGridStyles}>
@@ -292,7 +293,10 @@ const DirectorySection = ({
 									css={nestedStyles(nested.desktopSpan ?? 12)}
 									key={nested.id}
 								>
-									<Rows rows={nested.content.items} />
+									<Rows
+										rows={nested.content.items}
+										ophanComponentName={`puzzles-hub:${container.id}:${nested.id}`}
+									/>
 									<Archive container={nested} />
 								</div>
 							))}
