@@ -228,7 +228,7 @@ export const StandardLayoutArticleGrid = ({
 		? 'auto'
 		: `max(calc(80vh - ${immersiveHeaderHeight}px), calc(25rem - ${immersiveHeaderHeight}px))`;
 
-	const topHatTestingPage = 'p/x4zt8y';
+	const topHatTestingPage = '/p/x4zt8y';
 	const layoutType =
 		article.config.shortUrlId === topHatTestingPage
 			? 'interactiveTopHat'
