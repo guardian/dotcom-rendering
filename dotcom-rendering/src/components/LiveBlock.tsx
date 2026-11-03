@@ -5,7 +5,6 @@ import type { EditionId } from '../lib/edition';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { Block } from '../types/blocks';
 import type { Switches } from '../types/config';
-import { ElectionTrackerWrapper } from './ElectionTrackerWrapper.island';
 import { Island } from './Island';
 import { LastUpdated } from './LastUpdated';
 import { LiveBlockContainer } from './LiveBlockContainer';
@@ -76,33 +75,6 @@ export const LiveBlock = ({
 			serverTime={serverTime}
 		>
 			{block.elements.map((element, index) => {
-				if (
-					element._type ===
-						'model.dotcomrendering.pageElements.InteractiveAtomBlockElement' &&
-					element.id ===
-						'interactives/2026/11/election-trackers/us-election-tracker-2026'
-				) {
-					return (
-						<div
-							key={element.id}
-							css={css`
-								margin-bottom: 12px;
-							`}
-						>
-							<Island
-								priority="feature"
-								defer={{ until: 'visible' }}
-							>
-								<ElectionTrackerWrapper
-									electionDataUrl="https://zug.code.dev-guardianapis.com/views/elections/us-general-2026/congress-liveblog-tracker/all/v1"
-									electionComponents={{ components: [] }}
-									liveEffects={true}
-								/>
-							</Island>
-						</div>
-					);
-				}
-
 				return (
 					<RenderArticleElement
 						key={index}

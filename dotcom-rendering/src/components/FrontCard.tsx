@@ -54,7 +54,7 @@ export const FrontCard = (props: Props) => {
 		showPulsingDot: trail.format.design === ArticleDesign.LiveBlog,
 		showQuotedHeadline: trail.showQuotedHeadline,
 		showVideo: trail.showVideo,
-		slideshowImages: trail.slideshowImages,
+		slideshowMedia: trail.slideshowMedia,
 		snapData: trail.snapData,
 		starRating: trail.starRating,
 		uniqueId: trail.uniqueId,

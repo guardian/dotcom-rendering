@@ -121,6 +121,24 @@ const renderCrosswordLayout = ({
 	);
 };
 
+describe('CrosswordLayout app download link', () => {
+	it('renders the link when v1 is disabled', () => {
+		renderCrosswordLayout({});
+
+		expect(
+			screen.getByRole('link', { name: 'Download the Guardian app' }),
+		).toBeInTheDocument();
+	});
+
+	it('does not render the link when v1 is enabled', () => {
+		renderCrosswordLayout({ serverSideABTests: v1On });
+
+		expect(
+			screen.queryByRole('link', { name: 'Download the Guardian app' }),
+		).not.toBeInTheDocument();
+	});
+});
+
 describe('CrosswordLayout useful links', () => {
 	const puzzlesSupporting: PuzzleGameSupporting = {
 		usefulLinks: [
