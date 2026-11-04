@@ -144,13 +144,7 @@ const NewsletterSignupHeader = (
 		<div css={headerStyles}>
 			<div css={titleAndMetaStyles}>
 				<p css={titleStyles}>
-					{props.heading ? (
-						props.heading
-					) : (
-						<>
-							Sign up to <span>{props.name}</span>
-						</>
-					)}
+					{props.heading ? props.heading : `Sign up to ${props.name}`}
 				</p>
 				<p css={descriptionStyles}>{props.description}</p>
 			</div>
