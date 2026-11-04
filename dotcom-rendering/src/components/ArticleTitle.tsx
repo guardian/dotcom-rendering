@@ -6,7 +6,7 @@ import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
-	hasImmersiveGridTitle,
+	hasImmersiveGridTitleRule,
 } from '../lib/articleFormat';
 import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
@@ -101,7 +101,7 @@ export const ArticleTitle = ({
 }: Props) => {
 	const hasImmersivePortraitTitleRule =
 		layoutType === 'immersivePortrait' &&
-		hasImmersiveGridTitle(format, tags);
+		hasImmersiveGridTitleRule(format, tags);
 
 	return (
 		<div
@@ -146,6 +146,7 @@ export const ArticleTitle = ({
 					<img
 						src="https://interactive.guim.co.uk/atoms/2025/04/2025-weekend-essay-test/assets/v/1791480673/book.gif"
 						alt="Book"
+						data-chromatic="ignore"
 						css={css`
 							position: absolute;
 							right: 0;
