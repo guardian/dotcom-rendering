@@ -11,10 +11,13 @@ import {
 	textSans14,
 	textSansBold14,
 } from '@guardian/source/foundations';
+import { useEffect, useRef } from 'react';
+import { submitComponentEvent } from '../../../client/ophan/ophan';
 import { grid } from '../../../grid';
 import { isNetworkFront as isANetworkFront } from '../../../lib/edition';
 import { generateImageURL } from '../../../lib/image';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
+import { useIsInView } from '../../../lib/useIsInView';
 import { palette as themePalette } from '../../../palette';
 import type {
 	CustomSubnav,
@@ -22,10 +25,6 @@ import type {
 	CustomSubnavImage,
 	RenderingPage,
 } from '../../../types/customSubnav';
-import { useRef } from 'storybook/internal/preview-api';
-import { useIsInView } from '../../../lib/useIsInView';
-import { useEffect } from 'react';
-import { submitComponentEvent } from '../../../client/ophan/ophan';
 import { useConfig } from '../../ConfigContext';
 
 type Props = {
