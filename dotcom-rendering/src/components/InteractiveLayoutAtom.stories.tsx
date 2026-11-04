@@ -21,7 +21,7 @@ export const InteractiveLayoutAtom = meta.story({
 			design: 0,
 			theme: 0,
 		},
-		articleArrangement: 'interactive',
+		articleArrangement: 'interactiveStandard',
 	},
 	decorators: (StoryComponent) => (
 		<div
