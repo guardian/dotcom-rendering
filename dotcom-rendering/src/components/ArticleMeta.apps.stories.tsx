@@ -124,6 +124,22 @@ export const ImmersiveWithMultipleContributorsStory = meta.story({
 	},
 });
 
+export const ImmersiveGridWithMultipleContributorsStory = meta.story({
+	...ImmersiveWithMultipleContributorsStory.input,
+	args: {
+		...ImmersiveWithMultipleContributorsStory.input.args,
+		layoutType: 'immersiveLandscape',
+	},
+});
+
+export const ImmersivePortraitWithMultipleContributorsStory = meta.story({
+	...ImmersiveGridWithMultipleContributorsStory.input,
+	args: {
+		...ImmersiveGridWithMultipleContributorsStory.input.args,
+		layoutType: 'immersivePortrait',
+	},
+});
+
 export const WithMultipleContributors = meta.story({
 	...WithFollowStory.input,
 	args: {
