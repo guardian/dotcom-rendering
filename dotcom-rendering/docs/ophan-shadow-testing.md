@@ -2,16 +2,15 @@
 
 This adds the Dotcom integration for [Ophan's shadow testing](https://github.com/guardian/ophan/pull/8523).
 The first pass compares pageview counts with the installed TrackerJS version on
-sampled page loads. Both versions make independent decisions from the same browser
-lifecycle events. Only the installed tracker sends normal analytics. Attention and
-payload fields are outside this comparison.
+sampled page loads. Ophan runs a full candidate with private tracking state and
+captured networking. Both observe real browser events, and only the installed
+tracker sends normal analytics. Attention and payload fields are outside comparison.
 
 Normal tracking starts first. If the Frontend-provided
 `window.guardian.config.switches.ophanShadowTesting` is `true`, DCR calls the shadow
-API once for the page. It does not wait for the candidate policy to load. Ophan
-retains a bounded history so a late candidate can also compare the initial
-pageview. Startup errors
-are logged without preventing normal tracking, and Apps skip this integration.
+API once for the page. It does not wait for the candidate to load. Comparison
+starts after candidate initialisation, with earlier requests marked as excluded.
+Startup errors do not prevent normal tracking, and Apps skip this integration.
 
 The current TrackerJS 5.2.0 package does not have this API. The optional check keeps
 it working until the Ophan implementation is released and the NPM dependency is
@@ -27,7 +26,9 @@ read once per activation, so updates apply to new page loads.
 Before enabling, we still need the package upgrade, hosting, Tracker endpoint and
 Frontend switch. We also need to agree CDN headers and caching, any CSP changes,
 consent handling and a performance budget. The local checks are useful evidence,
-but full DCR still needs measuring on slower devices.
+but full DCR still needs measuring on slower devices. The candidate runs its own
+listeners, probes and attention timers. Its cooperative browser wrapper shares the
+live DOM, so this is a prototype for review before production use.
 
 Run the integration tests and type check from `dotcom-rendering/`:
 
