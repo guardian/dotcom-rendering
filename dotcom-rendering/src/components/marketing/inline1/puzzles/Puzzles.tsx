@@ -127,8 +127,6 @@ const Puzzles: ReactComponent<Inline1Props> = ({ variant }) => {
 		return null;
 	}
 
-	const isArticle = window.guardian.config.page.section;
-
 	return (
 		<section
 			css={outerContainerStyles}
