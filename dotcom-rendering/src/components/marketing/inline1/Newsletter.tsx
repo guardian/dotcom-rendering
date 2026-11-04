@@ -26,23 +26,22 @@ const NewsletterForm: ReactComponent<{ message: NewsletterMessage }> = ({
 	const frequency = message.frequency;
 	const illustrationSquare = message.imageUrl;
 	const newsletterId = message.newsletterId;
-	const componentId = ''; // TBC
+	const componentId = ''; // TBD
 	const isSignedIn = useIsSignedIn();
 
 	return (
 		<NewsletterSignupCardContainer
-			name={''} // We should get this from SDC
+			name={''} // We should get this from SDC?
 			description={description}
 			illustrationSquare={illustrationSquare}
 			frequency={frequency}
-			theme={''} // Can this prop be removed?
 			isSignedIn={isSignedIn}
 			heading={heading}
 		>
 			<Island priority="feature" defer={{ until: 'visible' }}>
 				<NewsletterSignupForm
 					newsletterId={newsletterId}
-					newsletterName={''} // We need this for the success message, should get from SDC
+					newsletterName={''} // We need this for the success message, should get from SDC?
 					frequency={frequency}
 					componentId={componentId}
 				/>
