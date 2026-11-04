@@ -1,11 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	from,
-	palette,
-	space,
-	textSans15,
-	until,
-} from '@guardian/source/foundations';
+import { from, palette, space, textSans15 } from '@guardian/source/foundations';
 import {
 	LinkButton,
 	SvgArrowRightStraight,
