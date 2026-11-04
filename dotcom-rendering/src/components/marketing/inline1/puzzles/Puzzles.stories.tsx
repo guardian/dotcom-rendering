@@ -14,6 +14,12 @@ const variant = {
 	},
 };
 
+const page = window.guardian.config
+	.page as typeof window.guardian.config.page & {
+	tones: string;
+	pillar: string;
+};
+
 type WithJsonProps<T> = T & { json?: string };
 type Props = WithJsonProps<React.ComponentProps<typeof Puzzles>>;
 const meta: Meta<Props> = {
@@ -22,24 +28,26 @@ const meta: Meta<Props> = {
 	args: {
 		variant,
 	},
+};
+
+export default meta;
+
+type Story = StoryObj<Props>;
+
+export const Default: Story = {
+	name: 'Basic Puzzles',
 	render: ({ json, ...args }) => {
 		const jsonProps = json
 			? JSON.parse(lzstring.decompressFromEncodedURIComponent(json))
 			: {};
-		window.guardian.config.page.tones = 'Features';
-		window.guardian.config.page.pillar = 'News';
+		page.tones = 'Features';
+		page.pillar = 'News';
 		return (
 			<div css={style}>
 				<Puzzles {...args} {...jsonProps} />
 			</div>
 		);
 	},
-};
-export default meta;
-
-type Story = StoryObj<Props>;
-export const Default: Story = {
-	name: 'Basic Puzzles',
 };
 
 export const OnOpinionOrAnalysis: Story = {
@@ -48,8 +56,8 @@ export const OnOpinionOrAnalysis: Story = {
 		const jsonProps = json
 			? JSON.parse(lzstring.decompressFromEncodedURIComponent(json))
 			: {};
-		window.guardian.config.page.tones = 'Analysis';
-		window.guardian.config.page.pillar = 'Opinion';
+		page.tones = 'Analysis';
+		page.pillar = 'Opinion';
 		return (
 			<div css={style}>
 				<Puzzles {...args} {...jsonProps} />
