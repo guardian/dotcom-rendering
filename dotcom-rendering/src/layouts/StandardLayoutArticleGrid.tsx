@@ -769,10 +769,6 @@ export const StandardLayoutArticleGrid = ({
 									padding-top: ${space[8]}px;
 								}
 							`,
-						layoutType === 'interactiveStandard' &&
-							css`
-								z-index: ${getZIndex('meta')};
-							`,
 						layoutType === 'interactiveTopHat' &&
 							css`
 								${topHatFurnitureBackgroundStyles}
