@@ -149,6 +149,99 @@ describe('PuzzlesArchiveCalendar', () => {
 		Reflect.deleteProperty(global, 'fetch');
 	});
 
+	it('distinguishes type, recent-card and calendar-date selection context', () => {
+		const medium = {
+			...archive.selectedPuzzle,
+			id: 'sudoku-medium',
+			title: 'Medium sudoku',
+		};
+		const { container } = render(
+			<PuzzlesArchiveCalendar
+				initialArchive={{
+					...archive,
+					puzzles: [archive.selectedPuzzle, medium],
+					recentItems: ['2026-09-01', '2026-09-03', '2026-09-02'].map(
+						(date) => ({ ...archive.items[0]!, date }),
+					),
+				}}
+			/>,
+		);
+		const type = screen.getByRole('link', { name: 'Medium sudoku' });
+		expect(type.closest('[data-component]')).toHaveAttribute(
+			'data-component',
+			'puzzles-archive-types',
+		);
+		expect(type).toHaveAttribute(
+			'data-link-name',
+			'archive | puzzle-type | logic-puzzles | puzzle-sudoku-easy | target-puzzle-sudoku-medium | month-2026-09',
+		);
+		expect(type).toHaveAttribute(
+			'href',
+			'/puzzles-and-games/logic-puzzles/archive?puzzle=sudoku-medium&year=2026&month=9',
+		);
+
+		const recent = container.querySelectorAll(
+			'[data-component="puzzles-archive-recent"] a',
+		);
+		expect(
+			Array.from(recent, (link) => link.getAttribute('data-link-name')),
+		).toEqual([
+			'archive | recent | logic-puzzles | puzzle-sudoku-easy | date-2026-09-03 | card-@1',
+			'archive | recent | logic-puzzles | puzzle-sudoku-easy | date-2026-09-02 | card-@2',
+			'archive | recent | logic-puzzles | puzzle-sudoku-easy | date-2026-09-01 | card-@3',
+		]);
+		const date = screen.getByLabelText('2026-09-02, available');
+		expect(date.closest('[data-component]')).toHaveAttribute(
+			'data-component',
+			'puzzles-archive-calendar',
+		);
+		expect(date).toHaveAttribute(
+			'data-link-name',
+			'archive | date | logic-puzzles | puzzle-sudoku-easy | date-2026-09-02',
+		);
+		expect(
+			container.querySelector('[data-status="unavailable"]'),
+		).not.toHaveAttribute('data-link-name');
+	});
+
+	it('distinguishes the empty-month fallback and preserves year boundaries', () => {
+		render(
+			<PuzzlesArchiveCalendar
+				initialArchive={{ ...archive, month: 1, items: [] }}
+			/>,
+		);
+		expect(
+			screen.getByRole('link', { name: 'Previous month' }),
+		).toHaveAttribute(
+			'data-link-name',
+			'archive | previous-month | logic-puzzles | puzzle-sudoku-easy | month-2025-12',
+		);
+		expect(
+			screen.getByRole('link', { name: 'View previous month' }),
+		).toHaveAttribute(
+			'data-link-name',
+			'archive | previous-month-empty | logic-puzzles | puzzle-sudoku-easy | month-2025-12',
+		);
+	});
+
+	it('cancels a deferred selection when the calendar unmounts', async () => {
+		jest.useFakeTimers();
+		const fetchMock = jest.fn();
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		const { unmount } = render(
+			<PuzzlesArchiveCalendar initialArchive={archive} />,
+		);
+		fireEvent.click(screen.getByRole('link', { name: 'Previous month' }));
+		unmount();
+		await act(async () => {
+			jest.runOnlyPendingTimers();
+		});
+		expect(fetchMock).not.toHaveBeenCalled();
+	});
+
 	it('links an available date to the API-derived exact puzzle destination', () => {
 		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
 		expect(screen.getByLabelText('2026-09-02, available')).toHaveAttribute(
@@ -455,6 +548,18 @@ describe('PuzzlesArchiveCalendar', () => {
 		const previous = screen.getByRole('link', { name: 'Previous month' });
 		const status = screen.getByRole('status');
 		expect(status).not.toHaveTextContent('Loading archive…');
+		expect(previous).toHaveAttribute(
+			'data-link-name',
+			'archive | previous-month | logic-puzzles | puzzle-sudoku-easy | month-2026-08',
+		);
+		fireEvent.click(previous);
+		await waitFor(() =>
+			expect(calendar).toHaveAttribute('aria-busy', 'true'),
+		);
+		expect(previous).not.toHaveAttribute('data-link-name');
+		expect(
+			screen.getByRole('link', { name: 'Next month' }),
+		).not.toHaveAttribute('data-link-name');
 		fireEvent.click(previous);
 		expect(calendar).toHaveAttribute('aria-busy', 'true');
 		expect(
@@ -472,6 +577,17 @@ describe('PuzzlesArchiveCalendar', () => {
 		expect(screen.getByTestId('archive-calendar')).toBe(calendar);
 		expect(calendar).toHaveAttribute('aria-busy', 'false');
 		expect(status).not.toHaveTextContent('Loading archive…');
+		expect(previous).toHaveAttribute(
+			'data-link-name',
+			'archive | previous-month | logic-puzzles | puzzle-sudoku-easy | month-2026-07',
+		);
+		expect(
+			screen.getByRole('link', { name: 'Next month' }),
+		).toHaveAttribute(
+			'data-link-name',
+			'archive | next-month | logic-puzzles | puzzle-sudoku-easy | month-2026-09',
+		);
+		expect(fetchMock).toHaveBeenCalledTimes(1);
 	});
 
 	it('keeps the selected month and shows recent cards when only earlier publications exist', async () => {
@@ -682,6 +798,7 @@ describe('PuzzlesArchiveCalendar', () => {
 
 		const nextButton = screen.getByRole('button', { name: 'Next month' });
 		expect(nextButton).toBeDisabled();
+		expect(nextButton).not.toHaveAttribute('data-link-name');
 		fireEvent.click(nextButton);
 		expect(fetchMock).not.toHaveBeenCalled();
 		Reflect.deleteProperty(global, 'fetch');
@@ -746,6 +863,18 @@ describe('PuzzlesArchiveCalendar', () => {
 		expect(
 			screen.getByRole('link', { name: /Latest Medium sudoku/ }),
 		).toHaveAttribute('href', selectedArchive.recentItems[0]!.url);
+		expect(
+			screen.getByRole('link', { name: /Latest Medium sudoku/ }),
+		).toHaveAttribute(
+			'data-link-name',
+			'archive | recent | logic-puzzles | puzzle-sudoku-medium | date-2026-10-07 | card-@1',
+		);
+		expect(
+			screen.getByRole('link', { name: 'Easy sudoku' }),
+		).toHaveAttribute(
+			'data-link-name',
+			'archive | puzzle-type | logic-puzzles | puzzle-sudoku-medium | target-puzzle-sudoku-easy | month-2026-09',
+		);
 		expect(
 			screen.queryByRole('link', { name: /Latest Easy sudoku/ }),
 		).not.toBeInTheDocument();
