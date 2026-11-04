@@ -277,6 +277,7 @@ export const PuzzlesArchiveLayout = ({
 								defer={{ until: 'visible' }}
 							>
 								<RelatedPuzzlesRailEnhanced
+									source="archive"
 									items={archive.moreFrom}
 								/>
 							</Island>

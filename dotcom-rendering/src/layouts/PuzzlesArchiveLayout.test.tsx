@@ -2,6 +2,7 @@ import '@testing-library/jest-dom';
 import { palette } from '@guardian/source/foundations';
 import { render, screen } from '@testing-library/react';
 import type { ReactNode } from 'react';
+import { Island } from '../components/Island';
 import { PuzzlesArchiveLayout } from './PuzzlesArchiveLayout';
 
 jest.mock('../components/Masthead/Masthead', () => ({
@@ -11,7 +12,7 @@ jest.mock('../components/Footer', () => ({
 	Footer: () => <div data-testid="footer" />,
 }));
 jest.mock('../components/Island', () => ({
-	Island: () => null,
+	Island: jest.fn(() => null),
 }));
 jest.mock('../components/RelatedPuzzlesRail', () => ({
 	RelatedPuzzlesRail: () => <div data-testid="more-puzzles" />,
@@ -96,6 +97,27 @@ describe('PuzzlesArchiveLayout', () => {
 				name: 'Word games',
 			}),
 		).toBeInTheDocument();
+	});
+
+	it('passes the archive source into the More-from island', () => {
+		jest.mocked(Island).mockClear();
+		render(
+			<PuzzlesArchiveLayout
+				NAV={nav}
+				puzzlesPage={page(true) as never}
+			/>,
+		);
+		expect(Island).toHaveBeenCalledWith(
+			expect.objectContaining({
+				children: expect.objectContaining({
+					props: expect.objectContaining({
+						source: 'archive',
+						items: page(true).archive.moreFrom,
+					}),
+				}),
+			}),
+			expect.anything(),
+		);
 	});
 
 	it('does not render ad slots for ad-free users', () => {

@@ -744,6 +744,7 @@ export const PuzzlePageLayout = ({
 								defer={{ until: 'visible' }}
 							>
 								<RelatedPuzzlesRailEnhanced
+									source="puzzle-page"
 									items={
 										instance.moreFromPuzzlesAndGames ?? []
 									}
