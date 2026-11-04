@@ -272,16 +272,17 @@ export const StandardLayoutArticleGrid = ({
 			return undefined;
 		}
 
-		const columnCount =
-			gridLayout === 'immersivePortrait'
-				? 5
-				: gridLayout === 'immersiveLandscape'
-					? 4
-					: 3;
+		const columnCount = gridLayout === 'immersivePortrait' ? 5 : 3;
 
 		return css`
 			${from.leftCol} {
 				${grid.centreRule(columnCount)}
+				${gridLayout === 'immersiveLandscape' &&
+				css`
+					& > *:nth-child(3)::before {
+						top: 100%;
+					}
+				`}
 			}
 		`;
 	};
@@ -762,7 +763,7 @@ export const StandardLayoutArticleGrid = ({
 									padding-top: ${space[3]}px;
 								}
 							`,
-						isImmersivePortrait
+						isImmersive
 							? css`
 									${from.leftCol} {
 										margin-right: -10px;

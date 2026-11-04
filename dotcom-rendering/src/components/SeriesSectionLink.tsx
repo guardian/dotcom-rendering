@@ -443,11 +443,18 @@ export const SeriesSectionLink = ({
 
 		return (
 			<div
-				css={
+				css={[
 					hasLayoutType
 						? immersiveGridTitleWrapperBelowDesktop
-						: undefined
-				}
+						: undefined,
+					layoutType === 'immersivePortrait' &&
+						css`
+							${until.desktop} {
+								padding-left: 10px;
+								padding-right: 10px;
+							}
+						`,
+				]}
 			>
 				<TitleLink
 					href={`${guardianBaseURL}/${linkExt}`}
@@ -455,13 +462,15 @@ export const SeriesSectionLink = ({
 					colour={titleColour}
 					extraCss={[
 						invertedStyle(format),
-						sectionPadding,
+						layoutType !== 'immersivePortrait' && sectionPadding,
 						css`
 							background-color: ${themePalette(
 								'--series-title-background',
 							)};
 						`,
-						hasLayoutType && immersiveGridTitleBelowDesktop,
+						hasLayoutType &&
+							layoutType !== 'immersivePortrait' &&
+							immersiveGridTitleBelowDesktop,
 						layoutType === 'immersiveLandscape' &&
 							immersiveLandscapeTitle,
 						isGallery &&
@@ -479,6 +488,12 @@ export const SeriesSectionLink = ({
 										${themePalette(
 											'--series-title-background',
 										)};
+							`,
+						layoutType === 'immersivePortrait' &&
+							css`
+								display: inline-block;
+								padding: 2px 2px 4px;
+								box-shadow: none;
 							`,
 					].filter(Boolean)}
 					data-component="series"
