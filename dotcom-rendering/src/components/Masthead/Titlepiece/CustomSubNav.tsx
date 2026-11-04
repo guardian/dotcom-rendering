@@ -12,6 +12,7 @@ import {
 	textSansBold14,
 } from '@guardian/source/foundations';
 import { grid } from '../../../grid';
+import { isNetworkFront } from '../../../lib/edition';
 import { generateImageURL } from '../../../lib/image';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import { palette as themePalette } from '../../../palette';
@@ -31,7 +32,7 @@ type Props = {
 };
 
 const subNavStyles = css`
-	${textSans14}
+	${textSans14};
 	display: flex;
 	column-gap: ${space[2]}px;
 	color: inherit;
@@ -98,7 +99,7 @@ const articleDividerStyles = css`
 `;
 
 const articleHeaderStyles = css`
-	${textSansBold14}
+	${textSansBold14};
 	color: ${themePalette('--custom-subnav-header-text')};
 	display: flex;
 	align-items: center;
@@ -121,7 +122,7 @@ const headerTextWrapperStyles = css`
 
 /** On fronts the header sits above the links as a large stacked heading. */
 const frontContainerStyles = css`
-	${headlineBold28}
+	${headlineBold28};
 	margin-top: ${space[2]}px;
 	color: ${themePalette('--masthead-nav-link-text')};
 `;
@@ -139,7 +140,7 @@ const imageNavStyles = css`
 `;
 
 const imageWrapperStyles = css`
-	${grid.column.all}
+	${grid.column.all};
 	grid-row: 1;
 	position: relative;
 	display: block;
@@ -158,7 +159,7 @@ const headerImageStyles = css`
 `;
 
 const imageHeaderTextStyles = css`
-	${headlineBold28}
+	${headlineBold28};
 	position: absolute;
 	left: ${space[3]}px;
 	bottom: ${space[1]}px;
@@ -172,7 +173,7 @@ const imageHeaderTextStyles = css`
 const imageListStyles = css`
 	${grid.column.all}
 	grid-row: 2;
-	${textSans14}
+	${textSans14};
 	display: flex;
 	align-items: center;
 	column-gap: ${space[2]}px;
@@ -341,6 +342,7 @@ export const CustomSubNav = ({
 	hasPageSkin,
 	pageId,
 }: Props) => {
+	const isANetworkFront = isNetworkFront(pageId);
 	const isArticle = renderingPage === 'article';
 	/** DCR receives images for all platforms; only web images are rendered here. */
 	const webImages = (customSubNav.images ?? []).filter((image) =>
@@ -360,8 +362,9 @@ export const CustomSubNav = ({
 					linkText,
 				)}
 			>
-				{linkText === currentNavLink ||
-				(pageId.length > 0 && dotcomPath.includes(pageId)) ? (
+				{!isANetworkFront &&
+				(linkText === currentNavLink ||
+					(pageId.length > 0 && dotcomPath.includes(pageId))) ? (
 					<span css={selectedLink}>{linkText}</span>
 				) : (
 					linkText
