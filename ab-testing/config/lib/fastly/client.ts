@@ -54,7 +54,7 @@ export class FastlyClient {
 	}
 	/**
 	 * Fetch data from Fastly API
-	 * We're using fetch instead of the Fastly API client as it doesn't play nicely with Deno, nor is it typed
+	 * We're using a plain fetch instead of the Fastly API client as it isn't typed
 	 *
 	 * @param url - The URL to fetch
 	 * @param options - Fetch options

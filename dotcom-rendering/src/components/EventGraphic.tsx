@@ -23,6 +23,7 @@ export type Graphic = v.InferOutput<typeof GraphicSchema>;
 
 export type EventGraphicProps = {
 	graphic: Graphic | undefined;
+	trackingLabel: 'front';
 };
 
 export const EventGraphic = (props: EventGraphicProps) => {
@@ -49,6 +50,7 @@ export const EventGraphic = (props: EventGraphicProps) => {
 								props.graphic.electionComponents
 							}
 							liveEffects={props.graphic.liveEffects}
+							trackingLabel={props.trackingLabel}
 						/>
 					</Island>
 				</article>

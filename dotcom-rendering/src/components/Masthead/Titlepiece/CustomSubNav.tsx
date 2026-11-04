@@ -26,6 +26,7 @@ type Props = {
 	customSubNav: CustomSubnav;
 	currentNavLink: string;
 	renderingPage: RenderingPage;
+	pageId: string;
 	hasPageSkin?: boolean;
 };
 
@@ -89,6 +90,13 @@ const articleSubNavStyles = css`
 	}
 `;
 
+/** Article subnavs have a divider separating the header text from the scrollable list. */
+const articleDividerStyles = css`
+	margin-left: ${space[2]}px;
+	padding-left: ${space[2]}px;
+	border-left: 1px solid ${themePalette('--masthead-nav-lines')};
+`;
+
 const articleHeaderStyles = css`
 	${textSansBold14}
 	color: ${themePalette('--custom-subnav-header-text')};
@@ -101,9 +109,21 @@ const articleHeaderStyles = css`
 	 * The 1.1px is selected based on the alignment visually with the subnav links.
 	 */
 	padding-top: 1.1px;
-	padding-right: ${space[2]}px;
-	margin-right: ${space[2]}px;
-	border-right: 1px solid ${themePalette('--masthead-nav-lines')};
+	padding-right: 0;
+	margin-right: 0;
+`;
+
+const headerTextWrapperStyles = css`
+	display: flex;
+	align-items: center;
+	flex-shrink: 0;
+`;
+
+/** On fronts the header sits above the links as a large stacked heading. */
+const frontContainerStyles = css`
+	${headlineBold28}
+	margin-top: ${space[2]}px;
+	color: ${themePalette('--masthead-nav-link-text')};
 `;
 
 /**
@@ -225,7 +245,15 @@ const HeaderImage = ({
 
 /** Sets horizontal scrolling behaviour and removes the scrollbar */
 const scrollableSubNavStyles = css`
-	overflow-x: scroll;
+	display: flex;
+	flex-wrap: nowrap;
+	overflow-x: auto;
+	-webkit-mask-image: linear-gradient(
+		to right,
+		black calc(100% - 40px),
+		transparent
+	);
+	mask-image: linear-gradient(to right, black calc(100% - 40px), transparent);
 
 	@supports selector(::-webkit-scrollbar) {
 		&::-webkit-scrollbar {
@@ -233,6 +261,10 @@ const scrollableSubNavStyles = css`
 		}
 	}
 	scrollbar-width: none; /* Firefox */
+
+	& > * {
+		flex-shrink: 0;
+	}
 `;
 
 const subnavListItemStyles = css`
@@ -269,8 +301,8 @@ const HeaderText = ({
 }: {
 	header: CustomSubnavHeader;
 	cssOverrides?: SerializedStyles;
-}) =>
-	dotcomPath ? (
+}) => {
+	const link = dotcomPath ? (
 		<a
 			css={[headerLinkStyles, cssOverrides]}
 			data-src-focus-disabled={true}
@@ -287,12 +319,8 @@ const HeaderText = ({
 		<span css={cssOverrides}>{headerText}</span>
 	);
 
-/** On fronts the header sits above the links as a large stacked heading. */
-const frontContainerStyles = css`
-	${headlineBold28}
-	margin-top: ${space[2]}px;
-	color: ${themePalette('--masthead-nav-link-text')};
-`;
+	return <span css={headerTextWrapperStyles}>{link}</span>;
+};
 
 const CustomHeader = (
 	customSubNav: CustomSubnav,
@@ -311,6 +339,7 @@ export const CustomSubNav = ({
 	currentNavLink,
 	renderingPage,
 	hasPageSkin,
+	pageId,
 }: Props) => {
 	const isArticle = renderingPage === 'article';
 	/** DCR receives images for all platforms; only web images are rendered here. */
@@ -331,7 +360,8 @@ export const CustomSubNav = ({
 					linkText,
 				)}
 			>
-				{linkText === currentNavLink ? (
+				{linkText === currentNavLink ||
+				(pageId.length > 0 && dotcomPath.includes(pageId)) ? (
 					<span css={selectedLink}>{linkText}</span>
 				) : (
 					linkText
@@ -368,23 +398,50 @@ export const CustomSubNav = ({
 		);
 	}
 
+	if (isArticle) {
+		return (
+			<div
+				data-component={`custom-subnav-${customSubNav.header.headerText}`}
+				data-component-id={customSubNav.id}
+				data-rendering-page={renderingPage}
+				css={[articleContainerStyles, scrollableSubNavStyles]}
+			>
+				{CustomHeader(customSubNav, articleHeaderStyles)}
+				<ul
+					css={[
+						subNavStyles,
+						!hasPageSkin && subNavStylesFromLeftCol,
+						articleSubNavStyles,
+						articleDividerStyles,
+						css`
+							flex-shrink: 0;
+							width: max-content;
+						`,
+					]}
+					role="list"
+					style={{
+						'--sub-nav-link': themePalette('--sub-nav-link-header'),
+					}}
+				>
+					{linkItems}
+				</ul>
+			</div>
+		);
+	}
+
 	return (
 		<div
 			data-component={`custom-subnav-${customSubNav.header.headerText}`}
 			data-component-id={customSubNav.id}
 			data-rendering-page={renderingPage}
-			css={isArticle ? articleContainerStyles : frontContainerStyles}
+			css={frontContainerStyles}
 		>
-			{CustomHeader(
-				customSubNav,
-				isArticle ? articleHeaderStyles : undefined,
-			)}
+			{CustomHeader(customSubNav, undefined)}
 			<ul
 				css={[
 					subNavStyles,
 					!hasPageSkin && subNavStylesFromLeftCol,
 					scrollableSubNavStyles,
-					isArticle && articleSubNavStyles,
 				]}
 				role="list"
 				style={{

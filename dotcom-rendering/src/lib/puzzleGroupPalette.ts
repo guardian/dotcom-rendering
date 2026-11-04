@@ -68,6 +68,8 @@ export const puzzleGroupForItemType = (
 		case 'word-wheel':
 			return 'word-games';
 		case 'trivia':
+		case 'film-reveal':
+		case 'on-the-ball':
 			return 'trivia';
 		default:
 			return undefined;

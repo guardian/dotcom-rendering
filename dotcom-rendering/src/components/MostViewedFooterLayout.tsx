@@ -86,7 +86,7 @@ const frontStyles = (hasPageSkin: boolean) => css`
 
 const adFreeStyles = css`
 	${between.desktop.and.leftCol} {
-		min-width: 960px;
+		min-width: min(960px, 100%);
 	}
 	${between.leftCol.and.wide} {
 		width: 75%;

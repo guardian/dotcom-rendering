@@ -5,15 +5,96 @@
 Frontend resolves each dated page with `GET /game?puzzleType=...&date=YYYY-MM-DD`
 and sends the response's `gameUrl` as `instance.gameUrl`. DCR passes it through the
 layout to `PuzzleIframe` and preserves the API's path, opaque puzzle ID and provider
-parameters. AmuseLabs URLs receive the current reader's `uid` and `darkMode`; all
-providers continue to receive `guardian-puzzle-context`.
+parameters. AmuseLabs URLs receive the current reader's `uid` and `darkMode`;
+MovieGrid URLs receive `darkMode=0|1` without adding `uid`. All providers continue
+to receive `guardian-puzzle-context`.
 
 The local URL builders described below remain a compatibility fallback for older
 frontend payloads without `gameUrl`. New frontend pages always supply the API URL
 or return 404/502 before rendering. Deploy this DCR support before the frontend change.
+MovieGrid pages require `instance.gameUrl`; missing or blank URLs return 404.
+DCR never derives MovieGrid puzzle URLs or IDs.
 
 Hub progress enrichment also preserves crossword `gameUrl` values exactly, including
 absolute links and dated Genius article paths. Other puzzle card destinations are unchanged.
+
+Film reveal and On the ball require both `puzzles-new-hub-v1` and
+`puzzles-new-hub-v2` for hub cards, game pages and trivia archives. V1-only requests
+omit the cards and receive 404 for those pages; existing V1 puzzles are unchanged.
+Local development retains its gate bypass.
+
+## Sponsorship
+
+Frontend owns configuration and precedence; DCR renders resolved branding for `editionId` without
+inheriting sponsors. See [frontend's guide](https://github.com/guardian/frontend/blob/main/docs/puzzle-page.md#sponsorship)
+for fields, activation and rollout rules.
+
+| Surface              | Branding path                                                  |
+| -------------------- | -------------------------------------------------------------- |
+| Hub (`/PuzzlesPage`) | `commercialProperties[editionId].branding`                     |
+| Container            | `layout.containers[].commercialProperties[editionId].branding` |
+| Game (`/PuzzlePage`) | `commercialProperties[editionId].branding`                     |
+
+The maps use `Partial<CommercialProperties>` and the shared article schema. Missing properties,
+an empty map or no matching edition means unsponsored; unknown editions and malformed branding
+are rejected. Containers must be top-level `featured` or `standard` sections (including default);
+nested, `ad` and `supporting` sponsorship is rejected. Normal section visibility still applies.
+
+Example payload excerpt (not a complete request):
+
+```json
+{
+	"editionId": "AU",
+	"commercialProperties": {
+		"AU": {
+			"branding": {
+				"brandingType": { "name": "sponsored" },
+				"sponsorName": "Example sponsor",
+				"logo": {
+					"src": "https://example.com/logo.png",
+					"dimensions": { "width": 200, "height": 100 },
+					"link": "https://example.com",
+					"label": "Supported by"
+				},
+				"aboutThisLink": ""
+			},
+			"adTargeting": []
+		}
+	}
+}
+```
+
+Frontend maps `logo.darkSrc` to `logoForDarkBackground` and missing `aboutUri` to an empty
+`aboutThisLink`. Raw configuration blocks are not rendering inputs. Crosswords retain their
+article flow; this configuration does not enable archive sponsorship.
+
+### Presentation and tracking
+
+- Sponsorship remains visible to ad-free readers.
+- Hub branding selects sponsored artwork and hides the first section's top rule. Container branding
+  does not change the header.
+- Hub/game About links require a non-empty URL; containers never show an About link.
+- Games use `ArticleMeta`, a 140px logo-width cap and the puzzle light/dark text palette. When dark
+  mode is enabled, `logoForDarkBackground` can replace the normal logo. Hub/container lockups use
+  `logo.src` in both modes.
+- Logo links use `rel="nofollow"`, an accessible sponsor name and `getOphanComponents`: the tracking
+  prefix is `front-container` for hub/containers and `article-meta` for games.
+
+### Sponsorship checks
+
+From the `dotcom-rendering` sub-directory:
+
+```sh
+pnpm exec jest src/model/validate.puzzlesPage.test.ts src/model/validate.puzzlePage.test.ts \
+  src/layouts/PuzzlesLayout.test.tsx src/layouts/PuzzlePageLayout.test.tsx \
+  src/components/PuzzlesDirectory.test.tsx
+pnpm exec playwright test playwright/tests/puzzles.sponsorship.e2e.spec.ts --output=/tmp/puzzles-sponsorship-results
+```
+
+Browser tests use fixtures to cover edition targeting, ad-free readers, About links and Ophan
+clicks; game clicks wait for the `Branding` island to hydrate. Frontend tests cover precedence.
+For live QA, use the GET proxy below with real frontend/API data and inspect both UI and JSON.
+Use a separate test output directory to preserve screenshots; never commit demo sponsors.
 
 ## What is implemented
 
@@ -35,15 +116,10 @@ entirely on their existing, separate `/crosswords/*` flow
 Article pipeline). That flow is unrelated to Puzzle Page and is not
 described further in this file.
 
-Readers reach individual puzzles via `frontend`'s public, top-level URLs,
-mirroring how crosswords are already routed, e.g. `/sudoku/easy`,
-`/word-wheel`, `/wordiply` (nested only where the puzzle itself has
-variants, like sudoku's difficulty levels). This is separate from the
-Puzzles Hub (the directory/listing page, unrelated to Puzzle Page), which
-stays at `/puzzles-and-games`. None of this is DCR's own routing, it's
-`frontend`'s public URL structure, and does not affect DCR's `/PuzzlePage`
-endpoint/contract at all; it's mentioned here only so example URLs
-elsewhere in this doc stay accurate.
+Readers reach individual puzzles through frontend's dated public URLs, for example
+`/puzzles-and-games/logic-puzzles/sudoku-easy/YYYY-MM-DD` and
+`/puzzles-and-games/word-games/word-wheel/YYYY-MM-DD`. Dateless routes redirect to the relevant
+archive. The hub remains at `/puzzles-and-games`; DCR's rendering endpoint is `/PuzzlePage`.
 
 **Access control is enforced on both sides.** `frontend` gates reader
 access to these routes via its existing `PuzzlesHubV1Experiment`/
@@ -54,10 +130,10 @@ participation itself (via `isPuzzlesHubV1Enabled`, mirroring
 request, so the endpoint isn't left relying solely on `frontend` never
 calling it (see "Hitting it locally" below).
 
-### The V0 puzzle set
+### Supported puzzle set
 
 The `PuzzleConfig` registry (`src/model/puzzles/puzzleConfigs.ts`) currently
-contains exactly 6 slugs, all rendered via the generic sandboxed
+contains 8 slugs, all rendered via the generic sandboxed
 `PuzzleIframe.island.tsx` component:
 
 | `slug`          | `puzzleGroup`   | provider               |
@@ -68,15 +144,18 @@ contains exactly 6 slugs, all rendered via the generic sandboxed
 | `sudoku-killer` | `logic-puzzles` | AmuseLabs              |
 | `word-wheel`    | `word-games`    | AmuseLabs              |
 | `wordiply`      | `word-games`    | bespoke (wordiply.com) |
+| `film-reveal`   | `trivia`        | MovieGrid              |
+| `on-the-ball`   | `trivia`        | MovieGrid              |
 
-Codeword, futoshiki, suguru, and the trivia/quizzes puzzles (on-the-ball,
-film-reveal) were removed from the registry for V0 and may return later.
+The `trivia` group uses the public `trivia-and-quizzes` route and archive category.
+Codeword, futoshiki and suguru remain outside the registry.
 **`iframe` is a discriminated union keyed by `provider`
-(`PuzzleProvider = 'amuselabs' | 'wordiply'`), each entry holds only the
+(`PuzzleProvider = 'amuselabs' | 'wordiply' | 'moviegrid'`), each entry holds only the
 minimal, provider-specific identity data needed to build its iframe URL,
 not a pre-baked final URL string.** AmuseLabs entries carry a `set`
 identifier (e.g. `'guardian-sudoku-easy'`, `'guardian-killer-sudoku-medium'`);
-Wordiply carries its `baseUrl`. Building the actual URL, including which
+Wordiply carries its `baseUrl`; MovieGrid relies entirely on the API URL.
+Building the actual URL, including which
 query params a given provider does or doesn't accept, is the job of a
 per-provider strategy module, `src/lib/puzzleIframeUrl.ts`, not this
 registry:
@@ -143,7 +222,7 @@ then renders. Fixtures generated below set `serverSideABTests` to
 `{ 'puzzles-new-hub-v1': 'variant' }` so they pass this gate; `NODE_ENV=development`
 also bypasses it locally.
 
-Generate fixture JSON for all 6 slugs using the `tsx` devDependency (no
+Generate fixture JSON for all 8 slugs using the `tsx` devDependency (no
 extra install needed) and `fixtures/manual/puzzlePage.ts`'s
 `createPuzzlePage`/`puzzlePageFixtures`:
 
@@ -161,10 +240,18 @@ EOF
 pnpm exec tsx /tmp/dump-puzzle-fixtures.ts
 ```
 
-Then hit the route directly. **This is DCR's own local `POST` endpoint, not
-a real, browsable end-user URL.** `/PuzzlePage` only accepts `POST`
-requests with a JSON body; DCR is not directly browsable by real users
-without `frontend` in front of it constructing and sending that body.
+Production `/PuzzlePage` accepts a JSON `POST`. The development server also supports a browsable
+GET proxy that fetches real JSON from frontend, so screenshots do not require a fixture or hidden
+Playwright request interception. With frontend on port 9000, for example:
+
+```text
+http://localhost:9000/puzzles-and-games/word-games/word-wheel/2026-10-26.json?_edition=AU
+```
+
+Replace the date with a game available in the selected API environment. The hub equivalent uses `/PuzzlesPage/`
+before the frontend hub URL.
+
+For fixture-based testing, POST the generated JSON directly:
 
 | `slug`          | local command                                                                                                                          |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
@@ -174,9 +261,12 @@ without `frontend` in front of it constructing and sending that body.
 | `sudoku-killer` | `curl -i -X POST http://localhost:3030/PuzzlePage -H "Content-Type: application/json" --data @/tmp/puzzle-fixtures/sudoku-killer.json` |
 | `word-wheel`    | `curl -i -X POST http://localhost:3030/PuzzlePage -H "Content-Type: application/json" --data @/tmp/puzzle-fixtures/word-wheel.json`    |
 | `wordiply`      | `curl -i -X POST http://localhost:3030/PuzzlePage -H "Content-Type: application/json" --data @/tmp/puzzle-fixtures/wordiply.json`      |
+| `film-reveal`   | `curl -i -X POST http://localhost:3030/PuzzlePage -H "Content-Type: application/json" --data @/tmp/puzzle-fixtures/film-reveal.json`   |
+| `on-the-ball`   | `curl -i -X POST http://localhost:3030/PuzzlePage -H "Content-Type: application/json" --data @/tmp/puzzle-fixtures/on-the-ball.json`   |
 
-All six should return `200`, hydrating into a sandboxed iframe pointed at
-that slug's resolved provider URL. An unknown slug (or a known slug renamed
+All eight should return `200`. MovieGrid fixtures use illustrative `example.com`
+URLs; replace `instance.gameUrl` with an API response to preview the real game.
+Other fixtures hydrate into a sandboxed iframe pointed at the resolved provider URL. An unknown slug (or a known slug renamed
 to something else in the request body) returns `404`.
 
 ### How to configure/add a new puzzle
@@ -208,8 +298,7 @@ iframe-based slug already using a supported provider:
       own naming convention matches our internal slug: the killer-sudoku
       incident is a direct, confirmed example of that assumption silently
       being wrong.
-    - **A genuinely new provider** (e.g. MovieGrid, returning in a future
-      version, not in the V0 registry today): needs its own
+    - **A genuinely new provider**: needs its own
       `PuzzleIframeConfig` union variant, its own builder function in
       `src/lib/puzzleIframeUrl.ts`, and a new case in
       `resolvePuzzleIframeUrl`'s dispatcher (the `never` exhaustiveness

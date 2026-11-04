@@ -206,7 +206,6 @@ export const storylinesExample = {
 				discussionId: '/p/x67zqf',
 			},
 			display: {
-				isBoosted: false,
 				boostLevel: 'default',
 				isImmersive: false,
 				showBoostedHeadline: false,
@@ -539,7 +538,6 @@ export const storylinesExample = {
 				discussionId: '/p/x67te2',
 			},
 			display: {
-				isBoosted: false,
 				boostLevel: 'default',
 				isImmersive: false,
 				showBoostedHeadline: false,
@@ -788,7 +786,6 @@ export const storylinesExample = {
 				discussionId: '/p/x67mz2',
 			},
 			display: {
-				isBoosted: false,
 				boostLevel: 'default',
 				isImmersive: false,
 				showBoostedHeadline: false,
@@ -1261,7 +1258,6 @@ export const storylinesExample = {
 				discussionId: '/p/x67y2z',
 			},
 			display: {
-				isBoosted: false,
 				boostLevel: 'default',
 				isImmersive: false,
 				showBoostedHeadline: false,
@@ -1870,7 +1866,6 @@ export const storylinesExample = {
 				discussionId: '/p/x67m4v',
 			},
 			display: {
-				isBoosted: false,
 				boostLevel: 'default',
 				isImmersive: false,
 				showBoostedHeadline: false,
@@ -2271,7 +2266,6 @@ export const storylinesExample = {
 				discussionId: '/p/x65zjf',
 			},
 			display: {
-				isBoosted: false,
 				boostLevel: 'default',
 				isImmersive: false,
 				showBoostedHeadline: false,
@@ -2660,7 +2654,6 @@ export const storylinesExample = {
 				discussionId: '/p/x67gb6',
 			},
 			display: {
-				isBoosted: false,
 				boostLevel: 'default',
 				isImmersive: false,
 				showBoostedHeadline: false,
@@ -3011,7 +3004,6 @@ export const storylinesExample = {
 				discussionId: '/p/x67gbb',
 			},
 			display: {
-				isBoosted: false,
 				boostLevel: 'default',
 				isImmersive: false,
 				showBoostedHeadline: false,
@@ -3362,7 +3354,6 @@ export const storylinesExample = {
 				discussionId: '/p/x67tyg',
 			},
 			display: {
-				isBoosted: false,
 				boostLevel: 'default',
 				isImmersive: false,
 				showBoostedHeadline: false,
@@ -3634,7 +3625,6 @@ export const storylinesExample = {
 				discussionId: '/p/x67teh',
 			},
 			display: {
-				isBoosted: false,
 				boostLevel: 'default',
 				isImmersive: false,
 				showBoostedHeadline: false,
@@ -3939,7 +3929,6 @@ export const storylinesExample = {
 				discussionId: '/p/x67t7p',
 			},
 			display: {
-				isBoosted: false,
 				boostLevel: 'default',
 				isImmersive: false,
 				showBoostedHeadline: false,
@@ -4274,7 +4263,6 @@ export const storylinesExample = {
 				discussionId: '/p/x67hyf',
 			},
 			display: {
-				isBoosted: false,
 				boostLevel: 'default',
 				isImmersive: false,
 				showBoostedHeadline: false,
@@ -4662,7 +4650,6 @@ export const storylinesExample = {
 				discussionId: '/p/x67g9k',
 			},
 			display: {
-				isBoosted: false,
 				boostLevel: 'default',
 				isImmersive: false,
 				showBoostedHeadline: false,
@@ -5020,7 +5007,6 @@ export const storylinesExample = {
 				discussionId: '/p/x66357',
 			},
 			display: {
-				isBoosted: false,
 				boostLevel: 'default',
 				isImmersive: false,
 				showBoostedHeadline: false,
@@ -5360,7 +5346,6 @@ export const storylinesExample = {
 				discussionId: '/p/x67g6p',
 			},
 			display: {
-				isBoosted: false,
 				boostLevel: 'default',
 				isImmersive: false,
 				showBoostedHeadline: false,
@@ -5668,7 +5653,6 @@ export const storylinesExample = {
 				discussionId: '/p/x66gvm',
 			},
 			display: {
-				isBoosted: false,
 				boostLevel: 'default',
 				isImmersive: false,
 				showBoostedHeadline: false,
@@ -6055,7 +6039,6 @@ export const storylinesExample = {
 				discussionId: '/p/x66jfb',
 			},
 			display: {
-				isBoosted: false,
 				boostLevel: 'default',
 				isImmersive: false,
 				showBoostedHeadline: false,
@@ -6444,7 +6427,6 @@ export const storylinesExample = {
 				discussionId: '/p/x67fqb',
 			},
 			display: {
-				isBoosted: false,
 				boostLevel: 'default',
 				isImmersive: false,
 				showBoostedHeadline: false,
@@ -6716,7 +6698,6 @@ export const storylinesExample = {
 				discussionId: '/p/x67fx6',
 			},
 			display: {
-				isBoosted: false,
 				boostLevel: 'default',
 				isImmersive: false,
 				showBoostedHeadline: false,
@@ -7042,7 +7023,6 @@ export const storylinesExample = {
 				discussionId: '/p/x67cxf',
 			},
 			display: {
-				isBoosted: false,
 				boostLevel: 'default',
 				isImmersive: false,
 				showBoostedHeadline: false,

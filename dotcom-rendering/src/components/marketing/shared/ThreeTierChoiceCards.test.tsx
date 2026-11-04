@@ -1,7 +1,38 @@
 import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { useState } from 'react';
+import type { ChoiceCardDesignSettings } from '../banners/designableBanner/settings';
 import { ThreeTierChoiceCards } from './ThreeTierChoiceCards';
+
+const cardCssForRadio = (radio: HTMLElement): string => {
+	const classNames = new Set<string>();
+	let element: HTMLElement | null = radio;
+	while (element) {
+		for (const className of element.classList) {
+			classNames.add(className);
+		}
+		element = element.parentElement;
+	}
+
+	const rules = Array.from(document.styleSheets).flatMap((sheet) =>
+		Array.from(sheet.cssRules).map((rule) => rule.cssText),
+	);
+	const cardStyleRule = rules.find(
+		(rule) =>
+			rule.includes('box-shadow') &&
+			rule.includes('background-color') &&
+			Array.from(classNames).some((className) =>
+				rule.includes(`.${className}`),
+			),
+	);
+	const cardStyleClassName = Array.from(classNames).find(
+		(className) => cardStyleRule?.includes(`.${className}`) === true,
+	);
+	if (cardStyleClassName === undefined) return '';
+	return rules
+		.filter((rule) => rule.includes(`.${cardStyleClassName}`))
+		.join('\n');
+};
 
 // Mock choice cards for testing
 const mockChoiceCards: Array<ChoiceCard & { defaultExpanded?: boolean }> = [
@@ -47,6 +78,110 @@ const mockChoiceCards: Array<ChoiceCard & { defaultExpanded?: boolean }> = [
 ];
 
 describe('ThreeTierChoiceCards', () => {
+	const translucentDesign = {
+		buttonColour: '#FFFFFF',
+		buttonOpacity: 0.8,
+		buttonTextColour: '#121212',
+		buttonBorderColour: '#121212',
+		buttonSelectColour: '#FFFFFF',
+		buttonSelectOpacity: 0.95,
+		buttonSelectTextColour: '#606060',
+		buttonSelectBorderColour: '#121212',
+	};
+
+	const renderStyledCards = (
+		choiceCardDesignSettings: ChoiceCardDesignSettings = translucentDesign,
+	) =>
+		render(
+			<ThreeTierChoiceCards
+				selectedChoiceCard={mockChoiceCards[0]}
+				setSelectedChoiceCard={jest.fn()}
+				choices={mockChoiceCards}
+				id="banner"
+				choiceCardDesignSettings={choiceCardDesignSettings}
+			/>,
+		);
+
+	it('renders the selected fill, text, and 2px stroke at configured values', () => {
+		renderStyledCards();
+
+		const selectedRadio = screen.getByRole('radio', {
+			name: /Support £5\/month/,
+		});
+		const selectedCss = cardCssForRadio(selectedRadio);
+
+		expect(selectedCss).toContain(
+			'background-color: rgba(255, 255, 255, 0.95)',
+		);
+		expect(selectedCss).toContain('color: #606060');
+		expect(selectedCss).toContain('inset 0 0 0 2px #121212');
+	});
+
+	it('renders the unselected fill and 1px stroke at configured values', () => {
+		renderStyledCards();
+
+		const unselectedRadio = screen.getByRole('radio', {
+			name: /Support £12\/month/,
+		});
+		const unselectedCss = cardCssForRadio(unselectedRadio);
+
+		expect(unselectedCss).toContain(
+			'background-color: rgba(255, 255, 255, 0.8)',
+		);
+		expect(unselectedCss).toContain('inset 0 0 0 1px #121212');
+	});
+
+	it('uses the selected fill for the unselected card hover state', () => {
+		renderStyledCards();
+
+		const unselectedRadio = screen.getByRole('radio', {
+			name: /Support £12\/month/,
+		});
+		const cardCss = cardCssForRadio(unselectedRadio);
+
+		expect(cardCss).toContain(':hover');
+		expect(cardCss).toContain(
+			'background-color: rgba(255, 255, 255, 0.95)',
+		);
+	});
+
+	it('does not select an unselected radio on hover', () => {
+		renderStyledCards();
+
+		const unselectedRadio = screen.getByRole('radio', {
+			name: /Support £12\/month/,
+		});
+
+		expect(unselectedRadio).not.toBeChecked();
+		fireEvent.mouseOver(unselectedRadio);
+		expect(unselectedRadio).not.toBeChecked();
+	});
+
+	it('keeps legacy fills opaque and does not add a hover fill', () => {
+		renderStyledCards({
+			buttonColour: '#FFFFFF',
+			buttonTextColour: '#121212',
+			buttonBorderColour: '#121212',
+			buttonSelectColour: '#FFFFFF',
+			buttonSelectTextColour: '#606060',
+			buttonSelectBorderColour: '#121212',
+		});
+
+		const selectedRadio = screen.getByRole('radio', {
+			name: /Support £5\/month/,
+		});
+		const unselectedRadio = screen.getByRole('radio', {
+			name: /Support £12\/month/,
+		});
+		const selectedCss = cardCssForRadio(selectedRadio);
+		const unselectedCss = cardCssForRadio(unselectedRadio);
+
+		expect(selectedCss).toContain('background-color: #FFFFFF');
+		expect(selectedCss).not.toContain(':hover');
+		expect(unselectedCss).toContain('background-color: #FFFFFF');
+		expect(unselectedCss).not.toContain(':hover');
+	});
+
 	it('should handle default expanded card correctly', () => {
 		const TestComponent = () => {
 			const [selectedChoiceCard, setSelectedChoiceCard] = useState<

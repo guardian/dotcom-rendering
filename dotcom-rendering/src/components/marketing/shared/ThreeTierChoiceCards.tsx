@@ -22,12 +22,14 @@ import type { ChoiceCard as _ChoiceCard } from '@guardian/support-dotcom-compone
 import type { Dispatch, SetStateAction } from 'react';
 import { useEffect } from 'react';
 import sanitise from 'sanitize-html';
+import { transparentColour } from '../../../lib/transparentColour';
 import { useIsInView } from '../../../lib/useIsInView';
 import type { ChoiceCardDesignSettings } from '../banners/designableBanner/settings';
+import { contentTransitionEasing } from './transitions';
 
 export type ChoiceCard = _ChoiceCard & { defaultExpanded?: boolean };
 
-const choiceCardTransition = '0.2s cubic-bezier(0.27, 1.06, 0.18, 1)';
+const choiceCardTransition = `0.2s ${contentTransitionEasing}`;
 
 const styles = {
 	radioGroup: css`
@@ -202,43 +204,67 @@ export const ThreeTierChoiceCards = ({
 	const supportTierChoiceCardStyles = (
 		selected: boolean,
 		isEmpty: boolean,
-	) => css`
-		display: block;
-		position: relative;
-		border: none;
-		box-shadow: ${selected
-			? `inset 0 0 0 2px ${
-					choiceCardDesignSettings?.buttonSelectBorderColour ??
-					palette.brand['400']
-				}`
-			: `inset 0 0 0 1px ${
-					choiceCardDesignSettings?.buttonBorderColour ??
-					palette.neutral[46]
-				}`};
-		background-color: ${selected
+	) => {
+		const backgroundColour = selected
 			? (choiceCardDesignSettings?.buttonSelectColour ??
 				palette.neutral[100])
-			: (choiceCardDesignSettings?.buttonColour ?? palette.neutral[100])};
-		color: ${selected
-			? (choiceCardDesignSettings?.buttonSelectTextColour ?? 'inherit')
-			: (choiceCardDesignSettings?.buttonTextColour ?? 'inherit')};
-		border-radius: 10px;
-		padding: ${selected && !isEmpty
-			? `8px ${space[5] + 2}px 12px ${space[5] + 2}px`
-			: `7px ${space[5] + 1}px`};
-		transition: ${choiceCardTransition};
-		transition-property: color, background-color, box-shadow, padding;
+			: (choiceCardDesignSettings?.buttonColour ?? palette.neutral[100]);
+		const backgroundOpacity = selected
+			? choiceCardDesignSettings?.buttonSelectOpacity
+			: choiceCardDesignSettings?.buttonOpacity;
+		const hoverColour =
+			choiceCardDesignSettings?.buttonSelectColour ??
+			palette.neutral[100];
+		const hoverOpacity = choiceCardDesignSettings?.buttonSelectOpacity;
 
-		> div {
-			position: static;
-		}
+		return css`
+			display: block;
+			position: relative;
+			border: none;
+			box-shadow: ${selected
+				? `inset 0 0 0 2px ${
+						choiceCardDesignSettings?.buttonSelectBorderColour ??
+						palette.brand['400']
+					}`
+				: `inset 0 0 0 1px ${
+						choiceCardDesignSettings?.buttonBorderColour ??
+						palette.neutral[46]
+					}`};
+			background-color: ${backgroundOpacity === undefined
+				? backgroundColour
+				: transparentColour(backgroundColour, backgroundOpacity)};
+			color: ${selected
+				? (choiceCardDesignSettings?.buttonSelectTextColour ??
+					'inherit')
+				: (choiceCardDesignSettings?.buttonTextColour ?? 'inherit')};
+			border-radius: 10px;
+			padding: ${selected && !isEmpty
+				? `8px ${space[5] + 2}px 12px ${space[5] + 2}px`
+				: `7px ${space[5] + 1}px`};
+			transition: ${choiceCardTransition};
+			transition-property: color, background-color, box-shadow, padding;
+			${hoverOpacity === undefined
+				? ''
+				: css`
+						&:hover {
+							background-color: ${transparentColour(
+								hoverColour,
+								hoverOpacity,
+							)};
+						}
+					`}
 
-		> div > label::before {
-			content: '';
-			position: absolute;
-			inset: 0;
-		}
-	`;
+			> div {
+				position: static;
+			}
+
+			> div > label::before {
+				content: '';
+				position: absolute;
+				inset: 0;
+			}
+		`;
+	};
 
 	const labelOverrideStyles = (isSelected: boolean) => css`
 		+ label div {

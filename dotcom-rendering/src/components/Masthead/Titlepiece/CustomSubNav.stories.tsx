@@ -59,6 +59,14 @@ const customSubNavWithImages: CustomSubnav = {
 	],
 };
 
+const customSubNavWithNonClickableHeader: CustomSubnav = {
+	...customSubNav,
+	header: {
+		...customSubNav.header,
+		dotcomPath: undefined,
+	},
+};
+
 const meta = {
 	component: CustomSubNav,
 	title: 'Components/Masthead/Titlepiece/CustomSubNav',
@@ -93,7 +101,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Front = {
-	args: { renderingPage: 'front' },
+	args: { renderingPage: 'front', pageId: '/us-news/us-congress' },
 } satisfies Story;
 
 export const FrontWithHiddenHeader = {
@@ -106,6 +114,7 @@ export const FrontWithHiddenHeader = {
 				showHeaderText: false,
 			},
 		},
+		pageId: '/us-news/us-congress',
 	},
 } satisfies Story;
 
@@ -114,6 +123,7 @@ export const FrontWithImage = {
 	args: {
 		renderingPage: 'front',
 		customSubNav: customSubNavWithImages,
+		pageId: '/us-news/us-congress',
 	},
 } satisfies Story;
 
@@ -127,11 +137,37 @@ export const FrontWithImageAndHiddenHeader = {
 				showHeaderText: false,
 			},
 		},
+		pageId: '/us-news/us-congress',
+	},
+} satisfies Story;
+
+export const FrontWithNonClickableHeader = {
+	args: {
+		renderingPage: 'front',
+		customSubNav: customSubNavWithNonClickableHeader,
+		pageId: '/us-news/us-congress',
 	},
 } satisfies Story;
 
 export const Article = {
-	args: { renderingPage: 'article' },
+	args: { renderingPage: 'article', pageId: '/us-news/us-congress' },
+	parameters: {
+		formats: [
+			{
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.News,
+			},
+		],
+	},
+} satisfies Story;
+
+export const ArticleWithNonClickableHeader = {
+	args: {
+		renderingPage: 'article',
+		customSubNav: customSubNavWithNonClickableHeader,
+		pageId: '/us-news/us-congress',
+	},
 	parameters: {
 		formats: [
 			{
