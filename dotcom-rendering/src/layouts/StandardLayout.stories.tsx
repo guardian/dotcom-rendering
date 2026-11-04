@@ -9,6 +9,7 @@ import { ArticleDesign, ArticleDisplay } from '../lib/articleFormat';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { extractNAV } from '../model/extract-nav';
 import { enhanceArticleType } from '../types/article';
+import type { MediaAtomBlockElement } from '../types/content';
 import { StandardLayout } from './StandardLayout';
 
 const meta = {
@@ -278,6 +279,52 @@ const immersivePortraitFormat = {
 	theme: webImmersivePortraitArticle.theme,
 };
 
+const assertImmersivePortraitFooter = async (canvasElement: HTMLElement) => {
+	const footer = canvasElement.querySelector<HTMLElement>(
+		'[data-grid-centre-rule-anchor]',
+	);
+	const media = canvasElement.querySelector<HTMLElement>(
+		'[data-gu-name="media"]',
+	);
+	const standfirst = canvasElement.querySelector<HTMLElement>(
+		'[data-gu-name="standfirst"]',
+	);
+	const metadata = canvasElement.querySelector<HTMLElement>(
+		'[data-gu-name="meta"]',
+	);
+
+	await expect(footer).not.toBeNull();
+	await expect(media).not.toBeNull();
+	await expect(standfirst).not.toBeNull();
+	await expect(metadata).not.toBeNull();
+
+	const view = canvasElement.ownerDocument.defaultView;
+	if (view == null) throw new Error('Expected a window for the story canvas');
+
+	if (view.innerWidth >= breakpoints.leftCol) {
+		const footerStyles = view.getComputedStyle(footer!);
+		const centreRuleStyles = view.getComputedStyle(footer!, '::before');
+		const mediaRect = media!.getBoundingClientRect();
+		const standfirstRect = standfirst!.getBoundingClientRect();
+		const metadataRect = metadata!.getBoundingClientRect();
+
+		await expect(footerStyles.display).toBe('grid');
+		await expect(footerStyles.borderTopWidth).toBe('1px');
+		await expect(centreRuleStyles.width).toBe('1px');
+		await expect(
+			Math.abs(standfirstRect.top - metadataRect.top),
+		).toBeLessThan(1);
+		await expect(
+			Math.abs(standfirstRect.bottom - mediaRect.bottom),
+		).toBeLessThan(1);
+		await expect(
+			Math.abs(metadataRect.bottom - mediaRect.bottom),
+		).toBeLessThan(1);
+	} else {
+		await expect(view.getComputedStyle(footer!).display).toBe('contents');
+	}
+};
+
 export const WebImmersivePortrait: Story = {
 	args: {
 		renderingTarget: 'Web',
@@ -316,5 +363,99 @@ export const WebImmersivePortrait: Story = {
 				'light wide': allModes['light wide'],
 			},
 		},
+	},
+	play: async ({ canvasElement }) => {
+		await assertImmersivePortraitFooter(canvasElement);
+	},
+};
+
+const portraitImage =
+	webImmersivePortraitArticle.frontendData.mainMediaElements.find(
+		(element) =>
+			element._type ===
+			'model.dotcomrendering.pageElements.ImageBlockElement',
+	);
+
+if (
+	portraitImage?._type !==
+	'model.dotcomrendering.pageElements.ImageBlockElement'
+) {
+	throw new Error(
+		'Expected the immersive portrait fixture to contain an image',
+	);
+}
+
+const posterImage = portraitImage.media.allImages[0];
+
+if (posterImage == null) {
+	throw new Error('Expected the immersive portrait image to have a source');
+}
+
+const portraitLoop: MediaAtomBlockElement = {
+	_type: 'model.dotcomrendering.pageElements.MediaAtomBlockElement',
+	elementId: 'immersive-portrait-loop',
+	id: 'immersive-portrait-loop',
+	assets: [
+		{
+			url: 'https://uploads.guim.co.uk/2026/08/27/Video__David_Newby._Styling__Melanie_Wilkinson--0a23361a-3cb6-4e45-84b8-d2a4921a89b7-1.0_480w_q8.mp4',
+			mimeType: 'video/mp4',
+			aspectRatio: '9:16',
+		},
+	],
+	posterImage: [
+		{
+			url: posterImage.url,
+			width: Number(posterImage.fields.width),
+		},
+	],
+	videoPlayerFormat: 'Loop',
+};
+
+export const WebImmersivePortraitLoop: Story = {
+	args: {
+		...WebImmersivePortrait.args,
+		article: {
+			...webImmersivePortraitArticle.frontendData,
+			shouldHideAds: true,
+			mainMediaElements: [portraitLoop],
+		},
+	},
+	parameters: {
+		...WebImmersivePortrait.parameters,
+		chromatic: {
+			modes: {
+				'light mobileMedium': allModes['light mobileMedium'],
+				'light tablet': {
+					...allModes.light,
+					viewport: breakpoints.tablet,
+				},
+				'light desktop': allModes['light desktop'],
+				'light wide': allModes['light wide'],
+			},
+		},
+	},
+	play: async ({ canvasElement }) => {
+		await assertImmersivePortraitFooter(canvasElement);
+
+		const video = canvasElement.querySelector<HTMLVideoElement>('video');
+		await expect(video).not.toBeNull();
+
+		const view = canvasElement.ownerDocument.defaultView;
+		if (view == null) {
+			throw new Error('Expected a window for the story canvas');
+		}
+
+		const videoStyles = view.getComputedStyle(video!);
+		await expect(videoStyles.objectFit).toBe('cover');
+		await expect(videoStyles.objectPosition).toBe('50% 0%');
+
+		if (view.innerWidth >= breakpoints.leftCol) {
+			const media = canvasElement.querySelector<HTMLElement>(
+				'[data-gu-name="media"]',
+			);
+			await expect(media).not.toBeNull();
+			const { width, height } = media!.getBoundingClientRect();
+			await expect(Math.abs(height - width * 1.25)).toBeLessThan(1);
+		}
 	},
 };
