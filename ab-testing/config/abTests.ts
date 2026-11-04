@@ -312,6 +312,16 @@ const ABTests: ABTest[] = [
 		groups: ["enable"],
 	},
 	{
+		name: "commercial-doubleVerify-ad-filter",
+		description: "Double Verify Ad filter for the US",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-11-19",
+		type: "client",
+		status: "ON",
+		audienceSize: 0,
+		groups: ["enable"],
+	},
+	{
 		name: "newsroom-ai-tag-page-storylines",
 		description:
 			"Testing the AI generated storylines component on tag pages",

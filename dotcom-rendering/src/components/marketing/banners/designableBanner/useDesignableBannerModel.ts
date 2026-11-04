@@ -53,7 +53,7 @@ const buildHeaderImageSettings = (
 	return buildImageSettings(design.headerImage);
 };
 
-const buildChoiceCardSettings = (
+export const buildChoiceCardSettings = (
 	design: ConfigurableDesign,
 ): ChoiceCardDesignSettings | undefined => {
 	if (design.visual?.kind !== 'ChoiceCards') {
@@ -61,9 +61,11 @@ const buildChoiceCardSettings = (
 	}
 	const {
 		buttonColour,
+		buttonOpacity,
 		buttonTextColour,
 		buttonBorderColour,
 		buttonSelectColour,
+		buttonSelectOpacity,
 		buttonSelectTextColour,
 		buttonSelectBorderColour,
 		buttonSelectMarkerColour,
@@ -74,6 +76,7 @@ const buildChoiceCardSettings = (
 		buttonColour: buttonColour
 			? hexColourToString(buttonColour)
 			: undefined,
+		buttonOpacity: buttonOpacity ?? undefined,
 		buttonTextColour: buttonTextColour
 			? hexColourToString(buttonTextColour)
 			: undefined,
@@ -83,6 +86,7 @@ const buildChoiceCardSettings = (
 		buttonSelectColour: buttonSelectColour
 			? hexColourToString(buttonSelectColour)
 			: undefined,
+		buttonSelectOpacity: buttonSelectOpacity ?? undefined,
 		buttonSelectTextColour: buttonSelectTextColour
 			? hexColourToString(buttonSelectTextColour)
 			: undefined,
