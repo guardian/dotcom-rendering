@@ -81,8 +81,13 @@ const isNewsNotCommentOrRecipeOrGallery = (format: ArticleFormat) =>
 	format.design !== ArticleDesign.Recipe &&
 	format.design !== ArticleDesign.Gallery;
 
-const isImmersiveLayoutType = (layoutType: LayoutType | undefined) =>
-	layoutType === 'immersiveLandscape' || layoutType === 'immersivePortrait';
+const isImmersiveGrid = (
+	format: ArticleFormat,
+	layoutType: LayoutType | undefined,
+) =>
+	layoutType === 'immersiveLandscape' ||
+	layoutType === 'immersivePortrait' ||
+	(layoutType != null && format.display === ArticleDisplay.Immersive);
 
 const decideHeadlineFont = (
 	format: ArticleFormat,
@@ -94,7 +99,7 @@ const decideHeadlineFont = (
 			? 50
 			: 34;
 
-	if (isImmersiveLayoutType(layoutType)) {
+	if (isImmersiveGrid(format, layoutType)) {
 		return size === 50 ? headlineBold50 : headlineBold34;
 	}
 
@@ -123,7 +128,7 @@ const decideMobileHeadlineFont = (
 			? 34
 			: 28;
 
-	if (isImmersiveLayoutType(layoutType)) {
+	if (isImmersiveGrid(format, layoutType)) {
 		return size === 34 ? headlineBold34 : headlineBold28;
 	}
 
