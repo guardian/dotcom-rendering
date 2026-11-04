@@ -18,9 +18,10 @@ const outerContainerStyles = css`
 	}
 `;
 
-const innerContainerStyles = css`
-	/* stylelint-disable-next-line color-no-hex */
-	background-color: #fef6f0;
+const innerContainerStyles = (shouldHaveWhiteBackground: boolean) => css`
+	background-color: ${shouldHaveWhiteBackground
+		? palette.neutral[100]
+		: '#fef6f0'};
 	position: relative;
 `;
 
@@ -121,12 +122,24 @@ const Puzzles: ReactComponent<Inline1Props> = ({ variant }) => {
 		return null;
 	}
 
+	// This tells typescript that tones and pillar exist on
+	// the page object, by default it doesn't know that.
+	const page = window.guardian.config
+		.page as typeof window.guardian.config.page & {
+		tones: string;
+		pillar: string;
+	};
+
+	const isAnalysis = page.tones.split(',').includes('Analysis');
+	const isOpinion = page.pillar === 'Opinion';
+	const shouldHaveWhiteBackground = isAnalysis || isOpinion;
+
 	return (
 		<section
 			css={outerContainerStyles}
 			aria-label="Guardian Puzzles and Games"
 		>
-			<div css={innerContainerStyles}>
+			<div css={innerContainerStyles(shouldHaveWhiteBackground)}>
 				<div css={guardianLogoContainerStyles}>
 					<SvgGuardianLogo aria-hidden="true" />
 				</div>

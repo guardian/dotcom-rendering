@@ -26,7 +26,8 @@ const meta: Meta<Props> = {
 		const jsonProps = json
 			? JSON.parse(lzstring.decompressFromEncodedURIComponent(json))
 			: {};
-
+		window.guardian.config.page.tones = 'Features';
+		window.guardian.config.page.pillar = 'News';
 		return (
 			<div css={style}>
 				<Puzzles {...args} {...jsonProps} />
@@ -39,4 +40,20 @@ export default meta;
 type Story = StoryObj<Props>;
 export const Default: Story = {
 	name: 'Basic Puzzles',
+};
+
+export const OnOpinionOrAnalysis: Story = {
+	name: 'Basic Puzzles White Background',
+	render: ({ json, ...args }) => {
+		const jsonProps = json
+			? JSON.parse(lzstring.decompressFromEncodedURIComponent(json))
+			: {};
+		window.guardian.config.page.tones = 'Analysis';
+		window.guardian.config.page.pillar = 'Opinion';
+		return (
+			<div css={style}>
+				<Puzzles {...args} {...jsonProps} />
+			</div>
+		);
+	},
 };
