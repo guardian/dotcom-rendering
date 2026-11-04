@@ -79,6 +79,9 @@ jobs:
         with:
           cache: true
 
+      - name: Check UI
+        run: pnpm run check
+
       - name: Build UI
         run: pnpm build
 

@@ -44,6 +44,13 @@ const sectionLabelLink = css`
 `;
 
 const rowBelowLeftCol = (format: ArticleFormat) => {
+	if (format.design === ArticleDesign.WeekendEssay) {
+		return css`
+			display: flex;
+			flex-direction: column;
+		`;
+	}
+
 	if (
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog
