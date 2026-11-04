@@ -16,6 +16,7 @@ export type NewsletterSignupCardProps = {
 	description: string;
 	illustrationSquare?: string;
 	children?: React.ReactNode;
+	heading?: string;
 	isSignedIn?: boolean | 'Pending';
 	isModal?: boolean;
 };
@@ -143,7 +144,13 @@ const NewsletterSignupHeader = (
 		<div css={headerStyles}>
 			<div css={titleAndMetaStyles}>
 				<p css={titleStyles}>
-					Sign up to <span>{props.name}</span>
+					{props.heading ? (
+						props.heading
+					) : (
+						<>
+							Sign up to <span>{props.name}</span>
+						</>
+					)}
 				</p>
 				<p css={descriptionStyles}>{props.description}</p>
 			</div>
@@ -172,6 +179,7 @@ export const NewsletterSignupCard = ({
 	illustrationSquare,
 	children,
 	isSignedIn,
+	heading,
 	isModal = false,
 }: NewsletterSignupCardProps) => {
 	const content = (
@@ -179,6 +187,7 @@ export const NewsletterSignupCard = ({
 			<NewsletterSignupHeader
 				frequency={frequency}
 				name={name}
+				heading={heading}
 				description={description}
 				illustrationSquare={illustrationSquare}
 				isSignedIn={isSignedIn}

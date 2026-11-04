@@ -31,7 +31,8 @@ const newsletterVariant: Inline1Variant = {
 		type: 'Inline1NewsletterMessage' as const,
 		newsletterId: 'saturday-edition',
 		frequency: 'Weekly',
-		heading: 'Saturday Edition', //newsletter name
+		heading:
+			'Sign up to the Saturday Edition, our free weekend news roundup',
 		body: 'An exclusive look at the week’s best Guardian journalism from the editor-in-chief, Katharine Viner',
 		imageUrl:
 			'https://uploads.guim.co.uk/2023/11/01/SaturdayEdition_-_5-3.jpg',

@@ -10,6 +10,7 @@ type Props = Pick<
 	theme: string;
 	isSignedIn?: boolean | 'Pending';
 	children?: React.ReactNode;
+	heading?: string;
 };
 
 const themeColorStyles = (theme: string) => css`
@@ -21,6 +22,7 @@ const themeColorStyles = (theme: string) => css`
 export const NewsletterSignupCardContainer = ({
 	theme,
 	name,
+	heading,
 	frequency,
 	description,
 	illustrationSquare,
@@ -40,6 +42,7 @@ export const NewsletterSignupCardContainer = ({
 					description={description}
 					illustrationSquare={illustrationSquare}
 					isSignedIn={isSignedIn}
+					heading={heading}
 				>
 					{children}
 				</NewsletterSignupCard>
