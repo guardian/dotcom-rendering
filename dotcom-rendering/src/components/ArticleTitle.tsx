@@ -6,7 +6,7 @@ import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
-	hasImmersiveGridTitle,
+	hasImmersiveGridTitleRule,
 } from '../lib/articleFormat';
 import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
@@ -101,7 +101,7 @@ export const ArticleTitle = ({
 }: Props) => {
 	const hasImmersivePortraitTitleRule =
 		layoutType === 'immersivePortrait' &&
-		hasImmersiveGridTitle(format, tags);
+		hasImmersiveGridTitleRule(format, tags);
 
 	return (
 		<div
