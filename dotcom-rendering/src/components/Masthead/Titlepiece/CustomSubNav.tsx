@@ -365,13 +365,13 @@ export const CustomSubNav = ({
 				component: {
 					componentType: 'EVENT_GRAPHIC', // TODO: Change this
 					id: TRACKING_ID,
-					labels: [], // TODO: Check with Petter
 				},
 				action: 'VIEW',
+				value: customSubNav.id,
 			},
 			renderingTarget,
 		);
-	}, [isInView, renderingTarget, TRACKING_ID]);
+	}, [isInView, renderingTarget, TRACKING_ID, customSubNav.id]);
 	/** DCR receives images for all platforms; only web images are rendered here. */
 	const webImages = (customSubNav.images ?? []).filter((image) =>
 		image.platforms.includes('web'),
