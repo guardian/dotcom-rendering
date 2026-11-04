@@ -49,6 +49,16 @@ const hoverStyles = (isLoopAndInLoopClickTestVariant: boolean) => css`
 		background-color: ${palette('--card-background-hover')};
 	}
 
+	/**
+	 * Darken the picture itself rather than laying an overlay on top of it,
+	 * so only its visible pixels are affected and transparent areas
+	 * (e.g. cutouts) keep the card background. 90% brightness closely
+	 * matches the --card-background-hover overlay used on other media.
+	 */
+	:hover .card-picture img {
+		filter: brightness(90%);
+	}
+
 	/* Only underline the headline element we want to target (not kickers/sublink headlines) */
 	:hover .card-headline .show-underline {
 		text-decoration: underline;
@@ -73,6 +83,9 @@ const hoverStyles = (isLoopAndInLoopClickTestVariant: boolean) => css`
 		}
 		.media-overlay {
 			background-color: transparent;
+		}
+		.card-picture img {
+			filter: none;
 		}
 	}
 `;
