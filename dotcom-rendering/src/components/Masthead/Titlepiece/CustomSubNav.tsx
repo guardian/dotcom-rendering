@@ -351,7 +351,6 @@ export const CustomSubNav = ({
 	const { renderingTarget } = useConfig();
 	const isNetworkFront = isANetworkFront(pageId);
 	const isArticle = renderingPage === 'article';
-	const TRACKING_ID = `custom-subnav-${customSubNav.header.headerText}`;
 
 	useEffect(() => {
 		if (isInView !== true || hasTrackedView.current) {
@@ -362,15 +361,20 @@ export const CustomSubNav = ({
 		void submitComponentEvent(
 			{
 				component: {
-					componentType: 'EVENT_GRAPHIC', // TODO: Change this
-					id: TRACKING_ID,
+					componentType: 'CUSTOM_SUBNAV',
+					id: customSubNav.header.headerText,
 				},
 				action: 'VIEW',
 				value: customSubNav.id,
 			},
 			renderingTarget,
 		);
-	}, [isInView, renderingTarget, TRACKING_ID, customSubNav.id]);
+	}, [
+		isInView,
+		renderingTarget,
+		customSubNav.header.headerText,
+		customSubNav.id,
+	]);
 	/** DCR receives images for all platforms; only web images are rendered here. */
 	const webImages = (customSubNav.images ?? []).filter((image) =>
 		image.platforms.includes('web'),
