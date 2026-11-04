@@ -38,9 +38,11 @@ export interface HeaderSettings {
 
 export interface ChoiceCardDesignSettings {
 	buttonColour?: string;
+	buttonOpacity?: number;
 	buttonTextColour?: string;
 	buttonBorderColour?: string;
 	buttonSelectColour?: string;
+	buttonSelectOpacity?: number;
 	buttonSelectTextColour?: string;
 	buttonSelectBorderColour?: string;
 	buttonSelectMarkerColour?: string;
