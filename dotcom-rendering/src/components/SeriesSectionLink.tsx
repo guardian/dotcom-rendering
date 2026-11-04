@@ -92,17 +92,13 @@ const marginRight = css`
 	}
 `;
 
-const invertedStyle = (format: ArticleFormat) => css`
+const invertedStyle = () => css`
 	/* Handle text wrapping onto a new line */
 	white-space: pre-wrap;
 	box-decoration-break: clone;
-	line-height: 28px;
 	padding-right: ${space[1]}px;
 	padding-top: ${space[1]}px;
 	padding-bottom: ${space[2]}px;
-	${format.display === ArticleDisplay.Immersive ? from.leftCol : from.wide} {
-		line-height: 28px;
-	}
 `;
 
 const fontStyles = (format: ArticleFormat) => {
@@ -461,7 +457,7 @@ export const SeriesSectionLink = ({
 					format={format}
 					colour={titleColour}
 					extraCss={[
-						invertedStyle(format),
+						invertedStyle(),
 						layoutType !== 'immersivePortrait' && sectionPadding,
 						css`
 							background-color: ${themePalette(

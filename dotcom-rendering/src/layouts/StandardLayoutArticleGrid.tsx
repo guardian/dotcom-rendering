@@ -763,7 +763,7 @@ export const StandardLayoutArticleGrid = ({
 									padding-top: ${space[3]}px;
 								}
 							`,
-						isImmersive
+						isImmersiveLandscape
 							? css`
 									${from.leftCol} {
 										margin-right: -10px;
