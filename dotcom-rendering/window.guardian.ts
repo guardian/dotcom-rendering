@@ -7,6 +7,7 @@ import type {
 } from '@guardian/consent-manager';
 import type ophan from '@guardian/ophan-tracker-js';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/types';
+import type { Inline1Props } from '@guardian/support-dotcom-components/dist/shared/types/props/inline1';
 import type { google } from './src/components/YoutubeAtom/ima';
 import type { DailyArticleHistory } from './src/lib/dailyArticleCount';
 import type { ReaderRevenueDevUtils } from './src/lib/readerRevenueDevUtils';
@@ -31,6 +32,11 @@ declare global {
 			 * e.g. https://github.com/search?q=org%3Aguardian+window.guardian.queue&type=code
 			 */
 			queue: Array<() => void>;
+			/**
+			 * For the commercial bundle to request rendering of SDC components
+			 * into ad slots.
+			 */
+			sdc?: { inline1?: { slotId: string; props: Inline1Props } };
 			// Olly N 10/01/2022:
 			// The 'emotionCache' property would better live as a singleton package/chunk, but we're currently limited
 			// by having multiple entrypoints in webpack, meaning we can't guarantee singleton behavior
@@ -64,6 +70,9 @@ declare global {
 		google?: typeof google;
 		YT?: typeof YT;
 		onYouTubeIframeAPIReady?: () => void;
+	}
+	interface WindowEventMap {
+		'commercial.sdc-render': CustomEvent<{ props: Inline1Props }>;
 	}
 }
 /* ~ this line is required as per TypeScript's global-modifying-module.d.ts instructions */

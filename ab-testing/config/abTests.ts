@@ -80,30 +80,6 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 	},
 	{
-		name: "fronts-and-curation-loop-click-through",
-		description:
-			"Test impact of click to article via loop videos on fronts",
-		owners: ["fronts.and.curation@guardian.co.uk"],
-		status: "OFF",
-		expirationDate: "2026-09-19",
-		type: "server",
-		audienceSize: 5 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: false,
-	},
-	{
-		name: "fronts-and-curation-click-to-play",
-		description: "Test click to play longform videos vs autoplay",
-		owners: ["fronts.and.curation@guardian.co.uk"],
-		status: "OFF",
-		expirationDate: "2026-09-28",
-		type: "server",
-		audienceSize: 0 / 100,
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "martech-admiral-adblock",
 		description:
 			"Control group for Admiral ad blocker - runs the detection script but does not show the modal",
@@ -347,6 +323,18 @@ const ABTests: ABTest[] = [
 		audienceSpace: "B",
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
+	},
+	{
+		name: "commercial-iab-taxonomy",
+		description:
+			"Test the impact of using IAB Taxonomy tags for ad targeting",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-11-25",
+		type: "client",
+		status: "ON",
+		audienceSize: 0,
+		audienceSpace: "A",
+		groups: ["control", "variant-primary", "variant-primary-secondary"],
 	},
 ];
 

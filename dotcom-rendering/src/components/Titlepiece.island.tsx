@@ -620,6 +620,7 @@ export const Titlepiece = ({
 						currentNavLink={nav.currentNavLink}
 						renderingPage={customSubnav.renderingPage}
 						hasPageSkin={hasPageSkin}
+						pageId={pageId}
 					/>
 				</div>
 			)}

@@ -11,6 +11,7 @@ import {
 	visuallyHidden,
 } from '@guardian/source/foundations';
 import { SvgCheckmark } from '@guardian/source/react-components';
+import { getPuzzleGroupPalette } from '../lib/puzzleGroupPalette';
 import type { PuzzleItem } from '../types/puzzlesPage';
 
 /**
@@ -71,6 +72,12 @@ const puzzleColours = (item: PuzzleItem) => {
 				background: palette.opinion[800],
 				title: palette.opinion[400],
 			};
+		case 'film-reveal':
+		case 'on-the-ball':
+		case 'trivia': {
+			const { tint, primary } = getPuzzleGroupPalette('trivia');
+			return { background: tint, title: primary };
+		}
 		default:
 			return {
 				background: item.backgroundColour,
