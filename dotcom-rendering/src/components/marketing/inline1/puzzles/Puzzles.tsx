@@ -42,6 +42,11 @@ const guardianLogoContainerStyles = css`
 	margin-right: 10px;
 	line-height: 0;
 	font-size: 0;
+	width: 74px;
+
+	${from.phablet} {
+		width: 102px;
+	}
 
 	${from.tablet} {
 		float: right;
@@ -131,7 +136,7 @@ const Puzzles: ReactComponent<Inline1Props> = ({ variant }) => {
 		>
 			<div css={innerContainerStyles}>
 				<div css={guardianLogoContainerStyles}>
-					<SvgGuardianLogo width={75} aria-hidden="true" />
+					<SvgGuardianLogo aria-hidden="true" />
 				</div>
 				<div css={mainContentContainerStyles}>
 					<div css={logoAndImageContainerStyles}>
