@@ -103,6 +103,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					tagIds={tagPage.tags.map((tag) => tag.properties.id)}
 					sectionId={tagPage.config.section}
 					contentType={contentType}
+					canonicalUrl={tagPage.canonicalUrl}
 				/>
 			</div>
 

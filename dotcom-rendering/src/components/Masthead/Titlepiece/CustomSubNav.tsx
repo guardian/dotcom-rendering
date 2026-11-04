@@ -12,6 +12,7 @@ import {
 	textSansBold14,
 } from '@guardian/source/foundations';
 import { grid } from '../../../grid';
+import { isNetworkFront as isANetworkFront } from '../../../lib/edition';
 import { generateImageURL } from '../../../lib/image';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import { palette as themePalette } from '../../../palette';
@@ -28,6 +29,7 @@ type Props = {
 	renderingPage: RenderingPage;
 	pageId: string;
 	hasPageSkin?: boolean;
+	canonicalUrl?: string;
 };
 
 const subNavStyles = css`
@@ -340,7 +342,9 @@ export const CustomSubNav = ({
 	renderingPage,
 	hasPageSkin,
 	pageId,
+	canonicalUrl,
 }: Props) => {
+	const isNetworkFront = isANetworkFront(pageId);
 	const isArticle = renderingPage === 'article';
 	/** DCR receives images for all platforms; only web images are rendered here. */
 	const webImages = (customSubNav.images ?? []).filter((image) =>
@@ -348,27 +352,31 @@ export const CustomSubNav = ({
 	);
 	const hasHeaderImage = !isArticle && webImages.length > 0;
 
-	const linkItems = customSubNav.links.map(({ linkText, dotcomPath }) => (
-		<li key={dotcomPath} css={subnavListItemStyles}>
-			<a
-				css={subnavLinkStyles}
-				data-src-focus-disabled={true}
-				href={dotcomPath}
-				data-link-name={nestedOphanComponents(
-					'header',
-					'custom subnav',
-					linkText,
-				)}
-			>
-				{linkText === currentNavLink ||
-				(pageId.length > 0 && dotcomPath.includes(pageId)) ? (
-					<span css={selectedLink}>{linkText}</span>
-				) : (
-					linkText
-				)}
-			</a>
-		</li>
-	));
+	const linkItems = customSubNav.links.map(({ linkText, dotcomPath }) => {
+		console.log({ linkText, currentNavLink, canonicalUrl, dotcomPath });
+
+		return (
+			<li key={dotcomPath} css={subnavListItemStyles}>
+				<a
+					css={subnavLinkStyles}
+					data-src-focus-disabled={true}
+					href={dotcomPath}
+					data-link-name={nestedOphanComponents(
+						'header',
+						'custom subnav',
+						linkText,
+					)}
+				>
+					{!isNetworkFront &&
+					(dotcomPath === pageId || dotcomPath === canonicalUrl) ? (
+						<span css={selectedLink}>{linkText}</span>
+					) : (
+						linkText
+					)}
+				</a>
+			</li>
+		);
+	});
 
 	if (hasHeaderImage) {
 		return (

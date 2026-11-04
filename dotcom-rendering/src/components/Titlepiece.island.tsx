@@ -37,6 +37,7 @@ interface Props {
 	showSlimNav?: boolean;
 	hasPageSkin?: boolean;
 	pageId?: string;
+	canonicalUrl?: string;
 }
 
 const gridContent = css`
@@ -333,6 +334,7 @@ export const Titlepiece = ({
 	showSlimNav,
 	hasPageSkin,
 	pageId = '',
+	canonicalUrl,
 }: Props) => {
 	const { showBanner } = useEditionSwitcherBanner(pageId, editionId);
 
@@ -621,6 +623,7 @@ export const Titlepiece = ({
 						renderingPage={customSubnav.renderingPage}
 						hasPageSkin={hasPageSkin}
 						pageId={pageId}
+						canonicalUrl={canonicalUrl}
 					/>
 				</div>
 			)}
