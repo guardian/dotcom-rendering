@@ -184,8 +184,19 @@ export const MediaWrapper = ({
 	const isHorizontalOnDesktop =
 		mediaPositionOnDesktop === 'left' || mediaPositionOnDesktop === 'right';
 
+	/**
+	 * Pictures are darkened on hover with a filter instead of an overlay
+	 * (see CardWrapper), so that transparent areas of the image aren't tinted
+	 */
+	const isPicture = mediaType === 'picture';
+	const showMediaOverlay =
+		!isPicture &&
+		(mediaType === 'cinemagraph' ||
+			isLoopAndInLoopClickTestVariant == true);
+
 	return (
 		<div
+			className={isPicture ? 'card-picture' : undefined}
 			css={[
 				(mediaType === 'slideshow' ||
 					mediaType === 'picture' ||
@@ -239,9 +250,7 @@ export const MediaWrapper = ({
 			<>
 				{children}
 				{/* This overlay is styled when the CardLink is hovered */}
-				{(mediaType === 'picture' ||
-					mediaType === 'cinemagraph' ||
-					isLoopAndInLoopClickTestVariant == true) && (
+				{showMediaOverlay && (
 					<div
 						css={[
 							mediaOverlayContainerStyles,
