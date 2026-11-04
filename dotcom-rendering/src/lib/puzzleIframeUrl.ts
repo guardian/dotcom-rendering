@@ -14,7 +14,7 @@ import type {
  * (vs `idx=1` for "latest"), `embed=1`, an optional `uid`, and an optional
  * `darkMode=0|1` (a plain literal value, not a JSON blob). Wordiply has no
  * confirmed query param support of any kind yet. MovieGrid/SportsReveal
- * accept a client-added `darkMode=0|1` but no confirmed `uid`.
+ * accept `darkMode=0|1` and `uid`, which takes precedence over their guest token.
  *
  * Blindly applying the same query params to every provider regardless of
  * what it actually supports is fragile, and was already conceptually
@@ -122,14 +122,15 @@ export const resolvePuzzleIframeUrl = (
 	// The API owns puzzle selection. Never replace its id, path or provider parameters.
 	if (gameUrl !== undefined) {
 		const url = new URL(gameUrl);
-		if (config.iframe.provider === 'amuselabs') {
+		if (
+			config.iframe.provider === 'amuselabs' ||
+			config.iframe.provider === 'moviegrid'
+		) {
 			if (context.userId !== null) {
 				url.searchParams.set('uid', context.userId);
 			} else {
 				url.searchParams.delete('uid');
 			}
-			url.searchParams.set('darkMode', context.darkMode ? '1' : '0');
-		} else if (config.iframe.provider === 'moviegrid') {
 			url.searchParams.set('darkMode', context.darkMode ? '1' : '0');
 		}
 		return url.toString();

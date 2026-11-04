@@ -5,9 +5,11 @@
 Frontend resolves each dated page with `GET /game?puzzleType=...&date=YYYY-MM-DD`
 and sends the response's `gameUrl` as `instance.gameUrl`. DCR passes it through the
 layout to `PuzzleIframe` and preserves the API's path, opaque puzzle ID and provider
-parameters. AmuseLabs URLs receive the current reader's `uid` and `darkMode`;
-MovieGrid URLs receive `darkMode=0|1` without adding `uid`. All providers continue
-to receive `guardian-puzzle-context`.
+parameters. AmuseLabs and MovieGrid URLs receive the signed-in reader's `uid` and
+`darkMode=0|1`; `uid` is removed when signed out so the provider uses its guest
+identity. The iframe reloads and progress adapter resets when the reader changes.
+Guest progress is not automatically imported into the signed-in account.
+All providers continue to receive `guardian-puzzle-context`.
 
 The local URL builders described below remain a compatibility fallback for older
 frontend payloads without `gameUrl`. New frontend pages always supply the API URL
@@ -660,9 +662,8 @@ darkMode: boolean, puzzleDate: string | null } }` and the
   phased: local-device-only first, then a thin API wrapper, then a
   backing database), and confirms the exact real AmuseLabs URL parameter
   conventions already implemented here (`set`, `id` vs `idx=1`, `embed=1`,
-  `uid`, `darkMode=0|1`), plus MovieGrid/sportsreveal's simpler convention
-  (base URL plus a client-added `darkMode` param only, no confirmed `uid`
-  support for those two providers). `puzzleConfigs.ts`'s current registry,
+  `uid`, `darkMode=0|1`), plus MovieGrid/SportsReveal's API URL with client-added
+  `darkMode` and signed-in `uid` parameters. `puzzleConfigs.ts`'s current registry,
   with its explicit, per-entry identity data, is a deliberate,
   correct-for-now V0 solution, not the intended final architecture. When
   the Puzzles Server/Archive API materialises, this registry's statically
