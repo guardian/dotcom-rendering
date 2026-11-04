@@ -13,7 +13,6 @@ import { isWithinTwelveHours, secondsToDuration } from '../../lib/formatTime';
 import { appendLinkNameMedia } from '../../lib/getDataLinkName';
 import { getZIndex } from '../../lib/getZIndex';
 import { getOphanComponents } from '../../lib/labs';
-import { useAB } from '../../lib/useAB';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import { palette } from '../../palette';
 import type { Branding } from '../../types/branding';
@@ -417,20 +416,6 @@ export const Card = ({
 	headlineTestUuid,
 	isStorylines = false,
 }: Props) => {
-	const ab = useAB();
-	const isInLoopClickTestControl = Boolean(
-		ab?.isUserInTestGroup(
-			'fronts-and-curation-loop-click-through',
-			'control',
-		),
-	);
-	const isInLoopClickTestVariant = Boolean(
-		ab?.isUserInTestGroup(
-			'fronts-and-curation-loop-click-through',
-			'variant',
-		),
-	);
-
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
 		supportingContent,
@@ -831,15 +816,6 @@ export const Card = ({
 		);
 	};
 
-	const isLoopAndInLoopClickTestControl = Boolean(
-		media?.type === 'loop-video' && isInLoopClickTestControl,
-	);
-	const isLoopAndInLoopClickTestVariant = Boolean(
-		media?.type === 'loop-video' && isInLoopClickTestVariant,
-	);
-	const isLoopAndInLoopClickTest =
-		isLoopAndInLoopClickTestControl || isLoopAndInLoopClickTestVariant;
-
 	return (
 		<CardWrapper
 			format={format}
@@ -851,15 +827,12 @@ export const Card = ({
 					? palette('--onward-content-top-border')
 					: undefined
 			}
-			isLoopAndInLoopClickTestVariant={isLoopAndInLoopClickTestVariant}
 		>
 			<CardLink
 				linkTo={linkTo}
 				headlineText={headlineText}
 				dataLinkName={resolvedDataLinkName}
 				isExternalLink={isExternalLink}
-				isLoopAndInLoopClickTest={isLoopAndInLoopClickTest}
-				shouldRaiseZIndexForAbTest={false} // The z-index is raised in a new CardLink in the SelfHostedVideo island.
 				headlineTestUuid={headlineTestUuid}
 			/>
 			{headlinePosition === 'outer' && (
@@ -925,9 +898,6 @@ export const Card = ({
 						mediaPositionOnMobile={mediaPositionOnMobile}
 						padMedia={isMediaCardOrNewsletter && !isOnwardsContent}
 						isSmallCard={isSmallCard}
-						isLoopAndInLoopClickTestVariant={
-							isLoopAndInLoopClickTestVariant
-						}
 					>
 						{media.type === 'slideshow' && (
 							<Island
@@ -1002,14 +972,6 @@ export const Card = ({
 									minAspectRatio={3 / 4}
 									containerAspectRatioDesktop={5 / 4}
 									preventAutoplay={false}
-									cardLink={{
-										headlineText,
-										dataLinkName: resolvedDataLinkName,
-										isExternalLink,
-									}}
-									isInLoopClickTestVariant={
-										isLoopAndInLoopClickTestVariant
-									}
 								/>
 							</Island>
 						)}
