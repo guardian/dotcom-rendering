@@ -439,6 +439,9 @@ export const SeriesSectionLink = ({
 		const title = tag?.title ?? sectionLabel;
 		const linkExt = tag?.id ?? sectionUrl;
 		const hasLayoutType = isImmersive && layoutType !== undefined;
+		const isNotImmersivePortraitLayout = layoutType !== 'immersivePortrait';
+		const isImmersiveLandscapeLayout = layoutType === 'immersiveLandscape';
+		const isImmersivePortraitLayout = layoutType === 'immersivePortrait';
 
 		return (
 			<div
@@ -468,17 +471,16 @@ export const SeriesSectionLink = ({
 					colour={titleColour}
 					extraCss={[
 						invertedStyle(),
-						layoutType !== 'immersivePortrait' && sectionPadding,
+						isNotImmersivePortraitLayout && sectionPadding,
 						css`
 							background-color: ${themePalette(
 								'--series-title-background',
 							)};
 						`,
 						hasLayoutType &&
-							layoutType !== 'immersivePortrait' &&
+							isNotImmersivePortraitLayout &&
 							immersiveGridTitleBelowDesktop,
-						layoutType === 'immersiveLandscape' &&
-							immersiveLandscapeTitle,
+						isImmersiveLandscapeLayout && immersiveLandscapeTitle,
 						isGallery &&
 							css`
 								position: relative;
@@ -498,7 +500,7 @@ export const SeriesSectionLink = ({
 											'--series-title-background',
 										)};
 							`,
-						layoutType === 'immersivePortrait' &&
+						isImmersivePortraitLayout &&
 							css`
 								display: inline-block;
 								line-height: 28px;
