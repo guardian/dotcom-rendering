@@ -485,6 +485,14 @@ export const SeriesSectionLink = ({
 					colour={titleColour}
 					extraCss={[
 						invertedStyle(),
+						isImmersive &&
+							!hasLayoutType &&
+							css`
+								line-height: 28px;
+								${from.leftCol} {
+									line-height: 28px;
+								}
+							`,
 						isNotImmersivePortraitLayout && sectionPadding,
 						css`
 							background-color: ${themePalette(

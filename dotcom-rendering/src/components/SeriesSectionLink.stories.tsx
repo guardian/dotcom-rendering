@@ -3,7 +3,12 @@ import { from } from '@guardian/source/foundations';
 import type { Decorator } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
 import preview from '../../.storybook/preview';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	Pillar,
+} from '../lib/articleFormat';
 import { SeriesSectionLink } from './SeriesSectionLink';
 
 const seriesTag = {
@@ -12,9 +17,9 @@ const seriesTag = {
 	type: 'Series' as const,
 };
 
-const longSeriesTag = {
+const shortSeriesTag = {
 	...seriesTag,
-	title: 'Series title with the addition of some more text to show how this wraps',
+	title: 'Series title',
 };
 
 const baseArgs = {
@@ -106,12 +111,39 @@ const meta = preview.meta({
 });
 
 export const Standard = meta.story({
-	args: baseArgs,
+	args: {
+		...baseArgs,
+		tags: [shortSeriesTag],
+	},
 });
 
 export const StandardTwoLines = meta.story({
 	args: baseArgs,
 	decorators: [twoLineDecorator],
+});
+
+export const StandardOpinionTwoLines = meta.story({
+	args: {
+		...baseArgs,
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: Pillar.Opinion,
+		},
+	},
+	decorators: [twoLineDecorator],
+});
+
+export const StandardOpinion = meta.story({
+	args: {
+		...baseArgs,
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: Pillar.Opinion,
+		},
+		tags: [shortSeriesTag],
+	},
 });
 
 export const Gallery = meta.story({
@@ -122,6 +154,7 @@ export const Gallery = meta.story({
 			design: ArticleDesign.Gallery,
 			theme: Pillar.News,
 		},
+		tags: [shortSeriesTag],
 	},
 });
 
@@ -137,6 +170,30 @@ export const GalleryTwoLines = meta.story({
 	decorators: [twoLineDecorator],
 });
 
+export const GalleryCultureTwoLines = meta.story({
+	args: {
+		...baseArgs,
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Gallery,
+			theme: Pillar.Culture,
+		},
+	},
+	decorators: [twoLineDecorator],
+});
+
+export const GalleryCulture = meta.story({
+	args: {
+		...baseArgs,
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Gallery,
+			theme: Pillar.Culture,
+		},
+		tags: [shortSeriesTag],
+	},
+});
+
 export const ImmersiveLandscape = meta.story({
 	args: {
 		...baseArgs,
@@ -146,7 +203,7 @@ export const ImmersiveLandscape = meta.story({
 			theme: Pillar.News,
 		},
 		layoutType: 'immersiveLandscape',
-		tags: [longSeriesTag],
+		tags: [shortSeriesTag],
 	},
 	decorators: [immersiveLandscapeDecorator],
 });
@@ -164,6 +221,59 @@ export const ImmersiveLandscapeTwoLines = meta.story({
 	decorators: [twoLineImmersiveLandscapeDecorator],
 });
 
+export const ImmersiveLandscapeSportTwoLines = meta.story({
+	args: {
+		...baseArgs,
+		format: {
+			display: ArticleDisplay.Immersive,
+			design: ArticleDesign.Standard,
+			theme: Pillar.Sport,
+		},
+		layoutType: 'immersiveLandscape',
+	},
+	decorators: [twoLineImmersiveLandscapeDecorator],
+});
+
+export const ImmersiveLandscapeSport = meta.story({
+	args: {
+		...baseArgs,
+		format: {
+			display: ArticleDisplay.Immersive,
+			design: ArticleDesign.Standard,
+			theme: Pillar.Sport,
+		},
+		layoutType: 'immersiveLandscape',
+		tags: [shortSeriesTag],
+	},
+	decorators: [immersiveLandscapeDecorator],
+});
+
+export const LegacyImmersiveLabs = meta.story({
+	args: {
+		...baseArgs,
+		format: {
+			display: ArticleDisplay.Immersive,
+			design: ArticleDesign.Standard,
+			theme: ArticleSpecial.Labs,
+		},
+		layoutType: undefined,
+		tags: [shortSeriesTag],
+	},
+});
+
+export const LegacyImmersiveLabsTwoLines = meta.story({
+	args: {
+		...baseArgs,
+		format: {
+			display: ArticleDisplay.Immersive,
+			design: ArticleDesign.Standard,
+			theme: ArticleSpecial.Labs,
+		},
+		layoutType: undefined,
+	},
+	decorators: [twoLineDecorator],
+});
+
 export const ImmersivePortrait = meta.story({
 	args: {
 		...baseArgs,
@@ -173,7 +283,7 @@ export const ImmersivePortrait = meta.story({
 			theme: Pillar.News,
 		},
 		layoutType: 'immersivePortrait',
-		tags: [longSeriesTag],
+		tags: [shortSeriesTag],
 	},
 	decorators: [immersivePortraitDecorator],
 });
@@ -189,4 +299,31 @@ export const ImmersivePortraitTwoLines = meta.story({
 		layoutType: 'immersivePortrait',
 	},
 	decorators: [twoLineImmersivePortraitDecorator],
+});
+
+export const ImmersivePortraitLifestyleTwoLines = meta.story({
+	args: {
+		...baseArgs,
+		format: {
+			display: ArticleDisplay.Immersive,
+			design: ArticleDesign.Standard,
+			theme: Pillar.Lifestyle,
+		},
+		layoutType: 'immersivePortrait',
+	},
+	decorators: [twoLineImmersivePortraitDecorator],
+});
+
+export const ImmersivePortraitLifestyle = meta.story({
+	args: {
+		...baseArgs,
+		format: {
+			display: ArticleDisplay.Immersive,
+			design: ArticleDesign.Standard,
+			theme: Pillar.Lifestyle,
+		},
+		layoutType: 'immersivePortrait',
+		tags: [shortSeriesTag],
+	},
+	decorators: [immersivePortraitDecorator],
 });
