@@ -12,6 +12,7 @@
 		"test": "IMAGE_DIGEST=sha256:12345 jest --maxWorkers=50%",
 		"test:watch": "IMAGE_DIGEST=sha256:12345 jest --watch --maxWorkers=25%",
 		"test:ci": "IMAGE_DIGEST=sha256:12345 jest --runInBand",
+		"test:article-html": "jest --ci --config jest.article-html.config.js --runInBand",
 		"playwright:open": "playwright test --ui",
 		"playwright:run": "playwright test",
 		"unused-exports": "pnpm ts-unused-exports ./tsconfig.json --ignoreFiles='(/(fixtures|__mocks__)/|.+\\.(stories|mocks))' --exitWithCount",
