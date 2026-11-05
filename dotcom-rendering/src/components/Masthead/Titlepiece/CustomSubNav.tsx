@@ -12,6 +12,7 @@ import {
 	textSansBold14,
 } from '@guardian/source/foundations';
 import { grid } from '../../../grid';
+import { isNetworkFront as isANetworkFront } from '../../../lib/edition';
 import { generateImageURL } from '../../../lib/image';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import { palette as themePalette } from '../../../palette';
@@ -24,14 +25,14 @@ import type {
 
 type Props = {
 	customSubNav: CustomSubnav;
-	currentNavLink: string;
 	renderingPage: RenderingPage;
 	pageId: string;
 	hasPageSkin?: boolean;
+	canonicalUrl?: string;
 };
 
 const subNavStyles = css`
-	${textSans14}
+	${textSans14};
 	display: flex;
 	column-gap: ${space[2]}px;
 	color: inherit;
@@ -98,7 +99,7 @@ const articleDividerStyles = css`
 `;
 
 const articleHeaderStyles = css`
-	${textSansBold14}
+	${textSansBold14};
 	color: ${themePalette('--custom-subnav-header-text')};
 	display: flex;
 	align-items: center;
@@ -121,7 +122,7 @@ const headerTextWrapperStyles = css`
 
 /** On fronts the header sits above the links as a large stacked heading. */
 const frontContainerStyles = css`
-	${headlineBold28}
+	${headlineBold28};
 	margin-top: ${space[2]}px;
 	color: ${themePalette('--masthead-nav-link-text')};
 `;
@@ -158,7 +159,7 @@ const headerImageStyles = css`
 `;
 
 const imageHeaderTextStyles = css`
-	${headlineBold28}
+	${headlineBold28};
 	position: absolute;
 	left: ${space[3]}px;
 	bottom: ${space[1]}px;
@@ -172,7 +173,7 @@ const imageHeaderTextStyles = css`
 const imageListStyles = css`
 	${grid.column.all}
 	grid-row: 2;
-	${textSans14}
+	${textSans14};
 	display: flex;
 	align-items: center;
 	column-gap: ${space[2]}px;
@@ -336,11 +337,12 @@ const CustomHeader = (
  */
 export const CustomSubNav = ({
 	customSubNav,
-	currentNavLink,
 	renderingPage,
 	hasPageSkin,
 	pageId,
+	canonicalUrl,
 }: Props) => {
+	const isNetworkFront = isANetworkFront(pageId);
 	const isArticle = renderingPage === 'article';
 	/** DCR receives images for all platforms; only web images are rendered here. */
 	const webImages = (customSubNav.images ?? []).filter((image) =>
@@ -360,8 +362,8 @@ export const CustomSubNav = ({
 					linkText,
 				)}
 			>
-				{linkText === currentNavLink ||
-				(pageId.length > 0 && dotcomPath.includes(pageId)) ? (
+				{!isNetworkFront &&
+				(dotcomPath === pageId || dotcomPath === canonicalUrl) ? (
 					<span css={selectedLink}>{linkText}</span>
 				) : (
 					linkText

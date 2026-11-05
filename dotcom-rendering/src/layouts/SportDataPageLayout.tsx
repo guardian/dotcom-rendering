@@ -130,6 +130,7 @@ export const SportDataPageLayout = (
 						pageId={sportData.config.pageId}
 						sectionId={sportData.config.section}
 						contentType={sportData.config.contentType}
+						canonicalUrl={sportData.canonicalUrl}
 					/>
 				</div>
 			)}
