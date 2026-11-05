@@ -145,7 +145,7 @@ for (const [slug, title] of [
 				await expect(headline).toHaveCSS('font-weight', '500');
 				const themeColour =
 					mode === 'dark'
-						? 'rgb(168, 227, 223)'
+						? 'rgb(105, 209, 202)'
 						: 'rgb(12, 122, 115)';
 				for (const component of ['series', 'section']) {
 					const link = page.locator(

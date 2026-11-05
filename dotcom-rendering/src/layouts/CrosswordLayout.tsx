@@ -14,6 +14,7 @@ import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
+import { useConfig } from '../components/ConfigContext';
 import { CrosswordInstructions } from '../components/CrosswordInstructions';
 import { CrosswordLinks } from '../components/CrosswordLinks';
 import { DecideLines } from '../components/DecideLines';
@@ -43,6 +44,7 @@ import {
 	getPuzzlesSubNavLinks,
 	PUZZLES_SUBNAV_PARENT,
 } from '../lib/puzzlesSubNav';
+import { puzzleAccentStyles } from '../lib/puzzlesTheme';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
@@ -124,6 +126,7 @@ interface Props {
 
 export const CrosswordLayout = (props: Props) => {
 	const { article, format } = props;
+	const { darkModeAvailable } = useConfig();
 	const {
 		config: { isPaidContent, host, hasSurveyAd },
 	} = article;
@@ -238,7 +241,13 @@ export const CrosswordLayout = (props: Props) => {
 				<AdSlot position="survey" display={format.display} />
 			)}
 
-			<main data-layout="InteractiveLayout">
+			<main
+				data-layout="InteractiveLayout"
+				css={
+					isPuzzlesHubV1 &&
+					puzzleAccentStyles('crosswords', darkModeAvailable)
+				}
+			>
 				<Section
 					fullWidth={true}
 					showTopBorder={false}

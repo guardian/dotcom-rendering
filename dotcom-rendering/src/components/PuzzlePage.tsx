@@ -1,7 +1,7 @@
 import { Global } from '@emotion/react';
 import { StrictMode } from 'react';
 import {
-	getPuzzlePageFormat,
+	puzzlePageFormat,
 	PuzzlePageLayout,
 	type ResolvedPuzzlePage,
 } from '../layouts/PuzzlePageLayout';
@@ -25,12 +25,7 @@ export const PuzzlePage = ({ puzzlePage, NAV }: Props) => {
 
 	return (
 		<StrictMode>
-			<Global
-				styles={rootStyles(
-					getPuzzlePageFormat(puzzlePage.puzzleConfig.puzzleGroup),
-					darkModeAvailable,
-				)}
-			/>
+			<Global styles={rootStyles(puzzlePageFormat, darkModeAvailable)} />
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
 			<Island priority="feature" defer={{ until: 'idle' }}>

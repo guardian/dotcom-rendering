@@ -4,7 +4,7 @@ import { getHeaderSignInUrl } from '../lib/headerSignInUrl';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 
 const linkStyles = css`
-	color: ${palette.lifestyle[400]};
+	color: var(--puzzles-primary, ${palette.lifestyle[400]});
 	text-decoration: none;
 	:hover,
 	:focus {
