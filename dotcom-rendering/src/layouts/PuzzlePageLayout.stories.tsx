@@ -2,10 +2,6 @@ import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
 import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
-import {
-	puzzlesHubV1Experiment,
-	puzzlesHubV1Participation,
-} from '../lib/puzzlesHubVersionExperiment';
 import { extractNAV } from '../model/extract-nav';
 import { getPuzzleConfig } from '../model/puzzles/puzzleConfigs';
 import { getPuzzlePageFormat, PuzzlePageLayout } from './PuzzlePageLayout';
@@ -69,9 +65,7 @@ const saturdayEdition = {
 
 const v1Config = {
 	...puzzlePage.config,
-	serverSideABTests: puzzlesHubV1Participation(
-		puzzlesHubV1Experiment.variant,
-	),
+	edition: 'INT' as const,
 };
 
 export const WithUsefulLinksAndNewsletter = {

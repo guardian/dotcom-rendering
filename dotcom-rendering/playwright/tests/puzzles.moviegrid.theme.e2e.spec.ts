@@ -40,8 +40,8 @@ for (const width of [375, 1280]) {
 							isAdFreeUser: true,
 						}),
 						configOverrides: {
+							edition: 'INT',
 							serverSideABTests: {
-								'puzzles-new-hub-v1': 'variant',
 								'puzzles-new-hub-v2': 'variant',
 								'webx-dark-mode-web': 'enable',
 							},
@@ -117,8 +117,8 @@ for (const [slug, title] of [
 							isAdFreeUser: true,
 						}),
 						configOverrides: {
+							edition: 'INT',
 							serverSideABTests: {
-								'puzzles-new-hub-v1': 'variant',
 								'puzzles-new-hub-v2': 'variant',
 								'webx-dark-mode-web':
 									mode === 'dark-disabled'

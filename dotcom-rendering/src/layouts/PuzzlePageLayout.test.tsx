@@ -3,8 +3,6 @@ import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
 import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
 import { ConfigProvider } from '../components/ConfigContext';
 import {
-	puzzlesHubV1Experiment,
-	puzzlesHubV1Participation,
 	puzzlesHubV2Experiment,
 	puzzlesHubV2Participation,
 } from '../lib/puzzlesHubVersionExperiment';
@@ -51,11 +49,7 @@ jest.mock('../lib/useAB', () => ({
 	useAB: jest.fn().mockReturnValue(null),
 }));
 
-const v1On = puzzlesHubV1Participation(puzzlesHubV1Experiment.variant);
-const v1AndV2On = {
-	...v1On,
-	...puzzlesHubV2Participation(puzzlesHubV2Experiment.variant),
-};
+const v2On = puzzlesHubV2Participation(puzzlesHubV2Experiment.variant);
 
 const renderPuzzlePageLayout = (
 	slug: string,
@@ -266,7 +260,7 @@ describe('PuzzlePageLayout', () => {
 			const { container } = renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: {},
+					edition: 'UK',
 				},
 			});
 
@@ -283,7 +277,7 @@ describe('PuzzlePageLayout', () => {
 			const { container } = renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: v1On,
+					edition: 'INT',
 				},
 			});
 
@@ -303,7 +297,8 @@ describe('PuzzlePageLayout', () => {
 			const { container } = renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: v1AndV2On,
+					edition: 'INT',
+					serverSideABTests: v2On,
 				},
 			});
 
@@ -344,7 +339,7 @@ describe('PuzzlePageLayout', () => {
 			renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: v1On,
+					edition: 'INT',
 				},
 			});
 
@@ -359,7 +354,7 @@ describe('PuzzlePageLayout', () => {
 			renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: v1On,
+					edition: 'INT',
 				},
 				instance: {
 					...createPuzzlePage('sudoku-easy').instance,
@@ -388,7 +383,7 @@ describe('PuzzlePageLayout', () => {
 			renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: {},
+					edition: 'UK',
 				},
 			});
 

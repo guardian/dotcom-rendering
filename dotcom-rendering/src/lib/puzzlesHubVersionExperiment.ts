@@ -1,71 +1,39 @@
 import type { ConfigType } from '../types/config';
+import { isPuzzlesHubAvailable } from './puzzlesHubAccess';
 
 /**
- * The v1/v2 tiers of the Puzzles & Games rollout, layered cumulatively (see
- * the JSDoc comments in `ab-testing/config/abTests.ts` for what each tier
- * gates on the product side).
+ * The v2 tier of the Puzzles & Games rollout, layered on top of the hub's
+ * edition gate (see `isPuzzlesHubAvailable`, which replaced the former
+ * `puzzles-new-hub-v1` AB test).
  *
- * Each tier is a genuinely separate AB test entry, but a later tier is only
- * meaningful in combination with the tier below it: `puzzles-new-hub-v2`
- * does nothing unless `puzzles-new-hub-v1` is also enabled. This prevents an
- * inconsistent state and means each tier can be rolled back independently
- * (flip just that tier's `audienceSize`/`status` in `abTests.ts`).
+ * `puzzles-new-hub-v2` is a genuinely separate AB test entry, but it is only
+ * meaningful in combination with the hub being available: it does nothing
+ * outside the editions the hub is rolled out to. This prevents an
+ * inconsistent state and means v2 can be rolled back independently (flip just
+ * its `audienceSize`/`status` in `abTests.ts`).
  */
-export const puzzlesHubV1Experiment = {
-	name: 'puzzles-new-hub-v1',
-	variant: 'variant',
-	control: 'control',
-} as const;
-
 export const puzzlesHubV2Experiment = {
 	name: 'puzzles-new-hub-v2',
 	variant: 'variant',
 	control: 'control',
 } as const;
 
-type PuzzlesVersionExperimentConfig = Pick<ConfigType, 'serverSideABTests'>;
-
-const isInVariant = (
-	{ serverSideABTests }: PuzzlesVersionExperimentConfig,
-	testName: string,
-	variant: string,
-): boolean =>
-	serverSideABTests[testName] === variant ||
-	process.env.NODE_ENV === 'development';
+type PuzzlesVersionExperimentConfig = Pick<
+	ConfigType,
+	'serverSideABTests' | 'edition'
+>;
 
 /**
- * True when `puzzles-new-hub-v1` is in its `variant` group for this request
- * (or in local development).
- */
-export const isPuzzlesHubV1Enabled = (
-	config: PuzzlesVersionExperimentConfig,
-): boolean =>
-	isInVariant(
-		config,
-		puzzlesHubV1Experiment.name,
-		puzzlesHubV1Experiment.variant,
-	);
-
-/**
- * True only when BOTH `puzzles-new-hub-v1` and `puzzles-new-hub-v2` are in
- * their `variant` group for this request. Either being off is enough to keep
- * v2 features hidden - see the cumulative design note above.
+ * True only when the hub is available for this request's edition AND
+ * `puzzles-new-hub-v2` is in its `variant` group (or in local development).
  */
 export const isPuzzlesHubV2Enabled = (
 	config: PuzzlesVersionExperimentConfig,
 ): boolean =>
-	isPuzzlesHubV1Enabled(config) &&
-	isInVariant(
-		config,
-		puzzlesHubV2Experiment.name,
-		puzzlesHubV2Experiment.variant,
-	);
-
-export const puzzlesHubV1Participation = (
-	group: string,
-): Record<string, string> => ({
-	[puzzlesHubV1Experiment.name]: group,
-});
+	isPuzzlesHubAvailable(config) &&
+	(config.serverSideABTests[puzzlesHubV2Experiment.name] ===
+		puzzlesHubV2Experiment.variant ||
+		process.env.NODE_ENV === 'development');
 
 export const puzzlesHubV2Participation = (
 	group: string,
