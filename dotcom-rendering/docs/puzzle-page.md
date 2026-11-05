@@ -18,6 +18,9 @@ DCR never derives MovieGrid puzzle URLs or IDs.
 Hub progress enrichment also preserves crossword `gameUrl` values exactly, including
 absolute links and dated Genius article paths. Other puzzle card destinations are unchanged.
 
+Archive calendars re-fetch the selected month when restored from the browser's
+back/forward cache, so recently saved progress appears without a manual reload.
+
 Film reveal and On the ball require both `puzzles-new-hub-v1` and
 `puzzles-new-hub-v2` for hub cards, game pages and trivia archives. V1-only requests
 omit the cards and receive 404 for those pages; existing V1 puzzles are unchanged.
