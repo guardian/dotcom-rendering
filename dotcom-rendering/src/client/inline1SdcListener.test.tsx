@@ -24,12 +24,12 @@ const dispatch = (slot: HTMLElement) =>
 describe('inline1SdcListener', () => {
 	beforeEach(() => {
 		document.body.innerHTML = '';
-		delete window.guardian.sdc;
+		delete window.guardian.commercial?.sdc;
 	});
 
 	it('renders a request made before listener was set up', async () => {
 		addSlot();
-		window.guardian.sdc = {
+		(window.guardian.commercial ??= {}).sdc = {
 			inline1: { slotId: SLOT_ID, props: inline1Props },
 		};
 
