@@ -495,6 +495,13 @@ export const SeriesSectionLink = ({
 							isNotImmersivePortraitLayout &&
 							immersiveGridTitleBelowDesktop,
 						isImmersiveLandscapeLayout && immersiveLandscapeTitle,
+						isImmersiveLandscapeLayout &&
+							isLabs &&
+							css`
+								${from.wide} {
+									bottom: 1px;
+								}
+							`,
 						isGallery &&
 							css`
 								position: relative;
