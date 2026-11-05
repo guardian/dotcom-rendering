@@ -68,3 +68,59 @@ export const puzzlesPageTheme = (
 		`}
 	`;
 };
+
+/**
+ * The palette variables `puzzleAccentStyles` sets. Together they cover every
+ * variable that depends on the page theme and is used by the Puzzles & games
+ * pages (see `puzzlesThemeCoverage.test.tsx`, which fails when one is missing).
+ */
+const accentVariables = [
+	'--share-button',
+	'--series-title-text',
+	'--article-section-link-text',
+	'--byline-anchor',
+	'--byline-hover',
+	'--discussion-primary-button-background',
+	'--discussion-button-background-hover',
+] as const;
+
+/** Themed in light mode only, they are already neutral in dark mode. */
+const lightOnlyVariables = ['--byline', '--sign-in-link'] as const;
+
+export const puzzleAccentVariables: readonly string[] = [
+	...accentVariables,
+	...lightOnlyVariables,
+];
+
+const declare = (names: readonly string[], colour: string) =>
+	names.map((name) => `${name}: ${colour};`).join('\n');
+
+/**
+ * Sets only the accent colour of the words and buttons the article palette
+ * takes from the page theme (series and section links, setter, share and
+ * print buttons, sign in link and comment buttons), to the group's colour.
+ * Leaves the theme, backgrounds and lines alone. The setter and the sign in
+ * link keep their neutral theme colours in dark mode.
+ */
+export const puzzleAccentStyles = (
+	group: PuzzleGroupKey,
+	darkModeAvailable: boolean,
+): SerializedStyles => {
+	const { primary, accent } = getPuzzleGroupPalette(group);
+
+	return css`
+		${declare(accentVariables, primary)}
+		${declare(lightOnlyVariables, primary)}
+
+		${darkModeAvailable &&
+		css`
+			@media (prefers-color-scheme: dark) {
+				html:not([data-color-scheme='light']) & {
+					${declare(accentVariables, accent)}
+					--byline: ${palette.neutral[60]};
+					--sign-in-link: ${palette.neutral[100]};
+				}
+			}
+		`}
+	`;
+};
