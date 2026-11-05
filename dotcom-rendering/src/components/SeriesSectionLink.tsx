@@ -203,8 +203,6 @@ const immersiveGridTitleBelowDesktop = css`
 `;
 
 const immersiveLandscapeTitle = css`
-	display: inline-block;
-
 	${from.tablet} {
 		margin-left: -29px;
 	}
@@ -453,6 +451,13 @@ export const SeriesSectionLink = ({
 							${until.desktop} {
 								padding-left: 10px;
 								padding-right: 10px;
+							}
+						`,
+					layoutType === 'immersiveLandscape' &&
+						css`
+							padding-bottom: 5px;
+							${from.desktop} {
+								padding-bottom: 9px;
 							}
 						`,
 				]}
