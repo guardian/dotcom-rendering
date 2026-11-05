@@ -63,7 +63,7 @@ const handleEvent = (event: CustomEvent<{ props: Inline1Props }>): void => {
  */
 export const inline1SdcListener = (): Promise<void> => {
 	// Check if the commercial bundle has already sent an event
-	const request = window.guardian.sdc?.inline1;
+	const request = window.guardian.commercial?.sdc?.inline1;
 	if (request) {
 		const slot = document.getElementById(request.slotId);
 		if (slot) {
