@@ -81,12 +81,23 @@ const isNewsNotCommentOrRecipeOrGallery = (format: ArticleFormat) =>
 	format.design !== ArticleDesign.Recipe &&
 	format.design !== ArticleDesign.Gallery;
 
-const decideHeadlineFont = (format: ArticleFormat) => {
+const isImmersiveLayoutType = (layoutType: LayoutType | undefined) =>
+	layoutType === 'immersiveLandscape' || layoutType === 'immersivePortrait';
+
+const decideHeadlineFont = (
+	format: ArticleFormat,
+	layoutType: LayoutType | undefined,
+) => {
 	const size =
 		format.display === ArticleDisplay.Immersive ||
 		format.design === ArticleDesign.Gallery
 			? 50
 			: 34;
+
+	if (isImmersiveLayoutType(layoutType)) {
+		return size === 50 ? headlineBold50 : headlineBold34;
+	}
+
 	if (isNewsNotCommentOrRecipeOrGallery(format)) {
 		return size === 50 ? headlineMedium50 : headlineMedium34;
 	}
@@ -102,12 +113,20 @@ const decideHeadlineFont = (format: ArticleFormat) => {
 	}
 };
 
-const decideMobileHeadlineFont = (format: ArticleFormat) => {
+const decideMobileHeadlineFont = (
+	format: ArticleFormat,
+	layoutType: LayoutType | undefined,
+) => {
 	const size =
 		format.display === ArticleDisplay.Immersive ||
 		format.design === ArticleDesign.Gallery
 			? 34
 			: 28;
+
+	if (isImmersiveLayoutType(layoutType)) {
+		return size === 34 ? headlineBold34 : headlineBold28;
+	}
+
 	if (isNewsNotCommentOrRecipeOrGallery(format)) {
 		return size === 34 ? headlineMedium34 : headlineMedium28;
 	}
@@ -123,19 +142,22 @@ const decideMobileHeadlineFont = (format: ArticleFormat) => {
 	}
 };
 
-const headlineFont = (format: ArticleFormat) => {
+const headlineFont = (
+	format: ArticleFormat,
+	layoutType: LayoutType | undefined,
+) => {
 	if (format.design === ArticleDesign.Gallery) {
 		return css`
-			${decideMobileHeadlineFont(format)}
+			${decideMobileHeadlineFont(format, layoutType)}
 			${from.desktop} {
-				${decideHeadlineFont(format)}
+				${decideHeadlineFont(format, layoutType)}
 			}
 		`;
 	}
 	return css`
-		${decideMobileHeadlineFont(format)}
+		${decideMobileHeadlineFont(format, layoutType)}
 		${from.tablet} {
-			${decideHeadlineFont(format)}
+			${decideHeadlineFont(format, layoutType)}
 		}
 	`;
 };
@@ -589,7 +611,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
-											: headlineFont(format),
+											: headlineFont(format, layoutType),
 										isLegacyImmersive
 											? [
 													legacyInvertedText,
@@ -645,7 +667,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? jumboLabsFont
-											: headlineFont(format),
+											: headlineFont(format, layoutType),
 										maxWidth,
 										isLegacyImmersive && [
 											legacyInvertedStyles,
@@ -689,7 +711,7 @@ export const ArticleHeadline = ({
 							css={[
 								format.theme === ArticleSpecial.Labs
 									? labsFont
-									: headlineFont(format),
+									: headlineFont(format, layoutType),
 								topPadding,
 								css`
 									color: ${themePalette('--headline-colour')};
@@ -730,7 +752,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
-											: headlineFont(format),
+											: headlineFont(format, layoutType),
 										topPadding,
 										css`
 											color: ${themePalette(
@@ -772,7 +794,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
-											: headlineFont(format),
+											: headlineFont(format, layoutType),
 										topPadding,
 										css`
 											color: ${themePalette(
@@ -814,7 +836,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
-											: headlineFont(format),
+											: headlineFont(format, layoutType),
 										topPadding,
 										css`
 											color: ${themePalette(
@@ -855,7 +877,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
-											: headlineFont(format),
+											: headlineFont(format, layoutType),
 										invertedWrapper,
 										invertedFontLineHeight,
 										css`
@@ -905,7 +927,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
-											: headlineFont(format),
+											: headlineFont(format, layoutType),
 										topPadding,
 										css`
 											color: ${themePalette(
@@ -947,7 +969,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
-											: headlineFont(format),
+											: headlineFont(format, layoutType),
 										css`
 											color: ${isMatch
 												? themePalette(
@@ -992,7 +1014,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
-											: headlineFont(format),
+											: headlineFont(format, layoutType),
 										topPadding,
 										css`
 											color: ${themePalette(
@@ -1022,7 +1044,7 @@ export const ArticleHeadline = ({
 								css={[
 									format.theme === ArticleSpecial.Labs
 										? labsFont
-										: headlineFont(format),
+										: headlineFont(format, layoutType),
 									topPadding,
 									css`
 										color: ${themePalette(
@@ -1049,7 +1071,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsGalleryFont
-											: headlineFont(format),
+											: headlineFont(format, layoutType),
 										css`
 											color: ${themePalette(
 												'--headline-colour',
@@ -1123,7 +1145,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
-											: headlineFont(format),
+											: headlineFont(format, layoutType),
 										topPadding,
 										css`
 											color: ${themePalette(

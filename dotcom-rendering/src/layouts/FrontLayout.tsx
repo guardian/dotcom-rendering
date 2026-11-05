@@ -265,6 +265,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					)}
 					sectionId={front.config.section}
 					contentType={front.config.contentType}
+					canonicalUrl={front.canonicalUrl}
 				/>
 
 				{isPaidContent && (

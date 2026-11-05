@@ -27,6 +27,7 @@ type Props = {
 	tagIds?: string[];
 	sectionId?: string;
 	contentType?: string;
+	canonicalUrl?: string;
 };
 
 /**
@@ -65,6 +66,7 @@ export const Masthead = ({
 	tagIds,
 	sectionId,
 	contentType,
+	canonicalUrl,
 }: Props) => (
 	<header data-component="header">
 		<Section
@@ -125,6 +127,7 @@ export const Masthead = ({
 				showSlimNav={showSlimNav}
 				hasPageSkin={hasPageSkin}
 				pageId={pageId}
+				canonicalUrl={canonicalUrl}
 			/>
 		</Island>
 	</header>
