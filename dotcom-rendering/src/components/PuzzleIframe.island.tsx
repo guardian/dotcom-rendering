@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { until } from '@guardian/source/foundations';
 import { useEffect, useRef, useState } from 'react';
 import { getAuthStatus, subscribeToAuthStateChange } from '../lib/identity';
+import { handleMovieGridAction } from '../lib/movieGridActions';
 import { resolvePuzzleIframeUrl } from '../lib/puzzleIframeUrl';
 import {
 	AMUSELABS_ORIGIN,
@@ -330,7 +331,7 @@ export const buildPuzzleIframeSrc = (
 };
 
 /** Only accept supported provider messages from this iframe's own window and origin. */
-const usePuzzleProgressReporting = (
+const usePuzzleMessages = (
 	puzzleConfig: PuzzleConfig,
 	iframeRef: React.RefObject<HTMLIFrameElement>,
 	progressIdentity?: PuzzleProgressIdentity,
@@ -347,13 +348,17 @@ const usePuzzleProgressReporting = (
 			: movieGrid && progressIdentity
 				? createMovieGridAdapter(movieGrid, progressIdentity)
 				: undefined;
-		if (!adapter) return;
+		if (!adapter && !movieGrid) return;
 		const origin = isAmuseLabs ? AMUSELABS_ORIGIN : movieGrid?.origin;
 
 		const onMessage = (event: MessageEvent<unknown>) => {
 			if (event.origin !== origin) return;
 			if (event.source !== iframeRef.current?.contentWindow) return;
 
+			if (movieGrid) {
+				void handleMovieGridAction(event.data).catch(console.error);
+			}
+			if (!adapter) return;
 			const progress = isAmuseLabs
 				? handleAmuseLabsMessage(adapter, event.data)
 				: handleMovieGridMessage(adapter, event.data);
@@ -417,7 +422,7 @@ export const PuzzleIframe = ({
 	const iframeSrc = buildPuzzleIframeSrc(puzzleConfig, context, gameUrl);
 	const iframeRef = useRef<HTMLIFrameElement>(null);
 
-	usePuzzleProgressReporting(puzzleConfig, iframeRef, progressIdentity);
+	usePuzzleMessages(puzzleConfig, iframeRef, progressIdentity);
 
 	// In development the islands do not hydrate when the page is opened
 	// straight from the local `frontend` (its `/assets/` cannot serve this
