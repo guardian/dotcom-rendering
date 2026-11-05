@@ -96,6 +96,11 @@ const weekendReadFrame = css`
 		content: '';
 		display: block;
 		background-image: url('https://interactive.guim.co.uk/atoms/2025/04/2025-weekend-essay-test/assets/v/1791480673/frame.png');
+		@media (prefers-color-scheme: dark) {
+			:root:not([data-color-scheme='light']) & {
+				filter: invert(1);
+			}
+		}
 		background-size: contain;
 		background-position: center;
 		background-repeat: no-repeat;
