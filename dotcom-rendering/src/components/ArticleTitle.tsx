@@ -116,6 +116,10 @@ export const ArticleTitle = ({
 						: undefined,
 					hasImmersivePortraitTitleRule &&
 						immersivePortraitSeriesRule,
+					layoutType === 'interactiveTopHat' &&
+						css`
+							width: 100%;
+						`,
 				]}
 			>
 				<SeriesSectionLink
