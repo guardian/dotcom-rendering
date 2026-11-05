@@ -1,36 +1,40 @@
 # Ophan shadow testing
 
 This adds the Dotcom integration for [Ophan's shadow testing](https://github.com/guardian/ophan/pull/8523).
-The first pass compares pageview counts with the installed TrackerJS version on
-sampled page loads. Ophan runs a full candidate with private tracking state and
-captured networking. Both observe real browser events, and only the installed
-tracker sends normal analytics. Attention and payload fields are outside comparison.
+It runs the full candidate tracker alongside the installed version and compares
+pageview counts and query parameters, including the initial pageview. Candidate
+analytics requests are captured. Only normal tracking enters the event pipeline.
 
-Normal tracking starts first. If the Frontend-provided
-`window.guardian.config.switches.ophanShadowTesting` is `true`, DCR calls the shadow
-API once for the page. It does not wait for the candidate to load. Comparison
-starts after candidate initialisation, with earlier requests marked as excluded.
-Startup errors do not prevent normal tracking, and Apps skip this integration.
+When `window.guardian.config.switches.ophanShadowTesting` is true and the package
+supports the API, DCR calls `startShadowFromConfig(config, () => ophan.init('ng'))`
+before normal initialisation. The library samples locally first. The local cap is
+1%, so other pages initialise immediately without a shadow config request.
 
-The current TrackerJS 5.2.0 package does not have this API. The optional check keeps
-it working until the Ophan implementation is released and the NPM dependency is
-upgraded. The baseline version comes from that dependency, so it changes as part
-of the normal upgrade.
+Selected pages allow 200 ms in total for config and candidate loading. If ready,
+the candidate gets its own config/storage copies before normal init, and receives
+that same init call through the API hook. There is no saved-call history or replay.
+On timeout, failure or cancellation, normal tracking starts once without a test.
+Late candidates cannot activate. Concurrent `getOphan` callers share startup and
+wait for tracking to initialise before recording events. Apps skip this integration.
 
-DCR fixes the config URL, candidate location and reporting endpoint in
-`src/client/ophan/shadow.ts`. Those hosting paths are proposed and have not been
-provisioned. Ophan's JSON config controls the candidate build, sampling and expiry.
-This allows later candidates to be tested without another DCR change. Config is
-read once per activation, so updates apply to new page loads.
+The trade-off is delayed tracking on sampled pages. A reader leaving during that
+wait may be missed. Caching should help but cannot be assumed. The candidate also
+adds CPU and memory work, with its own listeners, probes and attention timers. Its
+wrapper shares the DOM and main thread, so performance and side effects still need
+checking on Dotcom, including slower devices. Attention isn't compared.
 
-Before enabling, we still need the package upgrade, hosting, Tracker endpoint and
-Frontend switch. We also need to agree CDN headers and caching, any CSP changes,
-consent handling and a performance budget. The local checks are useful evidence,
-but full DCR still needs measuring on slower devices. The candidate runs its own
-listeners, probes and attention timers. Its cooperative browser wrapper shares the
-live DOM, so this is a prototype for review before production use.
+DCR fixes the URLs, sample cap and wait budget in `src/client/ophan/shadow.ts`.
+Ophan's config selects the build and expiry, and can reduce sampling or turn it off.
+It cannot exceed the local cap or extend the wait. Config is read only on locally
+selected pages, once per activation, so updates apply to new page loads.
 
-Run the integration tests and type check from `dotcom-rendering/`:
+The installed TrackerJS 5.2.0 doesn't support this API. Until the matching package
+is released and installed, the capability check falls back to immediate normal
+init. The baseline build comes from the dependency version. Hosting paths are
+proposed and unprovisioned. Activation also needs the Tracker endpoint, Frontend
+switch, CDN caching/CSP/consent review and an agreed performance budget.
+
+Run the integration tests and types from `dotcom-rendering/`:
 
 ```sh
 pnpm test:ci src/client/ophan/ophan.test.ts
@@ -38,5 +42,5 @@ pnpm tsc
 ```
 
 [The Ophan guide](https://github.com/guardian/ophan/blob/codex/tracker-shared-input/tracker-js/SHARED-INPUT-SHADOW.md)
-explains comparison and reporting. Ophan owns that behaviour, including the
-separate diagnostic endpoint and its cumulative reports.
+explains matching, reporting and limits. Diagnostics go to Ophan's separate endpoint,
+outside Slab and BigLoader. The integration remains off for review.

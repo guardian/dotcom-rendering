@@ -7,32 +7,53 @@ const config = {
 	assetBase: 'https://assets.theguardian.com/ophan/shadow/candidates/',
 	reportingUrl: 'https://ophan.theguardian.com/diagnostics/tracker-shadow',
 	baselineBuild: packageJson.dependencies['@guardian/ophan-tracker-js'],
+	sampleRate: 0.01,
+	timeoutMs: 200,
 };
 
-// Optional until the API from guardian/ophan#8523 is released and installed.
-// Keep the current package buildable without copying its shadow implementation.
+// Optional until guardian/ophan#8523 is released and installed.
 type TrackerModule = {
 	default: typeof ophan;
-	startShadowFromConfig?: (options: typeof config) => unknown;
+	startShadowFromConfig?: (
+		options: typeof config,
+		initialise: () => void,
+	) => { ready: Promise<void> };
 };
 
-let started = false;
+let startup: Promise<void> | undefined;
 
-export const startOphanShadowTesting = (tracker: TrackerModule): void => {
-	if (
-		started ||
-		typeof window === 'undefined' ||
-		window.guardian.config.switches.ophanShadowTesting !== true ||
-		typeof tracker.startShadowFromConfig !== 'function'
-	) {
-		return;
-	}
-
-	// Several callers may initialise Ophan concurrently before it is cached.
-	started = true;
+export const initialiseOphan = (tracker: TrackerModule): Promise<void> => {
+	if (startup) return startup;
+	let initialised = false;
+	const initialise = () => {
+		if (initialised) return;
+		initialised = true;
+		tracker.default.init('ng');
+	};
 	try {
-		tracker.startShadowFromConfig(config);
+		if (
+			typeof window !== 'undefined' &&
+			window.guardian.config.switches.ophanShadowTesting === true &&
+			typeof tracker.startShadowFromConfig === 'function'
+		) {
+			startup = tracker
+				.startShadowFromConfig(config, initialise)
+				.ready.catch((error: unknown) => {
+					log(
+						'dotcom',
+						'Ophan shadow testing could not start',
+						error,
+					);
+				})
+				.finally(initialise);
+		} else {
+			initialise();
+			startup = Promise.resolve();
+		}
 	} catch (error) {
 		log('dotcom', 'Ophan shadow testing could not start', error);
+		initialise();
+		startup = Promise.resolve();
 	}
+	return startup;
 };

@@ -2,7 +2,7 @@ import { log } from '@guardian/libs';
 import type ophan from '@guardian/ophan-tracker-js';
 import type { ComponentEvent, TAction } from '@guardian/ophan-tracker-js';
 import type { RenderingTarget } from '../../types/renderingTarget';
-import { startOphanShadowTesting } from './shadow';
+import { initialiseOphan } from './shadow';
 
 type Ophan = typeof ophan;
 
@@ -59,8 +59,7 @@ export const getOphan = async (
 	);
 	const { default: ophan } = trackerModule;
 
-	ophan.init('ng');
-	startOphanShadowTesting(trackerModule);
+	await initialiseOphan(trackerModule);
 
 	const record: (typeof ophan)['record'] = (event, callback) => {
 		ophan.record(event, callback);
