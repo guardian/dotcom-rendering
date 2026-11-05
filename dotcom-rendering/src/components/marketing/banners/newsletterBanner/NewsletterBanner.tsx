@@ -4,7 +4,10 @@ import type { PromotedNewsletter } from '@guardian/support-dotcom-components/dis
 import type { ComponentType } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { validatedBannerWrapper } from '../common/BannerWrapper';
-import type { BannerRenderProps } from '../common/types';
+import type {
+	BannerRenderProps,
+	NewsletterBannerDesign,
+} from '../common/types';
 import type { BannerData } from '../designableBanner/BannerProps';
 import { BannerBody } from '../designableBanner/components/BannerBody';
 import { BannerCloseButton } from '../designableBanner/components/BannerCloseButton';
@@ -95,7 +98,9 @@ export const NewsletterBannerComponent = (
 		return null;
 	}
 
-	const { basic } = props.design.colours;
+	const design = props.design as NewsletterBannerDesign;
+	const { basic, newsletterBanner } = design.colours;
+	const dividerColor = hexColourToString(newsletterBanner.divider);
 	const bannerData = buildNewsletterBannerData(
 		baseBannerData,
 		newsletter,
@@ -118,8 +123,8 @@ export const NewsletterBannerComponent = (
 			]}
 		>
 			<div css={styles.layout}>
-				<NewsletterBannerLogo />
-				<div css={styles.verticalLine} />
+				<NewsletterBannerLogo bannerData={bannerData} />
+				<div css={styles.verticalLine(dividerColor)} />
 				<div css={styles.panels}>
 					<div
 						css={styles.panel(!isSuccess)}
@@ -133,9 +138,16 @@ export const NewsletterBannerComponent = (
 										<div css={styles.frequencyRow}>
 											<NewsletterFrequencyTag
 												frequency={newsletter.frequency}
+												actionColor={hexColourToString(
+													newsletterBanner.actionColor,
+												)}
 											/>
 										</div>
-										<div css={styles.horizontalLine} />
+										<div
+											css={styles.horizontalLine(
+												dividerColor,
+											)}
+										/>
 										<div css={styles.textImageRow}>
 											<div css={styles.textCopy}>
 												<div
@@ -164,6 +176,21 @@ export const NewsletterBannerComponent = (
 												newsletter.identityName
 											}
 											componentId="newsletter_banner"
+											headingColor={hexColourToString(
+												basic.headerText,
+											)}
+											actionColor={hexColourToString(
+												newsletterBanner.actionColor,
+											)}
+											errorColor={hexColourToString(
+												newsletterBanner.errorColor,
+											)}
+											privacyTextColor={hexColourToString(
+												newsletterBanner.privacyTextColor,
+											)}
+											toggleTextColor={hexColourToString(
+												newsletterBanner.toggleTextColor,
+											)}
 											onSuccess={() => setIsSuccess(true)}
 										/>
 									</div>
@@ -184,6 +211,15 @@ export const NewsletterBannerComponent = (
 								<SuccessMessage
 									newsletterName={newsletter.name}
 									frequency={newsletter.frequency}
+									textColor={hexColourToString(
+										newsletterBanner.successTextColor,
+									)}
+									browseButtonTextColor={hexColourToString(
+										newsletterBanner.browseButtonTextColor,
+									)}
+									browseButtonBorderColor={hexColourToString(
+										newsletterBanner.browseButtonBorderColor,
+									)}
 								/>
 							</div>
 						</div>

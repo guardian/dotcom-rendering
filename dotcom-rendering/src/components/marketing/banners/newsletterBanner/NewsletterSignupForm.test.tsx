@@ -12,6 +12,7 @@ const mockHandleSubmit = jest.fn((event: React.FormEvent<HTMLFormElement>) =>
 const mockHandleSubmitButtonClick = jest.fn();
 const mockHandleEmailFocus = jest.fn();
 let mockResponseOk: boolean | undefined;
+let mockIsValidationError = false;
 
 jest.mock('../../../ConfigContext', () => ({
 	useConfig: () => ({ renderingTarget: 'Web' }),
@@ -30,6 +31,10 @@ jest.mock('../../../../lib/useNewsletterSignupForm', () => ({
 		isWaitingForResponse: false,
 		captchaSiteKey: 'test-site-key',
 		responseOk: mockResponseOk,
+		isValidationError: mockIsValidationError,
+		errorMessage: mockIsValidationError
+			? 'Enter a valid email address'
+			: undefined,
 		handleSubmit: mockHandleSubmit,
 		handleSubmitButtonClick: mockHandleSubmitButtonClick,
 		handleEmailFocus: mockHandleEmailFocus,
@@ -41,14 +46,11 @@ jest.mock('react-google-recaptcha', () => ({
 	default: jest.fn(() => null),
 }));
 
-jest.mock('../../../NewsletterPrivacyMessage', () => ({
-	NewsletterPrivacyMessage: () => null,
-}));
-
 describe('newsletter banner signup form', () => {
 	beforeEach(() => {
 		jest.clearAllMocks();
 		mockResponseOk = undefined;
+		mockIsValidationError = false;
 	});
 
 	it('renders CAPTCHA and delegates submission to the signup hook', () => {
@@ -57,12 +59,23 @@ describe('newsletter banner signup form', () => {
 			<NewsletterSignupForm
 				newsletterId="test-newsletter"
 				componentId="test-banner"
+				actionColor="#052962"
+				errorColor="#C70000"
+				headingColor="#FFFFFF"
+				privacyTextColor="#707070"
+				toggleTextColor="#333333"
 				onSuccess={onSuccess}
 			/>,
 		);
 
 		expect(ReactGoogleRecaptcha).toHaveBeenCalled();
 		expect(onSuccess).not.toHaveBeenCalled();
+		expect(testingScreen.getByText('Enter your email')).toHaveStyle({
+			color: '#FFFFFF',
+		});
+		expect(
+			testingScreen.getByRole('button', { name: 'Sign up' }),
+		).toHaveStyle({ backgroundColor: '#052962' });
 
 		fireEvent.focus(testingScreen.getByRole('textbox'));
 		fireEvent.click(testingScreen.getByRole('button', { name: 'Sign up' }));
@@ -73,12 +86,118 @@ describe('newsletter banner signup form', () => {
 		expect(onSuccess).not.toHaveBeenCalled();
 	});
 
+	it('uses the configured validation error color', () => {
+		mockIsValidationError = true;
+		render(
+			<NewsletterSignupForm
+				newsletterId="test-newsletter"
+				componentId="test-banner"
+				actionColor="#052962"
+				errorColor="#FF9081"
+				headingColor="#FFFFFF"
+				privacyTextColor="#707070"
+				toggleTextColor="#333333"
+			/>,
+		);
+
+		expect(testingScreen.getByRole('alert')).toHaveStyle({
+			color: '#FF9081',
+		});
+		expect(testingScreen.getByRole('textbox')).toHaveStyle({
+			borderColor: '#FF9081',
+		});
+		expect(testingScreen.getByText('Enter your email')).toHaveStyle({
+			color: '#FFFFFF',
+		});
+	});
+
+	it('uses the configured error and action colors for the failure message', () => {
+		mockResponseOk = false;
+		render(
+			<NewsletterSignupForm
+				newsletterId="test-newsletter"
+				componentId="test-banner"
+				actionColor="#8F6A70"
+				errorColor="#FF9081"
+				headingColor="#FFFFFF"
+				privacyTextColor="#BABABA"
+				toggleTextColor="#DCDCDC"
+			/>,
+		);
+
+		const alert = testingScreen.getByRole('alert');
+		expect(alert).toHaveTextContent('Sign up failed.');
+		expect(alert.parentElement?.parentElement).toHaveStyle({
+			color: '#FF9081',
+		});
+		expect(
+			testingScreen.getByRole('button', { name: 'Try again' }),
+		).toHaveStyle({ backgroundColor: '#8F6A70' });
+	});
+
+	it.each(['#707070', '#BABABA'])(
+		'uses %s for privacy text, links and the bold label',
+		(privacyTextColor) => {
+			render(
+				<NewsletterSignupForm
+					newsletterId="test-newsletter"
+					componentId="test-banner"
+					actionColor="#052962"
+					errorColor="#C70000"
+					headingColor="#FFFFFF"
+					privacyTextColor={privacyTextColor}
+					toggleTextColor="#333333"
+				/>,
+			);
+
+			const label = testingScreen.getByText('Privacy Notice:');
+			expect(label).toHaveStyle({ color: privacyTextColor });
+			expect(label.parentElement).toHaveStyle({
+				color: privacyTextColor,
+			});
+			expect(testingScreen.getByText('Privacy Policy')).toHaveStyle({
+				color: privacyTextColor,
+			});
+			expect(testingScreen.getByText('theguardian.com')).toHaveStyle({
+				color: privacyTextColor,
+			});
+		},
+	);
+
+	it.each(['#333333', '#DCDCDC'])(
+		'uses %s for the marketing toggle label',
+		(toggleTextColor) => {
+			render(
+				<NewsletterSignupForm
+					newsletterId="test-newsletter"
+					componentId="test-banner"
+					actionColor="#052962"
+					errorColor="#C70000"
+					headingColor="#FFFFFF"
+					privacyTextColor="#707070"
+					toggleTextColor={toggleTextColor}
+				/>,
+			);
+
+			expect(
+				testingScreen.getByText(
+					'Get updates about our journalism and ways to support and enjoy our work. Toggle to opt out.',
+				),
+			).toHaveStyle({ color: toggleTextColor });
+		},
+	);
+
 	it('calls onSuccess only after the signup hook reports success', () => {
 		const onSuccess = jest.fn();
 		const renderForm = () => (
 			<NewsletterSignupForm
 				newsletterId="test-newsletter"
 				componentId="test-banner"
+				actionColor="#052962"
+				errorColor="#C70000"
+				headingColor="#FFFFFF"
+				privacyTextColor="#707070"
+				toggleTextColor="#333333"
 				onSuccess={onSuccess}
 			/>
 		);

@@ -1,25 +1,18 @@
 import { css } from '@emotion/react';
-import { from, neutral, until } from '@guardian/source/foundations';
-import { SvgGuardianLogo } from '@guardian/source/react-components';
+import { space } from '@guardian/source/foundations';
+import type { BannerData } from '../designableBanner/exports';
+import { BannerLogo } from '../designableBanner/exports';
 
 const styles = css`
-	grid-area: logo;
-
-	${until.leftCol} {
-		display: none;
-	}
-
-	${from.leftCol} {
-		justify-self: end;
-		width: 128px;
-		height: 41px;
-		justify-content: end;
-		margin-top: 28px;
-	}
+	margin-top: ${space[2]}px;
 `;
 
-export const NewsletterBannerLogo = () => (
+export const NewsletterBannerLogo = ({
+	bannerData,
+}: {
+	bannerData: BannerData;
+}) => (
 	<div css={styles}>
-		<SvgGuardianLogo textColor={neutral[0]} />
+		<BannerLogo bannerData={bannerData} />
 	</div>
 );

@@ -13,6 +13,11 @@ import { styles } from './NewsletterSignupForm.styles';
 type NewsletterSignupFormProps = {
 	newsletterId: string;
 	componentId: string;
+	actionColor: string;
+	errorColor: string;
+	headingColor: string;
+	privacyTextColor: string;
+	toggleTextColor: string;
 	abTest?: AbTest;
 	isModal?: boolean;
 	onSuccess?: () => void;
@@ -29,6 +34,11 @@ type NewsletterSignupFormProps = {
 export const NewsletterSignupForm = ({
 	newsletterId,
 	componentId,
+	actionColor,
+	errorColor,
+	headingColor,
+	privacyTextColor,
+	toggleTextColor,
 	abTest,
 	isModal = false,
 	onSuccess,
@@ -105,8 +115,18 @@ export const NewsletterSignupForm = ({
 				{isSignedIn ? (
 					<input type="hidden" name="email" value={userEmail ?? ''} />
 				) : (
-					<div css={styles.emailField}>
+					<div
+						css={[
+							styles.emailField,
+							styles.validationError(errorColor),
+						]}
+					>
 						<TextInput
+							theme={{
+								textLabel: headingColor,
+								textError: errorColor,
+								borderError: errorColor,
+							}}
 							name="email"
 							label="Enter your email"
 							type="email"
@@ -122,6 +142,10 @@ export const NewsletterSignupForm = ({
 				)}
 				<div css={styles.submitButtonContainer}>
 					<Button
+						theme={{
+							backgroundPrimary: actionColor,
+							backgroundPrimaryHover: actionColor,
+						}}
 						cssOverrides={
 							isSignedIn
 								? [styles.submitButton, styles.signedInButton]
@@ -152,6 +176,9 @@ export const NewsletterSignupForm = ({
 							>
 								<div css={styles.marketingToggleBox}>
 									<ToggleSwitch
+										cssOverrides={styles.toggleText(
+											toggleTextColor,
+										)}
 										id={`marketing-opt-in-${newsletterId}`}
 										checked={marketingOptIn ?? false}
 										onClick={handleMarketingToggle}
@@ -163,6 +190,9 @@ export const NewsletterSignupForm = ({
 							<div css={styles.privacyContainer(isSignedIn)}>
 								<NewsletterPrivacyMessage
 									isSignedIn={isSignedIn}
+									cssOverrides={styles.privacyText(
+										privacyTextColor,
+									)}
 								/>
 							</div>
 						</div>
@@ -171,7 +201,12 @@ export const NewsletterSignupForm = ({
 			</form>
 
 			{showFailure && (
-				<FailureMessage text={failureMessage} onRetry={handleReset} />
+				<FailureMessage
+					text={failureMessage}
+					actionColor={actionColor}
+					onRetry={handleReset}
+					errorColor={errorColor}
+				/>
 			)}
 			{captchaSiteKey !== undefined && captchaSiteKey !== '' && (
 				<div css={styles.recaptchaContainer}>
