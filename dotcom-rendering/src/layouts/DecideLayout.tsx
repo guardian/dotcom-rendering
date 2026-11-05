@@ -41,7 +41,7 @@ const isInRevampedImmersiveLayoutTest = (article: Article): boolean =>
 	article.frontendData.config.serverSideABTests[
 		'articles-and-publishing-revamped-immersive-layout'
 	] === 'variant';
-const immersiveTestArticle = '/p/x6adat';
+const immersiveTestArticles = ['/p/x6adat', '/p/x6a2dm'];
 
 const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 	const format = {
@@ -66,8 +66,9 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 				}
 				default: {
 					return isInRevampedImmersiveLayoutTest(article) ||
-						article.frontendData.config.shortUrlId ===
-							immersiveTestArticle ||
+						immersiveTestArticles.includes(
+							article.frontendData.config.shortUrlId,
+						) ||
 						(article.theme === ArticleSpecial.Labs &&
 							article.design === ArticleDesign.Standard) ? (
 						<StandardLayout
@@ -212,8 +213,9 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 				}
 				default: {
 					return isInRevampedImmersiveLayoutTest(article) ||
-						article.frontendData.config.shortUrlId ===
-							immersiveTestArticle ||
+						immersiveTestArticles.includes(
+							article.frontendData.config.shortUrlId,
+						) ||
 						(article.theme === ArticleSpecial.Labs &&
 							article.design === ArticleDesign.Standard) ? (
 						<StandardLayout
