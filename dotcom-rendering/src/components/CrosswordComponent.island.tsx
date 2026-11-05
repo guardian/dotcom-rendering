@@ -12,11 +12,11 @@ import {
 	textSansItalic12,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
-import libDebounce from 'lodash.debounce';
 import type { ReactNode } from 'react';
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useRef } from 'react';
 import { useCrosswordProgressReporting } from '../lib/puzzleProgress/useCrosswordProgressReporting';
 import { removeMediaRulePrefix, useMatchMedia } from '../lib/useMatchMedia';
+import { useScrollGradients } from '../lib/useScrollGradients';
 import { palette } from '../palette';
 import { AdSlot } from './AdSlot.web';
 
@@ -64,50 +64,12 @@ const Layout: CrosswordProps['Layout'] = ({
 	MobileBannerAd,
 }) => {
 	const cluesRef = useRef<HTMLDivElement>(null);
-	const [showGradient, setShowGradient] = useState(false);
+	const { showTopGradient, showBottomGradient } =
+		useScrollGradients(cluesRef);
 
 	const betweenTabletAndLeftCol = useMatchMedia(
 		removeMediaRulePrefix(between.tablet.and.leftCol),
 	);
-
-	const updateGradientVisibility = () => {
-		const clueList = cluesRef.current;
-		if (!clueList) {
-			return;
-		}
-		const scrollPos = clueList.scrollTop;
-		const maxScroll = clueList.scrollHeight - clueList.clientHeight;
-		setShowGradient(scrollPos < maxScroll - 16);
-	};
-
-	useEffect(() => {
-		const clueList = cluesRef.current;
-		if (!clueList) {
-			return;
-		}
-
-		updateGradientVisibility();
-
-		clueList.addEventListener(
-			'scroll',
-			libDebounce(updateGradientVisibility, 100),
-		);
-		window.addEventListener(
-			'resize',
-			libDebounce(updateGradientVisibility, 100),
-		);
-
-		return () => {
-			clueList.removeEventListener(
-				'scroll',
-				libDebounce(updateGradientVisibility, 100),
-			);
-			window.removeEventListener(
-				'resize',
-				libDebounce(updateGradientVisibility, 100),
-			);
-		};
-	}, []);
 
 	return (
 		<div
@@ -178,8 +140,23 @@ const Layout: CrosswordProps['Layout'] = ({
 					display: flex;
 					${from.tablet} {
 						max-height: ${gridWidth}px;
+						::before {
+							display: ${showTopGradient ? 'block' : 'none'};
+							position: absolute;
+							content: '';
+							top: 0;
+							left: 0;
+							width: 100%;
+							height: 64px;
+							pointer-events: none;
+							background-image: linear-gradient(
+								180deg,
+								${palette('--article-background')},
+								transparent
+							);
+						}
 						::after {
-							display: ${showGradient ? 'block' : 'none'};
+							display: ${showBottomGradient ? 'block' : 'none'};
 							position: absolute;
 							content: '';
 							bottom: 0;
@@ -195,12 +172,14 @@ const Layout: CrosswordProps['Layout'] = ({
 					}
 					${from.leftCol} {
 						max-height: none;
+						::before,
 						::after {
 							background-image: none;
 						}
 					}
 					@media print {
 						max-height: none;
+						::before,
 						::after {
 							background-image: none;
 						}
