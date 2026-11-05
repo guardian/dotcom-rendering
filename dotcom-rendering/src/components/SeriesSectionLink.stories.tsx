@@ -1,0 +1,163 @@
+import { css } from '@emotion/react';
+import type { Decorator } from '@storybook/react-webpack5';
+import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import { SeriesSectionLink } from './SeriesSectionLink';
+
+const seriesTag = {
+	id: 'us-news/series/glenn-greenwald-on-security-and-liberty',
+	title: 'Glenn Greenwald on security and liberty',
+	type: 'Series' as const,
+};
+
+const longSeriesTag = {
+	...seriesTag,
+	title: 'Series title with the addition of some more text to show how this wraps',
+};
+
+const baseArgs = {
+	format: {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: Pillar.News,
+	},
+	layoutType: 'standard' as const,
+	tags: [seriesTag],
+	sectionLabel: 'US news',
+	sectionUrl: 'us-news',
+	guardianBaseURL: 'https://www.theguardian.com',
+};
+
+const immersiveLandscapeDecorator: Decorator = (Story) => (
+	<div
+		css={css`
+			padding-left: 20px;
+		`}
+	>
+		<Story />
+	</div>
+);
+
+const twoLineDecorator: Decorator = (Story) => (
+	<div
+		css={css`
+			width: 280px;
+		`}
+	>
+		<Story />
+	</div>
+);
+
+const twoLineImmersiveLandscapeDecorator: Decorator = (Story) => (
+	<div
+		css={css`
+			box-sizing: border-box;
+			width: 300px;
+			padding-left: 20px;
+		`}
+	>
+		<Story />
+	</div>
+);
+
+const meta = preview.meta({
+	component: SeriesSectionLink,
+	title: 'Components/Series Section Link',
+	args: baseArgs,
+	parameters: {
+		chromatic: {
+			modes: {
+				'light mobile': allModes['light mobile'],
+				'light desktop': allModes['light desktop'],
+				'light leftCol': allModes['light leftCol'],
+				'light wide': allModes['light wide'],
+			},
+		},
+	},
+});
+
+export const Standard = meta.story({
+	args: baseArgs,
+});
+
+export const StandardTwoLines = meta.story({
+	args: baseArgs,
+	decorators: [twoLineDecorator],
+});
+
+export const Gallery = meta.story({
+	args: {
+		...baseArgs,
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Gallery,
+			theme: Pillar.News,
+		},
+	},
+});
+
+export const GalleryTwoLines = meta.story({
+	args: {
+		...baseArgs,
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Gallery,
+			theme: Pillar.News,
+		},
+	},
+	decorators: [twoLineDecorator],
+});
+
+export const ImmersiveLandscape = meta.story({
+	args: {
+		...baseArgs,
+		format: {
+			display: ArticleDisplay.Immersive,
+			design: ArticleDesign.Standard,
+			theme: Pillar.News,
+		},
+		layoutType: 'immersiveLandscape',
+		tags: [longSeriesTag],
+	},
+	decorators: [immersiveLandscapeDecorator],
+});
+
+export const ImmersiveLandscapeTwoLines = meta.story({
+	args: {
+		...baseArgs,
+		format: {
+			display: ArticleDisplay.Immersive,
+			design: ArticleDesign.Standard,
+			theme: Pillar.News,
+		},
+		layoutType: 'immersiveLandscape',
+	},
+	decorators: [twoLineImmersiveLandscapeDecorator],
+});
+
+export const ImmersivePortrait = meta.story({
+	args: {
+		...baseArgs,
+		format: {
+			display: ArticleDisplay.Immersive,
+			design: ArticleDesign.Standard,
+			theme: Pillar.News,
+		},
+		layoutType: 'immersivePortrait',
+		tags: [longSeriesTag],
+	},
+});
+
+export const ImmersivePortraitTwoLines = meta.story({
+	args: {
+		...baseArgs,
+		format: {
+			display: ArticleDisplay.Immersive,
+			design: ArticleDesign.Standard,
+			theme: Pillar.News,
+		},
+		layoutType: 'immersivePortrait',
+	},
+	decorators: [twoLineDecorator],
+});
