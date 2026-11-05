@@ -157,6 +157,11 @@ export const ArticleTitle = ({
 								width: 110px;
 								height: 110px;
 							}
+							@media (prefers-color-scheme: dark) {
+								:root:not([data-color-scheme='light']) & {
+									filter: invert(1);
+								}
+							}
 						`}
 					/>
 				)}
