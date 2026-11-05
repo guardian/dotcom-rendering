@@ -342,7 +342,11 @@ export const StandardLayoutArticleGrid = ({
 
 	const topHatFurnitureBackgroundStyles = css`
 		z-index: ${getZIndex('mediaOverlay')};
-		background: rgba(255, 255, 255, 0.9);
+		background-color: color-mix(
+			in srgb,
+			${themePalette('--article-background')} 90%,
+			transparent
+		);
 		padding: 0 10px;
 	`;
 
