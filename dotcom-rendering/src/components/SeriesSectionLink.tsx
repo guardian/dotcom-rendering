@@ -203,11 +203,13 @@ const immersiveGridTitleBelowDesktop = css`
 `;
 
 const immersiveLandscapeTitle = css`
+	display: inline-block;
+
 	${from.tablet} {
 		margin-left: -29px;
 	}
 	${from.desktop} {
-		margin-left: -10px;
+		margin-left: -14px;
 	}
 	${from.leftCol} {
 		margin-left: -4px;
@@ -216,6 +218,9 @@ const immersiveLandscapeTitle = css`
 	span {
 		${from.tablet} {
 			padding-left: 10px;
+		}
+		${from.desktop} {
+			padding-left: 2px;
 		}
 		${from.leftCol} {
 			padding-left: 0;
@@ -491,8 +496,12 @@ export const SeriesSectionLink = ({
 						layoutType === 'immersivePortrait' &&
 							css`
 								display: inline-block;
+								line-height: 28px;
 								padding: 2px 2px 4px;
 								box-shadow: none;
+								${from.leftCol} {
+									line-height: 28px;
+								}
 							`,
 					].filter(Boolean)}
 					data-component="series"
