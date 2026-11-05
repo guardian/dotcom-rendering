@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { from } from '@guardian/source/foundations';
 import type { Decorator } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
 import preview from '../../.storybook/preview';
@@ -55,6 +56,33 @@ const twoLineImmersiveLandscapeDecorator: Decorator = (Story) => (
 			box-sizing: border-box;
 			width: 300px;
 			padding-left: 20px;
+		`}
+	>
+		<Story />
+	</div>
+);
+
+const immersivePortraitDecorator: Decorator = (Story) => (
+	<div
+		css={css`
+			${from.desktop} {
+				padding-left: 10px;
+			}
+		`}
+	>
+		<Story />
+	</div>
+);
+
+const twoLineImmersivePortraitDecorator: Decorator = (Story) => (
+	<div
+		css={css`
+			box-sizing: border-box;
+			width: 280px;
+			${from.desktop} {
+				width: 290px;
+				padding-left: 10px;
+			}
 		`}
 	>
 		<Story />
@@ -147,6 +175,7 @@ export const ImmersivePortrait = meta.story({
 		layoutType: 'immersivePortrait',
 		tags: [longSeriesTag],
 	},
+	decorators: [immersivePortraitDecorator],
 });
 
 export const ImmersivePortraitTwoLines = meta.story({
@@ -159,5 +188,5 @@ export const ImmersivePortraitTwoLines = meta.story({
 		},
 		layoutType: 'immersivePortrait',
 	},
-	decorators: [twoLineDecorator],
+	decorators: [twoLineImmersivePortraitDecorator],
 });

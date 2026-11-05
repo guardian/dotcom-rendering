@@ -198,17 +198,21 @@ const immersiveGridTitleBelowDesktop = css`
 	${until.desktop} {
 		color: white;
 		padding: 3px 6px 4px 6px;
-		box-shadow: none;
 	}
 `;
 
 const immersiveLandscapeTitle = css`
+	position: relative;
+	bottom: 2px;
 	line-height: 28px;
-	padding-top: 3px;
-	padding-bottom: 4px;
+	padding: 2px 2px 4px;
 
 	${from.tablet} {
-		margin-left: -29px;
+		margin-left: -24px;
+		padding-left: 2px;
+	}
+	${until.desktop} {
+		padding: 2px 2px 4px;
 	}
 	${from.desktop} {
 		margin-left: -14px;
@@ -217,24 +221,24 @@ const immersiveLandscapeTitle = css`
 		margin-left: -4px;
 		line-height: 28px;
 	}
+	${from.wide} {
+		line-height: 32px;
+	}
 
 	span {
 		${from.tablet} {
-			padding-left: 10px;
-		}
-		${from.desktop} {
-			padding-left: 2px;
+			padding-left: 12px;
 		}
 		${from.leftCol} {
-			padding-left: 0;
+			padding-left: 2px;
 		}
 	}
 `;
 
 const immersiveGridTitleWrapperBelowDesktop = css`
 	${until.desktop} {
-		padding-left: 9px;
-		padding-right: 9px;
+		padding-left: 10px;
+		padding-right: 10px;
 	}
 `;
 
@@ -460,6 +464,11 @@ export const SeriesSectionLink = ({
 								padding-left: 10px;
 								padding-right: 10px;
 							}
+							${from.desktop} {
+								bottom: 2px;
+								position: relative;
+								z-index: 1;
+							}
 						`,
 				]}
 			>
@@ -488,6 +497,8 @@ export const SeriesSectionLink = ({
 							`,
 						isImmersive &&
 							css`
+								border-bottom: 1px solid
+									${themePalette('--series-title-background')};
 								box-shadow:
 									-6px 0 0 0
 										${themePalette(
@@ -501,8 +512,7 @@ export const SeriesSectionLink = ({
 						isImmersivePortraitLayout &&
 							css`
 								line-height: 28px;
-								padding: 3px 2px 4px;
-								box-shadow: none;
+								padding: 2px 2px 4px;
 								${from.leftCol} {
 									line-height: 28px;
 								}
