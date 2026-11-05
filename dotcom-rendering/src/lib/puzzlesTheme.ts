@@ -72,8 +72,9 @@ export const puzzlesPageTheme = (
 /**
  * Sets only the accent colour of the words and buttons the article palette
  * takes from the page theme (series and section links, setter, share and
- * print buttons), to the group's colour. Leaves the theme, backgrounds and
- * lines alone.
+ * print buttons, sign in link and comment buttons), to the group's colour.
+ * Leaves the theme, backgrounds and lines alone. The sign in link stays white
+ * in dark mode, as it is with the theme.
  */
 export const puzzleAccentStyles = (
 	group: PuzzleGroupKey,
@@ -87,16 +88,20 @@ export const puzzleAccentStyles = (
 		--byline: ${colour};
 		--byline-anchor: ${colour};
 		--byline-hover: ${colour};
+		--discussion-primary-button-background: ${colour};
+		--discussion-button-background-hover: ${colour};
 	`;
 
 	return css`
 		${vars(primary)}
+		--sign-in-link: ${primary};
 
 		${darkModeAvailable &&
 		css`
 			@media (prefers-color-scheme: dark) {
 				html:not([data-color-scheme='light']) & {
 					${vars(accent)}
+					--sign-in-link: ${palette.neutral[100]};
 				}
 			}
 		`}
