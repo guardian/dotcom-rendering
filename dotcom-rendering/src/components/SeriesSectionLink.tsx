@@ -210,7 +210,7 @@ const immersiveLandscapeTitle = css`
 		margin-left: -10px;
 	}
 	${from.leftCol} {
-		margin-left: 0;
+		margin-left: -4px;
 	}
 
 	span {
@@ -472,6 +472,9 @@ export const SeriesSectionLink = ({
 						isGallery &&
 							css`
 								position: relative;
+								${from.wide} {
+									line-height: 28px;
+								}
 							`,
 						isImmersive &&
 							css`
