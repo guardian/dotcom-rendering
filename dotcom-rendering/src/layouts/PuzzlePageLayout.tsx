@@ -43,6 +43,7 @@ import {
 	getPuzzlesSubNavLinks,
 	PUZZLES_SUBNAV_PARENT,
 } from '../lib/puzzlesSubNav';
+import { puzzleAccentStyles } from '../lib/puzzlesTheme';
 import { enhanceBranding } from '../model/enhanceCommercialProperties';
 import type { NavType, SubNavType } from '../model/extract-nav';
 import type { PuzzleConfig } from '../model/puzzles/puzzleConfigs';
@@ -542,7 +543,14 @@ export const PuzzlePageLayout = ({
 
 			<main
 				data-layout="PuzzlePageLayout"
-				css={isTrivia && triviaPageStyles(darkModeAvailable)}
+				css={
+					isTrivia
+						? triviaPageStyles(darkModeAvailable)
+						: puzzleAccentStyles(
+								puzzleConfig.puzzleGroup,
+								darkModeAvailable,
+							)
+				}
 			>
 				<Section
 					fullWidth={true}

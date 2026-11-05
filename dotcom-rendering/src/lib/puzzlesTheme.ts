@@ -68,3 +68,36 @@ export const puzzlesPageTheme = (
 		`}
 	`;
 };
+
+/**
+ * Sets only the accent colour of the words and buttons the article palette
+ * takes from the page theme (series and section links, setter, share and
+ * print buttons), to the group's colour. Leaves the theme, backgrounds and
+ * lines alone.
+ */
+export const puzzleAccentStyles = (
+	group: PuzzleGroupKey,
+	darkModeAvailable: boolean,
+): SerializedStyles => {
+	const { primary, accent } = getPuzzleGroupPalette(group);
+	const vars = (colour: string) => css`
+		--share-button: ${colour};
+		--series-title-text: ${colour};
+		--article-section-link-text: ${colour};
+		--byline: ${colour};
+		--byline-anchor: ${colour};
+	`;
+
+	return css`
+		${vars(primary)}
+
+		${darkModeAvailable &&
+		css`
+			@media (prefers-color-scheme: dark) {
+				html:not([data-color-scheme='light']) & {
+					${vars(accent)}
+				}
+			}
+		`}
+	`;
+};
