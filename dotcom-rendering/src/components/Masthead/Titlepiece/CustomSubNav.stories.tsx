@@ -91,7 +91,6 @@ const meta = {
 	render: (args) => <CustomSubNav {...args} />,
 	args: {
 		customSubNav,
-		currentNavLink: 'US Congress',
 		hasPageSkin: false,
 	},
 } satisfies Meta<typeof CustomSubNav>;

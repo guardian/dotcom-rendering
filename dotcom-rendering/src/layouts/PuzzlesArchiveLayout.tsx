@@ -227,6 +227,7 @@ export const PuzzlesArchiveLayout = ({
 					showSlimNav={false}
 					hasPageSkin={false}
 					hasPageSkinContentSelfConstrain={false}
+					canonicalUrl={puzzlesPage.canonicalUrl}
 				/>
 			</div>
 			<main

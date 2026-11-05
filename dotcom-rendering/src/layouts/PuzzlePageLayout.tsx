@@ -521,6 +521,7 @@ export const PuzzlePageLayout = ({
 					tagIds={[]}
 					sectionId={config.section}
 					contentType="Game"
+					canonicalUrl={puzzlePage.canonicalUrl}
 				/>
 			</div>
 

@@ -230,6 +230,7 @@ export const CrosswordLayout = (props: Props) => {
 					tagIds={article.tags.map((tag) => tag.id)}
 					sectionId={article.config.section}
 					contentType={article.contentType}
+					canonicalUrl={article.canonicalUrl}
 				/>
 			</div>
 
