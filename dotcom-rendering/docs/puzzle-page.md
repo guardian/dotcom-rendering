@@ -439,11 +439,12 @@ gap later.
 
 For pages with `instance.gameUrl` and a puzzle date, `usePuzzleGame` waits for
 Identity authentication. Signed-in readers then request
-`/puzzles-and-games/game/{slug}/{date}.json` on the page's own origin, sending the access token
+`{ajaxUrl}/puzzles-and-games/game/{slug}/{date}.json`, sending the access token
 in the `Authorization` header. Frontend forwards it to the Puzzles API's
-`GET /game` and returns a response that cannot be cached. This request does not
-use `ajaxUrl`: the web router already forwards `/puzzles-and-games/` to frontend,
-so no AJAX router change or cross-origin preflight is needed. The iframe waits for
+`GET /game` and returns a response with `Cache-Control: private, no-store, no-cache`.
+The AJAX router in platform forwards this path, including OPTIONS preflights,
+to frontend's applications service. Deploy that router rule and the frontend
+endpoint before the DCR consumer. The iframe waits for
 the resulting `gameUrl` and preserves the API's `id` and `uid`; DCR does not
 replace `uid` with `legacy_identity_id` or send the token to the iframe.
 Signed-out readers use the anonymous server-provided URL. Authentication

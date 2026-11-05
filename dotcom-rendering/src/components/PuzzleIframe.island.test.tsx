@@ -291,39 +291,47 @@ describe('PuzzleIframe', () => {
 	const getDarkModeParamFromSrc = (src: string): string | null =>
 		new URL(src).searchParams.get('darkMode');
 
-	it('loads the API-selected puzzle after authentication resolves', async () => {
-		mockedGetAuthStatus.mockResolvedValue(signedIn('reader'));
-		render(
-			<PuzzleIframe
-				puzzleConfig={sudokuEasyConfig}
-				title="API puzzle"
-				darkModeAvailable={false}
-				puzzleDate="2026-09-26"
-				gameUrl="https://tg.amuselabs.com/guardian/date-picker?set=from-api&id=opaque-id&embed=1&uid=api-user"
-			/>,
-		);
-		const iframe =
-			await testScreen.findByTitle<HTMLIFrameElement>('API puzzle');
-		await waitFor(() =>
-			expect(new URL(iframe.src).searchParams.get('uid')).toBe(
-				'api-user',
-			),
-		);
-		expect(new URL(iframe.src).searchParams.get('id')).toBe('opaque-id');
-		expect(new URL(iframe.src).searchParams.get('set')).toBe('from-api');
-		expect(global.fetch).toHaveBeenCalledWith(
-			'/puzzles-and-games/game/sudoku-easy/2026-09-26.json',
-			expect.objectContaining({
-				cache: 'no-store',
-				credentials: 'same-origin',
-				headers: {
-					Accept: 'application/json',
-					Authorization: 'Bearer reader-access-token',
-				},
-			}),
-		);
-		expect(iframe.src).not.toContain('reader-access-token');
-	});
+	it.each(['', 'https://code.api.nextgen.guardianapps.co.uk'])(
+		'loads the API-selected puzzle through ajaxUrl=%s after authentication resolves',
+		async (ajaxUrl) => {
+			pageConfig.ajaxUrl = ajaxUrl;
+			mockedGetAuthStatus.mockResolvedValue(signedIn('reader'));
+			render(
+				<PuzzleIframe
+					puzzleConfig={sudokuEasyConfig}
+					title="API puzzle"
+					darkModeAvailable={false}
+					puzzleDate="2026-09-26"
+					gameUrl="https://tg.amuselabs.com/guardian/date-picker?set=from-api&id=opaque-id&embed=1&uid=api-user"
+				/>,
+			);
+			const iframe =
+				await testScreen.findByTitle<HTMLIFrameElement>('API puzzle');
+			await waitFor(() =>
+				expect(new URL(iframe.src).searchParams.get('uid')).toBe(
+					'api-user',
+				),
+			);
+			expect(new URL(iframe.src).searchParams.get('id')).toBe(
+				'opaque-id',
+			);
+			expect(new URL(iframe.src).searchParams.get('set')).toBe(
+				'from-api',
+			);
+			expect(global.fetch).toHaveBeenCalledWith(
+				`${ajaxUrl}/puzzles-and-games/game/sudoku-easy/2026-09-26.json`,
+				expect.objectContaining({
+					cache: 'no-store',
+					credentials: 'same-origin',
+					headers: {
+						Accept: 'application/json',
+						Authorization: 'Bearer reader-access-token',
+					},
+				}),
+			);
+			expect(iframe.src).not.toContain('reader-access-token');
+		},
+	);
 
 	it('waits for the authenticated game URL before loading the iframe', async () => {
 		mockedGetAuthStatus.mockResolvedValue(signedIn('reader'));
