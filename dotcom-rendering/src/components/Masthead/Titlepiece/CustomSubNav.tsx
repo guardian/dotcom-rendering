@@ -11,10 +11,13 @@ import {
 	textSans14,
 	textSansBold14,
 } from '@guardian/source/foundations';
+import { useEffect, useRef } from 'react';
+import { submitComponentEvent } from '../../../client/ophan/ophan';
 import { grid } from '../../../grid';
 import { isNetworkFront as isANetworkFront } from '../../../lib/edition';
 import { generateImageURL } from '../../../lib/image';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
+import { useIsInView } from '../../../lib/useIsInView';
 import { palette as themePalette } from '../../../palette';
 import type {
 	CustomSubnav,
@@ -22,6 +25,7 @@ import type {
 	CustomSubnavImage,
 	RenderingPage,
 } from '../../../types/customSubnav';
+import { useConfig } from '../../ConfigContext';
 
 type Props = {
 	customSubNav: CustomSubnav;
@@ -342,8 +346,35 @@ export const CustomSubNav = ({
 	pageId,
 	canonicalUrl,
 }: Props) => {
+	const hasTrackedView = useRef(false);
+	const [isInView, setNode] = useIsInView({});
+	const { renderingTarget } = useConfig();
 	const isNetworkFront = isANetworkFront(pageId);
 	const isArticle = renderingPage === 'article';
+
+	useEffect(() => {
+		if (isInView !== true || hasTrackedView.current) {
+			return;
+		}
+
+		hasTrackedView.current = true;
+		void submitComponentEvent(
+			{
+				component: {
+					componentType: 'CUSTOM_SUBNAV',
+					id: customSubNav.header.headerText,
+				},
+				action: 'VIEW',
+				value: customSubNav.id,
+			},
+			renderingTarget,
+		);
+	}, [
+		isInView,
+		renderingTarget,
+		customSubNav.header.headerText,
+		customSubNav.id,
+	]);
 	/** DCR receives images for all platforms; only web images are rendered here. */
 	const webImages = (customSubNav.images ?? []).filter((image) =>
 		image.platforms.includes('web'),
@@ -375,6 +406,7 @@ export const CustomSubNav = ({
 	if (hasHeaderImage) {
 		return (
 			<div
+				ref={setNode}
 				data-component={`custom-subnav-${customSubNav.header.headerText}`}
 				data-component-id={customSubNav.id}
 				data-rendering-page={renderingPage}
@@ -403,6 +435,7 @@ export const CustomSubNav = ({
 	if (isArticle) {
 		return (
 			<div
+				ref={setNode}
 				data-component={`custom-subnav-${customSubNav.header.headerText}`}
 				data-component-id={customSubNav.id}
 				data-rendering-page={renderingPage}
@@ -433,6 +466,7 @@ export const CustomSubNav = ({
 
 	return (
 		<div
+			ref={setNode}
 			data-component={`custom-subnav-${customSubNav.header.headerText}`}
 			data-component-id={customSubNav.id}
 			data-rendering-page={renderingPage}
