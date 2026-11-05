@@ -449,14 +449,14 @@ export const SeriesSectionLink = ({
 					hasLayoutType
 						? immersiveGridTitleWrapperBelowDesktop
 						: undefined,
-					layoutType === 'immersivePortrait' &&
+					isImmersivePortraitLayout &&
 						css`
 							${until.desktop} {
 								padding-left: 10px;
 								padding-right: 10px;
 							}
 						`,
-					layoutType === 'immersiveLandscape' &&
+					isImmersiveLandscapeLayout &&
 						css`
 							padding-bottom: 5px;
 							${from.desktop} {
