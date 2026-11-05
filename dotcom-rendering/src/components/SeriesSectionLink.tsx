@@ -242,6 +242,12 @@ const immersiveGridTitleWrapperBelowDesktop = css`
 	}
 `;
 
+const galleryTitleWrapper = css`
+	${until.desktop} {
+		overflow: hidden;
+	}
+`;
+
 const seriesTitleBackground = css`
 	background-color: ${themePalette('--series-title-background')};
 	box-shadow:
@@ -458,6 +464,7 @@ export const SeriesSectionLink = ({
 					hasLayoutType
 						? immersiveGridTitleWrapperBelowDesktop
 						: undefined,
+					isGallery && galleryTitleWrapper,
 					isImmersivePortraitLayout &&
 						css`
 							${until.desktop} {
@@ -491,14 +498,24 @@ export const SeriesSectionLink = ({
 						isGallery &&
 							css`
 								position: relative;
+								${until.desktop} {
+									box-shadow: 0 4px 0
+										${themePalette(
+											'--series-title-background',
+										)};
+								}
 								${from.wide} {
 									line-height: 28px;
 								}
 							`,
 						isImmersive &&
 							css`
-								border-bottom: 1px solid
-									${themePalette('--series-title-background')};
+								filter: drop-shadow(
+									0 1px 0
+										${themePalette(
+											'--series-title-background',
+										)}
+								);
 								box-shadow:
 									-6px 0 0 0
 										${themePalette(
