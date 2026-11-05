@@ -4,8 +4,8 @@ import type { PuzzleProgressItem } from './puzzleCardProgress';
 import { loadPuzzleProgress } from './puzzleCardProgress';
 
 /**
- * The reader's puzzle progress, fetched in the browser and refreshed when
- * they sign in or out. `undefined` until (and unless) it is available.
+ * The reader's puzzle progress, refreshed on auth changes and restoration
+ * from the browser's back/forward cache. `undefined` until it is available.
  */
 export const usePuzzleProgress = (): PuzzleProgressItem[] | undefined => {
 	const [progress, setProgress] = useState<PuzzleProgressItem[]>();
@@ -23,11 +23,16 @@ export const usePuzzleProgress = (): PuzzleProgressItem[] | undefined => {
 			});
 		};
 
+		const onPageShow = (event: PageTransitionEvent) => {
+			if (event.persisted) refresh();
+		};
 		refresh();
 		const unsubscribe = subscribeToAuthStateChange(refresh);
+		window.addEventListener('pageshow', onPageShow);
 		return () => {
 			active = false;
 			unsubscribe();
+			window.removeEventListener('pageshow', onPageShow);
 		};
 	}, []);
 
