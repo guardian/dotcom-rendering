@@ -80,7 +80,7 @@ const handleEvent = (event: CustomEvent<{ props: Inline1Props }>): void => {
  *
  * If the commercial bundle wants the page to render a component from SDC then
  * it sends an event on the ad slot element, and also records the request on
- * `window.guardian.sdc.inline1`. This is to avoid a race between this
+ * `window.guardian.commercial.sdc.inline1`. This is to avoid a race between this
  * function and the commercial script.
  */
 export const inline1SdcListener = (): Promise<void> => {
