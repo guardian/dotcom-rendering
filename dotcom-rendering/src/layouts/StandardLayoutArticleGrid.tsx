@@ -449,6 +449,10 @@ export const StandardLayoutArticleGrid = ({
 								margin-top: ${space[2]}px;
 							`
 						: undefined,
+					isInteractiveTopHat &&
+						css`
+							z-index: ${getZIndex('mediaOverlay')};
+						`,
 				]}
 			>
 				<div>
