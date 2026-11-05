@@ -1691,8 +1691,8 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering CODE (us
       "GuApplicationTargetGroup",
       "GuRepository",
       "GuArtifactsAccountId",
-      "GuRiffRaffDeploymentIdParameterExperimental",
       "GuHttpsEgressSecurityGroup",
+      "GuRiffRaffDeploymentIdParameterExperimental",
       "GuApplicationTargetGroup",
       "GuCertificate",
       "GuApplicationLoadBalancer",
@@ -2067,7 +2067,7 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering CODE (us
             "SecurityGroups": [
               {
                 "Fn::GetAtt": [
-                  "GuHttpsEgressSecurityGroupFaciarenderingecsEDA89EA5",
+                  "EcsServiceSecurityGroup8FDFD52F",
                   "GroupId",
                 ],
               },
@@ -2105,6 +2105,98 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering CODE (us
         },
       },
       "Type": "AWS::ECS::Service",
+    },
+    "EcsServiceSecurityGroup8FDFD52F": {
+      "DependsOn": [
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+      ],
+      "Properties": {
+        "GroupDescription": "FaciaRendering-CODE/EcsService/SecurityGroup",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "EcsServiceSecurityGroupfromFaciaRenderingCODEInternalIngressSecurityGroupFaciarenderingB17DBE3C90007AAB14C2": {
+      "DependsOn": [
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+      ],
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "EcsServiceSecurityGroup8FDFD52F",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "InternalIngressSecurityGroupFaciarendering8C803402",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "EcsServiceSecurityGroupfromFaciaRenderingCODELoadBalancerFaciarenderingSecurityGroup069B331E90002FBAE13B": {
+      "DependsOn": [
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+      ],
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "EcsServiceSecurityGroup8FDFD52F",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "LoadBalancerFaciarenderingSecurityGroup18FA4240",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
     },
     "EcsServiceTaskCountTarget02FCCE22": {
       "DependsOn": [
@@ -2776,48 +2868,6 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering CODE (us
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "GuHttpsEgressSecurityGroupFaciarenderingecsfromFaciaRenderingCODEInternalIngressSecurityGroupFaciarenderingB17DBE3C9000ACAE434A": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "FromPort": 9000,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupFaciarenderingecsEDA89EA5",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": {
-          "Fn::GetAtt": [
-            "InternalIngressSecurityGroupFaciarendering8C803402",
-            "GroupId",
-          ],
-        },
-        "ToPort": 9000,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
-    "GuHttpsEgressSecurityGroupFaciarenderingecsfromFaciaRenderingCODELoadBalancerFaciarenderingSecurityGroup069B331E90000C3C1460": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "FromPort": 9000,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupFaciarenderingecsEDA89EA5",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": {
-          "Fn::GetAtt": [
-            "LoadBalancerFaciarenderingSecurityGroup18FA4240",
-            "GroupId",
-          ],
-        },
-        "ToPort": 9000,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
     "GuHttpsEgressSecurityGroupFaciarenderingfromFaciaRenderingCODEInternalIngressSecurityGroupFaciarenderingB17DBE3C9000A42B2532": {
       "Properties": {
         "Description": "Load balancer to target",
@@ -2981,12 +3031,12 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering CODE (us
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "InternalIngressSecurityGroupFaciarenderingtoFaciaRenderingCODEGuHttpsEgressSecurityGroupFaciarendering04034B8C900093D1CA7E": {
+    "InternalIngressSecurityGroupFaciarenderingtoFaciaRenderingCODEEcsServiceSecurityGroupD26654A390002CC8A67D": {
       "Properties": {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": {
           "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupFaciarendering60580ECC",
+            "EcsServiceSecurityGroup8FDFD52F",
             "GroupId",
           ],
         },
@@ -3002,12 +3052,12 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering CODE (us
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
-    "InternalIngressSecurityGroupFaciarenderingtoFaciaRenderingCODEGuHttpsEgressSecurityGroupFaciarenderingecs99880E7E90003EEF4C72": {
+    "InternalIngressSecurityGroupFaciarenderingtoFaciaRenderingCODEGuHttpsEgressSecurityGroupFaciarendering04034B8C900093D1CA7E": {
       "Properties": {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": {
           "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupFaciarenderingecsEDA89EA5",
+            "GuHttpsEgressSecurityGroupFaciarendering60580ECC",
             "GroupId",
           ],
         },
@@ -3310,12 +3360,12 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering CODE (us
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "LoadBalancerFaciarenderingSecurityGrouptoFaciaRenderingCODEGuHttpsEgressSecurityGroupFaciarendering04034B8C90004084400E": {
+    "LoadBalancerFaciarenderingSecurityGrouptoFaciaRenderingCODEEcsServiceSecurityGroupD26654A390009BA02647": {
       "Properties": {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": {
           "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupFaciarendering60580ECC",
+            "EcsServiceSecurityGroup8FDFD52F",
             "GroupId",
           ],
         },
@@ -3331,12 +3381,12 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering CODE (us
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
-    "LoadBalancerFaciarenderingSecurityGrouptoFaciaRenderingCODEGuHttpsEgressSecurityGroupFaciarenderingecs99880E7E9000CD7F60E2": {
+    "LoadBalancerFaciarenderingSecurityGrouptoFaciaRenderingCODEGuHttpsEgressSecurityGroupFaciarendering04034B8C90004084400E": {
       "Properties": {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": {
           "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupFaciarenderingecsEDA89EA5",
+            "GuHttpsEgressSecurityGroupFaciarendering60580ECC",
             "GroupId",
           ],
         },
@@ -3772,8 +3822,8 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering PROD (us
       "GuApplicationTargetGroup",
       "GuRepository",
       "GuArtifactsAccountId",
-      "GuRiffRaffDeploymentIdParameterExperimental",
       "GuHttpsEgressSecurityGroup",
+      "GuRiffRaffDeploymentIdParameterExperimental",
       "GuApplicationTargetGroup",
       "GuCertificate",
       "GuApplicationLoadBalancer",
@@ -4261,7 +4311,7 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering PROD (us
             "SecurityGroups": [
               {
                 "Fn::GetAtt": [
-                  "GuHttpsEgressSecurityGroupFaciarenderingecsEDA89EA5",
+                  "EcsServiceSecurityGroup8FDFD52F",
                   "GroupId",
                 ],
               },
@@ -4299,6 +4349,98 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering PROD (us
         },
       },
       "Type": "AWS::ECS::Service",
+    },
+    "EcsServiceSecurityGroup8FDFD52F": {
+      "DependsOn": [
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+      ],
+      "Properties": {
+        "GroupDescription": "FaciaRendering-PROD/EcsService/SecurityGroup",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "EcsServiceSecurityGroupfromFaciaRenderingPRODInternalIngressSecurityGroupFaciarenderingCE33A0499000C29CAC30": {
+      "DependsOn": [
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+      ],
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "EcsServiceSecurityGroup8FDFD52F",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "InternalIngressSecurityGroupFaciarendering8C803402",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "EcsServiceSecurityGroupfromFaciaRenderingPRODLoadBalancerFaciarenderingSecurityGroup62AE4BD59000F0CBA556": {
+      "DependsOn": [
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+      ],
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "EcsServiceSecurityGroup8FDFD52F",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "LoadBalancerFaciarenderingSecurityGroup18FA4240",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
     },
     "EcsServiceTaskCountTarget02FCCE22": {
       "DependsOn": [
@@ -4970,48 +5112,6 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering PROD (us
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "GuHttpsEgressSecurityGroupFaciarenderingecsfromFaciaRenderingPRODInternalIngressSecurityGroupFaciarenderingCE33A0499000F87D358E": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "FromPort": 9000,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupFaciarenderingecsEDA89EA5",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": {
-          "Fn::GetAtt": [
-            "InternalIngressSecurityGroupFaciarendering8C803402",
-            "GroupId",
-          ],
-        },
-        "ToPort": 9000,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
-    "GuHttpsEgressSecurityGroupFaciarenderingecsfromFaciaRenderingPRODLoadBalancerFaciarenderingSecurityGroup62AE4BD590005ECE0A2B": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "FromPort": 9000,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupFaciarenderingecsEDA89EA5",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": {
-          "Fn::GetAtt": [
-            "LoadBalancerFaciarenderingSecurityGroup18FA4240",
-            "GroupId",
-          ],
-        },
-        "ToPort": 9000,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
     "GuHttpsEgressSecurityGroupFaciarenderingfromFaciaRenderingPRODInternalIngressSecurityGroupFaciarenderingCE33A0499000BC3E9A8D": {
       "Properties": {
         "Description": "Load balancer to target",
@@ -5300,12 +5400,12 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering PROD (us
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "InternalIngressSecurityGroupFaciarenderingtoFaciaRenderingPRODGuHttpsEgressSecurityGroupFaciarendering46B0F7F890004A1A7599": {
+    "InternalIngressSecurityGroupFaciarenderingtoFaciaRenderingPRODEcsServiceSecurityGroup6D07DEA290002D22B586": {
       "Properties": {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": {
           "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupFaciarendering60580ECC",
+            "EcsServiceSecurityGroup8FDFD52F",
             "GroupId",
           ],
         },
@@ -5321,12 +5421,12 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering PROD (us
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
-    "InternalIngressSecurityGroupFaciarenderingtoFaciaRenderingPRODGuHttpsEgressSecurityGroupFaciarenderingecs46500B30900015ECEC55": {
+    "InternalIngressSecurityGroupFaciarenderingtoFaciaRenderingPRODGuHttpsEgressSecurityGroupFaciarendering46B0F7F890004A1A7599": {
       "Properties": {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": {
           "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupFaciarenderingecsEDA89EA5",
+            "GuHttpsEgressSecurityGroupFaciarendering60580ECC",
             "GroupId",
           ],
         },
@@ -5828,12 +5928,12 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering PROD (us
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "LoadBalancerFaciarenderingSecurityGrouptoFaciaRenderingPRODGuHttpsEgressSecurityGroupFaciarendering46B0F7F89000457DF4F4": {
+    "LoadBalancerFaciarenderingSecurityGrouptoFaciaRenderingPRODEcsServiceSecurityGroup6D07DEA2900008A1513E": {
       "Properties": {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": {
           "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupFaciarendering60580ECC",
+            "EcsServiceSecurityGroup8FDFD52F",
             "GroupId",
           ],
         },
@@ -5849,12 +5949,12 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering PROD (us
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
-    "LoadBalancerFaciarenderingSecurityGrouptoFaciaRenderingPRODGuHttpsEgressSecurityGroupFaciarenderingecs46500B3090000DB10C20": {
+    "LoadBalancerFaciarenderingSecurityGrouptoFaciaRenderingPRODGuHttpsEgressSecurityGroupFaciarendering46B0F7F89000457DF4F4": {
       "Properties": {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": {
           "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupFaciarenderingecsEDA89EA5",
+            "GuHttpsEgressSecurityGroupFaciarendering60580ECC",
             "GroupId",
           ],
         },
@@ -6409,8 +6509,8 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
       "GuApplicationTargetGroup",
       "GuRepository",
       "GuArtifactsAccountId",
-      "GuRiffRaffDeploymentIdParameterExperimental",
       "GuHttpsEgressSecurityGroup",
+      "GuRiffRaffDeploymentIdParameterExperimental",
       "GuApplicationTargetGroup",
       "GuCertificate",
       "GuApplicationLoadBalancer",
@@ -6785,7 +6885,7 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
             "SecurityGroups": [
               {
                 "Fn::GetAtt": [
-                  "GuHttpsEgressSecurityGroupInteractiverenderingecs077B4B99",
+                  "EcsServiceSecurityGroup8FDFD52F",
                   "GroupId",
                 ],
               },
@@ -6823,6 +6923,98 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
         },
       },
       "Type": "AWS::ECS::Service",
+    },
+    "EcsServiceSecurityGroup8FDFD52F": {
+      "DependsOn": [
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+      ],
+      "Properties": {
+        "GroupDescription": "InteractiveRendering-CODE/EcsService/SecurityGroup",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "interactive-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "EcsServiceSecurityGroupfromInteractiveRenderingCODEInternalIngressSecurityGroupInteractiverendering4C54400F90003A02F772": {
+      "DependsOn": [
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+      ],
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "EcsServiceSecurityGroup8FDFD52F",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "InternalIngressSecurityGroupInteractiverendering71ED4A41",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "EcsServiceSecurityGroupfromInteractiveRenderingCODELoadBalancerInteractiverenderingSecurityGroup11A1BC2490008B43D603": {
+      "DependsOn": [
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+      ],
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "EcsServiceSecurityGroup8FDFD52F",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "LoadBalancerInteractiverenderingSecurityGroupBDDFF9AB",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
     },
     "EcsServiceTaskCountTarget02FCCE22": {
       "DependsOn": [
@@ -7445,48 +7637,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "GuHttpsEgressSecurityGroupInteractiverenderingecsfromInteractiveRenderingCODEInternalIngressSecurityGroupInteractiverendering4C54400F9000D2A199BF": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "FromPort": 9000,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupInteractiverenderingecs077B4B99",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": {
-          "Fn::GetAtt": [
-            "InternalIngressSecurityGroupInteractiverendering71ED4A41",
-            "GroupId",
-          ],
-        },
-        "ToPort": 9000,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
-    "GuHttpsEgressSecurityGroupInteractiverenderingecsfromInteractiveRenderingCODELoadBalancerInteractiverenderingSecurityGroup11A1BC249000B016B467": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "FromPort": 9000,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupInteractiverenderingecs077B4B99",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": {
-          "Fn::GetAtt": [
-            "LoadBalancerInteractiverenderingSecurityGroupBDDFF9AB",
-            "GroupId",
-          ],
-        },
-        "ToPort": 9000,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
     "GuHttpsEgressSecurityGroupInteractiverenderingfromInteractiveRenderingCODEInternalIngressSecurityGroupInteractiverendering4C54400F9000604E8775": {
       "Properties": {
         "Description": "Load balancer to target",
@@ -7699,12 +7849,12 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "InternalIngressSecurityGroupInteractiverenderingtoInteractiveRenderingCODEGuHttpsEgressSecurityGroupInteractiverenderingE68466639000AF9FB151": {
+    "InternalIngressSecurityGroupInteractiverenderingtoInteractiveRenderingCODEEcsServiceSecurityGroup25A2607A90005B1E4A21": {
       "Properties": {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": {
           "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupInteractiverendering8AC409C4",
+            "EcsServiceSecurityGroup8FDFD52F",
             "GroupId",
           ],
         },
@@ -7720,12 +7870,12 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
-    "InternalIngressSecurityGroupInteractiverenderingtoInteractiveRenderingCODEGuHttpsEgressSecurityGroupInteractiverenderingecs8283E2219000B7C80545": {
+    "InternalIngressSecurityGroupInteractiverenderingtoInteractiveRenderingCODEGuHttpsEgressSecurityGroupInteractiverenderingE68466639000AF9FB151": {
       "Properties": {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": {
           "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupInteractiverenderingecs077B4B99",
+            "GuHttpsEgressSecurityGroupInteractiverendering8AC409C4",
             "GroupId",
           ],
         },
@@ -8028,12 +8178,12 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "LoadBalancerInteractiverenderingSecurityGrouptoInteractiveRenderingCODEGuHttpsEgressSecurityGroupInteractiverenderingE68466639000550ED22B": {
+    "LoadBalancerInteractiverenderingSecurityGrouptoInteractiveRenderingCODEEcsServiceSecurityGroup25A2607A9000AD1E8B7D": {
       "Properties": {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": {
           "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupInteractiverendering8AC409C4",
+            "EcsServiceSecurityGroup8FDFD52F",
             "GroupId",
           ],
         },
@@ -8049,12 +8199,12 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
-    "LoadBalancerInteractiverenderingSecurityGrouptoInteractiveRenderingCODEGuHttpsEgressSecurityGroupInteractiverenderingecs8283E221900026C6441D": {
+    "LoadBalancerInteractiverenderingSecurityGrouptoInteractiveRenderingCODEGuHttpsEgressSecurityGroupInteractiverenderingE68466639000550ED22B": {
       "Properties": {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": {
           "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupInteractiverenderingecs077B4B99",
+            "GuHttpsEgressSecurityGroupInteractiverendering8AC409C4",
             "GroupId",
           ],
         },
@@ -8490,8 +8640,8 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
       "GuApplicationTargetGroup",
       "GuRepository",
       "GuArtifactsAccountId",
-      "GuRiffRaffDeploymentIdParameterExperimental",
       "GuHttpsEgressSecurityGroup",
+      "GuRiffRaffDeploymentIdParameterExperimental",
       "GuApplicationTargetGroup",
       "GuCertificate",
       "GuApplicationLoadBalancer",
@@ -8979,7 +9129,7 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
             "SecurityGroups": [
               {
                 "Fn::GetAtt": [
-                  "GuHttpsEgressSecurityGroupInteractiverenderingecs077B4B99",
+                  "EcsServiceSecurityGroup8FDFD52F",
                   "GroupId",
                 ],
               },
@@ -9017,6 +9167,98 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
         },
       },
       "Type": "AWS::ECS::Service",
+    },
+    "EcsServiceSecurityGroup8FDFD52F": {
+      "DependsOn": [
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+      ],
+      "Properties": {
+        "GroupDescription": "InteractiveRendering-PROD/EcsService/SecurityGroup",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "interactive-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "EcsServiceSecurityGroupfromInteractiveRenderingPRODInternalIngressSecurityGroupInteractiverendering4EAEE1A39000080F2CF3": {
+      "DependsOn": [
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+      ],
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "EcsServiceSecurityGroup8FDFD52F",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "InternalIngressSecurityGroupInteractiverendering71ED4A41",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "EcsServiceSecurityGroupfromInteractiveRenderingPRODLoadBalancerInteractiverenderingSecurityGroup485B80A49000819CBFA9": {
+      "DependsOn": [
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+      ],
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "EcsServiceSecurityGroup8FDFD52F",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "LoadBalancerInteractiverenderingSecurityGroupBDDFF9AB",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
     },
     "EcsServiceTaskCountTarget02FCCE22": {
       "DependsOn": [
@@ -9639,48 +9881,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "GuHttpsEgressSecurityGroupInteractiverenderingecsfromInteractiveRenderingPRODInternalIngressSecurityGroupInteractiverendering4EAEE1A39000A4324E49": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "FromPort": 9000,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupInteractiverenderingecs077B4B99",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": {
-          "Fn::GetAtt": [
-            "InternalIngressSecurityGroupInteractiverendering71ED4A41",
-            "GroupId",
-          ],
-        },
-        "ToPort": 9000,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
-    "GuHttpsEgressSecurityGroupInteractiverenderingecsfromInteractiveRenderingPRODLoadBalancerInteractiverenderingSecurityGroup485B80A49000327D68D2": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "FromPort": 9000,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupInteractiverenderingecs077B4B99",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": {
-          "Fn::GetAtt": [
-            "LoadBalancerInteractiverenderingSecurityGroupBDDFF9AB",
-            "GroupId",
-          ],
-        },
-        "ToPort": 9000,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
     "GuHttpsEgressSecurityGroupInteractiverenderingfromInteractiveRenderingPRODInternalIngressSecurityGroupInteractiverendering4EAEE1A3900095B63859": {
       "Properties": {
         "Description": "Load balancer to target",
@@ -10018,12 +10218,12 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "InternalIngressSecurityGroupInteractiverenderingtoInteractiveRenderingPRODGuHttpsEgressSecurityGroupInteractiverendering7D2C46D0900008151B0F": {
+    "InternalIngressSecurityGroupInteractiverenderingtoInteractiveRenderingPRODEcsServiceSecurityGroup038331CF90001193BD76": {
       "Properties": {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": {
           "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupInteractiverendering8AC409C4",
+            "EcsServiceSecurityGroup8FDFD52F",
             "GroupId",
           ],
         },
@@ -10039,12 +10239,12 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
-    "InternalIngressSecurityGroupInteractiverenderingtoInteractiveRenderingPRODGuHttpsEgressSecurityGroupInteractiverenderingecs38AFE05D90002C893945": {
+    "InternalIngressSecurityGroupInteractiverenderingtoInteractiveRenderingPRODGuHttpsEgressSecurityGroupInteractiverendering7D2C46D0900008151B0F": {
       "Properties": {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": {
           "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupInteractiverenderingecs077B4B99",
+            "GuHttpsEgressSecurityGroupInteractiverendering8AC409C4",
             "GroupId",
           ],
         },
@@ -10546,12 +10746,12 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "LoadBalancerInteractiverenderingSecurityGrouptoInteractiveRenderingPRODGuHttpsEgressSecurityGroupInteractiverendering7D2C46D09000634366C2": {
+    "LoadBalancerInteractiverenderingSecurityGrouptoInteractiveRenderingPRODEcsServiceSecurityGroup038331CF9000F9AD1994": {
       "Properties": {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": {
           "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupInteractiverendering8AC409C4",
+            "EcsServiceSecurityGroup8FDFD52F",
             "GroupId",
           ],
         },
@@ -10567,12 +10767,12 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
-    "LoadBalancerInteractiverenderingSecurityGrouptoInteractiveRenderingPRODGuHttpsEgressSecurityGroupInteractiverenderingecs38AFE05D9000E2269A15": {
+    "LoadBalancerInteractiverenderingSecurityGrouptoInteractiveRenderingPRODGuHttpsEgressSecurityGroupInteractiverendering7D2C46D09000634366C2": {
       "Properties": {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": {
           "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupInteractiverenderingecs077B4B99",
+            "GuHttpsEgressSecurityGroupInteractiverendering8AC409C4",
             "GroupId",
           ],
         },
@@ -11117,10 +11317,10 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
       "GuRepository",
       "GuArtifactsAccountId",
       "GuLoggingStreamNameParameter",
+      "GuHttpsEgressSecurityGroup",
       "GuRiffRaffDeploymentIdParameterExperimental",
       "GuLogShippingPolicy",
       "GuParameterStoreReadPolicy",
-      "GuHttpsEgressSecurityGroup",
       "GuApplicationTargetGroup",
       "GuCertificate",
       "GuApplicationLoadBalancer",
@@ -11382,7 +11582,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
             "SecurityGroups": [
               {
                 "Fn::GetAtt": [
-                  "GuHttpsEgressSecurityGroupTagpagerenderingecsF0505C36",
+                  "EcsServiceSecurityGroup8FDFD52F",
                   "GroupId",
                 ],
               },
@@ -11420,6 +11620,98 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
         },
       },
       "Type": "AWS::ECS::Service",
+    },
+    "EcsServiceSecurityGroup8FDFD52F": {
+      "DependsOn": [
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+      ],
+      "Properties": {
+        "GroupDescription": "TagPageRendering-CODE/EcsService/SecurityGroup",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "EcsServiceSecurityGroupfromTagPageRenderingCODEInternalIngressSecurityGroupTagpagerendering0B98E4F99000BD035C0A": {
+      "DependsOn": [
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+      ],
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "EcsServiceSecurityGroup8FDFD52F",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "InternalIngressSecurityGroupTagpagerendering38FD16DB",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "EcsServiceSecurityGroupfromTagPageRenderingCODELoadBalancerTagpagerenderingSecurityGroup301E89529000EC46BB28": {
+      "DependsOn": [
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+      ],
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "EcsServiceSecurityGroup8FDFD52F",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "LoadBalancerTagpagerenderingSecurityGroup4D481A16",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
     },
     "EcsServiceTaskCountTarget02FCCE22": {
       "DependsOn": [
@@ -11970,48 +12262,6 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "GuHttpsEgressSecurityGroupTagpagerenderingecsfromTagPageRenderingCODEInternalIngressSecurityGroupTagpagerendering0B98E4F990001A2DADD1": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "FromPort": 9000,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupTagpagerenderingecsF0505C36",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": {
-          "Fn::GetAtt": [
-            "InternalIngressSecurityGroupTagpagerendering38FD16DB",
-            "GroupId",
-          ],
-        },
-        "ToPort": 9000,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
-    "GuHttpsEgressSecurityGroupTagpagerenderingecsfromTagPageRenderingCODELoadBalancerTagpagerenderingSecurityGroup301E895290004324C739": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "FromPort": 9000,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupTagpagerenderingecsF0505C36",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": {
-          "Fn::GetAtt": [
-            "LoadBalancerTagpagerenderingSecurityGroup4D481A16",
-            "GroupId",
-          ],
-        },
-        "ToPort": 9000,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
     "GuLogShippingPolicy981BFE5A": {
       "Properties": {
         "PolicyDocument": {
@@ -12090,12 +12340,12 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "InternalIngressSecurityGroupTagpagerenderingtoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerenderingecsBADC1D1E900094544771": {
+    "InternalIngressSecurityGroupTagpagerenderingtoTagPageRenderingCODEEcsServiceSecurityGroup7F2095EE9000E38B4E8D": {
       "Properties": {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": {
           "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupTagpagerenderingecsF0505C36",
+            "EcsServiceSecurityGroup8FDFD52F",
             "GroupId",
           ],
         },
@@ -12285,12 +12535,12 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEGuHttpsEgressSecurityGroupTagpagerenderingecsBADC1D1E900047DE752F": {
+    "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingCODEEcsServiceSecurityGroup7F2095EE9000EC25A215": {
       "Properties": {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": {
           "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupTagpagerenderingecsF0505C36",
+            "EcsServiceSecurityGroup8FDFD52F",
             "GroupId",
           ],
         },
@@ -12492,10 +12742,10 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
       "GuRepository",
       "GuArtifactsAccountId",
       "GuLoggingStreamNameParameter",
+      "GuHttpsEgressSecurityGroup",
       "GuRiffRaffDeploymentIdParameterExperimental",
       "GuLogShippingPolicy",
       "GuParameterStoreReadPolicy",
-      "GuHttpsEgressSecurityGroup",
       "GuApplicationTargetGroup",
       "GuCertificate",
       "GuApplicationLoadBalancer",
@@ -12758,7 +13008,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
             "SecurityGroups": [
               {
                 "Fn::GetAtt": [
-                  "GuHttpsEgressSecurityGroupTagpagerenderingecsF0505C36",
+                  "EcsServiceSecurityGroup8FDFD52F",
                   "GroupId",
                 ],
               },
@@ -12796,6 +13046,98 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
         },
       },
       "Type": "AWS::ECS::Service",
+    },
+    "EcsServiceSecurityGroup8FDFD52F": {
+      "DependsOn": [
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+      ],
+      "Properties": {
+        "GroupDescription": "TagPageRendering-PROD/EcsService/SecurityGroup",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "EcsServiceSecurityGroupfromTagPageRenderingPRODInternalIngressSecurityGroupTagpagerendering1CF134899000FE2C5DA1": {
+      "DependsOn": [
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+      ],
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "EcsServiceSecurityGroup8FDFD52F",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "InternalIngressSecurityGroupTagpagerendering38FD16DB",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "EcsServiceSecurityGroupfromTagPageRenderingPRODLoadBalancerTagpagerenderingSecurityGroup55D2582D900080C2B927": {
+      "DependsOn": [
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+      ],
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "EcsServiceSecurityGroup8FDFD52F",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "LoadBalancerTagpagerenderingSecurityGroup4D481A16",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
     },
     "EcsServiceTaskCountTarget02FCCE22": {
       "DependsOn": [
@@ -13346,48 +13688,6 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "GuHttpsEgressSecurityGroupTagpagerenderingecsfromTagPageRenderingPRODInternalIngressSecurityGroupTagpagerendering1CF134899000E9252A81": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "FromPort": 9000,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupTagpagerenderingecsF0505C36",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": {
-          "Fn::GetAtt": [
-            "InternalIngressSecurityGroupTagpagerendering38FD16DB",
-            "GroupId",
-          ],
-        },
-        "ToPort": 9000,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
-    "GuHttpsEgressSecurityGroupTagpagerenderingecsfromTagPageRenderingPRODLoadBalancerTagpagerenderingSecurityGroup55D2582D900081AA330A": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "FromPort": 9000,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupTagpagerenderingecsF0505C36",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": {
-          "Fn::GetAtt": [
-            "LoadBalancerTagpagerenderingSecurityGroup4D481A16",
-            "GroupId",
-          ],
-        },
-        "ToPort": 9000,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
     "GuLogShippingPolicy981BFE5A": {
       "Properties": {
         "PolicyDocument": {
@@ -13591,12 +13891,12 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "InternalIngressSecurityGroupTagpagerenderingtoTagPageRenderingPRODGuHttpsEgressSecurityGroupTagpagerenderingecs7BD0DC4E9000C0C61B8C": {
+    "InternalIngressSecurityGroupTagpagerenderingtoTagPageRenderingPRODEcsServiceSecurityGroupAD2AD35790005077D743": {
       "Properties": {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": {
           "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupTagpagerenderingecsF0505C36",
+            "EcsServiceSecurityGroup8FDFD52F",
             "GroupId",
           ],
         },
@@ -13786,12 +14086,12 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingPRODGuHttpsEgressSecurityGroupTagpagerenderingecs7BD0DC4E9000E1B35F77": {
+    "LoadBalancerTagpagerenderingSecurityGrouptoTagPageRenderingPRODEcsServiceSecurityGroupAD2AD35790009CF23C98": {
       "Properties": {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": {
           "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupTagpagerenderingecsF0505C36",
+            "EcsServiceSecurityGroup8FDFD52F",
             "GroupId",
           ],
         },
