@@ -232,13 +232,20 @@ const adStyles = css`
 	background: ${palette.neutral[97]};
 `;
 
-const Archive = ({ container }: { container: PuzzleContainer }) => {
+const Archive = ({
+	container,
+	ophanComponentName,
+}: {
+	container: PuzzleContainer;
+	ophanComponentName: string;
+}) => {
 	if (container.content.archiveChoices !== undefined) {
 		return (
 			<Island priority="critical">
 				<PuzzlesArchiveMenu
 					archives={container.content.archiveChoices}
 					label={`${container.title} archive`}
+					ophanComponentName={ophanComponentName}
 				/>
 			</Island>
 		);
@@ -293,12 +300,18 @@ const DirectorySection = ({
 									key={nested.id}
 								>
 									<Rows rows={nested.content.items} />
-									<Archive container={nested} />
+									<Archive
+										container={nested}
+										ophanComponentName={`puzzles-archive-menu:${container.id}:${nested.id}`}
+									/>
 								</div>
 							))}
 					</div>
 				)}
-				<Archive container={container} />
+				<Archive
+					container={container}
+					ophanComponentName={`puzzles-archive-menu:${container.id}`}
+				/>
 			</div>
 		</section>
 	);

@@ -641,9 +641,15 @@ describe('PuzzlesDirectory', () => {
 			'true',
 		);
 		fireEvent.click(summary!);
-		expect(screen.getByRole('link', { name: 'Archive A' })).toHaveAttribute(
-			'href',
-			'/crosswords/series/quick',
+		const archiveLink = screen.getByRole('link', { name: 'Archive A' });
+		expect(archiveLink).toHaveAttribute('href', '/crosswords/series/quick');
+		expect(archiveLink.closest('[data-component]')).toHaveAttribute(
+			'data-component',
+			'puzzles-archive-menu:multiple',
+		);
+		expect(archiveLink).toHaveAttribute(
+			'data-link-name',
+			'archive | select | item-archive-a | position-@1',
 		);
 		await waitFor(() =>
 			expect(summary!.closest('details')).toHaveAttribute('open'),
@@ -667,6 +673,50 @@ describe('PuzzlesDirectory', () => {
 		expect(summary!.closest('details')).toHaveAttribute('open');
 		fireEvent.pointerDown(document.body);
 		expect(summary!.closest('details')).not.toHaveAttribute('open');
+	});
+
+	it('attributes nested archive menus to their full section path', () => {
+		render(
+			<PuzzlesDirectory
+				layout={{
+					containers: [
+						section({
+							content: {
+								items: [],
+								nestedContainers: [
+									section({
+										id: 'daily',
+										title: 'Daily games',
+										content: {
+											items: [[item()]],
+											nestedContainers: [],
+											archiveChoices: [
+												item({
+													id: 'archive-daily',
+													title: 'Daily archive',
+													url: '/puzzles-and-games/word-games/archive',
+													cardVariant: 'archive',
+												}),
+											],
+										},
+									}),
+								],
+							},
+						}),
+					],
+				}}
+				renderAds={false}
+			/>,
+		);
+		fireEvent.click(screen.getByText('Daily games archive'));
+		expect(
+			screen
+				.getByRole('link', { name: 'Daily archive' })
+				.closest('[data-component]'),
+		).toHaveAttribute(
+			'data-component',
+			'puzzles-archive-menu:word-games:daily',
+		);
 	});
 
 	it('renders a single archive choice as a dropdown', () => {

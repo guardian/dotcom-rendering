@@ -683,6 +683,22 @@ export const archivePageUrl = (
 	return `/puzzles-and-games/${category}/archive?${search.toString()}`;
 };
 
+const archiveLinkName = (
+	archive: PuzzlesArchive,
+	action: string,
+	...details: string[]
+): string =>
+	[
+		'archive',
+		action,
+		archive.category,
+		`puzzle-${archive.selectedPuzzle.id}`,
+		...details,
+	].join(' | ');
+
+const archiveMonth = (year: number, month: number): string =>
+	`${year}-${String(month).padStart(2, '0')}`;
+
 export const PuzzlesArchiveCalendar = ({
 	initialArchive,
 }: {
@@ -692,6 +708,7 @@ export const PuzzlesArchiveCalendar = ({
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(initialArchive.hasError);
 	const requests = useRef({ id: 0 });
+	const navigationTimer = useRef<number | undefined>(undefined);
 	const cache = useRef(
 		new Map([
 			[
@@ -729,7 +746,7 @@ export const PuzzlesArchiveCalendar = ({
 	);
 	const today = new Date();
 	const todayDate = londonDate(today);
-	const displayedMonth = `${archive.year}-${String(archive.month).padStart(2, '0')}`;
+	const displayedMonth = archiveMonth(archive.year, archive.month);
 	const todayWeekday = todayDate?.startsWith(`${displayedMonth}-`)
 		? currentWeekdayLabel(today)
 		: undefined;
@@ -843,6 +860,9 @@ export const PuzzlesArchiveCalendar = ({
 		window.addEventListener('popstate', onPopState);
 		return () => {
 			window.removeEventListener('popstate', onPopState);
+			if (navigationTimer.current !== undefined) {
+				window.clearTimeout(navigationTimer.current);
+			}
 			++pendingRequests.id;
 		};
 	}, [initialArchive, loadArchive]);
@@ -870,6 +890,18 @@ export const PuzzlesArchiveCalendar = ({
 		if (selected) window.history.pushState({}, '', pageUrl);
 	};
 
+	const navigateAfterClick = (navigate: () => Promise<void>) => {
+		if (navigationTimer.current !== undefined) {
+			window.clearTimeout(navigationTimer.current);
+		}
+		// Let Ophan's document listener read the clicked link before React
+		// removes its tracking name while loading or changes a cached selection.
+		navigationTimer.current = window.setTimeout(() => {
+			navigationTimer.current = undefined;
+			void navigate();
+		}, 0);
+	};
+
 	const previousMonth = moveMonth(archive.year, archive.month, -1);
 	const previousMonthUrl = archivePageUrl(
 		archive.category,
@@ -889,10 +921,15 @@ export const PuzzlesArchiveCalendar = ({
 		<section
 			aria-label={`${archive.selectedPuzzle.title} archive`}
 			css={sectionStyles}
+			data-component="puzzles-archive-calendar"
 		>
 			<div aria-hidden="true" css={linesStyles} />
 			<div css={chipsStyles}>
-				<nav aria-label="Puzzle types" css={tabsStyles}>
+				<nav
+					aria-label="Puzzle types"
+					css={tabsStyles}
+					data-component="puzzles-archive-types"
+				>
 					{archive.puzzles.map((puzzle) => {
 						const href = archivePageUrl(
 							archive.category,
@@ -909,6 +946,12 @@ export const PuzzlesArchiveCalendar = ({
 								}
 								href={href}
 								key={puzzle.id}
+								data-link-name={archiveLinkName(
+									archive,
+									'puzzle-type',
+									`target-puzzle-${puzzle.id}`,
+									`month-${displayedMonth}`,
+								)}
 								onClick={(event) => {
 									if (
 										event.button !== 0 ||
@@ -920,7 +963,9 @@ export const PuzzlesArchiveCalendar = ({
 										return;
 									}
 									event.preventDefault();
-									void selectPuzzle(puzzle.id, href);
+									navigateAfterClick(() =>
+										selectPuzzle(puzzle.id, href),
+									);
 								}}
 							>
 								{puzzle.title}
@@ -938,9 +983,18 @@ export const PuzzlesArchiveCalendar = ({
 				/>
 			</div>
 			<h2 css={titleStyles}>{puzzleHeading}</h2>
-			<div css={recentStyles}>
+			<div css={recentStyles} data-component="puzzles-archive-recent">
 				{recent.map((item, index) => (
-					<a href={item.url} key={`${item.date}-${item.puzzleType}`}>
+					<a
+						href={item.url}
+						key={`${item.date}-${item.puzzleType}`}
+						data-link-name={archiveLinkName(
+							archive,
+							'recent',
+							`date-${item.date}`,
+							`card-@${index + 1}`,
+						)}
+					>
 						<strong>
 							{index === 0
 								? `Latest ${archive.selectedPuzzle.title}`
@@ -975,6 +1029,15 @@ export const PuzzlesArchiveCalendar = ({
 					aria-label="Previous month"
 					aria-disabled={loading}
 					href={previousMonthUrl}
+					data-link-name={
+						loading
+							? undefined
+							: archiveLinkName(
+									archive,
+									'previous-month',
+									`month-${archiveMonth(previousMonth.year, previousMonth.month)}`,
+								)
+					}
 					onClick={(event) => {
 						if (loading) {
 							event.preventDefault();
@@ -990,7 +1053,9 @@ export const PuzzlesArchiveCalendar = ({
 							return;
 						}
 						event.preventDefault();
-						void selectMonth(-1, previousMonthUrl);
+						navigateAfterClick(() =>
+							selectMonth(-1, previousMonthUrl),
+						);
 					}}
 				>
 					<SvgArrowLeftStraight />
@@ -1019,6 +1084,15 @@ export const PuzzlesArchiveCalendar = ({
 						aria-label="Next month"
 						aria-disabled={loading}
 						href={nextMonthUrl}
+						data-link-name={
+							loading
+								? undefined
+								: archiveLinkName(
+										archive,
+										'next-month',
+										`month-${archiveMonth(nextMonth.year, nextMonth.month)}`,
+									)
+						}
 						onClick={(event) => {
 							if (loading) {
 								event.preventDefault();
@@ -1034,7 +1108,9 @@ export const PuzzlesArchiveCalendar = ({
 								return;
 							}
 							event.preventDefault();
-							void selectMonth(1, nextMonthUrl);
+							navigateAfterClick(() =>
+								selectMonth(1, nextMonthUrl),
+							);
 						}}
 					>
 						<SvgArrowRightStraight />
@@ -1078,6 +1154,11 @@ export const PuzzlesArchiveCalendar = ({
 							data-status={status}
 							href={cell.item.url}
 							key={cell.date}
+							data-link-name={archiveLinkName(
+								archive,
+								'date',
+								`date-${cell.date}`,
+							)}
 						>
 							{cell.item.setterName !== undefined &&
 								cell.item.setterName !== '' && (
@@ -1129,6 +1210,15 @@ export const PuzzlesArchiveCalendar = ({
 					</p>
 					<a
 						href={previousMonthUrl}
+						data-link-name={
+							loading
+								? undefined
+								: archiveLinkName(
+										archive,
+										'previous-month-empty',
+										`month-${archiveMonth(previousMonth.year, previousMonth.month)}`,
+									)
+						}
 						onClick={(event) => {
 							if (
 								event.button !== 0 ||
@@ -1140,7 +1230,9 @@ export const PuzzlesArchiveCalendar = ({
 								return;
 							}
 							event.preventDefault();
-							void selectMonth(-1, previousMonthUrl);
+							navigateAfterClick(() =>
+								selectMonth(-1, previousMonthUrl),
+							);
 						}}
 					>
 						View previous month
