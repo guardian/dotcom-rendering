@@ -374,8 +374,16 @@ describe('PuzzleIframe', () => {
 		expect(new URL(iframe.src).searchParams.get('id')).toBe('selected');
 	});
 
-	it('loads the server URL without an authenticated lookup when signed out', async () => {
+	it('automatically loads the API URL without Authorization when signed out', async () => {
 		mockedGetAuthStatus.mockResolvedValue(signedOut());
+		jest.mocked(global.fetch).mockResolvedValueOnce({
+			ok: true,
+			json: () =>
+				Promise.resolve({
+					gameUrl:
+						'https://tg.amuselabs.com/guardian/date-picker?id=anonymous-api',
+				}),
+		} as Response);
 		render(
 			<PuzzleIframe
 				puzzleConfig={sudokuEasyConfig}
@@ -388,11 +396,66 @@ describe('PuzzleIframe', () => {
 		const iframe = testScreen.getByTitle<HTMLIFrameElement>('API puzzle');
 		await waitFor(() =>
 			expect(new URL(iframe.src).searchParams.get('id')).toBe(
-				'anonymous',
+				'anonymous-api',
 			),
 		);
 		expect(new URL(iframe.src).searchParams.has('uid')).toBe(false);
-		expect(global.fetch).not.toHaveBeenCalled();
+		expect(global.fetch).toHaveBeenCalledTimes(1);
+		expect(global.fetch).toHaveBeenCalledWith(
+			'https://code.api.nextgen.guardianapps.co.uk/puzzles-and-games/game/sudoku-easy/2026-09-26.json',
+			expect.objectContaining({
+				cache: 'no-store',
+				headers: { Accept: 'application/json' },
+			}),
+		);
+	});
+
+	it('fetches a personalised URL when the reader signs in after an anonymous lookup', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedOut());
+		jest.mocked(global.fetch).mockResolvedValueOnce({
+			ok: true,
+			json: () =>
+				Promise.resolve({
+					gameUrl:
+						'https://tg.amuselabs.com/guardian/date-picker?id=anonymous-api',
+				}),
+		} as Response);
+		render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="API puzzle"
+				darkModeAvailable={false}
+				puzzleDate="2026-09-26"
+				gameUrl="https://tg.amuselabs.com/guardian/date-picker?id=anonymous"
+			/>,
+		);
+		const iframe = testScreen.getByTitle<HTMLIFrameElement>('API puzzle');
+		await waitFor(() =>
+			expect(new URL(iframe.src).searchParams.get('id')).toBe(
+				'anonymous-api',
+			),
+		);
+		mockedGetAuthStatus.mockResolvedValue(signedIn('reader'));
+		await act(() =>
+			Promise.resolve(
+				mockedSubscribeToAuthStateChange.mock.calls[0]![0](),
+			),
+		);
+		await waitFor(() =>
+			expect(new URL(iframe.src).searchParams.get('uid')).toBe(
+				'api-user',
+			),
+		);
+		expect(global.fetch).toHaveBeenCalledTimes(2);
+		expect(global.fetch).toHaveBeenLastCalledWith(
+			'https://code.api.nextgen.guardianapps.co.uk/puzzles-and-games/game/sudoku-easy/2026-09-26.json',
+			expect.objectContaining({
+				headers: {
+					Accept: 'application/json',
+					Authorization: 'Bearer reader-access-token',
+				},
+			}),
+		);
 	});
 
 	it('does not add uid when the authenticated API response has none', async () => {
@@ -441,6 +504,14 @@ describe('PuzzleIframe', () => {
 		);
 		await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(1));
 		mockedGetAuthStatus.mockResolvedValue(signedOut());
+		jest.mocked(global.fetch).mockResolvedValueOnce({
+			ok: true,
+			json: () =>
+				Promise.resolve({
+					gameUrl:
+						'https://tg.amuselabs.com/guardian/date-picker?id=anonymous',
+				}),
+		} as Response);
 		await act(() =>
 			Promise.resolve(
 				mockedSubscribeToAuthStateChange.mock.calls[0]![0](),

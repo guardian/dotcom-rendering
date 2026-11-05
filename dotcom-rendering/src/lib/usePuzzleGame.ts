@@ -10,7 +10,7 @@ interface PuzzleGame {
 	hasError: boolean;
 }
 
-/** Resolve signed-in game URLs through frontend, which keeps the Puzzles API key server-side. */
+/** Resolve game URLs through frontend, adding reader authentication when available. */
 export const usePuzzleGame = (
 	slug: string,
 	puzzleDate: string | null,
@@ -34,21 +34,20 @@ export const usePuzzleGame = (
 				const auth = await getAuthStatus();
 				if (current !== generation) return;
 				let gameUrl = sourceUrl;
-				if (
-					auth.kind === 'SignedIn' &&
-					sourceUrl !== undefined &&
-					puzzleDate !== null
-				) {
+				if (sourceUrl !== undefined && puzzleDate !== null) {
+					const headers: Record<string, string> = {
+						Accept: 'application/json',
+					};
+					if (auth.kind === 'SignedIn') {
+						headers.Authorization = `Bearer ${auth.accessToken.accessToken}`;
+					}
 					controller = new AbortController();
 					const response = await fetch(
 						`${window.guardian.config.page.ajaxUrl}/puzzles-and-games/game/${encodeURIComponent(slug)}/${encodeURIComponent(puzzleDate)}.json`,
 						{
 							cache: 'no-store',
 							credentials: 'same-origin',
-							headers: {
-								Accept: 'application/json',
-								Authorization: `Bearer ${auth.accessToken.accessToken}`,
-							},
+							headers,
 							signal: controller.signal,
 						},
 					);
