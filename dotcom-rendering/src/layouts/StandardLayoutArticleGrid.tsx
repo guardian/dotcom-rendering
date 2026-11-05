@@ -627,7 +627,7 @@ export const StandardLayoutArticleGrid = ({
 					isInteractiveTopHat &&
 						css`
 							${topHatFurnitureBackgroundStyles}
-							padding-top: 10px;
+							padding-top: ${space[1]}px;
 						`,
 				]}
 			>
@@ -797,7 +797,7 @@ export const StandardLayoutArticleGrid = ({
 						layoutType === 'interactiveTopHat' &&
 							css`
 								${topHatFurnitureBackgroundStyles}
-								padding-bottom: 10px;
+								padding-bottom: ${space[4]}px;
 							`,
 					]}
 				>
