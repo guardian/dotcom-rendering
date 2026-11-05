@@ -70,6 +70,32 @@ export const puzzlesPageTheme = (
 };
 
 /**
+ * The palette variables `puzzleAccentStyles` sets. Together they cover every
+ * variable that depends on the page theme and is used by the Puzzles & games
+ * pages (see `puzzlesThemeCoverage.test.tsx`, which fails when one is missing).
+ */
+const accentVariables = [
+	'--share-button',
+	'--series-title-text',
+	'--article-section-link-text',
+	'--byline-anchor',
+	'--byline-hover',
+	'--discussion-primary-button-background',
+	'--discussion-button-background-hover',
+] as const;
+
+/** Themed in light mode only, they are already neutral in dark mode. */
+const lightOnlyVariables = ['--byline', '--sign-in-link'] as const;
+
+export const puzzleAccentVariables: readonly string[] = [
+	...accentVariables,
+	...lightOnlyVariables,
+];
+
+const declare = (names: readonly string[], colour: string) =>
+	names.map((name) => `${name}: ${colour};`).join('\n');
+
+/**
  * Sets only the accent colour of the words and buttons the article palette
  * takes from the page theme (series and section links, setter, share and
  * print buttons, sign in link and comment buttons), to the group's colour.
@@ -81,26 +107,16 @@ export const puzzleAccentStyles = (
 	darkModeAvailable: boolean,
 ): SerializedStyles => {
 	const { primary, accent } = getPuzzleGroupPalette(group);
-	const vars = (colour: string) => css`
-		--share-button: ${colour};
-		--series-title-text: ${colour};
-		--article-section-link-text: ${colour};
-		--byline-anchor: ${colour};
-		--byline-hover: ${colour};
-		--discussion-primary-button-background: ${colour};
-		--discussion-button-background-hover: ${colour};
-	`;
 
 	return css`
-		${vars(primary)}
-		--byline: ${primary};
-		--sign-in-link: ${primary};
+		${declare(accentVariables, primary)}
+		${declare(lightOnlyVariables, primary)}
 
 		${darkModeAvailable &&
 		css`
 			@media (prefers-color-scheme: dark) {
 				html:not([data-color-scheme='light']) & {
-					${vars(accent)}
+					${declare(accentVariables, accent)}
 					--byline: ${palette.neutral[60]};
 					--sign-in-link: ${palette.neutral[100]};
 				}
