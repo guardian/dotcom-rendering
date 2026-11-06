@@ -30,7 +30,7 @@ jobs:
           cache: true
 
       - name: Pull Image
-        uses: guardian/actions-ecr/pull@v1.0.2
+        uses: guardian/actions-ecr/pull@v1.1.0
         id: pull-image
         with:
           app: dotcom-rendering
