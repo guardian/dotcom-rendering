@@ -43,7 +43,7 @@ const baseCardStyles = css`
 	text-decoration: none;
 `;
 
-const hoverStyles = css`
+const hoverStyles = (isLoopAndInLoopClickTestVariant = false) => css`
 	:hover .media-overlay {
 		width: 100%;
 		height: 100%;
@@ -121,9 +121,6 @@ export const CardWrapper = ({
 							desktopTopBarStyles(topBarColour, topBarPadding),
 						showTopBarMobile &&
 							mobileTopBarStyles(topBarColour, topBarPadding),
-						hoverStyles,
-						showTopBarDesktop && desktopTopBarStyles(topBarColour),
-						showTopBarMobile && mobileTopBarStyles(topBarColour),
 					]}
 				>
 					{children}
