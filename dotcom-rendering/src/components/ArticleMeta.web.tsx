@@ -298,6 +298,12 @@ const metaNumbersExtrasLiveBlog = css`
 	}
 `;
 
+const immersivePortraitRightPadding = css`
+	${from.leftCol} {
+		padding-right: 10px;
+	}
+`;
+
 export const ArticleMeta = ({
 	branding,
 	format,
@@ -409,13 +415,8 @@ export const ArticleMeta = ({
 						)}
 						<div
 							css={
-								layoutType === 'immersivePortrait'
-									? css`
-											${from.leftCol} {
-												padding-right: 10px;
-											}
-										`
-									: undefined
+								layoutType === 'immersivePortrait' &&
+								immersivePortraitRightPadding
 							}
 						>
 							{isAudio && podcast && seriesTag && (
@@ -586,6 +587,8 @@ export const ArticleMeta = ({
 								display: flex;
 								flex-direction: row;
 								align-items: flex-start;
+								${layoutType === 'immersivePortrait' &&
+								immersivePortraitRightPadding}
 							`}
 						>
 							<div>
@@ -605,9 +608,18 @@ export const ArticleMeta = ({
 					</div>
 				</div>
 				{showPreferredSource ? (
-					<PreferredSourceButton
-						hidePreferredSourceOnPrint={hidePreferredSourceOnPrint}
-					/>
+					<div
+						css={
+							layoutType === 'immersivePortrait' &&
+							immersivePortraitRightPadding
+						}
+					>
+						<PreferredSourceButton
+							hidePreferredSourceOnPrint={
+								hidePreferredSourceOnPrint
+							}
+						/>
+					</div>
 				) : null}
 				{layoutType === 'immersiveLandscape' &&
 					mainMediaElements?.[0] && (
