@@ -29,6 +29,7 @@ import { useConfig } from '../../ConfigContext';
 
 type Props = {
 	customSubNav: CustomSubnav;
+	currentNavLink?: string;
 	renderingPage: RenderingPage;
 	pageId: string;
 	hasPageSkin?: boolean;
@@ -65,18 +66,22 @@ const subNavStylesFromLeftCol = css`
 const articleContainerStyles = css`
 	display: flex;
 	align-items: stretch;
-	min-height: 36px;
+	/* Keep this container at the reduced list height instead of the shared
+	 * article min-height, otherwise the outer row remains taller than the
+	 * inline list itself.
+	 */
+	min-height: 0;
 
 	${from.mobileMedium} {
-		min-height: 40px;
+		min-height: 0;
 	}
 
 	${from.tablet} {
-		min-height: 42px;
+		min-height: 0;
 	}
 
 	${from.leftCol} {
-		min-height: 44px;
+		min-height: 0;
 	}
 `;
 
@@ -362,6 +367,7 @@ const CustomHeader = (
  */
 export const CustomSubNav = ({
 	customSubNav,
+	currentNavLink = '',
 	renderingPage,
 	hasPageSkin,
 	underlineHeader,
