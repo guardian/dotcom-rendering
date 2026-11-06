@@ -307,7 +307,7 @@ describe('CrosswordLayout Puzzle Page design (v1)', () => {
 			container.querySelector('a[data-component="series"]'),
 		).toHaveAttribute(
 			'href',
-			'/puzzles-and-games/crosswords/archive?puzzle=quick',
+			'/puzzles-and-games/crosswords/quick/archive',
 		);
 	});
 

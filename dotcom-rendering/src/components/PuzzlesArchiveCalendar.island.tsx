@@ -671,17 +671,21 @@ const cacheKey = (puzzleId: string, year: number, month: number): string =>
 
 export const archivePageUrl = (
 	category: PuzzlesArchive['category'],
-	puzzleId: string,
+	puzzle: Pick<PuzzlesArchive['selectedPuzzle'], 'slug' | 'set'>,
 	year: number,
 	month: number,
 ): string => {
 	const search = new URLSearchParams({
-		puzzle: puzzleId,
 		year: String(year),
 		month: String(month),
 	});
-	return `/puzzles-and-games/${category}/archive?${search.toString()}`;
+	const segment = puzzle.slug?.split('/').pop() ?? puzzle.set;
+	return `/puzzles-and-games/${category}/${segment}/archive?${search.toString()}`;
 };
+
+/** The puzzle segment of `/puzzles-and-games/{category}/{puzzle}/archive`. */
+const puzzleSegmentFromPath = (pathname: string): string | undefined =>
+	/^\/puzzles-and-games\/[^/]+\/([^/]+)\/archive\/?$/.exec(pathname)?.[1];
 
 export const PuzzlesArchiveCalendar = ({
 	initialArchive,
@@ -809,7 +813,10 @@ export const PuzzlesArchiveCalendar = ({
 		const restoreSelection = async (force = false) => {
 			const requestAtStart = requests.current.id;
 			const params = new URLSearchParams(window.location.search);
-			const puzzle = params.get('puzzle');
+			// Legacy `?puzzle=` links are still honoured.
+			const puzzle =
+				puzzleSegmentFromPath(window.location.pathname) ??
+				params.get('puzzle');
 			const selectedPuzzle =
 				initialArchive.puzzles.find(
 					(candidate) =>
@@ -882,14 +889,14 @@ export const PuzzlesArchiveCalendar = ({
 	const previousMonth = moveMonth(archive.year, archive.month, -1);
 	const previousMonthUrl = archivePageUrl(
 		archive.category,
-		archive.selectedPuzzle.id,
+		archive.selectedPuzzle,
 		previousMonth.year,
 		previousMonth.month,
 	);
 	const nextMonth = moveMonth(archive.year, archive.month, 1);
 	const nextMonthUrl = archivePageUrl(
 		archive.category,
-		archive.selectedPuzzle.id,
+		archive.selectedPuzzle,
 		nextMonth.year,
 		nextMonth.month,
 	);
@@ -905,7 +912,7 @@ export const PuzzlesArchiveCalendar = ({
 					{archive.puzzles.map((puzzle) => {
 						const href = archivePageUrl(
 							archive.category,
-							puzzle.id,
+							puzzle,
 							archive.year,
 							archive.month,
 						);

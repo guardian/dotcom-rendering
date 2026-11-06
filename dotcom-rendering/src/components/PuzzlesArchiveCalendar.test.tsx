@@ -55,8 +55,8 @@ const archive: PuzzlesArchive = {
 
 describe('archive calendar helpers', () => {
 	it('builds an archive URL that preserves the puzzle and month', () => {
-		expect(archivePageUrl('crosswords', 'archive-mini', 2026, 8)).toBe(
-			'/puzzles-and-games/crosswords/archive?puzzle=archive-mini&year=2026&month=8',
+		expect(archivePageUrl('crosswords', { set: 'mini' }, 2026, 8)).toBe(
+			'/puzzles-and-games/crosswords/mini/archive?year=2026&month=8',
 		);
 	});
 
@@ -884,7 +884,9 @@ describe('PuzzlesArchiveCalendar', () => {
 		expect(pushState).toHaveBeenCalledWith(
 			{},
 			'',
-			expect.stringContaining('puzzle=sudoku-medium'),
+			expect.stringContaining(
+				'/puzzles-and-games/logic-puzzles/sudoku-medium/archive',
+			),
 		);
 		expect(
 			screen.getByRole('link', { name: /Latest Medium sudoku/ }),
@@ -924,7 +926,7 @@ describe('PuzzlesArchiveCalendar', () => {
 		window.history.replaceState(
 			{},
 			'',
-			'?puzzle=sudoku-medium&year=2020&month=8',
+			'/puzzles-and-games/logic-puzzles/sudoku-medium/archive?year=2020&month=8',
 		);
 		render(<PuzzlesArchiveCalendar initialArchive={initialArchive} />);
 		await waitFor(() =>

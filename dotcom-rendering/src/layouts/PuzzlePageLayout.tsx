@@ -421,7 +421,7 @@ export const PuzzlePageLayout = ({
 	 */
 	const puzzleFamilyTag: TagType[] = [
 		{
-			id: `puzzles-and-games/${puzzleGroupPath}/${puzzleConfig.slug}`,
+			id: `puzzles-and-games/${puzzleGroupPath}/${puzzleConfig.slug}/archive`,
 			type: 'Series',
 			title: puzzleFamilyName,
 		},
