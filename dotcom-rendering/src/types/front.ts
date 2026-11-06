@@ -15,6 +15,7 @@ import type {
 import type { EditionId } from '../lib/edition';
 import type { Branding, CollectionBranding } from './branding';
 import type { BoostLevel, Newsletter, StarRating } from './content';
+import type { CustomSubnav } from './customSubnav';
 import type { FooterType } from './footer';
 import type { FENavType } from './frontend';
 import type { ArticleMedia, MainMedia } from './mainMedia';
@@ -81,6 +82,8 @@ export type DCRFrontCard = {
 	discussionApiUrl: string;
 	isExternalLink: boolean;
 	showLivePlayable: boolean;
+	showMiniNav?: boolean;
+	miniNavData?: CustomSubnav;
 	trailText?: string;
 	starRating?: StarRating;
 	webPublicationDate?: string;

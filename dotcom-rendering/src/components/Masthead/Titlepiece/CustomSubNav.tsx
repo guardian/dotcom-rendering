@@ -30,8 +30,10 @@ import { useConfig } from '../../ConfigContext';
 type Props = {
 	customSubNav: CustomSubnav;
 	renderingPage: RenderingPage;
-	pageId: string;
+	pageId?: string;
 	hasPageSkin?: boolean;
+	underlineHeader?: boolean;
+	isCard?: boolean;
 	canonicalUrl?: string;
 };
 
@@ -63,18 +65,22 @@ const subNavStylesFromLeftCol = css`
 const articleContainerStyles = css`
 	display: flex;
 	align-items: stretch;
-	min-height: 36px;
+	/* Keep this container at the reduced list height instead of the shared
+	 * article min-height, otherwise the outer row remains taller than the
+	 * inline list itself.
+	 */
+	min-height: 0;
 
 	${from.mobileMedium} {
-		min-height: 40px;
+		min-height: 0;
 	}
 
 	${from.tablet} {
-		min-height: 42px;
+		min-height: 0;
 	}
 
 	${from.leftCol} {
-		min-height: 44px;
+		min-height: 0;
 	}
 `;
 
@@ -95,10 +101,15 @@ const articleSubNavStyles = css`
 	}
 `;
 
+/** Article subnavs keep a small horizontal gap between the header and the list items. */
+const articleHeaderGapStyles = css`
+	margin-left: ${space[1]}px;
+	padding-left: ${space[1]}px;
+`;
+
 /** Article subnavs have a divider separating the header text from the scrollable list. */
 const articleDividerStyles = css`
-	margin-left: ${space[2]}px;
-	padding-left: ${space[2]}px;
+	${articleHeaderGapStyles}
 	border-left: 1px solid ${themePalette('--masthead-nav-lines')};
 `;
 
@@ -294,6 +305,8 @@ const selectedLink = css`
 const headerLinkStyles = css`
 	color: inherit;
 	text-decoration: none;
+	padding-left: 1px;
+	margin-left: 1px;
 
 	&:hover {
 		text-decoration: underline;
@@ -303,13 +316,22 @@ const headerLinkStyles = css`
 const HeaderText = ({
 	header: { headerText, dotcomPath },
 	cssOverrides,
+	underlineHeader,
 }: {
 	header: CustomSubnavHeader;
 	cssOverrides?: SerializedStyles;
+	underlineHeader?: boolean;
 }) => {
 	const link = dotcomPath ? (
 		<a
-			css={[headerLinkStyles, cssOverrides]}
+			css={[
+				headerLinkStyles,
+				cssOverrides,
+				underlineHeader &&
+					css`
+						text-decoration: underline;
+					`,
+			]}
 			data-src-focus-disabled={true}
 			href={dotcomPath}
 			data-link-name={nestedOphanComponents(
@@ -330,9 +352,14 @@ const HeaderText = ({
 const CustomHeader = (
 	customSubNav: CustomSubnav,
 	cssOverrides: SerializedStyles | undefined,
+	underlineHeader?: boolean,
 ) => {
 	return customSubNav.header.showHeaderText ? (
-		<HeaderText header={customSubNav.header} cssOverrides={cssOverrides} />
+		<HeaderText
+			header={customSubNav.header}
+			cssOverrides={cssOverrides}
+			underlineHeader={underlineHeader}
+		/>
 	) : undefined;
 };
 
@@ -343,13 +370,15 @@ export const CustomSubNav = ({
 	customSubNav,
 	renderingPage,
 	hasPageSkin,
+	underlineHeader,
+	isCard = false,
 	pageId,
 	canonicalUrl,
 }: Props) => {
 	const hasTrackedView = useRef(false);
 	const [isInView, setNode] = useIsInView({});
 	const { renderingTarget } = useConfig();
-	const isNetworkFront = isANetworkFront(pageId);
+	const isNetworkFront = pageId ? isANetworkFront(pageId) : false;
 	const isArticle = renderingPage === 'article';
 
 	useEffect(() => {
@@ -417,7 +446,11 @@ export const CustomSubNav = ({
 						images={webImages}
 						headerText={customSubNav.header.headerText}
 					/>
-					{CustomHeader(customSubNav, imageHeaderTextStyles)}
+					{CustomHeader(
+						customSubNav,
+						imageHeaderTextStyles,
+						underlineHeader,
+					)}
 				</div>
 				<ul
 					css={[imageListStyles, scrollableSubNavStyles]}
@@ -432,7 +465,8 @@ export const CustomSubNav = ({
 		);
 	}
 
-	if (isArticle) {
+	if (isArticle || isCard) {
+		const showHeaderDivider = !isCard;
 		return (
 			<div
 				ref={setNode}
@@ -447,7 +481,10 @@ export const CustomSubNav = ({
 						subNavStyles,
 						!hasPageSkin && subNavStylesFromLeftCol,
 						articleSubNavStyles,
-						articleDividerStyles,
+						!showHeaderDivider && articleHeaderGapStyles,
+						showHeaderDivider
+							? articleDividerStyles
+							: articleHeaderGapStyles,
 						css`
 							flex-shrink: 0;
 							width: max-content;
