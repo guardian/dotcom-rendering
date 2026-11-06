@@ -203,10 +203,12 @@ const immersiveGridTitleBelowDesktop = css`
 
 const immersiveLandscapeTitle = css`
 	position: relative;
-	bottom: 2px;
 	line-height: 28px;
 	padding: 2px 2px 4px;
 
+	${until.tablet} {
+		margin-left: ${space[2]}px;
+	}
 	${from.tablet} {
 		margin-left: -24px;
 		padding-left: 2px;
@@ -489,6 +491,12 @@ export const SeriesSectionLink = ({
 							!hasLayoutType &&
 							css`
 								line-height: 28px;
+								${until.tablet} {
+									margin-left: 16px;
+									${from.mobileLandscape} {
+										margin-left: 24px;
+									}
+								}
 								${from.leftCol} {
 									line-height: 28px;
 								}
