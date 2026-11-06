@@ -306,6 +306,8 @@ const selectedLink = css`
 const headerLinkStyles = css`
 	color: inherit;
 	text-decoration: none;
+	padding-left: 1px;
+	margin-left: 1px;
 
 	&:hover {
 		text-decoration: underline;
