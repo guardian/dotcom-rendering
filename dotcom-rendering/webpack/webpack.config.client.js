@@ -133,7 +133,7 @@ module.exports = ({ build }) => ({
 	module: {
 		rules: [
 			{
-				test: /\.[jt]sx?|mjs$/,
+				test: /\.[jt]sx?$|mjs$/,
 				exclude: module.exports.transpileExclude,
 				use: getLoaders(build),
 			},
