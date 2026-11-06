@@ -31,7 +31,7 @@ type Props = {
 	customSubNav: CustomSubnav;
 	currentNavLink?: string;
 	renderingPage: RenderingPage;
-	pageId: string;
+	pageId?: string;
 	hasPageSkin?: boolean;
 	underlineHeader?: boolean;
 	isCard?: boolean;
@@ -380,7 +380,7 @@ export const CustomSubNav = ({
 	const hasTrackedView = useRef(false);
 	const [isInView, setNode] = useIsInView({});
 	const { renderingTarget } = useConfig();
-	const isNetworkFront = isANetworkFront(pageId);
+	const isNetworkFront = pageId ? isANetworkFront(pageId) : false;
 	const isArticle = renderingPage === 'article';
 
 	useEffect(() => {
