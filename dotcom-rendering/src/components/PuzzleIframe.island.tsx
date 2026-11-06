@@ -329,10 +329,11 @@ export const buildPuzzleIframeSrc = (
 	}
 };
 
-/** Only accept supported provider messages from this iframe's own window and origin. */
+/** Check the iframe's origin/window and reset progress state whenever its URL changes. */
 const usePuzzleProgressReporting = (
 	puzzleConfig: PuzzleConfig,
 	iframeRef: React.RefObject<HTMLIFrameElement>,
+	iframeSrc: string,
 	progressIdentity?: PuzzleProgressIdentity,
 ) => {
 	const isAmuseLabs = puzzleConfig.iframe.provider === 'amuselabs';
@@ -362,7 +363,7 @@ const usePuzzleProgressReporting = (
 
 		window.addEventListener('message', onMessage);
 		return () => window.removeEventListener('message', onMessage);
-	}, [isAmuseLabs, movieGrid, progressIdentity, iframeRef]);
+	}, [isAmuseLabs, movieGrid, progressIdentity, iframeRef, iframeSrc]);
 };
 
 const postContextMessage = (
@@ -417,7 +418,12 @@ export const PuzzleIframe = ({
 	const iframeSrc = buildPuzzleIframeSrc(puzzleConfig, context, gameUrl);
 	const iframeRef = useRef<HTMLIFrameElement>(null);
 
-	usePuzzleProgressReporting(puzzleConfig, iframeRef, progressIdentity);
+	usePuzzleProgressReporting(
+		puzzleConfig,
+		iframeRef,
+		iframeSrc,
+		progressIdentity,
+	);
 
 	// In development the islands do not hydrate when the page is opened
 	// straight from the local `frontend` (its `/assets/` cannot serve this

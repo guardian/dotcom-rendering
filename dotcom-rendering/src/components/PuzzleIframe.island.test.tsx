@@ -47,7 +47,7 @@ const wordiplyConfig = puzzleConfigs.wordiply!;
 
 describe('buildPuzzleIframeSrc', () => {
 	it.each(['film-reveal', 'on-the-ball'])(
-		'adds context and dark mode to the API-provided %s URL without adding uid',
+		'adds account identity, context and dark mode to the API-provided %s URL',
 		(slug) => {
 			const context: PuzzleContext = {
 				userId: 'reader',
@@ -66,7 +66,7 @@ describe('buildPuzzleIframeSrc', () => {
 			expect(url.searchParams.get('id')).toBe('opaque');
 			expect(url.searchParams.get('embed')).toBe('1');
 			expect(url.searchParams.get('darkMode')).toBe('1');
-			expect(url.searchParams.has('uid')).toBe(false);
+			expect(url.searchParams.get('uid')).toBe('reader');
 			expect(
 				JSON.parse(url.searchParams.get('guardian-puzzle-context')!),
 			).toEqual(context);
@@ -462,12 +462,102 @@ describe('PuzzleIframe', () => {
 				'sandbox',
 				'allow-scripts allow-same-origin allow-popups allow-forms',
 			);
-			expect(getUidFromSrc(iframe.src)).toBeNull();
+			expect(getUidFromSrc(iframe.src)).toBe('reader');
 			expect(getContextFromSrc(iframe.src)).toEqual({
 				userId: 'reader',
 				darkMode: true,
 				puzzleDate: '2026-10-28',
 			});
+		},
+	);
+
+	it.each(['film-reveal', 'on-the-ball'])(
+		'switches %s between guest and account identities on auth changes',
+		async (slug) => {
+			mockedGetAuthStatus.mockResolvedValue(signedOut());
+			render(
+				<PuzzleIframe
+					puzzleConfig={puzzleConfigs[slug]!}
+					title={slug}
+					darkModeAvailable={false}
+					puzzleDate="2026-11-03"
+					gameUrl={`https://example.com/${slug}?id=opaque&uid=stale`}
+				/>,
+			);
+			const iframe = screen.getByTitle<HTMLIFrameElement>(slug);
+			await waitFor(() => expect(iframe).toHaveAttribute('src'));
+			expect(getUidFromSrc(iframe.src)).toBeNull();
+			const onAuthChange =
+				mockedSubscribeToAuthStateChange.mock.calls[0]![0];
+			for (const userId of ['account-a', 'account-b', null]) {
+				mockedGetAuthStatus.mockResolvedValue(
+					userId === null ? signedOut() : signedIn(userId),
+				);
+				await act(async () => {
+					onAuthChange();
+				});
+				await waitFor(() =>
+					expect(getUidFromSrc(iframe.src)).toBe(userId),
+				);
+				expect(new URL(iframe.src).searchParams.get('id')).toBe(
+					'opaque',
+				);
+			}
+		},
+	);
+
+	it.each([
+		['film-reveal', 'https://moviegrid.io', 'film_reveal', 'FILMREVEAL'],
+		['on-the-ball', 'https://sportsreveal.io', 'on_the_ball', 'ONTHEBALL'],
+	])(
+		'resets %s completion tracking when switching accounts',
+		async (slug, origin, puzzle, puzzleType) => {
+			mockedGetAuthStatus.mockResolvedValue(signedIn('account-a'));
+			const progressIdentity = {
+				puzzleId: 'api-puzzle',
+				puzzleType,
+				publishDate: '2026-11-03T00:00:00Z',
+			};
+			render(
+				<PuzzleIframe
+					puzzleConfig={puzzleConfigs[slug]!}
+					title={slug}
+					darkModeAvailable={false}
+					puzzleDate="2026-11-03"
+					gameUrl={`${origin}/guardian/archive?id=394`}
+					progressIdentity={progressIdentity}
+				/>,
+			);
+			const iframe = screen.getByTitle<HTMLIFrameElement>(slug);
+			await waitFor(() =>
+				expect(getUidFromSrc(iframe.src)).toBe('account-a'),
+			);
+			const dispatch = (event: string) =>
+				act(() => {
+					window.dispatchEvent(
+						new MessageEvent('message', {
+							origin,
+							source: iframe.contentWindow,
+							data: { event, puzzle },
+						}),
+					);
+				});
+			dispatch('end_game');
+			expect(reportPuzzleProgress).toHaveBeenCalledWith(
+				expect.objectContaining({ gameStatus: 'completed' }),
+			);
+			jest.mocked(reportPuzzleProgress).mockClear();
+			mockedGetAuthStatus.mockResolvedValue(signedIn('account-b'));
+			await act(async () => {
+				mockedSubscribeToAuthStateChange.mock.calls[0]![0]();
+			});
+			await waitFor(() =>
+				expect(getUidFromSrc(iframe.src)).toBe('account-b'),
+			);
+			dispatch('input');
+			expect(reportPuzzleProgress).toHaveBeenCalledWith(
+				expect.objectContaining({ gameStatus: 'in-progress' }),
+			);
 		},
 	);
 
