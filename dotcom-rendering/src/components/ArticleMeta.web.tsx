@@ -407,7 +407,17 @@ export const ArticleMeta = ({
 								<Avatar src={avatarUrl} alt={authorName} />
 							</ImmersiveMetaAvatarContainer>
 						)}
-						<div>
+						<div
+							css={
+								layoutType === 'immersivePortrait'
+									? css`
+											${from.leftCol} {
+												padding-right: 10px;
+											}
+										`
+									: undefined
+							}
+						>
 							{isAudio && podcast && seriesTag && (
 								<PodcastMeta
 									series={seriesTag}
