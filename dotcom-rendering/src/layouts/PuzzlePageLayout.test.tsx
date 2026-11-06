@@ -222,7 +222,7 @@ describe('PuzzlePageLayout', () => {
 			container.querySelector('a[data-component="series"]'),
 		).toHaveAttribute(
 			'href',
-			'/puzzles-and-games/logic-puzzles/sudoku-easy',
+			'/puzzles-and-games/logic-puzzles/sudoku-easy/archive',
 		);
 		expect(
 			container.querySelector('a[data-component="section"]'),

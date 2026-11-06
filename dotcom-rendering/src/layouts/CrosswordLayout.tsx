@@ -155,8 +155,8 @@ export const CrosswordLayout = (props: Props) => {
 	 * & games crosswords archive ("Quick" filtered to its crossword type, see
 	 * `titleTags`). Without v1 both are unchanged.
 	 */
-	const PUZZLES_CROSSWORDS_ARCHIVE_PATH =
-		'puzzles-and-games/crosswords/archive';
+	const PUZZLES_CROSSWORDS_PATH = 'puzzles-and-games/crosswords';
+	const PUZZLES_CROSSWORDS_ARCHIVE_PATH = `${PUZZLES_CROSSWORDS_PATH}/archive`;
 
 	/**
 	 * The series tag ("Quick") links to that crossword type's archive page,
@@ -169,7 +169,7 @@ export const CrosswordLayout = (props: Props) => {
 					tag.type === 'Series'
 						? {
 								...tag,
-								id: `${PUZZLES_CROSSWORDS_ARCHIVE_PATH}?puzzle=${crosswordType}`,
+								id: `${PUZZLES_CROSSWORDS_PATH}/${crosswordType}/archive`,
 							}
 						: tag,
 				)
