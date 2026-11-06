@@ -195,14 +195,18 @@ const ABTests: ABTest[] = [
 	},
 	{
 		name: "commercial-prebid-failsafe-timeout",
-		description: "Gradually roll out the Prebid failsafe timeout feature",
+		description: "Testing wrapping Prebid in a failsafe timeout",
 		owners: ["commercial.dev@guardian.co.uk"],
 		expirationDate: "2027-01-19",
 		type: "client",
-		status: "OFF",
-		audienceSize: 0 / 100,
+		status: "ON",
+		audienceSize: 15 / 100,
 		audienceSpace: "B",
-		groups: ["control", "variant"],
+		groups: [
+			"control",
+			"variant-one", // Failsafe set at 3_000ms
+			"variant-two", // Failsafe set at 4_000ms
+		],
 		shouldForceMetricsCollection: true,
 	},
 	{
