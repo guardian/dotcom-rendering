@@ -256,9 +256,6 @@ export const StandardLayoutArticleGrid = ({
 			: 'landscape';
 	const immersiveHeaderHeight =
 		minHeaderHeightPx + (isLabs ? LABS_HEADER_HEIGHT : 0);
-	const immersiveMediaRowHeight = usesImmersiveImageProportions
-		? 'auto'
-		: `max(calc(80vh - ${immersiveHeaderHeight}px), calc(25rem - ${immersiveHeaderHeight}px))`;
 
 	const topHatTestingPage = '/p/x4zt8y';
 	const layoutType =
@@ -275,16 +272,17 @@ export const StandardLayoutArticleGrid = ({
 			return undefined;
 		}
 
-		const columnCount =
-			gridLayout === 'immersivePortrait'
-				? 5
-				: gridLayout === 'immersiveLandscape'
-					? 4
-					: 3;
+		const columnCount = gridLayout === 'immersivePortrait' ? 5 : 3;
 
 		return css`
 			${from.leftCol} {
 				${grid.centreRule(columnCount)}
+				${gridLayout === 'immersiveLandscape' &&
+				css`
+					& > *:nth-child(3)::before {
+						top: 100%;
+					}
+				`}
 			}
 		`;
 	};
@@ -359,22 +357,6 @@ export const StandardLayoutArticleGrid = ({
 				grid.container,
 				grid.outerRules(),
 				setCentreRule(layoutType),
-				isLabs &&
-					isImmersive &&
-					css`
-						${from.desktop} {
-							&::before,
-							&::after {
-								z-index: ${getZIndex(
-									'immersiveGridOuterRules',
-								)};
-							}
-						}
-						grid-template-rows: ${immersiveMediaRowHeight} repeat(
-								6,
-								auto
-							);
-					`,
 				isImmersive &&
 					css`
 						${until.tablet} {
@@ -389,6 +371,10 @@ export const StandardLayoutArticleGrid = ({
 							grid-template-rows: auto auto ${ageWarning != null
 									? '130px'
 									: '90px'} auto auto auto auto auto;
+						}
+						&::before,
+						&::after {
+							z-index: ${getZIndex('immersiveGridOuterRules')};
 						}
 					`,
 				isInteractiveTopHat &&
@@ -785,13 +771,6 @@ export const StandardLayoutArticleGrid = ({
 									padding-top: ${space[3]}px;
 								}
 							`,
-						isImmersivePortrait
-							? css`
-									${from.leftCol} {
-										margin-right: -10px;
-									}
-								`
-							: undefined,
 						isImmersiveLandscape &&
 							css`
 								${from.leftCol} {
