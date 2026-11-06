@@ -1,6 +1,5 @@
 import type { Inline1Props } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useIsSignedIn } from '../../../lib/useAuthStatus';
-import { Island } from '../../Island';
 import { NewsletterSignupCardContainer } from '../../NewsletterSignupCardContainer';
 import { NewsletterSignupForm } from '../../NewsletterSignupForm.island';
 import type { ReactComponent } from '../lib/ReactComponent';
@@ -38,14 +37,12 @@ const NewsletterForm: ReactComponent<{ message: NewsletterMessage }> = ({
 			isSignedIn={isSignedIn}
 			heading={heading}
 		>
-			<Island priority="feature" defer={{ until: 'visible' }}>
-				<NewsletterSignupForm
-					newsletterId={newsletterId}
-					newsletterName={''} // We need this for the success message, should get from SDC?
-					frequency={frequency}
-					componentId={componentId}
-				/>
-			</Island>
+			<NewsletterSignupForm
+				newsletterId={newsletterId}
+				newsletterName={''} // We need this for the success message, should get from SDC?
+				frequency={frequency}
+				componentId={componentId}
+			/>
 		</NewsletterSignupCardContainer>
 	);
 };
