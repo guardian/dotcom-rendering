@@ -14,6 +14,11 @@ frontend payloads without `gameUrl`. New frontend pages always supply the API UR
 or return 404/502 before rendering. Deploy this DCR support before the frontend change.
 MovieGrid pages require `instance.gameUrl`; missing or blank URLs return 404.
 DCR never derives MovieGrid puzzle URLs or IDs.
+MovieGrid's `copy_game` and `share_game` messages are handled by the parent page,
+using the existing native-share/clipboard approach. Actions require the expected
+provider origin and this iframe's window, independently of progress identity.
+For local interaction testing, open `/PuzzlePage/http://localhost:9001/<game-path>`
+on DCR's port 3030 so the iframe island can load its JavaScript from the same origin.
 
 Hub progress enrichment also preserves crossword `gameUrl` values exactly, including
 absolute links and dated Genius article paths. Other puzzle card destinations are unchanged.
