@@ -149,6 +149,91 @@ describe('PuzzlesArchiveCalendar', () => {
 		Reflect.deleteProperty(global, 'fetch');
 	});
 
+	it.each([false, true])(
+		'refreshes restored calendar and recent-card progress after Back (signed in: %s)',
+		async (signedIn) => {
+			if (signedIn) {
+				mockedGetAuthStatus.mockResolvedValue({
+					kind: 'SignedIn',
+					accessToken: { accessToken: 'test-token' },
+					idToken: {},
+				} as never);
+			}
+			const completed = {
+				...archive,
+				items: [
+					{
+						...archive.items[0]!,
+						progress: 100,
+						gameStatus: 'completed',
+					},
+				],
+			};
+			const fetchMock = jest
+				.fn()
+				.mockResolvedValueOnce({
+					ok: true,
+					json: async () => (signedIn ? archive : completed),
+				})
+				.mockResolvedValue({ ok: true, json: async () => completed });
+			Object.defineProperty(global, 'fetch', {
+				configurable: true,
+				value: fetchMock,
+			});
+			render(<PuzzlesArchiveCalendar initialArchive={archive} />);
+			await act(async () => undefined);
+			expect(fetchMock).toHaveBeenCalledTimes(signedIn ? 1 : 0);
+			expect(
+				screen.getByLabelText('2026-09-02, available'),
+			).toBeInTheDocument();
+
+			fireEvent(
+				window,
+				new PageTransitionEvent('pageshow', { persisted: true }),
+			);
+
+			await screen.findByLabelText('2026-09-02, completed');
+			expect(fetchMock).toHaveBeenCalledTimes(signedIn ? 2 : 1);
+			expect(fetchMock).toHaveBeenLastCalledWith(
+				expect.objectContaining({
+					pathname:
+						'/puzzles-and-games/logic-puzzles/archive-data/sudoku-easy/2026/9',
+				}),
+				expect.objectContaining({ cache: 'no-store' }),
+			);
+			expect(
+				within(
+					screen.getByRole('link', { name: /Latest Easy sudoku/ }),
+				).getByText('Played'),
+			).toBeInTheDocument();
+		},
+	);
+
+	it('does not refresh on the initial pageshow and removes the listener on unmount', async () => {
+		const fetchMock = jest.fn();
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		const { unmount } = render(
+			<PuzzlesArchiveCalendar initialArchive={archive} />,
+		);
+		await act(async () => undefined);
+		fireEvent(
+			window,
+			new PageTransitionEvent('pageshow', { persisted: false }),
+		);
+		await act(async () => undefined);
+		expect(fetchMock).not.toHaveBeenCalled();
+		unmount();
+		fireEvent(
+			window,
+			new PageTransitionEvent('pageshow', { persisted: true }),
+		);
+		await act(async () => undefined);
+		expect(fetchMock).not.toHaveBeenCalled();
+	});
+
 	it('links an available date to the API-derived exact puzzle destination', () => {
 		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
 		expect(screen.getByLabelText('2026-09-02, available')).toHaveAttribute(
@@ -275,6 +360,70 @@ describe('PuzzlesArchiveCalendar', () => {
 						'/puzzles-and-games/logic-puzzles/archive-data/sudoku-easy/2026/9',
 				}),
 				expect.objectContaining({
+					headers: expect.objectContaining({
+						Authorization: 'Bearer access-token',
+					}),
+				}),
+			);
+		},
+	);
+
+	it.each([
+		['film-reveal', 'FILMREVEAL'],
+		['on-the-ball', 'ONTHEBALL'],
+	])(
+		'refreshes %s completion through the uncached AJAX host',
+		async (slug, puzzleType) => {
+			pageConfig.ajaxUrl = 'https://api.nextgen.guardianapps.co.uk';
+			mockedGetAuthStatus.mockResolvedValue({
+				kind: 'SignedIn',
+				accessToken: { accessToken: 'access-token' },
+				idToken: {},
+			} as never);
+			const trivia: PuzzlesArchive = {
+				...archive,
+				category: 'trivia-and-quizzes',
+				selectedPuzzle: {
+					id: slug,
+					title: slug,
+					puzzleType,
+					slug: `trivia-and-quizzes/${slug}`,
+					set: 'all',
+				},
+				items: [{ ...archive.items[0]!, puzzleType }],
+			};
+			const fetchMock = jest.fn().mockResolvedValue({
+				ok: true,
+				json: async () => ({
+					...trivia,
+					items: [
+						{
+							...trivia.items[0],
+							progress: 100,
+							gameStatus: 'completed',
+						},
+					],
+				}),
+			});
+			Object.defineProperty(global, 'fetch', {
+				configurable: true,
+				value: fetchMock,
+			});
+			render(<PuzzlesArchiveCalendar initialArchive={trivia} />);
+
+			await waitFor(() =>
+				expect(
+					screen.getByLabelText('2026-09-02, completed'),
+				).toBeInTheDocument(),
+			);
+			expect(fetchMock).toHaveBeenCalledWith(
+				expect.objectContaining({
+					origin: 'https://api.nextgen.guardianapps.co.uk',
+					pathname: `/puzzles-and-games/trivia-and-quizzes/archive-data/${slug}/2026/9`,
+				}),
+				expect.objectContaining({
+					cache: 'no-store',
+					credentials: 'same-origin',
 					headers: expect.objectContaining({
 						Authorization: 'Bearer access-token',
 					}),
@@ -528,6 +677,64 @@ describe('PuzzlesArchiveCalendar', () => {
 		await screen.findByText('September 2026');
 		expect(cardDates()).toEqual(recentItems.map((item) => item.date));
 		expect(fetchMock).toHaveBeenCalledTimes(1);
+	});
+
+	it('invalidates other cached months when restored and keeps the current selection', async () => {
+		const previous = {
+			...archive,
+			month: 8,
+			items: [{ ...archive.items[0]!, date: '2026-08-31' }],
+		};
+		const completed = {
+			...archive,
+			items: [
+				{
+					...archive.items[0]!,
+					progress: 100,
+					gameStatus: 'completed',
+				},
+			],
+		};
+		const completedPrevious = {
+			...previous,
+			items: [
+				{
+					...previous.items[0]!,
+					progress: 100,
+					gameStatus: 'completed',
+				},
+			],
+		};
+		const fetchMock = jest
+			.fn()
+			.mockResolvedValueOnce({ ok: true, json: async () => previous })
+			.mockResolvedValueOnce({ ok: true, json: async () => completed })
+			.mockResolvedValueOnce({
+				ok: true,
+				json: async () => completedPrevious,
+			});
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
+		await act(async () => undefined);
+		fireEvent.click(screen.getByRole('link', { name: 'Previous month' }));
+		await screen.findByText('August 2026');
+		fireEvent.click(screen.getByRole('link', { name: 'Next month' }));
+		await screen.findByText('September 2026');
+		expect(fetchMock).toHaveBeenCalledTimes(1);
+		const selection = window.location.search;
+
+		fireEvent(
+			window,
+			new PageTransitionEvent('pageshow', { persisted: true }),
+		);
+		await screen.findByLabelText('2026-09-02, completed');
+		expect(window.location.search).toBe(selection);
+		fireEvent.click(screen.getByRole('link', { name: 'Previous month' }));
+		await screen.findByLabelText('2026-08-31, completed');
+		expect(fetchMock).toHaveBeenCalledTimes(3);
 	});
 
 	it('does not replace explicitly empty recent cards with historical items', () => {

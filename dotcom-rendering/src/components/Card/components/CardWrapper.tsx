@@ -43,7 +43,7 @@ const baseCardStyles = css`
 	text-decoration: none;
 `;
 
-const hoverStyles = (isLoopAndInLoopClickTestVariant: boolean) => css`
+const hoverStyles = css`
 	:hover .media-overlay {
 		width: 100%;
 		height: 100%;
@@ -67,6 +67,7 @@ const hoverStyles = (isLoopAndInLoopClickTestVariant: boolean) => css`
 					? `.cinemagraph, .loop`
 					: `.cinemagraph`}
 			):hover,
+		.video-container:not(.cinemagraph):hover,
 		.slideshow-carousel-footer:hover,
 		.branding-logo:hover
 	) {
@@ -120,6 +121,9 @@ export const CardWrapper = ({
 							desktopTopBarStyles(topBarColour, topBarPadding),
 						showTopBarMobile &&
 							mobileTopBarStyles(topBarColour, topBarPadding),
+						hoverStyles,
+						showTopBarDesktop && desktopTopBarStyles(topBarColour),
+						showTopBarMobile && mobileTopBarStyles(topBarColour),
 					]}
 				>
 					{children}

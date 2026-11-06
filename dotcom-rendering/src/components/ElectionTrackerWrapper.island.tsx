@@ -1,6 +1,10 @@
+import { useEffect, useRef } from 'react';
 import { safeParse } from 'valibot';
+import { submitComponentEvent } from '../client/ophan/ophan';
 import { safeParseURL } from '../lib/parse';
 import { fromValibot } from '../lib/result';
+import { useIsInView } from '../lib/useIsInView';
+import { useConfig } from './ConfigContext';
 import {
 	ElectionComponents,
 	type ElectionComponentsJson,
@@ -16,6 +20,7 @@ type Props = {
 	 * in tests and storybook.
 	 */
 	liveEffects: boolean;
+	trackingLabel: 'liveblog' | 'front';
 };
 
 /**
@@ -23,7 +28,31 @@ type Props = {
  * case, the Fetch API.
  */
 export const ElectionTrackerWrapper = (props: Props) => {
+	const hasTrackedView = useRef(false);
+	const [isInView, setNode] = useIsInView({});
+	const { renderingTarget } = useConfig();
+	const TRACKING_ID = 'election-tracker';
+
 	const url = safeParseURL(props.electionDataUrl);
+
+	useEffect(() => {
+		if (isInView !== true || hasTrackedView.current) {
+			return;
+		}
+
+		hasTrackedView.current = true;
+		void submitComponentEvent(
+			{
+				component: {
+					componentType: 'EVENT_GRAPHIC',
+					id: TRACKING_ID,
+					labels: [props.trackingLabel],
+				},
+				action: 'VIEW',
+			},
+			renderingTarget,
+		);
+	}, [isInView, renderingTarget, props.trackingLabel]);
 
 	if (!url.ok) {
 		return null;
@@ -34,16 +63,18 @@ export const ElectionTrackerWrapper = (props: Props) => {
 	);
 
 	return (
-		<ElectionTracker
-			electionDataUrl={url.value}
-			initialData={parsedData.ok ? parsedData.value.components : []}
-			refreshInterval={60}
-			getElectionData={
-				props.liveEffects
-					? getElectionData
-					: () => Promise.resolve(props.electionComponents)
-			}
-		/>
+		<div ref={setNode}>
+			<ElectionTracker
+				electionDataUrl={url.value}
+				initialData={parsedData.ok ? parsedData.value.components : []}
+				refreshInterval={60}
+				getElectionData={
+					props.liveEffects
+						? getElectionData
+						: () => Promise.resolve(props.electionComponents)
+				}
+			/>
+		</div>
 	);
 };
 

@@ -318,3 +318,27 @@ export const WebImmersivePortrait: Story = {
 		},
 	},
 };
+
+const immersiveWeekendReadFormat = {
+	...immersivePortraitFormat,
+	design: ArticleDesign.WeekendEssay,
+};
+
+export const WebImmersivePortraitWeekendRead: Story = {
+	args: {
+		...WebImmersivePortrait.args,
+		article: {
+			...webImmersivePortraitArticle.frontendData,
+			shouldHideAds: true,
+			format: {
+				...webImmersivePortraitArticle.frontendData.format,
+				design: 'WeekendEssayDesign',
+			},
+		},
+		format: immersiveWeekendReadFormat,
+	},
+	parameters: {
+		...WebImmersivePortrait.parameters,
+		formats: [immersiveWeekendReadFormat],
+	},
+};

@@ -29,11 +29,11 @@ import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
+	Pillar,
 } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
 import { formatPuzzleDate } from '../lib/puzzleDate';
-import { getPuzzleGroupPalette } from '../lib/puzzleGroupPalette';
 import {
 	isPuzzlesHubV1Enabled,
 	isPuzzlesHubV2Enabled,
@@ -42,6 +42,7 @@ import {
 	getPuzzlesSubNavLinks,
 	PUZZLES_SUBNAV_PARENT,
 } from '../lib/puzzlesSubNav';
+import { puzzleAccentStyles } from '../lib/puzzlesTheme';
 import { enhanceBranding } from '../model/enhanceCommercialProperties';
 import type { NavType, SubNavType } from '../model/extract-nav';
 import type { PuzzleConfig } from '../model/puzzles/puzzleConfigs';
@@ -91,6 +92,7 @@ import { BannerWrapper } from './lib/stickiness';
 const puzzleGroupLabels: Record<PuzzleConfig['puzzleGroup'], string> = {
 	'logic-puzzles': 'Logic puzzles',
 	'word-games': 'Word games',
+	trivia: 'Trivia & quizzes',
 };
 
 /**
@@ -110,6 +112,8 @@ const puzzleFamilyNames: Record<string, string> = {
 	'sudoku-killer': 'Sudoku',
 	'word-wheel': 'Word wheel',
 	wordiply: 'Wordiply',
+	'film-reveal': 'Film reveal',
+	'on-the-ball': 'On the ball',
 };
 
 /**
@@ -130,6 +134,8 @@ const puzzleHeadlineNames: Record<string, string> = {
 	'sudoku-killer': 'Killer sudoku',
 	'word-wheel': 'Word wheel',
 	wordiply: 'Wordiply',
+	'film-reveal': 'Film reveal',
+	'on-the-ball': 'On the ball',
 };
 
 /**
@@ -179,11 +185,9 @@ const AGE_WARNING_SUPPRESSION_TAGS: TagType[] = [
  * `width: 100%` styling needs too, so this reuses that existing,
  * documented case rather than inventing a new one.
  *
- * `theme` follows the puzzle's group (`getPuzzleGroupPalette`): news for
- * crosswords, opinion for word games, sport for logic puzzles. This is what
- * makes `pillarPalette`-driven colours (the share button, print button
- * border, comments, etc, see `paletteDeclarations.ts`) resolve to the
- * group's colour across the whole page.
+ * `theme` is the same fixed `Pillar.Lifestyle` for every group: it only
+ * provides the page's neutral colours (background, lines). Each group's accent
+ * colour comes from `puzzleAccentStyles`, not from the theme.
  *
  * **Exported** so `PuzzlePage.tsx` can pass this exact same value to
  * `rootStyles()` for its page-wide `<Global>` styles. `themePalette()`
@@ -197,13 +201,11 @@ const AGE_WARNING_SUPPRESSION_TAGS: TagType[] = [
  * with red instead of Lifestyle pink, regardless of what `puzzlePageFormat`
  * itself said.
  */
-export const getPuzzlePageFormat = (
-	puzzleGroup: PuzzleConfig['puzzleGroup'],
-): ArticleFormat => ({
+export const puzzlePageFormat: ArticleFormat = {
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Crossword,
-	theme: getPuzzleGroupPalette(puzzleGroup).theme,
-});
+	theme: Pillar.Lifestyle,
+};
 
 /**
  * Identical to `CrosswordLayout.tsx`'s own `CrosswordGrid`: the same grid
@@ -355,7 +357,6 @@ export const PuzzlePageLayout = ({
 }: Props) => {
 	const { config, instance, editionId, puzzleConfig } = puzzlePage;
 	const { isPaidContent, host, hasSurveyAd } = config;
-	const puzzlePageFormat = getPuzzlePageFormat(puzzleConfig.puzzleGroup);
 
 	// Puzzle Page instances have no comments/discussion concept at all:
 	// `FEPuzzlePageType` carries no `isCommentable` flag or per-instance
@@ -399,6 +400,10 @@ export const PuzzlePageLayout = ({
 	const contributionsServiceUrl = '';
 
 	const labelText = puzzleGroupLabels[puzzleConfig.puzzleGroup];
+	const puzzleGroupPath =
+		puzzleConfig.puzzleGroup === 'trivia'
+			? 'trivia-and-quizzes'
+			: puzzleConfig.puzzleGroup;
 	const displayDate = formatPuzzleDate(instance.puzzleDate);
 	const puzzleFamilyName =
 		puzzleFamilyNames[puzzleConfig.slug] ?? instance.title;
@@ -416,7 +421,7 @@ export const PuzzlePageLayout = ({
 	 */
 	const puzzleFamilyTag: TagType[] = [
 		{
-			id: `puzzles-and-games/${puzzleConfig.puzzleGroup}/${puzzleConfig.slug}`,
+			id: `puzzles-and-games/${puzzleGroupPath}/${puzzleConfig.slug}`,
 			type: 'Series',
 			title: puzzleFamilyName,
 		},
@@ -477,12 +482,6 @@ export const PuzzlePageLayout = ({
 					discussionApiUrl={config.discussionApiUrl}
 					idApiUrl={config.idApiUrl}
 					contributionsServiceUrl={contributionsServiceUrl}
-					// `puzzlePageFormat.theme` is never `ArticleSpecial.Labs`
-					// (never `ArticleSpecial.Labs`), so `CrosswordLayout`'s
-					// derived `format.theme !== ArticleSpecial.Labs` check
-					// always evaluates `true` here - hardcoded directly
-					// rather than keeping a comparison TypeScript can prove
-					// is always true.
 					showSubNav={true}
 					showSlimNav={false}
 					hasPageSkin={false}
@@ -491,6 +490,7 @@ export const PuzzlePageLayout = ({
 					tagIds={[]}
 					sectionId={config.section}
 					contentType="Game"
+					canonicalUrl={puzzlePage.canonicalUrl}
 				/>
 			</div>
 
@@ -509,7 +509,13 @@ export const PuzzlePageLayout = ({
 				)}
 			</div>
 
-			<main data-layout="PuzzlePageLayout">
+			<main
+				data-layout="PuzzlePageLayout"
+				css={puzzleAccentStyles(
+					puzzleConfig.puzzleGroup,
+					darkModeAvailable,
+				)}
+			>
 				<Section
 					fullWidth={true}
 					showTopBorder={false}
@@ -524,7 +530,7 @@ export const PuzzlePageLayout = ({
 									format={puzzlePageFormat}
 									tags={puzzleFamilyTag}
 									sectionLabel={labelText}
-									sectionUrl={`puzzles-and-games/${puzzleConfig.puzzleGroup}/archive`}
+									sectionUrl={`puzzles-and-games/${puzzleGroupPath}/archive`}
 									guardianBaseURL={GUARDIAN_BASE_URL}
 								/>
 							</GridItem>
@@ -598,6 +604,7 @@ export const PuzzlePageLayout = ({
 										}
 										shortUrlId={config.shortUrlId}
 										hidePreferredSourceOnPrint={true}
+										isPuzzlePage={true}
 									/>
 								</div>
 							</GridItem>
@@ -622,6 +629,9 @@ export const PuzzlePageLayout = ({
 										<Island priority="critical">
 											<PuzzleIframe
 												gameUrl={instance.gameUrl}
+												progressIdentity={
+													instance.progressIdentity
+												}
 												puzzleConfig={puzzleConfig}
 												title={instance.title}
 												darkModeAvailable={

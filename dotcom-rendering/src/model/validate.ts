@@ -372,9 +372,12 @@ const isArchiveItem = (value: unknown): boolean =>
 
 const isPuzzlesArchive = (value: unknown): boolean =>
 	isObject(value) &&
-	['crosswords', 'word-games', 'logic-puzzles'].includes(
-		String(value.category),
-	) &&
+	[
+		'crosswords',
+		'word-games',
+		'logic-puzzles',
+		'trivia-and-quizzes',
+	].includes(String(value.category)) &&
 	isString(value.title) &&
 	isString(value.description) &&
 	isArchivePuzzle(value.selectedPuzzle) &&

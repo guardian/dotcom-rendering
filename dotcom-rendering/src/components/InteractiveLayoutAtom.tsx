@@ -14,6 +14,7 @@ export type InteractiveLayoutAtomType = {
 	type: string;
 	format: ArticleFormat;
 	articleArrangement?: LayoutType;
+	isMainMedia?: boolean;
 };
 
 export const InteractiveLayoutAtom = ({
@@ -26,13 +27,14 @@ export const InteractiveLayoutAtom = ({
 	type,
 	format,
 	articleArrangement,
+	isMainMedia = false,
 }: InteractiveLayoutAtomType) => (
 	<div
 		className="interactive interactive-atom"
 		css={
 			// Interactive atoms in the grid based layout (i.e. with an article arrangement)
 			// have default role styles applied as they no longer have a figure wrapper
-			articleArrangement
+			articleArrangement && !isMainMedia
 				? defaultRoleStyles(role, format)
 				: css`
 						margin: 0;

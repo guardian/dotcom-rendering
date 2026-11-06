@@ -7,15 +7,20 @@ export const unifyPageContent = ({
 	elementHtml,
 	renderingTarget,
 	customData,
+	forceLightColorScheme,
 }: {
 	elementCss?: string;
 	elementJs?: string;
 	elementHtml?: string;
 	renderingTarget: RenderingTarget;
 	customData?: string;
+	forceLightColorScheme?: boolean;
 }): string =>
 	renderToString(
-		<html lang="en">
+		<html
+			lang="en"
+			data-color-scheme={forceLightColorScheme ? 'light' : undefined}
+		>
 			<head>
 				<meta charSet="utf-8" />
 				<meta
