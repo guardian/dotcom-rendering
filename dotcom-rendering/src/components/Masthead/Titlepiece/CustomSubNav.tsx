@@ -29,7 +29,6 @@ import { useConfig } from '../../ConfigContext';
 
 type Props = {
 	customSubNav: CustomSubnav;
-	currentNavLink?: string;
 	renderingPage: RenderingPage;
 	pageId?: string;
 	hasPageSkin?: boolean;

@@ -89,7 +89,6 @@ export const FrontCard = (props: Props) => {
 			>
 				<CustomSubNav
 					customSubNav={trail.miniNavData}
-					currentNavLink=""
 					renderingPage="article"
 					isCard={true}
 				/>
