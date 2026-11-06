@@ -195,11 +195,11 @@ catalogs:
       specifier: 24.12.4
       version: 24.12.4
     aws-cdk:
-      specifier: 2.1146.1
-      version: 2.1146.1
+      specifier: 2.1147.0
+      version: 2.1147.0
     aws-cdk-lib:
-      specifier: 2.274.0
-      version: 2.274.0
+      specifier: 2.275.0
+      version: 2.275.0
     constructs:
       specifier: 10.8.1
       version: 10.8.1
@@ -279,7 +279,7 @@ importers:
         version: 3.995.0
       '@guardian/cdk':
         specifier: 'catalog:'
-        version: 66.0.0(aws-cdk-lib@2.274.0(constructs@10.8.1))(aws-cdk@2.1146.1)(constructs@10.8.1)
+        version: 66.0.0(aws-cdk-lib@2.275.0(constructs@10.8.1))(aws-cdk@2.1147.0)(constructs@10.8.1)
       '@guardian/tsconfig':
         specifier: 'catalog:'
         version: 1.0.1
@@ -288,10 +288,10 @@ importers:
         version: 24.12.4
       aws-cdk:
         specifier: 'catalog:'
-        version: 2.1146.1
+        version: 2.1147.0
       aws-cdk-lib:
         specifier: 'catalog:'
-        version: 2.274.0(constructs@10.8.1)
+        version: 2.275.0(constructs@10.8.1)
       constructs:
         specifier: 'catalog:'
         version: 10.8.1
@@ -483,7 +483,7 @@ importers:
         version: 6.1.0(browserslist@4.28.8)(tslib@2.6.2)
       '@guardian/cdk':
         specifier: 'catalog:'
-        version: 66.0.0(aws-cdk-lib@2.274.0(constructs@10.8.1))(aws-cdk@2.1146.1)(constructs@10.8.1)
+        version: 66.0.0(aws-cdk-lib@2.275.0(constructs@10.8.1))(aws-cdk@2.1147.0)(constructs@10.8.1)
       '@guardian/commercial-core':
         specifier: 35.1.0
         version: 35.1.0(@guardian/consent-manager@2.3.0(@guardian/ophan-tracker-js@5.4.0)(tslib@2.6.2)(typescript@6.0.3))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@5.4.0)(tslib@2.6.2)(typescript@6.0.3))
@@ -675,10 +675,10 @@ importers:
         version: 2.1.1(ajv@8.18.0)
       aws-cdk:
         specifier: 'catalog:'
-        version: 2.1146.1
+        version: 2.1147.0
       aws-cdk-lib:
         specifier: 'catalog:'
-        version: 2.274.0(constructs@10.8.1)
+        version: 2.275.0(constructs@10.8.1)
       browserslist:
         specifier: 4.28.8
         version: 4.28.8
@@ -4919,8 +4919,8 @@ packages:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
     engines: {node: '>= 0.4'}
 
-  aws-cdk-lib@2.274.0:
-    resolution: {integrity: sha512-jez6nnPRPGLRv6PfaVUdJNnIQN/5OQQRyQRfdf2lbkww5Z2W4FJ+RIEW1TpYgJ3oLXoM23f9LGA1kxoqvF/sFg==}
+  aws-cdk-lib@2.275.0:
+    resolution: {integrity: sha512-Gjj1tM3dQedhsI7MdwMvULF1PzgEO/zX0KFHU9xwZskkSL9057IZB4fJWm9nL+aaNU3TU+lNt8uB6d8QcZtUpQ==}
     engines: {node: '>= 20.0.0'}
     peerDependencies:
       constructs: ^10.5.0
@@ -4938,8 +4938,8 @@ packages:
       - yaml
       - mime-types
 
-  aws-cdk@2.1146.1:
-    resolution: {integrity: sha512-Sb3RHuPt8yLP4BPFNl+D2li5wI9h4UL/+NYVq8FCxmDfUJwayzEOc/Tgb4wcixB8naOmPOLzhWkdbFx17tuhSg==}
+  aws-cdk@2.1147.0:
+    resolution: {integrity: sha512-2ON/W4jShXWS926bKO6Osgw3MDlxhco5cz3n7SS5GLzaEaYs6ebpAHRDZp6sirkGnMqWoUwxCmIOkvAHS9Rn2A==}
     engines: {node: '>= 18.0.0'}
     hasBin: true
 
@@ -11460,13 +11460,13 @@ snapshots:
       browserslist: 4.28.8
       tslib: 2.6.2
 
-  '@guardian/cdk@66.0.0(aws-cdk-lib@2.274.0(constructs@10.8.1))(aws-cdk@2.1146.1)(constructs@10.8.1)':
+  '@guardian/cdk@66.0.0(aws-cdk-lib@2.275.0(constructs@10.8.1))(aws-cdk@2.1147.0)(constructs@10.8.1)':
     dependencies:
       '@aws-sdk/client-ec2': 3.1149.0
       '@aws-sdk/client-ssm': 3.1149.0
       '@aws-sdk/credential-providers': 3.1149.0
-      aws-cdk: 2.1146.1
-      aws-cdk-lib: 2.274.0(constructs@10.8.1)
+      aws-cdk: 2.1147.0
+      aws-cdk-lib: 2.275.0(constructs@10.8.1)
       chalk: 4.1.2
       codemaker: 1.141.0
       constructs: 10.8.1
@@ -14459,14 +14459,14 @@ snapshots:
     dependencies:
       possible-typed-array-names: 1.1.0
 
-  aws-cdk-lib@2.274.0(constructs@10.8.1):
+  aws-cdk-lib@2.275.0(constructs@10.8.1):
     dependencies:
       '@aws-cdk/asset-awscli-v1': 2.2.292
       '@aws-cdk/asset-node-proxy-agent-v6': 2.1.3
       '@aws-cdk/cloud-assembly-schema': 55.2.0
       constructs: 10.8.1
 
-  aws-cdk@2.1146.1: {}
+  aws-cdk@2.1147.0: {}
 
   axe-core@4.13.0: {}
 
