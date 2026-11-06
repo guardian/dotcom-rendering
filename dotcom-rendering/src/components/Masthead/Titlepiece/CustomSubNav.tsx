@@ -369,7 +369,6 @@ const CustomHeader = (
  */
 export const CustomSubNav = ({
 	customSubNav,
-	currentNavLink = '',
 	renderingPage,
 	hasPageSkin,
 	underlineHeader,
