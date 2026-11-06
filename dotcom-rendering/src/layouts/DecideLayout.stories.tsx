@@ -176,10 +176,6 @@ const immersiveLandscapeFixture = {
 	),
 	config: {
 		...StandardStandardNewsFixture.config,
-		serverSideABTests: {
-			...StandardStandardNewsFixture.config.serverSideABTests,
-			'articles-and-publishing-revamped-immersive-layout': 'variant',
-		},
 	},
 };
 
