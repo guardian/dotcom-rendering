@@ -35,6 +35,7 @@ const container = css`
 	border-top: 1px solid ${palette.brandAlt[400]};
 	border-bottom: 1px solid ${palette.neutral[86]};
 
+	color: ${palette.neutral[7]};
 	background: ${palette.neutral[100]};
 
 	border: 1px solid ${palette.neutral[0]};
@@ -53,6 +54,10 @@ const container = css`
 	b,
 	strong {
 		font-weight: bold;
+	}
+
+	a {
+		color: ${palette.neutral[7]};
 	}
 `;
 
