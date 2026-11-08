@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import lzstring from 'lz-string';
 import { SupporterRevenue } from './SupporterRevenue';
 import { props } from './utils/storybook';
