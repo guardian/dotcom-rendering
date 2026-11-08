@@ -42,6 +42,7 @@ export const serverConfig: UserConfig = mergeConfig(sharedConfig, {
 		rolldownOptions: {
 			input: {
 				server: './src/server/server.ts',
+				instrumentation: './src/server/instrumentation.ts',
 			},
 			output: {
 				format: 'cjs',
@@ -49,7 +50,8 @@ export const serverConfig: UserConfig = mergeConfig(sharedConfig, {
 				// Produce a single server.js file (no code splitting),
 				// matching webpack's single-file output. This avoids
 				// server chunks colliding with client assets in dist/.
-				inlineDynamicImports: true,
+				// TODO check
+				// inlineDynamicImports: true,
 				minify: {
 					mangle: {
 						keepNames: true,
