@@ -275,7 +275,7 @@ describe('buildFrameStyles', () => {
 		);
 
 		expect(nonTouchStyles).toContain(
-			'@media (max-width: 739.9px){min-height:600px;}',
+			' width: 100%; min-height: 600px; border: 1px solid var(--article-border); overflow: hidden; @media (max-width: 979.9px) { min-height: 600px; } @media (max-width: 739.9px) { min-height: 600px; } ',
 		);
 	});
 
@@ -289,7 +289,7 @@ describe('buildFrameStyles', () => {
 		);
 
 		expect(touchBlock).toContain(
-			'@media (max-width: 739.9px) { min-height: 600px; }',
+			'@media (pointer: coarse) { min-height: 800px; @media (max-width: 979.9px) { min-height: 600px; } @media (max-width: 739.9px) { min-height: 600px; } } ; ',
 		);
 	});
 });
