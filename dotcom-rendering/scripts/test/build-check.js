@@ -35,6 +35,12 @@ const fileExists = async (filePath) => {
 };
 
 (async () => {
+	const serverFiles = ['./dist/server.js', './dist/instrumentation.js'];
+
+	for (const file of serverFiles) {
+		await fileExists(file);
+	}
+
 	// Check that the manifest files return values for all the chunks
 	const manifestFiles = [
 		'./dist/manifest.client.web.json',
