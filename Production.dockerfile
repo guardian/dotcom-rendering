@@ -16,6 +16,7 @@ ENV NODE_ENV=production
 # Build the application
 FROM dependencies AS builder
 RUN node vite/build.mts
+RUN node scripts/test/build-check.js
 # TODO VITE FIXME
 # RUN node scripts/islands/island-descriptions.mjs
 
