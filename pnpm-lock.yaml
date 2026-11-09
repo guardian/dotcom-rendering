@@ -6,6 +6,9 @@ importers:
   .:
     configDependencies: {}
     packageManagerDependencies:
+      '@pnpm/exe':
+        specifier: 12.14.0
+        version: 12.14.0
       pnpm:
         specifier: 12.14.0
         version: 12.14.0
@@ -89,6 +92,11 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@pnpm/exe@12.14.0':
+    resolution: {integrity: sha512-iZCbiKegYUapNVkZY4O8vjXt9EF/j34LbDvew6qUM5g/HrxMY38cFJaoE8+5ZWQfbt2YCsLfufI5TTh+GxUbWw==}
+    engines: {node: '>=18.*'}
+    hasBin: true
+
   pnpm@12.14.0:
     resolution: {integrity: sha512-wYum2HmT09Fky16JSPMrLAbuhUSH4GzY2GeBNC+z5btGNDZwNHEehoArqpw3vqkGzhkprQjXCITJfYAd8TOJpg==}
     engines: {node: '>=18.*'}
@@ -138,6 +146,23 @@ snapshots:
   '@pnpm/exe.win32-x64@12.14.0':
     optional: true
 
+  '@pnpm/exe@12.14.0':
+    optionalDependencies:
+      '@pnpm/exe.android-arm64': 12.14.0
+      '@pnpm/exe.android-x64': 12.14.0
+      '@pnpm/exe.darwin-arm64': 12.14.0
+      '@pnpm/exe.darwin-x64': 12.14.0
+      '@pnpm/exe.freebsd-x64': 12.14.0
+      '@pnpm/exe.linux-arm64': 12.14.0
+      '@pnpm/exe.linux-arm64-musl': 12.14.0
+      '@pnpm/exe.linux-ppc64': 12.14.0
+      '@pnpm/exe.linux-riscv64': 12.14.0
+      '@pnpm/exe.linux-s390x': 12.14.0
+      '@pnpm/exe.linux-x64': 12.14.0
+      '@pnpm/exe.linux-x64-musl': 12.14.0
+      '@pnpm/exe.win32-arm64': 12.14.0
+      '@pnpm/exe.win32-x64': 12.14.0
+
   pnpm@12.14.0:
     optionalDependencies:
       '@pnpm/exe.android-arm64': 12.14.0
@@ -171,8 +196,8 @@ catalogs:
       specifier: 3.995.0
       version: 3.995.0
     '@guardian/cdk':
-      specifier: 66.0.0
-      version: 66.0.0
+      specifier: 0.0.0-canary-20261102141046
+      version: 0.0.0-canary-20261102141046
     '@guardian/eslint-config':
       specifier: 16.0.0
       version: 16.0.0
@@ -279,7 +304,7 @@ importers:
         version: 3.995.0
       '@guardian/cdk':
         specifier: 'catalog:'
-        version: 66.0.0(aws-cdk-lib@2.274.0(constructs@10.8.1))(aws-cdk@2.1146.1)(constructs@10.8.1)
+        version: 0.0.0-canary-20261102141046(aws-cdk-lib@2.274.0(constructs@10.8.1))(aws-cdk@2.1146.1)(constructs@10.8.1)
       '@guardian/tsconfig':
         specifier: 'catalog:'
         version: 1.0.1
@@ -483,7 +508,7 @@ importers:
         version: 6.1.0(browserslist@4.28.8)(tslib@2.6.2)
       '@guardian/cdk':
         specifier: 'catalog:'
-        version: 66.0.0(aws-cdk-lib@2.274.0(constructs@10.8.1))(aws-cdk@2.1146.1)(constructs@10.8.1)
+        version: 0.0.0-canary-20261102141046(aws-cdk-lib@2.274.0(constructs@10.8.1))(aws-cdk@2.1146.1)(constructs@10.8.1)
       '@guardian/commercial-core':
         specifier: 35.1.0
         version: 35.1.0(@guardian/consent-manager@2.3.0(@guardian/ophan-tracker-js@5.4.0)(tslib@2.6.2)(typescript@6.0.3))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@5.4.0)(tslib@2.6.2)(typescript@6.0.3))
@@ -2172,8 +2197,8 @@ packages:
       browserslist: ^4.22.2
       tslib: ^2.6.2
 
-  '@guardian/cdk@66.0.0':
-    resolution: {integrity: sha512-9xetVEUEwxlA4g+mpohECFhx0YcYsFgAHwAdac+2rKfQvvOfWln5Wv/eeZwu4ICxN1FmlcdHiaJJF3jWWxA9NA==}
+  '@guardian/cdk@0.0.0-canary-20261102141046':
+    resolution: {integrity: sha512-/uHuGMX4rFT4453Yjs95PKEDai3tpknC50lRTvVJfJoDP7PNHPbopFSTXZRXuVujYDWp1sLppagwhAd7CzFLwQ==}
     hasBin: true
     peerDependencies:
       aws-cdk: ^2.1135.0
@@ -9813,7 +9838,7 @@ snapshots:
       '@smithy/fetch-http-handler': 5.8.0
       '@smithy/node-http-handler': 4.12.1
       '@smithy/types': 4.19.0
-      tslib: 2.8.1
+      tslib: 2.6.2
 
   '@aws-sdk/client-s3@3.995.0':
     dependencies:
@@ -9925,7 +9950,7 @@ snapshots:
       '@smithy/fetch-http-handler': 5.8.0
       '@smithy/node-http-handler': 4.12.1
       '@smithy/types': 4.19.0
-      tslib: 2.8.1
+      tslib: 2.6.2
 
   '@aws-sdk/client-ssm@3.995.0':
     dependencies:
@@ -10090,7 +10115,7 @@ snapshots:
       '@smithy/core': 3.35.2
       '@smithy/credential-provider-imds': 4.5.2
       '@smithy/types': 4.19.0
-      tslib: 2.8.1
+      tslib: 2.6.2
 
   '@aws-sdk/credential-providers@3.995.0':
     dependencies:
@@ -10157,7 +10182,7 @@ snapshots:
       '@smithy/core': 3.35.2
       '@smithy/signature-v4': 5.7.4
       '@smithy/types': 4.19.0
-      tslib: 2.8.1
+      tslib: 2.6.2
 
   '@aws-sdk/middleware-sdk-s3@3.972.76':
     dependencies:
@@ -10228,7 +10253,7 @@ snapshots:
       '@smithy/fetch-http-handler': 5.8.0
       '@smithy/node-http-handler': 4.12.1
       '@smithy/types': 4.19.0
-      tslib: 2.8.1
+      tslib: 2.6.2
 
   '@aws-sdk/region-config-resolver@3.972.49':
     dependencies:
@@ -11460,7 +11485,7 @@ snapshots:
       browserslist: 4.28.8
       tslib: 2.6.2
 
-  '@guardian/cdk@66.0.0(aws-cdk-lib@2.274.0(constructs@10.8.1))(aws-cdk@2.1146.1)(constructs@10.8.1)':
+  '@guardian/cdk@0.0.0-canary-20261102141046(aws-cdk-lib@2.274.0(constructs@10.8.1))(aws-cdk@2.1146.1)(constructs@10.8.1)':
     dependencies:
       '@aws-sdk/client-ec2': 3.1149.0
       '@aws-sdk/client-ssm': 3.1149.0
