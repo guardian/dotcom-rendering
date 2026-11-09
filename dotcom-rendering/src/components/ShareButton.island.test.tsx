@@ -1,6 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import { ConfigProvider } from './ConfigContext';
 import { ShareButton } from './ShareButton.island';
 
 jest.mock('../lib/useMatchMedia', () => ({ useMatchMedia: () => false }));
@@ -20,26 +19,14 @@ const format = {
 const shareUrl =
 	'https://www.theguardian.com/crosswords/quick/17599?CMP=share_btn_url';
 
-const button = (
-	overrides: Partial<Parameters<typeof ShareButton>[0]> = {},
-	renderingTarget: 'Web' | 'Apps' = 'Web',
-) => (
-	<ConfigProvider
-		value={{
-			renderingTarget,
-			darkModeAvailable: false,
-			assetOrigin: '/',
-			editionId: 'UK',
-		}}
-	>
-		<ShareButton
-			pageId="crosswords/quick/17599"
-			webTitle="Quick crossword"
-			format={format}
-			context="ArticleMeta"
-			{...overrides}
-		/>
-	</ConfigProvider>
+const button = (overrides: Partial<Parameters<typeof ShareButton>[0]> = {}) => (
+	<ShareButton
+		pageId="crosswords/quick/17599"
+		webTitle="Quick crossword"
+		format={format}
+		context="ArticleMeta"
+		{...overrides}
+	/>
 );
 
 describe('puzzle sharing', () => {
@@ -67,7 +54,7 @@ describe('puzzle sharing', () => {
 			} else if (method === 'copy') {
 				setNavigator('clipboard', { writeText: share });
 			}
-			render(button());
+			render(button({ puzzleTrackingSource: 'crossword-page' }));
 			const control = screen.getByRole(
 				method === 'email' ? 'link' : 'button',
 				{ name: 'Share' },
@@ -99,8 +86,8 @@ describe('puzzle sharing', () => {
 		},
 	);
 
-	it.each(['article', 'apps'] as const)(
-		'does not add puzzle analytics to %s',
+	it.each(['article', 'crossword'] as const)(
+		'does not add puzzle analytics to an unconfigured %s',
 		async (kind) => {
 			const writeText = jest.fn().mockResolvedValue(undefined);
 			setNavigator('clipboard', { writeText });
@@ -114,7 +101,6 @@ describe('puzzle sharing', () => {
 								},
 							}
 						: {},
-					kind === 'apps' ? 'Apps' : 'Web',
 				),
 			);
 			const share = screen.getByRole('button', { name: 'Share' });

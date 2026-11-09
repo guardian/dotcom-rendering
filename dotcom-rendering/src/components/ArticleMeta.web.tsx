@@ -553,7 +553,12 @@ export const ArticleMeta = ({
 									format={format}
 									context="ArticleMeta"
 									puzzleTrackingSource={
-										isPuzzlePage ? 'puzzle-page' : undefined
+										isPuzzlePage
+											? 'puzzle-page'
+											: format.design ===
+												  ArticleDesign.Crossword
+												? 'crossword-page'
+												: undefined
 									}
 								/>
 							</Island>

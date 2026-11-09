@@ -20,7 +20,6 @@ import {
 import { transparentColour } from '../lib/transparentColour';
 import { useMatchMedia } from '../lib/useMatchMedia';
 import { palette as themePalette } from '../palette';
-import { useConfig } from './ConfigContext';
 
 type Props = {
 	size?: Size;
@@ -235,14 +234,6 @@ export const ShareButton = ({
 	context,
 	puzzleTrackingSource,
 }: Props) => {
-	const { renderingTarget } = useConfig();
-	const puzzleSource =
-		renderingTarget === 'Web'
-			? (puzzleTrackingSource ??
-				(format.design === ArticleDesign.Crossword
-					? 'crossword-page'
-					: undefined))
-			: undefined;
 	const [isCopied, setIsCopied] = useState(false);
 	const [buttonKind, setButtonKind] = useState<ButtonKind>('email');
 	const copyFeedbackTimer = useRef<ReturnType<typeof setTimeout> | undefined>(
@@ -302,7 +293,7 @@ export const ShareButton = ({
 	}, [isCopied]);
 
 	const trackingAttributes = puzzleActionAttributes(
-		puzzleSource,
+		puzzleTrackingSource,
 		`share-attempt | ${buttonKind} | ${context}`,
 	);
 
@@ -327,7 +318,7 @@ export const ShareButton = ({
 						navigator.clipboard
 							.writeText(shareData.url)
 							.then(() => {
-								if (puzzleSource === undefined) {
+								if (puzzleTrackingSource === undefined) {
 									setIsCopied(true);
 								} else {
 									// Keep the clicked icon attached until Ophan's
