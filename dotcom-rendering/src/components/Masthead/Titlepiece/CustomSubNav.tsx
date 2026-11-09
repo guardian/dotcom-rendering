@@ -69,18 +69,18 @@ const articleContainerStyles = css`
 	 * article min-height, otherwise the outer row remains taller than the
 	 * inline list itself.
 	 */
-	min-height: 0;
+	min-height: 36px;
 
 	${from.mobileMedium} {
-		min-height: 0;
+		min-height: 40px;
 	}
 
 	${from.tablet} {
-		min-height: 0;
+		min-height: 42px;
 	}
 
 	${from.leftCol} {
-		min-height: 0;
+		min-height: 44px;
 	}
 `;
 
@@ -103,14 +103,13 @@ const articleSubNavStyles = css`
 
 /** Article subnavs keep a small horizontal gap between the header and the list items. */
 const articleHeaderGapStyles = css`
-	margin-left: ${space[2]}px;
-	padding-left: ${space[2]}px;
+	margin-left: ${space[1]}px;
+	padding-left: ${space[1]}px;
 `;
 
 const cardMiniNavHeaderGapStyles = css`
 	margin-left: ${space[2]}px;
 	padding-left: ${space[2]}px;
-	padding-top: 8px;
 `;
 
 const cardMiniNavNoHeaderGapStyles = css`
@@ -119,20 +118,30 @@ const cardMiniNavNoHeaderGapStyles = css`
 `;
 
 /**
- * Card mini-navs keep the reduced vertical spacing regardless of whether the
- * header text is hidden. The no-header case only needs to remove the left gap;
- * the vertical reset must remain independent of that condition.
+ * Keep the card mini-nav height reset separate from the header/list spacing.
+ * Vertical padding on the list changes its total box size and interferes with the
+ * earlier baseline fix, so only the horizontal gutter belongs in the gap styles.
  */
-const cardMiniNavStyles = css`
-	margin: 0;
+const cardMiniNavLayoutStyles = css`
+	margin-top: 0;
+	margin-bottom: 0;
 	padding-top: 0;
 	padding-bottom: 0;
 	list-style: none;
 
 	${from.mobileMedium} {
-		margin: 0;
+		margin-top: 0;
+		margin-bottom: 0;
 		padding-top: 0;
 		padding-bottom: 0;
+	}
+`;
+
+const cardMiniNavContainerStyles = css`
+	min-height: 24px;
+
+	${from.mobileMedium} {
+		min-height: 24px;
 	}
 `;
 
@@ -141,6 +150,8 @@ const articleDividerStyles = css`
 	${articleHeaderGapStyles}
 	border-left: 1px solid ${themePalette('--masthead-nav-lines')};
 `;
+
+const cardMiniNavStyles = cardMiniNavLayoutStyles;
 
 const articleHeaderStyles = css`
 	${textSansBold14};
@@ -500,7 +511,11 @@ export const CustomSubNav = ({
 				data-component={`custom-subnav-${customSubNav.header.headerText}`}
 				data-component-id={customSubNav.id}
 				data-rendering-page={renderingPage}
-				css={[articleContainerStyles, scrollableSubNavStyles]}
+				css={[
+					articleContainerStyles,
+					isCard && cardMiniNavContainerStyles,
+					scrollableSubNavStyles,
+				]}
 			>
 				{CustomHeader(customSubNav, articleHeaderStyles)}
 				<ul
