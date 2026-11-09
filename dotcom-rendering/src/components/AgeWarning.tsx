@@ -3,6 +3,7 @@ import {
 	from,
 	textSans12,
 	textSans17,
+	until,
 	visuallyHidden,
 } from '@guardian/source/foundations';
 import { palette } from '../palette';
@@ -19,11 +20,25 @@ const ageWarningStyles = (isSmall: boolean) => css`
 	background-color: ${palette('--age-warning-background')};
 	display: inline-block;
 
-	> strong {
+	> span > strong {
 		font-weight: bold;
 	}
 
 	padding: ${isSmall ? '3px 5px' : '6px 10px'};
+
+	${!isSmall &&
+	css`
+		${until.mobileMedium} {
+			background-color: transparent;
+			padding: 0;
+			line-height: 32px;
+			> span {
+				background-color: ${palette('--age-warning-background')};
+				box-decoration-break: clone;
+				padding: 6px 10px;
+			}
+		}
+	`}
 
 	${from.mobileLandscape} {
 		padding-left: ${isSmall ? '6px' : '12px'};
@@ -56,11 +71,18 @@ export const AgeWarning = ({ age, isScreenReader, size = 'medium' }: Props) => {
 			aria-hidden="true"
 			data-gu-name="age-warning"
 		>
-			<svg width="11" height="11" viewBox="0 0 11 11" fill="currentColor">
-				<path d="M5.4 0C2.4 0 0 2.4 0 5.4s2.4 5.4 5.4 5.4 5.4-2.4 5.4-5.4S8.4 0 5.4 0zm3 6.8H4.7V1.7h.7L6 5.4l2.4.6v.8z"></path>
-			</svg>{' '}
-			{warningPrefix}
-			<strong>{ageOld}</strong>
+			<span>
+				<svg
+					width="11"
+					height="11"
+					viewBox="0 0 11 11"
+					fill="currentColor"
+				>
+					<path d="M5.4 0C2.4 0 0 2.4 0 5.4s2.4 5.4 5.4 5.4 5.4-2.4 5.4-5.4S8.4 0 5.4 0zm3 6.8H4.7V1.7h.7L6 5.4l2.4.6v.8z"></path>
+				</svg>{' '}
+				{warningPrefix}
+				<strong>{ageOld}</strong>
+			</span>
 		</div>
 	);
 };

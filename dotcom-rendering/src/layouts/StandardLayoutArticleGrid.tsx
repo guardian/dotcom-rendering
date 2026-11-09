@@ -342,6 +342,12 @@ export const StandardLayoutArticleGrid = ({
 								? '96px'
 								: '48px'};
 						}
+						${ageWarning != null &&
+						css`
+							${until.mobileMedium} {
+								--immersive-headline-overlap: 6.75rem;
+							}
+						`}
 					`,
 				isImmersiveLandscape &&
 					css`
@@ -553,20 +559,32 @@ export const StandardLayoutArticleGrid = ({
 										)};
 									}
 
-									&::before {
+									&::before,
+									&::after {
 										${headlineFont(format)}
 										content: '';
 										position: absolute;
 										inset: calc(1lh - 120px)
 											0 -${space[8]}px;
 										z-index: ${getZIndex('mediaOverlay')};
+										pointer-events: none;
+									}
+
+									&::before {
+										backdrop-filter: blur(7px);
+										mask-image: linear-gradient(
+											180deg,
+											transparent 0%,
+											black 120px
+										);
+									}
+
+									&::after {
 										background: linear-gradient(
 											180deg,
 											rgba(26, 26, 26, 0) 0%,
 											#1a1a1a 120px
 										);
-										backdrop-filter: blur(7px);
-										pointer-events: none;
 									}
 								}
 							}
