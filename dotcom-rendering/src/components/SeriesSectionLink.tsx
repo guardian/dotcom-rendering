@@ -1,5 +1,6 @@
 import { css, type SerializedStyles } from '@emotion/react';
 import {
+	between,
 	from,
 	headlineBold17,
 	headlineBold20,
@@ -472,6 +473,9 @@ export const SeriesSectionLink = ({
 							${until.desktop} {
 								padding-left: 10px;
 								padding-right: 10px;
+							}
+							${between.tablet.and.leftCol} {
+								padding-left: 6px;
 							}
 							${from.desktop} {
 								bottom: 2px;

@@ -340,7 +340,7 @@ export const StandardLayoutArticleGrid = ({
 						${until.tablet} {
 							--immersive-headline-overlap: ${ageWarning != null
 								? '96px'
-								: '24px'};
+								: '48px'};
 						}
 					`,
 				isImmersiveLandscape &&
@@ -557,15 +557,15 @@ export const StandardLayoutArticleGrid = ({
 										${headlineFont(format)}
 										content: '';
 										position: absolute;
-										inset: -120px 0 -${space[8]}px;
+										inset: calc(1lh - 120px)
+											0 -${space[8]}px;
 										z-index: ${getZIndex('mediaOverlay')};
-										background: ${headlineBackgroundImmersive};
-										backdrop-filter: blur(8px);
-										mask-image: linear-gradient(
-											to bottom,
-											transparent,
-											black calc(120px + 1lh)
+										background: linear-gradient(
+											180deg,
+											rgba(26, 26, 26, 0) 0%,
+											#1a1a1a 120px
 										);
+										backdrop-filter: blur(7px);
 										pointer-events: none;
 									}
 								}
