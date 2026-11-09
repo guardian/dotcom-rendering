@@ -13,6 +13,7 @@ import type { PuzzleItem } from '../types/puzzlesPage';
 type Props = {
 	archives: PuzzleItem[];
 	label?: string;
+	ophanComponentName?: string;
 };
 
 const getArchiveUrl = (item: PuzzleItem): string | undefined => {
@@ -154,6 +155,7 @@ const linkStyles = css`
 export const PuzzlesArchiveMenu = ({
 	archives,
 	label = 'Puzzle archives',
+	ophanComponentName = 'puzzles-archive-menu',
 }: Props) => {
 	const detailsRef = useRef<HTMLDetailsElement>(null);
 	const summaryRef = useRef<HTMLElement>(null);
@@ -232,12 +234,18 @@ export const PuzzlesArchiveMenu = ({
 					/>
 				</svg>
 			</summary>
-			<ul aria-label={label} css={menuStyles} ref={menuRef}>
-				{validArchives.map(({ archive, url }) => (
+			<ul
+				aria-label={label}
+				css={menuStyles}
+				ref={menuRef}
+				data-component={ophanComponentName}
+			>
+				{validArchives.map(({ archive, url }, index) => (
 					<li key={archive.id}>
 						<a
 							css={linkStyles}
 							href={url}
+							data-link-name={`archive | select | item-${archive.id} | position-@${index + 1}`}
 							{...(/^https?:\/\//.test(url)
 								? {
 										rel: 'noopener noreferrer',
