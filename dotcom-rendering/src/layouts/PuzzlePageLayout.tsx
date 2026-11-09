@@ -3,8 +3,6 @@ import {
 	from,
 	remSpace,
 	palette as sourcePalette,
-	space,
-	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
@@ -27,6 +25,7 @@ import { RelatedPuzzlesRailEnhanced } from '../components/RelatedPuzzlesRailEnha
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
+import { UnlockPremiumPuzzlesModal } from '../components/UnlockPremiumPuzzlesModal';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -35,7 +34,7 @@ import {
 } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
-import { getZIndex } from '../lib/getZIndex';
+import { getPathFromUrl } from '../lib/premiumPuzzlesUrls';
 import { formatPuzzleDate } from '../lib/puzzleDate';
 import {
 	isPuzzlesHubV1Enabled,
@@ -322,79 +321,6 @@ const stretchLines = css`
 
 const mainContainerWrapperStyles = css`
 	position: relative;
-`;
-
-const unlockPremiumPuzzlesBlockerStyles = css`
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-`;
-
-const unlockPremiumPuzzlesOverlayStyles = css`
-	z-index: ${getZIndex('lightbox')};
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	opacity: 0.8;
-	background-color: ${sourcePalette.neutral[20]};
-`;
-
-const unlockPremiumPuzzlesModalStyles = css`
-	z-index: ${getZIndex('sign-in-gate')};
-	min-width: ${space[5]}px;
-	min-height: ${space[24]}px;
-	max-width: 620px;
-	width: 100%;
-	background-color: ${sourcePalette.neutral[93]};
-	border-radius: ${space[3]}px;
-
-	${until.phablet} {
-		position: absolute;
-		max-width: none;
-		bottom: 0;
-		border-bottom-left-radius: 0;
-		border-bottom-right-radius: 0;
-	}
-`;
-
-const unlockPremiumPuzzlesModalBodyStyles = css`
-	display: flex;
-	flex-direction: column;
-`;
-
-const unlockPremiumPuzzlesModalBodyHeaderStyles = css`
-	display: flex;
-`;
-
-const unlockPremiumPuzzlesModalBodyDividerStyles = css`
-	display: flex;
-`;
-
-const unlockPremiumPuzzlesModalBodyHeroStyles = css`
-	display: flex;
-`;
-
-const unlockPremiumPuzzlesModalBodyTitleStyles = css`
-	display: flex;
-`;
-
-const unlockPremiumPuzzlesModalBodySubtitleStyles = css`
-	display: flex;
-`;
-
-const unlockPremiumPuzzlesModalBodyBenefitsStyles = css`
-	display: flex;
-`;
-
-const unlockPremiumPuzzlesModaFooterStyles = css`
-	display: flex;
 `;
 
 /**
@@ -919,57 +845,15 @@ export const PuzzlePageLayout = ({
 						</div>
 					)}
 				</main>
-				<div css={unlockPremiumPuzzlesBlockerStyles}>
-					<div css={unlockPremiumPuzzlesOverlayStyles}></div>
-					<div css={unlockPremiumPuzzlesModalStyles}>
-						<div css={unlockPremiumPuzzlesModalBodyStyles}>
-							<div
-								css={unlockPremiumPuzzlesModalBodyHeaderStyles}
-							>
-								logo here
-							</div>
-							<div
-								css={unlockPremiumPuzzlesModalBodyDividerStyles}
-							>
-								divider
-							</div>
-							<div css={unlockPremiumPuzzlesModalBodyHeroStyles}>
-								hero image here
-							</div>
-							<div css={unlockPremiumPuzzlesModalBodyTitleStyles}>
-								Unlock the full puzzles experience - and more
-							</div>
-							<div
-								css={
-									unlockPremiumPuzzlesModalBodySubtitleStyles
-								}
-							>
-								Subscribe to the Guardian to unlock the ad-free
-								puzzles archive and enjoy more digital benefits:
-							</div>
-							<div
-								css={
-									unlockPremiumPuzzlesModalBodyBenefitsStyles
-								}
-							>
-								<ul>
-									<li>
-										Unlimited ad-free reading on all your
-										devices
-									</li>
-									<li>
-										Unlimited access to the Guardian app and
-										Guardian Feast app
-									</li>
-									<li>
-										An exclusive weekly supporter newsletter
-									</li>
-								</ul>
-							</div>
-						</div>
-						<div css={unlockPremiumPuzzlesModaFooterStyles}></div>
-					</div>
-				</div>
+				{/* Premium puzzles paywall: needs the position: relative wrapper above. */}
+				<UnlockPremiumPuzzlesModal
+					idUrl={config.idUrl}
+					returnFromSubscribeToPath={getPathFromUrl(
+						puzzlePage.canonicalUrl,
+						'/puzzles-and-games',
+					)}
+					returnToArchivePath={`/puzzles-and-games/${puzzleGroupPath}/archive`}
+				/>
 			</div>
 
 			{/*
