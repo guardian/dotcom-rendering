@@ -61,32 +61,26 @@ const subNavStylesFromLeftCol = css`
 	}
 `;
 
-const cardMiniNavStyles = css`
-	margin-top: 0;
-	margin-bottom: 0;
-
-	${from.mobileMedium} {
-		margin-top: 0;
-		margin-bottom: 0;
-	}
-`;
-
 /** On articles the header and links sit on a single aligned row. */
 const articleContainerStyles = css`
 	display: flex;
 	align-items: stretch;
-	min-height: 36px;
+	/* Keep this container at the reduced list height instead of the shared
+	 * article min-height, otherwise the outer row remains taller than the
+	 * inline list itself.
+	 */
+	min-height: 0;
 
 	${from.mobileMedium} {
-		min-height: 40px;
+		min-height: 0;
 	}
 
 	${from.tablet} {
-		min-height: 42px;
+		min-height: 0;
 	}
 
 	${from.leftCol} {
-		min-height: 44px;
+		min-height: 0;
 	}
 `;
 
@@ -114,8 +108,32 @@ const articleHeaderGapStyles = css`
 `;
 
 const cardMiniNavHeaderGapStyles = css`
-	margin-left: ${space[1]}px;
-	padding-left: ${space[1]}px;
+	margin-left: ${space[2]}px;
+	padding-left: ${space[2]}px;
+	padding-top: 8px;
+`;
+
+const cardMiniNavNoHeaderGapStyles = css`
+	margin-left: 0;
+	padding-left: 0;
+`;
+
+/**
+ * Card mini-navs keep the reduced vertical spacing regardless of whether the
+ * header text is hidden. The no-header case only needs to remove the left gap;
+ * the vertical reset must remain independent of that condition.
+ */
+const cardMiniNavStyles = css`
+	margin: 0;
+	padding-top: 0;
+	padding-bottom: 0;
+	list-style: none;
+
+	${from.mobileMedium} {
+		margin: 0;
+		padding-top: 0;
+		padding-bottom: 0;
+	}
 `;
 
 /** Article subnavs have a divider separating the header text from the scrollable list. */
@@ -487,12 +505,14 @@ export const CustomSubNav = ({
 				{CustomHeader(customSubNav, articleHeaderStyles)}
 				<ul
 					css={[
-						isCard && cardMiniNavStyles,
 						subNavStyles,
 						!hasPageSkin && subNavStylesFromLeftCol,
 						articleSubNavStyles,
+						isCard && cardMiniNavStyles,
 						isCard
-							? cardMiniNavHeaderGapStyles
+							? customSubNav.header.showHeaderText
+								? cardMiniNavHeaderGapStyles
+								: cardMiniNavNoHeaderGapStyles
 							: articleDividerStyles,
 						css`
 							flex-shrink: 0;
