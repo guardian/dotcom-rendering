@@ -238,9 +238,11 @@ const cardImageStyles = (isFeatured: boolean) => css`
 export const PuzzleCard = ({
 	isFeatured,
 	item,
+	dataLinkName,
 }: {
 	isFeatured: boolean;
 	item: PuzzleItem;
+	dataLinkName?: string;
 }) => {
 	const url = getPuzzleUrl(item);
 	const colours = puzzleColours(item);
@@ -294,7 +296,12 @@ export const PuzzleCard = ({
 		cardColourStyles(colours.background),
 	];
 	return url !== undefined ? (
-		<a css={styles} href={url} {...externalProps(url)}>
+		<a
+			css={styles}
+			href={url}
+			data-link-name={dataLinkName}
+			{...externalProps(url)}
+		>
 			{contents}
 		</a>
 	) : (
@@ -476,30 +483,53 @@ export const rowStyles = (
 export const Rows = ({
 	isFeatured = false,
 	rows,
+	ophanComponentName,
 }: {
 	isFeatured?: boolean;
 	rows: PuzzleItem[][];
-}) => (
-	<div css={rowsStyles}>
-		{rows
-			.filter((row) => row.length > 0)
-			.map((row) => (
-				<ul
-					data-card-size={
-						isSmallCard(row[0]?.cardVariant) ? 'small' : 'normal'
-					}
-					css={rowStyles(
-						row[0]?.cardVariant ?? 'primary',
-						row.length,
-					)}
-					key={row.map(({ id }) => id).join('-')}
-				>
-					{row.map((item) => (
-						<li key={item.id}>
-							<PuzzleCard isFeatured={isFeatured} item={item} />
-						</li>
-					))}
-				</ul>
-			))}
-	</div>
-);
+	ophanComponentName?: string;
+}) => {
+	const populatedRows = rows.filter((row) => row.length > 0);
+
+	return (
+		<div css={rowsStyles} data-component={ophanComponentName}>
+			{populatedRows.map((row, groupIndex) => {
+				const offset = populatedRows
+					.slice(0, groupIndex)
+					.reduce(
+						(total, previousRow) => total + previousRow.length,
+						0,
+					);
+
+				return (
+					<ul
+						data-card-size={
+							isSmallCard(row[0]?.cardVariant)
+								? 'small'
+								: 'normal'
+						}
+						css={rowStyles(
+							row[0]?.cardVariant ?? 'primary',
+							row.length,
+						)}
+						key={row.map(({ id }) => id).join('-')}
+					>
+						{row.map((item, index) => (
+							<li key={item.id}>
+								<PuzzleCard
+									isFeatured={isFeatured}
+									item={item}
+									dataLinkName={
+										ophanComponentName !== undefined
+											? `puzzles | group-${groupIndex} | card-@${offset + index + 1} | card-${item.id}`
+											: undefined
+									}
+								/>
+							</li>
+						))}
+					</ul>
+				);
+			})}
+		</div>
+	);
+};
