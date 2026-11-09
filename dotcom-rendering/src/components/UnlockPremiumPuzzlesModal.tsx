@@ -37,8 +37,8 @@ const overlayStyles = css`
 	left: 0;
 	width: 100%;
 	height: 100%;
-	opacity: 0.8;
-	background-color: ${sourcePalette.neutral[20]};
+	opacity: 0.5;
+	background-color: ${sourcePalette.neutral[0]};
 `;
 
 const modalStyles = css`
@@ -47,8 +47,12 @@ const modalStyles = css`
 	min-height: ${space[24]}px;
 	max-width: 620px;
 	width: 100%;
-	padding: ${space[6]}px;
-	background-color: ${sourcePalette.neutral[93]};
+	padding-top: ${space[4]}px;
+	padding-left: ${space[4]}px;
+	padding-right: ${space[4]}px;
+	padding-bottom: ${space[6]}px;
+	/* New color specified by the Design team for the Modal background */
+	background-color: #fef9f6;
 	border-radius: ${space[3]}px;
 
 	${until.phablet} {
