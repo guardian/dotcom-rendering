@@ -43,7 +43,7 @@ const baseCardStyles = css`
 	text-decoration: none;
 `;
 
-const hoverStyles = (isLoopAndInLoopClickTestVariant = false) => css`
+const hoverStyles = (isLoopAndInLoopClickTestVariant: boolean) => css`
 	:hover .media-overlay {
 		width: 100%;
 		height: 100%;
@@ -67,7 +67,6 @@ const hoverStyles = (isLoopAndInLoopClickTestVariant = false) => css`
 					? `.cinemagraph, .loop`
 					: `.cinemagraph`}
 			):hover,
-		.video-container:not(.cinemagraph):hover,
 		.slideshow-carousel-footer:hover,
 		.branding-logo:hover
 	) {
