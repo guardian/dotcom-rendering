@@ -6,9 +6,10 @@ import { getOptionsHeaders, type SignedIn } from './identity';
  * served from `config.ajaxUrl` (which avoids the page's CDN cache) and the
  * reader's own `Authorization` header is forwarded.
  *
- * NOTE: the path and the response shape are the proposed contract and still
- * have to be agreed with the backend. Until then it is mocked by the
- * development server (`src/server/lib/dev-puzzle-access-mock.ts`).
+ * It is served by `frontend` (`PuzzlesAccessController`), which forwards the
+ * `Authorization` header to the Puzzles API. The upstream call is still to be
+ * agreed with the Puzzles API team; until it exists the endpoint answers 502,
+ * which counts as a failed check here.
  */
 export const PUZZLE_ACCESS_ENDPOINT = '/puzzles-and-games/access';
 

@@ -1,6 +1,8 @@
 # Premium puzzles access: plan and decisions
 
-Status: phases 0 to 3 are implemented against mocks. Phase 4 (the real backend contract) is pending.
+Status: phases 0 to 4 are implemented. `frontend` computes the premium flag and
+serves the access endpoint (on the same branch name as this work). The upstream
+Puzzles API access endpoint it forwards to is still to be agreed.
 
 This document records the plan for gating premium puzzles on the Puzzle Page,
 every decision taken along the way, and the reasoning behind each one.
@@ -187,13 +189,8 @@ Notes:
    (`src/model/validate.puzzlePage.ts`). Absent means free, so nothing is
    blocked until the backend sends it. The name is a working name, to agree
    with the backend.
-2. Development-only mock of the flag: `puzzlePageMockOverrides` in
-   `src/server/lib/dev-puzzle-access-mock.ts`, applied by `server.dev.ts` to
-   the payload about to be rendered (browsable GET and POST).
-3. Development-only mock of the access endpoint, in the same file, returning
-   `{ "hasAccess": boolean }` with configurable delay and failure. It allows
-   cross-origin requests with the `Authorization` header, like the real
-   endpoint must.
+2. The flag and the access endpoint were first mocked by the DCR dev server.
+   The mocks were removed once `frontend` implemented the real thing (phase 4).
 
 ### Phase 2: control island - done
 
@@ -216,13 +213,20 @@ Notes:
    network error, timeout, missing puzzle id) and the gate component. The
    contract field has validation tests.
 
-### Phase 4: real contract (depends on other teams)
+### Phase 4: real contract in `frontend` - done
 
-9. Ask the backend for: the premium flag (in the `/game` response, or
-   computed by `frontend`), and an access endpoint modelled on
-   `puzzlesProgress()` (`NoCache`, `Authorization`, CORS, served via
-   `ajaxUrl`). Minimal response: `{ "hasAccess": boolean }`.
-10. Replace the mocks with the real contract. Nothing else should change.
+9. The premium flag is computed by `frontend` from the puzzle date
+   (`PuzzlesAccessPolicy`, Europe/London, today back to 7 days ago is free) and
+   sent as `instance.requiresSubscription` only when `true`.
+10. `GET /puzzles-and-games/access?puzzleId=<id>` (`PuzzlesAccessController`)
+    follows the progress endpoints' pattern: `NoCache`, CORS and the reader's
+    `Authorization` header forwarded to the Puzzles API. It answers
+    `{ "hasAccess": boolean }`. A missing `Authorization` header or a malformed
+    `puzzleId` is refused without calling the Puzzles API, which keeps junk
+    traffic away from it.
+11. The upstream call (`GET /access?puzzleId=` on the Puzzles API) is the
+    proposed contract. Until it exists the endpoint answers 502, which this
+    page treats as a failed check (D5).
 
 ## 7. Implementation notes and local testing
 
@@ -239,23 +243,16 @@ Notes:
   not use `adFreeDataIsPresent`, which also returns `true` when a signed in
   reader's benefits data is merely out of date, and so is too generous to count
   as evidence.
-- **In development** the gate calls `http://localhost:3030` (the DCR dev
-  server) instead of `config.ajaxUrl`, so the mock works whichever origin the
-  page is opened from.
-- **Controlling the mocks** (development server only, plain GET requests):
-    - `/puzzles-and-games/access/mock?requiresSubscription=true` makes every
-      rendered puzzle premium (`false` makes them free, `reset=true` clears all).
-    - `/puzzles-and-games/access/mock?hasAccess=false` makes the endpoint deny.
-    - `/puzzles-and-games/access/mock?delayMs=2000` makes it answer slowly.
-    - `/puzzles-and-games/access/mock?fail=true` makes it answer 500.
-- To see each row of the table: set `requiresSubscription=true`, then sign
-  out, or sign in with and without the ad-free cookie, and vary `hasAccess`,
-  `delayMs` and `fail`.
+- **Local testing:** the flag comes from `frontend`, so any puzzle older than
+  7 days is premium with no setup. Signed out readers see the modal straight
+  away. Signed in readers need the Puzzles API access endpoint to answer; until
+  it exists they get 502, and are judged by the ad-free hint alone (D5).
 
 ## 8. Dependencies and open items
 
-- Premium flag name and source (puzzles API `/game` or `frontend`).
-- Access endpoint contract and path.
+- The Puzzles API access endpoint (`GET /access?puzzleId=`, answering
+  `{ "hasAccess": boolean }`) that `frontend` forwards to.
+- Confirm `requiresSubscription` as the final field name.
 - Whether the ad-free benefit matches the entitlement closely enough in
   practice. To check by looking at the real `benefits` array for Supporter
   Plus and Digital Pack test accounts (URL in `config.page.userBenefitsApiUrl`).

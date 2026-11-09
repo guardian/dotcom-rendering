@@ -36,13 +36,6 @@ type Props = ComponentProps<typeof PuzzleIframe> &
 		puzzleId?: string;
 	};
 
-/**
- * In development the access endpoint is mocked by the DCR dev server (see
- * `src/server/lib/dev-puzzle-access-mock.ts`), whichever origin the page is
- * opened from.
- */
-const DEV_MOCK_ORIGIN = 'http://localhost:3030';
-
 type AuthState = { authStatus: AuthStatus; reader: PuzzleReader };
 
 type AccessCheck = { forAuthState: AuthState; result: PuzzleAccessCheckResult };
@@ -135,10 +128,7 @@ export const PuzzleAccessGate = ({
 
 		const controller = new AbortController();
 		void fetchPuzzleAccess({
-			baseUrl:
-				process.env.NODE_ENV === 'development'
-					? DEV_MOCK_ORIGIN
-					: ajaxUrl,
+			baseUrl: ajaxUrl,
 			puzzleId,
 			authStatus: authState.authStatus,
 			signal: controller.signal,
