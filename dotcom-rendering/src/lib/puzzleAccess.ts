@@ -5,10 +5,6 @@ import { getOptionsHeaders, type SignedIn } from './identity';
  * to this premium puzzle?". Modelled on the puzzle progress endpoints: it is
  * served from `config.ajaxUrl` (which avoids the page's CDN cache) and the
  * reader's own `Authorization` header is forwarded.
- *
- * It is served by `frontend` (`PuzzlesAccessController`). The Puzzles API has
- * no access endpoint yet, so for now it always answers 503, which counts as a
- * failed check here.
  */
 export const PUZZLE_ACCESS_ENDPOINT = '/puzzles-and-games/access';
 
