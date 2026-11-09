@@ -3,6 +3,8 @@ import {
 	from,
 	remSpace,
 	palette as sourcePalette,
+	space,
+	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
@@ -33,6 +35,7 @@ import {
 } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
+import { getZIndex } from '../lib/getZIndex';
 import { formatPuzzleDate } from '../lib/puzzleDate';
 import {
 	isPuzzlesHubV1Enabled,
@@ -317,6 +320,83 @@ const stretchLines = css`
 	}
 `;
 
+const mainContainerWrapperStyles = css`
+	position: relative;
+`;
+
+const unlockPremiumPuzzlesBlockerStyles = css`
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+`;
+
+const unlockPremiumPuzzlesOverlayStyles = css`
+	z-index: ${getZIndex('lightbox')};
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0.8;
+	background-color: ${sourcePalette.neutral[20]};
+`;
+
+const unlockPremiumPuzzlesModalStyles = css`
+	z-index: ${getZIndex('sign-in-gate')};
+	min-width: ${space[5]}px;
+	min-height: ${space[24]}px;
+	max-width: 620px;
+	width: 100%;
+	background-color: ${sourcePalette.neutral[93]};
+	border-radius: ${space[3]}px;
+
+	${until.phablet} {
+		position: absolute;
+		max-width: none;
+		bottom: 0;
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+`;
+
+const unlockPremiumPuzzlesModalBodyStyles = css`
+	display: flex;
+	flex-direction: column;
+`;
+
+const unlockPremiumPuzzlesModalBodyHeaderStyles = css`
+	display: flex;
+`;
+
+const unlockPremiumPuzzlesModalBodyDividerStyles = css`
+	display: flex;
+`;
+
+const unlockPremiumPuzzlesModalBodyHeroStyles = css`
+	display: flex;
+`;
+
+const unlockPremiumPuzzlesModalBodyTitleStyles = css`
+	display: flex;
+`;
+
+const unlockPremiumPuzzlesModalBodySubtitleStyles = css`
+	display: flex;
+`;
+
+const unlockPremiumPuzzlesModalBodyBenefitsStyles = css`
+	display: flex;
+`;
+
+const unlockPremiumPuzzlesModaFooterStyles = css`
+	display: flex;
+`;
+
 /**
  * The `/PuzzlePage` handler resolves and validates the `PuzzleConfig` for
  * the request's `slug` before rendering; it is passed alongside the raw
@@ -509,170 +589,233 @@ export const PuzzlePageLayout = ({
 				)}
 			</div>
 
-			<main
-				data-layout="PuzzlePageLayout"
-				css={puzzleAccentStyles(
-					puzzleConfig.puzzleGroup,
-					darkModeAvailable,
-				)}
-			>
-				<Section
-					fullWidth={true}
-					showTopBorder={false}
-					backgroundColour={themePalette('--article-background')}
-					borderColour={themePalette('--article-border')}
-					element="article"
+			<div css={mainContainerWrapperStyles}>
+				<main
+					data-layout="PuzzlePageLayout"
+					css={puzzleAccentStyles(
+						puzzleConfig.puzzleGroup,
+						darkModeAvailable,
+					)}
 				>
-					<div>
-						<PuzzleGrid>
-							<GridItem area="title" element="aside">
-								<ArticleTitle
-									format={puzzlePageFormat}
-									tags={puzzleFamilyTag}
-									sectionLabel={labelText}
-									sectionUrl={`puzzles-and-games/${puzzleGroupPath}/archive`}
-									guardianBaseURL={GUARDIAN_BASE_URL}
-								/>
-							</GridItem>
-							<GridItem area="headline">
-								<div css={maxWidth}>
-									<ArticleHeadline
+					<Section
+						fullWidth={true}
+						showTopBorder={false}
+						backgroundColour={themePalette('--article-background')}
+						borderColour={themePalette('--article-border')}
+						element="article"
+					>
+						<div>
+							<PuzzleGrid>
+								<GridItem area="title" element="aside">
+									<ArticleTitle
 										format={puzzlePageFormat}
-										headlineString={puzzleHeadlineText}
-										tags={AGE_WARNING_SUPPRESSION_TAGS}
-										webPublicationDateDeprecated={
-											displayDate ?? ''
-										}
+										tags={puzzleFamilyTag}
+										sectionLabel={labelText}
+										sectionUrl={`puzzles-and-games/${puzzleGroupPath}/archive`}
+										guardianBaseURL={GUARDIAN_BASE_URL}
 									/>
-								</div>
-							</GridItem>
-							<GridItem area="standfirst">
-								<div data-print-layout="hide">
-									<Hide until="leftCol">
-										<MetaLines />
-									</Hide>
-									{/*
-									 * `CrosswordLinks`' one job is a
-									 * `crossword.pdf` "PDF version" link -
-									 * a crossword-only concept with no
-									 * Puzzle Page equivalent
-									 * (`FEPuzzlePageType` has no `crossword`
-									 * field at all). It occupies this same
-									 * grid slot, but with the real Puzzle
-									 * Page equivalent instead: a print
-									 * button, gated on
-									 * `puzzleConfig.printEnabled` (Sudoku
-									 * only, see `PrintButton`'s doc
-									 * comment).
-									 */}
-									{puzzleConfig.printEnabled && (
-										<div
-											css={css`
-												margin-top: ${remSpace[2]};
-												margin-bottom: ${remSpace[2]};
-											`}
-										>
-											<Island
-												priority="feature"
-												defer={{ until: 'visible' }}
-											>
-												<PrintButton />
-											</Island>
-										</div>
-									)}
-								</div>
-							</GridItem>
-							<GridItem area="meta" element="aside">
-								<div css={maxWidth}>
-									<div css={stretchLines}>
-										<MetaLines />
+								</GridItem>
+								<GridItem area="headline">
+									<div css={maxWidth}>
+										<ArticleHeadline
+											format={puzzlePageFormat}
+											headlineString={puzzleHeadlineText}
+											tags={AGE_WARNING_SUPPRESSION_TAGS}
+											webPublicationDateDeprecated={
+												displayDate ?? ''
+											}
+										/>
 									</div>
-									<ArticleMeta
-										branding={
-											branding &&
-											enhanceBranding(branding)
-										}
-										format={puzzlePageFormat}
-										pageId={puzzlePage.id}
-										webTitle={puzzlePage.webTitle}
-										tags={[]}
-										primaryDateline={displayDate ?? ''}
-										secondaryDateline=""
-										isCommentable={showComments}
-										discussionApiUrl={
-											config.discussionApiUrl
-										}
-										shortUrlId={config.shortUrlId}
-										hidePreferredSourceOnPrint={true}
-										isPuzzlePage={true}
-									/>
-								</div>
-							</GridItem>
-							{/*
-							 * `instructions` (crossword-specific setter
-							 * instructions, e.g. Prize/Genius puzzles) has
-							 * no Puzzle Page equivalent - `FEPuzzlePageType`
-							 * carries no such field, so this `GridItem` is
-							 * never rendered, hardcoded off exactly like
-							 * `CrosswordLayout`'s own
-							 * `!!article.crossword?.instructions` gate,
-							 * just with a fixed `false` instead of a
-							 * derived one.
-							 */}
-							<GridItem area="body" element="article">
-								<div css={frameContainerStyles}>
-									<ArticleContainer format={puzzlePageFormat}>
-										{/* Not deferred until visible: the iframe has no `src`
+								</GridItem>
+								<GridItem area="standfirst">
+									<div data-print-layout="hide">
+										<Hide until="leftCol">
+											<MetaLines />
+										</Hide>
+										{/*
+										 * `CrosswordLinks`' one job is a
+										 * `crossword.pdf` "PDF version" link -
+										 * a crossword-only concept with no
+										 * Puzzle Page equivalent
+										 * (`FEPuzzlePageType` has no `crossword`
+										 * field at all). It occupies this same
+										 * grid slot, but with the real Puzzle
+										 * Page equivalent instead: a print
+										 * button, gated on
+										 * `puzzleConfig.printEnabled` (Sudoku
+										 * only, see `PrintButton`'s doc
+										 * comment).
+										 */}
+										{puzzleConfig.printEnabled && (
+											<div
+												css={css`
+													margin-top: ${remSpace[2]};
+													margin-bottom: ${remSpace[2]};
+												`}
+											>
+												<Island
+													priority="feature"
+													defer={{ until: 'visible' }}
+												>
+													<PrintButton />
+												</Island>
+											</div>
+										)}
+									</div>
+								</GridItem>
+								<GridItem area="meta" element="aside">
+									<div css={maxWidth}>
+										<div css={stretchLines}>
+											<MetaLines />
+										</div>
+										<ArticleMeta
+											branding={
+												branding &&
+												enhanceBranding(branding)
+											}
+											format={puzzlePageFormat}
+											pageId={puzzlePage.id}
+											webTitle={puzzlePage.webTitle}
+											tags={[]}
+											primaryDateline={displayDate ?? ''}
+											secondaryDateline=""
+											isCommentable={showComments}
+											discussionApiUrl={
+												config.discussionApiUrl
+											}
+											shortUrlId={config.shortUrlId}
+											hidePreferredSourceOnPrint={true}
+											isPuzzlePage={true}
+										/>
+									</div>
+								</GridItem>
+								{/*
+								 * `instructions` (crossword-specific setter
+								 * instructions, e.g. Prize/Genius puzzles) has
+								 * no Puzzle Page equivalent - `FEPuzzlePageType`
+								 * carries no such field, so this `GridItem` is
+								 * never rendered, hardcoded off exactly like
+								 * `CrosswordLayout`'s own
+								 * `!!article.crossword?.instructions` gate,
+								 * just with a fixed `false` instead of a
+								 * derived one.
+								 */}
+								<GridItem area="body" element="article">
+									<div css={frameContainerStyles}>
+										<ArticleContainer
+											format={puzzlePageFormat}
+										>
+											{/* Not deferred until visible: the iframe has no `src`
                         until this island hydrates and the reader is known,
                         so waiting for the island to be seen would delay
                         the puzzle itself. */}
-										<Island priority="critical">
-											<PuzzleIframe
-												gameUrl={instance.gameUrl}
-												progressIdentity={
-													instance.progressIdentity
-												}
-												puzzleConfig={puzzleConfig}
-												title={instance.title}
-												darkModeAvailable={
-													darkModeAvailable
-												}
-												puzzleDate={
-													instance.puzzleDate ?? null
-												}
-											/>
-										</Island>
-									</ArticleContainer>
-								</div>
-							</GridItem>
-							<GridItem area="right-column">
-								<RightColumn showFrom="wide">
-									<div
-										css={css`
-											margin-top: ${remSpace[3]};
-										`}
-									>
-										{renderAds ? (
-											<AdSlot
-												position="right"
-												display={
-													puzzlePageFormat.display
-												}
-												isPaidContent={isPaidContent}
-												shouldHideReaderRevenue={
-													config.shouldHideReaderRevenue
-												}
-											/>
-										) : null}
+											<Island priority="critical">
+												<PuzzleIframe
+													gameUrl={instance.gameUrl}
+													progressIdentity={
+														instance.progressIdentity
+													}
+													puzzleConfig={puzzleConfig}
+													title={instance.title}
+													darkModeAvailable={
+														darkModeAvailable
+													}
+													puzzleDate={
+														instance.puzzleDate ??
+														null
+													}
+												/>
+											</Island>
+										</ArticleContainer>
 									</div>
-								</RightColumn>
-							</GridItem>
-						</PuzzleGrid>
-					</div>
-				</Section>
+								</GridItem>
+								<GridItem area="right-column">
+									<RightColumn showFrom="wide">
+										<div
+											css={css`
+												margin-top: ${remSpace[3]};
+											`}
+										>
+											{renderAds ? (
+												<AdSlot
+													position="right"
+													display={
+														puzzlePageFormat.display
+													}
+													isPaidContent={
+														isPaidContent
+													}
+													shouldHideReaderRevenue={
+														config.shouldHideReaderRevenue
+													}
+												/>
+											) : null}
+										</div>
+									</RightColumn>
+								</GridItem>
+							</PuzzleGrid>
+						</div>
+					</Section>
 
-				{renderAds && (
-					<Hide from="tablet">
+					{renderAds && (
+						<Hide from="tablet">
+							<Section
+								fullWidth={true}
+								padSides={false}
+								showTopBorder={false}
+								showSideBorders={false}
+								backgroundColour={themePalette(
+									'--ad-background',
+								)}
+								element="aside"
+								hideFromPrintLayout={true}
+							>
+								<AdSlot position="crossword-banner-mobile" />
+							</Section>
+						</Hide>
+					)}
+
+					<Section
+						fullWidth={true}
+						showTopBorder={false}
+						padSides={false}
+						backgroundColour={themePalette('--article-background')}
+						hideFromPrintLayout={true}
+					>
+						<StraightLines
+							count={1}
+							color={themePalette('--straight-lines')}
+							cssOverrides={css`
+								display: block;
+							`}
+						/>
+					</Section>
+
+					{showRelated && (
+						<div data-print-layout="hide">
+							<Section
+								fullWidth={true}
+								showTopBorder={false}
+								backgroundColour={themePalette(
+									'--article-background',
+								)}
+							>
+								<Island
+									priority="enhancement"
+									defer={{ until: 'visible' }}
+								>
+									<RelatedPuzzlesRailEnhanced
+										items={
+											instance.moreFromPuzzlesAndGames ??
+											[]
+										}
+									/>
+								</Island>
+							</Section>
+						</div>
+					)}
+
+					{renderAds && (
 						<Section
 							fullWidth={true}
 							padSides={false}
@@ -680,154 +823,154 @@ export const PuzzlePageLayout = ({
 							showSideBorders={false}
 							backgroundColour={themePalette('--ad-background')}
 							element="aside"
-							hideFromPrintLayout={true}
 						>
-							<AdSlot position="crossword-banner-mobile" />
-						</Section>
-					</Hide>
-				)}
-
-				<Section
-					fullWidth={true}
-					showTopBorder={false}
-					padSides={false}
-					backgroundColour={themePalette('--article-background')}
-					hideFromPrintLayout={true}
-				>
-					<StraightLines
-						count={1}
-						color={themePalette('--straight-lines')}
-						cssOverrides={css`
-							display: block;
-						`}
-					/>
-				</Section>
-
-				{showRelated && (
-					<div data-print-layout="hide">
-						<Section
-							fullWidth={true}
-							showTopBorder={false}
-							backgroundColour={themePalette(
-								'--article-background',
-							)}
-						>
-							<Island
-								priority="enhancement"
-								defer={{ until: 'visible' }}
-							>
-								<RelatedPuzzlesRailEnhanced
-									items={
-										instance.moreFromPuzzlesAndGames ?? []
-									}
-								/>
-							</Island>
-						</Section>
-					</div>
-				)}
-
-				{renderAds && (
-					<Section
-						fullWidth={true}
-						padSides={false}
-						showTopBorder={false}
-						showSideBorders={false}
-						backgroundColour={themePalette('--ad-background')}
-						element="aside"
-					>
-						<AdSlot
-							data-print-layout="hide"
-							position="merchandising-high"
-							display={puzzlePageFormat.display}
-						/>
-					</Section>
-				)}
-
-				{showComments && (
-					<>
-						<Section
-							fullWidth={true}
-							padSides={true}
-							showTopBorder={false}
-							showSideBorders={true}
-							element="aside"
-						>
-							<div
-								css={css`
-									height: 20px;
-								`}
-							></div>
-						</Section>
-						<Section
-							fullWidth={true}
-							sectionId="comments"
-							element="section"
-							backgroundColour={themePalette(
-								'--discussion-section-background',
-							)}
-							borderColour={themePalette('--article-border')}
-							fontColour={themePalette('--discussion-text')}
-							hideFromPrintLayout={true}
-						>
-							<DiscussionLayout
-								discussionApiUrl={config.discussionApiUrl}
-								shortUrlId={config.shortUrlId}
-								format={puzzlePageFormat}
-								discussionD2Uid={config.discussionD2Uid}
-								discussionApiClientHeader={
-									config.discussionApiClientHeader
-								}
-								enableDiscussionSwitch={
-									!!config.switches.enableDiscussionSwitch
-								}
-								isAdFreeUser={!!puzzlePage.isAdFreeUser}
-								shouldHideAds={!renderAds}
-								idApiUrl={config.idApiUrl}
+							<AdSlot
+								data-print-layout="hide"
+								position="merchandising-high"
+								display={puzzlePageFormat.display}
 							/>
 						</Section>
+					)}
+
+					{showComments && (
+						<>
+							<Section
+								fullWidth={true}
+								padSides={true}
+								showTopBorder={false}
+								showSideBorders={true}
+								element="aside"
+							>
+								<div
+									css={css`
+										height: 20px;
+									`}
+								></div>
+							</Section>
+							<Section
+								fullWidth={true}
+								sectionId="comments"
+								element="section"
+								backgroundColour={themePalette(
+									'--discussion-section-background',
+								)}
+								borderColour={themePalette('--article-border')}
+								fontColour={themePalette('--discussion-text')}
+								hideFromPrintLayout={true}
+							>
+								<DiscussionLayout
+									discussionApiUrl={config.discussionApiUrl}
+									shortUrlId={config.shortUrlId}
+									format={puzzlePageFormat}
+									discussionD2Uid={config.discussionD2Uid}
+									discussionApiClientHeader={
+										config.discussionApiClientHeader
+									}
+									enableDiscussionSwitch={
+										!!config.switches.enableDiscussionSwitch
+									}
+									isAdFreeUser={!!puzzlePage.isAdFreeUser}
+									shouldHideAds={!renderAds}
+									idApiUrl={config.idApiUrl}
+								/>
+							</Section>
+							<Section
+								fullWidth={true}
+								padSides={true}
+								showTopBorder={false}
+								showSideBorders={true}
+								element="aside"
+							>
+								<div
+									css={css`
+										height: 20px;
+									`}
+								></div>
+							</Section>
+						</>
+					)}
+
+					{showComments && renderAds && (
 						<Section
 							fullWidth={true}
-							padSides={true}
+							padSides={false}
 							showTopBorder={false}
-							showSideBorders={true}
+							showSideBorders={false}
+							backgroundColour={themePalette('--ad-background')}
 							element="aside"
 						>
-							<div
-								css={css`
-									height: 20px;
-								`}
-							></div>
+							<AdSlot
+								position="merchandising"
+								display={puzzlePageFormat.display}
+							/>
 						</Section>
-					</>
-				)}
+					)}
 
-				{showComments && renderAds && (
-					<Section
-						fullWidth={true}
-						padSides={false}
-						showTopBorder={false}
-						showSideBorders={false}
-						backgroundColour={themePalette('--ad-background')}
-						element="aside"
-					>
-						<AdSlot
-							position="merchandising"
-							display={puzzlePageFormat.display}
-						/>
-					</Section>
-				)}
-
-				{isV1Enabled && instance.puzzlesSupporting && (
-					<div data-print-layout="hide">
-						<PuzzlesUsefulLinks
-							id="puzzle-page"
-							title="Useful links"
-							links={instance.puzzlesSupporting.usefulLinks}
-							newsletter={instance.puzzlesSupporting.newsletter}
-						/>
+					{isV1Enabled && instance.puzzlesSupporting && (
+						<div data-print-layout="hide">
+							<PuzzlesUsefulLinks
+								id="puzzle-page"
+								title="Useful links"
+								links={instance.puzzlesSupporting.usefulLinks}
+								newsletter={
+									instance.puzzlesSupporting.newsletter
+								}
+							/>
+						</div>
+					)}
+				</main>
+				<div css={unlockPremiumPuzzlesBlockerStyles}>
+					<div css={unlockPremiumPuzzlesOverlayStyles}></div>
+					<div css={unlockPremiumPuzzlesModalStyles}>
+						<div css={unlockPremiumPuzzlesModalBodyStyles}>
+							<div
+								css={unlockPremiumPuzzlesModalBodyHeaderStyles}
+							>
+								logo here
+							</div>
+							<div
+								css={unlockPremiumPuzzlesModalBodyDividerStyles}
+							>
+								divider
+							</div>
+							<div css={unlockPremiumPuzzlesModalBodyHeroStyles}>
+								hero image here
+							</div>
+							<div css={unlockPremiumPuzzlesModalBodyTitleStyles}>
+								Unlock the full puzzles experience - and more
+							</div>
+							<div
+								css={
+									unlockPremiumPuzzlesModalBodySubtitleStyles
+								}
+							>
+								Subscribe to the Guardian to unlock the ad-free
+								puzzles archive and enjoy more digital benefits:
+							</div>
+							<div
+								css={
+									unlockPremiumPuzzlesModalBodyBenefitsStyles
+								}
+							>
+								<ul>
+									<li>
+										Unlimited ad-free reading on all your
+										devices
+									</li>
+									<li>
+										Unlimited access to the Guardian app and
+										Guardian Feast app
+									</li>
+									<li>
+										An exclusive weekly supporter newsletter
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div css={unlockPremiumPuzzlesModaFooterStyles}></div>
 					</div>
-				)}
-			</main>
+				</div>
+			</div>
 
 			{/*
 			 * `CrosswordLayout` also renders `NAV.subNavSections` again
