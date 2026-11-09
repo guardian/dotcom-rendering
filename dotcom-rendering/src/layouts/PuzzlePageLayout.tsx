@@ -576,7 +576,7 @@ export const PuzzlePageLayout = ({
 												priority="feature"
 												defer={{ until: 'visible' }}
 											>
-												<PrintButton />
+												<PrintButton puzzleTrackingSource="puzzle-page" />
 											</Island>
 										</div>
 									)}

@@ -7,15 +7,20 @@ import {
 	SvgCheckmark,
 	SvgShareWeb,
 } from '@guardian/source/react-components';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
 	ArticleDesign,
 	type ArticleFormat,
 	ArticleSpecial,
 } from '../lib/articleFormat';
+import {
+	puzzleActionAttributes,
+	type PuzzleActionSource,
+} from '../lib/puzzleActionTracking';
 import { transparentColour } from '../lib/transparentColour';
 import { useMatchMedia } from '../lib/useMatchMedia';
 import { palette as themePalette } from '../palette';
+import { useConfig } from './ConfigContext';
 
 type Props = {
 	size?: Size;
@@ -33,9 +38,12 @@ type Props = {
 	webTitle: string;
 	format: ArticleFormat;
 	context: Context;
+	puzzleTrackingSource?: PuzzleActionSource;
 };
 
 type ButtonKind = 'native' | 'copy' | 'email';
+
+type TrackingAttributes = ReturnType<typeof puzzleActionAttributes>;
 
 type Context = 'ArticleMeta' | 'LiveBlock' | 'SubMeta' | 'ImageCaption';
 
@@ -133,12 +141,14 @@ export const CopyNativeShareButton = ({
 	isLiveBlogMeta,
 	isCopied,
 	isNonLabsGalleryMeta,
+	trackingAttributes,
 }: {
 	onShare: () => void;
 	size?: Size;
 	isLiveBlogMeta: boolean;
 	isCopied: boolean;
 	isNonLabsGalleryMeta: boolean;
+	trackingAttributes?: TrackingAttributes;
 }) => {
 	const sizeXSmall = size === 'xsmall';
 
@@ -158,6 +168,7 @@ export const CopyNativeShareButton = ({
 				isLiveBlogMeta && liveBlogMobileMeta(isCopied),
 			])}
 			data-gu-name="share-button"
+			{...trackingAttributes}
 		>
 			{isCopied ? 'Link copied' : 'Share'}
 		</Button>
@@ -169,17 +180,20 @@ export const EmailLink = ({
 	size,
 	isLiveBlogMeta,
 	isNonLabsGalleryMeta,
+	trackingAttributes,
 }: {
 	href: string;
 	size?: Size;
 	isLiveBlogMeta: boolean;
 	isNonLabsGalleryMeta: boolean;
+	trackingAttributes?: TrackingAttributes;
 }) => {
 	const sizeXSmall = size === 'xsmall';
 
 	return (
 		<LinkButton
 			href={href}
+			{...trackingAttributes}
 			size={size}
 			type="button"
 			priority="tertiary"
@@ -219,9 +233,23 @@ export const ShareButton = ({
 	webTitle,
 	format,
 	context,
+	puzzleTrackingSource,
 }: Props) => {
+	const { renderingTarget } = useConfig();
+	const puzzleSource =
+		renderingTarget === 'Web'
+			? (puzzleTrackingSource ??
+				(format.design === ArticleDesign.Crossword
+					? 'crossword-page'
+					: undefined))
+			: undefined;
 	const [isCopied, setIsCopied] = useState(false);
 	const [buttonKind, setButtonKind] = useState<ButtonKind>('email');
+	const copyFeedbackTimer = useRef<ReturnType<typeof setTimeout> | undefined>(
+		undefined,
+	);
+
+	useEffect(() => () => clearTimeout(copyFeedbackTimer.current), []);
 
 	const isLiveBlogMeta =
 		format.design === ArticleDesign.LiveBlog && context === 'ArticleMeta';
@@ -273,6 +301,11 @@ export const ShareButton = ({
 		return () => clearTimeout(timer);
 	}, [isCopied]);
 
+	const trackingAttributes = puzzleActionAttributes(
+		puzzleSource,
+		`share-attempt | ${buttonKind} | ${context}`,
+	);
+
 	switch (buttonKind) {
 		case 'native':
 			return (
@@ -280,6 +313,7 @@ export const ShareButton = ({
 					onShare={() => {
 						navigator.share(shareData).catch(console.error);
 					}}
+					trackingAttributes={trackingAttributes}
 					size={size}
 					isLiveBlogMeta={isLiveBlogMeta}
 					isCopied={isCopied}
@@ -293,10 +327,21 @@ export const ShareButton = ({
 						navigator.clipboard
 							.writeText(shareData.url)
 							.then(() => {
-								setIsCopied(true);
+								if (puzzleSource === undefined) {
+									setIsCopied(true);
+								} else {
+									// Keep the clicked icon attached until Ophan's
+									// document listener has captured its button.
+									clearTimeout(copyFeedbackTimer.current);
+									copyFeedbackTimer.current = setTimeout(
+										() => setIsCopied(true),
+										0,
+									);
+								}
 							})
 							.catch(console.error);
 					}}
+					trackingAttributes={trackingAttributes}
 					size={size}
 					isLiveBlogMeta={isLiveBlogMeta}
 					isCopied={isCopied}
@@ -307,6 +352,7 @@ export const ShareButton = ({
 			return (
 				<EmailLink
 					href={`mailto:?subject=${webTitle}&body=${shareData.url}`}
+					trackingAttributes={trackingAttributes}
 					size={size}
 					isLiveBlogMeta={isLiveBlogMeta}
 					isNonLabsGalleryMeta={isNonLabsGalleryMeta}

@@ -552,6 +552,9 @@ export const ArticleMeta = ({
 									webTitle={webTitle}
 									format={format}
 									context="ArticleMeta"
+									puzzleTrackingSource={
+										isPuzzlePage ? 'puzzle-page' : undefined
+									}
 								/>
 							</Island>
 						</div>
