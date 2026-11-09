@@ -168,7 +168,32 @@ Why:
 - Accepted cost: a subscriber whose ad-free benefit is out of date sees no ads
   either, which is what they paid for.
 
+### D9. Everything is behind the `puzzles-new-hub-v3` A/B test
+
+The modal and everything that depends on it only have an effect for readers in
+the `variant` group of `puzzles-new-hub-v3`, and only when `puzzles-new-hub-v1`
+and `puzzles-new-hub-v2` are also on (the tiers are cumulative: v2 needs v1, v3
+needs v1 and v2). Outside it, every puzzle behaves as a
+free one, whatever `frontend` sends in `instance.requiresSubscription`: the
+game loads at once, no access request is made and ads are rendered as usual.
+
+Why:
+
+- It lets the feature be rolled out, measured and rolled back without a deploy
+  (set the test's `audienceSize` to `0 / 100`, or its `status` to `"OFF"`),
+  like the v1 and v2 tiers.
+- `frontend` can send the flag to every reader. The A/B decision is made in the
+  layout, from `config.serverSideABTests`, so `frontend` does not need to know
+  about the test.
+- In local development every tier is on, like for v1 and v2, so the modal can be
+  seen without opting in.
+
+The test is defined in `ab-testing/config/abTests.ts` (type `server`, deployed
+to Fastly) and read through `isPuzzlesHubV3Enabled`.
+
 ## 5. Target behaviour
+
+The table below applies to readers in `puzzles-new-hub-v3` (D9).
 
 | Puzzle               | Reader                      | Result                                                                                                                 |
 | -------------------- | --------------------------- | ---------------------------------------------------------------------------------------------------------------------- |

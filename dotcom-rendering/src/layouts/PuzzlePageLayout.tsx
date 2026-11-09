@@ -39,6 +39,7 @@ import { formatPuzzleDate } from '../lib/puzzleDate';
 import {
 	isPuzzlesHubV1Enabled,
 	isPuzzlesHubV2Enabled,
+	isPuzzlesHubV3Enabled,
 } from '../lib/puzzlesHubVersionExperiment';
 import {
 	getPuzzlesSubNavLinks,
@@ -371,7 +372,7 @@ export const PuzzlePageLayout = ({
 	// gates its own (there, real) `showComments` Section, just with a
 	// fixed value instead of a derived one.
 	// NOTE: if comments are ever enabled, they must also stay off for premium
-	// puzzles (`!instance.requiresSubscription`): the unlock modal covers the
+	// puzzles (`!requiresSubscription`): the unlock modal covers the
 	// page, so a section the reader cannot reach makes no sense.
 	const showComments = false;
 
@@ -392,6 +393,12 @@ export const PuzzlePageLayout = ({
 	// }
 	const isV1Enabled = isPuzzlesHubV1Enabled(config);
 
+	// The premium puzzles access control (the unlock modal, the access check
+	// and no ads) only has an effect for readers in `puzzles-new-hub-v3`.
+	// Outside it every puzzle behaves as a free one, whatever `frontend` sends.
+	const requiresSubscription =
+		isPuzzlesHubV3Enabled(config) && !!instance.requiresSubscription;
+
 	const showRelated =
 		!!instance.moreFromPuzzlesAndGames?.length && isV1Enabled;
 
@@ -407,8 +414,7 @@ export const PuzzlePageLayout = ({
 	// ads behind its overlay could be seen badly and not clicked. This is
 	// decided here, from a property of the puzzle, so the cached HTML holds
 	// nothing about the reader and no ad is requested and then hidden.
-	const renderAds =
-		canRenderAds(puzzlePage) && !instance.requiresSubscription;
+	const renderAds = canRenderAds(puzzlePage) && !requiresSubscription;
 
 	// `getContributionsServiceUrl` reads `config.contributionsServiceUrl`,
 	// a field `ConfigType` doesn't carry for Puzzle Page requests. Hardcoded
@@ -661,7 +667,7 @@ export const PuzzlePageLayout = ({
 														null
 													}
 													requiresSubscription={
-														instance.requiresSubscription
+														requiresSubscription
 													}
 													ajaxUrl={config.ajaxUrl}
 													puzzleId={
