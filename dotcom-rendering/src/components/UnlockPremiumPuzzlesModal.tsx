@@ -1,10 +1,12 @@
 import { css, type SerializedStyles } from '@emotion/react';
 import {
-	headlineBold28,
+	headlineMedium24,
 	palette as sourcePalette,
 	space,
 	textEgyptian17,
 	textEgyptianBold17,
+	textSans14,
+	textSansBold14,
 	until,
 } from '@guardian/source/foundations';
 import {
@@ -77,7 +79,9 @@ const headerStyles = css`
 const dividerStyles = css`
 	border: 0;
 	border-top: 1px solid ${sourcePalette.neutral[86]};
-	margin: ${space[2]}px 0;
+	margin-top: ${space[4]}px;
+	margin-bottom: ${space[4]}px;
+	width: 100%;
 `;
 
 const heroStyles = css`
@@ -85,20 +89,24 @@ const heroStyles = css`
 `;
 
 const titleStyles = css`
-	${headlineBold28};
+	${headlineMedium24};
 	color: ${sourcePalette.brand[400]};
+	font-variant-numeric: lining-nums proportional-nums;
 	margin: ${space[4]}px 0;
 `;
 
 const subtitleStyles = css`
 	${textEgyptianBold17};
+	color: ${sourcePalette.neutral[0]};
+	margin-top: ${space[2]}px;
 	margin-bottom: ${space[3]}px;
 `;
 
 const benefitsStyles = css`
 	${textEgyptian17};
+	color: ${sourcePalette.neutral[0]};
 	list-style: none;
-	margin: 0 0 ${space[6]}px;
+	margin: 0 0 ${space[2]}px;
 	padding: 0;
 
 	li {
@@ -117,7 +125,7 @@ const benefitsStyles = css`
 const footerStyles = css`
 	display: flex;
 	flex-direction: column;
-	gap: ${space[4]}px;
+	gap: ${space[6]}px;
 `;
 
 const buttonsStyles = css`
@@ -135,8 +143,18 @@ const buttonsStyles = css`
 `;
 
 const footnoteStyles = css`
-	${textEgyptian17};
+	${textSans14};
+	color: ${sourcePalette.neutral[0]};
 	text-align: center;
+
+	a {
+		${textSansBold14};
+		color: ${sourcePalette.brand[500]};
+		text-decoration-line: underline;
+		text-decoration-style: solid;
+		text-decoration-skip-ink: none;
+		text-underline-position: from-font;
+	}
 `;
 
 const DEFAULT_TITLE = 'Unlock the full puzzles experience - and more';
@@ -203,7 +221,7 @@ export const UnlockPremiumPuzzlesModal = ({
 					<div css={headerStyles}>
 						<SvgGuardianLogo
 							textColor={sourcePalette.neutral[0]}
-							width={150}
+							width={98}
 						/>
 					</div>
 					<hr css={dividerStyles} />
