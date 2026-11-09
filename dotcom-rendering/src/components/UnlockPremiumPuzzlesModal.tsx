@@ -13,6 +13,7 @@ import {
 	LinkButton,
 	SvgGuardianLogo,
 	SvgTickRound,
+	themeButtonReaderRevenue,
 } from '@guardian/source/react-components';
 import { getZIndex } from '../lib/getZIndex';
 import {
@@ -164,6 +165,15 @@ const buttonsStyles = css`
 	}
 `;
 
+const subscribeButtonStyles = css`
+	border-radius: 40px;
+`;
+
+const archiveButtonStyles = css`
+	border-radius: 40px;
+	border: 2px solid ${sourcePalette.brand[400]};
+`;
+
 const footnoteStyles = css`
 	${textSans14};
 	color: ${sourcePalette.neutral[0]};
@@ -268,10 +278,19 @@ export const UnlockPremiumPuzzlesModal = ({
 				</div>
 				<div css={footerStyles}>
 					<div css={buttonsStyles}>
-						<LinkButton href={subscribeUrl} priority="primary">
+						<LinkButton
+							href={subscribeUrl}
+							priority="primary"
+							theme={themeButtonReaderRevenue}
+							cssOverrides={subscribeButtonStyles}
+						>
 							Subscribe
 						</LinkButton>
-						<LinkButton href={archiveUrl} priority="tertiary">
+						<LinkButton
+							href={archiveUrl}
+							priority="tertiary"
+							cssOverrides={archiveButtonStyles}
+						>
 							Return to puzzle archive
 						</LinkButton>
 					</div>
