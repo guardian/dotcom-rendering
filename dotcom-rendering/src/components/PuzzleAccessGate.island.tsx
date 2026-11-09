@@ -46,8 +46,8 @@ const placeholderStyles = css`
 
 /**
  * The modal is absolutely positioned, so it has to live inside the page
- * layout's positioned wrapper to cover the whole page content. Falls back to
- * rendering in place when that wrapper is not found.
+ * layout's positioned `<main>` to cover the whole page content. Falls back to
+ * rendering in place when it is not found.
  */
 const renderInModalRoot = (modal: ReactNode) => {
 	const root = document.getElementById(PUZZLE_MODAL_ROOT_ID);
