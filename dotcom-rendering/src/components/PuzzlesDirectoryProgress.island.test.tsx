@@ -371,6 +371,16 @@ describe('PuzzlesDirectoryProgress', () => {
 			);
 
 			await screen.findByText('By: API setter');
+			const card = screen.getByRole('link', { name: /Quick crossword/ });
+			expect(card).toHaveAttribute('href', '/crosswords/quick/123');
+			expect(card).toHaveAttribute(
+				'data-link-name',
+				'puzzles | group-0 | card-@1 | card-quick',
+			);
+			expect(card.closest('[data-component]')).toHaveAttribute(
+				'data-component',
+				'puzzles-hub:crosswords',
+			);
 			expect(screen.getByText('Mon 3 Aug')).toBeInTheDocument();
 			expect(screen.getByText('Played')).toBeInTheDocument();
 			expect(fetchMock).toHaveBeenCalledWith(
