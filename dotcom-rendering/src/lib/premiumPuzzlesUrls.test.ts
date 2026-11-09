@@ -67,6 +67,17 @@ describe('getPathFromUrl', () => {
 		).toBe('/sudoku/easy');
 	});
 
+	it('collapses repeated leading slashes, so the path stays a same-site path', () => {
+		const path = getPathFromUrl(
+			'http://localhost:9000//puzzles-and-games/logic-puzzles/sudoku-easy/2026-10-30',
+			'/fallback',
+		);
+		expect(path).toBe(
+			'/puzzles-and-games/logic-puzzles/sudoku-easy/2026-10-30',
+		);
+		expect(isSafeInternalPath(path)).toBe(true);
+	});
+
 	it('returns the fallback for an invalid URL', () => {
 		expect(getPathFromUrl('not a url', '/fallback')).toBe('/fallback');
 	});

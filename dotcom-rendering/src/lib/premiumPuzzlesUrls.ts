@@ -39,10 +39,15 @@ export const isSafeInternalPath = (path: string): boolean =>
 /**
  * The path of an absolute URL (e.g. a page's `canonicalUrl`), or `fallback`
  * if the URL cannot be parsed.
+ *
+ * Repeated leading slashes are collapsed to one: a path starting with `//` is
+ * a protocol-relative URL, which `isSafeInternalPath` (rightly) refuses, and
+ * `frontend`'s puzzle page `canonicalUrl` currently comes with one
+ * (`https://host//puzzles-and-games/...`).
  */
 export const getPathFromUrl = (url: string, fallback: string): string => {
 	try {
-		return new URL(url).pathname;
+		return new URL(url).pathname.replace(/^\/{2,}/, '/');
 	} catch {
 		return fallback;
 	}
