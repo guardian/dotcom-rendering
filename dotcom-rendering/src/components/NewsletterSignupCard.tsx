@@ -7,9 +7,9 @@ import {
 	textSansBold15,
 } from '@guardian/source/foundations';
 import { SvgNewsletterFilled } from '@guardian/source/react-components';
+import sanitize from 'sanitize-html';
 import { generateImageURL } from '../lib/image';
 import { palette as themePalette } from '../palette';
-import sanitize from 'sanitize-html';
 
 export type NewsletterSignupCardProps = {
 	name: string;
