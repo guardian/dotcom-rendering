@@ -9,6 +9,7 @@ import {
 import { SvgNewsletterFilled } from '@guardian/source/react-components';
 import { generateImageURL } from '../lib/image';
 import { palette as themePalette } from '../palette';
+import sanitize from 'sanitize-html';
 
 export type NewsletterSignupCardProps = {
 	name: string;
@@ -127,6 +128,10 @@ const illustrationStyles = css`
 	}
 `;
 
+// This is used to sanitize the HTML for the title
+// and description to allow for custom styling in RRCP
+const allowedHTMLTags = ['s', 'em', 'strong'];
+
 const NewsletterSignupHeader = (
 	props: Omit<NewsletterSignupCardProps, 'children'>,
 ) => (
@@ -143,10 +148,23 @@ const NewsletterSignupHeader = (
 		<hr css={innerDividerStyles} />
 		<div css={headerStyles}>
 			<div css={titleAndMetaStyles}>
-				<p css={titleStyles}>
-					{props.heading ? props.heading : `Sign up to ${props.name}`}
-				</p>
-				<p css={descriptionStyles}>{props.description}</p>
+				<p
+					css={titleStyles}
+					dangerouslySetInnerHTML={{
+						__html: sanitize(
+							props.heading ?? `Sign up to ${props.name}`,
+							{ allowedTags: allowedHTMLTags },
+						),
+					}}
+				></p>
+				<p
+					css={descriptionStyles}
+					dangerouslySetInnerHTML={{
+						__html: sanitize(props.description, {
+							allowedTags: allowedHTMLTags,
+						}),
+					}}
+				></p>
 			</div>
 			{!!props.illustrationSquare && (
 				<img
