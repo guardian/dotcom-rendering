@@ -79,7 +79,7 @@ const modalStyles = css`
 	padding-left: ${space[4]}px;
 	padding-right: ${space[4]}px;
 	padding-bottom: ${space[6]}px;
-	/* New color specified by the Design team for the Modal background */
+	/* stylelint-disable-next-line color-no-hex -- specified by the Design team for the modal background, not in the Source palette */
 	background-color: #fef9f6;
 	border-radius: ${space[3]}px;
 
