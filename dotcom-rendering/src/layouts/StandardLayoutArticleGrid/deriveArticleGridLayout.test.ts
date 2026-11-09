@@ -34,6 +34,26 @@ const mediaAtom = ({
 
 describe('deriveArticleGridLayout', () => {
 	it.each([
+		{ display: ArticleDisplay.Standard, required: false, expected: false },
+		{ display: ArticleDisplay.Standard, required: true, expected: false },
+		{ display: ArticleDisplay.Immersive, required: false, expected: false },
+		{ display: ArticleDisplay.Immersive, required: true, expected: true },
+	])(
+		'places an affiliate disclaimer above the standfirst only for immersive articles ($display, $required)',
+		({ display, required, expected }) => {
+			const layout = deriveArticleGridLayout({
+				article: {
+					...article,
+					affiliateLinksDisclaimerRequired: required,
+				},
+				format: { ...immersiveFormat, display },
+			});
+
+			expect(layout.hasImmersiveAffiliateDisclaimer).toBe(expected);
+		},
+	);
+
+	it.each([
 		{
 			name: 'portrait image',
 			mainMediaElements: article.mainMediaElements.map((element) =>

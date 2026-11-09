@@ -19,6 +19,60 @@ const immersiveMediaBelowTablet = css`
 	}
 `;
 
+const landscapeMediaMargins = css`
+	${from.tablet} {
+		margin-left: -20px;
+		margin-right: -20px;
+	}
+`;
+
+const portraitMediaSizing = css`
+	aspect-ratio: 4 / 5;
+	${from.leftCol} {
+		grid-template-rows: auto 1fr max-content;
+	}
+`;
+
+const labsPortraitMediaSizing = css`
+	${until.tablet} {
+		position: relative;
+		width: 100%;
+		min-width: 0;
+		aspect-ratio: 4 / 5;
+		overflow: hidden;
+		background-color: ${themePalette('--headline-background-immersive')};
+		> div {
+			position: absolute;
+			inset: 0;
+		}
+	}
+`;
+
+const landscapeMediaSizing = (headerHeight: number) => css`
+	position: relative;
+	aspect-ratio: 4 / 5;
+	> div {
+		position: absolute;
+		inset: 0;
+	}
+	${from.mobileLandscape} {
+		aspect-ratio: 5 / 4;
+	}
+	${from.desktop} {
+		aspect-ratio: auto;
+		height: calc(100vh - ${headerHeight}px);
+	}
+`;
+
+const portraitImageFill = css`
+	> div {
+		height: 100%;
+	}
+	${from.leftCol} {
+		aspect-ratio: 4 / 5;
+	}
+`;
+
 export const ArticleGridMainMedia = ({
 	article,
 	format,
@@ -55,90 +109,43 @@ export const ArticleGridMainMedia = ({
 			layoutType={layoutType}
 			format={format}
 			css={[
-				isImmersive
-					? css`
-							${from.tablet} {
-								align-self: start;
-								${!usesImmersiveImageProportions &&
-								mainMediaAspectRatio != null &&
-								`aspect-ratio: ${mainMediaAspectRatio.replace(':', ' / ')};`}
-								${isImmersiveLandscape &&
-								`margin-left: -20px;
-								margin-right: -20px;`}
-							}
-
-							${isImmersivePortrait &&
-							css`
-								aspect-ratio: 4 / 5;
-
-								${!isImmersiveWeekendRead &&
-								css`
-									${between.tablet.and.desktop} {
-										margin-left: -20px;
-										margin-right: -20px;
-									}
-								`}
-							`}
-							${!isImmersiveWeekendRead &&
-							immersiveMediaBelowTablet}
-
-							${hasLabsPortraitImage &&
-							css`
-								${until.tablet} {
-									position: relative;
-									width: 100%;
-									min-width: 0;
-									aspect-ratio: 4 / 5;
-									overflow: hidden;
-									background-color: ${themePalette(
-										'--headline-background-immersive',
-									)};
-
-									> div {
-										position: absolute;
-										inset: 0;
-									}
-								}
-							`}
-						`
-					: undefined,
+				isImmersive &&
+					css`
+						${from.tablet} {
+							align-self: start;
+						}
+					`,
+				isImmersive &&
+					!usesImmersiveImageProportions &&
+					mainMediaAspectRatio != null &&
+					css`
+						${from.tablet} {
+							aspect-ratio: ${mainMediaAspectRatio.replace(
+								':',
+								' / ',
+							)};
+						}
+					`,
+				isImmersiveLandscape && landscapeMediaMargins,
+				isImmersivePortrait && portraitMediaSizing,
+				isImmersivePortrait &&
+					!isImmersiveWeekendRead &&
+					css`
+						${between.tablet.and.desktop} {
+							margin-left: -20px;
+							margin-right: -20px;
+						}
+					`,
+				isImmersive &&
+					!isImmersiveWeekendRead &&
+					immersiveMediaBelowTablet,
+				hasLabsPortraitImage && labsPortraitMediaSizing,
 				isImmersiveLandscape &&
 					usesImmersiveImageProportions &&
-					css`
-						position: relative;
-						aspect-ratio: 4 / 5;
-
-						> div {
-							position: absolute;
-							inset: 0;
-						}
-
-						${from.mobileLandscape} {
-							aspect-ratio: 5 / 4;
-						}
-
-						${from.desktop} {
-							aspect-ratio: auto;
-							height: calc(100vh - ${immersiveHeaderHeight}px);
-						}
-					`,
-				isImmersivePortrait &&
-					css`
-						${from.leftCol} {
-							grid-template-rows: auto 1fr max-content;
-						}
-					`,
+					landscapeMediaSizing(immersiveHeaderHeight),
 				isImmersivePortrait &&
 					usesImmersiveImageProportions &&
-					css`
-						> div {
-							height: 100%;
-						}
-
-						${from.leftCol} {
-							aspect-ratio: 4 / 5;
-						}
-					`,
+					portraitImageFill,
 				displayAvatarUrl && layoutType === 'picture'
 					? css`
 							margin-top: ${space[2]}px;

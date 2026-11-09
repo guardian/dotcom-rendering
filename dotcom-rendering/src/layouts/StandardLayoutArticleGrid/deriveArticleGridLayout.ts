@@ -16,6 +16,7 @@ export type ArticleGridLayout = {
 	avatarUrl: string | undefined;
 	captionText: ReturnType<typeof decideMainMediaCaption>;
 	immersiveHeaderHeight: number;
+	hasImmersiveAffiliateDisclaimer: boolean;
 	isImmersive: boolean;
 	isImmersiveLandscape: boolean;
 	isImmersivePortrait: boolean;
@@ -77,6 +78,7 @@ export const deriveArticleGridLayout = ({
 			: getLayoutType(format, mainMediaOrientation);
 	const isImmersivePortrait = layoutType === 'immersivePortrait';
 	const isImmersiveLandscape = layoutType === 'immersiveLandscape';
+	const isImmersive = isImmersivePortrait || isImmersiveLandscape;
 
 	return {
 		ageWarning: getAgeWarning(
@@ -87,7 +89,9 @@ export const deriveArticleGridLayout = ({
 			?.bylineLargeImageUrl,
 		captionText: decideMainMediaCaption(mainMedia),
 		immersiveHeaderHeight,
-		isImmersive: isImmersivePortrait || isImmersiveLandscape,
+		hasImmersiveAffiliateDisclaimer:
+			isImmersive && article.affiliateLinksDisclaimerRequired,
+		isImmersive,
 		isImmersiveLandscape,
 		isImmersiveWeekendRead:
 			isImmersivePortrait && format.design === ArticleDesign.WeekendEssay,
