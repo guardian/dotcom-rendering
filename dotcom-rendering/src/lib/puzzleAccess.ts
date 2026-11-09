@@ -13,6 +13,13 @@ import { getOptionsHeaders, type SignedIn } from './identity';
 export const PUZZLE_ACCESS_ENDPOINT = '/puzzles-and-games/access';
 
 /**
+ * The id of the positioned wrapper the page layout puts around the whole main
+ * content. The gate renders the modal into it (through a portal), so the modal
+ * covers the whole page content and not just the game's area.
+ */
+export const PUZZLE_MODAL_ROOT_ID = 'puzzle-modal-root';
+
+/**
  * How long to wait for the access check before treating it as failed.
  */
 export const PUZZLE_ACCESS_TIMEOUT_MS = 3000;

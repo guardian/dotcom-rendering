@@ -1,6 +1,12 @@
 import { css } from '@emotion/react';
 import { palette as sourcePalette } from '@guardian/source/foundations';
-import { type ComponentProps, useEffect, useState } from 'react';
+import {
+	type ComponentProps,
+	type ReactNode,
+	useEffect,
+	useState,
+} from 'react';
+import { createPortal } from 'react-dom';
 import { getAdFreeCookie } from '../client/userFeatures/cookies/adFree';
 import {
 	type AuthStatus,
@@ -10,6 +16,7 @@ import {
 import {
 	fetchPuzzleAccess,
 	getPuzzleAccessView,
+	PUZZLE_MODAL_ROOT_ID,
 	type PuzzleAccessCheckResult,
 	type PuzzleReader,
 } from '../lib/puzzleAccess';
@@ -43,6 +50,16 @@ type AccessCheck = { forAuthState: AuthState; result: PuzzleAccessCheckResult };
 const placeholderStyles = css`
 	background-color: ${sourcePalette.neutral[97]};
 `;
+
+/**
+ * The modal is absolutely positioned, so it has to live inside the page
+ * layout's positioned wrapper to cover the whole page content. Falls back to
+ * rendering in place when that wrapper is not found.
+ */
+const renderInModalRoot = (modal: ReactNode) => {
+	const root = document.getElementById(PUZZLE_MODAL_ROOT_ID);
+	return root ? createPortal(modal, root) : modal;
+};
 
 /**
  * The reader's auth state, `undefined` until the first check has finished, and
@@ -153,13 +170,14 @@ export const PuzzleAccessGate = ({
 					placeholderStyles,
 				]}
 			/>
-			{view === 'modal' && (
-				<UnlockPremiumPuzzlesModal
-					idUrl={idUrl}
-					returnFromSubscribeToPath={returnFromSubscribeToPath}
-					returnToArchivePath={returnToArchivePath}
-				/>
-			)}
+			{view === 'modal' &&
+				renderInModalRoot(
+					<UnlockPremiumPuzzlesModal
+						idUrl={idUrl}
+						returnFromSubscribeToPath={returnFromSubscribeToPath}
+						returnToArchivePath={returnToArchivePath}
+					/>,
+				)}
 		</>
 	);
 };

@@ -34,6 +34,7 @@ import {
 import { canRenderAds } from '../lib/canRenderAds';
 import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
 import { getPathFromUrl } from '../lib/premiumPuzzlesUrls';
+import { PUZZLE_MODAL_ROOT_ID } from '../lib/puzzleAccess';
 import { formatPuzzleDate } from '../lib/puzzleDate';
 import {
 	isPuzzlesHubV1Enabled,
@@ -514,7 +515,7 @@ export const PuzzlePageLayout = ({
 				)}
 			</div>
 
-			<div css={mainContainerWrapperStyles}>
+			<div css={mainContainerWrapperStyles} id={PUZZLE_MODAL_ROOT_ID}>
 				<main
 					data-layout="PuzzlePageLayout"
 					css={puzzleAccentStyles(
