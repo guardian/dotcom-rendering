@@ -140,6 +140,25 @@ either error is small and short-lived.
 The decision is made in the browser after hydration, so a cache hit or miss
 does not change the behaviour.
 
+### D8. Premium puzzles render no ads and no comments
+
+Ads are not rendered at all when `instance.requiresSubscription` is true
+(`renderAds` in `PuzzlePageLayout.tsx`). Comments are already permanently off
+on the Puzzle Page; if they are ever enabled they must also stay off for
+premium puzzles.
+
+Why:
+
+- A reader with access is a subscriber, so ad-free. A reader without access
+  only sees the modal, and ads behind its overlay can be seen badly and cannot
+  be clicked.
+- It is decided from a property of the puzzle, so the cached HTML still holds
+  nothing about the reader (D1).
+- Not rendering the slots is better than hiding them afterwards: no ad is
+  requested and then hidden, so no unseen impressions are generated.
+- Accepted cost: a subscriber whose ad-free benefit is out of date sees no ads
+  either, which is what they paid for.
+
 ## 5. Target behaviour
 
 | Puzzle               | Reader                      | Result                                                                                                                 |

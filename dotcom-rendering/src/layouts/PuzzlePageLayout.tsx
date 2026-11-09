@@ -370,6 +370,9 @@ export const PuzzlePageLayout = ({
 	// Hardcoded permanently off, mirroring exactly how `CrosswordLayout`
 	// gates its own (there, real) `showComments` Section, just with a
 	// fixed value instead of a derived one.
+	// NOTE: if comments are ever enabled, they must also stay off for premium
+	// puzzles (`!instance.requiresSubscription`): the unlock modal covers the
+	// page, so a section the reader cannot reach makes no sense.
 	const showComments = false;
 
 	// The "More from Puzzles & Games" rail is a v1-scoped feature (per the
@@ -398,7 +401,14 @@ export const PuzzlePageLayout = ({
 	// `Front`/`TagPage`/`SportDataPage`) can gate ads here too, instead of
 	// rendering them unconditionally regardless of whether the reader has
 	// actually paid for an ad-free subscription.
-	const renderAds = canRenderAds(puzzlePage);
+	//
+	// Premium puzzles never render ads: a reader with access is a subscriber
+	// (ad-free), and a reader without access only sees the unlock modal, and
+	// ads behind its overlay could be seen badly and not clicked. This is
+	// decided here, from a property of the puzzle, so the cached HTML holds
+	// nothing about the reader and no ad is requested and then hidden.
+	const renderAds =
+		canRenderAds(puzzlePage) && !instance.requiresSubscription;
 
 	// `getContributionsServiceUrl` reads `config.contributionsServiceUrl`,
 	// a field `ConfigType` doesn't carry for Puzzle Page requests. Hardcoded

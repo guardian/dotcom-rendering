@@ -86,7 +86,7 @@ const renderPuzzlePageLayout = (
 };
 
 describe('PuzzlePageLayout', () => {
-	it('passes the API progress identity into the iframe island for hydration', () => {
+	it('passes the API progress identity into the access gate island for hydration', () => {
 		const page = createPuzzlePage('film-reveal');
 		const progressIdentity = {
 			puzzleId: 'moviegrid-filmreveal-394',
@@ -97,7 +97,7 @@ describe('PuzzlePageLayout', () => {
 			instance: { ...page.instance, progressIdentity },
 		});
 		const props = container
-			.querySelector('gu-island[name="PuzzleIframe"]')
+			.querySelector('gu-island[name="PuzzleAccessGate"]')
 			?.getAttribute('props');
 		expect(JSON.parse(props!)).toEqual(
 			expect.objectContaining({ progressIdentity }),
@@ -454,6 +454,42 @@ describe('PuzzlePageLayout', () => {
 			expect(
 				container.querySelector('#dfp-ad--crossword-banner-mobile'),
 			).not.toBeInTheDocument();
+		});
+
+		it('does not render any ad slots for a premium puzzle, even for a non-ad-free reader', () => {
+			const base = createPuzzlePage('sudoku-easy');
+			const { container } = renderPuzzlePageLayout('sudoku-easy', {
+				isAdFreeUser: false,
+				instance: { ...base.instance, requiresSubscription: true },
+			});
+
+			expect(
+				container.querySelector('#dfp-ad--top-above-nav'),
+			).not.toBeInTheDocument();
+			expect(
+				container.querySelector('#dfp-ad--merchandising-high'),
+			).not.toBeInTheDocument();
+			expect(
+				container.querySelector('#dfp-ad--merchandising'),
+			).not.toBeInTheDocument();
+			expect(
+				container.querySelector('#dfp-ad--right'),
+			).not.toBeInTheDocument();
+			expect(
+				container.querySelector('#dfp-ad--crossword-banner-mobile'),
+			).not.toBeInTheDocument();
+		});
+
+		it('still renders ad slots when the puzzle is explicitly not premium', () => {
+			const base = createPuzzlePage('sudoku-easy');
+			const { container } = renderPuzzlePageLayout('sudoku-easy', {
+				isAdFreeUser: false,
+				instance: { ...base.instance, requiresSubscription: false },
+			});
+
+			expect(
+				container.querySelector('#dfp-ad--merchandising-high'),
+			).toBeInTheDocument();
 		});
 	});
 });
