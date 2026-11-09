@@ -482,6 +482,7 @@ export const CrosswordLayout = (props: Props) => {
 								defer={{ until: 'visible' }}
 							>
 								<RelatedPuzzlesRailEnhanced
+									source="crossword-page"
 									items={article.moreFromPuzzlesAndGames}
 								/>
 							</Island>

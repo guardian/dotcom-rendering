@@ -3,7 +3,10 @@ import { withValidatedCadence } from '../lib/puzzleCadence';
 import { withProgress } from '../lib/puzzleCardProgress';
 import { usePuzzleProgress } from '../lib/usePuzzleProgress';
 import type { PuzzleItem } from '../types/puzzlesPage';
-import { RelatedPuzzlesRail } from './RelatedPuzzlesRail';
+import {
+	RelatedPuzzlesRail,
+	type RelatedPuzzlesSource,
+} from './RelatedPuzzlesRail';
 
 /**
  * The "More from Puzzles & games" rail, enhanced in the browser:
@@ -18,8 +21,10 @@ import { RelatedPuzzlesRail } from './RelatedPuzzlesRail';
  */
 export const RelatedPuzzlesRailEnhanced = ({
 	items,
+	source,
 }: {
 	items: PuzzleItem[];
+	source: RelatedPuzzlesSource;
 }) => {
 	const [validated, setValidated] = useState(items);
 	const progress = usePuzzleProgress();
@@ -33,5 +38,5 @@ export const RelatedPuzzlesRailEnhanced = ({
 		[validated, progress],
 	);
 
-	return <RelatedPuzzlesRail items={withState} />;
+	return <RelatedPuzzlesRail items={withState} source={source} />;
 };
