@@ -74,8 +74,7 @@ describe('enhanceCards mini navigation', () => {
 			};
 			const enhancedCard = enhance({
 				...card,
-				properties: { ...card.properties, miniNavData },
-				display: { ...card.display, showMiniNav },
+				display: { ...card.display, showMiniNav, miniNavData },
 			});
 			expect(enhancedCard?.showMiniNav).toBe(showMiniNav);
 			expect(enhancedCard?.miniNavData).toEqual(miniNavData);
@@ -99,8 +98,7 @@ describe('enhanceCards mini navigation', () => {
 		expect(
 			enhance({
 				...card,
-				properties: { ...card.properties, miniNavData },
-				display: { ...card.display, showMiniNav: true },
+				display: { ...card.display, showMiniNav: true, miniNavData },
 			})?.miniNavData,
 		).toEqual(miniNavData);
 	});
