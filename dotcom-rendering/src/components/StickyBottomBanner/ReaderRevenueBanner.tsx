@@ -30,13 +30,7 @@ import {
 import { getToday } from '../../lib/dailyArticleCount';
 import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
 import { getZIndex } from '../../lib/getZIndex';
-import { getAuthStatus } from '../../lib/identity';
 import type { CanShowResult } from '../../lib/messagePicker';
-import {
-	fetchNewsletterSubscriptions,
-	getCachedSubscriptions,
-	shouldInvalidateCache,
-} from '../../lib/newsletterSubscriptionCache';
 import { getBanner } from '../../lib/sdcRequests';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type { TagType } from '../../types/tag';
@@ -257,7 +251,6 @@ export const canShowRRBanner: CanShowFunctionType<
 	signInBannerLastClosedAt,
 	abandonedBasketBannerLastClosedAt,
 	isPreview,
-	idApiUrl,
 	renderingTarget,
 	asyncArticleCounts,
 	ophanPageViewId,
@@ -320,23 +313,24 @@ export const canShowRRBanner: CanShowFunctionType<
 	const userConsent = await hasRequiredConsents();
 
 	const optedOutOfArticleCount = await hasOptedOutOfArticleCount();
-	let userSubscriptions: number[] = [];
-	if (isSignedIn) {
-		const authStatus = await getAuthStatus();
-		if (authStatus.kind === 'SignedIn') {
-			const userId = authStatus.idToken.claims.sub;
-			const cachedSubscriptions = getCachedSubscriptions();
-			userSubscriptions =
-				cachedSubscriptions &&
-				!shouldInvalidateCache(cachedSubscriptions, userId)
-					? cachedSubscriptions.listIds
-					: ((await fetchNewsletterSubscriptions(
-							idApiUrl,
-							userId,
-							authStatus,
-						)) ?? []);
-		}
-	}
+	// Skip fetching user subscriptions for now
+	const userSubscriptions: number[] = [];
+	// if (isSignedIn) {
+	// 	const authStatus = await getAuthStatus();
+	// 	if (authStatus.kind === 'SignedIn') {
+	// 		const userId = authStatus.idToken.claims.sub;
+	// 		const cachedSubscriptions = getCachedSubscriptions();
+	// 		userSubscriptions =
+	// 			cachedSubscriptions &&
+	// 			!shouldInvalidateCache(cachedSubscriptions, userId)
+	// 				? cachedSubscriptions.listIds
+	// 				: ((await fetchNewsletterSubscriptions(
+	// 						idApiUrl,
+	// 						userId,
+	// 						authStatus,
+	// 					)) ?? []);
+	// 	}
+	// }
 	const bannerPayload = await buildPayload({
 		isSignedIn,
 		countryCode,

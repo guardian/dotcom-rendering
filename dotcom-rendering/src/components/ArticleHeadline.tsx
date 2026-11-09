@@ -87,6 +87,7 @@ const decideHeadlineFont = (format: ArticleFormat) => {
 		format.design === ArticleDesign.Gallery
 			? 50
 			: 34;
+
 	if (isNewsNotCommentOrRecipeOrGallery(format)) {
 		return size === 50 ? headlineMedium50 : headlineMedium34;
 	}
@@ -108,6 +109,7 @@ const decideMobileHeadlineFont = (format: ArticleFormat) => {
 		format.design === ArticleDesign.Gallery
 			? 34
 			: 28;
+
 	if (isNewsNotCommentOrRecipeOrGallery(format)) {
 		return size === 34 ? headlineMedium34 : headlineMedium28;
 	}

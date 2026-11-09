@@ -44,6 +44,7 @@ export const AllEditorialNewslettersPageLayout = ({
 					showSlimNav={false}
 					hasPageSkin={false}
 					hasPageSkinContentSelfConstrain={false}
+					canonicalUrl={newslettersPage.canonicalUrl}
 				/>
 			</div>
 

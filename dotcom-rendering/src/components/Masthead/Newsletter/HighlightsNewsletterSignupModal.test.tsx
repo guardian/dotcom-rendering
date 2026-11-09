@@ -88,13 +88,11 @@ describe('HighlightsNewsletterSignupModal', () => {
 	it('renders a labelled dialog with the newsletter name', () => {
 		renderModal();
 
-		const dialog = screen.getByRole('dialog');
+		const dialog = screen.getByRole('dialog', {
+			name: `Sign up to ${newsletter.name}`,
+		});
 		expect(dialog).toBeInTheDocument();
 		expect(dialog).toHaveAttribute('aria-modal', 'true');
-		// The visually-hidden h2 provides the accessible name
-		expect(
-			screen.getByText(`Sign up to ${newsletter.name}`),
-		).toBeInTheDocument();
 	});
 
 	it('renders the newsletter signup form', () => {

@@ -11,9 +11,13 @@ import {
 	textSans14,
 	textSansBold14,
 } from '@guardian/source/foundations';
+import { useEffect, useRef } from 'react';
+import { submitComponentEvent } from '../../../client/ophan/ophan';
 import { grid } from '../../../grid';
+import { isNetworkFront as isANetworkFront } from '../../../lib/edition';
 import { generateImageURL } from '../../../lib/image';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
+import { useIsInView } from '../../../lib/useIsInView';
 import { palette as themePalette } from '../../../palette';
 import type {
 	CustomSubnav,
@@ -21,17 +25,18 @@ import type {
 	CustomSubnavImage,
 	RenderingPage,
 } from '../../../types/customSubnav';
+import { useConfig } from '../../ConfigContext';
 
 type Props = {
 	customSubNav: CustomSubnav;
-	currentNavLink: string;
 	renderingPage: RenderingPage;
 	pageId: string;
 	hasPageSkin?: boolean;
+	canonicalUrl?: string;
 };
 
 const subNavStyles = css`
-	${textSans14}
+	${textSans14};
 	display: flex;
 	column-gap: ${space[2]}px;
 	color: inherit;
@@ -98,7 +103,7 @@ const articleDividerStyles = css`
 `;
 
 const articleHeaderStyles = css`
-	${textSansBold14}
+	${textSansBold14};
 	color: ${themePalette('--custom-subnav-header-text')};
 	display: flex;
 	align-items: center;
@@ -121,7 +126,7 @@ const headerTextWrapperStyles = css`
 
 /** On fronts the header sits above the links as a large stacked heading. */
 const frontContainerStyles = css`
-	${headlineBold28}
+	${headlineBold28};
 	margin-top: ${space[2]}px;
 	color: ${themePalette('--masthead-nav-link-text')};
 `;
@@ -158,7 +163,7 @@ const headerImageStyles = css`
 `;
 
 const imageHeaderTextStyles = css`
-	${headlineBold28}
+	${headlineBold28};
 	position: absolute;
 	left: ${space[3]}px;
 	bottom: ${space[1]}px;
@@ -172,7 +177,7 @@ const imageHeaderTextStyles = css`
 const imageListStyles = css`
 	${grid.column.all}
 	grid-row: 2;
-	${textSans14}
+	${textSans14};
 	display: flex;
 	align-items: center;
 	column-gap: ${space[2]}px;
@@ -336,12 +341,40 @@ const CustomHeader = (
  */
 export const CustomSubNav = ({
 	customSubNav,
-	currentNavLink,
 	renderingPage,
 	hasPageSkin,
 	pageId,
+	canonicalUrl,
 }: Props) => {
+	const hasTrackedView = useRef(false);
+	const [isInView, setNode] = useIsInView({});
+	const { renderingTarget } = useConfig();
+	const isNetworkFront = isANetworkFront(pageId);
 	const isArticle = renderingPage === 'article';
+
+	useEffect(() => {
+		if (isInView !== true || hasTrackedView.current) {
+			return;
+		}
+
+		hasTrackedView.current = true;
+		void submitComponentEvent(
+			{
+				component: {
+					componentType: 'CUSTOM_SUBNAV',
+					id: customSubNav.header.headerText,
+				},
+				action: 'VIEW',
+				value: customSubNav.id,
+			},
+			renderingTarget,
+		);
+	}, [
+		isInView,
+		renderingTarget,
+		customSubNav.header.headerText,
+		customSubNav.id,
+	]);
 	/** DCR receives images for all platforms; only web images are rendered here. */
 	const webImages = (customSubNav.images ?? []).filter((image) =>
 		image.platforms.includes('web'),
@@ -360,8 +393,8 @@ export const CustomSubNav = ({
 					linkText,
 				)}
 			>
-				{linkText === currentNavLink ||
-				(pageId.length > 0 && dotcomPath.includes(pageId)) ? (
+				{!isNetworkFront &&
+				(dotcomPath === pageId || dotcomPath === canonicalUrl) ? (
 					<span css={selectedLink}>{linkText}</span>
 				) : (
 					linkText
@@ -373,6 +406,7 @@ export const CustomSubNav = ({
 	if (hasHeaderImage) {
 		return (
 			<div
+				ref={setNode}
 				data-component={`custom-subnav-${customSubNav.header.headerText}`}
 				data-component-id={customSubNav.id}
 				data-rendering-page={renderingPage}
@@ -401,6 +435,7 @@ export const CustomSubNav = ({
 	if (isArticle) {
 		return (
 			<div
+				ref={setNode}
 				data-component={`custom-subnav-${customSubNav.header.headerText}`}
 				data-component-id={customSubNav.id}
 				data-rendering-page={renderingPage}
@@ -431,6 +466,7 @@ export const CustomSubNav = ({
 
 	return (
 		<div
+			ref={setNode}
 			data-component={`custom-subnav-${customSubNav.header.headerText}`}
 			data-component-id={customSubNav.id}
 			data-rendering-page={renderingPage}

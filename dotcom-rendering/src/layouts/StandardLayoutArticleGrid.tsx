@@ -31,7 +31,7 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 	ArticleSpecial,
-	hasImmersiveGridTitle,
+	hasImmersiveGridTitleRule,
 } from '../lib/articleFormat';
 import { getSoleContributor } from '../lib/byline';
 import { getContributionsServiceUrl } from '../lib/contributions';
@@ -155,6 +155,7 @@ const avatarPositionStyles = (isPicture: boolean) => css`
 interface GridItemProps {
 	area: Area;
 	layoutType: LayoutType;
+	format: ArticleFormat;
 	element?: 'div' | 'aside';
 	className?: string;
 	children: React.ReactNode;
@@ -173,13 +174,14 @@ const getImageOrientation = (
 const GridItem = ({
 	area,
 	layoutType,
+	format,
 	element: Element = 'div',
 	className,
 	children,
 }: GridItemProps) => (
 	<Element
 		data-gu-name={area}
-		css={gridItemCss(area, layoutType)}
+		css={gridItemCss(area, layoutType, format)}
 		className={className}
 	>
 		{children}
@@ -254,9 +256,6 @@ export const StandardLayoutArticleGrid = ({
 			: 'landscape';
 	const immersiveHeaderHeight =
 		minHeaderHeightPx + (isLabs ? LABS_HEADER_HEIGHT : 0);
-	const immersiveMediaRowHeight = usesImmersiveImageProportions
-		? 'auto'
-		: `max(calc(80vh - ${immersiveHeaderHeight}px), calc(25rem - ${immersiveHeaderHeight}px))`;
 
 	const topHatTestingPage = '/p/x4zt8y';
 	const layoutType =
@@ -273,16 +272,17 @@ export const StandardLayoutArticleGrid = ({
 			return undefined;
 		}
 
-		const columnCount =
-			gridLayout === 'immersivePortrait'
-				? 5
-				: gridLayout === 'immersiveLandscape'
-					? 4
-					: 3;
+		const columnCount = gridLayout === 'immersivePortrait' ? 5 : 3;
 
 		return css`
 			${from.leftCol} {
 				${grid.centreRule(columnCount)}
+				${gridLayout === 'immersiveLandscape' &&
+				css`
+					& > *:nth-child(3)::before {
+						top: 100%;
+					}
+				`}
 			}
 		`;
 	};
@@ -292,8 +292,10 @@ export const StandardLayoutArticleGrid = ({
 	const isImmersivePortrait = layoutType === 'immersivePortrait';
 	const isImmersiveLandscape = layoutType === 'immersiveLandscape';
 	const isImmersive = isImmersivePortrait || isImmersiveLandscape;
+	const isImmersiveWeekendRead =
+		isImmersivePortrait && format.design === ArticleDesign.WeekendEssay;
 	const hasImmersivePortraitTitleRule =
-		isImmersivePortrait && hasImmersiveGridTitle(format, article.tags);
+		isImmersivePortrait && hasImmersiveGridTitleRule(format, article.tags);
 
 	const isInteractiveTopHat = layoutType === 'interactiveTopHat';
 
@@ -351,22 +353,6 @@ export const StandardLayoutArticleGrid = ({
 				grid.container,
 				grid.outerRules(),
 				setCentreRule(layoutType),
-				isLabs &&
-					isImmersive &&
-					css`
-						${from.desktop} {
-							&::before,
-							&::after {
-								z-index: ${getZIndex(
-									'immersiveGridOuterRules',
-								)};
-							}
-						}
-						grid-template-rows: ${immersiveMediaRowHeight} repeat(
-								6,
-								auto
-							);
-					`,
 				isImmersive &&
 					css`
 						${until.tablet} {
@@ -382,6 +368,10 @@ export const StandardLayoutArticleGrid = ({
 									? '130px'
 									: '90px'} auto auto auto auto auto;
 						}
+						&::before,
+						&::after {
+							z-index: ${getZIndex('immersiveGridOuterRules')};
+						}
 					`,
 				isInteractiveTopHat &&
 					css`
@@ -392,6 +382,7 @@ export const StandardLayoutArticleGrid = ({
 			<GridItem
 				area="media"
 				layoutType={layoutType}
+				format={format}
 				css={[
 					isImmersive
 						? css`
@@ -410,7 +401,8 @@ export const StandardLayoutArticleGrid = ({
 								css`
 									aspect-ratio: 4 / 5;
 								`}
-								${isImmersive && immersiveMediaBelowTablet}
+								${!isImmersiveWeekendRead &&
+								immersiveMediaBelowTablet}
 
 								${hasLabsPortraitImage &&
 								css`
@@ -507,6 +499,7 @@ export const StandardLayoutArticleGrid = ({
 			<GridItem
 				area="title"
 				layoutType={layoutType}
+				format={format}
 				element="aside"
 				css={[
 					isImmersive &&
@@ -550,8 +543,10 @@ export const StandardLayoutArticleGrid = ({
 			<GridItem
 				area="headline"
 				layoutType={layoutType}
+				format={format}
 				css={[
 					isImmersive &&
+						!isImmersiveWeekendRead &&
 						css`
 							z-index: ${getZIndex('articleHeadline')};
 
@@ -573,6 +568,15 @@ export const StandardLayoutArticleGrid = ({
 
 							${until.tablet} {
 								padding-bottom: ${space[8]}px;
+							}
+						`,
+					isImmersiveWeekendRead &&
+						css`
+							z-index: ${getZIndex('articleHeadline')};
+
+							${until.desktop} {
+								border-top: 1px solid
+									${themePalette('--article-border')};
 							}
 						`,
 					isImmersiveLandscape &&
@@ -668,6 +672,7 @@ export const StandardLayoutArticleGrid = ({
 				<GridItem
 					area="caption"
 					layoutType={layoutType}
+					format={format}
 					css={css`
 						padding-top: ${space[2]}px;
 					`}
@@ -706,6 +711,7 @@ export const StandardLayoutArticleGrid = ({
 				<GridItem
 					area="standfirst"
 					layoutType={layoutType}
+					format={format}
 					css={[
 						isImmersive &&
 							css`
@@ -746,6 +752,7 @@ export const StandardLayoutArticleGrid = ({
 				<GridItem
 					area="meta"
 					layoutType={layoutType}
+					format={format}
 					element="aside"
 					css={[
 						isImmersive &&
@@ -756,13 +763,6 @@ export const StandardLayoutArticleGrid = ({
 									padding-top: ${space[3]}px;
 								}
 							`,
-						isImmersivePortrait
-							? css`
-									${from.leftCol} {
-										margin-right: -10px;
-									}
-								`
-							: undefined,
 						isImmersiveLandscape &&
 							css`
 								${from.leftCol} {
@@ -899,6 +899,7 @@ export const StandardLayoutArticleGrid = ({
 			<GridItem
 				area="body"
 				layoutType={layoutType}
+				format={format}
 				css={css`
 					z-index: ${getZIndex('bodyArea')};
 				`}
@@ -1020,6 +1021,7 @@ export const StandardLayoutArticleGrid = ({
 			<GridItem
 				area="right-column"
 				layoutType={layoutType}
+				format={format}
 				css={css`
 					padding-top: ${layoutType === 'media' ? 0 : 6}px;
 					${from.desktop} {
