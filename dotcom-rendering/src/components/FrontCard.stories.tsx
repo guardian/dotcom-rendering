@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { customSubnav } from '../../fixtures/manual/customSubnav';
 import { trails } from '../../fixtures/manual/trails';
 import type { DCRFrontCard } from '../types/front';

@@ -157,11 +157,5 @@
 		"vite-plugin-svgr": "5.2.0",
 		"web-vitals": "4.2.3",
 		"zod": "4.6.6"
-	},
-	"devDependencies": {
-		"@rollup/plugin-inject": "5.0.5",
-		"rollup-plugin-visualizer": "7.0.1",
-		"vite": "8.0.11",
-		"vite-plugin-svgr": "5.2.0"
 	}
 }
