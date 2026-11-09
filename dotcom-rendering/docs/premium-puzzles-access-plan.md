@@ -298,3 +298,52 @@ Notes:
   needs explicit approval first.
 - Changes to shared Guardian libraries or to the Gateway and `frontend` copies
   of the user benefits cookie logic.
+- Crosswords (see section 10).
+
+## 10. Crosswords: not in this change
+
+This change only covers the Puzzle Page (`PuzzlePageLayout`). Crosswords are
+not gated yet. The investigation below is kept for the follow-up.
+
+**How crosswords differ**
+
+- They are articles rendered by `CrosswordLayout` (`ArticleDeprecated`), not by
+  the Puzzle Page. The board is a `CrosswordElement` block, built by
+  `buildCrosswordBlock` and drawn by the `CrosswordComponent` island, so a gate
+  has to wrap that island instead of an iframe.
+- The island gets the whole crossword in its props (grid, clues and, once
+  published, the solutions). Hiding the board does not hide the content, so
+  this is a weaker soft paywall than the Puzzle Page's, where only a game URL is
+  in the HTML. D3 (soft paywall accepted) needs to be confirmed for crosswords.
+- They have real comments (`showComments`) and ads inside the island, which
+  would both have to be off for premium crosswords.
+- `frontend` serves them with a shared 60s cache (`CacheTime.Crosswords`), through
+  DCR or, when the `DCRCrosswords` switch is off, through a legacy Scala
+  template that DCR does not control and that a gate would not cover.
+
+**What it would take**
+
+- DCR: generalise `PuzzleAccessGate` so the "board" is a parameter, add a gate
+  for `CrosswordComponent`, carry the flag on the crossword element from
+  `buildCrosswordBlock` (already DCR code, combined with
+  `isPuzzlesHubV3Enabled`), and update `CrosswordLayout` (positioned container
+  for the modal, no ads, no comments). The puzzle id for the access check is
+  already defined by the progress adapter: `guardian-crossword-<type>-<number>`.
+- `frontend`: compute `requiresSubscription` from `crossword.date` with
+  `PuzzlesAccessPolicy` and send it as an optional field. The model is the
+  shared article model, and DCR's article schema is not strict, so `frontend`
+  can ship it first. DCR needs its type and generated schema updated.
+- Without any A/B test nothing changes, as for the Puzzle Page: the flag is
+  combined with the v3 check before it reaches the element, so the island
+  renders exactly as today and no access request is made.
+
+**Open questions**
+
+- Does the 7 day rule apply to every crossword series? The progress adapter
+  skips `everyman`, `special` and `speedy` (the Puzzles API has no type for
+  them); they would be treated as free.
+- The puzzle date is `crossword.date` (a UTC date, like the progress identity).
+  Around midnight the 7 day boundary can be off by an hour.
+- v2 plans to migrate crosswords to the Puzzle Page template. Since v3 needs v2,
+  the existing gate would then cover them and gating `CrosswordLayout` would be
+  transitional. Is there a date for that migration?
