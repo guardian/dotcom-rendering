@@ -19,10 +19,92 @@ import type { ArticleGridLayout } from './deriveArticleGridLayout';
 import { GridItem } from './GridItem';
 import { topHatFurnitureBackgroundStyles } from './styles';
 
-const avatarHeadlineWrapper = css`
+const spacedColumn = css`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+`;
+
+const immersiveLayer = css`
+	z-index: ${getZIndex('articleHeadline')};
+`;
+
+const immersiveHeadlineOverlay = (
+	format: ArticleFormat,
+	isPortrait: boolean,
+) => css`
+	${isPortrait ? until.desktop : until.tablet} {
+		z-index: ${getZIndex('mediaOverlay')};
+		padding-bottom: ${space[8]}px;
+		[data-gu-name='age-warning'] {
+			position: relative;
+			z-index: ${getZIndex('articleHeadline')};
+		}
+		h1 {
+			position: relative;
+			isolation: isolate;
+			background-color: transparent;
+
+			${until.tablet} {
+				padding-inline: 20px;
+			}
+
+			${until.mobileLandscape} {
+				padding-inline: 10px;
+			}
+
+			> span {
+				position: relative;
+				z-index: ${getZIndex('articleHeadline')};
+			}
+			&::before,
+			&::after {
+				${headlineFont(format)}
+				content: '';
+				position: absolute;
+				inset: calc(1lh - 120px) 0 -${space[8]}px;
+				z-index: ${getZIndex('mediaOverlay')};
+				pointer-events: none;
+			}
+			&::before {
+				backdrop-filter: blur(7px);
+				mask-image: linear-gradient(
+					180deg,
+					transparent 0%,
+					black 120px
+				);
+			}
+			&::after {
+				background: linear-gradient(
+					180deg,
+					transparent 0%,
+					${themePalette('--headline-background')} 120px
+				);
+			}
+		}
+	}
+`;
+
+const weekendReadHeadlineRule = css`
+	${until.desktop} {
+		border-top: 1px solid ${themePalette('--article-border')};
+	}
+`;
+
+const landscapeHeadlineSpacing = (hasAffiliateDisclaimer: boolean) => css`
+	${between.tablet.and.desktop} {
+		padding-bottom: ${hasAffiliateDisclaimer ? space[3] : space[8]}px;
+	}
+`;
+
+const portraitHeadlineBorders = (hasTitleRule: boolean) => css`
+	${from.desktop} {
+		border-bottom: 1px solid ${themePalette('--article-border')};
+		${!hasTitleRule &&
+		css`
+			border-top: 1px solid ${themePalette('--article-border')};
+		`}
+	}
 `;
 
 const avatarPositionStyles = (isPicture: boolean) => css`
@@ -66,6 +148,7 @@ export const ArticleGridHeader = ({
 		ageWarning,
 		avatarUrl,
 		hasPageSkin,
+		hasImmersiveAffiliateDisclaimer,
 		isImmersive,
 		isImmersiveLandscape,
 		isImmersivePortrait,
@@ -76,16 +159,24 @@ export const ArticleGridHeader = ({
 	const hasImmersivePortraitTitleRule =
 		isImmersivePortrait && hasImmersiveGridTitleRule(format, article.tags);
 	const displayAvatarUrl = avatarUrl != null;
-	const hasImmersiveAffiliateDisclaimer =
-		isImmersive && article.affiliateLinksDisclaimerRequired;
 	const isFootballMatchReport =
 		format.design === ArticleDesign.MatchReport &&
 		article.matchType === 'FootballMatchType' &&
 		article.matchStatsUrl != null;
-	const headlineBackgroundImmersive = themePalette('--headline-background');
-	const immersiveHeadlineOverlayBreakpoint = isImmersivePortrait
-		? until.desktop
-		: until.tablet;
+	const isPictureOrComment =
+		layoutType === 'picture' || layoutType === 'comment';
+	const headline = (
+		<ArticleHeadline
+			format={format}
+			layoutType={layoutType}
+			headlineString={article.headline}
+			tags={article.tags}
+			byline={article.byline}
+			webPublicationDateDeprecated={article.webPublicationDateDeprecated}
+			hasAvatar={isPictureOrComment ? Boolean(avatarUrl) : undefined}
+			starRating={article.starRating}
+		/>
+	);
 
 	return (
 		<>
@@ -96,10 +187,7 @@ export const ArticleGridHeader = ({
 				hasPageSkin={hasPageSkin}
 				element="aside"
 				css={[
-					isImmersive &&
-						css`
-							z-index: ${getZIndex('articleHeadline')};
-						`,
+					isImmersive && immersiveLayer,
 					isImmersive &&
 						!isImmersiveWeekendRead &&
 						ageWarning != null &&
@@ -124,7 +212,7 @@ export const ArticleGridHeader = ({
 							align-content: flex-start;
 							margin-bottom: 0;
 
-							${format.design !== ArticleDesign.WeekendEssay &&
+							${!isImmersiveWeekendRead &&
 							css`
 								${between.tablet.and.desktop} {
 									margin-left: -20px;
@@ -136,12 +224,7 @@ export const ArticleGridHeader = ({
 								}
 							`}
 						`,
-					layoutType === 'picture' &&
-						css`
-							display: flex;
-							flex-direction: column;
-							justify-content: space-between;
-						`,
+					layoutType === 'picture' && spacedColumn,
 					isInteractiveTopHat &&
 						css`
 							z-index: ${getZIndex('mediaOverlay')};
@@ -164,108 +247,25 @@ export const ArticleGridHeader = ({
 				format={format}
 				hasPageSkin={hasPageSkin}
 				css={[
+					isImmersive && immersiveLayer,
 					isImmersive &&
 						!isImmersiveWeekendRead &&
-						css`
-							z-index: ${getZIndex('articleHeadline')};
-
-							${immersiveHeadlineOverlayBreakpoint} {
-								z-index: ${getZIndex('mediaOverlay')};
-								padding-bottom: ${space[8]}px;
-								[data-gu-name='age-warning'] {
-									position: relative;
-									z-index: ${getZIndex('articleHeadline')};
-								}
-								h1 {
-									position: relative;
-									isolation: isolate;
-									background-color: transparent;
-
-									${until.tablet} {
-										padding-inline: 20px;
-									}
-
-									${until.mobileLandscape} {
-										padding-inline: 10px;
-									}
-
-									> span {
-										position: relative;
-										z-index: ${getZIndex(
-											'articleHeadline',
-										)};
-									}
-									&::before,
-									&::after {
-										${headlineFont(format)}
-										content: '';
-										position: absolute;
-										inset: calc(1lh - 120px)
-											0 -${space[8]}px;
-										z-index: ${getZIndex('mediaOverlay')};
-										pointer-events: none;
-									}
-									&::before {
-										backdrop-filter: blur(7px);
-										mask-image: linear-gradient(
-											180deg,
-											transparent 0%,
-											black 120px
-										);
-									}
-									&::after {
-										background: linear-gradient(
-											180deg,
-											transparent 0%,
-											${headlineBackgroundImmersive} 120px
-										);
-									}
-								}
-							}
-						`,
-					isImmersiveWeekendRead &&
-						css`
-							z-index: ${getZIndex('articleHeadline')};
-							${until.desktop} {
-								border-top: 1px solid
-									${themePalette('--article-border')};
-							}
-						`,
+						immersiveHeadlineOverlay(format, isImmersivePortrait),
+					isImmersiveWeekendRead && weekendReadHeadlineRule,
 					isImmersiveLandscape &&
+						landscapeHeadlineSpacing(
+							hasImmersiveAffiliateDisclaimer,
+						),
+					isImmersivePortrait &&
+						!isImmersiveWeekendRead &&
 						css`
 							${between.tablet.and.desktop} {
-								padding-bottom: ${space[8]}px;
+								margin-left: -20px;
+								margin-right: -20px;
 							}
-
-							${hasImmersiveAffiliateDisclaimer &&
-							`${between.tablet.and.desktop} {
-								padding-bottom: ${space[3]}px;
-							}`}
 						`,
 					isImmersivePortrait &&
-						css`
-							${!isImmersiveWeekendRead &&
-							css`
-								${between.tablet.and.desktop} {
-									margin-left: -20px;
-									margin-right: -20px;
-								}
-							`}
-
-							${from.desktop} {
-								border-bottom: 1px solid
-									${themePalette('--article-border')};
-								${!hasImmersivePortraitTitleRule &&
-								css`
-									border-top: 1px solid
-										${themePalette('--article-border')};
-								`}
-							}
-							${between.desktop.and.leftCol} {
-								border-bottom: 1px solid
-									${themePalette('--article-border')};
-							}
-						`,
+						portraitHeadlineBorders(hasImmersivePortraitTitleRule),
 					isInteractiveTopHat &&
 						css`
 							${topHatFurnitureBackgroundStyles}
@@ -273,59 +273,33 @@ export const ArticleGridHeader = ({
 						`,
 				]}
 			>
-				{layoutType === 'picture' || layoutType === 'comment' ? (
-					<div css={avatarHeadlineWrapper}>
-						<ArticleHeadline
-							format={format}
-							layoutType={layoutType}
-							headlineString={article.headline}
-							tags={article.tags}
-							byline={article.byline}
-							webPublicationDateDeprecated={
-								article.webPublicationDateDeprecated
-							}
-							hasAvatar={!!avatarUrl}
-							starRating={article.starRating}
-						/>
-
-						<>
-							{displayAvatarUrl && avatarUrl && (
-								<div
-									css={avatarPositionStyles(
-										layoutType === 'picture',
-									)}
-								>
-									<ContributorAvatar
-										imageSrc={avatarUrl}
-										imageAlt={article.byline ?? ''}
-									/>
-								</div>
-							)}
-							{!(
-								layoutType === 'picture' && !displayAvatarUrl
-							) && (
-								<StraightLines
-									count={8}
-									cssOverrides={css`
-										display: block;
-									`}
-									color={themePalette('--straight-lines')}
+				{isPictureOrComment ? (
+					<div css={spacedColumn}>
+						{headline}
+						{displayAvatarUrl && avatarUrl && (
+							<div
+								css={avatarPositionStyles(
+									layoutType === 'picture',
+								)}
+							>
+								<ContributorAvatar
+									imageSrc={avatarUrl}
+									imageAlt={article.byline ?? ''}
 								/>
-							)}
-						</>
+							</div>
+						)}
+						{(layoutType !== 'picture' || displayAvatarUrl) && (
+							<StraightLines
+								count={8}
+								cssOverrides={css`
+									display: block;
+								`}
+								color={themePalette('--straight-lines')}
+							/>
+						)}
 					</div>
 				) : (
-					<ArticleHeadline
-						format={format}
-						layoutType={layoutType}
-						headlineString={article.headline}
-						tags={article.tags}
-						byline={article.byline}
-						webPublicationDateDeprecated={
-							article.webPublicationDateDeprecated
-						}
-						starRating={article.starRating}
-					/>
+					headline
 				)}
 			</GridItem>
 		</>

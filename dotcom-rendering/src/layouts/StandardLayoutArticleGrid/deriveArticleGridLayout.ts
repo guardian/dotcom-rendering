@@ -17,6 +17,7 @@ export type ArticleGridLayout = {
 	captionText: ReturnType<typeof decideMainMediaCaption>;
 	hasPageSkin: boolean;
 	immersiveHeaderHeight: number;
+	hasImmersiveAffiliateDisclaimer: boolean;
 	isImmersive: boolean;
 	isImmersiveLandscape: boolean;
 	isImmersivePortrait: boolean;
@@ -60,6 +61,7 @@ export const deriveArticleGridLayout = ({
 		minHeaderHeightPx + (isLabs ? LABS_HEADER_HEIGHT : 0);
 	const isImmersivePortrait = layoutType === 'immersivePortrait';
 	const isImmersiveLandscape = layoutType === 'immersiveLandscape';
+	const isImmersive = isImmersivePortrait || isImmersiveLandscape;
 
 	return {
 		hasPageSkin,
@@ -71,7 +73,9 @@ export const deriveArticleGridLayout = ({
 			?.bylineLargeImageUrl,
 		captionText: decideMainMediaCaption(mainMedia),
 		immersiveHeaderHeight,
-		isImmersive: isImmersivePortrait || isImmersiveLandscape,
+		hasImmersiveAffiliateDisclaimer:
+			isImmersive && article.affiliateLinksDisclaimerRequired,
+		isImmersive,
 		isImmersiveLandscape,
 		isImmersiveWeekendRead:
 			isImmersivePortrait && format.design === ArticleDesign.WeekendEssay,

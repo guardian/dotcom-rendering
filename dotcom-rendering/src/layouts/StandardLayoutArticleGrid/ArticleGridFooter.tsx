@@ -56,6 +56,7 @@ export const ArticleGridFooter = ({
 		avatarUrl,
 		captionText,
 		hasPageSkin,
+		hasImmersiveAffiliateDisclaimer,
 		isImmersive,
 		isImmersiveLandscape,
 		isImmersivePortrait,
@@ -66,8 +67,16 @@ export const ArticleGridFooter = ({
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
 	const displayAvatarUrl = avatarUrl != null;
-	const hasImmersiveAffiliateDisclaimer =
-		isImmersive && article.affiliateLinksDisclaimerRequired;
+	const caption = (
+		<Caption
+			captionText={captionText}
+			format={format}
+			shouldLimitWidth={false}
+			isLeftCol={true}
+			isMainMedia={true}
+			showIconBelowLeftCol={true}
+		/>
+	);
 
 	const articleMeta = (
 		<ArticleMeta
@@ -103,25 +112,9 @@ export const ArticleGridFooter = ({
 					`}
 				>
 					{isImmersivePortrait ? (
-						<Caption
-							captionText={captionText}
-							format={format}
-							shouldLimitWidth={false}
-							isLeftCol={true}
-							isMainMedia={true}
-							showIconBelowLeftCol={true}
-						/>
+						caption
 					) : (
-						<Hide from="leftCol">
-							<Caption
-								captionText={captionText}
-								format={format}
-								shouldLimitWidth={false}
-								isLeftCol={true}
-								isMainMedia={true}
-								showIconBelowLeftCol={true}
-							/>
-						</Hide>
+						<Hide from="leftCol">{caption}</Hide>
 					)}
 				</GridItem>
 			)}
