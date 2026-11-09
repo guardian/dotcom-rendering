@@ -15,7 +15,12 @@ import {
 	SvgTickRound,
 	themeButtonReaderRevenue,
 } from '@guardian/source/react-components';
+import { useEffect, useRef } from 'react';
 import { getZIndex } from '../lib/getZIndex';
+import {
+	getModalMaxHeight,
+	MODAL_MAX_HEIGHT_PROPERTY,
+} from '../lib/premiumPuzzlesModalLayout';
 import {
 	buildPremiumPuzzlesSubscribeUrl,
 	getPremiumPuzzlesSignInUrl,
@@ -43,6 +48,14 @@ const blockerStyles = css`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+
+	/* A bottom sheet on small screens: the modal goes to the bottom of the
+	   covered content and sticks to the bottom of the screen (see modalStyles) */
+	${until.phablet} {
+		flex-direction: column;
+		align-items: stretch;
+		justify-content: flex-end;
+	}
 `;
 
 const overlayStyles = css`
@@ -71,9 +84,16 @@ const modalStyles = css`
 	border-radius: ${space[3]}px;
 
 	${until.phablet} {
-		position: absolute;
-		max-width: none;
+		/* Sticks to the bottom of the screen while the covered content is in
+		   view, then stops at the end of it so the page footer shows below. */
+		position: sticky;
 		bottom: 0;
+		display: flex;
+		flex-direction: column;
+		max-width: none;
+		/* Set from the page layout, see getModalMaxHeight */
+		max-height: var(${MODAL_MAX_HEIGHT_PROPERTY}, 70vh);
+		padding: 0;
 		border-bottom-left-radius: 0;
 		border-bottom-right-radius: 0;
 	}
@@ -82,6 +102,14 @@ const modalStyles = css`
 const bodyStyles = css`
 	display: flex;
 	flex-direction: column;
+
+	/* The logo, hero, title and benefits scroll, the footer does not */
+	${until.phablet} {
+		flex: 1 1 auto;
+		min-height: 0;
+		overflow-y: auto;
+		padding: ${space[4]}px ${space[4]}px ${space[3]}px;
+	}
 `;
 
 const headerStyles = css`
@@ -149,6 +177,14 @@ const footerStyles = css`
 	display: flex;
 	flex-direction: column;
 	gap: ${space[6]}px;
+
+	${until.phablet} {
+		flex: none;
+		position: relative;
+		padding: ${space[4]}px ${space[4]}px
+			calc(${space[6]}px + env(safe-area-inset-bottom, 0px));
+		box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.15);
+	}
 `;
 
 const buttonsStyles = css`
@@ -245,8 +281,33 @@ export const UnlockPremiumPuzzlesModal = ({
 		? returnToArchivePath
 		: '/';
 
+	const blockerRef = useRef<HTMLDivElement>(null);
+
+	// On small screens the modal is a bottom sheet whose height depends on how
+	// much room is left under the page header (see getModalMaxHeight)
+	useEffect(() => {
+		const blocker = blockerRef.current;
+		if (!blocker) return;
+
+		const updateMaxHeight = () => {
+			const wrapperTop =
+				blocker.getBoundingClientRect().top + window.scrollY;
+			blocker.style.setProperty(
+				MODAL_MAX_HEIGHT_PROPERTY,
+				`${getModalMaxHeight({
+					viewportHeight: window.innerHeight,
+					wrapperTop,
+				})}px`,
+			);
+		};
+
+		updateMaxHeight();
+		window.addEventListener('resize', updateMaxHeight);
+		return () => window.removeEventListener('resize', updateMaxHeight);
+	}, []);
+
 	return (
-		<div css={[blockerStyles, cssOverrides]}>
+		<div ref={blockerRef} css={[blockerStyles, cssOverrides]}>
 			<div css={overlayStyles}></div>
 			<div css={modalStyles}>
 				<div css={bodyStyles}>

@@ -25,6 +25,12 @@ every decision taken along the way, and the reasoning behind each one.
       only), `idUrl`, and optional `title`, `subtitle`, `benefits`,
       `cssOverrides`.
     - Absolutely positioned: the parent must have `position: relative`.
+    - On small screens it is a bottom sheet: it sticks to the bottom of the
+      screen (`position: sticky`) while the covered content is in view, and
+      stops at the end of it so the page footer shows below. The logo, hero,
+      title and benefits scroll inside it, the buttons stay in view. Its
+      height is capped to the room left under the page header
+      (`getModalMaxHeight`), so the buttons are on screen when the page loads.
     - The hero image is a decorative PNG (`alt=""`) served by the image CDN
       (`i.guim.co.uk`) shown 556 px wide with the design's 185/69 aspect ratio.
     - The "sign in" link goes to `<idUrl>/signin` with no `returnUrl`, because it
