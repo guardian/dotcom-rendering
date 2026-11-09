@@ -61,14 +61,27 @@ const subNavStylesFromLeftCol = css`
 	}
 `;
 
-/** On articles the header and links sit on a single aligned row. */
-const articleContainerStyles = css`
+const cardMiniNavStyles = css`
+	margin-top: 0;
+	margin-bottom: 0;
+
+	${from.mobileMedium} {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+`;
+
+/** Header and links sit on a single aligned row (article subnav and card mini-nav). */
+const inlineRowStyles = css`
 	display: flex;
 	align-items: stretch;
-	/* Keep this container at the reduced list height instead of the shared
-	 * article min-height, otherwise the outer row remains taller than the
-	 * inline list itself.
-	 */
+`;
+
+/**
+ * Article subnav row heights. Card mini-navs don't take these, so they size from
+ * their list instead and sit more tightly inside the card.
+ */
+const articleRowHeightStyles = css`
 	min-height: 36px;
 
 	${from.mobileMedium} {
@@ -103,46 +116,13 @@ const articleSubNavStyles = css`
 
 /** Article subnavs keep a small horizontal gap between the header and the list items. */
 const articleHeaderGapStyles = css`
-	margin-left: ${space[1]}px;
-	padding-left: ${space[1]}px;
-`;
-
-const cardMiniNavHeaderGapStyles = css`
 	margin-left: ${space[2]}px;
 	padding-left: ${space[2]}px;
 `;
 
-const cardMiniNavNoHeaderGapStyles = css`
-	margin-left: 0;
-	padding-left: 0;
-`;
-
-/**
- * Keep the card mini-nav height reset separate from the header/list spacing.
- * Vertical padding on the list changes its total box size and interferes with the
- * earlier baseline fix, so only the horizontal gutter belongs in the gap styles.
- */
-const cardMiniNavLayoutStyles = css`
-	margin-top: 0;
-	margin-bottom: 0;
-	padding-top: 0;
-	padding-bottom: 0;
-	list-style: none;
-
-	${from.mobileMedium} {
-		margin-top: 0;
-		margin-bottom: 0;
-		padding-top: 0;
-		padding-bottom: 0;
-	}
-`;
-
-const cardMiniNavContainerStyles = css`
-	min-height: 24px;
-
-	${from.mobileMedium} {
-		min-height: 24px;
-	}
+const cardMiniNavHeaderGapStyles = css`
+	margin-left: ${space[1]}px;
+	padding-left: ${space[1]}px;
 `;
 
 /** Article subnavs have a divider separating the header text from the scrollable list. */
@@ -150,8 +130,6 @@ const articleDividerStyles = css`
 	${articleHeaderGapStyles}
 	border-left: 1px solid ${themePalette('--masthead-nav-lines')};
 `;
-
-const cardMiniNavStyles = cardMiniNavLayoutStyles;
 
 const articleHeaderStyles = css`
 	${textSansBold14};
@@ -512,22 +490,21 @@ export const CustomSubNav = ({
 				data-component-id={customSubNav.id}
 				data-rendering-page={renderingPage}
 				css={[
-					articleContainerStyles,
-					isCard && cardMiniNavContainerStyles,
+					inlineRowStyles,
+					!isCard && articleRowHeightStyles,
 					scrollableSubNavStyles,
 				]}
 			>
 				{CustomHeader(customSubNav, articleHeaderStyles)}
 				<ul
 					css={[
+						isCard && cardMiniNavStyles,
 						subNavStyles,
 						!hasPageSkin && subNavStylesFromLeftCol,
 						articleSubNavStyles,
-						isCard && cardMiniNavStyles,
 						isCard
-							? customSubNav.header.showHeaderText
-								? cardMiniNavHeaderGapStyles
-								: cardMiniNavNoHeaderGapStyles
+							? customSubNav.header.showHeaderText &&
+								cardMiniNavHeaderGapStyles
 							: articleDividerStyles,
 						css`
 							flex-shrink: 0;
