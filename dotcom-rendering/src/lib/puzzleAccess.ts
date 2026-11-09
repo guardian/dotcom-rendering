@@ -6,10 +6,9 @@ import { getOptionsHeaders, type SignedIn } from './identity';
  * served from `config.ajaxUrl` (which avoids the page's CDN cache) and the
  * reader's own `Authorization` header is forwarded.
  *
- * It is served by `frontend` (`PuzzlesAccessController`), which forwards the
- * `Authorization` header to the Puzzles API. The upstream call is still to be
- * agreed with the Puzzles API team; until it exists the endpoint answers 502,
- * which counts as a failed check here.
+ * It is served by `frontend` (`PuzzlesAccessController`). The Puzzles API has
+ * no access endpoint yet, so for now it always answers 503, which counts as a
+ * failed check here.
  */
 export const PUZZLE_ACCESS_ENDPOINT = '/puzzles-and-games/access';
 

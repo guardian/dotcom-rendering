@@ -1,8 +1,8 @@
 # Premium puzzles access: plan and decisions
 
 Status: phases 0 to 4 are implemented. `frontend` computes the premium flag and
-serves the access endpoint (on the same branch name as this work). The upstream
-Puzzles API access endpoint it forwards to is still to be agreed.
+serves the access endpoint (on the same branch name as this work), which for now
+always answers 503 because the Puzzles API has no access endpoint yet.
 
 This document records the plan for gating premium puzzles on the Puzzle Page,
 every decision taken along the way, and the reasoning behind each one.
@@ -219,14 +219,14 @@ Notes:
    (`PuzzlesAccessPolicy`, Europe/London, today back to 7 days ago is free) and
    sent as `instance.requiresSubscription` only when `true`.
 10. `GET /puzzles-and-games/access?puzzleId=<id>` (`PuzzlesAccessController`)
-    follows the progress endpoints' pattern: `NoCache`, CORS and the reader's
-    `Authorization` header forwarded to the Puzzles API. It answers
-    `{ "hasAccess": boolean }`. A missing `Authorization` header or a malformed
-    `puzzleId` is refused without calling the Puzzles API, which keeps junk
-    traffic away from it.
-11. The upstream call (`GET /access?puzzleId=` on the Puzzles API) is the
-    proposed contract. Until it exists the endpoint answers 502, which this
-    page treats as a failed check (D5).
+    exists with the progress endpoints' conventions: `NoCache` and CORS. For now
+    it always answers 503 and does not call the Puzzles API, because that API
+    has no access endpoint yet. This page treats any non-2xx answer as a failed
+    check (D5).
+11. When the Puzzles API endpoint exists (proposed contract:
+    `GET /access?puzzleId=` answering `{ "hasAccess": boolean }`), `frontend`
+    forwards the reader's `Authorization` header to it and answers
+    `{ "hasAccess": boolean }`. Nothing changes in this repository.
 
 ## 7. Implementation notes and local testing
 
@@ -245,8 +245,8 @@ Notes:
   as evidence.
 - **Local testing:** the flag comes from `frontend`, so any puzzle older than
   7 days is premium with no setup. Signed out readers see the modal straight
-  away. Signed in readers need the Puzzles API access endpoint to answer; until
-  it exists they get 502, and are judged by the ad-free hint alone (D5).
+  away. Signed in readers get 503 from the access endpoint for now, so they are
+  judged by the ad-free hint alone (D5).
 
 ## 8. Dependencies and open items
 
