@@ -170,7 +170,7 @@ describe('CrosswordLayout useful links', () => {
 			'href',
 			'https://www.theguardian.com/crosswords/crossword-blog',
 		);
-		expect(screen.getByText('Cluesletter')).toBeInTheDocument();
+		expect(screen.getByText('Sign up to Cluesletter')).toBeInTheDocument();
 	});
 
 	it('does not render the section when frontend does not send it', () => {

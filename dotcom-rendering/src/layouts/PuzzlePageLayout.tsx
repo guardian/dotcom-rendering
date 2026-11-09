@@ -34,7 +34,6 @@ import {
 import { canRenderAds } from '../lib/canRenderAds';
 import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
 import { formatPuzzleDate } from '../lib/puzzleDate';
-import { getPuzzleGroupPalette } from '../lib/puzzleGroupPalette';
 import {
 	isPuzzlesHubV1Enabled,
 	isPuzzlesHubV2Enabled,
@@ -43,6 +42,7 @@ import {
 	getPuzzlesSubNavLinks,
 	PUZZLES_SUBNAV_PARENT,
 } from '../lib/puzzlesSubNav';
+import { puzzleAccentStyles } from '../lib/puzzlesTheme';
 import { enhanceBranding } from '../model/enhanceCommercialProperties';
 import type { NavType, SubNavType } from '../model/extract-nav';
 import type { PuzzleConfig } from '../model/puzzles/puzzleConfigs';
@@ -185,13 +185,9 @@ const AGE_WARNING_SUPPRESSION_TAGS: TagType[] = [
  * `width: 100%` styling needs too, so this reuses that existing,
  * documented case rather than inventing a new one.
  *
- * `theme` follows the puzzle's group (`getPuzzleGroupPalette`): news for
- * crosswords, opinion for word games, sport for logic puzzles and Labs for
- * trivia colours only. The layout overrides trivia's component theme and
- * background to retain editorial typography and puzzle-page styling.
- * This makes `pillarPalette`-driven colours (the share button, print button
- * border, comments, etc, see `paletteDeclarations.ts`) resolve to the
- * group's colour across the whole page.
+ * `theme` is the same fixed `Pillar.Lifestyle` for every group: it only
+ * provides the page's neutral colours (background, lines). Each group's accent
+ * colour comes from `puzzleAccentStyles`, not from the theme.
  *
  * **Exported** so `PuzzlePage.tsx` can pass this exact same value to
  * `rootStyles()` for its page-wide `<Global>` styles. `themePalette()`
@@ -205,32 +201,11 @@ const AGE_WARNING_SUPPRESSION_TAGS: TagType[] = [
  * with red instead of Lifestyle pink, regardless of what `puzzlePageFormat`
  * itself said.
  */
-export const getPuzzlePageFormat = (
-	puzzleGroup: PuzzleConfig['puzzleGroup'],
-): ArticleFormat => ({
+export const puzzlePageFormat: ArticleFormat = {
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Crossword,
-	theme: getPuzzleGroupPalette(puzzleGroup).theme,
-});
-
-const triviaPageStyles = (darkModeAvailable: boolean) => css`
-	--article-background: ${sourcePalette.neutral[100]};
-	--article-border: ${sourcePalette.neutral[86]};
-	--article-meta-lines: ${themePalette('--article-border')};
-	--straight-lines: ${themePalette('--article-border')};
-	--series-title-text: ${themePalette('--share-button')};
-	--article-section-link-text: ${themePalette('--share-button')};
-
-	${darkModeAvailable &&
-	css`
-		@media (prefers-color-scheme: dark) {
-			html:not([data-color-scheme='light']) & {
-				--article-background: ${sourcePalette.neutral[10]};
-				--article-border: ${sourcePalette.neutral[20]};
-			}
-		}
-	`}
-`;
+	theme: Pillar.Lifestyle,
+};
 
 /**
  * Identical to `CrosswordLayout.tsx`'s own `CrosswordGrid`: the same grid
@@ -382,12 +357,6 @@ export const PuzzlePageLayout = ({
 }: Props) => {
 	const { config, instance, editionId, puzzleConfig } = puzzlePage;
 	const { isPaidContent, host, hasSurveyAd } = config;
-	const isTrivia = puzzleConfig.puzzleGroup === 'trivia';
-	// Labs supplies accent colours through rootStyles, not branded typography or layout.
-	const puzzlePageFormat: ArticleFormat = {
-		...getPuzzlePageFormat(puzzleConfig.puzzleGroup),
-		...(isTrivia && { theme: Pillar.News }),
-	};
 
 	// Puzzle Page instances have no comments/discussion concept at all:
 	// `FEPuzzlePageType` carries no `isCommentable` flag or per-instance
@@ -542,7 +511,10 @@ export const PuzzlePageLayout = ({
 
 			<main
 				data-layout="PuzzlePageLayout"
-				css={isTrivia && triviaPageStyles(darkModeAvailable)}
+				css={puzzleAccentStyles(
+					puzzleConfig.puzzleGroup,
+					darkModeAvailable,
+				)}
 			>
 				<Section
 					fullWidth={true}

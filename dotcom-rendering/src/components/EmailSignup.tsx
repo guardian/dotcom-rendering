@@ -14,7 +14,7 @@ export type EmailSignUpProps = {
 	name: string;
 	description: string;
 	frequency: string;
-	theme: string;
+	theme?: string;
 	children?: React.ReactNode;
 };
 
@@ -41,7 +41,7 @@ const stackBelowTabletStyles = css`
 	}
 `;
 
-const titleStyles = (theme: string) => css`
+const titleStyles = (theme: string | undefined) => css`
 	${headlineBold20};
 	flex-grow: 1;
 	span {

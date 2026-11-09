@@ -3437,8 +3437,6 @@ const articleBackgroundLight: PaletteFunction = ({
 
 const articleBackgroundDark: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
-		case ArticleDesign.WeekendEssay:
-			return sourcePalette.news[800];
 		case ArticleDesign.DeadBlog:
 			return sourcePalette.neutral[7];
 		case ArticleDesign.LiveBlog:
@@ -4380,6 +4378,7 @@ const subMetaBackgroundLight: PaletteFunction = ({
 					return sourcePalette.neutral[97];
 			}
 		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
 			return sourcePalette.opinion[800];
 		case ArticleDesign.Comment:
 			switch (theme) {
@@ -4388,8 +4387,6 @@ const subMetaBackgroundLight: PaletteFunction = ({
 				default:
 					return sourcePalette.opinion[800];
 			}
-		case ArticleDesign.Editorial:
-			return sourcePalette.opinion[800];
 		case ArticleDesign.Analysis:
 			switch (theme) {
 				case ArticleSpecial.SpecialReportAlt:
@@ -4397,6 +4394,8 @@ const subMetaBackgroundLight: PaletteFunction = ({
 				default:
 					return sourcePalette.news[800];
 			}
+		case ArticleDesign.WeekendEssay:
+			return sourcePalette.news[800];
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
