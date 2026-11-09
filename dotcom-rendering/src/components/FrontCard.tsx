@@ -70,29 +70,7 @@ export const FrontCard = (props: Props) => {
 		isMiniNavSupported(cardProps.containerType, trail.boostLevel) &&
 		trail.showMiniNav &&
 		trail.miniNavData ? (
-			<div
-				className="mini-nav"
-				css={css`
-					position: relative;
-					z-index: ${getZIndex('card-nested-link')};
-					min-width: 0;
-					--custom-subnav-header-text: ${palette(
-						trail.miniNavData.header.dotcomPath
-							? '--card-kicker-text'
-							: '--card-headline',
-					)};
-					--masthead-nav-link-text: ${palette('--card-headline')};
-					--masthead-nav-link-text-hover: ${palette(
-						'--card-headline',
-					)};
-				`}
-			>
-				<CustomSubNav
-					customSubNav={trail.miniNavData}
-					renderingPage="article"
-					isCard={true}
-				/>
-			</div>
+			<MiniNav miniNavData={trail.miniNavData} />
 		) : undefined;
 
 	return Card({
@@ -100,4 +78,38 @@ export const FrontCard = (props: Props) => {
 		...cardProps,
 		...(headerContent && { headerContent }),
 	});
+};
+
+type MiniNavProps = {
+	miniNavData: DCRFrontCard['miniNavData'];
+};
+
+const MiniNav = ({ miniNavData }: MiniNavProps) => {
+	if (!miniNavData) {
+		return null;
+	}
+
+	return (
+		<div
+			className="mini-nav"
+			css={css`
+				position: relative;
+				z-index: ${getZIndex('card-nested-link')};
+				min-width: 0;
+				--custom-subnav-header-text: ${palette(
+					miniNavData.header.dotcomPath
+						? '--card-kicker-text'
+						: '--card-headline',
+				)};
+				--masthead-nav-link-text: ${palette('--card-headline')};
+				--masthead-nav-link-text-hover: ${palette('--card-headline')};
+			`}
+		>
+			<CustomSubNav
+				customSubNav={miniNavData}
+				renderingPage="article"
+				isCard={true}
+			/>
+		</div>
+	);
 };
