@@ -1,10 +1,21 @@
 import { act, screen, waitFor } from '@testing-library/react';
 import { props as inline1Props } from '../components/marketing/inline1/utils/storybook';
+import type { Config } from '../types/configContext';
 import { inline1SdcListener } from './inline1SdcListener';
+import { getConfig } from './islands/getConfig';
 
 jest.mock('../components/marketing/inline1/SupporterRevenue', () => ({
 	SupporterRevenue: () => <div data-testid="supporter-revenue" />,
 }));
+
+jest.mock('./islands/getConfig');
+
+const mockConfig = {
+	renderingTarget: 'Web',
+	darkModeAvailable: false,
+	assetOrigin: '/',
+	editionId: 'UK',
+} satisfies Config;
 
 const SLOT_ID = 'dfp-ad--inline1';
 
@@ -24,12 +35,13 @@ const dispatch = (slot: HTMLElement) =>
 describe('inline1SdcListener', () => {
 	beforeEach(() => {
 		document.body.innerHTML = '';
-		delete window.guardian.sdc;
+		delete window.guardian.commercial?.sdc;
+		jest.mocked(getConfig).mockReturnValue(mockConfig);
 	});
 
 	it('renders a request made before listener was set up', async () => {
 		addSlot();
-		window.guardian.sdc = {
+		(window.guardian.commercial ??= {}).sdc = {
 			inline1: { slotId: SLOT_ID, props: inline1Props },
 		};
 

@@ -823,7 +823,7 @@ export const PuzzlesArchiveCalendar = ({
 		const pendingRequests = requests.current;
 		// The browser retains the query even when the CDN removes it upstream.
 		// Restore deep links after hydration, and Back/Forward without a reload.
-		const restoreSelection = async () => {
+		const restoreSelection = async (force = false) => {
 			const requestAtStart = requests.current.id;
 			const params = new URLSearchParams(window.location.search);
 			const puzzle = params.get('puzzle');
@@ -852,14 +852,23 @@ export const PuzzlesArchiveCalendar = ({
 				validMonth ? year : initialArchive.year,
 				validMonth ? month : initialArchive.month,
 				selectedPuzzle.id,
-				authStatus.kind === 'SignedIn',
+				force || authStatus.kind === 'SignedIn',
 			);
 		};
 		void restoreSelection();
 		const onPopState = () => void restoreSelection();
+		const onPageShow = (event: PageTransitionEvent) => {
+			if (!event.persisted) return;
+			// BFCache restores the mounted island and its stale month cache.
+			++pendingRequests.id;
+			cache.current.clear();
+			void restoreSelection(true);
+		};
 		window.addEventListener('popstate', onPopState);
+		window.addEventListener('pageshow', onPageShow);
 		return () => {
 			window.removeEventListener('popstate', onPopState);
+			window.removeEventListener('pageshow', onPageShow);
 			if (navigationTimer.current !== undefined) {
 				window.clearTimeout(navigationTimer.current);
 			}

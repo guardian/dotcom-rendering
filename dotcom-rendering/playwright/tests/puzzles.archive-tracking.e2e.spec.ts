@@ -287,6 +287,91 @@ test.describe('Puzzle archive click tracking', () => {
 		await expect(page).toHaveURL(/puzzle=sudoku-easy&year=2026&month=10$/);
 	});
 
+	test('preserves click attribution after a persisted pageshow refresh', async ({
+		context,
+		page,
+	}) => {
+		const clicks = recordClicks(page);
+		await loadArchive(page);
+		const previousClick = nextClick(page);
+		await page
+			.getByRole('link', { name: 'Previous month', exact: true })
+			.click();
+		await previousClick;
+		await expect(
+			page.getByText('August 2026', { exact: true }),
+		).toBeVisible();
+
+		let refreshes = 0;
+		await context.route(
+			'**/puzzles-and-games/logic-puzzles/archive-data/**',
+			async (route) => {
+				refreshes += 1;
+				const month = Number(
+					new URL(route.request().url()).pathname.split('/').at(-1),
+				);
+				const refreshed = archiveFor(easy, month);
+				await route.fulfill({
+					json: {
+						...refreshed,
+						items: refreshed.items.map((item) => ({
+							...item,
+							progress: 100,
+							gameStatus: 'completed',
+						})),
+						recentItems: refreshed.recentItems?.map((item) => ({
+							...item,
+							progress: 100,
+							gameStatus: 'completed',
+						})),
+					},
+				});
+			},
+		);
+		await page.evaluate(() => {
+			window.dispatchEvent(
+				new PageTransitionEvent('pageshow', { persisted: true }),
+			);
+		});
+		await expect(
+			page.getByRole('link', {
+				name: '2026-08-02, completed',
+				exact: true,
+			}),
+		).toBeVisible();
+		await expect(
+			page
+				.getByRole('link', { name: /Latest Easy sudoku/ })
+				.getByText('Played'),
+		).toBeVisible();
+		expect(refreshes).toBe(1);
+		expect(clicks).toHaveLength(1);
+
+		const nextMonthClick = nextClick(page);
+		await page
+			.getByRole('link', { name: 'Next month', exact: true })
+			.click();
+		await nextMonthClick;
+		await expect(
+			page.getByText('September 2026', { exact: true }),
+		).toBeVisible();
+		expect(refreshes).toBe(2);
+		expect(clicks).toEqual([
+			{
+				component: 'puzzles-archive-calendar',
+				names: [
+					'archive | previous-month | logic-puzzles | puzzle-sudoku-easy | month-2026-08',
+				],
+			},
+			{
+				component: 'puzzles-archive-calendar',
+				names: [
+					'archive | next-month | logic-puzzles | puzzle-sudoku-easy | month-2026-09',
+				],
+			},
+		]);
+	});
+
 	test('attributes keyboard puzzle-type selection and updates subsequent calendar context', async ({
 		page,
 	}) => {

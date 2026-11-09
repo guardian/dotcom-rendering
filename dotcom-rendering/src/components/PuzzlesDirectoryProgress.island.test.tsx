@@ -1,5 +1,11 @@
 import '@testing-library/jest-dom';
-import { render, screen, waitFor } from '@testing-library/react';
+import {
+	act,
+	fireEvent,
+	render,
+	screen,
+	waitFor,
+} from '@testing-library/react';
 import { getAuthStatus, subscribeToAuthStateChange } from '../lib/identity';
 import type { PuzzlesLayoutType } from '../types/puzzlesPage';
 import {
@@ -254,6 +260,54 @@ describe('PuzzlesDirectoryProgress', () => {
 
 		expect(enriched.containers[0]!.content.items[0]![0]!.date).toBe(
 			'2026-09-30',
+		);
+	});
+
+	it('refreshes the Played tick after returning to the hub from the browser cache', async () => {
+		mockedGetAuthStatus.mockResolvedValue({
+			kind: 'SignedIn',
+			accessToken: { accessToken: 'access-token' },
+			idToken: {},
+		} as never);
+		const item = {
+			puzzleType: 'CROSSWORD_QUICK',
+			publishDate: '2026-11-05T00:00:00Z',
+			progress: 0,
+			gameStatus: 'not-started',
+		};
+		const fetchMock = jest
+			.fn()
+			.mockResolvedValueOnce({
+				ok: true,
+				json: async () => ({ results: [item] }),
+			})
+			.mockResolvedValueOnce({
+				ok: true,
+				json: async () => ({
+					results: [
+						{ ...item, progress: 100, gameStatus: 'completed' },
+					],
+				}),
+			});
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		render(<PuzzlesDirectoryProgress layout={layout} renderAds={false} />);
+		await act(async () => undefined);
+		expect(fetchMock).toHaveBeenCalledTimes(1);
+		expect(screen.queryByText('Played')).not.toBeInTheDocument();
+
+		fireEvent(
+			window,
+			new PageTransitionEvent('pageshow', { persisted: true }),
+		);
+
+		await screen.findByText('Played');
+		expect(fetchMock).toHaveBeenCalledTimes(2);
+		expect(fetchMock).toHaveBeenLastCalledWith(
+			'/puzzles-and-games/progress',
+			expect.objectContaining({ cache: 'no-store' }),
 		);
 	});
 

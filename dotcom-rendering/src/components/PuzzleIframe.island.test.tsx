@@ -1,5 +1,6 @@
 import { act, render, screen, waitFor } from '@testing-library/react';
 import { getAuthStatus, subscribeToAuthStateChange } from '../lib/identity';
+import { handleMovieGridAction } from '../lib/movieGridActions';
 import { reportPuzzleProgress } from '../lib/puzzleProgress/reporter';
 import { useMatchMedia } from '../lib/useMatchMedia';
 import { puzzleConfigs } from '../model/puzzles/puzzleConfigs';
@@ -13,6 +14,10 @@ import {
 jest.mock('../lib/identity', () => ({
 	getAuthStatus: jest.fn(),
 	subscribeToAuthStateChange: jest.fn(),
+}));
+
+jest.mock('../lib/movieGridActions', () => ({
+	handleMovieGridAction: jest.fn(),
 }));
 
 jest.mock('../lib/puzzleProgress/reporter', () => ({
@@ -297,6 +302,7 @@ describe('PuzzleIframe', () => {
 		unsubscribe = jest.fn();
 		mockedSubscribeToAuthStateChange.mockReturnValue(unsubscribe);
 		mockedUseMatchMedia.mockReturnValue(false);
+		jest.mocked(handleMovieGridAction).mockResolvedValue(undefined);
 	});
 
 	const getContextFromSrc = (src: string): PuzzleContext => {
@@ -311,6 +317,53 @@ describe('PuzzleIframe', () => {
 
 	const getDarkModeParamFromSrc = (src: string): string | null =>
 		new URL(src).searchParams.get('darkMode');
+
+	it.each([
+		['film-reveal', 'https://moviegrid.io'],
+		['on-the-ball', 'https://sportsreveal.io'],
+	])(
+		'handles %s copy/share messages without requiring progress identity',
+		async (slug, origin) => {
+			mockedGetAuthStatus.mockResolvedValue(signedOut());
+			const { unmount } = render(
+				<PuzzleIframe
+					puzzleConfig={puzzleConfigs[slug]!}
+					title={slug}
+					darkModeAvailable={false}
+					puzzleDate="2026-11-03"
+					gameUrl={`${origin}/guardian/archive?id=394`}
+				/>,
+			);
+			const iframe = screen.getByTitle<HTMLIFrameElement>(slug);
+			await waitFor(() => expect(iframe).toHaveAttribute('src'));
+			const data = {
+				event: 'copy_game',
+				puzzle: 'on_the_ball',
+				share_text: 'Results',
+				share_url: 'https://guardian.go.link/1oRLv',
+			};
+			const dispatch = (messageOrigin: string, source: Window | null) =>
+				act(() => {
+					window.dispatchEvent(
+						new MessageEvent('message', {
+							origin: messageOrigin,
+							source,
+							data,
+						}),
+					);
+				});
+			dispatch('https://other.example', iframe.contentWindow);
+			dispatch(origin, window);
+			expect(handleMovieGridAction).not.toHaveBeenCalled();
+			dispatch(origin, iframe.contentWindow);
+			expect(handleMovieGridAction).toHaveBeenCalledWith(data);
+			expect(reportPuzzleProgress).not.toHaveBeenCalled();
+			unmount();
+			jest.mocked(handleMovieGridAction).mockClear();
+			dispatch(origin, iframe.contentWindow);
+			expect(handleMovieGridAction).not.toHaveBeenCalled();
+		},
+	);
 
 	it.each([
 		['film-reveal', 'https://moviegrid.io', 'film_reveal', 'FILMREVEAL'],
