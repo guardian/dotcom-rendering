@@ -494,6 +494,25 @@ export const StandardLayoutArticleGrid = ({
 						css`
 							z-index: ${getZIndex('articleHeadline')};
 						`,
+					isImmersive &&
+						!isImmersiveWeekendRead &&
+						ageWarning != null &&
+						css`
+							${until.desktop} {
+								padding-bottom: 2px;
+							}
+							${until.tablet} {
+								padding-bottom: calc(
+									var(--immersive-headline-overlap) + 2px
+								);
+							}
+							${isImmersiveLandscape &&
+							css`
+								${from.desktop} {
+									padding-bottom: 2px;
+								}
+							`}
+						`,
 					isImmersivePortrait &&
 						css`
 							align-content: flex-start;
@@ -582,8 +601,8 @@ export const StandardLayoutArticleGrid = ({
 									&::after {
 										background: linear-gradient(
 											180deg,
-											rgba(26, 26, 26, 0) 0%,
-											#1a1a1a 120px
+											transparent 0%,
+											${headlineBackgroundImmersive} 120px
 										);
 									}
 								}

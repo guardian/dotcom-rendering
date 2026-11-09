@@ -557,6 +557,9 @@ export const SeriesSectionLink = ({
 							css`
 								line-height: 28px;
 								padding: 2px 2px 4px;
+								${until.tablet} {
+									margin-left: ${space[2]}px;
+								}
 								${from.leftCol} {
 									line-height: 28px;
 								}
