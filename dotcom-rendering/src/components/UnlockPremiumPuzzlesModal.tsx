@@ -21,6 +21,18 @@ import {
 	isSafeInternalPath,
 } from '../lib/premiumPuzzlesUrls';
 
+/**
+ * The hero illustration, in its final, already cropped version, served by the
+ * image CDN (`i.guim.co.uk`). Shown 556 px wide with the design's 185/69
+ * aspect ratio; the file is 556 by 208 px, so the CDN does not enlarge it
+ * further. Width and height are set on the `<img>` so the layout does not
+ * jump when it loads.
+ */
+const HERO_IMAGE_URL =
+	'https://i.guim.co.uk/img/uploads/2026/11/09/HERO-01-2.png?width=360&dpr=2&s=none';
+const HERO_IMAGE_WIDTH = 556;
+const HERO_IMAGE_HEIGHT = 207;
+
 const blockerStyles = css`
 	position: absolute;
 	top: 0;
@@ -86,6 +98,16 @@ const dividerStyles = css`
 
 const heroStyles = css`
 	display: flex;
+	justify-content: center;
+
+	img {
+		display: block;
+		width: 100%;
+		max-width: ${HERO_IMAGE_WIDTH}px;
+		height: auto;
+		aspect-ratio: 185 / 69;
+		object-fit: cover;
+	}
 `;
 
 const titleStyles = css`
@@ -225,7 +247,14 @@ export const UnlockPremiumPuzzlesModal = ({
 						/>
 					</div>
 					<hr css={dividerStyles} />
-					<div css={heroStyles}>hero image here</div>
+					<div css={heroStyles}>
+						<img
+							src={HERO_IMAGE_URL}
+							width={HERO_IMAGE_WIDTH}
+							height={HERO_IMAGE_HEIGHT}
+							alt=""
+						/>
+					</div>
 					<div css={titleStyles}>{title}</div>
 					<div css={subtitleStyles}>{subtitle}</div>
 					<ul css={benefitsStyles}>

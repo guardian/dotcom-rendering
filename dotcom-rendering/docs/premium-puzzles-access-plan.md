@@ -25,7 +25,8 @@ every decision taken along the way, and the reasoning behind each one.
       only), `idUrl`, and optional `title`, `subtitle`, `benefits`,
       `cssOverrides`.
     - Absolutely positioned: the parent must have `position: relative`.
-    - The hero image is still a text placeholder (no asset yet).
+    - The hero image is a decorative PNG (`alt=""`) served by the image CDN
+      (`i.guim.co.uk`) shown 556 px wide with the design's 185/69 aspect ratio.
     - The "sign in" link goes to `<idUrl>/signin` with no `returnUrl`, because it
       is unknown whether the profile site accepts a bare path.
 - `src/lib/premiumPuzzlesUrls.ts` (with tests): builds the Subscribe URL
@@ -256,7 +257,6 @@ Notes:
 - Whether the ad-free benefit matches the entitlement closely enough in
   practice. To check by looking at the real `benefits` array for Supporter
   Plus and Digital Pack test accounts (URL in `config.page.userBenefitsApiUrl`).
-- The hero image asset for the modal.
 - Destination and `returnUrl` behaviour of the modal's "sign in" link.
 - A request timeout value for the access check (D5 needs a "slow" threshold).
 
