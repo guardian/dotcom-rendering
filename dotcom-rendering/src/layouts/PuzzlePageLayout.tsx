@@ -19,13 +19,12 @@ import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Logo } from '../components/Masthead/Titlepiece/Logo';
 import { PrintButton } from '../components/PrintButton.island';
-import { PuzzleIframe } from '../components/PuzzleIframe.island';
+import { PuzzleAccessGate } from '../components/PuzzleAccessGate.island';
 import { PuzzlesUsefulLinks } from '../components/PuzzlesSupporting';
 import { RelatedPuzzlesRailEnhanced } from '../components/RelatedPuzzlesRailEnhanced.island';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
-import { UnlockPremiumPuzzlesModal } from '../components/UnlockPremiumPuzzlesModal';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -68,7 +67,7 @@ import { BannerWrapper } from './lib/stickiness';
  *
  * The **one deliberate content difference**, per explicit product/design
  * direction: the crossword game itself (`ArticleBody` rendering the
- * `crossword` block) is replaced by `PuzzleIframe.island` in the `body`
+ * `crossword` block) is replaced by `PuzzleAccessGate.island` (which renders `PuzzleIframe`, or the premium puzzles modal) in the `body`
  * grid area. Puzzle Page is scoped to iframe-based puzzles only; the
  * crossword-only game/data model has no equivalent here.
  *
@@ -636,7 +635,7 @@ export const PuzzlePageLayout = ({
                         so waiting for the island to be seen would delay
                         the puzzle itself. */}
 											<Island priority="critical">
-												<PuzzleIframe
+												<PuzzleAccessGate
 													gameUrl={instance.gameUrl}
 													progressIdentity={
 														instance.progressIdentity
@@ -650,6 +649,21 @@ export const PuzzlePageLayout = ({
 														instance.puzzleDate ??
 														null
 													}
+													requiresSubscription={
+														instance.requiresSubscription
+													}
+													ajaxUrl={config.ajaxUrl}
+													puzzleId={
+														instance
+															.progressIdentity
+															?.puzzleId
+													}
+													idUrl={config.idUrl}
+													returnFromSubscribeToPath={getPathFromUrl(
+														puzzlePage.canonicalUrl,
+														'/puzzles-and-games',
+													)}
+													returnToArchivePath={`/puzzles-and-games/${puzzleGroupPath}/archive`}
 												/>
 											</Island>
 										</ArticleContainer>
@@ -845,15 +859,6 @@ export const PuzzlePageLayout = ({
 						</div>
 					)}
 				</main>
-				{/* Premium puzzles paywall: needs the position: relative wrapper above. */}
-				<UnlockPremiumPuzzlesModal
-					idUrl={config.idUrl}
-					returnFromSubscribeToPath={getPathFromUrl(
-						puzzlePage.canonicalUrl,
-						'/puzzles-and-games',
-					)}
-					returnToArchivePath={`/puzzles-and-games/${puzzleGroupPath}/archive`}
-				/>
 			</div>
 
 			{/*
