@@ -13,6 +13,8 @@ type Props = {
 	showTopBarMobile: boolean;
 	containerPalette?: DCRContainerPalette;
 	topBarColour?: string;
+	topBarPadding?: number;
+	isLoopAndInLoopClickTestVariant?: boolean;
 };
 
 const baseCardStyles = css`
@@ -41,7 +43,7 @@ const baseCardStyles = css`
 	text-decoration: none;
 `;
 
-const hoverStyles = css`
+const hoverStyles = (isLoopAndInLoopClickTestVariant: boolean) => css`
 	:hover .media-overlay {
 		width: 100%;
 		height: 100%;
@@ -59,7 +61,12 @@ const hoverStyles = css`
 	*/
 	:has(
 		ul.sublinks:hover,
-		.video-container:not(.cinemagraph):hover,
+		.mini-nav:hover,
+		.video-container:not(
+				${isLoopAndInLoopClickTestVariant
+					? `.cinemagraph, .loop`
+					: `.cinemagraph`}
+			):hover,
 		.slideshow-carousel-footer:hover,
 		.branding-logo:hover
 	) {
@@ -72,23 +79,23 @@ const hoverStyles = css`
 	}
 `;
 
-const topBarStyles = (colour: string) => css`
+const topBarStyles = (colour: string, padding: number) => css`
 	::before {
 		border-top: 1px solid ${colour};
 		content: '';
 		width: 100%;
-		padding-bottom: ${space[2]}px;
+		padding-bottom: ${padding}px;
 		background-color: unset;
 	}
 `;
-const mobileTopBarStyles = (colour: string) => css`
+const mobileTopBarStyles = (colour: string, padding: number) => css`
 	${until.tablet} {
-		${topBarStyles(colour)}
+		${topBarStyles(colour, padding)}
 	}
 `;
-const desktopTopBarStyles = (colour: string) => css`
+const desktopTopBarStyles = (colour: string, padding: number) => css`
 	${from.tablet} {
-		${topBarStyles(colour)}
+		${topBarStyles(colour, padding)}
 	}
 `;
 
@@ -99,6 +106,8 @@ export const CardWrapper = ({
 	showTopBarMobile,
 	containerPalette,
 	topBarColour = palette('--card-border-top'),
+	topBarPadding = space[2],
+	isLoopAndInLoopClickTestVariant,
 }: Props) => {
 	return (
 		<FormatBoundary format={format}>
@@ -106,9 +115,11 @@ export const CardWrapper = ({
 				<div
 					css={[
 						baseCardStyles,
-						hoverStyles,
-						showTopBarDesktop && desktopTopBarStyles(topBarColour),
-						showTopBarMobile && mobileTopBarStyles(topBarColour),
+						hoverStyles(isLoopAndInLoopClickTestVariant === true),
+						showTopBarDesktop &&
+							desktopTopBarStyles(topBarColour, topBarPadding),
+						showTopBarMobile &&
+							mobileTopBarStyles(topBarColour, topBarPadding),
 					]}
 				>
 					{children}
