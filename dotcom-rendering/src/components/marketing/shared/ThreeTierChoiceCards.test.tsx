@@ -34,6 +34,9 @@ const cardCssForRadio = (radio: HTMLElement): string => {
 		.join('\n');
 };
 
+const benefitsContainerFor = (copy: string) =>
+	screen.getByText(copy).closest('[aria-hidden]');
+
 // Mock choice cards for testing
 const mockChoiceCards: Array<ChoiceCard & { defaultExpanded?: boolean }> = [
 	{
@@ -223,6 +226,111 @@ describe('ThreeTierChoiceCards', () => {
 		expect(
 			screen.getByText('Unlimited access to the Guardian app'),
 		).toBeInTheDocument();
+	});
+
+	it('expands the first pill card when none is selected and no expansion is configured', () => {
+		const choices = mockChoiceCards.map((card, index) => ({
+			...card,
+			defaultExpanded: undefined,
+			pill: index < 2 ? { copy: 'Highlighted' } : undefined,
+		}));
+
+		render(
+			<ThreeTierChoiceCards
+				setSelectedChoiceCard={() => undefined}
+				choices={choices}
+				id="banner"
+			/>,
+		);
+
+		screen.getAllByRole('radio').forEach((radio) => {
+			expect(radio).not.toBeChecked();
+		});
+		expect(
+			benefitsContainerFor(
+				'Give to the Guardian every month with Support',
+			),
+		).toHaveAttribute('aria-hidden', 'false');
+		expect(
+			benefitsContainerFor('Unlock All-access digital benefits:'),
+		).toHaveAttribute('aria-hidden', 'true');
+	});
+
+	it('expands the middle card when no card has a pill or expansion setting', () => {
+		const choices = mockChoiceCards.map((card) => ({
+			...card,
+			defaultExpanded: undefined,
+			pill: undefined,
+		}));
+
+		render(
+			<ThreeTierChoiceCards
+				setSelectedChoiceCard={() => undefined}
+				choices={choices}
+				id="banner"
+			/>,
+		);
+
+		expect(
+			benefitsContainerFor('Unlock All-access digital benefits:'),
+		).toHaveAttribute('aria-hidden', 'false');
+		expect(
+			benefitsContainerFor(
+				'Give to the Guardian every month with Support',
+			),
+		).toHaveAttribute('aria-hidden', 'true');
+	});
+
+	it('respects explicit defaultExpanded values before pill-based expansion', () => {
+		const choices = mockChoiceCards.map((card, index) => ({
+			...card,
+			defaultExpanded: index === 2,
+			pill: index < 2 ? { copy: 'Highlighted' } : undefined,
+		}));
+
+		render(
+			<ThreeTierChoiceCards
+				setSelectedChoiceCard={() => undefined}
+				choices={choices}
+				id="banner"
+			/>,
+		);
+
+		expect(
+			benefitsContainerFor('We welcome support of any size, any time'),
+		).toHaveAttribute('aria-hidden', 'false');
+		expect(
+			benefitsContainerFor(
+				'Give to the Guardian every month with Support',
+			),
+		).toHaveAttribute('aria-hidden', 'true');
+	});
+
+	it('keeps every card collapsed when defaultExpanded is explicitly false', () => {
+		const choices = mockChoiceCards.map((card, index) => ({
+			...card,
+			defaultExpanded: false,
+			pill: index < 2 ? { copy: 'Highlighted' } : undefined,
+		}));
+
+		render(
+			<ThreeTierChoiceCards
+				setSelectedChoiceCard={() => undefined}
+				choices={choices}
+				id="banner"
+			/>,
+		);
+
+		[
+			'Give to the Guardian every month with Support',
+			'Unlock All-access digital benefits:',
+			'We welcome support of any size, any time',
+		].forEach((copy) => {
+			expect(benefitsContainerFor(copy)).toHaveAttribute(
+				'aria-hidden',
+				'true',
+			);
+		});
 	});
 
 	it('should only select and expand the clicked card', () => {

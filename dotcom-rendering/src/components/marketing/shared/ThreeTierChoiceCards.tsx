@@ -387,6 +387,16 @@ export const ThreeTierChoiceCards = ({
 								);
 							}
 						}
+						const hasExplicitDefaultExpanded = choices.some(
+							(choice) => choice.defaultExpanded !== undefined,
+						);
+						const firstPillIndex = choices.findIndex((choice) =>
+							Boolean(choice.pill),
+						);
+						const defaultExpandedIndex =
+							firstPillIndex !== -1
+								? firstPillIndex
+								: Math.floor(choices.length / 2);
 
 						return choices.map((card, index) => {
 							const {
@@ -414,7 +424,10 @@ export const ThreeTierChoiceCards = ({
 
 							const isExpanded =
 								selected ||
-								(!selectedChoiceCard && card.defaultExpanded);
+								(selectedIndex === -1 &&
+									(hasExplicitDefaultExpanded
+										? card.defaultExpanded === true
+										: index === defaultExpandedIndex));
 							const isEmpty =
 								benefits.length === 0 &&
 								(benefitsLabel == null || benefitsLabel === '');
