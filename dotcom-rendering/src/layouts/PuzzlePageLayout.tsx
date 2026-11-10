@@ -576,7 +576,7 @@ export const PuzzlePageLayout = ({
 												priority="feature"
 												defer={{ until: 'visible' }}
 											>
-												<PrintButton />
+												<PrintButton puzzleTrackingSource="puzzle-page" />
 											</Island>
 										</div>
 									)}
@@ -717,6 +717,7 @@ export const PuzzlePageLayout = ({
 								defer={{ until: 'visible' }}
 							>
 								<RelatedPuzzlesRailEnhanced
+									source="puzzle-page"
 									items={
 										instance.moreFromPuzzlesAndGames ?? []
 									}

@@ -7,7 +7,7 @@ import { AffiliateDisclaimer } from '../components/AffiliateProducts/AffiliateDi
 import { AppsEpic } from '../components/AppsEpic.island';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
-import { ArticleHeadline } from '../components/ArticleHeadline';
+import { ArticleHeadline, headlineFont } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
@@ -70,27 +70,6 @@ const immersiveMediaBelowTablet = css`
 
 		> div {
 			height: 100%;
-		}
-
-		&::after {
-			content: '';
-			position: absolute;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			height: 240px;
-			z-index: ${getZIndex('mediaOverlay')};
-			background: ${themePalette('--headline-background-immersive')};
-			backdrop-filter: blur(8px);
-			mask-image: linear-gradient(
-				to bottom,
-				transparent,
-				rgb(0 0 0 / 12%) 25%,
-				rgb(0 0 0 / 50%) 55%,
-				rgb(0 0 0 / 85%) 80%,
-				black
-			);
-			pointer-events: none;
 		}
 	}
 `;
@@ -272,16 +251,17 @@ export const StandardLayoutArticleGrid = ({
 			return undefined;
 		}
 
-		const columnCount =
-			gridLayout === 'immersivePortrait'
-				? 5
-				: gridLayout === 'immersiveLandscape'
-					? 4
-					: 3;
+		const columnCount = gridLayout === 'immersivePortrait' ? 5 : 3;
 
 		return css`
 			${from.leftCol} {
 				${grid.centreRule(columnCount)}
+				${gridLayout === 'immersiveLandscape' &&
+				css`
+					& > *:nth-child(3)::before {
+						top: 100%;
+					}
+				`}
 			}
 		`;
 	};
@@ -293,6 +273,9 @@ export const StandardLayoutArticleGrid = ({
 	const isImmersive = isImmersivePortrait || isImmersiveLandscape;
 	const isImmersiveWeekendRead =
 		isImmersivePortrait && format.design === ArticleDesign.WeekendEssay;
+	const immersiveHeadlineOverlayBreakpoint = isImmersivePortrait
+		? until.desktop
+		: until.tablet;
 	const hasImmersivePortraitTitleRule =
 		isImmersivePortrait && hasImmersiveGridTitleRule(format, article.tags);
 
@@ -357,8 +340,14 @@ export const StandardLayoutArticleGrid = ({
 						${until.tablet} {
 							--immersive-headline-overlap: ${ageWarning != null
 								? '96px'
-								: '24px'};
+								: '48px'};
 						}
+						${ageWarning != null &&
+						css`
+							${until.mobileMedium} {
+								--immersive-headline-overlap: 6.75rem;
+							}
+						`}
 					`,
 				isImmersiveLandscape &&
 					css`
@@ -505,6 +494,25 @@ export const StandardLayoutArticleGrid = ({
 						css`
 							z-index: ${getZIndex('articleHeadline')};
 						`,
+					isImmersive &&
+						!isImmersiveWeekendRead &&
+						ageWarning != null &&
+						css`
+							${until.desktop} {
+								padding-bottom: 2px;
+							}
+							${until.tablet} {
+								padding-bottom: calc(
+									var(--immersive-headline-overlap) + 2px
+								);
+							}
+							${isImmersiveLandscape &&
+							css`
+								${from.desktop} {
+									padding-bottom: 2px;
+								}
+							`}
+						`,
 					isImmersivePortrait &&
 						css`
 							align-content: flex-start;
@@ -549,24 +557,55 @@ export const StandardLayoutArticleGrid = ({
 						css`
 							z-index: ${getZIndex('articleHeadline')};
 
-							${until.tablet} {
-								background: linear-gradient(
-									to bottom,
-									transparent,
-									${headlineBackgroundImmersive}
-										calc(
-											var(--immersive-headline-overlap) -
-												1px
-										)
-								);
+							${immersiveHeadlineOverlayBreakpoint} {
+								z-index: ${getZIndex('mediaOverlay')};
+								padding-bottom: ${space[8]}px;
+
+								[data-gu-name='age-warning'] {
+									position: relative;
+									z-index: ${getZIndex('articleHeadline')};
+								}
 
 								h1 {
+									position: relative;
+									isolation: isolate;
 									background-color: transparent;
-								}
-							}
 
-							${until.tablet} {
-								padding-bottom: ${space[8]}px;
+									> span {
+										position: relative;
+										z-index: ${getZIndex(
+											'articleHeadline',
+										)};
+									}
+
+									&::before,
+									&::after {
+										${headlineFont(format)}
+										content: '';
+										position: absolute;
+										inset: calc(1lh - 120px)
+											0 -${space[8]}px;
+										z-index: ${getZIndex('mediaOverlay')};
+										pointer-events: none;
+									}
+
+									&::before {
+										backdrop-filter: blur(7px);
+										mask-image: linear-gradient(
+											180deg,
+											transparent 0%,
+											black 120px
+										);
+									}
+
+									&::after {
+										background: linear-gradient(
+											180deg,
+											transparent 0%,
+											${headlineBackgroundImmersive} 120px
+										);
+									}
+								}
 							}
 						`,
 					isImmersiveWeekendRead &&
@@ -762,13 +801,6 @@ export const StandardLayoutArticleGrid = ({
 									padding-top: ${space[3]}px;
 								}
 							`,
-						isImmersivePortrait
-							? css`
-									${from.leftCol} {
-										margin-right: -10px;
-									}
-								`
-							: undefined,
 						isImmersiveLandscape &&
 							css`
 								${from.leftCol} {

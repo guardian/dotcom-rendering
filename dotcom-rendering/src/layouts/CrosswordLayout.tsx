@@ -482,6 +482,7 @@ export const CrosswordLayout = (props: Props) => {
 								defer={{ until: 'visible' }}
 							>
 								<RelatedPuzzlesRailEnhanced
+									source="crossword-page"
 									items={article.moreFromPuzzlesAndGames}
 								/>
 							</Island>
@@ -497,6 +498,7 @@ export const CrosswordLayout = (props: Props) => {
 					>
 						<SubMeta
 							format={format}
+							puzzleTrackingSource="crossword-page"
 							subMetaKeywordLinks={article.subMetaKeywordLinks}
 							subMetaSectionLinks={article.subMetaSectionLinks}
 							pageId={article.pageId}

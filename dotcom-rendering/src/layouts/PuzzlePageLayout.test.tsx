@@ -341,7 +341,7 @@ describe('PuzzlePageLayout', () => {
 
 	describe('"More from Puzzles & Games" rail (v1-scoped feature)', () => {
 		it('renders the rail when data is present AND v1 is enabled', () => {
-			renderPuzzlePageLayout('sudoku-easy', {
+			const { container } = renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
 					serverSideABTests: v1On,
@@ -353,6 +353,17 @@ describe('PuzzlePageLayout', () => {
 					name: 'More from Puzzles & games',
 				}),
 			).toBeInTheDocument();
+			expect(
+				container.querySelector(
+					'[data-component="puzzles-more-from:puzzle-page"]',
+				),
+			).toBeInTheDocument();
+			const props = container
+				.querySelector('gu-island[name="RelatedPuzzlesRailEnhanced"]')
+				?.getAttribute('props');
+			expect(JSON.parse(props!)).toEqual(
+				expect.objectContaining({ source: 'puzzle-page' }),
+			);
 		});
 
 		it('does not render the rail when moreFromPuzzlesAndGames is empty, even with v1 enabled', () => {
