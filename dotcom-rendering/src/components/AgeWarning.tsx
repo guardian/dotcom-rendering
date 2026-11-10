@@ -3,6 +3,7 @@ import {
 	from,
 	textSans12,
 	textSans17,
+	until,
 	visuallyHidden,
 } from '@guardian/source/foundations';
 import { palette } from '../palette';
@@ -24,6 +25,15 @@ const ageWarningStyles = (isSmall: boolean) => css`
 	}
 
 	padding: ${isSmall ? '3px 5px' : '6px 10px'};
+
+	${!isSmall &&
+	css`
+		${until.mobileMedium} {
+			display: inline;
+			box-decoration-break: clone;
+			line-height: 32px;
+		}
+	`}
 
 	${from.mobileLandscape} {
 		padding-left: ${isSmall ? '6px' : '12px'};

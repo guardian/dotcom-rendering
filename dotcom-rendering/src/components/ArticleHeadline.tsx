@@ -125,7 +125,7 @@ const decideMobileHeadlineFont = (format: ArticleFormat) => {
 	}
 };
 
-const headlineFont = (format: ArticleFormat) => {
+export const headlineFont = (format: ArticleFormat) => {
 	if (format.design === ArticleDesign.Gallery) {
 		return css`
 			${decideMobileHeadlineFont(format)}
