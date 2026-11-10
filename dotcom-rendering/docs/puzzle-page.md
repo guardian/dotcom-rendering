@@ -1,5 +1,19 @@
 # Puzzle Page
 
+## Hub scroll depth
+
+The Web Hub reports Ophan `interaction` events with component
+`puzzles-hub-scroll-depth` and string values `25`, `50`, `75`, `100`.
+Each reached milestone is recorded once per pageview; use the highest value as
+that pageview's maximum observed depth bucket, not an exact percentage.
+
+Depth is the bottom of the viewport divided by the current document height,
+including header and footer. Initial viewport coverage counts, so short pages can
+reach 100% without scrolling. Measurements are batched to animation frames on
+scroll/resize and visibility/page restoration; hidden documents are ignored.
+Previously reported buckets remain reported if late content changes the height.
+Archive and game pages are excluded.
+
 ## Puzzles API URL resolution
 
 Frontend resolves each dated page with `GET /game?puzzleType=...&date=YYYY-MM-DD`
