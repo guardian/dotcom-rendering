@@ -70,6 +70,14 @@ export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
 		scaling: NonNullable<
 			GuLoadBalancedAppExperimentalProps['ecsProps']
 		>['scaling'];
+
+		provisionManagedSecurityRole?: NonNullable<
+			GuLoadBalancedAppExperimentalProps['ecsProps']
+		>['provisionManagedSecurityRole'];
+
+		managedInstancesProps?: NonNullable<
+			GuLoadBalancedAppExperimentalProps['ecsProps']
+		>['managedInstancesProps'];
 	};
 
 	targetGroupWeights?: NonNullable<
@@ -312,6 +320,10 @@ export class RenderingCDKStack extends CDKStack {
 							memoryLimitMiB: ecsProps.taskMemoryLimitMiB,
 							cpu: ecsProps.taskCpu,
 							scaling: ecsProps.scaling,
+							provisionManagedSecurityRole:
+								ecsProps.provisionManagedSecurityRole,
+							managedInstancesProps:
+								ecsProps.managedInstancesProps,
 						},
 					}),
 			...(targetGroupWeights == null ? {} : { targetGroupWeights }),
