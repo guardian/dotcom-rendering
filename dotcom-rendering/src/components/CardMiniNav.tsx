@@ -6,9 +6,10 @@ import { CustomSubNav } from './Masthead/Titlepiece/CustomSubNav';
 
 type Props = {
 	miniNavData: DCRFrontCard['miniNavData'];
+	isWideCard?: boolean;
 };
 
-export const CardMiniNav = ({ miniNavData }: Props) => {
+export const CardMiniNav = ({ miniNavData, isWideCard = false }: Props) => {
 	if (!miniNavData) {
 		return null;
 	}
@@ -20,6 +21,7 @@ export const CardMiniNav = ({ miniNavData }: Props) => {
 				position: relative;
 				z-index: ${getZIndex('card-nested-link')};
 				min-width: 0;
+				${isWideCard && `padding-top: 2px; padding-bottom: 4px;`}
 				--custom-subnav-header-text: ${palette(
 					miniNavData.header.dotcomPath
 						? '--card-kicker-text'
