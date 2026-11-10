@@ -27,6 +27,11 @@ Archive calendars re-fetch the selected month when restored from the browser's
 back/forward cache. Hub cards and recommendation rails also refresh their progress,
 so recently saved completion ticks appear without a manual reload.
 
+The archive sign-in prompt uses `data-component="puzzles-archive-sign-in"` and
+`data-link-name="puzzles | archive | sign-in"` for standard Ophan click capture.
+This measures link activations, not completed authentication; the existing sign-in
+destination and authentication behaviour are unchanged.
+
 Film reveal and On the ball require both `puzzles-new-hub-v1` and
 `puzzles-new-hub-v2` for hub cards, game pages and trivia archives. V1-only requests
 omit the cards and receive 404 for those pages; existing V1 puzzles are unchanged.
