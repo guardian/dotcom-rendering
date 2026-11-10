@@ -171,8 +171,8 @@ catalogs:
       specifier: 3.995.0
       version: 3.995.0
     '@guardian/cdk':
-      specifier: 66.0.0
-      version: 66.0.0
+      specifier: 67.0.0
+      version: 67.0.0
     '@guardian/eslint-config':
       specifier: 16.0.0
       version: 16.0.0
@@ -195,11 +195,11 @@ catalogs:
       specifier: 24.12.4
       version: 24.12.4
     aws-cdk:
-      specifier: 2.1146.1
-      version: 2.1146.1
+      specifier: 2.1148.0
+      version: 2.1148.0
     aws-cdk-lib:
-      specifier: 2.274.0
-      version: 2.274.0
+      specifier: 2.275.0
+      version: 2.275.0
     constructs:
       specifier: 10.8.1
       version: 10.8.1
@@ -279,7 +279,7 @@ importers:
         version: 3.995.0
       '@guardian/cdk':
         specifier: 'catalog:'
-        version: 66.0.0(aws-cdk-lib@2.274.0(constructs@10.8.1))(aws-cdk@2.1146.1)(constructs@10.8.1)
+        version: 67.0.0(aws-cdk-lib@2.275.0(constructs@10.8.1))(aws-cdk@2.1148.0)(constructs@10.8.1)
       '@guardian/tsconfig':
         specifier: 'catalog:'
         version: 1.0.1
@@ -288,10 +288,10 @@ importers:
         version: 24.12.4
       aws-cdk:
         specifier: 'catalog:'
-        version: 2.1146.1
+        version: 2.1148.0
       aws-cdk-lib:
         specifier: 'catalog:'
-        version: 2.274.0(constructs@10.8.1)
+        version: 2.275.0(constructs@10.8.1)
       constructs:
         specifier: 'catalog:'
         version: 10.8.1
@@ -483,7 +483,7 @@ importers:
         version: 6.1.0(browserslist@4.28.8)(tslib@2.6.2)
       '@guardian/cdk':
         specifier: 'catalog:'
-        version: 66.0.0(aws-cdk-lib@2.274.0(constructs@10.8.1))(aws-cdk@2.1146.1)(constructs@10.8.1)
+        version: 67.0.0(aws-cdk-lib@2.275.0(constructs@10.8.1))(aws-cdk@2.1148.0)(constructs@10.8.1)
       '@guardian/commercial-core':
         specifier: 35.1.0
         version: 35.1.0(@guardian/consent-manager@2.3.0(@guardian/ophan-tracker-js@5.4.0)(tslib@2.6.2)(typescript@6.0.3))(@guardian/libs@32.0.0(@guardian/ophan-tracker-js@5.4.0)(tslib@2.6.2)(typescript@6.0.3))
@@ -675,10 +675,10 @@ importers:
         version: 2.1.1(ajv@8.18.0)
       aws-cdk:
         specifier: 'catalog:'
-        version: 2.1146.1
+        version: 2.1148.0
       aws-cdk-lib:
         specifier: 'catalog:'
-        version: 2.274.0(constructs@10.8.1)
+        version: 2.275.0(constructs@10.8.1)
       browserslist:
         specifier: 4.28.8
         version: 4.28.8
@@ -2172,8 +2172,8 @@ packages:
       browserslist: ^4.22.2
       tslib: ^2.6.2
 
-  '@guardian/cdk@66.0.0':
-    resolution: {integrity: sha512-9xetVEUEwxlA4g+mpohECFhx0YcYsFgAHwAdac+2rKfQvvOfWln5Wv/eeZwu4ICxN1FmlcdHiaJJF3jWWxA9NA==}
+  '@guardian/cdk@67.0.0':
+    resolution: {integrity: sha512-j+Y1cih6TC8qGiqw32w2+avfnDVU2NKHMc7b1RT8daMwjG8N4a1ao6pfb1eQ4hwngZaIqB6yFpZtCDTZ8cNphA==}
     hasBin: true
     peerDependencies:
       aws-cdk: ^2.1135.0
@@ -4900,8 +4900,8 @@ packages:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
     engines: {node: '>= 0.4'}
 
-  aws-cdk-lib@2.274.0:
-    resolution: {integrity: sha512-jez6nnPRPGLRv6PfaVUdJNnIQN/5OQQRyQRfdf2lbkww5Z2W4FJ+RIEW1TpYgJ3oLXoM23f9LGA1kxoqvF/sFg==}
+  aws-cdk-lib@2.275.0:
+    resolution: {integrity: sha512-Gjj1tM3dQedhsI7MdwMvULF1PzgEO/zX0KFHU9xwZskkSL9057IZB4fJWm9nL+aaNU3TU+lNt8uB6d8QcZtUpQ==}
     engines: {node: '>= 20.0.0'}
     peerDependencies:
       constructs: ^10.5.0
@@ -4919,8 +4919,8 @@ packages:
       - yaml
       - mime-types
 
-  aws-cdk@2.1146.1:
-    resolution: {integrity: sha512-Sb3RHuPt8yLP4BPFNl+D2li5wI9h4UL/+NYVq8FCxmDfUJwayzEOc/Tgb4wcixB8naOmPOLzhWkdbFx17tuhSg==}
+  aws-cdk@2.1148.0:
+    resolution: {integrity: sha512-G7MqPDzldsFxrVSFxR8Oj3vf8NutokIatJVygW/g/0COjrepsbDjuCP9OB9iN2hOn3QvOSf10qd5K/P3D5TQcQ==}
     engines: {node: '>= 18.0.0'}
     hasBin: true
 
@@ -9794,7 +9794,7 @@ snapshots:
       '@smithy/fetch-http-handler': 5.8.0
       '@smithy/node-http-handler': 4.12.1
       '@smithy/types': 4.19.0
-      tslib: 2.8.1
+      tslib: 2.6.2
 
   '@aws-sdk/client-s3@3.995.0':
     dependencies:
@@ -9906,7 +9906,7 @@ snapshots:
       '@smithy/fetch-http-handler': 5.8.0
       '@smithy/node-http-handler': 4.12.1
       '@smithy/types': 4.19.0
-      tslib: 2.8.1
+      tslib: 2.6.2
 
   '@aws-sdk/client-ssm@3.995.0':
     dependencies:
@@ -10071,7 +10071,7 @@ snapshots:
       '@smithy/core': 3.35.2
       '@smithy/credential-provider-imds': 4.5.2
       '@smithy/types': 4.19.0
-      tslib: 2.8.1
+      tslib: 2.6.2
 
   '@aws-sdk/credential-providers@3.995.0':
     dependencies:
@@ -10138,7 +10138,7 @@ snapshots:
       '@smithy/core': 3.35.2
       '@smithy/signature-v4': 5.7.4
       '@smithy/types': 4.19.0
-      tslib: 2.8.1
+      tslib: 2.6.2
 
   '@aws-sdk/middleware-sdk-s3@3.972.76':
     dependencies:
@@ -10209,7 +10209,7 @@ snapshots:
       '@smithy/fetch-http-handler': 5.8.0
       '@smithy/node-http-handler': 4.12.1
       '@smithy/types': 4.19.0
-      tslib: 2.8.1
+      tslib: 2.6.2
 
   '@aws-sdk/region-config-resolver@3.972.49':
     dependencies:
@@ -11441,13 +11441,13 @@ snapshots:
       browserslist: 4.28.8
       tslib: 2.6.2
 
-  '@guardian/cdk@66.0.0(aws-cdk-lib@2.274.0(constructs@10.8.1))(aws-cdk@2.1146.1)(constructs@10.8.1)':
+  '@guardian/cdk@67.0.0(aws-cdk-lib@2.275.0(constructs@10.8.1))(aws-cdk@2.1148.0)(constructs@10.8.1)':
     dependencies:
       '@aws-sdk/client-ec2': 3.1149.0
       '@aws-sdk/client-ssm': 3.1149.0
       '@aws-sdk/credential-providers': 3.1149.0
-      aws-cdk: 2.1146.1
-      aws-cdk-lib: 2.274.0(constructs@10.8.1)
+      aws-cdk: 2.1148.0
+      aws-cdk-lib: 2.275.0(constructs@10.8.1)
       chalk: 4.1.2
       codemaker: 1.141.0
       constructs: 10.8.1
@@ -14393,14 +14393,14 @@ snapshots:
     dependencies:
       possible-typed-array-names: 1.1.0
 
-  aws-cdk-lib@2.274.0(constructs@10.8.1):
+  aws-cdk-lib@2.275.0(constructs@10.8.1):
     dependencies:
       '@aws-cdk/asset-awscli-v1': 2.2.292
       '@aws-cdk/asset-node-proxy-agent-v6': 2.1.3
       '@aws-cdk/cloud-assembly-schema': 55.2.0
       constructs: 10.8.1
 
-  aws-cdk@2.1146.1: {}
+  aws-cdk@2.1148.0: {}
 
   axe-core@4.13.0: {}
 
