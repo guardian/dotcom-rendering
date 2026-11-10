@@ -58,6 +58,36 @@ it('records initial coverage and each subsequently reached bucket once', async (
 	).toEqual(['25', '50', '75', '100']);
 });
 
+it('does not duplicate milestones when pending Ophan requests resolve out of order', async () => {
+	let resolveFirst!: (ophan: Awaited<ReturnType<typeof getOphan>>) => void;
+	let resolveSecond!: typeof resolveFirst;
+	jest.mocked(getOphan)
+		.mockReturnValueOnce(
+			new Promise((resolve) => {
+				resolveFirst = resolve;
+			}),
+		)
+		.mockReturnValueOnce(
+			new Promise((resolve) => {
+				resolveSecond = resolve;
+			}),
+		);
+	cleanupTracking = trackPuzzlesHubScrollDepth();
+	await sample();
+	scrollTo(1000);
+	await sample();
+	expect(getOphan).toHaveBeenCalledTimes(2);
+	expect(record).not.toHaveBeenCalled();
+
+	resolveSecond({ record } as never);
+	await Promise.resolve();
+	resolveFirst({ record } as never);
+	await Promise.resolve();
+	expect(
+		record.mock.calls.map(([event]) => event.interaction?.value),
+	).toEqual(['25', '50', '75']);
+});
+
 it('does not track pages outside the Hub', async () => {
 	document.body.innerHTML =
 		'<main data-layout="PuzzlesArchiveLayout"></main>';
