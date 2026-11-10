@@ -14,6 +14,7 @@ test.describe('Commercial E2E tests', () => {
 
 		const fixedSlots = [
 			'right',
+			'top-above-nav',
 			'merchandising-high',
 			'mostpop',
 			'merchandising',
