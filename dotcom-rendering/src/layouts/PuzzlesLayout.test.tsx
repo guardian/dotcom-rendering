@@ -1,9 +1,10 @@
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import type { ReactNode } from 'react';
 import { Standard } from '../../fixtures/generated/fe-articles/Standard';
 import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
 import { SubNav } from '../components/Masthead/Titlepiece/SubNav';
+import { Sponsored } from '../components/PuzzlesDirectory.stories';
 import {
 	puzzlesHubV1Experiment,
 	puzzlesHubV1Participation,
@@ -162,6 +163,27 @@ describe('PuzzlesLayout', () => {
 			]);
 		},
 	);
+
+	it('renders the full V2 subnav in the Sponsored story without the development bypass', () => {
+		render(<Sponsored />);
+		const masthead = within(screen.getByTestId('masthead'));
+
+		expect(
+			masthead.getAllByRole('link').map((link) => link.textContent),
+		).toEqual([
+			'Puzzles & games',
+			'Crosswords',
+			'Word games',
+			'Logic puzzles',
+			'Trivia & quizzes',
+		]);
+		expect(
+			masthead.getByRole('link', { name: 'Trivia & quizzes' }),
+		).toHaveAttribute(
+			'href',
+			'/puzzles-and-games/trivia-and-quizzes/archive',
+		);
+	});
 
 	it.each(['AU', 'UK'])(
 		'selects only %s container branding independently of hub branding',
