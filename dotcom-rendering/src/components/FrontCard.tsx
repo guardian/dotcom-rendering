@@ -65,9 +65,16 @@ export const FrontCard = (props: Props) => {
 		headlineTestUuid: trail.headlineTestUuid,
 	};
 
+	const isWideMiniNavCard =
+		cardProps.mediaPositionOnDesktop === 'left' ||
+		cardProps.mediaPositionOnDesktop === 'right';
+
 	const headerContent =
 		!!isMiniNavSupported && trail.miniNavData ? (
-			<CardMiniNav miniNavData={trail.miniNavData} />
+			<CardMiniNav
+				miniNavData={trail.miniNavData}
+				isWideCard={isWideMiniNavCard}
+			/>
 		) : undefined;
 
 	return Card({
