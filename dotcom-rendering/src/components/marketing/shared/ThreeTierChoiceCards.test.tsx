@@ -243,9 +243,9 @@ describe('ThreeTierChoiceCards', () => {
 			/>,
 		);
 
-		screen.getAllByRole('radio').forEach((radio) => {
+		for (const radio of screen.getAllByRole('radio')) {
 			expect(radio).not.toBeChecked();
-		});
+		}
 		expect(
 			benefitsContainerFor(
 				'Give to the Guardian every month with Support',
@@ -321,16 +321,16 @@ describe('ThreeTierChoiceCards', () => {
 			/>,
 		);
 
-		[
+		for (const copy of [
 			'Give to the Guardian every month with Support',
 			'Unlock All-access digital benefits:',
 			'We welcome support of any size, any time',
-		].forEach((copy) => {
+		]) {
 			expect(benefitsContainerFor(copy)).toHaveAttribute(
 				'aria-hidden',
 				'true',
 			);
-		});
+		}
 	});
 
 	it('should only select and expand the clicked card', () => {
