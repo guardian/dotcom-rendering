@@ -19,6 +19,7 @@ describe('PuzzlesArchiveDescription', () => {
 				'Use the calendar to track your puzzle progress from our archive.',
 			),
 		).toBeInTheDocument();
+		expect(testingScreen.queryByRole('link')).not.toBeInTheDocument();
 	});
 
 	it('shows the header sign-in destination to a signed-out reader', () => {
@@ -26,11 +27,18 @@ describe('PuzzlesArchiveDescription', () => {
 
 		render(<PuzzlesArchiveDescription idUrl={idUrl} />);
 
-		expect(
-			testingScreen.getByRole('link', {
-				name: 'Sign in or create an account',
-			}),
-		).toHaveAttribute(
+		const link = testingScreen.getByRole('link', {
+			name: 'Sign in or create an account',
+		});
+		expect(link).toHaveAttribute(
+			'data-component',
+			'puzzles-archive-sign-in',
+		);
+		expect(link).toHaveAttribute(
+			'data-link-name',
+			'puzzles | archive | sign-in',
+		);
+		expect(link).toHaveAttribute(
 			'href',
 			expect.stringMatching(
 				/^https:\/\/profile\.theguardian\.com\/signin\?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in&/,

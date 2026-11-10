@@ -498,6 +498,7 @@ export const CrosswordLayout = (props: Props) => {
 					>
 						<SubMeta
 							format={format}
+							puzzleTrackingSource="crossword-page"
 							subMetaKeywordLinks={article.subMetaKeywordLinks}
 							subMetaSectionLinks={article.subMetaSectionLinks}
 							pageId={article.pageId}

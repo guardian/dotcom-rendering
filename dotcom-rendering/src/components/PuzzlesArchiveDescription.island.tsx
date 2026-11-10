@@ -18,7 +18,12 @@ export const PuzzlesArchiveDescription = ({ idUrl }: { idUrl: string }) => {
 	if (isSignedIn === false) {
 		return (
 			<>
-				<a css={linkStyles} href={getHeaderSignInUrl(idUrl)}>
+				<a
+					css={linkStyles}
+					href={getHeaderSignInUrl(idUrl)}
+					data-component="puzzles-archive-sign-in"
+					data-link-name="puzzles | archive | sign-in"
+				>
 					Sign in or create an account
 				</a>{' '}
 				to keep track of your progress.
