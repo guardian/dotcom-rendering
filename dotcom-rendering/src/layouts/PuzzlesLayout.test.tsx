@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import type { ReactNode } from 'react';
+import { Standard } from '../../fixtures/generated/fe-articles/Standard';
 import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
 import { SubNav } from '../components/Masthead/Titlepiece/SubNav';
 import {
@@ -9,7 +10,7 @@ import {
 	puzzlesHubV2Experiment,
 	puzzlesHubV2Participation,
 } from '../lib/puzzlesHubVersionExperiment';
-import type { NavType } from '../model/extract-nav';
+import { extractNAV, type NavType } from '../model/extract-nav';
 import type { Branding } from '../types/branding';
 import { PuzzlesLayout } from './PuzzlesLayout';
 
@@ -62,7 +63,7 @@ const page = (isAdFreeUser = false) => ({
 });
 
 describe('PuzzlesLayout', () => {
-	const nav = { pillars: [], readerRevenueLinks: { footer: [] } } as NavType;
+	const nav = { ...extractNAV(Standard.nav), subNavSections: undefined };
 	const renderedCss = () =>
 		[
 			...Array.from(document.querySelectorAll('style')).map(
@@ -95,11 +96,16 @@ describe('PuzzlesLayout', () => {
 	] as const)(
 		'renders the hub subnav for %s even when frontend omits trivia',
 		(_description, isV1Enabled, isV2Enabled) => {
-			const categoryLinks = [
-				['Crosswords', '/puzzles-and-games/crosswords/archive'],
-				['Word games', '/puzzles-and-games/word-games/archive'],
-				['Logic puzzles', '/puzzles-and-games/logic-puzzles/archive'],
-			].map(([title, url]) => ({ title, longTitle: title, url }));
+			const categoryLinks = (
+				[
+					['Crosswords', '/puzzles-and-games/crosswords/archive'],
+					['Word games', '/puzzles-and-games/word-games/archive'],
+					[
+						'Logic puzzles',
+						'/puzzles-and-games/logic-puzzles/archive',
+					],
+				] as const
+			).map(([title, url]) => ({ title, longTitle: title, url }));
 			const parent = {
 				title: 'Puzzles & games',
 				longTitle: 'Puzzles & games',
@@ -107,12 +113,10 @@ describe('PuzzlesLayout', () => {
 			};
 			render(
 				<PuzzlesLayout
-					NAV={
-						{
-							...nav,
-							subNavSections: { parent, links: categoryLinks },
-						} as NavType
-					}
+					NAV={{
+						...nav,
+						subNavSections: { parent, links: categoryLinks },
+					}}
 					puzzlesPage={
 						{
 							...page(),
