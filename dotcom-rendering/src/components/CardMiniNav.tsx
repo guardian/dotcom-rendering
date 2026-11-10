@@ -29,11 +29,7 @@ export const CardMiniNav = ({ miniNavData }: Props) => {
 				--masthead-nav-link-text-hover: ${palette('--card-headline')};
 			`}
 		>
-			<CustomSubNav
-				customSubNav={miniNavData}
-				renderingPage="article"
-				isCard={true}
-			/>
+			<CustomSubNav customSubNav={miniNavData} renderingPage="card" />
 		</div>
 	);
 };

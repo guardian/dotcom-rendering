@@ -170,6 +170,21 @@ describe('FrontCard mini navigation', () => {
 		);
 	});
 
+	it('uses card styling rather than article subnav styling', () => {
+		renderCard();
+
+		const miniNav = screen
+			.getByRole('link', { name: 'More Football' })
+			.closest('[data-component-id]');
+		const list = screen.getByRole('list');
+
+		expect(miniNav).toHaveAttribute('data-rendering-page', 'card');
+		// Article subnavs have a divider (with an 8px gap) and fixed row heights; card mini-navs must not.
+		// (jsdom drops the `border-left` shorthand as it contains a CSS var, so assert on the divider's padding.)
+		expect(list).not.toHaveStyle({ paddingLeft: '8px' });
+		expect(miniNav).not.toHaveStyle({ minHeight: '36px' });
+	});
+
 	it('uses the card kicker colour for the header and headline colour for links', () => {
 		renderCard();
 
