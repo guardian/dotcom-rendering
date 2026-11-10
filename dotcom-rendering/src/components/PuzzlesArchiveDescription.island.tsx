@@ -15,7 +15,7 @@ const linkStyles = css`
 export const PuzzlesArchiveDescription = ({ idUrl }: { idUrl: string }) => {
 	const isSignedIn = useIsSignedIn();
 
-	if (isSignedIn !== true) {
+	if (isSignedIn === false) {
 		return (
 			<>
 				<a css={linkStyles} href={getHeaderSignInUrl(idUrl)}>
@@ -27,6 +27,16 @@ export const PuzzlesArchiveDescription = ({ idUrl }: { idUrl: string }) => {
 	}
 
 	return (
-		<>Use the calendar to track your puzzle progress from our archive.</>
+		<span
+			css={
+				isSignedIn === 'Pending' &&
+				css`
+					visibility: hidden;
+				`
+			}
+			aria-hidden={isSignedIn === 'Pending' ? true : undefined}
+		>
+			Use the calendar to track your puzzle progress from our archive.
+		</span>
 	);
 };

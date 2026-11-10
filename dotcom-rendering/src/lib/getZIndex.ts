@@ -89,15 +89,15 @@ const indices = [
 	'bodyArea',
 	'rightColumnArea',
 
+	// Vertical grid rule lines, kept above the main media and furniture
+	'immersiveGridOuterRules',
+
 	// Article headline (should be above main media)
 	'articleHeadline',
 	'immersiveBlackBox',
 
 	// Media overlay
 	'mediaOverlay',
-
-	// Vertical grid rule lines, kept above the main media in Labs immersive articles
-	'immersiveGridOuterRules',
 
 	// Self-hosted video
 	'video-progress-bar-foreground',

@@ -274,6 +274,7 @@ describe('MovieGrid game URLs', () => {
 			expect(Object.fromEntries(url.searchParams)).toEqual({
 				token: 'keep',
 				darkMode: darkMode ? '1' : '0',
+				platform: 'web',
 			});
 		},
 	);

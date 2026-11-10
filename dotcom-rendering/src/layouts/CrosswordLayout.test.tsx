@@ -170,7 +170,7 @@ describe('CrosswordLayout useful links', () => {
 			'href',
 			'https://www.theguardian.com/crosswords/crossword-blog',
 		);
-		expect(screen.getByText('Cluesletter')).toBeInTheDocument();
+		expect(screen.getByText('Sign up to Cluesletter')).toBeInTheDocument();
 	});
 
 	it('does not render the section when frontend does not send it', () => {
@@ -192,7 +192,7 @@ describe('CrosswordLayout useful links', () => {
 
 describe('CrosswordLayout "More from Puzzles & games" rail', () => {
 	it('renders the rail when data is present and v1 is enabled', () => {
-		renderCrosswordLayout({
+		const { container } = renderCrosswordLayout({
 			moreFromPuzzlesAndGames: relatedPuzzles,
 			serverSideABTests: v1On,
 		});
@@ -202,6 +202,17 @@ describe('CrosswordLayout "More from Puzzles & games" rail', () => {
 		).toBeInTheDocument();
 		expect(screen.getByText('Quick crossword')).toBeInTheDocument();
 		expect(screen.getByText('Mini crossword')).toBeInTheDocument();
+		expect(
+			screen
+				.getByRole('link', { name: /Quick crossword Previous/ })
+				.closest('[data-component]'),
+		).toHaveAttribute('data-component', 'puzzles-more-from:crossword-page');
+		const props = container
+			.querySelector('gu-island[name="RelatedPuzzlesRailEnhanced"]')
+			?.getAttribute('props');
+		expect(JSON.parse(props!)).toEqual(
+			expect.objectContaining({ source: 'crossword-page' }),
+		);
 	});
 
 	it('does not render the rail when the data is absent, even with v1 enabled', () => {
