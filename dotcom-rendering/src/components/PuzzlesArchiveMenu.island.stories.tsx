@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { breakpoints, until } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { userEvent, within } from 'storybook/test';
 import type { PuzzleItem } from '../types/puzzlesPage';
 import { PuzzlesArchiveMenu } from './PuzzlesArchiveMenu.island';

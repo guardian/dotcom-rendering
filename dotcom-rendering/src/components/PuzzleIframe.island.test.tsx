@@ -169,7 +169,7 @@ describe('buildFrameStyles', () => {
 	// CSS testing.
 	it('uses the hardcoded default min-height for a known slug', () => {
 		expect(buildFrameStyles('sudoku-easy').styles).toContain(
-			'min-height:620px;',
+			'min-height: 620px;',
 		);
 	});
 
@@ -178,7 +178,7 @@ describe('buildFrameStyles', () => {
 			/max-width:\s*979\.9px/,
 		);
 		expect(buildFrameStyles('sudoku-easy').styles).toContain(
-			'min-height:520px;',
+			'min-height: 520px;',
 		);
 	});
 
@@ -187,7 +187,7 @@ describe('buildFrameStyles', () => {
 			/max-width:\s*739\.9px/,
 		);
 		expect(buildFrameStyles('sudoku-easy').styles).toContain(
-			'min-height:630px;',
+			'min-height: 630px;',
 		);
 	});
 
@@ -212,19 +212,19 @@ describe('buildFrameStyles', () => {
 
 	it('falls back to the default min-heights for an unrecognised slug', () => {
 		expect(buildFrameStyles('unknown-slug').styles).toContain(
-			'min-height:500px;',
+			'min-height: 500px;',
 		);
 		expect(buildFrameStyles('unknown-slug').styles).toContain(
-			'min-height:700px;',
+			'min-height: 700px;',
 		);
 		expect(buildFrameStyles('unknown-slug').styles).toContain(
-			'min-height:900px;',
+			'min-height: 900px;',
 		);
 	});
 
 	it('includes a visible border around the iframe', () => {
 		expect(buildFrameStyles('sudoku-easy').styles).toMatch(
-			/border:1px solid var\(--article-border\);/,
+			/border: 1px solid var\(--article-border\);/,
 		);
 	});
 
@@ -236,7 +236,7 @@ describe('buildFrameStyles', () => {
 
 	it('uses the non-touch min-heights for wordiply by default', () => {
 		expect(buildFrameStyles('wordiply').styles).toContain(
-			'min-height:600px;',
+			'min-height: 600px;',
 		);
 	});
 
@@ -275,7 +275,7 @@ describe('buildFrameStyles', () => {
 		);
 
 		expect(nonTouchStyles).toContain(
-			'@media (max-width: 739.9px){min-height:600px;}',
+			' width: 100%; min-height: 600px; border: 1px solid var(--article-border); overflow: hidden; @media (max-width: 979.9px) { min-height: 600px; } @media (max-width: 739.9px) { min-height: 600px; } ',
 		);
 	});
 
@@ -289,7 +289,7 @@ describe('buildFrameStyles', () => {
 		);
 
 		expect(touchBlock).toContain(
-			'@media (max-width: 739.9px) { min-height: 600px; }',
+			'@media (pointer: coarse) { min-height: 800px; @media (max-width: 979.9px) { min-height: 600px; } @media (max-width: 739.9px) { min-height: 600px; } } ; ',
 		);
 	});
 });

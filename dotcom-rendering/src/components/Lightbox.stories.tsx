@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { storage } from '@guardian/libs';
 import { breakpoints } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useEffect } from 'react';
 import {
 	ArticleDesign,

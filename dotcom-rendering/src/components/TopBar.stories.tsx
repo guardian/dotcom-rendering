@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { AccessToken, IDToken } from '@guardian/identity-auth';
 import { breakpoints, from } from '@guardian/source/foundations';
-import type { Meta } from '@storybook/react-webpack5';
+import type { Meta } from '@storybook/react-vite';
 import type { PropsWithChildren } from 'react';
 import { expect, userEvent, within } from 'storybook/test';
 import {

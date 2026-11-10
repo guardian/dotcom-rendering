@@ -197,9 +197,7 @@ export const MaybeBrazeEpic = ({ meta, countryCode, idApiUrl }: EpicConfig) => {
 		useState<typeof BrazeEndOfArticleComponent>();
 
 	useEffect(() => {
-		import(
-			/* webpackChunkName: "guardian-braze-components-end-of-article" */ '@guardian/braze-components/end-of-article'
-		)
+		import('@guardian/braze-components/end-of-article')
 			.then((module) => {
 				setBrazeComponent(() => module.BrazeEndOfArticleComponent);
 			})

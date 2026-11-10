@@ -3,7 +3,6 @@ import { resets } from '@guardian/source/foundations';
 import { palette as sourcePalette } from '@guardian/source/foundations';
 import addonA11y from '@storybook/addon-a11y';
 import addonDocs from '@storybook/addon-docs';
-import { definePreview } from '@storybook/react-webpack5';
 import isChromatic from 'chromatic/isChromatic';
 import MockDate from 'mockdate';
 import { sb } from 'storybook/test';
@@ -14,6 +13,7 @@ import { mockFetch } from '../src/lib/mockRESTCalls';
 import { ABTests } from '../src/experiments/lib/ab-tests';
 import { setABTests } from '../src/lib/useAB';
 import { ConfigContextDecorator } from './decorators/configContextDecorator';
+import { definePreview } from '@storybook/react-vite';
 import {
 	globalColourScheme,
 	globalColourSchemeDecorator,
