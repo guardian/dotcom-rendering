@@ -175,6 +175,7 @@ export const TagPageRenderingPropsCODE: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
+		provisionManagedSecurityRole: true,
 	},
 };
 
