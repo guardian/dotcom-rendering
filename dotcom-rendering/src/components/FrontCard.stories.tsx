@@ -67,22 +67,6 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const WideCard = {
-	args: {
-		trail,
-		mediaPositionOnDesktop: 'right',
-		mediaPositionOnMobile: 'bottom',
-	},
-} satisfies Story;
-
-export const NarrowCard = {
-	args: {
-		trail,
-		mediaPositionOnDesktop: 'top',
-		mediaPositionOnMobile: 'left',
-	},
-} satisfies Story;
-
 export const BelowBoostedLevel = {
 	args: {
 		trail: {
