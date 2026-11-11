@@ -278,6 +278,26 @@ const immersivePortraitFormat = {
 	theme: webImmersivePortraitArticle.theme,
 };
 
+const immersivePortraitModes = {
+	'light mobile': allModes['light mobile'],
+	'light mobileMedium': allModes['light mobileMedium'],
+	'light mobileLandscape': {
+		...allModes.light,
+		viewport: breakpoints.mobileLandscape,
+	},
+	'light phablet': {
+		...allModes.light,
+		viewport: breakpoints.phablet,
+	},
+	'light tablet': {
+		...allModes.light,
+		viewport: breakpoints.tablet,
+	},
+	'light desktop': allModes['light desktop'],
+	'light leftCol': allModes['light leftCol'],
+	'light wide': allModes['light wide'],
+};
+
 export const WebImmersivePortrait: Story = {
 	args: {
 		renderingTarget: 'Web',
@@ -340,5 +360,30 @@ export const WebImmersivePortraitWeekendRead: Story = {
 	parameters: {
 		...WebImmersivePortrait.parameters,
 		formats: [immersiveWeekendReadFormat],
+		chromatic: {
+			modes: {
+				...WebImmersivePortrait.parameters?.chromatic.modes,
+				'light rotated phablet': {
+					...allModes.light,
+					viewport: { width: 800, height: breakpoints.phablet },
+				},
+				'light short tablet': {
+					...allModes.light,
+					viewport: { width: breakpoints.tablet, height: 483 },
+				},
+				'dark mobileMedium': {
+					...allModes.dark,
+					viewport: breakpoints.mobileMedium,
+				},
+				'dark tablet': {
+					...allModes.dark,
+					viewport: breakpoints.tablet,
+				},
+				'dark wide': {
+					...allModes.dark,
+					viewport: breakpoints.wide,
+				},
+			},
+		},
 	},
 };
