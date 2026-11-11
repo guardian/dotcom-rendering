@@ -328,10 +328,11 @@ export const StandardLayoutArticleGrid = ({
 					`,
 				isImmersiveLandscape &&
 					css`
-						${from.desktop} {
+						${from.tablet} {
+							/* Two 57.5px headline lines, ending at the second baseline. */
 							grid-template-rows: auto auto ${ageWarning != null
-									? '130px'
-									: '90px'} auto auto auto auto auto;
+									? '140px'
+									: '106px'} auto auto auto auto auto;
 						}
 						&::before,
 						&::after {
