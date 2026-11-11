@@ -239,15 +239,6 @@ const darkBackground = css`
 	background-color: ${themePalette('--headline-background')};
 `;
 
-const immersiveDarkBackground = css`
-	background-color: ${themePalette('--headline-background-immersive')};
-
-	${from.tablet} {
-		background-color: ${themePalette('--headline-background-immersive')};
-		padding-bottom: ${space[6]}px;
-	}
-`;
-
 const invertedText = css`
 	color: white;
 	white-space: pre-wrap;
@@ -258,6 +249,7 @@ const invertedText = css`
 	${from.tablet} {
 		margin-left: -20px;
 		padding-left: 20px;
+		padding-bottom: ${space[6]}px;
 	}
 
 	${from.leftCol} {
@@ -281,7 +273,7 @@ const gridHeadlineTextBelowDesktop = css`
 
 	${until.desktop} {
 		color: white;
-		background-color: ${themePalette('--headline-background-immersive')};
+		background-color: ${themePalette('--headline-background')};
 		white-space: pre-wrap;
 		padding-bottom: ${space[1]}px;
 		padding-left: 12px;
@@ -291,7 +283,7 @@ const gridHeadlineTextBelowDesktop = css`
 
 const immersiveHeadlineStyles = (layoutType: LayoutType | undefined) => {
 	if (layoutType === 'immersiveLandscape') {
-		return [invertedText, immersiveDarkBackground];
+		return [invertedText, darkBackground];
 	}
 
 	return gridHeadlineTextBelowDesktop;
@@ -514,10 +506,7 @@ export const ArticleHeadline = ({
 											? labsFont
 											: headlineFont(format),
 										isInverted
-											? [
-													invertedText,
-													immersiveDarkBackground,
-												]
+											? [invertedText, darkBackground]
 											: gridHeadlineText,
 									]}
 								>

@@ -176,10 +176,6 @@ export const StandardLayoutArticleGrid = ({
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
-	const headlineBackgroundImmersive = themePalette(
-		'--headline-background-immersive',
-	);
-
 	const isFootballMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchStatsUrl;
 
@@ -391,7 +387,9 @@ export const StandardLayoutArticleGrid = ({
 										min-width: 0;
 										aspect-ratio: 4 / 5;
 										overflow: hidden;
-										background-color: ${headlineBackgroundImmersive};
+										background-color: ${themePalette(
+											'--headline-background',
+										)};
 
 										> div {
 											position: absolute;
@@ -606,7 +604,10 @@ export const StandardLayoutArticleGrid = ({
 										background: linear-gradient(
 											180deg,
 											transparent 0%,
-											${headlineBackgroundImmersive} 120px
+											${themePalette(
+													'--headline-background',
+												)}
+												120px
 										);
 									}
 								}

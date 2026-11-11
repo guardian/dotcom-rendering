@@ -229,8 +229,16 @@ const headlineBackgroundLight: PaletteFunction = ({
 	switch (display) {
 		case ArticleDisplay.Immersive:
 			switch (theme) {
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[300];
+				case Pillar.Lifestyle:
+					return '#310028';
+				case Pillar.Culture:
+					return '#251F15';
+				case Pillar.Sport:
+					return '#00243A';
+				case Pillar.Opinion:
+					return '#3E1302';
+				case Pillar.News:
+					return sourcePalette.neutral[10];
 				default:
 					return sourcePalette.neutral[7];
 			}
@@ -239,7 +247,6 @@ const headlineBackgroundLight: PaletteFunction = ({
 		case ArticleDisplay.Standard:
 			switch (design) {
 				case ArticleDesign.Gallery:
-					return sourcePalette.neutral[7];
 				case ArticleDesign.Interview:
 					return sourcePalette.neutral[7];
 				default:
@@ -255,7 +262,7 @@ const headlineBackgroundDark: PaletteFunction = ({
 	display,
 	theme,
 }) => {
-	if (display === ArticleDisplay.Immersive) return sourcePalette.neutral[7];
+	if (display === ArticleDisplay.Immersive) return sourcePalette.neutral[10];
 
 	switch (design) {
 		case ArticleDesign.DeadBlog:
@@ -300,28 +307,6 @@ const headlineBackgroundDark: PaletteFunction = ({
 			return sourcePalette.neutral[10];
 	}
 };
-
-// Merge this with the above functions once the new immersive grid layouts
-// are fully rolled out and the old layout removed
-const headlineBackgroundImmersiveLight: PaletteFunction = ({ theme }) => {
-	switch (theme) {
-		case Pillar.Lifestyle:
-			return '#310028';
-		case Pillar.Culture:
-			return '#251F15';
-		case Pillar.Sport:
-			return '#00243A';
-		case Pillar.Opinion:
-			return '#3E1302';
-		case Pillar.News:
-			return sourcePalette.neutral[10];
-		default:
-			return sourcePalette.neutral[7];
-	}
-};
-
-const headlineBackgroundImmersiveDark: PaletteFunction = () =>
-	sourcePalette.neutral[10];
 
 const headlineBlogBackgroundLight: PaletteFunction = ({
 	design,
@@ -7801,10 +7786,6 @@ const paletteColours = {
 	'--headline-background': {
 		light: headlineBackgroundLight,
 		dark: headlineBackgroundDark,
-	},
-	'--headline-background-immersive': {
-		light: headlineBackgroundImmersiveLight,
-		dark: headlineBackgroundImmersiveDark,
 	},
 	'--headline-blog-background': {
 		light: headlineBlogBackgroundLight,
