@@ -9,7 +9,8 @@ every decision taken along the way, and the reasoning behind each one.
 
 ## 1. Goal
 
-- Puzzles from today back to 7 days ago are free for everyone.
+- The last 7 days, counting today, are free for everyone: with today being the
+  9th, the 3rd to the 9th are free and the 2nd is already premium.
 - Older puzzles ("premium puzzles") need a Supporter Plus or Digital Pack
   (All-access digital) subscription.
 - Readers without access must not get the game board. They see a modal asking
@@ -203,12 +204,12 @@ to Fastly) and read through `isPuzzlesHubV3Enabled`.
 
 The table below applies to readers in `puzzles-new-hub-v3` (D9).
 
-| Puzzle               | Reader                      | Result                                                                                                                 |
-| -------------------- | --------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| Free (within 7 days) | Anyone                      | Board immediately, no modal, no endpoint call                                                                          |
-| Premium              | Signed out                  | Modal immediately, no board, no API call (no session means no subscription)                                            |
-| Premium              | Signed in, `adFree` present | Board immediately, access check in the background. If "no access": unmount the board, show the modal                   |
-| Premium              | Signed in, no `adFree`      | Neutral placeholder with the board's height (no modal, no game). Ask the API. Access: load the board. No access: modal |
+| Puzzle             | Reader                      | Result                                                                                                                 |
+| ------------------ | --------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Free (last 7 days) | Anyone                      | Board immediately, no modal, no endpoint call                                                                          |
+| Premium            | Signed out                  | Modal immediately, no board, no API call (no session means no subscription)                                            |
+| Premium            | Signed in, `adFree` present | Board immediately, access check in the background. If "no access": unmount the board, show the modal                   |
+| Premium            | Signed in, no `adFree`      | Neutral placeholder with the board's height (no modal, no game). Ask the API. Access: load the board. No access: modal |
 
 API failure or timeout on the "signed in, `adFree` present" row: keep the board
 (D5). On the "signed in, no `adFree`" row: show the modal (D5).
@@ -256,7 +257,7 @@ Notes:
 ### Phase 4: real contract in `frontend` - done
 
 9. The premium flag is computed by `frontend` from the puzzle date
-   (`PuzzlesAccessPolicy`, Europe/London, today back to 7 days ago is free) and
+   (`PuzzlesAccessPolicy`, Europe/London, the last 7 days counting today are free) and
    sent as `instance.requiresSubscription` only when `true`.
 10. `GET /puzzles-and-games/access?puzzleId=<id>` (`PuzzlesAccessController`)
     exists with the progress endpoints' conventions: `NoCache` and CORS. For now
@@ -283,8 +284,8 @@ Notes:
   not use `adFreeDataIsPresent`, which also returns `true` when a signed in
   reader's benefits data is merely out of date, and so is too generous to count
   as evidence.
-- **Local testing:** the flag comes from `frontend`, so any puzzle older than
-  7 days is premium with no setup. Signed out readers see the modal straight
+- **Local testing:** the flag comes from `frontend`, so any puzzle outside
+  the last 7 days (counting today) is premium with no setup. Signed out readers see the modal straight
   away. Signed in readers get 503 from the access endpoint for now, so they are
   judged by the ad-free hint alone (D5).
 
