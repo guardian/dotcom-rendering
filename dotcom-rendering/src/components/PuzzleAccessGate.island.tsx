@@ -32,7 +32,11 @@ type Props = ComponentProps<typeof PuzzleIframe> &
 		requiresSubscription?: boolean;
 		/** `config.ajaxUrl`: the uncached host the access check is sent to. */
 		ajaxUrl: string;
-		/** The Puzzles API id, used to ask about this puzzle's access. */
+		/**
+		 * The Puzzles API id, used to ask about this puzzle's access. The
+		 * puzzle's date (`puzzleDate`, already a prop of the iframe) is sent
+		 * with it so the API can find the puzzle.
+		 */
 		puzzleId?: string;
 	};
 
@@ -110,6 +114,7 @@ export const PuzzleAccessGate = ({
 	requiresSubscription = false,
 	ajaxUrl,
 	puzzleId,
+	puzzleDate,
 	idUrl,
 	returnToArchivePath,
 	...iframeProps
@@ -129,6 +134,7 @@ export const PuzzleAccessGate = ({
 		void fetchPuzzleAccess({
 			baseUrl: ajaxUrl,
 			puzzleId,
+			puzzleDate,
 			authStatus: authState.authStatus,
 			signal: controller.signal,
 		}).then((result) => {
@@ -138,7 +144,7 @@ export const PuzzleAccessGate = ({
 		});
 
 		return () => controller.abort();
-	}, [requiresSubscription, authState, ajaxUrl, puzzleId]);
+	}, [requiresSubscription, authState, ajaxUrl, puzzleId, puzzleDate]);
 
 	const view = getPuzzleAccessView({
 		requiresSubscription,
@@ -148,7 +154,7 @@ export const PuzzleAccessGate = ({
 	});
 
 	if (view === 'board') {
-		return <PuzzleIframe {...iframeProps} />;
+		return <PuzzleIframe {...iframeProps} puzzleDate={puzzleDate} />;
 	}
 
 	return (

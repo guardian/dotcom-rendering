@@ -109,6 +109,22 @@ describe('PuzzleAccessGate', () => {
 		expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
 	});
 
+	it('asks about the puzzle by its id and its date', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedIn);
+		mockedFetchPuzzleAccess.mockResolvedValue('granted');
+		renderGate(true);
+
+		await waitFor(() =>
+			expect(mockedFetchPuzzleAccess).toHaveBeenCalledWith(
+				expect.objectContaining({
+					baseUrl: 'https://ajax.example.com',
+					puzzleId: 'guardian-sudoku-easy-20261101',
+					puzzleDate: '2026-11-01',
+				}),
+			),
+		);
+	});
+
 	it('shows the modal to a signed in reader without the hint who is denied', async () => {
 		mockedGetAuthStatus.mockResolvedValue(signedIn);
 		mockedFetchPuzzleAccess.mockResolvedValue('denied');

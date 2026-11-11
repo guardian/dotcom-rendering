@@ -1,8 +1,11 @@
 # Premium puzzles access: plan and decisions
 
-Status: phases 0 to 4 are implemented. `frontend` computes the premium flag and
-serves the access endpoint (on the same branch name as this work), which for now
-always answers 503 because the Puzzles API has no access endpoint yet.
+Status: phases 0 to 4 are implemented. `frontend` computes the premium flag
+(only as a hint, see D3) and serves the access endpoint (on the same branch name
+as this work), which relays the question to the Puzzles API access endpoint
+(`GET /v1/game/{puzzleId}/access/{date}`). Until that endpoint is deployed to a
+stage, `frontend` cannot get an answer and every check there counts as failed
+(D5).
 
 This document records the plan for gating premium puzzles on the Puzzle Page,
 every decision taken along the way, and the reasoning behind each one.
@@ -263,24 +266,31 @@ Notes:
 9. The premium flag is computed by `frontend` from the puzzle date
    (`PuzzlesAccessPolicy`, Europe/London, the last 7 days counting today are free) and
    sent as `instance.requiresSubscription` only when `true`.
-10. `GET /puzzles-and-games/access?puzzleId=<id>` (`PuzzlesAccessController`)
-    exists with the progress endpoints' conventions: `NoCache` and CORS. For now
-    it always answers 503 and does not call the Puzzles API, because that API
-    has no access endpoint yet. This page treats any non-2xx answer as a failed
-    check (D5).
-11. When the Puzzles API endpoint exists (proposed contract:
-    `GET /access?puzzleId=` answering `{ "hasAccess": boolean }`), `frontend`
-    forwards the reader's `Authorization` header to it and answers
-    `{ "hasAccess": boolean }`. Nothing changes in this repository.
+10. `GET /puzzles-and-games/access?puzzleId=<id>&date=<YYYY-MM-DD>`
+    (`PuzzlesAccessController`) follows the progress endpoints' conventions:
+    `NoCache` and CORS. It rejects a missing `Authorization` header (401) and a
+    malformed id or date (400) without calling anything, then forwards the
+    reader's `Authorization` header to the Puzzles API
+    (`GET /v1/game/{puzzleId}/access/{date}`) and answers
+    `{ "hasAccess": boolean }`. Any other outcome, including a 401, 403 or 404
+    from the Puzzles API, a timeout or an invalid body, is a 503, never a
+    "denied": this page treats any non-2xx answer as a failed check (D5).
+11. The Puzzles API owns the rule and is the authority. It finds the puzzle from
+    its id (the date only picks the catalogue month) and decides from the
+    puzzle's own publish date, so a wrong date is a 404 and never a free
+    puzzle. `frontend`'s flag (`PuzzlesAccessPolicy`) is only a hint that lets
+    free puzzles and signed out readers resolve with no request at all. This
+    repository sends the puzzle's date (`instance.puzzleDate`) with its id.
 
 ## 7. Implementation notes and local testing
 
-- **Endpoint (proposed contract):** `GET <ajaxUrl>/puzzles-and-games/access?puzzleId=<id>`
+- **Endpoint:** `GET <ajaxUrl>/puzzles-and-games/access?puzzleId=<id>&date=<YYYY-MM-DD>`
   with the reader's `Authorization` header, answering `{ "hasAccess": boolean }`.
-  The path and shape are constants in `src/lib/puzzleAccess.ts` and still have
-  to be agreed with the backend. The puzzle id is
-  `instance.progressIdentity.puzzleId`; if it is missing the check counts as
-  failed.
+  The path and shape are constants in `src/lib/puzzleAccess.ts`. The puzzle id
+  is `instance.progressIdentity.puzzleId` and the date is
+  `instance.puzzleDate`; if either is missing the check counts as failed and
+  nothing is requested. Both are sent together because the Puzzles API finds
+  the puzzle from its id and uses the date only to pick the catalogue month.
 - **Timeout:** `PUZZLE_ACCESS_TIMEOUT_MS` is 3000 ms (an initial value, easy to
   tune). A timeout counts as a failed check (D5).
 - **The hint is strict:** it is the presence of the `GU_AF1` cookie
@@ -290,13 +300,19 @@ Notes:
   as evidence.
 - **Local testing:** the flag comes from `frontend`, so any puzzle outside
   the last 7 days (counting today) is premium with no setup. Signed out readers see the modal straight
-  away. Signed in readers get 503 from the access endpoint for now, so they are
-  judged by the ad-free hint alone (D5).
+  away. Signed in readers are checked against the access endpoint. Where the
+  Puzzles API endpoint is not deployed (or `frontend` is not pointed at a stage
+  that has it), the check fails with a 503 and they are judged by the ad-free
+  hint alone (D5).
 
 ## 8. Dependencies and open items
 
-- The Puzzles API access endpoint (`GET /access?puzzleId=`, answering
-  `{ "hasAccess": boolean }`) that `frontend` forwards to.
+- The Puzzles API access endpoint (`GET /v1/game/{puzzleId}/access/{date}`,
+  answering `{ "isPremium": boolean, "hasAccess": boolean }`) that `frontend`
+  forwards to, deployed to CODE and then PROD before `frontend` is.
+- Check in CODE that the token the browser sends is the access token Benefits
+  API accepts, and measure the end to end latency of the access check
+  (browser, `frontend`, Puzzles API, Benefits API), including cold starts.
 - Confirm `requiresSubscription` as the final field name.
 - Whether the ad-free benefit matches the entitlement closely enough in
   practice. To check by looking at the real `benefits` array for Supporter
@@ -402,11 +418,11 @@ Status: accepted, no code change.
 Problem: `PuzzleAccessGate` reads the ad-free cookie (`GU_AF1`) only when the auth
 state changes. The user benefits refresh can set the cookie later, so a
 subscriber whose cookies are missing or expired (first visit on a device, or
-after 30 days) can see the modal until they reload. Today this is visible because
-the access endpoint always answers 503 and the cookie is the only evidence of
-access (D5, D6).
+after 30 days) can see the modal until they reload. This is visible wherever the
+access check fails, because then the cookie is the only evidence of access (D5,
+D6).
 
-Why it is accepted: once the Puzzles API access endpoint exists, `frontend`
+Why it is accepted: with the Puzzles API access endpoint in place, `frontend`
 answers `hasAccess` and that answer is authoritative. A signed in reader without
 the cookie sees the empty box (never the modal) until the answer arrives, and
 `hasAccess: true` then shows the board without a reload. The cookie only matters
@@ -414,8 +430,8 @@ when the check fails.
 
 Caveats:
 
-- Until the endpoint exists (it answers 503 on dev and CODE) the problem is real
-  there.
+- On a stage where the Puzzles API endpoint is not deployed yet, `frontend`
+  answers 503 and the problem is real there.
 - If the endpoint fails or takes more than 3 seconds, D5 applies: without the
   cookie the reader gets the modal, even a subscriber. This is deliberate, so a
   failure on our side never unlocks everything, and it only affects subscribers

@@ -107,18 +107,19 @@ describe('fetchPuzzleAccess', () => {
 	const jsonResponse = (body: unknown, ok = true) =>
 		Promise.resolve({ ok, json: () => Promise.resolve(body) });
 
-	it('calls the access endpoint with the puzzle id and the reader token', async () => {
+	it('calls the access endpoint with the puzzle id, its date and the reader token', async () => {
 		const fn = mockFetch(() => jsonResponse({ hasAccess: true }));
 
 		await fetchPuzzleAccess({
 			baseUrl: 'https://ajax.example.com',
 			puzzleId: 'guardian-sudoku-easy-20261002',
+			puzzleDate: '2026-10-02',
 			authStatus,
 		});
 
 		const [url, init] = fn.mock.calls[0] as unknown as [URL, RequestInit];
 		expect(url.toString()).toBe(
-			`https://ajax.example.com${PUZZLE_ACCESS_ENDPOINT}?puzzleId=guardian-sudoku-easy-20261002`,
+			`https://ajax.example.com${PUZZLE_ACCESS_ENDPOINT}?puzzleId=guardian-sudoku-easy-20261002&date=2026-10-02`,
 		);
 		expect(init.headers).toMatchObject({
 			Authorization: 'Bearer token',
@@ -131,6 +132,7 @@ describe('fetchPuzzleAccess', () => {
 			fetchPuzzleAccess({
 				baseUrl: 'https://ajax.example.com',
 				puzzleId: 'id',
+				puzzleDate: '2026-11-01',
 				authStatus,
 			}),
 		).resolves.toBe('granted');
@@ -142,6 +144,7 @@ describe('fetchPuzzleAccess', () => {
 			fetchPuzzleAccess({
 				baseUrl: 'https://ajax.example.com',
 				puzzleId: 'id',
+				puzzleDate: '2026-11-01',
 				authStatus,
 			}),
 		).resolves.toBe('denied');
@@ -157,6 +160,7 @@ describe('fetchPuzzleAccess', () => {
 			fetchPuzzleAccess({
 				baseUrl: 'https://ajax.example.com',
 				puzzleId: 'id',
+				puzzleDate: '2026-11-01',
 				authStatus,
 			}),
 		).resolves.toBe('failed');
@@ -168,11 +172,32 @@ describe('fetchPuzzleAccess', () => {
 			fetchPuzzleAccess({
 				baseUrl: 'https://ajax.example.com',
 				puzzleId: undefined,
+				puzzleDate: '2026-11-01',
 				authStatus,
 			}),
 		).resolves.toBe('failed');
 		expect(fn).not.toHaveBeenCalled();
 	});
+
+	it.each([
+		['missing', undefined],
+		['null', null],
+		['empty', ''],
+	])(
+		'resolves failed, without calling the backend, when the puzzle date is %s',
+		async (_name, puzzleDate) => {
+			const fn = mockFetch(() => jsonResponse({ hasAccess: true }));
+			await expect(
+				fetchPuzzleAccess({
+					baseUrl: 'https://ajax.example.com',
+					puzzleId: 'guardian-sudoku-easy-20261101',
+					puzzleDate,
+					authStatus,
+				}),
+			).resolves.toBe('failed');
+			expect(fn).not.toHaveBeenCalled();
+		},
+	);
 
 	it('resolves failed when the backend is too slow', async () => {
 		jest.useFakeTimers();
@@ -188,6 +213,7 @@ describe('fetchPuzzleAccess', () => {
 		const result = fetchPuzzleAccess({
 			baseUrl: 'https://ajax.example.com',
 			puzzleId: 'id',
+			puzzleDate: '2026-11-01',
 			authStatus,
 			timeoutMs: 1000,
 		});
