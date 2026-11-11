@@ -14,6 +14,27 @@ scroll/resize and visibility/page restoration; hidden documents are ignored.
 Previously reported buckets remain reported if late content changes the height.
 Archive and game pages are excluded.
 
+## Game-page interaction context
+
+PDF, print and share/copy controls append labelled puzzle context to the existing
+Ophan `data-link-name`; the `clickComponent` and number of events are unchanged.
+For example:
+
+```text
+puzzles | print-request | slug-sudoku-easy | date-2026-11-09 | provider-amuselabs
+puzzles | share-attempt | copy | ArticleMeta | slug-quick | date-2026-11-08 | provider-guardian-crossword
+```
+
+For iframe pages, slug/provider come from `PuzzleConfig` and date from
+`instance.puzzleDate`. For crossword pages, slug is the `crosswordType` series
+identifier, date is the crossword data timestamp's UTC calendar date, and provider
+is `guardian-crossword`. Iframe providers are `amuselabs`, `wordiply` or `moviegrid`.
+Missing/invalid dates are omitted, never inferred from the URL or today's date.
+Controls without context retain their existing tracking names.
+
+The labelled values are transmitted within an entry of the existing
+`clickLinkNames` array, not new structured Ophan fields. This identifies the source puzzle for host-page actions only.
+
 ## Puzzles API URL resolution
 
 Frontend resolves each dated page with `GET /game?puzzleType=...&date=YYYY-MM-DD`

@@ -68,7 +68,12 @@ const loadActions = async (
 						theme: 'LifestylePillar',
 						display: 'StandardDisplay',
 					},
-					crossword: { ...quickCrossword, pdf },
+					crossword: {
+						...quickCrossword,
+						crosswordType: 'quick',
+						date: Date.UTC(2026, 10, 8),
+						pdf,
+					},
 					pageId: crosswordPath,
 					isAdFreeUser: true,
 					isCommentable: false,
@@ -153,7 +158,9 @@ test.describe('Puzzle PDF, print and share tracking', () => {
 		expect(clicks).toEqual([
 			{
 				component: 'puzzles-actions:puzzle-page',
-				names: ['puzzles | print-request'],
+				names: [
+					'puzzles | print-request | slug-sudoku-easy | date-2026-11-09 | provider-amuselabs',
+				],
 			},
 		]);
 	});
@@ -182,7 +189,9 @@ test.describe('Puzzle PDF, print and share tracking', () => {
 		expect(clicks).toEqual([
 			{
 				component: 'puzzles-actions:crossword-page',
-				names: ['puzzles | pdf-open'],
+				names: [
+					'puzzles | pdf-open | slug-quick | date-2026-11-08 | provider-guardian-crossword',
+				],
 			},
 		]);
 		await pdfPage.close();
@@ -203,7 +212,9 @@ test.describe('Puzzle PDF, print and share tracking', () => {
 		expect(clicks).toEqual([
 			{
 				component: 'puzzles-actions:puzzle-page',
-				names: ['puzzles | share-attempt | copy | ArticleMeta'],
+				names: [
+					'puzzles | share-attempt | copy | ArticleMeta | slug-sudoku-easy | date-2026-11-09 | provider-amuselabs',
+				],
 			},
 		]);
 	});

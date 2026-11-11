@@ -23,6 +23,10 @@ import {
 import { getAudioData } from '../lib/audio-data';
 import { getSoleContributor } from '../lib/byline';
 import { decideMainMediaCaption } from '../lib/decide-caption';
+import {
+	crosswordActionContext,
+	type PuzzleActionContext,
+} from '../lib/puzzleActionTracking';
 import { hasFilterTag, isRepublished } from '../lib/theFilter';
 import { palette as themePalette } from '../palette';
 import { hasPreferredSourceButton } from '../preferredSource';
@@ -63,6 +67,7 @@ type Props = {
 	crossword?: FEArticle['crossword'];
 	hidePreferredSourceOnPrint?: boolean;
 	isPuzzlePage?: boolean;
+	puzzleTrackingContext?: PuzzleActionContext;
 };
 
 const meta = (format: ArticleFormat) => {
@@ -324,6 +329,7 @@ export const ArticleMeta = ({
 	crossword,
 	hidePreferredSourceOnPrint,
 	isPuzzlePage = false,
+	puzzleTrackingContext,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const showPreferredSource = hasPreferredSourceButton(
@@ -563,6 +569,10 @@ export const ArticleMeta = ({
 									webTitle={webTitle}
 									format={format}
 									context="ArticleMeta"
+									puzzleTrackingContext={
+										puzzleTrackingContext ??
+										crosswordActionContext(crossword)
+									}
 									puzzleTrackingSource={
 										isPuzzlePage
 											? 'puzzle-page'
