@@ -1,4 +1,7 @@
-import { getModalMaxHeight } from './premiumPuzzlesModalLayout';
+import {
+	getModalMaxHeight,
+	shouldFlowWithPage,
+} from './premiumPuzzlesModalLayout';
 
 describe('getModalMaxHeight', () => {
 	it('uses 70% of the screen when there is room under the header', () => {
@@ -29,5 +32,34 @@ describe('getModalMaxHeight', () => {
 		expect(
 			getModalMaxHeight({ viewportHeight: 813, wrapperTop: 100 }),
 		).toBe(569);
+	});
+});
+
+describe('shouldFlowWithPage', () => {
+	it('is false when the room under the header fits the smallest sheet', () => {
+		expect(
+			shouldFlowWithPage({ viewportHeight: 812, wrapperTop: 220 }),
+		).toBe(false);
+	});
+
+	it('is false when the room is exactly the smallest sheet', () => {
+		expect(
+			shouldFlowWithPage({ viewportHeight: 520, wrapperTop: 200 }),
+		).toBe(false);
+	});
+
+	it('is true when the room under the header is smaller than the smallest sheet', () => {
+		expect(
+			shouldFlowWithPage({ viewportHeight: 480, wrapperTop: 192 }),
+		).toBe(true);
+		expect(
+			shouldFlowWithPage({ viewportHeight: 360, wrapperTop: 225 }),
+		).toBe(true);
+	});
+
+	it('is true when the header is taller than the screen', () => {
+		expect(
+			shouldFlowWithPage({ viewportHeight: 600, wrapperTop: 900 }),
+		).toBe(true);
 	});
 });

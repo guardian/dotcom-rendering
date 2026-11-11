@@ -32,6 +32,10 @@ every decision taken along the way, and the reasoning behind each one.
       title and benefits scroll inside it, the buttons stay in view. Its
       height is capped to the room left under the page header
       (`getModalMaxHeight`), so the buttons are on screen when the page loads.
+      When the room under the header is smaller than the smallest sheet
+      (`shouldFlowWithPage`, for example a small phone in landscape) it is no
+      longer sticky: it sits at the top of the covered content with its natural
+      height and the reader scrolls the page to reach the buttons.
     - The hero image is a decorative PNG (`alt=""`) served by the image CDN
       (`i.guim.co.uk`) shown 556 px wide with the design's 185/69 aspect ratio.
     - Both the "Subscribe" and the "sign in" links carry the current page as
@@ -365,12 +369,12 @@ started), `decision needed` (blocked on a choice), `accepted` (no code change, w
 the reason recorded), `done`. Update this table as
 each one is dealt with, and reply on the pull request when it is.
 
-| #   | From    | Where                                                  | Summary                                                                              | Verdict                   | Status          |
-| --- | ------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------- | --------------- |
-| R1  | Daniel  | `PuzzlePageLayout.tsx` (`mainStyles`)                  | The overlay and modal can sit above the expanded navigation                          | Valid                     | done            |
-| R2  | Daniel  | `PuzzleAccessGate.island.tsx`                          | Ad-free cookie can update after the auth check, locking subscribers out until reload | Valid, partly             | accepted        |
-| R3  | Gustavo | `premiumPuzzlesUrls.ts` (`getPremiumPuzzlesSignInUrl`) | The "sign in" link has no return URL                                                 | Valid                     | done            |
-| R4  | Gustavo | `premiumPuzzlesModalLayout.ts` (`getModalMaxHeight`)   | The 320px minimum can exceed the room under the header on mobile                     | Valid for short viewports | decision needed |
+| #   | From    | Where                                                  | Summary                                                                              | Verdict                   | Status   |
+| --- | ------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------- | -------- |
+| R1  | Daniel  | `PuzzlePageLayout.tsx` (`mainStyles`)                  | The overlay and modal can sit above the expanded navigation                          | Valid                     | done     |
+| R2  | Daniel  | `PuzzleAccessGate.island.tsx`                          | Ad-free cookie can update after the auth check, locking subscribers out until reload | Valid, partly             | accepted |
+| R3  | Gustavo | `premiumPuzzlesUrls.ts` (`getPremiumPuzzlesSignInUrl`) | The "sign in" link has no return URL                                                 | Valid                     | done     |
+| R4  | Gustavo | `premiumPuzzlesModalLayout.ts` (`getModalMaxHeight`)   | The 320px minimum can exceed the room under the header on mobile                     | Valid for short viewports | done     |
 
 ### R1. Stacking context for the modal
 
@@ -453,18 +457,68 @@ the puzzle, and sign in and check you land on the puzzle.
 
 ### R4. Minimum height of the mobile bottom sheet
 
-`getModalMaxHeight` returns `max(320, min(70% of the screen, room under the
-header))`, so when the room under the header is under 320px the minimum wins. A
-sticky element cannot leave its container, and the container starts below the
-header, so the bottom of the sheet, with the buttons, starts below the fold until
-the reader scrolls. The realistic case is a phone in landscape (about 375px high
-with a short header).
+Status: done. The "flow with the page" mode below is the answer to this
+comment, and it is the agreed final behaviour.
 
-Testing so far: the bottom sheet was verified in headless Chrome on a mock-up,
-before the portal root moved to `<main>`. It has not been checked on the real
-page since, so landscape and short viewports are untested.
+Answer to the review: the comment is right for short screens. The 320px minimum
+could leave the buttons below the fold (32px on a 320x480 phone, 185px on a
+600x360 one). Tested on 9 screen sizes in headless Chrome. Removing the minimum
+is not the fix, because the footer is about 200 to 219px high and would be
+clipped. Instead, when the room under the header is smaller than the minimum
+sheet, the modal stops being a sticky bottom sheet and flows with the page (see
+Fix), so nothing is cut and the buttons are reachable by scrolling. Taller
+screens are unchanged.
 
-Decision needed, with its trade-off: always cap the height to the room under the
-header, with only a small safety minimum. The buttons are then always visible,
-but on very short screens the scrollable reading area gets small. The unit test
-that pins the 320px minimum would change. Check in landscape after the change.
+Problem: `getModalMaxHeight` returns `max(320, min(70% of the screen, room under
+the header))`, so when the room under the header is under 320px the minimum
+wins. A sticky element cannot leave its container, and the container starts
+below the header, so the bottom of the sheet, with the buttons, started below the
+fold until the reader scrolled.
+
+Measured in headless Chrome with the real header and the real modal, on the
+bottom sheet layout (width under 660px), before the change. Room is the space
+between the end of the header and the bottom of the screen:
+
+| Screen  | Room | Sheet height | Buttons visible on load |
+| ------- | ---- | ------------ | ----------------------- |
+| 375x812 | 592  | 568          | yes                     |
+| 390x844 | 624  | 591          | yes                     |
+| 360x640 | 448  | 448          | yes                     |
+| 375x667 | 447  | 447          | yes                     |
+| 320x568 | 376  | 376          | yes                     |
+| 360x520 | 328  | 328          | yes                     |
+| 320x480 | 288  | 320          | no, 32px below          |
+| 600x360 | 135  | 320          | no, 185px below         |
+
+Removing the minimum would not help: the footer (buttons and footnote) is about
+200 to 219px high, so with a strict cap, as in the 600x360 case (room 135px), the
+sheet would be shorter than its own footer and the buttons would be clipped.
+
+Fix: a "flow with the page" mode for screens too short for the sheet.
+
+- `shouldFlowWithPage` (`src/lib/premiumPuzzlesModalLayout.ts`) is true when the
+  room under the header is smaller than the minimum sheet height (320px). It uses
+  the real header position, so an extra banner at the top of the page is taken
+  into account.
+- The modal's effect, which already measures the room, sets the data attribute
+  `data-flow-with-page` on the container, and re-evaluates it on resize and
+  rotation.
+- With the attribute, the CSS makes the sheet `position: static` with no maximum
+  height, puts it at the top of the covered content, lets the body flow (no inner
+  scroll) and drops the footer shadow. The reader scrolls the page to reach the
+  buttons.
+- Everything else is unchanged: on taller screens the sheet is still the sticky
+  bottom sheet.
+
+Verified in headless Chrome: the 6 taller sizes above are unchanged (sticky, buttons
+visible on load); at 320x480, 600x360 and 568x320 the mode is on, the sheet is at
+the top of the content with its natural height, and scrolling the page brings the
+buttons into view and they are clickable. Rotating 360x640 to 640x360 and back
+switches the mode on and off.
+
+Caveats:
+
+- On the shortest screens the buttons are not visible on load, but a page scroll
+  away. That is the intended trade-off of this mode.
+- The room depends on the header height, 192 to 225px on the test page. To check
+  on a real mobile page in CODE.

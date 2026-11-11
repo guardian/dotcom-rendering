@@ -19,7 +19,9 @@ import { useEffect, useRef, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import {
 	getModalMaxHeight,
+	MODAL_FLOW_ATTRIBUTE,
 	MODAL_MAX_HEIGHT_PROPERTY,
+	shouldFlowWithPage,
 } from '../lib/premiumPuzzlesModalLayout';
 import {
 	buildPremiumPuzzlesSubscribeUrl,
@@ -56,6 +58,14 @@ const blockerStyles = css`
 		flex-direction: column;
 		align-items: stretch;
 		justify-content: flex-end;
+	}
+
+	/* On a screen too short for the sheet it goes to the top of the covered
+	   content instead (see shouldFlowWithPage) */
+	${until.phablet} {
+		&[${MODAL_FLOW_ATTRIBUTE}='true'] {
+			justify-content: flex-start;
+		}
 	}
 `;
 
@@ -97,6 +107,12 @@ const modalStyles = css`
 		padding: 0;
 		border-bottom-left-radius: 0;
 		border-bottom-right-radius: 0;
+
+		/* Flows with the page, with its natural height */
+		[${MODAL_FLOW_ATTRIBUTE}='true'] > & {
+			position: static;
+			max-height: none;
+		}
 	}
 `;
 
@@ -110,6 +126,11 @@ const bodyStyles = css`
 		min-height: 0;
 		overflow-y: auto;
 		padding: ${space[4]}px ${space[4]}px ${space[3]}px;
+
+		[${MODAL_FLOW_ATTRIBUTE}='true'] > div > & {
+			flex: none;
+			overflow-y: visible;
+		}
 	}
 `;
 
@@ -185,6 +206,10 @@ const footerStyles = css`
 		padding: ${space[4]}px ${space[4]}px
 			calc(${space[6]}px + env(safe-area-inset-bottom, 0px));
 		box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.15);
+
+		[${MODAL_FLOW_ATTRIBUTE}='true'] > div > & {
+			box-shadow: none;
+		}
 	}
 `;
 
@@ -302,20 +327,24 @@ export const UnlockPremiumPuzzlesModal = ({
 	const blockerRef = useRef<HTMLDivElement>(null);
 
 	// On small screens the modal is a bottom sheet whose height depends on how
-	// much room is left under the page header (see getModalMaxHeight)
+	// much room is left under the page header (see getModalMaxHeight). When
+	// there is too little room it flows with the page instead (see
+	// shouldFlowWithPage)
 	useEffect(() => {
 		const blocker = blockerRef.current;
 		if (!blocker) return;
 
 		const updateMaxHeight = () => {
+			const viewportHeight = window.innerHeight;
 			const wrapperTop =
 				blocker.getBoundingClientRect().top + window.scrollY;
 			blocker.style.setProperty(
 				MODAL_MAX_HEIGHT_PROPERTY,
-				`${getModalMaxHeight({
-					viewportHeight: window.innerHeight,
-					wrapperTop,
-				})}px`,
+				`${getModalMaxHeight({ viewportHeight, wrapperTop })}px`,
+			);
+			blocker.setAttribute(
+				MODAL_FLOW_ATTRIBUTE,
+				String(shouldFlowWithPage({ viewportHeight, wrapperTop })),
 			);
 		};
 
