@@ -117,7 +117,7 @@ const ctaButtonTheme = {
 	backgroundPrimary: palette.neutral[0],
 };
 
-const Puzzles: ReactComponent<Inline1Props> = ({ variant }) => {
+export const Puzzles: ReactComponent<Inline1Props> = ({ variant }) => {
 	if (variant.message.type != 'Inline1PuzzlesMessage') {
 		return null;
 	}
