@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import {
-	from,
 	space,
 	textSans15,
 	textSans17,
@@ -36,14 +35,6 @@ const subtitlePositionStyles = (position: SubtitlesPosition) => css`
 	${position === 'top' && `top: ${space[4]}px;`};
 	${position === 'bottom' && `bottom: ${space[4]}px;`};
 	${position === 'bottom-elevated' && `bottom: ${space[12]}px;`};
-	${position === 'top-on-mobile' &&
-	`
-		top: ${space[4]}px;
-		${from.tablet} {
-			top: auto;
-			bottom: ${space[4]}px;
-		}
-	`};
 `;
 
 const cueBoxStyles = css`

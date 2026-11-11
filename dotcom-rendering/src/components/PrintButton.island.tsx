@@ -4,6 +4,10 @@ import {
 	LinkButton,
 	SvgDocument,
 } from '@guardian/source/react-components';
+import {
+	puzzleActionAttributes,
+	type PuzzleActionSource,
+} from '../lib/puzzleActionTracking';
 import { palette as themePalette } from '../palette';
 
 const buttonStyles = css`
@@ -36,7 +40,13 @@ const buttonStyles = css`
  * With `href` (e.g. a crossword's PDF) it renders as a plain link, which
  * needs no hydration.
  */
-export const PrintButton = ({ href }: { href?: string }) => {
+export const PrintButton = ({
+	href,
+	puzzleTrackingSource,
+}: {
+	href?: string;
+	puzzleTrackingSource?: PuzzleActionSource;
+}) => {
 	if (href !== undefined) {
 		return (
 			<LinkButton
@@ -48,6 +58,7 @@ export const PrintButton = ({ href }: { href?: string }) => {
 				iconSide="left"
 				icon={<SvgDocument />}
 				cssOverrides={css(buttonStyles)}
+				{...puzzleActionAttributes(puzzleTrackingSource, 'pdf-open')}
 			>
 				Print version
 			</LinkButton>
@@ -63,6 +74,7 @@ export const PrintButton = ({ href }: { href?: string }) => {
 			iconSide="left"
 			icon={<SvgDocument />}
 			cssOverrides={css(buttonStyles)}
+			{...puzzleActionAttributes(puzzleTrackingSource, 'print-request')}
 		>
 			Print version
 		</Button>

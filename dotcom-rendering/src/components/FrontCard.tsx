@@ -1,8 +1,9 @@
 import { ArticleDesign } from '../lib/articleFormat';
-import { isMediaCard } from '../lib/cardHelpers';
+import { isMediaCard, isMiniNavSupported } from '../lib/cardHelpers';
 import type { DCRFrontCard } from '../types/front';
 import type { Props as CardProps } from './Card/Card';
 import { Card } from './Card/Card';
+import { CardMiniNav } from './CardMiniNav';
 
 type Props = {
 	trail: DCRFrontCard;
@@ -62,5 +63,16 @@ export const FrontCard = (props: Props) => {
 		headlineTestUuid: trail.headlineTestUuid,
 	};
 
-	return Card({ ...defaultProps, ...cardProps });
+	const headerContent =
+		isMiniNavSupported(cardProps.containerType, trail.boostLevel) &&
+		trail.showMiniNav &&
+		trail.miniNavData ? (
+			<CardMiniNav miniNavData={trail.miniNavData} />
+		) : undefined;
+
+	return Card({
+		...defaultProps,
+		...cardProps,
+		...(headerContent && { headerContent }),
+	});
 };

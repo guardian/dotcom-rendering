@@ -1,19 +1,38 @@
 # Puzzle Page
 
+## Hub scroll depth
+
+The Web Hub reports Ophan `interaction` events with component
+`puzzles-hub-scroll-depth` and string values `25`, `50`, `75`, `100`.
+Each reached milestone is recorded once per pageview; use the highest value as
+that pageview's maximum observed depth bucket, not an exact percentage.
+
+Depth is the bottom of the viewport divided by the current document height,
+including header and footer. Initial viewport coverage counts, so short pages can
+reach 100% without scrolling. Measurements are batched to animation frames on
+scroll/resize and visibility/page restoration; hidden documents are ignored.
+Previously reported buckets remain reported if late content changes the height.
+Archive and game pages are excluded.
+
 ## Puzzles API URL resolution
 
 Frontend resolves each dated page with `GET /game?puzzleType=...&date=YYYY-MM-DD`
 and sends the response's `gameUrl` as `instance.gameUrl`. DCR passes it through the
 layout to `PuzzleIframe` and preserves the API's path, opaque puzzle ID and provider
 parameters. AmuseLabs URLs receive the current reader's `uid` and `darkMode`;
-MovieGrid URLs receive `darkMode=0|1` without adding `uid`. All providers continue
-to receive `guardian-puzzle-context`.
+MovieGrid URLs receive `darkMode=0|1` and `platform=web` without adding `uid`.
+All providers continue to receive `guardian-puzzle-context`.
 
 The local URL builders described below remain a compatibility fallback for older
 frontend payloads without `gameUrl`. New frontend pages always supply the API URL
 or return 404/502 before rendering. Deploy this DCR support before the frontend change.
 MovieGrid pages require `instance.gameUrl`; missing or blank URLs return 404.
 DCR never derives MovieGrid puzzle URLs or IDs.
+MovieGrid's `copy_game` and `share_game` messages are handled by the parent page,
+using the existing native-share/clipboard approach. Actions require the expected
+provider origin and this iframe's window, independently of progress identity.
+For local interaction testing, open `/PuzzlePage/http://localhost:9001/<game-path>`
+on DCR's port 3030 so the iframe island can load its JavaScript from the same origin.
 
 Hub progress enrichment also preserves crossword `gameUrl` values exactly, including
 absolute links and dated Genius article paths. Other puzzle card destinations are unchanged.
@@ -21,6 +40,11 @@ absolute links and dated Genius article paths. Other puzzle card destinations ar
 Archive calendars re-fetch the selected month when restored from the browser's
 back/forward cache. Hub cards and recommendation rails also refresh their progress,
 so recently saved completion ticks appear without a manual reload.
+
+The archive sign-in prompt uses `data-component="puzzles-archive-sign-in"` and
+`data-link-name="puzzles | archive | sign-in"` for standard Ophan click capture.
+This measures link activations, not completed authentication; the existing sign-in
+destination and authentication behaviour are unchanged.
 
 Film reveal and On the ball require both `puzzles-new-hub-v1` and
 `puzzles-new-hub-v2` for hub cards, game pages and trivia archives. V1-only requests
@@ -665,8 +689,8 @@ darkMode: boolean, puzzleDate: string | null } }` and the
   backing database), and confirms the exact real AmuseLabs URL parameter
   conventions already implemented here (`set`, `id` vs `idx=1`, `embed=1`,
   `uid`, `darkMode=0|1`), plus MovieGrid/sportsreveal's simpler convention
-  (base URL plus a client-added `darkMode` param only, no confirmed `uid`
-  support for those two providers). `puzzleConfigs.ts`'s current registry,
+  (base URL plus client-added `darkMode` and `platform=web` params, no confirmed
+  `uid` support for those two providers). `puzzleConfigs.ts`'s current registry,
   with its explicit, per-entry identity data, is a deliberate,
   correct-for-now V0 solution, not the intended final architecture. When
   the Puzzles Server/Archive API materialises, this registry's statically

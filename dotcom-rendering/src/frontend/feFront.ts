@@ -9,6 +9,7 @@ import type {
 	Newsletter,
 	StarRating,
 } from '../types/content';
+import type { CustomSubnav } from '../types/customSubnav';
 import type { FooterType } from '../types/footer';
 import type { FrontEditorialTest } from '../types/front';
 import type { FENavType } from '../types/frontend';
@@ -225,6 +226,7 @@ export type FEFrontCard = {
 		href?: string;
 		embedUri?: string;
 		newsletterData?: Newsletter;
+		miniNavData?: CustomSubnav;
 		tests?: FrontEditorialTest[];
 	};
 	header: {
@@ -280,6 +282,8 @@ export type FEFrontCard = {
 		showQuotedHeadline: boolean;
 		imageHide: boolean;
 		showLivePlayable: boolean;
+		showMiniNav?: boolean;
+		miniNavData?: CustomSubnav;
 	};
 	format?: FEFormat;
 	enriched?: FESnap;
