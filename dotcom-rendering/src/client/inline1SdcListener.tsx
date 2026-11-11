@@ -19,7 +19,7 @@ const fetchComponent = (
 				const msg = `Error importing inline1 component: ${String(err)}`;
 				window.guardian.modules.sentry.reportError(
 					new Error(msg),
-					'inline1',
+					'inline1SupporterRevenue',
 				);
 				return undefined;
 			});
@@ -35,7 +35,23 @@ const fetchComponent = (
 				const msg = `Error importing inline1 component: ${String(err)}`;
 				window.guardian.modules.sentry.reportError(
 					new Error(msg),
-					'inline1',
+					'inline1Newsletter',
+				);
+				return undefined;
+			});
+	}
+	if (message.type === 'Inline1PuzzlesMessage') {
+		return import(
+			/* webpackChunkName: "Puzzles" */ `../components/marketing/inline1/puzzles/Puzzles`
+		)
+			.then((module) => {
+				return module.Puzzles;
+			})
+			.catch((err) => {
+				const msg = `Error importing inline1 component: ${String(err)}`;
+				window.guardian.modules.sentry.reportError(
+					new Error(msg),
+					'inline1Puzzles',
 				);
 				return undefined;
 			});

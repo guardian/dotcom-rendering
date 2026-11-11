@@ -206,18 +206,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "articles-and-publishing-revamped-immersive-layout",
-		description: "New grid-based immersive layout for all articles",
-		owners: ["articles.and.publishing@guardian.co.uk"],
-		status: "ON",
-		expirationDate: "2027-08-31",
-		type: "server",
-		audienceSize: 25 / 100,
-		audienceSpace: "B",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "commercial-mobile-above-nav-test",
 		description: "Test adding the mobile-above-nav ad slot to mobile pages",
 		owners: ["commercial.dev@guardian.co.uk"],

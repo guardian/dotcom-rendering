@@ -79,8 +79,8 @@ export const FaciaRenderingPropsCODE: RenderingCDKStackProps = {
 	},
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
-		taskCpu: 1024,
-		taskMemoryLimitMiB: 2048,
+		cpu: 1024,
+		memoryLimitMiB: 2048,
 		scaling: {
 			minimumTasks: 1,
 			maximumTasks: 3,
@@ -135,8 +135,8 @@ export const FaciaRenderingPropsPROD: RenderingCDKStackProps = {
 	},
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
-		taskCpu: 1024,
-		taskMemoryLimitMiB: 2048,
+		cpu: 1024,
+		memoryLimitMiB: 2048,
 		scaling: {
 			minimumTasks: 21,
 			maximumTasks: 210,
@@ -164,8 +164,8 @@ export const TagPageRenderingPropsCODE: RenderingCDKStackProps = {
 	domainName: 'tag-page-rendering.code.dev-guardianapis.com',
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
-		taskCpu: 1024,
-		taskMemoryLimitMiB: 2048,
+		cpu: 1024,
+		memoryLimitMiB: 2048,
 		scaling: {
 			minimumTasks: 1,
 			maximumTasks: 3,
@@ -175,6 +175,7 @@ export const TagPageRenderingPropsCODE: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
+		provisionManagedSecurityRole: true,
 	},
 };
 
@@ -190,8 +191,8 @@ export const TagPageRenderingPropsPROD: RenderingCDKStackProps = {
 	domainName: 'tag-page-rendering.guardianapis.com',
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
-		taskCpu: 1024,
-		taskMemoryLimitMiB: 2048,
+		cpu: 1024,
+		memoryLimitMiB: 2048,
 		scaling: {
 			minimumTasks: 18,
 			maximumTasks: 30,
@@ -222,8 +223,8 @@ export const InteractiveRenderingPropsCODE: RenderingCDKStackProps = {
 	},
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
-		taskCpu: 1024,
-		taskMemoryLimitMiB: 2048,
+		cpu: 1024,
+		memoryLimitMiB: 2048,
 		scaling: {
 			minimumTasks: 1,
 			maximumTasks: 3,
@@ -283,8 +284,8 @@ export const InteractiveRenderingPropsPROD: RenderingCDKStackProps = {
 	},
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
-		taskCpu: 1024,
-		taskMemoryLimitMiB: 2048,
+		cpu: 1024,
+		memoryLimitMiB: 2048,
 		scaling: {
 			minimumTasks: 3,
 			maximumTasks: 30,
