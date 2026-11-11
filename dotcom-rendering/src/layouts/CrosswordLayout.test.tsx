@@ -70,11 +70,13 @@ const renderCrosswordLayout = ({
 	puzzlesSupporting,
 	serverSideABTests = {},
 	withQuickSeries = false,
+	crosswordType = 'quick',
 }: {
 	moreFromPuzzlesAndGames?: PuzzleItem[];
 	puzzlesSupporting?: PuzzleGameSupporting;
 	serverSideABTests?: Record<string, string>;
 	withQuickSeries?: boolean;
+	crosswordType?: string;
 }) => {
 	const article = enhanceArticleType(
 		{
@@ -90,7 +92,7 @@ const renderCrosswordLayout = ({
 					},
 				],
 				crossword: {
-					crosswordType: 'quick',
+					crosswordType,
 					entries: [],
 				} as unknown as typeof StandardFixture.crossword,
 			}),
@@ -320,6 +322,18 @@ describe('CrosswordLayout Puzzle Page design (v1)', () => {
 			'href',
 			'/puzzles-and-games/crosswords/quick/archive',
 		);
+	});
+
+	it('points the title series link at the crosswords archive for types without their own archive page', () => {
+		const { container } = renderCrosswordLayout({
+			serverSideABTests: v1On,
+			withQuickSeries: true,
+			crosswordType: 'genius',
+		});
+
+		expect(
+			container.querySelector('a[data-component="series"]'),
+		).toHaveAttribute('href', '/puzzles-and-games/crosswords/archive');
 	});
 
 	it('keeps the original title series link when v1 is disabled', () => {
