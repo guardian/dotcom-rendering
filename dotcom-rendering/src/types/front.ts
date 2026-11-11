@@ -169,7 +169,6 @@ export type DCRCollectionType = {
 };
 
 export type DCRGroupedTrails = {
-	snap: DCRFrontCard[];
 	standard: DCRFrontCard[];
 	splash: DCRFrontCard[];
 };
