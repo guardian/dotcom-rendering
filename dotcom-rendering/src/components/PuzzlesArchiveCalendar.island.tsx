@@ -830,10 +830,7 @@ export const PuzzlesArchiveCalendar = ({
 		const restoreSelection = async (force = false) => {
 			const requestAtStart = requests.current.id;
 			const params = new URLSearchParams(window.location.search);
-			// Legacy `?puzzle=` links are still honoured.
-			const puzzle =
-				puzzleSegmentFromPath(window.location.pathname) ??
-				params.get('puzzle');
+			const puzzle = puzzleSegmentFromPath(window.location.pathname);
 			const selectedPuzzle =
 				initialArchive.puzzles.find(
 					(candidate) =>
