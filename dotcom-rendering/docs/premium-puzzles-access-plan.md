@@ -365,7 +365,7 @@ each one is dealt with, and reply on the pull request when it is.
 
 | #   | From    | Where                                                  | Summary                                                                              | Verdict                   | Status          |
 | --- | ------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------- | --------------- |
-| R1  | Daniel  | `PuzzlePageLayout.tsx` (`mainStyles`)                  | The overlay and modal can sit above the expanded navigation                          | Valid                     | open            |
+| R1  | Daniel  | `PuzzlePageLayout.tsx` (`mainStyles`)                  | The overlay and modal can sit above the expanded navigation                          | Valid                     | done            |
 | R2  | Daniel  | `PuzzleAccessGate.island.tsx`                          | Ad-free cookie can update after the auth check, locking subscribers out until reload | Valid, partly             | decision needed |
 | R3  | Gustavo | `premiumPuzzlesUrls.ts` (`getPremiumPuzzlesSignInUrl`) | The "sign in" link has no return URL                                                 | Valid                     | done            |
 | R4  | Gustavo | `premiumPuzzlesModalLayout.ts` (`getModalMaxHeight`)   | The 320px minimum can exceed the room under the header on mobile                     | Valid for short viewports | decision needed |
@@ -380,8 +380,14 @@ where the menu overlaps the content.
 Proposed fix: add `isolation: isolate` to `mainStyles` so their stacking is
 contained in `<main>`.
 
-To verify in a browser: the expanded navigation must end up above `<main>`, and
-the header and footer links must stay clickable with the modal shown.
+Verified and fixed. Reproduced with the real header and the real modal (the
+expanded navigation is CSS only): before the change 67 of 68 menu links on
+desktop, and 13 of 13 on mobile, were covered by elements inside `<main>`; after
+adding `isolation: isolate` all of them are clickable, the overlay still covers
+only the page content and the menu is drawn above the modal. The check was run
+in headless Chrome against the page rendered by the DCR dev server, with the
+modal mounted by hand because the dev asset server was not serving the client
+bundles at the time.
 
 ### R2. Ad-free cookie refreshed after the gate has decided
 

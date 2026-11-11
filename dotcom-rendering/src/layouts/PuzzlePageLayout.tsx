@@ -323,9 +323,15 @@ const stretchLines = css`
  * Positioned so the unlock modal, which `PuzzleAccessGate` renders into it
  * (see `PUZZLE_MODAL_ROOT_ID`), covers exactly the page content and leaves
  * the header and the footer reachable.
+ *
+ * `position: relative` alone does not create a stacking context, so the
+ * modal's z-index would compete with the header's (for example the expanded
+ * navigation) and cover it. `isolation: isolate` keeps the modal's stacking
+ * inside `<main>`.
  */
 const mainStyles = css`
 	position: relative;
+	isolation: isolate;
 `;
 
 /**
