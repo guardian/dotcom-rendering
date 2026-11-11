@@ -49,7 +49,6 @@ const renderGate = (requiresSubscription?: boolean) =>
 			ajaxUrl="https://ajax.example.com"
 			puzzleId="guardian-sudoku-easy-20261101"
 			idUrl="https://profile.theguardian.com"
-			returnFromSubscribeToPath="/sudoku/easy"
 			returnToArchivePath="/puzzles-and-games/logic-puzzles/archive"
 		/>,
 	);

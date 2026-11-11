@@ -26,7 +26,7 @@ import { UnlockPremiumPuzzlesModal } from './UnlockPremiumPuzzlesModal';
 type Props = ComponentProps<typeof PuzzleIframe> &
 	Pick<
 		ComponentProps<typeof UnlockPremiumPuzzlesModal>,
-		'idUrl' | 'returnFromSubscribeToPath' | 'returnToArchivePath'
+		'idUrl' | 'returnToArchivePath'
 	> & {
 		/** `instance.requiresSubscription`. Absent means the puzzle is free. */
 		requiresSubscription?: boolean;
@@ -111,7 +111,6 @@ export const PuzzleAccessGate = ({
 	ajaxUrl,
 	puzzleId,
 	idUrl,
-	returnFromSubscribeToPath,
 	returnToArchivePath,
 	...iframeProps
 }: Props) => {
@@ -164,7 +163,6 @@ export const PuzzleAccessGate = ({
 				renderInModalRoot(
 					<UnlockPremiumPuzzlesModal
 						idUrl={idUrl}
-						returnFromSubscribeToPath={returnFromSubscribeToPath}
 						returnToArchivePath={returnToArchivePath}
 					/>,
 				)}

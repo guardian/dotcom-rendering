@@ -33,7 +33,6 @@ import {
 } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
-import { getPathFromUrl } from '../lib/premiumPuzzlesUrls';
 import { PUZZLE_MODAL_ROOT_ID } from '../lib/puzzleAccess';
 import { formatPuzzleDate } from '../lib/puzzleDate';
 import {
@@ -680,10 +679,6 @@ export const PuzzlePageLayout = ({
 														?.puzzleId
 												}
 												idUrl={config.idUrl}
-												returnFromSubscribeToPath={getPathFromUrl(
-													puzzlePage.canonicalUrl,
-													'/puzzles-and-games',
-												)}
 												returnToArchivePath={`/puzzles-and-games/${puzzleGroupPath}/archive`}
 											/>
 										</Island>

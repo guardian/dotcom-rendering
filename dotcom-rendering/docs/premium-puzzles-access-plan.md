@@ -21,9 +21,9 @@ every decision taken along the way, and the reasoning behind each one.
 
 - `src/components/UnlockPremiumPuzzlesModal.tsx`: the modal, extracted from
   `PuzzlePageLayout.tsx` so it can be reused on other pages.
-    - Props: `returnFromSubscribeToPath`, `returnToArchivePath` (both paths
-      only), `idUrl`, and optional `title`, `subtitle`, `benefits`,
-      `cssOverrides`.
+    - Props: `returnToArchivePath` (a path only), `idUrl`, and optional
+      `returnUrl`, `title`, `subtitle`, `benefits`, `cssOverrides`. `returnUrl`
+      defaults to the URL of the page the modal is shown on (see below).
     - Absolutely positioned: the parent must have `position: relative`.
     - On small screens it is a bottom sheet: it sticks to the bottom of the
       screen (`position: sticky`) while the covered content is in view, and
@@ -33,10 +33,18 @@ every decision taken along the way, and the reasoning behind each one.
       (`getModalMaxHeight`), so the buttons are on screen when the page loads.
     - The hero image is a decorative PNG (`alt=""`) served by the image CDN
       (`i.guim.co.uk`) shown 556 px wide with the design's 185/69 aspect ratio.
-    - The "sign in" link goes to `<idUrl>/signin` with no `returnUrl`, because it
-      is unknown whether the profile site accepts a bare path.
+    - Both the "Subscribe" and the "sign in" links carry the current page as
+      `returnUrl`: a full `https` URL (origin and path, no query or hash) read
+      from `window.location` after mounting. Support and Identity ignore any
+      other return URL, so on a page not served over `https` (for example
+      `localhost`) the parameter is left out.
 - `src/lib/premiumPuzzlesUrls.ts` (with tests): builds the Subscribe URL
-  `<support>/?source=puzzles&returnTo=<path>`.
+  `<support>/?source=puzzles&returnUrl=<encoded https URL>`, the sign in URL
+  `<idUrl>/signin?returnUrl=<encoded https URL>` and the return URL itself
+  (`getCurrentPageUrl`).
+    - Support redirects `/` to `/{region}/contribute` and keeps the query string
+      (checked with `HEAD` requests on PROD and CODE), so the region is left to
+      Support and the page does not need to know it.
     - The Support origin is derived from `config.idUrl` by replacing the
       `profile.` subdomain with `support.`, with a fallback to
       `https://support.theguardian.com`.
@@ -288,7 +296,8 @@ Notes:
 - Whether the ad-free benefit matches the entitlement closely enough in
   practice. To check by looking at the real `benefits` array for Supporter
   Plus and Digital Pack test accounts (URL in `config.page.userBenefitsApiUrl`).
-- Destination and `returnUrl` behaviour of the modal's "sign in" link.
+- Destination and `returnUrl` behaviour of the modal's "sign in" link (see R3 in
+  section 11).
 - A request timeout value for the access check (D5 needs a "slow" threshold).
 
 ## 9. Out of scope
@@ -347,3 +356,83 @@ not gated yet. The investigation below is kept for the follow-up.
 - v2 plans to migrate crosswords to the Puzzle Page template. Since v3 needs v2,
   the existing gate would then cover them and gating `CrosswordLayout` would be
   transitional. Is there a date for that migration?
+
+## 11. Review feedback (PR #17190)
+
+Tracking of the review comments on the DCR pull request. Status: `open` (not
+started), `decision needed` (blocked on a choice), `done`. Update this table as
+each one is dealt with, and reply on the pull request when it is.
+
+| #   | From    | Where                                                  | Summary                                                                              | Verdict                   | Status          |
+| --- | ------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------- | --------------- |
+| R1  | Daniel  | `PuzzlePageLayout.tsx` (`mainStyles`)                  | The overlay and modal can sit above the expanded navigation                          | Valid                     | open            |
+| R2  | Daniel  | `PuzzleAccessGate.island.tsx`                          | Ad-free cookie can update after the auth check, locking subscribers out until reload | Valid, partly             | decision needed |
+| R3  | Gustavo | `premiumPuzzlesUrls.ts` (`getPremiumPuzzlesSignInUrl`) | The "sign in" link has no return URL                                                 | Valid                     | done            |
+| R4  | Gustavo | `premiumPuzzlesModalLayout.ts` (`getModalMaxHeight`)   | The 320px minimum can exceed the room under the header on mobile                     | Valid for short viewports | decision needed |
+
+### R1. Stacking context for the modal
+
+`position: relative` does not create a stacking context. The overlay and modal
+use `z-index` (`lightbox`, `sign-in-gate`) that therefore compete in the root
+stacking context, so they can cover the expanded navigation and intercept clicks
+where the menu overlaps the content.
+
+Proposed fix: add `isolation: isolate` to `mainStyles` so their stacking is
+contained in `<main>`.
+
+To verify in a browser: the expanded navigation must end up above `<main>`, and
+the header and footer links must stay clickable with the modal shown.
+
+### R2. Ad-free cookie refreshed after the gate has decided
+
+`PuzzleAccessGate` reads `getAdFreeCookie()` only when the auth state changes.
+The user benefits refresh can set the cookie later, so a subscriber with no
+cookie yet (first visit on a device, expired cookie) keeps seeing the modal
+until they reload. This matters now because the access endpoint answers 503 and
+the cookie is the only evidence of access (D5, D6).
+
+Once the Puzzles API access endpoint exists its answer is authoritative and the
+cookie stops deciding, so the problem mostly goes away at that point.
+
+Proposed fix: re-evaluate the gate when the benefits refresh finishes, with a
+test for it.
+
+Decision needed: first check whether `src/client/userFeatures` exposes a
+completion signal. If it does not, a custom event or polling is new behaviour
+and may touch code shared with other teams (see section 9), so it needs explicit
+approval before it is built.
+
+### R3. Return URL on the "sign in" link
+
+`getPremiumPuzzlesSignInUrl(idUrl)` sent an existing subscriber to Identity with
+no way back, so they lost their route to the puzzle. This also closes the open
+item in section 8.
+
+Done: both the Subscribe link (Support renamed its parameter from `returnTo` to
+`returnUrl` and now needs a full `https` URL on the Guardian domain, URL
+encoded) and the sign in link take the current page URL as `returnUrl`. It is
+built by `getCurrentPageUrl` from `window.location`, so the host matches the
+environment. `getPathFromUrl` and the `returnFromSubscribeToPath` prop are gone,
+which also removes a change from `PuzzlePageLayout.tsx`.
+
+To verify in CODE (a rejected `returnUrl` is ignored silently): subscribe and
+check the thank-you button reads "Return to Puzzles & games" and links back to
+the puzzle, and sign in and check you land on the puzzle.
+
+### R4. Minimum height of the mobile bottom sheet
+
+`getModalMaxHeight` returns `max(320, min(70% of the screen, room under the
+header))`, so when the room under the header is under 320px the minimum wins. A
+sticky element cannot leave its container, and the container starts below the
+header, so the bottom of the sheet, with the buttons, starts below the fold until
+the reader scrolls. The realistic case is a phone in landscape (about 375px high
+with a short header).
+
+Testing so far: the bottom sheet was verified in headless Chrome on a mock-up,
+before the portal root moved to `<main>`. It has not been checked on the real
+page since, so landscape and short viewports are untested.
+
+Decision needed, with its trade-off: always cap the height to the room under the
+header, with only a small safety minimum. The buttons are then always visible,
+but on very short screens the scrollable reading area gets small. The unit test
+that pins the 320px minimum would change. Check in landscape after the change.

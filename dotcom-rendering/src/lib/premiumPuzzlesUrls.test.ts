@@ -1,6 +1,6 @@
 import {
 	buildPremiumPuzzlesSubscribeUrl,
-	getPathFromUrl,
+	getCurrentPageUrl,
 	getPremiumPuzzlesSignInUrl,
 	getSupportBaseUrl,
 	isSafeInternalPath,
@@ -57,71 +57,83 @@ describe('isSafeInternalPath', () => {
 	});
 });
 
-describe('getPathFromUrl', () => {
-	it('returns the pathname of an absolute URL', () => {
+describe('getCurrentPageUrl', () => {
+	const at = (origin: string, pathname: string) => ({
+		protocol: new URL(origin).protocol,
+		origin,
+		pathname,
+	});
+
+	it('returns the origin and the path', () => {
 		expect(
-			getPathFromUrl(
-				'https://www.theguardian.com/sudoku/easy?x=1',
-				'/fallback',
+			getCurrentPageUrl(
+				at('https://www.theguardian.com', '/sudoku/easy/2026-11-01'),
 			),
-		).toBe('/sudoku/easy');
+		).toBe('https://www.theguardian.com/sudoku/easy/2026-11-01');
 	});
 
-	it('collapses repeated leading slashes, so the path stays a same-site path', () => {
-		const path = getPathFromUrl(
-			'http://localhost:9000//puzzles-and-games/logic-puzzles/sudoku-easy/2026-10-30',
-			'/fallback',
-		);
-		expect(path).toBe(
-			'/puzzles-and-games/logic-puzzles/sudoku-easy/2026-10-30',
-		);
-		expect(isSafeInternalPath(path)).toBe(true);
+	it('keeps the environment origin', () => {
+		expect(
+			getCurrentPageUrl(
+				at('https://m.code.dev-theguardian.com', '/puzzles-and-games'),
+			),
+		).toBe('https://m.code.dev-theguardian.com/puzzles-and-games');
 	});
 
-	it('returns the fallback for an invalid URL', () => {
-		expect(getPathFromUrl('not a url', '/fallback')).toBe('/fallback');
+	it('collapses repeated leading slashes', () => {
+		expect(
+			getCurrentPageUrl(
+				at('https://r.thegulocal.com', '//puzzles-and-games/x'),
+			),
+		).toBe('https://r.thegulocal.com/puzzles-and-games/x');
+	});
+
+	it('returns undefined when the page is not served over https', () => {
+		expect(
+			getCurrentPageUrl(
+				at('http://localhost:9000', '/puzzles-and-games'),
+			),
+		).toBeUndefined();
 	});
 });
 
 describe('buildPremiumPuzzlesSubscribeUrl', () => {
-	it('builds the Support URL with source and returnTo', () => {
-		expect(
-			buildPremiumPuzzlesSubscribeUrl({
-				idUrl: 'https://profile.thegulocal.com',
-				returnFromSubscribeToPath: '/puzzles-and-games',
-			}),
-		).toBe(
-			'https://support.thegulocal.com/?source=puzzles&returnTo=%2Fpuzzles-and-games',
+	it('builds the Support URL with source and an encoded https returnUrl', () => {
+		const link = buildPremiumPuzzlesSubscribeUrl({
+			idUrl: 'https://profile.theguardian.com',
+			returnUrl: 'https://www.theguardian.com/puzzles-and-games',
+		});
+		expect(link).toBe(
+			'https://support.theguardian.com/?source=puzzles&returnUrl=https%3A%2F%2Fwww.theguardian.com%2Fpuzzles-and-games',
+		);
+		expect(link).not.toContain('returnTo');
+		expect(new URL(link).searchParams.get('returnUrl')).toBe(
+			'https://www.theguardian.com/puzzles-and-games',
 		);
 	});
 
-	it('encodes special characters in the return path', () => {
-		const url = new URL(
-			buildPremiumPuzzlesSubscribeUrl({
-				idUrl: 'https://profile.theguardian.com',
-				returnFromSubscribeToPath: '/a/b?x=1&y=2',
-			}),
-		);
-		expect(url.searchParams.get('returnTo')).toBe('/a/b?x=1&y=2');
-		expect(url.searchParams.get('source')).toBe('puzzles');
-	});
-
-	it('omits returnTo when the path is not a safe internal path', () => {
+	it('only sends source when there is no return URL', () => {
 		expect(
 			buildPremiumPuzzlesSubscribeUrl({
 				idUrl: 'https://profile.theguardian.com',
-				returnFromSubscribeToPath: '//evil.com',
 			}),
 		).toBe('https://support.theguardian.com/?source=puzzles');
 	});
 
-	it('falls back to production when idUrl is missing', () => {
+	it('uses the Support origin of the current environment', () => {
 		expect(
 			buildPremiumPuzzlesSubscribeUrl({
-				returnFromSubscribeToPath: '/puzzles-and-games',
+				idUrl: 'https://profile.thegulocal.com',
+				returnUrl: 'https://r.thegulocal.com/puzzles-and-games',
 			}),
 		).toBe(
-			'https://support.theguardian.com/?source=puzzles&returnTo=%2Fpuzzles-and-games',
+			'https://support.thegulocal.com/?source=puzzles&returnUrl=https%3A%2F%2Fr.thegulocal.com%2Fpuzzles-and-games',
+		);
+	});
+
+	it('falls back to production when idUrl is missing', () => {
+		expect(buildPremiumPuzzlesSubscribeUrl({})).toBe(
+			'https://support.theguardian.com/?source=puzzles',
 		);
 	});
 });
@@ -136,6 +148,17 @@ describe('getPremiumPuzzlesSignInUrl', () => {
 	it('falls back to production', () => {
 		expect(getPremiumPuzzlesSignInUrl(undefined)).toBe(
 			'https://profile.theguardian.com/signin',
+		);
+	});
+
+	it('adds an encoded returnUrl', () => {
+		expect(
+			getPremiumPuzzlesSignInUrl(
+				'https://profile.theguardian.com',
+				'https://www.theguardian.com/puzzles-and-games',
+			),
+		).toBe(
+			'https://profile.theguardian.com/signin?returnUrl=https%3A%2F%2Fwww.theguardian.com%2Fpuzzles-and-games',
 		);
 	});
 });

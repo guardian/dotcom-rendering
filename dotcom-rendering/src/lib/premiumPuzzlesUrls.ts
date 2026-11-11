@@ -37,44 +37,54 @@ export const isSafeInternalPath = (path: string): boolean =>
 	path.startsWith('/') && !path.startsWith('//') && !path.includes('\\');
 
 /**
- * The path of an absolute URL (e.g. a page's `canonicalUrl`), or `fallback`
- * if the URL cannot be parsed.
+ * The URL of the page the reader is on, to send them back to after they
+ * subscribe or sign in: the origin and the path, with no query string or hash.
+ * Puzzle pages are fully described by their path, and leaving the rest out keeps
+ * tracking parameters out of the return link.
  *
- * Repeated leading slashes are collapsed to one: a path starting with `//` is
- * a protocol-relative URL, which `isSafeInternalPath` (rightly) refuses, and
- * `frontend`'s puzzle page `canonicalUrl` currently comes with one
- * (`https://host//puzzles-and-games/...`).
+ * Repeated leading slashes in the path are collapsed to one.
+ *
+ * Returns `undefined` when the page is not served over `https`: Support and
+ * Identity ignore any other return URL, so there is nothing useful to send.
  */
-export const getPathFromUrl = (url: string, fallback: string): string => {
-	try {
-		return new URL(url).pathname.replace(/^\/{2,}/, '/');
-	} catch {
-		return fallback;
-	}
+export const getCurrentPageUrl = (location: {
+	protocol: string;
+	origin: string;
+	pathname: string;
+}): string | undefined => {
+	if (location.protocol !== 'https:') return undefined;
+	return `${location.origin}${location.pathname.replace(/^\/{2,}/, '/')}`;
 };
 
 /**
  * The "Subscribe" CTA of the premium puzzles modal: the Support site (region
- * is resolved by the Support site itself) with a `returnTo` path so the reader
- * lands back where they came from after subscribing.
+ * is resolved by the Support site itself) with a `returnUrl`, a full `https`
+ * URL, so the reader lands back where they came from after subscribing.
  */
 export const buildPremiumPuzzlesSubscribeUrl = ({
 	idUrl,
-	returnFromSubscribeToPath,
+	returnUrl,
 }: {
 	idUrl?: string;
-	returnFromSubscribeToPath: string;
+	returnUrl?: string;
 }): string => {
 	const params = new URLSearchParams({ source: 'puzzles' });
-	if (isSafeInternalPath(returnFromSubscribeToPath)) {
-		params.set('returnTo', returnFromSubscribeToPath);
+	if (returnUrl !== undefined) {
+		params.set('returnUrl', returnUrl);
 	}
 	return `${getSupportBaseUrl(idUrl)}/?${params.toString()}`;
 };
 
 /**
  * The "sign in" link of the premium puzzles modal: the Identity sign-in page
- * of the current environment (`idUrl`), falling back to production.
+ * of the current environment (`idUrl`), falling back to production, with a
+ * `returnUrl` so the reader comes back to the puzzle after signing in.
  */
-export const getPremiumPuzzlesSignInUrl = (idUrl?: string): string =>
-	`${idUrl ?? PROD_PROFILE_BASE_URL}/signin`;
+export const getPremiumPuzzlesSignInUrl = (
+	idUrl?: string,
+	returnUrl?: string,
+): string => {
+	const base = `${idUrl ?? PROD_PROFILE_BASE_URL}/signin`;
+	if (returnUrl === undefined) return base;
+	return `${base}?${new URLSearchParams({ returnUrl }).toString()}`;
+};

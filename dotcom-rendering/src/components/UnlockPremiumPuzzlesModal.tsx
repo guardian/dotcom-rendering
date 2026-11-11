@@ -15,7 +15,7 @@ import {
 	SvgTickRound,
 	themeButtonReaderRevenue,
 } from '@guardian/source/react-components';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import {
 	getModalMaxHeight,
@@ -23,6 +23,7 @@ import {
 } from '../lib/premiumPuzzlesModalLayout';
 import {
 	buildPremiumPuzzlesSubscribeUrl,
+	getCurrentPageUrl,
 	getPremiumPuzzlesSignInUrl,
 	isSafeInternalPath,
 } from '../lib/premiumPuzzlesUrls';
@@ -238,11 +239,10 @@ const DEFAULT_BENEFITS = [
 
 type Props = {
 	/**
-	 * Same-site path the reader is sent back to after subscribing,
-	 * e.g. `/puzzles-and-games`. Absolute and protocol-relative URLs are
-	 * ignored.
+	 * Full `https` URL the reader is sent back to after subscribing or signing
+	 * in. Defaults to the URL of the page the modal is shown on.
 	 */
-	returnFromSubscribeToPath: string;
+	returnUrl?: string;
 	/** Same-site path of the "Return to puzzle archive" button. */
 	returnToArchivePath: string;
 	/**
@@ -257,6 +257,18 @@ type Props = {
 };
 
 /**
+ * The URL of the page the reader is on. Read after mounting, so what the
+ * server renders and what the browser first renders are the same.
+ */
+const useCurrentPageUrl = (): string | undefined => {
+	const [url, setUrl] = useState<string | undefined>(undefined);
+	useEffect(() => {
+		setUrl(getCurrentPageUrl(window.location));
+	}, []);
+	return url;
+};
+
+/**
  * A blocking modal, with a dimmed overlay, asking the reader to subscribe to
  * unlock premium puzzles.
  *
@@ -265,7 +277,7 @@ type Props = {
  * caller.
  */
 export const UnlockPremiumPuzzlesModal = ({
-	returnFromSubscribeToPath,
+	returnUrl: returnUrlOverride,
 	returnToArchivePath,
 	idUrl,
 	title = DEFAULT_TITLE,
@@ -273,10 +285,9 @@ export const UnlockPremiumPuzzlesModal = ({
 	benefits = DEFAULT_BENEFITS,
 	cssOverrides,
 }: Props) => {
-	const subscribeUrl = buildPremiumPuzzlesSubscribeUrl({
-		idUrl,
-		returnFromSubscribeToPath,
-	});
+	const currentPageUrl = useCurrentPageUrl();
+	const returnUrl = returnUrlOverride ?? currentPageUrl;
+	const subscribeUrl = buildPremiumPuzzlesSubscribeUrl({ idUrl, returnUrl });
 	const archiveUrl = isSafeInternalPath(returnToArchivePath)
 		? returnToArchivePath
 		: '/';
@@ -359,7 +370,9 @@ export const UnlockPremiumPuzzlesModal = ({
 						Your current account doesn&apos;t include unlimited
 						access to Guardian Puzzles. If you have a premium
 						subscription{' '}
-						<a href={getPremiumPuzzlesSignInUrl(idUrl)}>sign in</a>{' '}
+						<a href={getPremiumPuzzlesSignInUrl(idUrl, returnUrl)}>
+							sign in
+						</a>{' '}
 						with that account to access.
 					</p>
 				</div>

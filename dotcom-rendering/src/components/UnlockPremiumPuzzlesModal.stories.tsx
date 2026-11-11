@@ -20,7 +20,7 @@ const meta = {
 	],
 	args: {
 		idUrl: 'https://profile.theguardian.com',
-		returnFromSubscribeToPath: '/puzzles-and-games',
+		returnUrl: 'https://www.theguardian.com/puzzles-and-games',
 		returnToArchivePath: '/puzzles-and-games/logic-puzzles/archive',
 	},
 } satisfies Meta<typeof UnlockPremiumPuzzlesModal>;
