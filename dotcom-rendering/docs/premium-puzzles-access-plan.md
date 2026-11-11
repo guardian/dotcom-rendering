@@ -361,13 +361,14 @@ not gated yet. The investigation below is kept for the follow-up.
 ## 11. Review feedback (PR #17190)
 
 Tracking of the review comments on the DCR pull request. Status: `open` (not
-started), `decision needed` (blocked on a choice), `done`. Update this table as
+started), `decision needed` (blocked on a choice), `accepted` (no code change, with
+the reason recorded), `done`. Update this table as
 each one is dealt with, and reply on the pull request when it is.
 
 | #   | From    | Where                                                  | Summary                                                                              | Verdict                   | Status          |
 | --- | ------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------- | --------------- |
 | R1  | Daniel  | `PuzzlePageLayout.tsx` (`mainStyles`)                  | The overlay and modal can sit above the expanded navigation                          | Valid                     | done            |
-| R2  | Daniel  | `PuzzleAccessGate.island.tsx`                          | Ad-free cookie can update after the auth check, locking subscribers out until reload | Valid, partly             | decision needed |
+| R2  | Daniel  | `PuzzleAccessGate.island.tsx`                          | Ad-free cookie can update after the auth check, locking subscribers out until reload | Valid, partly             | accepted        |
 | R3  | Gustavo | `premiumPuzzlesUrls.ts` (`getPremiumPuzzlesSignInUrl`) | The "sign in" link has no return URL                                                 | Valid                     | done            |
 | R4  | Gustavo | `premiumPuzzlesModalLayout.ts` (`getModalMaxHeight`)   | The 320px minimum can exceed the room under the header on mobile                     | Valid for short viewports | decision needed |
 
@@ -392,22 +393,46 @@ bundles at the time.
 
 ### R2. Ad-free cookie refreshed after the gate has decided
 
-`PuzzleAccessGate` reads `getAdFreeCookie()` only when the auth state changes.
-The user benefits refresh can set the cookie later, so a subscriber with no
-cookie yet (first visit on a device, expired cookie) keeps seeing the modal
-until they reload. This matters now because the access endpoint answers 503 and
-the cookie is the only evidence of access (D5, D6).
+Status: accepted, no code change.
 
-Once the Puzzles API access endpoint exists its answer is authoritative and the
-cookie stops deciding, so the problem mostly goes away at that point.
+Problem: `PuzzleAccessGate` reads the ad-free cookie (`GU_AF1`) only when the auth
+state changes. The user benefits refresh can set the cookie later, so a
+subscriber whose cookies are missing or expired (first visit on a device, or
+after 30 days) can see the modal until they reload. Today this is visible because
+the access endpoint always answers 503 and the cookie is the only evidence of
+access (D5, D6).
 
-Proposed fix: re-evaluate the gate when the benefits refresh finishes, with a
-test for it.
+Why it is accepted: once the Puzzles API access endpoint exists, `frontend`
+answers `hasAccess` and that answer is authoritative. A signed in reader without
+the cookie sees the empty box (never the modal) until the answer arrives, and
+`hasAccess: true` then shows the board without a reload. The cookie only matters
+when the check fails.
 
-Decision needed: first check whether `src/client/userFeatures` exposes a
-completion signal. If it does not, a custom event or polling is new behaviour
-and may touch code shared with other teams (see section 9), so it needs explicit
-approval before it is built.
+Caveats:
+
+- Until the endpoint exists (it answers 503 on dev and CODE) the problem is real
+  there.
+- If the endpoint fails or takes more than 3 seconds, D5 applies: without the
+  cookie the reader gets the modal, even a subscriber. This is deliberate, so a
+  failure on our side never unlocks everything, and it only affects subscribers
+  with missing cookies during an endpoint failure.
+
+Findings from the investigation: `src/client/userFeatures/user-features.ts` has no
+completion signal. `refresh()` is started once at page startup (`main.web.ts`),
+nothing keeps its promise, no event is dispatched, and calls are not shared, so a
+second caller would send a second request. The cookie is only refreshed when the
+expiry cookie `gu_user_benefits_expiry` is missing or past. The module is shared
+with the ads startup (`priority: 'critical'`) and its `persistResponse` is
+mirrored in `frontend` and Gateway.
+
+Options that were considered and not taken, in case the caveats start to matter:
+
+- A. The gate calls `refresh()` itself when the reader is signed in, has no
+  ad-free cookie and the benefits data needs refreshing, then re-reads the
+  cookie. No change to shared code, one duplicate benefits request in that case.
+- B. Make `refresh()` share one in-flight promise (and optionally dispatch an
+  event). No duplicate request, but it changes a shared module (section 9).
+- C. Poll the cookie in the gate. New, timer based behaviour.
 
 ### R3. Return URL on the "sign in" link
 
