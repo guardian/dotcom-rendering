@@ -39,6 +39,9 @@ updates:
       jest:
         patterns:
           - 'jest*'
+      opentelemetry:
+        patterns:
+          - '@opentelemetry/*'
       react:
         patterns:
           - 'react*'
