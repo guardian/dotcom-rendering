@@ -359,8 +359,7 @@ export const StandardLayoutArticleGrid = ({
 						? css`
 								${from.tablet} {
 									align-self: start;
-									${(!isImmersiveLandscape ||
-										!usesImmersiveImageProportions) &&
+									${!usesImmersiveImageProportions &&
 									mainMediaAspectRatio != null &&
 									`aspect-ratio: ${mainMediaAspectRatio.replace(':', ' / ')};`}
 									${isImmersiveLandscape &&
@@ -371,6 +370,14 @@ export const StandardLayoutArticleGrid = ({
 								${isImmersivePortrait &&
 								css`
 									aspect-ratio: 4 / 5;
+
+									${!isImmersiveWeekendRead &&
+									css`
+										${between.tablet.and.desktop} {
+											margin-left: -20px;
+											margin-right: -20px;
+										}
+									`}
 								`}
 								${!isImmersiveWeekendRead &&
 								immersiveMediaBelowTablet}
@@ -503,6 +510,11 @@ export const StandardLayoutArticleGrid = ({
 
 							${format.design !== ArticleDesign.WeekendEssay &&
 							css`
+								${between.tablet.and.desktop} {
+									margin-left: -20px;
+									margin-right: -20px;
+								}
+
 								${from.desktop} {
 									align-content: flex-end;
 								}
@@ -553,6 +565,14 @@ export const StandardLayoutArticleGrid = ({
 									position: relative;
 									isolation: isolate;
 									background-color: transparent;
+
+									${until.tablet} {
+										padding-inline: 20px;
+									}
+
+									${until.mobileLandscape} {
+										padding-inline: 10px;
+									}
 
 									> span {
 										position: relative;
@@ -615,6 +635,14 @@ export const StandardLayoutArticleGrid = ({
 						`,
 					isImmersivePortrait &&
 						css`
+							${!isImmersiveWeekendRead &&
+							css`
+								${between.tablet.and.desktop} {
+									margin-left: -20px;
+									margin-right: -20px;
+								}
+							`}
+
 							${from.desktop} {
 								border-bottom: 1px solid
 									${themePalette('--article-border')};
