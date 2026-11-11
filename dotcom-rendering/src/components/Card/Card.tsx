@@ -820,7 +820,7 @@ export const Card = ({
 
 	return (
 		<CardWrapper
-			topBarPadding={headerContent ? space[1] : undefined}
+			topBarPadding={headerContent ? 0 : undefined}
 			format={format}
 			showTopBarDesktop={showTopBarDesktop}
 			showTopBarMobile={showTopBarMobile}
