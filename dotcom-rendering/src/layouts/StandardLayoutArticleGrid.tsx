@@ -566,6 +566,14 @@ export const StandardLayoutArticleGrid = ({
 									isolation: isolate;
 									background-color: transparent;
 
+									${until.tablet} {
+										padding-inline: 20px;
+									}
+
+									${until.mobileLandscape} {
+										padding-inline: 10px;
+									}
+
 									> span {
 										position: relative;
 										z-index: ${getZIndex(
