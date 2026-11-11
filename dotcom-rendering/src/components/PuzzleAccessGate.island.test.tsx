@@ -23,7 +23,9 @@ jest.mock('./PuzzleIframe.island', () => ({
 	buildFrameStyles: () => undefined,
 }));
 jest.mock('./UnlockPremiumPuzzlesModal', () => ({
-	UnlockPremiumPuzzlesModal: () => <div data-testid="modal" />,
+	UnlockPremiumPuzzlesModal: ({ isSignedIn }: { isSignedIn?: boolean }) => (
+		<div data-testid="modal" data-signed-in={String(isSignedIn)} />
+	),
 }));
 
 const mockedGetAuthStatus = jest.mocked(getAuthStatus);
@@ -78,7 +80,10 @@ describe('PuzzleAccessGate', () => {
 		mockedGetAuthStatus.mockResolvedValue(signedOut);
 		renderGate(true);
 		expect(screen.queryByTestId('board')).not.toBeInTheDocument();
-		await screen.findByTestId('modal');
+		expect(await screen.findByTestId('modal')).toHaveAttribute(
+			'data-signed-in',
+			'false',
+		);
 		expect(screen.queryByTestId('board')).not.toBeInTheDocument();
 		expect(mockedFetchPuzzleAccess).not.toHaveBeenCalled();
 	});
@@ -108,7 +113,10 @@ describe('PuzzleAccessGate', () => {
 		mockedGetAuthStatus.mockResolvedValue(signedIn);
 		mockedFetchPuzzleAccess.mockResolvedValue('denied');
 		renderGate(true);
-		await screen.findByTestId('modal');
+		expect(await screen.findByTestId('modal')).toHaveAttribute(
+			'data-signed-in',
+			'true',
+		);
 		expect(screen.queryByTestId('board')).not.toBeInTheDocument();
 	});
 

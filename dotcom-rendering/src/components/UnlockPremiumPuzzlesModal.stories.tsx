@@ -31,6 +31,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {} satisfies Story;
 
+export const SignedIn = {
+	args: { isSignedIn: true },
+} satisfies Story;
+
 export const CustomContent = {
 	args: {
 		title: 'Custom title',

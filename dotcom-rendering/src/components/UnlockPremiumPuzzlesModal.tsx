@@ -250,6 +250,12 @@ type Props = {
 	 * origins of the current environment (falls back to production).
 	 */
 	idUrl?: string;
+	/**
+	 * Whether the reader is signed in. Only changes the footnote: a signed out
+	 * reader is told so, a signed in one is told their account has no access.
+	 * Defaults to signed out.
+	 */
+	isSignedIn?: boolean;
 	title?: string;
 	subtitle?: string;
 	benefits?: string[];
@@ -280,6 +286,7 @@ export const UnlockPremiumPuzzlesModal = ({
 	returnUrl: returnUrlOverride,
 	returnToArchivePath,
 	idUrl,
+	isSignedIn = false,
 	title = DEFAULT_TITLE,
 	subtitle = DEFAULT_SUBTITLE,
 	benefits = DEFAULT_BENEFITS,
@@ -367,9 +374,10 @@ export const UnlockPremiumPuzzlesModal = ({
 						</LinkButton>
 					</div>
 					<p css={footnoteStyles}>
-						Your current account doesn&apos;t include unlimited
-						access to Guardian Puzzles. If you have a premium
-						subscription{' '}
+						{isSignedIn
+							? "Your current account doesn't include unlimited access to Guardian Puzzles."
+							: 'You are currently signed out.'}{' '}
+						If you have a premium subscription{' '}
 						<a href={getPremiumPuzzlesSignInUrl(idUrl, returnUrl)}>
 							sign in
 						</a>{' '}

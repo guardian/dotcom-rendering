@@ -163,6 +163,7 @@ export const PuzzleAccessGate = ({
 				renderInModalRoot(
 					<UnlockPremiumPuzzlesModal
 						idUrl={idUrl}
+						isSignedIn={authState?.reader.isSignedIn}
 						returnToArchivePath={returnToArchivePath}
 					/>,
 				)}

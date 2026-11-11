@@ -43,4 +43,30 @@ describe('UnlockPremiumPuzzlesModal', () => {
 			screen.getByRole('link', { name: 'sign in' }).getAttribute('href'),
 		).toBe('https://profile.theguardian.com/signin');
 	});
+
+	it('tells a signed out reader that they are signed out', () => {
+		renderModal();
+		expect(
+			screen.getByText(/You are currently signed out\./),
+		).toBeInTheDocument();
+		expect(
+			screen.queryByText(/Your current account/),
+		).not.toBeInTheDocument();
+	});
+
+	it('tells a signed in reader that their account has no access', () => {
+		render(
+			<UnlockPremiumPuzzlesModal
+				idUrl="https://profile.theguardian.com"
+				isSignedIn={true}
+				returnToArchivePath="/puzzles-and-games/logic-puzzles/archive"
+			/>,
+		);
+		expect(
+			screen.getByText(/Your current account doesn't include/),
+		).toBeInTheDocument();
+		expect(
+			screen.queryByText(/You are currently signed out/),
+		).not.toBeInTheDocument();
+	});
 });
