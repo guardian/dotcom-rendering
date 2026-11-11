@@ -840,8 +840,8 @@ importers:
         specifier: 7.5.4
         version: 7.5.4
       source-map:
-        specifier: 0.7.4
-        version: 0.7.4
+        specifier: 0.8.0
+        version: 0.8.0
       storybook:
         specifier: 10.6.6
         version: 10.6.6(@types/react@18.3.1)(prettier@3.8.3)(react@18.3.1)
@@ -8601,6 +8601,10 @@ packages:
   source-map@0.7.4:
     resolution: {integrity: sha512-l3BikUxvPOcn5E74dZiq5BGsTb5yEwhaTSzccU6t4sDOH8NWJCstKO5QT2CvtFoK6F0saL7p9xHAqHOlCPJygA==}
     engines: {node: '>= 8'}
+
+  source-map@0.8.0:
+    resolution: {integrity: sha512-d8EqvL+k/SOXCreS/SUzg2ciyHqBBLcN/yuRjFsbvVhHTE2pgei7oAhmPM7kWFbkX6OSMQfUq4KbkF3au9lhYQ==}
+    engines: {node: '>= 12'}
 
   space-separated-tokens@2.0.2:
     resolution: {integrity: sha512-PEGlAwrG8yXGXRjW32fGbg66JAlOAwbObuqVoJpv/mRgoWDQfgH1wDPvtzWyUSNAXBGSk8h755YDbbcEy3SH2Q==}
@@ -18724,6 +18728,8 @@ snapshots:
   source-map@0.6.1: {}
 
   source-map@0.7.4: {}
+
+  source-map@0.8.0: {}
 
   space-separated-tokens@2.0.2: {}
 
