@@ -580,6 +580,16 @@ export const SeriesSectionLink = ({
 
 								&& {
 									padding-inline: 6px;
+
+									${isImmersiveLandscapeLayout &&
+									css`
+										${from.tablet} {
+											padding-left: 20px;
+										}
+										${from.leftCol} {
+											padding-left: 10px;
+										}
+									`}
 								}
 
 								span {
