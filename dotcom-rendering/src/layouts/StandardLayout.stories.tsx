@@ -444,13 +444,17 @@ export const WebImmersivePortraitLoop: Story = {
 		await expect(videoStyles.objectFit).toBe('cover');
 		await expect(videoStyles.objectPosition).toBe('50% 0%');
 
-		if (view.innerWidth >= breakpoints.leftCol) {
+		if (view.innerWidth >= breakpoints.tablet) {
 			const media = canvasElement.querySelector<HTMLElement>(
 				'[data-gu-name="media"]',
 			);
 			await expect(media).not.toBeNull();
 			const { width, height } = media!.getBoundingClientRect();
-			await expect(Math.abs(height - width * 1.25)).toBeLessThan(1);
+			const heightRatio =
+				view.innerWidth >= breakpoints.leftCol ? 5 / 4 : 16 / 9;
+			await expect(Math.abs(height - width * heightRatio)).toBeLessThan(
+				1,
+			);
 		}
 	},
 };

@@ -94,6 +94,12 @@ export const ArticleGridMainMedia = ({
 		usesImmersiveImageProportions,
 	} = layout;
 	const displayAvatarUrl = avatarUrl != null;
+	const usesNativeMediaAspectRatio =
+		!usesImmersiveImageProportions ||
+		(isImmersivePortrait &&
+			!isImmersiveWeekendRead &&
+			article.mainMediaElements[0]?._type ===
+				'model.dotcomrendering.pageElements.MediaAtomBlockElement');
 	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
 	const hasLabsPortraitImage =
 		layout.isLabs && isImmersivePortrait && usesImmersiveImageProportions;
@@ -116,7 +122,7 @@ export const ArticleGridMainMedia = ({
 						}
 					`,
 				isImmersive &&
-					!usesImmersiveImageProportions &&
+					usesNativeMediaAspectRatio &&
 					mainMediaAspectRatio != null &&
 					css`
 						${from.tablet} {
