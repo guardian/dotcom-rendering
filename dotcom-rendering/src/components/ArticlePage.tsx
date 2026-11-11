@@ -3,6 +3,7 @@ import { StrictMode } from 'react';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { ArticleDesign } from '../lib/articleFormat';
+import { hasLivePricing } from '../lib/livePricing';
 import { rootStyles } from '../lib/rootStyles';
 import { isFilterPageId } from '../lib/theFilter';
 import type { NavType } from '../model/extract-nav';
@@ -19,6 +20,7 @@ import { Island } from './Island';
 import { Lightbox } from './Lightbox';
 import { Metrics } from './Metrics.island';
 import { ReaderRevenueDev } from './ReaderRevenueDev.island';
+import { RecordLivePricing } from './RecordLivePricing.island';
 import { SendTargetingParams } from './SendTargetingParams.island';
 import { SetABTests } from './SetABTests.island';
 import { SetAdTargeting } from './SetAdTargeting.island';
@@ -97,6 +99,14 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					<EnhanceAffiliateLinks />
 				</Island>
 			)}
+			{isWeb &&
+				hasLivePricing(
+					frontendData.blocks.flatMap((block) => block.elements),
+				) && (
+					<Island priority="feature" defer={{ until: 'idle' }}>
+						<RecordLivePricing />
+					</Island>
+				)}
 			{(format.design === ArticleDesign.LiveBlog ||
 				format.design === ArticleDesign.DeadBlog) && (
 				<SkipTo id={'key-events-carousel'} label="Skip to key events" />

@@ -13,7 +13,7 @@ import { palette } from '../../palette';
 import type { SummaryProduct } from '../../types/content';
 import { ProductLinkButton } from '../Button/ProductLinkButton';
 import {
-	getProductCtaLivePrice,
+	getProductCtaLivePriceDisplay,
 	getProductLinkLabelWithoutPrice,
 } from './livePriceUtils';
 import { ProductCardImage } from './ProductCardImage';
@@ -94,6 +94,8 @@ export const HorizontalSummaryProductCard = ({
 		return null;
 	}
 
+	const ctaPrice = getProductCtaLivePriceDisplay(cardCta);
+
 	return (
 		<div css={horizontalCard}>
 			<div css={imageContainer}>
@@ -122,7 +124,9 @@ export const HorizontalSummaryProductCard = ({
 				>
 					Read more
 				</Link>
-				<div css={price}>{getProductCtaLivePrice(cardCta)}</div>
+				<div css={price} data-live-price={ctaPrice.livePriceDisplay}>
+					{ctaPrice.content}
+				</div>
 			</div>
 			<div css={buttonContainer}>
 				<ProductLinkButton
