@@ -343,29 +343,7 @@ export const WebImmersivePortraitWeekendRead: Story = {
 		...WebImmersivePortrait.parameters,
 		formats: [immersiveWeekendReadFormat],
 		chromatic: {
-			modes: {
-				...immersivePortraitModes,
-				'light rotated phablet': {
-					...allModes.light,
-					viewport: { width: 800, height: breakpoints.phablet },
-				},
-				'light short tablet': {
-					...allModes.light,
-					viewport: { width: breakpoints.tablet, height: 483 },
-				},
-				'dark mobileMedium': {
-					...allModes.dark,
-					viewport: breakpoints.mobileMedium,
-				},
-				'dark tablet': {
-					...allModes.dark,
-					viewport: breakpoints.tablet,
-				},
-				'dark wide': {
-					...allModes.dark,
-					viewport: breakpoints.wide,
-				},
-			},
+			modes: immersivePortraitModes,
 		},
 	},
 };
