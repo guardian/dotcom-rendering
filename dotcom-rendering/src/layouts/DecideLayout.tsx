@@ -1,8 +1,4 @@
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-} from '../lib/articleFormat';
+import { ArticleDesign, ArticleDisplay } from '../lib/articleFormat';
 import type { NavType } from '../model/extract-nav';
 import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -12,7 +8,6 @@ import { GalleryLayout } from './GalleryLayout';
 import { HostedArticleLayout } from './HostedArticleLayout';
 import { HostedGalleryLayout } from './HostedGalleryLayout';
 import { HostedVideoLayout } from './HostedVideoLayout';
-import { ImmersiveLayout } from './ImmersiveLayout';
 import { LiveLayout } from './LiveLayout';
 import { NewsletterSignupLayout } from './NewsletterSignupLayout';
 import { StandardLayout } from './StandardLayout';
@@ -32,16 +27,6 @@ interface WebProps extends BaseProps {
 }
 
 export type Props = WebProps | AppProps;
-
-/**
- * Guards the new grid-based immersive layout for all Guardian articles
- * behind a 0% a/b test
- */
-const isInRevampedImmersiveLayoutTest = (article: Article): boolean =>
-	article.frontendData.config.serverSideABTests[
-		'articles-and-publishing-revamped-immersive-layout'
-	] === 'variant';
-const immersiveTestArticles = ['/p/x6adat', '/p/x6a2dm'];
 
 const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 	const format = {
@@ -65,20 +50,8 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 					);
 				}
 				default: {
-					return isInRevampedImmersiveLayoutTest(article) ||
-						immersiveTestArticles.includes(
-							article.frontendData.config.shortUrlId,
-						) ||
-						(article.theme === ArticleSpecial.Labs &&
-							article.design === ArticleDesign.Standard) ? (
+					return (
 						<StandardLayout
-							article={article.frontendData}
-							format={format}
-							renderingTarget={renderingTarget}
-							serverTime={serverTime}
-						/>
-					) : (
-						<ImmersiveLayout
 							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
@@ -212,21 +185,8 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 					);
 				}
 				default: {
-					return isInRevampedImmersiveLayoutTest(article) ||
-						immersiveTestArticles.includes(
-							article.frontendData.config.shortUrlId,
-						) ||
-						(article.theme === ArticleSpecial.Labs &&
-							article.design === ArticleDesign.Standard) ? (
+					return (
 						<StandardLayout
-							article={article.frontendData}
-							format={format}
-							NAV={NAV}
-							renderingTarget={renderingTarget}
-							serverTime={serverTime}
-						/>
-					) : (
-						<ImmersiveLayout
 							article={article.frontendData}
 							format={format}
 							NAV={NAV}
