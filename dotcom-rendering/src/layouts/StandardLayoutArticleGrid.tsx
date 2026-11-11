@@ -359,8 +359,7 @@ export const StandardLayoutArticleGrid = ({
 						? css`
 								${from.tablet} {
 									align-self: start;
-									${(!isImmersiveLandscape ||
-										!usesImmersiveImageProportions) &&
+									${!usesImmersiveImageProportions &&
 									mainMediaAspectRatio != null &&
 									`aspect-ratio: ${mainMediaAspectRatio.replace(':', ' / ')};`}
 									${isImmersiveLandscape &&
@@ -372,10 +371,13 @@ export const StandardLayoutArticleGrid = ({
 								css`
 									aspect-ratio: 4 / 5;
 
-									${between.tablet.and.desktop} {
-										margin-left: -20px;
-										margin-right: -20px;
-									}
+									${!isImmersiveWeekendRead &&
+									css`
+										${between.tablet.and.desktop} {
+											margin-left: -20px;
+											margin-right: -20px;
+										}
+									`}
 								`}
 								${!isImmersiveWeekendRead &&
 								immersiveMediaBelowTablet}
