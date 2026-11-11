@@ -5,6 +5,7 @@ import type {
 import { useEffect } from 'react';
 import { useIsSignedIn } from '../../../lib/useAuthStatus';
 import { useIsInView } from '../../../lib/useIsInView';
+import { useNewsletterSubscription } from '../../../lib/useNewsletterSubscription';
 import { NewsletterSignupCardContainer } from '../../NewsletterSignupCardContainer';
 import { NewsletterSignupForm } from '../../NewsletterSignupForm.island';
 import type { ReactComponent } from '../lib/ReactComponent';
@@ -15,6 +16,17 @@ type NewsletterMessage = Extract<
 	{ type: 'Inline1NewsletterMessage' }
 >;
 
+type ValidNewsletterMessage = NewsletterMessage & {
+	newsletterListId: string;
+	newsletterName: string;
+	frequency: string;
+};
+
+const isValidNewsletterMessage = (message: NewsletterMessage) =>
+	message.newsletterListId !== undefined &&
+	message.newsletterName !== undefined &&
+	message.frequency !== undefined;
+
 export const Newsletter: ReactComponent<Inline1Props> = ({
 	variant,
 	tracking,
@@ -22,14 +34,23 @@ export const Newsletter: ReactComponent<Inline1Props> = ({
 	if (variant.message.type !== 'Inline1NewsletterMessage') {
 		return;
 	}
+	if (isValidNewsletterMessage(variant.message)) {
+		return (
+			<NewsletterForm
+				message={variant.message as ValidNewsletterMessage} tracking={tracking}
+			/>
+		);
+	}
 
-	return <NewsletterForm message={variant.message} tracking={tracking} />;
+	return;
 };
 
+
 const NewsletterForm: ReactComponent<{
-	message: NewsletterMessage;
+	message: ValidNewsletterMessage;
 	tracking: Tracking;
 }> = ({ message, tracking }) => {
+	const newsletterName = message.newsletterName;
 	const heading = message.heading;
 	const description = message.body;
 	const frequency = message.frequency;
@@ -37,6 +58,10 @@ const NewsletterForm: ReactComponent<{
 	const newsletterId = message.newsletterId;
 	const componentId = ''; // TBD
 	const isSignedIn = useIsSignedIn();
+	const isSubscribed = useNewsletterSubscription(
+		message.newsletterListId,
+		window.guardian.config.page.idApiUrl,
+	);
 
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
@@ -51,7 +76,7 @@ const NewsletterForm: ReactComponent<{
 	return (
 		<div ref={setNode}>
 			<NewsletterSignupCardContainer
-				name={''} // We should get this from SDC?
+				name={newsletterName}
 				description={description}
 				illustrationSquare={illustrationSquare}
 				frequency={frequency}
@@ -60,10 +85,11 @@ const NewsletterForm: ReactComponent<{
 			>
 				<NewsletterSignupForm
 					newsletterId={newsletterId}
-					newsletterName={''} // We need this for the success message, should get from SDC?
+					newsletterName={newsletterName}
 					frequency={frequency}
 					componentId={componentId}
-				/>
+					isAlreadySubscribed={isSubscribed}
+			/>
 			</NewsletterSignupCardContainer>
 		</div>
 	);
