@@ -8,7 +8,10 @@ import {
 } from '@guardian/cdk/lib/constructs/core';
 import { GuCname } from '@guardian/cdk/lib/constructs/dns/dns-records';
 import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
-import type { GuLoadBalancedAppExperimentalProps } from '@guardian/cdk/lib/experimental/patterns/gu-load-balanced-app';
+import type {
+	EcsProps,
+	GuLoadBalancedAppExperimentalProps,
+} from '@guardian/cdk/lib/experimental/patterns/gu-load-balanced-app';
 import { GuLoadBalancedAppExperimental } from '@guardian/cdk/lib/experimental/patterns/gu-load-balanced-app';
 import type { GuAsgCapacity } from '@guardian/cdk/lib/types';
 import { aws_cloudwatch, type App as CDKApp, Duration } from 'aws-cdk-lib';
@@ -54,31 +57,7 @@ export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
 	 * ECS configuration including image identifier and instance sizing.
 	 * Optional to control which services run in an EC2-ECS hybrid mode, or EC2-only.
 	 */
-	ecsProps?: {
-		imageIdentifier: NonNullable<
-			GuLoadBalancedAppExperimentalProps['ecsProps']
-		>['imageIdentifier'];
-
-		taskCpu: NonNullable<
-			GuLoadBalancedAppExperimentalProps['ecsProps']
-		>['cpu'];
-
-		taskMemoryLimitMiB: NonNullable<
-			GuLoadBalancedAppExperimentalProps['ecsProps']
-		>['memoryLimitMiB'];
-
-		scaling: NonNullable<
-			GuLoadBalancedAppExperimentalProps['ecsProps']
-		>['scaling'];
-
-		provisionManagedSecurityRole?: NonNullable<
-			GuLoadBalancedAppExperimentalProps['ecsProps']
-		>['provisionManagedSecurityRole'];
-
-		managedInstancesProps?: NonNullable<
-			GuLoadBalancedAppExperimentalProps['ecsProps']
-		>['managedInstancesProps'];
-	};
+	ecsProps?: Omit<EcsProps, 'repositoryName'>;
 
 	targetGroupWeights?: NonNullable<
 		GuLoadBalancedAppExperimentalProps['targetGroupWeights']
@@ -317,8 +296,8 @@ export class RenderingCDKStack extends CDKStack {
 								'guardian/dotcom-rendering/dotcom-rendering',
 							imageIdentifier: ecsProps.imageIdentifier,
 
-							memoryLimitMiB: ecsProps.taskMemoryLimitMiB,
-							cpu: ecsProps.taskCpu,
+							memoryLimitMiB: ecsProps.memoryLimitMiB,
+							cpu: ecsProps.cpu,
 							scaling: ecsProps.scaling,
 							provisionManagedSecurityRole:
 								ecsProps.provisionManagedSecurityRole,
