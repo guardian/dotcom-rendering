@@ -36,6 +36,7 @@ const archive: PuzzlesArchive = {
 		puzzleType: 'SUDOKU_EASY',
 		slug: 'logic-puzzles/sudoku-easy',
 		set: 'easy',
+		path: '/puzzles-and-games/logic-puzzles/sudoku-easy/archive',
 	},
 	puzzles: [],
 	year: 2026,
@@ -55,9 +56,13 @@ const archive: PuzzlesArchive = {
 
 describe('archive calendar helpers', () => {
 	it('builds an archive URL that preserves the puzzle and month', () => {
-		expect(archivePageUrl('crosswords', { set: 'mini' }, 2026, 8)).toBe(
-			'/puzzles-and-games/crosswords/mini/archive?year=2026&month=8',
-		);
+		expect(
+			archivePageUrl(
+				{ path: '/puzzles-and-games/crosswords/mini/archive' },
+				2026,
+				8,
+			),
+		).toBe('/puzzles-and-games/crosswords/mini/archive?year=2026&month=8');
 	});
 
 	it('maps the API status, not the progress value, to the day status', () => {
@@ -156,6 +161,7 @@ describe('PuzzlesArchiveCalendar', () => {
 			title: 'Medium sudoku',
 			slug: 'logic-puzzles/sudoku-medium',
 			set: 'medium',
+			path: '/puzzles-and-games/logic-puzzles/sudoku-medium/archive',
 		};
 		const { container } = render(
 			<PuzzlesArchiveCalendar
@@ -496,6 +502,7 @@ describe('PuzzlesArchiveCalendar', () => {
 					puzzleType,
 					slug: `trivia-and-quizzes/${slug}`,
 					set: 'all',
+					path: `/puzzles-and-games/trivia-and-quizzes/${slug}/archive`,
 				},
 				items: [{ ...archive.items[0]!, puzzleType }],
 			};
@@ -699,6 +706,7 @@ describe('PuzzlesArchiveCalendar', () => {
 				title: 'Weekend',
 				set: 'weekend',
 				puzzleType: 'CROSSWORD_WEEKEND',
+				path: '/puzzles-and-games/crosswords/weekend/archive',
 			},
 			items: [
 				{
@@ -968,6 +976,7 @@ describe('PuzzlesArchiveCalendar', () => {
 			puzzleType: 'SUDOKU_MEDIUM',
 			slug: 'logic-puzzles/sudoku-medium',
 			set: 'medium',
+			path: '/puzzles-and-games/logic-puzzles/sudoku-medium/archive',
 		};
 		const initialArchive = {
 			...archive,
@@ -1047,6 +1056,7 @@ describe('PuzzlesArchiveCalendar', () => {
 			...archive.selectedPuzzle,
 			id: 'sudoku-medium',
 			title: 'Medium sudoku',
+			path: '/puzzles-and-games/logic-puzzles/sudoku-medium/archive',
 		};
 		const initialArchive = {
 			...archive,

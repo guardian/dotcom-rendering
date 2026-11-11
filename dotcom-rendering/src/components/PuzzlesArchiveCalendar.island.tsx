@@ -670,8 +670,7 @@ const cacheKey = (puzzleId: string, year: number, month: number): string =>
 	`${puzzleId}-${year}-${month}`;
 
 export const archivePageUrl = (
-	category: PuzzlesArchive['category'],
-	puzzle: Pick<PuzzlesArchive['selectedPuzzle'], 'slug' | 'set'>,
+	puzzle: Pick<PuzzlesArchive['selectedPuzzle'], 'path'>,
 	year: number,
 	month: number,
 ): string => {
@@ -679,13 +678,8 @@ export const archivePageUrl = (
 		year: String(year),
 		month: String(month),
 	});
-	const segment = puzzle.slug?.split('/').pop() ?? puzzle.set;
-	return `/puzzles-and-games/${category}/${segment}/archive?${search.toString()}`;
+	return `${puzzle.path}?${search.toString()}`;
 };
-
-/** The puzzle segment of `/puzzles-and-games/{category}/{puzzle}/archive`. */
-const puzzleSegmentFromPath = (pathname: string): string | undefined =>
-	/^\/puzzles-and-games\/[^/]+\/([^/]+)\/archive\/?$/.exec(pathname)?.[1];
 
 const archiveLinkName = (
 	archive: PuzzlesArchive,
@@ -830,13 +824,10 @@ export const PuzzlesArchiveCalendar = ({
 		const restoreSelection = async (force = false) => {
 			const requestAtStart = requests.current.id;
 			const params = new URLSearchParams(window.location.search);
-			const puzzle = puzzleSegmentFromPath(window.location.pathname);
+			const pathname = window.location.pathname.replace(/\/$/, '');
 			const selectedPuzzle =
 				initialArchive.puzzles.find(
-					(candidate) =>
-						candidate.id === puzzle ||
-						candidate.set === puzzle ||
-						candidate.slug?.split('/').pop() === puzzle,
+					(candidate) => candidate.path === pathname,
 				) ?? initialArchive.selectedPuzzle;
 			const year = Number(params.get('year'));
 			const month = Number(params.get('month'));
@@ -917,14 +908,12 @@ export const PuzzlesArchiveCalendar = ({
 
 	const previousMonth = moveMonth(archive.year, archive.month, -1);
 	const previousMonthUrl = archivePageUrl(
-		archive.category,
 		archive.selectedPuzzle,
 		previousMonth.year,
 		previousMonth.month,
 	);
 	const nextMonth = moveMonth(archive.year, archive.month, 1);
 	const nextMonthUrl = archivePageUrl(
-		archive.category,
 		archive.selectedPuzzle,
 		nextMonth.year,
 		nextMonth.month,
@@ -945,7 +934,6 @@ export const PuzzlesArchiveCalendar = ({
 				>
 					{archive.puzzles.map((puzzle) => {
 						const href = archivePageUrl(
-							archive.category,
 							puzzle,
 							archive.year,
 							archive.month,

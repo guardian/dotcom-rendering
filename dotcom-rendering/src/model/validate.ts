@@ -360,7 +360,8 @@ const isArchivePuzzle = (value: unknown): boolean =>
 	isString(value.title) &&
 	isString(value.puzzleType) &&
 	(value.slug === undefined || isString(value.slug)) &&
-	isString(value.set);
+	isString(value.set) &&
+	isString(value.path);
 
 const isArchiveItem = (value: unknown): boolean =>
 	isObject(value) &&

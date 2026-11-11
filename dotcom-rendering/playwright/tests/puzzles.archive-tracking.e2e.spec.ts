@@ -17,6 +17,7 @@ const easy: PuzzlesArchive['selectedPuzzle'] = {
 	puzzleType: 'SUDOKU_EASY',
 	slug: 'logic-puzzles/sudoku-easy',
 	set: 'easy',
+	path: '/puzzles-and-games/logic-puzzles/sudoku-easy/archive',
 };
 const medium: PuzzlesArchive['selectedPuzzle'] = {
 	id: 'sudoku-medium',
@@ -24,6 +25,7 @@ const medium: PuzzlesArchive['selectedPuzzle'] = {
 	puzzleType: 'SUDOKU_MEDIUM',
 	slug: 'logic-puzzles/sudoku-medium',
 	set: 'medium',
+	path: '/puzzles-and-games/logic-puzzles/sudoku-medium/archive',
 };
 const archiveFor = (puzzle = easy, month = 9): PuzzlesArchive => ({
 	category: 'logic-puzzles',
