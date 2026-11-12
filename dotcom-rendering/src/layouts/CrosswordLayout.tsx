@@ -101,22 +101,6 @@ const CrosswordGrid = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-/**
- * The crossword types with their own Puzzles & games archive page, i.e. the
- * `archiveChoices` sets in `frontend`'s `puzzles-layout.json`. Any other path
- * segment 404s.
- */
-const ARCHIVED_CROSSWORD_TYPES = new Set([
-	'quick',
-	'mini',
-	'cryptic',
-	'weekend',
-	'quick-cryptic',
-	'quiptic',
-	'prize',
-	'sunday-quick',
-]);
-
 const maxWidth = css`
 	${from.desktop} {
 		max-width: 620px;
@@ -177,14 +161,14 @@ export const CrosswordLayout = (props: Props) => {
 	/**
 	 * The series tag ("Quick") links to that crossword type's archive page,
 	 * `SeriesSectionLink` builds the href as `${guardianBaseURL}/${tag.id}`.
-	 * Types without their own archive page (e.g. "genius") would 404, so they
+	 * `frontend` sends the path only for types that have their own archive
+	 * page (a path for any other type, e.g. "genius", would 404), so the rest
 	 * link to the crosswords archive instead.
 	 */
 	const crosswordType = article.crossword?.crosswordType;
 	const seriesArchivePath =
-		crosswordType && ARCHIVED_CROSSWORD_TYPES.has(crosswordType)
-			? `${PUZZLES_CROSSWORDS_PATH}/${crosswordType}/archive`
-			: PUZZLES_CROSSWORDS_ARCHIVE_PATH;
+		article.puzzleArchivePath?.replace(/^\//, '') ??
+		PUZZLES_CROSSWORDS_ARCHIVE_PATH;
 	const titleTags =
 		isPuzzlesHubV1 && crosswordType
 			? article.tags.map((tag) =>

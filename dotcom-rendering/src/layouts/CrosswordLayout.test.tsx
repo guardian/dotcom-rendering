@@ -71,18 +71,21 @@ const renderCrosswordLayout = ({
 	serverSideABTests = {},
 	withQuickSeries = false,
 	crosswordType = 'quick',
+	puzzleArchivePath,
 }: {
 	moreFromPuzzlesAndGames?: PuzzleItem[];
 	puzzlesSupporting?: PuzzleGameSupporting;
 	serverSideABTests?: Record<string, string>;
 	withQuickSeries?: boolean;
 	crosswordType?: string;
+	puzzleArchivePath?: string;
 }) => {
 	const article = enhanceArticleType(
 		{
 			...StandardFixture,
 			moreFromPuzzlesAndGames,
 			puzzlesSupporting,
+			puzzleArchivePath,
 			...(withQuickSeries && {
 				tags: [
 					{
@@ -310,10 +313,11 @@ describe('CrosswordLayout Puzzle Page design (v1)', () => {
 		).toHaveAttribute('href', '/puzzles-and-games/crosswords/archive');
 	});
 
-	it('points the title series link at the archive filtered to the crossword type', () => {
+	it('points the title series link at the archive page frontend sends for the crossword type', () => {
 		const { container } = renderCrosswordLayout({
 			serverSideABTests: v1On,
 			withQuickSeries: true,
+			puzzleArchivePath: '/puzzles-and-games/crosswords/quick/archive',
 		});
 
 		expect(
@@ -324,7 +328,7 @@ describe('CrosswordLayout Puzzle Page design (v1)', () => {
 		);
 	});
 
-	it('points the title series link at the crosswords archive for types without their own archive page', () => {
+	it('points the title series link at the crosswords archive when frontend sends no archive page', () => {
 		const { container } = renderCrosswordLayout({
 			serverSideABTests: v1On,
 			withQuickSeries: true,
