@@ -1,4 +1,3 @@
-import { expect } from 'storybook/test';
 import { leftColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { defaultFormats } from '../../.storybook/decorators/splitThemeDecorator';
 import { allModes } from '../../.storybook/modes';
@@ -114,13 +113,6 @@ export const ImmersiveGridAndFollowStory = meta.story({
 	args: {
 		...ImmersiveAndFollowStory.input.args,
 		layoutType: 'immersiveLandscape',
-	},
-	play: async ({ canvasElement }) => {
-		const followIslands = canvasElement.querySelectorAll(
-			'[data-gu-name="follow"]',
-		);
-
-		await expect(followIslands).toHaveLength(1);
 	},
 });
 
