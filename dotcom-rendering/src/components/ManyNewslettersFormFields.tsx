@@ -45,7 +45,7 @@ const recaptchaContainerStyle = (showRecaptchaContainer: boolean) => css`
 	}
 `;
 
-export type ManyNewslettersFormFieldsProps = Omit<
+type ManyNewslettersFormFieldsProps = Omit<
 	FormProps,
 	'handleSubmitButton' | 'newsletterCount'
 >;

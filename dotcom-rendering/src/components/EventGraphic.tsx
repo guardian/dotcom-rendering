@@ -4,7 +4,7 @@ import { ElectionComponents } from './ElectionTrackers/electionComponent';
 import { ElectionTrackerWrapper } from './ElectionTrackerWrapper.island';
 import { Island } from './Island';
 
-export const ElectionComponentsJsonSchema = v.custom<
+const ElectionComponentsJsonSchema = v.custom<
 	v.InferInput<typeof ElectionComponents>
 >((input) => v.is(ElectionComponents, input));
 
@@ -21,7 +21,7 @@ export const GraphicSchema = v.object({
 
 export type Graphic = v.InferOutput<typeof GraphicSchema>;
 
-export type EventGraphicProps = {
+type EventGraphicProps = {
 	graphic: Graphic | undefined;
 	trackingLabel: 'front';
 };

@@ -148,7 +148,7 @@ const noPointerEvents = css`
  * reduced.) The following article has more detail on non-linear gradients:
  * https://css-tricks.com/easing-linear-gradients/
  */
-export const overlayMaskGradientStyles = (angle: string) => css`
+const overlayMaskGradientStyles = (angle: string) => css`
 	mask-image: linear-gradient(
 		${angle},
 		transparent 0px,

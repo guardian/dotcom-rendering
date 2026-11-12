@@ -95,7 +95,7 @@ export const KnowledgeQuizAtom = ({
 	);
 };
 
-export const Question = ({
+const Question = ({
 	id,
 	text,
 	imageUrl,
@@ -332,7 +332,7 @@ const resultHeaderStyles = css`
 	padding-bottom: ${space[2]}px;
 `;
 
-export const Result = ({
+const Result = ({
 	quizSelection,
 	resultGroups,
 	pageId,

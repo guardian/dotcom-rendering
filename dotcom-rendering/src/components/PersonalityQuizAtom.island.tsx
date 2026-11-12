@@ -393,7 +393,7 @@ const missingAnswersStyles = css`
 	color: ${sourcePalette.error[500]};
 `;
 
-export const MissingAnswers = () => (
+const MissingAnswers = () => (
 	<div css={missingAnswersStyles}>
 		You have not answered all the questions.
 	</div>
@@ -417,7 +417,7 @@ const resultDescriptionStyles = css`
 	${textSans17}
 `;
 
-export const Result = ({
+const Result = ({
 	resultBuckets,
 	pageId,
 	webTitle,

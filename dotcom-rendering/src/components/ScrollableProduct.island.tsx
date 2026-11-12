@@ -33,7 +33,7 @@ const countStyles = css`
 	}
 `;
 
-export type FixedSlideWidth = {
+type FixedSlideWidth = {
 	defaultWidth: number;
 	widthFromBreakpoints: Array<{ breakpoint: Breakpoint; width: number }>;
 };

@@ -16,7 +16,7 @@ const labsLogoSvgText = css`
 	transform: translate(-50%, -50%);
 `;
 
-export type LabsLogoProps = {
+type LabsLogoProps = {
 	size?: number;
 };
 

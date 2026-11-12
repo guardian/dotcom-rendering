@@ -15,7 +15,7 @@ import type { Loading } from './CardPicture';
  * Working on this file? Checkout out 027-pictures.md & 029-signing-image-urls.md for background information & context
  **/
 
-export type Orientation = 'portrait' | 'landscape';
+type Orientation = 'portrait' | 'landscape';
 
 // Hosted content main media images require a 'banner' style aspect ratio
 type HostedAspectRatio = '13:4';

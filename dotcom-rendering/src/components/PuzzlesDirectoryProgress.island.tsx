@@ -12,7 +12,6 @@ import type {
 import { PuzzlesDirectory } from './PuzzlesDirectory';
 
 export { puzzleTypeForCard };
-export type { PuzzleProgressItem };
 
 type Props = {
 	layout: PuzzlesLayoutType;

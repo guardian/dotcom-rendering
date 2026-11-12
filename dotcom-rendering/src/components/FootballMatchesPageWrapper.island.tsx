@@ -13,7 +13,7 @@ import { error, ok } from '../lib/result';
 import type { FootballMatchListPageKind, Region } from '../sportDataPage';
 import { FootballMatchesPage } from './FootballMatchesPage';
 
-export const getMoreDays =
+const getMoreDays =
 	(
 		ajaxUrl: string,
 		nextPage: string,

@@ -235,7 +235,7 @@ const cardImageStyles = (isFeatured: boolean) => css`
 	`}
 `;
 
-export const PuzzleCard = ({
+const PuzzleCard = ({
 	isFeatured,
 	item,
 	dataLinkName,
@@ -322,7 +322,7 @@ const tabletSeparator = [16, 10] as const;
 const isSmallCard = (variant: PuzzleItem['cardVariant'] | undefined) =>
 	variant === 'compact';
 
-export const rowsStyles = css`
+const rowsStyles = css`
 	--puzzles-gap: 16px;
 	--puzzles-group-above: ${normalSeparator[0]}px;
 	--puzzles-group-below: ${normalSeparator[1]}px;
@@ -430,10 +430,7 @@ const tabletCompactGridStyles = (count: number) => {
 	`;
 };
 
-export const rowStyles = (
-	variant: PuzzleItem['cardVariant'],
-	count: number,
-) => {
+const rowStyles = (variant: PuzzleItem['cardVariant'], count: number) => {
 	const mobileColumns = variant === 'compact' ? Math.min(count, 2) : 1;
 	const tabletColumns =
 		variant === 'compact' ? Math.min(count, 3) : Math.min(count, 2);

@@ -216,7 +216,7 @@ export interface PuzzleContext {
 	puzzleDate: string | null;
 }
 
-export interface PuzzleContextMessage {
+interface PuzzleContextMessage {
 	type: 'guardian-puzzle-context';
 	context: PuzzleContext;
 }

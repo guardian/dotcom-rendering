@@ -7,7 +7,7 @@ type LocalisedTitles = {
 	};
 };
 
-export const localisedTitles: LocalisedTitles = {
+const localisedTitles: LocalisedTitles = {
 	US: {
 		Film: 'Movies',
 		Football: 'Soccer',

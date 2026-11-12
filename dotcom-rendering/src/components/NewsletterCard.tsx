@@ -28,10 +28,8 @@ interface Props {
 export const BUTTON_ROLE = 'GroupedNewslettersList-sign-up-button';
 export const BUTTON_SELECTED_CLASS =
 	'js-GroupedNewslettersList-sign-up-button--selected';
-export const ICON_PLUS_CLASS =
-	'js-GroupedNewslettersList-sign-up-button__plus-icon';
-export const ICON_TICK_CLASS =
-	'js-GroupedNewslettersList-sign-up-button__tick-icon';
+const ICON_PLUS_CLASS = 'js-GroupedNewslettersList-sign-up-button__plus-icon';
+const ICON_TICK_CLASS = 'js-GroupedNewslettersList-sign-up-button__tick-icon';
 
 const groupItemStyle = css`
 	position: relative;

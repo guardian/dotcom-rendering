@@ -112,7 +112,7 @@ const timeStyles = css`
 	display: block;
 `;
 
-export const getUrl = ({
+const getUrl = ({
 	renderingTarget,
 	id,
 }: {

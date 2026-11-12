@@ -4,7 +4,7 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import type { RoleType } from '../types/content';
 import { defaultRoleStyles } from './Figure';
 
-export type InteractiveLayoutAtomType = {
+type InteractiveLayoutAtomType = {
 	id: string;
 	elementHtml?: string;
 	elementJs?: string;

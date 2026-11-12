@@ -4,7 +4,7 @@ import { Body } from './ExpandableAtom/Body';
 import { Container } from './ExpandableAtom/Container';
 import { Footer } from './ExpandableAtom/Footer';
 
-export type QandaAtomProps = {
+type QandaAtomProps = {
 	id: string;
 	title: string;
 	image?: string;

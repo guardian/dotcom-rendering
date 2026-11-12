@@ -22,7 +22,7 @@ import { getAuthStatus } from '../lib/identity';
 import { isGameStatus } from '../lib/puzzleCardProgress';
 import type { PuzzlesArchive, PuzzlesArchiveItem } from '../types/puzzlesPage';
 
-export type CalendarCell = {
+type CalendarCell = {
 	day: number;
 	date: string;
 	item?: PuzzlesArchiveItem;

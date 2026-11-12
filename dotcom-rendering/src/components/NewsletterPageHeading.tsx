@@ -10,7 +10,7 @@ import { Link, SvgChevronRightSingle } from '@guardian/source/react-components';
 import type { EditionId } from '../lib/edition';
 import { Section } from './Section';
 
-export interface NewslettersListProps {
+interface NewslettersListProps {
 	mmaUrl?: string;
 	newsletterCount: number;
 	editionId: EditionId;
