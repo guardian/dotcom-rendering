@@ -99,7 +99,6 @@ export const styles = {
 	`,
 	additionalFieldsContent: css`
 		padding-top: ${space[2]}px;
-		padding-bottom: 28px;
 
 		${until.tablet} {
 			padding-top: ${space[3]}px;
