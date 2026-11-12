@@ -278,6 +278,26 @@ const immersivePortraitFormat = {
 	theme: webImmersivePortraitArticle.theme,
 };
 
+const immersivePortraitModes = {
+	'light mobile': allModes['light mobile'],
+	'light mobileMedium': allModes['light mobileMedium'],
+	'light mobileLandscape': {
+		...allModes.light,
+		viewport: breakpoints.mobileLandscape,
+	},
+	'light phablet': {
+		...allModes.light,
+		viewport: breakpoints.phablet,
+	},
+	'light tablet': {
+		...allModes.light,
+		viewport: breakpoints.tablet,
+	},
+	'light desktop': allModes['light desktop'],
+	'light leftCol': allModes['light leftCol'],
+	'light wide': allModes['light wide'],
+};
+
 export const WebImmersivePortrait: Story = {
 	args: {
 		renderingTarget: 'Web',
@@ -296,25 +316,7 @@ export const WebImmersivePortrait: Story = {
 	parameters: {
 		formats: [immersivePortraitFormat],
 		chromatic: {
-			modes: {
-				'light mobile': allModes['light mobile'],
-				'light mobileMedium': allModes['light mobileMedium'],
-				'light mobileLandscape': {
-					...allModes.light,
-					viewport: breakpoints.mobileLandscape,
-				},
-				'light phablet': {
-					...allModes.light,
-					viewport: breakpoints.phablet,
-				},
-				'light tablet': {
-					...allModes.light,
-					viewport: breakpoints.tablet,
-				},
-				'light desktop': allModes['light desktop'],
-				'light leftCol': allModes['light leftCol'],
-				'light wide': allModes['light wide'],
-			},
+			modes: immersivePortraitModes,
 		},
 	},
 };
@@ -340,5 +342,8 @@ export const WebImmersivePortraitWeekendRead: Story = {
 	parameters: {
 		...WebImmersivePortrait.parameters,
 		formats: [immersiveWeekendReadFormat],
+		chromatic: {
+			modes: immersivePortraitModes,
+		},
 	},
 };

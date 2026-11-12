@@ -21,6 +21,7 @@ import {
 	ArticleSpecial,
 	isImmersiveOpinion,
 } from '../lib/articleFormat';
+import { getZIndex } from '../lib/getZIndex';
 import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
 import { Hide } from './Hide';
@@ -240,8 +241,13 @@ const immersiveLandscapeTitle = css`
 
 const immersiveGridTitleWrapperBelowDesktop = css`
 	${until.desktop} {
-		padding-left: 10px;
-		padding-right: 10px;
+		padding-inline: 10px;
+	}
+	${until.tablet} {
+		padding-inline: 20px;
+	}
+	${until.mobileLandscape} {
+		padding-inline: 10px;
 	}
 `;
 
@@ -470,17 +476,16 @@ export const SeriesSectionLink = ({
 					isGallery && galleryTitleWrapper,
 					isImmersivePortraitLayout &&
 						css`
-							${until.desktop} {
-								padding-left: 10px;
-								padding-right: 10px;
+							${between.tablet.and.desktop} {
+								padding-inline: 12px;
 							}
-							${between.tablet.and.leftCol} {
+							${between.desktop.and.leftCol} {
 								padding-left: 6px;
 							}
 							${from.desktop} {
 								bottom: 2px;
 								position: relative;
-								z-index: 1;
+								z-index: ${getZIndex('articleHeadline')};
 							}
 						`,
 				]}
@@ -565,6 +570,37 @@ export const SeriesSectionLink = ({
 								}
 								${from.wide} {
 									line-height: 32px;
+								}
+							`,
+						hasLayoutType &&
+							css`
+								position: relative;
+								left: -6px;
+								box-shadow: none;
+
+								&& {
+									padding-inline: 6px;
+
+									${isImmersiveLandscapeLayout &&
+									css`
+										${from.tablet} {
+											padding-left: 20px;
+										}
+										${from.leftCol} {
+											padding-left: 10px;
+										}
+									`}
+								}
+
+								span {
+									padding-left: 0;
+								}
+
+								${isImmersivePortraitLayout
+									? until.desktop
+									: until.tablet} {
+									left: 0;
+									margin-left: 0;
 								}
 							`,
 					].filter(Boolean)}
