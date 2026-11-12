@@ -1,10 +1,10 @@
 import type { LinkType } from '../model/extract-nav';
 
 /**
- * Shared category sub-nav for the main hub, puzzle and crossword pages.
+ * Shared category sub-nav for the main hub, archive, puzzle and crossword pages.
  * Use this list rather than frontend's page-specific `NAV.subNavSections`
  * so the hub includes the same rollout-gated categories as game pages.
- * The hub keeps the parent inline with the category links; game pages
+ * The hub keeps the parent inline with the category links; archive and game pages
  * supply it separately as `subNavSections.parent`.
  *
  * V0 shows only the parent link. V1 adds Crosswords, Word games and Logic
