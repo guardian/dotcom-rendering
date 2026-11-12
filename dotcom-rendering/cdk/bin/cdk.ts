@@ -236,7 +236,7 @@ export const InteractiveRenderingPropsCODE: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
-		provisionManagedSecurityRole: true,
+		managedInstancesProps: {},
 	},
 	// Route 100% traffic to ECS.
 	targetGroupWeights: {
@@ -298,7 +298,7 @@ export const InteractiveRenderingPropsPROD: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
-		provisionManagedSecurityRole: true,
+		managedInstancesProps: {},
 	},
 	// Route 100% traffic to EC2, 0% to ECS.
 	targetGroupWeights: {
