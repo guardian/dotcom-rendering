@@ -258,6 +258,26 @@ export const WebImmersiveMobile: Story = {
 	},
 };
 
+const allLightBreakpointModes = {
+	'light mobile': allModes['light mobile'],
+	'light mobileMedium': allModes['light mobileMedium'],
+	'light mobileLandscape': {
+		...allModes.light,
+		viewport: breakpoints.mobileLandscape,
+	},
+	'light phablet': {
+		...allModes.light,
+		viewport: breakpoints.phablet,
+	},
+	'light tablet': {
+		...allModes.light,
+		viewport: breakpoints.tablet,
+	},
+	'light desktop': allModes['light desktop'],
+	'light leftCol': allModes['light leftCol'],
+	'light wide': allModes['light wide'],
+};
+
 const webImmersiveLabsArticle = enhanceArticleType(LabsFixture, 'Web');
 
 export const WebImmersiveLabsWithPageSkin: Story = {
@@ -296,9 +316,7 @@ export const WebImmersiveLabsWithPageSkin: Story = {
 			},
 		],
 		chromatic: {
-			modes: {
-				'light wide': allModes['light wide'],
-			},
+			modes: allLightBreakpointModes,
 		},
 	},
 	play: async ({ canvasElement }) => {
@@ -350,26 +368,6 @@ const immersivePortraitFormat = {
 	theme: webImmersivePortraitArticle.theme,
 };
 
-const immersivePortraitModes = {
-	'light mobile': allModes['light mobile'],
-	'light mobileMedium': allModes['light mobileMedium'],
-	'light mobileLandscape': {
-		...allModes.light,
-		viewport: breakpoints.mobileLandscape,
-	},
-	'light phablet': {
-		...allModes.light,
-		viewport: breakpoints.phablet,
-	},
-	'light tablet': {
-		...allModes.light,
-		viewport: breakpoints.tablet,
-	},
-	'light desktop': allModes['light desktop'],
-	'light leftCol': allModes['light leftCol'],
-	'light wide': allModes['light wide'],
-};
-
 export const WebImmersivePortrait: Story = {
 	args: {
 		renderingTarget: 'Web',
@@ -388,7 +386,7 @@ export const WebImmersivePortrait: Story = {
 	parameters: {
 		formats: [immersivePortraitFormat],
 		chromatic: {
-			modes: immersivePortraitModes,
+			modes: allLightBreakpointModes,
 		},
 	},
 };
@@ -415,7 +413,7 @@ export const WebImmersivePortraitWeekendRead: Story = {
 		...WebImmersivePortrait.parameters,
 		formats: [immersiveWeekendReadFormat],
 		chromatic: {
-			modes: immersivePortraitModes,
+			modes: allLightBreakpointModes,
 		},
 	},
 };
