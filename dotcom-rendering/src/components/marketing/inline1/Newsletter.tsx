@@ -16,11 +16,13 @@ type NewsletterMessage = Extract<
 	{ type: 'Inline1NewsletterMessage' }
 >;
 
-type ValidNewsletterMessage = NewsletterMessage & {
-	newsletterListId: string;
-	newsletterName: string;
-	frequency: string;
-};
+type ValidNewsletterMessage = NewsletterMessage &
+	Required<
+		Pick<
+			NewsletterMessage,
+			'newsletterListId' | 'newsletterName' | 'frequency'
+		>
+	>;
 
 const isValidNewsletterMessage = (message: NewsletterMessage) =>
 	message.newsletterListId !== undefined &&
@@ -37,14 +39,14 @@ export const Newsletter: ReactComponent<Inline1Props> = ({
 	if (isValidNewsletterMessage(variant.message)) {
 		return (
 			<NewsletterForm
-				message={variant.message as ValidNewsletterMessage} tracking={tracking}
+				message={variant.message as ValidNewsletterMessage}
+				tracking={tracking}
 			/>
 		);
 	}
 
 	return;
 };
-
 
 const NewsletterForm: ReactComponent<{
 	message: ValidNewsletterMessage;
@@ -89,7 +91,7 @@ const NewsletterForm: ReactComponent<{
 					frequency={frequency}
 					componentId={componentId}
 					isAlreadySubscribed={isSubscribed}
-			/>
+				/>
 			</NewsletterSignupCardContainer>
 		</div>
 	);
