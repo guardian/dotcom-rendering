@@ -279,6 +279,25 @@ const allLightBreakpointModes = {
 };
 
 const webImmersiveLabsArticle = enhanceArticleType(LabsFixture, 'Web');
+const webImmersiveLabsArticleWithSupportingCaption = {
+	...webImmersiveLabsArticle.frontendData,
+	blocks: webImmersiveLabsArticle.frontendData.blocks.map((block) => ({
+		...block,
+		elements: block.elements.map((element) =>
+			element._type ===
+				'model.dotcomrendering.pageElements.ImageBlockElement' &&
+			element.role === 'supporting'
+				? {
+						...element,
+						data: {
+							...element.data,
+							caption: 'Statue of Queen Elizabeth II.',
+						},
+					}
+				: element,
+		),
+	})),
+};
 
 export const WebImmersiveLabsWithPageSkin: Story = {
 	args: {
@@ -290,9 +309,9 @@ export const WebImmersiveLabsWithPageSkin: Story = {
 			),
 		},
 		article: {
-			...webImmersiveLabsArticle.frontendData,
+			...webImmersiveLabsArticleWithSupportingCaption,
 			config: {
-				...webImmersiveLabsArticle.frontendData.config,
+				...webImmersiveLabsArticleWithSupportingCaption.config,
 				hasPageSkin: true,
 			},
 		},
