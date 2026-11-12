@@ -2,10 +2,17 @@ import { getOptionsHeaders, type SignedIn } from './identity';
 
 /**
  * The uncached `frontend` endpoint that answers "does this reader have access
- * to this premium puzzle?". Modelled on the puzzle progress endpoints: it is
- * served from `config.ajaxUrl` (which avoids the page's CDN cache) and the
- * reader's own `Authorization` header is forwarded. `frontend` relays it to
- * the Puzzles API, which owns the rule and is the authority.
+ * to this premium puzzle?", requested as
+ * `<PUZZLE_ACCESS_ENDPOINT>/<puzzleId>/<date>`. It is served from
+ * `config.ajaxUrl` and the reader's own `Authorization` header is forwarded.
+ * `frontend` relays it to the Puzzles API, which owns the rule and is the
+ * authority.
+ *
+ * The id and the date are path parameters, not a query string: query
+ * parameters are stripped by the CDN in CODE and PROD (see
+ * `PuzzlesArchiveCalendar.island.tsx`), and nothing here may depend on how the
+ * CDN treats a request. The route also has to be allowed in the router
+ * (`router.conf` in guardian/platform), like the archive data routes.
  */
 export const PUZZLE_ACCESS_ENDPOINT = '/puzzles-and-games/access';
 
@@ -144,11 +151,9 @@ export const fetchPuzzleAccess = async ({
 
 	try {
 		const url = new URL(
-			PUZZLE_ACCESS_ENDPOINT,
+			`${PUZZLE_ACCESS_ENDPOINT}/${encodeURIComponent(puzzleId)}/${encodeURIComponent(puzzleDate)}`,
 			baseUrl === '' ? window.location.origin : baseUrl,
 		);
-		url.searchParams.set('puzzleId', puzzleId);
-		url.searchParams.set('date', puzzleDate);
 
 		const response = await fetch(url, {
 			mode: 'cors',

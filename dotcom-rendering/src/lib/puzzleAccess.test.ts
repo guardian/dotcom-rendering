@@ -119,11 +119,42 @@ describe('fetchPuzzleAccess', () => {
 
 		const [url, init] = fn.mock.calls[0] as unknown as [URL, RequestInit];
 		expect(url.toString()).toBe(
-			`https://ajax.example.com${PUZZLE_ACCESS_ENDPOINT}?puzzleId=guardian-sudoku-easy-20261002&date=2026-10-02`,
+			`https://ajax.example.com${PUZZLE_ACCESS_ENDPOINT}/guardian-sudoku-easy-20261002/2026-10-02`,
 		);
 		expect(init.headers).toMatchObject({
 			Authorization: 'Bearer token',
 		});
+	});
+
+	it('sends the puzzle id and the date as path parameters, never as a query string', async () => {
+		const fn = mockFetch(() => jsonResponse({ hasAccess: true }));
+
+		await fetchPuzzleAccess({
+			baseUrl: 'https://ajax.example.com',
+			puzzleId: 'guardian-sudoku-easy-20261002',
+			puzzleDate: '2026-10-02',
+			authStatus,
+		});
+
+		const [url] = fn.mock.calls[0] as unknown as [URL];
+		expect(url.search).toBe('');
+	});
+
+	it('keeps an id with unusual characters inside a single path segment', async () => {
+		const fn = mockFetch(() => jsonResponse({ hasAccess: true }));
+
+		await fetchPuzzleAccess({
+			baseUrl: 'https://ajax.example.com',
+			puzzleId: 'a/b?c=d',
+			puzzleDate: '2026-10-02',
+			authStatus,
+		});
+
+		const [url] = fn.mock.calls[0] as unknown as [URL];
+		expect(url.pathname).toBe(
+			`${PUZZLE_ACCESS_ENDPOINT}/a%2Fb%3Fc%3Dd/2026-10-02`,
+		);
+		expect(url.search).toBe('');
 	});
 
 	it('resolves granted', async () => {
