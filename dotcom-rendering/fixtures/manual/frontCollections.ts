@@ -2,7 +2,6 @@ import type { DCRCollectionType } from '../../src/types/front';
 import { trails } from './trails';
 
 const defaultGrouped = {
-	snap: [],
 	splash: [],
 	standard: [],
 };
@@ -203,12 +202,12 @@ export const testCollectionsUs = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'flexible/special',
+		collectionType: 'flexible/general',
 		displayName: 'Around the world',
 		grouped: {
 			...defaultGrouped,
-			splash: [trails[0]],
-			standard: [trails[1]],
+			splash: [{ ...trails[0], boostLevel: 'default' }],
+			standard: [{ ...trails[1], boostLevel: 'default' }],
 		},
 	},
 	{
@@ -337,30 +336,5 @@ export const smallFlexibleGeneralCollection = [
 		},
 		collectionType: 'flexible/general',
 		containerLevel: 'Primary',
-	},
-] satisfies DCRCollectionType[];
-
-export const smallFlexibleSpecialCollection = [
-	{
-		...defaultValues,
-		collectionType: 'flexible/special',
-		containerLevel: 'Primary',
-		grouped: {
-			...defaultGrouped,
-			standard: [trails[0]],
-		},
-	},
-] satisfies DCRCollectionType[];
-
-export const largeFlexibleSpecialCollection = [
-	{
-		...defaultValues,
-		collectionType: 'flexible/special',
-		containerLevel: 'Primary',
-		grouped: {
-			...defaultGrouped,
-			snap: [trails[0]],
-			standard: [trails[1], trails[2], trails[3], trails[4]],
-		},
 	},
 ] satisfies DCRCollectionType[];

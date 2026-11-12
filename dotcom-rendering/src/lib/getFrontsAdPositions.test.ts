@@ -1,9 +1,7 @@
 import {
 	brandedTestCollections,
 	largeFlexibleGeneralCollection,
-	largeFlexibleSpecialCollection,
 	smallFlexibleGeneralCollection,
-	smallFlexibleSpecialCollection,
 	testCollectionsUk,
 	testCollectionsUs,
 	testCollectionsWithSecondaryLevel,
@@ -22,7 +20,6 @@ const testCollection: AdCandidate = {
 	containerLevel: 'Primary',
 	containerPalette: 'EventPalette',
 	grouped: {
-		snap: [],
 		splash: [],
 		standard: [],
 	},
@@ -118,10 +115,10 @@ describe('Mobile Ads', () => {
 		const testCollections: AdCandidate[] = [
 			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (0)
 			{ ...testCollection, collectionType: 'static/medium/4' },
-			{ ...testCollection, collectionType: 'flexible/special' }, // Ad position (2)
-			{ ...testCollection, collectionType: 'flexible/special' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (2)
+			{ ...testCollection, collectionType: 'flexible/general' },
 			{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (4)
-			{ ...testCollection, collectionType: 'flexible/special' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
 			{ ...testCollection, collectionType: 'static/medium/4' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (8)
@@ -152,9 +149,9 @@ describe('Mobile Ads', () => {
 		const testCollections: AdCandidate[] = [
 			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (0)
 			{ ...testCollection, collectionType: 'static/medium/4' },
-			{ ...testCollection, collectionType: 'flexible/special' }, // Ad position (2)
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (2)
 			{ ...testCollection, collectionType: 'flexible/general' },
-			{ ...testCollection, collectionType: 'flexible/special' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (5)
 			{ ...testCollection, collectionType: 'static/medium/4' },
 			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (7)
@@ -185,8 +182,8 @@ describe('Mobile Ads', () => {
 			{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (2)
 			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
-			{ ...testCollection, collectionType: 'flexible/special' }, // Ad position (5)
-			{ ...testCollection, collectionType: 'flexible/special' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (5)
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
 			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (9)
@@ -211,7 +208,7 @@ describe('Mobile Ads', () => {
 	// We used https://www.theguardian.com/uk/lifeandstyle as a blueprint
 	it('Lifeandstyle front, with more than 4 collections, with thrashers at various places', () => {
 		const testCollections: AdCandidate[] = [
-			{ ...testCollection, collectionType: 'flexible/special' }, // Ad position (0)
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (0)
 			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
 			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (3)
@@ -297,7 +294,7 @@ describe('Mobile Ads', () => {
 			}, // Ad position (6)
 			{
 				...testCollection,
-				collectionType: 'flexible/special',
+				collectionType: 'flexible/general',
 				containerLevel: 'Primary',
 			}, // Ignored - is before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (8)
@@ -441,48 +438,10 @@ describe('inserting an ad after the first collection', () => {
 			expect(adPositions).not.toContain(1);
 		});
 
-		it('inserts an ad after the first collection if it is a LARGE flexible special container', () => {
-			const adPositions = getMobileAdPositions(
-				[
-					...largeFlexibleSpecialCollection,
-					{
-						...testCollection,
-						collectionType: 'scrollable/small',
-						containerLevel: 'Secondary',
-					},
-					{
-						...testCollection,
-						collectionType: 'scrollable/medium',
-						containerLevel: 'Secondary',
-					},
-				],
-				'uk',
-			);
-
-			expect(adPositions).toContain(0);
-			expect(adPositions).not.toContain(1);
-		});
-
 		it('does NOT insert an ad after the first collection if it is a SMALL flexible general container', () => {
 			const adPositions = getMobileAdPositions(
 				[
 					...smallFlexibleGeneralCollection,
-					{
-						...testCollection,
-						collectionType: 'scrollable/small',
-						containerLevel: 'Secondary',
-					},
-				],
-				'uk',
-			);
-
-			expect(adPositions).not.toContain(0);
-		});
-
-		it('does NOT insert an ad after the first collection if it is a SMALL flexible special container', () => {
-			const adPositions = getMobileAdPositions(
-				[
-					...smallFlexibleSpecialCollection,
 					{
 						...testCollection,
 						collectionType: 'scrollable/small',
@@ -519,53 +478,10 @@ describe('inserting an ad after the first collection', () => {
 			expect(adPositions).not.toContain(2);
 		});
 
-		it('inserts an ad before the second collection if it is preceded by a LARGE flexible special container', () => {
-			const adPositions = getDesktopAdPositions(
-				[
-					...largeFlexibleSpecialCollection,
-					{
-						...testCollection,
-						collectionType: 'scrollable/small',
-						containerLevel: 'Secondary',
-					},
-					{
-						...testCollection,
-						collectionType: 'scrollable/medium',
-						containerLevel: 'Secondary',
-					},
-				],
-				'uk',
-			);
-
-			expect(adPositions).toContain(1);
-			expect(adPositions).not.toContain(2);
-		});
-
 		it('does NOT insert an ad before the second collection if it is preceded by a SMALL flexible general container', () => {
 			const adPositions = getDesktopAdPositions(
 				[
 					...smallFlexibleGeneralCollection,
-					{
-						...testCollection,
-						collectionType: 'scrollable/small',
-						containerLevel: 'Secondary',
-					},
-					{
-						...testCollection,
-						collectionType: 'scrollable/medium',
-						containerLevel: 'Secondary',
-					},
-				],
-				'uk',
-			);
-
-			expect(adPositions).not.toContain(1);
-		});
-
-		it('does NOT insert an ad before the second collection if it is preceded by a SMALL flexible special container', () => {
-			const adPositions = getDesktopAdPositions(
-				[
-					...smallFlexibleSpecialCollection,
 					{
 						...testCollection,
 						collectionType: 'scrollable/small',
