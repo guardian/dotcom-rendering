@@ -28,7 +28,7 @@ type WithJsonProps<T> = T & { json?: string };
 type Props = WithJsonProps<React.ComponentProps<typeof Puzzles>>;
 const meta: Meta<Props> = {
 	component: Puzzles,
-	title: 'Components/marketing/Puzzles',
+	title: 'Components/marketing/inline1/Puzzles',
 	args: props,
 };
 
