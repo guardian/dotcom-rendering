@@ -11,6 +11,7 @@ import type {
 	ArticleCountType,
 	BannerChannel,
 	ConfigurableDesign,
+	HexColour,
 	SeparateArticleCount,
 	TickerSettings,
 } from '@guardian/support-dotcom-components/dist/shared/types';
@@ -60,6 +61,21 @@ export interface BannerTextContent {
 	mainContent: BannerRenderedContent;
 	mobileContent: BannerRenderedContent;
 }
+
+export type NewsletterBannerDesign = Omit<ConfigurableDesign, 'colours'> & {
+	colours: ConfigurableDesign['colours'] & {
+		newsletterBanner: {
+			divider: HexColour;
+			actionColor: HexColour;
+			errorColor: HexColour;
+			privacyTextColor: HexColour;
+			toggleTextColor: HexColour;
+			successTextColor: HexColour;
+			browseButtonTextColor: HexColour;
+			browseButtonBorderColor: HexColour;
+		};
+	};
+};
 
 export interface BannerRenderProps {
 	onCtaClick: () => void;

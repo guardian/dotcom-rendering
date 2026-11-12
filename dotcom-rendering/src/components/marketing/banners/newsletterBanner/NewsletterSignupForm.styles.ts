@@ -20,6 +20,11 @@ export const styles = {
 	collapsedForm: css`
 		row-gap: 0;
 	`,
+	validationError: (errorColor: string): SerializedStyles => css`
+		[role='alert'] {
+			color: ${errorColor};
+		}
+	`,
 	bannerSignedInLayout: css`
 		grid-template-columns: minmax(0, 1fr);
 		grid-template-areas: 'submit';
@@ -53,7 +58,6 @@ export const styles = {
 		min-width: 0;
 
 		label div {
-			color: ${palette('--newsletter-signup-input-text')};
 			font-size: 14px;
 		}
 
@@ -118,13 +122,25 @@ export const styles = {
 		padding: ${space[2]}px;
 		border: 1px solid ${palette('--card-border-supporting')};
 		border-radius: 4px;
-		label {
-			color: ${palette('--newsletter-signup-toggle-text')};
-		}
+	`,
+	toggleText: (textColor: string): SerializedStyles => css`
+		color: ${textColor};
 	`,
 	recaptchaContainer: css`
 		.grecaptcha-badge {
 			visibility: hidden;
+		}
+	`,
+	privacyText: (textColor: string): SerializedStyles => css`
+		&,
+		a,
+		a:link,
+		a:visited,
+		a:hover,
+		a:active,
+		a:focus,
+		strong {
+			color: ${textColor};
 		}
 	`,
 	privacyContainer: (

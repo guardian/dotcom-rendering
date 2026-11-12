@@ -3,6 +3,7 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/0a2439b701586a7a2cc60dce10b4d96cf7a828db/packages/modules/src/modules/banners/utils/storybook.ts
  */
+import { neutral } from '@guardian/source/foundations';
 import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type {
 	BannerProps,
@@ -10,6 +11,7 @@ import type {
 	HexColour,
 	Tracking,
 } from '@guardian/support-dotcom-components/dist/shared/types';
+import type { NewsletterBannerDesign } from '../common/types';
 
 export const tracking: Tracking = {
 	ophanPageId: 'kbluzw2csbf83eabedel',
@@ -139,7 +141,7 @@ export const design: ConfigurableDesign = {
 	},
 };
 
-export const newsletterDesign: ConfigurableDesign = {
+export const newsletterDesign: NewsletterBannerDesign = {
 	colours: {
 		basic: {
 			background: { r: 'F3', g: 'F7', b: 'FF', kind: 'hex' },
@@ -147,6 +149,16 @@ export const newsletterDesign: ConfigurableDesign = {
 			headerText: { r: '12', g: '12', b: '12', kind: 'hex' },
 			articleCountText: { r: '00', g: '00', b: '00', kind: 'hex' },
 			logo: { r: '00', g: '00', b: '00', kind: 'hex' },
+		},
+		newsletterBanner: {
+			divider: stringToHexColour('DCDCDC'),
+			actionColor: stringToHexColour('052962'),
+			errorColor: stringToHexColour('C70000'),
+			privacyTextColor: stringToHexColour(neutral[46].slice(1)),
+			toggleTextColor: stringToHexColour(neutral[20].slice(1)),
+			successTextColor: stringToHexColour(neutral[20].slice(1)),
+			browseButtonTextColor: stringToHexColour('052962'),
+			browseButtonBorderColor: stringToHexColour('052962'),
 		},
 		highlightedText: {
 			text: { r: '33', g: '33', b: '33', kind: 'hex' },
@@ -178,6 +190,61 @@ export const newsletterDesign: ConfigurableDesign = {
 			headlineColour: { r: '33', g: '33', b: '33', kind: 'hex' },
 			totalColour: { r: '33', g: '33', b: '33', kind: 'hex' },
 			goalColour: { r: '33', g: '33', b: '33', kind: 'hex' },
+		},
+	},
+};
+
+export const newsletterDesignDark: NewsletterBannerDesign = {
+	...newsletterDesign,
+	colours: {
+		...newsletterDesign.colours,
+		newsletterBanner: {
+			...newsletterDesign.colours.newsletterBanner,
+			actionColor: stringToHexColour('c4aa81'),
+			errorColor: stringToHexColour('FF9081'),
+			privacyTextColor: stringToHexColour(neutral[73].slice(1)),
+			toggleTextColor: stringToHexColour(neutral[86].slice(1)),
+			successTextColor: stringToHexColour(neutral[86].slice(1)),
+			browseButtonTextColor: stringToHexColour(neutral[86].slice(1)),
+			browseButtonBorderColor: stringToHexColour(neutral[86].slice(1)),
+		},
+		basic: {
+			background: stringToHexColour('1A1A1A'),
+			bodyText: stringToHexColour('E8E8E8'),
+			headerText: stringToHexColour('FFFFFF'),
+			articleCountText: stringToHexColour('FFFFFF'),
+			logo: stringToHexColour('FFFFFF'),
+		},
+		highlightedText: {
+			text: stringToHexColour('FFFFFF'),
+			highlight: stringToHexColour('FFE500'),
+		},
+		primaryCta: {
+			default: {
+				text: stringToHexColour('1A1A1A'),
+				background: stringToHexColour('C4A484'),
+			},
+		},
+		secondaryCta: {
+			default: {
+				text: stringToHexColour('FFFFFF'),
+				background: stringToHexColour('333333'),
+				border: stringToHexColour('FFFFFF'),
+			},
+		},
+		closeButton: {
+			default: {
+				text: stringToHexColour('FFFFFF'),
+				background: stringToHexColour('333333'),
+				border: stringToHexColour('333333'),
+			},
+		},
+		ticker: {
+			filledProgress: stringToHexColour('FFE500'),
+			progressBarBackground: stringToHexColour('333333'),
+			headlineColour: stringToHexColour('FFE500'),
+			totalColour: stringToHexColour('FFFFFF'),
+			goalColour: stringToHexColour('FFE500'),
 		},
 	},
 };
