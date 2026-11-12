@@ -93,12 +93,12 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "webx-monitor-group-contamination-v2",
+		name: "webx-monitor-group-contamination-v3",
 		description:
-			"V2 of test to measure the impact of contamination between groups in ab tests",
+			"V3 of test to measure the impact of contamination between groups in ab tests",
 		owners: ["commercial.dev@theguardian.com"],
 		status: "ON",
-		expirationDate: "2026-11-11",
+		expirationDate: "2026-12-01",
 		type: "client",
 		audienceSize: 10 / 100,
 		audienceSpace: "A",
