@@ -221,7 +221,7 @@ const overlayNote = (type: ArticleCountOptOutType): SerializedStyles => css`
 	}
 `;
 
-export interface ArticleCountOptOutOverlayProps {
+interface ArticleCountOptOutOverlayProps {
 	type: ArticleCountOptOutType;
 	hasOptedOut: boolean;
 	onOptOut: () => void;

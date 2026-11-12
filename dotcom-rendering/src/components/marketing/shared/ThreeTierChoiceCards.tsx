@@ -27,7 +27,7 @@ import { useIsInView } from '../../../lib/useIsInView';
 import type { ChoiceCardDesignSettings } from '../banners/designableBanner/settings';
 import { contentTransitionEasing } from './transitions';
 
-export type ChoiceCard = _ChoiceCard & { defaultExpanded?: boolean };
+type ChoiceCard = _ChoiceCard & { defaultExpanded?: boolean };
 
 const choiceCardTransition = `0.2s ${contentTransitionEasing}`;
 

@@ -18,12 +18,12 @@ interface EpicView {
 	date: number;
 	testId: string;
 }
-export type EpicViewLog = EpicView[];
+type EpicViewLog = EpicView[];
 
 /**
  * Return the entire viewLog.
  */
-export const getEpicViewLog = (): EpicViewLog | undefined => {
+const getEpicViewLog = (): EpicViewLog | undefined => {
 	const item = storage.local.get(viewLogKey);
 	if (Array.isArray(item)) {
 		return item as EpicView[];

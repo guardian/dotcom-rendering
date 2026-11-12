@@ -127,7 +127,7 @@ export interface FEMediaAtom {
 	// channelId?: string; // currently unused
 }
 
-export type FEMultimediaSlideshowSlide = {
+type FEMultimediaSlideshowSlide = {
 	content:
 		| { type: 'Image'; item: { image: { allImages: Image[] } } }
 		| { type: 'Video'; item: { mediaAtom: FEMediaAtom } };

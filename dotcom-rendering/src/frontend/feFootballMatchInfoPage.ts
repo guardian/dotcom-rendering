@@ -83,7 +83,7 @@ export type FEFootballMatchInfoPage = FEFootballDataPage & {
 	matchHeaderUrl: string;
 };
 
-export const feFootballTeamSummarySchema = object({
+const feFootballTeamSummarySchema = object({
 	id: string(),
 	name: string(),
 	possession: number(),

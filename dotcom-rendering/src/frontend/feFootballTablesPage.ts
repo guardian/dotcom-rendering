@@ -37,11 +37,6 @@ export type FETeamResult = {
 	foe: FETeamScore;
 };
 
-export type FERecentResultsPerTeam = {
-	teamId: string;
-	results: FETeamResult[];
-};
-
 export type FELeagueTableEntrySummary = {
 	stageNumber: string;
 	round: FERound;

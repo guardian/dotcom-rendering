@@ -108,7 +108,6 @@ export type FEFixture = InferOutput<typeof fixtureSchema>;
 export type FEMatchDay = InferOutput<typeof matchDaySchema>;
 export type FEResult = InferOutput<typeof resultSchema>;
 export type FEFootballMatch = InferOutput<typeof feFootballMatchSchema>;
-export type FEMatchDayTeam = InferOutput<typeof matchDayTeamSchema>;
 
 export type FECompetitionMatch = {
 	competitionSummary: FECompetitionSummary;

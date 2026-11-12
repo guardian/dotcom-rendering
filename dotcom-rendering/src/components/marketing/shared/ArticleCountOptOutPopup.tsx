@@ -24,7 +24,7 @@ const OPHAN_COMPONENT_ID_OPT_OUT_OPEN = 'article-count-opt-out-open';
 const OPHAN_COMPONENT_ID_OPT_OUT_CLOSE = 'article-count-opt-out-close';
 const OPHAN_COMPONENT_ID_OPT_OUT_CONFIRM = 'article-count-opt-out-confirm';
 
-export const ophanComponentEventOptOutView = (
+const ophanComponentEventOptOutView = (
 	componentType: TComponentType,
 ): ComponentEvent => ({
 	component: {
@@ -35,7 +35,7 @@ export const ophanComponentEventOptOutView = (
 	value: `article-count-opt-out-popup-${componentType}`,
 });
 
-export const ophanComponentEventOptOutOpen = (
+const ophanComponentEventOptOutOpen = (
 	componentType: TComponentType,
 ): ComponentEvent => ({
 	component: {
@@ -46,7 +46,7 @@ export const ophanComponentEventOptOutOpen = (
 	value: `article-count-opt-out-popup-${componentType}`,
 });
 
-export const ophanComponentEventOptOutClose = (
+const ophanComponentEventOptOutClose = (
 	componentType: TComponentType,
 ): ComponentEvent => ({
 	component: {
@@ -57,7 +57,7 @@ export const ophanComponentEventOptOutClose = (
 	value: `article-count-opt-out-popup-${componentType}`,
 });
 
-export const ophanComponentEventOptOutConfirm = (
+const ophanComponentEventOptOutConfirm = (
 	componentType: TComponentType,
 ): ComponentEvent => ({
 	component: {
@@ -144,7 +144,7 @@ export interface OphanTracking {
 	submitComponentEvent: (componentEvent: ComponentEvent) => void;
 }
 
-export interface ArticleCountOptOutProps {
+interface ArticleCountOptOutProps {
 	numArticles: number;
 	nextWord: string | null;
 	type: ArticleCountOptOutType;

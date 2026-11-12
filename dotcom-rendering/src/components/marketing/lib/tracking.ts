@@ -8,10 +8,6 @@ import type { ComponentEvent, TAction } from '@guardian/ophan-tracker-js';
 import { addRegionIdToSupportUrl } from '@guardian/support-dotcom-components';
 import type {
 	AbandonedBasket,
-	BannerTest,
-	BannerVariant,
-	EpicTest,
-	EpicVariant,
 	TargetingAbTest,
 	Tracking,
 } from '@guardian/support-dotcom-components/dist/shared/types';
@@ -166,7 +162,7 @@ const addAbandonedBasketContributionParams = (
 	return `${baseUrl}/${region}/contribute/checkout?selected-amount=${amount}&selected-contribution-type=${billingPeriod}`;
 };
 
-export const addAbandonedBasketParamsToUrl = (
+const addAbandonedBasketParamsToUrl = (
 	baseUrl: string,
 	abandonedBasket: AbandonedBasket,
 ): string => {
@@ -264,7 +260,7 @@ type ProfileLinkParams = {
 
 type TrackingParam = keyof Tracking;
 
-export const addProfileTrackingParams = (
+const addProfileTrackingParams = (
 	baseUrl: string,
 	params: Tracking,
 ): string => {
@@ -305,13 +301,13 @@ export const addProfileTrackingParams = (
 	)}`;
 };
 
-export const addChoiceCardsOneTimeParams = (url: string): string => {
+const addChoiceCardsOneTimeParams = (url: string): string => {
 	const newParams = `oneTime`;
 	const alreadyHasQueryString = url.includes('?');
 	return `${url}${alreadyHasQueryString ? '&' : '?'}${newParams}`;
 };
 
-export const addChoiceCardsProductParams = (
+const addChoiceCardsProductParams = (
 	url: string,
 	product: string,
 	ratePlan: string,
@@ -407,23 +403,6 @@ export const getChoiceCardUrl = (choiceCard?: ChoiceCard): string => {
 };
 
 // SHARED TRACKING
-const campaignPrefix = 'gdnwb_copts_memco';
-
-export const buildCampaignCode = (
-	test: EpicTest,
-	variant: EpicVariant,
-): string =>
-	`${campaignPrefix}_${test.campaignId ?? test.name}_${variant.name}`;
-
-export const buildBannerCampaignCode = (
-	test: BannerTest,
-	variant: BannerVariant,
-): string => `${test.name}_${variant.name}`;
-
-export const buildAmpEpicCampaignCode = (
-	testName: string,
-	variantName: string,
-): string => `AMP__${testName}__${variantName}`;
 
 const createEventFromTracking = (action: TAction) => {
 	return (tracking: Tracking, componentId: string): ComponentEvent => {
@@ -465,10 +444,7 @@ const createEventFromTracking = (action: TAction) => {
 	};
 };
 
-export const addLabelToTracking = (
-	tracking: Tracking,
-	label: string,
-): Tracking => {
+const addLabelToTracking = (tracking: Tracking, label: string): Tracking => {
 	if (tracking.labels) {
 		return {
 			...tracking,

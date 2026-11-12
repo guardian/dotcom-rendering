@@ -1,12 +1,4 @@
-import {
-	array,
-	type InferOutput,
-	literal,
-	number,
-	object,
-	string,
-	union,
-} from 'valibot';
+import { array, literal, number, object, string, union } from 'valibot';
 import { feFootballMatchSchema } from './feFootballMatchListPage';
 
 const EditionIdSchema = union([
@@ -41,5 +33,3 @@ export const feFootballMatchDaySchema = object({
 	editionId: EditionIdSchema,
 	guardianBaseURL: string(),
 });
-
-export type FEFootballMatchDay = InferOutput<typeof feFootballMatchDaySchema>;
