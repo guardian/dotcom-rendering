@@ -425,8 +425,13 @@ describe('PuzzlePageLayout', () => {
 				headerSlot?.closest('[data-print-layout="hide"]')
 					?.parentElement,
 			).toBe(container);
+			const merchandisingSlot = container.querySelector(
+				'#dfp-ad--merchandising-high',
+			);
+			expect(merchandisingSlot).toBeInTheDocument();
+			expect(merchandisingSlot).not.toHaveAttribute('data-label-show');
 			expect(
-				container.querySelector('#dfp-ad--merchandising-high'),
+				merchandisingSlot?.closest('[data-print-layout="hide"]'),
 			).toBeInTheDocument();
 			const game = container.querySelector(
 				'[data-layout="PuzzlePageLayout"] article',

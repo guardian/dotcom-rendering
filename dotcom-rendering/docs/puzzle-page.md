@@ -49,8 +49,8 @@ destination and authentication behaviour are unchanged.
 Film reveal and On the ball require both `puzzles-new-hub-v1` and
 `puzzles-new-hub-v2` for hub cards, game pages and trivia archives. V1-only requests
 omit the cards and receive 404 for those pages; existing V1 puzzles are unchanged.
-Local development retains its gate bypass. Full-hub stories, including the sponsored
-hub, explicitly enable both variants so Chromatic builds show all puzzle subnav
+Local development retains its gate bypass. Full-hub and archive stories explicitly
+enable both variants so Chromatic builds show all puzzle subnav
 categories without relying on that bypass.
 
 ## Sponsorship
