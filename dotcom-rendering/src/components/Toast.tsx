@@ -3,7 +3,7 @@ import { space } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { EditorialButton } from './Button/EditorialButton';
 
-export type ToastProps = {
+type ToastProps = {
 	count: number;
 	onClick: () => void;
 };

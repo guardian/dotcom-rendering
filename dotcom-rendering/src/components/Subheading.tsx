@@ -124,7 +124,7 @@ const fontStyles = ({
 	}
 `;
 
-export const paddingStyles = (topPadding: boolean) => css`
+const paddingStyles = (topPadding: boolean) => css`
 	padding-top: ${topPadding ? space[2] : 0}px;
 	padding-bottom: ${space[0]}px;
 	${from.tablet} {

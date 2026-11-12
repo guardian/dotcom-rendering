@@ -75,7 +75,7 @@ const myAccountLinkStyles = css`
 	z-index: ${getZIndex('mastheadMyAccountDropdown')};
 `;
 
-export const buildIdentityLinks = (
+const buildIdentityLinks = (
 	mmaUrl: string,
 	idUrl: string,
 	userId: string,
@@ -182,7 +182,7 @@ const SignIn = ({
 	</a>
 );
 
-export const dropDownOverrides = (showSignInTextOnMobile: boolean) => css`
+const dropDownOverrides = (showSignInTextOnMobile: boolean) => css`
 	color: ${themePalette('--masthead-top-bar-link-text')};
 	padding-right: 0;
 	padding-bottom: 0;

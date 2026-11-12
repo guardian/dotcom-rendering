@@ -66,7 +66,7 @@ type Props = CricketMatchHeaderProps & {
 	refreshInterval: number;
 };
 
-export const getUrl = (
+const getUrl = (
 	baseUrl: URL | undefined,
 	renderingTarget: RenderingTarget,
 ): URL | undefined => {

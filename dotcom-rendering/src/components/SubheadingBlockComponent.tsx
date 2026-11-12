@@ -10,7 +10,7 @@ type Props = { html: string; format: ArticleFormat };
 
 const headingLevels = { H2: 2, H3: 3, H4: 4 } as const;
 
-export const buildElementTree =
+const buildElementTree =
 	(format: ArticleFormat) =>
 	(node: Node): ReactNode => {
 		if (isElement(node)) {

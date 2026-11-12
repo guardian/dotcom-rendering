@@ -157,7 +157,7 @@ const videoViewportStyles = (
 /**
  * Dispatches a custom play audio event so that other videos listening for this event will be muted.
  */
-export const dispatchCustomPlayAudioEvent = (uniqueId: string) => {
+const dispatchCustomPlayAudioEvent = (uniqueId: string) => {
 	document.dispatchEvent(
 		new CustomEvent(customSelfHostedVideoPlayAudioEventName, {
 			detail: { uniqueId },

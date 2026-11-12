@@ -80,7 +80,7 @@ const defaultTheme: WaveFormTheme = {
 	wave: 'grey',
 };
 
-export type WaveFormProps = {
+type WaveFormProps = {
 	/**
 	 * The same seed will generate the same waveform. For example, passing the url
 	 * as the seed will ensure the waveform is the same for the same audio file.

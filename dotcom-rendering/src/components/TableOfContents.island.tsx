@@ -53,7 +53,7 @@ interface Props {
  * that the bar grows with its text when a reader increases their browser's
  * text size, rather than clipping it.
  */
-export const FILTER_TOC_STICKY_HEIGHT = 48;
+const FILTER_TOC_STICKY_HEIGHT = 48;
 
 /**
  * Where a section heading comes to rest when a reader jumps to it: clear of

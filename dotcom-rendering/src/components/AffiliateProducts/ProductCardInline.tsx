@@ -20,7 +20,7 @@ import type {
 import { ProductCardButtons } from './ProductCardButtons';
 import { ProductCardImage } from './ProductCardImage';
 
-export type InlineProductCardProps = {
+type InlineProductCardProps = {
 	format: ArticleFormat;
 	elementId: string;
 	brandName: string;

@@ -163,7 +163,7 @@ const ElectionElement = v.variant('kind', [
 	),
 ]);
 
-export const Layout = v.variant('kind', [
+const Layout = v.variant('kind', [
 	v.object(
 		{
 			kind: v.literal('sideBySide'),

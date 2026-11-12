@@ -24,7 +24,7 @@ const showAllButtonStyles = css`
 	margin-top: ${space[6]}px;
 `;
 
-export const theme: Partial<ThemeButton> = {
+const theme: Partial<ThemeButton> = {
 	textTertiary: palette('--product-button-primary-background'),
 	borderTertiary: palette('--product-button-primary-background'),
 };

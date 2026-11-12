@@ -108,7 +108,7 @@ export const formatPrice = (price: number): string =>
 	priceFormatter.format(price).replace(/\.00$/, '');
 
 const priceRegex = /([£$])(\d+,?\d*(\.\d{2})?)/;
-export const extractPriceFromLabel = (
+const extractPriceFromLabel = (
 	label: string,
 ):
 	| {

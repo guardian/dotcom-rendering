@@ -44,7 +44,7 @@ const tabIcons = css`
 	align-items: center;
 `;
 
-export interface CalloutBlockProps {
+interface CalloutBlockProps {
 	prompt: string;
 	heading: string;
 	description: string;

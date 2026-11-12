@@ -39,9 +39,9 @@ type AuthProviderButtonProps = {
 };
 
 // The gap between elements in the main section of MinimalLayout.
-export const SECTION_GAP = remSpace[3]; // 12px
+const SECTION_GAP = remSpace[3]; // 12px
 
-export const mainSectionStyles = (signInGateVersion: AuxiaGateVersion) => css`
+const mainSectionStyles = (signInGateVersion: AuxiaGateVersion) => css`
 	display: flex;
 	flex-direction: column;
 	gap: ${SECTION_GAP};
@@ -65,7 +65,7 @@ const sharedButtonStyles = (width: ButtonWidth = 'full') => css`
 	}
 `;
 
-export const secondaryButtonStyles = (width: ButtonWidth = 'full') => css`
+const secondaryButtonStyles = (width: ButtonWidth = 'full') => css`
 	${sharedButtonStyles(width)}
 	background-color: ${palette.neutral[100]};
 	border-color: ${palette.brand[400]};

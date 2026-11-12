@@ -4,7 +4,7 @@ import { from, space } from '@guardian/source/foundations';
 import type { CardMediaType } from '../../../types/layout';
 import type { MediaPositionType } from './MediaWrapper';
 
-export type GapSize = 'none' | 'tiny' | 'small' | 'medium' | 'large';
+type GapSize = 'none' | 'tiny' | 'small' | 'medium' | 'large';
 
 export type GapSizes = { row: GapSize; column: GapSize };
 

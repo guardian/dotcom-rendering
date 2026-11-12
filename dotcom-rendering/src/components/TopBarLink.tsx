@@ -8,7 +8,7 @@ type Props = {
 	children: React.ReactNode;
 };
 
-export const topBarLinkStyles = css`
+const topBarLinkStyles = css`
 	display: flex;
 	align-items: center;
 	${textSansBold17};

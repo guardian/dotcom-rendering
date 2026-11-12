@@ -44,7 +44,7 @@ const minimisePaddingStyle = css`
 	}
 `;
 
-export const theme: Partial<ThemeButton> = {
+const theme: Partial<ThemeButton> = {
 	backgroundPrimary: palette('--product-button-primary-background'),
 	backgroundPrimaryHover: palette(
 		'--product-button-primary-background-hover',

@@ -3,20 +3,20 @@
  * This file was migrated from:
  * https://github.com/guardian/gateway/blob/b980d008f91bd1abb108e50de9cdd1c364f37f4d/src/shared/model/QueryParams.ts
  */
-export type Stringifiable = string | boolean | number | null | undefined;
-export type StringifiableRecord = Record<
+type Stringifiable = string | boolean | number | null | undefined;
+type StringifiableRecord = Record<
 	string,
 	Stringifiable | readonly Stringifiable[]
 >;
 
-export interface TrackingQueryParams {
+interface TrackingQueryParams {
 	ref?: string;
 	refViewId?: string;
 	componentEventParams?: string;
 	listName?: string;
 }
 
-export type ValidClientId =
+type ValidClientId =
 	| 'members'
 	| 'recurringContributions'
 	| 'jobs'

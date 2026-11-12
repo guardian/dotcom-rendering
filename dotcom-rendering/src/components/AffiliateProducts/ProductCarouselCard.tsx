@@ -19,7 +19,7 @@ import {
 } from './livePriceUtils';
 import { ProductCardImage } from './ProductCardImage';
 
-export type ProductCarouselCardProps = {
+type ProductCarouselCardProps = {
 	product: SummaryProduct;
 	format: ArticleFormat;
 };

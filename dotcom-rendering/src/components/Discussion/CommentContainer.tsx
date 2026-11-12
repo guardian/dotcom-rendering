@@ -70,12 +70,6 @@ const removeMargin = css`
 	margin: 0px;
 `;
 
-export const avatar = (avatarSize: number) => css`
-	border-radius: ${avatarSize + 10}px;
-	width: ${avatarSize}px;
-	height: ${avatarSize}px;
-`;
-
 export const CommentContainer = ({
 	comment,
 	isClosedForComments,
