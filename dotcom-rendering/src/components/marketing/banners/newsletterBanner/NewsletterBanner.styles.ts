@@ -92,6 +92,7 @@ export const styles = {
 		max-height: 65vh;
 		max-height: 65svh;
 		overflow-y: auto;
+		overflow-x: hidden;
 
 		* {
 			box-sizing: border-box;
