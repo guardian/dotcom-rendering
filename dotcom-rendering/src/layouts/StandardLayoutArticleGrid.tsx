@@ -1025,6 +1025,7 @@ export const StandardLayoutArticleGrid = ({
 						shouldHideAds={article.shouldHideAds}
 						articleArrangement={layoutType}
 						idApiUrl={article.config.idApiUrl}
+						hasPageSkin={hasPageSkin}
 					/>
 					<MatchInfoContainer
 						isMatchReport={isFootballMatchReport}
