@@ -267,8 +267,7 @@ export const postUsernameResponseSchema = variant('status', [
 const orderBy = ['newest', 'oldest', 'recommendations'] as const;
 export type OrderByType = (typeof orderBy)[number];
 
-const threads = ['collapsed', 'expanded', 'unthreaded'] as const;
-export type ThreadsType = (typeof threads)[number];
+export type ThreadsType = 'collapsed' | 'expanded' | 'unthreaded';
 
 const pageSize = [25, 50, 100] as const;
 export type PageSizeType = (typeof pageSize)[number];

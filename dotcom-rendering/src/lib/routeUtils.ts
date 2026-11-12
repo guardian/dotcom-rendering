@@ -33,96 +33,93 @@ type ExtractRouteParams<T> = string extends T
  * These are all the accepted url routes for this application
  * If you want to add a new route, it will need to be added below
  */
-const ValidRoutePathsArray = [
-	'/404',
-	'/change-email/:token',
-	'/change-email/complete',
-	'/change-email/error',
-	'/agree/GRS',
-	'/email/:template',
-	'/consent-token/:token/accept',
-	'/consent-token/error',
-	'/consent-token/resend',
-	'/consent-token/email-sent',
-	'/delete',
-	'/delete/complete',
-	'/delete/email-sent',
-	'/delete-blocked',
-	'/delete-email-validation',
-	'/delete-set-password',
-	'/error',
-	'/maintenance',
-	'/oauth/authorization-code/:callbackParam',
-	'/oauth/authorization-code/application-callback',
-	'/oauth/authorization-code/callback',
-	'/oauth/authorization-code/delete-callback',
-	'/oauth/authorization-code/interaction-code-callback',
-	'/reauthenticate',
-	'/reauthenticate/password',
-	'/register',
-	'/register/code',
-	'/register/code/expired',
-	'/register/code/resend',
-	'/register/email',
-	'https://profile.theguardian.com/register/email',
-	'/register/email-sent',
-	'/register/email-sent/resend',
-	'/reset-password',
-	'/reset-password/:token',
-	'/reset-password/code',
-	'/reset-password/code/expired',
-	'/reset-password/code/resend',
-	'/reset-password/complete',
-	'/reset-password/email-sent',
-	'/reset-password/expired',
-	'/reset-password/password',
-	'/reset-password/resend',
-	'/set-password',
-	'/set-password/:token',
-	'/set-password/complete',
-	'/set-password/email-sent',
-	'/set-password/expired',
-	'/set-password/password',
-	'/set-password/resend',
-	'/signed-in-as',
-	'/signin',
-	'/signin/code',
-	'/signin/code/resend',
-	'/signin/code/expired',
-	'/signin/password',
-	'/signin/refresh',
-	'/signin/:social',
-	'https://profile.theguardian.com/signin',
-	'https://profile.theguardian.com/signin/:social',
-	'/signin/email-sent',
-	'/signin/email-sent/resend',
-	'/signout',
-	'/signout/all',
-	'/unsubscribe/:emailType/:data/:token',
-	'/unsubscribe/success',
-	'/unsubscribe/error',
-	'/unsubscribe-all/:data/:token',
-	'/subscribe/:emailType/:data/:token',
-	'/subscribe/success',
-	'/subscribe/error',
-	'/verify-email',
-	'/welcome',
-	'/welcome/:token',
-	'/welcome/:app/complete',
-	'/welcome/complete',
-	'/welcome/email-sent',
-	'/welcome/existing',
-	'/welcome/expired',
-	'/welcome/resend',
-	'/welcome/google',
-	'/welcome/apple',
-	'/welcome/social',
-	'/welcome/review',
-	'/welcome/newsletters',
-	'/welcome/password',
-] as const;
-
-type RoutePaths = (typeof ValidRoutePathsArray)[number];
+type RoutePaths =
+	| '/404'
+	| '/change-email/:token'
+	| '/change-email/complete'
+	| '/change-email/error'
+	| '/agree/GRS'
+	| '/email/:template'
+	| '/consent-token/:token/accept'
+	| '/consent-token/error'
+	| '/consent-token/resend'
+	| '/consent-token/email-sent'
+	| '/delete'
+	| '/delete/complete'
+	| '/delete/email-sent'
+	| '/delete-blocked'
+	| '/delete-email-validation'
+	| '/delete-set-password'
+	| '/error'
+	| '/maintenance'
+	| '/oauth/authorization-code/:callbackParam'
+	| '/oauth/authorization-code/application-callback'
+	| '/oauth/authorization-code/callback'
+	| '/oauth/authorization-code/delete-callback'
+	| '/oauth/authorization-code/interaction-code-callback'
+	| '/reauthenticate'
+	| '/reauthenticate/password'
+	| '/register'
+	| '/register/code'
+	| '/register/code/expired'
+	| '/register/code/resend'
+	| '/register/email'
+	| 'https://profile.theguardian.com/register/email'
+	| '/register/email-sent'
+	| '/register/email-sent/resend'
+	| '/reset-password'
+	| '/reset-password/:token'
+	| '/reset-password/code'
+	| '/reset-password/code/expired'
+	| '/reset-password/code/resend'
+	| '/reset-password/complete'
+	| '/reset-password/email-sent'
+	| '/reset-password/expired'
+	| '/reset-password/password'
+	| '/reset-password/resend'
+	| '/set-password'
+	| '/set-password/:token'
+	| '/set-password/complete'
+	| '/set-password/email-sent'
+	| '/set-password/expired'
+	| '/set-password/password'
+	| '/set-password/resend'
+	| '/signed-in-as'
+	| '/signin'
+	| '/signin/code'
+	| '/signin/code/resend'
+	| '/signin/code/expired'
+	| '/signin/password'
+	| '/signin/refresh'
+	| '/signin/:social'
+	| 'https://profile.theguardian.com/signin'
+	| 'https://profile.theguardian.com/signin/:social'
+	| '/signin/email-sent'
+	| '/signin/email-sent/resend'
+	| '/signout'
+	| '/signout/all'
+	| '/unsubscribe/:emailType/:data/:token'
+	| '/unsubscribe/success'
+	| '/unsubscribe/error'
+	| '/unsubscribe-all/:data/:token'
+	| '/subscribe/:emailType/:data/:token'
+	| '/subscribe/success'
+	| '/subscribe/error'
+	| '/verify-email'
+	| '/welcome'
+	| '/welcome/:token'
+	| '/welcome/:app/complete'
+	| '/welcome/complete'
+	| '/welcome/email-sent'
+	| '/welcome/existing'
+	| '/welcome/expired'
+	| '/welcome/resend'
+	| '/welcome/google'
+	| '/welcome/apple'
+	| '/welcome/social'
+	| '/welcome/review'
+	| '/welcome/newsletters'
+	| '/welcome/password';
 
 /**
  * The absolute URL of the Identity sign-in page (the "combined" sign-in and

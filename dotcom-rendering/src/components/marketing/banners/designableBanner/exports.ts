@@ -1,8 +1,3 @@
-export {
-	DesignableBannerUnvalidated as BannerUnvalidated,
-	BannerComponent,
-} from './Banner';
-
 import './components/BannerHeader';
 import './components/BannerBody';
 import './components/BannerVisual';
@@ -14,3 +9,8 @@ import './components/BannerArticleCount';
 import './components/BannerLogo';
 import './components/BannerContent';
 import './components/BannerReminder';
+
+export {
+	DesignableBannerUnvalidated as BannerUnvalidated,
+	BannerComponent,
+} from './Banner';
