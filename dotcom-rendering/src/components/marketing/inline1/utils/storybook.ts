@@ -39,7 +39,7 @@ const newsletterVariant: Inline1Variant = {
 	},
 };
 
-const tracking = {
+export const tracking = {
 	abTestName: '',
 	abTestVariant: '',
 	campaignCode: '',
