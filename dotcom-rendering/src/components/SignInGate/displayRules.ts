@@ -1,12 +1,9 @@
 // use the dailyArticleCount from the local storage to see how many articles the user has viewed in a day
 import { onConsent } from '@guardian/consent-manager';
 import type { ConsentState } from '@guardian/consent-manager';
-import type { CountryCode } from '@guardian/libs';
 import type { DailyArticle } from '../../lib/dailyArticleCount';
 import { getDailyArticleCount } from '../../lib/dailyArticleCount';
 import type { TagType } from '../../types/tag';
-import { hasUserDismissedGateMoreThanCount } from './dismissGate';
-import type { CanShowGateProps } from './types';
 
 // in our case if this is the n-numbered article or higher the user has viewed then set the gate
 export const isNPageOrHigherPageView = (n = 2): boolean => {
@@ -59,120 +56,6 @@ export const hasRequiredConsents = (): Promise<boolean> =>
 	onConsent()
 		.then(({ canTarget }: ConsentState) => canTarget)
 		.catch(() => false);
-
-const pageMetaDataMakesItEligibleForGateDisplay = (
-	contentType: string,
-	sectionId: string | undefined,
-	tags: TagType[],
-): boolean => {
-	return (
-		isValidContentType(contentType) &&
-		isValidSection(sectionId) &&
-		isValidTag(tags)
-	);
-};
-
-export const canShowSignInGate = ({
-	isSignedIn,
-	currentTest,
-	contentType,
-	sectionId,
-	tags,
-	isPaidContent,
-	isPreview,
-}: CanShowGateProps): Promise<boolean> => {
-	// This check is functionally identical to the same check in SDC
-	// This logically ensures that SDC will get a subset of the pages for which
-	// pageMetaDataMakesItEligibleForGateDisplay return true
-	if (
-		!pageMetaDataMakesItEligibleForGateDisplay(contentType, sectionId, tags)
-	) {
-		return Promise.resolve(false);
-	}
-
-	return Promise.resolve(
-		!isSignedIn &&
-			!hasUserDismissedGateMoreThanCount(
-				currentTest.variant,
-				currentTest.name,
-				5,
-			) &&
-			isNPageOrHigherPageView(3) &&
-			// hide the sign in gate on isPaidContent
-			!isPaidContent &&
-			// hide the sign in gate on internal tools preview &&
-			!isPreview,
-	);
-};
-
-export const canShowSignInGateMandatory: ({
-	isSignedIn,
-	currentTest,
-	contentType,
-	sectionId,
-	tags,
-	isPaidContent,
-	isPreview,
-	currentLocaleCode,
-}: CanShowGateProps) => Promise<boolean> = async ({
-	isSignedIn,
-	currentTest,
-	contentType,
-	sectionId,
-	tags,
-	isPaidContent,
-	isPreview,
-	currentLocaleCode,
-}: CanShowGateProps) => {
-	return await canShowSignInGate({
-		isSignedIn,
-		currentTest,
-		contentType,
-		sectionId,
-		tags,
-		isPaidContent,
-		isPreview,
-		currentLocaleCode,
-	});
-};
-
-const US_REGION_CODES: (CountryCode | undefined)[] = [
-	'US',
-	'AS',
-	'GU',
-	'MP',
-	'PR',
-	'VI',
-];
-
-export const canShowSignInGateWithOffers = ({
-	isSignedIn,
-	currentTest,
-	contentType,
-	sectionId,
-	tags,
-	isPaidContent,
-	isPreview,
-	currentLocaleCode,
-}: CanShowGateProps): Promise<boolean> =>
-	Promise.resolve(
-		!isSignedIn &&
-			!hasUserDismissedGateMoreThanCount(
-				currentTest.variant,
-				currentTest.name,
-				5,
-			) &&
-			isNPageOrHigherPageView(3) &&
-			isValidContentType(contentType) &&
-			isValidSection(sectionId) &&
-			isValidTag(tags) &&
-			// hide the sign in gate on isPaidContent
-			!isPaidContent &&
-			// hide the sign in gate on internal tools preview &&
-			!isPreview &&
-			// hide the sign in gate for AU and US readers
-			!['AU', ...US_REGION_CODES].includes(currentLocaleCode),
-	);
 
 /*
 	Date: 29th April 2025

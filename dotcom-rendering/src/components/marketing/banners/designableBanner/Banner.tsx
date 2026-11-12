@@ -7,7 +7,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { useEffect, useRef } from 'react';
-import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
+import { bannerWrapper } from '../common/BannerWrapper';
 import type { BannerRenderProps } from '../common/types';
 import { BannerArticleCount } from './components/BannerArticleCount';
 import { BannerBody } from './components/BannerBody';
@@ -288,10 +288,8 @@ const Banner = (props: BannerRenderProps): JSX.Element | null => {
 };
 
 const unvalidated = bannerWrapper(Banner, 'designable-banner');
-const validated = validatedBannerWrapper(Banner, 'designable-banner');
 
 export {
 	Banner as BannerComponent,
 	unvalidated as DesignableBannerUnvalidated,
-	validated as DesignableBanner,
 };

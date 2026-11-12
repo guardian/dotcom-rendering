@@ -1,4 +1,4 @@
-export interface DCRBadgeType {
+interface DCRBadgeType {
 	imageSrc: string;
 	/** Link to an external sponsor page */
 	href: string;

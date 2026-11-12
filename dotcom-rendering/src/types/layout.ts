@@ -1,11 +1,3 @@
-export type SharePlatform =
-	| 'facebook'
-	| 'twitter'
-	| 'email'
-	| 'whatsApp'
-	| 'linkedIn'
-	| 'messenger';
-
 export type RichLinkCardType =
 	| 'special-report'
 	| 'live'

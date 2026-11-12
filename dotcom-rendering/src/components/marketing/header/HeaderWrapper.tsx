@@ -4,7 +4,6 @@
  * https://github.com/guardian/support-dotcom-components/blob/4925ef1e0ced5d221f1122afe79f93bd7448e0e5/packages/modules/src/modules/headers/HeaderWrapper.tsx
  */
 import type { TAction } from '@guardian/ophan-tracker-js';
-import { headerPropsSchema } from '@guardian/support-dotcom-components';
 import type {
 	Cta,
 	HeaderProps,
@@ -167,22 +166,4 @@ export const headerWrapper = (
 		);
 	};
 	return Wrapped;
-};
-
-const validate = (props: unknown): props is HeaderProps => {
-	const result = headerPropsSchema.safeParse(props);
-	return result.success;
-};
-
-export const validatedHeaderWrapper = (
-	Header: ReactComponent<HeaderRenderProps>,
-): ReactComponent<HeaderProps> => {
-	// eslint-disable-next-line react/display-name -- this is not a React component, but a function that returns one
-	return (props: HeaderProps) => {
-		if (validate(props)) {
-			const Module = headerWrapper(Header);
-			return <Module {...props} />;
-		}
-		return <></>;
-	};
 };

@@ -28,7 +28,7 @@ export type PuzzleItem = {
 	backgroundColour?: string;
 };
 
-export type PuzzleContent = {
+type PuzzleContent = {
 	items: PuzzleItem[][];
 	nestedContainers: PuzzleContainer[];
 	archive?: PuzzleItem;
@@ -62,7 +62,7 @@ export type PuzzlesNewsletter = {
 	exampleUrl?: string;
 };
 
-export type PuzzlePopularityGroup = {
+type PuzzlePopularityGroup = {
 	title: string;
 	itemIds: string[];
 };
@@ -84,7 +84,7 @@ export type PuzzleGameSupporting = {
 export type PuzzlesLayoutType = {
 	containers: PuzzleContainer[];
 };
-export type PuzzlesArchivePuzzle = {
+type PuzzlesArchivePuzzle = {
 	id: string;
 	title: string;
 	puzzleType: string;

@@ -1,27 +1,6 @@
-import type { CountryCode } from '@guardian/libs';
 import { isObject, isOneOf, isString } from '@guardian/libs';
 import type { EditionId } from '../../lib/edition';
-import type { TagType } from '../../types/tag';
 import type { QueryParams } from '../AuthProviderButtons/types';
-
-export type CanShowGateProps = {
-	isSignedIn: boolean;
-	currentTest: CurrentSignInGateABTest;
-	contentType: string;
-	sectionId?: string;
-	tags: TagType[];
-	isPaidContent: boolean;
-	isPreview?: boolean;
-	currentLocaleCode: CountryCode | undefined;
-};
-
-export type SignInGateComponent = {
-	gate?: (props: SignInGateProps) => JSX.Element;
-	canShow: ({
-		isSignedIn,
-		currentTest,
-	}: CanShowGateProps) => Promise<boolean>;
-};
 
 export const ALL_USER_TYPES = ['new', 'guest', 'current'] as const;
 export type UserType = (typeof ALL_USER_TYPES)[number];

@@ -18,7 +18,7 @@ export type FrontsBannerAdCollections = {
 	[key: string]: string[];
 };
 
-export interface AdTargetParam {
+interface AdTargetParam {
 	name: string;
 	value: string | string[];
 }

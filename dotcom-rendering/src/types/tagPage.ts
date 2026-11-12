@@ -22,13 +22,13 @@ export interface GroupedTrails extends GroupedTrailsBase {
 	trails: DCRFrontCard[];
 }
 
-export interface GroupedTrailsFastMpu extends GroupedTrailsBase {
+interface GroupedTrailsFastMpu extends GroupedTrailsBase {
 	injected: true;
 	speed: 'fast';
 	// Trails must either be length of 2, 4, 6, 9
 	trails: Tuple<DCRFrontCard, 2 | 4 | 6 | 9>;
 }
-export interface GroupedTrailsSlowMpu extends GroupedTrailsBase {
+interface GroupedTrailsSlowMpu extends GroupedTrailsBase {
 	injected: true;
 	speed: 'slow';
 	// Trails must either be length of 2, 4, 5, 7

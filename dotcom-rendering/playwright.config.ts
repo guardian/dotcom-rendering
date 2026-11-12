@@ -5,7 +5,7 @@ const isDev = process.env.NODE_ENV !== 'production';
 /**
  * The server port for local development or CI
  */
-export const PORT = isDev ? 3030 : 9000;
+const PORT = isDev ? 3030 : 9000;
 export const ORIGIN = `http://localhost:${PORT}`;
 
 /**

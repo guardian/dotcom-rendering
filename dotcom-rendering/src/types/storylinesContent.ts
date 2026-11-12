@@ -8,7 +8,7 @@ export type ParsedStoryline = {
 	categories: ParsedCategory[];
 };
 
-export type ParsedCategory = {
+type ParsedCategory = {
 	title: string;
 	groupedTrails: DCRGroupedTrails;
 };
@@ -17,7 +17,7 @@ export type ParsedCategory = {
  * The types below should match up with those defined in the tool:
  * https://github.com/guardian/tag-page-supercharger/blob/main/app/models/FrontendContent.scala#L9
  */
-export type ImageData = {
+type ImageData = {
 	src?: string;
 	altText?: string;
 	isAvatar: boolean;
@@ -37,7 +37,7 @@ export type CategoryContent = {
 	articles: ArticleData[];
 };
 
-export type Storyline = {
+type Storyline = {
 	title: string;
 	content: CategoryContent[];
 };

@@ -460,7 +460,7 @@ const validate = (props: unknown): props is EpicProps => {
 	return result.success;
 };
 
-export const validatedEpic: ReactComponent<EpicProps> = (props) => {
+const validatedEpic: ReactComponent<EpicProps> = (props) => {
 	if (validate(props)) {
 		return <ContributionsEpic {...props} />;
 	}
