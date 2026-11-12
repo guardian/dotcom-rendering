@@ -341,9 +341,10 @@ export const ArticleMetaApps = ({
 							layoutType={layoutType}
 						/>
 					)}
-					{shouldShowFollowButtons(
-						isComment || isAnalysis || isImmersive,
-					) &&
+					{!showContributor &&
+						shouldShowFollowButtons(
+							isComment || isAnalysis || isImmersive,
+						) &&
 						soleContributor && (
 							<Island
 								priority="feature"
