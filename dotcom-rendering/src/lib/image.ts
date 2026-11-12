@@ -94,7 +94,7 @@ export const generateImageURL = ({
 	}?${params.toString()}`;
 };
 
-export const isSupported = (imageUrl: string): boolean => {
+const isSupported = (imageUrl: string): boolean => {
 	const supportedImages = ['jpg', 'jpeg', 'png', 'gif'];
 	return supportedImages.some((extension) =>
 		imageUrl.endsWith(`.${extension}`),

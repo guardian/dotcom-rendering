@@ -7,7 +7,7 @@ export type PuzzleGroupKey =
 	| 'logic-puzzles'
 	| 'trivia';
 
-export type PuzzleGroupPalette = {
+type PuzzleGroupPalette = {
 	/** Light tint, used for card backgrounds and chip hover fills. */
 	tint: string;
 	/** Main colour in light mode (chips, titles, setter). */

@@ -42,7 +42,7 @@ const gameStatuses: readonly string[] = [
 export const isGameStatus = (value: unknown): value is GameStatus =>
 	typeof value === 'string' && gameStatuses.includes(value);
 
-export const parseProgressItems = (
+const parseProgressItems = (
 	value: unknown,
 ): PuzzleProgressItem[] | undefined => {
 	if (typeof value !== 'object' || value === null) return undefined;

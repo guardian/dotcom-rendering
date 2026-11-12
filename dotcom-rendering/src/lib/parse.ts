@@ -20,7 +20,7 @@ export const parseDate = (a: string): Result<string, Date> => {
 	return ok(d);
 };
 
-export type Parser<E, A, B> = (a: A) => Result<E, B>;
+type Parser<E, A, B> = (a: A) => Result<E, B>;
 
 export const oneOf =
 	<E, A, B>(parsers: [Parser<E, A, B>, ...Array<Parser<E, A, B>>]) =>
@@ -47,7 +47,7 @@ export const oneOf =
 		return f(parsers, []);
 	};
 
-export class URLParseError {}
+class URLParseError {}
 
 export const safeParseURL = (s: string): Result<URLParseError, URL> => {
 	try {

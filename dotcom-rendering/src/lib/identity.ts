@@ -11,7 +11,7 @@ export type CustomIdTokenClaims = CustomClaims & {
 	braze_uuid: string;
 };
 
-export async function isSignedInAuthState(): Promise<
+async function isSignedInAuthState(): Promise<
 	IdentityAuthState<never, CustomIdTokenClaims>
 > {
 	return getIdentityAuth()

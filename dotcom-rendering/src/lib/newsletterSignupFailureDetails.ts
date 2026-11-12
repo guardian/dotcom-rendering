@@ -1,7 +1,7 @@
 const MAX_FAILURE_DETAIL_LENGTH = 60;
 const ERROR_CODE_HEADER = 'Email-Signup-Error-Code';
 
-export type NewsletterSignupFailureDetails = {
+type NewsletterSignupFailureDetails = {
 	errorCode?: string;
 	errorDescription?: string;
 };

@@ -238,7 +238,7 @@ const elementHeightDataMap: {
 	},
 };
 
-export const calculateApproximateElementHeight = (
+const calculateApproximateElementHeight = (
 	element: FEElement,
 	isMobile: boolean,
 ): number => {

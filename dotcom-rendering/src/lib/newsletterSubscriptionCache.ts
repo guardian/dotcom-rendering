@@ -62,7 +62,7 @@ export const shouldInvalidateCache = (
 	return false;
 };
 
-export interface NewsletterSubscriptionResponse {
+interface NewsletterSubscriptionResponse {
 	result: {
 		subscriptions: Array<{
 			listId: string;
