@@ -5,7 +5,7 @@
 /** The kind of page a custom subnav is rendered on, used to vary its styling. */
 export type RenderingPage = 'front' | 'article';
 
-export interface CustomSubnavLink {
+interface CustomSubnavLink {
 	linkText: string;
 	dotcomPath: string;
 }
@@ -16,7 +16,7 @@ export interface CustomSubnavHeader {
 	dotcomPath?: string;
 	copy: string;
 }
-export type CustomSubnavImageBreakpoint =
+type CustomSubnavImageBreakpoint =
 	| 'mobile'
 	| 'mobileMedium'
 	| 'mobileLandscape'
@@ -26,7 +26,7 @@ export type CustomSubnavImageBreakpoint =
 	| 'leftCol'
 	| 'wide';
 
-export type CustomSubnavImagePlatform = 'ios' | 'web' | 'android';
+type CustomSubnavImagePlatform = 'ios' | 'web' | 'android';
 
 export interface CustomSubnavImage {
 	imageSrc: string;
@@ -34,7 +34,7 @@ export interface CustomSubnavImage {
 	platforms: CustomSubnavImagePlatform[];
 }
 
-export interface CustomSubnavTargetedPage {
+interface CustomSubnavTargetedPage {
 	type: 'front' | 'article' | 'hasTag';
 	path: string;
 }

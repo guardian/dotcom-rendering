@@ -43,7 +43,7 @@ export type ArticleDeprecated = Omit<FEArticle, 'affiliateLinksDisclaimer'> & {
 	affiliateLinksDisclaimerRequired: boolean;
 };
 
-export type ArticleFields = {
+type ArticleFields = {
 	frontendData: ArticleDeprecated;
 	display: ArticleDisplay;
 	theme: ArticleTheme;
@@ -51,7 +51,7 @@ export type ArticleFields = {
 	serverTime?: number | undefined;
 };
 
-export type GalleryDesign = ArticleDesign.Gallery | ArticleDesign.HostedGallery;
+type GalleryDesign = ArticleDesign.Gallery | ArticleDesign.HostedGallery;
 
 export type Gallery = ArticleFields & {
 	design: GalleryDesign;
@@ -59,13 +59,13 @@ export type Gallery = ArticleFields & {
 	mainMedia?: ImageBlockElement;
 };
 
-export type OtherArticles = ArticleFields & {
+type OtherArticles = ArticleFields & {
 	design: Exclude<ArticleDesign, GalleryDesign>;
 };
 
 export type Article = Gallery | OtherArticles;
 
-export const getGalleryMainMedia = (
+const getGalleryMainMedia = (
 	mainMediaElements: FEElement[],
 	trailImage?: ImageBlockElement,
 ): ImageBlockElement | undefined => {

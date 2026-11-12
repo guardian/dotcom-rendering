@@ -15,7 +15,7 @@ import type { PuzzleGameSupporting, PuzzleItem } from './puzzlesPage';
  * component-rendered case (crosswords remain on their existing, separate
  * `/crosswords/*` flow), so this type carries no crossword-specific fields.
  */
-export interface PuzzlePageInstance {
+interface PuzzlePageInstance {
 	/** Dated provider URL resolved by frontend through the Puzzles API. */
 	gameUrl?: string;
 	/** Authoritative anonymous identity for reporting the reader's progress. */

@@ -3,7 +3,7 @@ import type { EditionId } from '../lib/edition';
 
 export type StageType = 'DEV' | 'CODE' | 'PROD';
 
-export interface CommercialConfigType {
+interface CommercialConfigType {
 	isPaidContent?: boolean;
 	pageId: string;
 	webPublicationDate?: number;

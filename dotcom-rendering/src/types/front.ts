@@ -200,7 +200,7 @@ export type TreatType = {
 	pageId?: string;
 };
 
-export type VariantId = 'A' | 'B';
+type VariantId = 'A' | 'B';
 
 export type VariantMeta = {
 	id: VariantId;

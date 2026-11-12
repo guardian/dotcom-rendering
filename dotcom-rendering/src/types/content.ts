@@ -34,7 +34,7 @@ interface ThirdPartyEmbeddedContent {
 	sourceDomain?: string;
 }
 
-export interface AudioAtomBlockElement {
+interface AudioAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.AudioAtomBlockElement';
 	elementId: string;
 	id: string;
@@ -113,7 +113,7 @@ export interface CalloutBlockElementV2 {
 	contacts?: CalloutContactType[];
 }
 
-export interface CallToActionAtomBlockElement {
+interface CallToActionAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.CallToActionAtomBlockElement';
 	elementId: string;
 	id: string;
@@ -210,7 +210,7 @@ export interface CommentBlockElement {
 	role?: RoleType;
 }
 
-export interface ContentAtomBlockElement {
+interface ContentAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ContentAtomBlockElement';
 	elementId: string;
 	atomId: string;
@@ -223,7 +223,7 @@ interface DisclaimerBlockElement {
 	role?: RoleType;
 }
 
-export interface DividerBlockElement {
+interface DividerBlockElement {
 	_type: 'model.dotcomrendering.pageElements.DividerBlockElement';
 	size?: 'full' | 'partial';
 	spaceAbove?: 'tight' | 'loose';
@@ -284,7 +284,7 @@ interface GuideAtomBlockElement {
 	role?: RoleType;
 }
 
-export interface GuVideoBlockElement {
+interface GuVideoBlockElement {
 	_type: 'model.dotcomrendering.pageElements.GuVideoBlockElement';
 	elementId: string;
 	assets: VideoAssets[];
@@ -427,7 +427,7 @@ export interface ListItem {
 	bylineHtml?: string;
 }
 
-export interface LinkBlockElement {
+interface LinkBlockElement {
 	_type: 'model.dotcomrendering.pageElements.LinkBlockElement';
 	elementId: string;
 	url: string;
@@ -553,7 +553,7 @@ export interface EnhancedProductSummaryElement {
 	title: string;
 }
 
-export interface RecipeFeaturedImage {
+interface RecipeFeaturedImage {
 	url: string;
 	mediaId: string;
 	cropId: string;
@@ -566,7 +566,7 @@ export interface RecipeFeaturedImage {
 	mediaApiUri?: string;
 }
 
-export interface EventGraphicBlockElement {
+interface EventGraphicBlockElement {
 	_type: 'model.dotcomrendering.pageElements.EventGraphicBlockElement';
 	elementId: string;
 	components: ElectionComponentsJson;
@@ -714,7 +714,7 @@ export interface FETimelineBlockElement {
 	sections: FETimelineSection[];
 }
 
-export interface TimelineAtomBlockElement {
+interface TimelineAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.TimelineAtomBlockElement';
 	elementId: string;
 	id: string;
@@ -744,13 +744,13 @@ export interface VineBlockElement extends ThirdPartyEmbeddedContent {
 	title: string;
 }
 
-export interface VideoBlockElement extends ThirdPartyEmbeddedContent {
+interface VideoBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.VideoBlockElement';
 	elementId: string;
 	role?: RoleType;
 }
 
-export interface VideoFacebookBlockElement extends ThirdPartyEmbeddedContent {
+interface VideoFacebookBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.VideoFacebookBlockElement';
 	elementId: string;
 	url: string;
@@ -775,7 +775,7 @@ export interface VideoVimeoBlockElement extends ThirdPartyEmbeddedContent {
 	role?: RoleType;
 }
 
-export interface VideoYoutubeBlockElement extends ThirdPartyEmbeddedContent {
+interface VideoYoutubeBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement';
 	elementId: string;
 	embedUrl?: string;
@@ -881,7 +881,7 @@ interface WitnessTypeBlockElement extends ThirdPartyEmbeddedContent {
 		| WitnessTypeDataText;
 }
 
-export interface CrosswordElement {
+interface CrosswordElement {
 	_type: 'model.dotcomrendering.pageElements.CrosswordElement';
 	crossword: CrosswordProps['data'];
 }
@@ -982,7 +982,7 @@ export type RoleType =
 	| 'thumbnail'
 	| 'halfWidth';
 
-export interface ImageSource {
+interface ImageSource {
 	weighting: Weighting;
 	srcSet: SrcSetItem[];
 }
@@ -992,7 +992,7 @@ export type AffiliateProductPrice = {
 	price: string;
 };
 
-export type ProductDisplayType =
+type ProductDisplayType =
 	| 'InlineOnly'
 	| 'ProductCardOnly'
 	| 'InlineWithProductCard';
@@ -1010,14 +1010,7 @@ export type ProductCustomAttribute = {
 	value: string;
 };
 
-export type ProductStarRating =
-	| '0'
-	| '1'
-	| '2'
-	| '3'
-	| '4'
-	| '5'
-	| 'none-selected';
+type ProductStarRating = '0' | '1' | '2' | '3' | '4' | '5' | 'none-selected';
 
 export type ProductSummaryDisplayType =
 	| 'Carousel'
@@ -1025,7 +1018,7 @@ export type ProductSummaryDisplayType =
 	| 'StackedCard'
 	| 'StackedCardExpanded';
 
-export interface SrcSetItem {
+interface SrcSetItem {
 	src: string;
 	width: number;
 }
@@ -1250,22 +1243,6 @@ export type PersonalityQuizAtomType = {
 };
 
 export type QuizSelectionType = Record<string, AnswerType>;
-
-export type SharePlatformType =
-	| 'facebook'
-	| 'twitter'
-	| 'email'
-	| 'linkedIn'
-	| 'pinterest'
-	| 'whatsApp'
-	| 'messenger';
-
-export type SharingUrlsType = {
-	[K in SharePlatformType]?: {
-		url: string;
-		userMessage: string;
-	};
-};
 
 // -------------------------------------
 // Newsletter
