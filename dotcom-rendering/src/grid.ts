@@ -111,13 +111,13 @@ const paddedContainer = `
  * don't work well with `contain: paint`. The CSS property anchor() looks like a long-term
  * solution for this issue in the future once browser support is more widespread.
  */
-const centreRule = (
-	n: number,
+const centreRuleAt = (
+	selector: string,
 	{ color }: { color?: string } = {},
 ): string => `/* CENTRE RULE */
     contain: paint;
 
-    & > *:nth-child(${n}) {
+    & > ${selector} {
       position: relative;
 
       &::before {
@@ -135,6 +135,9 @@ const centreRule = (
         }
       }
     }`;
+
+const centreRule = (n: number, options: { color?: string } = {}): string =>
+	centreRuleAt(`*:nth-child(${n})`, options);
 
 /**
  * CSS for the left and right Guardian grid vertical rules.
@@ -293,6 +296,11 @@ const grid = {
 	 * breakpoint contexts to vary which child the rule anchors to.
 	 */
 	centreRule,
+	/**
+	 * CSS for a centre vertical rule anchored to an explicitly selected
+	 * direct child of the grid container.
+	 */
+	centreRuleAt,
 } as const;
 
 export { grid };
