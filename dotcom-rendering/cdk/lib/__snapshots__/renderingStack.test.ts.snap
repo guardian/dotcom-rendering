@@ -13463,6 +13463,8 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
       "GuRepository",
       "GuLoggingStreamNameParameter",
       "GuHttpsEgressSecurityGroup",
+      "GuECSManagedInstanceRoleExperimental",
+      "GuECSInstanceRolePolicyForManagedInstancesExperimental",
       "GuRiffRaffDeploymentIdParameterExperimental",
       "GuLogShippingPolicy",
       "GuParameterStoreReadPolicy",
@@ -13672,6 +13674,118 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
       },
       "Type": "AWS::CertificateManager::Certificate",
       "UpdateReplacePolicy": "Retain",
+    },
+    "ECSInstanceProfileBA4A4DA9": {
+      "Properties": {
+        "Roles": [
+          {
+            "Ref": "ECSManagedInstancesRole1E652558",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::InstanceProfile",
+    },
+    "ECSInstanceRolePolicyD0240271": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "ecs:DiscoverPollEndpoint",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            {
+              "Action": "ecs:RegisterContainerInstance",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "tagpagerenderingEcsClusterE7696595",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": "ecs:Poll",
+              "Effect": "Allow",
+              "Resource": [
+                "arn:aws:ecs:*:*:container-instance/*",
+                "arn:aws:ecs:*:*:task-set/*",
+              ],
+            },
+            {
+              "Action": [
+                "ecs:StartTelemetrySession",
+                "ecs:PutSystemLogEvents",
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:ecs:*:*:container-instance/*",
+            },
+            {
+              "Action": [
+                "ecs:SubmitAttachmentStateChanges",
+                "ecs:SubmitTaskStateChange",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "tagpagerenderingEcsClusterE7696595",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "ECSInstanceRolePolicyD0240271",
+        "Roles": [
+          {
+            "Ref": "ECSManagedInstancesRole1E652558",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "ECSManagedInstancesRole1E652558": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "tag-page-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
     },
     "EcsService81FC6EF6": {
       "DependsOn": [
