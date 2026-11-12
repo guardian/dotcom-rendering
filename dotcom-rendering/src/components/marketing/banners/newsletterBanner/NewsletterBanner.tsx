@@ -68,7 +68,7 @@ const buildNewsletterBannerData = (
 	};
 };
 
-export const NewsletterBannerComponent = (
+const NewsletterBannerComponent = (
 	props: BannerRenderProps,
 ): JSX.Element | null => {
 	const newsletter = props.promotedNewsletter;

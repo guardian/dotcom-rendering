@@ -30,7 +30,7 @@ import {
 	OPHAN_COMPONENT_ARTICLE_COUNT_STAY_OUT,
 } from './utils/ophan';
 
-export interface ContributionsEpicArticleCountAboveWithOptOutProps {
+interface ContributionsEpicArticleCountAboveWithOptOutProps {
 	copy?: string;
 	articleCount: number;
 	isArticleCountOn: boolean;

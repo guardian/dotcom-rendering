@@ -56,7 +56,7 @@ export interface BannerRenderedContent {
 	secondaryCta: BannerEnrichedSecondaryCta | null;
 }
 
-export interface BannerTextContent {
+interface BannerTextContent {
 	mainContent: BannerRenderedContent;
 	mobileContent: BannerRenderedContent;
 }

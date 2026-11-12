@@ -105,7 +105,7 @@ const ctaContainerStyles = css`
 
 // --- Types --- //
 
-export interface ContributionsEpicReminderSignedInProps {
+interface ContributionsEpicReminderSignedInProps {
 	reminderLabel: string;
 	reminderStatus: ReminderStatus;
 	onSetReminderClick: () => void;

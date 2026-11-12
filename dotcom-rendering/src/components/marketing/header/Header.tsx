@@ -20,7 +20,7 @@ import {
 import { palette as themePalette } from '../../../palette';
 import type { ReactComponent } from '../lib/ReactComponent';
 import type { HeaderRenderProps } from './HeaderWrapper';
-import { headerWrapper, validatedHeaderWrapper } from './HeaderWrapper';
+import { headerWrapper } from './HeaderWrapper';
 
 const gridStyles = css`
 	display: grid;
@@ -138,5 +138,4 @@ const Header: ReactComponent<HeaderRenderProps> = (
 };
 
 const unvalidated = headerWrapper(Header);
-const validated = validatedHeaderWrapper(Header);
-export { validated as Header, unvalidated as HeaderUnvalidated };
+export { unvalidated as HeaderUnvalidated };

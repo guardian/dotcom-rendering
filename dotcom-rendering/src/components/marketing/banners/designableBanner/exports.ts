@@ -1,17 +1,16 @@
 export {
-	DesignableBanner as Banner,
 	DesignableBannerUnvalidated as BannerUnvalidated,
 	BannerComponent,
 } from './Banner';
-export type { BannerData } from './BannerProps';
-export { BannerHeader } from './components/BannerHeader';
-export { BannerBody } from './components/BannerBody';
-export { BannerVisual } from './components/BannerVisual';
-export { BannerCtas } from './components/BannerCtas';
-export { BannerCloseButton } from './components/BannerCloseButton';
-export { BannerChoiceCards } from './components/BannerChoiceCards';
-export { BannerTicker } from './components/BannerTicker';
-export { BannerArticleCount } from './components/BannerArticleCount';
-export { BannerLogo } from './components/BannerLogo';
-export { BannerContent } from './components/BannerContent';
-export { BannerReminder } from './components/BannerReminder';
+
+import './components/BannerHeader';
+import './components/BannerBody';
+import './components/BannerVisual';
+import './components/BannerCtas';
+import './components/BannerCloseButton';
+import './components/BannerChoiceCards';
+import './components/BannerTicker';
+import './components/BannerArticleCount';
+import './components/BannerLogo';
+import './components/BannerContent';
+import './components/BannerReminder';

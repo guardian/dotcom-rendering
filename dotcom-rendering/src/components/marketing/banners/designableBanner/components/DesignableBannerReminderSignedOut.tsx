@@ -30,7 +30,7 @@ interface ThankYouProps {
 	contactUsColor?: string;
 }
 
-export function ThankYou({
+function ThankYou({
 	reminderLabelWithPreposition,
 	thankyouColor,
 	contactUsColor,
@@ -69,7 +69,7 @@ interface InfoCopyProps {
 	privacyLinkColor?: string;
 }
 
-export function InfoCopy({
+function InfoCopy({
 	reminderLabelWithPreposition,
 	privacyLinkColor,
 }: InfoCopyProps): JSX.Element {
@@ -92,7 +92,7 @@ export function InfoCopy({
 
 // ---- Error component ---- //
 
-export function ErrorCopy(): JSX.Element {
+function ErrorCopy(): JSX.Element {
 	return (
 		<div css={styles.errorCopy}>
 			Sorry we couldn&apos;t set a reminder for you this time. Please try
@@ -103,7 +103,7 @@ export function ErrorCopy(): JSX.Element {
 
 // ---- Component ---- //
 
-export interface DesignableBannerReminderSignedOutProps {
+interface DesignableBannerReminderSignedOutProps {
 	reminderCta: BannerEnrichedReminderCta;
 	reminderStatus: ReminderStatus;
 	onReminderSetClick: (email: string) => void;

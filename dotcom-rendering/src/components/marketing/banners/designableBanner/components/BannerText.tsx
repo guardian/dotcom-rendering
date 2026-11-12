@@ -14,7 +14,7 @@ type BannerTextStyleableAreas =
 	| 'copy'
 	| 'highlightedText';
 
-export type BannerTextStyles = Partial<
+type BannerTextStyles = Partial<
 	Record<BannerTextStyleableAreas, SerializedStyles | SerializedStyles[]>
 >;
 

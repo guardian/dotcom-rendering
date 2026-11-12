@@ -21,7 +21,7 @@ export const tracking: Tracking = {
 	campaignCode: 'UsEoyAppealBanner_control',
 };
 
-export const contentNoHeading = {
+const contentNoHeading = {
 	paragraphs: [
 		'Fearless, investigative reporting shapes a fairer world. At the Guardian, our independence allows us to chase the truth wherever it takes us. <strong>We have no shareholders.</strong> No vested interests. Just the determination and passion to bring readers quality reporting, including groundbreaking investigations.',
 		'We do not shy away. And we provide all this for free, for everyone.',
@@ -40,12 +40,12 @@ export const contentNoHeading = {
 		},
 	},
 };
-export const contentWithHeading = {
+const contentWithHeading = {
 	...contentNoHeading,
 	heading: 'Show your support for reader-funded journalism',
 };
 
-export const mobileContentNoHeading = {
+const mobileContentNoHeading = {
 	paragraphs: [
 		'Fearless, investigative reporting shapes a fairer world. At the Guardian, our independence allows us to chase the truth wherever it takes us. <strong>We have no shareholders.</strong> No vested interests. Just the determination and passion to bring readers quality reporting, including groundbreaking investigations.',
 		'We do not shy away. And we provide all this for free, for everyone.',
@@ -65,20 +65,9 @@ export const mobileContentNoHeading = {
 	},
 };
 
-export const mobileContentWithHeading = {
+const mobileContentWithHeading = {
 	...mobileContentNoHeading,
 	heading: 'Show your support for reader-funded journalism',
-};
-
-export const reducedBodyCopy = {
-	heading: 'Lorem ipsum dolor sit amet, et lorem.', // Max 40 characters. Example is 37 characters.
-	paragraphs: [
-		'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
-	], //Max 180 charcters this example is 175ish
-	cta: {
-		text: 'Continue',
-		baseUrl: 'https://support.theguardian.com/contribute/one-off',
-	},
 };
 
 const hexColourStringRegex = /^([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})$/i;

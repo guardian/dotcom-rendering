@@ -9,7 +9,7 @@ import type {
 } from '../shared/ArticleCountOptOutPopup';
 import { ArticleCountOptOutPopup } from '../shared/ArticleCountOptOutPopup';
 
-export const replaceArticleCountWithLink = (
+const replaceArticleCountWithLink = (
 	text: string,
 	numArticles: number,
 	articleCountOptOutType: ArticleCountOptOutType,

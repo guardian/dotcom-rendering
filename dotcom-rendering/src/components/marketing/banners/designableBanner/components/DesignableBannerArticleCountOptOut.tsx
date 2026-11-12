@@ -25,7 +25,7 @@ import { buttonStyles } from '../styles/buttonStyles';
 
 // ---- Component ---- //
 
-export interface DesignableBannerArticleCountOptOutProps {
+interface DesignableBannerArticleCountOptOutProps {
 	numArticles: number;
 	nextWord: string | null;
 	settings: BannerTemplateSettings;
@@ -79,7 +79,7 @@ export const DesignableBannerArticleCountOptOut: ReactComponent<
 
 // ---- Helper Component ---- //
 
-export interface OverlayProps {
+interface OverlayProps {
 	hasOptedOut: boolean;
 	onOptOut: () => void;
 	onClose: () => void;

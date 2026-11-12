@@ -16,7 +16,7 @@ import { ContributionsEpicReminderSignedOut } from './ContributionsEpicReminderS
 
 // --- Types --- //
 
-export interface ContributionsEpicReminderProps {
+interface ContributionsEpicReminderProps {
 	initialEmailAddress?: string;
 	reminderFields: ReminderFields;
 	onCloseReminderClick: () => void;

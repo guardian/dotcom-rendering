@@ -8,13 +8,13 @@ import type { Image } from '@guardian/support-dotcom-components/dist/shared/type
 import type { ReactNode } from 'react';
 import type { BannerId } from '../common/types';
 
-export type ContainerSettings = {
+type ContainerSettings = {
 	backgroundColour: string;
 	textColor?: string;
 	paddingTop?: string;
 };
 
-export type CtaStateSettings = {
+type CtaStateSettings = {
 	textColour: string;
 	backgroundColour: string;
 	border?: string;
@@ -26,12 +26,12 @@ export interface CtaSettings {
 	desktop?: CtaStateSettings;
 }
 
-export interface HighlightedTextSettings {
+interface HighlightedTextSettings {
 	textColour: string;
 	highlightColour?: string;
 }
 
-export interface HeaderSettings {
+interface HeaderSettings {
 	textColour?: string;
 	headerImage?: Image;
 }

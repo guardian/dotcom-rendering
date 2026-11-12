@@ -19,12 +19,12 @@ import {
 	isProfileUrl,
 } from '../lib/tracking';
 
-export interface HeaderEnrichedCta {
+interface HeaderEnrichedCta {
 	ctaUrl: string;
 	ctaText: string;
 }
 
-export interface HeaderRenderedContent {
+interface HeaderRenderedContent {
 	heading: string;
 	subheading: string;
 	primaryCta: HeaderEnrichedCta | null;

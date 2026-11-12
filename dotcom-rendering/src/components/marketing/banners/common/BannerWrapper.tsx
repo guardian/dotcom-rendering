@@ -56,7 +56,7 @@ function getComponentIds(bannerId: BannerId) {
 	};
 }
 
-export const getParagraphsOrMessageText = (
+const getParagraphsOrMessageText = (
 	paras: string[] | undefined,
 	text: string | undefined,
 ): string[] => {

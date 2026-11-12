@@ -130,7 +130,7 @@ const getCustomSubmitStyles = (
 
 // --- Types --- //
 
-export interface ContributionsEpicReminderSignedOutProps {
+interface ContributionsEpicReminderSignedOutProps {
 	reminderLabel: string;
 	reminderStatus: ReminderStatus;
 	onSetReminderClick: (email: string) => void;

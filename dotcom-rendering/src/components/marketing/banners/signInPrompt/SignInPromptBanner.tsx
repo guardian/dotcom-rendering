@@ -25,7 +25,7 @@ import {
 } from '@guardian/source/react-components';
 import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type { ReactComponent } from '../../lib/ReactComponent';
-import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
+import { validatedBannerWrapper } from '../common/BannerWrapper';
 import type { BannerRenderProps } from '../common/types';
 
 const bannerStyles = css`
@@ -155,13 +155,9 @@ const SignInPromptBanner: ReactComponent<BannerRenderProps> = (props) => {
 	);
 };
 
-const unvalidated = bannerWrapper(SignInPromptBanner, 'sign-in-prompt-banner');
 const validated = validatedBannerWrapper(
 	SignInPromptBanner,
 	'sign-in-prompt-banner',
 );
 
-export {
-	validated as SignInPromptBanner,
-	unvalidated as SignInPromptBannerUnvalidated,
-};
+export { validated as SignInPromptBanner };
