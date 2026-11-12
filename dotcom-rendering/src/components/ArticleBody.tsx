@@ -149,6 +149,12 @@ const pageSkinBodyStyles = css`
 			margin-left: 0;
 		}
 
+		figure[data-spacefinder-role='supporting'] > figcaption,
+		figure[data-spacefinder-role='showcase'] > figcaption,
+		figure[data-spacefinder-role='immersive'] > figcaption {
+			position: static;
+		}
+
 		figure[data-spacefinder-role='immersive'] {
 			width: auto;
 			max-width: none;
