@@ -1,3 +1,4 @@
+import { css, Global } from '@emotion/react';
 import { palette as sourcePalette } from '@guardian/source/foundations';
 import { AdPortals } from '../components/AdPortals.island';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
@@ -37,6 +38,7 @@ import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { InteractiveArticleGridDeprecated } from './interactives/InteractiveArticleGridDeprecated';
+import { pageSkinContainer } from './lib/pageSkin';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 import { StandardLayoutArticleGrid } from './StandardLayoutArticleGrid';
 
@@ -107,9 +109,21 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isFilterArticle = hasFilterTag(article.tags);
 
 	const renderAds = canRenderAds(article);
+	const hasPageSkin =
+		isWeb && renderAds && (article.config.hasPageSkin ?? false);
 
 	return (
 		<>
+			{hasPageSkin && (
+				<Global
+					styles={css`
+						html,
+						body {
+							overflow-x: clip;
+						}
+					`}
+				/>
+			)}
 			{isInteractive && (
 				<>
 					<InteractivesScrollbarWidth />
@@ -133,6 +147,14 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								<HeaderAdSlot />
 							</Section>
 						</Stuck>
+					)}
+					{hasPageSkin && (
+						<AdSlot
+							data-print-layout="hide"
+							position="pageskin"
+							display={format.display}
+							hasPageskin={hasPageSkin}
+						/>
 					)}
 					<Masthead
 						nav={props.NAV}
@@ -160,6 +182,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								!isFilterArticle) ||
 							isInteractive
 						}
+						hasPageSkin={hasPageSkin}
 						hasPageSkinContentSelfConstrain={true}
 						pageId={article.pageId}
 						tagIds={article.tags.map((tag) => tag.id)}
@@ -179,6 +202,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						borderColour={sourcePalette.neutral[60]}
 						sectionId="labs-header"
 						element="aside"
+						hasPageSkin={hasPageSkin}
 					>
 						<LabsHeader
 							editionId={editionId}
@@ -205,7 +229,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				<AdSlot position="survey" display={format.display} />
 			)}
 
-			<main data-layout={contentLayoutName}>
+			<main
+				data-layout={contentLayoutName}
+				css={hasPageSkin && pageSkinContainer}
+			>
 				{isApps && renderAds && (
 					<Island priority="critical">
 						<AdPortals />
@@ -221,6 +248,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							article={article}
 							format={format}
 							renderingTarget={renderingTarget}
+							hasPageSkin={hasPageSkin}
 						/>
 					)}
 				</div>
@@ -376,6 +404,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							fullWidth={true}
 							padSides={false}
 							element="aside"
+							hasPageSkin={hasPageSkin}
 						>
 							<Island
 								priority="enhancement"
@@ -396,6 +425,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						borderColour={sourcePalette.brand[600]}
 						showSideBorders={false}
 						element="footer"
+						hasPageSkin={hasPageSkin}
 					>
 						<Footer
 							pageFooter={article.pageFooter}

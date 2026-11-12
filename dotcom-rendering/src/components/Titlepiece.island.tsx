@@ -227,6 +227,12 @@ const slimNavBurgerOverrides = css`
 	}
 `;
 
+const slimNavPageSkinBurgerOverrides = css`
+	${from.leftCol} {
+		right: 356px;
+	}
+`;
+
 const expandedNavStyles = css`
 	${gridContent}
 	grid-row: 2;
@@ -578,6 +584,9 @@ export const Titlepiece = ({
 					burgerStyles,
 					!hasPageSkin && burgerStylesFromLeftCol,
 					showSlimNav && slimNavBurgerOverrides,
+					showSlimNav &&
+						hasPageSkin &&
+						slimNavPageSkinBurgerOverrides,
 				]}
 			>
 				<VeggieBurger />
