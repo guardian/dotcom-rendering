@@ -186,7 +186,7 @@ describe('Island: server-side rendering', () => {
 		expect(() =>
 			renderToString(
 				<WithConfig>
-					<EnhanceAffiliateLinks />
+					<EnhanceAffiliateLinks pageId="test-page-id" />
 				</WithConfig>,
 			),
 		).not.toThrow();
