@@ -56,6 +56,7 @@ const archive: PuzzlesArchive = {
 		title: 'Easy sudoku',
 		puzzleType: 'SUDOKU_EASY',
 		set: 'easy',
+		path: '/puzzles-and-games/logic-puzzles/easy/archive',
 	},
 	puzzles: [],
 	year: 2026,

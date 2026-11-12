@@ -108,6 +108,14 @@ export const ImmersiveAndFollowStory = meta.story({
 	},
 });
 
+export const ImmersiveGridAndFollowStory = meta.story({
+	...ImmersiveAndFollowStory.input,
+	args: {
+		...ImmersiveAndFollowStory.input.args,
+		layoutType: 'immersiveLandscape',
+	},
+});
+
 export const ImmersiveWithMultipleContributorsStory = meta.story({
 	...ImmersiveAndFollowStory.input,
 	args: {

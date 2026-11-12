@@ -112,6 +112,7 @@ interface GridItemProps {
 	area: Area;
 	layoutType: LayoutType;
 	format: ArticleFormat;
+	hasPageSkin: boolean;
 	element?: 'div' | 'aside';
 	className?: string;
 	children: React.ReactNode;
@@ -131,13 +132,14 @@ const GridItem = ({
 	area,
 	layoutType,
 	format,
+	hasPageSkin,
 	element: Element = 'div',
 	className,
 	children,
 }: GridItemProps) => (
 	<Element
 		data-gu-name={area}
-		css={gridItemCss(area, layoutType, format)}
+		css={gridItemCss(area, layoutType, format, hasPageSkin)}
 		className={className}
 	>
 		{children}
@@ -148,10 +150,12 @@ export const StandardLayoutArticleGrid = ({
 	article,
 	format,
 	renderingTarget,
+	hasPageSkin,
 }: {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
+	hasPageSkin: boolean;
 }) => {
 	const {
 		config: { host },
@@ -306,6 +310,7 @@ export const StandardLayoutArticleGrid = ({
 					background-color: ${themePalette('--article-background')};
 				`,
 				grid.container,
+				hasPageSkin && grid.pageSkinContainer,
 				grid.outerRules(),
 				setCentreRule(layoutType),
 				isImmersive &&
@@ -335,6 +340,22 @@ export const StandardLayoutArticleGrid = ({
 							z-index: ${getZIndex('immersiveGridOuterRules')};
 						}
 					`,
+				hasPageSkin &&
+					css`
+						${from.desktop} {
+							&::before {
+								left: 0;
+								grid-column: auto;
+								transform: none;
+							}
+
+							&::after {
+								right: 0;
+								grid-column: auto;
+								transform: none;
+							}
+						}
+					`,
 				isImmersivePortrait &&
 					css`
 						${from.leftCol} {
@@ -351,6 +372,7 @@ export const StandardLayoutArticleGrid = ({
 				area="media"
 				layoutType={layoutType}
 				format={format}
+				hasPageSkin={hasPageSkin}
 				css={[
 					isImmersive
 						? css`
@@ -477,6 +499,7 @@ export const StandardLayoutArticleGrid = ({
 				area="title"
 				layoutType={layoutType}
 				format={format}
+				hasPageSkin={hasPageSkin}
 				element="aside"
 				css={[
 					isImmersive &&
@@ -545,6 +568,7 @@ export const StandardLayoutArticleGrid = ({
 				area="headline"
 				layoutType={layoutType}
 				format={format}
+				hasPageSkin={hasPageSkin}
 				css={[
 					isImmersive &&
 						!isImmersiveWeekendRead &&
@@ -726,6 +750,7 @@ export const StandardLayoutArticleGrid = ({
 					area="caption"
 					layoutType={layoutType}
 					format={format}
+					hasPageSkin={hasPageSkin}
 					css={css`
 						padding-top: ${space[2]}px;
 					`}
@@ -757,6 +782,7 @@ export const StandardLayoutArticleGrid = ({
 				area="standfirst"
 				layoutType={layoutType}
 				format={format}
+				hasPageSkin={hasPageSkin}
 				css={[
 					isImmersive &&
 						css`
@@ -798,6 +824,7 @@ export const StandardLayoutArticleGrid = ({
 				area="meta"
 				layoutType={layoutType}
 				format={format}
+				hasPageSkin={hasPageSkin}
 				element="aside"
 				css={[
 					isImmersive &&
@@ -941,6 +968,7 @@ export const StandardLayoutArticleGrid = ({
 				area="body"
 				layoutType={layoutType}
 				format={format}
+				hasPageSkin={hasPageSkin}
 				css={css`
 					z-index: ${getZIndex('bodyArea')};
 				`}
@@ -998,6 +1026,7 @@ export const StandardLayoutArticleGrid = ({
 						shouldHideAds={article.shouldHideAds}
 						articleArrangement={layoutType}
 						idApiUrl={article.config.idApiUrl}
+						hasPageSkin={hasPageSkin}
 					/>
 					<MatchInfoContainer
 						isMatchReport={isFootballMatchReport}
@@ -1063,6 +1092,7 @@ export const StandardLayoutArticleGrid = ({
 				area="right-column"
 				layoutType={layoutType}
 				format={format}
+				hasPageSkin={hasPageSkin}
 				css={css`
 					padding-top: ${layoutType === 'media' ? 0 : 6}px;
 					${from.desktop} {

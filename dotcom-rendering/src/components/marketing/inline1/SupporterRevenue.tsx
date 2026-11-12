@@ -10,7 +10,10 @@ import {
 import { SvgGuardianLogo } from '@guardian/source/react-components';
 import { LinkButton } from '@guardian/source/react-components';
 import type { Inline1Props } from '@guardian/support-dotcom-components/dist/shared/types/props/inline1';
+import { useEffect } from 'react';
+import { useIsInView } from '../../../lib/useIsInView';
 import type { ReactComponent } from '../lib/ReactComponent';
+import { recordInline1View } from './utils/viewCount';
 
 const outerContainerStyles = css`
 	border-top: 1px solid ${palette.neutral[73]};
@@ -103,7 +106,20 @@ const imageStyles = css`
 	object-fit: cover;
 `;
 
-export const SupporterRevenue: ReactComponent<Inline1Props> = ({ variant }) => {
+export const SupporterRevenue: ReactComponent<Inline1Props> = ({
+	tracking,
+	variant,
+}) => {
+	const [hasBeenSeen, setNode] = useIsInView({
+		debounce: true,
+		threshold: 0,
+	});
+	useEffect(() => {
+		if (hasBeenSeen === true) {
+			recordInline1View(tracking.abTestName);
+		}
+	}, [hasBeenSeen, tracking.abTestName]);
+
 	if (variant.message.type != 'Inline1SupportMessage') {
 		return;
 	}
@@ -116,6 +132,7 @@ export const SupporterRevenue: ReactComponent<Inline1Props> = ({ variant }) => {
 		<section
 			css={outerContainerStyles}
 			aria-labelledby="supporter-revenue-heading"
+			ref={setNode}
 		>
 			<div css={innerContainerStyles}>
 				<div css={guardianLogoContainerStyles}>

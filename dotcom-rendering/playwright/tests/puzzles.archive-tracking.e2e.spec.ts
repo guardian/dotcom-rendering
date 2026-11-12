@@ -17,6 +17,7 @@ const easy: PuzzlesArchive['selectedPuzzle'] = {
 	puzzleType: 'SUDOKU_EASY',
 	slug: 'logic-puzzles/sudoku-easy',
 	set: 'easy',
+	path: '/puzzles-and-games/logic-puzzles/sudoku-easy/archive',
 };
 const medium: PuzzlesArchive['selectedPuzzle'] = {
 	id: 'sudoku-medium',
@@ -24,6 +25,7 @@ const medium: PuzzlesArchive['selectedPuzzle'] = {
 	puzzleType: 'SUDOKU_MEDIUM',
 	slug: 'logic-puzzles/sudoku-medium',
 	set: 'medium',
+	path: '/puzzles-and-games/logic-puzzles/sudoku-medium/archive',
 };
 const archiveFor = (puzzle = easy, month = 9): PuzzlesArchive => ({
 	category: 'logic-puzzles',
@@ -284,7 +286,9 @@ test.describe('Puzzle archive click tracking', () => {
 			});
 		}
 		expect(clicks).toHaveLength(3);
-		await expect(page).toHaveURL(/puzzle=sudoku-easy&year=2026&month=10$/);
+		await expect(page).toHaveURL(
+			/\/sudoku-easy\/archive\?year=2026&month=10$/,
+		);
 	});
 
 	test('preserves click attribution after a persisted pageshow refresh', async ({
@@ -607,7 +611,7 @@ test.describe('Puzzle archive click tracking', () => {
 		const clicks = recordClicks(page);
 		await loadArchive(page);
 		await context.route(
-			'**/puzzles-and-games/logic-puzzles/archive?*',
+			'**/puzzles-and-games/logic-puzzles/*/archive?*',
 			async (route) =>
 				route.fulfill({
 					contentType: 'text/html',
@@ -623,7 +627,7 @@ test.describe('Puzzle archive click tracking', () => {
 		const destination = await popup;
 		await click;
 		await expect(destination).toHaveURL(
-			/puzzle=sudoku-medium&year=2026&month=9$/,
+			/\/sudoku-medium\/archive\?year=2026&month=9$/,
 		);
 		expect(page.url()).toBe(originalUrl);
 		expect(clicks).toEqual([

@@ -2,6 +2,12 @@ import { css, Global } from '@emotion/react';
 import { breakpoints, palette } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { createPuzzlesPage } from '../../fixtures/manual/puzzlesPage';
+import {
+	puzzlesHubV1Experiment,
+	puzzlesHubV1Participation,
+	puzzlesHubV2Experiment,
+	puzzlesHubV2Participation,
+} from '../lib/puzzlesHubVersionExperiment';
 import { extractNAV } from '../model/extract-nav';
 import type { PuzzlesArchive } from '../types/puzzlesPage';
 import { PuzzlesArchiveLayout } from './PuzzlesArchiveLayout';
@@ -15,6 +21,7 @@ const puzzles = ['Quick', 'Mini', 'Cryptic', 'Quick cryptic', 'Quiptic'].map(
 			puzzleType: id.toUpperCase(),
 			slug: `crosswords/${id}`,
 			set: id,
+			path: `/puzzles-and-games/crosswords/${id}/archive`,
 		};
 	},
 );
@@ -74,7 +81,14 @@ const archive: PuzzlesArchive = {
 	],
 };
 
-const puzzlesPage = createPuzzlesPage({ archive });
+const config = {
+	...createPuzzlesPage().config,
+	serverSideABTests: {
+		...puzzlesHubV1Participation(puzzlesHubV1Experiment.variant),
+		...puzzlesHubV2Participation(puzzlesHubV2Experiment.variant),
+	},
+};
+const puzzlesPage = createPuzzlesPage({ archive, config });
 
 const meta = {
 	title: 'Layouts/Puzzles Archive',
@@ -166,6 +180,7 @@ const wordWheel = {
 	puzzleType: 'WORD_WHEEL',
 	slug: 'word-games/word-wheel',
 	set: 'word-wheel',
+	path: '/puzzles-and-games/word-games/word-wheel/archive',
 };
 
 const wordGamesArchive: PuzzlesArchive = {
@@ -186,6 +201,7 @@ const sudokuPuzzles = ['Easy', 'Medium', 'Hard', 'Killer'].map((title) => {
 		puzzleType: id.toUpperCase().replace('-', '_'),
 		slug: `logic-puzzles/${id}`,
 		set: id,
+		path: `/puzzles-and-games/logic-puzzles/${id}/archive`,
 	};
 });
 const sudokuMedium = sudokuPuzzles[1]!;
@@ -202,14 +218,17 @@ const logicPuzzlesArchive: PuzzlesArchive = {
 
 export const WordGames = {
 	args: {
-		puzzlesPage: createPuzzlesPage({ archive: wordGamesArchive }),
+		puzzlesPage: createPuzzlesPage({ archive: wordGamesArchive, config }),
 	},
 	parameters: lightParameters,
 } satisfies Story;
 
 export const LogicPuzzles = {
 	args: {
-		puzzlesPage: createPuzzlesPage({ archive: logicPuzzlesArchive }),
+		puzzlesPage: createPuzzlesPage({
+			archive: logicPuzzlesArchive,
+			config,
+		}),
 	},
 	parameters: lightParameters,
 } satisfies Story;
@@ -224,6 +243,7 @@ const manyCrosswords = [
 			puzzleType: id.toUpperCase(),
 			slug: `crosswords/${id}`,
 			set: id,
+			path: `/puzzles-and-games/crosswords/${id}/archive`,
 		};
 	}),
 ];
@@ -236,6 +256,7 @@ export const ManyPuzzleTypes = {
 	args: {
 		puzzlesPage: createPuzzlesPage({
 			archive: { ...archive, puzzles: manyCrosswords },
+			config,
 		}),
 	},
 	parameters: lightParameters,
@@ -249,7 +270,7 @@ export const CrosswordsDark = {
 export const WordGamesDark = {
 	args: {
 		darkModeAvailable: true,
-		puzzlesPage: createPuzzlesPage({ archive: wordGamesArchive }),
+		puzzlesPage: createPuzzlesPage({ archive: wordGamesArchive, config }),
 	},
 	parameters: darkParameters,
 } satisfies Story;
@@ -257,7 +278,10 @@ export const WordGamesDark = {
 export const LogicPuzzlesDark = {
 	args: {
 		darkModeAvailable: true,
-		puzzlesPage: createPuzzlesPage({ archive: logicPuzzlesArchive }),
+		puzzlesPage: createPuzzlesPage({
+			archive: logicPuzzlesArchive,
+			config,
+		}),
 	},
 	parameters: darkParameters,
 } satisfies Story;

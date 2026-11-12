@@ -3,6 +3,7 @@ import {
 	from,
 	remSpace,
 	palette as sourcePalette,
+	space,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
@@ -88,6 +89,17 @@ import { BannerWrapper } from './lib/stickiness';
  * `CrosswordLayout` itself gates its own `showComments` Section, just with
  * a fixed value instead of a derived one.
  */
+
+const merchandisingAdStyles = css`
+	.ad-slot.ad-slot--rendered {
+		/* Fluid creatives reset the slot's default padding. */
+		padding-bottom: ${space[6]}px;
+
+		&:not([data-label-show='true']) {
+			border-top: 1px solid ${sourcePalette.neutral[86]};
+		}
+	}
+`;
 
 const puzzleGroupLabels: Record<PuzzleConfig['puzzleGroup'], string> = {
 	'logic-puzzles': 'Logic puzzles',
@@ -421,7 +433,7 @@ export const PuzzlePageLayout = ({
 	 */
 	const puzzleFamilyTag: TagType[] = [
 		{
-			id: `puzzles-and-games/${puzzleGroupPath}/${puzzleConfig.slug}`,
+			id: `puzzles-and-games/${puzzleGroupPath}/${puzzleConfig.slug}/archive`,
 			type: 'Series',
 			title: puzzleFamilyName,
 		},
@@ -736,11 +748,15 @@ export const PuzzlePageLayout = ({
 						backgroundColour={themePalette('--ad-background')}
 						element="aside"
 					>
-						<AdSlot
+						<div
+							css={merchandisingAdStyles}
 							data-print-layout="hide"
-							position="merchandising-high"
-							display={puzzlePageFormat.display}
-						/>
+						>
+							<AdSlot
+								position="merchandising-high"
+								display={puzzlePageFormat.display}
+							/>
+						</div>
 					</Section>
 				)}
 
