@@ -13,7 +13,7 @@ type WithJsonProps<T> = T & { json?: string };
 type Props = WithJsonProps<React.ComponentProps<typeof Newsletter>>;
 const meta: Meta<Props> = {
 	component: Newsletter,
-	title: 'Components/marketing/Newsletter',
+	title: 'Components/marketing/inline1/Newsletter',
 	args: newsletterProps,
 	render: ({ json, ...args }) => {
 		const jsonProps = json
