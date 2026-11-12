@@ -73,9 +73,7 @@ export const isCartoon = (
 	);
 };
 
-export const isProduct = (
-	element?: FEElement,
-): element is ProductBlockElement => {
+const isProduct = (element?: FEElement): element is ProductBlockElement => {
 	if (!element) return false;
 	return (
 		element._type ===

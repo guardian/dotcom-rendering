@@ -32,7 +32,7 @@ declare global {
 	}
 }
 
-export interface NativeMessage {
+interface NativeMessage {
 	data: string;
 	connectionId: string;
 }
@@ -63,7 +63,7 @@ function sendNativeMessage(nativeMessage: NativeMessage): void {
 let uid = 1;
 const getUniqueConnectionId = () => `connection-${uid++}`;
 
-export class NativeConnection extends ThriftConnection {
+class NativeConnection extends ThriftConnection {
 	connectionId = getUniqueConnectionId();
 	promises: PromiseResponse[] = [];
 	outBuffer: NativeMessage[] = [];

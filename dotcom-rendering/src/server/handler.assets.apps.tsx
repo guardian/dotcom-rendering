@@ -23,7 +23,7 @@ type Props = {
 	fontList: FontDisplay[];
 };
 
-export const buildHtml = (scriptTags: string[]) => {
+const buildHtml = (scriptTags: string[]) => {
 	const body = renderToString(<AssetsPage fontList={fontList} />);
 
 	return `<!doctype html>
@@ -51,7 +51,7 @@ export const buildHtml = (scriptTags: string[]) => {
 const assetHash = (asset: string) =>
 	createHash('sha256').update(asset).digest('base64');
 
-export const AssetsPage = ({ fontList: fonts }: Props) => {
+const AssetsPage = ({ fontList: fonts }: Props) => {
 	return (
 		<>
 			{fonts.map((font) => (

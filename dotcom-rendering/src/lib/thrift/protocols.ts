@@ -11,7 +11,7 @@ import type {
 } from '@creditkarma/thrift-server-core';
 import { MessageType, TProtocol } from '@creditkarma/thrift-server-core';
 
-export abstract class TProtocolDecorator extends TProtocol {
+abstract class TProtocolDecorator extends TProtocol {
 	private concreteProtocol: TProtocol;
 
 	constructor(protocol: TProtocol) {

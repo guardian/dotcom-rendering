@@ -24,7 +24,7 @@ export type CrosswordIdentityData = {
 };
 
 /** The part of the component's `ProgressChange` this adapter reads. */
-export type CrosswordProgressChange = {
+type CrosswordProgressChange = {
 	filledCells: number;
 	totalCells: number;
 	isComplete: boolean;

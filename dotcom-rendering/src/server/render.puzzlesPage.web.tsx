@@ -14,7 +14,7 @@ import type { Config } from '../types/configContext';
 import type { FEPuzzlesPageType } from '../types/puzzlesPage';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
-export const isPuzzlesDarkModeAvailable = (
+const isPuzzlesDarkModeAvailable = (
 	serverSideABTests: Record<string, string>,
 ): boolean => serverSideABTests['webx-dark-mode-web'] === 'enable';
 

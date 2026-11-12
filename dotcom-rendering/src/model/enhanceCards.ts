@@ -283,7 +283,7 @@ export const getFrontEditorialTestData = (
  * Decide the headline to be shown for a given card. If there is an active editorial test on a card,
  * return the variant headline matching the user test group. Otherwise, return the default headline
  */
-export const decideHeadline = (
+const decideHeadline = (
 	faciaCard: FEFrontCard | FESupportingContent,
 	serverSideABTests: Record<string, string>,
 	isEditorialABTestingEnabled: boolean,
@@ -304,7 +304,7 @@ export const decideHeadline = (
 /**
  * Find the UUID of a headline test if one is running on the card
  */
-export const findHeadlineTestUuid = (
+const findHeadlineTestUuid = (
 	faciaCard: FEFrontCard | FESupportingContent,
 	serverSideABTests: Record<string, string>,
 	isEditorialABTestingEnabled: boolean,

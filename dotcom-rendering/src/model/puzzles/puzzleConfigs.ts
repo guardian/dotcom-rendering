@@ -23,16 +23,9 @@ import { formatPuzzleDateShort } from '../../lib/puzzleDate';
  * comment for why this split exists.
  */
 
-export const puzzleGroups = ['logic-puzzles', 'word-games', 'trivia'] as const;
+const puzzleGroups = ['logic-puzzles', 'word-games', 'trivia'] as const;
 
-export type PuzzleGroup = (typeof puzzleGroups)[number];
-
-/**
- * The set of puzzle iframe providers DCR knows how to build a URL for.
- * Adding a provider means adding a `PuzzleIframeConfig` union variant and
- * handling its URLs in `src/lib/puzzleIframeUrl.ts`.
- */
-export type PuzzleProvider = 'amuselabs' | 'wordiply' | 'moviegrid';
+type PuzzleGroup = (typeof puzzleGroups)[number];
 
 /**
  * AmuseLabs-hosted puzzles (the sudoku variants, word-wheel) are
@@ -78,11 +71,11 @@ export interface WordiplyIframeConfig {
 }
 
 /** MovieGrid's dated URLs are supplied by the Puzzles API, never derived here. */
-export interface MovieGridIframeConfig {
+interface MovieGridIframeConfig {
 	provider: 'moviegrid';
 }
 
-export type PuzzleIframeConfig =
+type PuzzleIframeConfig =
 	| AmuseLabsIframeConfig
 	| WordiplyIframeConfig
 	| MovieGridIframeConfig;
