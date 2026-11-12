@@ -1,8 +1,11 @@
+import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import type { ReactNode } from 'react';
 import { expect, within } from 'storybook/test';
 import { allModes } from '../../.storybook/modes';
 import { Audio as AudioFixture } from '../../fixtures/generated/fe-articles/Audio';
+import { Labs as LabsFixture } from '../../fixtures/generated/fe-articles/Labs';
 import { Recipe as RecipeFixture } from '../../fixtures/generated/fe-articles/Recipe';
 import { Standard as StandardFixture } from '../../fixtures/generated/fe-articles/Standard';
 import { ArticleDesign, ArticleDisplay } from '../lib/articleFormat';
@@ -19,6 +22,17 @@ const meta = {
 export default meta;
 
 type Story = StoryObj<typeof meta>;
+
+const PageSkinWrapper = ({ children }: { children: ReactNode }) => (
+	<div
+		css={css`
+			background-image: url('https://adimage.theguardian.com/pageskins/puppies-pageskin.jpg');
+			background-size: contain;
+		`}
+	>
+		{children}
+	</div>
+);
 
 const appsAudioArticle = enhanceArticleType(AudioFixture, 'Apps');
 
@@ -241,6 +255,64 @@ export const WebImmersiveMobile: Story = {
 		const { width, height } = image.getBoundingClientRect();
 		await expect(width).toBeGreaterThan(0);
 		await expect(height).toBeCloseTo((width * 5) / 4, 0);
+	},
+};
+
+const webImmersiveLabsArticle = enhanceArticleType(LabsFixture, 'Web');
+
+export const WebImmersiveLabsWithPageSkin: Story = {
+	args: {
+		renderingTarget: 'Web',
+		NAV: {
+			...extractNAV(webImmersiveLabsArticle.frontendData.nav),
+			selectedPillar: getCurrentPillar(
+				webImmersiveLabsArticle.frontendData,
+			),
+		},
+		article: {
+			...webImmersiveLabsArticle.frontendData,
+			config: {
+				...webImmersiveLabsArticle.frontendData.config,
+				hasPageSkin: true,
+			},
+		},
+		format: {
+			design: webImmersiveLabsArticle.design,
+			display: webImmersiveLabsArticle.display,
+			theme: webImmersiveLabsArticle.theme,
+		},
+	},
+	render: (args) => (
+		<PageSkinWrapper>
+			<StandardLayout {...args} />
+		</PageSkinWrapper>
+	),
+	parameters: {
+		formats: [
+			{
+				design: webImmersiveLabsArticle.design,
+				display: webImmersiveLabsArticle.display,
+				theme: webImmersiveLabsArticle.theme,
+			},
+		],
+		chromatic: {
+			modes: {
+				'light wide': allModes['light wide'],
+			},
+		},
+	},
+	play: async ({ canvasElement }) => {
+		const pageSkinSlot = canvasElement.querySelector(
+			'[data-name="pageskin-inread"]',
+		);
+		const main = canvasElement.querySelector('main');
+		const labsHeader = canvasElement.querySelector('#labs-header');
+		const mainMedia = canvasElement.querySelector('[data-gu-name="media"]');
+
+		await expect(pageSkinSlot).toBeInTheDocument();
+		await expect(main).not.toBeNull();
+		await expect(labsHeader).not.toBeNull();
+		await expect(mainMedia).not.toBeNull();
 	},
 };
 

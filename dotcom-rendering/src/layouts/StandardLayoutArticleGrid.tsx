@@ -1,6 +1,12 @@
 import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
-import { between, from, space, until } from '@guardian/source/foundations';
+import {
+	between,
+	breakpoints,
+	from,
+	space,
+	until,
+} from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AffiliateDisclaimer } from '../components/AffiliateProducts/AffiliateDisclaimer';
@@ -148,10 +154,12 @@ export const StandardLayoutArticleGrid = ({
 	article,
 	format,
 	renderingTarget,
+	hasPageSkin,
 }: {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
+	hasPageSkin: boolean;
 }) => {
 	const {
 		config: { host },
@@ -339,6 +347,22 @@ export const StandardLayoutArticleGrid = ({
 							z-index: ${getZIndex('immersiveGridOuterRules')};
 						}
 					`,
+				hasPageSkin &&
+					css`
+						${from.desktop} {
+							&::before {
+								left: 0;
+								grid-column: auto;
+								transform: none;
+							}
+
+							&::after {
+								right: 0;
+								grid-column: auto;
+								transform: none;
+							}
+						}
+					`,
 				isImmersivePortrait &&
 					css`
 						${from.leftCol} {
@@ -421,6 +445,13 @@ export const StandardLayoutArticleGrid = ({
 								height: calc(
 									100vh - ${immersiveHeaderHeight}px
 								);
+							}
+						`,
+					hasPageSkin &&
+						isImmersive &&
+						css`
+							${from.desktop} {
+								width: ${breakpoints.desktop}px;
 							}
 						`,
 					isImmersivePortrait &&
