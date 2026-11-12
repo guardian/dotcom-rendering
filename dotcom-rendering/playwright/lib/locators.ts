@@ -42,14 +42,6 @@ const expectToNotExist = async (
 	});
 };
 
-const expectLocatorToExist = async (
-	page: Page,
-	locator: Locator,
-	count = 1,
-): Promise<void> => {
-	await expect(locator).toHaveCount(count, { timeout: TEN_SECONDS });
-};
-
 const expectLocatorToNotExist = async (
 	page: Page,
 	locator: Locator,
@@ -62,6 +54,5 @@ export {
 	expectToNotBeVisible,
 	expectToExist,
 	expectToNotExist,
-	expectLocatorToExist,
 	expectLocatorToNotExist,
 };

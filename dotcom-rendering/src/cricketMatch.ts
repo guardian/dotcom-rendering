@@ -116,7 +116,7 @@ type OtherResult = {
 
 export type CricketResult = WinnerResult | OtherResult;
 
-export type CricketMatchKind = 'Fixture' | 'Live' | 'Result';
+type CricketMatchKind = 'Fixture' | 'Live' | 'Result';
 
 export type CricketMatch = {
 	kind: CricketMatchKind;

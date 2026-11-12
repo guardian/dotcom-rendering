@@ -71,9 +71,7 @@ type MissingScore = {
 
 type ParserError = MissingScore;
 
-export const parseTable = (
-	feGroup: FEGroup,
-): Result<ParserError, FootballTable> =>
+const parseTable = (feGroup: FEGroup): Result<ParserError, FootballTable> =>
 	parseEntries(feGroup.entries).map((entries) => ({
 		groupName: feGroup.round.name,
 		entries: entries.sort((a, b) => a.position - b.position),

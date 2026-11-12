@@ -50,7 +50,7 @@ export type FootballMatchTeamWithStats = FootballTeam & {
 /**
  * Summary stats information about a given team in a football match
  */
-export type FootballMatchTeamWithStatsSummary = FootballTeam & {
+type FootballMatchTeamWithStatsSummary = FootballTeam & {
 	possession: number;
 	shotsTotal: number;
 	statsColour: string;

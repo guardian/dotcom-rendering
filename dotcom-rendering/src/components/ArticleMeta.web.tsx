@@ -174,10 +174,7 @@ const metaNumbers = (isPictureContent: boolean) => css`
 	}
 `;
 
-export const metaContainer = (
-	format: ArticleFormat,
-	layoutType?: LayoutType,
-) => {
+const metaContainer = (format: ArticleFormat, layoutType?: LayoutType) => {
 	const defaultMargins = css`
 		${until.phablet} {
 			margin-left: -20px;

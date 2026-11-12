@@ -25,7 +25,7 @@ type CardProps = {
 	aspectRatio: AspectRatio;
 };
 
-export const OneCardFast = ({
+const OneCardFast = ({
 	trail,
 	imageLoading,
 	aspectRatio,
@@ -45,7 +45,7 @@ export const OneCardFast = ({
 	);
 };
 
-export const OneCardSlow = ({
+const OneCardSlow = ({
 	trail,
 	imageLoading,
 	aspectRatio,
@@ -65,7 +65,7 @@ export const OneCardSlow = ({
 	);
 };
 
-export const TwoCard = ({
+const TwoCard = ({
 	trails,
 	imageLoading,
 	aspectRatio,
@@ -92,7 +92,7 @@ export const TwoCard = ({
 	);
 };
 
-export const ThreeCard = ({
+const ThreeCard = ({
 	trails,
 	imageLoading,
 	aspectRatio,
@@ -126,7 +126,7 @@ export const ThreeCard = ({
 	);
 };
 
-export const FourCard = ({
+const FourCard = ({
 	trails,
 	imageLoading,
 	aspectRatio,
@@ -167,7 +167,7 @@ export const FourCard = ({
 	);
 };
 
-export const FiveCardFast = ({
+const FiveCardFast = ({
 	trails,
 	imageLoading,
 	aspectRatio,
@@ -216,7 +216,7 @@ export const FiveCardFast = ({
 	);
 };
 
-export const FiveCardSlow = ({
+const FiveCardSlow = ({
 	trails,
 	imageLoading,
 	aspectRatio,
@@ -268,7 +268,7 @@ export const FiveCardSlow = ({
 	);
 };
 
-export const SixCardFast = ({
+const SixCardFast = ({
 	trails,
 	imageLoading,
 	aspectRatio,
@@ -319,7 +319,7 @@ export const SixCardFast = ({
 	);
 };
 
-export const SixCardSlow = ({
+const SixCardSlow = ({
 	trails,
 	imageLoading,
 	aspectRatio,
@@ -378,7 +378,7 @@ export const SixCardSlow = ({
 	);
 };
 
-export const SevenCardFast = ({
+const SevenCardFast = ({
 	trails,
 	imageLoading,
 	aspectRatio,
@@ -432,7 +432,7 @@ export const SevenCardFast = ({
 	);
 };
 
-export const SevenCardSlow = ({
+const SevenCardSlow = ({
 	trails,
 	imageLoading,
 	aspectRatio,
@@ -498,7 +498,7 @@ export const SevenCardSlow = ({
 	);
 };
 
-export const EightOrMoreFast = ({
+const EightOrMoreFast = ({
 	trails,
 	imageLoading,
 	aspectRatio,
@@ -576,7 +576,7 @@ export const EightOrMoreFast = ({
 	);
 };
 
-export const EightOrMoreSlow = ({
+const EightOrMoreSlow = ({
 	trails,
 	imageLoading,
 	aspectRatio,

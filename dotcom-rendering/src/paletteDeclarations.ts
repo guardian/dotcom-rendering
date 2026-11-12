@@ -954,7 +954,7 @@ const calloutSubmitBackgroundHoverLight: PaletteFunction = () =>
 const calloutSubmitBackgroundHoverDark: PaletteFunction = () =>
 	themeButtonBrand.backgroundPrimaryHover;
 
-export const expandingWrapper = {
+const expandingWrapper = {
 	'--expandingWrapper--background': {
 		light: () => expandingWrapperThemeDefault['--background'],
 		dark: () => expandingWrapperDarkTheme['--background'],
@@ -1006,7 +1006,7 @@ export const expandingWrapper = {
 	};
 };
 
-export const tabs = {
+const tabs = {
 	'--tabs--background': {
 		light: () => tabsThemeDefault['--background'],
 		dark: () => tabsDarkTheme['--background'],

@@ -17,11 +17,11 @@ export type Region = {
 	competitions: Array<{ url: string; name: string }>;
 };
 
-export type FootballData = SportPageConfig & {
+type FootballData = SportPageConfig & {
 	regions: Region[];
 };
 
-export type SportPageConfig = {
+type SportPageConfig = {
 	editionId: EditionId;
 	guardianBaseURL: string;
 	config: FESportPageConfig;

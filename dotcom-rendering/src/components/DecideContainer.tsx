@@ -190,4 +190,3 @@ export const DecideContainer = ({
 			return null;
 	}
 };
-export { GraphicSchema };

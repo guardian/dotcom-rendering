@@ -17,12 +17,12 @@ const eventTypes = [
 ] as const;
 const isEventType = isOneOf(eventTypes);
 
-export type PlayerEvent = {
+type PlayerEvent = {
 	eventTime: string; // minutes
 	eventType: (typeof eventTypes)[number];
 };
 
-export type FootballTeam = {
+type FootballTeam = {
 	id: string;
 	name: string;
 	codename: string;
@@ -38,7 +38,7 @@ export type FootballTeam = {
 	scorers: string[];
 };
 
-export type FootballPlayer = {
+type FootballPlayer = {
 	id: string;
 	name: string;
 	position: string;

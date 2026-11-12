@@ -1,4 +1,4 @@
-import type { BrowserContext, Cookie } from '@playwright/test';
+import type { BrowserContext } from '@playwright/test';
 
 const addCookie = async (
 	context: BrowserContext,
@@ -19,21 +19,4 @@ const addCookie = async (
 	]);
 };
 
-/**
- * Clear a single cookie
- *
- * Playwright does not currently have a method for removing a single cookie
- */
-const clearCookie = async (
-	context: BrowserContext,
-	cookieName: string,
-): Promise<void> => {
-	const cookies = await context.cookies();
-	const filteredCookies = cookies.filter(
-		(cookie: Cookie) => cookie.name !== cookieName,
-	);
-	await context.clearCookies();
-	await context.addCookies(filteredCookies);
-};
-
-export { addCookie, clearCookie };
+export { addCookie };

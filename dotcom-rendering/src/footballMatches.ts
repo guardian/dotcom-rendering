@@ -14,7 +14,7 @@ export type Team = {
 	id: string;
 };
 
-export type TeamScore = Team & {
+type TeamScore = Team & {
 	score?: number;
 };
 
@@ -23,20 +23,20 @@ type MatchData = {
 	dateTimeISOString: string;
 };
 
-export type MatchResult = MatchData & {
+type MatchResult = MatchData & {
 	kind: 'Result';
 	homeTeam: TeamScore;
 	awayTeam: TeamScore;
 	comment?: string;
 };
 
-export type MatchFixture = MatchData & {
+type MatchFixture = MatchData & {
 	kind: 'Fixture';
 	homeTeam: Team;
 	awayTeam: Team;
 };
 
-export type LiveMatch = MatchData & {
+type LiveMatch = MatchData & {
 	kind: 'Live';
 	homeTeam: TeamScore;
 	awayTeam: TeamScore;

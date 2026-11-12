@@ -23,7 +23,7 @@ export type FootballMatch = MatchFixture | LiveMatch | MatchResult;
  * Before a match has started we have some information, such as when it's going
  * to start and which teams are playing. But we don't have a score or status.
  */
-export type MatchFixture = MatchData & {
+type MatchFixture = MatchData & {
 	kind: 'Fixture';
 	homeTeam: FootballTeam;
 	awayTeam: FootballTeam;
@@ -33,7 +33,7 @@ export type MatchFixture = MatchData & {
  * Once a match has started we have additional information beyond what's
  * available for a {@linkcode MatchFixture}, such as the score.
  */
-export type LiveMatch = MatchData & {
+type LiveMatch = MatchData & {
 	kind: 'Live';
 	homeTeam: FootballMatchTeamWithScore;
 	awayTeam: FootballMatchTeamWithScore;
@@ -46,7 +46,7 @@ export type LiveMatch = MatchData & {
  * {@linkcode LiveMatch}, such as the score. The status is always "full-time"
  * (FT), so we don't need a property for that.
  */
-export type MatchResult = MatchData & {
+type MatchResult = MatchData & {
 	kind: 'Result';
 	homeTeam: FootballMatchTeamWithScore;
 	awayTeam: FootballMatchTeamWithScore;

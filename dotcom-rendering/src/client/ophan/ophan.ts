@@ -1,6 +1,6 @@
 import { log } from '@guardian/libs';
 import type ophan from '@guardian/ophan-tracker-js';
-import type { ComponentEvent, TAction } from '@guardian/ophan-tracker-js';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import type { RenderingTarget } from '../../types/renderingTarget';
 
 type Ophan = typeof ophan;
@@ -101,48 +101,6 @@ export const submitClickComponentEvent = async (
 ): Promise<void> => {
 	const ophan = await getOphan(renderingTarget);
 	ophan.trackClickComponentEvent(element);
-};
-
-interface SdcTestMeta {
-	abTestName: NonNullable<ComponentEvent['abTest']>['name'];
-	abTestVariant: NonNullable<ComponentEvent['abTest']>['name'];
-	componentType: ComponentEvent['component']['componentType'];
-	campaignCode: ComponentEvent['component']['campaignCode'];
-	products: ComponentEvent['component']['products'];
-	labels: ComponentEvent['component']['labels'];
-	campaignId?: string;
-}
-
-export const sendOphanComponentEvent = async (
-	action: TAction,
-	testMeta: SdcTestMeta,
-	renderingTarget: RenderingTarget,
-): Promise<void> => {
-	const {
-		abTestName,
-		abTestVariant,
-		componentType,
-		products = [],
-		campaignCode,
-		labels = [],
-	} = testMeta;
-
-	const componentEvent: ComponentEvent = {
-		component: {
-			componentType,
-			products,
-			campaignCode,
-			id: testMeta.campaignId ?? testMeta.campaignCode,
-			labels,
-		},
-		abTest: {
-			name: abTestName,
-			variant: abTestVariant,
-		},
-		action,
-	};
-
-	await submitComponentEvent(componentEvent, renderingTarget);
 };
 
 export const recordPerformance = async (
