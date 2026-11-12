@@ -104,7 +104,7 @@ test.describe('Live MovieGrid frontend integration', () => {
 			request,
 		}) => {
 			await disableCMP(context);
-			const archivePath = `/puzzles-and-games/trivia-and-quizzes/archive?puzzle=${slug}`;
+			const archivePath = `/puzzles-and-games/trivia-and-quizzes/${slug}/archive`;
 			const redirect = await request.get(
 				`${frontendOrigin}/puzzles-and-games/trivia-and-quizzes/${slug}`,
 				{ maxRedirects: 0 },

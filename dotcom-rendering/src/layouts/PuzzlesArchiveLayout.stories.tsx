@@ -15,6 +15,7 @@ const puzzles = ['Quick', 'Mini', 'Cryptic', 'Quick cryptic', 'Quiptic'].map(
 			puzzleType: id.toUpperCase(),
 			slug: `crosswords/${id}`,
 			set: id,
+			path: `/puzzles-and-games/crosswords/${id}/archive`,
 		};
 	},
 );
@@ -166,6 +167,7 @@ const wordWheel = {
 	puzzleType: 'WORD_WHEEL',
 	slug: 'word-games/word-wheel',
 	set: 'word-wheel',
+	path: '/puzzles-and-games/word-games/word-wheel/archive',
 };
 
 const wordGamesArchive: PuzzlesArchive = {
@@ -186,6 +188,7 @@ const sudokuPuzzles = ['Easy', 'Medium', 'Hard', 'Killer'].map((title) => {
 		puzzleType: id.toUpperCase().replace('-', '_'),
 		slug: `logic-puzzles/${id}`,
 		set: id,
+		path: `/puzzles-and-games/logic-puzzles/${id}/archive`,
 	};
 });
 const sudokuMedium = sudokuPuzzles[1]!;
@@ -224,6 +227,7 @@ const manyCrosswords = [
 			puzzleType: id.toUpperCase(),
 			slug: `crosswords/${id}`,
 			set: id,
+			path: `/puzzles-and-games/crosswords/${id}/archive`,
 		};
 	}),
 ];
