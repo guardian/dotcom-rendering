@@ -324,11 +324,13 @@ export const WebImmersiveLabsWithPageSkin: Story = {
 			'[data-name="pageskin-inread"]',
 		);
 		const main = canvasElement.querySelector('main');
+		const article = canvasElement.querySelector('article');
 		const labsHeader = canvasElement.querySelector('#labs-header');
 		const mainMedia = canvasElement.querySelector('[data-gu-name="media"]');
 
 		await expect(pageSkinSlot).toBeInTheDocument();
 		await expect(main).not.toBeNull();
+		await expect(article).not.toBeNull();
 		await expect(labsHeader).not.toBeNull();
 		await expect(mainMedia).not.toBeNull();
 	},
@@ -388,6 +390,47 @@ export const WebImmersivePortrait: Story = {
 		chromatic: {
 			modes: allLightBreakpointModes,
 		},
+	},
+};
+
+export const WebImmersivePortraitWithPageSkin: Story = {
+	args: {
+		renderingTarget: 'Web',
+		NAV: {
+			...extractNAV(webImmersivePortraitArticle.frontendData.nav),
+			selectedPillar: getCurrentPillar(
+				webImmersivePortraitArticle.frontendData,
+			),
+		},
+		article: {
+			...webImmersivePortraitArticle.frontendData,
+			shouldHideAds: false,
+			config: {
+				...webImmersivePortraitArticle.frontendData.config,
+				hasPageSkin: true,
+			},
+		},
+		format: immersivePortraitFormat,
+	},
+	render: (args) => (
+		<PageSkinWrapper>
+			<StandardLayout {...args} />
+		</PageSkinWrapper>
+	),
+	parameters: {
+		formats: [immersivePortraitFormat],
+		chromatic: {
+			modes: {
+				'light wide': allModes['light wide'],
+			},
+		},
+	},
+	play: async ({ canvasElement }) => {
+		const article = canvasElement.querySelector('article');
+		const mainMedia = canvasElement.querySelector('[data-gu-name="media"]');
+
+		await expect(article).not.toBeNull();
+		await expect(mainMedia).not.toBeNull();
 	},
 };
 

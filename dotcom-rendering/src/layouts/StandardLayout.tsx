@@ -1,3 +1,4 @@
+import { css, Global } from '@emotion/react';
 import { palette as sourcePalette } from '@guardian/source/foundations';
 import { AdPortals } from '../components/AdPortals.island';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
@@ -113,6 +114,16 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	return (
 		<>
+			{hasPageSkin && (
+				<Global
+					styles={css`
+						html,
+						body {
+							overflow-x: clip;
+						}
+					`}
+				/>
+			)}
 			{isInteractive && (
 				<>
 					<InteractivesScrollbarWidth />
