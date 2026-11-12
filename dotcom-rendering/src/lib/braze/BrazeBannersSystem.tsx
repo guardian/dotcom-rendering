@@ -24,7 +24,7 @@ import { suppressForTaylorReport } from './taylorReport';
  * Determines the best mix color (black or white)
  * based on a given background hex color.
  */
-export function getContrastMix(hexColor: string): 'black' | 'white' {
+function getContrastMix(hexColor: string): 'black' | 'white' {
 	// Remove the hash if it exists
 	const hex = hexColor.replace('#', '');
 
@@ -46,7 +46,7 @@ export function getContrastMix(hexColor: string): 'black' | 'white' {
  * Determines the best accessible text color (black or white)
  * based on a given background hex color.
  */
-export function getContrastColor(hexColor: string): '#000000' | '#ffffff' {
+function getContrastColor(hexColor: string): '#000000' | '#ffffff' {
 	return getContrastMix(hexColor) === 'black' ? '#000000' : '#ffffff';
 }
 
@@ -337,7 +337,7 @@ export function refreshBanners(
 /**
  * Meta information required to display a Braze Banner.
  */
-export type BrazeBannersSystemMeta = {
+type BrazeBannersSystemMeta = {
 	id: string;
 	braze: BrazeInstance;
 	banner: Banner;

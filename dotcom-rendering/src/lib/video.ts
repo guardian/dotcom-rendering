@@ -5,7 +5,7 @@ import type { VideoPlayerFormat } from '../types/mainMedia';
 export type CustomPlayEventDetail = { uniqueId: string };
 
 /** We expect all videos to include dimensions since the field was added to FEMediaAsset */
-export const DEFAULT_ASPECT_RATIO = 5 / 4;
+const DEFAULT_ASPECT_RATIO = 5 / 4;
 
 export const DEFAULT_IMAGE_ASPECT_RATIO = '5:4';
 
@@ -40,16 +40,15 @@ const mp4FileTypes = [
 
 const allSupportedVideoFileTypes = [...mp4FileTypes, ...m3u8FileTypes] as const;
 
-export const supportedFileTypesPreferM3U8 = Array.from(
+const supportedFileTypesPreferM3U8 = Array.from(
 	new Set([...m3u8FileTypes, ...allSupportedVideoFileTypes]),
 );
 
-export const supportedFileTypesPreferMp4 = Array.from(
+const supportedFileTypesPreferMp4 = Array.from(
 	new Set([...mp4FileTypes, ...allSupportedVideoFileTypes]),
 );
 
-export type SupportedVideoFileType =
-	(typeof allSupportedVideoFileTypes)[number];
+type SupportedVideoFileType = (typeof allSupportedVideoFileTypes)[number];
 
 /**
  * We use an arbitrary limit or 20 seconds before considering a video "long".

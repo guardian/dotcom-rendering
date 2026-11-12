@@ -4,14 +4,13 @@ import type {
 	EpicPayload,
 	EpicProps,
 	GutterPayload,
-	GutterProps,
 	HeaderPayload,
 	HeaderProps,
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { TestTracking } from '@guardian/support-dotcom-components/dist/shared/types/abTests/shared';
 import { getDeviceClass } from '../client/deviceDetection/iPadDetection';
 
-export interface ModuleData<PROPS> {
+interface ModuleData<PROPS> {
 	name: string;
 	props: PROPS;
 }
@@ -111,12 +110,6 @@ export const getBanner = (
 	headers?: HeadersInit,
 ): Promise<ModuleDataResponse<BannerProps>> =>
 	getModuleData('banner', baseUrl, payload, headers);
-
-export const getGutterLiveblog = (
-	baseUrl: string,
-	payload: GutterPayload,
-): Promise<ModuleDataResponse<GutterProps>> =>
-	getModuleData('gutter-liveblog', baseUrl, payload);
 
 export const getHeader = (
 	baseUrl: string,

@@ -1,14 +1,8 @@
-import type {
-	BannerPayload,
-	EpicPayload,
-} from '@guardian/support-dotcom-components/dist/dotcom/types';
-import type {
-	BannerProps,
-	EpicProps,
-} from '@guardian/support-dotcom-components/dist/shared/types';
+import type { EpicPayload } from '@guardian/support-dotcom-components/dist/dotcom/types';
+import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import useSWRImmutable from 'swr/immutable';
 import type { ModuleDataResponse } from './sdcRequests';
-import { getBanner, getEpic, getLiveblogEpic } from './sdcRequests';
+import { getLiveblogEpic } from './sdcRequests';
 
 const useSDC = <PAYLOAD, PROPS>(
 	key: string,
@@ -34,15 +28,7 @@ type UseSDC<PAYLOAD, PROPS> = (
 	payload: PAYLOAD,
 ) => ModuleDataResponse<PROPS> | undefined;
 
-export const useSDCEpic: UseSDC<EpicPayload, EpicProps> = (baseUrl, payload) =>
-	useSDC('epic', () => getEpic(baseUrl, payload));
-
 export const useSDCLiveblogEpic: UseSDC<EpicPayload, EpicProps> = (
 	baseUrl,
 	payload,
 ) => useSDC('liveblog-epic', () => getLiveblogEpic(baseUrl, payload));
-
-export const useSDCBanner: UseSDC<BannerPayload, BannerProps> = (
-	baseUrl,
-	payload,
-) => useSDC('banner', () => getBanner(baseUrl, payload));

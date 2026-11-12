@@ -42,7 +42,7 @@ import type {
  * `PuzzleContext` in `src/components/PuzzleIframe.island.tsx`, which
  * re-exports this same type rather than defining its own.
  */
-export interface PuzzleUrlContext {
+interface PuzzleUrlContext {
 	userId: string | null;
 	darkMode: boolean;
 	/**

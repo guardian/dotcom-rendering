@@ -21,7 +21,7 @@ import type {
  * type { first: string, last: string }
  */
 
-export type ExtractRouteParams<T> = string extends T
+type ExtractRouteParams<T> = string extends T
 	? Record<string, string>
 	: T extends `${string}:${infer Param}/${infer Rest}`
 		? { [k in Param | keyof ExtractRouteParams<Rest>]?: string }
@@ -29,13 +29,11 @@ export type ExtractRouteParams<T> = string extends T
 			? { [k in Param]?: string }
 			: Record<string, never>;
 
-export type ConsentPath = 'newsletters' | 'data' | 'review';
-
 /**
  * These are all the accepted url routes for this application
  * If you want to add a new route, it will need to be added below
  */
-export const ValidRoutePathsArray = [
+const ValidRoutePathsArray = [
 	'/404',
 	'/change-email/:token',
 	'/change-email/complete',
@@ -124,7 +122,7 @@ export const ValidRoutePathsArray = [
 	'/welcome/password',
 ] as const;
 
-export type RoutePaths = (typeof ValidRoutePathsArray)[number];
+type RoutePaths = (typeof ValidRoutePathsArray)[number];
 
 /**
  * The absolute URL of the Identity sign-in page (the "combined" sign-in and
@@ -145,7 +143,7 @@ export const PROFILE_SIGN_IN_SOCIAL_URL =
  * These are all valid paths for the Identity API
  * New routes should be added below
  */
-export type ApiRoutePaths =
+type ApiRoutePaths =
 	| '/auth/oauth-token'
 	| '/consents'
 	| '/consent-email/:token'
@@ -182,15 +180,10 @@ type MembersDataApiRoutePaths = '/user-attributes/me';
 
 type UserBenefitsApiRoutePaths = '/benefits/me';
 
-export type PasswordRoutePath = Extract<
-	'/reset-password' | '/set-password' | '/welcome',
-	RoutePaths
->;
-
 /**
  * This is all valid routes on the site, only used for the helper function addQueryParamsToPath
  */
-export type AllRoutes =
+type AllRoutes =
 	| ApiRoutePaths
 	| RoutePaths
 	| OktaApiRoutePaths
@@ -204,7 +197,7 @@ export type AllRoutes =
  * would require an object { first: "value", last: "value" } for token substitution
  */
 
-export type PathParams<P extends AllRoutes> = ExtractRouteParams<P>;
+type PathParams<P extends AllRoutes> = ExtractRouteParams<P>;
 
 type BuildUrl = <P extends AllRoutes>(
 	path: P,
@@ -220,7 +213,7 @@ type BuildUrl = <P extends AllRoutes>(
  * @param path target path.
  * @param params parameters.
  */
-export const buildUrl: BuildUrl = <P extends AllRoutes>(
+const buildUrl: BuildUrl = <P extends AllRoutes>(
 	path: P,
 	params: PathParams<P> = {} as PathParams<P>,
 ): string => {
@@ -239,7 +232,7 @@ export const buildUrl: BuildUrl = <P extends AllRoutes>(
  * @param obj Object to remove empty keys from
  * @returns Object with empty keys removed and values converted to strings
  */
-export const removeEmptyKeysFromObjectAndConvertValuesToString = (
+const removeEmptyKeysFromObjectAndConvertValuesToString = (
 	obj: Record<string, unknown>,
 ): Record<string, string> => {
 	const newObj: Record<string, string> = {};
@@ -267,7 +260,7 @@ export const removeEmptyKeysFromObjectAndConvertValuesToString = (
  * @param params QueryParams object with all query parameters
  * @returns PersistableQueryParams - object with query parameters to persist between requests
  */
-export const getPersistableQueryParams = (
+const getPersistableQueryParams = (
 	params: QueryParams,
 ): PersistableQueryParams => ({
 	returnUrl: params.returnUrl,
