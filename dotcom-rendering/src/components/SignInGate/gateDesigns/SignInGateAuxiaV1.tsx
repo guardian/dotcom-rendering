@@ -171,7 +171,7 @@ export const SignInGateAuxiaV1 = ({
 };
 
 // --- Styling ---
-export const signInGateContainer = css`
+const signInGateContainer = css`
 	max-width: 617px;
 	padding: ${space[4]}px 0 ${space[10]}px;
 

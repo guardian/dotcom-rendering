@@ -134,20 +134,6 @@ export const faq = css`
 	}
 `;
 
-export const privacyLink = css`
-	color: ${text.anchorPrimary};
-	text-decoration: underline;
-	text-decoration-color: ${line.primary};
-	text-underline-position: under;
-	border: 0;
-	background: transparent;
-	/* stylelint-disable-next-line property-disallowed-list */
-	font-family: inherit;
-	font-size: inherit;
-	padding: 0;
-	cursor: pointer;
-`;
-
 export const firstParagraphOverlay = css`
 	margin-top: -250px;
 	width: 100%;

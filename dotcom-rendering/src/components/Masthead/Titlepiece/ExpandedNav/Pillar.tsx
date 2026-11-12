@@ -50,7 +50,7 @@ const columnLinkTitle = css`
 	}
 `;
 
-export const mainMenuLinkStyle = css`
+const mainMenuLinkStyle = css`
 	box-sizing: border-box;
 	overflow: hidden;
 	position: relative;
@@ -60,7 +60,7 @@ export const mainMenuLinkStyle = css`
 	}
 `;
 
-export const columnLinks = css`
+const columnLinks = css`
 	${textSans15};
 	box-sizing: border-box;
 	display: flex;

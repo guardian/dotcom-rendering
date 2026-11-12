@@ -148,7 +148,7 @@ function parseAbandonedBasket(
 	return parsedResult.data;
 }
 
-export const hasRequiredConsents = (): Promise<boolean> =>
+const hasRequiredConsents = (): Promise<boolean> =>
 	onConsent()
 		.then(({ canTarget }: ConsentState) => canTarget)
 		.catch(() => false);

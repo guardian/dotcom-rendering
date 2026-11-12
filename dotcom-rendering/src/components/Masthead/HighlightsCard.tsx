@@ -15,7 +15,7 @@ import { FormatBoundary } from '../FormatBoundary';
 import { StarRating } from '../StarRating/StarRating';
 import { HighlightsCardImage } from './HighlightsCardImage';
 
-export type HighlightsCardProps = {
+type HighlightsCardProps = {
 	linkTo: string;
 	format: ArticleFormat;
 	headlineText: string;

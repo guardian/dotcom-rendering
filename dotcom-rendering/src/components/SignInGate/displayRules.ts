@@ -60,7 +60,7 @@ export const hasRequiredConsents = (): Promise<boolean> =>
 		.then(({ canTarget }: ConsentState) => canTarget)
 		.catch(() => false);
 
-export const pageMetaDataMakesItEligibleForGateDisplay = (
+const pageMetaDataMakesItEligibleForGateDisplay = (
 	contentType: string,
 	sectionId: string | undefined,
 	tags: TagType[],

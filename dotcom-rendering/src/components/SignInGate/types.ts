@@ -26,7 +26,7 @@ export type SignInGateComponent = {
 export const ALL_USER_TYPES = ['new', 'guest', 'current'] as const;
 export type UserType = (typeof ALL_USER_TYPES)[number];
 
-export const isUserType = isOneOf(ALL_USER_TYPES);
+const isUserType = isOneOf(ALL_USER_TYPES);
 
 export const ALL_PRODUCTS = [
 	'Contribution',
@@ -36,7 +36,7 @@ export const ALL_PRODUCTS = [
 ] as const;
 export type Product = (typeof ALL_PRODUCTS)[number];
 
-export const isProduct = isOneOf(ALL_PRODUCTS);
+const isProduct = isOneOf(ALL_PRODUCTS);
 export interface CheckoutCompleteCookieData {
 	userType: UserType;
 	product: Product;
@@ -77,8 +77,6 @@ export type CurrentSignInGateABTest = {
 	id: string;
 };
 
-export type SignInGateTestMap = { [name: string]: SignInGateComponent };
-
 // -------------------------------
 // Auxia Integration Experiment //
 // -------------------------------
@@ -101,7 +99,7 @@ export interface TreatmentContentDecoded {
 
 // The treatmentType is how Auxia tells the client which type of gate to display
 // The spelling of "dismissible" is inconsistent here, but this is because the treatments were set up this way in Auxia.
-export type AuxiaAPIResponseDataUserTreatmentType =
+type AuxiaAPIResponseDataUserTreatmentType =
 	| 'DISMISSABLE_SIGN_IN_GATE'
 	| 'NONDISMISSIBLE_SIGN_IN_GATE'
 	| 'DISMISSABLE_SIGN_IN_GATE_POPUP'
@@ -200,7 +198,7 @@ export interface AuxiaProxyGetTreatmentsResponse {
 	data?: AuxiaProxyGetTreatmentsProxyResponseData;
 }
 
-export interface AuxiaProxyGetTreatmentsProxyResponseData {
+interface AuxiaProxyGetTreatmentsProxyResponseData {
 	responseId: string;
 	userTreatment?: AuxiaAPIResponseDataUserTreatment;
 	// Set to true on responses produced by the active Gandalf rules, both

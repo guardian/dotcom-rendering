@@ -1,4 +1,3 @@
-import type { SerializedStyles } from '@emotion/react';
 import { css, jsx } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
 import type { CSSProperties, PropsWithChildren } from 'react';
@@ -96,54 +95,3 @@ export const Grid = ({
 		{ css: [grid, !hasPageSkin && gridBeyondDesktop], style },
 		children,
 	);
-
-/** Spans the entire width of the grid */
-export const Content = ({
-	children,
-	styles,
-}: PropsWithChildren<{ styles?: SerializedStyles }>) => (
-	<section style={{ gridColumn: 'content' }} css={styles}>
-		{children}
-	</section>
-);
-
-export const MainColumn = ({
-	children,
-	styles,
-}: PropsWithChildren<{ styles?: SerializedStyles }>) => (
-	<section
-		style={{ gridColumn: 'main-column', gridRowStart: 1 }}
-		css={styles}
-	>
-		{children}
-	</section>
-);
-
-const hideUntilLeftCol = css`
-	display: none;
-	${from.leftCol} {
-		display: block;
-	}
-`;
-/** Only visible from leftCol / 1140px */
-export const LeftColumn = ({ children }: PropsWithChildren) => (
-	<section
-		style={{ gridColumn: 'left-column', gridRowStart: 1 }}
-		css={hideUntilLeftCol}
-	>
-		{children}
-	</section>
-);
-
-const hideUntilDesktop = css`
-	display: none;
-	${from.leftCol} {
-		display: block;
-	}
-`;
-/** Only visible from desktop / 980px */
-export const RightColumn = ({ children }: PropsWithChildren) => (
-	<section style={{ gridColumn: 'right-column' }} css={hideUntilDesktop}>
-		{children}
-	</section>
-);

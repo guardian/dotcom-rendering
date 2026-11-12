@@ -8,7 +8,7 @@ const containerStyling = css`
 	position: relative;
 `;
 
-export const detailStyling = css`
+const detailStyling = css`
 	margin: 16px 0 36px;
 	background: ${themePalette('--expandable-atom-background')};
 	color: ${themePalette('--article-text')};

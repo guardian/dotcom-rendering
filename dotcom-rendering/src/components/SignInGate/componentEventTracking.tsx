@@ -26,18 +26,6 @@ export const submitComponentEventTracking = async (
 	ophan.record({ componentEvent });
 };
 
-export const submitViewEventTracking = (
-	componentEvent: Omit<ComponentEvent, 'action'>,
-	renderingTarget: RenderingTarget,
-) =>
-	void submitComponentEventTracking(
-		{
-			...componentEvent,
-			action: 'VIEW',
-		},
-		renderingTarget,
-	);
-
 const submitClickEventTracking = (
 	componentEvent: Omit<ComponentEvent, 'action'>,
 	renderingTarget: RenderingTarget,
@@ -50,7 +38,7 @@ const submitClickEventTracking = (
 		renderingTarget,
 	);
 
-export const withComponentId = (id?: string): ComponentEvent['component'] => ({
+const withComponentId = (id?: string): ComponentEvent['component'] => ({
 	componentType: 'SIGN_IN_GATE',
 	id,
 });
