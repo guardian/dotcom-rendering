@@ -1,4 +1,4 @@
-import { expect, within } from 'storybook/test';
+import { expect } from 'storybook/test';
 import { leftColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { defaultFormats } from '../../.storybook/decorators/splitThemeDecorator';
 import { allModes } from '../../.storybook/modes';
@@ -116,12 +116,11 @@ export const ImmersiveGridAndFollowStory = meta.story({
 		layoutType: 'immersiveLandscape',
 	},
 	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
-		const followControls = await canvas.findAllByText(
-			'Follow Lanre Bakare in My Guardian',
+		const followIslands = canvasElement.querySelectorAll(
+			'[data-gu-name="follow"]',
 		);
 
-		await expect(followControls).toHaveLength(1);
+		await expect(followIslands).toHaveLength(1);
 	},
 });
 
