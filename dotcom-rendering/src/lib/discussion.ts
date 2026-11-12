@@ -1,4 +1,3 @@
-import { isOneOf } from '@guardian/libs';
 import type { GenericSchema, InferInput, InferOutput } from 'valibot';
 import {
 	array,
@@ -27,14 +26,6 @@ import type {
 	unPickComment,
 } from './discussionApi';
 import { error, ok, type Result } from './result';
-
-export type CAPIPillar =
-	| 'news'
-	| 'sport'
-	| 'culture'
-	| 'opinion'
-	| 'lifestyle'
-	| 'labs';
 
 const userProfile: GenericSchema<UserProfile> = object({
 	userId: string(),
@@ -167,7 +158,7 @@ export const parseRepliesResponse = (
 	return ok(result.output.comment.responses);
 };
 
-export type CommentResponseErrorCodes = (typeof errorCodes)[number];
+type CommentResponseErrorCodes = (typeof errorCodes)[number];
 const errorCodes = [
 	'USERNAME_MISSING',
 	'EMPTY_COMMENT_BODY',
@@ -274,15 +265,12 @@ export const postUsernameResponseSchema = variant('status', [
 ]);
 
 const orderBy = ['newest', 'oldest', 'recommendations'] as const;
-export const isOrderBy = isOneOf(orderBy);
 export type OrderByType = (typeof orderBy)[number];
 
 const threads = ['collapsed', 'expanded', 'unthreaded'] as const;
-export const isThreads = isOneOf(threads);
 export type ThreadsType = (typeof threads)[number];
 
 const pageSize = [25, 50, 100] as const;
-export const isPageSize = isOneOf(pageSize);
 export type PageSizeType = (typeof pageSize)[number];
 export interface FilterOptions {
 	orderBy: OrderByType;
@@ -404,34 +392,3 @@ export const getCommentContextResponseSchema = object({
 	pageSize: picklist(pageSize),
 	page: number(),
 });
-
-/** for development purposes only! */
-export const stubUser = {
-	kind: 'Reader',
-	addUsername: () => Promise.resolve(error('This is a stub user')),
-	onComment: () =>
-		Promise.resolve(
-			ok(
-				String(
-					Number.MAX_SAFE_INTEGER - Math.ceil(Math.random() * 12_000),
-				),
-			),
-		),
-	onRecommend: () => Promise.resolve(true),
-	onReply: () => Promise.resolve(error('API_ERROR')),
-	reportAbuse: () => Promise.resolve(error('Invalid')),
-	profile: {
-		userId: 'stub-user-000',
-		displayName: 'Stub User',
-		webUrl: '',
-		apiUrl: '',
-		avatar: '',
-		secureAvatarUrl: '',
-		badge: [],
-		privateFields: {
-			canPostComment: true,
-			isPremoderated: false,
-			hasCommented: true,
-		},
-	},
-} satisfies Reader;

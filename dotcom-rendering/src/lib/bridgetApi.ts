@@ -1,5 +1,4 @@
 import type { ThriftClient } from '@creditkarma/thrift-server-core';
-import * as AbTesting from '@guardian/bridget/AbTesting';
 import * as Acquisitions from '@guardian/bridget/Acquisitions';
 import * as Analytics from '@guardian/bridget/Analytics';
 import * as Audio from '@guardian/bridget/Audio';
@@ -12,7 +11,6 @@ import * as Interactives from '@guardian/bridget/Interactives';
 import * as ListenToArticle from '@guardian/bridget/ListenToArticle';
 import * as LiveActivities from '@guardian/bridget/LiveActivities';
 import * as MatchNotifications from '@guardian/bridget/MatchNotifications';
-import * as Metrics from '@guardian/bridget/Metrics';
 import * as Navigation from '@guardian/bridget/Navigation';
 import * as Newsletters from '@guardian/bridget/Newsletters';
 import * as Notifications from '@guardian/bridget/Notifications';
@@ -127,17 +125,6 @@ export const getVideoClient = (): Video.Client<void> => {
 	}
 	return videoClient;
 };
-let metricsClient: Metrics.Client<void> | undefined = undefined;
-export const getMetricsClient = (): Metrics.Client<void> => {
-	if (!metricsClient) {
-		metricsClient = createAppClient<Metrics.Client<void>>(
-			Metrics.Client,
-			'buffered',
-			'compact',
-		);
-	}
-	return metricsClient;
-};
 let analyticsClient: Analytics.Client<void> | undefined = undefined;
 export const getAnalyticsClient = (): Analytics.Client<void> => {
 	if (!analyticsClient) {
@@ -232,18 +219,6 @@ export const getListenToArticleClient = (): ListenToArticle.Client<void> => {
 		);
 	}
 	return listenToArticleClient;
-};
-
-let nativeAbTestingClient: AbTesting.Client<void> | undefined = undefined;
-export const getNativeABTestingClient = (): AbTesting.Client<void> => {
-	if (!nativeAbTestingClient) {
-		nativeAbTestingClient = createAppClient<AbTesting.Client<void>>(
-			AbTesting.Client,
-			'buffered',
-			'compact',
-		);
-	}
-	return nativeAbTestingClient;
 };
 
 export type MatchNotificationsClient = BridgetClient<MatchNotifications.Client>;

@@ -116,9 +116,7 @@ const getScriptRegex = (build: Build) =>
 export const WEB = getScriptRegex('client.web');
 export const WEB_VARIANT_SCRIPT = getScriptRegex('client.web.variant');
 export const APPS_SCRIPT = getScriptRegex('client.apps');
-export const EDITIONS_CROSSWORD_SCRIPT = getScriptRegex(
-	'client.editionsCrossword',
-);
+const EDITIONS_CROSSWORD_SCRIPT = getScriptRegex('client.editionsCrossword');
 
 export const generateScriptTags = (scripts: string[]): string[] =>
 	scripts.filter(isString).map((script) => {

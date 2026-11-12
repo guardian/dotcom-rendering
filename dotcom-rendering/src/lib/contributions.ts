@@ -16,8 +16,7 @@ import type { TagPage } from '../types/tagPage';
 import { getAuthStatus, getOptionsHeaders } from './identity';
 
 // User Attributes API cookies (created on sign-in)
-export const RECURRING_CONTRIBUTOR_COOKIE = 'gu_recurring_contributor';
-export const OPT_OUT_OF_ARTICLE_COUNT_COOKIE = 'gu_article_count_opt_out';
+const OPT_OUT_OF_ARTICLE_COUNT_COOKIE = 'gu_article_count_opt_out';
 
 // Support Frontend cookie (created when a contribution is made)
 export const SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE =
@@ -28,7 +27,6 @@ const WEEKLY_ARTICLE_COUNT_KEY = 'gu.history.weeklyArticleCount';
 export const NO_RR_BANNER_KEY = 'gu.noRRBanner';
 
 // See https://github.com/guardian/support-dotcom-components/blob/main/module-versions.md
-export const MODULES_VERSION = 'v3';
 
 // Returns true if we should hide support messaging because the user is a supporter.
 // Checks the cookie that is set by the user benefits API upon signing in.
@@ -102,10 +100,10 @@ export const shouldHideSupportMessaging = (
 	}
 };
 
-export const REQUIRED_CONSENTS_FOR_ARTICLE_COUNT = [1, 3, 7];
+const REQUIRED_CONSENTS_FOR_ARTICLE_COUNT = [1, 3, 7];
 const REQUIRED_CONSENTS_FOR_BROWSER_ID = [1, 3, 5, 7];
 
-export const hasArticleCountOptOutCookie = (): boolean =>
+const hasArticleCountOptOutCookie = (): boolean =>
 	getCookie({ name: OPT_OUT_OF_ARTICLE_COUNT_COOKIE }) !== null;
 
 const removeWeeklyArticleCountsFromLocalStorage = () =>

@@ -18,7 +18,7 @@ export interface ArticleCounts {
 	dailyArticleHistory: DailyArticleHistory;
 }
 
-export const shouldIncrementArticleCount = (contentType: string): boolean => {
+const shouldIncrementArticleCount = (contentType: string): boolean => {
 	// See https://github.com/guardian/frontend/blob/9c8707d894c858dd17de1c7c1499f6b91f5287bc/common/app/model/DotcomContentType.scala#L29
 	return [
 		'article',
@@ -38,7 +38,7 @@ export const shouldIncrementArticleCount = (contentType: string): boolean => {
  * @param {string} contentType
  * @return {*}  {(DailyArticleHistory | undefined)}
  */
-export const getDailyArticleCounts = (
+const getDailyArticleCounts = (
 	contentType: string,
 ): DailyArticleHistory | undefined => {
 	if (!window.guardian.dailyArticleCount) {
@@ -61,7 +61,7 @@ export const getDailyArticleCounts = (
  * @param {string} contentType
  * @return {*}  {(Promise<WeeklyArticleHistory | undefined>)}
  */
-export const getWeeklyArticleCounts = async (
+const getWeeklyArticleCounts = async (
 	pageId: string,
 	tags: TagType[],
 	contentType: string,
