@@ -38,6 +38,7 @@ interface Props {
 	hasPageSkin?: boolean;
 	pageId?: string;
 	canonicalUrl?: string;
+	showReaderRevenueLinks?: boolean;
 }
 
 const gridContent = css`
@@ -335,6 +336,7 @@ export const Titlepiece = ({
 	hasPageSkin,
 	pageId = '',
 	canonicalUrl,
+	showReaderRevenueLinks = true,
 }: Props) => {
 	const { showBanner } = useEditionSwitcherBanner(pageId, editionId);
 
@@ -587,6 +589,7 @@ export const Titlepiece = ({
 					nav={nav}
 					editionId={editionId}
 					hasPageSkin={hasPageSkin}
+					showReaderRevenueLinks={showReaderRevenueLinks}
 				/>
 			</div>
 
