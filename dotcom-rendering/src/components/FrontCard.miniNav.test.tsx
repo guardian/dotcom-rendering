@@ -82,7 +82,7 @@ describe('FrontCard mini navigation', () => {
 		},
 	);
 
-	it.each([undefined, 'static/medium/4', 'flexible/special'] as const)(
+	it.each([undefined, 'static/medium/4', 'scrollable/small'] as const)(
 		'does not render mini navigation in container %s',
 		(containerType) => {
 			renderCard({ containerType });

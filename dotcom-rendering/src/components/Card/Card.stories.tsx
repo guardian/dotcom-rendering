@@ -1774,7 +1774,7 @@ export const WithALargeGap = () => {
 				>
 					<Card
 						{...basicCardProps}
-						containerType={'flexible/special'}
+						containerType={'flexible/general'}
 						mediaPositionOnDesktop="left"
 						format={{
 							display: ArticleDisplay.Standard,
@@ -1828,7 +1828,7 @@ export const WithAVerticalGap = () => {
 				>
 					<Card
 						{...basicCardProps}
-						containerType={'flexible/special'}
+						containerType={'flexible/general'}
 						mediaPositionOnDesktop="bottom"
 						format={{
 							display: ArticleDisplay.Standard,
