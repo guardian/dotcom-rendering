@@ -97,7 +97,7 @@ const ABTests: ABTest[] = [
 		description:
 			"V3 of test to measure the impact of contamination between groups in ab tests",
 		owners: ["commercial.dev@theguardian.com"],
-		status: "OFF",
+		status: "ON",
 		expirationDate: "2026-12-01",
 		type: "client",
 		audienceSize: 10 / 100,
