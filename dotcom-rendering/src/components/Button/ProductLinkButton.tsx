@@ -9,9 +9,9 @@ import { SKIMLINK_REL } from '../../lib/affiliateLinksUtils';
 import { palette } from '../../palette';
 import type { AffiliateProductPrice } from '../../types/content';
 import {
+	applyLatestPriceToLabel,
 	createAccessibleProductLabel,
 	createStrikeThroughProductLabel,
-	rewriteLabelWithLatestPrice,
 } from '../AffiliateProducts/livePriceUtils';
 import { heightAutoStyle, wrapButtonTextStyle } from './styles';
 import { getPropsForLinkUrl } from './utils';
@@ -76,10 +76,8 @@ export const ProductLinkButton = ({
 		...(minimisePadding ? [minimisePaddingStyle] : []),
 	];
 
-	const labelWithLatestPrice = rewriteLabelWithLatestPrice(
-		latestPrice,
-		label,
-	);
+	const { label: labelWithLatestPrice, livePriceDisplay } =
+		applyLatestPriceToLabel(latestPrice, label);
 
 	return (
 		<LinkButton
@@ -93,6 +91,7 @@ export const ProductLinkButton = ({
 			data-component={dataComponent}
 			data-ignore="global-link-styling"
 			data-link-name={`product link button ${priority}`}
+			data-live-price={livePriceDisplay}
 			data-spacefinder-role="inline"
 			size={size}
 			cssOverrides={cssOverrides}

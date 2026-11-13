@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
+import type { ReactNode } from 'react';
 import type { AffiliateProductPrice, ProductCta } from '../../types/content';
 
 const strikeThroughRegex = /~([^~]+)~(.*)/;
@@ -139,12 +140,25 @@ export const extractPriceFromLabel = (
 // Matches the conventional retailer CTA label of {price} at {retailerName}
 const priceAtRetailerRegex = new RegExp(`^${priceRegex.source} at .+$`);
 
-export const rewriteLabelWithLatestPrice = (
+/**
+ * How a live price was presented to the reader, if at all:
+ * - `live` – the live price replaced the article price (including when they are equal)
+ * - `strikethrough` – the article price is struck through alongside the live price
+ * - `undefined` – no live price was presented, the article price is shown as-is
+ *
+ * Rendered as the `data-live-price` attribute so that we can track in Ophan
+ * whether a live price was actually presented on the page.
+ */
+export type LivePriceDisplay = 'live' | 'strikethrough' | undefined;
+
+export const applyLatestPriceToLabel = (
 	latestPrice: AffiliateProductPrice | undefined,
 	label: string,
-) => {
+): { label: string; livePriceDisplay: LivePriceDisplay } => {
+	const unchanged = { label, livePriceDisplay: undefined };
+
 	if (isUndefined(latestPrice) || !priceAtRetailerRegex.test(label)) {
-		return label;
+		return unchanged;
 	}
 
 	const formattedLatestPrice = getFormattedLatestPrice(latestPrice);
@@ -156,7 +170,7 @@ export const rewriteLabelWithLatestPrice = (
 		Number.isNaN(extractedPrice.numericPrice) ||
 		extractedPrice.currencySymbol !== latestPrice.currencySymbol
 	) {
-		return label;
+		return unchanged;
 	}
 
 	if (
@@ -165,21 +179,37 @@ export const rewriteLabelWithLatestPrice = (
 			extractedPrice.numericPrice,
 		)
 	) {
-		return label.replace(
-			extractedPrice.entireMatch,
-			`~${extractedPrice.entireMatch}~ ${formattedLatestPrice.formattedPrice}`,
-		);
-	} else {
-		return label.replace(
+		return {
+			label: label.replace(
+				extractedPrice.entireMatch,
+				`~${extractedPrice.entireMatch}~ ${formattedLatestPrice.formattedPrice}`,
+			),
+			livePriceDisplay: 'strikethrough',
+		};
+	}
+
+	return {
+		label: label.replace(
 			extractedPrice.entireMatch,
 			formattedLatestPrice.formattedPrice,
-		);
-	}
+		),
+		livePriceDisplay: 'live',
+	};
 };
 
-export const getProductCtaLivePrice = ({ price, latestPrice }: ProductCta) => {
+export const rewriteLabelWithLatestPrice = (
+	latestPrice: AffiliateProductPrice | undefined,
+	label: string,
+): string => applyLatestPriceToLabel(latestPrice, label).label;
+
+export const getProductCtaLivePriceDisplay = ({
+	price,
+	latestPrice,
+}: ProductCta): { content: ReactNode; livePriceDisplay: LivePriceDisplay } => {
+	const unchanged = { content: price, livePriceDisplay: undefined };
+
 	if (isUndefined(latestPrice)) {
-		return price;
+		return unchanged;
 	}
 
 	const formattedLatestPrice = getFormattedLatestPrice(latestPrice);
@@ -189,7 +219,7 @@ export const getProductCtaLivePrice = ({ price, latestPrice }: ProductCta) => {
 		Number.isNaN(numericArticlePrice) ||
 		isUndefined(formattedLatestPrice)
 	) {
-		return price;
+		return unchanged;
 	}
 
 	if (
@@ -198,13 +228,22 @@ export const getProductCtaLivePrice = ({ price, latestPrice }: ProductCta) => {
 			numericArticlePrice,
 		)
 	) {
-		return (
-			<>
-				<s css={strikeThroughStyle}>{price}</s>{' '}
-				{formattedLatestPrice.formattedPrice}
-			</>
-		);
+		return {
+			content: (
+				<>
+					<s css={strikeThroughStyle}>{price}</s>{' '}
+					{formattedLatestPrice.formattedPrice}
+				</>
+			),
+			livePriceDisplay: 'strikethrough',
+		};
 	}
 
-	return formattedLatestPrice.formattedPrice;
+	return {
+		content: formattedLatestPrice.formattedPrice,
+		livePriceDisplay: 'live',
+	};
 };
+
+export const getProductCtaLivePrice = (cta: ProductCta): ReactNode =>
+	getProductCtaLivePriceDisplay(cta).content;

@@ -14,7 +14,7 @@ import { palette } from '../../palette';
 import type { SummaryProduct } from '../../types/content';
 import { ProductLinkButton } from '../Button/ProductLinkButton';
 import {
-	getProductCtaLivePrice,
+	getProductCtaLivePriceDisplay,
 	getProductLinkLabelWithoutPrice,
 } from './livePriceUtils';
 import { ProductCardImage } from './ProductCardImage';
@@ -91,6 +91,7 @@ export const ProductCarouselCard = ({
 
 	const hasHeading = !!productBlock.primaryHeadingHtml;
 	const cardCta = productBlock.productCtas[ctaIndex];
+	const ctaPrice = cardCta && getProductCtaLivePriceDisplay(cardCta);
 	const headingId = productBlock.h2Id;
 	const productAndBrandName = [
 		productBlock.brandName,
@@ -143,10 +144,13 @@ export const ProductCarouselCard = ({
 						</div>
 					</div>
 				)}
-				{cardCta && (
+				{cardCta && ctaPrice && (
 					<>
-						<div css={priceStyle}>
-							{getProductCtaLivePrice(cardCta)}
+						<div
+							css={priceStyle}
+							data-live-price={ctaPrice.livePriceDisplay}
+						>
+							{ctaPrice.content}
 						</div>
 						<div css={buttonWrapper}>
 							<ProductLinkButton
