@@ -39,6 +39,9 @@ updates:
       jest:
         patterns:
           - 'jest*'
+      opentelemetry:
+        patterns:
+          - '@opentelemetry/*'
       react:
         patterns:
           - 'react*'
@@ -68,9 +71,7 @@ updates:
         exclude-patterns:
           - '@storybook/*'
   - package-ecosystem: 'github-actions'
-    directories:
-      - '/.github/workflows'
-      - '/.github/actions/setup-node-env'
+    directory: '/.github/workflows'
     schedule:
       interval: 'daily'
     rebase-strategy: 'disabled'

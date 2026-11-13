@@ -5,6 +5,8 @@ import {
 	waitFor,
 } from '@testing-library/react';
 import { getAuthStatus, subscribeToAuthStateChange } from '../lib/identity';
+import { handleMovieGridAction } from '../lib/movieGridActions';
+import { reportPuzzleProgress } from '../lib/puzzleProgress/reporter';
 import { useMatchMedia } from '../lib/useMatchMedia';
 import { puzzleConfigs } from '../model/puzzles/puzzleConfigs';
 import {
@@ -17,6 +19,14 @@ import {
 jest.mock('../lib/identity', () => ({
 	getAuthStatus: jest.fn(),
 	subscribeToAuthStateChange: jest.fn(),
+}));
+
+jest.mock('../lib/movieGridActions', () => ({
+	handleMovieGridAction: jest.fn(),
+}));
+
+jest.mock('../lib/puzzleProgress/reporter', () => ({
+	reportPuzzleProgress: jest.fn(),
 }));
 
 jest.mock('../lib/useMatchMedia', () => ({
@@ -46,7 +56,34 @@ const sudokuEasyConfig = puzzleConfigs['sudoku-easy']!;
 const wordiplyConfig = puzzleConfigs.wordiply!;
 
 describe('buildPuzzleIframeSrc', () => {
-	it('adds reader context to the API game URL while preserving its puzzle and uid', () => {
+	it.each(['film-reveal', 'on-the-ball'])(
+		'adds context and dark mode to the API-provided %s URL without adding uid',
+		(slug) => {
+			const context: PuzzleContext = {
+				userId: 'reader',
+				darkMode: true,
+				puzzleDate: '2026-10-28',
+			};
+			const url = new URL(
+				buildPuzzleIframeSrc(
+					puzzleConfigs[slug]!,
+					context,
+					`https://example.com/${slug}?id=opaque&embed=1`,
+				),
+			);
+
+			expect(url.pathname).toBe(`/${slug}`);
+			expect(url.searchParams.get('id')).toBe('opaque');
+			expect(url.searchParams.get('embed')).toBe('1');
+			expect(url.searchParams.get('darkMode')).toBe('1');
+			expect(url.searchParams.has('uid')).toBe(false);
+			expect(
+				JSON.parse(url.searchParams.get('guardian-puzzle-context')!),
+			).toEqual(context);
+		},
+	);
+
+	it('adds reader context to the API game URL without deriving a different puzzle', () => {
 		const context: PuzzleContext = {
 			userId: 'reader',
 			darkMode: true,
@@ -159,6 +196,25 @@ describe('buildFrameStyles', () => {
 		);
 	});
 
+	it.each([
+		['film-reveal', 700],
+		['on-the-ball', 640],
+	] as const)(
+		'uses the measured desktop height for %s and preserves the narrower tiers',
+		(slug, desktopHeight) => {
+			const styles = buildFrameStyles(slug).styles.replace(/\s+/g, '');
+			expect(styles.split('@media')[0]).toContain(
+				`min-height:${desktopHeight}px;`,
+			);
+			expect(styles).toContain(
+				'@media(max-width:979.9px){min-height:700px;}',
+			);
+			expect(styles).toContain(
+				'@media(max-width:739.9px){min-height:900px;}',
+			);
+		},
+	);
+
 	it('falls back to the default min-heights for an unrecognised slug', () => {
 		expect(buildFrameStyles('unknown-slug').styles).toContain(
 			'min-height:500px;',
@@ -267,6 +323,7 @@ describe('PuzzleIframe', () => {
 					}),
 			}),
 		});
+		jest.mocked(handleMovieGridAction).mockResolvedValue(undefined);
 	});
 
 	afterEach(() => {
@@ -330,6 +387,212 @@ describe('PuzzleIframe', () => {
 				}),
 			);
 			expect(iframe.src).not.toContain('reader-access-token');
+		},
+	);
+
+	it.each([
+		['film-reveal', 'https://moviegrid.io'],
+		['on-the-ball', 'https://sportsreveal.io'],
+	])(
+		'handles %s copy/share messages without requiring progress identity',
+		async (slug, origin) => {
+			mockedGetAuthStatus.mockResolvedValue(signedOut());
+			const { unmount } = render(
+				<PuzzleIframe
+					puzzleConfig={puzzleConfigs[slug]!}
+					title={slug}
+					darkModeAvailable={false}
+					puzzleDate="2026-11-03"
+					gameUrl={`${origin}/guardian/archive?id=394`}
+				/>,
+			);
+			const iframe = testScreen.getByTitle<HTMLIFrameElement>(slug);
+			await waitFor(() => expect(iframe).toHaveAttribute('src'));
+			const data = {
+				event: 'copy_game',
+				puzzle: 'on_the_ball',
+				share_text: 'Results',
+				share_url: 'https://guardian.go.link/1oRLv',
+			};
+			const dispatch = (messageOrigin: string, source: Window | null) =>
+				act(() => {
+					window.dispatchEvent(
+						new MessageEvent('message', {
+							origin: messageOrigin,
+							source,
+							data,
+						}),
+					);
+				});
+			dispatch('https://other.example', iframe.contentWindow);
+			dispatch(origin, window);
+			expect(handleMovieGridAction).not.toHaveBeenCalled();
+			dispatch(origin, iframe.contentWindow);
+			expect(handleMovieGridAction).toHaveBeenCalledWith(data);
+			expect(reportPuzzleProgress).not.toHaveBeenCalled();
+			unmount();
+			jest.mocked(handleMovieGridAction).mockClear();
+			dispatch(origin, iframe.contentWindow);
+			expect(handleMovieGridAction).not.toHaveBeenCalled();
+		},
+	);
+
+	it.each([
+		['film-reveal', 'https://moviegrid.io', 'film_reveal', 'FILMREVEAL'],
+		['on-the-ball', 'https://sportsreveal.io', 'on_the_ball', 'ONTHEBALL'],
+	])(
+		'reports %s progress only from its own provider and iframe',
+		async (slug, origin, puzzle, puzzleType) => {
+			mockedGetAuthStatus.mockResolvedValue(signedIn('reader'));
+			const progressIdentity = {
+				puzzleId: 'canonical-api-id',
+				puzzleType,
+				publishDate: '2026-11-02T00:00:00Z',
+			};
+			const { unmount } = render(
+				<PuzzleIframe
+					puzzleConfig={puzzleConfigs[slug]!}
+					title={slug}
+					darkModeAvailable={false}
+					puzzleDate="2026-11-02"
+					gameUrl={`${origin}/guardian/archive?id=provider-id`}
+					progressIdentity={progressIdentity}
+				/>,
+			);
+			const iframe = testScreen.getByTitle<HTMLIFrameElement>(slug);
+			await waitFor(() => expect(iframe).toHaveAttribute('src'));
+			const dispatch = (
+				messageOrigin: string,
+				source: Window | null,
+				event: string,
+				game = puzzle,
+			) =>
+				act(() => {
+					window.dispatchEvent(
+						new MessageEvent('message', {
+							origin: messageOrigin,
+							source,
+							data: { event, puzzle: game },
+						}),
+					);
+				});
+			dispatch(`${origin}.example.com`, iframe.contentWindow, 'end_game');
+			dispatch(origin, window, 'end_game');
+			dispatch(origin, null, 'end_game');
+			dispatch(origin, iframe.contentWindow, 'end_game', 'another_game');
+			dispatch(origin, iframe.contentWindow, 'start_game');
+			expect(reportPuzzleProgress).not.toHaveBeenCalled();
+
+			dispatch(origin, iframe.contentWindow, 'input');
+			expect(reportPuzzleProgress).toHaveBeenNthCalledWith(1, {
+				...progressIdentity,
+				gameStatus: 'in-progress',
+				progress: 1,
+			});
+			dispatch(origin, iframe.contentWindow, 'end_game');
+			expect(reportPuzzleProgress).toHaveBeenNthCalledWith(2, {
+				...progressIdentity,
+				gameStatus: 'completed',
+				progress: 100,
+			});
+			dispatch(origin, iframe.contentWindow, 'input');
+			expect(reportPuzzleProgress).toHaveBeenCalledTimes(2);
+			const source = iframe.contentWindow;
+			unmount();
+			dispatch(origin, source, 'end_game');
+			expect(reportPuzzleProgress).toHaveBeenCalledTimes(2);
+		},
+	);
+
+	it('does not infer MovieGrid progress identity from the iframe URL', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedIn('reader'));
+		render(
+			<PuzzleIframe
+				puzzleConfig={puzzleConfigs['film-reveal']!}
+				title="Film reveal"
+				darkModeAvailable={false}
+				puzzleDate="2026-11-02"
+				gameUrl="https://moviegrid.io/guardian/archive?id=394"
+			/>,
+		);
+		const iframe = testScreen.getByTitle<HTMLIFrameElement>('Film reveal');
+		await waitFor(() => expect(iframe).toHaveAttribute('src'));
+		act(() => {
+			window.dispatchEvent(
+				new MessageEvent('message', {
+					origin: 'https://moviegrid.io',
+					source: iframe.contentWindow,
+					data: { event: 'end_game', puzzle: 'film_reveal' },
+				}),
+			);
+		});
+		expect(reportPuzzleProgress).not.toHaveBeenCalled();
+	});
+
+	it('preserves AmuseLabs completion reporting', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedIn('reader'));
+		render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="Sudoku"
+				darkModeAvailable={false}
+				puzzleDate="2026-11-02"
+			/>,
+		);
+		const iframe = testScreen.getByTitle<HTMLIFrameElement>('Sudoku');
+		await waitFor(() => expect(iframe).toHaveAttribute('src'));
+		act(() => {
+			window.dispatchEvent(
+				new MessageEvent('message', {
+					origin: 'https://tg.amuselabs.com',
+					source: iframe.contentWindow,
+					data: JSON.stringify({
+						type: 'PUZZLE_COMPLETE',
+						id: 'guardian-sudoku-easy-20261102',
+						series: 'guardian-sudoku-easy',
+						completedCorrectly: true,
+					}),
+				}),
+			);
+		});
+		expect(reportPuzzleProgress).toHaveBeenCalledWith({
+			puzzleId: 'guardian-sudoku-easy-20261102',
+			puzzleType: 'SUDOKU_EASY',
+			publishDate: '2026-11-02T00:00:00Z',
+			gameStatus: 'completed',
+			progress: 100,
+		});
+	});
+
+	it.each(['film-reveal', 'on-the-ball'])(
+		'loads %s in the shared sandbox after authentication resolves',
+		async (slug) => {
+			mockedGetAuthStatus.mockResolvedValue(signedIn('reader'));
+			mockedUseMatchMedia.mockReturnValue(true);
+			render(
+				<PuzzleIframe
+					puzzleConfig={puzzleConfigs[slug]!}
+					title={slug}
+					darkModeAvailable={true}
+					puzzleDate="2026-10-28"
+					gameUrl={`https://example.com/${slug}?id=opaque`}
+				/>,
+			);
+			const iframe = testScreen.getByTitle<HTMLIFrameElement>(slug);
+			expect(iframe).not.toHaveAttribute('src');
+			await waitFor(() =>
+				expect(getDarkModeParamFromSrc(iframe.src)).toBe('1'),
+			);
+			expect(iframe).toHaveAttribute(
+				'sandbox',
+				'allow-scripts allow-same-origin allow-popups allow-forms',
+			);
+			expect(getUidFromSrc(iframe.src)).toBeNull();
+			expect(getContextFromSrc(iframe.src)).toEqual({
+				userId: 'reader',
+				darkMode: true,
+				puzzleDate: '2026-10-28',
+			});
 		},
 	);
 

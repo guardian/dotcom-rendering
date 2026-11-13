@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import type { StoryObj } from '@storybook/react-webpack5';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
@@ -136,6 +137,32 @@ Review.decorators = [
 			theme: Pillar.News,
 		},
 	]),
+];
+
+const overflowWord = 'longunbrokenword'.repeat(12);
+const overflowUrl = `https://www.theguardian.com/${overflowWord}`;
+
+export const LongWordsAndLinks: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => (
+	<Section fullWidth={true}>
+		<div
+			css={css`
+				max-width: 280px;
+			`}
+		>
+			<Standfirst
+				format={format}
+				layoutType="immersivePortrait"
+				standfirst={`<p>${overflowWord}</p><p><a href="${overflowUrl}">${overflowUrl}</a></p>`}
+			/>
+		</div>
+	</Section>
+);
+LongWordsAndLinks.decorators = [
+	splitTheme([{ ...articleFormat, display: ArticleDisplay.Immersive }]),
 ];
 
 export const LiveBlog: StoryObj = ({ format }: { format: ArticleFormat }) => {

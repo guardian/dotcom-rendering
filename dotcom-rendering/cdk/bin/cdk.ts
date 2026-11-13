@@ -1,4 +1,4 @@
-import { App, Duration } from 'aws-cdk-lib';
+import { App, Duration, Size } from 'aws-cdk-lib';
 import { InstanceClass, InstanceSize, InstanceType } from 'aws-cdk-lib/aws-ec2';
 import type { RenderingCDKStackProps } from '../lib/renderingStack';
 import { RenderingCDKStack } from '../lib/renderingStack';
@@ -79,8 +79,8 @@ export const FaciaRenderingPropsCODE: RenderingCDKStackProps = {
 	},
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
-		taskCpu: 1024,
-		taskMemoryLimitMiB: 2048,
+		cpu: 1024,
+		memoryLimitMiB: 2048,
 		scaling: {
 			minimumTasks: 1,
 			maximumTasks: 3,
@@ -135,8 +135,8 @@ export const FaciaRenderingPropsPROD: RenderingCDKStackProps = {
 	},
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
-		taskCpu: 1024,
-		taskMemoryLimitMiB: 2048,
+		cpu: 1024,
+		memoryLimitMiB: 2048,
 		scaling: {
 			minimumTasks: 21,
 			maximumTasks: 210,
@@ -164,8 +164,8 @@ export const TagPageRenderingPropsCODE: RenderingCDKStackProps = {
 	domainName: 'tag-page-rendering.code.dev-guardianapis.com',
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
-		taskCpu: 1024,
-		taskMemoryLimitMiB: 2048,
+		cpu: 1024,
+		memoryLimitMiB: 2048,
 		scaling: {
 			minimumTasks: 1,
 			maximumTasks: 3,
@@ -175,6 +175,7 @@ export const TagPageRenderingPropsCODE: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
+		managedInstancesProps: {},
 	},
 };
 
@@ -190,8 +191,8 @@ export const TagPageRenderingPropsPROD: RenderingCDKStackProps = {
 	domainName: 'tag-page-rendering.guardianapis.com',
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
-		taskCpu: 1024,
-		taskMemoryLimitMiB: 2048,
+		cpu: 1024,
+		memoryLimitMiB: 2048,
 		scaling: {
 			minimumTasks: 18,
 			maximumTasks: 30,
@@ -203,6 +204,7 @@ export const TagPageRenderingPropsPROD: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
+		provisionManagedSecurityRole: true,
 	},
 };
 
@@ -222,8 +224,8 @@ export const InteractiveRenderingPropsCODE: RenderingCDKStackProps = {
 	},
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
-		taskCpu: 1024,
-		taskMemoryLimitMiB: 2048,
+		cpu: 1024,
+		memoryLimitMiB: 2048,
 		scaling: {
 			minimumTasks: 1,
 			maximumTasks: 3,
@@ -235,6 +237,7 @@ export const InteractiveRenderingPropsCODE: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
+		managedInstancesProps: {},
 	},
 	// Route 100% traffic to ECS.
 	targetGroupWeights: {
@@ -283,8 +286,8 @@ export const InteractiveRenderingPropsPROD: RenderingCDKStackProps = {
 	},
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
-		taskCpu: 1024,
-		taskMemoryLimitMiB: 2048,
+		cpu: 1024,
+		memoryLimitMiB: 2048,
 		scaling: {
 			minimumTasks: 3,
 			maximumTasks: 30,
@@ -296,11 +299,18 @@ export const InteractiveRenderingPropsPROD: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
+		managedInstancesProps: {
+			instancesRequirements: {
+				memoryMin: Size.mebibytes(2048),
+				vCpuCountMin: 1,
+				allowedInstanceTypes: ['c8g.*'],
+			},
+		},
 	},
-	// Route 100% traffic to EC2, 0% to ECS.
+	// Route 50% traffic to EC2, 50% to ECS.
 	targetGroupWeights: {
-		ec2: 1,
-		ecs: 0,
+		ec2: 50,
+		ecs: 50,
 	},
 };
 new RenderingCDKStack(

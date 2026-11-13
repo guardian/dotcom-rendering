@@ -52,6 +52,9 @@ export const theme: Partial<ThemeButton> = {
 	textPrimary: palette('--product-button-primary-text'),
 	textTertiary: palette('--product-button-primary-background'),
 	borderTertiary: palette('--product-button-primary-background'),
+	backgroundTertiaryHover: palette(
+		'--product-button-tertiary-background-hover',
+	),
 };
 
 export const ProductLinkButton = ({

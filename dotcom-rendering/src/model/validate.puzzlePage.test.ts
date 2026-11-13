@@ -45,6 +45,62 @@ describe('validateAsPuzzlePageType', () => {
 		);
 	});
 
+	it('preserves the authoritative progress identity when present and accepts older payloads without it', () => {
+		const page = createPuzzlePage('film-reveal');
+		expect(
+			validateAsPuzzlePageType(page).instance.progressIdentity,
+		).toBeUndefined();
+		page.instance.progressIdentity = {
+			puzzleId: 'moviegrid-filmreveal-394',
+			puzzleType: 'FILMREVEAL',
+			publishDate: '2026-11-02T00:00:00Z',
+		};
+		expect(
+			validateAsPuzzlePageType(page).instance.progressIdentity,
+		).toEqual(page.instance.progressIdentity);
+	});
+
+	it('preserves requiresSubscription and accepts older payloads without it', () => {
+		const page = createPuzzlePage('sudoku-easy');
+		expect(
+			validateAsPuzzlePageType(page).instance.requiresSubscription,
+		).toBeUndefined();
+		page.instance.requiresSubscription = true;
+		expect(
+			validateAsPuzzlePageType(page).instance.requiresSubscription,
+		).toBe(true);
+	});
+
+	it.each(['true', 1, null, {}])(
+		'rejects a non-boolean requiresSubscription: %j',
+		(requiresSubscription) => {
+			const page = createPuzzlePage('sudoku-easy');
+			expectInvalid({
+				...page,
+				instance: { ...page.instance, requiresSubscription },
+			});
+		},
+	);
+
+	it.each([
+		null,
+		[],
+		{},
+		{
+			puzzleId: '',
+			puzzleType: 'FILMREVEAL',
+			publishDate: '2026-11-02T00:00:00Z',
+		},
+		{ puzzleId: 'id', puzzleType: 42, publishDate: '2026-11-02T00:00:00Z' },
+		{ puzzleId: 'id', puzzleType: 'FILMREVEAL' },
+	])('rejects a malformed progress identity: %j', (progressIdentity) => {
+		const page = createPuzzlePage('film-reveal');
+		expectInvalid({
+			...page,
+			instance: { ...page.instance, progressIdentity },
+		});
+	});
+
 	it('rejects a non-string game URL', () => {
 		const page = clone(createPuzzlePage('sudoku-easy')) as unknown as {
 			instance: { gameUrl: unknown };

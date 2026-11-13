@@ -8,6 +8,7 @@ import type { RenderingTarget } from './types/renderingTarget';
 export const hasPreferredSourceButton = (
 	renderingTarget: RenderingTarget,
 	format: ArticleFormat,
+	isPuzzlePage = false,
 ): boolean => {
 	if (renderingTarget !== 'Web') {
 		return false;
@@ -34,6 +35,8 @@ export const hasPreferredSourceButton = (
 
 	switch (format.theme) {
 		case ArticleSpecial.Labs:
+			// Trivia pages borrow Labs colours without being Labs content.
+			return isPuzzlePage;
 		case ArticleSpecial.SpecialReport:
 		case ArticleSpecial.SpecialReportAlt:
 			return false;

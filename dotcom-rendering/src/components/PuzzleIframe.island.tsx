@@ -1,13 +1,20 @@
 import { css } from '@emotion/react';
 import { until } from '@guardian/source/foundations';
 import { useEffect, useRef } from 'react';
+import { handleMovieGridAction } from '../lib/movieGridActions';
 import { resolvePuzzleIframeUrl } from '../lib/puzzleIframeUrl';
 import {
 	AMUSELABS_ORIGIN,
 	createAmuseLabsAdapter,
 	handleAmuseLabsMessage,
 } from '../lib/puzzleProgress/adapters/amuseLabs';
+import {
+	createMovieGridAdapter,
+	handleMovieGridMessage,
+	movieGridGames,
+} from '../lib/puzzleProgress/adapters/movieGrid';
 import { reportPuzzleProgress } from '../lib/puzzleProgress/reporter';
+import type { PuzzleProgressIdentity } from '../lib/puzzleProgress/types';
 import { useMatchMedia } from '../lib/useMatchMedia';
 import { usePuzzleGame } from '../lib/usePuzzleGame';
 import type { PuzzleConfig } from '../model/puzzles/puzzleConfigs';
@@ -16,6 +23,7 @@ import { palette as themePalette } from '../palette';
 interface Props {
 	/** Authoritative dated URL from GET /game, when supplied by frontend. */
 	gameUrl?: string;
+	progressIdentity?: PuzzleProgressIdentity;
 	/**
 	 * The puzzle's own `PuzzleConfig`, used to resolve the provider-specific
 	 * iframe URL (`set`/`baseUrl`, etc., see `src/lib/puzzleIframeUrl.ts`)
@@ -54,8 +62,8 @@ type MinHeightTiers = { default: number; tablet: number; mobile: number };
  * not confirmed pixel-for-pixel against a real AmuseLabs/Wordiply embed
  * (see docs/puzzle-page.md's "Iframe height at narrower viewports" -
  * platform access for real measurement is being arranged separately), but
- * are deliberately tuned per puzzle instead of one generic guess for all
- * six.
+ * are deliberately tuned per puzzle instead of one generic guess for every
+ * game.
  *
  * Three tiers, matching AmuseLabs' own responsive reflow breakpoints:
  * - `default`: from `desktop` (980px) up.
@@ -80,6 +88,8 @@ const PUZZLE_MIN_HEIGHTS: Record<string, MinHeightTiers> = {
 	'sudoku-killer': { default: 620, tablet: 520, mobile: 630 },
 	'word-wheel': { default: 600, tablet: 750, mobile: 500 },
 	wordiply: { default: 600, tablet: 600, mobile: 600 },
+	'film-reveal': { default: 700, tablet: 700, mobile: 900 },
+	'on-the-ball': { default: 640, tablet: 700, mobile: 900 },
 };
 
 /**
@@ -274,34 +284,44 @@ export const buildPuzzleIframeSrc = (
 	}
 };
 
-/**
- * Reports the reader's progress to the Puzzles API (through the `frontend`
- * proxy) from the messages an AmuseLabs iframe posts to this window. Only
- * messages from the AmuseLabs origin AND from this component's own iframe are
- * considered. Other providers have no adapter yet.
- */
-const usePuzzleProgressReporting = (
+/** Only accept supported provider messages from this iframe's own window and origin. */
+const usePuzzleMessages = (
 	puzzleConfig: PuzzleConfig,
 	iframeRef: React.RefObject<HTMLIFrameElement>,
+	progressIdentity?: PuzzleProgressIdentity,
 ) => {
 	const isAmuseLabs = puzzleConfig.iframe.provider === 'amuselabs';
+	const movieGrid =
+		puzzleConfig.iframe.provider === 'moviegrid'
+			? movieGridGames[puzzleConfig.slug]
+			: undefined;
 
 	useEffect(() => {
-		if (!isAmuseLabs) return;
-
-		const adapter = createAmuseLabsAdapter();
+		const adapter = isAmuseLabs
+			? createAmuseLabsAdapter()
+			: movieGrid && progressIdentity
+				? createMovieGridAdapter(movieGrid, progressIdentity)
+				: undefined;
+		if (!adapter && !movieGrid) return;
+		const origin = isAmuseLabs ? AMUSELABS_ORIGIN : movieGrid?.origin;
 
 		const onMessage = (event: MessageEvent<unknown>) => {
-			if (event.origin !== AMUSELABS_ORIGIN) return;
+			if (event.origin !== origin) return;
 			if (event.source !== iframeRef.current?.contentWindow) return;
 
-			const progress = handleAmuseLabsMessage(adapter, event.data);
+			if (movieGrid) {
+				void handleMovieGridAction(event.data).catch(console.error);
+			}
+			if (!adapter) return;
+			const progress = isAmuseLabs
+				? handleAmuseLabsMessage(adapter, event.data)
+				: handleMovieGridMessage(adapter, event.data);
 			if (progress) void reportPuzzleProgress(progress);
 		};
 
 		window.addEventListener('message', onMessage);
 		return () => window.removeEventListener('message', onMessage);
-	}, [isAmuseLabs, iframeRef]);
+	}, [isAmuseLabs, movieGrid, progressIdentity, iframeRef]);
 };
 
 const postContextMessage = (
@@ -344,6 +364,7 @@ const postContextMessage = (
  */
 export const PuzzleIframe = ({
 	gameUrl,
+	progressIdentity,
 	puzzleConfig,
 	title,
 	darkModeAvailable,
@@ -364,7 +385,7 @@ export const PuzzleIframe = ({
 	);
 	const iframeRef = useRef<HTMLIFrameElement>(null);
 
-	usePuzzleProgressReporting(puzzleConfig, iframeRef);
+	usePuzzleMessages(puzzleConfig, iframeRef, progressIdentity);
 
 	// API-backed puzzles wait for authentication and their personalised game URL.
 	const shouldLoad =

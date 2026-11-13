@@ -7,14 +7,14 @@ import type {
 /**
  * Per-provider strategy for building a puzzle iframe's `src` URL.
  *
- * Each puzzle iframe provider (AmuseLabs, Wordiply, and, in future,
- * MovieGrid/SportsReveal) has its own, independently-confirmed rules for
+ * Each puzzle iframe provider (AmuseLabs, Wordiply and MovieGrid)
+ * has its own, independently-confirmed rules for
  * what query params it accepts and in what form (see the "Puzzles hub 3P
  * API requirements" architecture document): AmuseLabs accepts `set`, `id`
  * (vs `idx=1` for "latest"), `embed=1`, an optional `uid`, and an optional
  * `darkMode=0|1` (a plain literal value, not a JSON blob). Wordiply has no
  * confirmed query param support of any kind yet. MovieGrid/SportsReveal
- * accept a client-added `darkMode=0|1` but no confirmed `uid`.
+ * receive client-added `darkMode=0|1` and `platform=web` but no confirmed `uid`.
  *
  * Blindly applying the same query params to every provider regardless of
  * what it actually supports is fragile, and was already conceptually
@@ -124,6 +124,9 @@ export const resolvePuzzleIframeUrl = (
 		const url = new URL(gameUrl);
 		if (config.iframe.provider === 'amuselabs') {
 			url.searchParams.set('darkMode', context.darkMode ? '1' : '0');
+		} else if (config.iframe.provider === 'moviegrid') {
+			url.searchParams.set('darkMode', context.darkMode ? '1' : '0');
+			url.searchParams.set('platform', 'web');
 		}
 		return url.toString();
 	}
@@ -135,6 +138,8 @@ export const resolvePuzzleIframeUrl = (
 			return buildAmuseLabsUrl(iframe, context);
 		case 'wordiply':
 			return buildWordiplyUrl(iframe, context);
+		case 'moviegrid':
+			throw new TypeError('MovieGrid requires an API-provided gameUrl.');
 		default: {
 			// Exhaustiveness check: adding a new PuzzleProvider without also
 			// adding a case (and builder function) here is a compile error,

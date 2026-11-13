@@ -7,6 +7,7 @@ import {
 	textSansBold15,
 } from '@guardian/source/foundations';
 import { SvgNewsletterFilled } from '@guardian/source/react-components';
+import sanitize from 'sanitize-html';
 import { generateImageURL } from '../lib/image';
 import { palette as themePalette } from '../palette';
 
@@ -16,6 +17,7 @@ export type NewsletterSignupCardProps = {
 	description: string;
 	illustrationSquare?: string;
 	children?: React.ReactNode;
+	heading?: string;
 	isSignedIn?: boolean | 'Pending';
 	isModal?: boolean;
 };
@@ -126,6 +128,10 @@ const illustrationStyles = css`
 	}
 `;
 
+// This is used to sanitize the HTML for the title
+// and description to allow for custom styling in RRCP
+const allowedHTMLTags = ['s', 'em', 'strong', 'a'];
+
 const NewsletterSignupHeader = (
 	props: Omit<NewsletterSignupCardProps, 'children'>,
 ) => (
@@ -142,10 +148,23 @@ const NewsletterSignupHeader = (
 		<hr css={innerDividerStyles} />
 		<div css={headerStyles}>
 			<div css={titleAndMetaStyles}>
-				<p css={titleStyles}>
-					Sign up to <span>{props.name}</span>
-				</p>
-				<p css={descriptionStyles}>{props.description}</p>
+				<p
+					css={titleStyles}
+					dangerouslySetInnerHTML={{
+						__html: sanitize(
+							props.heading ?? `Sign up to ${props.name}`,
+							{ allowedTags: allowedHTMLTags },
+						),
+					}}
+				></p>
+				<p
+					css={descriptionStyles}
+					dangerouslySetInnerHTML={{
+						__html: sanitize(props.description, {
+							allowedTags: allowedHTMLTags,
+						}),
+					}}
+				></p>
 			</div>
 			{!!props.illustrationSquare && (
 				<img
@@ -172,6 +191,7 @@ export const NewsletterSignupCard = ({
 	illustrationSquare,
 	children,
 	isSignedIn,
+	heading,
 	isModal = false,
 }: NewsletterSignupCardProps) => {
 	const content = (
@@ -179,6 +199,7 @@ export const NewsletterSignupCard = ({
 			<NewsletterSignupHeader
 				frequency={frequency}
 				name={name}
+				heading={heading}
 				description={description}
 				illustrationSquare={illustrationSquare}
 				isSignedIn={isSignedIn}

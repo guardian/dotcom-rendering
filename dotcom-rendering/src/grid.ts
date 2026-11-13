@@ -64,6 +64,12 @@ const container = `
     }
 `;
 
+const pageSkinContainer = `
+	${fromBreakpoint.leftCol} {
+		grid-template-columns: ${desktopColumns};
+	}
+`;
+
 const paddedContainer = `
 	${container}
 
@@ -238,6 +244,7 @@ const grid = {
 	 *   </div>
 	 */
 	container,
+	pageSkinContainer,
 	paddedContainer,
 	/**
 	 * Place the element into one of the common Guardian layout columns. The

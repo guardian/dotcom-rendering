@@ -17,6 +17,14 @@ import {
 import { PuzzlesDirectoryProgress } from '../components/PuzzlesDirectoryProgress.island';
 import { Section } from '../components/Section';
 import { has } from '../lib/has-string';
+import {
+	isPuzzlesHubV1Enabled,
+	isPuzzlesHubV2Enabled,
+} from '../lib/puzzlesHubVersionExperiment';
+import {
+	getPuzzlesSubNavLinks,
+	PUZZLES_SUBNAV_PARENT,
+} from '../lib/puzzlesSubNav';
 import { puzzlesPageTheme } from '../lib/puzzlesTheme';
 import type { NavType } from '../model/extract-nav';
 import type { Branding } from '../types/branding';
@@ -178,16 +186,15 @@ export const PuzzlesLayout = ({
 	const puzzlesNav = {
 		...NAV,
 		currentNavLink: 'Puzzles & games',
-		subNavSections: NAV.subNavSections
-			? {
-					links: [
-						...(NAV.subNavSections.parent
-							? [NAV.subNavSections.parent]
-							: []),
-						...NAV.subNavSections.links,
-					],
-				}
-			: undefined,
+		subNavSections: {
+			links: [
+				PUZZLES_SUBNAV_PARENT,
+				...getPuzzlesSubNavLinks(
+					isPuzzlesHubV1Enabled(puzzlesPage.config),
+					isPuzzlesHubV2Enabled(puzzlesPage.config),
+				),
+			],
+		},
 	};
 	return (
 		<>
@@ -219,6 +226,7 @@ export const PuzzlesLayout = ({
 					showSlimNav={false}
 					hasPageSkin={false}
 					hasPageSkinContentSelfConstrain={false}
+					canonicalUrl={puzzlesPage.canonicalUrl}
 				/>
 			</div>
 			<main

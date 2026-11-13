@@ -86,6 +86,58 @@ const renderPuzzlePageLayout = (
 };
 
 describe('PuzzlePageLayout', () => {
+	it('passes the API progress identity into the iframe island for hydration', () => {
+		const page = createPuzzlePage('film-reveal');
+		const progressIdentity = {
+			puzzleId: 'moviegrid-filmreveal-394',
+			puzzleType: 'FILMREVEAL',
+			publishDate: '2026-11-02T00:00:00Z',
+		};
+		const { container } = renderPuzzlePageLayout('film-reveal', {
+			instance: { ...page.instance, progressIdentity },
+		});
+		const props = container
+			.querySelector('gu-island[name="PuzzleIframe"]')
+			?.getAttribute('props');
+		expect(JSON.parse(props!)).toEqual(
+			expect.objectContaining({ progressIdentity }),
+		);
+	});
+
+	it.each([
+		['film-reveal', 'Film reveal'],
+		['on-the-ball', 'On the ball'],
+	])(
+		'renders the %s headline and trivia section link without print',
+		(slug, title) => {
+			renderPuzzlePageLayout(slug);
+
+			expect(
+				screen.getByRole('heading', { level: 1, name: title }),
+			).toBeInTheDocument();
+			expect(
+				screen.getByRole('link', { name: 'Trivia & quizzes' }),
+			).toHaveAttribute(
+				'href',
+				'/puzzles-and-games/trivia-and-quizzes/archive',
+			);
+			const preferredSource = screen.getByRole('link', {
+				name: 'Prefer the Guardian on Google',
+			});
+			expect(preferredSource).toHaveAttribute(
+				'href',
+				'https://www.google.com/preferences/source?q=theguardian.com',
+			);
+			expect(preferredSource).toHaveAttribute(
+				'data-print-layout',
+				'hide',
+			);
+			expect(
+				screen.queryByRole('button', { name: /print/i }),
+			).not.toBeInTheDocument();
+		},
+	);
+
 	it.each([
 		{ slug: 'word-wheel', isAdFreeUser: false },
 		{ slug: 'word-wheel', isAdFreeUser: true },
@@ -170,7 +222,7 @@ describe('PuzzlePageLayout', () => {
 			container.querySelector('a[data-component="series"]'),
 		).toHaveAttribute(
 			'href',
-			'/puzzles-and-games/logic-puzzles/sudoku-easy',
+			'/puzzles-and-games/logic-puzzles/sudoku-easy/archive',
 		);
 		expect(
 			container.querySelector('a[data-component="section"]'),
@@ -289,7 +341,7 @@ describe('PuzzlePageLayout', () => {
 
 	describe('"More from Puzzles & Games" rail (v1-scoped feature)', () => {
 		it('renders the rail when data is present AND v1 is enabled', () => {
-			renderPuzzlePageLayout('sudoku-easy', {
+			const { container } = renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
 					serverSideABTests: v1On,
@@ -301,6 +353,17 @@ describe('PuzzlePageLayout', () => {
 					name: 'More from Puzzles & games',
 				}),
 			).toBeInTheDocument();
+			expect(
+				container.querySelector(
+					'[data-component="puzzles-more-from:puzzle-page"]',
+				),
+			).toBeInTheDocument();
+			const props = container
+				.querySelector('gu-island[name="RelatedPuzzlesRailEnhanced"]')
+				?.getAttribute('props');
+			expect(JSON.parse(props!)).toEqual(
+				expect.objectContaining({ source: 'puzzle-page' }),
+			);
 		});
 
 		it('does not render the rail when moreFromPuzzlesAndGames is empty, even with v1 enabled', () => {
@@ -362,8 +425,13 @@ describe('PuzzlePageLayout', () => {
 				headerSlot?.closest('[data-print-layout="hide"]')
 					?.parentElement,
 			).toBe(container);
+			const merchandisingSlot = container.querySelector(
+				'#dfp-ad--merchandising-high',
+			);
+			expect(merchandisingSlot).toBeInTheDocument();
+			expect(merchandisingSlot).not.toHaveAttribute('data-label-show');
 			expect(
-				container.querySelector('#dfp-ad--merchandising-high'),
+				merchandisingSlot?.closest('[data-print-layout="hide"]'),
 			).toBeInTheDocument();
 			const game = container.querySelector(
 				'[data-layout="PuzzlePageLayout"] article',

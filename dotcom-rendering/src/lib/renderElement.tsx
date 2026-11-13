@@ -1,3 +1,4 @@
+import { space } from '@guardian/source/foundations';
 import { AdPlaceholder } from '../components/AdPlaceholder.apps';
 import { ProductElement } from '../components/AffiliateProducts/ProductElement';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.island';
@@ -442,6 +443,7 @@ export const renderElement = ({
 						type={element._type}
 						format={format}
 						articleArrangement={articleArrangement}
+						isMainMedia={isMainMedia}
 					/>
 				);
 			}
@@ -1011,6 +1013,9 @@ export const renderElement = ({
 				<div
 					css={{
 						marginBottom: 12,
+						'h3:not(:first-of-type)': {
+							paddingTop: space[4],
+						},
 					}}
 				>
 					<Island priority="feature" defer={{ until: 'visible' }}>
@@ -1018,6 +1023,8 @@ export const renderElement = ({
 							electionDataUrl={element.dataUrl.href}
 							electionComponents={element.components}
 							liveEffects={true}
+							// This trackingLabel is currently just used for liveblog and it's temporary
+							trackingLabel={'liveblog'}
 						/>
 					</Island>
 				</div>

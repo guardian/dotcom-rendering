@@ -360,7 +360,8 @@ const isArchivePuzzle = (value: unknown): boolean =>
 	isString(value.title) &&
 	isString(value.puzzleType) &&
 	(value.slug === undefined || isString(value.slug)) &&
-	isString(value.set);
+	isString(value.set) &&
+	isString(value.path);
 
 const isArchiveItem = (value: unknown): boolean =>
 	isObject(value) &&
@@ -372,9 +373,12 @@ const isArchiveItem = (value: unknown): boolean =>
 
 const isPuzzlesArchive = (value: unknown): boolean =>
 	isObject(value) &&
-	['crosswords', 'word-games', 'logic-puzzles'].includes(
-		String(value.category),
-	) &&
+	[
+		'crosswords',
+		'word-games',
+		'logic-puzzles',
+		'trivia-and-quizzes',
+	].includes(String(value.category)) &&
 	isString(value.title) &&
 	isString(value.description) &&
 	isArchivePuzzle(value.selectedPuzzle) &&

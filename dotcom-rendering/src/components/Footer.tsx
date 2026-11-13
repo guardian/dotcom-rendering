@@ -237,9 +237,11 @@ const bttPosition = css`
 const FooterLinks = ({
 	pageFooter,
 	urls,
+	showReaderRevenueLinks,
 }: {
 	pageFooter: FooterType;
 	urls: ReaderRevenueCategories;
+	showReaderRevenueLinks: boolean;
 }) => {
 	const linkGroups = pageFooter.footerLinks.map((linkGroup, index) => {
 		const linkList = linkGroup.flatMap(
@@ -276,7 +278,7 @@ const FooterLinks = ({
 		return <ul key={key}>{linkList}</ul>;
 	});
 
-	const rrLinks = (
+	const rrLinks = showReaderRevenueLinks ? (
 		<div css={readerRevenueLinks}>
 			<Island priority="feature" defer={{ until: 'visible' }}>
 				<FooterReaderRevenueLinks
@@ -285,7 +287,7 @@ const FooterLinks = ({
 				/>
 			</Island>
 		</div>
-	);
+	) : null;
 
 	return (
 		<div css={footerList}>
@@ -332,6 +334,7 @@ export const Footer = ({
 	urls,
 	editionId,
 	hasPageSkin,
+	showReaderRevenueLinks = true,
 }: {
 	pillars: PillarLinkType[];
 	selectedPillar?: Pillar;
@@ -339,6 +342,7 @@ export const Footer = ({
 	urls: ReaderRevenueCategories;
 	editionId: EditionId;
 	hasPageSkin?: boolean;
+	showReaderRevenueLinks?: boolean;
 }) => (
 	<div
 		data-print-layout="hide"
@@ -376,7 +380,11 @@ export const Footer = ({
 				</LinkButton>
 			</div>
 
-			<FooterLinks pageFooter={pageFooter} urls={urls} />
+			<FooterLinks
+				pageFooter={pageFooter}
+				urls={urls}
+				showReaderRevenueLinks={showReaderRevenueLinks}
+			/>
 
 			{editionId === 'AU' && (
 				<div css={acknowledgments}>

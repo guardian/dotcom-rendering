@@ -159,7 +159,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			case 'static/feature/2':
 				return '4:5';
 			case 'flexible/general':
-			case 'flexible/special':
 			case 'scrollable/small':
 			case 'scrollable/medium':
 			case 'static/medium/4':
@@ -265,6 +264,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					)}
 					sectionId={front.config.section}
 					contentType={front.config.contentType}
+					canonicalUrl={front.canonicalUrl}
 				/>
 
 				{isPaidContent && (

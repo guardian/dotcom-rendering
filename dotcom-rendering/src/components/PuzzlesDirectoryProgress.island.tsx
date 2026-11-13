@@ -1,6 +1,7 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import type { PuzzleProgressItem } from '../lib/puzzleCardProgress';
 import { puzzleTypeForCard } from '../lib/puzzleCardProgress';
+import { trackPuzzlesHubScrollDepth } from '../lib/puzzlesHubScrollTracking';
 import { usePuzzleProgress } from '../lib/usePuzzleProgress';
 import type { Branding } from '../types/branding';
 import type {
@@ -137,6 +138,7 @@ export const PuzzlesDirectoryProgress = ({
 	containerBranding,
 }: Props) => {
 	const progress = usePuzzleProgress();
+	useEffect(trackPuzzlesHubScrollDepth, []);
 	const progressLayout = useMemo(
 		() => (progress ? enrichLayoutWithProgress(layout, progress) : layout),
 		[layout, progress],

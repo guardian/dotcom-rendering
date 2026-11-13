@@ -1,7 +1,17 @@
 import { breakpoints } from '@guardian/source/foundations';
 import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
-import { createPuzzlesPage } from '../../fixtures/manual/puzzlesPage';
+import {
+	createPuzzlesPage,
+	featuredTriviaPuzzlesContainer,
+	triviaPuzzlesContainer,
+} from '../../fixtures/manual/puzzlesPage';
 import { PuzzlesLayout } from '../layouts/PuzzlesLayout';
+import {
+	puzzlesHubV1Experiment,
+	puzzlesHubV1Participation,
+	puzzlesHubV2Experiment,
+	puzzlesHubV2Participation,
+} from '../lib/puzzlesHubVersionExperiment';
 import { extractNAV } from '../model/extract-nav';
 import type { PuzzlesLayoutType } from '../types/puzzlesPage';
 import { PuzzlesDirectory } from './PuzzlesDirectory';
@@ -129,6 +139,20 @@ export const AdFree = () => (
 	<PuzzlesDirectory layout={layout} renderAds={false} />
 );
 
+export const TriviaAndQuizzes = () => (
+	<PuzzlesDirectory
+		layout={{ containers: [triviaPuzzlesContainer] }}
+		renderAds={false}
+	/>
+);
+
+export const MovieGridFeatured = () => (
+	<PuzzlesDirectory
+		layout={{ containers: [featuredTriviaPuzzlesContainer] }}
+		renderAds={false}
+	/>
+);
+
 /** The newsletter should align with both edges of the right-hand puzzle card. */
 export const WithNewsletter = () => (
 	<PuzzlesDirectory
@@ -181,9 +205,16 @@ export const SponsoredContainer = () => (
 
 export const Sponsored = () => {
 	const page = createPuzzlesPage({ layout, isAdFreeUser: true });
+	const config = {
+		...page.config,
+		serverSideABTests: {
+			...puzzlesHubV1Participation(puzzlesHubV1Experiment.variant),
+			...puzzlesHubV2Participation(puzzlesHubV2Experiment.variant),
+		},
+	};
 	return (
 		<PuzzlesLayout
-			puzzlesPage={page}
+			puzzlesPage={{ ...page, config }}
 			NAV={extractNAV(page.nav)}
 			branding={puzzlesBranding}
 		/>

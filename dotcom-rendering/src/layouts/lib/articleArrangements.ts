@@ -5,6 +5,7 @@ import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
+	isOpinionDesign,
 } from '../../lib/articleFormat';
 
 export type LayoutType =
@@ -13,7 +14,8 @@ export type LayoutType =
 	| 'media'
 	| 'picture'
 	| 'comment'
-	| 'interactive'
+	| 'interactiveStandard'
+	| 'interactiveTopHat'
 	| 'immersiveLandscape'
 	| 'immersivePortrait';
 
@@ -247,46 +249,67 @@ const commentCss: LayoutCssMap = {
 const immersivePortraitCss: LayoutCssMap = {
 	title: {
 		belowDesktop: 'grid-row: 1;',
+		mobile: `${grid.column.all} grid-row: 2; align-self: end; padding-bottom: var(--immersive-headline-overlap);`,
+		tablet: `grid-row: 2; ${grid.between('centre-column-start', 'centre-column-end')};`,
 		desktop: `grid-row: 1; ${grid.between('centre-column-start', 8)};`,
 		leftCol: `${grid.between('left-column-start', 9)};`,
 		wide: `${grid.between('left-column-start', 10)};`,
 	},
 	headline: {
 		belowDesktop: 'grid-row: 2;',
+		mobile: `${grid.column.all} grid-row: 3; margin-top: calc(-1 * var(--immersive-headline-overlap));`,
+		tablet: `grid-row: 3 / span 2; ${grid.between('centre-column-start', 'centre-column-end')};`,
 		desktop: `grid-row: 2; ${grid.between('centre-column-start', 8)};`,
 		leftCol: `grid-row: 2; ${grid.between('left-column-start', 9)};`,
 		wide: `grid-row: 2; ${grid.between('left-column-start', 10)};`,
 	},
 	media: {
 		belowDesktop: 'grid-row: 3;',
+		mobile: `${grid.column.all} grid-row: 1 / span 2;`,
+		tablet: `grid-row: 1 / span 3; ${grid.between('centre-column-start', 'centre-column-end')};`,
 		desktop: `grid-row: 1 / span 4; ${grid.between(8, 'right-column-end')};`,
 		leftCol: `grid-row: 1 / span 3; ${grid.between(9, 'right-column-end')};`,
 		wide: `grid-row: 1 / span 3; ${grid.between(10, 'right-column-end')};`,
 	},
 	standfirst: {
 		belowDesktop: 'grid-row: 4;',
+		tablet: 'grid-row: 5;',
 		desktop: `grid-row: 3; ${grid.between('centre-column-start', 7)};`,
 		leftCol: `grid-row: 3; ${grid.between('centre-column-start', 8)};`,
 		wide: `grid-row: 3; ${grid.between('centre-column-start', 9)};`,
 	},
 	caption: {
 		belowDesktop: 'grid-row: 5;',
+		tablet: 'grid-row: 6;',
 		desktop: `grid-row: 5;`,
 		leftCol: `grid-row: 4; ${grid.column.left};`,
 	},
 	meta: {
 		belowDesktop: 'grid-row: 6;',
+		tablet: 'grid-row: 7;',
 		desktop: `grid-row: 4; ${grid.between('centre-column-start', 8)};`,
 		leftCol: `grid-row: 3; ${grid.column.left};`,
 	},
 	body: {
 		belowDesktop: 'grid-row: 7;',
+		tablet: 'grid-row: 8;',
+		desktop: 'grid-row: 6;',
 		leftCol: 'grid-row: 4;',
 	},
 	'right-column': {
 		desktop: `grid-row: 5 / span 2; ${grid.column.right};`,
 		leftCol: `grid-row: 4; ${grid.column.right};`,
 	},
+};
+
+const immersiveWeekendReadBelowDesktop: Partial<Record<Area, string>> = {
+	title: `grid-row: 1; ${grid.column.centre} align-self: start; padding-bottom: 0;`,
+	headline: `grid-row: 2; ${grid.column.centre} margin-top: 0;`,
+	media: 'grid-row: 3;',
+	caption: 'grid-row: 4;',
+	standfirst: 'grid-row: 5;',
+	meta: 'grid-row: 6;',
+	body: 'grid-row: 7;',
 };
 
 const immersiveLandscapeCss: LayoutCssMap = {
@@ -330,13 +353,43 @@ const immersiveLandscapeCss: LayoutCssMap = {
 	},
 };
 
+const interactiveTopHatCss: LayoutCssMap = {
+	title: {
+		mobile: 'grid-row: 2;',
+		tablet: 'grid-row: 2;',
+	},
+	headline: {
+		mobile: 'grid-row: 3;',
+		tablet: 'grid-row: 3;',
+	},
+	standfirst: {
+		mobile: 'grid-row: 4;',
+		tablet: 'grid-row: 4;',
+	},
+	media: {
+		mobile: `grid-row: 1 / span 7; ${grid.column.all}`,
+		tablet: `grid-row: 1 / span 7; ${grid.column.all}`,
+	},
+	meta: {
+		mobile: 'grid-row: 5;',
+		tablet: 'grid-row: 5;',
+	},
+	body: {
+		tablet: 'grid-row: 8;',
+	},
+	'right-column': {
+		desktop: `grid-row: 8; ${grid.column.right};`,
+	},
+};
+
 const layoutCssMaps: Record<LayoutType, LayoutCssMap> = {
 	standard: standardCss,
 	showcase: showcaseCss,
 	media: mediaCss,
 	picture: pictureCss,
 	comment: commentCss,
-	interactive: standardCss,
+	interactiveStandard: standardCss,
+	interactiveTopHat: interactiveTopHatCss,
 	immersiveLandscape: immersiveLandscapeCss,
 	immersivePortrait: immersivePortraitCss,
 };
@@ -352,6 +405,8 @@ const layoutCssMaps: Record<LayoutType, LayoutCssMap> = {
  *
  * @param area - The named piece of article furniture to position (e.g. `'headline'`, `'body'`).
  * @param layoutType - See {@link LayoutType}. Determines which CSS map to use for lookups.
+ * @param format - Keeps Weekend Read headers above the media below desktop.
+ * @param hasPageSkin - Keeps item placement on the desktop arrangement at wider viewports.
  *
  * @example
  * // In a React component:
@@ -360,22 +415,37 @@ const layoutCssMaps: Record<LayoutType, LayoutCssMap> = {
 export const gridItemCss = (
 	area: Area,
 	layoutType: LayoutType,
+	format?: ArticleFormat,
+	hasPageSkin = false,
 ): SerializedStyles => {
 	const areaOverrides = layoutCssMaps[layoutType][area] ?? {};
+	const weekendReadStyles =
+		layoutType === 'immersivePortrait' &&
+		format?.design === ArticleDesign.WeekendEssay
+			? immersiveWeekendReadBelowDesktop[area]
+			: undefined;
 
-	const breakpointCss = Object.entries(areaOverrides).map(
-		([bp, styles]) => css`
-			${breakpointQueries[bp as Breakpoint]} {
-				${styles}
-			}
-		`,
-	);
+	const breakpointCss = Object.entries(areaOverrides)
+		.filter(([bp]) => !hasPageSkin || (bp !== 'leftCol' && bp !== 'wide'))
+		.map(
+			([bp, styles]) => css`
+				${breakpointQueries[bp as Breakpoint]} {
+					${styles}
+				}
+			`,
+		);
 
 	// All items default to the centre column; breakpoint entries above
 	// override grid-row and grid-column as needed.
 	return css`
 		grid-column: centre-column-start / centre-column-end;
 		${breakpointCss}
+		${weekendReadStyles &&
+		css`
+			${until.desktop} {
+				${weekendReadStyles}
+			}
+		`}
 	`;
 };
 
@@ -389,6 +459,8 @@ export const getLayoutType = (
 	format: ArticleFormat,
 	mainMediaOrientation: 'portrait' | 'landscape' | 'square',
 ): LayoutType => {
+	// Pending: Display hint for interactive top hat articles, maybe 'Showcase'?
+	// return 'interactiveTopHat';
 	if (format.display === ArticleDisplay.Immersive) {
 		if (
 			mainMediaOrientation === 'portrait' ||
@@ -407,13 +479,11 @@ export const getLayoutType = (
 	}
 	if (format.design === ArticleDesign.Picture) return 'picture';
 	if (format.display === ArticleDisplay.Showcase) return 'showcase';
-	if (
-		format.design === ArticleDesign.Comment ||
-		format.design === ArticleDesign.Editorial ||
-		format.design === ArticleDesign.Letter
-	) {
+	if (isOpinionDesign(format.design)) {
 		return 'comment';
 	}
-	if (format.design === ArticleDesign.Interactive) return 'interactive';
+	if (format.design === ArticleDesign.Interactive) {
+		return 'interactiveStandard';
+	}
 	return 'standard';
 };

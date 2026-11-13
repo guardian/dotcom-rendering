@@ -90,6 +90,8 @@ export type PuzzlesArchivePuzzle = {
 	puzzleType: string;
 	slug?: string;
 	set: string;
+	/** Path of this puzzle's own archive page, e.g. `/puzzles-and-games/crosswords/quick/archive`. */
+	path: string;
 };
 
 export type PuzzlesArchiveItem = {
@@ -103,7 +105,11 @@ export type PuzzlesArchiveItem = {
 };
 
 export type PuzzlesArchive = {
-	category: 'crosswords' | 'word-games' | 'logic-puzzles';
+	category:
+		| 'crosswords'
+		| 'word-games'
+		| 'logic-puzzles'
+		| 'trivia-and-quizzes';
 	title: string;
 	description: string;
 	selectedPuzzle: PuzzlesArchivePuzzle;

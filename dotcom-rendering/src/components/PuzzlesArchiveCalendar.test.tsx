@@ -36,6 +36,7 @@ const archive: PuzzlesArchive = {
 		puzzleType: 'SUDOKU_EASY',
 		slug: 'logic-puzzles/sudoku-easy',
 		set: 'easy',
+		path: '/puzzles-and-games/logic-puzzles/sudoku-easy/archive',
 	},
 	puzzles: [],
 	year: 2026,
@@ -55,9 +56,13 @@ const archive: PuzzlesArchive = {
 
 describe('archive calendar helpers', () => {
 	it('builds an archive URL that preserves the puzzle and month', () => {
-		expect(archivePageUrl('crosswords', 'archive-mini', 2026, 8)).toBe(
-			'/puzzles-and-games/crosswords/archive?puzzle=archive-mini&year=2026&month=8',
-		);
+		expect(
+			archivePageUrl(
+				{ path: '/puzzles-and-games/crosswords/mini/archive' },
+				2026,
+				8,
+			),
+		).toBe('/puzzles-and-games/crosswords/mini/archive?year=2026&month=8');
 	});
 
 	it('maps the API status, not the progress value, to the day status', () => {
@@ -147,6 +152,199 @@ describe('PuzzlesArchiveCalendar', () => {
 		jest.useRealTimers();
 		jest.restoreAllMocks();
 		Reflect.deleteProperty(global, 'fetch');
+	});
+
+	it('distinguishes type, recent-card and calendar-date selection context', () => {
+		const medium = {
+			...archive.selectedPuzzle,
+			id: 'sudoku-medium',
+			title: 'Medium sudoku',
+			slug: 'logic-puzzles/sudoku-medium',
+			set: 'medium',
+			path: '/puzzles-and-games/logic-puzzles/sudoku-medium/archive',
+		};
+		const { container } = render(
+			<PuzzlesArchiveCalendar
+				initialArchive={{
+					...archive,
+					puzzles: [archive.selectedPuzzle, medium],
+					recentItems: ['2026-09-01', '2026-09-03', '2026-09-02'].map(
+						(date) => ({ ...archive.items[0]!, date }),
+					),
+				}}
+			/>,
+		);
+		const type = screen.getByRole('link', { name: 'Medium sudoku' });
+		expect(type.closest('[data-component]')).toHaveAttribute(
+			'data-component',
+			'puzzles-archive-types',
+		);
+		expect(type).toHaveAttribute(
+			'data-link-name',
+			'archive | puzzle-type | logic-puzzles | puzzle-sudoku-easy | target-puzzle-sudoku-medium | month-2026-09',
+		);
+		expect(type).toHaveAttribute(
+			'href',
+			'/puzzles-and-games/logic-puzzles/sudoku-medium/archive?year=2026&month=9',
+		);
+
+		const recent = container.querySelectorAll(
+			'[data-component="puzzles-archive-recent"] a',
+		);
+		expect(
+			Array.from(recent, (link) => link.getAttribute('data-link-name')),
+		).toEqual([
+			'archive | recent | logic-puzzles | puzzle-sudoku-easy | date-2026-09-03 | card-@1',
+			'archive | recent | logic-puzzles | puzzle-sudoku-easy | date-2026-09-02 | card-@2',
+			'archive | recent | logic-puzzles | puzzle-sudoku-easy | date-2026-09-01 | card-@3',
+		]);
+		const date = screen.getByLabelText('2026-09-02, available');
+		expect(date.closest('[data-component]')).toHaveAttribute(
+			'data-component',
+			'puzzles-archive-calendar',
+		);
+		expect(date).toHaveAttribute(
+			'data-link-name',
+			'archive | date | logic-puzzles | puzzle-sudoku-easy | date-2026-09-02',
+		);
+		expect(
+			container.querySelector('[data-status="unavailable"]'),
+		).not.toHaveAttribute('data-link-name');
+	});
+
+	it('distinguishes the empty-month fallback and preserves year boundaries', () => {
+		render(
+			<PuzzlesArchiveCalendar
+				initialArchive={{ ...archive, month: 1, items: [] }}
+			/>,
+		);
+		expect(
+			screen.getByRole('link', { name: 'Previous month' }),
+		).toHaveAttribute(
+			'data-link-name',
+			'archive | previous-month | logic-puzzles | puzzle-sudoku-easy | month-2025-12',
+		);
+		expect(
+			screen.getByRole('link', { name: 'View previous month' }),
+		).toHaveAttribute(
+			'data-link-name',
+			'archive | previous-month-empty | logic-puzzles | puzzle-sudoku-easy | month-2025-12',
+		);
+	});
+
+	it('cancels a deferred selection when the calendar unmounts', async () => {
+		jest.useFakeTimers();
+		const fetchMock = jest.fn();
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		const { unmount } = render(
+			<PuzzlesArchiveCalendar initialArchive={archive} />,
+		);
+		fireEvent.click(screen.getByRole('link', { name: 'Previous month' }));
+		unmount();
+		await act(async () => {
+			jest.runOnlyPendingTimers();
+		});
+		expect(fetchMock).not.toHaveBeenCalled();
+	});
+
+	it.each([false, true])(
+		'refreshes restored calendar and recent-card progress after Back (signed in: %s)',
+		async (signedIn) => {
+			if (signedIn) {
+				mockedGetAuthStatus.mockResolvedValue({
+					kind: 'SignedIn',
+					accessToken: { accessToken: 'test-token' },
+					idToken: {},
+				} as never);
+			}
+			const completed = {
+				...archive,
+				items: [
+					{
+						...archive.items[0]!,
+						progress: 100,
+						gameStatus: 'completed',
+					},
+				],
+			};
+			const fetchMock = jest
+				.fn()
+				.mockResolvedValueOnce({
+					ok: true,
+					json: async () => (signedIn ? archive : completed),
+				})
+				.mockResolvedValue({ ok: true, json: async () => completed });
+			Object.defineProperty(global, 'fetch', {
+				configurable: true,
+				value: fetchMock,
+			});
+			render(<PuzzlesArchiveCalendar initialArchive={archive} />);
+			await act(async () => undefined);
+			expect(fetchMock).toHaveBeenCalledTimes(signedIn ? 1 : 0);
+			expect(
+				screen.getByLabelText('2026-09-02, available'),
+			).toBeInTheDocument();
+
+			fireEvent(
+				window,
+				new PageTransitionEvent('pageshow', { persisted: true }),
+			);
+
+			const completedDate = await screen.findByLabelText(
+				'2026-09-02, completed',
+			);
+			expect(completedDate).toHaveAttribute(
+				'data-link-name',
+				'archive | date | logic-puzzles | puzzle-sudoku-easy | date-2026-09-02',
+			);
+			expect(
+				screen.getByRole('link', { name: /Latest Easy sudoku/ }),
+			).toHaveAttribute(
+				'data-link-name',
+				'archive | recent | logic-puzzles | puzzle-sudoku-easy | date-2026-09-02 | card-@1',
+			);
+			expect(fetchMock).toHaveBeenCalledTimes(signedIn ? 2 : 1);
+			expect(fetchMock).toHaveBeenLastCalledWith(
+				expect.objectContaining({
+					pathname:
+						'/puzzles-and-games/logic-puzzles/archive-data/sudoku-easy/2026/9',
+				}),
+				expect.objectContaining({ cache: 'no-store' }),
+			);
+			expect(
+				within(
+					screen.getByRole('link', { name: /Latest Easy sudoku/ }),
+				).getByText('Played'),
+			).toBeInTheDocument();
+		},
+	);
+
+	it('does not refresh on the initial pageshow and removes the listener on unmount', async () => {
+		const fetchMock = jest.fn();
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		const { unmount } = render(
+			<PuzzlesArchiveCalendar initialArchive={archive} />,
+		);
+		await act(async () => undefined);
+		fireEvent(
+			window,
+			new PageTransitionEvent('pageshow', { persisted: false }),
+		);
+		await act(async () => undefined);
+		expect(fetchMock).not.toHaveBeenCalled();
+		unmount();
+		fireEvent(
+			window,
+			new PageTransitionEvent('pageshow', { persisted: true }),
+		);
+		await act(async () => undefined);
+		expect(fetchMock).not.toHaveBeenCalled();
 	});
 
 	it('links an available date to the API-derived exact puzzle destination', () => {
@@ -283,6 +481,71 @@ describe('PuzzlesArchiveCalendar', () => {
 		},
 	);
 
+	it.each([
+		['film-reveal', 'FILMREVEAL'],
+		['on-the-ball', 'ONTHEBALL'],
+	])(
+		'refreshes %s completion through the uncached AJAX host',
+		async (slug, puzzleType) => {
+			pageConfig.ajaxUrl = 'https://api.nextgen.guardianapps.co.uk';
+			mockedGetAuthStatus.mockResolvedValue({
+				kind: 'SignedIn',
+				accessToken: { accessToken: 'access-token' },
+				idToken: {},
+			} as never);
+			const trivia: PuzzlesArchive = {
+				...archive,
+				category: 'trivia-and-quizzes',
+				selectedPuzzle: {
+					id: slug,
+					title: slug,
+					puzzleType,
+					slug: `trivia-and-quizzes/${slug}`,
+					set: 'all',
+					path: `/puzzles-and-games/trivia-and-quizzes/${slug}/archive`,
+				},
+				items: [{ ...archive.items[0]!, puzzleType }],
+			};
+			const fetchMock = jest.fn().mockResolvedValue({
+				ok: true,
+				json: async () => ({
+					...trivia,
+					items: [
+						{
+							...trivia.items[0],
+							progress: 100,
+							gameStatus: 'completed',
+						},
+					],
+				}),
+			});
+			Object.defineProperty(global, 'fetch', {
+				configurable: true,
+				value: fetchMock,
+			});
+			render(<PuzzlesArchiveCalendar initialArchive={trivia} />);
+
+			await waitFor(() =>
+				expect(
+					screen.getByLabelText('2026-09-02, completed'),
+				).toBeInTheDocument(),
+			);
+			expect(fetchMock).toHaveBeenCalledWith(
+				expect.objectContaining({
+					origin: 'https://api.nextgen.guardianapps.co.uk',
+					pathname: `/puzzles-and-games/trivia-and-quizzes/archive-data/${slug}/2026/9`,
+				}),
+				expect.objectContaining({
+					cache: 'no-store',
+					credentials: 'same-origin',
+					headers: expect.objectContaining({
+						Authorization: 'Bearer access-token',
+					}),
+				}),
+			);
+		},
+	);
+
 	it('bolds the current London weekday only in the current month', () => {
 		jest.useFakeTimers().setSystemTime(new Date('2026-10-07T12:00:00Z'));
 		const currentMonthArchive = {
@@ -391,6 +654,18 @@ describe('PuzzlesArchiveCalendar', () => {
 		const previous = screen.getByRole('link', { name: 'Previous month' });
 		const status = screen.getByRole('status');
 		expect(status).not.toHaveTextContent('Loading archive…');
+		expect(previous).toHaveAttribute(
+			'data-link-name',
+			'archive | previous-month | logic-puzzles | puzzle-sudoku-easy | month-2026-08',
+		);
+		fireEvent.click(previous);
+		await waitFor(() =>
+			expect(calendar).toHaveAttribute('aria-busy', 'true'),
+		);
+		expect(previous).not.toHaveAttribute('data-link-name');
+		expect(
+			screen.getByRole('link', { name: 'Next month' }),
+		).not.toHaveAttribute('data-link-name');
 		fireEvent.click(previous);
 		expect(calendar).toHaveAttribute('aria-busy', 'true');
 		expect(
@@ -408,6 +683,17 @@ describe('PuzzlesArchiveCalendar', () => {
 		expect(screen.getByTestId('archive-calendar')).toBe(calendar);
 		expect(calendar).toHaveAttribute('aria-busy', 'false');
 		expect(status).not.toHaveTextContent('Loading archive…');
+		expect(previous).toHaveAttribute(
+			'data-link-name',
+			'archive | previous-month | logic-puzzles | puzzle-sudoku-easy | month-2026-07',
+		);
+		expect(
+			screen.getByRole('link', { name: 'Next month' }),
+		).toHaveAttribute(
+			'data-link-name',
+			'archive | next-month | logic-puzzles | puzzle-sudoku-easy | month-2026-09',
+		);
+		expect(fetchMock).toHaveBeenCalledTimes(1);
 	});
 
 	it('keeps the selected month and shows recent cards when only earlier publications exist', async () => {
@@ -420,6 +706,7 @@ describe('PuzzlesArchiveCalendar', () => {
 				title: 'Weekend',
 				set: 'weekend',
 				puzzleType: 'CROSSWORD_WEEKEND',
+				path: '/puzzles-and-games/crosswords/weekend/archive',
 			},
 			items: [
 				{
@@ -530,6 +817,64 @@ describe('PuzzlesArchiveCalendar', () => {
 		expect(fetchMock).toHaveBeenCalledTimes(1);
 	});
 
+	it('invalidates other cached months when restored and keeps the current selection', async () => {
+		const previous = {
+			...archive,
+			month: 8,
+			items: [{ ...archive.items[0]!, date: '2026-08-31' }],
+		};
+		const completed = {
+			...archive,
+			items: [
+				{
+					...archive.items[0]!,
+					progress: 100,
+					gameStatus: 'completed',
+				},
+			],
+		};
+		const completedPrevious = {
+			...previous,
+			items: [
+				{
+					...previous.items[0]!,
+					progress: 100,
+					gameStatus: 'completed',
+				},
+			],
+		};
+		const fetchMock = jest
+			.fn()
+			.mockResolvedValueOnce({ ok: true, json: async () => previous })
+			.mockResolvedValueOnce({ ok: true, json: async () => completed })
+			.mockResolvedValueOnce({
+				ok: true,
+				json: async () => completedPrevious,
+			});
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
+		await act(async () => undefined);
+		fireEvent.click(screen.getByRole('link', { name: 'Previous month' }));
+		await screen.findByText('August 2026');
+		fireEvent.click(screen.getByRole('link', { name: 'Next month' }));
+		await screen.findByText('September 2026');
+		expect(fetchMock).toHaveBeenCalledTimes(1);
+		const selection = window.location.search;
+
+		fireEvent(
+			window,
+			new PageTransitionEvent('pageshow', { persisted: true }),
+		);
+		await screen.findByLabelText('2026-09-02, completed');
+		expect(window.location.search).toBe(selection);
+		fireEvent.click(screen.getByRole('link', { name: 'Previous month' }));
+		await screen.findByLabelText('2026-08-31, completed');
+		expect(fetchMock).toHaveBeenCalledTimes(3);
+	});
+
 	it('does not replace explicitly empty recent cards with historical items', () => {
 		const { container } = render(
 			<PuzzlesArchiveCalendar
@@ -618,6 +963,7 @@ describe('PuzzlesArchiveCalendar', () => {
 
 		const nextButton = screen.getByRole('button', { name: 'Next month' });
 		expect(nextButton).toBeDisabled();
+		expect(nextButton).not.toHaveAttribute('data-link-name');
 		fireEvent.click(nextButton);
 		expect(fetchMock).not.toHaveBeenCalled();
 		Reflect.deleteProperty(global, 'fetch');
@@ -630,6 +976,7 @@ describe('PuzzlesArchiveCalendar', () => {
 			puzzleType: 'SUDOKU_MEDIUM',
 			slug: 'logic-puzzles/sudoku-medium',
 			set: 'medium',
+			path: '/puzzles-and-games/logic-puzzles/sudoku-medium/archive',
 		};
 		const initialArchive = {
 			...archive,
@@ -677,11 +1024,25 @@ describe('PuzzlesArchiveCalendar', () => {
 		expect(pushState).toHaveBeenCalledWith(
 			{},
 			'',
-			expect.stringContaining('puzzle=sudoku-medium'),
+			expect.stringContaining(
+				'/puzzles-and-games/logic-puzzles/sudoku-medium/archive',
+			),
 		);
 		expect(
 			screen.getByRole('link', { name: /Latest Medium sudoku/ }),
 		).toHaveAttribute('href', selectedArchive.recentItems[0]!.url);
+		expect(
+			screen.getByRole('link', { name: /Latest Medium sudoku/ }),
+		).toHaveAttribute(
+			'data-link-name',
+			'archive | recent | logic-puzzles | puzzle-sudoku-medium | date-2026-10-07 | card-@1',
+		);
+		expect(
+			screen.getByRole('link', { name: 'Easy sudoku' }),
+		).toHaveAttribute(
+			'data-link-name',
+			'archive | puzzle-type | logic-puzzles | puzzle-sudoku-medium | target-puzzle-sudoku-easy | month-2026-09',
+		);
 		expect(
 			screen.queryByRole('link', { name: /Latest Easy sudoku/ }),
 		).not.toBeInTheDocument();
@@ -695,6 +1056,7 @@ describe('PuzzlesArchiveCalendar', () => {
 			...archive.selectedPuzzle,
 			id: 'sudoku-medium',
 			title: 'Medium sudoku',
+			path: '/puzzles-and-games/logic-puzzles/sudoku-medium/archive',
 		};
 		const initialArchive = {
 			...archive,
@@ -717,7 +1079,7 @@ describe('PuzzlesArchiveCalendar', () => {
 		window.history.replaceState(
 			{},
 			'',
-			'?puzzle=sudoku-medium&year=2020&month=8',
+			'/puzzles-and-games/logic-puzzles/sudoku-medium/archive?year=2020&month=8',
 		);
 		render(<PuzzlesArchiveCalendar initialArchive={initialArchive} />);
 		await waitFor(() =>

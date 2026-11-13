@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { palette as sourcePalette, space } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import { customSubnav as customSubNav } from '../../../../fixtures/manual/customSubnav';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -8,31 +9,6 @@ import {
 } from '../../../lib/articleFormat';
 import type { CustomSubnav } from '../../../types/customSubnav';
 import { CustomSubNav } from './CustomSubNav';
-
-const customSubNav: CustomSubnav = {
-	id: 'us-politics',
-	header: {
-		headerText: 'US politics',
-		copy: '',
-		dotcomPath: '/us-news/us-politics',
-		showHeaderText: true,
-	},
-	format: 'large',
-	links: [
-		{
-			linkText: 'Trump administration',
-			dotcomPath: '/us-news/trump-administration',
-		},
-		{ linkText: 'US Congress', dotcomPath: '/us-news/us-congress' },
-		{ linkText: 'US supreme court', dotcomPath: '/law/us-supreme-court' },
-		{
-			linkText: 'US elections 2024',
-			dotcomPath: '/us-news/us-elections-2024',
-		},
-		{ linkText: 'US immigration', dotcomPath: '/us-news/usimmigration' },
-	],
-	pages: [],
-};
 
 /** Distinct images per breakpoint so it's obvious which one is being served. */
 const customSubNavWithImages: CustomSubnav = {
@@ -59,6 +35,14 @@ const customSubNavWithImages: CustomSubnav = {
 	],
 };
 
+const customSubNavWithNonClickableHeader: CustomSubnav = {
+	...customSubNav,
+	header: {
+		...customSubNav.header,
+		dotcomPath: undefined,
+	},
+};
+
 const meta = {
 	component: CustomSubNav,
 	title: 'Components/Masthead/Titlepiece/CustomSubNav',
@@ -83,7 +67,6 @@ const meta = {
 	render: (args) => <CustomSubNav {...args} />,
 	args: {
 		customSubNav,
-		currentNavLink: 'US Congress',
 		hasPageSkin: false,
 	},
 } satisfies Meta<typeof CustomSubNav>;
@@ -93,7 +76,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Front = {
-	args: { renderingPage: 'front' },
+	args: { renderingPage: 'front', pageId: '/us-news/us-congress' },
 } satisfies Story;
 
 export const FrontWithHiddenHeader = {
@@ -106,6 +89,7 @@ export const FrontWithHiddenHeader = {
 				showHeaderText: false,
 			},
 		},
+		pageId: '/us-news/us-congress',
 	},
 } satisfies Story;
 
@@ -114,6 +98,7 @@ export const FrontWithImage = {
 	args: {
 		renderingPage: 'front',
 		customSubNav: customSubNavWithImages,
+		pageId: '/us-news/us-congress',
 	},
 } satisfies Story;
 
@@ -127,11 +112,37 @@ export const FrontWithImageAndHiddenHeader = {
 				showHeaderText: false,
 			},
 		},
+		pageId: '/us-news/us-congress',
+	},
+} satisfies Story;
+
+export const FrontWithNonClickableHeader = {
+	args: {
+		renderingPage: 'front',
+		customSubNav: customSubNavWithNonClickableHeader,
+		pageId: '/us-news/us-congress',
 	},
 } satisfies Story;
 
 export const Article = {
-	args: { renderingPage: 'article' },
+	args: { renderingPage: 'article', pageId: '/us-news/us-congress' },
+	parameters: {
+		formats: [
+			{
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.News,
+			},
+		],
+	},
+} satisfies Story;
+
+export const ArticleWithNonClickableHeader = {
+	args: {
+		renderingPage: 'article',
+		customSubNav: customSubNavWithNonClickableHeader,
+		pageId: '/us-news/us-congress',
+	},
 	parameters: {
 		formats: [
 			{

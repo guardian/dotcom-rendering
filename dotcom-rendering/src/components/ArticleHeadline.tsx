@@ -81,14 +81,22 @@ const isNewsNotCommentOrRecipeOrGallery = (format: ArticleFormat) =>
 	format.design !== ArticleDesign.Recipe &&
 	format.design !== ArticleDesign.Gallery;
 
+const isImmersiveNonNews = (format: ArticleFormat) =>
+	format.display === ArticleDisplay.Immersive && format.theme !== Pillar.News;
+
 const decideHeadlineFont = (format: ArticleFormat) => {
 	const size =
 		format.display === ArticleDisplay.Immersive ||
 		format.design === ArticleDesign.Gallery
 			? 50
 			: 34;
+
 	if (isNewsNotCommentOrRecipeOrGallery(format)) {
 		return size === 50 ? headlineMedium50 : headlineMedium34;
+	}
+
+	if (isImmersiveNonNews(format)) {
+		return size === 50 ? headlineBold50 : headlineBold34;
 	}
 
 	const fontWeight = getFontWeightByDesign(format.design);
@@ -108,8 +116,13 @@ const decideMobileHeadlineFont = (format: ArticleFormat) => {
 		format.design === ArticleDesign.Gallery
 			? 34
 			: 28;
+
 	if (isNewsNotCommentOrRecipeOrGallery(format)) {
 		return size === 34 ? headlineMedium34 : headlineMedium28;
+	}
+
+	if (isImmersiveNonNews(format)) {
+		return size === 34 ? headlineBold34 : headlineBold28;
 	}
 
 	const fontWeight = getFontWeightByDesign(format.design);
@@ -123,7 +136,7 @@ const decideMobileHeadlineFont = (format: ArticleFormat) => {
 	}
 };
 
-const headlineFont = (format: ArticleFormat) => {
+export const headlineFont = (format: ArticleFormat) => {
 	if (format.design === ArticleDesign.Gallery) {
 		return css`
 			${decideMobileHeadlineFont(format)}
