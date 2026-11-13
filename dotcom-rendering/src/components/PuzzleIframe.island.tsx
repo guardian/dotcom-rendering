@@ -378,11 +378,6 @@ export const PuzzleIframe = ({
 	} = usePuzzleGame(puzzleConfig.slug, puzzleDate, gameUrl);
 	const darkMode = usePuzzleDarkMode(darkModeAvailable);
 	const context = buildPuzzleContext(userId, darkMode, puzzleDate);
-	const iframeSrc = buildPuzzleIframeSrc(
-		puzzleConfig,
-		context,
-		resolvedGameUrl,
-	);
 	const iframeRef = useRef<HTMLIFrameElement>(null);
 
 	usePuzzleMessages(puzzleConfig, iframeRef, progressIdentity);
@@ -400,6 +395,10 @@ export const PuzzleIframe = ({
 		);
 	}
 
+	const iframeSrc = shouldLoad
+		? buildPuzzleIframeSrc(puzzleConfig, context, resolvedGameUrl)
+		: undefined;
+
 	return (
 		<iframe
 			ref={iframeRef}
@@ -407,7 +406,7 @@ export const PuzzleIframe = ({
 			// No `src` until the reader is known, so the puzzle loads once, with
 			// the right `uid`, instead of loading anonymously and then again.
 			// The frame keeps its `min-height`, so nothing shifts when it loads.
-			src={shouldLoad ? iframeSrc : undefined}
+			src={iframeSrc}
 			title={title}
 			loading="lazy"
 			sandbox="allow-scripts allow-same-origin allow-popups allow-forms"

@@ -314,13 +314,16 @@ describe('PuzzleIframe', () => {
 		Object.defineProperty(global, 'fetch', {
 			configurable: true,
 			writable: true,
-			value: jest.fn().mockResolvedValue({
-				ok: true,
-				json: () =>
-					Promise.resolve({
-						gameUrl:
-							'https://tg.amuselabs.com/guardian/date-picker?set=from-api&id=opaque-id&embed=1&uid=api-user',
-					}),
+			value: jest.fn().mockImplementation((url: string) => {
+				const gameUrl = url.includes('/film-reveal/')
+					? 'https://moviegrid.io/guardian/archive?id=394'
+					: url.includes('/on-the-ball/')
+						? 'https://sportsreveal.io/guardian/archive?id=394'
+						: 'https://tg.amuselabs.com/guardian/date-picker?set=from-api&id=opaque-id&embed=1&uid=api-user';
+				return Promise.resolve({
+					ok: true,
+					json: () => Promise.resolve({ gameUrl }),
+				});
 			}),
 		});
 		jest.mocked(handleMovieGridAction).mockResolvedValue(undefined);
@@ -802,16 +805,22 @@ describe('PuzzleIframe', () => {
 		expect(new URL(iframe.src).searchParams.has('uid')).toBe(false);
 	});
 
-	it.each([{ ok: false }, { ok: true, json: () => Promise.resolve({}) }])(
-		'shows an error instead of loading an anonymous fallback when lookup fails: %j',
-		async (response) => {
+	it.each(
+		['sudoku-easy', 'film-reveal', 'on-the-ball'].flatMap((slug) =>
+			[{ ok: false }, { ok: true, json: () => Promise.resolve({}) }].map(
+				(response) => ({ slug, response }),
+			),
+		),
+	)(
+		'shows an error instead of loading a fallback when $slug lookup fails: $response',
+		async ({ slug, response }) => {
 			mockedGetAuthStatus.mockResolvedValue(signedIn('reader'));
 			jest.mocked(global.fetch).mockResolvedValueOnce(
 				response as Response,
 			);
 			render(
 				<PuzzleIframe
-					puzzleConfig={sudokuEasyConfig}
+					puzzleConfig={puzzleConfigs[slug]!}
 					title="API puzzle"
 					darkModeAvailable={false}
 					puzzleDate="2026-09-26"
