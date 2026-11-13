@@ -12,6 +12,8 @@ import { LinkButton } from '@guardian/source/react-components';
 import type { Inline1Props } from '@guardian/support-dotcom-components/dist/shared/types/props/inline1';
 import sanitize from 'sanitize-html';
 import type { ReactComponent } from '../lib/ReactComponent';
+import type { ImageAttrs } from '../shared/ResponsiveImage';
+import { ResponsiveImage } from '../shared/ResponsiveImage';
 import { useInline1Tracking } from './utils/useInline1Tracking';
 
 const outerContainerStyles = css`
@@ -100,9 +102,11 @@ const imageWrapperStyles = css`
 `;
 
 const imageStyles = css`
-	height: 131px;
-	width: 164px;
-	object-fit: cover;
+	img {
+		height: 131px;
+		width: 164px;
+		object-fit: cover;
+	}
 `;
 
 // This is used to sanitize the HTML for the title
@@ -127,6 +131,32 @@ export const SupporterRevenue: ReactComponent<Inline1Props> = ({
 	const image = variant.message.image;
 	const cta = variant.message.primaryCta;
 
+	const baseImage: ImageAttrs = {
+		url: image.desktopUrl ?? '',
+		media: '',
+		alt: image.altText,
+	};
+
+	const images: ImageAttrs[] = [];
+	if (image.mobileUrl !== undefined && image.mobileUrl.length > 0) {
+		images.push({
+			url: image.mobileUrl,
+			media: '(max-width: 739px)',
+		});
+	}
+	if (image.tabletUrl !== undefined && image.tabletUrl.length > 0) {
+		images.push({
+			url: image.tabletUrl,
+			media: '(max-width: 979px)',
+		});
+	}
+	if (image.desktopUrl !== undefined && image.desktopUrl.length > 0) {
+		images.push({
+			url: image.desktopUrl,
+			media: '',
+		});
+	}
+
 	return (
 		<section
 			css={outerContainerStyles}
@@ -139,11 +169,11 @@ export const SupporterRevenue: ReactComponent<Inline1Props> = ({
 				</div>
 				{image && (
 					<div css={imageWrapperStyles}>
-						<img
-							src={image.desktopUrl}
-							css={imageStyles}
-							alt={image.altText}
-						/>
+						<ResponsiveImage
+							cssOverrides={imageStyles}
+							images={images}
+							baseImage={baseImage}
+						></ResponsiveImage>
 					</div>
 				)}
 				<h2
