@@ -54,14 +54,23 @@ describe('puzzle sharing', () => {
 			} else if (method === 'copy') {
 				setNavigator('clipboard', { writeText: share });
 			}
-			render(button({ puzzleTrackingSource: 'crossword-page' }));
+			render(
+				button({
+					puzzleTrackingSource: 'crossword-page',
+					puzzleTrackingContext: {
+						slug: 'quick',
+						date: '2026-11-09',
+						provider: 'guardian-crossword',
+					},
+				}),
+			);
 			const control = screen.getByRole(
 				method === 'email' ? 'link' : 'button',
 				{ name: 'Share' },
 			);
 			expect(control).toHaveAttribute(
 				'data-link-name',
-				`puzzles | share-attempt | ${method} | ArticleMeta`,
+				`puzzles | share-attempt | ${method} | ArticleMeta | slug-quick | date-2026-11-09 | provider-guardian-crossword`,
 			);
 			if (method === 'email') {
 				expect(control).toHaveAttribute(
@@ -83,6 +92,34 @@ describe('puzzle sharing', () => {
 					await screen.findByRole('button', { name: 'Link copied' });
 				}
 			}
+		},
+	);
+
+	it.each([
+		{
+			provider: 'amuselabs' as const,
+			date: '2026-11-09',
+			dateLabel: ' | date-2026-11-09',
+		},
+		{ provider: 'wordiply' as const, date: undefined, dateLabel: '' },
+		{ provider: 'moviegrid' as const, date: '2026-02-30', dateLabel: '' },
+	])(
+		'keeps $provider context without inventing a missing or invalid date',
+		({ provider, date, dateLabel }) => {
+			render(
+				button({
+					puzzleTrackingSource: 'puzzle-page',
+					puzzleTrackingContext: {
+						slug: 'test-puzzle',
+						provider,
+						date,
+					},
+				}),
+			);
+			expect(screen.getByRole('link', { name: 'Share' })).toHaveAttribute(
+				'data-link-name',
+				`puzzles | share-attempt | email | ArticleMeta | slug-test-puzzle${dateLabel} | provider-${provider}`,
+			);
 		},
 	);
 

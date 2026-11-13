@@ -12,7 +12,10 @@ import { StraightLines } from '@guardian/source-development-kitchen/react-compon
 import { Fragment } from 'react';
 import { grid } from '../grid';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
-import type { PuzzleActionSource } from '../lib/puzzleActionTracking';
+import type {
+	PuzzleActionContext,
+	PuzzleActionSource,
+} from '../lib/puzzleActionTracking';
 import type { BaseLinkType } from '../model/extract-nav';
 import { palette } from '../palette';
 import { Island } from './Island';
@@ -139,6 +142,7 @@ type Props = {
 	showBottomSocialButtons: boolean;
 	isDeprecatedInteractiveLayout?: boolean;
 	puzzleTrackingSource?: PuzzleActionSource;
+	puzzleTrackingContext?: PuzzleActionContext;
 };
 
 const syndicationButtonOverrides = css`
@@ -216,6 +220,7 @@ export const SubMeta = ({
 	showBottomSocialButtons,
 	isDeprecatedInteractiveLayout = false,
 	puzzleTrackingSource,
+	puzzleTrackingContext,
 }: Props) => {
 	const createLinks = () => {
 		const links: BaseLinkType[] = [];
@@ -296,6 +301,7 @@ export const SubMeta = ({
 							format={format}
 							context="SubMeta"
 							puzzleTrackingSource={puzzleTrackingSource}
+							puzzleTrackingContext={puzzleTrackingContext}
 						/>
 					</Island>
 					<div css={syndicationButtonOverrides}>

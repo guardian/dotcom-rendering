@@ -315,11 +315,26 @@ describe('PuzzlePageLayout', () => {
 
 	describe('print button (Sudoku-only, per PR #16700 review)', () => {
 		it('renders the print button for a sudoku puzzle', () => {
-			renderPuzzlePageLayout('sudoku-easy');
+			const { container } = renderPuzzlePageLayout('sudoku-easy');
 
 			expect(
 				screen.getByRole('button', { name: 'Print version' }),
-			).toBeInTheDocument();
+			).toHaveAttribute(
+				'data-link-name',
+				'puzzles | print-request | slug-sudoku-easy | date-2026-09-11 | provider-amuselabs',
+			);
+			const props = container
+				.querySelector('gu-island[name="ShareButton"]')
+				?.getAttribute('props');
+			expect(JSON.parse(props!)).toEqual(
+				expect.objectContaining({
+					puzzleTrackingContext: {
+						slug: 'sudoku-easy',
+						date: '2026-09-11',
+						provider: 'amuselabs',
+					},
+				}),
+			);
 		});
 
 		it('does not render the print button for word-wheel', () => {
