@@ -137,30 +137,32 @@ export const SupporterRevenue: ReactComponent<Inline1Props> = ({
 	const image = variant.message.image;
 	const cta = variant.message.primaryCta;
 
-	const baseImage: ImageAttrs = {
-		url: image.desktopUrl ?? '',
+	const images: ImageAttrs[] = [];
+	const baseImage = {
+		url: image?.desktopUrl ?? '',
 		media: '',
-		alt: image.altText,
+		alt: image?.altText ?? '',
 	};
 
-	const images: ImageAttrs[] = [];
-	if (image.mobileUrl !== undefined && image.mobileUrl.length > 0) {
-		images.push({
-			url: image.mobileUrl,
-			media: '(max-width: 739px)',
-		});
-	}
-	if (image.tabletUrl !== undefined && image.tabletUrl.length > 0) {
-		images.push({
-			url: image.tabletUrl,
-			media: '(max-width: 979px)',
-		});
-	}
-	if (image.desktopUrl !== undefined && image.desktopUrl.length > 0) {
-		images.push({
-			url: image.desktopUrl,
-			media: '',
-		});
+	if (image) {
+		if (image.mobileUrl !== undefined && image.mobileUrl.length > 0) {
+			images.push({
+				url: image.mobileUrl,
+				media: '(max-width: 739px)',
+			});
+		}
+		if (image.tabletUrl !== undefined && image.tabletUrl.length > 0) {
+			images.push({
+				url: image.tabletUrl,
+				media: '(max-width: 979px)',
+			});
+		}
+		if (image.desktopUrl !== undefined && image.desktopUrl.length > 0) {
+			images.push({
+				url: image.desktopUrl,
+				media: '',
+			});
+		}
 	}
 
 	return (
