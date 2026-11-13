@@ -109,7 +109,7 @@ const imageStyles = css`
 
 // This is used to sanitize the HTML for the title
 // and description to allow for custom styling in RRCP
-const allowedHTMLTags = ['s', 'em', 'strong'];
+const allowedHTMLTags = ['s', 'em', 'strong', 'a'];
 
 export const SupporterRevenue: ReactComponent<Inline1Props> = ({
 	tracking,
