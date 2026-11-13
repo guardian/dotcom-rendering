@@ -1,7 +1,19 @@
 import { expect, test } from '@playwright/test';
 import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
 import { disableCMP } from '../lib/cmp';
+import { waitForIsland } from '../lib/islands';
 import { loadPage } from '../lib/load-page';
+
+// Fixture pages also resolve their game URL through the frontend proxy after hydration.
+test.beforeEach(async ({ page }) => {
+	for (const slug of ['film-reveal', 'on-the-ball']) {
+		await page.route(`**/puzzles-and-games/game/${slug}/*.json`, (route) =>
+			route.fulfill({
+				json: { gameUrl: createPuzzlePage(slug).instance.gameUrl },
+			}),
+		);
+	}
+});
 
 for (const width of [375, 1280]) {
 	for (const colorScheme of ['light', 'dark'] as const) {
@@ -22,7 +34,7 @@ for (const width of [375, 1280]) {
 						body: '',
 					});
 				}
-				return route.continue();
+				return route.fallback();
 			});
 
 			let referenceStyles: unknown;
@@ -48,6 +60,11 @@ for (const width of [375, 1280]) {
 						},
 					},
 				});
+				await waitForIsland(page, 'PuzzleIframe');
+				await expect(page.locator('main iframe')).toHaveAttribute(
+					'src',
+					/.+/,
+				);
 				const styles = await page.locator('main').evaluate((main) => {
 					const headline = getComputedStyle(
 						main.querySelector('h1')!,
@@ -128,6 +145,11 @@ for (const [slug, title] of [
 						},
 					},
 				});
+				await waitForIsland(page, 'PuzzleIframe');
+				await expect(page.locator('main iframe')).toHaveAttribute(
+					'src',
+					/.+/,
+				);
 				if (mode === 'explicit-light') {
 					await page.evaluate(() => {
 						document.documentElement.dataset.colorScheme = 'light';
