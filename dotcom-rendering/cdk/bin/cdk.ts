@@ -1,4 +1,4 @@
-import { App, Duration } from 'aws-cdk-lib';
+import { App, Duration, Size } from 'aws-cdk-lib';
 import { InstanceClass, InstanceSize, InstanceType } from 'aws-cdk-lib/aws-ec2';
 import type { RenderingCDKStackProps } from '../lib/renderingStack';
 import { RenderingCDKStack } from '../lib/renderingStack';
@@ -299,7 +299,13 @@ export const InteractiveRenderingPropsPROD: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
-		managedInstancesProps: {},
+		managedInstancesProps: {
+			instancesRequirements: {
+				memoryMin: Size.mebibytes(2048),
+				vCpuCountMin: 1,
+				allowedInstanceTypes: ['c8g.*'],
+			},
+		},
 	},
 	// Route 90% traffic to EC2, 10% to ECS.
 	targetGroupWeights: {

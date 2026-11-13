@@ -11207,11 +11207,8 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
               ],
             },
             "InstanceRequirements": {
-              "CpuManufacturers": [
-                "amazon-web-services",
-              ],
-              "InstanceGenerations": [
-                "current",
+              "AllowedInstanceTypes": [
+                "c8g.*",
               ],
               "MemoryMiB": {
                 "Min": 2048,
