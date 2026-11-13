@@ -666,8 +666,8 @@ importers:
         specifier: 0.2.33
         version: 0.2.33
       '@types/sanitize-html':
-        specifier: 2.16.1
-        version: 2.16.1
+        specifier: 2.16.2
+        version: 2.16.2
       '@types/scheduler':
         specifier: 0.16.2
         version: 0.16.2
@@ -4329,8 +4329,8 @@ packages:
   '@types/resolve@1.20.6':
     resolution: {integrity: sha512-A4STmOXPhMUtHH+S6ymgE2GiBSMqf4oTvcQZMcHzokuTLVYzXTB8ttjcgxOVaAp2lGwEdzZ0J+cRbbeevQj1UQ==}
 
-  '@types/sanitize-html@2.16.1':
-    resolution: {integrity: sha512-n9wjs8bCOTyN/ynwD8s/nTcTreIHB1vf31vhLMGqUPNHaweKC4/fAl4Dj+hUlCTKYgm4P3k83fmiFfzkZ6sgMA==}
+  '@types/sanitize-html@2.16.2':
+    resolution: {integrity: sha512-kuAbgDCFv418flrp3z4o/4ufLA/5ovmXRH0L419iZCPGO7w00znjeDI5Wy/KZWNIBpDQc7hucCK+J5almB6FyA==}
 
   '@types/scheduler@0.16.2':
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
@@ -5788,10 +5788,6 @@ packages:
     resolution: {integrity: sha512-aN97NXWF6AWBTahfVOIrB/NShkzi5H7F9r1s9mD3cDj4Ko5f2qhhVoYMibXF7GlLveb/D2ioWay8lxI97Ven3g==}
     engines: {node: '>=0.12'}
 
-  entities@7.0.1:
-    resolution: {integrity: sha512-TWrgLOFUQTH994YUyl1yT4uyavY5nNB5muff+RtWaqNVCAK408b5ZnnbNAUEWLTCpum9w6arT70i1XdQ4UeOPA==}
-    engines: {node: '>=0.12'}
-
   entities@8.1.0:
     resolution: {integrity: sha512-kxL7msIffSuh9aaFAMD7rxAIuTRMAHMeBtgHW2yUdWw732ZNh4MehkF2gdjvtdmikkaIP9bFDDJOPlsvm7avrA==}
     engines: {node: '>=20.19.0'}
@@ -6567,9 +6563,6 @@ packages:
         optional: true
       webpack:
         optional: true
-
-  htmlparser2@10.1.0:
-    resolution: {integrity: sha512-VTZkM9GWRAtEpveh7MSF6SjjrpNVNNVJfFup7xTY3UpFtm67foy9HDVXneLtFVt4pMz5kZtgNcvCniNFb1hlEQ==}
 
   htmlparser2@12.0.0:
     resolution: {integrity: sha512-Tz7u1i95/g2x2jz81+x0FBVhBhY5aRTvD3tXXdFaljuNdzDLJ8UGNRrTcj2cgQvAg3iW/h77Fz15nLW0L0CrZw==}
@@ -13672,9 +13665,9 @@ snapshots:
 
   '@types/resolve@1.20.6': {}
 
-  '@types/sanitize-html@2.16.1':
+  '@types/sanitize-html@2.16.2':
     dependencies:
-      htmlparser2: 10.1.0
+      htmlparser2: 12.0.0
 
   '@types/scheduler@0.16.2': {}
 
@@ -15253,8 +15246,6 @@ snapshots:
 
   entities@6.0.1: {}
 
-  entities@7.0.1: {}
-
   entities@8.1.0: {}
 
   env-paths@2.2.1: {}
@@ -16292,13 +16283,6 @@ snapshots:
       tapable: 2.3.3
     optionalDependencies:
       webpack: 5.112.2(@swc/core@1.16.20)(clean-css@5.3.3)(csso@5.0.5)(esbuild@0.28.1)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.31)(svgo@3.3.5)(webpack-cli@7.2.3)
-
-  htmlparser2@10.1.0:
-    dependencies:
-      domelementtype: 2.3.0
-      domhandler: 5.0.3
-      domutils: 3.2.2
-      entities: 7.0.1
 
   htmlparser2@12.0.0:
     dependencies:
