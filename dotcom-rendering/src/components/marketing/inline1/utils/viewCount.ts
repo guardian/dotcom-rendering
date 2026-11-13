@@ -1,5 +1,5 @@
 import { storage } from '@guardian/libs';
-import type { Inline1View } from '@guardian/support-dotcom-components/dist/shared/types/targeting/inline1';
+import type { MessageViewLog } from '@guardian/support-dotcom-components/dist/shared/types';
 
 /**
  * We record views of the inline1 components in an array in local storage.
@@ -10,17 +10,27 @@ import type { Inline1View } from '@guardian/support-dotcom-components/dist/share
 const localStorageKey = 'gu.inline1.views';
 const maxEntries = 50;
 
-const getInline1Views = (): Inline1View[] => {
+const isMessageView = (item: unknown): item is MessageViewLog[number] =>
+	typeof item === 'object' &&
+	item !== null &&
+	'testId' in item &&
+	typeof item.testId === 'string' &&
+	'date' in item &&
+	typeof item.date === 'number';
+
+const getInline1Views = (): MessageViewLog => {
 	const item = storage.local.get(localStorageKey);
 	if (Array.isArray(item)) {
-		return item as Inline1View[];
+		return item.filter(isMessageView);
 	}
 	return [];
 };
 
-const recordInline1View = (testName: string, date: Date = new Date()): void => {
-	const newView: Inline1View = { testName, timestamp: date.getTime() };
-	const views = [newView, ...getInline1Views()].slice(0, maxEntries);
+const recordInline1View = (testId: string, date: Date = new Date()): void => {
+	const views: MessageViewLog = [
+		{ testId, date: date.getTime() },
+		...getInline1Views(),
+	].slice(0, maxEntries);
 	storage.local.set(localStorageKey, views);
 };
 
