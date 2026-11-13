@@ -20,7 +20,7 @@ import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Logo } from '../components/Masthead/Titlepiece/Logo';
 import { PrintButton } from '../components/PrintButton.island';
-import { PuzzleIframe } from '../components/PuzzleIframe.island';
+import { PuzzleAccessGate } from '../components/PuzzleAccessGate.island';
 import { PuzzlesUsefulLinks } from '../components/PuzzlesSupporting';
 import { RelatedPuzzlesRailEnhanced } from '../components/RelatedPuzzlesRailEnhanced.island';
 import { RightColumn } from '../components/RightColumn';
@@ -34,10 +34,12 @@ import {
 } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
+import { PUZZLE_MODAL_ROOT_ID } from '../lib/puzzleAccess';
 import { formatPuzzleDate } from '../lib/puzzleDate';
 import {
 	isPuzzlesHubV1Enabled,
 	isPuzzlesHubV2Enabled,
+	isPuzzlesHubV3Enabled,
 } from '../lib/puzzlesHubVersionExperiment';
 import {
 	getPuzzlesSubNavLinks,
@@ -67,7 +69,7 @@ import { BannerWrapper } from './lib/stickiness';
  *
  * The **one deliberate content difference**, per explicit product/design
  * direction: the crossword game itself (`ArticleBody` rendering the
- * `crossword` block) is replaced by `PuzzleIframe.island` in the `body`
+ * `crossword` block) is replaced by `PuzzleAccessGate.island` (which renders `PuzzleIframe`, or the premium puzzles modal) in the `body`
  * grid area. Puzzle Page is scoped to iframe-based puzzles only; the
  * crossword-only game/data model has no equivalent here.
  *
@@ -330,6 +332,21 @@ const stretchLines = css`
 `;
 
 /**
+ * Positioned so the unlock modal, which `PuzzleAccessGate` renders into it
+ * (see `PUZZLE_MODAL_ROOT_ID`), covers exactly the page content and leaves
+ * the header and the footer reachable.
+ *
+ * `position: relative` alone does not create a stacking context, so the
+ * modal's z-index would compete with the header's (for example the expanded
+ * navigation) and cover it. `isolation: isolate` keeps the modal's stacking
+ * inside `<main>`.
+ */
+const mainStyles = css`
+	position: relative;
+	isolation: isolate;
+`;
+
+/**
  * The `/PuzzlePage` handler resolves and validates the `PuzzleConfig` for
  * the request's `slug` before rendering; it is passed alongside the raw
  * payload rather than re-derived here so `PuzzlePageLayout` has a single,
@@ -376,6 +393,9 @@ export const PuzzlePageLayout = ({
 	// Hardcoded permanently off, mirroring exactly how `CrosswordLayout`
 	// gates its own (there, real) `showComments` Section, just with a
 	// fixed value instead of a derived one.
+	// NOTE: if comments are ever enabled, they must also stay off for premium
+	// puzzles (`!requiresSubscription`): the unlock modal covers the
+	// page, so a section the reader cannot reach makes no sense.
 	const showComments = false;
 
 	// The "More from Puzzles & Games" rail is a v1-scoped feature (per the
@@ -395,6 +415,12 @@ export const PuzzlePageLayout = ({
 	// }
 	const isV1Enabled = isPuzzlesHubV1Enabled(config);
 
+	// The premium puzzles access control (the unlock modal, the access check
+	// and no ads) only has an effect for readers in `puzzles-new-hub-v3`.
+	// Outside it every puzzle behaves as a free one, whatever `frontend` sends.
+	const requiresSubscription =
+		isPuzzlesHubV3Enabled(config) && instance.requiresSubscription === true;
+
 	const showRelated =
 		!!instance.moreFromPuzzlesAndGames?.length && isV1Enabled;
 
@@ -404,7 +430,13 @@ export const PuzzlePageLayout = ({
 	// `Front`/`TagPage`/`SportDataPage`) can gate ads here too, instead of
 	// rendering them unconditionally regardless of whether the reader has
 	// actually paid for an ad-free subscription.
-	const renderAds = canRenderAds(puzzlePage);
+	//
+	// Premium puzzles never render ads: a reader with access is a subscriber
+	// (ad-free), and a reader without access only sees the unlock modal, and
+	// ads behind its overlay could be seen badly and not clicked. This is
+	// decided here, from a property of the puzzle, so the cached HTML holds
+	// nothing about the reader and no ad is requested and then hidden.
+	const renderAds = canRenderAds(puzzlePage) && !requiresSubscription;
 
 	// `getContributionsServiceUrl` reads `config.contributionsServiceUrl`,
 	// a field `ConfigType` doesn't carry for Puzzle Page requests. Hardcoded
@@ -522,11 +554,15 @@ export const PuzzlePageLayout = ({
 			</div>
 
 			<main
+				id={PUZZLE_MODAL_ROOT_ID}
 				data-layout="PuzzlePageLayout"
-				css={puzzleAccentStyles(
-					puzzleConfig.puzzleGroup,
-					darkModeAvailable,
-				)}
+				css={[
+					puzzleAccentStyles(
+						puzzleConfig.puzzleGroup,
+						darkModeAvailable,
+					),
+					mainStyles,
+				]}
 			>
 				<Section
 					fullWidth={true}
@@ -639,7 +675,7 @@ export const PuzzlePageLayout = ({
                         so waiting for the island to be seen would delay
                         the puzzle itself. */}
 										<Island priority="critical">
-											<PuzzleIframe
+											<PuzzleAccessGate
 												gameUrl={instance.gameUrl}
 												progressIdentity={
 													instance.progressIdentity
@@ -652,6 +688,16 @@ export const PuzzlePageLayout = ({
 												puzzleDate={
 													instance.puzzleDate ?? null
 												}
+												requiresSubscription={
+													requiresSubscription
+												}
+												ajaxUrl={config.ajaxUrl}
+												puzzleId={
+													instance.progressIdentity
+														?.puzzleId
+												}
+												idUrl={config.idUrl}
+												returnToArchivePath={`/puzzles-and-games/${puzzleGroupPath}/archive`}
 											/>
 										</Island>
 									</ArticleContainer>
