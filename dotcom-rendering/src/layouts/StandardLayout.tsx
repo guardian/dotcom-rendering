@@ -22,6 +22,7 @@ import { OnwardsUpper } from '../components/OnwardsUpper.island';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { SubNav } from '../components/SubNav.island';
+import { grid } from '../grid';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -130,6 +131,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					<Island priority="critical">
 						<InteractivesDisableArticleSwipe />
 					</Island>
+					<Global
+						styles={css`
+							.gu-grid {
+								${grid.container}
+							}
+						`}
+					/>
 				</>
 			)}
 
