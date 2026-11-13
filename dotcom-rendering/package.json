@@ -142,7 +142,7 @@
 		"sanitize-html": "2.18.1",
 		"screenfull": "6.0.2",
 		"semver": "7.5.4",
-		"source-map": "0.7.4",
+		"source-map": "0.8.0",
 		"storybook": "10.6.6",
 		"stylelint": "16.26.1",
 		"stylelint-config-recommended": "14.0.0",
