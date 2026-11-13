@@ -93,12 +93,12 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "webx-monitor-group-contamination-v2",
+		name: "webx-monitor-group-contamination-v3",
 		description:
-			"V2 of test to measure the impact of contamination between groups in ab tests",
+			"V3 of test to measure the impact of contamination between groups in ab tests",
 		owners: ["commercial.dev@theguardian.com"],
 		status: "ON",
-		expirationDate: "2026-11-11",
+		expirationDate: "2026-12-01",
 		type: "client",
 		audienceSize: 10 / 100,
 		audienceSpace: "A",
@@ -178,6 +178,36 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
 	},
+	/**
+	 * Puzzles & Games rollout, tier v3: premium puzzles.
+	 *
+	 * Only takes effect when `puzzles-new-hub-v1` AND `puzzles-new-hub-v2` are
+	 * ALSO enabled for the reader, so the rollout can never end up in an
+	 * inconsistent state.
+	 *
+	 * On top of v1 and v2, this tier activates the premium puzzles access control on
+	 * the Puzzle Page: puzzles older than 7 days need a Supporter Plus or
+	 * Digital Pack subscription, and readers without one see the "unlock
+	 * premium puzzles" modal instead of the game. The access check, the modal,
+	 * and removing ads from premium puzzles all depend on it, so with this
+	 * tier off every puzzle behaves as a free one, whatever `frontend` sends.
+	 *
+	 * To roll back without a deploy: flip this test's `audienceSize` to
+	 * `0 / 100` (or `status` to `"OFF"`).
+	 */
+	{
+		name: "puzzles-new-hub-v3",
+		description:
+			"Rollout of the premium puzzles access control (modal for puzzles older than 7 days), on top of the puzzles-new-hub-v1 and v2 baseline",
+		owners: ["puzzles.team@guardian.co.uk"],
+		status: "ON",
+		expirationDate: "2026-12-31",
+		type: "server",
+		audienceSize: 0 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
 	{
 		name: "fronts-and-curation-editorial-test",
 		description: "Allow editorial A/B tests to run on web",
@@ -195,27 +225,19 @@ const ABTests: ABTest[] = [
 	},
 	{
 		name: "commercial-prebid-failsafe-timeout",
-		description: "Gradually roll out the Prebid failsafe timeout feature",
+		description: "Testing wrapping Prebid in a failsafe timeout",
 		owners: ["commercial.dev@guardian.co.uk"],
 		expirationDate: "2027-01-19",
 		type: "client",
-		status: "OFF",
-		audienceSize: 0 / 100,
-		audienceSpace: "B",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: true,
-	},
-	{
-		name: "articles-and-publishing-revamped-immersive-layout",
-		description: "New grid-based immersive layout for all articles",
-		owners: ["articles.and.publishing@guardian.co.uk"],
 		status: "ON",
-		expirationDate: "2027-08-31",
-		type: "server",
-		audienceSize: 25 / 100,
+		audienceSize: 15 / 100,
 		audienceSpace: "B",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: false,
+		groups: [
+			"control",
+			"variant-one", // Failsafe set at 3_000ms
+			"variant-two", // Failsafe set at 4_000ms
+		],
+		shouldForceMetricsCollection: true,
 	},
 	{
 		name: "commercial-mobile-above-nav-test",
@@ -282,7 +304,7 @@ const ABTests: ABTest[] = [
 		owners: ["commercial.dev@guardian.co.uk"],
 		expirationDate: "2027-01-19",
 		type: "client",
-		status: "ON",
+		status: "OFF",
 		audienceSize: 100 / 100,
 		audienceSpace: "D",
 		groups: ["control", "variant"],

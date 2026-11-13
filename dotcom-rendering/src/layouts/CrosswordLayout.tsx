@@ -156,22 +156,25 @@ export const CrosswordLayout = (props: Props) => {
 	 * & games crosswords archive ("Quick" filtered to its crossword type, see
 	 * `titleTags`). Without v1 both are unchanged.
 	 */
-	const PUZZLES_CROSSWORDS_ARCHIVE_PATH =
-		'puzzles-and-games/crosswords/archive';
+	const PUZZLES_CROSSWORDS_PATH = 'puzzles-and-games/crosswords';
+	const PUZZLES_CROSSWORDS_ARCHIVE_PATH = `${PUZZLES_CROSSWORDS_PATH}/archive`;
 
 	/**
 	 * The series tag ("Quick") links to that crossword type's archive page,
 	 * `SeriesSectionLink` builds the href as `${guardianBaseURL}/${tag.id}`.
+	 * `frontend` sends the path only for types that have their own archive
+	 * page (a path for any other type, e.g. "genius", would 404), so the rest
+	 * link to the crosswords archive instead.
 	 */
 	const crosswordType = article.crossword?.crosswordType;
+	const seriesArchivePath =
+		article.puzzleArchivePath?.replace(/^\//, '') ??
+		PUZZLES_CROSSWORDS_ARCHIVE_PATH;
 	const titleTags =
 		isPuzzlesHubV1 && crosswordType
 			? article.tags.map((tag) =>
 					tag.type === 'Series'
-						? {
-								...tag,
-								id: `${PUZZLES_CROSSWORDS_ARCHIVE_PATH}?puzzle=${crosswordType}`,
-							}
+						? { ...tag, id: seriesArchivePath }
 						: tag,
 				)
 			: article.tags;

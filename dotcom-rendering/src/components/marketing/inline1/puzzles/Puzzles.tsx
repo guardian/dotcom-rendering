@@ -6,7 +6,10 @@ import {
 	SvgGuardianLogo,
 } from '@guardian/source/react-components';
 import type { Inline1Props } from '@guardian/support-dotcom-components/dist/shared/types';
+import { useEffect } from 'react';
+import { useIsInView } from '../../../../lib/useIsInView';
 import type { ReactComponent } from '../../lib/ReactComponent';
+import { recordInline1View } from '../utils/viewCount';
 
 const outerContainerStyles = css`
 	border-top: 1px solid ${palette.neutral[73]};
@@ -117,7 +120,20 @@ const ctaButtonTheme = {
 	backgroundPrimary: palette.neutral[0],
 };
 
-const Puzzles: ReactComponent<Inline1Props> = ({ variant }) => {
+export const Puzzles: ReactComponent<Inline1Props> = ({
+	variant,
+	tracking,
+}) => {
+	const [hasBeenSeen, setNode] = useIsInView({
+		debounce: true,
+		threshold: 0,
+	});
+	useEffect(() => {
+		if (hasBeenSeen === true) {
+			recordInline1View(tracking.abTestName);
+		}
+	}, [hasBeenSeen, tracking.abTestName]);
+
 	if (variant.message.type != 'Inline1PuzzlesMessage') {
 		return null;
 	}
@@ -138,6 +154,7 @@ const Puzzles: ReactComponent<Inline1Props> = ({ variant }) => {
 		<section
 			css={outerContainerStyles}
 			aria-label="Guardian Puzzles and Games"
+			ref={setNode}
 		>
 			<div css={innerContainerStyles(shouldHaveWhiteBackground)}>
 				<div css={guardianLogoContainerStyles}>

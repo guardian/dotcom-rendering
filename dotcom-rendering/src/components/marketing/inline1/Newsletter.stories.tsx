@@ -9,16 +9,12 @@ const style = css`
 	margin: 3em auto;
 `;
 
-const { variant } = newsletterProps;
-
 type WithJsonProps<T> = T & { json?: string };
 type Props = WithJsonProps<React.ComponentProps<typeof Newsletter>>;
 const meta: Meta<Props> = {
 	component: Newsletter,
-	title: 'Components/marketing/Newsletter',
-	args: {
-		variant,
-	},
+	title: 'Components/marketing/inline1/Newsletter',
+	args: newsletterProps,
 	render: ({ json, ...args }) => {
 		const jsonProps = json
 			? JSON.parse(lzstring.decompressFromEncodedURIComponent(json))

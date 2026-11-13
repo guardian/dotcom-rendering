@@ -72,6 +72,7 @@ import { TrailText, type TrailTextSize } from './components/TrailText';
 export type Position = 'inner' | 'outer' | 'none';
 
 export type Props = {
+	headerContent?: React.ReactNode;
 	linkTo: string;
 	format: ArticleFormat;
 	/** The format of the article holding the card */
@@ -353,6 +354,7 @@ const decideSublinkPosition = (
 };
 
 export const Card = ({
+	headerContent,
 	linkTo,
 	format,
 	contextFormat,
@@ -566,9 +568,7 @@ export const Card = ({
 	};
 
 	/* Whilst we migrate to the new container types, we need to check which container we are in. */
-	const isFlexibleContainer =
-		containerType === 'flexible/special' ||
-		containerType === 'flexible/general';
+	const isFlexibleContainer = containerType === 'flexible/general';
 
 	const isSmallCard = containerType === 'scrollable/small';
 
@@ -818,6 +818,7 @@ export const Card = ({
 
 	return (
 		<CardWrapper
+			topBarPadding={headerContent ? space[1] : undefined}
 			format={format}
 			showTopBarDesktop={showTopBarDesktop}
 			showTopBarMobile={showTopBarMobile}
@@ -828,6 +829,7 @@ export const Card = ({
 					: undefined
 			}
 		>
+			{headerContent}
 			<CardLink
 				linkTo={linkTo}
 				headlineText={headlineText}

@@ -45,6 +45,7 @@ export const AllEditorialNewslettersPageLayout = ({
 					hasPageSkin={false}
 					hasPageSkinContentSelfConstrain={false}
 					canonicalUrl={newslettersPage.canonicalUrl}
+					showReaderRevenueLinks={false}
 				/>
 			</div>
 
@@ -93,6 +94,7 @@ export const AllEditorialNewslettersPageLayout = ({
 					pillars={NAV.pillars}
 					urls={NAV.readerRevenueLinks.footer}
 					editionId={editionId}
+					showReaderRevenueLinks={false}
 				/>
 			</Section>
 		</>

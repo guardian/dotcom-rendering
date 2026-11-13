@@ -129,6 +129,8 @@ export interface FEArticle {
 	moreFromPuzzlesAndGames?: PuzzleItem[];
 	/** Useful links and newsletter, only sent for crossword pages. */
 	puzzlesSupporting?: PuzzleGameSupporting;
+	/** Path of the archive page of this crossword's type, if it has one. */
+	puzzleArchivePath?: string;
 }
 
 type PageType = {
