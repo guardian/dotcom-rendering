@@ -95,7 +95,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 			{frontendData.affiliateLinksDisclaimerRequired && (
 				<Island priority="feature" defer={{ until: 'idle' }}>
 					<EnhanceAffiliateLinks
-						pageId={frontendData.config.pageId}
+						urlId={frontendData.config.shortUrlId}
 					/>
 				</Island>
 			)}

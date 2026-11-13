@@ -43,7 +43,7 @@ const utmKeys = [
 	'utm_term',
 ];
 
-export const EnhanceAffiliateLinks = ({ pageId }: { pageId: string }) => {
+export const EnhanceAffiliateLinks = ({ urlId }: { urlId: string }) => {
 	const abTests = useAB();
 
 	// Get users server & client-side AB test participations
@@ -99,7 +99,7 @@ export const EnhanceAffiliateLinks = ({ pageId }: { pageId: string }) => {
 				utmParamsString,
 				referrerDomain,
 				xcustComponentId: link.getAttribute('data-x-cust-component-id'),
-				pageId,
+				urlId,
 			});
 
 			parsedLinkUrl.searchParams.set('xcust', xcustParam);

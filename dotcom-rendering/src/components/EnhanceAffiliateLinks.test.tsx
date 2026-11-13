@@ -20,7 +20,7 @@ describe('EnhanceAffiliateLinks', () => {
             <a href="https://example.com">Not a Skimlink</a>
         `;
 
-		render(<EnhanceAffiliateLinks pageId="test-page-id" />);
+		render(<EnhanceAffiliateLinks urlId="test-page-id" />);
 
 		const link = document.querySelector('a');
 		expect(link?.href).toBe('https://example.com/');
@@ -36,7 +36,7 @@ describe('EnhanceAffiliateLinks', () => {
             <a href="https://go.skimresources.com/?id=12345">Skimlink</a>
         `;
 
-		render(<EnhanceAffiliateLinks pageId="test-page-id" />);
+		render(<EnhanceAffiliateLinks urlId="test-page-id" />);
 
 		const link = document.querySelector('a');
 		expect(link?.href).toContain(
@@ -54,7 +54,7 @@ describe('EnhanceAffiliateLinks', () => {
             <a href="https://go.skimresources.com/?id=12345">Skimlink</a>
         `;
 
-		render(<EnhanceAffiliateLinks pageId="test-page-id" />);
+		render(<EnhanceAffiliateLinks urlId="test-page-id" />);
 
 		const link = document.querySelector('a');
 		expect(link?.href).toContain(
@@ -74,7 +74,7 @@ describe('EnhanceAffiliateLinks', () => {
 			}),
 		});
 
-		render(<EnhanceAffiliateLinks pageId="test-page-id" />);
+		render(<EnhanceAffiliateLinks urlId="test-page-id" />);
 
 		const link = document.querySelector('a');
 		expect(link?.href).toContain(
@@ -92,7 +92,7 @@ describe('EnhanceAffiliateLinks', () => {
 
 		document.body.innerHTML = `<a href="https://go.skimresources.com/?id=12345">Skimlink</a>`;
 
-		render(<EnhanceAffiliateLinks pageId="test-page-id" />);
+		render(<EnhanceAffiliateLinks urlId="test-page-id" />);
 
 		const link = document.querySelector('a');
 		expect(link?.href).toContain(
@@ -115,7 +115,7 @@ describe('EnhanceAffiliateLinks', () => {
 		<a href="https://go.skimresources.com/?id=12345">Skimlink</a>
 	`;
 
-		render(<EnhanceAffiliateLinks pageId="test-page-id" />);
+		render(<EnhanceAffiliateLinks urlId="test-page-id" />);
 
 		const link = document.querySelector('a');
 
@@ -141,7 +141,7 @@ describe('EnhanceAffiliateLinks', () => {
 		<a href="https://go.skimresources.com/?id=12345">Skimlink</a>
 	`;
 
-		render(<EnhanceAffiliateLinks pageId="test-page-id" />);
+		render(<EnhanceAffiliateLinks urlId="test-page-id" />);
 
 		const link = document.querySelector('a');
 		expect(link?.href).toContain(
@@ -160,7 +160,7 @@ describe('EnhanceAffiliateLinks', () => {
 			<a href="https://go.skimresources.com/?id=12345&xcust=referrer%7Cold.example%7CaccountId%7C12345">Skimlink</a>
 		`;
 
-		render(<EnhanceAffiliateLinks pageId="test-page-id" />);
+		render(<EnhanceAffiliateLinks urlId="test-page-id" />);
 
 		const link = document.querySelector('a');
 		const updatedUrl = new URL(link?.href ?? '');

@@ -32,11 +32,11 @@ describe('buildXcustValueForAffiliateLink', () => {
 			utmParamsString: '',
 			referrerDomain: 'www.theguardian.com',
 			xcustComponentId: null,
-			pageId: 'test-page-id',
+			urlId: '/p/test',
 		});
 
 		expect(xcustResult).toBe(
-			'test-page-id|referrer|www.theguardian.com|accountId|1234X9876',
+			'/p/test|referrer|www.theguardian.com|accountId|1234X9876',
 		);
 	});
 
@@ -49,11 +49,11 @@ describe('buildXcustValueForAffiliateLink', () => {
 			utmParamsString: 'utm_medium|cpc|utm_campaign|summer',
 			referrerDomain: 'www.theguardian.com',
 			xcustComponentId: 'related-content',
-			pageId: 'test-page-id',
+			urlId: '/p/test',
 		});
 
 		expect(xcustResult).toBe(
-			'test-page-id|referrer|www.theguardian.com|accountId|1111|abTestParticipations|abTest1:variantA|utm_medium|cpc|utm_campaign|summer|componentId|related-content',
+			'/p/test|referrer|www.theguardian.com|accountId|1111|abTestParticipations|abTest1:variantA|utm_medium|cpc|utm_campaign|summer|componentId|related-content',
 		);
 	});
 
@@ -66,7 +66,7 @@ describe('buildXcustValueForAffiliateLink', () => {
 			utmParamsString: '',
 			referrerDomain: 'www.theguardian.com',
 			xcustComponentId: null,
-			pageId: 'test-page-id',
+			urlId: '/p/test',
 		});
 
 		expect(xcustResult).toContain('|abTestParticipations|');
@@ -85,7 +85,7 @@ describe('buildXcustValueForAffiliateLink', () => {
 			utmParamsString: '',
 			referrerDomain: 'www.theguardian.com',
 			xcustComponentId: null,
-			pageId: 'test-page-id',
+			urlId: '/p/test',
 		});
 
 		expect(xcustResult).toContain(
