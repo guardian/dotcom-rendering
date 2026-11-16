@@ -3,6 +3,7 @@ import { isUndefined } from '@guardian/libs';
 import { type CrosswordProps } from '@guardian/react-crossword';
 import { palette, space } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
+import { puzzleActionAttributes } from '../lib/puzzleActionTracking';
 import { palette as themePalette } from '../palette';
 import { PrintButton } from './PrintButton.island';
 
@@ -21,9 +22,16 @@ export const CrosswordLinks = ({
 		isUndefined(crossword.pdf) || (
 			<div css={crosswordLinkStyles}>
 				{isPuzzlesHubV1 ? (
-					<PrintButton href={crossword.pdf} />
+					<PrintButton
+						href={crossword.pdf}
+						puzzleTrackingSource="crossword-page"
+					/>
 				) : (
 					<LinkButton
+						{...puzzleActionAttributes(
+							'crossword-page',
+							'pdf-open',
+						)}
 						href={crossword.pdf}
 						size="small"
 						priority="tertiary"

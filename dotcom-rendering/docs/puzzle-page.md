@@ -1,28 +1,58 @@
 # Puzzle Page
 
+## Hub scroll depth
+
+The Web Hub reports Ophan `interaction` events with component
+`puzzles-hub-scroll-depth` and string values `25`, `50`, `75`, `100`.
+Each reached milestone is recorded once per pageview; use the highest value as
+that pageview's maximum observed depth bucket, not an exact percentage.
+
+Depth is the bottom of the viewport divided by the current document height,
+including header and footer. Initial viewport coverage counts, so short pages can
+reach 100% without scrolling. Measurements are batched to animation frames on
+scroll/resize and visibility/page restoration; hidden documents are ignored.
+Previously reported buckets remain reported if late content changes the height.
+Archive and game pages are excluded.
+
 ## Puzzles API URL resolution
 
 Frontend resolves each dated page with `GET /game?puzzleType=...&date=YYYY-MM-DD`
 and sends the response's `gameUrl` as `instance.gameUrl`. DCR passes it through the
 layout to `PuzzleIframe` and preserves the API's path, opaque puzzle ID and provider
 parameters. AmuseLabs URLs receive the current reader's `uid` and `darkMode`;
-MovieGrid URLs receive `darkMode=0|1` without adding `uid`. All providers continue
-to receive `guardian-puzzle-context`.
+MovieGrid URLs receive `darkMode=0|1` and `platform=web` without adding `uid`.
+All providers continue to receive `guardian-puzzle-context`.
 
 The local URL builders described below remain a compatibility fallback for older
 frontend payloads without `gameUrl`. New frontend pages always supply the API URL
 or return 404/502 before rendering. Deploy this DCR support before the frontend change.
 MovieGrid pages require `instance.gameUrl`; missing or blank URLs return 404.
 DCR never derives MovieGrid puzzle URLs or IDs.
+MovieGrid's `copy_game` and `share_game` messages are handled by the parent page,
+using the existing native-share/clipboard approach. Actions require the expected
+provider origin and this iframe's window, independently of progress identity.
+For local interaction testing, open `/PuzzlePage/http://localhost:9001/<game-path>`
+on DCR's port 3030 so the iframe island can load its JavaScript from the same origin.
 
 Hub progress enrichment also preserves crossword `gameUrl` values exactly, including
 absolute links and dated Genius article paths. Other puzzle card destinations are unchanged.
+
+Archive calendars re-fetch the selected month when restored from the browser's
+back/forward cache. Hub cards and recommendation rails also refresh their progress,
+so recently saved completion ticks appear without a manual reload.
+
+The archive sign-in prompt uses `data-component="puzzles-archive-sign-in"` and
+`data-link-name="puzzles | archive | sign-in"` for standard Ophan click capture.
+This measures link activations, not completed authentication; the existing sign-in
+destination and authentication behaviour are unchanged.
 
 Film reveal and On the ball require both an edition the hub is available in and
 `puzzles-new-hub-v2` for hub cards, game pages and trivia archives. Requests with
 only the edition gate omit the cards and receive 404 for those pages; existing
 puzzles are unchanged.
-Local development retains its gate bypass.
+Local development retains its gate bypass. Full-hub and archive stories explicitly
+enable v2 so Chromatic builds show all puzzle subnav categories without relying on
+that bypass.
 
 ## Sponsorship
 
@@ -448,8 +478,26 @@ gap later.
 | `instance.puzzleDate`              | `string?` (e.g. `"2026-09-11"`)                           | Which day's puzzle the reader wants to see. Rendered as a human-readable date (e.g. "11 September 2026") next to the page title, passed through unformatted as `PuzzleContext.puzzleDate` to the puzzle iframe (see below), and used (short-formatted) to resolve the `{date}` placeholder in `PuzzleConfig.title`/`description` (see "SEO" above). `frontend` now always resolves and sends this for every request (its Puzzle Page URLs carry a date segment), though DCR still treats the field as optional and simply omits/tidies up the display/context/SEO value when absent. |
 | `instance.moreFromPuzzlesAndGames` | `PuzzleItem[]?` (from `src/types/puzzlesPage.ts`)         | Rendered as a plain "More from Puzzles & games" list when present and non-empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | `instance.puzzlesSupporting`       | `PuzzleGameSupporting?` (from `src/types/puzzlesPage.ts`) | Rendered as a "Useful links" section (links plus newsletter sign-up) above the footer when present. frontend omits it when it has nothing to show.                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `instance.requiresSubscription`    | `boolean?`                                                | Whether the puzzle is premium (only Supporter Plus or Digital Pack readers may play it; the last 7 days counting today, in Europe/London, are free). A property of the puzzle, never of the reader, so it is safe in cached HTML; the backend must compute it, never the browser. Absent means free. Whether the current reader has access is checked client-side, see `docs/premium-puzzles-access-plan.md`.                                                                                                                                                                        |
 
 ### User/context info passed to the puzzle iframe
+
+For pages with `instance.gameUrl` and a puzzle date, `usePuzzleGame` waits for
+Identity authentication, then automatically requests
+`{ajaxUrl}/puzzles-and-games/game/{slug}/{date}.json` for both signed-in and
+signed-out readers. When signed in, it sends the access token in the
+`Authorization` header; signed-out requests omit that header. Frontend forwards
+the request and any supplied token to the Puzzles API's
+`GET /game` and returns a response with `Cache-Control: private, no-store, no-cache`.
+The AJAX router in platform forwards this path, including OPTIONS preflights,
+to frontend's applications service. Deploy that router rule and the frontend
+endpoint before the DCR consumer. The iframe waits for
+the resulting `gameUrl` and preserves the API's `id` and `uid`; DCR does not
+replace `uid` with `legacy_identity_id` or send the token to the iframe.
+Signed-out readers use the anonymous URL returned by that endpoint. Authentication
+changes refresh the selection and discard pending responses from the previous
+session. Failed lookups show an error instead of loading an
+anonymous fallback. Older payloads without `gameUrl` retain the local URL builder.
 
 `src/components/PuzzleIframe.island.tsx` passes a combined `PuzzleContext`
 about the current reader to the puzzle provider two ways:
@@ -662,8 +710,8 @@ darkMode: boolean, puzzleDate: string | null } }` and the
   backing database), and confirms the exact real AmuseLabs URL parameter
   conventions already implemented here (`set`, `id` vs `idx=1`, `embed=1`,
   `uid`, `darkMode=0|1`), plus MovieGrid/sportsreveal's simpler convention
-  (base URL plus a client-added `darkMode` param only, no confirmed `uid`
-  support for those two providers). `puzzleConfigs.ts`'s current registry,
+  (base URL plus client-added `darkMode` and `platform=web` params, no confirmed
+  `uid` support for those two providers). `puzzleConfigs.ts`'s current registry,
   with its explicit, per-entry identity data, is a deliberate,
   correct-for-now V0 solution, not the intended final architecture. When
   the Puzzles Server/Archive API materialises, this registry's statically

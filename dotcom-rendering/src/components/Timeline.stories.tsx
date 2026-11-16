@@ -1,3 +1,5 @@
+import { css } from '@emotion/react';
+import { breakpoints, from } from '@guardian/source/foundations';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { allModes } from '../../.storybook/modes';
 import preview from '../../.storybook/preview';
@@ -9,6 +11,7 @@ import {
 	Pillar,
 } from '../lib/articleFormat';
 import { getNestedArticleElement } from '../lib/renderElement';
+import { palette } from '../palette';
 import type { TextBlockElement, YoutubeBlockElement } from '../types/content';
 import { Timeline } from './Timeline';
 
@@ -86,6 +89,48 @@ const ArticleElementComponent = getNestedArticleElement({
 	webTitle: 'Storybook page',
 	shouldHideAds: false,
 });
+
+const articleGridRule = css`
+	position: relative;
+
+	${from.tablet} {
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: -20px;
+			width: 1px;
+			background-color: ${palette('--article-border')};
+		}
+	}
+
+	${from.leftCol} {
+		&::before {
+			left: -10px;
+		}
+	}
+`;
+
+const allBreakpointModes = {
+	'light mobile': allModes['light mobile'],
+	'light mobileMedium': allModes['light mobileMedium'],
+	'light mobileLandscape': {
+		globalColourScheme: 'light',
+		viewport: breakpoints.mobileLandscape,
+	},
+	'light phablet': {
+		globalColourScheme: 'light',
+		viewport: breakpoints.phablet,
+	},
+	'light tablet': {
+		globalColourScheme: 'light',
+		viewport: breakpoints.tablet,
+	},
+	'light desktop': allModes['light desktop'],
+	'light leftCol': allModes['light leftCol'],
+	'light wide': allModes['light wide'],
+};
 
 export const FlatWithNoTitles = meta.story({
 	args: {
@@ -201,6 +246,47 @@ export const SectionedWithSomeTitles = meta.story({
 					),
 				},
 			],
+		},
+	},
+});
+
+export const SectionedInArticleGrid = meta.story({
+	name: 'Sectioned in Article Grid',
+	args: {
+		timeline: {
+			_type: 'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement',
+			sections: [
+				{
+					title: '2026',
+					events: [
+						{
+							date: '12 November 2026',
+							title: 'A significant event occurs',
+							label: 'Key event',
+							body: [
+								{
+									...testTextElement,
+									elementId:
+										'article-grid-regression-text-element',
+									html: '<p>This timeline is rendered against the article centre rule to cover its responsive border alignment.</p>',
+								},
+							],
+						},
+					],
+				},
+			],
+		},
+		ArticleElementComponent,
+		format,
+	},
+	render: (args) => (
+		<div css={articleGridRule}>
+			<Timeline {...args} />
+		</div>
+	),
+	parameters: {
+		chromatic: {
+			modes: allBreakpointModes,
 		},
 	},
 });

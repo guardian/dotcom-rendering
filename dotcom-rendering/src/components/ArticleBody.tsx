@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	between,
+	from,
 	headlineBold24,
 	pxToRem,
 	remSpace,
@@ -67,6 +68,7 @@ type Props = {
 	serverTime?: number;
 	idApiUrl?: string;
 	articleArrangement?: LayoutType;
+	hasPageSkin?: boolean;
 };
 
 /**
@@ -133,6 +135,35 @@ const bodyPadding = css`
 	}
 `;
 
+/**
+ * Page skins use the desktop grid at wider viewport breakpoints, so body
+ * furniture must keep its desktop positioning rather than moving into the
+ * usual left column outside the article.
+ */
+const pageSkinBodyStyles = css`
+	${from.leftCol} {
+		figure[data-spacefinder-role='supporting'],
+		figure[data-spacefinder-role='thumbnail'],
+		figure[data-spacefinder-role='showcase'],
+		figure[data-spacefinder-role='richLink'] {
+			margin-left: 0;
+		}
+
+		figure[data-spacefinder-role='supporting'] > figcaption,
+		figure[data-spacefinder-role='showcase'] > figcaption,
+		figure[data-spacefinder-role='immersive'] > figcaption {
+			position: static;
+		}
+
+		figure[data-spacefinder-role='immersive'] {
+			width: auto;
+			max-width: none;
+			margin-left: -20px;
+			margin-right: -340px;
+		}
+	}
+`;
+
 const globalLinkStyles = () => css`
 	a:not([data-ignore='global-link-styling']) {
 		text-decoration: none;
@@ -190,6 +221,7 @@ export const ArticleBody = ({
 	serverTime,
 	idApiUrl,
 	articleArrangement,
+	hasPageSkin = false,
 }: Props) => {
 	const isInteractiveContent =
 		format.design === ArticleDesign.Interactive ||
@@ -295,6 +327,7 @@ export const ArticleBody = ({
 					globalOlStyles(),
 					globalStrongStyles,
 					globalLinkStyles(),
+					hasPageSkin && pageSkinBodyStyles,
 					isHostedContent && [hostedContentH2Styles],
 					tableOfContentsStyle === 'horizontal'
 						? horizontalTableOfContentsHeadingOffset

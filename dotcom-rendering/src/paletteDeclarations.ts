@@ -3,7 +3,10 @@
   --
   the palette object is large and ordering helps knowing where to insert new elements
 */
-import { palette as sourcePalette } from '@guardian/source/foundations';
+import {
+	calculateHoverColour,
+	palette as sourcePalette,
+} from '@guardian/source/foundations';
 import {
 	themeButton,
 	themeButtonBrand,
@@ -3437,8 +3440,6 @@ const articleBackgroundLight: PaletteFunction = ({
 
 const articleBackgroundDark: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
-		case ArticleDesign.WeekendEssay:
-			return sourcePalette.news[800];
 		case ArticleDesign.DeadBlog:
 			return sourcePalette.neutral[7];
 		case ArticleDesign.LiveBlog:
@@ -4380,6 +4381,7 @@ const subMetaBackgroundLight: PaletteFunction = ({
 					return sourcePalette.neutral[97];
 			}
 		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
 			return sourcePalette.opinion[800];
 		case ArticleDesign.Comment:
 			switch (theme) {
@@ -4388,8 +4390,6 @@ const subMetaBackgroundLight: PaletteFunction = ({
 				default:
 					return sourcePalette.opinion[800];
 			}
-		case ArticleDesign.Editorial:
-			return sourcePalette.opinion[800];
 		case ArticleDesign.Analysis:
 			switch (theme) {
 				case ArticleSpecial.SpecialReportAlt:
@@ -4397,6 +4397,8 @@ const subMetaBackgroundLight: PaletteFunction = ({
 				default:
 					return sourcePalette.news[800];
 			}
+		case ArticleDesign.WeekendEssay:
+			return sourcePalette.news[800];
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
@@ -5951,10 +5953,17 @@ const productButtonPrimaryBackgroundLight: PaletteFunction = () =>
 	sourcePalette.lifestyle[300];
 const productButtonPrimaryBackgroundDark: PaletteFunction = () =>
 	sourcePalette.lifestyle[500];
+
 const productButtonPrimaryBackgroundHoverLight: PaletteFunction = () =>
-	'#660055';
+	calculateHoverColour(sourcePalette.lifestyle[300]);
 const productButtonPrimaryBackgroundHoverDark: PaletteFunction = () =>
-	'#FF8ACC';
+	calculateHoverColour(sourcePalette.lifestyle[500]);
+
+const productButtonTertiaryBackgroundHoverLight: PaletteFunction = () =>
+	calculateHoverColour('transparent', sourcePalette.lifestyle[300]);
+const productButtonTertiaryBackgroundHoverDark: PaletteFunction = () =>
+	calculateHoverColour('transparent', sourcePalette.lifestyle[500]);
+
 const productButtonPrimaryTextDark: PaletteFunction = () =>
 	sourcePalette.neutral[7];
 const productButtonPrimaryTextLight: PaletteFunction = () =>
@@ -8300,6 +8309,10 @@ const paletteColours = {
 	'--product-button-primary-text': {
 		light: productButtonPrimaryTextLight,
 		dark: productButtonPrimaryTextDark,
+	},
+	'--product-button-tertiary-background-hover': {
+		light: productButtonTertiaryBackgroundHoverLight,
+		dark: productButtonTertiaryBackgroundHoverDark,
 	},
 	'--product-card-background': {
 		light: productCardBackgroundLight,

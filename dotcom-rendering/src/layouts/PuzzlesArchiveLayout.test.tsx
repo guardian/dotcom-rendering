@@ -1,17 +1,38 @@
 import '@testing-library/jest-dom';
 import { palette } from '@guardian/source/foundations';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import type { ReactNode } from 'react';
+import { createPuzzlesPage } from '../../fixtures/manual/puzzlesPage';
+import { Island } from '../components/Island';
+import { SubNav } from '../components/Masthead/Titlepiece/SubNav';
+import {
+	puzzlesHubV2Experiment,
+	puzzlesHubV2Participation,
+} from '../lib/puzzlesHubVersionExperiment';
+import { extractNAV, type NavType } from '../model/extract-nav';
 import { PuzzlesArchiveLayout } from './PuzzlesArchiveLayout';
+import archiveStories, {
+	LogicPuzzles,
+	WordGames,
+} from './PuzzlesArchiveLayout.stories';
 
 jest.mock('../components/Masthead/Masthead', () => ({
-	Masthead: () => <header data-testid="masthead" />,
+	Masthead: ({ nav }: { nav: NavType }) => (
+		<header data-testid="masthead">
+			{nav.subNavSections && (
+				<SubNav
+					subNavSections={nav.subNavSections}
+					currentNavLink={nav.currentNavLink}
+				/>
+			)}
+		</header>
+	),
 }));
 jest.mock('../components/Footer', () => ({
 	Footer: () => <div data-testid="footer" />,
 }));
 jest.mock('../components/Island', () => ({
-	Island: () => null,
+	Island: jest.fn(() => null),
 }));
 jest.mock('../components/RelatedPuzzlesRail', () => ({
 	RelatedPuzzlesRail: () => <div data-testid="more-puzzles" />,
@@ -27,7 +48,7 @@ const page = (isAdFreeUser = false) => ({
 	isAdFreeUser,
 	editionId: 'UK',
 	contributionsServiceUrl: '',
-	config: { switches: {} },
+	config: { switches: {}, serverSideABTests: {} },
 	pageFooter: {},
 	layout: { containers: [] },
 	archive: {
@@ -41,7 +62,87 @@ const slotIds = () =>
 	Array.from(document.querySelectorAll('.js-ad-slot'), (slot) => slot.id);
 
 describe('PuzzlesArchiveLayout', () => {
-	const nav = { pillars: [], readerRevenueLinks: { footer: [] } } as never;
+	const nav = extractNAV(createPuzzlesPage().nav);
+
+	it.each([
+		['Crosswords', archiveStories.args],
+		['Word games', { ...archiveStories.args, ...WordGames.args }],
+		['Logic puzzles', { ...archiveStories.args, ...LogicPuzzles.args }],
+	] as const)(
+		'shows all V2 subnav links and keeps %s selected in the archive story',
+		(title, args) => {
+			render(<PuzzlesArchiveLayout {...args} />);
+			const masthead = within(screen.getByTestId('masthead'));
+
+			expect(
+				masthead.getAllByRole('link').map((link) => ({
+					title: link.textContent,
+					url: link.getAttribute('href'),
+				})),
+			).toEqual([
+				{ title: 'Puzzles & games', url: '/puzzles-and-games' },
+				{
+					title: 'Crosswords',
+					url: '/puzzles-and-games/crosswords/archive',
+				},
+				{
+					title: 'Word games',
+					url: '/puzzles-and-games/word-games/archive',
+				},
+				{
+					title: 'Logic puzzles',
+					url: '/puzzles-and-games/logic-puzzles/archive',
+				},
+				{
+					title: 'Trivia & quizzes',
+					url: '/puzzles-and-games/trivia-and-quizzes/archive',
+				},
+			]);
+			expect(
+				masthead
+					.getByRole('link', { name: title })
+					.querySelector('span'),
+			).toHaveTextContent(title);
+		},
+	);
+
+	it.each([
+		['hub only', true, false, 4],
+		['V2 without hub', false, true, 1],
+		['neither', false, false, 1],
+	] as const)(
+		'hides trivia for %s',
+		(_description, isHubAvailable, isV2Enabled, expectedLinkCount) => {
+			const { puzzlesPage } = archiveStories.args;
+			render(
+				<PuzzlesArchiveLayout
+					NAV={nav}
+					puzzlesPage={{
+						...puzzlesPage,
+						config: {
+							...puzzlesPage.config,
+							edition: isHubAvailable ? 'INT' : 'UK',
+							serverSideABTests: {
+								...puzzlesHubV2Participation(
+									isV2Enabled
+										? puzzlesHubV2Experiment.variant
+										: puzzlesHubV2Experiment.control,
+								),
+							},
+						},
+					}}
+				/>,
+			);
+			const masthead = within(screen.getByTestId('masthead'));
+
+			expect(
+				masthead.queryByRole('link', { name: 'Trivia & quizzes' }),
+			).not.toBeInTheDocument();
+			expect(masthead.getAllByRole('link')).toHaveLength(
+				expectedLinkCount,
+			);
+		},
+	);
 
 	it('renders the trivia archive with its Labs palette', () => {
 		const puzzlesPage = page(true);
@@ -96,6 +197,27 @@ describe('PuzzlesArchiveLayout', () => {
 				name: 'Word games',
 			}),
 		).toBeInTheDocument();
+	});
+
+	it('passes the archive source into the More-from island', () => {
+		jest.mocked(Island).mockClear();
+		render(
+			<PuzzlesArchiveLayout
+				NAV={nav}
+				puzzlesPage={page(true) as never}
+			/>,
+		);
+		expect(Island).toHaveBeenCalledWith(
+			expect.objectContaining({
+				children: expect.objectContaining({
+					props: expect.objectContaining({
+						source: 'archive',
+						items: page(true).archive.moreFrom,
+					}),
+				}),
+			}),
+			expect.anything(),
+		);
 	});
 
 	it('does not render ad slots for ad-free users', () => {

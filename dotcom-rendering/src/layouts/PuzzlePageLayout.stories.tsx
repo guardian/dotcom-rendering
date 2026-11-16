@@ -4,7 +4,7 @@ import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
 import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
 import { extractNAV } from '../model/extract-nav';
 import { getPuzzleConfig } from '../model/puzzles/puzzleConfigs';
-import { getPuzzlePageFormat, PuzzlePageLayout } from './PuzzlePageLayout';
+import { puzzlePageFormat, PuzzlePageLayout } from './PuzzlePageLayout';
 
 const puzzlePage = createPuzzlePage('word-wheel');
 const puzzleConfig = getPuzzleConfig('word-wheel');
@@ -23,7 +23,7 @@ const meta = {
 		darkModeAvailable: false,
 	},
 	parameters: {
-		formats: [getPuzzlePageFormat(storyPuzzleConfig.puzzleGroup)],
+		formats: [puzzlePageFormat],
 		chromatic: {
 			viewports: [breakpoints.mobileMedium, breakpoints.wide],
 		},
@@ -110,6 +110,6 @@ export const LogicPuzzle = {
 		},
 	},
 	parameters: {
-		formats: [getPuzzlePageFormat(sudokuConfig.puzzleGroup)],
+		formats: [puzzlePageFormat],
 	},
 } satisfies Story;

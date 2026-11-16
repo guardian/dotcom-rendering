@@ -190,10 +190,10 @@ const MetaGridCommentCount = ({
 
 const MetaGridDateline = ({
 	children,
-	isImmersiveOrAnalysisWithMultipleAuthors,
+	useBylineArea,
 }: {
 	children: ReactNode;
-	isImmersiveOrAnalysisWithMultipleAuthors: boolean;
+	useBylineArea: boolean;
 }) => (
 	<div
 		css={css`
@@ -201,9 +201,7 @@ const MetaGridDateline = ({
 			margin-bottom: ${space[4]}px;
 		`}
 		style={{
-			gridArea: isImmersiveOrAnalysisWithMultipleAuthors
-				? 'byline'
-				: 'dateline',
+			gridArea: useBylineArea ? 'byline' : 'dateline',
 		}}
 	>
 		{children}
@@ -284,6 +282,9 @@ export const ArticleMetaApps = ({
 	const isImmersiveOrAnalysisWithMultipleAuthors =
 		(isAnalysis || isImmersive) && !!byline && isUndefined(soleContributor);
 
+	const showContributor =
+		shouldShowContributor(format, isImmersiveGrid) && !!byline;
+
 	const shouldShowListenToArticleButton =
 		!!pageId && !(isLiveBlog || isPicture || isGallery || isVideo);
 
@@ -332,18 +333,18 @@ export const ArticleMetaApps = ({
 					</MetaGridAvatar>
 				)}
 				<MetaGridByline isComment={isComment}>
-					{shouldShowContributor(format, isImmersiveGrid) &&
-						!!byline && (
-							<Contributor
-								byline={byline}
-								tags={tags}
-								format={format}
-								layoutType={layoutType}
-							/>
-						)}
-					{shouldShowFollowButtons(
-						isComment || isAnalysis || isImmersive,
-					) &&
+					{showContributor && (
+						<Contributor
+							byline={byline}
+							tags={tags}
+							format={format}
+							layoutType={layoutType}
+						/>
+					)}
+					{!showContributor &&
+						shouldShowFollowButtons(
+							isComment || isAnalysis || isImmersive,
+						) &&
 						soleContributor && (
 							<Island
 								priority="feature"
@@ -394,8 +395,9 @@ export const ArticleMetaApps = ({
 					/>
 				)}
 				<MetaGridDateline
-					isImmersiveOrAnalysisWithMultipleAuthors={
-						isImmersiveOrAnalysisWithMultipleAuthors
+					useBylineArea={
+						isImmersiveOrAnalysisWithMultipleAuthors &&
+						!showContributor
 					}
 				>
 					<Dateline

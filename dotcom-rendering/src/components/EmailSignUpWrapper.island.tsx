@@ -36,7 +36,6 @@ export const EmailSignUpWrapper = ({
 	description,
 	illustrationSquare,
 	frequency,
-	theme,
 }: EmailSignUpWrapperProps) => {
 	const { renderingTarget } = useConfig();
 	const isSignedIn = useIsSignedIn();
@@ -82,7 +81,6 @@ export const EmailSignUpWrapper = ({
 				description={description}
 				illustrationSquare={illustrationSquare}
 				frequency={frequency}
-				theme={theme}
 				isSignedIn={isSignedIn}
 			>
 				<Island priority="feature" defer={{ until: 'visible' }}>

@@ -11,9 +11,13 @@ import {
 	textSans14,
 	textSansBold14,
 } from '@guardian/source/foundations';
+import { useEffect, useRef } from 'react';
+import { submitComponentEvent } from '../../../client/ophan/ophan';
 import { grid } from '../../../grid';
+import { isNetworkFront as isANetworkFront } from '../../../lib/edition';
 import { generateImageURL } from '../../../lib/image';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
+import { useIsInView } from '../../../lib/useIsInView';
 import { palette as themePalette } from '../../../palette';
 import type {
 	CustomSubnav,
@@ -21,16 +25,24 @@ import type {
 	CustomSubnavImage,
 	RenderingPage,
 } from '../../../types/customSubnav';
+import { useConfig } from '../../ConfigContext';
+
+/**
+ * Where the subnav is rendered. Extends the payload's `RenderingPage` with `card`,
+ * used when a subnav is shown as a mini-nav inside a front card.
+ */
+type SubNavPlacement = RenderingPage | 'card';
 
 type Props = {
 	customSubNav: CustomSubnav;
-	currentNavLink: string;
-	renderingPage: RenderingPage;
+	renderingPage: SubNavPlacement;
+	pageId?: string;
 	hasPageSkin?: boolean;
+	canonicalUrl?: string;
 };
 
 const subNavStyles = css`
-	${textSans14}
+	${textSans14};
 	display: flex;
 	column-gap: ${space[2]}px;
 	color: inherit;
@@ -53,10 +65,14 @@ const subNavStylesFromLeftCol = css`
 	}
 `;
 
-/** On articles the header and links sit on a single aligned row. */
-const articleContainerStyles = css`
+/** Header and links sit on a single aligned row (article subnav and card mini-nav). */
+const inlineRowStyles = css`
 	display: flex;
 	align-items: stretch;
+`;
+
+/** Article subnav row heights. */
+const articleRowHeightStyles = css`
 	min-height: 36px;
 
 	${from.mobileMedium} {
@@ -89,15 +105,31 @@ const articleSubNavStyles = css`
 	}
 `;
 
-/** Article subnavs have a divider separating the header text from the scrollable list. */
-const articleDividerStyles = css`
+/** Article subnavs keep a small horizontal gap between the header and the list items. */
+const articleHeaderGapStyles = css`
 	margin-left: ${space[2]}px;
 	padding-left: ${space[2]}px;
+`;
+
+/** The inline links list sizes to its content so it scrolls rather than squashing. */
+const inlineListSizingStyles = css`
+	flex-shrink: 0;
+	width: max-content;
+`;
+
+const cardMiniNavHeaderGapStyles = css`
+	margin-left: ${space[1]}px;
+	padding-left: ${space[1]}px;
+`;
+
+/** Article subnavs have a divider separating the header text from the scrollable list. */
+const articleDividerStyles = css`
+	${articleHeaderGapStyles}
 	border-left: 1px solid ${themePalette('--masthead-nav-lines')};
 `;
 
 const articleHeaderStyles = css`
-	${textSansBold14}
+	${textSansBold14};
 	color: ${themePalette('--custom-subnav-header-text')};
 	display: flex;
 	align-items: center;
@@ -120,7 +152,7 @@ const headerTextWrapperStyles = css`
 
 /** On fronts the header sits above the links as a large stacked heading. */
 const frontContainerStyles = css`
-	${headlineBold28}
+	${headlineBold28};
 	margin-top: ${space[2]}px;
 	color: ${themePalette('--masthead-nav-link-text')};
 `;
@@ -157,7 +189,7 @@ const headerImageStyles = css`
 `;
 
 const imageHeaderTextStyles = css`
-	${headlineBold28}
+	${headlineBold28};
 	position: absolute;
 	left: ${space[3]}px;
 	bottom: ${space[1]}px;
@@ -171,7 +203,7 @@ const imageHeaderTextStyles = css`
 const imageListStyles = css`
 	${grid.column.all}
 	grid-row: 2;
-	${textSans14}
+	${textSans14};
 	display: flex;
 	align-items: center;
 	column-gap: ${space[2]}px;
@@ -184,6 +216,7 @@ const imageListStyles = css`
 
 	${from.tablet} {
 		min-height: 44px;
+		padding: 0 ${space[5]}px;
 	}
 `;
 
@@ -335,16 +368,39 @@ const CustomHeader = (
  */
 export const CustomSubNav = ({
 	customSubNav,
-	currentNavLink,
 	renderingPage,
 	hasPageSkin,
+	pageId,
+	canonicalUrl,
 }: Props) => {
-	const isArticle = renderingPage === 'article';
-	/** DCR receives images for all platforms; only web images are rendered here. */
-	const webImages = (customSubNav.images ?? []).filter((image) =>
-		image.platforms.includes('web'),
-	);
-	const hasHeaderImage = !isArticle && webImages.length > 0;
+	const hasTrackedView = useRef(false);
+	const [isInView, setNode] = useIsInView({});
+	const { renderingTarget } = useConfig();
+	const isNetworkFront = pageId ? isANetworkFront(pageId) : false;
+
+	useEffect(() => {
+		if (isInView !== true || hasTrackedView.current) {
+			return;
+		}
+
+		hasTrackedView.current = true;
+		void submitComponentEvent(
+			{
+				component: {
+					componentType: 'CUSTOM_SUBNAV',
+					id: customSubNav.header.headerText,
+				},
+				action: 'VIEW',
+				value: customSubNav.id,
+			},
+			renderingTarget,
+		);
+	}, [
+		isInView,
+		renderingTarget,
+		customSubNav.header.headerText,
+		customSubNav.id,
+	]);
 
 	const linkItems = customSubNav.links.map(({ linkText, dotcomPath }) => (
 		<li key={dotcomPath} css={subnavListItemStyles}>
@@ -358,7 +414,8 @@ export const CustomSubNav = ({
 					linkText,
 				)}
 			>
-				{linkText === currentNavLink ? (
+				{!isNetworkFront &&
+				(dotcomPath === pageId || dotcomPath === canonicalUrl) ? (
 					<span css={selectedLink}>{linkText}</span>
 				) : (
 					linkText
@@ -367,86 +424,134 @@ export const CustomSubNav = ({
 		</li>
 	));
 
-	if (hasHeaderImage) {
-		return (
-			<div
-				data-component={`custom-subnav-${customSubNav.header.headerText}`}
-				data-component-id={customSubNav.id}
-				data-rendering-page={renderingPage}
-				css={imageNavStyles}
-			>
-				<div css={imageWrapperStyles}>
-					<HeaderImage
-						images={webImages}
-						headerText={customSubNav.header.headerText}
-					/>
-					{CustomHeader(customSubNav, imageHeaderTextStyles)}
+	switch (renderingPage) {
+		/** On fronts the header sits above the links as a large stacked heading. */
+		case 'front':
+			/** DCR receives images for all platforms; only web images are rendered here. */
+			const webImages = (customSubNav.images ?? []).filter((image) =>
+				image.platforms.includes('web'),
+			);
+			const hasHeaderImage = webImages.length > 0;
+			if (hasHeaderImage) {
+				return (
+					<div
+						ref={setNode}
+						data-component={`custom-subnav-${customSubNav.header.headerText}`}
+						data-component-id={customSubNav.id}
+						data-rendering-page={renderingPage}
+						css={imageNavStyles}
+					>
+						<div css={imageWrapperStyles}>
+							<HeaderImage
+								images={webImages}
+								headerText={customSubNav.header.headerText}
+							/>
+							{CustomHeader(customSubNav, imageHeaderTextStyles)}
+						</div>
+						<ul
+							css={[imageListStyles, scrollableSubNavStyles]}
+							role="list"
+							style={{
+								'--sub-nav-link': themePalette(
+									'--sub-nav-link-header',
+								),
+							}}
+						>
+							{linkItems}
+						</ul>
+					</div>
+				);
+			}
+			return (
+				<div
+					ref={setNode}
+					data-component={`custom-subnav-${customSubNav.header.headerText}`}
+					data-component-id={customSubNav.id}
+					data-rendering-page={renderingPage}
+					css={frontContainerStyles}
+				>
+					{CustomHeader(customSubNav, undefined)}
+					<ul
+						css={[
+							subNavStyles,
+							!hasPageSkin && subNavStylesFromLeftCol,
+							scrollableSubNavStyles,
+						]}
+						role="list"
+						style={{
+							'--sub-nav-link': themePalette(
+								'--sub-nav-link-header',
+							),
+						}}
+					>
+						{linkItems}
+					</ul>
 				</div>
-				<ul
-					css={[imageListStyles, scrollableSubNavStyles]}
-					role="list"
-					style={{
-						'--sub-nav-link': themePalette('--sub-nav-link-header'),
-					}}
-				>
-					{linkItems}
-				</ul>
-			</div>
-		);
-	}
+			);
 
-	if (isArticle) {
-		return (
-			<div
-				data-component={`custom-subnav-${customSubNav.header.headerText}`}
-				data-component-id={customSubNav.id}
-				data-rendering-page={renderingPage}
-				css={[articleContainerStyles, scrollableSubNavStyles]}
-			>
-				{CustomHeader(customSubNav, articleHeaderStyles)}
-				<ul
+		/** On articles the header and links sit on one row, separated by a divider. */
+		case 'article':
+			return (
+				<div
+					ref={setNode}
+					data-component={`custom-subnav-${customSubNav.header.headerText}`}
+					data-component-id={customSubNav.id}
+					data-rendering-page={renderingPage}
 					css={[
-						subNavStyles,
-						!hasPageSkin && subNavStylesFromLeftCol,
-						articleSubNavStyles,
-						articleDividerStyles,
-						css`
-							flex-shrink: 0;
-							width: max-content;
-						`,
+						inlineRowStyles,
+						articleRowHeightStyles,
+						scrollableSubNavStyles,
 					]}
-					role="list"
-					style={{
-						'--sub-nav-link': themePalette('--sub-nav-link-header'),
-					}}
 				>
-					{linkItems}
-				</ul>
-			</div>
-		);
-	}
+					{CustomHeader(customSubNav, articleHeaderStyles)}
+					<ul
+						css={[
+							subNavStyles,
+							!hasPageSkin && subNavStylesFromLeftCol,
+							articleSubNavStyles,
+							articleDividerStyles,
+							inlineListSizingStyles,
+						]}
+						role="list"
+						style={{
+							'--sub-nav-link': themePalette(
+								'--sub-nav-link-header',
+							),
+						}}
+					>
+						{linkItems}
+					</ul>
+				</div>
+			);
 
-	return (
-		<div
-			data-component={`custom-subnav-${customSubNav.header.headerText}`}
-			data-component-id={customSubNav.id}
-			data-rendering-page={renderingPage}
-			css={frontContainerStyles}
-		>
-			{CustomHeader(customSubNav, undefined)}
-			<ul
-				css={[
-					subNavStyles,
-					!hasPageSkin && subNavStylesFromLeftCol,
-					scrollableSubNavStyles,
-				]}
-				role="list"
-				style={{
-					'--sub-nav-link': themePalette('--sub-nav-link-header'),
-				}}
-			>
-				{linkItems}
-			</ul>
-		</div>
-	);
+		case 'card':
+			return (
+				<div
+					ref={setNode}
+					data-component={`custom-subnav-${customSubNav.header.headerText}`}
+					data-component-id={customSubNav.id}
+					data-rendering-page={renderingPage}
+					css={[inlineRowStyles, scrollableSubNavStyles]}
+				>
+					{CustomHeader(customSubNav, articleHeaderStyles)}
+					<ul
+						css={[
+							subNavStyles,
+							articleSubNavStyles,
+							customSubNav.header.showHeaderText &&
+								cardMiniNavHeaderGapStyles,
+							inlineListSizingStyles,
+						]}
+						role="list"
+						style={{
+							'--sub-nav-link': themePalette(
+								'--sub-nav-link-header',
+							),
+						}}
+					>
+						{linkItems}
+					</ul>
+				</div>
+			);
+	}
 };

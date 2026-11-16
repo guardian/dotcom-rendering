@@ -234,7 +234,13 @@ const cardImageStyles = css`
 	}
 `;
 
-const MorePuzzlesCard = ({ item }: { item: PuzzleItem }) => {
+const MorePuzzlesCard = ({
+	item,
+	dataLinkName,
+}: {
+	item: PuzzleItem;
+	dataLinkName?: string;
+}) => {
 	const url = getPuzzleUrl(item);
 	const { darkModeAvailable } = useConfig();
 	const colours = puzzleColours(item);
@@ -283,7 +289,12 @@ const MorePuzzlesCard = ({ item }: { item: PuzzleItem }) => {
 		cardColourStyles(colours, darkModeAvailable),
 	];
 	return url !== undefined ? (
-		<a css={styles} href={url} {...externalProps(url)}>
+		<a
+			css={styles}
+			href={url}
+			data-link-name={dataLinkName}
+			{...externalProps(url)}
+		>
 			{contents}
 		</a>
 	) : (
@@ -539,11 +550,13 @@ const rowStyles = (
 export const MorePuzzlesRows = ({
 	items,
 	mobileScrollable = false,
+	ophanComponentName,
 }: {
 	items: PuzzleItem[];
 	mobileScrollable?: boolean;
+	ophanComponentName?: string;
 }) => (
-	<div css={rowsStyles}>
+	<div css={rowsStyles} data-component={ophanComponentName}>
 		<ul
 			css={rowStyles(
 				items[0]?.cardVariant ?? 'primary',
@@ -551,9 +564,16 @@ export const MorePuzzlesRows = ({
 				mobileScrollable,
 			)}
 		>
-			{items.map((item) => (
+			{items.map((item, index) => (
 				<li key={item.id}>
-					<MorePuzzlesCard item={item} />
+					<MorePuzzlesCard
+						item={item}
+						dataLinkName={
+							ophanComponentName !== undefined
+								? `puzzles | group-0 | card-@${index + 1} | card-${item.id}`
+								: undefined
+						}
+					/>
 				</li>
 			))}
 		</ul>

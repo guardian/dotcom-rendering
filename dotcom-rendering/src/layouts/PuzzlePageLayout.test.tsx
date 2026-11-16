@@ -5,6 +5,8 @@ import { ConfigProvider } from '../components/ConfigContext';
 import {
 	puzzlesHubV2Experiment,
 	puzzlesHubV2Participation,
+	puzzlesHubV3Experiment,
+	puzzlesHubV3Participation,
 } from '../lib/puzzlesHubVersionExperiment';
 import { extractNAV } from '../model/extract-nav';
 import { getPuzzleConfig } from '../model/puzzles/puzzleConfigs';
@@ -50,6 +52,10 @@ jest.mock('../lib/useAB', () => ({
 }));
 
 const v2On = puzzlesHubV2Participation(puzzlesHubV2Experiment.variant);
+const v2AndV3On = {
+	...v2On,
+	...puzzlesHubV3Participation(puzzlesHubV3Experiment.variant),
+};
 
 const renderPuzzlePageLayout = (
 	slug: string,
@@ -80,7 +86,7 @@ const renderPuzzlePageLayout = (
 };
 
 describe('PuzzlePageLayout', () => {
-	it('passes the API progress identity into the iframe island for hydration', () => {
+	it('passes the API progress identity into the access gate island for hydration', () => {
 		const page = createPuzzlePage('film-reveal');
 		const progressIdentity = {
 			puzzleId: 'moviegrid-filmreveal-394',
@@ -91,7 +97,7 @@ describe('PuzzlePageLayout', () => {
 			instance: { ...page.instance, progressIdentity },
 		});
 		const props = container
-			.querySelector('gu-island[name="PuzzleIframe"]')
+			.querySelector('gu-island[name="PuzzleAccessGate"]')
 			?.getAttribute('props');
 		expect(JSON.parse(props!)).toEqual(
 			expect.objectContaining({ progressIdentity }),
@@ -216,7 +222,7 @@ describe('PuzzlePageLayout', () => {
 			container.querySelector('a[data-component="series"]'),
 		).toHaveAttribute(
 			'href',
-			'/puzzles-and-games/logic-puzzles/sudoku-easy',
+			'/puzzles-and-games/logic-puzzles/sudoku-easy/archive',
 		);
 		expect(
 			container.querySelector('a[data-component="section"]'),
@@ -336,7 +342,7 @@ describe('PuzzlePageLayout', () => {
 
 	describe('"More from Puzzles & Games" rail (v1-scoped feature)', () => {
 		it('renders the rail when data is present AND v1 is enabled', () => {
-			renderPuzzlePageLayout('sudoku-easy', {
+			const { container } = renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
 					edition: 'INT',
@@ -348,6 +354,17 @@ describe('PuzzlePageLayout', () => {
 					name: 'More from Puzzles & games',
 				}),
 			).toBeInTheDocument();
+			expect(
+				container.querySelector(
+					'[data-component="puzzles-more-from:puzzle-page"]',
+				),
+			).toBeInTheDocument();
+			const props = container
+				.querySelector('gu-island[name="RelatedPuzzlesRailEnhanced"]')
+				?.getAttribute('props');
+			expect(JSON.parse(props!)).toEqual(
+				expect.objectContaining({ source: 'puzzle-page' }),
+			);
 		});
 
 		it('does not render the rail when moreFromPuzzlesAndGames is empty, even with v1 enabled', () => {
@@ -409,8 +426,13 @@ describe('PuzzlePageLayout', () => {
 				headerSlot?.closest('[data-print-layout="hide"]')
 					?.parentElement,
 			).toBe(container);
+			const merchandisingSlot = container.querySelector(
+				'#dfp-ad--merchandising-high',
+			);
+			expect(merchandisingSlot).toBeInTheDocument();
+			expect(merchandisingSlot).not.toHaveAttribute('data-label-show');
 			expect(
-				container.querySelector('#dfp-ad--merchandising-high'),
+				merchandisingSlot?.closest('[data-print-layout="hide"]'),
 			).toBeInTheDocument();
 			const game = container.querySelector(
 				'[data-layout="PuzzlePageLayout"] article',
@@ -450,5 +472,90 @@ describe('PuzzlePageLayout', () => {
 				container.querySelector('#dfp-ad--crossword-banner-mobile'),
 			).not.toBeInTheDocument();
 		});
+
+		const renderPremiumPuzzle = (
+			serverSideABTests: Record<string, string>,
+			requiresSubscription: boolean | undefined = true,
+			edition: 'INT' | 'UK' = 'INT',
+		) => {
+			const base = createPuzzlePage('sudoku-easy');
+			return renderPuzzlePageLayout('sudoku-easy', {
+				isAdFreeUser: false,
+				config: { ...base.config, edition, serverSideABTests },
+				instance: { ...base.instance, requiresSubscription },
+			});
+		};
+
+		const gateProps = (container: HTMLElement) =>
+			JSON.parse(
+				container
+					.querySelector('gu-island[name="PuzzleAccessGate"]')
+					?.getAttribute('props') ?? '{}',
+			) as { requiresSubscription?: boolean };
+
+		it('does not render any ad slots for a premium puzzle, even for a non-ad-free reader', () => {
+			const { container } = renderPremiumPuzzle(v2AndV3On);
+
+			expect(
+				container.querySelector('#dfp-ad--top-above-nav'),
+			).not.toBeInTheDocument();
+			expect(
+				container.querySelector('#dfp-ad--merchandising-high'),
+			).not.toBeInTheDocument();
+			expect(
+				container.querySelector('#dfp-ad--merchandising'),
+			).not.toBeInTheDocument();
+			expect(
+				container.querySelector('#dfp-ad--right'),
+			).not.toBeInTheDocument();
+			expect(
+				container.querySelector('#dfp-ad--crossword-banner-mobile'),
+			).not.toBeInTheDocument();
+			expect(gateProps(container).requiresSubscription).toBe(true);
+		});
+
+		it('still renders ad slots when the puzzle is explicitly not premium', () => {
+			const { container } = renderPremiumPuzzle(v2AndV3On, false);
+
+			expect(
+				container.querySelector('#dfp-ad--merchandising-high'),
+			).toBeInTheDocument();
+			expect(gateProps(container).requiresSubscription).toBe(false);
+		});
+
+		it.each([
+			['no test participation', {}, 'INT'],
+			['v2 only', v2On, 'INT'],
+			[
+				'v3 without v2',
+				puzzlesHubV3Participation(puzzlesHubV3Experiment.variant),
+				'INT',
+			],
+			[
+				'v3 in control',
+				{
+					...v2On,
+					...puzzlesHubV3Participation(
+						puzzlesHubV3Experiment.control,
+					),
+				},
+				'INT',
+			],
+			['v2 and v3 outside the hub editions', v2AndV3On, 'UK'],
+		] as const)(
+			'treats a premium puzzle as free outside puzzles-new-hub-v3 (%s)',
+			(_label, serverSideABTests, edition) => {
+				const { container } = renderPremiumPuzzle(
+					serverSideABTests,
+					true,
+					edition,
+				);
+
+				expect(
+					container.querySelector('#dfp-ad--merchandising-high'),
+				).toBeInTheDocument();
+				expect(gateProps(container).requiresSubscription).toBe(false);
+			},
+		);
 	});
 });

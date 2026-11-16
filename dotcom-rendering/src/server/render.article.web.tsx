@@ -146,6 +146,7 @@ export const renderArticle = ({
 		contentType: frontendData.contentType,
 		shouldHideReaderRevenue: frontendData.shouldHideReaderRevenue,
 		googleRecaptchaSiteKey: frontendData.config.googleRecaptchaSiteKey,
+		promotedNewsletter: frontendData.promotedNewsletter,
 		// Until we understand exactly what config we need to make available client-side,
 		// add everything we haven't explicitly typed as unknown config
 		unknownConfig: frontendData.config,
@@ -205,6 +206,7 @@ window.twttr = (function(d, s, id) {
 				: undefined,
 		canonicalUrl,
 		renderingTarget: 'Web',
+		hasPageSkin: frontendData.config.hasPageSkin,
 		weAreHiring: !!frontendData.config.switches.weAreHiring,
 		config,
 		hasLiveBlogTopAd: !!frontendData.config.hasLiveBlogTopAd,
@@ -391,6 +393,7 @@ export const renderHostedContent = ({
 		contentType: frontendData.contentType,
 		shouldHideReaderRevenue: frontendData.shouldHideReaderRevenue,
 		googleRecaptchaSiteKey: frontendData.config.googleRecaptchaSiteKey,
+		promotedNewsletter: frontendData.promotedNewsletter,
 		// Until we understand exactly what config we need to make available client-side,
 		// add everything we haven't explicitly typed as unknown config
 		unknownConfig: frontendData.config,

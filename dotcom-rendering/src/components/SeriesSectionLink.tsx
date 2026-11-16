@@ -1,5 +1,6 @@
 import { css, type SerializedStyles } from '@emotion/react';
 import {
+	between,
 	from,
 	headlineBold17,
 	headlineBold20,
@@ -20,6 +21,7 @@ import {
 	ArticleSpecial,
 	isImmersiveOpinion,
 } from '../lib/articleFormat';
+import { getZIndex } from '../lib/getZIndex';
 import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
 import { Hide } from './Hide';
@@ -44,6 +46,13 @@ const sectionLabelLink = css`
 `;
 
 const rowBelowLeftCol = (format: ArticleFormat) => {
+	if (format.design === ArticleDesign.WeekendEssay) {
+		return css`
+			display: flex;
+			flex-direction: column;
+		`;
+	}
+
 	if (
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog
@@ -85,17 +94,13 @@ const marginRight = css`
 	}
 `;
 
-const invertedStyle = (format: ArticleFormat) => css`
+const invertedStyle = () => css`
 	/* Handle text wrapping onto a new line */
 	white-space: pre-wrap;
 	box-decoration-break: clone;
-	line-height: 28px;
 	padding-right: ${space[1]}px;
 	padding-top: ${space[1]}px;
 	padding-bottom: ${space[2]}px;
-	${format.display === ArticleDisplay.Immersive ? from.leftCol : from.wide} {
-		line-height: 28px;
-	}
 `;
 
 const fontStyles = (format: ArticleFormat) => {
@@ -195,35 +200,60 @@ const immersiveGridTitleBelowDesktop = css`
 	${until.desktop} {
 		color: white;
 		padding: 3px 6px 4px 6px;
-		box-shadow: none;
 	}
 `;
 
 const immersiveLandscapeTitle = css`
+	position: relative;
+	line-height: 28px;
+	padding: 2px 2px 4px;
+
+	${until.tablet} {
+		margin-left: ${space[2]}px;
+	}
 	${from.tablet} {
-		margin-left: -29px;
+		margin-left: -24px;
+		padding-left: 2px;
+	}
+	${until.desktop} {
+		padding: 2px 2px 4px;
 	}
 	${from.desktop} {
-		margin-left: -10px;
+		margin-left: -14px;
 	}
 	${from.leftCol} {
-		margin-left: 0;
+		margin-left: -4px;
+		line-height: 28px;
+	}
+	${from.wide} {
+		line-height: 32px;
 	}
 
 	span {
 		${from.tablet} {
-			padding-left: 10px;
+			padding-left: 12px;
 		}
 		${from.leftCol} {
-			padding-left: 0;
+			padding-left: 2px;
 		}
 	}
 `;
 
 const immersiveGridTitleWrapperBelowDesktop = css`
 	${until.desktop} {
-		padding-left: 9px;
-		padding-right: 9px;
+		padding-inline: 10px;
+	}
+	${until.tablet} {
+		padding-inline: 20px;
+	}
+	${until.mobileLandscape} {
+		padding-inline: 10px;
+	}
+`;
+
+const galleryTitleWrapper = css`
+	${until.desktop} {
+		overflow: hidden;
 	}
 `;
 
@@ -433,36 +463,91 @@ export const SeriesSectionLink = ({
 		const title = tag?.title ?? sectionLabel;
 		const linkExt = tag?.id ?? sectionUrl;
 		const hasLayoutType = isImmersive && layoutType !== undefined;
+		const isNotImmersivePortraitLayout = layoutType !== 'immersivePortrait';
+		const isImmersiveLandscapeLayout = layoutType === 'immersiveLandscape';
+		const isImmersivePortraitLayout = layoutType === 'immersivePortrait';
 
 		return (
 			<div
-				css={
+				css={[
 					hasLayoutType
 						? immersiveGridTitleWrapperBelowDesktop
-						: undefined
-				}
+						: undefined,
+					isGallery && galleryTitleWrapper,
+					isImmersivePortraitLayout &&
+						css`
+							${between.tablet.and.desktop} {
+								padding-inline: 12px;
+							}
+							${between.desktop.and.leftCol} {
+								padding-left: 6px;
+							}
+							${from.desktop} {
+								bottom: 2px;
+								position: relative;
+								z-index: ${getZIndex('articleHeadline')};
+							}
+						`,
+				]}
 			>
 				<TitleLink
 					href={`${guardianBaseURL}/${linkExt}`}
 					format={format}
 					colour={titleColour}
 					extraCss={[
-						invertedStyle(format),
-						sectionPadding,
+						invertedStyle(),
+						isImmersive &&
+							!hasLayoutType &&
+							css`
+								line-height: 28px;
+								${until.tablet} {
+									margin-left: 16px;
+									${from.mobileLandscape} {
+										margin-left: 24px;
+									}
+								}
+								${from.leftCol} {
+									line-height: 28px;
+								}
+							`,
+						isNotImmersivePortraitLayout && sectionPadding,
 						css`
 							background-color: ${themePalette(
 								'--series-title-background',
 							)};
 						`,
-						hasLayoutType && immersiveGridTitleBelowDesktop,
-						layoutType === 'immersiveLandscape' &&
-							immersiveLandscapeTitle,
+						hasLayoutType &&
+							isNotImmersivePortraitLayout &&
+							immersiveGridTitleBelowDesktop,
+						isImmersiveLandscapeLayout && immersiveLandscapeTitle,
+						isImmersiveLandscapeLayout &&
+							isLabs &&
+							css`
+								${from.wide} {
+									bottom: 1px;
+								}
+							`,
 						isGallery &&
 							css`
 								position: relative;
+								${until.desktop} {
+									box-shadow: 0 4px 0
+										${themePalette(
+											'--series-title-background',
+										)};
+								}
+								${from.wide} {
+									line-height: 28px;
+								}
 							`,
 						isImmersive &&
 							css`
+								filter: drop-shadow(
+									0 1px 0
+										${themePalette(
+											'--series-title-background',
+										)}
+								);
 								box-shadow:
 									-6px 0 0 0
 										${themePalette(
@@ -472,6 +557,51 @@ export const SeriesSectionLink = ({
 										${themePalette(
 											'--series-title-background',
 										)};
+							`,
+						isImmersivePortraitLayout &&
+							css`
+								line-height: 28px;
+								padding: 2px 2px 4px;
+								${until.tablet} {
+									margin-left: ${space[2]}px;
+								}
+								${from.leftCol} {
+									line-height: 28px;
+								}
+								${from.wide} {
+									line-height: 32px;
+								}
+							`,
+						hasLayoutType &&
+							css`
+								position: relative;
+								left: -6px;
+								box-shadow: none;
+
+								&& {
+									padding-inline: 6px;
+
+									${isImmersiveLandscapeLayout &&
+									css`
+										${from.tablet} {
+											padding-left: 20px;
+										}
+										${from.leftCol} {
+											padding-left: 10px;
+										}
+									`}
+								}
+
+								span {
+									padding-left: 0;
+								}
+
+								${isImmersivePortraitLayout
+									? until.desktop
+									: until.tablet} {
+									left: 0;
+									margin-left: 0;
+								}
 							`,
 					].filter(Boolean)}
 					data-component="series"
