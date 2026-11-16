@@ -498,9 +498,26 @@ gap later.
 | `instance.puzzleDate`              | `string?` (e.g. `"2026-09-11"`)                           | Which day's puzzle the reader wants to see. Rendered as a human-readable date (e.g. "11 September 2026") next to the page title, passed through unformatted as `PuzzleContext.puzzleDate` to the puzzle iframe (see below), and used (short-formatted) to resolve the `{date}` placeholder in `PuzzleConfig.title`/`description` (see "SEO" above). `frontend` now always resolves and sends this for every request (its Puzzle Page URLs carry a date segment), though DCR still treats the field as optional and simply omits/tidies up the display/context/SEO value when absent. |
 | `instance.moreFromPuzzlesAndGames` | `PuzzleItem[]?` (from `src/types/puzzlesPage.ts`)         | Rendered as a plain "More from Puzzles & games" list when present and non-empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | `instance.puzzlesSupporting`       | `PuzzleGameSupporting?` (from `src/types/puzzlesPage.ts`) | Rendered as a "Useful links" section (links plus newsletter sign-up) above the footer when present. frontend omits it when it has nothing to show.                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `instance.requiresSubscription`    | `boolean?`                                                | Whether the puzzle is premium (only Supporter Plus or Digital Pack readers may play it; the last 7 days counting today, in Europe/London, are free). A property of the puzzle, never of the reader, so it is safe in cached HTML; the backend must compute it, never the browser. Absent means free. Whether the current reader has access is a separate question, answered client-side.                                                                                                                                                                                             |
+| `instance.requiresSubscription`    | `boolean?`                                                | Whether the puzzle is premium (only Supporter Plus or Digital Pack readers may play it; the last 7 days counting today, in Europe/London, are free). A property of the puzzle, never of the reader, so it is safe in cached HTML; the backend must compute it, never the browser. Absent means free. Whether the current reader has access is checked client-side, see `docs/premium-puzzles-access-plan.md`.                                                                                                                                                                        |
 
 ### User/context info passed to the puzzle iframe
+
+For pages with `instance.gameUrl` and a puzzle date, `usePuzzleGame` waits for
+Identity authentication, then automatically requests
+`{ajaxUrl}/puzzles-and-games/game/{slug}/{date}.json` for both signed-in and
+signed-out readers. When signed in, it sends the access token in the
+`Authorization` header; signed-out requests omit that header. Frontend forwards
+the request and any supplied token to the Puzzles API's
+`GET /game` and returns a response with `Cache-Control: private, no-store, no-cache`.
+The AJAX router in platform forwards this path, including OPTIONS preflights,
+to frontend's applications service. Deploy that router rule and the frontend
+endpoint before the DCR consumer. The iframe waits for
+the resulting `gameUrl` and preserves the API's `id` and `uid`; DCR does not
+replace `uid` with `legacy_identity_id` or send the token to the iframe.
+Signed-out readers use the anonymous URL returned by that endpoint. Authentication
+changes refresh the selection and discard pending responses from the previous
+session. Failed lookups show an error instead of loading an
+anonymous fallback. Older payloads without `gameUrl` retain the local URL builder.
 
 `src/components/PuzzleIframe.island.tsx` passes a combined `PuzzleContext`
 about the current reader to the puzzle provider two ways:

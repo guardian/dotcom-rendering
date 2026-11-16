@@ -92,6 +92,7 @@ export const FaciaRenderingPropsCODE: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
+		provisionManagedSecurityRole: true,
 	},
 	// Route 100% traffic to EC2.
 	targetGroupWeights: {
@@ -148,6 +149,7 @@ export const FaciaRenderingPropsPROD: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
+		provisionManagedSecurityRole: true,
 	},
 	// Route 100% traffic to EC2.
 	targetGroupWeights: {
@@ -175,7 +177,13 @@ export const TagPageRenderingPropsCODE: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
-		managedInstancesProps: {},
+		managedInstancesProps: {
+			instancesRequirements: {
+				memoryMin: Size.mebibytes(2048),
+				vCpuCountMin: 1,
+				allowedInstanceTypes: ['c8g.*'],
+			},
+		},
 	},
 };
 
@@ -204,7 +212,13 @@ export const TagPageRenderingPropsPROD: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
-		provisionManagedSecurityRole: true,
+		managedInstancesProps: {
+			instancesRequirements: {
+				memoryMin: Size.mebibytes(2048),
+				vCpuCountMin: 1,
+				allowedInstanceTypes: ['c8g.*'],
+			},
+		},
 	},
 };
 
@@ -307,10 +321,10 @@ export const InteractiveRenderingPropsPROD: RenderingCDKStackProps = {
 			},
 		},
 	},
-	// Route 90% traffic to EC2, 10% to ECS.
+	// Route 50% traffic to EC2, 50% to ECS.
 	targetGroupWeights: {
-		ec2: 90,
-		ecs: 10,
+		ec2: 50,
+		ecs: 50,
 	},
 };
 new RenderingCDKStack(
