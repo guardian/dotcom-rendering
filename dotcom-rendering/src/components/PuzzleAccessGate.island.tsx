@@ -69,10 +69,16 @@ const useAuthState = (): AuthState | undefined => {
 
 	useEffect(() => {
 		let isMounted = true;
+		// Lookups can overlap: one runs on mount and another on every auth
+		// change, and they can resolve out of order. Only the latest one may set
+		// the state, otherwise a slow older lookup (for example "signed in")
+		// could overwrite a newer one (for example "signed out").
+		let latestLookup = 0;
 
 		const refresh = () => {
+			const lookup = ++latestLookup;
 			void getAuthStatus().then((authStatus) => {
-				if (!isMounted) return;
+				if (!isMounted || lookup !== latestLookup) return;
 				setAuthState({
 					authStatus,
 					reader: {

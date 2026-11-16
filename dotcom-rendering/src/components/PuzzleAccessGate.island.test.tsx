@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { act, render, screen, waitFor } from '@testing-library/react';
 import { getAdFreeCookie } from '../client/userFeatures/cookies/adFree';
-import { getAuthStatus } from '../lib/identity';
+import { getAuthStatus, subscribeToAuthStateChange } from '../lib/identity';
 import type * as PuzzleAccess from '../lib/puzzleAccess';
 import { fetchPuzzleAccess } from '../lib/puzzleAccess';
 import { puzzleConfigs } from '../model/puzzles/puzzleConfigs';
@@ -29,6 +29,9 @@ jest.mock('./UnlockPremiumPuzzlesModal', () => ({
 }));
 
 const mockedGetAuthStatus = jest.mocked(getAuthStatus);
+const mockedSubscribeToAuthStateChange = jest.mocked(
+	subscribeToAuthStateChange,
+);
 const mockedGetAdFreeCookie = jest.mocked(getAdFreeCookie);
 const mockedFetchPuzzleAccess = jest.mocked(fetchPuzzleAccess);
 
@@ -173,5 +176,48 @@ describe('PuzzleAccessGate', () => {
 		renderGate(true);
 		await screen.findByTestId('modal');
 		expect(screen.queryByTestId('board')).not.toBeInTheDocument();
+	});
+
+	it('ignores an older auth lookup that resolves after a newer one', async () => {
+		// The first lookup (on mount) is slow and will say "signed in". The
+		// reader then signs out, which starts a second, faster lookup.
+		let resolveFirstLookup: (
+			authStatus: Awaited<ReturnType<typeof getAuthStatus>>,
+		) => void = () => undefined;
+		mockedGetAuthStatus
+			.mockReturnValueOnce(
+				new Promise((resolve) => {
+					resolveFirstLookup = resolve;
+				}),
+			)
+			.mockResolvedValue(signedOut);
+		let authStateChanged: () => void = () => undefined;
+		mockedSubscribeToAuthStateChange.mockImplementationOnce((callback) => {
+			authStateChanged = callback;
+			return () => undefined;
+		});
+		mockedFetchPuzzleAccess.mockReturnValue(new Promise(() => undefined));
+
+		renderGate(true);
+		await act(async () => {
+			authStateChanged();
+			await Promise.resolve();
+		});
+		expect(await screen.findByTestId('modal')).toHaveAttribute(
+			'data-signed-in',
+			'false',
+		);
+
+		// The stale "signed in" answer arrives last and must not win.
+		await act(async () => {
+			resolveFirstLookup(signedIn);
+			await Promise.resolve();
+		});
+
+		expect(screen.getByTestId('modal')).toHaveAttribute(
+			'data-signed-in',
+			'false',
+		);
+		expect(mockedFetchPuzzleAccess).not.toHaveBeenCalled();
 	});
 });
