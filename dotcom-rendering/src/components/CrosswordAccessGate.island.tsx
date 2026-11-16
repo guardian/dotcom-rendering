@@ -4,6 +4,7 @@ import { palette as sourcePalette } from '@guardian/source/foundations';
 import type { ComponentProps } from 'react';
 import { getCrosswordAccessIdentity } from '../lib/puzzleProgress/adapters/crossword';
 import { renderInModalRoot, usePuzzleAccess } from '../lib/usePuzzleAccess';
+import { palette as themePalette } from '../palette';
 import { CrosswordComponent } from './CrosswordComponent.island';
 import { UnlockPremiumPuzzlesModal } from './UnlockPremiumPuzzlesModal';
 
@@ -16,10 +17,17 @@ type Props = Pick<
 	ajaxUrl: string;
 };
 
+/**
+ * Same spacing and border as the Puzzle Page's placeholder (`frameContainerStyles`
+ * in `PuzzlePageLayout` and `buildFrameStyles`), so both premium pages look alike.
+ */
 const placeholderStyles = css`
 	background-color: ${sourcePalette.neutral[97]};
+	border: 1px solid ${themePalette('--article-border')};
 	width: 100%;
 	min-height: 480px;
+	margin-top: 16px;
+	margin-bottom: 16px;
 `;
 
 /**
