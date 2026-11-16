@@ -67,10 +67,18 @@ export type NewsletterBannerDesign = Omit<ConfigurableDesign, 'colours'> & {
 		newsletterBanner: {
 			divider: HexColour;
 			actionColor: HexColour;
+			frequencyIconColor?: HexColour;
+			emailInputTextColor?: HexColour;
+			emailInputBackgroundColor?: HexColour;
+			emailInputBorderColor?: HexColour;
+			signupButtonBackgroundColor?: HexColour;
+			signupButtonTextColor?: HexColour;
 			errorColor: HexColour;
 			privacyTextColor: HexColour;
 			toggleTextColor: HexColour;
+			toggleActiveColor?: HexColour;
 			successTextColor: HexColour;
+			successIconColor?: HexColour;
 			browseButtonTextColor: HexColour;
 			browseButtonBorderColor: HexColour;
 		};

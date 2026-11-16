@@ -5,6 +5,7 @@ import { palette as themePalette } from '../palette';
 
 interface Props {
 	textColor?: 'supporting' | 'regular';
+	linkColor?: string;
 	cssOverrides?: ReturnType<typeof css>;
 	isSignedIn?: boolean | 'Pending';
 }
@@ -15,11 +16,24 @@ const GUARDIAN_PRIVACY_POLICY =
 
 type PolicyUrl = typeof GUARDIAN_HOMEPAGE | typeof GUARDIAN_PRIVACY_POLICY;
 
-type LegalLinkProps = { href: PolicyUrl; children: string };
+type LegalLinkProps = {
+	href: PolicyUrl;
+	children: string;
+	linkColor?: string;
+};
 
 /** Link component fixed with data-ignore and rel attributes for consistency in this file only */
-const LegalLink = ({ href, children }: LegalLinkProps) => (
-	<Link data-ignore="global-link-styling" href={href} rel="noreferrer">
+const LegalLink = ({ href, children, linkColor }: LegalLinkProps) => (
+	<Link
+		data-ignore="global-link-styling"
+		href={href}
+		rel="noreferrer"
+		theme={
+			linkColor !== undefined
+				? { textPrimary: linkColor, textPrimaryHover: linkColor }
+				: undefined
+		}
+	>
 		{children}
 	</Link>
 );
@@ -72,6 +86,7 @@ const textStyles = (textColor: 'supporting' | 'regular') => {
 
 export const NewsletterPrivacyMessage = ({
 	textColor = 'supporting',
+	linkColor,
 	cssOverrides,
 	isSignedIn,
 }: Props) => (
@@ -83,12 +98,17 @@ export const NewsletterPrivacyMessage = ({
 			<>
 				If you do not have an account, we will create a guest account
 				for you on{' '}
-				<LegalLink href={GUARDIAN_HOMEPAGE}>theguardian.com</LegalLink>{' '}
+				<LegalLink href={GUARDIAN_HOMEPAGE} linkColor={linkColor}>
+					theguardian.com
+				</LegalLink>{' '}
 				to send you this newsletter. You can complete full registration
 				at any time.{' '}
 			</>
 		)}
 		For more information about how we use your data see our{' '}
-		<LegalLink href={GUARDIAN_PRIVACY_POLICY}>Privacy Policy</LegalLink>.
+		<LegalLink href={GUARDIAN_PRIVACY_POLICY} linkColor={linkColor}>
+			Privacy Policy
+		</LegalLink>
+		.
 	</span>
 );

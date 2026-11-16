@@ -141,6 +141,12 @@ export const NewsletterBannerComponent = (
 												actionColor={hexColourToString(
 													newsletterBanner.actionColor,
 												)}
+												iconColor={
+													newsletterBanner.frequencyIconColor &&
+													hexColourToString(
+														newsletterBanner.frequencyIconColor,
+													)
+												}
 											/>
 										</div>
 										<div
@@ -182,6 +188,36 @@ export const NewsletterBannerComponent = (
 											actionColor={hexColourToString(
 												newsletterBanner.actionColor,
 											)}
+											emailInputTextColor={
+												newsletterBanner.emailInputTextColor &&
+												hexColourToString(
+													newsletterBanner.emailInputTextColor,
+												)
+											}
+											emailInputBackgroundColor={
+												newsletterBanner.emailInputBackgroundColor &&
+												hexColourToString(
+													newsletterBanner.emailInputBackgroundColor,
+												)
+											}
+											emailInputBorderColor={
+												newsletterBanner.emailInputBorderColor &&
+												hexColourToString(
+													newsletterBanner.emailInputBorderColor,
+												)
+											}
+											signupButtonBackgroundColor={
+												newsletterBanner.signupButtonBackgroundColor &&
+												hexColourToString(
+													newsletterBanner.signupButtonBackgroundColor,
+												)
+											}
+											signupButtonTextColor={
+												newsletterBanner.signupButtonTextColor &&
+												hexColourToString(
+													newsletterBanner.signupButtonTextColor,
+												)
+											}
 											errorColor={hexColourToString(
 												newsletterBanner.errorColor,
 											)}
@@ -191,6 +227,12 @@ export const NewsletterBannerComponent = (
 											toggleTextColor={hexColourToString(
 												newsletterBanner.toggleTextColor,
 											)}
+											toggleActiveColor={
+												newsletterBanner.toggleActiveColor &&
+												hexColourToString(
+													newsletterBanner.toggleActiveColor,
+												)
+											}
 											onSuccess={() => setIsSuccess(true)}
 										/>
 									</div>
@@ -214,6 +256,12 @@ export const NewsletterBannerComponent = (
 									textColor={hexColourToString(
 										newsletterBanner.successTextColor,
 									)}
+									iconColor={
+										newsletterBanner.successIconColor &&
+										hexColourToString(
+											newsletterBanner.successIconColor,
+										)
+									}
 									browseButtonTextColor={hexColourToString(
 										newsletterBanner.browseButtonTextColor,
 									)}

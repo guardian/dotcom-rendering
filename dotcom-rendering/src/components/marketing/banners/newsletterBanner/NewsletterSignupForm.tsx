@@ -1,4 +1,5 @@
 import type { AbTest } from '@guardian/ophan-tracker-js';
+import { neutral } from '@guardian/source/foundations';
 import { Button, TextInput } from '@guardian/source/react-components';
 import { ToggleSwitch } from '@guardian/source-development-kitchen/react-components';
 import { type ChangeEvent, useEffect } from 'react';
@@ -14,10 +15,16 @@ type NewsletterSignupFormProps = {
 	newsletterId: string;
 	componentId: string;
 	actionColor: string;
+	emailInputTextColor?: string;
+	emailInputBackgroundColor?: string;
+	emailInputBorderColor?: string;
+	signupButtonBackgroundColor?: string;
+	signupButtonTextColor?: string;
 	errorColor: string;
 	headingColor: string;
 	privacyTextColor: string;
 	toggleTextColor: string;
+	toggleActiveColor?: string;
 	abTest?: AbTest;
 	isModal?: boolean;
 	onSuccess?: () => void;
@@ -35,10 +42,16 @@ export const NewsletterSignupForm = ({
 	newsletterId,
 	componentId,
 	actionColor,
+	emailInputTextColor = neutral[7],
+	emailInputBackgroundColor = neutral[100],
+	emailInputBorderColor,
+	signupButtonBackgroundColor = actionColor,
+	signupButtonTextColor,
 	errorColor,
 	headingColor,
 	privacyTextColor,
 	toggleTextColor,
+	toggleActiveColor,
 	abTest,
 	isModal = false,
 	onSuccess,
@@ -122,10 +135,18 @@ export const NewsletterSignupForm = ({
 						]}
 					>
 						<TextInput
+							cssOverrides={styles.emailInputText(
+								emailInputTextColor,
+							)}
 							theme={{
 								textLabel: headingColor,
+								textUserInput: emailInputTextColor,
+								backgroundInput: emailInputBackgroundColor,
 								textError: errorColor,
 								borderError: errorColor,
+								...(emailInputBorderColor !== undefined && {
+									border: emailInputBorderColor,
+								}),
 							}}
 							name="email"
 							label="Enter your email"
@@ -143,8 +164,11 @@ export const NewsletterSignupForm = ({
 				<div css={styles.submitButtonContainer}>
 					<Button
 						theme={{
-							backgroundPrimary: actionColor,
-							backgroundPrimaryHover: actionColor,
+							backgroundPrimary: signupButtonBackgroundColor,
+							backgroundPrimaryHover: signupButtonBackgroundColor,
+							...(signupButtonTextColor !== undefined && {
+								textPrimary: signupButtonTextColor,
+							}),
 						}}
 						cssOverrides={
 							isSignedIn
@@ -178,6 +202,7 @@ export const NewsletterSignupForm = ({
 									<ToggleSwitch
 										cssOverrides={styles.toggleText(
 											toggleTextColor,
+											toggleActiveColor,
 										)}
 										id={`marketing-opt-in-${newsletterId}`}
 										checked={marketingOptIn ?? false}
@@ -190,6 +215,7 @@ export const NewsletterSignupForm = ({
 							<div css={styles.privacyContainer(isSignedIn)}>
 								<NewsletterPrivacyMessage
 									isSignedIn={isSignedIn}
+									linkColor={privacyTextColor}
 									cssOverrides={styles.privacyText(
 										privacyTextColor,
 									)}
@@ -203,7 +229,8 @@ export const NewsletterSignupForm = ({
 			{showFailure && (
 				<FailureMessage
 					text={failureMessage}
-					actionColor={actionColor}
+					buttonBackgroundColor={signupButtonBackgroundColor}
+					buttonTextColor={signupButtonTextColor}
 					onRetry={handleReset}
 					errorColor={errorColor}
 				/>

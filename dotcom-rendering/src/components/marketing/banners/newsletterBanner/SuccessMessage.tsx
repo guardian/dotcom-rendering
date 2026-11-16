@@ -7,10 +7,10 @@ import {
 } from '@guardian/source/foundations';
 import { LinkButton, SvgTickRound } from '@guardian/source/react-components';
 
-const successContainerStyles = css`
+const successContainerStyles = (iconColor: string) => css`
 	display: grid;
 	grid-template-columns: 34.5px minmax(0, 1fr);
-	color: ${palette.success[400]};
+	color: ${iconColor};
 	${until.tablet} {
 		padding: 0 10px;
 	}
@@ -43,21 +43,23 @@ export const SuccessMessage = ({
 	newsletterName,
 	frequency,
 	textColor,
+	iconColor = palette.success[400],
 	browseButtonTextColor,
 	browseButtonBorderColor,
 }: {
 	newsletterName: string;
 	frequency: string;
 	textColor: string;
+	iconColor?: string;
 	browseButtonTextColor: string;
 	browseButtonBorderColor: string;
 }) => {
 	return (
-		<div css={successContainerStyles}>
+		<div css={successContainerStyles(iconColor)}>
 			<SvgTickRound />
 			<div css={successContentStyles}>
 				<span css={successTextStyles(textColor)} role="alert">
-					<strong>You're signed up!</strong>
+					<strong>You&apos;re signed up!</strong>
 					&nbsp;
 					<span>
 						You will receive {newsletterName}{' '}

@@ -25,6 +25,12 @@ export const styles = {
 			color: ${errorColor};
 		}
 	`,
+	emailInputText: (textColor: string): SerializedStyles => css`
+		&,
+		&:invalid[value]:not([value='']) {
+			color: ${textColor};
+		}
+	`,
 	bannerSignedInLayout: css`
 		grid-template-columns: minmax(0, 1fr);
 		grid-template-areas: 'submit';
@@ -59,13 +65,6 @@ export const styles = {
 
 		label div {
 			font-size: 14px;
-		}
-
-		input {
-			color: ${palette('--newsletter-signup-input-text')};
-			background-color: ${palette(
-				'--newsletter-signup-input-background',
-			)};
 		}
 
 		[role='alert'] {
@@ -122,8 +121,22 @@ export const styles = {
 		border: 1px solid ${palette('--card-border-supporting')};
 		border-radius: 4px;
 	`,
-	toggleText: (textColor: string): SerializedStyles => css`
+	toggleText: (
+		textColor: string,
+		activeColor?: string,
+	): SerializedStyles => css`
 		color: ${textColor};
+		${activeColor !== undefined &&
+		css`
+			button[aria-checked='true'] {
+				background-color: ${activeColor};
+				border-color: ${activeColor};
+
+				&::before {
+					border-color: ${activeColor};
+				}
+			}
+		`}
 	`,
 	recaptchaContainer: css`
 		.grecaptcha-badge {
@@ -147,7 +160,7 @@ export const styles = {
 	): SerializedStyles => css`
 		margin-top: ${space[2]}px;
 		${until.tablet} {
-			margin-top: ${isSignedIn ? 0 : space[3]}px;
+			margin-top: ${isSignedIn !== false ? 0 : space[3]}px;
 		}
 		grid-column: 1 / -1;
 		${isSignedIn === true &&

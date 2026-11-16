@@ -28,7 +28,7 @@ const frequencyLabelStyles = css`
 	white-space: nowrap;
 `;
 
-const badgeStyles = (actionColor: string) => css`
+const badgeStyles = (actionColor: string, iconColor: string) => css`
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -39,7 +39,7 @@ const badgeStyles = (actionColor: string) => css`
 	background-color: ${actionColor};
 
 	svg {
-		fill: ${themePalette('--newsletter-card-badge-icon')};
+		fill: ${iconColor};
 		height: 18px;
 		width: 18px;
 	}
@@ -48,12 +48,14 @@ const badgeStyles = (actionColor: string) => css`
 export const NewsletterFrequencyTag = ({
 	frequency,
 	actionColor,
+	iconColor = themePalette('--newsletter-card-badge-icon'),
 }: {
 	frequency: string;
 	actionColor: string;
+	iconColor?: string;
 }) => (
 	<div css={frequencyTagStyles(actionColor)}>
-		<span css={badgeStyles(actionColor)}>
+		<span css={badgeStyles(actionColor, iconColor)}>
 			<SvgNewsletterFilled />
 		</span>
 		<span css={frequencyTextStyles}>

@@ -26,7 +26,18 @@ const headerImage = {
 
 const designs = {
 	Light: { ...newsletterDesign, headerImage },
-	Dark: { ...newsletterDesignDark, headerImage },
+	Dark: {
+		...newsletterDesignDark,
+		headerImage: {
+			mobileUrl:
+				'https://i.guim.co.uk/img/media/3e54a72ccdf78508b8af96645b1ddbeb3907ffad/0_0_360_360/360.png?width=90&quality=100&s=4eb720cd36be529e66a20b6c7ed08640',
+			tabletUrl:
+				'https://i.guim.co.uk/img/media/1ffc36c9f7bb070eb67efcc74dd8f74d8c52cf9a/0_0_1968_1484/500.jpg?width=492&quality=100&s=459906ef0aca89a4020f144f23593f56',
+			desktopUrl:
+				'https://i.guim.co.uk/img/media/7688239a7cc28f7f95cb8f13b3073dba277db0dd/0_0_1840_1244/1840.jpg?width=460&quality=100&s=f79da6483ae56e30aae6e04f84b135c2',
+			altText: '',
+		},
+	},
 };
 
 const meta = preview.meta({
@@ -147,6 +158,20 @@ export const SignedOut = meta.story({
 		mocked(useNewsletterSignupForm).mockImplementation(
 			useInteractiveSignedOutForm,
 		);
+	},
+});
+
+export const InvalidEmail = meta.story({
+	beforeEach() {
+		mocked(useNewsletterSignupForm).mockReturnValue({
+			...signedOutFormState,
+			userEmail: 'invalid-email',
+			isInteracted: true,
+			showMarketingToggle: true,
+			marketingOptIn: true,
+			errorMessage: 'Incorrect email format. Please check.',
+			isValidationError: true,
+		});
 	},
 });
 

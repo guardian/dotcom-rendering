@@ -71,12 +71,14 @@ export const FailureMessage = ({
 	onRetry,
 	text,
 	errorColor,
-	actionColor,
+	buttonBackgroundColor,
+	buttonTextColor,
 }: {
 	onRetry: React.MouseEventHandler<HTMLButtonElement>;
 	text: string;
 	errorColor: string;
-	actionColor: string;
+	buttonBackgroundColor: string;
+	buttonTextColor?: string;
 }) => (
 	<div css={[responseBoxStyles, errorContainerStyles(errorColor)]}>
 		<SvgAlertRound />
@@ -94,8 +96,11 @@ export const FailureMessage = ({
 			</span>
 			<Button
 				theme={{
-					backgroundPrimary: actionColor,
-					backgroundPrimaryHover: actionColor,
+					backgroundPrimary: buttonBackgroundColor,
+					backgroundPrimaryHover: buttonBackgroundColor,
+					...(buttonTextColor !== undefined && {
+						textPrimary: buttonTextColor,
+					}),
 				}}
 				size="small"
 				priority="primary"
