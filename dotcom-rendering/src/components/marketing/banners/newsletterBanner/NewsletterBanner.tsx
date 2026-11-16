@@ -26,20 +26,9 @@ const buildNewsletterBannerData = (
 	newsletter: PromotedNewsletter,
 	onClose: () => void,
 ): BannerData => {
-	const baseImageSettings =
+	const imageSettings =
 		baseBannerData.settings.headerSettings?.headerImage ??
 		baseBannerData.settings.imageSettings;
-	const illustrationSquare: unknown = newsletter.illustrationSquare;
-	const hasIllustrationSquare =
-		typeof illustrationSquare === 'string' && illustrationSquare.length > 0;
-	const imageSettings =
-		baseImageSettings !== undefined && hasIllustrationSquare
-			? {
-					...baseImageSettings,
-					mobileUrl: illustrationSquare,
-					tabletUrl: illustrationSquare,
-				}
-			: baseImageSettings;
 
 	return {
 		...baseBannerData,
