@@ -63,6 +63,7 @@ export interface BannerTextContent {
 }
 
 export type NewsletterBannerDesign = Omit<ConfigurableDesign, 'colours'> & {
+	tabletImageAsBackground?: boolean;
 	colours: ConfigurableDesign['colours'] & {
 		newsletterBanner: {
 			divider: HexColour;

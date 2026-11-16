@@ -205,6 +205,30 @@ export const styles = {
 	textCopy: css`
 		min-width: 0;
 	`,
+	tabletBackgroundImage: (url: string): SerializedStyles => css`
+		${between.phablet.and.desktop} {
+			background-image: url(${JSON.stringify(url)});
+			background-size: ${phabletContentMaxWidth} auto;
+			background-position: center 12px;
+			background-origin: border-box;
+			background-attachment: local;
+			background-repeat: no-repeat;
+		}
+	`,
+	tabletBackgroundRow: css`
+		${between.phablet.and.desktop} {
+			grid-template-columns: minmax(0, 1fr);
+
+			> div:first-of-type > div:first-of-type > div {
+				background-color: transparent;
+			}
+		}
+	`,
+	hideTabletImage: css`
+		${between.phablet.and.desktop} {
+			display: none;
+		}
+	`,
 	mobileImage: css`
 		width: 90px;
 		height: 90px;
@@ -290,6 +314,11 @@ export const styles = {
 
 		&& h2 {
 			margin: 0;
+		}
+	`,
+	tabletBackgroundHeading: css`
+		${between.phablet.and.desktop} {
+			padding-top: 184px;
 		}
 	`,
 	subheading: css`

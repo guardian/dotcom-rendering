@@ -101,6 +101,15 @@ export const NewsletterBannerComponent = (
 	const design = props.design as NewsletterBannerDesign;
 	const { basic, newsletterBanner } = design.colours;
 	const dividerColor = hexColourToString(newsletterBanner.divider);
+	const tabletBackgroundUrl =
+		design.tabletImageAsBackground === true
+			? (
+					baseBannerData.settings.headerSettings?.headerImage ??
+					baseBannerData.settings.imageSettings
+				)?.tabletUrl
+			: undefined;
+	const hasTabletBackground =
+		tabletBackgroundUrl !== undefined && tabletBackgroundUrl.length > 0;
 	const bannerData = buildNewsletterBannerData(
 		baseBannerData,
 		newsletter,
@@ -119,6 +128,9 @@ export const NewsletterBannerComponent = (
 					hexColourToString(basic.background),
 					hexColourToString(basic.bodyText),
 				),
+				hasTabletBackground &&
+					!isSuccess &&
+					styles.tabletBackgroundImage(tabletBackgroundUrl),
 				styles.dismissal(isDismissing),
 			]}
 		>
@@ -154,12 +166,20 @@ export const NewsletterBannerComponent = (
 												dividerColor,
 											)}
 										/>
-										<div css={styles.textImageRow}>
+										<div
+											css={[
+												styles.textImageRow,
+												hasTabletBackground &&
+													styles.tabletBackgroundRow,
+											]}
+										>
 											<div css={styles.textCopy}>
 												<div
-													css={
-														styles.headingAfterDivider
-													}
+													css={[
+														styles.headingAfterDivider,
+														hasTabletBackground &&
+															styles.tabletBackgroundHeading,
+													]}
 												>
 													<BannerHeader
 														bannerData={bannerData}
@@ -171,7 +191,13 @@ export const NewsletterBannerComponent = (
 													/>
 												</div>
 											</div>
-											<div css={styles.mobileImage}>
+											<div
+												css={[
+													styles.mobileImage,
+													hasTabletBackground &&
+														styles.hideTabletImage,
+												]}
+											>
 												<BannerVisual
 													bannerData={bannerData}
 												/>

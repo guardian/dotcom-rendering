@@ -187,6 +187,31 @@ export const SignedIn = meta.story({
 	},
 });
 
+export const TabletBackgroundImage = meta.story({
+	parameters: {
+		viewport: {
+			options: {
+				phablet: {
+					name: 'phablet',
+					styles: {
+						width: '660px',
+						height: '1200px',
+					},
+				},
+			},
+		},
+	},
+	globals: {
+		viewport: { value: 'phablet', isRotated: false },
+	},
+	args: {
+		design: {
+			...designs.Dark,
+			tabletImageAsBackground: true,
+		},
+	},
+});
+
 export const USHideMarketingToggle = meta.story({
 	beforeEach() {
 		mocked(useCountryCode).mockReturnValue('US');
