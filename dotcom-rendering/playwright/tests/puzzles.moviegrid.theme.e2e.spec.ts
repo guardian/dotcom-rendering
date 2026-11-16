@@ -60,7 +60,7 @@ for (const width of [375, 1280]) {
 						},
 					},
 				});
-				await waitForIsland(page, 'PuzzleIframe');
+				await waitForIsland(page, 'PuzzleAccessGate');
 				await expect(page.locator('main iframe')).toHaveAttribute(
 					'src',
 					/.+/,
@@ -145,7 +145,7 @@ for (const [slug, title] of [
 						},
 					},
 				});
-				await waitForIsland(page, 'PuzzleIframe');
+				await waitForIsland(page, 'PuzzleAccessGate');
 				await expect(page.locator('main iframe')).toHaveAttribute(
 					'src',
 					/.+/,
