@@ -1,11 +1,7 @@
 import { css } from '@emotion/react';
-import {
-	palette,
-	space,
-	textSans15,
-	until,
-} from '@guardian/source/foundations';
+import { space, textSans15, until } from '@guardian/source/foundations';
 import { LinkButton, SvgTickRound } from '@guardian/source/react-components';
+import type { NewsletterBannerData } from './NewsletterBannerData';
 
 const successContainerStyles = (iconColor: string) => css`
 	display: grid;
@@ -40,25 +36,22 @@ const successTextStyles = (textColor: string) => css`
 `;
 
 export const SuccessMessage = ({
-	newsletterName,
-	frequency,
-	textColor,
-	iconColor = palette.success[400],
-	browseButtonTextColor,
-	browseButtonBorderColor,
+	bannerData,
 }: {
-	newsletterName: string;
-	frequency: string;
-	textColor: string;
-	iconColor?: string;
-	browseButtonTextColor: string;
-	browseButtonBorderColor: string;
+	bannerData: NewsletterBannerData;
 }) => {
+	const { name: newsletterName, frequency } = bannerData.newsletter;
+	const {
+		successTextColor,
+		successIconColor,
+		browseButtonTextColor,
+		browseButtonBorderColor,
+	} = bannerData.settings.newsletterBanner;
 	return (
-		<div css={successContainerStyles(iconColor)}>
+		<div css={successContainerStyles(successIconColor)}>
 			<SvgTickRound />
 			<div css={successContentStyles}>
-				<span css={successTextStyles(textColor)} role="alert">
+				<span css={successTextStyles(successTextColor)} role="alert">
 					<strong>You&apos;re signed up!</strong>
 					&nbsp;
 					<span>

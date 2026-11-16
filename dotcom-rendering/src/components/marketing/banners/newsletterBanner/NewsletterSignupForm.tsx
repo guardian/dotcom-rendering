@@ -1,5 +1,4 @@
 import type { AbTest } from '@guardian/ophan-tracker-js';
-import { neutral } from '@guardian/source/foundations';
 import { Button, TextInput } from '@guardian/source/react-components';
 import { ToggleSwitch } from '@guardian/source-development-kitchen/react-components';
 import { type ChangeEvent, useEffect } from 'react';
@@ -9,22 +8,12 @@ import { useNewsletterSignupForm } from '../../../../lib/useNewsletterSignupForm
 import { useConfig } from '../../../ConfigContext';
 import { NewsletterPrivacyMessage } from '../../../NewsletterPrivacyMessage';
 import { FailureMessage } from './ErrorMessage';
+import type { NewsletterBannerData } from './NewsletterBannerData';
 import { styles } from './NewsletterSignupForm.styles';
 
 type NewsletterSignupFormProps = {
-	newsletterId: string;
+	bannerData: NewsletterBannerData;
 	componentId: string;
-	actionColor: string;
-	emailInputTextColor?: string;
-	emailInputBackgroundColor?: string;
-	emailInputBorderColor?: string;
-	signupButtonBackgroundColor?: string;
-	signupButtonTextColor?: string;
-	errorColor: string;
-	headingColor: string;
-	privacyTextColor: string;
-	toggleTextColor: string;
-	toggleActiveColor?: string;
 	abTest?: AbTest;
 	isModal?: boolean;
 	onSuccess?: () => void;
@@ -39,23 +28,25 @@ type NewsletterSignupFormProps = {
  */
 
 export const NewsletterSignupForm = ({
-	newsletterId,
+	bannerData,
 	componentId,
-	actionColor,
-	emailInputTextColor = neutral[7],
-	emailInputBackgroundColor = neutral[100],
-	emailInputBorderColor,
-	signupButtonBackgroundColor = actionColor,
-	signupButtonTextColor,
-	errorColor,
-	headingColor,
-	privacyTextColor,
-	toggleTextColor,
-	toggleActiveColor,
 	abTest,
 	isModal = false,
 	onSuccess,
 }: NewsletterSignupFormProps) => {
+	const newsletterId = bannerData.newsletter.identityName;
+	const {
+		emailInputTextColor,
+		emailInputBackgroundColor,
+		emailInputBorderColor,
+		signupButtonBackgroundColor,
+		signupButtonTextColor,
+		errorColor,
+		headingColor,
+		privacyTextColor,
+		toggleTextColor,
+		toggleActiveColor,
+	} = bannerData.settings.newsletterBanner;
 	const { renderingTarget } = useConfig();
 	const hideMarketingToggle = useHideMarketingToggleForCountry();
 
@@ -228,11 +219,9 @@ export const NewsletterSignupForm = ({
 
 			{showFailure && (
 				<FailureMessage
+					bannerData={bannerData}
 					text={failureMessage}
-					buttonBackgroundColor={signupButtonBackgroundColor}
-					buttonTextColor={signupButtonTextColor}
 					onRetry={handleReset}
-					errorColor={errorColor}
 				/>
 			)}
 			{captchaSiteKey !== undefined && captchaSiteKey !== '' && (

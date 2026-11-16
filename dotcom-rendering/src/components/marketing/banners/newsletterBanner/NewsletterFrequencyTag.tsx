@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { space, textSansBold15, until } from '@guardian/source/foundations';
 import { SvgNewsletterFilled } from '@guardian/source/react-components';
-import { palette as themePalette } from '../../../../palette';
+import type { NewsletterBannerData } from './NewsletterBannerData';
 
 const frequencyTagStyles = (actionColor: string) => css`
 	display: flex;
@@ -46,21 +46,23 @@ const badgeStyles = (actionColor: string, iconColor: string) => css`
 `;
 
 export const NewsletterFrequencyTag = ({
-	frequency,
-	actionColor,
-	iconColor = themePalette('--newsletter-card-badge-icon'),
+	bannerData,
 }: {
-	frequency: string;
-	actionColor: string;
-	iconColor?: string;
-}) => (
-	<div css={frequencyTagStyles(actionColor)}>
-		<span css={badgeStyles(actionColor, iconColor)}>
-			<SvgNewsletterFilled />
-		</span>
-		<span css={frequencyTextStyles}>
-			<span css={frequencyLabelStyles}>Free newsletter |</span>
-			<span css={frequencyLabelStyles}>{frequency}</span>
-		</span>
-	</div>
-);
+	bannerData: NewsletterBannerData;
+}) => {
+	const { actionColor, frequencyIconColor } =
+		bannerData.settings.newsletterBanner;
+	return (
+		<div css={frequencyTagStyles(actionColor)}>
+			<span css={badgeStyles(actionColor, frequencyIconColor)}>
+				<SvgNewsletterFilled />
+			</span>
+			<span css={frequencyTextStyles}>
+				<span css={frequencyLabelStyles}>Free newsletter |</span>
+				<span css={frequencyLabelStyles}>
+					{bannerData.newsletter.frequency}
+				</span>
+			</span>
+		</div>
+	);
+};

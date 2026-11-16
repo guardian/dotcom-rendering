@@ -11,6 +11,7 @@ import {
 	SvgAlertRound,
 	SvgReload,
 } from '@guardian/source/react-components';
+import type { NewsletterBannerData } from './NewsletterBannerData';
 
 const responseBoxStyles = css`
 	padding: 7px 12px 16px 7.5px;
@@ -68,49 +69,49 @@ const retryButtonStyles = css`
 `;
 
 export const FailureMessage = ({
+	bannerData,
 	onRetry,
 	text,
-	errorColor,
-	buttonBackgroundColor,
-	buttonTextColor,
 }: {
+	bannerData: NewsletterBannerData;
 	onRetry: React.MouseEventHandler<HTMLButtonElement>;
 	text: string;
-	errorColor: string;
-	buttonBackgroundColor: string;
-	buttonTextColor?: string;
-}) => (
-	<div css={[responseBoxStyles, errorContainerStyles(errorColor)]}>
-		<SvgAlertRound />
-		<div css={errorContentStyles}>
-			<span css={errorTextStyles} role="alert">
-				{text} Please try again or contact{' '}
-				<Link
-					href="mailto:customer.help@theguardian.com"
-					target="_blank"
-					rel="noreferrer"
-					cssOverrides={errorLinkStyles}
+}) => {
+	const { errorColor, signupButtonBackgroundColor, signupButtonTextColor } =
+		bannerData.settings.newsletterBanner;
+	return (
+		<div css={[responseBoxStyles, errorContainerStyles(errorColor)]}>
+			<SvgAlertRound />
+			<div css={errorContentStyles}>
+				<span css={errorTextStyles} role="alert">
+					{text} Please try again or contact{' '}
+					<Link
+						href="mailto:customer.help@theguardian.com"
+						target="_blank"
+						rel="noreferrer"
+						cssOverrides={errorLinkStyles}
+					>
+						customer.help@theguardian.com
+					</Link>
+				</span>
+				<Button
+					theme={{
+						backgroundPrimary: signupButtonBackgroundColor,
+						backgroundPrimaryHover: signupButtonBackgroundColor,
+						...(signupButtonTextColor !== undefined && {
+							textPrimary: signupButtonTextColor,
+						}),
+					}}
+					size="small"
+					priority="primary"
+					icon={<SvgReload />}
+					iconSide="right"
+					onClick={onRetry}
+					cssOverrides={retryButtonStyles}
 				>
-					customer.help@theguardian.com
-				</Link>
-			</span>
-			<Button
-				theme={{
-					backgroundPrimary: buttonBackgroundColor,
-					backgroundPrimaryHover: buttonBackgroundColor,
-					...(buttonTextColor !== undefined && {
-						textPrimary: buttonTextColor,
-					}),
-				}}
-				size="small"
-				priority="primary"
-				icon={<SvgReload />}
-				iconSide="right"
-				onClick={onRetry}
-				cssOverrides={retryButtonStyles}
-			>
-				Try again
-			</Button>
+					Try again
+				</Button>
+			</div>
 		</div>
-	</div>
-);
+	);
+};

@@ -5,6 +5,12 @@ import {
 	screen as testingScreen,
 } from '@testing-library/react';
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
+import { props } from '../utils/storybook';
+import type {
+	NewsletterBannerData,
+	NewsletterBannerSettings,
+} from './NewsletterBannerData';
+import { buildNewsletterBannerSettings } from './NewsletterBannerData';
 import { NewsletterSignupForm } from './NewsletterSignupForm';
 
 const mockHandleSubmit = jest.fn((event: React.FormEvent<HTMLFormElement>) =>
@@ -51,6 +57,92 @@ jest.mock('react-google-recaptcha', () => ({
 	default: jest.fn(() => null),
 }));
 
+const copy = {
+	heading: null,
+	paragraphs: [],
+	primaryCta: null,
+	secondaryCta: null,
+};
+const ctaSettings = {
+	default: { textColour: '#FFFFFF', backgroundColour: '#052962' },
+};
+const bannerData: NewsletterBannerData = {
+	bannerChannel: 'contributions',
+	design: props.design,
+	content: { mainContent: copy, mobileContent: copy },
+	tracking: props.tracking,
+	articleCounts: props.articleCounts,
+	reminderTracking: {
+		onReminderCtaClick: jest.fn(),
+		onReminderSetClick: jest.fn(),
+		onReminderCloseClick: jest.fn(),
+	},
+	newsletter: {
+		listId: 6042,
+		identityName: 'test-newsletter',
+		name: 'Test newsletter',
+		frequency: 'Weekly',
+	},
+	settings: {
+		containerSettings: { backgroundColour: '#FFFFFF' },
+		primaryCtaSettings: ctaSettings,
+		secondaryCtaSettings: ctaSettings,
+		closeButtonSettings: ctaSettings,
+		highlightedTextSettings: { textColour: '#121212' },
+		newsletterBanner: {
+			...buildNewsletterBannerSettings(undefined),
+			headingColor: '#FFFFFF',
+		},
+	},
+	isCollapsed: false,
+	isCollapsible: false,
+	isTabletOrAbove: false,
+	choices: undefined,
+	selectedChoiceCard: undefined,
+	actions: {
+		onClose: jest.fn(),
+		onToggleCollapse: jest.fn(),
+		onCtaClick: jest.fn(),
+		onSecondaryCtaClick: jest.fn(),
+		onChoiceCardChange: jest.fn(),
+		submitComponentEvent: jest.fn(),
+	},
+	selectors: {
+		copyForViewport: copy,
+		headingCopy: copy,
+		showBody: true,
+		showTicker: false,
+		showArticleCount: false,
+		showChoiceCardCtas: false,
+		showChoiceCardSelector: false,
+		showStandardCtas: false,
+		showBodyVisual: false,
+		showHeaderImage: false,
+		customSecondaryCta: null,
+		reminderCta: null,
+	},
+};
+
+const form = (
+	settings: Partial<NewsletterBannerSettings> = {},
+	onSuccess?: () => void,
+) => (
+	<NewsletterSignupForm
+		bannerData={{
+			...bannerData,
+			settings: {
+				...bannerData.settings,
+				newsletterBanner: {
+					...bannerData.settings.newsletterBanner,
+					...settings,
+				},
+			},
+		}}
+		componentId="test-banner"
+		onSuccess={onSuccess}
+	/>
+);
+
 describe('newsletter banner signup form', () => {
 	beforeEach(() => {
 		jest.clearAllMocks();
@@ -63,18 +155,7 @@ describe('newsletter banner signup form', () => {
 
 	it('renders CAPTCHA and delegates submission to the signup hook', () => {
 		const onSuccess = jest.fn();
-		render(
-			<NewsletterSignupForm
-				newsletterId="test-newsletter"
-				componentId="test-banner"
-				actionColor="#052962"
-				errorColor="#C70000"
-				headingColor="#FFFFFF"
-				privacyTextColor="#707070"
-				toggleTextColor="#333333"
-				onSuccess={onSuccess}
-			/>,
-		);
+		render(form({}, onSuccess));
 
 		expect(ReactGoogleRecaptcha).toHaveBeenCalled();
 		expect(onSuccess).not.toHaveBeenCalled();
@@ -97,16 +178,7 @@ describe('newsletter banner signup form', () => {
 	it('uses the configured validation error color', () => {
 		mockIsValidationError = true;
 		render(
-			<NewsletterSignupForm
-				newsletterId="test-newsletter"
-				componentId="test-banner"
-				actionColor="#052962"
-				emailInputBorderColor="#EDEDED"
-				errorColor="#FF9081"
-				headingColor="#FFFFFF"
-				privacyTextColor="#707070"
-				toggleTextColor="#333333"
-			/>,
+			form({ emailInputBorderColor: '#EDEDED', errorColor: '#FF9081' }),
 		);
 
 		expect(testingScreen.getByRole('alert')).toHaveStyle({
@@ -126,17 +198,11 @@ describe('newsletter banner signup form', () => {
 			mockUserEmail = userEmail;
 			mockIsValidationError = true;
 			render(
-				<NewsletterSignupForm
-					newsletterId="test-newsletter"
-					componentId="test-banner"
-					actionColor="#EACCA0"
-					emailInputTextColor="#EDEDED"
-					emailInputBackgroundColor="#333333"
-					errorColor="#FF9081"
-					headingColor="#FFFFFF"
-					privacyTextColor="#EDEDED"
-					toggleTextColor="#DCDCDC"
-				/>,
+				form({
+					emailInputTextColor: '#EDEDED',
+					emailInputBackgroundColor: '#333333',
+					errorColor: '#FF9081',
+				}),
 			);
 
 			expect(testingScreen.getByRole('textbox')).toHaveStyle({
@@ -157,20 +223,9 @@ describe('newsletter banner signup form', () => {
 		'keeps the email input light with the $scheme browser palette',
 		({ scheme, text, background }) => {
 			const { container } = render(
-				<div data-color-scheme={scheme}>
-					<NewsletterSignupForm
-						newsletterId="test-newsletter"
-						componentId="test-banner"
-						actionColor="#052962"
-						errorColor="#C70000"
-						headingColor="#121212"
-						privacyTextColor="#707070"
-						toggleTextColor="#333333"
-					/>
-				</div>,
+				<div data-color-scheme={scheme}>{form()}</div>,
 			);
-			const palette = container.firstElementChild;
-			palette?.setAttribute(
+			container.firstElementChild?.setAttribute(
 				'style',
 				`--newsletter-signup-input-text: ${text}; --newsletter-signup-input-background: ${background}`,
 			);
@@ -184,18 +239,11 @@ describe('newsletter banner signup form', () => {
 
 	it('uses the configured email input colors', () => {
 		render(
-			<NewsletterSignupForm
-				newsletterId="test-newsletter"
-				componentId="test-banner"
-				actionColor="#052962"
-				emailInputTextColor="#123456"
-				emailInputBackgroundColor="#FEDCBA"
-				emailInputBorderColor="#AABBCC"
-				errorColor="#C70000"
-				headingColor="#121212"
-				privacyTextColor="#707070"
-				toggleTextColor="#333333"
-			/>,
+			form({
+				emailInputTextColor: '#123456',
+				emailInputBackgroundColor: '#FEDCBA',
+				emailInputBorderColor: '#AABBCC',
+			}),
 		);
 
 		expect(testingScreen.getByRole('textbox')).toHaveStyle({
@@ -207,17 +255,10 @@ describe('newsletter banner signup form', () => {
 
 	it('uses the configured signup button colors', () => {
 		render(
-			<NewsletterSignupForm
-				newsletterId="test-newsletter"
-				componentId="test-banner"
-				actionColor="#EACCA0"
-				signupButtonBackgroundColor="#FFFFFF"
-				signupButtonTextColor="#1A1A1A"
-				errorColor="#FF9081"
-				headingColor="#FFFFFF"
-				privacyTextColor="#BABABA"
-				toggleTextColor="#DCDCDC"
-			/>,
+			form({
+				signupButtonBackgroundColor: '#FFFFFF',
+				signupButtonTextColor: '#1A1A1A',
+			}),
 		);
 
 		expect(
@@ -228,15 +269,10 @@ describe('newsletter banner signup form', () => {
 	it('uses the configured error and action colors for the failure message', () => {
 		mockResponseOk = false;
 		render(
-			<NewsletterSignupForm
-				newsletterId="test-newsletter"
-				componentId="test-banner"
-				actionColor="#8F6A70"
-				errorColor="#FF9081"
-				headingColor="#FFFFFF"
-				privacyTextColor="#BABABA"
-				toggleTextColor="#DCDCDC"
-			/>,
+			form({
+				signupButtonBackgroundColor: '#8F6A70',
+				errorColor: '#FF9081',
+			}),
 		);
 
 		const alert = testingScreen.getByRole('alert');
@@ -252,17 +288,10 @@ describe('newsletter banner signup form', () => {
 	it('uses the signup button colors for the retry button', () => {
 		mockResponseOk = false;
 		render(
-			<NewsletterSignupForm
-				newsletterId="test-newsletter"
-				componentId="test-banner"
-				actionColor="#EACCA0"
-				signupButtonBackgroundColor="#FFFFFF"
-				signupButtonTextColor="#1A1A1A"
-				errorColor="#FF9081"
-				headingColor="#FFFFFF"
-				privacyTextColor="#EDEDED"
-				toggleTextColor="#DCDCDC"
-			/>,
+			form({
+				signupButtonBackgroundColor: '#FFFFFF',
+				signupButtonTextColor: '#1A1A1A',
+			}),
 		);
 
 		expect(
@@ -273,41 +302,22 @@ describe('newsletter banner signup form', () => {
 	it.each(['#707070', '#EDEDED'])(
 		'uses %s for privacy text, links and the bold label',
 		(privacyTextColor) => {
-			render(
-				<NewsletterSignupForm
-					newsletterId="test-newsletter"
-					componentId="test-banner"
-					actionColor="#052962"
-					errorColor="#C70000"
-					headingColor="#FFFFFF"
-					privacyTextColor={privacyTextColor}
-					toggleTextColor="#333333"
-				/>,
-			);
-
+			render(form({ privacyTextColor }));
 			const label = testingScreen.getByText('Privacy Notice:');
 			expect(label).toHaveStyle({ color: privacyTextColor });
 			expect(label.parentElement).toHaveStyle({
 				color: privacyTextColor,
 			});
+			expect(
+				testingScreen.getByRole('link', { name: 'Privacy Policy' }),
+			).toHaveStyle({ color: privacyTextColor });
 		},
 	);
 
 	it.each(['#333333', '#DCDCDC'])(
 		'uses %s for the marketing toggle label',
 		(toggleTextColor) => {
-			render(
-				<NewsletterSignupForm
-					newsletterId="test-newsletter"
-					componentId="test-banner"
-					actionColor="#052962"
-					errorColor="#C70000"
-					headingColor="#FFFFFF"
-					privacyTextColor="#707070"
-					toggleTextColor={toggleTextColor}
-				/>,
-			);
-
+			render(form({ toggleTextColor }));
 			expect(
 				testingScreen.getByText(
 					'Get updates about our journalism and ways to support and enjoy our work. Toggle to opt out.',
@@ -321,19 +331,7 @@ describe('newsletter banner signup form', () => {
 		(toggleActiveColor) => {
 			mockShowMarketingToggle = true;
 			mockMarketingOptIn = true;
-			render(
-				<NewsletterSignupForm
-					newsletterId="test-newsletter"
-					componentId="test-banner"
-					actionColor="#052962"
-					errorColor="#C70000"
-					headingColor="#121212"
-					privacyTextColor="#707070"
-					toggleTextColor="#333333"
-					toggleActiveColor={toggleActiveColor}
-				/>,
-			);
-
+			render(form({ toggleActiveColor }));
 			expect(testingScreen.getByRole('switch')).toHaveStyle({
 				backgroundColor: toggleActiveColor,
 				borderColor: toggleActiveColor,
@@ -343,19 +341,7 @@ describe('newsletter banner signup form', () => {
 
 	it('keeps the unchecked toggle colour unchanged', () => {
 		mockShowMarketingToggle = true;
-		render(
-			<NewsletterSignupForm
-				newsletterId="test-newsletter"
-				componentId="test-banner"
-				actionColor="#052962"
-				errorColor="#C70000"
-				headingColor="#121212"
-				privacyTextColor="#707070"
-				toggleTextColor="#333333"
-				toggleActiveColor="#28A85F"
-			/>,
-		);
-
+		render(form({ toggleActiveColor: '#28A85F' }));
 		expect(testingScreen.getByRole('switch')).toHaveStyle({
 			backgroundColor: neutral[46],
 			borderColor: neutral[46],
@@ -364,28 +350,15 @@ describe('newsletter banner signup form', () => {
 
 	it('calls onSuccess only after the signup hook reports success', () => {
 		const onSuccess = jest.fn();
-		const renderForm = () => (
-			<NewsletterSignupForm
-				newsletterId="test-newsletter"
-				componentId="test-banner"
-				actionColor="#052962"
-				errorColor="#C70000"
-				headingColor="#FFFFFF"
-				privacyTextColor="#707070"
-				toggleTextColor="#333333"
-				onSuccess={onSuccess}
-			/>
-		);
-		const { rerender } = render(renderForm());
-
+		const { rerender } = render(form({}, onSuccess));
 		expect(onSuccess).not.toHaveBeenCalled();
 
 		mockResponseOk = false;
-		rerender(renderForm());
+		rerender(form({}, onSuccess));
 		expect(onSuccess).not.toHaveBeenCalled();
 
 		mockResponseOk = true;
-		rerender(renderForm());
+		rerender(form({}, onSuccess));
 		expect(onSuccess).toHaveBeenCalledTimes(1);
 	});
 });

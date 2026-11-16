@@ -1,4 +1,3 @@
-import { hexColourToString } from '@guardian/support-dotcom-components';
 import type { BannerProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { PromotedNewsletter } from '@guardian/support-dotcom-components/dist/shared/types/props/banner';
 import type { ComponentType } from 'react';
@@ -15,6 +14,8 @@ import { BannerHeader } from '../designableBanner/components/BannerHeader';
 import { BannerVisual } from '../designableBanner/components/BannerVisual';
 import { useDesignableBannerModel } from '../designableBanner/useDesignableBannerModel';
 import { styles, transitionDurationMs } from './NewsletterBanner.styles';
+import type { NewsletterBannerData } from './NewsletterBannerData';
+import { buildNewsletterBannerSettings } from './NewsletterBannerData';
 import { NewsletterBannerLogo } from './NewsletterBannerLogo';
 import { NewsletterFrequencyTag } from './NewsletterFrequencyTag';
 import { NewsletterSignupForm } from './NewsletterSignupForm';
@@ -25,13 +26,14 @@ const buildNewsletterBannerData = (
 	baseBannerData: BannerData,
 	newsletter: PromotedNewsletter,
 	onClose: () => void,
-): BannerData => {
+): NewsletterBannerData => {
 	const imageSettings =
 		baseBannerData.settings.headerSettings?.headerImage ??
 		baseBannerData.settings.imageSettings;
 
 	return {
 		...baseBannerData,
+		newsletter,
 		actions: {
 			...baseBannerData.actions,
 			onClose,
@@ -56,6 +58,9 @@ const buildNewsletterBannerData = (
 		settings: {
 			...baseBannerData.settings,
 			imageSettings,
+			newsletterBanner: buildNewsletterBannerSettings(
+				baseBannerData.design,
+			),
 		},
 	};
 };
@@ -87,9 +92,7 @@ export const NewsletterBannerComponent = (
 		return null;
 	}
 
-	const design = props.design as NewsletterBannerDesign;
-	const { basic, newsletterBanner } = design.colours;
-	const dividerColor = hexColourToString(newsletterBanner.divider);
+	const design: NewsletterBannerDesign = props.design;
 	const tabletBackgroundUrl =
 		design.tabletImageAsBackground === true
 			? (
@@ -104,6 +107,7 @@ export const NewsletterBannerComponent = (
 		newsletter,
 		isSuccess ? dismiss : baseBannerData.actions.onClose,
 	);
+	const dividerColor = bannerData.settings.newsletterBanner.divider;
 
 	return (
 		<div
@@ -114,8 +118,9 @@ export const NewsletterBannerComponent = (
 			{...(isDismissing ? { inert: '' } : {})}
 			css={[
 				styles.container(
-					hexColourToString(basic.background),
-					hexColourToString(basic.bodyText),
+					bannerData.settings.containerSettings.backgroundColour,
+					bannerData.settings.containerSettings.textColor ??
+						'inherit',
 				),
 				hasTabletBackground &&
 					!isSuccess &&
@@ -138,16 +143,7 @@ export const NewsletterBannerComponent = (
 									<div css={styles.content}>
 										<div css={styles.frequencyRow}>
 											<NewsletterFrequencyTag
-												frequency={newsletter.frequency}
-												actionColor={hexColourToString(
-													newsletterBanner.actionColor,
-												)}
-												iconColor={
-													newsletterBanner.frequencyIconColor &&
-													hexColourToString(
-														newsletterBanner.frequencyIconColor,
-													)
-												}
+												bannerData={bannerData}
 											/>
 										</div>
 										<div
@@ -193,61 +189,8 @@ export const NewsletterBannerComponent = (
 											</div>
 										</div>
 										<NewsletterSignupForm
-											newsletterId={
-												newsletter.identityName
-											}
+											bannerData={bannerData}
 											componentId="newsletter_banner"
-											headingColor={hexColourToString(
-												basic.headerText,
-											)}
-											actionColor={hexColourToString(
-												newsletterBanner.actionColor,
-											)}
-											emailInputTextColor={
-												newsletterBanner.emailInputTextColor &&
-												hexColourToString(
-													newsletterBanner.emailInputTextColor,
-												)
-											}
-											emailInputBackgroundColor={
-												newsletterBanner.emailInputBackgroundColor &&
-												hexColourToString(
-													newsletterBanner.emailInputBackgroundColor,
-												)
-											}
-											emailInputBorderColor={
-												newsletterBanner.emailInputBorderColor &&
-												hexColourToString(
-													newsletterBanner.emailInputBorderColor,
-												)
-											}
-											signupButtonBackgroundColor={
-												newsletterBanner.signupButtonBackgroundColor &&
-												hexColourToString(
-													newsletterBanner.signupButtonBackgroundColor,
-												)
-											}
-											signupButtonTextColor={
-												newsletterBanner.signupButtonTextColor &&
-												hexColourToString(
-													newsletterBanner.signupButtonTextColor,
-												)
-											}
-											errorColor={hexColourToString(
-												newsletterBanner.errorColor,
-											)}
-											privacyTextColor={hexColourToString(
-												newsletterBanner.privacyTextColor,
-											)}
-											toggleTextColor={hexColourToString(
-												newsletterBanner.toggleTextColor,
-											)}
-											toggleActiveColor={
-												newsletterBanner.toggleActiveColor &&
-												hexColourToString(
-													newsletterBanner.toggleActiveColor,
-												)
-											}
 											onSuccess={() => setIsSuccess(true)}
 										/>
 									</div>
@@ -265,25 +208,7 @@ export const NewsletterBannerComponent = (
 					>
 						<div>
 							<div css={styles.successContent}>
-								<SuccessMessage
-									newsletterName={newsletter.name}
-									frequency={newsletter.frequency}
-									textColor={hexColourToString(
-										newsletterBanner.successTextColor,
-									)}
-									iconColor={
-										newsletterBanner.successIconColor &&
-										hexColourToString(
-											newsletterBanner.successIconColor,
-										)
-									}
-									browseButtonTextColor={hexColourToString(
-										newsletterBanner.browseButtonTextColor,
-									)}
-									browseButtonBorderColor={hexColourToString(
-										newsletterBanner.browseButtonBorderColor,
-									)}
-								/>
+								<SuccessMessage bannerData={bannerData} />
 							</div>
 						</div>
 					</div>

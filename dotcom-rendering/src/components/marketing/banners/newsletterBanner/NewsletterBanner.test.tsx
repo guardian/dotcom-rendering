@@ -16,6 +16,7 @@ import {
 	stringToHexColour,
 } from '../utils/storybook';
 import { NewsletterBanner } from './NewsletterBanner';
+import type { NewsletterBannerData } from './NewsletterBannerData';
 
 const squareIllustration = 'https://example.com/newsletter-square.jpg';
 
@@ -65,33 +66,33 @@ jest.mock('../../../../lib/useMatchMedia', () => ({
 jest.mock('./NewsletterSignupForm', () => ({
 	NewsletterSignupForm: ({
 		onSuccess,
-		signupButtonBackgroundColor,
-		signupButtonTextColor,
-		emailInputTextColor,
-		emailInputBackgroundColor,
-		emailInputBorderColor,
-		toggleActiveColor,
+		bannerData,
 	}: {
 		onSuccess: () => void;
-		signupButtonBackgroundColor?: string;
-		signupButtonTextColor?: string;
-		emailInputTextColor?: string;
-		emailInputBackgroundColor?: string;
-		emailInputBorderColor?: string;
-		toggleActiveColor?: string;
-	}) => (
-		<button
-			onClick={onSuccess}
-			data-background-color={signupButtonBackgroundColor}
-			data-text-color={signupButtonTextColor}
-			data-input-text-color={emailInputTextColor}
-			data-input-background-color={emailInputBackgroundColor}
-			data-input-border-color={emailInputBorderColor}
-			data-toggle-active-color={toggleActiveColor}
-		>
-			Sign up
-		</button>
-	),
+		bannerData: NewsletterBannerData;
+	}) => {
+		const {
+			signupButtonBackgroundColor,
+			signupButtonTextColor,
+			emailInputTextColor,
+			emailInputBackgroundColor,
+			emailInputBorderColor,
+			toggleActiveColor,
+		} = bannerData.settings.newsletterBanner;
+		return (
+			<button
+				onClick={onSuccess}
+				data-background-color={signupButtonBackgroundColor}
+				data-text-color={signupButtonTextColor}
+				data-input-text-color={emailInputTextColor}
+				data-input-background-color={emailInputBackgroundColor}
+				data-input-border-color={emailInputBorderColor}
+				data-toggle-active-color={toggleActiveColor}
+			>
+				Sign up
+			</button>
+		);
+	},
 }));
 
 describe('NewsletterBanner configuration', () => {
@@ -121,6 +122,73 @@ describe('NewsletterBanner configuration', () => {
 		});
 
 		expect(banner.props).toMatchObject(runtimeProps);
+	});
+
+	it('renders older designs without newsletter colours and supports signup', () => {
+		const colours = { ...newsletterDesign.colours };
+		delete colours.newsletterBanner;
+		const legacyProps = {
+			...sdcNewsletterProps,
+			design: { ...sdcNewsletterProps.design, colours },
+		};
+		expect(bannerSchema.safeParse(legacyProps).success).toBe(true);
+
+		render(
+			<NewsletterBanner
+				{...legacyProps}
+				idApiUrl="https://idapi.theguardian.com"
+			/>,
+		);
+
+		expect(
+			testingScreen.getByRole('heading', {
+				name: 'Sign up for The Stakes 2026',
+			}),
+		).toBeInTheDocument();
+		expect(
+			testingScreen.getByRole('button', { name: 'Sign up' }),
+		).toHaveAttribute('data-background-color', '#052962');
+
+		fireEvent.click(testingScreen.getByRole('button', { name: 'Sign up' }));
+		expect(
+			testingScreen.getByText("You're signed up!"),
+		).toBeInTheDocument();
+		expect(
+			testingScreen.getByRole('link', {
+				name: 'Browse more newsletters',
+			}),
+		).toHaveStyle({ color: '#052962' });
+	});
+
+	it('places the logo wrapper in the banner grid and hides it below leftCol', () => {
+		const { container } = render(
+			<NewsletterBanner
+				{...sdcNewsletterProps}
+				idApiUrl="https://idapi.theguardian.com"
+			/>,
+		);
+		const banner = container.querySelector('[role="alert"]');
+		const layout = banner?.firstElementChild;
+		const logo = layout?.firstElementChild;
+		expect(logo).toHaveStyle({ gridArea: 'logo' });
+
+		const mediaRules = Array.from(document.styleSheets)
+			.flatMap((sheet) => Array.from(sheet.cssRules))
+			.filter(
+				(rule): rule is CSSMediaRule => rule instanceof CSSMediaRule,
+			)
+			.filter((rule) => rule.conditionText.includes('1139.9px'))
+			.flatMap((rule) => Array.from(rule.cssRules))
+			.filter(
+				(rule): rule is CSSStyleRule => rule instanceof CSSStyleRule,
+			);
+		expect(
+			mediaRules.some(
+				(rule) =>
+					logo?.matches(rule.selectorText) === true &&
+					rule.style.display === 'none',
+			),
+		).toBe(true);
 	});
 
 	it('keeps the same close button outside the transitioning panels after signup', () => {
@@ -247,6 +315,27 @@ describe('NewsletterBanner configuration', () => {
 			'#FEDCBA',
 		);
 		expect(button).toHaveAttribute('data-input-border-color', '#AABBCC');
+	});
+
+	it('uses the action color when no signup button background is configured', () => {
+		const colours = {
+			...newsletterDesign.colours,
+			newsletterBanner: {
+				...newsletterDesign.colours.newsletterBanner,
+				actionColor: stringToHexColour('8F6A70'),
+			},
+		};
+		render(
+			<NewsletterBanner
+				{...sdcNewsletterProps}
+				design={{ ...sdcNewsletterProps.design, colours }}
+				idApiUrl="https://idapi.theguardian.com"
+			/>,
+		);
+
+		expect(
+			testingScreen.getByRole('button', { name: 'Sign up' }),
+		).toHaveAttribute('data-background-color', '#8F6A70');
 	});
 
 	it.each([
