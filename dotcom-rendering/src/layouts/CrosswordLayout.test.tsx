@@ -120,7 +120,7 @@ const renderCrosswordLayout = ({
 				// the only block, which is the one `ArticleBody` renders.
 				blocks: [],
 				crossword: {
-					crosswordType: 'quick',
+					crosswordType,
 					number: 28000,
 					date: Date.UTC(2020, 0, 1),
 					entries: [{ id: '1-across' }],
@@ -487,5 +487,53 @@ describe('CrosswordLayout premium crosswords', () => {
 		expect(screen.getByTestId('crossword')).toBeInTheDocument();
 		expect(screen.queryByTestId('crossword-gate')).not.toBeInTheDocument();
 		expect(container.querySelector('main[id]')).toBeNull();
+	});
+
+	it('keeps the skip link target on a gated crossword', () => {
+		const { container } = renderCrosswordLayout({
+			withCrossword: true,
+			crosswordRequiresSubscription: true,
+			serverSideABTests: v1V2AndV3On,
+		});
+
+		const targets = container.querySelectorAll('#maincontent');
+		expect(targets).toHaveLength(1);
+		expect(
+			targets[0]?.querySelector('gu-island[name="CrosswordAccessGate"]'),
+		).not.toBeNull();
+	});
+
+	it('shows no comment count on a gated crossword, and keeps it on an ungated one', () => {
+		const commentCount = 'gu-island[name="CommentCount"]';
+
+		const gated = renderCrosswordLayout({
+			withCrossword: true,
+			crosswordRequiresSubscription: true,
+			serverSideABTests: v1V2AndV3On,
+		});
+		expect(gated.container.querySelector(commentCount)).toBeNull();
+		gated.unmount();
+
+		const ungated = renderCrosswordLayout({
+			withCrossword: true,
+			serverSideABTests: v1V2AndV3On,
+		});
+		expect(ungated.container.querySelector(commentCount)).not.toBeNull();
+	});
+
+	it('keeps everything as before for a flagged crossword of a series the Puzzles API does not know', () => {
+		const commentCount = 'gu-island[name="CommentCount"]';
+		const { container } = renderCrosswordLayout({
+			withCrossword: true,
+			crosswordType: 'everyman',
+			crosswordRequiresSubscription: true,
+			serverSideABTests: v1V2AndV3On,
+		});
+
+		expect(screen.getByTestId('crossword')).toBeInTheDocument();
+		expect(screen.queryByTestId('crossword-gate')).not.toBeInTheDocument();
+		expect(container.querySelector('main[id]')).toBeNull();
+		expect(container.querySelector(commentCount)).not.toBeNull();
+		expect(container.querySelectorAll('#maincontent')).toHaveLength(1);
 	});
 });

@@ -39,6 +39,7 @@ import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTes
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { PUZZLE_MODAL_ROOT_ID } from '../lib/puzzleAccess';
 import { crosswordActionContext } from '../lib/puzzleActionTracking';
+import { getCrosswordAccessIdentity } from '../lib/puzzleProgress/adapters/crossword';
 import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
 import { isPuzzlesHubV2Enabled } from '../lib/puzzlesHubVersionExperiment';
 import {
@@ -147,8 +148,14 @@ export const CrosswordLayout = (props: Props) => {
 	 * Set by `buildCrosswordBlock` only for a premium crossword while puzzles
 	 * hub v3 is on (which needs v1 and v2). Otherwise false and this page is
 	 * exactly what it was: nothing below changes.
+	 *
+	 * frontend flags every crossword older than the free window, including
+	 * series the Puzzles API does not know (for example `everyman`). The gate
+	 * never gates those, so they must not take the premium path either: they
+	 * keep the article body, the ads and the comments. The same identity helper
+	 * as the gate decides, so the two can never disagree.
 	 */
-	const isPremium = article.blocks.some((block) =>
+	const isFlaggedPremium = article.blocks.some((block) =>
 		block.elements.some(
 			(element) =>
 				element._type ===
@@ -156,6 +163,10 @@ export const CrosswordLayout = (props: Props) => {
 				element.requiresSubscription === true,
 		),
 	);
+	const isPremium =
+		isFlaggedPremium &&
+		article.crossword !== undefined &&
+		getCrosswordAccessIdentity(article.crossword) !== undefined;
 
 	// Premium crosswords have no comments and no ads, like the Puzzle Page.
 	const showComments = article.isCommentable && !isPaidContent && !isPremium;
@@ -374,7 +385,9 @@ export const CrosswordLayout = (props: Props) => {
 										secondaryDateline={
 											article.webPublicationSecondaryDateDisplay
 										}
-										isCommentable={article.isCommentable}
+										isCommentable={
+											article.isCommentable && !isPremium
+										}
 										discussionApiUrl={
 											article.config.discussionApiUrl
 										}
@@ -397,22 +410,31 @@ export const CrosswordLayout = (props: Props) => {
 									<GridItem area="body" element="article">
 										<ArticleContainer format={format}>
 											{isPremium && article.crossword ? (
-												<Island
-													priority="critical"
-													defer={{ until: 'visible' }}
-												>
-													<CrosswordAccessGate
-														data={article.crossword}
-														ajaxUrl={
-															article.config
-																.ajaxUrl
-														}
-														idUrl={
-															article.config.idUrl
-														}
-														returnToArchivePath={`/${seriesArchivePath}`}
-													/>
-												</Island>
+												// The skip link target `ArticleBody` provides, kept
+												// because the gate replaces `ArticleBody`.
+												<div id="maincontent">
+													<Island
+														priority="critical"
+														defer={{
+															until: 'visible',
+														}}
+													>
+														<CrosswordAccessGate
+															data={
+																article.crossword
+															}
+															ajaxUrl={
+																article.config
+																	.ajaxUrl
+															}
+															idUrl={
+																article.config
+																	.idUrl
+															}
+															returnToArchivePath={`/${seriesArchivePath}`}
+														/>
+													</Island>
+												</div>
 											) : (
 												<ArticleBody
 													format={format}
