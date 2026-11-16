@@ -695,6 +695,10 @@
         "puzzleArchivePath": {
             "description": "Path of the archive page of this crossword's type, if it has one.",
             "type": "string"
+        },
+        "crosswordRequiresSubscription": {
+            "description": "Only sent, as `true`, for a crossword older than the free window. A hint\nfor the cached page: the Puzzles API decides who has access.",
+            "type": "boolean"
         }
     },
     "required": [
@@ -5332,6 +5336,11 @@
                         "number",
                         "solutionAvailable"
                     ]
+                },
+                "requiresSubscription": {
+                    "description": "Set, as `true`, only when this crossword is premium and the puzzles hub\nv3 test is on. Absent otherwise, so the element is as it always was.",
+                    "const": true,
+                    "type": "boolean"
                 }
             },
             "required": [
