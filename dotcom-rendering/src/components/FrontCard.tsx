@@ -7,6 +7,8 @@ import { CardMiniNav } from './CardMiniNav';
 
 type Props = {
 	trail: DCRFrontCard;
+	/* Used to determine if the mini nav should be displayed */
+	isUserOptedInToMiniNav?: boolean;
 } & Partial<CardProps> &
 	Pick<CardProps, 'imageLoading' | 'serverTime'>;
 
@@ -64,6 +66,7 @@ export const FrontCard = (props: Props) => {
 	};
 
 	const headerContent =
+		props.isUserOptedInToMiniNav === true &&
 		isMiniNavSupported(cardProps.containerType, trail.boostLevel) &&
 		trail.showMiniNav &&
 		trail.miniNavData ? (

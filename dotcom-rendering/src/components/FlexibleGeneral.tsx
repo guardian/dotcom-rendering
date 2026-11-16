@@ -41,6 +41,7 @@ type Props = {
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
 	isStorylines: boolean;
+	isUserOptedInToMiniNav: boolean;
 };
 
 type RowLayout = 'oneCardHalfWidth' | 'oneCardFullWidth' | 'twoCard';
@@ -292,6 +293,7 @@ type SplashCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
 	isStorylines: boolean;
+	isUserOptedInToMiniNav: boolean;
 };
 
 const SplashCardLayout = ({
@@ -306,6 +308,7 @@ const SplashCardLayout = ({
 	containerLevel,
 	collectionId,
 	isStorylines,
+	isUserOptedInToMiniNav,
 }: SplashCardLayoutProps) => {
 	const graphic = safeParse(GraphicSchema, {
 		electionDataUrl: card.dataUrl,
@@ -414,6 +417,7 @@ const SplashCardLayout = ({
 					headlinePosition={card.showLivePlayable ? 'outer' : 'inner'}
 					starRatingSize="medium"
 					isStorylines={isStorylines}
+					isUserOptedInToMiniNav={isUserOptedInToMiniNav}
 				/>
 			</LI>
 		</UL>
@@ -480,6 +484,7 @@ type FullWidthCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
 	isStorylines: boolean;
+	isUserOptedInToMiniNav: boolean;
 };
 
 const FullWidthCardLayout = ({
@@ -494,6 +499,7 @@ const FullWidthCardLayout = ({
 	containerLevel,
 	collectionId,
 	isStorylines,
+	isUserOptedInToMiniNav,
 }: FullWidthCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) {
@@ -575,6 +581,7 @@ const FullWidthCardLayout = ({
 					subtitleSize={subtitleSize}
 					starRatingSize="medium"
 					isStorylines={isStorylines}
+					isUserOptedInToMiniNav={isUserOptedInToMiniNav}
 				/>
 			</LI>
 		</UL>
@@ -684,6 +691,7 @@ export const FlexibleGeneral = ({
 	containerLevel = 'Primary',
 	collectionId,
 	isStorylines,
+	isUserOptedInToMiniNav,
 }: Props) => {
 	const splashCards = [...groupedTrails.splash].map((card, i) => ({
 		...card,
@@ -715,6 +723,7 @@ export const FlexibleGeneral = ({
 							containerLevel={containerLevel}
 							collectionId={collectionId}
 							isStorylines={isStorylines}
+							isUserOptedInToMiniNav={isUserOptedInToMiniNav}
 						/>
 					);
 				})}
@@ -735,6 +744,7 @@ export const FlexibleGeneral = ({
 								containerLevel={containerLevel}
 								collectionId={collectionId}
 								isStorylines={isStorylines}
+								isUserOptedInToMiniNav={isUserOptedInToMiniNav}
 							/>
 						);
 
