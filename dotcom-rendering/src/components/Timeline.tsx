@@ -166,13 +166,13 @@ const eventStyles = css`
 	${from.tablet} {
 		padding-left: ${space[5]}px;
 		padding-right: ${space[5]}px;
-		margin-left: -21px;
+		margin-left: -20px;
 		margin-right: -21px;
 	}
 	${from.leftCol} {
 		padding-left: 10px;
 		padding-right: 10px;
-		margin-left: -11px;
+		margin-left: -10px;
 		margin-right: -11px;
 	}
 `;
@@ -187,13 +187,13 @@ const labelStyles = css`
 	${from.tablet} {
 		padding-left: ${space[5]}px;
 		padding-right: ${space[5]}px;
-		margin-left: -21px;
+		margin-left: -20px;
 		margin-right: -21px;
 	}
 	${from.leftCol} {
 		padding-left: 10px;
 		padding-right: 10px;
-		margin-left: -11px;
+		margin-left: -10px;
 		margin-right: -11px;
 	}
 `;
