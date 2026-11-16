@@ -6,8 +6,6 @@ import { createPuzzlesPage } from '../../fixtures/manual/puzzlesPage';
 import { Island } from '../components/Island';
 import { SubNav } from '../components/Masthead/Titlepiece/SubNav';
 import {
-	puzzlesHubV1Experiment,
-	puzzlesHubV1Participation,
 	puzzlesHubV2Experiment,
 	puzzlesHubV2Participation,
 } from '../lib/puzzlesHubVersionExperiment';
@@ -109,12 +107,12 @@ describe('PuzzlesArchiveLayout', () => {
 	);
 
 	it.each([
-		['V1 only', true, false, 4],
-		['V2 without V1', false, true, 1],
-		['neither tier', false, false, 1],
+		['hub only', true, false, 4],
+		['V2 without hub', false, true, 1],
+		['neither', false, false, 1],
 	] as const)(
 		'hides trivia for %s',
-		(_description, isV1Enabled, isV2Enabled, expectedLinkCount) => {
+		(_description, isHubAvailable, isV2Enabled, expectedLinkCount) => {
 			const { puzzlesPage } = archiveStories.args;
 			render(
 				<PuzzlesArchiveLayout
@@ -123,12 +121,8 @@ describe('PuzzlesArchiveLayout', () => {
 						...puzzlesPage,
 						config: {
 							...puzzlesPage.config,
+							edition: isHubAvailable ? 'INT' : 'UK',
 							serverSideABTests: {
-								...puzzlesHubV1Participation(
-									isV1Enabled
-										? puzzlesHubV1Experiment.variant
-										: puzzlesHubV1Experiment.control,
-								),
 								...puzzlesHubV2Participation(
 									isV2Enabled
 										? puzzlesHubV2Experiment.variant

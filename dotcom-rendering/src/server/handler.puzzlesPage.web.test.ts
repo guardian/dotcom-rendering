@@ -35,31 +35,10 @@ describe('handlePuzzlesPage', () => {
 	});
 
 	it.each([
-		['V1 only', { 'puzzles-new-hub-v1': 'variant' }, false],
-		[
-			'V2 control',
-			{
-				'puzzles-new-hub-v1': 'variant',
-				'puzzles-new-hub-v2': 'control',
-			},
-			false,
-		],
-		[
-			'V2 unknown',
-			{
-				'puzzles-new-hub-v1': 'variant',
-				'puzzles-new-hub-v2': 'unknown',
-			},
-			false,
-		],
-		[
-			'V1 and V2',
-			{
-				'puzzles-new-hub-v1': 'variant',
-				'puzzles-new-hub-v2': 'variant',
-			},
-			true,
-		],
+		['no V2 participation', {}, false],
+		['V2 control', { 'puzzles-new-hub-v2': 'control' }, false],
+		['V2 unknown', { 'puzzles-new-hub-v2': 'unknown' }, false],
+		['V2 variant', { 'puzzles-new-hub-v2': 'variant' }, true],
 	] as const)(
 		'gates trivia and featured games for %s without changing V1 cards',
 		(_, serverSideABTests, showV2) => {
@@ -85,7 +64,7 @@ describe('handlePuzzlesPage', () => {
 			const page = createPuzzlesPage({
 				layout: { containers: [featured, triviaPuzzlesContainer] },
 			});
-			page.config = { ...page.config, serverSideABTests };
+			page.config = { ...page.config, edition: 'INT', serverSideABTests };
 			validate.mockReturnValue(page);
 			const res = response();
 			handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
@@ -121,10 +100,10 @@ describe('handlePuzzlesPage', () => {
 		}
 	});
 
-	it('renders the exact variant participation outside development', () => {
+	it('renders for the International edition outside development', () => {
 		validate.mockReturnValue({
 			layout: { containers: [] },
-			config: { serverSideABTests: { 'puzzles-new-hub-v1': 'variant' } },
+			config: { edition: 'INT', serverSideABTests: {} },
 		} as never);
 		const res = response();
 		handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
@@ -133,31 +112,32 @@ describe('handlePuzzlesPage', () => {
 	});
 
 	it.each([
-		['V1 only', { 'puzzles-new-hub-v1': 'variant' }, false],
-		['V2 alone', { 'puzzles-new-hub-v2': 'variant' }, false],
+		['International edition only', 'INT', {}, false],
 		[
-			'V2 control',
-			{
-				'puzzles-new-hub-v1': 'variant',
-				'puzzles-new-hub-v2': 'control',
-			},
+			'V2 variant outside International',
+			'UK',
+			{ 'puzzles-new-hub-v2': 'variant' },
 			false,
 		],
 		[
-			'both variants',
-			{
-				'puzzles-new-hub-v1': 'variant',
-				'puzzles-new-hub-v2': 'variant',
-			},
+			'International with V2 control',
+			'INT',
+			{ 'puzzles-new-hub-v2': 'control' },
+			false,
+		],
+		[
+			'International with V2 variant',
+			'INT',
+			{ 'puzzles-new-hub-v2': 'variant' },
 			true,
 		],
 	] as const)(
 		'gates the trivia archive for %s',
-		(_, serverSideABTests, allowed) => {
+		(_, edition, serverSideABTests, allowed) => {
 			validate.mockReturnValue({
 				layout: { containers: [] },
 				archive: { category: 'trivia-and-quizzes' },
-				config: { serverSideABTests },
+				config: { edition, serverSideABTests },
 			} as never);
 			const res = response();
 			handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
@@ -170,7 +150,7 @@ describe('handlePuzzlesPage', () => {
 		},
 	);
 
-	it('keeps V2 recommendations out of existing V1 archives', () => {
+	it('keeps V2 recommendations out of existing archives', () => {
 		const existing = {
 			...triviaPuzzlesContainer.content.items[0]![0]!,
 			type: 'word-wheel',
@@ -184,7 +164,7 @@ describe('handlePuzzlesPage', () => {
 					...triviaPuzzlesContainer.content.items[0]!,
 				],
 			},
-			config: { serverSideABTests: { 'puzzles-new-hub-v1': 'variant' } },
+			config: { edition: 'INT', serverSideABTests: {} },
 		} as never);
 		const res = response();
 		handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
@@ -193,26 +173,22 @@ describe('handlePuzzlesPage', () => {
 		).toEqual([existing]);
 	});
 
-	it('renders an archive payload for the V1 variant', () => {
+	it('renders an archive payload for the International edition', () => {
 		validate.mockReturnValue({
 			layout: { containers: [] },
 			archive: { moreFrom: [] },
-			config: {
-				serverSideABTests: {
-					'puzzles-new-hub-v1': 'variant',
-				},
-			},
+			config: { edition: 'INT', serverSideABTests: {} },
 		} as never);
 		const res = response();
 		handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
 		expect(renderPage).toHaveBeenCalledTimes(1);
 	});
 
-	it('does not render an archive when V1 is absent', () => {
+	it('does not render an archive outside the International edition', () => {
 		validate.mockReturnValue({
 			layout: { containers: [] },
 			archive: { moreFrom: [] },
-			config: { serverSideABTests: {} },
+			config: { edition: 'UK', serverSideABTests: {} },
 		} as never);
 		const res = response();
 		handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
@@ -220,12 +196,12 @@ describe('handlePuzzlesPage', () => {
 		expect(renderPage).not.toHaveBeenCalled();
 	});
 
-	it('renders without experiment participation in local development', () => {
+	it('renders outside the International edition in local development', () => {
 		const previousNodeEnvironment = process.env.NODE_ENV;
 		process.env.NODE_ENV = 'development';
 		validate.mockReturnValue({
 			layout: { containers: [] },
-			config: { serverSideABTests: {} },
+			config: { edition: 'UK', serverSideABTests: {} },
 		} as never);
 		const res = response();
 
@@ -243,19 +219,17 @@ describe('handlePuzzlesPage', () => {
 		}
 	});
 
-	it.each([
-		['control', { 'puzzles-new-hub-v1': 'control' }],
-		['missing', {}],
-		['unknown group', { 'puzzles-new-hub-v1': 'unknown' }],
-		['unrelated', { unrelated: 'variant' }],
-	])('returns 404 without mounting the renderer for %s', (_, tests) => {
-		validate.mockReturnValue({
-			layout: { containers: [] },
-			config: { serverSideABTests: tests },
-		} as never);
-		const res = response();
-		handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
-		expect(res.sendStatus).toHaveBeenCalledWith(404);
-		expect(renderPage).not.toHaveBeenCalled();
-	});
+	it.each(['UK', 'US', 'AU', 'EUR'])(
+		'returns 404 without mounting the renderer for the %s edition',
+		(edition) => {
+			validate.mockReturnValue({
+				layout: { containers: [] },
+				config: { edition, serverSideABTests: {} },
+			} as never);
+			const res = response();
+			handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
+			expect(res.sendStatus).toHaveBeenCalledWith(404);
+			expect(renderPage).not.toHaveBeenCalled();
+		},
+	);
 });

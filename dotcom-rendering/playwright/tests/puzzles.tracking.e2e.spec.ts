@@ -78,7 +78,7 @@ test.describe('Puzzles Hub card tracking', () => {
 			overrides: {
 				feFixture: fixture,
 				configOverrides: {
-					serverSideABTests: { 'puzzles-new-hub-v1': 'variant' },
+					edition: 'INT',
 				},
 			},
 		});
