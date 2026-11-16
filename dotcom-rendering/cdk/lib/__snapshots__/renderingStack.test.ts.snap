@@ -7367,7 +7367,7 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
           ],
         },
         "Family": "InteractiveRenderingCODEEcsTaskDefinition0F808565",
-        "Memory": "256",
+        "Memory": "512",
         "NetworkMode": "awsvpc",
         "RequiresCompatibilities": [
           "MANAGED_INSTANCES",
@@ -8399,7 +8399,7 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
                 "current",
               ],
               "MemoryMiB": {
-                "Min": 256,
+                "Min": 512,
               },
               "VCpuCount": {
                 "Min": 1,

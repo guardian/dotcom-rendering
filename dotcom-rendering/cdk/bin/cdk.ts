@@ -237,7 +237,7 @@ export const InteractiveRenderingPropsCODE: RenderingCDKStackProps = {
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
 		cpu: 256,
-		memoryLimitMiB: 256,
+		memoryLimitMiB: 512,
 		scaling: {
 			minimumTasks: 1,
 			maximumTasks: 3,
