@@ -1,9 +1,11 @@
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import type { Inline1Props } from '@guardian/support-dotcom-components/dist/shared/types/props/inline1';
 import { createElement } from 'react';
 import { createRoot } from 'react-dom/client';
 import { ConfigProvider } from '../components/ConfigContext';
 import type { ReactComponent } from '../components/marketing/lib/ReactComponent';
 import { getConfig } from './islands/getConfig';
+import { submitComponentEvent } from './ophan/ophan';
 
 const fetchComponent = (
 	message: Inline1Props['variant']['message'],
@@ -77,7 +79,12 @@ const render = <P extends object>(
 const fetchAndRender = (slot: HTMLElement, props: Inline1Props): void => {
 	void fetchComponent(props.variant.message).then((Component) => {
 		if (Component) {
-			render(Component, props, slot);
+			const enrichedProps: Inline1Props = {
+				submitComponentEvent: (componentEvent: ComponentEvent) =>
+					submitComponentEvent(componentEvent, 'Web'),
+				...props,
+			};
+			render(Component, enrichedProps, slot);
 		}
 	});
 };
