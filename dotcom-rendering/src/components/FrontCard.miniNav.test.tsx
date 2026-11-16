@@ -48,7 +48,7 @@ const renderCard = ({
 				imageLoading="eager"
 				serverTime={1793031866891}
 				{...props}
-				isUserOptedInToMiniNav={true}
+				isMiniNavSupported={true}
 			/>
 		</ConfigProvider>,
 	);

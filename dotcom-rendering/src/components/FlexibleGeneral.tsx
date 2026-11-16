@@ -1,7 +1,7 @@
 import { isUndefined } from '@guardian/libs';
 import { safeParse } from 'valibot';
 import { ArticleDesign } from '../lib/articleFormat';
-import { isMediaCard } from '../lib/cardHelpers';
+import { isMediaCard, isMiniNavSupported } from '../lib/cardHelpers';
 import { isWithinTwelveHours } from '../lib/formatTime';
 import { palette } from '../palette';
 import type { BoostLevel } from '../types/content';
@@ -417,7 +417,9 @@ const SplashCardLayout = ({
 					headlinePosition={card.showLivePlayable ? 'outer' : 'inner'}
 					starRatingSize="medium"
 					isStorylines={isStorylines}
-					isUserOptedInToMiniNav={isUserOptedInToMiniNav}
+					isMiniNavSupported={
+						isUserOptedInToMiniNav && card.showMiniNav
+					}
 				/>
 			</LI>
 		</UL>
@@ -581,7 +583,11 @@ const FullWidthCardLayout = ({
 					subtitleSize={subtitleSize}
 					starRatingSize="medium"
 					isStorylines={isStorylines}
-					isUserOptedInToMiniNav={isUserOptedInToMiniNav}
+					isMiniNavSupported={
+						isUserOptedInToMiniNav &&
+						!!card.showMiniNav &&
+						isMiniNavSupported(card.boostLevel)
+					}
 				/>
 			</LI>
 		</UL>
@@ -673,6 +679,7 @@ const HalfWidthCardLayout = ({
 							trailText={undefined}
 							canPlayInline={false}
 							isStorylines={isStorylines}
+							isMiniNavSupported={false}
 						/>
 					</LI>
 				);
