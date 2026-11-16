@@ -7,6 +7,8 @@ import {
 	puzzlesHubV1Participation,
 	puzzlesHubV2Experiment,
 	puzzlesHubV2Participation,
+	puzzlesHubV3Experiment,
+	puzzlesHubV3Participation,
 } from '../lib/puzzlesHubVersionExperiment';
 import { extractNAV } from '../model/extract-nav';
 import { getPuzzleConfig } from '../model/puzzles/puzzleConfigs';
@@ -56,6 +58,10 @@ const v1AndV2On = {
 	...v1On,
 	...puzzlesHubV2Participation(puzzlesHubV2Experiment.variant),
 };
+const v1V2AndV3On = {
+	...v1AndV2On,
+	...puzzlesHubV3Participation(puzzlesHubV3Experiment.variant),
+};
 
 const renderPuzzlePageLayout = (
 	slug: string,
@@ -86,7 +92,7 @@ const renderPuzzlePageLayout = (
 };
 
 describe('PuzzlePageLayout', () => {
-	it('passes the API progress identity into the iframe island for hydration', () => {
+	it('passes the API progress identity into the access gate island for hydration', () => {
 		const page = createPuzzlePage('film-reveal');
 		const progressIdentity = {
 			puzzleId: 'moviegrid-filmreveal-394',
@@ -97,7 +103,7 @@ describe('PuzzlePageLayout', () => {
 			instance: { ...page.instance, progressIdentity },
 		});
 		const props = container
-			.querySelector('gu-island[name="PuzzleIframe"]')
+			.querySelector('gu-island[name="PuzzleAccessGate"]')
 			?.getAttribute('props');
 		expect(JSON.parse(props!)).toEqual(
 			expect.objectContaining({ progressIdentity }),
@@ -471,5 +477,89 @@ describe('PuzzlePageLayout', () => {
 				container.querySelector('#dfp-ad--crossword-banner-mobile'),
 			).not.toBeInTheDocument();
 		});
+
+		const renderPremiumPuzzle = (
+			serverSideABTests: Record<string, string>,
+			requiresSubscription: boolean | undefined = true,
+		) => {
+			const base = createPuzzlePage('sudoku-easy');
+			return renderPuzzlePageLayout('sudoku-easy', {
+				isAdFreeUser: false,
+				config: { ...base.config, serverSideABTests },
+				instance: { ...base.instance, requiresSubscription },
+			});
+		};
+
+		const gateProps = (container: HTMLElement) =>
+			JSON.parse(
+				container
+					.querySelector('gu-island[name="PuzzleAccessGate"]')
+					?.getAttribute('props') ?? '{}',
+			) as { requiresSubscription?: boolean };
+
+		it('does not render any ad slots for a premium puzzle, even for a non-ad-free reader', () => {
+			const { container } = renderPremiumPuzzle(v1V2AndV3On);
+
+			expect(
+				container.querySelector('#dfp-ad--top-above-nav'),
+			).not.toBeInTheDocument();
+			expect(
+				container.querySelector('#dfp-ad--merchandising-high'),
+			).not.toBeInTheDocument();
+			expect(
+				container.querySelector('#dfp-ad--merchandising'),
+			).not.toBeInTheDocument();
+			expect(
+				container.querySelector('#dfp-ad--right'),
+			).not.toBeInTheDocument();
+			expect(
+				container.querySelector('#dfp-ad--crossword-banner-mobile'),
+			).not.toBeInTheDocument();
+			expect(gateProps(container).requiresSubscription).toBe(true);
+		});
+
+		it('still renders ad slots when the puzzle is explicitly not premium', () => {
+			const { container } = renderPremiumPuzzle(v1V2AndV3On, false);
+
+			expect(
+				container.querySelector('#dfp-ad--merchandising-high'),
+			).toBeInTheDocument();
+			expect(gateProps(container).requiresSubscription).toBe(false);
+		});
+
+		it.each([
+			['no test participation', {}],
+			['v1 only', v1On],
+			['v1 and v2 without v3', v1AndV2On],
+			[
+				'v1 and v3 without v2',
+				{
+					...v1On,
+					...puzzlesHubV3Participation(
+						puzzlesHubV3Experiment.variant,
+					),
+				},
+			],
+			['v3 without v1 and v2', puzzlesHubV3Participation('variant')],
+			[
+				'v3 in control',
+				{
+					...v1AndV2On,
+					...puzzlesHubV3Participation(
+						puzzlesHubV3Experiment.control,
+					),
+				},
+			],
+		])(
+			'treats a premium puzzle as free outside puzzles-new-hub-v3 (%s)',
+			(_label, serverSideABTests) => {
+				const { container } = renderPremiumPuzzle(serverSideABTests);
+
+				expect(
+					container.querySelector('#dfp-ad--merchandising-high'),
+				).toBeInTheDocument();
+				expect(gateProps(container).requiresSubscription).toBe(false);
+			},
+		);
 	});
 });
