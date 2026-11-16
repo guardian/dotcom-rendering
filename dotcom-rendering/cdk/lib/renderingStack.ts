@@ -347,7 +347,7 @@ export class RenderingCDKStack extends CDKStack {
 					),
 					command: ['--config=/etc/ecs/ecs-default-config.yaml'],
 					cpu: 256,
-					memoryLimitMiB: 512,
+					memoryLimitMiB: 128,
 					logging: fireLensLogDriver,
 					healthCheck: {
 						command: ['CMD', '/healthcheck'],
