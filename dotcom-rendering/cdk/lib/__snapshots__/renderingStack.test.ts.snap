@@ -7103,8 +7103,8 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
         "ManagedInstancesCapacityProviderC2946447",
       ],
       "Properties": {
-        "MaxCapacity": 3,
-        "MinCapacity": 1,
+        "MaxCapacity": 12,
+        "MinCapacity": 4,
         "ResourceId": {
           "Fn::Join": [
             "",

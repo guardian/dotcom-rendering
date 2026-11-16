@@ -239,8 +239,8 @@ export const InteractiveRenderingPropsCODE: RenderingCDKStackProps = {
 		cpu: 256,
 		memoryLimitMiB: 512,
 		scaling: {
-			minimumTasks: 1,
-			maximumTasks: 3,
+			minimumTasks: 4,
+			maximumTasks: 12,
 			cpuScaling: {
 				targetValue: 40,
 				// TODO: Tune cooldown values.
