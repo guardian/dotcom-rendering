@@ -119,15 +119,10 @@ export const resolvePuzzleIframeUrl = (
 	context: PuzzleUrlContext,
 	gameUrl?: string,
 ): string => {
-	// The API owns puzzle selection. Never replace its id, path or provider parameters.
+	// The API owns puzzle selection and identity. Preserve its id, uid and provider parameters.
 	if (gameUrl !== undefined) {
 		const url = new URL(gameUrl);
 		if (config.iframe.provider === 'amuselabs') {
-			if (context.userId !== null) {
-				url.searchParams.set('uid', context.userId);
-			} else {
-				url.searchParams.delete('uid');
-			}
 			url.searchParams.set('darkMode', context.darkMode ? '1' : '0');
 		} else if (config.iframe.provider === 'moviegrid') {
 			url.searchParams.set('darkMode', context.darkMode ? '1' : '0');
