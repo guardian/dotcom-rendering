@@ -279,8 +279,36 @@ const allLightBreakpointModes = {
 };
 
 const webImmersiveLabsArticle = enhanceArticleType(LabsFixture, 'Web');
+const labsCommercialProperties =
+	webImmersiveLabsArticle.frontendData.commercialProperties;
+const labsEditionId = webImmersiveLabsArticle.frontendData.editionId;
+const labsBranding = labsCommercialProperties[labsEditionId].branding;
+
+if (labsBranding == null) {
+	throw new Error('The Labs fixture must contain branding');
+}
+
+const stableLabsLogo =
+	'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="90"><rect width="140" height="90" fill="whitesmoke"/><text x="70" y="49" text-anchor="middle" font-family="Arial" font-size="14" fill="black">Example sponsor</text></svg>';
+
 const webImmersiveLabsArticleWithSupportingCaption = {
 	...webImmersiveLabsArticle.frontendData,
+	commercialProperties: {
+		...labsCommercialProperties,
+		[labsEditionId]: {
+			...labsCommercialProperties[labsEditionId],
+			branding: {
+				...labsBranding,
+				sponsorName: 'Example sponsor',
+				logo: {
+					...labsBranding.logo,
+					src: stableLabsLogo,
+					link: '#',
+				},
+				logoForDarkBackground: undefined,
+			},
+		},
+	},
 	blocks: webImmersiveLabsArticle.frontendData.blocks.map((block) => ({
 		...block,
 		elements: block.elements.map((element) =>
