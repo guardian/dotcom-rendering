@@ -133,8 +133,10 @@ subscribers, which contradicts the main priority.
 
 ### D4. No new browser storage; use the existing ad-free cookie as a hint
 
-The hint for "probably a subscriber" is: signed in AND the `adFree` benefit
-present (`GU_AF1`, via `adFreeDataIsPresent`).
+The hint for "probably a subscriber" is: signed in AND the `GU_AF1` (ad-free)
+cookie present, checked with `getAdFreeCookie()`. It deliberately does not use
+`adFreeDataIsPresent`, which also returns `true` when a signed in reader's
+benefits data is merely out of date (see section 7).
 
 Why:
 
