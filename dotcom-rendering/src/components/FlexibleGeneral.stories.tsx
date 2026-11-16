@@ -38,7 +38,6 @@ import { FrontSection } from './FrontSection';
 
 const emptyGroupedTrails: DCRGroupedTrails = {
 	standard: [],
-	snap: [],
 	splash: [],
 };
 

@@ -22,12 +22,15 @@ test.describe('MovieGrid account identity', () => {
 				`guardian-test-b-${randomUUID()}`,
 			];
 			await page.setViewportSize({ width: 1280, height: 1200 });
-			const src = (userId: string | null) =>
-				resolvePuzzleIframeUrl(
+			const src = (playerId: string | null) => {
+				const url = new URL(providerUrl);
+				if (playerId !== null) url.searchParams.set('uid', playerId);
+				return resolvePuzzleIframeUrl(
 					puzzleConfigs[slug]!,
-					{ userId, darkMode: false },
-					providerUrl,
+					{ userId: null, darkMode: false },
+					url.toString(),
 				);
+			};
 			await page.goto(ORIGIN, { waitUntil: 'domcontentloaded' });
 			await page.setContent(
 				`<iframe title="Test puzzle" width="1100" height="1000" sandbox="allow-scripts allow-same-origin allow-popups allow-forms" src="${src(null)}"></iframe>`,

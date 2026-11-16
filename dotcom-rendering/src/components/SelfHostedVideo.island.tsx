@@ -7,11 +7,7 @@ import {
 	submitClickComponentEvent,
 	submitComponentEvent,
 } from '../client/ophan/ophan';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	type ArticleFormat,
-} from '../lib/articleFormat';
+import { ArticleDisplay, type ArticleFormat } from '../lib/articleFormat';
 import { getVideoClient } from '../lib/bridgetApi';
 import { getZIndex } from '../lib/getZIndex';
 import { generateImageURL } from '../lib/image';
@@ -416,11 +412,7 @@ export const SelfHostedVideo = ({
 			? 'top'
 			: videoStyleSettings.useInteractiveProgressBar === true
 				? 'bottom-elevated'
-				: isMainMedia &&
-					  format?.display === ArticleDisplay.Immersive &&
-					  format.design !== ArticleDesign.WeekendEssay
-					? 'top-on-mobile'
-					: 'bottom';
+				: 'bottom';
 
 	/**
 	 * Show the play icon when the video is not playing, except for when it is scrolled out of view,

@@ -4,7 +4,7 @@ import { getHeaderSignInUrl } from '../lib/headerSignInUrl';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 
 const linkStyles = css`
-	color: ${palette.lifestyle[400]};
+	color: var(--puzzles-primary, ${palette.lifestyle[400]});
 	text-decoration: none;
 	:hover,
 	:focus {
@@ -15,10 +15,15 @@ const linkStyles = css`
 export const PuzzlesArchiveDescription = ({ idUrl }: { idUrl: string }) => {
 	const isSignedIn = useIsSignedIn();
 
-	if (isSignedIn !== true) {
+	if (isSignedIn === false) {
 		return (
 			<>
-				<a css={linkStyles} href={getHeaderSignInUrl(idUrl)}>
+				<a
+					css={linkStyles}
+					href={getHeaderSignInUrl(idUrl)}
+					data-component="puzzles-archive-sign-in"
+					data-link-name="puzzles | archive | sign-in"
+				>
 					Sign in or create an account
 				</a>{' '}
 				to keep track of your progress.
@@ -27,6 +32,16 @@ export const PuzzlesArchiveDescription = ({ idUrl }: { idUrl: string }) => {
 	}
 
 	return (
-		<>Use the calendar to track your puzzle progress from our archive.</>
+		<span
+			css={
+				isSignedIn === 'Pending' &&
+				css`
+					visibility: hidden;
+				`
+			}
+			aria-hidden={isSignedIn === 'Pending' ? true : undefined}
+		>
+			Use the calendar to track your puzzle progress from our archive.
+		</span>
 	);
 };

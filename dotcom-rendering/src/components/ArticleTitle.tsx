@@ -35,32 +35,19 @@ const immersiveGridMargins = css`
 	max-width: 80vw;
 	min-width: 200px;
 	margin-bottom: 0;
-	${from.desktop} {
-		margin-bottom: 4px;
-		margin-left: -4px;
-	}
 `;
 
 const immersivePortraitSeriesRule = css`
 	${from.desktop} {
 		display: flex;
 		align-items: flex-end;
-		width: calc(100% + 4px);
+		width: calc(100% + 2px);
 		max-width: none;
 
 		&::after {
 			content: '';
 			flex: 1;
-			margin-left: 6px;
 			border-bottom: 1px solid ${themePalette('--article-border')};
-			position: relative;
-			top: 4px;
-		}
-	}
-
-	${from.wide} {
-		&::after {
-			top: 6px;
 		}
 	}
 `;
@@ -156,6 +143,11 @@ export const ArticleTitle = ({
 							${from.leftCol} {
 								width: 110px;
 								height: 110px;
+							}
+							@media (prefers-color-scheme: dark) {
+								:root:not([data-color-scheme='light']) & {
+									filter: invert(1);
+								}
 							}
 						`}
 					/>

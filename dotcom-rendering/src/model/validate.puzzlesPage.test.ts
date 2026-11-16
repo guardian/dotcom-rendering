@@ -53,6 +53,7 @@ describe('validateAsPuzzlesPageType', () => {
 				title,
 				puzzleType,
 				set,
+				path: `/puzzles-and-games/${category}/${set}/archive`,
 			};
 			const archive = {
 				category,

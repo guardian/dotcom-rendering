@@ -70,17 +70,22 @@ const renderCrosswordLayout = ({
 	puzzlesSupporting,
 	serverSideABTests = {},
 	withQuickSeries = false,
+	crosswordType = 'quick',
+	puzzleArchivePath,
 }: {
 	moreFromPuzzlesAndGames?: PuzzleItem[];
 	puzzlesSupporting?: PuzzleGameSupporting;
 	serverSideABTests?: Record<string, string>;
 	withQuickSeries?: boolean;
+	crosswordType?: string;
+	puzzleArchivePath?: string;
 }) => {
 	const article = enhanceArticleType(
 		{
 			...StandardFixture,
 			moreFromPuzzlesAndGames,
 			puzzlesSupporting,
+			puzzleArchivePath,
 			...(withQuickSeries && {
 				tags: [
 					{
@@ -90,7 +95,7 @@ const renderCrosswordLayout = ({
 					},
 				],
 				crossword: {
-					crosswordType: 'quick',
+					crosswordType,
 					entries: [],
 				} as unknown as typeof StandardFixture.crossword,
 			}),
@@ -170,7 +175,7 @@ describe('CrosswordLayout useful links', () => {
 			'href',
 			'https://www.theguardian.com/crosswords/crossword-blog',
 		);
-		expect(screen.getByText('Cluesletter')).toBeInTheDocument();
+		expect(screen.getByText('Sign up to Cluesletter')).toBeInTheDocument();
 	});
 
 	it('does not render the section when frontend does not send it', () => {
@@ -192,7 +197,7 @@ describe('CrosswordLayout useful links', () => {
 
 describe('CrosswordLayout "More from Puzzles & games" rail', () => {
 	it('renders the rail when data is present and v1 is enabled', () => {
-		renderCrosswordLayout({
+		const { container } = renderCrosswordLayout({
 			moreFromPuzzlesAndGames: relatedPuzzles,
 			serverSideABTests: v1On,
 		});
@@ -202,6 +207,17 @@ describe('CrosswordLayout "More from Puzzles & games" rail', () => {
 		).toBeInTheDocument();
 		expect(screen.getByText('Quick crossword')).toBeInTheDocument();
 		expect(screen.getByText('Mini crossword')).toBeInTheDocument();
+		expect(
+			screen
+				.getByRole('link', { name: /Quick crossword Previous/ })
+				.closest('[data-component]'),
+		).toHaveAttribute('data-component', 'puzzles-more-from:crossword-page');
+		const props = container
+			.querySelector('gu-island[name="RelatedPuzzlesRailEnhanced"]')
+			?.getAttribute('props');
+		expect(JSON.parse(props!)).toEqual(
+			expect.objectContaining({ source: 'crossword-page' }),
+		);
 	});
 
 	it('does not render the rail when the data is absent, even with v1 enabled', () => {
@@ -297,18 +313,31 @@ describe('CrosswordLayout Puzzle Page design (v1)', () => {
 		).toHaveAttribute('href', '/puzzles-and-games/crosswords/archive');
 	});
 
-	it('points the title series link at the archive filtered to the crossword type', () => {
+	it('points the title series link at the archive page frontend sends for the crossword type', () => {
 		const { container } = renderCrosswordLayout({
 			serverSideABTests: v1On,
 			withQuickSeries: true,
+			puzzleArchivePath: '/puzzles-and-games/crosswords/quick/archive',
 		});
 
 		expect(
 			container.querySelector('a[data-component="series"]'),
 		).toHaveAttribute(
 			'href',
-			'/puzzles-and-games/crosswords/archive?puzzle=quick',
+			'/puzzles-and-games/crosswords/quick/archive',
 		);
+	});
+
+	it('points the title series link at the crosswords archive when frontend sends no archive page', () => {
+		const { container } = renderCrosswordLayout({
+			serverSideABTests: v1On,
+			withQuickSeries: true,
+			crosswordType: 'genius',
+		});
+
+		expect(
+			container.querySelector('a[data-component="series"]'),
+		).toHaveAttribute('href', '/puzzles-and-games/crosswords/archive');
 	});
 
 	it('keeps the original title series link when v1 is disabled', () => {

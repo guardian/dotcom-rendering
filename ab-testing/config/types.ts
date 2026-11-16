@@ -52,7 +52,9 @@ type ABTest = {
 	 * Would be nice to know who changed the status last and when
 	 */
 	status: "ON" | "OFF";
-	/** The size of the test, all variants will be divided equally to fit */
+	/**
+	 * The total audience size for the test, split equally among all variants
+	 */
 	audienceSize: number;
 	/**
 	 * Each test space represents 100% of the audience

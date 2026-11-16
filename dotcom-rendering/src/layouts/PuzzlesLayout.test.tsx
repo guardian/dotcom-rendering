@@ -1,12 +1,31 @@
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import type { ReactNode } from 'react';
+import { Standard } from '../../fixtures/generated/fe-articles/Standard';
 import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
+import { SubNav } from '../components/Masthead/Titlepiece/SubNav';
+import { Sponsored } from '../components/PuzzlesDirectory.stories';
+import {
+	puzzlesHubV1Experiment,
+	puzzlesHubV1Participation,
+	puzzlesHubV2Experiment,
+	puzzlesHubV2Participation,
+} from '../lib/puzzlesHubVersionExperiment';
+import { extractNAV, type NavType } from '../model/extract-nav';
 import type { Branding } from '../types/branding';
 import { PuzzlesLayout } from './PuzzlesLayout';
 
 jest.mock('../components/Masthead/Masthead', () => ({
-	Masthead: () => <header data-testid="masthead" />,
+	Masthead: ({ nav }: { nav: NavType }) => (
+		<header data-testid="masthead">
+			{nav.subNavSections && (
+				<SubNav
+					subNavSections={nav.subNavSections}
+					currentNavLink={nav.currentNavLink}
+				/>
+			)}
+		</header>
+	),
 }));
 jest.mock('../components/Footer', () => ({
 	Footer: () => <div data-testid="footer" />,
@@ -37,7 +56,7 @@ const page = (isAdFreeUser = false) => ({
 	isAdFreeUser,
 	editionId: 'UK',
 	contributionsServiceUrl: '',
-	config: { switches: {} },
+	config: { switches: {}, serverSideABTests: {} },
 	pageFooter: {},
 	layout: {
 		containers: [],
@@ -45,7 +64,7 @@ const page = (isAdFreeUser = false) => ({
 });
 
 describe('PuzzlesLayout', () => {
-	const nav = { pillars: [], readerRevenueLinks: { footer: [] } } as never;
+	const nav = { ...extractNAV(Standard.nav), subNavSections: undefined };
 	const renderedCss = () =>
 		[
 			...Array.from(document.querySelectorAll('style')).map(
@@ -68,6 +87,102 @@ describe('PuzzlesLayout', () => {
 		expect(
 			screen.queryByRole('navigation', { name: 'Puzzles categories' }),
 		).not.toBeInTheDocument();
+	});
+
+	it.each([
+		['V1 only', true, false],
+		['V1 and V2', true, true],
+		['V2 without V1', false, true],
+		['neither tier', false, false],
+	] as const)(
+		'renders the hub subnav for %s even when frontend omits trivia',
+		(_description, isV1Enabled, isV2Enabled) => {
+			const categoryLinks = (
+				[
+					['Crosswords', '/puzzles-and-games/crosswords/archive'],
+					['Word games', '/puzzles-and-games/word-games/archive'],
+					[
+						'Logic puzzles',
+						'/puzzles-and-games/logic-puzzles/archive',
+					],
+				] as const
+			).map(([title, url]) => ({ title, longTitle: title, url }));
+			const parent = {
+				title: 'Puzzles & games',
+				longTitle: 'Puzzles & games',
+				url: '/puzzles-and-games',
+			};
+			render(
+				<PuzzlesLayout
+					NAV={{
+						...nav,
+						subNavSections: { parent, links: categoryLinks },
+					}}
+					puzzlesPage={
+						{
+							...page(),
+							config: {
+								switches: {},
+								serverSideABTests: {
+									...puzzlesHubV1Participation(
+										isV1Enabled
+											? puzzlesHubV1Experiment.variant
+											: puzzlesHubV1Experiment.control,
+									),
+									...puzzlesHubV2Participation(
+										isV2Enabled
+											? puzzlesHubV2Experiment.variant
+											: puzzlesHubV2Experiment.control,
+									),
+								},
+							},
+						} as never
+					}
+				/>,
+			);
+
+			const hasTrivia = isV1Enabled && isV2Enabled;
+			expect(
+				screen.getAllByRole('link').map((link) => ({
+					title: link.textContent,
+					url: link.getAttribute('href'),
+				})),
+			).toEqual([
+				{ title: parent.title, url: parent.url },
+				...(isV1Enabled
+					? categoryLinks.map(({ title, url }) => ({ title, url }))
+					: []),
+				...(hasTrivia
+					? [
+							{
+								title: 'Trivia & quizzes',
+								url: '/puzzles-and-games/trivia-and-quizzes/archive',
+							},
+						]
+					: []),
+			]);
+		},
+	);
+
+	it('renders the full V2 subnav in the Sponsored story without the development bypass', () => {
+		render(<Sponsored />);
+		const masthead = within(screen.getByTestId('masthead'));
+
+		expect(
+			masthead.getAllByRole('link').map((link) => link.textContent),
+		).toEqual([
+			'Puzzles & games',
+			'Crosswords',
+			'Word games',
+			'Logic puzzles',
+			'Trivia & quizzes',
+		]);
+		expect(
+			masthead.getByRole('link', { name: 'Trivia & quizzes' }),
+		).toHaveAttribute(
+			'href',
+			'/puzzles-and-games/trivia-and-quizzes/archive',
+		);
 	});
 
 	it.each(['AU', 'UK'])(

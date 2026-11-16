@@ -60,6 +60,28 @@ describe('validateAsPuzzlePageType', () => {
 		).toEqual(page.instance.progressIdentity);
 	});
 
+	it('preserves requiresSubscription and accepts older payloads without it', () => {
+		const page = createPuzzlePage('sudoku-easy');
+		expect(
+			validateAsPuzzlePageType(page).instance.requiresSubscription,
+		).toBeUndefined();
+		page.instance.requiresSubscription = true;
+		expect(
+			validateAsPuzzlePageType(page).instance.requiresSubscription,
+		).toBe(true);
+	});
+
+	it.each(['true', 1, null, {}])(
+		'rejects a non-boolean requiresSubscription: %j',
+		(requiresSubscription) => {
+			const page = createPuzzlePage('sudoku-easy');
+			expectInvalid({
+				...page,
+				instance: { ...page.instance, requiresSubscription },
+			});
+		},
+	);
+
 	it.each([
 		null,
 		[],
