@@ -15,6 +15,7 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { useConfig } from '../components/ConfigContext';
+import { CrosswordAccessGate } from '../components/CrosswordAccessGate.island';
 import { CrosswordInstructions } from '../components/CrosswordInstructions';
 import { CrosswordLinks } from '../components/CrosswordLinks';
 import { DecideLines } from '../components/DecideLines';
@@ -36,6 +37,7 @@ import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
 import { getContributionsServiceUrl } from '../lib/contributions';
+import { PUZZLE_MODAL_ROOT_ID } from '../lib/puzzleAccess';
 import { crosswordActionContext } from '../lib/puzzleActionTracking';
 import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
 import { isPuzzlesHubV2Enabled } from '../lib/puzzlesHubVersionExperiment';
@@ -100,6 +102,17 @@ const CrosswordGrid = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
+/**
+ * Positioned so the unlock modal, which `CrosswordAccessGate` renders into it
+ * (see `PUZZLE_MODAL_ROOT_ID`), covers exactly the page content and leaves the
+ * header and the footer reachable. `isolation: isolate` keeps the modal's
+ * stacking inside `<main>`. Same as `PuzzlePageLayout`.
+ */
+const premiumMainStyles = css`
+	position: relative;
+	isolation: isolate;
+`;
+
 const maxWidth = css`
 	${from.desktop} {
 		max-width: 620px;
@@ -130,13 +143,28 @@ export const CrosswordLayout = (props: Props) => {
 		config: { isPaidContent, host, hasSurveyAd },
 	} = article;
 
-	const showComments = article.isCommentable && !isPaidContent;
+	/**
+	 * Set by `buildCrosswordBlock` only for a premium crossword while puzzles
+	 * hub v3 is on (which needs v1 and v2). Otherwise false and this page is
+	 * exactly what it was: nothing below changes.
+	 */
+	const isPremium = article.blocks.some((block) =>
+		block.elements.some(
+			(element) =>
+				element._type ===
+					'model.dotcomrendering.pageElements.CrosswordElement' &&
+				element.requiresSubscription === true,
+		),
+	);
+
+	// Premium crosswords have no comments and no ads, like the Puzzle Page.
+	const showComments = article.isCommentable && !isPaidContent && !isPremium;
 
 	const { branding } = article.commercialProperties[article.editionId];
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
-	const renderAds = canRenderAds(article);
+	const renderAds = canRenderAds(article) && !isPremium;
 
 	/**
 	 * With the puzzles hub v0 and v1 tiers both on, this page takes on the
@@ -244,11 +272,13 @@ export const CrosswordLayout = (props: Props) => {
 			)}
 
 			<main
+				id={isPremium ? PUZZLE_MODAL_ROOT_ID : undefined}
 				data-layout="InteractiveLayout"
-				css={
+				css={[
 					isPuzzlesHubV1 &&
-					puzzleAccentStyles('crosswords', darkModeAvailable)
-				}
+						puzzleAccentStyles('crosswords', darkModeAvailable),
+					isPremium && premiumMainStyles,
+				]}
 			>
 				<Section
 					fullWidth={true}
@@ -366,64 +396,92 @@ export const CrosswordLayout = (props: Props) => {
 								<>
 									<GridItem area="body" element="article">
 										<ArticleContainer format={format}>
-											<ArticleBody
-												format={format}
-												blocks={article.blocks}
-												host={host}
-												pageId={article.pageId}
-												webTitle={article.webTitle}
-												ajaxUrl={article.config.ajaxUrl}
-												switches={
-													article.config.switches
-												}
-												isSensitive={
-													article.config.isSensitive
-												}
-												isAdFreeUser={
-													article.isAdFreeUser
-												}
-												sectionId={
-													article.config.section
-												}
-												shouldHideReaderRevenue={
-													article.shouldHideReaderRevenue
-												}
-												tags={article.tags}
-												isPaidContent={
-													!!article.config
-														.isPaidContent
-												}
-												contributionsServiceUrl={
-													contributionsServiceUrl
-												}
-												contentType={
-													article.contentType
-												}
-												isPreview={
-													article.config.isPreview
-												}
-												idUrl={
-													article.config.idUrl ?? ''
-												}
-												isDev={!!article.config.isDev}
-												keywordIds={
-													article.config.keywordIds
-												}
-												tableOfContents={
-													article.tableOfContents
-												}
-												lang={article.lang}
-												isRightToLeftLang={
-													article.isRightToLeftLang
-												}
-												editionId={article.editionId}
-												shouldHideAds={
-													article.shouldHideAds
-												}
-												idApiUrl={
-													article.config.idApiUrl
-												}
-											/>
+											{isPremium && article.crossword ? (
+												<Island
+													priority="critical"
+													defer={{ until: 'visible' }}
+												>
+													<CrosswordAccessGate
+														data={article.crossword}
+														ajaxUrl={
+															article.config
+																.ajaxUrl
+														}
+														idUrl={
+															article.config.idUrl
+														}
+														returnToArchivePath={`/${seriesArchivePath}`}
+													/>
+												</Island>
+											) : (
+												<ArticleBody
+													format={format}
+													blocks={article.blocks}
+													host={host}
+													pageId={article.pageId}
+													webTitle={article.webTitle}
+													ajaxUrl={
+														article.config.ajaxUrl
+													}
+													switches={
+														article.config.switches
+													}
+													isSensitive={
+														article.config
+															.isSensitive
+													}
+													isAdFreeUser={
+														article.isAdFreeUser
+													}
+													sectionId={
+														article.config.section
+													}
+													shouldHideReaderRevenue={
+														article.shouldHideReaderRevenue
+													}
+													tags={article.tags}
+													isPaidContent={
+														!!article.config
+															.isPaidContent
+													}
+													contributionsServiceUrl={
+														contributionsServiceUrl
+													}
+													contentType={
+														article.contentType
+													}
+													isPreview={
+														article.config.isPreview
+													}
+													idUrl={
+														article.config.idUrl ??
+														''
+													}
+													isDev={
+														!!article.config.isDev
+													}
+													keywordIds={
+														article.config
+															.keywordIds
+													}
+													tableOfContents={
+														article.tableOfContents
+													}
+													lang={article.lang}
+													isRightToLeftLang={
+														article.isRightToLeftLang
+													}
+													editionId={
+														article.editionId
+													}
+													shouldHideAds={
+														article.shouldHideAds
+													}
+													idApiUrl={
+														article.config.idApiUrl
+													}
+												/>
+											)}
 										</ArticleContainer>
 									</GridItem>
 									<GridItem area="right-column">

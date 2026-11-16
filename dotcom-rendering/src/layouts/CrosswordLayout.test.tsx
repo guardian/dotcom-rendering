@@ -3,9 +3,12 @@ import { Standard as StandardFixture } from '../../fixtures/generated/fe-article
 import { ConfigProvider } from '../components/ConfigContext';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
+import { PUZZLE_MODAL_ROOT_ID } from '../lib/puzzleAccess';
 import {
 	puzzlesHubV2Experiment,
 	puzzlesHubV2Participation,
+	puzzlesHubV3Experiment,
+	puzzlesHubV3Participation,
 } from '../lib/puzzlesHubVersionExperiment';
 import { extractNAV } from '../model/extract-nav';
 import { enhanceArticleType } from '../types/article';
@@ -13,6 +16,12 @@ import type { PuzzleGameSupporting, PuzzleItem } from '../types/puzzlesPage';
 import { CrosswordLayout } from './CrosswordLayout';
 
 jest.mock('../lib/bridgetApi', () => jest.fn());
+jest.mock('../components/CrosswordComponent.island', () => ({
+	CrosswordComponent: () => <div data-testid="crossword" />,
+}));
+jest.mock('../components/CrosswordAccessGate.island', () => ({
+	CrosswordAccessGate: () => <div data-testid="crossword-gate" />,
+}));
 jest.mock('../lib/useMatchMedia', () => ({
 	...jest.requireActual('../lib/useMatchMedia'),
 	useMatchMedia: jest.fn(() => true),
@@ -36,6 +45,11 @@ jest.mock('../lib/useAB', () => ({
 }));
 
 const v2On = puzzlesHubV2Participation(puzzlesHubV2Experiment.variant);
+
+const v2AndV3On = {
+	...v2On,
+	...puzzlesHubV3Participation(puzzlesHubV3Experiment.variant),
+};
 
 const relatedPuzzles: PuzzleItem[] = [
 	{
@@ -68,6 +82,8 @@ const renderCrosswordLayout = ({
 	withQuickSeries = false,
 	crosswordType = 'quick',
 	puzzleArchivePath,
+	withCrossword = false,
+	crosswordRequiresSubscription,
 }: {
 	moreFromPuzzlesAndGames?: PuzzleItem[];
 	puzzlesSupporting?: PuzzleGameSupporting;
@@ -76,6 +92,8 @@ const renderCrosswordLayout = ({
 	withQuickSeries?: boolean;
 	crosswordType?: string;
 	puzzleArchivePath?: string;
+	withCrossword?: boolean;
+	crosswordRequiresSubscription?: boolean;
 }) => {
 	const article = enhanceArticleType(
 		{
@@ -96,6 +114,18 @@ const renderCrosswordLayout = ({
 					date: Date.UTC(2026, 10, 8),
 					entries: [],
 				} as unknown as typeof StandardFixture.crossword,
+			}),
+			...(withCrossword && {
+				// A crossword page has no body blocks of its own: the crossword is
+				// the only block, which is the one `ArticleBody` renders.
+				blocks: [],
+				crossword: {
+					crosswordType: 'quick',
+					number: 28000,
+					date: Date.UTC(2020, 0, 1),
+					entries: [{ id: '1-across' }],
+				} as unknown as typeof StandardFixture.crossword,
+				crosswordRequiresSubscription,
 			}),
 			config: { ...StandardFixture.config, edition, serverSideABTests },
 		},
@@ -394,5 +424,68 @@ describe('CrosswordLayout Puzzle Page design (v1)', () => {
 		expect(
 			screen.queryByText('Explore more on these topics'),
 		).not.toBeInTheDocument();
+	});
+});
+
+describe('CrosswordLayout premium crosswords', () => {
+	it('gates a premium crossword when puzzles hub v3 is on', () => {
+		const { container } = renderCrosswordLayout({
+			withCrossword: true,
+			crosswordRequiresSubscription: true,
+			edition: 'INT',
+			serverSideABTests: v2AndV3On,
+		});
+
+		expect(screen.getByTestId('crossword-gate')).toBeInTheDocument();
+		expect(screen.queryByTestId('crossword')).not.toBeInTheDocument();
+		expect(
+			container.querySelector(`main#${PUZZLE_MODAL_ROOT_ID}`),
+		).not.toBeNull();
+	});
+
+	it.each([
+		['no test is on', {}],
+		['only v2 is on', v2On],
+	])(
+		'renders the crossword exactly as before when %s, even if frontend sent the flag',
+		(_, serverSideABTests) => {
+			const { container } = renderCrosswordLayout({
+				withCrossword: true,
+				crosswordRequiresSubscription: true,
+				edition: 'INT',
+				serverSideABTests,
+			});
+
+			expect(screen.getByTestId('crossword')).toBeInTheDocument();
+			expect(
+				screen.queryByTestId('crossword-gate'),
+			).not.toBeInTheDocument();
+			expect(container.querySelector('main[id]')).toBeNull();
+		},
+	);
+
+	it('renders the crossword exactly as before in an edition without the hub, even with v3 on', () => {
+		const { container } = renderCrosswordLayout({
+			withCrossword: true,
+			crosswordRequiresSubscription: true,
+			edition: 'UK',
+			serverSideABTests: v2AndV3On,
+		});
+
+		expect(screen.getByTestId('crossword')).toBeInTheDocument();
+		expect(screen.queryByTestId('crossword-gate')).not.toBeInTheDocument();
+		expect(container.querySelector('main[id]')).toBeNull();
+	});
+
+	it('does not gate a crossword frontend did not flag, with v3 on', () => {
+		const { container } = renderCrosswordLayout({
+			withCrossword: true,
+			edition: 'INT',
+			serverSideABTests: v2AndV3On,
+		});
+
+		expect(screen.getByTestId('crossword')).toBeInTheDocument();
+		expect(screen.queryByTestId('crossword-gate')).not.toBeInTheDocument();
+		expect(container.querySelector('main[id]')).toBeNull();
 	});
 });
