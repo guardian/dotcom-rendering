@@ -282,14 +282,6 @@ const webImmersiveLabsArticle = enhanceArticleType(LabsFixture, 'Web');
 const labsCommercialProperties =
 	webImmersiveLabsArticle.frontendData.commercialProperties;
 const labsEditionId = webImmersiveLabsArticle.frontendData.editionId;
-const labsBranding = labsCommercialProperties[labsEditionId].branding;
-
-if (labsBranding == null) {
-	throw new Error('The Labs fixture must contain branding');
-}
-
-const stableLabsLogo =
-	'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="90"><rect width="140" height="90" fill="whitesmoke"/><text x="70" y="49" text-anchor="middle" font-family="Arial" font-size="14" fill="black">Example sponsor</text></svg>';
 
 const webImmersiveLabsArticleWithSupportingCaption = {
 	...webImmersiveLabsArticle.frontendData,
@@ -297,16 +289,7 @@ const webImmersiveLabsArticleWithSupportingCaption = {
 		...labsCommercialProperties,
 		[labsEditionId]: {
 			...labsCommercialProperties[labsEditionId],
-			branding: {
-				...labsBranding,
-				sponsorName: 'Example sponsor',
-				logo: {
-					...labsBranding.logo,
-					src: stableLabsLogo,
-					link: '#',
-				},
-				logoForDarkBackground: undefined,
-			},
+			branding: undefined,
 		},
 	},
 	blocks: webImmersiveLabsArticle.frontendData.blocks.map((block) => ({
@@ -374,12 +357,14 @@ export const WebImmersiveLabsWithPageSkin: Story = {
 		const article = canvasElement.querySelector('article');
 		const labsHeader = canvasElement.querySelector('#labs-header');
 		const mainMedia = canvasElement.querySelector('[data-gu-name="media"]');
+		const paidForBy = within(canvasElement).queryByText('Paid for by');
 
 		await expect(pageSkinSlot).toBeInTheDocument();
 		await expect(main).not.toBeNull();
 		await expect(article).not.toBeNull();
 		await expect(labsHeader).not.toBeNull();
 		await expect(mainMedia).not.toBeNull();
+		await expect(paidForBy).toBeNull();
 	},
 };
 
