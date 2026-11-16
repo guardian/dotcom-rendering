@@ -166,7 +166,7 @@ const eventStyles = css`
 	${from.tablet} {
 		padding-left: ${space[5]}px;
 		padding-right: ${space[5]}px;
-		margin-left: -21px;
+		margin-left: -20px;
 		margin-right: -21px;
 	}
 	${from.leftCol} {
@@ -187,7 +187,7 @@ const labelStyles = css`
 	${from.tablet} {
 		padding-left: ${space[5]}px;
 		padding-right: ${space[5]}px;
-		margin-left: -21px;
+		margin-left: -20px;
 		margin-right: -21px;
 	}
 	${from.leftCol} {
