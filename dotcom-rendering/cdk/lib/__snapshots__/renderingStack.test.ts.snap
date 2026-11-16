@@ -7359,7 +7359,7 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
             "ReadonlyRootFilesystem": true,
           },
         ],
-        "Cpu": "1024",
+        "Cpu": "256",
         "ExecutionRoleArn": {
           "Fn::GetAtt": [
             "EcsTaskDefinitionExecutionRoleBE450C73",
@@ -7367,7 +7367,7 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
           ],
         },
         "Family": "InteractiveRenderingCODEEcsTaskDefinition0F808565",
-        "Memory": "2048",
+        "Memory": "256",
         "NetworkMode": "awsvpc",
         "RequiresCompatibilities": [
           "MANAGED_INSTANCES",
@@ -8399,7 +8399,7 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
                 "current",
               ],
               "MemoryMiB": {
-                "Min": 2048,
+                "Min": 256,
               },
               "VCpuCount": {
                 "Min": 1,
@@ -8797,8 +8797,8 @@ systemctl start interactive-rendering",
             "PredefinedMetricType": "ECSServiceAverageCPUUtilizationHighResolution",
           },
           "ScaleInCooldown": 60,
-          "ScaleOutCooldown": 60,
-          "TargetValue": 20,
+          "ScaleOutCooldown": 30,
+          "TargetValue": 40,
         },
       },
       "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",

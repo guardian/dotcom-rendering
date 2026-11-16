@@ -236,17 +236,17 @@ export const InteractiveRenderingPropsCODE: RenderingCDKStackProps = {
 	},
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
-		cpu: 1024,
-		memoryLimitMiB: 2048,
+		cpu: 256,
+		memoryLimitMiB: 256,
 		scaling: {
 			minimumTasks: 1,
 			maximumTasks: 3,
 			cpuScaling: {
-				targetValue: 20,
+				targetValue: 40,
 				// TODO: Tune cooldown values.
 				// https://docs.aws.amazon.com/autoscaling/application/userguide/target-tracking-scaling-policy-overview.html#target-tracking-cooldown
 				scaleInCooldown: Duration.seconds(60),
-				scaleOutCooldown: Duration.seconds(60),
+				scaleOutCooldown: Duration.seconds(30),
 			},
 		},
 		managedInstancesProps: {},
