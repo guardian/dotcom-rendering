@@ -258,7 +258,7 @@ function decideGroupedTrails(
 	categoryIndex: number,
 	storylineId: string,
 ): DCRGroupedTrails {
-	const empty: DCRGroupedTrails = { splash: [], snap: [], standard: [] };
+	const empty: DCRGroupedTrails = { splash: [], standard: [] };
 
 	if (parsedCategoryName === 'Key Stories') {
 		/**
@@ -295,11 +295,7 @@ function decideGroupedTrails(
 }
 
 function hasRenderableCards(groupedTrails: DCRGroupedTrails): boolean {
-	return (
-		groupedTrails.splash.length > 0 ||
-		groupedTrails.snap.length > 0 ||
-		groupedTrails.standard.length > 0
-	);
+	return groupedTrails.splash.length > 0 || groupedTrails.standard.length > 0;
 }
 
 export function parseStorylinesContentToStorylines(

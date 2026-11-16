@@ -19,6 +19,14 @@ import { RelatedPuzzlesRailEnhanced } from '../components/RelatedPuzzlesRailEnha
 import { Section } from '../components/Section';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { center } from '../lib/center';
+import {
+	isPuzzlesHubV1Enabled,
+	isPuzzlesHubV2Enabled,
+} from '../lib/puzzlesHubVersionExperiment';
+import {
+	getPuzzlesSubNavLinks,
+	PUZZLES_SUBNAV_PARENT,
+} from '../lib/puzzlesSubNav';
 import { puzzlesPageTheme } from '../lib/puzzlesTheme';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -195,7 +203,17 @@ export const PuzzlesArchiveLayout = ({
 	const archive = puzzlesPage.archive;
 	if (!archive) return null;
 	const renderAds = !puzzlesPage.isAdFreeUser;
-	const archiveNav = { ...NAV, currentNavLink: archive.title };
+	const archiveNav = {
+		...NAV,
+		currentNavLink: archive.title,
+		subNavSections: {
+			parent: PUZZLES_SUBNAV_PARENT,
+			links: getPuzzlesSubNavLinks(
+				isPuzzlesHubV1Enabled(puzzlesPage.config),
+				isPuzzlesHubV2Enabled(puzzlesPage.config),
+			),
+		},
+	};
 
 	return (
 		<>

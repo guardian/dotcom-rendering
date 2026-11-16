@@ -29,6 +29,8 @@ const newsletterVariant: Inline1Variant = {
 	name: 'Inline1NewsletterMessage',
 	message: {
 		type: 'Inline1NewsletterMessage' as const,
+		newsletterName: 'Saturday Edition',
+		newsletterListId: 6031,
 		newsletterId: 'saturday-edition',
 		frequency: 'Weekly',
 		heading:
@@ -39,7 +41,7 @@ const newsletterVariant: Inline1Variant = {
 	},
 };
 
-const tracking = {
+export const tracking = {
 	abTestName: '',
 	abTestVariant: '',
 	campaignCode: '',

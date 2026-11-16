@@ -138,6 +138,8 @@ const isPuzzlePageInstance = (value: unknown): boolean => {
 				value.moreFromPuzzlesAndGames.every((item) =>
 					isPuzzleItem(item, false),
 				))) &&
+		(value.requiresSubscription === undefined ||
+			typeof value.requiresSubscription === 'boolean') &&
 		(value.puzzlesSupporting === undefined ||
 			isPuzzleGameSupporting(value.puzzlesSupporting))
 	);

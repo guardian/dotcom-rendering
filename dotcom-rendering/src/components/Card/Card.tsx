@@ -568,9 +568,7 @@ export const Card = ({
 	};
 
 	/* Whilst we migrate to the new container types, we need to check which container we are in. */
-	const isFlexibleContainer =
-		containerType === 'flexible/special' ||
-		containerType === 'flexible/general';
+	const isFlexibleContainer = containerType === 'flexible/general';
 
 	const isSmallCard = containerType === 'scrollable/small';
 

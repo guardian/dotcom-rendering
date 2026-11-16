@@ -6,7 +6,7 @@ import * as FlexibleGeneral from './FlexibleGeneral.stories';
 
 # Front Containers
 
-Fronts are comprised of "containers", which are themselves made up of a list of "cards". For the most part these cards represent articles, although there are special kinds of cards known as "snaplinks", which are discussed in more detail in [Flexible Special and Snaplinks](#flexible-special-and-snaplinks).
+Fronts are comprised of "containers", which are themselves made up of a list of "cards". For the most part these cards represent articles, although there are special kinds of cards known as "snaplinks", which are discussed in more detail in [Snaplinks](#snaplinks).
 
 There are several different types of containers, and each is handled by a separate React component. Most of them have relatively simple layouts, and accept a small number of cards. For example, the `StaticMediumFour` container, with four cards, can be seen here:
 
@@ -44,9 +44,9 @@ While a standard card being boosted can be seen here:
 
 The fronts tool also has additional card categories that provide a convenient way to set the boost level of cards, but these are translated into normal boost properties by the time the data reaches the container component.
 
-## Flexible Special and Snaplinks
+## Snaplinks
 
-The concepts of splash cards and boosts covered in [Flexible General](#flexible-general) are also present for `FlexibleSpecial`, although here boosts can only be applied to splash cards, not standard ones. The `FlexibleSpecial` container can also contain "snaps" (a.k.a. snaplinks), which are a way of creating cards that do not correspond to articles. For example, interactive atoms are added to fronts as snaplinks. More information on this can be found in the [facia-tool docs](https://github.com/guardian/facia-tool/blob/main/docs/Glossary.md#snaplinks).
+Containers can also contain "snaps" (a.k.a. snaplinks), which are a way of creating cards that do not correspond to articles. These are typically placed within the "Splash" group of a flexible general container, in order to ensure that the snap link renders full width. For example, interactive atoms are added to fronts as snaplinks. More information on this can be found in the [facia-tool docs](https://github.com/guardian/facia-tool/blob/main/docs/Glossary.md#snaplinks).
 
 ## Container Palettes
 

@@ -691,6 +691,10 @@
             "required": [
                 "usefulLinks"
             ]
+        },
+        "puzzleArchivePath": {
+            "description": "Path of the archive page of this crossword's type, if it has one.",
+            "type": "string"
         }
     },
     "required": [

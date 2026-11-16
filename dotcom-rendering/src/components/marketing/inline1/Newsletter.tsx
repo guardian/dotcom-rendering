@@ -1,25 +1,58 @@
-import type { Inline1Props } from '@guardian/support-dotcom-components/dist/shared/types';
+import type {
+	Inline1Props,
+	Tracking,
+} from '@guardian/support-dotcom-components/dist/shared/types';
+import { useEffect } from 'react';
 import { useIsSignedIn } from '../../../lib/useAuthStatus';
+import { useIsInView } from '../../../lib/useIsInView';
+import { useNewsletterSubscription } from '../../../lib/useNewsletterSubscription';
 import { NewsletterSignupCardContainer } from '../../NewsletterSignupCardContainer';
 import { NewsletterSignupForm } from '../../NewsletterSignupForm.island';
 import type { ReactComponent } from '../lib/ReactComponent';
+import { recordInline1View } from './utils/viewCount';
 
 type NewsletterMessage = Extract<
 	Inline1Props['variant']['message'],
 	{ type: 'Inline1NewsletterMessage' }
 >;
 
-export const Newsletter: ReactComponent<Inline1Props> = ({ variant }) => {
+type ValidNewsletterMessage = NewsletterMessage &
+	Required<
+		Pick<
+			NewsletterMessage,
+			'newsletterListId' | 'newsletterName' | 'frequency'
+		>
+	>;
+
+const isValidNewsletterMessage = (message: NewsletterMessage) =>
+	message.newsletterListId !== undefined &&
+	message.newsletterName !== undefined &&
+	message.frequency !== undefined;
+
+export const Newsletter: ReactComponent<Inline1Props> = ({
+	variant,
+	tracking,
+}) => {
 	if (variant.message.type !== 'Inline1NewsletterMessage') {
 		return;
 	}
+	if (isValidNewsletterMessage(variant.message)) {
+		return (
+			<NewsletterForm
+				message={variant.message as ValidNewsletterMessage}
+				tracking={tracking}
+			/>
+		);
+	}
 
-	return <NewsletterForm message={variant.message} />;
+	return;
 };
 
-const NewsletterForm: ReactComponent<{ message: NewsletterMessage }> = ({
-	message,
-}) => {
+const NewsletterForm: ReactComponent<{
+	message: ValidNewsletterMessage;
+	tracking: Tracking;
+}> = ({ message, tracking }) => {
+	const newsletterName = message.newsletterName;
 	const heading = message.heading;
 	const description = message.body;
 	const frequency = message.frequency;
@@ -27,22 +60,39 @@ const NewsletterForm: ReactComponent<{ message: NewsletterMessage }> = ({
 	const newsletterId = message.newsletterId;
 	const componentId = ''; // TBD
 	const isSignedIn = useIsSignedIn();
+	const isSubscribed = useNewsletterSubscription(
+		message.newsletterListId,
+		window.guardian.config.page.idApiUrl,
+	);
+
+	const [hasBeenSeen, setNode] = useIsInView({
+		debounce: true,
+		threshold: 0,
+	});
+	useEffect(() => {
+		if (hasBeenSeen === true) {
+			recordInline1View(tracking.abTestName);
+		}
+	}, [hasBeenSeen, tracking.abTestName]);
 
 	return (
-		<NewsletterSignupCardContainer
-			name={''} // We should get this from SDC?
-			description={description}
-			illustrationSquare={illustrationSquare}
-			frequency={frequency}
-			isSignedIn={isSignedIn}
-			heading={heading}
-		>
-			<NewsletterSignupForm
-				newsletterId={newsletterId}
-				newsletterName={''} // We need this for the success message, should get from SDC?
+		<div ref={setNode}>
+			<NewsletterSignupCardContainer
+				name={newsletterName}
+				description={description}
+				illustrationSquare={illustrationSquare}
 				frequency={frequency}
-				componentId={componentId}
-			/>
-		</NewsletterSignupCardContainer>
+				isSignedIn={isSignedIn}
+				heading={heading}
+			>
+				<NewsletterSignupForm
+					newsletterId={newsletterId}
+					newsletterName={newsletterName}
+					frequency={frequency}
+					componentId={componentId}
+					isAlreadySubscribed={isSubscribed}
+				/>
+			</NewsletterSignupCardContainer>
+		</div>
 	);
 };

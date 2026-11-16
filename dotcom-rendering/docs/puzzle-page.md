@@ -49,8 +49,8 @@ destination and authentication behaviour are unchanged.
 Film reveal and On the ball require both `puzzles-new-hub-v1` and
 `puzzles-new-hub-v2` for hub cards, game pages and trivia archives. V1-only requests
 omit the cards and receive 404 for those pages; existing V1 puzzles are unchanged.
-Local development retains its gate bypass. Full-hub stories, including the sponsored
-hub, explicitly enable both variants so Chromatic builds show all puzzle subnav
+Local development retains its gate bypass. Full-hub and archive stories explicitly
+enable both variants so Chromatic builds show all puzzle subnav
 categories without relying on that bypass.
 
 ## Sponsorship
@@ -477,6 +477,7 @@ gap later.
 | `instance.puzzleDate`              | `string?` (e.g. `"2026-09-11"`)                           | Which day's puzzle the reader wants to see. Rendered as a human-readable date (e.g. "11 September 2026") next to the page title, passed through unformatted as `PuzzleContext.puzzleDate` to the puzzle iframe (see below), and used (short-formatted) to resolve the `{date}` placeholder in `PuzzleConfig.title`/`description` (see "SEO" above). `frontend` now always resolves and sends this for every request (its Puzzle Page URLs carry a date segment), though DCR still treats the field as optional and simply omits/tidies up the display/context/SEO value when absent. |
 | `instance.moreFromPuzzlesAndGames` | `PuzzleItem[]?` (from `src/types/puzzlesPage.ts`)         | Rendered as a plain "More from Puzzles & games" list when present and non-empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | `instance.puzzlesSupporting`       | `PuzzleGameSupporting?` (from `src/types/puzzlesPage.ts`) | Rendered as a "Useful links" section (links plus newsletter sign-up) above the footer when present. frontend omits it when it has nothing to show.                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `instance.requiresSubscription`    | `boolean?`                                                | Whether the puzzle is premium (only Supporter Plus or Digital Pack readers may play it; the last 7 days counting today, in Europe/London, are free). A property of the puzzle, never of the reader, so it is safe in cached HTML; the backend must compute it, never the browser. Absent means free. Whether the current reader has access is a separate question, answered client-side.                                                                                                                                                                                             |
 
 ### User/context info passed to the puzzle iframe
 

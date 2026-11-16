@@ -105,9 +105,15 @@ type Props = {
 	editionId: EditionId;
 	nav: NavType;
 	hasPageSkin?: boolean;
+	showReaderRevenueLinks?: boolean;
 };
 
-export const Sections = ({ nav, editionId, hasPageSkin }: Props) => {
+export const Sections = ({
+	nav,
+	editionId,
+	hasPageSkin,
+	showReaderRevenueLinks = true,
+}: Props) => {
 	return (
 		<ul
 			css={[columnsStyle, !hasPageSkin && columnsStyleFromLeftCol]}
@@ -152,6 +158,7 @@ export const Sections = ({ nav, editionId, hasPageSkin }: Props) => {
 			<ReaderRevenueLinks
 				readerRevenueLinks={nav.readerRevenueLinks}
 				editionId={editionId}
+				showSupportLink={showReaderRevenueLinks}
 			/>
 
 			{/* Mobile only Brand Extensions list */}

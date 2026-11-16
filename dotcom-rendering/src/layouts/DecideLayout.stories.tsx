@@ -33,7 +33,10 @@ import {
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { extractNAV } from '../model/extract-nav';
 import { type Article, enhanceArticleType } from '../types/article';
-import type { ImageBlockElement } from '../types/content';
+import type {
+	ImageBlockElement,
+	MediaAtomBlockElement,
+} from '../types/content';
 import { DecideLayout, type Props as DecideLayoutProps } from './DecideLayout';
 
 export type HydratedLayoutDecoratorArgs = {
@@ -271,6 +274,59 @@ export const WebRecentImmersiveNewsWithoutSeries: Story = {
 				},
 				'Web',
 			),
+			display: ArticleDisplay.Immersive,
+		},
+		colourScheme: 'light',
+	},
+	parameters: WebStandardImmersiveNewsLight.parameters,
+};
+
+const titleOnlyCinemagraphMainMedia = {
+	_type: 'model.dotcomrendering.pageElements.MediaAtomBlockElement',
+	elementId: 'mock-cinemagraph-element',
+	id: 'mock-cinemagraph-atom',
+	assets: [
+		{
+			url: 'https://uploads.guim.co.uk/2025%2F06%2F20%2Ftesting+only%2C+please+ignore--3cb22b60-2c3f-48d6-8bce-38c956907cce-3.mp4',
+			mimeType: 'video/mp4',
+			dimensions: {
+				width: 500,
+				height: 400,
+			},
+			aspectRatio: '5:4',
+			hasAudio: false,
+		},
+	],
+	posterImage: [
+		{
+			url: 'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_210_5472_3283/master/5472.jpg',
+			width: 5472,
+		},
+	],
+	title: 'Illustration: Example Studio',
+	duration: 30,
+	videoPlayerFormat: 'Cinemagraph',
+} satisfies MediaAtomBlockElement;
+
+const immersiveTitleOnlyCinemagraphFixture = {
+	...recentImmersiveNewsFixture,
+	headline: 'An immersive feature with a title-only cinemagraph caption',
+	webTitle: 'An immersive feature with a title-only cinemagraph caption',
+	byline: 'Alex Example',
+	author: {
+		byline: 'Alex Example',
+	},
+	tags: recentImmersiveNewsFixture.tags.filter(
+		(tag) => tag.type !== 'Contributor',
+	),
+	mainMediaElements: [titleOnlyCinemagraphMainMedia],
+};
+
+export const WebRecentImmersiveNewsTitleOnlyCinemagraph: Story = {
+	name: 'Web Recent Immersive News With Title-Only Cinemagraph',
+	args: {
+		article: {
+			...enhanceArticleType(immersiveTitleOnlyCinemagraphFixture, 'Web'),
 			display: ArticleDisplay.Immersive,
 		},
 		colourScheme: 'light',

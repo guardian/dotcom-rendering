@@ -1,17 +1,21 @@
 import { css } from '@emotion/react';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import lzstring from 'lz-string';
+import { tracking } from '../utils/storybook';
 import Puzzles from './Puzzles';
 
 const style = css`
 	margin: 3em auto;
 `;
 
-const variant = {
-	name: 'Inline1PuzzlesMessage',
-	message: {
-		type: 'Inline1PuzzlesMessage' as const,
+const props = {
+	variant: {
+		name: 'Inline1PuzzlesMessage',
+		message: {
+			type: 'Inline1PuzzlesMessage' as const,
+		},
 	},
+	tracking,
 };
 
 const page = window.guardian.config
@@ -24,10 +28,8 @@ type WithJsonProps<T> = T & { json?: string };
 type Props = WithJsonProps<React.ComponentProps<typeof Puzzles>>;
 const meta: Meta<Props> = {
 	component: Puzzles,
-	title: 'Components/marketing/Puzzles',
-	args: {
-		variant,
-	},
+	title: 'Components/marketing/inline1/Puzzles',
+	args: props,
 };
 
 export default meta;
