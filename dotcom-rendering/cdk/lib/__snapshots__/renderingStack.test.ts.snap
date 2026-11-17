@@ -11103,13 +11103,13 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
                   "TargetGroupArn": {
                     "Ref": "TargetGroupInteractiverenderingB3F5F6D3",
                   },
-                  "Weight": 50,
+                  "Weight": 0,
                 },
                 {
                   "TargetGroupArn": {
                     "Ref": "InteractiverenderingEcsTargetGroupInteractiverendering62D942CE",
                   },
-                  "Weight": 50,
+                  "Weight": 1,
                 },
               ],
             },
