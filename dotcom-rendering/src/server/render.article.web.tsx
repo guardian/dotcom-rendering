@@ -206,6 +206,7 @@ window.twttr = (function(d, s, id) {
 				: undefined,
 		canonicalUrl,
 		renderingTarget: 'Web',
+		hasPageSkin: frontendData.config.hasPageSkin,
 		weAreHiring: !!frontendData.config.switches.weAreHiring,
 		config,
 		hasLiveBlogTopAd: !!frontendData.config.hasLiveBlogTopAd,

@@ -93,12 +93,12 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "webx-monitor-group-contamination-v2",
+		name: "webx-monitor-group-contamination-v3",
 		description:
-			"V2 of test to measure the impact of contamination between groups in ab tests",
+			"V3 of test to measure the impact of contamination between groups in ab tests",
 		owners: ["commercial.dev@theguardian.com"],
 		status: "ON",
-		expirationDate: "2026-11-11",
+		expirationDate: "2026-12-01",
 		type: "client",
 		audienceSize: 10 / 100,
 		audienceSpace: "A",
@@ -119,29 +119,24 @@ const ABTests: ABTest[] = [
 	},
 
 	/**
-	 * Puzzles & Games rollout, tier v1 (w/c 12 Oct launch).
+	 * Puzzles & Games rollout, tier v2 (future, no launch date confirmed
+	 * yet as of this writing).
 	 *
-	 * This is the master switch for the Puzzles & Games experience: the new
-	 * Puzzles Hub page, the V0 puzzle pages (sudoku easy/medium/hard/killer,
-	 * word-wheel, wordiply) and everything below. Turning it off (or down to
-	 * 0%) hides all of it, and (by the cumulative design) every later tier
-	 * too.
+	 * Only takes effect when the Puzzles & Games hub is available for the
+	 * reader's edition (see `isPuzzlesHubAvailable` in DCR), so the rollout
+	 * can never end up in an inconsistent state.
 	 *
-	 * This tier activates: the full hub sub-nav links (to
-	 * /word-games, /logic-puzzles, /trivia-and-quizzes), a
-	 * sign-in-to-track-progress message, a calendar/archive view for
-	 * crosswords/logic-puzzles/word-games (not Wordiply, which has no
-	 * archive), progress indicators (Available/Completed), the "More from
-	 * Puzzles & Games" related-content rail, newsletter signup, and
-	 * changes to the existing crossword page (print CTA repositioning, a
-	 * "play other puzzles" container).
+	 * On top of the hub, this tier activates: the On the Ball and Film Reveal
+	 * iframe games (Trivia and Quizzes group), a "Most played" container,
+	 * EventKit-driven navigation, migrating existing crossword pages onto
+	 * the new Puzzle Page template, and search-engine mobile app nudges.
 	 *
-	 * To roll back without a deploy: flip this test's `audienceSize` to
-	 * `0 / 100` (or `status` to `"OFF"`).
+	 * Kept at 0% until that work begins; there is nothing to roll back yet.
 	 */
 	{
-		name: "puzzles-new-hub-v1",
-		description: "Rollout of the v1 Puzzles & Games features (w/c 12 Oct)",
+		name: "puzzles-new-hub-v2",
+		description:
+			"Rollout of the v2 Puzzles & Games features (no date confirmed yet), on top of the Puzzles & Games hub",
 		owners: ["puzzles.team@guardian.co.uk"],
 		status: "ON",
 		expirationDate: "2026-12-31",
@@ -152,23 +147,26 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	/**
-	 * Puzzles & Games rollout, tier v2 (future, no launch date confirmed
-	 * yet as of this writing).
+	 * Puzzles & Games rollout, tier v3: premium puzzles.
 	 *
-	 * Only takes effect when `puzzles-new-hub-v1` is ALSO enabled for the
-	 * reader, so the rollout can never end up in an inconsistent state.
+	 * Only takes effect when `puzzles-new-hub-v1` AND `puzzles-new-hub-v2` are
+	 * ALSO enabled for the reader, so the rollout can never end up in an
+	 * inconsistent state.
 	 *
-	 * On top of v1, this tier activates: the On the Ball and Film Reveal
-	 * iframe games (Trivia and Quizzes group), a "Most played" container,
-	 * EventKit-driven navigation, migrating existing crossword pages onto
-	 * the new Puzzle Page template, and search-engine mobile app nudges.
+	 * On top of v1 and v2, this tier activates the premium puzzles access control on
+	 * the Puzzle Page: puzzles older than 7 days need a Supporter Plus or
+	 * Digital Pack subscription, and readers without one see the "unlock
+	 * premium puzzles" modal instead of the game. The access check, the modal,
+	 * and removing ads from premium puzzles all depend on it, so with this
+	 * tier off every puzzle behaves as a free one, whatever `frontend` sends.
 	 *
-	 * Kept at 0% until that work begins; there is nothing to roll back yet.
+	 * To roll back without a deploy: flip this test's `audienceSize` to
+	 * `0 / 100` (or `status` to `"OFF"`).
 	 */
 	{
-		name: "puzzles-new-hub-v2",
+		name: "puzzles-new-hub-v3",
 		description:
-			"Rollout of the v2 Puzzles & Games features (no date confirmed yet), on top of the puzzles-new-hub-v1 baseline",
+			"Rollout of the premium puzzles access control (modal for puzzles older than 7 days), on top of the puzzles-new-hub-v1 and v2 baseline",
 		owners: ["puzzles.team@guardian.co.uk"],
 		status: "ON",
 		expirationDate: "2026-12-31",

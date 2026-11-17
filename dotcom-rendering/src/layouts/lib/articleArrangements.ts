@@ -406,6 +406,7 @@ const layoutCssMaps: Record<LayoutType, LayoutCssMap> = {
  * @param area - The named piece of article furniture to position (e.g. `'headline'`, `'body'`).
  * @param layoutType - See {@link LayoutType}. Determines which CSS map to use for lookups.
  * @param format - Keeps Weekend Read headers above the media below desktop.
+ * @param hasPageSkin - Keeps item placement on the desktop arrangement at wider viewports.
  *
  * @example
  * // In a React component:
@@ -415,6 +416,7 @@ export const gridItemCss = (
 	area: Area,
 	layoutType: LayoutType,
 	format?: ArticleFormat,
+	hasPageSkin = false,
 ): SerializedStyles => {
 	const areaOverrides = layoutCssMaps[layoutType][area] ?? {};
 	const weekendReadStyles =
@@ -423,13 +425,15 @@ export const gridItemCss = (
 			? immersiveWeekendReadBelowDesktop[area]
 			: undefined;
 
-	const breakpointCss = Object.entries(areaOverrides).map(
-		([bp, styles]) => css`
-			${breakpointQueries[bp as Breakpoint]} {
-				${styles}
-			}
-		`,
-	);
+	const breakpointCss = Object.entries(areaOverrides)
+		.filter(([bp]) => !hasPageSkin || (bp !== 'leftCol' && bp !== 'wide'))
+		.map(
+			([bp, styles]) => css`
+				${breakpointQueries[bp as Breakpoint]} {
+					${styles}
+				}
+			`,
+		);
 
 	// All items default to the centre column; breakpoint entries above
 	// override grid-row and grid-column as needed.

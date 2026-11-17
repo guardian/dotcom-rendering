@@ -13,9 +13,10 @@ import { ADDITIONAL_REQUEST_PATH, interceptOphanRequest } from '../lib/ophan';
 
 const path = '/PuzzlesPage/https://www.theguardian.com/puzzles-and-games';
 
-// The hub returns a 404 outside this experiment's variant
+// The hub returns a 404 outside the editions it is available in. This is the
+// request's edition, separate from the fixture's `editionId` used for sponsorship.
 const configOverrides = {
-	serverSideABTests: { 'puzzles-new-hub-v1': 'variant' },
+	edition: 'INT',
 };
 
 const puzzlesPage = (editionId: EditionId) =>

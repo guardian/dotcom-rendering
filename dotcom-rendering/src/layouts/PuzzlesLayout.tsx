@@ -17,10 +17,8 @@ import {
 import { PuzzlesDirectoryProgress } from '../components/PuzzlesDirectoryProgress.island';
 import { Section } from '../components/Section';
 import { has } from '../lib/has-string';
-import {
-	isPuzzlesHubV1Enabled,
-	isPuzzlesHubV2Enabled,
-} from '../lib/puzzlesHubVersionExperiment';
+import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
+import { isPuzzlesHubV2Enabled } from '../lib/puzzlesHubVersionExperiment';
 import {
 	getPuzzlesSubNavLinks,
 	PUZZLES_SUBNAV_PARENT,
@@ -190,7 +188,7 @@ export const PuzzlesLayout = ({
 			links: [
 				PUZZLES_SUBNAV_PARENT,
 				...getPuzzlesSubNavLinks(
-					isPuzzlesHubV1Enabled(puzzlesPage.config),
+					isPuzzlesHubAvailable(puzzlesPage.config),
 					isPuzzlesHubV2Enabled(puzzlesPage.config),
 				),
 			],

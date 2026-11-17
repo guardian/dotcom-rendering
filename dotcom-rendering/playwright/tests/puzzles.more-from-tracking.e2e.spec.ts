@@ -67,7 +67,7 @@ const archive: PuzzlesArchive = {
 	moreFrom: items,
 };
 const configOverrides = {
-	serverSideABTests: { 'puzzles-new-hub-v1': 'variant' },
+	edition: 'INT',
 };
 
 const loadRail = async (

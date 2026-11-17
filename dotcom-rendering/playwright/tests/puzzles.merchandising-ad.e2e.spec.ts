@@ -17,7 +17,7 @@ for (const width of [375, 768, 1280]) {
 				overrides: {
 					feFixture: createPuzzlePage('wordiply'),
 					configOverrides: {
-						serverSideABTests: { 'puzzles-new-hub-v1': 'variant' },
+						edition: 'INT',
 					},
 				},
 			});

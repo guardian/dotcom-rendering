@@ -254,8 +254,10 @@ const MetaAvatarContainer = ({ children }: { children: React.ReactNode }) => (
 
 const ImmersiveMetaAvatarContainer = ({
 	children,
+	stackAtLeftCol,
 }: {
 	children: React.ReactNode;
+	stackAtLeftCol: boolean;
 }) => (
 	<div
 		css={css`
@@ -265,6 +267,15 @@ const ImmersiveMetaAvatarContainer = ({
 			margin-right: 10px;
 			margin-bottom: 12px;
 			margin-left: 0px;
+
+			${stackAtLeftCol &&
+			css`
+				${between.leftCol.and.wide} {
+					width: 140px;
+					height: 140px;
+					margin-top: 6px;
+				}
+			`}
 		`}
 	>
 		{children}
@@ -332,6 +343,7 @@ export const ArticleMeta = ({
 		isPuzzlePage,
 	);
 	const isImmersiveGrid = layoutType?.startsWith('immersive') ?? false;
+	const stackImmersiveMetaAtLeftCol = layoutType === 'immersiveLandscape';
 	const soleContributor = getSoleContributor(tags, byline);
 	const authorName = soleContributor?.title ?? 'Author Image';
 
@@ -406,10 +418,19 @@ export const ArticleMeta = ({
 						css={css`
 							display: flex;
 							flex-direction: row;
+
+							${stackImmersiveMetaAtLeftCol &&
+							css`
+								${between.leftCol.and.wide} {
+									flex-direction: column;
+								}
+							`}
 						`}
 					>
 						{!!avatarUrl && (
-							<ImmersiveMetaAvatarContainer>
+							<ImmersiveMetaAvatarContainer
+								stackAtLeftCol={stackImmersiveMetaAtLeftCol}
+							>
 								<Avatar src={avatarUrl} alt={authorName} />
 							</ImmersiveMetaAvatarContainer>
 						)}

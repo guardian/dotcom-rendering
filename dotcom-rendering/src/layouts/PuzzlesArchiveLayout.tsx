@@ -19,10 +19,8 @@ import { RelatedPuzzlesRailEnhanced } from '../components/RelatedPuzzlesRailEnha
 import { Section } from '../components/Section';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { center } from '../lib/center';
-import {
-	isPuzzlesHubV1Enabled,
-	isPuzzlesHubV2Enabled,
-} from '../lib/puzzlesHubVersionExperiment';
+import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
+import { isPuzzlesHubV2Enabled } from '../lib/puzzlesHubVersionExperiment';
 import {
 	getPuzzlesSubNavLinks,
 	PUZZLES_SUBNAV_PARENT,
@@ -209,7 +207,7 @@ export const PuzzlesArchiveLayout = ({
 		subNavSections: {
 			parent: PUZZLES_SUBNAV_PARENT,
 			links: getPuzzlesSubNavLinks(
-				isPuzzlesHubV1Enabled(puzzlesPage.config),
+				isPuzzlesHubAvailable(puzzlesPage.config),
 				isPuzzlesHubV2Enabled(puzzlesPage.config),
 			),
 		},

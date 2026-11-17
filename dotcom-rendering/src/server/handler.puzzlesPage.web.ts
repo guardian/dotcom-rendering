@@ -1,12 +1,10 @@
 import type { RequestHandler } from 'express';
+import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
 import {
 	withoutV2PuzzleItems,
 	withoutV2Puzzles,
 } from '../lib/puzzlesHubLayout';
-import {
-	isPuzzlesHubV1Enabled,
-	isPuzzlesHubV2Enabled,
-} from '../lib/puzzlesHubVersionExperiment';
+import { isPuzzlesHubV2Enabled } from '../lib/puzzlesHubVersionExperiment';
 import { validateAsPuzzlesPageType } from '../model/validate';
 import { makePrefetchHeader } from './lib/header';
 import { renderPuzzlesPage } from './render.puzzlesPage.web';
@@ -14,7 +12,7 @@ import { renderPuzzlesPage } from './render.puzzlesPage.web';
 export const handlePuzzlesPage: RequestHandler = ({ body }, res) => {
 	const puzzlesPage = validateAsPuzzlesPageType(body);
 	if (
-		!isPuzzlesHubV1Enabled(puzzlesPage.config) ||
+		!isPuzzlesHubAvailable(puzzlesPage.config) ||
 		(puzzlesPage.archive?.category === 'trivia-and-quizzes' &&
 			!isPuzzlesHubV2Enabled(puzzlesPage.config))
 	) {

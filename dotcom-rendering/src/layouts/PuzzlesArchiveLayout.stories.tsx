@@ -3,8 +3,6 @@ import { breakpoints, palette } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { createPuzzlesPage } from '../../fixtures/manual/puzzlesPage';
 import {
-	puzzlesHubV1Experiment,
-	puzzlesHubV1Participation,
 	puzzlesHubV2Experiment,
 	puzzlesHubV2Participation,
 } from '../lib/puzzlesHubVersionExperiment';
@@ -83,8 +81,8 @@ const archive: PuzzlesArchive = {
 
 const config = {
 	...createPuzzlesPage().config,
+	edition: 'INT' as const,
 	serverSideABTests: {
-		...puzzlesHubV1Participation(puzzlesHubV1Experiment.variant),
 		...puzzlesHubV2Participation(puzzlesHubV2Experiment.variant),
 	},
 };

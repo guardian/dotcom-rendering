@@ -1,4 +1,5 @@
 import { renderHook } from '@testing-library/react';
+import type { EditionId } from '../edition';
 import { reportPuzzleProgress } from './reporter';
 import {
 	IN_PROGRESS_DEBOUNCE_MS,
@@ -24,19 +25,16 @@ const change = (filledCells: number, isComplete = false) => ({
 	isComplete,
 });
 
-const setExperiment = (group: string | undefined) => {
+const setEdition = (edition: EditionId) => {
 	window.guardian = {
-		config: {
-			serverSideABTests:
-				group === undefined ? {} : { 'puzzles-new-hub-v1': group },
-		},
+		config: { page: { edition } },
 	} as unknown as typeof window.guardian;
 };
 
 beforeEach(() => {
 	jest.useFakeTimers();
 	mockedReport.mockClear();
-	setExperiment('variant');
+	setEdition('INT');
 });
 
 afterEach(() => {
@@ -106,10 +104,10 @@ describe('useCrosswordProgressReporting', () => {
 		);
 	});
 
-	it.each([['control'], ['unknown'], [undefined]])(
-		'reports nothing for a reader who is not in the puzzles-new-hub-v1 variant (%p)',
-		(group) => {
-			setExperiment(group);
+	it.each(['UK', 'US', 'AU', 'EUR'] as const)(
+		'reports nothing for a reader outside the International edition (%p)',
+		(edition) => {
+			setEdition(edition);
 			const { result, unmount } = renderHook(() =>
 				useCrosswordProgressReporting(data),
 			);

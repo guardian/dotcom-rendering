@@ -1,6 +1,7 @@
 import type { Request, Response } from 'express';
 import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
 import { triviaPuzzlesContainer } from '../../fixtures/manual/puzzlesPage';
+import type { EditionId } from '../lib/edition';
 import { handlePuzzlePage } from './handler.puzzlePage.web';
 import { renderPuzzlePage } from './render.puzzlePage.web';
 
@@ -40,18 +41,17 @@ describe('handlePuzzlePage', () => {
 		});
 	});
 
-	const withServerSideABTests = (
+	const withConfig = (
 		page: ReturnType<typeof createPuzzlePage>,
-		serverSideABTests: Record<string, string>,
+		edition: EditionId,
+		serverSideABTests: Record<string, string> = {},
 	) => ({
 		...page,
-		config: { ...page.config, serverSideABTests },
+		config: { ...page.config, edition, serverSideABTests },
 	});
 
-	it('omits V2 recommendations from existing V1 puzzle pages', () => {
-		const page = withServerSideABTests(createPuzzlePage('sudoku-easy'), {
-			'puzzles-new-hub-v1': 'variant',
-		});
+	it('omits V2 recommendations from existing puzzle pages', () => {
+		const page = withConfig(createPuzzlePage('sudoku-easy'), 'INT');
 		const existing = page.instance.moreFromPuzzlesAndGames!;
 		page.instance.moreFromPuzzlesAndGames = [
 			...existing,
@@ -66,11 +66,9 @@ describe('handlePuzzlePage', () => {
 		).toEqual(existing);
 	});
 
-	it('renders the page for a known slug when the puzzles-new-hub-v1 variant is active', () => {
+	it('renders the page for a known slug when the edition is International', () => {
 		const res = response();
-		const page = withServerSideABTests(createPuzzlePage('sudoku-easy'), {
-			'puzzles-new-hub-v1': 'variant',
-		});
+		const page = withConfig(createPuzzlePage('sudoku-easy'), 'INT');
 
 		invokeHandler(page, res);
 
@@ -97,11 +95,9 @@ describe('handlePuzzlePage', () => {
 		'sudoku-killer',
 		'word-wheel',
 		'wordiply',
-	])('renders V1 iframe-based slug %s when in variant', (slug) => {
+	])('renders iframe-based slug %s in the International edition', (slug) => {
 		const res = response();
-		const page = withServerSideABTests(createPuzzlePage(slug), {
-			'puzzles-new-hub-v1': 'variant',
-		});
+		const page = withConfig(createPuzzlePage(slug), 'INT');
 
 		invokeHandler(page, res);
 
@@ -110,38 +106,21 @@ describe('handlePuzzlePage', () => {
 	});
 
 	it.each(['film-reveal', 'on-the-ball'])(
-		'gates %s behind cumulative V2 participation',
+		'gates %s behind the International edition and V2 participation',
 		(slug) => {
-			for (const [serverSideABTests, allowed] of [
-				[{ 'puzzles-new-hub-v1': 'variant' }, false],
-				[{ 'puzzles-new-hub-v2': 'variant' }, false],
-				[
-					{
-						'puzzles-new-hub-v1': 'variant',
-						'puzzles-new-hub-v2': 'control',
-					},
-					false,
-				],
-				[
-					{
-						'puzzles-new-hub-v1': 'variant',
-						'puzzles-new-hub-v2': 'unknown',
-					},
-					false,
-				],
-				[
-					{
-						'puzzles-new-hub-v1': 'variant',
-						'puzzles-new-hub-v2': 'variant',
-					},
-					true,
-				],
+			for (const [edition, serverSideABTests, allowed] of [
+				['INT', {}, false],
+				['UK', { 'puzzles-new-hub-v2': 'variant' }, false],
+				['INT', { 'puzzles-new-hub-v2': 'control' }, false],
+				['INT', { 'puzzles-new-hub-v2': 'unknown' }, false],
+				['INT', { 'puzzles-new-hub-v2': 'variant' }, true],
 			] as const) {
 				mockedRenderPuzzlePage.mockClear();
 				const res = response();
 				invokeHandler(
-					withServerSideABTests(
+					withConfig(
 						createPuzzlePage(slug),
+						edition,
 						serverSideABTests,
 					),
 					res,
@@ -162,14 +141,12 @@ describe('handlePuzzlePage', () => {
 		(slug) => {
 			for (const gameUrl of [undefined, '', '   ']) {
 				const res = response();
-				const page = withServerSideABTests(
+				const page = withConfig(
 					createPuzzlePage(slug, {
 						instance: { title: slug, gameUrl },
 					}),
-					{
-						'puzzles-new-hub-v1': 'variant',
-						'puzzles-new-hub-v2': 'variant',
-					},
+					'INT',
+					{ 'puzzles-new-hub-v2': 'variant' },
 				);
 
 				invokeHandler(page, res);
@@ -180,11 +157,11 @@ describe('handlePuzzlePage', () => {
 		},
 	);
 
-	it('renders without experiment participation in local development', () => {
+	it('renders outside the International edition in local development', () => {
 		const previousNodeEnvironment = process.env.NODE_ENV;
 		process.env.NODE_ENV = 'development';
 		const res = response();
-		const page = withServerSideABTests(createPuzzlePage('sudoku-easy'), {});
+		const page = withConfig(createPuzzlePage('sudoku-easy'), 'UK');
 
 		try {
 			invokeHandler(page, res);
@@ -200,18 +177,15 @@ describe('handlePuzzlePage', () => {
 	});
 
 	it.each([
-		['control', { 'puzzles-new-hub-v1': 'control' }],
-		['missing', {}],
-		['unknown group', { 'puzzles-new-hub-v1': 'unknown' }],
-		['unrelated', { 'another-test': 'variant' }],
-	])(
-		'returns 404 without mounting the renderer for %s',
-		(_, serverSideABTests) => {
+		['UK', 'UK'],
+		['US', 'US'],
+		['AU', 'AU'],
+		['EUR', 'EUR'],
+	] as const)(
+		'returns 404 without mounting the renderer for the %s edition',
+		(_, edition) => {
 			const res = response();
-			const page = withServerSideABTests(
-				createPuzzlePage('sudoku-easy'),
-				serverSideABTests,
-			);
+			const page = withConfig(createPuzzlePage('sudoku-easy'), edition);
 
 			invokeHandler(page, res);
 
@@ -220,11 +194,9 @@ describe('handlePuzzlePage', () => {
 		},
 	);
 
-	it('returns 404 for an unknown slug even when in variant', () => {
+	it('returns 404 for an unknown slug even when in the International edition', () => {
 		const res = response();
-		const page = withServerSideABTests(createPuzzlePage('sudoku-easy'), {
-			'puzzles-new-hub-v1': 'variant',
-		});
+		const page = withConfig(createPuzzlePage('sudoku-easy'), 'INT');
 		page.slug = 'not-a-real-puzzle';
 
 		invokeHandler(page, res);

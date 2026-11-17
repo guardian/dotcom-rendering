@@ -1,4 +1,4 @@
-import { App, Duration } from 'aws-cdk-lib';
+import { App, Duration, Size } from 'aws-cdk-lib';
 import { InstanceClass, InstanceSize, InstanceType } from 'aws-cdk-lib/aws-ec2';
 import type { RenderingCDKStackProps } from '../lib/renderingStack';
 import { RenderingCDKStack } from '../lib/renderingStack';
@@ -92,6 +92,7 @@ export const FaciaRenderingPropsCODE: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
+		provisionManagedSecurityRole: true,
 	},
 	// Route 100% traffic to EC2.
 	targetGroupWeights: {
@@ -148,6 +149,7 @@ export const FaciaRenderingPropsPROD: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
+		provisionManagedSecurityRole: true,
 	},
 	// Route 100% traffic to EC2.
 	targetGroupWeights: {
@@ -175,7 +177,13 @@ export const TagPageRenderingPropsCODE: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
-		managedInstancesProps: {},
+		managedInstancesProps: {
+			instancesRequirements: {
+				memoryMin: Size.mebibytes(2048),
+				vCpuCountMin: 1,
+				allowedInstanceTypes: ['c8g.*'],
+			},
+		},
 	},
 };
 
@@ -204,7 +212,13 @@ export const TagPageRenderingPropsPROD: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
-		provisionManagedSecurityRole: true,
+		managedInstancesProps: {
+			instancesRequirements: {
+				memoryMin: Size.mebibytes(2048),
+				vCpuCountMin: 1,
+				allowedInstanceTypes: ['c8g.*'],
+			},
+		},
 	},
 };
 
@@ -299,12 +313,18 @@ export const InteractiveRenderingPropsPROD: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
-		managedInstancesProps: {},
+		managedInstancesProps: {
+			instancesRequirements: {
+				memoryMin: Size.mebibytes(2048),
+				vCpuCountMin: 1,
+				allowedInstanceTypes: ['c8g.*'],
+			},
+		},
 	},
-	// Route 100% traffic to EC2, 0% to ECS.
+	// Route 0% traffic to EC2, 100% to ECS.
 	targetGroupWeights: {
-		ec2: 1,
-		ecs: 0,
+		ec2: 0,
+		ecs: 1,
 	},
 };
 new RenderingCDKStack(
