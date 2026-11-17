@@ -1,12 +1,9 @@
 import { Standard as StandardFixture } from '../../fixtures/generated/fe-articles/Standard';
 import { ArticleDesign, Pillar } from '../lib/articleFormat';
-import {
-	puzzlesHubV1Experiment,
-	puzzlesHubV1Participation,
-} from '../lib/puzzlesHubVersionExperiment';
+import type { EditionId } from '../lib/edition';
 import { enhanceArticleType } from './article';
 
-const crosswordArticle = (serverSideABTests: Record<string, string>) =>
+const crosswordArticle = (edition: EditionId) =>
 	enhanceArticleType(
 		{
 			...StandardFixture,
@@ -15,7 +12,7 @@ const crosswordArticle = (serverSideABTests: Record<string, string>) =>
 				design: 'CrosswordDesign',
 				theme: 'LifestylePillar',
 			},
-			config: { ...StandardFixture.config, serverSideABTests },
+			config: { ...StandardFixture.config, edition },
 		},
 		'Web',
 	);
@@ -28,20 +25,16 @@ describe('enhanceArticleType crossword theme', () => {
 		});
 	});
 
-	it('uses the news theme for crosswords in the puzzles-new-hub-v1 variant', () => {
-		const article = crosswordArticle(
-			puzzlesHubV1Participation(puzzlesHubV1Experiment.variant),
-		);
+	it('uses the news theme for crosswords in the International edition', () => {
+		const article = crosswordArticle('INT');
 
 		expect(article.design).toBe(ArticleDesign.Crossword);
 		expect(article.theme).toBe(Pillar.News);
 	});
 
-	it('keeps the theme sent by Frontend outside the experiment', () => {
+	it('keeps the theme sent by Frontend outside the International edition', () => {
 		Object.defineProperty(process.env, 'NODE_ENV', { value: 'production' });
-		const article = crosswordArticle(
-			puzzlesHubV1Participation(puzzlesHubV1Experiment.control),
-		);
+		const article = crosswordArticle('UK');
 
 		expect(article.theme).toBe(Pillar.Lifestyle);
 	});

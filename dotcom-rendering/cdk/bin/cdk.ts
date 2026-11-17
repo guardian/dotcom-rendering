@@ -92,6 +92,7 @@ export const FaciaRenderingPropsCODE: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
+		provisionManagedSecurityRole: true,
 	},
 	// Route 100% traffic to EC2.
 	targetGroupWeights: {
@@ -148,6 +149,7 @@ export const FaciaRenderingPropsPROD: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
+		provisionManagedSecurityRole: true,
 	},
 	// Route 100% traffic to EC2.
 	targetGroupWeights: {
@@ -319,10 +321,10 @@ export const InteractiveRenderingPropsPROD: RenderingCDKStackProps = {
 			},
 		},
 	},
-	// Route 50% traffic to EC2, 50% to ECS.
+	// Route 0% traffic to EC2, 100% to ECS.
 	targetGroupWeights: {
-		ec2: 50,
-		ecs: 50,
+		ec2: 0,
+		ecs: 1,
 	},
 };
 new RenderingCDKStack(

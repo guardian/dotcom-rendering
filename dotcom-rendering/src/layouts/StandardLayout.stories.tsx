@@ -279,8 +279,33 @@ const allLightBreakpointModes = {
 };
 
 const webImmersiveLabsArticle = enhanceArticleType(LabsFixture, 'Web');
+const labsCommercialProperties =
+	webImmersiveLabsArticle.frontendData.commercialProperties;
+const labsEditionId = webImmersiveLabsArticle.frontendData.editionId;
+const labsBranding = labsCommercialProperties[labsEditionId].branding;
+
+if (labsBranding == null) {
+	throw new Error('The Labs fixture must contain branding');
+}
+
+const stableLabsLogo =
+	'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="90"><rect width="140" height="90" fill="white"/><text x="70" y="49" text-anchor="middle" font-family="Arial" font-size="14" fill="black">Prime Video</text></svg>';
+
 const webImmersiveLabsArticleWithSupportingCaption = {
 	...webImmersiveLabsArticle.frontendData,
+	commercialProperties: {
+		...labsCommercialProperties,
+		[labsEditionId]: {
+			...labsCommercialProperties[labsEditionId],
+			branding: {
+				...labsBranding,
+				logo: {
+					...labsBranding.logo,
+					src: stableLabsLogo,
+				},
+			},
+		},
+	},
 	blocks: webImmersiveLabsArticle.frontendData.blocks.map((block) => ({
 		...block,
 		elements: block.elements.map((element) =>
@@ -346,12 +371,22 @@ export const WebImmersiveLabsWithPageSkin: Story = {
 		const article = canvasElement.querySelector('article');
 		const labsHeader = canvasElement.querySelector('#labs-header');
 		const mainMedia = canvasElement.querySelector('[data-gu-name="media"]');
+		const brandingLogo = canvasElement.querySelector<HTMLImageElement>(
+			'[data-testid="branding-logo"] img',
+		);
 
 		await expect(pageSkinSlot).toBeInTheDocument();
 		await expect(main).not.toBeNull();
 		await expect(article).not.toBeNull();
 		await expect(labsHeader).not.toBeNull();
 		await expect(mainMedia).not.toBeNull();
+		await expect(brandingLogo).not.toBeNull();
+
+		if (mainMedia === null || brandingLogo === null) {
+			throw new Error('Expected main media and Labs branding');
+		}
+
+		await brandingLogo.decode();
 	},
 };
 
