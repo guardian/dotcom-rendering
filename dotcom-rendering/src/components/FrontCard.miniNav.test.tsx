@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { customSubnav } from '../../fixtures/manual/customSubnav';
 import { trails } from '../../fixtures/manual/trails';
 import type { CustomSubnav } from '../types/customSubnav';
-import type { DCRContainerType, DCRFrontCard } from '../types/front';
+import type { DCRFrontCard } from '../types/front';
 import { ConfigProvider } from './ConfigContext';
 import { FrontCard } from './FrontCard';
 
@@ -31,7 +31,7 @@ const renderCard = ({
 	...props
 }: {
 	trail?: DCRFrontCard;
-	containerType?: DCRContainerType;
+	isMiniNavSupported?: boolean;
 } = {}) =>
 	render(
 		<ConfigProvider
@@ -47,8 +47,8 @@ const renderCard = ({
 				containerType="flexible/general"
 				imageLoading="eager"
 				serverTime={1793031866891}
-				{...props}
 				isMiniNavSupported={true}
+				{...props}
 			/>
 		</ConfigProvider>,
 	);
@@ -56,47 +56,36 @@ const renderCard = ({
 const expectMiniNavAbsent = () => {
 	expect(screen.queryByText('Football')).not.toBeInTheDocument();
 	expect(
+		screen.queryByRole('link', { name: 'Football' }),
+	).not.toBeInTheDocument();
+	expect(
 		screen.queryByRole('link', { name: 'More Football' }),
 	).not.toBeInTheDocument();
 	expect(screen.getByText(defaultTrail.headline)).toBeInTheDocument();
 };
 
 describe('FrontCard mini navigation', () => {
-	it.each(['boost', 'megaboost', 'gigaboost'] as const)(
-		'renders mini navigation for a %s card',
-		(boostLevel) => {
-			renderCard({ trail: { ...defaultTrail, boostLevel } });
+	it('renders mini navigation when supported', () => {
+		renderCard();
 
-			expect(
-				screen.getByRole('link', { name: 'More Football' }),
-			).toHaveAttribute('href', '/football');
-			expect(screen.getByText(defaultTrail.headline)).toBeInTheDocument();
-		},
-	);
-
-	it.each([undefined, 'default'] as const)(
-		'does not render mini navigation with boost level %s',
-		(boostLevel) => {
-			renderCard({ trail: { ...defaultTrail, boostLevel } });
-
-			expectMiniNavAbsent();
-		},
-	);
-
-	it.each([undefined, 'static/medium/4', 'scrollable/small'] as const)(
-		'does not render mini navigation in container %s',
-		(containerType) => {
-			renderCard({ containerType });
-
-			expectMiniNavAbsent();
-		},
-	);
-
-	it('does not render mini navigation when disabled', () => {
-		renderCard({ trail: { ...defaultTrail, showMiniNav: false } });
-
-		expectMiniNavAbsent();
+		expect(screen.getByRole('link', { name: 'Football' })).toHaveAttribute(
+			'href',
+			'/football',
+		);
+		expect(
+			screen.getByRole('link', { name: 'More Football' }),
+		).toHaveAttribute('href', '/football');
+		expect(screen.getByText(defaultTrail.headline)).toBeInTheDocument();
 	});
+
+	it.each([false, undefined])(
+		'does not render mini navigation when isMiniNavSupported is %s',
+		(isMiniNavSupported) => {
+			renderCard({ isMiniNavSupported });
+
+			expectMiniNavAbsent();
+		},
+	);
 
 	it('does not render mini navigation when configuration is missing', () => {
 		renderCard({ trail: { ...defaultTrail, miniNavData: undefined } });
@@ -155,7 +144,7 @@ describe('FrontCard mini navigation', () => {
 		renderCard();
 
 		const miniNav = screen
-			.getByRole('link', { name: 'More Football' })
+			.getByRole('link', { name: 'Football' })
 			.closest('[data-component-id]');
 		const navWrapper = miniNav?.parentElement;
 		const cardWrapper = navWrapper?.parentElement;
@@ -175,7 +164,7 @@ describe('FrontCard mini navigation', () => {
 		renderCard();
 
 		const miniNav = screen
-			.getByRole('link', { name: 'More Football' })
+			.getByRole('link', { name: 'Football' })
 			.closest('[data-component-id]');
 		const list = screen.getByRole('list');
 
@@ -190,7 +179,7 @@ describe('FrontCard mini navigation', () => {
 		renderCard();
 
 		const miniNav = screen
-			.getByRole('link', { name: 'More Football' })
+			.getByRole('link', { name: 'Football' })
 			.closest('[data-component-id]');
 
 		expect(miniNav?.parentElement).toHaveStyle({
