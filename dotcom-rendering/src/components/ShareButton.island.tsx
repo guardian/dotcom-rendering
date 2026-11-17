@@ -15,6 +15,7 @@ import {
 } from '../lib/articleFormat';
 import {
 	puzzleActionAttributes,
+	type PuzzleActionContext,
 	type PuzzleActionSource,
 } from '../lib/puzzleActionTracking';
 import { transparentColour } from '../lib/transparentColour';
@@ -38,6 +39,7 @@ type Props = {
 	format: ArticleFormat;
 	context: Context;
 	puzzleTrackingSource?: PuzzleActionSource;
+	puzzleTrackingContext?: PuzzleActionContext;
 };
 
 type ButtonKind = 'native' | 'copy' | 'email';
@@ -233,6 +235,7 @@ export const ShareButton = ({
 	format,
 	context,
 	puzzleTrackingSource,
+	puzzleTrackingContext,
 }: Props) => {
 	const [isCopied, setIsCopied] = useState(false);
 	const [buttonKind, setButtonKind] = useState<ButtonKind>('email');
@@ -295,6 +298,7 @@ export const ShareButton = ({
 	const trackingAttributes = puzzleActionAttributes(
 		puzzleTrackingSource,
 		`share-attempt | ${buttonKind} | ${context}`,
+		puzzleTrackingContext,
 	);
 
 	switch (buttonKind) {

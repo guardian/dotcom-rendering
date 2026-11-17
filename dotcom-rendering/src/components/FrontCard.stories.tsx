@@ -55,6 +55,7 @@ const meta = {
 							mediaPositionOnDesktop="right"
 							mediaSize="small"
 							serverTime={1641038400000}
+							isMiniNavSupported={true}
 						/>
 					</LI>
 				</UL>
