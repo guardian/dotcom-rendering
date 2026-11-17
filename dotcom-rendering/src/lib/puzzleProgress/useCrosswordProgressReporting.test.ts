@@ -104,8 +104,8 @@ describe('useCrosswordProgressReporting', () => {
 		);
 	});
 
-	it.each(['UK', 'US', 'AU', 'EUR'] as const)(
-		'reports nothing for a reader outside the International edition (%p)',
+	it.each(['UK', 'US'] as const)(
+		'reports nothing for a reader outside the hub editions (%p)',
 		(edition) => {
 			setEdition(edition);
 			const { result, unmount } = renderHook(() =>
