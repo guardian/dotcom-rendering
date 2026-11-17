@@ -177,6 +177,17 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
+		name: "fronts-and-curation-card-mini-nav",
+		description: "Opt-in preview of mini subnavs on front cards",
+		owners: ["fronts.and.curation@guardian.co.uk"],
+		status: "ON",
+		expirationDate: "2026-12-16",
+		type: "server",
+		audienceSize: 0 / 100,
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
+	{
 		name: "fronts-and-curation-editorial-test",
 		description: "Allow editorial A/B tests to run on web",
 		owners: [

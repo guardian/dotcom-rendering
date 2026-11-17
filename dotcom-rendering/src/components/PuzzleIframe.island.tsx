@@ -284,10 +284,11 @@ export const buildPuzzleIframeSrc = (
 	}
 };
 
-/** Only accept supported provider messages from this iframe's own window and origin. */
+/** Check the iframe's origin/window and reset progress state whenever its URL changes. */
 const usePuzzleMessages = (
 	puzzleConfig: PuzzleConfig,
 	iframeRef: React.RefObject<HTMLIFrameElement>,
+	iframeSrc: string | undefined,
 	progressIdentity?: PuzzleProgressIdentity,
 ) => {
 	const isAmuseLabs = puzzleConfig.iframe.provider === 'amuselabs';
@@ -321,7 +322,7 @@ const usePuzzleMessages = (
 
 		window.addEventListener('message', onMessage);
 		return () => window.removeEventListener('message', onMessage);
-	}, [isAmuseLabs, movieGrid, progressIdentity, iframeRef]);
+	}, [isAmuseLabs, movieGrid, progressIdentity, iframeRef, iframeSrc]);
 };
 
 const postContextMessage = (
@@ -380,12 +381,16 @@ export const PuzzleIframe = ({
 	const context = buildPuzzleContext(userId, darkMode, puzzleDate);
 	const iframeRef = useRef<HTMLIFrameElement>(null);
 
-	usePuzzleMessages(puzzleConfig, iframeRef, progressIdentity);
-
 	// API-backed puzzles wait for authentication and their personalised game URL.
 	const shouldLoad =
 		isResolved ||
 		(process.env.NODE_ENV === 'development' && gameUrl === undefined);
+	const iframeSrc =
+		shouldLoad && !hasError
+			? buildPuzzleIframeSrc(puzzleConfig, context, resolvedGameUrl)
+			: undefined;
+
+	usePuzzleMessages(puzzleConfig, iframeRef, iframeSrc, progressIdentity);
 
 	if (hasError) {
 		return (
@@ -394,10 +399,6 @@ export const PuzzleIframe = ({
 			</p>
 		);
 	}
-
-	const iframeSrc = shouldLoad
-		? buildPuzzleIframeSrc(puzzleConfig, context, resolvedGameUrl)
-		: undefined;
 
 	return (
 		<iframe

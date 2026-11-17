@@ -599,6 +599,122 @@ describe('PuzzleIframe', () => {
 		},
 	);
 
+	it.each(['film-reveal', 'on-the-ball'])(
+		'reloads %s with the API identity when the reader changes',
+		async (slug) => {
+			mockedGetAuthStatus.mockResolvedValue(signedOut());
+			render(
+				<PuzzleIframe
+					puzzleConfig={puzzleConfigs[slug]!}
+					title={slug}
+					darkModeAvailable={false}
+					puzzleDate="2026-11-03"
+					gameUrl={`https://example.com/${slug}?id=opaque&uid=stale`}
+				/>,
+			);
+			const iframe = testScreen.getByTitle<HTMLIFrameElement>(slug);
+			await waitFor(() => expect(iframe).toHaveAttribute('src'));
+			expect(getUidFromSrc(iframe.src)).toBeNull();
+			const onAuthChange =
+				mockedSubscribeToAuthStateChange.mock.calls[0]![0];
+			for (const [userId, playerId] of [
+				['account-a', 'api-player-a'],
+				['account-b', 'api-player-b'],
+				[null, 'api-guest'],
+			] as const) {
+				mockedGetAuthStatus.mockResolvedValue(
+					userId === null ? signedOut() : signedIn(userId),
+				);
+				jest.mocked(global.fetch).mockResolvedValueOnce({
+					ok: true,
+					json: () =>
+						Promise.resolve({
+							gameUrl: `https://example.com/${slug}?id=api-puzzle&uid=${playerId}`,
+						}),
+				} as Response);
+				await act(async () => {
+					onAuthChange();
+				});
+				await waitFor(() =>
+					expect(getUidFromSrc(iframe.src)).toBe(playerId),
+				);
+				expect(new URL(iframe.src).searchParams.get('id')).toBe(
+					'api-puzzle',
+				);
+				expect(getContextFromSrc(iframe.src).userId).toBe(userId);
+			}
+		},
+	);
+
+	it.each([
+		['film-reveal', 'https://moviegrid.io', 'film_reveal', 'FILMREVEAL'],
+		['on-the-ball', 'https://sportsreveal.io', 'on_the_ball', 'ONTHEBALL'],
+	])(
+		'resets %s completion tracking when switching accounts',
+		async (slug, origin, puzzle, puzzleType) => {
+			mockedGetAuthStatus.mockResolvedValue(signedIn('account-a'));
+			jest.mocked(global.fetch).mockResolvedValueOnce({
+				ok: true,
+				json: () =>
+					Promise.resolve({
+						gameUrl: `${origin}/guardian/archive?id=394&uid=api-player-a`,
+					}),
+			} as Response);
+			const progressIdentity = {
+				puzzleId: 'api-puzzle',
+				puzzleType,
+				publishDate: '2026-11-03T00:00:00Z',
+			};
+			render(
+				<PuzzleIframe
+					puzzleConfig={puzzleConfigs[slug]!}
+					title={slug}
+					darkModeAvailable={false}
+					puzzleDate="2026-11-03"
+					gameUrl={`${origin}/guardian/archive?id=394`}
+					progressIdentity={progressIdentity}
+				/>,
+			);
+			const iframe = testScreen.getByTitle<HTMLIFrameElement>(slug);
+			await waitFor(() =>
+				expect(getUidFromSrc(iframe.src)).toBe('api-player-a'),
+			);
+			const dispatch = (event: string) =>
+				act(() => {
+					window.dispatchEvent(
+						new MessageEvent('message', {
+							origin,
+							source: iframe.contentWindow,
+							data: { event, puzzle },
+						}),
+					);
+				});
+			dispatch('end_game');
+			expect(reportPuzzleProgress).toHaveBeenCalledWith(
+				expect.objectContaining({ gameStatus: 'completed' }),
+			);
+			jest.mocked(reportPuzzleProgress).mockClear();
+			mockedGetAuthStatus.mockResolvedValue(signedIn('account-b'));
+			jest.mocked(global.fetch).mockResolvedValueOnce({
+				ok: true,
+				json: () =>
+					Promise.resolve({
+						gameUrl: `${origin}/guardian/archive?id=394&uid=api-player-b`,
+					}),
+			} as Response);
+			await act(async () => {
+				mockedSubscribeToAuthStateChange.mock.calls[0]![0]();
+			});
+			await waitFor(() =>
+				expect(getUidFromSrc(iframe.src)).toBe('api-player-b'),
+			);
+			dispatch('input');
+			expect(reportPuzzleProgress).toHaveBeenCalledWith(
+				expect.objectContaining({ gameStatus: 'in-progress' }),
+			);
+		},
+	);
+
 	it('waits for the authenticated game URL before loading the iframe', async () => {
 		mockedGetAuthStatus.mockResolvedValue(signedIn('reader'));
 		let resolveGame: (response: Response) => void = () => undefined;

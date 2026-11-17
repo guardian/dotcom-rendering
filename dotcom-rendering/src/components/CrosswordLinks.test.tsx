@@ -20,7 +20,7 @@ describe('crossword PDF tracking', () => {
 			});
 			expect(link).toHaveAttribute(
 				'data-link-name',
-				'puzzles | pdf-open',
+				'puzzles | pdf-open | slug-cryptic | date-2024-11-03 | provider-guardian-crossword',
 			);
 		},
 	);

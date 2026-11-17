@@ -244,6 +244,37 @@ describe('resolvePuzzleIframeUrl', () => {
 
 describe('MovieGrid game URLs', () => {
 	it.each(['film-reveal', 'on-the-ball'])(
+		'preserves API provider identity for signed-out %s',
+		(slug) => {
+			const url = new URL(
+				resolvePuzzleIframeUrl(
+					puzzleConfigs[slug]!,
+					{ userId: null, darkMode: false },
+					`https://example.com/${slug}?id=opaque&uid=previous-reader`,
+				),
+			);
+			expect(url.searchParams.get('uid')).toBe('previous-reader');
+			expect(url.searchParams.get('id')).toBe('opaque');
+		},
+	);
+
+	it.each(['film-reveal', 'on-the-ball'])(
+		'does not replace API provider identity with the internal account for %s',
+		(slug) => {
+			const url = new URL(
+				resolvePuzzleIframeUrl(
+					puzzleConfigs[slug]!,
+					{ userId: 'current-reader', darkMode: false },
+					`https://example.com/${slug}?id=opaque&uid=previous-reader`,
+				),
+			);
+			expect(url.searchParams.get('uid')).toBe('previous-reader');
+			expect(url.searchParams.getAll('uid')).toHaveLength(1);
+			expect(url.searchParams.get('id')).toBe('opaque');
+		},
+	);
+
+	it.each(['film-reveal', 'on-the-ball'])(
 		'requires an API URL for %s rather than guessing a vendor URL',
 		(slug) => {
 			expect(() =>
