@@ -576,6 +576,7 @@ export const PuzzlePageLayout = ({
 							<GridItem area="title" element="aside">
 								<ArticleTitle
 									format={puzzlePageFormat}
+									ophanComponentLink="puzzles | in-page-nav | puzzle-page"
 									tags={puzzleFamilyTag}
 									sectionLabel={labelText}
 									sectionUrl={`puzzles-and-games/${puzzleGroupPath}/archive`}
@@ -884,6 +885,7 @@ export const PuzzlePageLayout = ({
 					<div data-print-layout="hide">
 						<PuzzlesUsefulLinks
 							id="puzzle-page"
+							ophanComponentName="puzzles-useful-links:puzzle-page"
 							title="Useful links"
 							links={instance.puzzlesSupporting.usefulLinks}
 							newsletter={instance.puzzlesSupporting.newsletter}

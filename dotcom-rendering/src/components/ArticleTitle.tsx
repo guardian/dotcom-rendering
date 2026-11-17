@@ -20,6 +20,7 @@ type Props = {
 	sectionUrl: string;
 	guardianBaseURL: string;
 	isMatch?: boolean;
+	ophanComponentLink?: string;
 };
 
 const sectionStyles = css`
@@ -85,6 +86,7 @@ export const ArticleTitle = ({
 	sectionUrl,
 	guardianBaseURL,
 	isMatch,
+	ophanComponentLink,
 }: Props) => {
 	const hasImmersivePortraitTitleRule =
 		layoutType === 'immersivePortrait' &&
@@ -92,6 +94,7 @@ export const ArticleTitle = ({
 
 	return (
 		<div
+			data-link-name={ophanComponentLink}
 			css={[
 				[ArticleDesign.Gallery, ArticleDesign.HostedGallery].includes(
 					format.design,
