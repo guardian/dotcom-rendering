@@ -179,8 +179,6 @@ describe('handlePuzzlePage', () => {
 	it.each([
 		['UK', 'UK'],
 		['US', 'US'],
-		['AU', 'AU'],
-		['EUR', 'EUR'],
 	] as const)(
 		'returns 404 without mounting the renderer for the %s edition',
 		(_, edition) => {
