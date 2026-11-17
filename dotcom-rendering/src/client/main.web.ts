@@ -1,7 +1,10 @@
 import './webpackPublicPath';
+import { initializeWeeklyArticleCounts } from '../lib/articleCount';
 import { adaptSite, shouldAdapt } from './adaptiveSite';
 import { startup } from './startup';
 import { maybeSIndicatorCapiKey } from './userFeatures/cookies/sIndicatorCapiKey';
+
+initializeWeeklyArticleCounts();
 
 void (async () => {
 	if (await shouldAdapt()) {

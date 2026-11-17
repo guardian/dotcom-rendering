@@ -19,12 +19,14 @@ export interface Guardian {
 		page: {
 			dcrCouldRender: boolean;
 			contentType: string;
+			pageId?: string;
 			edition: EditionId;
 			revisionNumber: string;
 			dcrSentryDsn: string;
 			sentryHost: string;
 			sentryPublicApiKey: string;
 			keywordIds: string;
+			toneIds?: string;
 			dfpAccountId: string;
 			adUnit: string;
 			showRelatedContent: boolean;

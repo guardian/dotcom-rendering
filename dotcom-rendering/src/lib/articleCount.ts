@@ -61,36 +61,69 @@ export const getDailyArticleCounts = (
  * @param {string} contentType
  * @return {*}  {(Promise<WeeklyArticleHistory | undefined>)}
  */
-export const getWeeklyArticleCounts = async (
+const computeWeeklyArticleCounts = async (
 	pageId: string,
 	tags: TagType[],
 	contentType: string,
 ): Promise<WeeklyArticleHistory | undefined> => {
 	if (await hasOptedOutOfWeeklyArticleCount()) return undefined;
 
-	if (!window.guardian.weeklyArticleCount) {
-		if (shouldIncrementArticleCount(contentType)) {
-			// hasOptedOut needs to be done before we check if articleCount is set in the window
-			// This is because a potential race condition where one invocation of getArticleCounts
-			// is waiting for hasOptedOut another invocation might receive it and increment the article count.
-
-			const keywordAndToneTagIds: string[] = tags
-				.filter((tag) =>
-					['tone', 'keyword'].includes(tag.type.toLowerCase()),
-				)
-				.map((tag) => tag.id);
-			incrementWeeklyArticleCount(
-				storage.local,
-				pageId,
-				keywordAndToneTagIds,
-			);
-		}
-		window.guardian.weeklyArticleCount = getWeeklyArticleHistory(
+	if (shouldIncrementArticleCount(contentType)) {
+		const keywordAndToneTagIds: string[] = tags
+			.filter((tag) =>
+				['tone', 'keyword'].includes(tag.type.toLowerCase()),
+			)
+			.map((tag) => tag.id);
+		incrementWeeklyArticleCount(
 			storage.local,
+			pageId,
+			keywordAndToneTagIds,
 		);
 	}
+	window.guardian.weeklyArticleCount = getWeeklyArticleHistory(storage.local);
 
 	return window.guardian.weeklyArticleCount;
+};
+
+export const getWeeklyArticleCounts = (
+	pageId: string,
+	tags: TagType[],
+	contentType: string,
+): Promise<WeeklyArticleHistory | undefined> =>
+	(window.guardian.weeklyArticleCountPromise ??= computeWeeklyArticleCounts(
+		pageId,
+		tags,
+		contentType,
+	));
+
+export const initializeWeeklyArticleCounts = (): void => {
+	const { pageId, keywordIds, toneIds, contentType } =
+		window.guardian.config.page;
+	const tags: TagType[] = [
+		...(keywordIds ? keywordIds.split(',') : []).map((id) => ({
+			id,
+			type: 'keyword',
+			title: '',
+		})),
+		...(toneIds ? toneIds.split(',') : []).map((id) => ({
+			id,
+			type: 'tone',
+			title: '',
+		})),
+	];
+	const resolve = window.guardian.resolveWeeklyArticleCount;
+	const reject = window.guardian.rejectWeeklyArticleCount;
+
+	if (resolve && reject) {
+		delete window.guardian.resolveWeeklyArticleCount;
+		delete window.guardian.rejectWeeklyArticleCount;
+		void computeWeeklyArticleCounts(pageId ?? '', tags, contentType).then(
+			resolve,
+			reject,
+		);
+	} else {
+		void getWeeklyArticleCounts(pageId ?? '', tags, contentType);
+	}
 };
 
 export const getArticleCounts = async (
@@ -99,11 +132,15 @@ export const getArticleCounts = async (
 	contentType: string,
 ): Promise<ArticleCounts | undefined> => {
 	getDailyArticleCounts(contentType);
-	await getWeeklyArticleCounts(pageId, tags, contentType);
+	const weeklyArticleHistory = await getWeeklyArticleCounts(
+		pageId,
+		tags,
+		contentType,
+	);
 
 	return {
 		dailyArticleHistory: window.guardian.dailyArticleCount ?? [],
-		weeklyArticleHistory: window.guardian.weeklyArticleCount ?? [],
+		weeklyArticleHistory: weeklyArticleHistory ?? [],
 	};
 };
 

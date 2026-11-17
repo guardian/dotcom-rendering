@@ -46,6 +46,13 @@ declare global {
 			ophan?: typeof ophan;
 			readerRevenue: ReaderRevenueDevUtils;
 			weeklyArticleCount: WeeklyArticleHistory | undefined;
+			weeklyArticleCountPromise?: Promise<
+				WeeklyArticleHistory | undefined
+			>;
+			resolveWeeklyArticleCount?: (
+				history: WeeklyArticleHistory | undefined,
+			) => void;
+			rejectWeeklyArticleCount?: (reason: unknown) => void;
 			dailyArticleCount: DailyArticleHistory | undefined;
 		};
 		/**

@@ -283,6 +283,14 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <script>
                     window.guardian = ${windowGuardian};
                     window.guardian.queue = []; // Queue for functions to be fired by polyfill.io callback
+                    ${
+						renderingTarget === 'Web'
+							? `window.guardian.weeklyArticleCountPromise = new Promise(function(resolve, reject) {
+                        window.guardian.resolveWeeklyArticleCount = resolve;
+                        window.guardian.rejectWeeklyArticleCount = reject;
+                    });`
+							: ''
+					}
                 </script>
 
                 <script type="module">
