@@ -64,7 +64,7 @@ export const PrivacySettingsLink = ({ extraClasses }: Props) => {
 			}}
 		>
 			{framework === 'usnat'
-				? 'Do Not Sell or Share my personal information'
+				? 'Do not sell or share my personal information'
 				: 'Privacy settings'}
 		</ButtonLink>
 	);
