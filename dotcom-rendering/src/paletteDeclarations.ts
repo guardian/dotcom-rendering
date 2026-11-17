@@ -4895,15 +4895,6 @@ const linkKickerTextDark: PaletteFunction = ({ theme }) => {
 	}
 };
 
-const ageWarningWrapperBackground: PaletteFunction = (format) => {
-	switch (format.design) {
-		case ArticleDesign.Interview:
-		case ArticleDesign.Gallery:
-			return 'transparent';
-		default:
-			return headlineBackgroundLight(format);
-	}
-};
 const ageWarningBackgroundLight: PaletteFunction = () =>
 	sourcePalette.brandAlt[400];
 const ageWarningBackgroundDark: PaletteFunction = () =>
@@ -6885,10 +6876,6 @@ const paletteColours = {
 	'--age-warning-text': {
 		light: ageWarningText,
 		dark: ageWarningText,
-	},
-	'--age-warning-wrapper-background': {
-		light: ageWarningWrapperBackground,
-		dark: ageWarningWrapperBackground,
 	},
 	'--apps-directory-page-nav-background': {
 		light: () => sourcePalette.neutral[97],
