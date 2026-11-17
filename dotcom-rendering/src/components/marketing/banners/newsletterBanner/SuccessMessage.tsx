@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { space, textSans15, until } from '@guardian/source/foundations';
+import {
+	neutral,
+	space,
+	textSans15,
+	until,
+} from '@guardian/source/foundations';
 import { LinkButton, SvgTickRound } from '@guardian/source/react-components';
 import type { NewsletterBannerData } from './NewsletterBannerData';
 
@@ -41,17 +46,15 @@ export const SuccessMessage = ({
 	bannerData: NewsletterBannerData;
 }) => {
 	const { name: newsletterName, frequency } = bannerData.newsletter;
-	const {
-		successTextColor,
-		successIconColor,
-		browseButtonTextColor,
-		browseButtonBorderColor,
-	} = bannerData.settings.newsletterBanner;
+	const { successIconColor, browseButtonColor } =
+		bannerData.settings.newsletterBanner;
+	const bodyText =
+		bannerData.settings.containerSettings.textColor ?? neutral[20];
 	return (
 		<div css={successContainerStyles(successIconColor)}>
 			<SvgTickRound />
 			<div css={successContentStyles}>
-				<span css={successTextStyles(successTextColor)} role="alert">
+				<span css={successTextStyles(bodyText)} role="alert">
 					<strong>You&apos;re signed up!</strong>
 					&nbsp;
 					<span>
@@ -61,8 +64,8 @@ export const SuccessMessage = ({
 				</span>
 				<LinkButton
 					theme={{
-						textTertiary: browseButtonTextColor,
-						borderTertiary: browseButtonBorderColor,
+						textTertiary: browseButtonColor,
+						borderTertiary: browseButtonColor,
 					}}
 					href="/email-newsletters?INTCMP=DOTCOM_NEWSLETTER_SIGNUP_CARD"
 					priority="tertiary"

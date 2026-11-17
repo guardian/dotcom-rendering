@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	palette,
-	space,
-	textSans17,
-	until,
-} from '@guardian/source/foundations';
+import { space, textSans17, until } from '@guardian/source/foundations';
 import {
 	Button,
 	Link,
@@ -13,9 +8,9 @@ import {
 } from '@guardian/source/react-components';
 import type { NewsletterBannerData } from './NewsletterBannerData';
 
-const responseBoxStyles = css`
+const responseBoxStyles = (borderColor: string) => css`
 	padding: 7px 12px 16px 7.5px;
-	border: 1px solid ${palette.neutral[86]};
+	border: 1px solid ${borderColor};
 	border-radius: 4px;
 	margin-top: ${space[2]}px;
 	${until.tablet} {
@@ -77,10 +72,19 @@ export const FailureMessage = ({
 	onRetry: React.MouseEventHandler<HTMLButtonElement>;
 	text: string;
 }) => {
-	const { errorColor, signupButtonBackgroundColor, signupButtonTextColor } =
-		bannerData.settings.newsletterBanner;
+	const {
+		errorColor,
+		signupButtonBackgroundColor,
+		signupButtonTextColor,
+		borderColor,
+	} = bannerData.settings.newsletterBanner;
 	return (
-		<div css={[responseBoxStyles, errorContainerStyles(errorColor)]}>
+		<div
+			css={[
+				responseBoxStyles(borderColor),
+				errorContainerStyles(errorColor),
+			]}
+		>
 			<SvgAlertRound />
 			<div css={errorContentStyles}>
 				<span css={errorTextStyles} role="alert">

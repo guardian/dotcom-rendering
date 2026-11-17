@@ -1,7 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source/foundations';
-import { palette } from '../../../../palette';
 import { contentTransitionEasing } from '../../shared/transitions';
 
 const newsletterFormTransition = `0.2s ${contentTransitionEasing}`;
@@ -115,10 +114,10 @@ export const styles = {
 		gap: ${space[3]}px;
 		min-width: 0;
 	`,
-	marketingToggleBox: css`
+	marketingToggleBox: (borderColor: string): SerializedStyles => css`
 		width: 100%;
 		padding: ${space[2]}px;
-		border: 1px solid ${palette('--card-border-supporting')};
+		border: 1px solid ${borderColor};
 		border-radius: 4px;
 	`,
 	toggleText: (

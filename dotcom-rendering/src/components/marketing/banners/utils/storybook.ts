@@ -3,7 +3,6 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/0a2439b701586a7a2cc60dce10b4d96cf7a828db/packages/modules/src/modules/banners/utils/storybook.ts
  */
-import { neutral } from '@guardian/source/foundations';
 import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type {
 	BannerProps,
@@ -144,11 +143,11 @@ export const design: ConfigurableDesign = {
 export const newsletterDesign: NewsletterBannerDesign = {
 	colours: {
 		basic: {
-			background: { r: 'F3', g: 'F7', b: 'FF', kind: 'hex' },
-			bodyText: { r: '33', g: '33', b: '33', kind: 'hex' },
-			headerText: { r: '12', g: '12', b: '12', kind: 'hex' },
-			articleCountText: { r: '00', g: '00', b: '00', kind: 'hex' },
-			logo: { r: '00', g: '00', b: '00', kind: 'hex' },
+			background: stringToHexColour('F3F7FF'),
+			bodyText: stringToHexColour('333333'),
+			headerText: stringToHexColour('121212'),
+			articleCountText: stringToHexColour('000000'),
+			logo: stringToHexColour('000000'),
 		},
 		newsletterBanner: {
 			divider: stringToHexColour('DCDCDC'),
@@ -157,13 +156,10 @@ export const newsletterDesign: NewsletterBannerDesign = {
 			emailInputTextColor: stringToHexColour('121212'),
 			emailInputBackgroundColor: stringToHexColour('FFFFFF'),
 			errorColor: stringToHexColour('C70000'),
-			privacyTextColor: stringToHexColour(neutral[46].slice(1)),
-			toggleTextColor: stringToHexColour(neutral[20].slice(1)),
+			privacyTextColor: stringToHexColour('707070'),
 			toggleActiveColor: stringToHexColour('22874D'),
-			successTextColor: stringToHexColour(neutral[20].slice(1)),
 			successIconColor: stringToHexColour('58D08B'),
-			browseButtonTextColor: stringToHexColour('052962'),
-			browseButtonBorderColor: stringToHexColour('052962'),
+			browseButtonColor: stringToHexColour('052962'),
 		},
 		highlightedText: {
 			text: { r: '33', g: '33', b: '33', kind: 'hex' },
@@ -200,9 +196,15 @@ export const newsletterDesign: NewsletterBannerDesign = {
 };
 
 export const newsletterDesignDark: NewsletterBannerDesign = {
-	...newsletterDesign,
 	colours: {
 		...newsletterDesign.colours,
+		basic: {
+			background: stringToHexColour('1A1A1A'),
+			bodyText: stringToHexColour('EDEDED'),
+			headerText: stringToHexColour('FFFFFF'),
+			articleCountText: stringToHexColour('FFFFFF'),
+			logo: stringToHexColour('FFFFFF'),
+		},
 		newsletterBanner: {
 			divider: stringToHexColour('545454'),
 			actionColor: stringToHexColour('EACCA0'),
@@ -211,39 +213,13 @@ export const newsletterDesignDark: NewsletterBannerDesign = {
 			emailInputBackgroundColor: stringToHexColour('333333'),
 			emailInputBorderColor: stringToHexColour('EDEDED'),
 			signupButtonBackgroundColor: stringToHexColour('FFFFFF'),
-			signupButtonTextColor: stringToHexColour('1A1A1A'),
+			signupButtonTextColor: stringToHexColour('000000'),
 			errorColor: stringToHexColour('FF9081'),
 			privacyTextColor: stringToHexColour('EDEDED'),
-			toggleTextColor: stringToHexColour('DCDCDC'),
+			borderColor: stringToHexColour('999999'),
 			toggleActiveColor: stringToHexColour('28A85F'),
-			successTextColor: stringToHexColour('DCDCDC'),
 			successIconColor: stringToHexColour('58D08B'),
-			browseButtonTextColor: stringToHexColour('DCDCDC'),
-			browseButtonBorderColor: stringToHexColour('DCDCDC'),
-		},
-		basic: {
-			background: stringToHexColour('1A1A1A'),
-			bodyText: stringToHexColour('EDEDED'),
-			headerText: stringToHexColour('FFFFFF'),
-			articleCountText: stringToHexColour('FFFFFF'),
-			logo: stringToHexColour('FFFFFF'),
-		},
-		highlightedText: {
-			text: stringToHexColour('FFFFFF'),
-			highlight: stringToHexColour('FFE500'),
-		},
-		primaryCta: {
-			default: {
-				text: stringToHexColour('1A1A1A'),
-				background: stringToHexColour('C4A484'),
-			},
-		},
-		secondaryCta: {
-			default: {
-				text: stringToHexColour('FFFFFF'),
-				background: stringToHexColour('333333'),
-				border: stringToHexColour('FFFFFF'),
-			},
+			browseButtonColor: stringToHexColour('EDEDED'),
 		},
 		closeButton: {
 			default: {
@@ -251,13 +227,6 @@ export const newsletterDesignDark: NewsletterBannerDesign = {
 				background: stringToHexColour('333333'),
 				border: stringToHexColour('333333'),
 			},
-		},
-		ticker: {
-			filledProgress: stringToHexColour('FFE500'),
-			progressBarBackground: stringToHexColour('333333'),
-			headlineColour: stringToHexColour('FFE500'),
-			totalColour: stringToHexColour('FFFFFF'),
-			goalColour: stringToHexColour('FFE500'),
 		},
 	},
 };

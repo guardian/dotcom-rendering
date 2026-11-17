@@ -124,6 +124,37 @@ describe('NewsletterBanner configuration', () => {
 		expect(banner.props).toMatchObject(runtimeProps);
 	});
 
+	it.each(['Newsletter description', undefined])(
+		'hides configured highlighted text when the newsletter description is %s',
+		(signUpDescription) => {
+			const paragraph = 'Configured banner paragraph';
+			const content = {
+				...sdcNewsletterProps.content,
+				paragraphs: [paragraph],
+				highlightedText: 'Configured highlighted text',
+			};
+			render(
+				<NewsletterBanner
+					{...sdcNewsletterProps}
+					content={content}
+					mobileContent={content}
+					promotedNewsletter={{
+						...sdcNewsletterProps.promotedNewsletter,
+						signUpDescription,
+					}}
+					idApiUrl="https://idapi.theguardian.com"
+				/>,
+			);
+
+			expect(
+				testingScreen.queryByText('Configured highlighted text'),
+			).not.toBeInTheDocument();
+			expect(
+				testingScreen.getByText(signUpDescription ?? paragraph),
+			).toBeInTheDocument();
+		},
+	);
+
 	it('renders older designs without newsletter colours and supports signup', () => {
 		const colours = { ...newsletterDesign.colours };
 		delete colours.newsletterBanner;

@@ -42,6 +42,7 @@ const buildNewsletterBannerData = (
 			...baseBannerData.selectors,
 			copyForViewport: {
 				...baseBannerData.selectors.copyForViewport,
+				highlightedText: undefined,
 				paragraphs:
 					newsletter.signUpDescription !== undefined
 						? [<>{newsletter.signUpDescription}</>]

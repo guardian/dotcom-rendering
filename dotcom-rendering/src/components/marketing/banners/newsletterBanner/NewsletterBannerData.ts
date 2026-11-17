@@ -10,7 +10,6 @@ export interface NewsletterBannerSettings {
 	divider: string;
 	actionColor: string;
 	frequencyIconColor: string;
-	headingColor: string;
 	emailInputTextColor: string;
 	emailInputBackgroundColor: string;
 	emailInputBorderColor?: string;
@@ -18,12 +17,10 @@ export interface NewsletterBannerSettings {
 	signupButtonTextColor?: string;
 	errorColor: string;
 	privacyTextColor: string;
-	toggleTextColor: string;
+	borderColor: string;
 	toggleActiveColor?: string;
-	successTextColor: string;
 	successIconColor: string;
-	browseButtonTextColor: string;
-	browseButtonBorderColor: string;
+	browseButtonColor: string;
 }
 
 export interface NewsletterBannerData extends BannerData {
@@ -50,10 +47,6 @@ export const buildNewsletterBannerSettings = (
 			colours?.frequencyIconColor,
 			themePalette('--newsletter-card-badge-icon'),
 		),
-		headingColor: resolveColour(
-			design?.colours.basic.headerText,
-			neutral[7],
-		),
 		emailInputTextColor: resolveColour(
 			colours?.emailInputTextColor,
 			neutral[7],
@@ -74,21 +67,19 @@ export const buildNewsletterBannerSettings = (
 			hexColourToString(colours.signupButtonTextColor),
 		errorColor: resolveColour(colours?.errorColor, palette.error[400]),
 		privacyTextColor: resolveColour(colours?.privacyTextColor, neutral[46]),
-		toggleTextColor: resolveColour(colours?.toggleTextColor, neutral[20]),
+		borderColor: resolveColour(
+			colours?.borderColor,
+			themePalette('--card-border-supporting'),
+		),
 		toggleActiveColor:
 			colours?.toggleActiveColor &&
 			hexColourToString(colours.toggleActiveColor),
-		successTextColor: resolveColour(colours?.successTextColor, neutral[20]),
 		successIconColor: resolveColour(
 			colours?.successIconColor,
 			palette.success[400],
 		),
-		browseButtonTextColor: resolveColour(
-			colours?.browseButtonTextColor,
-			brand[400],
-		),
-		browseButtonBorderColor: resolveColour(
-			colours?.browseButtonBorderColor,
+		browseButtonColor: resolveColour(
+			colours?.browseButtonColor,
 			brand[400],
 		),
 	};

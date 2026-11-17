@@ -1,4 +1,5 @@
 import type { AbTest } from '@guardian/ophan-tracker-js';
+import { neutral } from '@guardian/source/foundations';
 import { Button, TextInput } from '@guardian/source/react-components';
 import { ToggleSwitch } from '@guardian/source-development-kitchen/react-components';
 import { type ChangeEvent, useEffect } from 'react';
@@ -42,11 +43,12 @@ export const NewsletterSignupForm = ({
 		signupButtonBackgroundColor,
 		signupButtonTextColor,
 		errorColor,
-		headingColor,
 		privacyTextColor,
-		toggleTextColor,
+		borderColor,
 		toggleActiveColor,
 	} = bannerData.settings.newsletterBanner;
+	const bodyText =
+		bannerData.settings.containerSettings.textColor ?? neutral[20];
 	const { renderingTarget } = useConfig();
 	const hideMarketingToggle = useHideMarketingToggleForCountry();
 
@@ -130,7 +132,7 @@ export const NewsletterSignupForm = ({
 								emailInputTextColor,
 							)}
 							theme={{
-								textLabel: headingColor,
+								textLabel: emailInputTextColor,
 								textUserInput: emailInputTextColor,
 								backgroundInput: emailInputBackgroundColor,
 								textError: errorColor,
@@ -189,10 +191,12 @@ export const NewsletterSignupForm = ({
 										: 'none',
 								}}
 							>
-								<div css={styles.marketingToggleBox}>
+								<div
+									css={styles.marketingToggleBox(borderColor)}
+								>
 									<ToggleSwitch
 										cssOverrides={styles.toggleText(
-											toggleTextColor,
+											bodyText,
 											toggleActiveColor,
 										)}
 										id={`marketing-opt-in-${newsletterId}`}

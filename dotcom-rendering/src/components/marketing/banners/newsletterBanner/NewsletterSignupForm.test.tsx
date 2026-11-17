@@ -5,7 +5,7 @@ import {
 	screen as testingScreen,
 } from '@testing-library/react';
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
-import { props } from '../utils/storybook';
+import { newsletterDesignDark, props } from '../utils/storybook';
 import type {
 	NewsletterBannerData,
 	NewsletterBannerSettings,
@@ -91,7 +91,6 @@ const bannerData: NewsletterBannerData = {
 		highlightedTextSettings: { textColour: '#121212' },
 		newsletterBanner: {
 			...buildNewsletterBannerSettings(undefined),
-			headingColor: '#FFFFFF',
 		},
 	},
 	isCollapsed: false,
@@ -124,7 +123,10 @@ const bannerData: NewsletterBannerData = {
 };
 
 const form = (
-	settings: Partial<NewsletterBannerSettings> = {},
+	{
+		bodyText = '#333333',
+		...settings
+	}: Partial<NewsletterBannerSettings> & { bodyText?: string } = {},
 	onSuccess?: () => void,
 ) => (
 	<NewsletterSignupForm
@@ -132,6 +134,10 @@ const form = (
 			...bannerData,
 			settings: {
 				...bannerData.settings,
+				containerSettings: {
+					...bannerData.settings.containerSettings,
+					textColor: bodyText,
+				},
 				newsletterBanner: {
 					...bannerData.settings.newsletterBanner,
 					...settings,
@@ -160,7 +166,7 @@ describe('newsletter banner signup form', () => {
 		expect(ReactGoogleRecaptcha).toHaveBeenCalled();
 		expect(onSuccess).not.toHaveBeenCalled();
 		expect(testingScreen.getByText('Enter your email')).toHaveStyle({
-			color: '#FFFFFF',
+			color: '#121212',
 		});
 		expect(
 			testingScreen.getByRole('button', { name: 'Sign up' }),
@@ -188,9 +194,21 @@ describe('newsletter banner signup form', () => {
 			borderColor: '#FF9081',
 		});
 		expect(testingScreen.getByText('Enter your email')).toHaveStyle({
-			color: '#FFFFFF',
+			color: '#121212',
 		});
 	});
+
+	it.each([false, true])(
+		'uses the dark design email label color with validation error %s',
+		(isValidationError) => {
+			mockIsValidationError = isValidationError;
+			render(form(buildNewsletterBannerSettings(newsletterDesignDark)));
+
+			expect(testingScreen.getByText('Enter your email')).toHaveStyle({
+				color: '#EDEDED',
+			});
+		},
+	);
 
 	it.each(['test@example.com', 'invalid-email'])(
 		'keeps the input text color on validation error for %s',
@@ -272,6 +290,7 @@ describe('newsletter banner signup form', () => {
 			form({
 				signupButtonBackgroundColor: '#8F6A70',
 				errorColor: '#FF9081',
+				borderColor: '#123456',
 			}),
 		);
 
@@ -279,6 +298,7 @@ describe('newsletter banner signup form', () => {
 		expect(alert).toHaveTextContent('Sign up failed.');
 		expect(alert.parentElement?.parentElement).toHaveStyle({
 			color: '#FF9081',
+			border: '1px solid #123456',
 		});
 		expect(
 			testingScreen.getByRole('button', { name: 'Try again' }),
@@ -287,16 +307,14 @@ describe('newsletter banner signup form', () => {
 
 	it('uses the signup button colors for the retry button', () => {
 		mockResponseOk = false;
-		render(
-			form({
-				signupButtonBackgroundColor: '#FFFFFF',
-				signupButtonTextColor: '#1A1A1A',
-			}),
-		);
+		render(form(buildNewsletterBannerSettings(newsletterDesignDark)));
 
 		expect(
 			testingScreen.getByRole('button', { name: 'Try again' }),
 		).toHaveStyle({ backgroundColor: '#FFFFFF', color: '#1A1A1A' });
+		expect(
+			testingScreen.getByRole('alert').parentElement?.parentElement,
+		).toHaveStyle({ border: '1px solid #999999' });
 	});
 
 	it.each(['#707070', '#EDEDED'])(
@@ -314,15 +332,15 @@ describe('newsletter banner signup form', () => {
 		},
 	);
 
-	it.each(['#333333', '#DCDCDC'])(
-		'uses %s for the marketing toggle label',
-		(toggleTextColor) => {
-			render(form({ toggleTextColor }));
+	it.each(['#333333', '#EDEDED'])(
+		'uses body text color %s for the marketing toggle label',
+		(bodyText) => {
+			render(form({ bodyText }));
 			expect(
 				testingScreen.getByText(
 					'Get updates about our journalism and ways to support and enjoy our work. Toggle to opt out.',
 				),
-			).toHaveStyle({ color: toggleTextColor });
+			).toHaveStyle({ color: bodyText });
 		},
 	);
 

@@ -77,12 +77,10 @@ export type NewsletterBannerDesign = Omit<ConfigurableDesign, 'colours'> & {
 			signupButtonTextColor?: HexColour;
 			errorColor: HexColour;
 			privacyTextColor: HexColour;
-			toggleTextColor: HexColour;
+			borderColor?: HexColour;
 			toggleActiveColor?: HexColour;
-			successTextColor: HexColour;
 			successIconColor?: HexColour;
-			browseButtonTextColor: HexColour;
-			browseButtonBorderColor: HexColour;
+			browseButtonColor: HexColour;
 		};
 	};
 };
