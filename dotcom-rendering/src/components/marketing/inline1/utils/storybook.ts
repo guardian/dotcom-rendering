@@ -1,37 +1,12 @@
 import type { Inline1Variant } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { Inline1Props } from '@guardian/support-dotcom-components/dist/shared/types/props/inline1';
 
-// const variant = {
-// 	name: 'Inline1SupportMessage',
-// 	message: {
-// 		type: 'Inline1SupportMessage' as const,
-// 		heading: 'Two-line headline for the primary messaging ',
-// 		body: 'Lorem ipsum dolor sit amet consectetur adipiscing elit non autem quo est ullamco laboris consequat duis sunt et.',
-// 		primaryCta: {
-// 			baseUrl: '#',
-// 			text: 'Primary md',
-// 		},
-// 		image: {
-// 			mainUrl:
-// 				'https://uploads.guim.co.uk/2025/06/12/not_for_sale_bg_scaled.svg',
-// 			mobileUrl:
-// 				'https://uploads.guim.co.uk/2025/06/12/not_for_sale_bg_scaled.svg',
-// 			tabletUrl:
-// 				'https://uploads.guim.co.uk/2025/06/12/not_for_sale_bg_scaled.svg',
-// 			desktopUrl:
-// 				'https://uploads.guim.co.uk/2025/06/12/not_for_sale_bg_scaled.svg',
-// 			altText: 'Optional img',
-// 		},
-// 	},
-// };
-
-const variant = {
+const supportVariant = {
 	name: 'CONTROL',
 	message: {
 		type: 'Inline1SupportMessage' as const,
-		heading:
-			'Test <strong>Heading </strong>with <em>different </em><s>formatting</s>',
-		body: 'Test Body',
+		heading: 'Headline - 48 characters, including spaces and punctuation.',
+		body: 'Lorem ipsum dolor sit amet. Supporting copy  should be 136 characters, including spaces and punctuation.',
 		primaryCta: {
 			text: 'Try Feast app',
 			baseUrl:
@@ -39,11 +14,11 @@ const variant = {
 		},
 		image: {
 			mobileUrl:
-				'https://i.guim.co.uk/img/media/d5fd46298bb30b3f4779a625df0a1c1054431474/68_428_3058_3819/master/3058.jpg?width=164&dpr=2&s=none&crop=none',
+				'https://i.guim.co.uk/img/media/d5fd46298bb30b3f4779a625df0a1c1054431474/68_428_3058_3819/master/3058.jpg?width=210&dpr=2&s=none',
 			tabletUrl:
-				'https://i.guim.co.uk/img/media/d5fd46298bb30b3f4779a625df0a1c1054431474/68_428_3058_3819/master/3058.jpg?width=328&dpr=2&s=none&crop=none',
+				'https://i.guim.co.uk/img/media/d5fd46298bb30b3f4779a625df0a1c1054431474/68_428_3058_3819/master/3058.jpg?width=157&dpr=2&s=none',
 			desktopUrl:
-				'https://i.guim.co.uk/img/media/d5fd46298bb30b3f4779a625df0a1c1054431474/68_428_3058_3819/master/3058.jpg?width=756&dpr=2&s=none&crop=none',
+				'https://i.guim.co.uk/img/media/d5fd46298bb30b3f4779a625df0a1c1054431474/68_428_3058_3819/master/3058.jpg?width=157&dpr=2&s=none',
 			altText: 'Feast app download',
 		},
 	},
@@ -75,8 +50,8 @@ export const tracking = {
 	referrerUrl: '',
 };
 
-export const props: Inline1Props = {
-	variant,
+export const supportProps: Inline1Props = {
+	variant: supportVariant,
 	tracking,
 };
 

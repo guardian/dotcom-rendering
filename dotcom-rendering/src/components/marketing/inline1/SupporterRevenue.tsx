@@ -68,6 +68,7 @@ const bodyStyles = css`
 	${textSans15};
 	${from.tablet} {
 		grid-area: body;
+		margin-bottom: 28px;
 	}
 `;
 
@@ -95,7 +96,6 @@ const ctaButtonStyles = css`
 const imageWrapperStyles = css`
 	display: flex;
 	align-items: flex-end;
-	height: 144px;
 	${from.tablet} {
 		grid-area: image;
 	}
@@ -103,9 +103,15 @@ const imageWrapperStyles = css`
 
 const imageStyles = css`
 	img {
-		height: 131px;
-		width: 164px;
 		object-fit: cover;
+		height: 126px;
+		width: 157px;
+	}
+
+	${until.tablet} {
+		img {
+			width: 210px;
+		}
 	}
 `;
 
