@@ -200,7 +200,8 @@ export const StandardLayoutArticleGrid = ({
 		if (
 			isLabs ||
 			gridLayout === 'interactiveStandard' ||
-			gridLayout === 'interactiveTopHat'
+			gridLayout === 'interactiveTopHat' ||
+			gridLayout === 'documentary'
 		) {
 			return undefined;
 		}
@@ -270,6 +271,7 @@ export const StandardLayoutArticleGrid = ({
 
 	const hideCaptionBeneathMainMedia =
 		layoutType === 'media' ||
+		layoutType === 'documentary' ||
 		isInteractiveTopHat ||
 		isImmersiveLandscape ||
 		isImmersivePortrait;
@@ -292,7 +294,7 @@ export const StandardLayoutArticleGrid = ({
 				`,
 				grid.container,
 				hasPageSkin && grid.pageSkinContainer,
-				grid.outerRules(),
+				layoutType !== 'documentary' && grid.outerRules(),
 				setCentreRule(layoutType),
 				isImmersive &&
 					css`
