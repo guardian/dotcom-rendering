@@ -55,7 +55,7 @@ const archiveFor = (puzzle = easy, month = 9): PuzzlesArchive => ({
 	moreFrom: [],
 });
 const configOverrides = {
-	serverSideABTests: { 'puzzles-new-hub-v1': 'variant' },
+	edition: 'INT',
 };
 const menuItem = (id: string, title: string, slug: string): PuzzleItem => ({
 	id,

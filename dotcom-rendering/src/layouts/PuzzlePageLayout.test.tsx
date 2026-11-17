@@ -3,8 +3,6 @@ import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
 import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
 import { ConfigProvider } from '../components/ConfigContext';
 import {
-	puzzlesHubV1Experiment,
-	puzzlesHubV1Participation,
 	puzzlesHubV2Experiment,
 	puzzlesHubV2Participation,
 	puzzlesHubV3Experiment,
@@ -53,13 +51,9 @@ jest.mock('../lib/useAB', () => ({
 	useAB: jest.fn().mockReturnValue(null),
 }));
 
-const v1On = puzzlesHubV1Participation(puzzlesHubV1Experiment.variant);
-const v1AndV2On = {
-	...v1On,
-	...puzzlesHubV2Participation(puzzlesHubV2Experiment.variant),
-};
-const v1V2AndV3On = {
-	...v1AndV2On,
+const v2On = puzzlesHubV2Participation(puzzlesHubV2Experiment.variant);
+const v2AndV3On = {
+	...v2On,
 	...puzzlesHubV3Participation(puzzlesHubV3Experiment.variant),
 };
 
@@ -272,7 +266,7 @@ describe('PuzzlePageLayout', () => {
 			const { container } = renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: {},
+					edition: 'UK',
 				},
 			});
 
@@ -289,7 +283,7 @@ describe('PuzzlePageLayout', () => {
 			const { container } = renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: v1On,
+					edition: 'INT',
 				},
 			});
 
@@ -309,7 +303,8 @@ describe('PuzzlePageLayout', () => {
 			const { container } = renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: v1AndV2On,
+					edition: 'INT',
+					serverSideABTests: v2On,
 				},
 			});
 
@@ -365,7 +360,7 @@ describe('PuzzlePageLayout', () => {
 			const { container } = renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: v1On,
+					edition: 'INT',
 				},
 			});
 
@@ -391,7 +386,7 @@ describe('PuzzlePageLayout', () => {
 			renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: v1On,
+					edition: 'INT',
 				},
 				instance: {
 					...createPuzzlePage('sudoku-easy').instance,
@@ -420,7 +415,7 @@ describe('PuzzlePageLayout', () => {
 			renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: {},
+					edition: 'UK',
 				},
 			});
 
@@ -496,11 +491,12 @@ describe('PuzzlePageLayout', () => {
 		const renderPremiumPuzzle = (
 			serverSideABTests: Record<string, string>,
 			requiresSubscription: boolean | undefined = true,
+			edition: 'INT' | 'UK' = 'INT',
 		) => {
 			const base = createPuzzlePage('sudoku-easy');
 			return renderPuzzlePageLayout('sudoku-easy', {
 				isAdFreeUser: false,
-				config: { ...base.config, serverSideABTests },
+				config: { ...base.config, edition, serverSideABTests },
 				instance: { ...base.instance, requiresSubscription },
 			});
 		};
@@ -513,7 +509,7 @@ describe('PuzzlePageLayout', () => {
 			) as { requiresSubscription?: boolean };
 
 		it('does not render any ad slots for a premium puzzle, even for a non-ad-free reader', () => {
-			const { container } = renderPremiumPuzzle(v1V2AndV3On);
+			const { container } = renderPremiumPuzzle(v2AndV3On);
 
 			expect(
 				container.querySelector('#dfp-ad--top-above-nav'),
@@ -534,7 +530,7 @@ describe('PuzzlePageLayout', () => {
 		});
 
 		it('still renders ad slots when the puzzle is explicitly not premium', () => {
-			const { container } = renderPremiumPuzzle(v1V2AndV3On, false);
+			const { container } = renderPremiumPuzzle(v2AndV3On, false);
 
 			expect(
 				container.querySelector('#dfp-ad--merchandising-high'),
@@ -543,32 +539,32 @@ describe('PuzzlePageLayout', () => {
 		});
 
 		it.each([
-			['no test participation', {}],
-			['v1 only', v1On],
-			['v1 and v2 without v3', v1AndV2On],
+			['no test participation', {}, 'INT'],
+			['v2 only', v2On, 'INT'],
 			[
-				'v1 and v3 without v2',
-				{
-					...v1On,
-					...puzzlesHubV3Participation(
-						puzzlesHubV3Experiment.variant,
-					),
-				},
+				'v3 without v2',
+				puzzlesHubV3Participation(puzzlesHubV3Experiment.variant),
+				'INT',
 			],
-			['v3 without v1 and v2', puzzlesHubV3Participation('variant')],
 			[
 				'v3 in control',
 				{
-					...v1AndV2On,
+					...v2On,
 					...puzzlesHubV3Participation(
 						puzzlesHubV3Experiment.control,
 					),
 				},
+				'INT',
 			],
-		])(
+			['v2 and v3 outside the hub editions', v2AndV3On, 'UK'],
+		] as const)(
 			'treats a premium puzzle as free outside puzzles-new-hub-v3 (%s)',
-			(_label, serverSideABTests) => {
-				const { container } = renderPremiumPuzzle(serverSideABTests);
+			(_label, serverSideABTests, edition) => {
+				const { container } = renderPremiumPuzzle(
+					serverSideABTests,
+					true,
+					edition,
+				);
 
 				expect(
 					container.querySelector('#dfp-ad--merchandising-high'),

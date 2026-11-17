@@ -7,8 +7,9 @@ import type { LinkType } from '../model/extract-nav';
  * The hub keeps the parent inline with the category links; archive and game pages
  * supply it separately as `subNavSections.parent`.
  *
- * V0 shows only the parent link. V1 adds Crosswords, Word games and Logic
- * puzzles; V2 also adds Trivia & quizzes, linking to its archive.
+ * Without hub access only the parent link is shown. Hub access (edition gate)
+ * adds Crosswords, Word games and Logic puzzles; v2 also adds Trivia & quizzes,
+ * linking to its archive.
  */
 export const PUZZLES_SUBNAV_PARENT: LinkType = {
 	title: 'Puzzles & games',

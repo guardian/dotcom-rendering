@@ -18,7 +18,7 @@ const puzzlePath = `puzzles-and-games/logic-puzzles/sudoku-easy/${date}`;
 const crosswordPath = 'crosswords/quick/17599';
 const pdf = 'https://example.com/crossword.pdf';
 const configOverrides = {
-	serverSideABTests: { 'puzzles-new-hub-v1': 'variant' },
+	edition: 'INT',
 };
 
 declare global {

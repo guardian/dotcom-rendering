@@ -7,8 +7,6 @@ import {
 } from '../../fixtures/manual/puzzlesPage';
 import { PuzzlesLayout } from '../layouts/PuzzlesLayout';
 import {
-	puzzlesHubV1Experiment,
-	puzzlesHubV1Participation,
 	puzzlesHubV2Experiment,
 	puzzlesHubV2Participation,
 } from '../lib/puzzlesHubVersionExperiment';
@@ -207,8 +205,8 @@ export const Sponsored = () => {
 	const page = createPuzzlesPage({ layout, isAdFreeUser: true });
 	const config = {
 		...page.config,
+		edition: 'INT' as const,
 		serverSideABTests: {
-			...puzzlesHubV1Participation(puzzlesHubV1Experiment.variant),
 			...puzzlesHubV2Participation(puzzlesHubV2Experiment.variant),
 		},
 	};

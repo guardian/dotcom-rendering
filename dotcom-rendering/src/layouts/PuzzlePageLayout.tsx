@@ -37,8 +37,8 @@ import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTes
 import type { PuzzleActionContext } from '../lib/puzzleActionTracking';
 import { PUZZLE_MODAL_ROOT_ID } from '../lib/puzzleAccess';
 import { formatPuzzleDate } from '../lib/puzzleDate';
+import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
 import {
-	isPuzzlesHubV1Enabled,
 	isPuzzlesHubV2Enabled,
 	isPuzzlesHubV3Enabled,
 } from '../lib/puzzlesHubVersionExperiment';
@@ -400,8 +400,8 @@ export const PuzzlePageLayout = ({
 	const showComments = false;
 
 	// The "More from Puzzles & Games" rail is a v1-scoped feature (per the
-	// Puzzles & Games rollout plan - see abTests.ts's puzzles-new-hub-v1
-	// JSDoc), not a v0 one - so it must not render just because
+	// Puzzles & Games rollout plan - see `isPuzzlesHubAvailable`), not a v0
+	// one - so it must not render just because
 	// instance.moreFromPuzzlesAndGames happens to be non-empty.
 	// if (instance.moreFromPuzzlesAndGames?.length === 0) {
 	//  instance.moreFromPuzzlesAndGames = [
@@ -414,7 +414,7 @@ export const PuzzlePageLayout = ({
 	//    },
 	//  ];
 	// }
-	const isV1Enabled = isPuzzlesHubV1Enabled(config);
+	const isV1Enabled = isPuzzlesHubAvailable(config);
 
 	// The premium puzzles access control (the unlock modal, the access check
 	// and no ads) only has an effect for readers in `puzzles-new-hub-v3`.

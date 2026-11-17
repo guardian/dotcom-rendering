@@ -6,8 +6,6 @@ import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
 import { SubNav } from '../components/Masthead/Titlepiece/SubNav';
 import { Sponsored } from '../components/PuzzlesDirectory.stories';
 import {
-	puzzlesHubV1Experiment,
-	puzzlesHubV1Participation,
 	puzzlesHubV2Experiment,
 	puzzlesHubV2Participation,
 } from '../lib/puzzlesHubVersionExperiment';
@@ -90,13 +88,13 @@ describe('PuzzlesLayout', () => {
 	});
 
 	it.each([
-		['V1 only', true, false],
-		['V1 and V2', true, true],
-		['V2 without V1', false, true],
-		['neither tier', false, false],
+		['hub only', true, false],
+		['hub and V2', true, true],
+		['V2 without hub', false, true],
+		['neither', false, false],
 	] as const)(
 		'renders the hub subnav for %s even when frontend omits trivia',
-		(_description, isV1Enabled, isV2Enabled) => {
+		(_description, isHubAvailable, isV2Enabled) => {
 			const categoryLinks = (
 				[
 					['Crosswords', '/puzzles-and-games/crosswords/archive'],
@@ -123,12 +121,8 @@ describe('PuzzlesLayout', () => {
 							...page(),
 							config: {
 								switches: {},
+								edition: isHubAvailable ? 'INT' : 'UK',
 								serverSideABTests: {
-									...puzzlesHubV1Participation(
-										isV1Enabled
-											? puzzlesHubV1Experiment.variant
-											: puzzlesHubV1Experiment.control,
-									),
 									...puzzlesHubV2Participation(
 										isV2Enabled
 											? puzzlesHubV2Experiment.variant
@@ -141,7 +135,7 @@ describe('PuzzlesLayout', () => {
 				/>,
 			);
 
-			const hasTrivia = isV1Enabled && isV2Enabled;
+			const hasTrivia = isHubAvailable && isV2Enabled;
 			expect(
 				screen.getAllByRole('link').map((link) => ({
 					title: link.textContent,
@@ -149,7 +143,7 @@ describe('PuzzlesLayout', () => {
 				})),
 			).toEqual([
 				{ title: parent.title, url: parent.url },
-				...(isV1Enabled
+				...(isHubAvailable
 					? categoryLinks.map(({ title, url }) => ({ title, url }))
 					: []),
 				...(hasTrivia
