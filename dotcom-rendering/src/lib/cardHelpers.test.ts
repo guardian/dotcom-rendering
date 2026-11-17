@@ -1,5 +1,21 @@
 import type { DCRContainerPalette } from '../types/front';
-import { cardHasDarkBackground } from './cardHelpers';
+import { cardHasDarkBackground, isMiniNavSupported } from './cardHelpers';
+
+describe('isMiniNavSupported', () => {
+	it.each(['boost', 'megaboost', 'gigaboost'] as const)(
+		'supports %s cards',
+		(boostLevel) => {
+			expect(isMiniNavSupported(boostLevel)).toBe(true);
+		},
+	);
+
+	it.each([undefined, 'default'] as const)(
+		'does not support boost level %s',
+		(boostLevel) => {
+			expect(isMiniNavSupported(boostLevel)).toBe(false);
+		},
+	);
+});
 
 describe('cardHasDarkBackground', () => {
 	const testCases = [

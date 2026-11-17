@@ -219,7 +219,7 @@ describe('handlePuzzlesPage', () => {
 		}
 	});
 
-	it.each(['UK', 'US', 'AU', 'EUR'])(
+	it.each(['UK', 'US'])(
 		'returns 404 without mounting the renderer for the %s edition',
 		(edition) => {
 			validate.mockReturnValue({

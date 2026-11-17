@@ -14,6 +14,27 @@ scroll/resize and visibility/page restoration; hidden documents are ignored.
 Previously reported buckets remain reported if late content changes the height.
 Archive and game pages are excluded.
 
+## Game-page interaction context
+
+PDF, print and share/copy controls append labelled puzzle context to the existing
+Ophan `data-link-name`; the `clickComponent` and number of events are unchanged.
+For example:
+
+```text
+puzzles | print-request | slug-sudoku-easy | date-2026-11-09 | provider-amuselabs
+puzzles | share-attempt | copy | ArticleMeta | slug-quick | date-2026-11-08 | provider-guardian-crossword
+```
+
+For iframe pages, slug/provider come from `PuzzleConfig` and date from
+`instance.puzzleDate`. For crossword pages, slug is the `crosswordType` series
+identifier, date is the crossword data timestamp's UTC calendar date, and provider
+is `guardian-crossword`. Iframe providers are `amuselabs`, `wordiply` or `moviegrid`.
+Missing/invalid dates are omitted, never inferred from the URL or today's date.
+Controls without context retain their existing tracking names.
+
+The labelled values are transmitted within an entry of the existing
+`clickLinkNames` array, not new structured Ophan fields. This identifies the source puzzle for host-page actions only.
+
 ## Puzzles API URL resolution
 
 Frontend fetches dated puzzles with `GET /game?puzzleType=...&date=YYYY-MM-DD`
@@ -159,7 +180,7 @@ archive. The hub remains at `/puzzles-and-games`; DCR's rendering endpoint is `/
 
 **Access control is enforced on both sides.** `frontend` gates reader
 access to these routes via its `PuzzlesHubAccess` edition check (currently
-International edition only) before it ever POSTs to DCR. DCR's own
+the International, Europe and Australia editions) before it ever POSTs to DCR. DCR's own
 `/PuzzlePage` endpoint additionally checks the same edition rule itself
 (via `isPuzzlesHubAvailable`, mirroring
 `/PuzzlesPage`'s hub gate) and returns `404` when it isn't enabled for the
@@ -759,7 +780,7 @@ were removed: everything they gated is now gated by `isPuzzlesHubAvailable`.
 
 - **The hub (formerly `puzzles-new-hub-v1`)**: available only in the
   editions listed in `PUZZLES_HUB_EDITIONS` (currently International,
-  `INT`, only). To roll it out to another edition, add its id to that list
+  `INT`, Europe, `EUR`, and Australia, `AU`). To roll it out to another edition, add its id to that list
   here and to `PuzzlesHubAccess.scala` in `frontend`. Gates
   the Puzzles Hub page, the 6 puzzle pages (sudoku x4, word-wheel,
   wordiply), full hub sub-nav links, a sign-in-to-track-progress message, a
@@ -783,7 +804,7 @@ The corresponding gate-check helpers live in DCR:
 `isPuzzlesHubV2Enabled` (`src/lib/puzzlesHubVersionExperiment.ts`),
 cumulative, as described above.
 
-**Current state**: the hub is available in the International edition only,
+**Current state**: the hub is available in the International, Europe and Australia editions,
 and v2 sits at `audienceSize: 0/100`. The hub gate is enforced at both
 layers: `frontend`'s route-level `PuzzlesHubAccess` check decides whether a
 request reaches `/PuzzlePage` at all, and DCR's `handlePuzzlePage`

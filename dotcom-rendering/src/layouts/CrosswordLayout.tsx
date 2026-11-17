@@ -36,6 +36,7 @@ import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
 import { getContributionsServiceUrl } from '../lib/contributions';
+import { crosswordActionContext } from '../lib/puzzleActionTracking';
 import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
 import { isPuzzlesHubV2Enabled } from '../lib/puzzlesHubVersionExperiment';
 import {
@@ -500,6 +501,9 @@ export const CrosswordLayout = (props: Props) => {
 						<SubMeta
 							format={format}
 							puzzleTrackingSource="crossword-page"
+							puzzleTrackingContext={crosswordActionContext(
+								article.crossword,
+							)}
 							subMetaKeywordLinks={article.subMetaKeywordLinks}
 							subMetaSectionLinks={article.subMetaSectionLinks}
 							pageId={article.pageId}

@@ -1,5 +1,5 @@
 import { ArticleDesign } from '../lib/articleFormat';
-import { isMediaCard, isMiniNavSupported } from '../lib/cardHelpers';
+import { isMediaCard } from '../lib/cardHelpers';
 import type { DCRFrontCard } from '../types/front';
 import type { Props as CardProps } from './Card/Card';
 import { Card } from './Card/Card';
@@ -7,6 +7,8 @@ import { CardMiniNav } from './CardMiniNav';
 
 type Props = {
 	trail: DCRFrontCard;
+	/* Used to determine if the mini nav should be displayed on a front card */
+	isMiniNavSupported?: boolean;
 } & Partial<CardProps> &
 	Pick<CardProps, 'imageLoading' | 'serverTime'>;
 
@@ -26,7 +28,7 @@ type Props = {
  * @param [props.trailText] - Defaults to undefined, set to `trail.trailText` if you want this card to show trail text.
  */
 export const FrontCard = (props: Props) => {
-	const { trail, ...cardProps } = props;
+	const { trail, isMiniNavSupported, ...cardProps } = props;
 
 	const contentSpacing =
 		isMediaCard(trail.format) || trail.isNewsletter ? 'large' : undefined;
@@ -64,9 +66,7 @@ export const FrontCard = (props: Props) => {
 	};
 
 	const headerContent =
-		isMiniNavSupported(cardProps.containerType, trail.boostLevel) &&
-		trail.showMiniNav &&
-		trail.miniNavData ? (
+		!!isMiniNavSupported && trail.miniNavData ? (
 			<CardMiniNav miniNavData={trail.miniNavData} />
 		) : undefined;
 
