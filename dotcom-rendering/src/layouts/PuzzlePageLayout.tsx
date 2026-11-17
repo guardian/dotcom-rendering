@@ -34,8 +34,8 @@ import {
 } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
-import type { PuzzleActionContext } from '../lib/puzzleActionTracking';
 import { PUZZLE_MODAL_ROOT_ID } from '../lib/puzzleAccess';
+import type { PuzzleActionContext } from '../lib/puzzleActionTracking';
 import { formatPuzzleDate } from '../lib/puzzleDate';
 import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
 import {
