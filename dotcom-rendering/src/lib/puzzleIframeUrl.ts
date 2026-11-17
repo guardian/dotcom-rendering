@@ -14,7 +14,7 @@ import type {
  * (vs `idx=1` for "latest"), `embed=1`, an optional `uid`, and an optional
  * `darkMode=0|1` (a plain literal value, not a JSON blob). Wordiply has no
  * confirmed query param support of any kind yet. MovieGrid/SportsReveal
- * receive client-added `darkMode=0|1` and `platform=web` but no confirmed `uid`.
+ * preserve the API's `uid` and receive client-added `darkMode=0|1` and `platform=web`.
  *
  * Blindly applying the same query params to every provider regardless of
  * what it actually supports is fragile, and was already conceptually
