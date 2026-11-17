@@ -10,8 +10,6 @@ import {
 	Pillar,
 } from '../lib/articleFormat';
 import {
-	puzzlesHubV1Experiment,
-	puzzlesHubV1Participation,
 	puzzlesHubV2Experiment,
 	puzzlesHubV2Participation,
 } from '../lib/puzzlesHubVersionExperiment';
@@ -131,10 +129,7 @@ const config = {
 	editionId: 'UK' as const,
 };
 
-const hubOn = {
-	...puzzlesHubV1Participation(puzzlesHubV1Experiment.variant),
-	...puzzlesHubV2Participation(puzzlesHubV2Experiment.variant),
-};
+const hubOn = puzzlesHubV2Participation(puzzlesHubV2Experiment.variant);
 
 describe('Puzzles & games theme coverage', () => {
 	it('keeps a neutral background and lines on the puzzle page', () => {
@@ -163,7 +158,10 @@ describe('Puzzles & games theme coverage', () => {
 	it('covers every theme-dependent variable the puzzle page uses', () => {
 		for (const slug of ['sudoku-easy', 'wordiply', 'film-reveal']) {
 			for (const signedIn of [false, true]) {
-				for (const serverSideABTests of [{}, hubOn]) {
+				for (const [edition, serverSideABTests] of [
+					['UK', {}],
+					['INT', hubOn],
+				] as const) {
 					mockSignedIn = signedIn;
 					const puzzleConfig = getPuzzleConfig(slug);
 					if (!puzzleConfig) throw new Error(`missing ${slug}`);
@@ -175,6 +173,7 @@ describe('Puzzles & games theme coverage', () => {
 									...page,
 									config: {
 										...page.config,
+										edition,
 										serverSideABTests,
 									},
 									puzzleConfig,
@@ -219,6 +218,7 @@ describe('Puzzles & games theme coverage', () => {
 					} as unknown as typeof StandardFixture.crossword,
 					config: {
 						...StandardFixture.config,
+						edition: 'INT',
 						serverSideABTests: hubOn,
 					},
 				},

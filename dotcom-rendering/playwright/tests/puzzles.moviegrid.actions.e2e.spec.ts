@@ -69,8 +69,8 @@ test.describe('MovieGrid completion actions', () => {
 				isAdFreeUser: true,
 				instance: { title, puzzleDate: '2026-11-03', gameUrl },
 			});
+			fixture.config.edition = 'INT';
 			fixture.config.serverSideABTests = {
-				'puzzles-new-hub-v1': 'variant',
 				'puzzles-new-hub-v2': 'variant',
 			};
 			if (!frontendOrigin) {

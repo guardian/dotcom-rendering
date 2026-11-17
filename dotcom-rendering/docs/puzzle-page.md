@@ -16,12 +16,17 @@ Archive and game pages are excluded.
 
 ## Puzzles API URL resolution
 
-Frontend resolves each dated page with `GET /game?puzzleType=...&date=YYYY-MM-DD`
-and sends the response's `gameUrl` as `instance.gameUrl`. DCR passes it through the
-layout to `PuzzleIframe` and preserves the API's path, opaque puzzle ID and provider
-parameters. AmuseLabs URLs receive the current reader's `uid` and `darkMode`;
-MovieGrid URLs receive `darkMode=0|1` and `platform=web` without adding `uid`.
-All providers continue to receive `guardian-puzzle-context`.
+Frontend fetches dated puzzles with `GET /game?puzzleType=...&date=YYYY-MM-DD`
+and passes `gameUrl` to `PuzzleIframe`. After authentication resolves, DCR fetches
+the reader's URL through frontend's game proxy.
+
+- Both providers keep the API's `uid` unchanged, even when signed out.
+- DCR never substitutes `legacy_identity_id` or reads `puzzle_id` itself.
+- Both receive `darkMode=0|1`; MovieGrid also receives `platform=web`.
+
+All providers receive `guardian-puzzle-context`. Authentication changes refresh
+the API URL and reset the iframe's progress adapter. Guest progress is not imported
+into an account.
 
 The local URL builders described below remain a compatibility fallback for older
 frontend payloads without `gameUrl`. New frontend pages always supply the API URL
@@ -46,12 +51,13 @@ The archive sign-in prompt uses `data-component="puzzles-archive-sign-in"` and
 This measures link activations, not completed authentication; the existing sign-in
 destination and authentication behaviour are unchanged.
 
-Film reveal and On the ball require both `puzzles-new-hub-v1` and
-`puzzles-new-hub-v2` for hub cards, game pages and trivia archives. V1-only requests
-omit the cards and receive 404 for those pages; existing V1 puzzles are unchanged.
+Film reveal and On the ball require both an edition the hub is available in and
+`puzzles-new-hub-v2` for hub cards, game pages and trivia archives. Requests with
+only the edition gate omit the cards and receive 404 for those pages; existing
+puzzles are unchanged.
 Local development retains its gate bypass. Full-hub and archive stories explicitly
-enable both variants so Chromatic builds show all puzzle subnav
-categories without relying on that bypass.
+enable v2 so Chromatic builds show all puzzle subnav categories without relying on
+that bypass.
 
 ## Sponsorship
 
@@ -152,10 +158,10 @@ Readers reach individual puzzles through frontend's dated public URLs, for examp
 archive. The hub remains at `/puzzles-and-games`; DCR's rendering endpoint is `/PuzzlePage`.
 
 **Access control is enforced on both sides.** `frontend` gates reader
-access to these routes via its existing `PuzzlesHubV1Experiment`/
-`puzzles-new-hub-v1` AB test before it ever POSTs to DCR. DCR's own
-`/PuzzlePage` endpoint additionally checks the same `puzzles-new-hub-v1`
-participation itself (via `isPuzzlesHubV1Enabled`, mirroring
+access to these routes via its `PuzzlesHubAccess` edition check (currently
+International edition only) before it ever POSTs to DCR. DCR's own
+`/PuzzlePage` endpoint additionally checks the same edition rule itself
+(via `isPuzzlesHubAvailable`, mirroring
 `/PuzzlesPage`'s hub gate) and returns `404` when it isn't enabled for the
 request, so the endpoint isn't left relying solely on `frontend` never
 calling it (see "Hitting it locally" below).
@@ -245,12 +251,12 @@ This starts webpack-dev-server on `http://localhost:3030`
 (`webpack/webpack.config.dev-server.js`).
 
 `src/server/handler.puzzlePage.web.ts` validates the body
-(`validateAsPuzzlePageType`), checks the request's `puzzles-new-hub-v1`
-participation via `isPuzzlesHubV1Enabled` (`404` if not enabled), looks up
+(`validateAsPuzzlePageType`), checks the request's edition
+via `isPuzzlesHubAvailable` (`404` if not enabled), looks up
 the `PuzzleConfig` for the request's `slug` (`404` if unknown), and only
-then renders. Fixtures generated below set `serverSideABTests` to
-`{ 'puzzles-new-hub-v1': 'variant' }` so they pass this gate; `NODE_ENV=development`
-also bypasses it locally.
+then renders. Fixtures generated below keep the Standard article's edition,
+so they only pass this gate with `NODE_ENV=development` (which bypasses it
+locally) or after setting `config.edition` to `'INT'`.
 
 Generate fixture JSON for all 8 slugs using the `tsx` devDependency (no
 extra install needed) and `fixtures/manual/puzzlePage.ts`'s
@@ -477,9 +483,26 @@ gap later.
 | `instance.puzzleDate`              | `string?` (e.g. `"2026-09-11"`)                           | Which day's puzzle the reader wants to see. Rendered as a human-readable date (e.g. "11 September 2026") next to the page title, passed through unformatted as `PuzzleContext.puzzleDate` to the puzzle iframe (see below), and used (short-formatted) to resolve the `{date}` placeholder in `PuzzleConfig.title`/`description` (see "SEO" above). `frontend` now always resolves and sends this for every request (its Puzzle Page URLs carry a date segment), though DCR still treats the field as optional and simply omits/tidies up the display/context/SEO value when absent. |
 | `instance.moreFromPuzzlesAndGames` | `PuzzleItem[]?` (from `src/types/puzzlesPage.ts`)         | Rendered as a plain "More from Puzzles & games" list when present and non-empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | `instance.puzzlesSupporting`       | `PuzzleGameSupporting?` (from `src/types/puzzlesPage.ts`) | Rendered as a "Useful links" section (links plus newsletter sign-up) above the footer when present. frontend omits it when it has nothing to show.                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `instance.requiresSubscription`    | `boolean?`                                                | Whether the puzzle is premium (only Supporter Plus or Digital Pack readers may play it; the last 7 days counting today, in Europe/London, are free). A property of the puzzle, never of the reader, so it is safe in cached HTML; the backend must compute it, never the browser. Absent means free. Whether the current reader has access is a separate question, answered client-side.                                                                                                                                                                                             |
+| `instance.requiresSubscription`    | `boolean?`                                                | Whether the puzzle is premium (only Supporter Plus or Digital Pack readers may play it; the last 7 days counting today, in Europe/London, are free). A property of the puzzle, never of the reader, so it is safe in cached HTML; the backend must compute it, never the browser. Absent means free. Whether the current reader has access is checked client-side, see `docs/premium-puzzles-access-plan.md`.                                                                                                                                                                        |
 
 ### User/context info passed to the puzzle iframe
+
+For pages with `instance.gameUrl` and a puzzle date, `usePuzzleGame` waits for
+Identity authentication, then automatically requests
+`{ajaxUrl}/puzzles-and-games/game/{slug}/{date}.json` for both signed-in and
+signed-out readers. When signed in, it sends the access token in the
+`Authorization` header; signed-out requests omit that header. Frontend forwards
+the request and any supplied token to the Puzzles API's
+`GET /game` and returns a response with `Cache-Control: private, no-store, no-cache`.
+The AJAX router in platform forwards this path, including OPTIONS preflights,
+to frontend's applications service. Deploy that router rule and the frontend
+endpoint before the DCR consumer. The iframe waits for
+the resulting `gameUrl` and preserves the API's `id` and `uid`; DCR does not
+replace `uid` with `legacy_identity_id` or send the token to the iframe.
+Signed-out readers use the anonymous URL returned by that endpoint. Authentication
+changes refresh the selection and discard pending responses from the previous
+session. Failed lookups show an error instead of loading an
+anonymous fallback. Older payloads without `gameUrl` retain the local URL builder.
 
 `src/components/PuzzleIframe.island.tsx` passes a combined `PuzzleContext`
 about the current reader to the puzzle provider two ways:
@@ -504,74 +527,19 @@ interface PuzzleContext {
 }
 ```
 
-- **`userId`** is the reader's `idToken.claims.legacy_identity_id` (resolved
-  via `src/lib/identity.ts`'s `getAuthStatus()`), the same identifier
-  already used to build MyAccount links elsewhere in DCR
-  (`TopBarMyAccount.tsx`). This is **not** the OIDC `sub` claim some other,
-  newer API integrations in DCR use instead. `null` when the reader is
-  signed out.
-- **`darkMode`** is whether dark mode is currently actually active for this
-  reader. Both of the following must be true:
-    1. `darkModeAvailable`, the existing server-side `webx-dark-mode-web` AB
-       test flag for this page/request, already read via `useConfig()` in
-       `PuzzlePage.tsx` and threaded down through `PuzzlePageLayout.tsx` to
-       `PuzzleIframe` the same way it already reaches `rootStyles()` for the
-       page chrome's own dark mode support (see `src/lib/rootStyles.ts`). No
-       new source of truth was introduced for this.
-    2. The reader's OS/browser actually preferring dark
-       (`prefers-color-scheme: dark`), checked reactively via DCR's existing,
-       generic `src/lib/useMatchMedia.ts` hook (already used elsewhere in DCR,
-       e.g. `ArticleMeta.web.tsx`). Not a new media-query mechanism.
+- **`userId`**: `idToken.claims.legacy_identity_id`, or `null` when signed out.
+  This is context only, not the provider's `uid`.
+- **Provider identity**: owned by Puzzle API and preserved in `gameUrl`.
+- **`darkMode`**: enabled only when `darkModeAvailable` is true and the reader's
+  browser prefers dark mode.
+- **`puzzleDate`**: frontend's requested date as `YYYY-MM-DD`, or `null` if absent.
 
-    When `darkModeAvailable` is `false`, `darkMode` is always `false` and the
-    media query isn't even consulted.
+For older payloads without `gameUrl`, AmuseLabs' fallback builder still adds
+`uid` from `userId` when signed in and always adds `darkMode=0|1`. This legacy
+behaviour is unchanged; its identity format remains unconfirmed.
 
-- **`puzzleDate`** is `instance.puzzleDate` passed straight through
-  unformatted (the raw `YYYY-MM-DD` string, not the "11 September 2026"
-  display text rendered next to the title), so third-party providers get
-  the machine-readable form. `null` when `instance.puzzleDate` is absent.
-  DCR does not parse the Puzzle Page URL or own the date-in-path/
-  redirect-to-archive logic itself: it purely receives whatever date
-  `frontend` resolved and sent in the request payload, and passes it on. See
-  `frontend`'s own documentation for how it resolves and redirects on the
-  date-in-URL structure.
-
-**A separate, plain `uid=<userId>` query parameter, and a plain
-`darkMode=0|1` query parameter, are also appended by AmuseLabs' own
-builder (`buildAmuseLabsUrl`, see "The V0 puzzle set" above), alongside
-`guardian-puzzle-context`.** `uid` is only appended when the reader is
-signed in (omitted entirely, not sent as `uid=null` or empty, when signed
-out); `darkMode=0|1` is always appended (never conditionally omitted,
-unlike `uid`). Both are genuinely different, independently-confirmed
-mechanisms from `guardian-puzzle-context` above, and are AmuseLabs-specific,
-**not** sent to Wordiply (which has no confirmed query param support of
-any kind yet): the native (Android/iOS) apps' own real, working AmuseLabs
-integration appends `&uid=<value>` as a plain query parameter when the
-user is authenticated ("If the user is authenticated, we add
-&uid=<puzzleId>") and a `darkMode=0|1` literal value, and DCR adopted the
-same query parameter names/patterns once confirmed. Both are additive,
-not a replacement, `guardian-puzzle-context` still carries its own
-`darkMode`/`puzzleDate` fields too, applied uniformly to every provider
-regardless of what that provider's own builder adds (see "The V0 puzzle
-set" above for why this split exists). `uid`'s value is sourced identically
-to `guardian-puzzle-context.userId` (`idToken.claims.legacy_identity_id`);
-the native apps call their equivalent value a "puzzleId", but there is no
-independent confirmation that identifier format matches ours, only that
-this exact query parameter name/pattern is what they use for their own
-equivalent value (see "Open questions" below).
-
-The iframe reloads automatically whenever any part of the context, `uid`,
-or `darkMode` changes while the reader is already on the page: sign in,
-sign out, switching accounts, or the reader's OS switching light/dark
-theme. The component subscribes to both auth state changes
-(`src/lib/identity.ts`'s `subscribeToAuthStateChange()`, a thin wrapper
-around the `@guardian/identity-auth` client's own
-`authStateManager.subscribe`) and colour-scheme changes (via
-`useMatchMedia`'s own reactivity), and since the iframe's `src` is derived
-directly from the current context, React gives the `<iframe>` a new `src`
-value whenever either changes, which the browser treats as a fresh
-navigation, so no manual reload call is needed. The `postMessage` above
-fires again after every such reload too.
+Auth or theme changes update the iframe URL and reset its progress adapter.
+The context message is sent after each iframe load.
 
 ### Iframe height at narrower viewports
 
@@ -691,9 +659,8 @@ darkMode: boolean, puzzleDate: string | null } }` and the
   phased: local-device-only first, then a thin API wrapper, then a
   backing database), and confirms the exact real AmuseLabs URL parameter
   conventions already implemented here (`set`, `id` vs `idx=1`, `embed=1`,
-  `uid`, `darkMode=0|1`), plus MovieGrid/sportsreveal's simpler convention
-  (base URL plus client-added `darkMode` and `platform=web` params, no confirmed
-  `uid` support for those two providers). `puzzleConfigs.ts`'s current registry,
+  `uid`, `darkMode=0|1`). MovieGrid/SportsReveal preserve the API's `uid` and receive
+  client-added `darkMode` and `platform=web` parameters. `puzzleConfigs.ts`'s current registry,
   with its explicit, per-entry identity data, is a deliberate,
   correct-for-now V0 solution, not the intended final architecture. When
   the Puzzles Server/Archive API materialises, this registry's statically
@@ -770,10 +737,9 @@ darkMode: boolean, puzzleDate: string | null } }` and the
   task); true calendar/business-logic validity (e.g. "did this puzzle
   actually exist on this date") is not validated anywhere in the stack yet.
 - **DCR's `/PuzzlePage` endpoint now has its own route-level access
-  control**, checking `puzzles-new-hub-v1` participation via
-  `isPuzzlesHubV1Enabled` and returning `404` when it isn't enabled, in
-  addition to (not instead of) `frontend`'s existing
-  `PuzzlesHubV1Experiment`/`puzzles-new-hub-v1` gate that decides whether a
+  control**, checking the request's edition via
+  `isPuzzlesHubAvailable` and returning `404` when it isn't enabled, in
+  addition to (not instead of) `frontend`'s `PuzzlesHubAccess` gate that decides whether a
   reader ever reaches one of these puzzle-page URLs in the first place.
   DCR also has a real, cumulative, code-change-free kill-switch for
   individual _feature tiers_ within the rendered page, see "Feature-tier
@@ -784,39 +750,44 @@ darkMode: boolean, puzzleDate: string | null } }` and the
 
 ### Feature-tier rollout gating (v1/v2)
 
-The Puzzles & Games rollout uses a 2-tier, **cumulative** AB-test/
-kill-switch structure (`ab-testing/config/abTests.ts`), so any rollout
-phase can be turned on/off without a DCR code change or redeploy. The
-former `puzzles-new-hub` (v0) test was removed: everything it gated is now
-gated by `puzzles-new-hub-v1`.
+The Puzzles & Games rollout is gated in two layers. The hub itself is
+gated by **edition** (`src/lib/puzzlesHubAccess.ts`), and the later v2 tier
+is a **cumulative** AB test on top of it (`ab-testing/config/abTests.ts`),
+so the v2 phase can be turned on/off without a DCR code change or
+redeploy. The former `puzzles-new-hub` (v0) and `puzzles-new-hub-v1` tests
+were removed: everything they gated is now gated by `isPuzzlesHubAvailable`.
 
-- **`puzzles-new-hub-v1`** (the master switch, w/c 12 Oct launch): gates
+- **The hub (formerly `puzzles-new-hub-v1`)**: available only in the
+  editions listed in `PUZZLES_HUB_EDITIONS` (currently International,
+  `INT`, only). To roll it out to another edition, add its id to that list
+  here and to `PuzzlesHubAccess.scala` in `frontend`. Gates
   the Puzzles Hub page, the 6 puzzle pages (sudoku x4, word-wheel,
   wordiply), full hub sub-nav links, a sign-in-to-track-progress message, a
   calendar/archive view for crosswords/logic-puzzles/word-games (not
   Wordiply), progress indicators, the "More from Puzzles & Games" rail,
   newsletter signup, and changes to the existing crossword page (print CTA
-  repositioning, "play other puzzles" container). Turning this off hides
-  everything, including every later tier.
-- **`puzzles-new-hub-v2`**: a future layer, **on top of v1**. It does
-  nothing unless `puzzles-new-hub-v1` is _also_ enabled. Activates: On the
+  repositioning, "play other puzzles" container). Removing an edition from
+  the list hides everything for it, including every later tier.
+- **`puzzles-new-hub-v2`**: a future layer, **on top of the hub**. It does
+  nothing unless the hub is _also_ available for the reader's edition. Activates: On the
   Ball/Film Reveal (Trivia and Quizzes), a "Most played" container,
   EventKit-driven navigation, migrating existing crossword pages onto the
   Puzzle Page template, and search-engine mobile app nudges. No launch date
   confirmed yet; kept at 0% until that work begins.
 
-To roll back a single phase without a deploy, flip only that tier's
-`audienceSize`/`status` in `abTests.ts`.
+To roll back v2 without a deploy, flip its `audienceSize`/`status` in
+`abTests.ts`. Rolling back the hub itself needs a deploy of both repos.
 
 The corresponding gate-check helpers live in DCR:
-`isPuzzlesHubV1Enabled`/`isPuzzlesHubV2Enabled`
-(`src/lib/puzzlesHubVersionExperiment.ts`), cumulative, as described above.
+`isPuzzlesHubAvailable` (`src/lib/puzzlesHubAccess.ts`) and
+`isPuzzlesHubV2Enabled` (`src/lib/puzzlesHubVersionExperiment.ts`),
+cumulative, as described above.
 
-**Current state**: both tiers sit at `audienceSize: 0/100`, hidden from the
-public entirely. The v1 gate is enforced at both layers: `frontend`'s
-route-level `PuzzlesHubV1Experiment` check decides whether a request reaches
-`/PuzzlePage` at all, and DCR's `handlePuzzlePage` independently checks
-`isPuzzlesHubV1Enabled` before rendering. Future v2 work should be gated
+**Current state**: the hub is available in the International edition only,
+and v2 sits at `audienceSize: 0/100`. The hub gate is enforced at both
+layers: `frontend`'s route-level `PuzzlesHubAccess` check decides whether a
+request reaches `/PuzzlePage` at all, and DCR's `handlePuzzlePage`
+independently checks `isPuzzlesHubAvailable` before rendering. Future v2 work should be gated
 behind `isPuzzlesHubV2Enabled`.
 
 ### SEO risks to revisit before shipping calendar/archive features

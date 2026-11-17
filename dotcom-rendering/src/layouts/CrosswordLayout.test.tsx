@@ -2,9 +2,8 @@ import { render, screen } from '@testing-library/react';
 import { Standard as StandardFixture } from '../../fixtures/generated/fe-articles/Standard';
 import { ConfigProvider } from '../components/ConfigContext';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import type { EditionId } from '../lib/edition';
 import {
-	puzzlesHubV1Experiment,
-	puzzlesHubV1Participation,
 	puzzlesHubV2Experiment,
 	puzzlesHubV2Participation,
 } from '../lib/puzzlesHubVersionExperiment';
@@ -36,11 +35,7 @@ jest.mock('../lib/useAB', () => ({
 	useAB: jest.fn().mockReturnValue(null),
 }));
 
-const v1On = puzzlesHubV1Participation(puzzlesHubV1Experiment.variant);
-const v1AndV2On = {
-	...v1On,
-	...puzzlesHubV2Participation(puzzlesHubV2Experiment.variant),
-};
+const v2On = puzzlesHubV2Participation(puzzlesHubV2Experiment.variant);
 
 const relatedPuzzles: PuzzleItem[] = [
 	{
@@ -68,6 +63,7 @@ const relatedPuzzles: PuzzleItem[] = [
 const renderCrosswordLayout = ({
 	moreFromPuzzlesAndGames,
 	puzzlesSupporting,
+	edition = 'UK',
 	serverSideABTests = {},
 	withQuickSeries = false,
 	crosswordType = 'quick',
@@ -75,6 +71,7 @@ const renderCrosswordLayout = ({
 }: {
 	moreFromPuzzlesAndGames?: PuzzleItem[];
 	puzzlesSupporting?: PuzzleGameSupporting;
+	edition?: EditionId;
 	serverSideABTests?: Record<string, string>;
 	withQuickSeries?: boolean;
 	crosswordType?: string;
@@ -99,7 +96,7 @@ const renderCrosswordLayout = ({
 					entries: [],
 				} as unknown as typeof StandardFixture.crossword,
 			}),
-			config: { ...StandardFixture.config, serverSideABTests },
+			config: { ...StandardFixture.config, edition, serverSideABTests },
 		},
 		'Web',
 	);
@@ -127,7 +124,7 @@ const renderCrosswordLayout = ({
 };
 
 describe('CrosswordLayout app download link', () => {
-	it('renders the link when v1 is disabled', () => {
+	it('renders the link when the hub is unavailable', () => {
 		renderCrosswordLayout({});
 
 		expect(
@@ -135,8 +132,8 @@ describe('CrosswordLayout app download link', () => {
 		).toBeInTheDocument();
 	});
 
-	it('does not render the link when v1 is enabled', () => {
-		renderCrosswordLayout({ serverSideABTests: v1On });
+	it('does not render the link when the hub is available', () => {
+		renderCrosswordLayout({ edition: 'INT' });
 
 		expect(
 			screen.queryByRole('link', { name: 'Download the Guardian app' }),
@@ -163,7 +160,7 @@ describe('CrosswordLayout useful links', () => {
 	it('renders the links and newsletter when frontend sends them and v1 is enabled', () => {
 		renderCrosswordLayout({
 			puzzlesSupporting,
-			serverSideABTests: v1On,
+			edition: 'INT',
 		});
 
 		expect(
@@ -179,7 +176,7 @@ describe('CrosswordLayout useful links', () => {
 	});
 
 	it('does not render the section when frontend does not send it', () => {
-		renderCrosswordLayout({ serverSideABTests: v1On });
+		renderCrosswordLayout({ edition: 'INT' });
 
 		expect(
 			screen.queryByRole('heading', { name: 'Useful links' }),
@@ -199,7 +196,7 @@ describe('CrosswordLayout "More from Puzzles & games" rail', () => {
 	it('renders the rail when data is present and v1 is enabled', () => {
 		const { container } = renderCrosswordLayout({
 			moreFromPuzzlesAndGames: relatedPuzzles,
-			serverSideABTests: v1On,
+			edition: 'INT',
 		});
 
 		expect(
@@ -221,7 +218,7 @@ describe('CrosswordLayout "More from Puzzles & games" rail', () => {
 	});
 
 	it('does not render the rail when the data is absent, even with v1 enabled', () => {
-		renderCrosswordLayout({ serverSideABTests: v1On });
+		renderCrosswordLayout({ edition: 'INT' });
 
 		expect(
 			screen.queryByRole('heading', {
@@ -233,7 +230,7 @@ describe('CrosswordLayout "More from Puzzles & games" rail', () => {
 	it('does not render the rail when the data is empty, even with v1 enabled', () => {
 		renderCrosswordLayout({
 			moreFromPuzzlesAndGames: [],
-			serverSideABTests: v1On,
+			edition: 'INT',
 		});
 
 		expect(
@@ -246,7 +243,6 @@ describe('CrosswordLayout "More from Puzzles & games" rail', () => {
 	it('does not render the rail when v1 is disabled, even with data present', () => {
 		renderCrosswordLayout({
 			moreFromPuzzlesAndGames: relatedPuzzles,
-			serverSideABTests: {},
 		});
 
 		expect(
@@ -259,7 +255,7 @@ describe('CrosswordLayout "More from Puzzles & games" rail', () => {
 
 describe('CrosswordLayout Puzzle Page design (v1)', () => {
 	it('uses the puzzles sub-nav instead of the crosswords one', () => {
-		renderCrosswordLayout({ serverSideABTests: v1On });
+		renderCrosswordLayout({ edition: 'INT' });
 
 		expect(screen.getAllByText('Word games').length).toBeGreaterThan(0);
 		expect(screen.getAllByText('Logic puzzles').length).toBeGreaterThan(0);
@@ -267,12 +263,12 @@ describe('CrosswordLayout Puzzle Page design (v1)', () => {
 
 	it('shows Trivia & quizzes in the sub-nav only when v2 is enabled', () => {
 		const { unmount } = renderCrosswordLayout({
-			serverSideABTests: v1On,
+			edition: 'INT',
 		});
 		expect(screen.queryAllByText('Trivia & quizzes')).toHaveLength(0);
 		unmount();
 
-		renderCrosswordLayout({ serverSideABTests: v1AndV2On });
+		renderCrosswordLayout({ edition: 'INT', serverSideABTests: v2On });
 		expect(screen.getAllByText('Trivia & quizzes').length).toBeGreaterThan(
 			0,
 		);
@@ -280,7 +276,7 @@ describe('CrosswordLayout Puzzle Page design (v1)', () => {
 
 	it('hides SubMeta (topics, share, reuse) and the footer sub-nav', () => {
 		const { container } = renderCrosswordLayout({
-			serverSideABTests: v1On,
+			edition: 'INT',
 		});
 
 		expect(
@@ -293,9 +289,7 @@ describe('CrosswordLayout Puzzle Page design (v1)', () => {
 	});
 
 	it('keeps the original design when v1 is disabled', () => {
-		renderCrosswordLayout({
-			serverSideABTests: {},
-		});
+		renderCrosswordLayout({});
 
 		expect(screen.queryAllByText('Word games')).toHaveLength(0);
 		expect(
@@ -305,7 +299,7 @@ describe('CrosswordLayout Puzzle Page design (v1)', () => {
 
 	it('points the title section link at the relative crosswords archive', () => {
 		const { container } = renderCrosswordLayout({
-			serverSideABTests: v1On,
+			edition: 'INT',
 		});
 
 		expect(
@@ -315,7 +309,7 @@ describe('CrosswordLayout Puzzle Page design (v1)', () => {
 
 	it('points the title series link at the archive page frontend sends for the crossword type', () => {
 		const { container } = renderCrosswordLayout({
-			serverSideABTests: v1On,
+			edition: 'INT',
 			withQuickSeries: true,
 			puzzleArchivePath: '/puzzles-and-games/crosswords/quick/archive',
 		});
@@ -330,7 +324,7 @@ describe('CrosswordLayout Puzzle Page design (v1)', () => {
 
 	it('points the title series link at the crosswords archive when frontend sends no archive page', () => {
 		const { container } = renderCrosswordLayout({
-			serverSideABTests: v1On,
+			edition: 'INT',
 			withQuickSeries: true,
 			crosswordType: 'genius',
 		});
@@ -342,7 +336,6 @@ describe('CrosswordLayout Puzzle Page design (v1)', () => {
 
 	it('keeps the original title series link when v1 is disabled', () => {
 		const { container } = renderCrosswordLayout({
-			serverSideABTests: {},
 			withQuickSeries: true,
 		});
 
@@ -355,9 +348,7 @@ describe('CrosswordLayout Puzzle Page design (v1)', () => {
 	});
 
 	it('keeps the original title section link when v1 is disabled', () => {
-		const { container } = renderCrosswordLayout({
-			serverSideABTests: {},
-		});
+		const { container } = renderCrosswordLayout({});
 
 		expect(
 			container.querySelector('a[data-component="section"]'),
@@ -365,7 +356,7 @@ describe('CrosswordLayout Puzzle Page design (v1)', () => {
 	});
 
 	it('applies the new design even when there is no rail data', () => {
-		renderCrosswordLayout({ serverSideABTests: v1On });
+		renderCrosswordLayout({ edition: 'INT' });
 
 		expect(
 			screen.queryByRole('heading', {
