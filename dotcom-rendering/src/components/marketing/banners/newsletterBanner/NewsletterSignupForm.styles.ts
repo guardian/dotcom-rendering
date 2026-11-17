@@ -12,7 +12,7 @@ export const styles = {
 		row-gap: ${space[2]}px;
 		align-items: end;
 
-		${until.tablet} {
+		${until.desktop} {
 			row-gap: ${space[3]}px;
 		}
 	`,
@@ -44,7 +44,7 @@ export const styles = {
 		grid-template-columns: minmax(0, 1fr) auto;
 		grid-template-areas: 'email submit';
 
-		${until.tablet} {
+		${until.desktop} {
 			grid-template-columns: 1fr;
 			grid-template-areas:
 				'email'
@@ -172,13 +172,13 @@ export const styles = {
 		width: 100%;
 		display: flex;
 		gap: ${space[2]}px;
-		${from.tablet} {
+		${from.desktop} {
 			width: auto;
 		}
 	`,
 	submitButton: css`
 		width: 100%;
-		${from.tablet} {
+		${from.desktop} {
 			width: auto;
 		}
 	`,
