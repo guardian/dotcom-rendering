@@ -6,6 +6,7 @@ import {
 } from '@guardian/source/react-components';
 import {
 	puzzleActionAttributes,
+	type PuzzleActionContext,
 	type PuzzleActionSource,
 } from '../lib/puzzleActionTracking';
 import { palette as themePalette } from '../palette';
@@ -43,9 +44,11 @@ const buttonStyles = css`
 export const PrintButton = ({
 	href,
 	puzzleTrackingSource,
+	puzzleTrackingContext,
 }: {
 	href?: string;
 	puzzleTrackingSource?: PuzzleActionSource;
+	puzzleTrackingContext?: PuzzleActionContext;
 }) => {
 	if (href !== undefined) {
 		return (
@@ -58,7 +61,11 @@ export const PrintButton = ({
 				iconSide="left"
 				icon={<SvgDocument />}
 				cssOverrides={css(buttonStyles)}
-				{...puzzleActionAttributes(puzzleTrackingSource, 'pdf-open')}
+				{...puzzleActionAttributes(
+					puzzleTrackingSource,
+					'pdf-open',
+					puzzleTrackingContext,
+				)}
 			>
 				Print version
 			</LinkButton>
@@ -74,7 +81,11 @@ export const PrintButton = ({
 			iconSide="left"
 			icon={<SvgDocument />}
 			cssOverrides={css(buttonStyles)}
-			{...puzzleActionAttributes(puzzleTrackingSource, 'print-request')}
+			{...puzzleActionAttributes(
+				puzzleTrackingSource,
+				'print-request',
+				puzzleTrackingContext,
+			)}
 		>
 			Print version
 		</Button>

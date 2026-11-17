@@ -239,6 +239,7 @@ export const StorylinesSectionContent = ({
 							collectionId={index}
 							containerLevel="Secondary"
 							isStorylines={true}
+							isUserOptedInToMiniNav={false}
 						/>
 					</div>
 				))}

@@ -8,7 +8,7 @@ import type { EditionId } from './edition';
  * with `PuzzlesHubAccess.scala` in `frontend`, which applies the same rule
  * before it ever calls DCR.
  */
-export const PUZZLES_HUB_EDITIONS: readonly EditionId[] = ['INT'];
+export const PUZZLES_HUB_EDITIONS: readonly EditionId[] = ['INT', 'EUR', 'AU'];
 
 type PuzzlesHubAccessConfig = Pick<ConfigType, 'edition'>;
 

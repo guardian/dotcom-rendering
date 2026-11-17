@@ -35,6 +35,7 @@ import {
 import { canRenderAds } from '../lib/canRenderAds';
 import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
 import { PUZZLE_MODAL_ROOT_ID } from '../lib/puzzleAccess';
+import type { PuzzleActionContext } from '../lib/puzzleActionTracking';
 import { formatPuzzleDate } from '../lib/puzzleDate';
 import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
 import {
@@ -449,6 +450,11 @@ export const PuzzlePageLayout = ({
 			? 'trivia-and-quizzes'
 			: puzzleConfig.puzzleGroup;
 	const displayDate = formatPuzzleDate(instance.puzzleDate);
+	const puzzleTrackingContext: PuzzleActionContext = {
+		slug: puzzleConfig.slug,
+		date: instance.puzzleDate,
+		provider: puzzleConfig.iframe.provider,
+	};
 	const puzzleFamilyName =
 		puzzleFamilyNames[puzzleConfig.slug] ?? instance.title;
 	const puzzleHeadlineText =
@@ -624,7 +630,12 @@ export const PuzzlePageLayout = ({
 												priority="feature"
 												defer={{ until: 'visible' }}
 											>
-												<PrintButton puzzleTrackingSource="puzzle-page" />
+												<PrintButton
+													puzzleTrackingSource="puzzle-page"
+													puzzleTrackingContext={
+														puzzleTrackingContext
+													}
+												/>
 											</Island>
 										</div>
 									)}
@@ -653,6 +664,9 @@ export const PuzzlePageLayout = ({
 										shortUrlId={config.shortUrlId}
 										hidePreferredSourceOnPrint={true}
 										isPuzzlePage={true}
+										puzzleTrackingContext={
+											puzzleTrackingContext
+										}
 									/>
 								</div>
 							</GridItem>
