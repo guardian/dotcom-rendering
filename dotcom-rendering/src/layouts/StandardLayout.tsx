@@ -135,19 +135,20 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 			{isWeb && (
 				<div data-print-layout="hide" id="bannerandheader">
-					{renderAds && (
-						<Stuck>
-							<Section
-								fullWidth={true}
-								showTopBorder={false}
-								showSideBorders={false}
-								padSides={false}
-								shouldCenter={false}
-							>
-								<HeaderAdSlot />
-							</Section>
-						</Stuck>
-					)}
+					{renderAds &&
+						format.display !== ArticleDisplay.Immersive && (
+							<Stuck>
+								<Section
+									fullWidth={true}
+									showTopBorder={false}
+									showSideBorders={false}
+									padSides={false}
+									shouldCenter={false}
+								>
+									<HeaderAdSlot />
+								</Section>
+							</Stuck>
+						)}
 					{hasPageSkin && (
 						<AdSlot
 							data-print-layout="hide"
