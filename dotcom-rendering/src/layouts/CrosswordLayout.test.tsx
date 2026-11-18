@@ -200,6 +200,12 @@ describe('CrosswordLayout useful links', () => {
 			'href',
 			'https://www.theguardian.com/crosswords/crossword-blog',
 		);
+		expect(
+			screen.getByRole('link', { name: 'Crossword blog' }),
+		).toHaveAttribute(
+			'data-component',
+			'puzzles-useful-links:crossword-page',
+		);
 		expect(screen.getByText('Sign up to Cluesletter')).toBeInTheDocument();
 	});
 
@@ -347,6 +353,14 @@ describe('CrosswordLayout Puzzle Page design (v1)', () => {
 		).toHaveAttribute(
 			'href',
 			'/puzzles-and-games/crosswords/quick/archive',
+		);
+		const series = container.querySelector('a[data-component="series"]');
+		expect(series).toHaveAttribute('data-link-name', 'article series');
+		expect(
+			series?.parentElement?.closest('[data-link-name]'),
+		).toHaveAttribute(
+			'data-link-name',
+			'puzzles | in-page-nav | crossword-page',
 		);
 	});
 

@@ -263,6 +263,7 @@ export const CrosswordLayout = (props: Props) => {
 								<div data-print-layout="hide">
 									<ArticleTitle
 										format={format}
+										ophanComponentLink="puzzles | in-page-nav | crossword-page"
 										tags={titleTags}
 										sectionLabel={article.sectionLabel}
 										sectionUrl={
@@ -582,6 +583,7 @@ export const CrosswordLayout = (props: Props) => {
 					<div data-print-layout="hide">
 						<PuzzlesUsefulLinks
 							id="crossword"
+							ophanComponentName="puzzles-useful-links:crossword-page"
 							title="Useful links"
 							links={article.puzzlesSupporting.usefulLinks}
 							newsletter={article.puzzlesSupporting.newsletter}

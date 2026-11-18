@@ -227,6 +227,21 @@ describe('PuzzlePageLayout', () => {
 		expect(
 			container.querySelector('a[data-component="section"]'),
 		).toHaveAttribute('href', '/puzzles-and-games/logic-puzzles/archive');
+		for (const component of ['series', 'section']) {
+			const link = container.querySelector(
+				`a[data-component="${component}"]`,
+			);
+			expect(link).toHaveAttribute(
+				'data-link-name',
+				`article ${component}`,
+			);
+			expect(
+				link?.parentElement?.closest('[data-link-name]'),
+			).toHaveAttribute(
+				'data-link-name',
+				'puzzles | in-page-nav | puzzle-page',
+			);
+		}
 	});
 
 	/**
@@ -251,6 +266,14 @@ describe('PuzzlePageLayout', () => {
 		expect(
 			screen.getAllByRole('link', { name: 'Puzzles & games' }).length,
 		).toBeGreaterThan(0);
+		expect(
+			container.querySelector(
+				'[data-testid="sub-nav"] a[href="/puzzles-and-games"]',
+			),
+		).toHaveAttribute(
+			'data-link-name',
+			'header : subnav : Puzzles & games',
+		);
 
 		for (const href of Object.values(subNavChildHrefs)) {
 			expect(
@@ -259,6 +282,27 @@ describe('PuzzlePageLayout', () => {
 				),
 			).not.toBeInTheDocument();
 		}
+	});
+
+	it('attributes Useful links to the puzzle page', () => {
+		const page = createPuzzlePage('sudoku-easy');
+		renderPuzzlePageLayout('sudoku-easy', {
+			config: { ...page.config, edition: 'INT' },
+			instance: {
+				...page.instance,
+				puzzlesSupporting: {
+					usefulLinks: [
+						{
+							title: 'Puzzle help',
+							url: 'https://example.com/help',
+						},
+					],
+				},
+			},
+		});
+		expect(
+			screen.getByRole('link', { name: 'Puzzle help' }),
+		).toHaveAttribute('data-component', 'puzzles-useful-links:puzzle-page');
 	});
 
 	describe('sub-nav child links (Crosswords/Word games/Logic puzzles/Trivia & quizzes, v1-scoped feature)', () => {
