@@ -138,6 +138,8 @@ export const styles = {
 		`}
 	`,
 	recaptchaContainer: css`
+		contain: layout;
+
 		.grecaptcha-badge {
 			visibility: hidden;
 		}
