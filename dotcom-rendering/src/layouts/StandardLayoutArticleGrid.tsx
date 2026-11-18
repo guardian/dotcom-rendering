@@ -46,7 +46,6 @@ import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import {
 	type Area,
-	getLayoutType,
 	gridItemCss,
 	type LayoutType,
 } from './lib/articleArrangements';
@@ -118,16 +117,6 @@ interface GridItemProps {
 	children: React.ReactNode;
 }
 
-const getImageOrientation = (
-	aspectRatio: string,
-): 'portrait' | 'landscape' | 'square' => {
-	const [width, height] = aspectRatio.split(':').map(Number);
-	if (width == null || height == null) return 'landscape';
-	if (height > width) return 'portrait';
-	if (width > height) return 'landscape';
-	return 'square';
-};
-
 const GridItem = ({
 	area,
 	layoutType,
@@ -149,11 +138,15 @@ const GridItem = ({
 export const StandardLayoutArticleGrid = ({
 	article,
 	format,
+	layoutType,
+	mainMediaAspectRatio,
 	renderingTarget,
 	hasPageSkin,
 }: {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
+	layoutType: LayoutType;
+	mainMediaAspectRatio: string | undefined;
 	renderingTarget: RenderingTarget;
 	hasPageSkin: boolean;
 }) => {
@@ -200,20 +193,8 @@ export const StandardLayoutArticleGrid = ({
 	const usesImmersiveImageProportions =
 		isMainMediaImage || isMainMediaLoopOrCinemagraph;
 
-	const mainMediaAspectRatio = isMainMediaImage
-		? mainMedia.media.allImages[0]?.fields.aspectRatio
-		: isMainMediaAtom
-			? mainMedia.assets[0]?.aspectRatio
-			: undefined;
-
-	const mainMediaOrientation =
-		mainMediaAspectRatio != null
-			? getImageOrientation(mainMediaAspectRatio)
-			: 'landscape';
 	const immersiveHeaderHeight =
 		minHeaderHeightPx + (isLabs ? LABS_HEADER_HEIGHT : 0);
-
-	const layoutType = getLayoutType(format, mainMediaOrientation);
 
 	const setCentreRule = (gridLayout: LayoutType) => {
 		if (
