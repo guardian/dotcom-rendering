@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { space } from '@guardian/source/foundations';
 import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
@@ -6,9 +7,10 @@ import { CustomSubNav } from './Masthead/Titlepiece/CustomSubNav';
 
 type Props = {
 	miniNavData: DCRFrontCard['miniNavData'];
+	isWideCard?: boolean;
 };
 
-export const CardMiniNav = ({ miniNavData }: Props) => {
+export const CardMiniNav = ({ miniNavData, isWideCard = false }: Props) => {
 	if (!miniNavData) {
 		return null;
 	}
@@ -20,6 +22,8 @@ export const CardMiniNav = ({ miniNavData }: Props) => {
 				position: relative;
 				z-index: ${getZIndex('card-nested-link')};
 				min-width: 0;
+				${isWideCard &&
+				`padding-top: ${space[0]}px; padding-bottom: ${space[1]}px;`}
 				--custom-subnav-header-text: ${palette(
 					miniNavData.header.dotcomPath
 						? '--card-kicker-text'

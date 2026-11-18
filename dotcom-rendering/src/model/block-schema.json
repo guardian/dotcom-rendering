@@ -4659,6 +4659,11 @@
                         "number",
                         "solutionAvailable"
                     ]
+                },
+                "requiresSubscription": {
+                    "description": "Set, as `true`, only when this crossword is premium and the puzzles hub\nv3 test is on. Absent otherwise, so the element is as it always was.",
+                    "const": true,
+                    "type": "boolean"
                 }
             },
             "required": [

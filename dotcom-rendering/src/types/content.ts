@@ -884,6 +884,11 @@ interface WitnessTypeBlockElement extends ThirdPartyEmbeddedContent {
 export interface CrosswordElement {
 	_type: 'model.dotcomrendering.pageElements.CrosswordElement';
 	crossword: CrosswordProps['data'];
+	/**
+	 * Set, as `true`, only when this crossword is premium and the puzzles hub
+	 * v3 test is on. Absent otherwise, so the element is as it always was.
+	 */
+	requiresSubscription?: true;
 }
 
 export type FEElement =
