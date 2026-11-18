@@ -10,11 +10,9 @@ import {
 import { SvgGuardianLogo } from '@guardian/source/react-components';
 import { LinkButton } from '@guardian/source/react-components';
 import type { Inline1Props } from '@guardian/support-dotcom-components/dist/shared/types/props/inline1';
-import { useEffect } from 'react';
 import sanitize from 'sanitize-html';
-import { useIsInView } from '../../../lib/useIsInView';
 import type { ReactComponent } from '../lib/ReactComponent';
-import { recordInline1View } from './utils/viewCount';
+import { useInline1Tracking } from './utils/useInline1Tracking';
 
 const outerContainerStyles = css`
 	border-top: 1px solid ${palette.neutral[73]};
@@ -112,18 +110,14 @@ const imageStyles = css`
 const allowedHTMLTags = ['s', 'em', 'strong', 'a'];
 
 export const SupporterRevenue: ReactComponent<Inline1Props> = ({
+	submitComponentEvent,
 	tracking,
 	variant,
 }) => {
-	const [hasBeenSeen, setNode] = useIsInView({
-		debounce: true,
-		threshold: 0,
+	const { setNode, sendEvent } = useInline1Tracking({
+		tracking,
+		submitComponentEvent,
 	});
-	useEffect(() => {
-		if (hasBeenSeen === true) {
-			recordInline1View(tracking.abTestName);
-		}
-	}, [hasBeenSeen, tracking.abTestName]);
 
 	if (variant.message.type != 'Inline1SupportMessage') {
 		return;
@@ -174,6 +168,7 @@ export const SupporterRevenue: ReactComponent<Inline1Props> = ({
 						cssOverrides={ctaButtonStyles}
 						theme={ctaButtonTheme}
 						href={cta.baseUrl}
+						onClick={() => sendEvent('CLICK', 'cta')}
 					>
 						{cta.text}
 					</LinkButton>

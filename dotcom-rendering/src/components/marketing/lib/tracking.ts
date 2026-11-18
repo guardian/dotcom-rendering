@@ -425,7 +425,7 @@ export const buildAmpEpicCampaignCode = (
 	variantName: string,
 ): string => `AMP__${testName}__${variantName}`;
 
-const createEventFromTracking = (action: TAction) => {
+export const createEventFromTracking = (action: TAction) => {
 	return (tracking: Tracking, componentId: string): ComponentEvent => {
 		const {
 			abTestName,

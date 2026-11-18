@@ -6,10 +6,8 @@ import {
 	SvgGuardianLogo,
 } from '@guardian/source/react-components';
 import type { Inline1Props } from '@guardian/support-dotcom-components/dist/shared/types';
-import { useEffect } from 'react';
-import { useIsInView } from '../../../../lib/useIsInView';
 import type { ReactComponent } from '../../lib/ReactComponent';
-import { recordInline1View } from '../utils/viewCount';
+import { useInline1Tracking } from '../utils/useInline1Tracking';
 
 const outerContainerStyles = css`
 	border-top: 1px solid ${palette.neutral[73]};
@@ -121,18 +119,14 @@ const ctaButtonTheme = {
 };
 
 export const Puzzles: ReactComponent<Inline1Props> = ({
+	submitComponentEvent,
 	variant,
 	tracking,
 }) => {
-	const [hasBeenSeen, setNode] = useIsInView({
-		debounce: true,
-		threshold: 0,
+	const { setNode, sendEvent } = useInline1Tracking({
+		tracking,
+		submitComponentEvent,
 	});
-	useEffect(() => {
-		if (hasBeenSeen === true) {
-			recordInline1View(tracking.abTestName);
-		}
-	}, [hasBeenSeen, tracking.abTestName]);
 
 	if (variant.message.type != 'Inline1PuzzlesMessage') {
 		return null;
@@ -185,6 +179,7 @@ export const Puzzles: ReactComponent<Inline1Props> = ({
 						icon={<SvgArrowRightStraight />}
 						iconSide="right"
 						aria-label="Visit the Guardian puzzles and games hub."
+						onClick={() => sendEvent('CLICK', 'cta')}
 					>
 						Play now
 					</LinkButton>
