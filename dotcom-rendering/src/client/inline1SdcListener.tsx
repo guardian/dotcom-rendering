@@ -69,6 +69,10 @@ const render = <P extends object>(
 	slot.innerHTML = '';
 	// override ad-slot-container style in parent element
 	slot.style.textAlign = 'left';
+	if (slot.parentElement) {
+		// remove the default background color
+		slot.parentElement.style.backgroundColor = 'transparent';
+	}
 	createRoot(slot).render(
 		<ConfigProvider value={getConfig()}>
 			{createElement(Component, props)}
