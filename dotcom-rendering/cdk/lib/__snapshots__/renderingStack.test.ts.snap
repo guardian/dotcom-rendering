@@ -2013,6 +2013,73 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering CODE (us
       },
       "Type": "AWS::IAM::Policy",
     },
+    "ECSInfrastructureRoleE492121F": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          "arn:aws:iam::aws:policy/AmazonECSInfrastructureRolePolicyForManagedInstances",
+        ],
+        "Policies": [
+          {
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Action": "iam:PassRole",
+                  "Condition": {
+                    "StringLike": {
+                      "iam:PassedToService": "ec2.*",
+                    },
+                  },
+                  "Effect": "Allow",
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "ECSManagedInstancesRole1E652558",
+                      "Arn",
+                    ],
+                  },
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "PassInstanceRoleToEC2",
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
     "ECSInstanceProfileBA4A4DA9": {
       "Properties": {
         "Roles": [
@@ -2127,13 +2194,24 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering CODE (us
     },
     "EcsService81FC6EF6": {
       "DependsOn": [
+        "ECSInstanceProfileBA4A4DA9",
+        "ECSManagedInstancesRole1E652558",
         "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
         "EcsTaskDefinitionTaskRoleB7B6D8DD",
         "ListenerFaciarenderingDeterministicRouteToEc2Rule715F6B64",
         "ListenerFaciarenderingDeterministicRouteToEcsRule9195083E",
         "ListenerFaciarendering08D44551",
+        "ManagedInstancesCapacityProviderC2946447",
       ],
       "Properties": {
+        "CapacityProviderStrategy": [
+          {
+            "CapacityProvider": {
+              "Ref": "ManagedInstancesCapacityProviderC2946447",
+            },
+            "Weight": 1,
+          },
+        ],
         "Cluster": {
           "Ref": "faciarenderingEcsClusterCBCA917A",
         },
@@ -2155,7 +2233,6 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering CODE (us
         },
         "EnableECSManagedTags": false,
         "HealthCheckGracePeriodSeconds": 60,
-        "LaunchType": "FARGATE",
         "LoadBalancers": [
           {
             "ContainerName": "facia-rendering",
@@ -2223,8 +2300,11 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering CODE (us
     },
     "EcsServiceTaskCountTarget02FCCE22": {
       "DependsOn": [
+        "ECSInstanceProfileBA4A4DA9",
+        "ECSManagedInstancesRole1E652558",
         "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
         "EcsTaskDefinitionTaskRoleB7B6D8DD",
+        "ManagedInstancesCapacityProviderC2946447",
       ],
       "Properties": {
         "MaxCapacity": 3,
@@ -2494,7 +2574,7 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering CODE (us
         "Memory": "2048",
         "NetworkMode": "awsvpc",
         "RequiresCompatibilities": [
-          "FARGATE",
+          "MANAGED_INSTANCES",
         ],
         "RuntimePlatform": {
           "CpuArchitecture": "ARM64",
@@ -2607,15 +2687,6 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering CODE (us
               "Action": "ecr:GetAuthorizationToken",
               "Effect": "Allow",
               "Resource": "*",
-            },
-            {
-              "Action": [
-                "ecr:BatchCheckLayerAvailability",
-                "ecr:GetDownloadUrlForLayer",
-                "ecr:BatchGetImage",
-              ],
-              "Effect": "Allow",
-              "Resource": "arn:aws:ecr:eu-west-1:694911143906:repository/aws-guardduty-agent-fargate",
             },
             {
               "Action": [
@@ -3505,6 +3576,76 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering CODE (us
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
+    "ManagedInstancesCapacityProviderC2946447": {
+      "Properties": {
+        "ClusterName": {
+          "Ref": "faciarenderingEcsClusterCBCA917A",
+        },
+        "ManagedInstancesProvider": {
+          "InfrastructureRoleArn": {
+            "Fn::GetAtt": [
+              "ECSInfrastructureRoleE492121F",
+              "Arn",
+            ],
+          },
+          "InstanceLaunchTemplate": {
+            "Ec2InstanceProfileArn": {
+              "Fn::GetAtt": [
+                "ECSInstanceProfileBA4A4DA9",
+                "Arn",
+              ],
+            },
+            "InstanceRequirements": {
+              "AllowedInstanceTypes": [
+                "c8g.*",
+              ],
+              "MemoryMiB": {
+                "Min": 2048,
+              },
+              "VCpuCount": {
+                "Min": 1,
+              },
+            },
+            "NetworkConfiguration": {
+              "SecurityGroups": [
+                {
+                  "Fn::GetAtt": [
+                    "GuHttpsEgressSecurityGroupFaciarenderingecsEDA89EA5",
+                    "GroupId",
+                  ],
+                },
+              ],
+              "Subnets": {
+                "Ref": "faciarenderingPrivateSubnets",
+              },
+            },
+          },
+        },
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::ECS::CapacityProvider",
+    },
     "ParameterStoreReadFaciarendering42966589": {
       "Properties": {
         "PolicyDocument": {
@@ -4360,6 +4501,73 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering PROD (us
       },
       "Type": "AWS::IAM::Policy",
     },
+    "ECSInfrastructureRoleE492121F": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          "arn:aws:iam::aws:policy/AmazonECSInfrastructureRolePolicyForManagedInstances",
+        ],
+        "Policies": [
+          {
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Action": "iam:PassRole",
+                  "Condition": {
+                    "StringLike": {
+                      "iam:PassedToService": "ec2.*",
+                    },
+                  },
+                  "Effect": "Allow",
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "ECSManagedInstancesRole1E652558",
+                      "Arn",
+                    ],
+                  },
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "PassInstanceRoleToEC2",
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
     "ECSInstanceProfileBA4A4DA9": {
       "Properties": {
         "Roles": [
@@ -4474,13 +4682,24 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering PROD (us
     },
     "EcsService81FC6EF6": {
       "DependsOn": [
+        "ECSInstanceProfileBA4A4DA9",
+        "ECSManagedInstancesRole1E652558",
         "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
         "EcsTaskDefinitionTaskRoleB7B6D8DD",
         "ListenerFaciarenderingDeterministicRouteToEc2Rule715F6B64",
         "ListenerFaciarenderingDeterministicRouteToEcsRule9195083E",
         "ListenerFaciarendering08D44551",
+        "ManagedInstancesCapacityProviderC2946447",
       ],
       "Properties": {
+        "CapacityProviderStrategy": [
+          {
+            "CapacityProvider": {
+              "Ref": "ManagedInstancesCapacityProviderC2946447",
+            },
+            "Weight": 1,
+          },
+        ],
         "Cluster": {
           "Ref": "faciarenderingEcsClusterCBCA917A",
         },
@@ -4502,7 +4721,6 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering PROD (us
         },
         "EnableECSManagedTags": false,
         "HealthCheckGracePeriodSeconds": 60,
-        "LaunchType": "FARGATE",
         "LoadBalancers": [
           {
             "ContainerName": "facia-rendering",
@@ -4570,8 +4788,11 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering PROD (us
     },
     "EcsServiceTaskCountTarget02FCCE22": {
       "DependsOn": [
+        "ECSInstanceProfileBA4A4DA9",
+        "ECSManagedInstancesRole1E652558",
         "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
         "EcsTaskDefinitionTaskRoleB7B6D8DD",
+        "ManagedInstancesCapacityProviderC2946447",
       ],
       "Properties": {
         "MaxCapacity": 210,
@@ -4841,7 +5062,7 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering PROD (us
         "Memory": "2048",
         "NetworkMode": "awsvpc",
         "RequiresCompatibilities": [
-          "FARGATE",
+          "MANAGED_INSTANCES",
         ],
         "RuntimePlatform": {
           "CpuArchitecture": "ARM64",
@@ -4954,15 +5175,6 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering PROD (us
               "Action": "ecr:GetAuthorizationToken",
               "Effect": "Allow",
               "Resource": "*",
-            },
-            {
-              "Action": [
-                "ecr:BatchCheckLayerAvailability",
-                "ecr:GetDownloadUrlForLayer",
-                "ecr:BatchGetImage",
-              ],
-              "Effect": "Allow",
-              "Resource": "arn:aws:ecr:eu-west-1:694911143906:repository/aws-guardduty-agent-fargate",
             },
             {
               "Action": [
@@ -6175,6 +6387,76 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering PROD (us
         "ToPort": 9000,
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "ManagedInstancesCapacityProviderC2946447": {
+      "Properties": {
+        "ClusterName": {
+          "Ref": "faciarenderingEcsClusterCBCA917A",
+        },
+        "ManagedInstancesProvider": {
+          "InfrastructureRoleArn": {
+            "Fn::GetAtt": [
+              "ECSInfrastructureRoleE492121F",
+              "Arn",
+            ],
+          },
+          "InstanceLaunchTemplate": {
+            "Ec2InstanceProfileArn": {
+              "Fn::GetAtt": [
+                "ECSInstanceProfileBA4A4DA9",
+                "Arn",
+              ],
+            },
+            "InstanceRequirements": {
+              "AllowedInstanceTypes": [
+                "c8g.*",
+              ],
+              "MemoryMiB": {
+                "Min": 2048,
+              },
+              "VCpuCount": {
+                "Min": 1,
+              },
+            },
+            "NetworkConfiguration": {
+              "SecurityGroups": [
+                {
+                  "Fn::GetAtt": [
+                    "GuHttpsEgressSecurityGroupFaciarenderingecsEDA89EA5",
+                    "GroupId",
+                  ],
+                },
+              ],
+              "Subnets": {
+                "Ref": "faciarenderingPrivateSubnets",
+              },
+            },
+          },
+        },
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "facia-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::ECS::CapacityProvider",
     },
     "ParameterStoreReadFaciarendering42966589": {
       "Properties": {

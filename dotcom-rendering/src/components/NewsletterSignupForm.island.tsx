@@ -39,6 +39,8 @@ type Props = {
 	 * immediately and the toggle is full-width.
 	 */
 	isModal?: boolean;
+	/** For additional tracking, if needed. The component already sends a tracking event */
+	onSubmitButtonClick?: () => void;
 };
 
 const formStyles = css`
@@ -300,6 +302,7 @@ const NewsletterSignupFormActive = ({
 	frequency,
 	componentId,
 	abTest,
+	onSubmitButtonClick,
 	isModal = false,
 }: Omit<Props, 'isAlreadySubscribed'>) => {
 	const { renderingTarget } = useConfig();
@@ -395,7 +398,10 @@ const NewsletterSignupFormActive = ({
 				<div css={submitButtonContainerStyles}>
 					<Button
 						cssOverrides={submitButtonStyles}
-						onClick={handleSubmitButtonClick}
+						onClick={() => {
+							handleSubmitButtonClick();
+							onSubmitButtonClick?.();
+						}}
 						type="submit"
 						theme={primaryButtonTheme}
 						isLoading={isWaitingForResponse}
