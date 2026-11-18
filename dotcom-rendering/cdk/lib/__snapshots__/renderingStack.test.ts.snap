@@ -6076,13 +6076,13 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering PROD (us
                   "TargetGroupArn": {
                     "Ref": "TargetGroupFaciarendering9388BE24",
                   },
-                  "Weight": 99,
+                  "Weight": 90,
                 },
                 {
                   "TargetGroupArn": {
                     "Ref": "FaciarenderingEcsTargetGroupFaciarendering79A36F0A",
                   },
-                  "Weight": 1,
+                  "Weight": 10,
                 },
               ],
             },
