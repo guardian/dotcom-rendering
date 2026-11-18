@@ -176,10 +176,7 @@ describe('handlePuzzlePage', () => {
 		}
 	});
 
-	it.each([
-		['UK', 'UK'],
-		['US', 'US'],
-	] as const)(
+	it.each([['UK', 'UK']] as const)(
 		'returns 404 without mounting the renderer for the %s edition',
 		(_, edition) => {
 			const res = response();
