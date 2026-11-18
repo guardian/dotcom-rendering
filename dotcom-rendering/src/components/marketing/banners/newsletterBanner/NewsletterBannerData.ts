@@ -1,9 +1,11 @@
 import { brand, neutral, palette } from '@guardian/source/foundations';
 import { hexColourToString } from '@guardian/support-dotcom-components';
-import type { HexColour } from '@guardian/support-dotcom-components/dist/shared/types';
+import type {
+	ConfigurableDesign,
+	HexColour,
+} from '@guardian/support-dotcom-components/dist/shared/types';
 import type { PromotedNewsletter } from '@guardian/support-dotcom-components/dist/shared/types/props/banner';
 import { palette as themePalette } from '../../../../palette';
-import type { NewsletterBannerDesign } from '../common/types';
 import type { BannerData } from '../designableBanner/BannerProps';
 
 export interface NewsletterBannerSettings {
@@ -35,7 +37,7 @@ const resolveColour = (colour: HexColour | undefined, fallback: string) =>
 
 /** Resolve newsletter colours once, including defaults for pre-theme designs. */
 export const buildNewsletterBannerSettings = (
-	design: NewsletterBannerDesign | undefined,
+	design: ConfigurableDesign | undefined,
 ): NewsletterBannerSettings => {
 	const colours = design?.colours.newsletterBanner;
 	const actionColor = resolveColour(colours?.actionColor, brand[400]);

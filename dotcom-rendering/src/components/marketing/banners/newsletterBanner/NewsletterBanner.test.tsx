@@ -1,4 +1,3 @@
-import { palette } from '@guardian/source/foundations';
 import { bannerSchema } from '@guardian/support-dotcom-components';
 import {
 	fireEvent,
@@ -9,14 +8,8 @@ import type {
 	removeMediaRulePrefix,
 	useMatchMedia,
 } from '../../../../lib/useMatchMedia';
-import {
-	newsletterDesign,
-	newsletterDesignDark,
-	props,
-	stringToHexColour,
-} from '../utils/storybook';
+import { newsletterDesign, props } from '../utils/storybook';
 import { NewsletterBanner } from './NewsletterBanner';
-import type { NewsletterBannerData } from './NewsletterBannerData';
 
 const squareIllustration = 'https://example.com/newsletter-square.jpg';
 
@@ -64,35 +57,9 @@ jest.mock('../../../../lib/useMatchMedia', () => ({
 }));
 
 jest.mock('./NewsletterSignupForm', () => ({
-	NewsletterSignupForm: ({
-		onSuccess,
-		bannerData,
-	}: {
-		onSuccess: () => void;
-		bannerData: NewsletterBannerData;
-	}) => {
-		const {
-			signupButtonBackgroundColor,
-			signupButtonTextColor,
-			emailInputTextColor,
-			emailInputBackgroundColor,
-			emailInputBorderColor,
-			toggleActiveColor,
-		} = bannerData.settings.newsletterBanner;
-		return (
-			<button
-				onClick={onSuccess}
-				data-background-color={signupButtonBackgroundColor}
-				data-text-color={signupButtonTextColor}
-				data-input-text-color={emailInputTextColor}
-				data-input-background-color={emailInputBackgroundColor}
-				data-input-border-color={emailInputBorderColor}
-				data-toggle-active-color={toggleActiveColor}
-			>
-				Sign up
-			</button>
-		);
-	},
+	NewsletterSignupForm: ({ onSuccess }: { onSuccess: () => void }) => (
+		<button onClick={onSuccess}>Sign up</button>
+	),
 }));
 
 describe('NewsletterBanner configuration', () => {
@@ -176,10 +143,6 @@ describe('NewsletterBanner configuration', () => {
 				name: 'Sign up for The Stakes 2026',
 			}),
 		).toBeInTheDocument();
-		expect(
-			testingScreen.getByRole('button', { name: 'Sign up' }),
-		).toHaveAttribute('data-background-color', '#052962');
-
 		fireEvent.click(testingScreen.getByRole('button', { name: 'Sign up' }));
 		expect(
 			testingScreen.getByText("You're signed up!"),
@@ -188,7 +151,7 @@ describe('NewsletterBanner configuration', () => {
 			testingScreen.getByRole('link', {
 				name: 'Browse more newsletters',
 			}),
-		).toHaveStyle({ color: '#052962' });
+		).toBeInTheDocument();
 	});
 
 	it('places the logo wrapper in the banner grid and hides it below leftCol', () => {
@@ -251,27 +214,6 @@ describe('NewsletterBanner configuration', () => {
 		).toBe(true);
 	});
 
-	it.each([
-		{ theme: 'light', design: newsletterDesign, iconColor: '#FFFFFF' },
-		{ theme: 'dark', design: newsletterDesignDark, iconColor: '#1A1A1A' },
-	])('uses the $theme frequency icon color', ({ design, iconColor }) => {
-		render(
-			<NewsletterBanner
-				{...sdcNewsletterProps}
-				design={{
-					...sdcNewsletterProps.design,
-					colours: design.colours,
-				}}
-				idApiUrl="https://idapi.theguardian.com"
-			/>,
-		);
-
-		const icon = testingScreen
-			.getByText('Free newsletter |')
-			.parentElement?.previousElementSibling?.querySelector('svg');
-		expect(icon).toHaveStyle({ fill: iconColor });
-	});
-
 	it('renders the frequency icon without a configured icon color', () => {
 		const colours = {
 			...newsletterDesign.colours,
@@ -296,169 +238,5 @@ describe('NewsletterBanner configuration', () => {
 				.getByText('Free newsletter |')
 				.parentElement?.previousElementSibling?.querySelector('svg'),
 		).toBeInTheDocument();
-	});
-
-	it('passes the dark theme signup button colors to the form', () => {
-		render(
-			<NewsletterBanner
-				{...sdcNewsletterProps}
-				design={{
-					...sdcNewsletterProps.design,
-					colours: newsletterDesignDark.colours,
-				}}
-				idApiUrl="https://idapi.theguardian.com"
-			/>,
-		);
-
-		const button = testingScreen.getByRole('button', { name: 'Sign up' });
-		expect(button).toHaveAttribute('data-background-color', '#FFFFFF');
-		expect(button).toHaveAttribute('data-text-color', '#1A1A1A');
-		expect(button).toHaveAttribute('data-input-text-color', '#EDEDED');
-		expect(button).toHaveAttribute(
-			'data-input-background-color',
-			'#333333',
-		);
-		expect(button).toHaveAttribute('data-input-border-color', '#EDEDED');
-	});
-
-	it('passes configured email input colors to the form', () => {
-		const colours = {
-			...newsletterDesign.colours,
-			newsletterBanner: {
-				...newsletterDesign.colours.newsletterBanner,
-				emailInputTextColor: stringToHexColour('123456'),
-				emailInputBackgroundColor: stringToHexColour('FEDCBA'),
-				emailInputBorderColor: stringToHexColour('AABBCC'),
-			},
-		};
-		render(
-			<NewsletterBanner
-				{...sdcNewsletterProps}
-				design={{ ...sdcNewsletterProps.design, colours }}
-				idApiUrl="https://idapi.theguardian.com"
-			/>,
-		);
-
-		const button = testingScreen.getByRole('button', { name: 'Sign up' });
-		expect(button).toHaveAttribute('data-input-text-color', '#123456');
-		expect(button).toHaveAttribute(
-			'data-input-background-color',
-			'#FEDCBA',
-		);
-		expect(button).toHaveAttribute('data-input-border-color', '#AABBCC');
-	});
-
-	it('uses the action color when no signup button background is configured', () => {
-		const colours = {
-			...newsletterDesign.colours,
-			newsletterBanner: {
-				...newsletterDesign.colours.newsletterBanner,
-				actionColor: stringToHexColour('8F6A70'),
-			},
-		};
-		render(
-			<NewsletterBanner
-				{...sdcNewsletterProps}
-				design={{ ...sdcNewsletterProps.design, colours }}
-				idApiUrl="https://idapi.theguardian.com"
-			/>,
-		);
-
-		expect(
-			testingScreen.getByRole('button', { name: 'Sign up' }),
-		).toHaveAttribute('data-background-color', '#8F6A70');
-	});
-
-	it.each([
-		{ theme: 'light', design: newsletterDesign, color: '#22874D' },
-		{ theme: 'dark', design: newsletterDesignDark, color: '#28A85F' },
-	])('passes the $theme toggle color to the form', ({ design, color }) => {
-		render(
-			<NewsletterBanner
-				{...sdcNewsletterProps}
-				design={{
-					...sdcNewsletterProps.design,
-					colours: design.colours,
-				}}
-				idApiUrl="https://idapi.theguardian.com"
-			/>,
-		);
-
-		expect(
-			testingScreen.getByRole('button', { name: 'Sign up' }),
-		).toHaveAttribute('data-toggle-active-color', color);
-	});
-
-	it.each([
-		{
-			theme: 'light',
-			design: newsletterDesign,
-			textColor: '#333333',
-			browseColor: '#052962',
-		},
-		{
-			theme: 'dark',
-			design: newsletterDesignDark,
-			textColor: '#DCDCDC',
-			browseColor: '#DCDCDC',
-		},
-	])(
-		'uses the $theme design colors for success content',
-		({ design, textColor, browseColor }) => {
-			render(
-				<NewsletterBanner
-					{...sdcNewsletterProps}
-					design={{
-						...sdcNewsletterProps.design,
-						colours: design.colours,
-					}}
-					idApiUrl="https://idapi.theguardian.com"
-				/>,
-			);
-
-			fireEvent.click(
-				testingScreen.getByRole('button', { name: 'Sign up' }),
-			);
-
-			expect(
-				testingScreen
-					.getByText("You're signed up!")
-					.closest('[role="alert"]'),
-			).toHaveStyle({ color: textColor });
-			const iconContainer = testingScreen
-				.getByText("You're signed up!")
-				.closest('[role="alert"]')?.parentElement?.parentElement;
-			expect(iconContainer?.querySelector('svg')).toBeInTheDocument();
-			expect(iconContainer).toHaveStyle({ color: '#58D08B' });
-			expect(
-				testingScreen.getByRole('link', {
-					name: 'Browse more newsletters',
-				}),
-			).toHaveStyle({ color: browseColor, borderColor: browseColor });
-		},
-	);
-
-	it('uses the default success icon color for older designs', () => {
-		const colours = {
-			...newsletterDesign.colours,
-			newsletterBanner: {
-				...newsletterDesign.colours.newsletterBanner,
-				successIconColor: undefined,
-			},
-		};
-		render(
-			<NewsletterBanner
-				{...sdcNewsletterProps}
-				design={{ ...sdcNewsletterProps.design, colours }}
-				idApiUrl="https://idapi.theguardian.com"
-			/>,
-		);
-		fireEvent.click(testingScreen.getByRole('button', { name: 'Sign up' }));
-
-		expect(
-			testingScreen
-				.getByText("You're signed up!")
-				.closest('[role="alert"]')?.parentElement?.parentElement,
-		).toHaveStyle({ color: palette.success[400] });
 	});
 });

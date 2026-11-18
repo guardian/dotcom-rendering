@@ -3,10 +3,7 @@ import type { PromotedNewsletter } from '@guardian/support-dotcom-components/dis
 import type { ComponentType } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { validatedBannerWrapper } from '../common/BannerWrapper';
-import type {
-	BannerRenderProps,
-	NewsletterBannerDesign,
-} from '../common/types';
+import type { BannerRenderProps } from '../common/types';
 import type { BannerData } from '../designableBanner/BannerProps';
 import { BannerBody } from '../designableBanner/components/BannerBody';
 import { BannerCloseButton } from '../designableBanner/components/BannerCloseButton';
@@ -93,9 +90,8 @@ export const NewsletterBannerComponent = (
 		return null;
 	}
 
-	const design: NewsletterBannerDesign = props.design;
 	const tabletBackgroundUrl =
-		design.tabletImageAsBackground === true
+		props.design.tabletImageAsBackground === true
 			? (
 					baseBannerData.settings.headerSettings?.headerImage ??
 					baseBannerData.settings.imageSettings

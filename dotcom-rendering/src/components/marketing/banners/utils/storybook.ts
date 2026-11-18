@@ -10,7 +10,6 @@ import type {
 	HexColour,
 	Tracking,
 } from '@guardian/support-dotcom-components/dist/shared/types';
-import type { NewsletterBannerDesign } from '../common/types';
 
 export const tracking: Tracking = {
 	ophanPageId: 'kbluzw2csbf83eabedel',
@@ -140,7 +139,7 @@ export const design: ConfigurableDesign = {
 	},
 };
 
-export const newsletterDesign: NewsletterBannerDesign = {
+export const newsletterDesign: ConfigurableDesign = {
 	colours: {
 		basic: {
 			background: stringToHexColour('F3F7FF'),
@@ -195,7 +194,7 @@ export const newsletterDesign: NewsletterBannerDesign = {
 	},
 };
 
-export const newsletterDesignDark: NewsletterBannerDesign = {
+export const newsletterDesignDark: ConfigurableDesign = {
 	colours: {
 		...newsletterDesign.colours,
 		basic: {
