@@ -50,30 +50,21 @@ describe('RecordLivePricing', () => {
 
 	it('does not record live pricing presented when the live price is hidden', () => {
 		const checkVisibility = jest.fn(() => false);
-		const descriptor = Object.getOwnPropertyDescriptor(
-			Element.prototype,
-			'checkVisibility',
-		);
-		Object.defineProperty(Element.prototype, 'checkVisibility', {
-			value: checkVisibility,
-			configurable: true,
-		});
+		const marker = document.createElement('a');
+		marker.setAttribute('data-live-price', 'live');
+		// jsdom doesn't implement checkVisibility, so fake a hidden element
+		marker.checkVisibility = checkVisibility;
+		document.body.appendChild(marker);
 
-		renderWithMarkup('<a href="#" data-live-price="live">£10 at Shop</a>');
+		try {
+			render(<RecordLivePricing />);
 
-		expect(checkVisibility).toHaveBeenCalled();
-		expect(recordExperiences).toHaveBeenCalledWith('Web', [
-			'live-pricing-available',
-		]);
-
-		if (descriptor) {
-			Object.defineProperty(
-				Element.prototype,
-				'checkVisibility',
-				descriptor,
-			);
-		} else {
-			delete (Element.prototype as Partial<Element>).checkVisibility;
+			expect(checkVisibility).toHaveBeenCalled();
+			expect(recordExperiences).toHaveBeenCalledWith('Web', [
+				'live-pricing-available',
+			]);
+		} finally {
+			marker.remove();
 		}
 	});
 });
