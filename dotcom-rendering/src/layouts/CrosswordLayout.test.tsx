@@ -493,7 +493,8 @@ describe('CrosswordLayout premium crosswords', () => {
 		const { container } = renderCrosswordLayout({
 			withCrossword: true,
 			crosswordRequiresSubscription: true,
-			serverSideABTests: v1V2AndV3On,
+			edition: 'INT',
+			serverSideABTests: v2AndV3On,
 		});
 
 		const targets = container.querySelectorAll('#maincontent');
@@ -509,14 +510,16 @@ describe('CrosswordLayout premium crosswords', () => {
 		const gated = renderCrosswordLayout({
 			withCrossword: true,
 			crosswordRequiresSubscription: true,
-			serverSideABTests: v1V2AndV3On,
+			edition: 'INT',
+			serverSideABTests: v2AndV3On,
 		});
 		expect(gated.container.querySelector(commentCount)).toBeNull();
 		gated.unmount();
 
 		const ungated = renderCrosswordLayout({
 			withCrossword: true,
-			serverSideABTests: v1V2AndV3On,
+			edition: 'INT',
+			serverSideABTests: v2AndV3On,
 		});
 		expect(ungated.container.querySelector(commentCount)).not.toBeNull();
 	});
@@ -527,7 +530,8 @@ describe('CrosswordLayout premium crosswords', () => {
 			withCrossword: true,
 			crosswordType: 'everyman',
 			crosswordRequiresSubscription: true,
-			serverSideABTests: v1V2AndV3On,
+			edition: 'INT',
+			serverSideABTests: v2AndV3On,
 		});
 
 		expect(screen.getByTestId('crossword')).toBeInTheDocument();
