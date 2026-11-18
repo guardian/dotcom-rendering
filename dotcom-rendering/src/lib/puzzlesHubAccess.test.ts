@@ -4,18 +4,18 @@ import {
 } from './puzzlesHubAccess';
 
 describe('isPuzzlesHubAvailable', () => {
-	it.each(['INT', 'EUR', 'AU'] as const)(
+	it.each(['INT', 'EUR', 'AU', 'US'] as const)(
 		'is true for the %s edition',
 		(edition) => {
 			expect(isPuzzlesHubAvailable({ edition })).toBe(true);
 		},
 	);
 
-	it.each(['UK', 'US'] as const)('is false for the %s edition', (edition) => {
+	it.each(['UK'] as const)('is false for the %s edition', (edition) => {
 		expect(isPuzzlesHubAvailable({ edition })).toBe(false);
 	});
 
-	it('only lists the International, Europe and Australia editions for now', () => {
-		expect(PUZZLES_HUB_EDITIONS).toEqual(['INT', 'EUR', 'AU']);
+	it('only lists the International, Europe, Australia and US editions for now', () => {
+		expect(PUZZLES_HUB_EDITIONS).toEqual(['INT', 'EUR', 'AU', 'US']);
 	});
 });

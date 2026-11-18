@@ -104,7 +104,7 @@ describe('useCrosswordProgressReporting', () => {
 		);
 	});
 
-	it.each(['UK', 'US'] as const)(
+	it.each(['UK'] as const)(
 		'reports nothing for a reader outside the hub editions (%p)',
 		(edition) => {
 			setEdition(edition);
