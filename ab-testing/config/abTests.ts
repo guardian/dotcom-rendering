@@ -316,7 +316,7 @@ const ABTests: ABTest[] = [
 		name: "commercial-doubleVerify-ad-filter",
 		description: "Double Verify Ad filter for the US",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-11-19",
+		expirationDate: "2026-12-16",
 		type: "client",
 		status: "ON",
 		audienceSize: 0,
