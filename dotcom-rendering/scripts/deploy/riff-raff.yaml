@@ -79,7 +79,7 @@ deployments:
       - frontend-static
   # interactive-rendering cloudformation
   interactive-rendering-cfn:
-    template: cloudformation
+    type: cloud-formation
     parameters:
       templateStagePaths:
         CODE: InteractiveRendering-CODE.template.json
