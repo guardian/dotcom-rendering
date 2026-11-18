@@ -93,6 +93,7 @@ const renderCrosswordLayout = ({
 				],
 				crossword: {
 					crosswordType,
+					date: Date.UTC(2026, 10, 8),
 					entries: [],
 				} as unknown as typeof StandardFixture.crossword,
 			}),
@@ -122,6 +123,33 @@ const renderCrosswordLayout = ({
 		</ConfigProvider>,
 	);
 };
+
+it('passes crossword context to both metadata share placements', () => {
+	const { container } = renderCrosswordLayout({ withQuickSeries: true });
+	const shareProps = Array.from(
+		container.querySelectorAll('gu-island[name="ShareButton"]'),
+		(island) =>
+			JSON.parse(island.getAttribute('props')!) as {
+				context: string;
+				puzzleTrackingContext: unknown;
+			},
+	);
+	expect(
+		shareProps.map(({ context, puzzleTrackingContext }) => ({
+			context,
+			puzzleTrackingContext,
+		})),
+	).toEqual(
+		['ArticleMeta', 'SubMeta'].map((context) => ({
+			context,
+			puzzleTrackingContext: {
+				slug: 'quick',
+				date: '2026-11-08',
+				provider: 'guardian-crossword',
+			},
+		})),
+	);
+});
 
 describe('CrosswordLayout app download link', () => {
 	it('renders the link when the hub is unavailable', () => {

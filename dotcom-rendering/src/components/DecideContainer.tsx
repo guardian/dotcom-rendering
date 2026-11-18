@@ -32,6 +32,7 @@ type Props = {
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
 	hasPageSkin?: boolean;
+	isUserOptedInToMiniNav: boolean;
 };
 
 export const DecideContainer = ({
@@ -48,6 +49,7 @@ export const DecideContainer = ({
 	collectionId,
 	containerLevel,
 	hasPageSkin,
+	isUserOptedInToMiniNav,
 }: Props) => {
 	switch (containerType) {
 		case 'nav/list':
@@ -76,6 +78,7 @@ export const DecideContainer = ({
 					containerLevel={containerLevel}
 					collectionId={collectionId}
 					isStorylines={false}
+					isUserOptedInToMiniNav={isUserOptedInToMiniNav}
 				/>
 			);
 		case 'scrollable/small':

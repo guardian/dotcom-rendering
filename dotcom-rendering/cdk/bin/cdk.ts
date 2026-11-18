@@ -92,12 +92,18 @@ export const FaciaRenderingPropsCODE: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
-		provisionManagedSecurityRole: true,
+		managedInstancesProps: {
+			instancesRequirements: {
+				memoryMin: Size.mebibytes(2048),
+				vCpuCountMin: 1,
+				allowedInstanceTypes: ['c8g.*'],
+			},
+		},
 	},
-	// Route 100% traffic to EC2.
+	// Route 100% traffic to ECS.
 	targetGroupWeights: {
-		ec2: 1,
-		ecs: 0,
+		ec2: 0,
+		ecs: 1,
 	},
 };
 new RenderingCDKStack(cdkApp, 'FaciaRendering-CODE', FaciaRenderingPropsCODE);
@@ -149,12 +155,18 @@ export const FaciaRenderingPropsPROD: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
-		provisionManagedSecurityRole: true,
+		managedInstancesProps: {
+			instancesRequirements: {
+				memoryMin: Size.mebibytes(2048),
+				vCpuCountMin: 1,
+				allowedInstanceTypes: ['c8g.*'],
+			},
+		},
 	},
-	// Route 100% traffic to EC2.
+	// Route 99% traffic to EC2, 1% to ECS.
 	targetGroupWeights: {
-		ec2: 1,
-		ecs: 0,
+		ec2: 99,
+		ecs: 1,
 	},
 };
 new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', FaciaRenderingPropsPROD);
