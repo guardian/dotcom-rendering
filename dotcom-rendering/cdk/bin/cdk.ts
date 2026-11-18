@@ -163,10 +163,10 @@ export const FaciaRenderingPropsPROD: RenderingCDKStackProps = {
 			},
 		},
 	},
-	// Route 90% traffic to EC2, 10% to ECS.
+	// Route 50% traffic to EC2, 50% to ECS.
 	targetGroupWeights: {
-		ec2: 90,
-		ecs: 10,
+		ec2: 50,
+		ecs: 50,
 	},
 };
 new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', FaciaRenderingPropsPROD);
