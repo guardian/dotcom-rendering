@@ -28,6 +28,8 @@ const puzzleTypesByCard = new Map<string, string>([
 	['sudoku:killer', 'SUDOKU_KILLER'],
 	['word-wheel:all', 'WORDWHEEL'],
 	['wordiply:all', 'WORDIPLY'],
+	['film-reveal:all', 'FILMREVEAL'],
+	['on-the-ball:all', 'ONTHEBALL'],
 ]);
 
 export const puzzleTypeForCard = (item: PuzzleItem): string | undefined =>
