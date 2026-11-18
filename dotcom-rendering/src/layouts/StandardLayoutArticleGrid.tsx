@@ -213,11 +213,7 @@ export const StandardLayoutArticleGrid = ({
 	const immersiveHeaderHeight =
 		minHeaderHeightPx + (isLabs ? LABS_HEADER_HEIGHT : 0);
 
-	const topHatTestingPage = '/p/x4zt8y';
-	const layoutType =
-		article.config.shortUrlId === topHatTestingPage
-			? 'interactiveTopHat'
-			: getLayoutType(format, mainMediaOrientation);
+	const layoutType = getLayoutType(format, mainMediaOrientation);
 
 	const setCentreRule = (gridLayout: LayoutType) => {
 		if (
