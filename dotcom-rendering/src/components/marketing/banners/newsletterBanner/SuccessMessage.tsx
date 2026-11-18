@@ -66,6 +66,7 @@ export const SuccessMessage = ({
 					theme={{
 						textTertiary: browseButtonColor,
 						borderTertiary: browseButtonColor,
+						backgroundTertiaryHover: 'transparent',
 					}}
 					href="/email-newsletters?INTCMP=DOTCOM_NEWSLETTER_SIGNUP_CARD"
 					priority="tertiary"
