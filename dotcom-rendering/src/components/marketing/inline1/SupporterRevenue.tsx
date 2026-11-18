@@ -24,10 +24,10 @@ const outerContainerStyles = css`
 const innerContainerStyles = css`
 	background-color: ${palette.neutral[97]};
 	padding-top: ${space[2]}px;
-	padding-left: ${space[3]}px;
+	padding-left: 10px;
 	display: flex;
 	flex-direction: column;
-	gap: ${space[3]}px;
+	gap: ${space[2]}px;
 
 	${until.tablet} {
 		padding-right: ${space[3]}px;
@@ -39,7 +39,7 @@ const innerContainerStyles = css`
 			'heading logo'
 			'body    image'
 			'cta	 image';
-		gap: ${space[3]}px ${space[3]}px;
+		gap: 0px ${space[3]}px;
 	}
 `;
 
@@ -47,6 +47,8 @@ const headingStyles = css`
 	${headlineMedium24};
 	${from.tablet} {
 		grid-area: heading;
+		margin-bottom: 8px;
+		max-width: 428px;
 	}
 `;
 
@@ -66,9 +68,13 @@ const guardianLogoContainerStyles = css`
 
 const bodyStyles = css`
 	${textSans15};
+	${until.tablet} {
+		margin-bottom: 12px;
+	}
 	${from.tablet} {
 		grid-area: body;
-		margin-bottom: 28px;
+		margin-bottom: 40px;
+		max-width: 428px;
 	}
 `;
 
