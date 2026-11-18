@@ -89,6 +89,13 @@ export const hasImmersiveGridTitle = (
 		containsSeriesTag(tags) ||
 		format.theme === ArticleSpecial.Labs);
 
+export const hasImmersiveGridTitleRule = (
+	format: ArticleFormat,
+	tags: TagType[],
+): boolean =>
+	format.design !== ArticleDesign.WeekendEssay &&
+	hasImmersiveGridTitle(format, tags);
+
 /**
  * NOTE: Immersive Opinion pieces are not supported,
  * i.e. when `CommentDesign` and `ImmersiveDisplay` are used jointly.

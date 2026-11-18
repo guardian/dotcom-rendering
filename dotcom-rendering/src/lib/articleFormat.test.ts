@@ -12,6 +12,7 @@ import {
 	getAllThemes,
 	getArticleThemeString,
 	hasImmersiveGridTitle,
+	hasImmersiveGridTitleRule,
 	isHostedContentDesign,
 	isImmersiveOpinion,
 	isOpinionDesign,
@@ -163,6 +164,18 @@ describe('article format classification', () => {
 		},
 	])('shows an immersive grid title for $name', ({ format, tags }) => {
 		expect(hasImmersiveGridTitle(format, tags)).toBe(true);
+		expect(hasImmersiveGridTitleRule(format, tags)).toBe(
+			format.design !== ArticleDesign.WeekendEssay,
+		);
+	});
+
+	it('does not use a tag-attached rule for Weekend Essays with series tags', () => {
+		expect(
+			hasImmersiveGridTitleRule(
+				{ ...immersiveFormat, design: ArticleDesign.WeekendEssay },
+				[seriesTag],
+			),
+		).toBe(false);
 	});
 
 	it('does not show an immersive grid title without a qualifying format or tag', () => {

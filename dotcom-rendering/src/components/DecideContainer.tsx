@@ -1,6 +1,4 @@
-import { isUndefined } from '@guardian/libs';
 import type { ImgHTMLAttributes } from 'react';
-import * as v from 'valibot';
 import type {
 	AspectRatio,
 	DCRContainerLevel,
@@ -9,10 +7,8 @@ import type {
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
-import type { Graphic } from './EventGraphic';
 import { GraphicSchema } from './EventGraphic';
 import { FlexibleGeneral } from './FlexibleGeneral';
-import { FlexibleSpecial } from './FlexibleSpecial';
 import { Island } from './Island';
 import { NavList } from './NavList';
 import { ScrollableFeature } from './ScrollableFeature.island';
@@ -36,34 +32,7 @@ type Props = {
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
 	hasPageSkin?: boolean;
-};
-
-const extractGraphic = (
-	groupedTrails: DCRGroupedTrails,
-): Graphic | undefined => {
-	const graphicCard = [
-		...groupedTrails.snap,
-		...groupedTrails.splash,
-		...groupedTrails.standard,
-	].find(
-		(card) =>
-			!isUndefined(card.dataUrl) &&
-			!isUndefined(card.graphicKind) &&
-			!isUndefined(card.eventData),
-	);
-
-	if (isUndefined(graphicCard)) {
-		return undefined;
-	}
-
-	const result = v.safeParse(GraphicSchema, {
-		electionDataUrl: graphicCard.dataUrl,
-		kind: graphicCard.graphicKind,
-		electionComponents: graphicCard.eventData,
-		liveEffects: true,
-	});
-
-	return result.success ? result.output : undefined;
+	isUserOptedInToMiniNav: boolean;
 };
 
 export const DecideContainer = ({
@@ -80,6 +49,7 @@ export const DecideContainer = ({
 	collectionId,
 	containerLevel,
 	hasPageSkin,
+	isUserOptedInToMiniNav,
 }: Props) => {
 	switch (containerType) {
 		case 'nav/list':
@@ -96,19 +66,6 @@ export const DecideContainer = ({
 					/>
 				</Island>
 			);
-		case 'flexible/special':
-			return (
-				<FlexibleSpecial
-					groupedTrails={groupedTrails}
-					containerPalette={containerPalette}
-					hideAge={hideAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-					aspectRatio={aspectRatio}
-					collectionId={collectionId}
-					graphic={extractGraphic(groupedTrails)}
-				/>
-			);
 		case 'flexible/general':
 			return (
 				<FlexibleGeneral
@@ -121,6 +78,7 @@ export const DecideContainer = ({
 					containerLevel={containerLevel}
 					collectionId={collectionId}
 					isStorylines={false}
+					isUserOptedInToMiniNav={isUserOptedInToMiniNav}
 				/>
 			);
 		case 'scrollable/small':

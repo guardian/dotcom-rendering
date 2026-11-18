@@ -8,7 +8,7 @@ const validPage = () => ({
 	editionId: 'UK',
 	canonicalUrl: 'https://www.theguardian.com/puzzles-and-games',
 	isAdFreeUser: false,
-	config: { serverSideABTests: { 'puzzles-new-hub-v1': 'variant' } },
+	config: { edition: 'INT' },
 	nav: {},
 	pageFooter: {},
 	layout: {
@@ -53,6 +53,7 @@ describe('validateAsPuzzlesPageType', () => {
 				title,
 				puzzleType,
 				set,
+				path: `/puzzles-and-games/${category}/${set}/archive`,
 			};
 			const archive = {
 				category,

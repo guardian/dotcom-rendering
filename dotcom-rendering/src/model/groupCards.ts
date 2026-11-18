@@ -7,17 +7,15 @@ import { enhanceCards } from './enhanceCards';
 /**
  * Groups cards based on their group specified in fronts tool
  *
- * For 'flexible' container types in fronts tool, cards can be grouped by sizes:
- *  - Snap (flexible/special only)
- *  - Splash (flexible/general only)
+ * For the 'flexible/general' container type in fronts tool, cards can be grouped by sizes:
+ *  - Splash
  *  - Standard
  *
- * This can be consumed by the rendering layer to tell us how we should size each card, which
- * can vary by container type.
+ * This can be consumed by the rendering layer to tell us how we should present each card.
  *
  * Backfilled cards are always considered 'standard'.
  *
- * @returns Card arrays grouped into 'snap', 'splash' and 'standard'
+ * @returns Card arrays grouped into 'splash' and 'standard'
  */
 export const groupCards = (
 	container: DCRContainerType,
@@ -55,43 +53,14 @@ export const groupCards = (
 			});
 
 			return {
-				snap: [],
 				splash: enhanceCards(splash, enhanceOptions()),
 				standard: enhanceCards(standard, enhanceOptions(splash.length)),
-			};
-		}
-		case 'flexible/special': {
-			const snap = curated.filter(({ card }) => card.group === '1');
-
-			// Backfilled cards will always be treated as 'standard' cards
-			const standard = [
-				...curated.filter(({ card }) => card.group === '0'),
-				...backfill,
-			];
-			const enhanceOptions = (offset = 0) => ({
-				cardInTagPage: false,
-				editionId,
-				pageId,
-				discussionApiUrl,
-				offset,
-				stripBranding,
-				serverSideABTests,
-				featureSwitches,
-			});
-
-			return {
-				// Splash is not supported on these container types
-				splash: [],
-				// Only 'snap' and 'standard' are supported by flexible/special
-				snap: enhanceCards(snap, enhanceOptions()),
-				standard: enhanceCards(standard, enhanceOptions(snap.length)),
 			};
 		}
 		default:
 			// All other container types do not support grouping
 			return {
 				splash: [],
-				snap: [],
 				standard: [],
 			};
 	}

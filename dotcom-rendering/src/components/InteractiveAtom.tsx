@@ -46,7 +46,9 @@ export const InteractiveAtom = ({
 	title,
 	customData,
 }: InteractiveAtomType) => {
-	const { renderingTarget } = useConfig();
+	const { renderingTarget, darkModeAvailable } = useConfig();
+	const forceLightColorScheme =
+		!darkModeAvailable && renderingTarget === 'Web';
 
 	return (
 		<div
@@ -70,6 +72,7 @@ export const InteractiveAtom = ({
 					elementHtml,
 					renderingTarget,
 					customData,
+					forceLightColorScheme,
 				})}
 				frameBorder="0"
 			/>

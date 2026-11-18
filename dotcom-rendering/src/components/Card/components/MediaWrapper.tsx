@@ -35,7 +35,6 @@ type Props = {
 	mediaPositionOnMobile: MediaPositionType;
 	isSmallCard: boolean;
 	padMedia?: boolean;
-	isLoopAndInLoopClickTestVariant?: boolean;
 };
 
 const mediaOverlayContainerStyles = css`
@@ -177,7 +176,6 @@ export const MediaWrapper = ({
 	mediaPositionOnMobile,
 	isSmallCard,
 	padMedia,
-	isLoopAndInLoopClickTestVariant,
 }: Props) => {
 	const isHorizontalOnMobile =
 		mediaPositionOnMobile === 'left' || mediaPositionOnMobile === 'right';
@@ -189,10 +187,7 @@ export const MediaWrapper = ({
 	 * (see CardWrapper), so that transparent areas of the image aren't tinted
 	 */
 	const isPicture = mediaType === 'picture';
-	const showMediaOverlay =
-		!isPicture &&
-		(mediaType === 'cinemagraph' ||
-			isLoopAndInLoopClickTestVariant == true);
+	const showMediaOverlay = mediaType === 'cinemagraph';
 
 	return (
 		<div

@@ -352,6 +352,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						tagIds={article.tags.map((tag) => tag.id)}
 						sectionId={article.config.section}
 						contentType={article.contentType}
+						canonicalUrl={article.canonicalUrl}
 					/>
 				</div>
 			)}

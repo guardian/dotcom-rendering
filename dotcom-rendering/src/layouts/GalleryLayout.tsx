@@ -131,6 +131,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					pageId={frontendData.pageId}
 					tagIds={frontendData.tags.map((tag) => tag.id)}
 					showSlimNav={!isWorldCup2026}
+					canonicalUrl={frontendData.canonicalUrl}
 				/>
 			) : null}
 			<GalleryLabsHeader
@@ -395,6 +396,7 @@ const BannerAndMasthead = (props: {
 	pageId: string | undefined;
 	tagIds?: string[];
 	showSlimNav?: boolean;
+	canonicalUrl?: string;
 }) => (
 	<div data-print-layout="hide" id="bannerandheader">
 		{props.renderAds ? (
@@ -432,6 +434,7 @@ const BannerAndMasthead = (props: {
 			tagIds={props.tagIds}
 			sectionId={props.config.section}
 			contentType={props.config.contentType}
+			canonicalUrl={props.canonicalUrl}
 		/>
 	</div>
 );

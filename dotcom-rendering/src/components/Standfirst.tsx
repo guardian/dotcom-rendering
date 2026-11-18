@@ -34,6 +34,8 @@ type Props = {
 const nestedStyles = (format: ArticleFormat) => {
 	const offset = format.display === ArticleDisplay.Immersive ? space[6] : 19;
 	return css`
+		overflow-wrap: anywhere;
+
 		li {
 			margin-bottom: 6px;
 			padding-left: ${offset}px;

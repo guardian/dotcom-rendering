@@ -2,7 +2,11 @@ import { css } from '@emotion/react';
 import { space, until } from '@guardian/source/foundations';
 import type { FEAspectRatio } from '../frontend/feFront';
 import { isInteractive } from '../layouts/lib/interactiveLegacyStyling';
-import { ArticleDisplay, type ArticleFormat } from '../lib/articleFormat';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+} from '../lib/articleFormat';
 import {
 	extractValidSourcesFromAssets,
 	getAspectRatioFromSources,
@@ -118,6 +122,13 @@ export const SelfHostedVideoInArticle = ({
 					videoStyle={videoStyle}
 					uniqueId={element.id}
 					caption={caption}
+					controlsPosition={
+						isMainMedia &&
+						format.display === ArticleDisplay.Immersive &&
+						format.design !== ArticleDesign.WeekendEssay
+							? 'top'
+							: 'bottom'
+					}
 					format={format}
 					isMainMedia={isMainMedia}
 					role={role}

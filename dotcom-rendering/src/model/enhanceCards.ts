@@ -247,13 +247,13 @@ export const getFrontEditorialTestData = (
 	}
 
 	/*
-	 * Initial rollout of Editorial AB testing will be limited to the US front only.
+	 * Initial rollout of Editorial AB testing will be limited to the US and AU fronts only.
 	 * Removal of this front restriction will be covered by https://github.com/guardian/frontend/issues/29129
 	 */
-	const isUSNetworkFront = pageId === 'us';
+	const isAllowedNetworkFront = pageId === 'us' || pageId === 'au';
 	const testCanRunOnPage =
 		!isUndefined(pageId) &&
-		isUSNetworkFront &&
+		isAllowedNetworkFront &&
 		activeFrontEditorialTest.frontsThisTestCanRunOn.includes(pageId);
 
 	// don't return data if test cannot run on the current front
@@ -673,6 +673,8 @@ export const enhanceCards = (
 			showByline: faciaCard.properties.showByline,
 			snapData: enhanceSnaps(faciaCard.enriched),
 			boostLevel: faciaCard.display.boostLevel,
+			showMiniNav: faciaCard.display.showMiniNav ?? false,
+			miniNavData: faciaCard.display.miniNavData,
 			isImmersive: !!faciaCard.display.isImmersive,
 			isCrossword: faciaCard.properties.isCrossword,
 			isNewsletter,

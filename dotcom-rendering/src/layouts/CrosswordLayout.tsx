@@ -14,6 +14,7 @@ import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
+import { useConfig } from '../components/ConfigContext';
 import { CrosswordInstructions } from '../components/CrosswordInstructions';
 import { CrosswordLinks } from '../components/CrosswordLinks';
 import { DecideLines } from '../components/DecideLines';
@@ -35,14 +36,14 @@ import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import {
-	isPuzzlesHubV1Enabled,
-	isPuzzlesHubV2Enabled,
-} from '../lib/puzzlesHubVersionExperiment';
+import { crosswordActionContext } from '../lib/puzzleActionTracking';
+import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
+import { isPuzzlesHubV2Enabled } from '../lib/puzzlesHubVersionExperiment';
 import {
 	getPuzzlesSubNavLinks,
 	PUZZLES_SUBNAV_PARENT,
 } from '../lib/puzzlesSubNav';
+import { puzzleAccentStyles } from '../lib/puzzlesTheme';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
@@ -124,6 +125,7 @@ interface Props {
 
 export const CrosswordLayout = (props: Props) => {
 	const { article, format } = props;
+	const { darkModeAvailable } = useConfig();
 	const {
 		config: { isPaidContent, host, hasSurveyAd },
 	} = article;
@@ -143,7 +145,7 @@ export const CrosswordLayout = (props: Props) => {
 	 * content") and no second sub-nav above the footer. Independent of
 	 * whether the rail has data, so the page design never depends on CAPI.
 	 */
-	const isPuzzlesHubV1 = isPuzzlesHubV1Enabled(article.config);
+	const isPuzzlesHubV1 = isPuzzlesHubAvailable(article.config);
 
 	/**
 	 * With v1 on, the title's series ("Quick") and section ("Crosswords")
@@ -152,22 +154,25 @@ export const CrosswordLayout = (props: Props) => {
 	 * & games crosswords archive ("Quick" filtered to its crossword type, see
 	 * `titleTags`). Without v1 both are unchanged.
 	 */
-	const PUZZLES_CROSSWORDS_ARCHIVE_PATH =
-		'puzzles-and-games/crosswords/archive';
+	const PUZZLES_CROSSWORDS_PATH = 'puzzles-and-games/crosswords';
+	const PUZZLES_CROSSWORDS_ARCHIVE_PATH = `${PUZZLES_CROSSWORDS_PATH}/archive`;
 
 	/**
 	 * The series tag ("Quick") links to that crossword type's archive page,
 	 * `SeriesSectionLink` builds the href as `${guardianBaseURL}/${tag.id}`.
+	 * `frontend` sends the path only for types that have their own archive
+	 * page (a path for any other type, e.g. "genius", would 404), so the rest
+	 * link to the crosswords archive instead.
 	 */
 	const crosswordType = article.crossword?.crosswordType;
+	const seriesArchivePath =
+		article.puzzleArchivePath?.replace(/^\//, '') ??
+		PUZZLES_CROSSWORDS_ARCHIVE_PATH;
 	const titleTags =
 		isPuzzlesHubV1 && crosswordType
 			? article.tags.map((tag) =>
 					tag.type === 'Series'
-						? {
-								...tag,
-								id: `${PUZZLES_CROSSWORDS_ARCHIVE_PATH}?puzzle=${crosswordType}`,
-							}
+						? { ...tag, id: seriesArchivePath }
 						: tag,
 				)
 			: article.tags;
@@ -230,6 +235,7 @@ export const CrosswordLayout = (props: Props) => {
 					tagIds={article.tags.map((tag) => tag.id)}
 					sectionId={article.config.section}
 					contentType={article.contentType}
+					canonicalUrl={article.canonicalUrl}
 				/>
 			</div>
 
@@ -237,7 +243,13 @@ export const CrosswordLayout = (props: Props) => {
 				<AdSlot position="survey" display={format.display} />
 			)}
 
-			<main data-layout="InteractiveLayout">
+			<main
+				data-layout="InteractiveLayout"
+				css={
+					isPuzzlesHubV1 &&
+					puzzleAccentStyles('crosswords', darkModeAvailable)
+				}
+			>
 				<Section
 					fullWidth={true}
 					showTopBorder={false}
@@ -472,6 +484,7 @@ export const CrosswordLayout = (props: Props) => {
 								defer={{ until: 'visible' }}
 							>
 								<RelatedPuzzlesRailEnhanced
+									source="crossword-page"
 									items={article.moreFromPuzzlesAndGames}
 								/>
 							</Island>
@@ -487,6 +500,10 @@ export const CrosswordLayout = (props: Props) => {
 					>
 						<SubMeta
 							format={format}
+							puzzleTrackingSource="crossword-page"
+							puzzleTrackingContext={crosswordActionContext(
+								article.crossword,
+							)}
 							subMetaKeywordLinks={article.subMetaKeywordLinks}
 							subMetaSectionLinks={article.subMetaSectionLinks}
 							pageId={article.pageId}

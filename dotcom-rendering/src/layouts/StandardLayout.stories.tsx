@@ -1,8 +1,11 @@
+import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import type { ReactNode } from 'react';
 import { expect, within } from 'storybook/test';
 import { allModes } from '../../.storybook/modes';
 import { Audio as AudioFixture } from '../../fixtures/generated/fe-articles/Audio';
+import { Labs as LabsFixture } from '../../fixtures/generated/fe-articles/Labs';
 import { Recipe as RecipeFixture } from '../../fixtures/generated/fe-articles/Recipe';
 import { Standard as StandardFixture } from '../../fixtures/generated/fe-articles/Standard';
 import { ArticleDesign, ArticleDisplay } from '../lib/articleFormat';
@@ -19,6 +22,17 @@ const meta = {
 export default meta;
 
 type Story = StoryObj<typeof meta>;
+
+const PageSkinWrapper = ({ children }: { children: ReactNode }) => (
+	<div
+		css={css`
+			background-image: url('https://adimage.theguardian.com/pageskins/puppies-pageskin.jpg');
+			background-size: contain;
+		`}
+	>
+		{children}
+	</div>
+);
 
 const appsAudioArticle = enhanceArticleType(AudioFixture, 'Apps');
 
@@ -244,6 +258,138 @@ export const WebImmersiveMobile: Story = {
 	},
 };
 
+const allLightBreakpointModes = {
+	'light mobile': allModes['light mobile'],
+	'light mobileMedium': allModes['light mobileMedium'],
+	'light mobileLandscape': {
+		...allModes.light,
+		viewport: breakpoints.mobileLandscape,
+	},
+	'light phablet': {
+		...allModes.light,
+		viewport: breakpoints.phablet,
+	},
+	'light tablet': {
+		...allModes.light,
+		viewport: breakpoints.tablet,
+	},
+	'light desktop': allModes['light desktop'],
+	'light leftCol': allModes['light leftCol'],
+	'light wide': allModes['light wide'],
+};
+
+const webImmersiveLabsArticle = enhanceArticleType(LabsFixture, 'Web');
+const labsCommercialProperties =
+	webImmersiveLabsArticle.frontendData.commercialProperties;
+const labsEditionId = webImmersiveLabsArticle.frontendData.editionId;
+const labsBranding = labsCommercialProperties[labsEditionId].branding;
+
+if (labsBranding == null) {
+	throw new Error('The Labs fixture must contain branding');
+}
+
+const stableLabsLogo =
+	'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="90"><rect width="140" height="90" fill="white"/><text x="70" y="49" text-anchor="middle" font-family="Arial" font-size="14" fill="black">Prime Video</text></svg>';
+
+const webImmersiveLabsArticleWithSupportingCaption = {
+	...webImmersiveLabsArticle.frontendData,
+	commercialProperties: {
+		...labsCommercialProperties,
+		[labsEditionId]: {
+			...labsCommercialProperties[labsEditionId],
+			branding: {
+				...labsBranding,
+				logo: {
+					...labsBranding.logo,
+					src: stableLabsLogo,
+				},
+			},
+		},
+	},
+	blocks: webImmersiveLabsArticle.frontendData.blocks.map((block) => ({
+		...block,
+		elements: block.elements.map((element) =>
+			element._type ===
+				'model.dotcomrendering.pageElements.ImageBlockElement' &&
+			element.role === 'supporting'
+				? {
+						...element,
+						data: {
+							...element.data,
+							caption: 'Statue of Queen Elizabeth II.',
+						},
+					}
+				: element,
+		),
+	})),
+};
+
+export const WebImmersiveLabsWithPageSkin: Story = {
+	args: {
+		renderingTarget: 'Web',
+		NAV: {
+			...extractNAV(webImmersiveLabsArticle.frontendData.nav),
+			selectedPillar: getCurrentPillar(
+				webImmersiveLabsArticle.frontendData,
+			),
+		},
+		article: {
+			...webImmersiveLabsArticleWithSupportingCaption,
+			config: {
+				...webImmersiveLabsArticleWithSupportingCaption.config,
+				hasPageSkin: true,
+			},
+		},
+		format: {
+			design: webImmersiveLabsArticle.design,
+			display: webImmersiveLabsArticle.display,
+			theme: webImmersiveLabsArticle.theme,
+		},
+	},
+	render: (args) => (
+		<PageSkinWrapper>
+			<StandardLayout {...args} />
+		</PageSkinWrapper>
+	),
+	parameters: {
+		formats: [
+			{
+				design: webImmersiveLabsArticle.design,
+				display: webImmersiveLabsArticle.display,
+				theme: webImmersiveLabsArticle.theme,
+			},
+		],
+		chromatic: {
+			modes: allLightBreakpointModes,
+		},
+	},
+	play: async ({ canvasElement }) => {
+		const pageSkinSlot = canvasElement.querySelector(
+			'[data-name="pageskin-inread"]',
+		);
+		const main = canvasElement.querySelector('main');
+		const article = canvasElement.querySelector('article');
+		const labsHeader = canvasElement.querySelector('#labs-header');
+		const mainMedia = canvasElement.querySelector('[data-gu-name="media"]');
+		const brandingLogo = canvasElement.querySelector<HTMLImageElement>(
+			'[data-testid="branding-logo"] img',
+		);
+
+		await expect(pageSkinSlot).toBeInTheDocument();
+		await expect(main).not.toBeNull();
+		await expect(article).not.toBeNull();
+		await expect(labsHeader).not.toBeNull();
+		await expect(mainMedia).not.toBeNull();
+		await expect(brandingLogo).not.toBeNull();
+
+		if (mainMedia === null || brandingLogo === null) {
+			throw new Error('Expected main media and Labs branding');
+		}
+
+		await brandingLogo.decode();
+	},
+};
+
 const webImmersivePortraitArticle = enhanceArticleType(
 	{
 		...RecipeFixture,
@@ -296,25 +442,75 @@ export const WebImmersivePortrait: Story = {
 	parameters: {
 		formats: [immersivePortraitFormat],
 		chromatic: {
+			modes: allLightBreakpointModes,
+		},
+	},
+};
+
+export const WebImmersivePortraitWithPageSkin: Story = {
+	args: {
+		renderingTarget: 'Web',
+		NAV: {
+			...extractNAV(webImmersivePortraitArticle.frontendData.nav),
+			selectedPillar: getCurrentPillar(
+				webImmersivePortraitArticle.frontendData,
+			),
+		},
+		article: {
+			...webImmersivePortraitArticle.frontendData,
+			shouldHideAds: false,
+			config: {
+				...webImmersivePortraitArticle.frontendData.config,
+				hasPageSkin: true,
+			},
+		},
+		format: immersivePortraitFormat,
+	},
+	render: (args) => (
+		<PageSkinWrapper>
+			<StandardLayout {...args} />
+		</PageSkinWrapper>
+	),
+	parameters: {
+		formats: [immersivePortraitFormat],
+		chromatic: {
 			modes: {
-				'light mobile': allModes['light mobile'],
-				'light mobileMedium': allModes['light mobileMedium'],
-				'light mobileLandscape': {
-					...allModes.light,
-					viewport: breakpoints.mobileLandscape,
-				},
-				'light phablet': {
-					...allModes.light,
-					viewport: breakpoints.phablet,
-				},
-				'light tablet': {
-					...allModes.light,
-					viewport: breakpoints.tablet,
-				},
-				'light desktop': allModes['light desktop'],
-				'light leftCol': allModes['light leftCol'],
 				'light wide': allModes['light wide'],
 			},
+		},
+	},
+	play: async ({ canvasElement }) => {
+		const article = canvasElement.querySelector('article');
+		const mainMedia = canvasElement.querySelector('[data-gu-name="media"]');
+
+		await expect(article).not.toBeNull();
+		await expect(mainMedia).not.toBeNull();
+	},
+};
+
+const immersiveWeekendReadFormat = {
+	...immersivePortraitFormat,
+	design: ArticleDesign.WeekendEssay,
+};
+
+export const WebImmersivePortraitWeekendRead: Story = {
+	args: {
+		...WebImmersivePortrait.args,
+		article: {
+			...webImmersivePortraitArticle.frontendData,
+			shouldHideAds: true,
+			format: {
+				...webImmersivePortraitArticle.frontendData.format,
+				design: 'WeekendEssayDesign',
+			},
+		},
+		format: immersiveWeekendReadFormat,
+	},
+	parameters: {
+		...WebImmersivePortrait.parameters,
+		formats: [immersiveWeekendReadFormat],
+		chromatic: {
+			modes: allLightBreakpointModes,
 		},
 	},
 };

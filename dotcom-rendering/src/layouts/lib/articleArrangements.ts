@@ -302,6 +302,16 @@ const immersivePortraitCss: LayoutCssMap = {
 	},
 };
 
+const immersiveWeekendReadBelowDesktop: Partial<Record<Area, string>> = {
+	title: `grid-row: 1; ${grid.column.centre} align-self: start; padding-bottom: 0;`,
+	headline: `grid-row: 2; ${grid.column.centre} margin-top: 0;`,
+	media: 'grid-row: 3;',
+	caption: 'grid-row: 4;',
+	standfirst: 'grid-row: 5;',
+	meta: 'grid-row: 6;',
+	body: 'grid-row: 7;',
+};
+
 const immersiveLandscapeCss: LayoutCssMap = {
 	title: {
 		mobile: `${grid.column.all} grid-row: 2; align-self: end; padding-bottom: var(--immersive-headline-overlap);`,
@@ -395,6 +405,8 @@ const layoutCssMaps: Record<LayoutType, LayoutCssMap> = {
  *
  * @param area - The named piece of article furniture to position (e.g. `'headline'`, `'body'`).
  * @param layoutType - See {@link LayoutType}. Determines which CSS map to use for lookups.
+ * @param format - Keeps Weekend Read headers above the media below desktop.
+ * @param hasPageSkin - Keeps item placement on the desktop arrangement at wider viewports.
  *
  * @example
  * // In a React component:
@@ -403,22 +415,37 @@ const layoutCssMaps: Record<LayoutType, LayoutCssMap> = {
 export const gridItemCss = (
 	area: Area,
 	layoutType: LayoutType,
+	format?: ArticleFormat,
+	hasPageSkin = false,
 ): SerializedStyles => {
 	const areaOverrides = layoutCssMaps[layoutType][area] ?? {};
+	const weekendReadStyles =
+		layoutType === 'immersivePortrait' &&
+		format?.design === ArticleDesign.WeekendEssay
+			? immersiveWeekendReadBelowDesktop[area]
+			: undefined;
 
-	const breakpointCss = Object.entries(areaOverrides).map(
-		([bp, styles]) => css`
-			${breakpointQueries[bp as Breakpoint]} {
-				${styles}
-			}
-		`,
-	);
+	const breakpointCss = Object.entries(areaOverrides)
+		.filter(([bp]) => !hasPageSkin || (bp !== 'leftCol' && bp !== 'wide'))
+		.map(
+			([bp, styles]) => css`
+				${breakpointQueries[bp as Breakpoint]} {
+					${styles}
+				}
+			`,
+		);
 
 	// All items default to the centre column; breakpoint entries above
 	// override grid-row and grid-column as needed.
 	return css`
 		grid-column: centre-column-start / centre-column-end;
 		${breakpointCss}
+		${weekendReadStyles &&
+		css`
+			${until.desktop} {
+				${weekendReadStyles}
+			}
+		`}
 	`;
 };
 

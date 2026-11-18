@@ -1,5 +1,13 @@
+import type { BoostLevel } from '../types/content';
 import type { DCRContainerPalette } from '../types/front';
 import { ArticleDesign, type ArticleFormat } from './articleFormat';
+
+export const isMiniNavSupported = (
+	boostLevel: BoostLevel | undefined,
+): boolean =>
+	boostLevel === 'boost' ||
+	boostLevel === 'megaboost' ||
+	boostLevel === 'gigaboost';
 
 export const isMediaCard = (format: ArticleFormat): boolean => {
 	switch (format.design) {

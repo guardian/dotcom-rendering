@@ -34,6 +34,7 @@ interface Props {
 	tagIds?: string[];
 	sectionId?: string;
 	contentType?: string;
+	showReaderRevenueLinks?: boolean;
 }
 
 const topBarStyles = css`
@@ -130,6 +131,7 @@ export const TopBar = ({
 	tagIds,
 	sectionId,
 	contentType,
+	showReaderRevenueLinks = true,
 }: Props) => {
 	const authStatus = useAuthStatus();
 	const { renderingTarget } = useConfig();
@@ -169,18 +171,20 @@ export const TopBar = ({
 	return (
 		<Grid type="div" hasPageSkin={hasPageSkin}>
 			<div css={topBarStyles}>
-				<TopBarLinkContainer
-					showVerticalDivider={false}
-					alignLeft={true}
-				>
-					<TopBarSupport
-						contributionsServiceUrl={contributionsServiceUrl}
-						pageUrl={referrerUrl}
-						tagIds={tagIds}
-						sectionId={sectionId}
-						contentType={contentType}
-					/>
-				</TopBarLinkContainer>
+				{showReaderRevenueLinks && (
+					<TopBarLinkContainer
+						showVerticalDivider={false}
+						alignLeft={true}
+					>
+						<TopBarSupport
+							contributionsServiceUrl={contributionsServiceUrl}
+							pageUrl={referrerUrl}
+							tagIds={tagIds}
+							sectionId={sectionId}
+							contentType={contentType}
+						/>
+					</TopBarLinkContainer>
+				)}
 
 				<Hide until="desktop">
 					<TopBarLinkContainer>

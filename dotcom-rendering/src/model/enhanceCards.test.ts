@@ -790,7 +790,7 @@ describe('Enhance Cards', () => {
 						] as VariantMeta[],
 						startDate: Date.now() - oneHourInMilliseconds,
 						expiryDate: Date.now() + oneHourInMilliseconds,
-						frontsThisTestCanRunOn: ['us'],
+						frontsThisTestCanRunOn: ['us', 'au', 'uk'],
 						hasManuallyEndedOnThisTrail: false,
 					},
 				],
@@ -938,6 +938,32 @@ describe('Enhance Cards', () => {
 					'us',
 				),
 			).toEqual({ headline: 'Headline B', uuid: 'uuid' });
+		});
+
+		it('returns the variant headline & test uuid on the AU front', () => {
+			expect(
+				getFrontEditorialTestData(
+					cardWithEditorialTest,
+					{
+						'fronts-and-curation-editorial-test': 'a',
+					},
+					true,
+					'au',
+				),
+			).toEqual({ headline: 'Headline A', uuid: 'uuid' });
+		});
+
+		it('returns undefined on a front outside the US and AU rollout, even if it is in the list of fronts this test can run on.', () => {
+			expect(
+				getFrontEditorialTestData(
+					cardWithEditorialTest,
+					{
+						'fronts-and-curation-editorial-test': 'a',
+					},
+					true,
+					'uk',
+				),
+			).toEqual(undefined);
 		});
 
 		it('returns undefined if the bucket name does not match a variant meta id', () => {

@@ -23,6 +23,10 @@ import {
 import { getAudioData } from '../lib/audio-data';
 import { getSoleContributor } from '../lib/byline';
 import { decideMainMediaCaption } from '../lib/decide-caption';
+import {
+	crosswordActionContext,
+	type PuzzleActionContext,
+} from '../lib/puzzleActionTracking';
 import { hasFilterTag, isRepublished } from '../lib/theFilter';
 import { palette as themePalette } from '../palette';
 import { hasPreferredSourceButton } from '../preferredSource';
@@ -63,6 +67,7 @@ type Props = {
 	crossword?: FEArticle['crossword'];
 	hidePreferredSourceOnPrint?: boolean;
 	isPuzzlePage?: boolean;
+	puzzleTrackingContext?: PuzzleActionContext;
 };
 
 const meta = (format: ArticleFormat) => {
@@ -254,8 +259,10 @@ const MetaAvatarContainer = ({ children }: { children: React.ReactNode }) => (
 
 const ImmersiveMetaAvatarContainer = ({
 	children,
+	stackAtLeftCol,
 }: {
 	children: React.ReactNode;
+	stackAtLeftCol: boolean;
 }) => (
 	<div
 		css={css`
@@ -265,6 +272,15 @@ const ImmersiveMetaAvatarContainer = ({
 			margin-right: 10px;
 			margin-bottom: 12px;
 			margin-left: 0px;
+
+			${stackAtLeftCol &&
+			css`
+				${between.leftCol.and.wide} {
+					width: 140px;
+					height: 140px;
+					margin-top: 6px;
+				}
+			`}
 		`}
 	>
 		{children}
@@ -298,6 +314,12 @@ const metaNumbersExtrasLiveBlog = css`
 	}
 `;
 
+const immersivePortraitRightPadding = css`
+	${from.leftCol} {
+		padding-right: 10px;
+	}
+`;
+
 export const ArticleMeta = ({
 	branding,
 	format,
@@ -318,6 +340,7 @@ export const ArticleMeta = ({
 	crossword,
 	hidePreferredSourceOnPrint,
 	isPuzzlePage = false,
+	puzzleTrackingContext,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const showPreferredSource = hasPreferredSourceButton(
@@ -326,6 +349,7 @@ export const ArticleMeta = ({
 		isPuzzlePage,
 	);
 	const isImmersiveGrid = layoutType?.startsWith('immersive') ?? false;
+	const stackImmersiveMetaAtLeftCol = layoutType === 'immersiveLandscape';
 	const soleContributor = getSoleContributor(tags, byline);
 	const authorName = soleContributor?.title ?? 'Author Image';
 
@@ -400,14 +424,28 @@ export const ArticleMeta = ({
 						css={css`
 							display: flex;
 							flex-direction: row;
+
+							${stackImmersiveMetaAtLeftCol &&
+							css`
+								${between.leftCol.and.wide} {
+									flex-direction: column;
+								}
+							`}
 						`}
 					>
 						{!!avatarUrl && (
-							<ImmersiveMetaAvatarContainer>
+							<ImmersiveMetaAvatarContainer
+								stackAtLeftCol={stackImmersiveMetaAtLeftCol}
+							>
 								<Avatar src={avatarUrl} alt={authorName} />
 							</ImmersiveMetaAvatarContainer>
 						)}
-						<div>
+						<div
+							css={
+								layoutType === 'immersivePortrait' &&
+								immersivePortraitRightPadding
+							}
+						>
 							{isAudio && podcast && seriesTag && (
 								<PodcastMeta
 									series={seriesTag}
@@ -552,6 +590,18 @@ export const ArticleMeta = ({
 									webTitle={webTitle}
 									format={format}
 									context="ArticleMeta"
+									puzzleTrackingContext={
+										puzzleTrackingContext ??
+										crosswordActionContext(crossword)
+									}
+									puzzleTrackingSource={
+										isPuzzlePage
+											? 'puzzle-page'
+											: format.design ===
+												  ArticleDesign.Crossword
+												? 'crossword-page'
+												: undefined
+									}
 								/>
 							</Island>
 						</div>
@@ -576,6 +626,8 @@ export const ArticleMeta = ({
 								display: flex;
 								flex-direction: row;
 								align-items: flex-start;
+								${layoutType === 'immersivePortrait' &&
+								immersivePortraitRightPadding}
 							`}
 						>
 							<div>
@@ -595,9 +647,18 @@ export const ArticleMeta = ({
 					</div>
 				</div>
 				{showPreferredSource ? (
-					<PreferredSourceButton
-						hidePreferredSourceOnPrint={hidePreferredSourceOnPrint}
-					/>
+					<div
+						css={
+							layoutType === 'immersivePortrait' &&
+							immersivePortraitRightPadding
+						}
+					>
+						<PreferredSourceButton
+							hidePreferredSourceOnPrint={
+								hidePreferredSourceOnPrint
+							}
+						/>
+					</div>
 				) : null}
 				{layoutType === 'immersiveLandscape' &&
 					mainMediaElements?.[0] && (
