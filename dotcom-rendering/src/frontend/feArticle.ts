@@ -131,6 +131,11 @@ export interface FEArticle {
 	puzzlesSupporting?: PuzzleGameSupporting;
 	/** Path of the archive page of this crossword's type, if it has one. */
 	puzzleArchivePath?: string;
+	/**
+	 * Only sent, as `true`, for a crossword older than the free window. A hint
+	 * for the cached page: the Puzzles API decides who has access.
+	 */
+	crosswordRequiresSubscription?: boolean;
 }
 
 type PageType = {
