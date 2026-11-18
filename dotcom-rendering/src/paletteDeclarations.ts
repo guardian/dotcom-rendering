@@ -3397,9 +3397,6 @@ const articleBackgroundLight: PaletteFunction = ({
 					return sourcePalette.neutral[0];
 			}
 		}
-		case ArticleDesign.Interactive:
-		case ArticleDesign.FullPageInteractive:
-			return 'transparent';
 		case ArticleDesign.Gallery:
 			return '#0d0d0d';
 		case ArticleDesign.HostedGallery:
