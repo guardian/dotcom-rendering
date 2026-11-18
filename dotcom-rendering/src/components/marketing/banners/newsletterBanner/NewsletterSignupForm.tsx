@@ -210,7 +210,6 @@ export const NewsletterSignupForm = ({
 							<div css={styles.privacyContainer(isSignedIn)}>
 								<NewsletterPrivacyMessage
 									isSignedIn={isSignedIn}
-									linkColor={privacyTextColor}
 									cssOverrides={styles.privacyText(
 										privacyTextColor,
 									)}

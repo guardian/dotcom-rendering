@@ -143,15 +143,15 @@ export const styles = {
 		}
 	`,
 	privacyText: (textColor: string): SerializedStyles => css`
-		&,
-		a,
-		a:link,
-		a:visited,
-		a:hover,
-		a:active,
-		a:focus,
-		strong {
-			color: ${textColor};
+		color: ${textColor};
+
+		/* Outrank the shared privacy styles and Source Link states. */
+		&& {
+			a,
+			a:hover,
+			strong {
+				color: inherit;
+			}
 		}
 	`,
 	privacyContainer: (
