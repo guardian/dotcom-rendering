@@ -96,6 +96,81 @@ describe('MorePuzzlesCard dark mode title colours', () => {
 	});
 });
 
+describe('MorePuzzlesCard click tracking', () => {
+	const rows = (cards: PuzzleItem[], tracked = true) => (
+		<ConfigProvider
+			value={{
+				renderingTarget: 'Web',
+				darkModeAvailable: false,
+				assetOrigin: '/',
+				editionId: 'UK',
+			}}
+		>
+			<MorePuzzlesRows
+				items={cards}
+				ophanComponentName={
+					tracked ? 'puzzles-more-from:puzzle-page' : undefined
+				}
+			/>
+		</ConfigProvider>
+	);
+
+	it('uses displayed position and card identity without changing internal or external destinations', () => {
+		const cards = [
+			{ ...items[0]!, index: 99 },
+			{ ...items[0]!, id: 'unavailable', url: undefined },
+			{ ...items[1]!, url: 'https://www.wordiply.com/' },
+		];
+		const { container } = render(rows(cards));
+		const links = screen.getAllByRole('link');
+		expect(
+			links.map((link) => link.getAttribute('data-link-name')),
+		).toEqual([
+			'puzzles | group-0 | card-@1 | card-sudoku-easy',
+			'puzzles | group-0 | card-@3 | card-crossword-quick',
+		]);
+		expect(links[0]).toHaveAttribute('href', cards[0]!.url);
+		expect(links[0]).not.toHaveAttribute('target');
+		expect(links[1]).toHaveAttribute('href', 'https://www.wordiply.com/');
+		expect(links[1]).toHaveAttribute('target', '_blank');
+		expect(links[1]).toHaveAttribute('rel', 'noopener noreferrer');
+		expect(container.querySelector('article')).not.toHaveAttribute(
+			'data-link-name',
+		);
+	});
+
+	it('recalculates positions after reordering or removing recommendations', () => {
+		const { rerender } = render(rows(items));
+		expect(
+			screen.getByRole('link', { name: 'Quick crossword No 17,599' }),
+		).toHaveAttribute(
+			'data-link-name',
+			'puzzles | group-0 | card-@2 | card-crossword-quick',
+		);
+		rerender(rows([items[1]!, items[0]!]));
+		expect(
+			screen.getByRole('link', { name: 'Quick crossword No 17,599' }),
+		).toHaveAttribute(
+			'data-link-name',
+			'puzzles | group-0 | card-@1 | card-crossword-quick',
+		);
+		rerender(rows([items[1]!]));
+		expect(screen.getAllByRole('link')).toHaveLength(1);
+		expect(screen.getByRole('link')).toHaveAttribute(
+			'data-link-name',
+			'puzzles | group-0 | card-@1 | card-crossword-quick',
+		);
+	});
+
+	it('leaves standalone rows untracked unless a component context is supplied', () => {
+		const { container } = render(rows(items, false));
+		expect(container.querySelector('[data-component]')).toBeNull();
+		for (const link of screen.getAllByRole('link')) {
+			expect(link).not.toHaveAttribute('data-link-name');
+		}
+	});
+});
+
 describe('MorePuzzlesCard progress', () => {
 	// The progress value is deliberately misleading: only the status counts.
 	const renderWithStatus = (gameStatus: GameStatus | undefined) =>

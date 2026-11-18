@@ -7,11 +7,9 @@ import {
 } from '@guardian/source/foundations';
 import type { ReactElement, SyntheticEvent } from 'react';
 import { forwardRef } from 'react';
-import { getZIndex } from '../lib/getZIndex';
 import type { ActiveCue } from '../lib/useSubtitles';
 import type { Source } from '../lib/video';
 import { palette } from '../palette';
-import { CardLink } from './Card/components/CardLink';
 import {
 	AudioIcon as AudioIconComponent,
 	FullscreenIcon,
@@ -48,10 +46,6 @@ const videoControlsStyles = css`
 	& > * {
 		pointer-events: auto;
 	}
-`;
-
-const videoControlsZIndexStyles = css`
-	z-index: ${getZIndex('video-controls-container')};
 `;
 
 const interactiveStyles = css`
@@ -156,24 +150,15 @@ export type Props = {
 	subtitlesPosition: SubtitlesPosition;
 	isFullscreen: boolean;
 	isWebKitFullscreen: boolean;
-	/* used by the card link component for click through to article functionality */
-	linkTo: string;
-	cardLink?: {
-		headlineText: string;
-		dataLinkName?: string;
-		isExternalLink: boolean;
-	};
-	isLoopAndInLoopClickTestVariant: boolean;
 };
 
 /**
  * Note that in React 19, forwardRef is no longer necessary:
  * https://react.dev/reference/react/forwardRef
  *
- * NB: When DEVELOPING LOCALLY, use `https://r.thegulocal.com/` instead of `localhost`.
- * This is required because CORS restrictions prevent accessing the subtitles and video file from localhost.
- * Alternatively, you can remove `crossOrigin="anonymous"` from the video element, which will not enable
- * CORS. You can then develop using localhost, but note that subtitles will not work in this scenario.
+ * Local development omits the crossorigin attribute because uploads.guim.co.uk
+ * does not allow requests from localhost. Subtitles therefore remain unavailable
+ * locally, while production keeps anonymous CORS enabled.
  */
 export const SelfHostedVideoPlayer = forwardRef(
 	(
@@ -221,9 +206,6 @@ export const SelfHostedVideoPlayer = forwardRef(
 			subtitlesPosition,
 			isFullscreen,
 			isWebKitFullscreen,
-			linkTo,
-			cardLink,
-			isLoopAndInLoopClickTestVariant,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
@@ -234,16 +216,6 @@ export const SelfHostedVideoPlayer = forwardRef(
 
 		return (
 			<>
-				{cardLink && isLoopAndInLoopClickTestVariant && (
-					<CardLink
-						linkTo={linkTo}
-						headlineText={cardLink.headlineText}
-						dataLinkName={cardLink.dataLinkName}
-						isExternalLink={cardLink.isExternalLink}
-						isLoopAndInLoopClickTest={true}
-						shouldRaiseZIndexForAbTest={true}
-					/>
-				)}
 				<video
 					id={videoId}
 					css={[
@@ -252,7 +224,11 @@ export const SelfHostedVideoPlayer = forwardRef(
 						showSubtitles && subtitleFontStyles(subtitleSize),
 						showCustomSubtitles && hideNativeSubtitlesStyles,
 					]}
-					crossOrigin="anonymous"
+					crossOrigin={
+						process.env.NODE_ENV === 'development'
+							? undefined
+							: 'anonymous'
+					}
 					ref={ref}
 					tabIndex={0}
 					data-testid="self-hosted-video-player"
@@ -271,11 +247,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 					onPlaying={handlePlaying}
 					onTimeUpdate={handleTimeUpdate}
 					onPause={handlePause}
-					onClick={
-						isLoopAndInLoopClickTestVariant
-							? undefined
-							: handlePlayPauseClick
-					}
+					onClick={handlePlayPauseClick}
 					onKeyDown={handleKeyDown}
 					onError={onError}
 					onEnded={handleEnded}
@@ -310,23 +282,14 @@ export const SelfHostedVideoPlayer = forwardRef(
 						position={subtitlesPosition}
 					/>
 				)}
-				<div
-					className="controls-container"
-					css={[
-						videoControlsStyles,
-						isLoopAndInLoopClickTestVariant &&
-							videoControlsZIndexStyles,
-					]}
-				>
-					{!isLoopAndInLoopClickTestVariant &&
-						showPlayPauseIcon !== null && (
-							<PlayPauseIcon
-								type={showPlayPauseIcon}
-								atomId={atomId}
-								handleClick={handlePlayPauseClick}
-								isLoopClickThroughTest={false}
-							/>
-						)}
+				<div className="controls-container" css={videoControlsStyles}>
+					{showPlayPauseIcon !== null && (
+						<PlayPauseIcon
+							type={showPlayPauseIcon}
+							atomId={atomId}
+							handleClick={handlePlayPauseClick}
+						/>
+					)}
 					{showProgressBar &&
 						duration !== undefined &&
 						(useLongFormProgressBar ? (
@@ -346,8 +309,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 								duration={duration}
 							/>
 						))}
-					{((showIcons && (showFullscreenIcon || hasAudio)) ||
-						isLoopAndInLoopClickTestVariant) && (
+					{showIcons && (showFullscreenIcon || hasAudio) && (
 						<div
 							css={[
 								iconsContainerStyles,
@@ -359,14 +321,6 @@ export const SelfHostedVideoPlayer = forwardRef(
 									iconsTopPositionStyles,
 							]}
 						>
-							{isLoopAndInLoopClickTestVariant && (
-								<PlayPauseIcon
-									type={showPlayPauseIcon ?? 'pause'}
-									atomId={atomId}
-									handleClick={handlePlayPauseClick}
-									isLoopClickThroughTest={true}
-								/>
-							)}
 							{showFullscreenIcon && (
 								<FullscreenIcon
 									isFullscreen={isFullscreen}

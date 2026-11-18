@@ -9,6 +9,7 @@ import type {
 	Newsletter,
 	StarRating,
 } from '../types/content';
+import type { CustomSubnav } from '../types/customSubnav';
 import type { FooterType } from '../types/footer';
 import type { FrontEditorialTest } from '../types/front';
 import type { FENavType } from '../types/frontend';
@@ -52,7 +53,6 @@ export type FEContainer =
 	| 'nav/media-list'
 	| 'news/most-popular'
 	| 'scrollable/highlights'
-	| 'flexible/special'
 	| 'flexible/general'
 	| 'scrollable/small'
 	| 'scrollable/medium'
@@ -126,6 +126,23 @@ export interface FEMediaAtom {
 	// channelId?: string; // currently unused
 }
 
+export type FEMultimediaSlideshowSlide = {
+	content:
+		| { type: 'Image'; item: { image: { allImages: Image[] } } }
+		| { type: 'Video'; item: { mediaAtom: FEMediaAtom } };
+	caption?: string;
+	label?: string;
+	credit?: string;
+};
+
+/** Pressed by frontend from fapi-client's resolved slideshow (model.content.MultimediaSlideshowAtom) */
+export type FEMultimediaSlideshow = {
+	id: string;
+	title?: string;
+	aspectRatio?: string;
+	slides: FEMultimediaSlideshowSlide[];
+};
+
 export type FEFrontCard = {
 	properties: {
 		isBreaking: boolean;
@@ -139,6 +156,7 @@ export type FEFrontCard = {
 			showMainVideo: boolean;
 			imageSlideshowReplace: boolean;
 			videoReplace: boolean;
+			multimediaSlideshowReplace?: boolean;
 		};
 		showKickerTag: boolean;
 		showByline: boolean;
@@ -207,6 +225,7 @@ export type FEFrontCard = {
 		href?: string;
 		embedUri?: string;
 		newsletterData?: Newsletter;
+		miniNavData?: CustomSubnav;
 		tests?: FrontEditorialTest[];
 	};
 	header: {
@@ -262,10 +281,13 @@ export type FEFrontCard = {
 		showQuotedHeadline: boolean;
 		imageHide: boolean;
 		showLivePlayable: boolean;
+		showMiniNav?: boolean;
+		miniNavData?: CustomSubnav;
 	};
 	format?: FEFormat;
 	enriched?: FESnap;
 	mediaAtom?: FEMediaAtom;
+	multimediaSlideshow?: FEMultimediaSlideshow;
 	supportingContent?: FESupportingContent[];
 	cardStyle?: {
 		type: FEFrontCardStyle;

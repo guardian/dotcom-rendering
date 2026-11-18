@@ -2,13 +2,9 @@ import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
 import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
-import {
-	puzzlesHubV1Experiment,
-	puzzlesHubV1Participation,
-} from '../lib/puzzlesHubVersionExperiment';
 import { extractNAV } from '../model/extract-nav';
 import { getPuzzleConfig } from '../model/puzzles/puzzleConfigs';
-import { getPuzzlePageFormat, PuzzlePageLayout } from './PuzzlePageLayout';
+import { puzzlePageFormat, PuzzlePageLayout } from './PuzzlePageLayout';
 
 const puzzlePage = createPuzzlePage('word-wheel');
 const puzzleConfig = getPuzzleConfig('word-wheel');
@@ -27,7 +23,7 @@ const meta = {
 		darkModeAvailable: false,
 	},
 	parameters: {
-		formats: [getPuzzlePageFormat(storyPuzzleConfig.puzzleGroup)],
+		formats: [puzzlePageFormat],
 		chromatic: {
 			viewports: [breakpoints.mobileMedium, breakpoints.wide],
 		},
@@ -69,9 +65,7 @@ const saturdayEdition = {
 
 const v1Config = {
 	...puzzlePage.config,
-	serverSideABTests: puzzlesHubV1Participation(
-		puzzlesHubV1Experiment.variant,
-	),
+	edition: 'INT' as const,
 };
 
 export const WithUsefulLinksAndNewsletter = {
@@ -116,6 +110,6 @@ export const LogicPuzzle = {
 		},
 	},
 	parameters: {
-		formats: [getPuzzlePageFormat(sudokuConfig.puzzleGroup)],
+		formats: [puzzlePageFormat],
 	},
 } satisfies Story;

@@ -7,7 +7,7 @@ import { AffiliateDisclaimer } from '../components/AffiliateProducts/AffiliateDi
 import { AppsEpic } from '../components/AppsEpic.island';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
-import { ArticleHeadline } from '../components/ArticleHeadline';
+import { ArticleHeadline, headlineFont } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
@@ -31,6 +31,7 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 	ArticleSpecial,
+	hasImmersiveGridTitleRule,
 } from '../lib/articleFormat';
 import { getSoleContributor } from '../lib/byline';
 import { getContributionsServiceUrl } from '../lib/contributions';
@@ -61,7 +62,7 @@ const stretchLines = css`
 	}
 `;
 
-const landscapeImmersiveMediaBelowDesktop = css`
+const immersiveMediaBelowTablet = css`
 	${until.tablet} {
 		position: relative;
 
@@ -69,27 +70,6 @@ const landscapeImmersiveMediaBelowDesktop = css`
 
 		> div {
 			height: 100%;
-		}
-
-		&::after {
-			content: '';
-			position: absolute;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			height: 240px;
-			z-index: ${getZIndex('mediaOverlay')};
-			background: ${themePalette('--headline-background-immersive')};
-			backdrop-filter: blur(8px);
-			mask-image: linear-gradient(
-				to bottom,
-				transparent,
-				rgb(0 0 0 / 12%) 25%,
-				rgb(0 0 0 / 50%) 55%,
-				rgb(0 0 0 / 85%) 80%,
-				black
-			);
-			pointer-events: none;
 		}
 	}
 `;
@@ -131,6 +111,8 @@ const avatarPositionStyles = (isPicture: boolean) => css`
 interface GridItemProps {
 	area: Area;
 	layoutType: LayoutType;
+	format: ArticleFormat;
+	hasPageSkin: boolean;
 	element?: 'div' | 'aside';
 	className?: string;
 	children: React.ReactNode;
@@ -149,13 +131,15 @@ const getImageOrientation = (
 const GridItem = ({
 	area,
 	layoutType,
+	format,
+	hasPageSkin,
 	element: Element = 'div',
 	className,
 	children,
 }: GridItemProps) => (
 	<Element
 		data-gu-name={area}
-		css={gridItemCss(area, layoutType)}
+		css={gridItemCss(area, layoutType, format, hasPageSkin)}
 		className={className}
 	>
 		{children}
@@ -166,10 +150,12 @@ export const StandardLayoutArticleGrid = ({
 	article,
 	format,
 	renderingTarget,
+	hasPageSkin,
 }: {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
+	hasPageSkin: boolean;
 }) => {
 	const {
 		config: { host },
@@ -194,10 +180,6 @@ export const StandardLayoutArticleGrid = ({
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
-	const headlineBackgroundImmersive = themePalette(
-		'--headline-background-immersive',
-	);
-
 	const isFootballMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchStatsUrl;
 
@@ -211,6 +193,12 @@ export const StandardLayoutArticleGrid = ({
 	const isMainMediaAtom =
 		mainMediaType ===
 		'model.dotcomrendering.pageElements.MediaAtomBlockElement';
+	const isMainMediaLoopOrCinemagraph =
+		isMainMediaAtom &&
+		(mainMedia.videoPlayerFormat === 'Loop' ||
+			mainMedia.videoPlayerFormat === 'Cinemagraph');
+	const usesImmersiveImageProportions =
+		isMainMediaImage || isMainMediaLoopOrCinemagraph;
 
 	const mainMediaAspectRatio = isMainMediaImage
 		? mainMedia.media.allImages[0]?.fields.aspectRatio
@@ -224,24 +212,54 @@ export const StandardLayoutArticleGrid = ({
 			: 'landscape';
 	const immersiveHeaderHeight =
 		minHeaderHeightPx + (isLabs ? LABS_HEADER_HEIGHT : 0);
-	const immersiveMediaRowHeight = isMainMediaImage
-		? 'auto'
-		: `max(calc(80vh - ${immersiveHeaderHeight}px), calc(25rem - ${immersiveHeaderHeight}px))`;
 
 	const layoutType = getLayoutType(format, mainMediaOrientation);
+
+	const setCentreRule = (gridLayout: LayoutType) => {
+		if (
+			isLabs ||
+			gridLayout === 'interactiveStandard' ||
+			gridLayout === 'interactiveTopHat'
+		) {
+			return undefined;
+		}
+
+		const columnCount = gridLayout === 'immersivePortrait' ? 5 : 3;
+
+		return css`
+			${from.leftCol} {
+				${grid.centreRule(columnCount)}
+				${gridLayout === 'immersiveLandscape' &&
+				css`
+					& > *:nth-child(3)::before {
+						top: 100%;
+					}
+				`}
+			}
+		`;
+	};
 
 	const contentLayoutName = `${ArticleDisplay[format.display]}Layout`;
 
 	const isImmersivePortrait = layoutType === 'immersivePortrait';
 	const isImmersiveLandscape = layoutType === 'immersiveLandscape';
 	const isImmersive = isImmersivePortrait || isImmersiveLandscape;
+	const isImmersiveWeekendRead =
+		isImmersivePortrait && format.design === ArticleDesign.WeekendEssay;
+	const immersiveHeadlineOverlayBreakpoint = isImmersivePortrait
+		? until.desktop
+		: until.tablet;
+	const hasImmersivePortraitTitleRule =
+		isImmersivePortrait && hasImmersiveGridTitleRule(format, article.tags);
+
+	const isInteractiveTopHat = layoutType === 'interactiveTopHat';
 
 	const isFilterArticle = hasFilterTag(article.tags);
 	const tableOfContentsStyle =
 		isImmersive && isFilterArticle ? 'horizontal' : 'default';
 
 	const hasLabsPortraitImage =
-		isLabs && isImmersivePortrait && isMainMediaImage;
+		isLabs && isImmersivePortrait && usesImmersiveImageProportions;
 
 	const ageWarning = getAgeWarning(
 		article.tags,
@@ -270,7 +288,20 @@ export const StandardLayoutArticleGrid = ({
 		isImmersive && article.affiliateLinksDisclaimerRequired;
 
 	const hideCaptionBeneathMainMedia =
-		layoutType === 'media' || isImmersiveLandscape || isImmersivePortrait;
+		layoutType === 'media' ||
+		isInteractiveTopHat ||
+		isImmersiveLandscape ||
+		isImmersivePortrait;
+
+	const topHatFurnitureBackgroundStyles = css`
+		z-index: ${getZIndex('mediaOverlay')};
+		background-color: color-mix(
+			in srgb,
+			${themePalette('--article-background')} 90%,
+			transparent
+		);
+		padding: 0 10px;
+	`;
 
 	return (
 		<article
@@ -279,62 +310,75 @@ export const StandardLayoutArticleGrid = ({
 					background-color: ${themePalette('--article-background')};
 				`,
 				grid.container,
+				hasPageSkin && grid.pageSkinContainer,
 				grid.outerRules(),
-				isLabs &&
-					isImmersive &&
-					css`
-						${from.desktop} {
-							&::before,
-							&::after {
-								z-index: ${getZIndex(
-									'immersiveGridOuterRules',
-								)};
-							}
-						}
-						grid-template-rows: ${immersiveMediaRowHeight} repeat(
-								6,
-								auto
-							);
-					`,
-				!isLabs &&
-					layoutType !== 'interactive' &&
-					css`
-						${from.leftCol} {
-							${grid.centreRule(isImmersive ? 4 : 3)}
-						}
-					`,
-				isImmersivePortrait &&
-					css`
-						${from.desktop} {
-							grid-template-rows: 0.25fr 1fr auto;
-						}
-					`,
-				isImmersiveLandscape &&
+				setCentreRule(layoutType),
+				isImmersive &&
 					css`
 						${until.tablet} {
 							--immersive-headline-overlap: ${ageWarning != null
 								? '96px'
-								: '24px'};
+								: '48px'};
 						}
-
-						${from.desktop} {
+						${ageWarning != null &&
+						css`
+							${until.mobileMedium} {
+								--immersive-headline-overlap: 6.75rem;
+							}
+						`}
+					`,
+				isImmersiveLandscape &&
+					css`
+						${from.tablet} {
+							/* Two 57.5px headline lines, ending at the second baseline. */
 							grid-template-rows: auto auto ${ageWarning != null
-									? '130px'
-									: '90px'} auto auto auto auto auto;
+									? '140px'
+									: '106px'} auto auto auto auto auto;
 						}
+						&::before,
+						&::after {
+							z-index: ${getZIndex('immersiveGridOuterRules')};
+						}
+					`,
+				hasPageSkin &&
+					css`
+						${from.desktop} {
+							&::before {
+								left: 0;
+								grid-column: auto;
+								transform: none;
+							}
+
+							&::after {
+								right: 0;
+								grid-column: auto;
+								transform: none;
+							}
+						}
+					`,
+				isImmersivePortrait &&
+					css`
+						${from.leftCol} {
+							grid-template-rows: 0.25fr 1fr max-content;
+						}
+					`,
+				isInteractiveTopHat &&
+					css`
+						grid-template-rows: 300px auto;
 					`,
 			]}
 		>
 			<GridItem
 				area="media"
 				layoutType={layoutType}
+				format={format}
+				hasPageSkin={hasPageSkin}
 				css={[
 					isImmersive
 						? css`
 								${from.tablet} {
 									align-self: start;
-									${(!isImmersiveLandscape ||
-										!isMainMediaImage) &&
+									${!usesImmersiveImageProportions &&
 									mainMediaAspectRatio != null &&
 									`aspect-ratio: ${mainMediaAspectRatio.replace(':', ' / ')};`}
 									${isImmersiveLandscape &&
@@ -345,9 +389,17 @@ export const StandardLayoutArticleGrid = ({
 								${isImmersivePortrait &&
 								css`
 									aspect-ratio: 4 / 5;
+
+									${!isImmersiveWeekendRead &&
+									css`
+										${between.tablet.and.desktop} {
+											margin-left: -20px;
+											margin-right: -20px;
+										}
+									`}
 								`}
-								${isImmersiveLandscape &&
-								landscapeImmersiveMediaBelowDesktop}
+								${!isImmersiveWeekendRead &&
+								immersiveMediaBelowTablet}
 
 								${hasLabsPortraitImage &&
 								css`
@@ -357,7 +409,9 @@ export const StandardLayoutArticleGrid = ({
 										min-width: 0;
 										aspect-ratio: 4 / 5;
 										overflow: hidden;
-										background-color: ${headlineBackgroundImmersive};
+										background-color: ${themePalette(
+											'--headline-background',
+										)};
 
 										> div {
 											position: absolute;
@@ -368,7 +422,7 @@ export const StandardLayoutArticleGrid = ({
 							`
 						: undefined,
 					isImmersiveLandscape &&
-						isMainMediaImage &&
+						usesImmersiveImageProportions &&
 						css`
 							position: relative;
 							aspect-ratio: 4 / 5;
@@ -389,11 +443,32 @@ export const StandardLayoutArticleGrid = ({
 								);
 							}
 						`,
+					isImmersivePortrait &&
+						css`
+							${from.leftCol} {
+								grid-template-rows: auto 1fr max-content;
+							}
+						`,
+					isImmersivePortrait &&
+						usesImmersiveImageProportions &&
+						css`
+							> div {
+								height: 100%;
+							}
+
+							${from.leftCol} {
+								aspect-ratio: 4 / 5;
+							}
+						`,
 					displayAvatarUrl && layoutType === 'picture'
 						? css`
 								margin-top: ${space[2]}px;
 							`
 						: undefined,
+					isInteractiveTopHat &&
+						css`
+							z-index: ${getZIndex('mediaOverlay')};
+						`,
 				]}
 			>
 				<div>
@@ -427,31 +502,59 @@ export const StandardLayoutArticleGrid = ({
 			<GridItem
 				area="title"
 				layoutType={layoutType}
+				format={format}
+				hasPageSkin={hasPageSkin}
 				element="aside"
 				css={[
-					isImmersiveLandscape &&
+					isImmersive &&
 						css`
 							z-index: ${getZIndex('articleHeadline')};
+						`,
+					isImmersive &&
+						!isImmersiveWeekendRead &&
+						ageWarning != null &&
+						css`
+							${until.desktop} {
+								padding-bottom: 2px;
+							}
+							${until.tablet} {
+								padding-bottom: calc(
+									var(--immersive-headline-overlap) + 2px
+								);
+							}
+							${isImmersiveLandscape &&
+							css`
+								${from.desktop} {
+									padding-bottom: 2px;
+								}
+							`}
 						`,
 					isImmersivePortrait &&
 						css`
 							align-content: flex-start;
 							margin-bottom: 0;
 
-							${until.desktop} {
-								border-bottom: 1px solid
-									${themePalette('--article-border')};
-							}
+							${format.design !== ArticleDesign.WeekendEssay &&
+							css`
+								${between.tablet.and.desktop} {
+									margin-left: -20px;
+									margin-right: -20px;
+								}
 
-							${from.desktop} {
-								align-content: flex-end;
-							}
+								${from.desktop} {
+									align-content: flex-end;
+								}
+							`}
 						`,
 					layoutType === 'picture' &&
 						css`
 							display: flex;
 							flex-direction: column;
 							justify-content: space-between;
+						`,
+					isInteractiveTopHat &&
+						css`
+							z-index: ${getZIndex('mediaOverlay')};
 						`,
 				]}
 			>
@@ -468,28 +571,88 @@ export const StandardLayoutArticleGrid = ({
 			<GridItem
 				area="headline"
 				layoutType={layoutType}
+				format={format}
+				hasPageSkin={hasPageSkin}
 				css={[
-					isImmersiveLandscape &&
+					isImmersive &&
+						!isImmersiveWeekendRead &&
 						css`
 							z-index: ${getZIndex('articleHeadline')};
 
-							${until.tablet} {
-								background: linear-gradient(
-									to bottom,
-									transparent,
-									${headlineBackgroundImmersive}
-										calc(
-											var(--immersive-headline-overlap) -
-												1px
-										)
-								);
+							${immersiveHeadlineOverlayBreakpoint} {
+								z-index: ${getZIndex('mediaOverlay')};
+								padding-bottom: ${space[8]}px;
+
+								[data-gu-name='age-warning'] {
+									position: relative;
+									z-index: ${getZIndex('articleHeadline')};
+								}
 
 								h1 {
+									position: relative;
+									isolation: isolate;
 									background-color: transparent;
+
+									${until.tablet} {
+										padding-inline: 20px;
+									}
+
+									${until.mobileLandscape} {
+										padding-inline: 10px;
+									}
+
+									> span {
+										position: relative;
+										z-index: ${getZIndex(
+											'articleHeadline',
+										)};
+									}
+
+									&::before,
+									&::after {
+										${headlineFont(format)}
+										content: '';
+										position: absolute;
+										inset: calc(1lh - 120px)
+											0 -${space[8]}px;
+										z-index: ${getZIndex('mediaOverlay')};
+										pointer-events: none;
+									}
+
+									&::before {
+										backdrop-filter: blur(7px);
+										mask-image: linear-gradient(
+											180deg,
+											transparent 0%,
+											black 120px
+										);
+									}
+
+									&::after {
+										background: linear-gradient(
+											180deg,
+											transparent 0%,
+											${themePalette(
+													'--headline-background',
+												)}
+												120px
+										);
+									}
 								}
 							}
+						`,
+					isImmersiveWeekendRead &&
+						css`
+							z-index: ${getZIndex('articleHeadline')};
 
 							${until.desktop} {
+								border-top: 1px solid
+									${themePalette('--article-border')};
+							}
+						`,
+					isImmersiveLandscape &&
+						css`
+							${between.tablet.and.desktop} {
 								padding-bottom: ${space[8]}px;
 							}
 
@@ -502,12 +665,32 @@ export const StandardLayoutArticleGrid = ({
 						`,
 					isImmersivePortrait &&
 						css`
+							${!isImmersiveWeekendRead &&
+							css`
+								${between.tablet.and.desktop} {
+									margin-left: -20px;
+									margin-right: -20px;
+								}
+							`}
+
 							${from.desktop} {
 								border-bottom: 1px solid
 									${themePalette('--article-border')};
-								border-top: 1px solid
+								${!hasImmersivePortraitTitleRule &&
+								`border-top: 1px solid ${themePalette(
+									'--article-border',
+								)};`}
+							}
+
+							${between.desktop.and.leftCol} {
+								border-bottom: 1px solid
 									${themePalette('--article-border')};
 							}
+						`,
+					isInteractiveTopHat &&
+						css`
+							${topHatFurnitureBackgroundStyles}
+							padding-top: ${space[1]}px;
 						`,
 				]}
 			>
@@ -566,49 +749,12 @@ export const StandardLayoutArticleGrid = ({
 					/>
 				)}
 			</GridItem>
-			<GridItem
-				area="standfirst"
-				layoutType={layoutType}
-				css={[
-					isImmersive &&
-						css`
-							${until.tablet} {
-								padding-top: ${hasImmersiveAffiliateDisclaimer
-									? space[3]
-									: space[2]}px;
-							}
-						`,
-					isImmersiveLandscape &&
-						css`
-							${from.desktop} {
-								padding-top: ${hasImmersiveAffiliateDisclaimer
-									? space[3]
-									: space[8]}px;
-							}
-
-							${from.leftCol} {
-								padding-bottom: 14px;
-							}
-						`,
-				]}
-			>
-				{hasImmersiveAffiliateDisclaimer && (
-					<AffiliateDisclaimer
-						cssOverrides={css`
-							margin: 0 0 ${space[2]}px;
-						`}
-					/>
-				)}
-				<Standfirst
-					format={format}
-					standfirst={article.standfirst}
-					layoutType={layoutType}
-				/>
-			</GridItem>
 			{isImmersive && (
 				<GridItem
 					area="caption"
 					layoutType={layoutType}
+					format={format}
+					hasPageSkin={hasPageSkin}
 					css={css`
 						padding-top: ${space[2]}px;
 					`}
@@ -637,8 +783,52 @@ export const StandardLayoutArticleGrid = ({
 				</GridItem>
 			)}
 			<GridItem
+				area="standfirst"
+				layoutType={layoutType}
+				format={format}
+				hasPageSkin={hasPageSkin}
+				css={[
+					isImmersive &&
+						css`
+							${until.tablet} {
+								padding-top: ${hasImmersiveAffiliateDisclaimer
+									? space[3]
+									: space[2]}px;
+							}
+						`,
+					isImmersiveLandscape &&
+						css`
+							${from.desktop} {
+								padding-top: ${hasImmersiveAffiliateDisclaimer
+									? space[3]
+									: space[8]}px;
+							}
+
+							${from.leftCol} {
+								padding-bottom: 14px;
+							}
+						`,
+					isInteractiveTopHat && topHatFurnitureBackgroundStyles,
+				]}
+			>
+				{hasImmersiveAffiliateDisclaimer && (
+					<AffiliateDisclaimer
+						cssOverrides={css`
+							margin: 0 0 ${space[2]}px;
+						`}
+					/>
+				)}
+				<Standfirst
+					format={format}
+					standfirst={article.standfirst}
+					layoutType={layoutType}
+				/>
+			</GridItem>
+			<GridItem
 				area="meta"
 				layoutType={layoutType}
+				format={format}
+				hasPageSkin={hasPageSkin}
 				element="aside"
 				css={[
 					isImmersive &&
@@ -662,15 +852,17 @@ export const StandardLayoutArticleGrid = ({
 								padding-top: ${space[8]}px;
 							}
 						`,
-					layoutType === 'interactive' &&
+					layoutType === 'interactiveTopHat' &&
 						css`
-							z-index: ${getZIndex('meta')};
+							${topHatFurnitureBackgroundStyles}
+							padding-bottom: ${space[4]}px;
 						`,
 				]}
 			>
 				{format.display !== ArticleDisplay.Immersive &&
 					format.design !== ArticleDesign.Audio &&
-					layoutType !== 'immersivePortrait' && (
+					layoutType !== 'immersivePortrait' &&
+					layoutType !== 'interactiveTopHat' && (
 						<div
 							css={[
 								(layoutType === 'picture' ||
@@ -779,6 +971,8 @@ export const StandardLayoutArticleGrid = ({
 			<GridItem
 				area="body"
 				layoutType={layoutType}
+				format={format}
+				hasPageSkin={hasPageSkin}
 				css={css`
 					z-index: ${getZIndex('bodyArea')};
 				`}
@@ -836,6 +1030,7 @@ export const StandardLayoutArticleGrid = ({
 						shouldHideAds={article.shouldHideAds}
 						articleArrangement={layoutType}
 						idApiUrl={article.config.idApiUrl}
+						hasPageSkin={hasPageSkin}
 					/>
 					<MatchInfoContainer
 						isMatchReport={isFootballMatchReport}
@@ -900,6 +1095,8 @@ export const StandardLayoutArticleGrid = ({
 			<GridItem
 				area="right-column"
 				layoutType={layoutType}
+				format={format}
+				hasPageSkin={hasPageSkin}
 				css={css`
 					padding-top: ${layoutType === 'media' ? 0 : 6}px;
 					${from.desktop} {
@@ -935,7 +1132,7 @@ export const StandardLayoutArticleGrid = ({
 					</Hide>
 				)}
 			</GridItem>
-			{layoutType === 'interactive' && (
+			{format.design === ArticleDesign.Interactive && (
 				<div
 					aria-hidden="true"
 					data-gu-name="centre-rule"
@@ -944,7 +1141,9 @@ export const StandardLayoutArticleGrid = ({
 						${from.leftCol} {
 							display: block;
 							grid-column: centre-column-start;
-							grid-row: 1 / 5;
+							grid-row: ${layoutType === 'interactiveStandard'
+								? '1 / 5'
+								: layoutType === 'interactiveTopHat' && '8'};
 							position: relative;
 
 							&::before {

@@ -108,6 +108,14 @@ export const ImmersiveAndFollowStory = meta.story({
 	},
 });
 
+export const ImmersiveGridAndFollowStory = meta.story({
+	...ImmersiveAndFollowStory.input,
+	args: {
+		...ImmersiveAndFollowStory.input.args,
+		layoutType: 'immersiveLandscape',
+	},
+});
+
 export const ImmersiveWithMultipleContributorsStory = meta.story({
 	...ImmersiveAndFollowStory.input,
 	args: {
@@ -121,6 +129,22 @@ export const ImmersiveWithMultipleContributorsStory = meta.story({
 				title: 'Laura Banks',
 			},
 		],
+	},
+});
+
+export const ImmersiveGridWithMultipleContributorsStory = meta.story({
+	...ImmersiveWithMultipleContributorsStory.input,
+	args: {
+		...ImmersiveWithMultipleContributorsStory.input.args,
+		layoutType: 'immersiveLandscape',
+	},
+});
+
+export const ImmersivePortraitWithMultipleContributorsStory = meta.story({
+	...ImmersiveGridWithMultipleContributorsStory.input,
+	args: {
+		...ImmersiveGridWithMultipleContributorsStory.input.args,
+		layoutType: 'immersivePortrait',
 	},
 });
 

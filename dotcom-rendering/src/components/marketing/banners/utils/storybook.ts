@@ -139,6 +139,49 @@ export const design: ConfigurableDesign = {
 	},
 };
 
+export const newsletterDesign: ConfigurableDesign = {
+	colours: {
+		basic: {
+			background: { r: 'F3', g: 'F7', b: 'FF', kind: 'hex' },
+			bodyText: { r: '33', g: '33', b: '33', kind: 'hex' },
+			headerText: { r: '12', g: '12', b: '12', kind: 'hex' },
+			articleCountText: { r: '00', g: '00', b: '00', kind: 'hex' },
+			logo: { r: '00', g: '00', b: '00', kind: 'hex' },
+		},
+		highlightedText: {
+			text: { r: '33', g: '33', b: '33', kind: 'hex' },
+			highlight: { r: 'F3', g: 'F7', b: 'FF', kind: 'hex' },
+		},
+		primaryCta: {
+			default: {
+				text: { r: '05', g: '29', b: '62', kind: 'hex' },
+				background: { r: 'FF', g: 'E5', b: '00', kind: 'hex' },
+			},
+		},
+		secondaryCta: {
+			default: {
+				text: { r: '00', g: '00', b: '00', kind: 'hex' },
+				background: { r: 'F1', g: 'F8', b: 'FC', kind: 'hex' },
+				border: { r: '00', g: '00', b: '00', kind: 'hex' },
+			},
+		},
+		closeButton: {
+			default: {
+				text: { r: '00', g: '00', b: '00', kind: 'hex' },
+				background: { r: 'E6', g: 'EC', b: 'EF', kind: 'hex' },
+				border: { r: 'E6', g: 'EC', b: 'EF', kind: 'hex' },
+			},
+		},
+		ticker: {
+			filledProgress: { r: '33', g: '33', b: '33', kind: 'hex' },
+			progressBarBackground: { r: 'F3', g: 'F7', b: 'FF', kind: 'hex' },
+			headlineColour: { r: '33', g: '33', b: '33', kind: 'hex' },
+			totalColour: { r: '33', g: '33', b: '33', kind: 'hex' },
+			goalColour: { r: '33', g: '33', b: '33', kind: 'hex' },
+		},
+	},
+};
+
 export const props: BannerProps = {
 	bannerChannel: 'contributions',
 	countryCode: 'GB',

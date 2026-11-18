@@ -302,26 +302,6 @@ export const Figure = ({
 							height: auto;
 							aspect-ratio: 4 / 5;
 						`,
-					articleArrangement === 'immersivePortrait' &&
-						format.design === ArticleDesign.WeekendEssay &&
-						css`
-							position: relative;
-							padding: 10px;
-							${from.wide} {
-								padding: 15px;
-							}
-							::before {
-								content: '';
-								display: block;
-								background-image: url('https://interactive.guim.co.uk/atoms/2025/04/2025-weekend-essay-test/assets/v/1791480673/frame.png');
-								background-size: contain;
-								background-position: center;
-								background-repeat: no-repeat;
-								position: absolute;
-								inset: 0;
-								pointer-events: none;
-							}
-						`,
 				]}
 			>
 				{children}

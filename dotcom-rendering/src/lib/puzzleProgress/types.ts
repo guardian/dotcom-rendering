@@ -37,6 +37,12 @@ export type PuzzleProgressEvent = {
 	progress: number;
 };
 
+/** Unmodified API identity; each provider adapter checks the supported puzzle type. */
+export type PuzzleProgressIdentity = Pick<
+	PuzzleProgressEvent,
+	'puzzleId' | 'publishDate'
+> & { puzzleType: string };
+
 /** The body of one item of `PUT /progress`. */
 export type PuzzleProgressUpdate = PuzzleProgressEvent & {
 	/** ISO 8601 UTC without milliseconds. The newest update wins server-side. */

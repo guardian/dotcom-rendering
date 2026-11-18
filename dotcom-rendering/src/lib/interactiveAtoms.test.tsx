@@ -64,7 +64,7 @@ describe('Interactive atom custom data attributes', () => {
 					design: 0,
 					theme: 0,
 				}}
-				articleArrangement="interactive"
+				articleArrangement="interactiveStandard"
 			/>,
 		);
 		const el = container.querySelector(

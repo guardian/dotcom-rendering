@@ -88,9 +88,8 @@ describe('parseStorylinesContentToStorylines (integration with Frontend fixture)
 	describe('Key Stories category', () => {
 		const keyStories = parsed[0]?.categories[0]?.groupedTrails;
 
-		it('produces a single splash card and no snap/standard cards', () => {
+		it('produces a single splash card and no standard cards', () => {
 			expect(keyStories?.splash).toHaveLength(1);
-			expect(keyStories?.snap).toHaveLength(0);
 			expect(keyStories?.standard).toHaveLength(0);
 		});
 

@@ -70,6 +70,11 @@ export const createPuzzlePage = (
 		instance: {
 			title: `${slug} puzzle`,
 			puzzleDate: '2026-09-11',
+			...(puzzleConfig.iframe.provider === 'moviegrid'
+				? {
+						gameUrl: `https://example.com/moviegrid/${slug}?id=fixture-only`,
+					}
+				: {}),
 			moreFromPuzzlesAndGames: sampleMoreFromPuzzlesAndGames,
 		},
 		isAdFreeUser: false,

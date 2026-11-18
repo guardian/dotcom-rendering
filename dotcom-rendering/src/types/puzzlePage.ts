@@ -1,4 +1,5 @@
 import type { EditionId } from '../lib/edition';
+import type { PuzzleProgressIdentity } from '../lib/puzzleProgress/types';
 import type { CommercialProperties } from './commercial';
 import type { ConfigType } from './config';
 import type { FooterType } from './footer';
@@ -17,6 +18,8 @@ import type { PuzzleGameSupporting, PuzzleItem } from './puzzlesPage';
 export interface PuzzlePageInstance {
 	/** Dated provider URL resolved by frontend through the Puzzles API. */
 	gameUrl?: string;
+	/** Authoritative anonymous identity for reporting the reader's progress. */
+	progressIdentity?: PuzzleProgressIdentity;
 	title: string;
 	/**
 	 * Which day's puzzle the reader wants to see, as a plain date string
@@ -38,6 +41,20 @@ export interface PuzzlePageInstance {
 	puzzleDate?: string;
 	moreFromPuzzlesAndGames?: PuzzleItem[];
 	puzzlesSupporting?: PuzzleGameSupporting;
+	/**
+	 * Whether this puzzle is premium, i.e. only readers with a Supporter Plus
+	 * or Digital Pack subscription may play it (today the puzzles from the
+	 * last 7 days, in the Europe/London timezone, are free).
+	 *
+	 * This is a property of the puzzle, never of the reader, so it is safe in
+	 * the shared, cached HTML. It must be computed by the backend (never in
+	 * the browser, where changing the device clock would unlock every
+	 * puzzle). Whether the current reader has access is a separate, uncached
+	 * question answered client-side, see `PuzzleAccessGate.island.tsx`.
+	 *
+	 * Absent means free, so nothing is blocked until the backend sends it.
+	 */
+	requiresSubscription?: boolean;
 }
 
 /**

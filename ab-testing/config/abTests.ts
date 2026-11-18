@@ -57,25 +57,12 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "commercial-prebid-price-floor-holdback",
-		description:
-			"This test will be the 5% holdback group for the prebid price floor",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-07-16",
-		type: "client",
-		status: "OFF",
-		audienceSize: 5 / 100,
-		audienceSpace: "A",
-		groups: ["holdback"],
-		shouldForceMetricsCollection: true,
-	},
-	{
 		name: "commercial-ozone-hashed-email",
 		description:
 			"Pass hashed email to Ozone via pubProvidedId for audience matching",
 		owners: ["commercial.dev@guardian.co.uk"],
 		status: "OFF",
-		expirationDate: "2026-09-30",
+		expirationDate: "2027-01-19",
 		type: "client",
 		audienceSize: 0,
 		audienceSpace: "A",
@@ -85,36 +72,12 @@ const ABTests: ABTest[] = [
 		name: "commercial-ozone-au-nz-adunit-ids",
 		description: "0% test to prove ad units for Ozone in Aus and NZ",
 		owners: ["commercial.dev@guardian.co.uk"],
-		status: "ON",
-		expirationDate: "2026-10-14",
+		status: "OFF",
+		expirationDate: "2027-01-19",
 		type: "client",
 		audienceSize: 0 / 100,
 		audienceSpace: "A",
 		groups: ["control", "variant"],
-	},
-	{
-		name: "fronts-and-curation-loop-click-through",
-		description:
-			"Test impact of click to article via loop videos on fronts",
-		owners: ["fronts.and.curation@guardian.co.uk"],
-		status: "OFF",
-		expirationDate: "2026-09-19",
-		type: "server",
-		audienceSize: 5 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: false,
-	},
-	{
-		name: "fronts-and-curation-click-to-play",
-		description: "Test click to play longform videos vs autoplay",
-		owners: ["fronts.and.curation@guardian.co.uk"],
-		status: "OFF",
-		expirationDate: "2026-09-28",
-		type: "server",
-		audienceSize: 0 / 100,
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: false,
 	},
 	{
 		name: "martech-admiral-adblock",
@@ -130,12 +93,12 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "webx-monitor-group-contamination-v2",
+		name: "webx-monitor-group-contamination-v3",
 		description:
-			"V2 of test to measure the impact of contamination between groups in ab tests",
+			"V3 of test to measure the impact of contamination between groups in ab tests",
 		owners: ["commercial.dev@theguardian.com"],
 		status: "ON",
-		expirationDate: "2026-11-11",
+		expirationDate: "2026-12-01",
 		type: "client",
 		audienceSize: 10 / 100,
 		audienceSpace: "A",
@@ -146,7 +109,7 @@ const ABTests: ABTest[] = [
 		name: "martech-header-sign-in-header-optimisation",
 		description: "Test removing the sign in wording from mobile",
 		owners: ["martech.dev@guardian.co.uk"],
-		status: "ON",
+		status: "OFF",
 		expirationDate: "2026-11-10",
 		type: "client",
 		audienceSize: 90 / 100,
@@ -156,29 +119,24 @@ const ABTests: ABTest[] = [
 	},
 
 	/**
-	 * Puzzles & Games rollout, tier v1 (w/c 12 Oct launch).
+	 * Puzzles & Games rollout, tier v2 (future, no launch date confirmed
+	 * yet as of this writing).
 	 *
-	 * This is the master switch for the Puzzles & Games experience: the new
-	 * Puzzles Hub page, the V0 puzzle pages (sudoku easy/medium/hard/killer,
-	 * word-wheel, wordiply) and everything below. Turning it off (or down to
-	 * 0%) hides all of it, and (by the cumulative design) every later tier
-	 * too.
+	 * Only takes effect when the Puzzles & Games hub is available for the
+	 * reader's edition (see `isPuzzlesHubAvailable` in DCR), so the rollout
+	 * can never end up in an inconsistent state.
 	 *
-	 * This tier activates: the full hub sub-nav links (to
-	 * /word-games, /logic-puzzles, /trivia-and-quizzes), a
-	 * sign-in-to-track-progress message, a calendar/archive view for
-	 * crosswords/logic-puzzles/word-games (not Wordiply, which has no
-	 * archive), progress indicators (Available/Completed), the "More from
-	 * Puzzles & Games" related-content rail, newsletter signup, and
-	 * changes to the existing crossword page (print CTA repositioning, a
-	 * "play other puzzles" container).
+	 * On top of the hub, this tier activates: the On the Ball and Film Reveal
+	 * iframe games (Trivia and Quizzes group), a "Most played" container,
+	 * EventKit-driven navigation, migrating existing crossword pages onto
+	 * the new Puzzle Page template, and search-engine mobile app nudges.
 	 *
-	 * To roll back without a deploy: flip this test's `audienceSize` to
-	 * `0 / 100` (or `status` to `"OFF"`).
+	 * Kept at 0% until that work begins; there is nothing to roll back yet.
 	 */
 	{
-		name: "puzzles-new-hub-v1",
-		description: "Rollout of the v1 Puzzles & Games features (w/c 12 Oct)",
+		name: "puzzles-new-hub-v2",
+		description:
+			"Rollout of the v2 Puzzles & Games features (no date confirmed yet), on top of the Puzzles & Games hub",
 		owners: ["puzzles.team@guardian.co.uk"],
 		status: "ON",
 		expirationDate: "2026-12-31",
@@ -189,29 +147,43 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	/**
-	 * Puzzles & Games rollout, tier v2 (future, no launch date confirmed
-	 * yet as of this writing).
+	 * Puzzles & Games rollout, tier v3: premium puzzles.
 	 *
-	 * Only takes effect when `puzzles-new-hub-v1` is ALSO enabled for the
-	 * reader, so the rollout can never end up in an inconsistent state.
+	 * Only takes effect when `puzzles-new-hub-v1` AND `puzzles-new-hub-v2` are
+	 * ALSO enabled for the reader, so the rollout can never end up in an
+	 * inconsistent state.
 	 *
-	 * On top of v1, this tier activates: the On the Ball and Film Reveal
-	 * iframe games (Trivia and Quizzes group), a "Most played" container,
-	 * EventKit-driven navigation, migrating existing crossword pages onto
-	 * the new Puzzle Page template, and search-engine mobile app nudges.
+	 * On top of v1 and v2, this tier activates the premium puzzles access control on
+	 * the Puzzle Page: puzzles older than 7 days need a Supporter Plus or
+	 * Digital Pack subscription, and readers without one see the "unlock
+	 * premium puzzles" modal instead of the game. The access check, the modal,
+	 * and removing ads from premium puzzles all depend on it, so with this
+	 * tier off every puzzle behaves as a free one, whatever `frontend` sends.
 	 *
-	 * Kept at 0% until that work begins; there is nothing to roll back yet.
+	 * To roll back without a deploy: flip this test's `audienceSize` to
+	 * `0 / 100` (or `status` to `"OFF"`).
 	 */
 	{
-		name: "puzzles-new-hub-v2",
+		name: "puzzles-new-hub-v3",
 		description:
-			"Rollout of the v2 Puzzles & Games features (no date confirmed yet), on top of the puzzles-new-hub-v1 baseline",
+			"Rollout of the premium puzzles access control (modal for puzzles older than 7 days), on top of the puzzles-new-hub-v1 and v2 baseline",
 		owners: ["puzzles.team@guardian.co.uk"],
 		status: "ON",
 		expirationDate: "2026-12-31",
 		type: "server",
 		audienceSize: 0 / 100,
 		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
+	{
+		name: "fronts-and-curation-card-mini-nav",
+		description: "Opt-in preview of mini subnavs on front cards",
+		owners: ["fronts.and.curation@guardian.co.uk"],
+		status: "ON",
+		expirationDate: "2026-12-16",
+		type: "server",
+		audienceSize: 0 / 100,
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
 	},
@@ -232,26 +204,19 @@ const ABTests: ABTest[] = [
 	},
 	{
 		name: "commercial-prebid-failsafe-timeout",
-		description: "Gradually roll out the Prebid failsafe timeout feature",
+		description: "Testing wrapping Prebid in a failsafe timeout",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-10-28",
+		expirationDate: "2027-01-19",
 		type: "client",
 		status: "ON",
-		audienceSize: 0 / 100,
+		audienceSize: 15 / 100,
 		audienceSpace: "B",
-		groups: ["control", "variant"],
+		groups: [
+			"control",
+			"variant-one", // Failsafe set at 3_000ms
+			"variant-two", // Failsafe set at 4_000ms
+		],
 		shouldForceMetricsCollection: true,
-	},
-	{
-		name: "articles-and-publishing-revamped-immersive-layout",
-		description: "New grid-based immersive layout for all articles",
-		owners: ["articles.and.publishing@guardian.co.uk "],
-		status: "ON",
-		expirationDate: "2027-08-31",
-		type: "server",
-		audienceSize: 0 / 100,
-		groups: ["enable"],
-		shouldForceMetricsCollection: false,
 	},
 	{
 		name: "commercial-mobile-above-nav-test",
@@ -270,9 +235,9 @@ const ABTests: ABTest[] = [
 		description:
 			"Test to measure the impact of fixing rich links insert behaviour and reduced restrictions on ad insertion around rich links.",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-10-28",
+		expirationDate: "2027-01-19",
 		type: "client",
-		status: "ON",
+		status: "OFF",
 		audienceSize: 0 / 100,
 		audienceSpace: "A",
 		groups: ["control", "variant"],
@@ -283,7 +248,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Test to measure the impact of changing the Prebid and APS timeout value.",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-10-28",
+		expirationDate: "2027-01-19",
 		type: "client",
 		status: "OFF",
 		audienceSize: 2.1 / 100, // 0.35% in each variant
@@ -303,9 +268,9 @@ const ABTests: ABTest[] = [
 		description:
 			"Test opening up the article-end ad slot in the US region for HeaderBidding",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-10-28",
+		expirationDate: "2027-01-19",
 		type: "client",
-		status: "ON",
+		status: "OFF",
 		audienceSize: 40 / 100,
 		audienceSpace: "B",
 		groups: ["control", "variant"],
@@ -316,9 +281,9 @@ const ABTests: ABTest[] = [
 		description:
 			"Test to measure the impact on ad density after adding to high value sections in spacefinder globally excluding AUS and NZ",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-10-28",
+		expirationDate: "2027-01-19",
 		type: "client",
-		status: "ON",
+		status: "OFF",
 		audienceSize: 100 / 100,
 		audienceSpace: "D",
 		groups: ["control", "variant"],
@@ -329,11 +294,11 @@ const ABTests: ABTest[] = [
 		description:
 			"Test the impact on ad density of regionalising Spacefinder for high value sections in Australia and New Zealand",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-10-28",
+		expirationDate: "2027-11-19",
 		type: "client",
 		status: "ON",
-		audienceSize: 0,
-		audienceSpace: "C",
+		audienceSize: 10 / 100,
+		audienceSpace: "A",
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
 	},
@@ -342,6 +307,16 @@ const ABTests: ABTest[] = [
 		description: "Next Best Action Features",
 		owners: ["commercial.dev@guardian.co.uk", "martech.dev@guardian.co.uk"],
 		expirationDate: "2027-01-06",
+		type: "client",
+		status: "ON",
+		audienceSize: 0,
+		groups: ["enable"],
+	},
+	{
+		name: "commercial-doubleVerify-ad-filter",
+		description: "Double Verify Ad filter for the US",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-12-16",
 		type: "client",
 		status: "ON",
 		audienceSize: 0,
@@ -359,6 +334,18 @@ const ABTests: ABTest[] = [
 		audienceSpace: "B",
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
+	},
+	{
+		name: "commercial-iab-taxonomy",
+		description:
+			"Test the impact of using IAB Taxonomy tags for ad targeting",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-11-25",
+		type: "client",
+		status: "ON",
+		audienceSize: 0,
+		audienceSpace: "A",
+		groups: ["control", "variant-primary", "variant-primary-secondary"],
 	},
 ];
 

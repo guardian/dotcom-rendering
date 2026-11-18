@@ -71,6 +71,56 @@ export const Default = meta.story({
 	decorators: [leftColumnDecorator],
 });
 
+export const LongContributorBylineAtLeftCol = meta.story({
+	args: {
+		...Default.input.args,
+		layoutType: 'immersiveLandscape',
+		byline: 'Alexandra Longlastname Example correspondent',
+		tags: [
+			{
+				id: 'profile/example-contributor',
+				type: 'Contributor',
+				title: 'Alexandra Longlastname',
+				bylineImageUrl:
+					'https://uploads.guim.co.uk/2017/10/06/Lanre-Bakare,-L.png',
+				bylineLargeImageUrl:
+					'https://uploads.guim.co.uk/2017/10/06/Lanre-Bakare,-L.png',
+			},
+		],
+	},
+	parameters: {
+		formats: [
+			{
+				display: ArticleDisplay.Immersive,
+				design: ArticleDesign.Feature,
+				theme: Pillar.News,
+			},
+		],
+		chromatic: {
+			modes: {
+				'light mobile': allModes['light mobile'],
+				'light mobileMedium': allModes['light mobileMedium'],
+				'light mobileLandscape': {
+					globalColourScheme: 'light',
+					viewport: breakpoints.mobileLandscape,
+				},
+				'light phablet': {
+					globalColourScheme: 'light',
+					viewport: breakpoints.phablet,
+				},
+				'light tablet': {
+					globalColourScheme: 'light',
+					viewport: breakpoints.tablet,
+				},
+				'light desktop': allModes['light desktop'],
+				'light leftCol': allModes['light leftCol'],
+				'light wide': allModes['light wide'],
+			},
+		},
+	},
+	decorators: [leftColumnDecorator],
+});
+
 export const WithBranding = meta.story({
 	args: {
 		...Default.input.args,

@@ -6,7 +6,6 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
 import type { NavType } from '../model/extract-nav';
 import type { Front } from '../types/front';
-import { AdmiralScript } from './AdmiralScript.island';
 import { AlreadyVisited } from './AlreadyVisited.island';
 import { BrazeMessaging } from './BrazeMessaging.island';
 import { useConfig } from './ConfigContext';
@@ -60,9 +59,6 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			<SkipTo id="navigation" label="Skip to navigation" />
 			<Island priority="feature" defer={{ until: 'idle' }}>
 				<AlreadyVisited />
-			</Island>
-			<Island priority="feature" defer={{ until: 'idle' }}>
-				<AdmiralScript />
 			</Island>
 			<Island priority="enhancement" defer={{ until: 'idle' }}>
 				<FocusStyles />

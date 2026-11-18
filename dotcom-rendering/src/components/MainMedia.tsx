@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { breakpoints, space, until } from '@guardian/source/foundations';
+import { breakpoints, from, space, until } from '@guardian/source/foundations';
 import type { LayoutType } from '../layouts/lib/articleArrangements';
 import {
 	ArticleDesign,
@@ -52,7 +52,13 @@ const immersiveWrapper = css`
 	overflow: hidden;
 `;
 
-const chooseWrapper = (format: ArticleFormat) => {
+const chooseWrapper = (
+	format: ArticleFormat,
+	articleArrangement?: LayoutType,
+) => {
+	if (articleArrangement === 'interactiveTopHat') {
+		return '';
+	}
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
 			return immersiveWrapper;
@@ -85,6 +91,30 @@ const chooseWrapper = (format: ArticleFormat) => {
 			return noGutters;
 	}
 };
+
+const weekendReadFrame = css`
+	position: relative;
+	padding: 10px;
+	${from.wide} {
+		padding: 15px;
+	}
+	::before {
+		content: '';
+		display: block;
+		background-image: url('https://uploads.guim.co.uk/2026/11/05/weekend-read-frame.png');
+		@media (prefers-color-scheme: dark) {
+			:root:not([data-color-scheme='light']) & {
+				filter: invert(1);
+			}
+		}
+		background-size: contain;
+		background-position: center;
+		background-repeat: no-repeat;
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+	}
+`;
 
 type Props = {
 	format: ArticleFormat;
@@ -122,7 +152,15 @@ export const MainMedia = ({
 	articleArrangement,
 }: Props) => {
 	return (
-		<div css={[mainMedia, chooseWrapper(format)]}>
+		<div
+			css={[
+				mainMedia,
+				chooseWrapper(format, articleArrangement),
+				articleArrangement === 'immersivePortrait' &&
+					format.design === ArticleDesign.WeekendEssay &&
+					weekendReadFrame,
+			]}
+		>
 			{elements.map((element, index) => (
 				<RenderArticleElement
 					key={index}

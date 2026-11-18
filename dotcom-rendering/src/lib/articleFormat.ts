@@ -1,5 +1,6 @@
 import { isString } from '@guardian/libs';
 import type { FEFormat } from '../frontend/feArticle';
+import type { TagType } from '../types/tag';
 
 export enum ArticleDesign {
 	Standard,
@@ -63,6 +64,37 @@ export interface ArticleFormat {
 	design: ArticleDesign;
 	display: ArticleDisplay;
 }
+
+export const isOpinionDesign = (design: ArticleDesign): boolean =>
+	[
+		ArticleDesign.Comment,
+		ArticleDesign.Editorial,
+		ArticleDesign.Letter,
+	].includes(design);
+
+export const isImmersiveOpinion = (format: ArticleFormat): boolean =>
+	format.display === ArticleDisplay.Immersive &&
+	(isOpinionDesign(format.design) ||
+		format.design === ArticleDesign.WeekendEssay);
+
+export const containsSeriesTag = (tags: TagType[]): boolean =>
+	tags.some((tag) => tag.type === 'Series');
+
+export const hasImmersiveGridTitle = (
+	format: ArticleFormat,
+	tags: TagType[],
+): boolean =>
+	format.display === ArticleDisplay.Immersive &&
+	(isImmersiveOpinion(format) ||
+		containsSeriesTag(tags) ||
+		format.theme === ArticleSpecial.Labs);
+
+export const hasImmersiveGridTitleRule = (
+	format: ArticleFormat,
+	tags: TagType[],
+): boolean =>
+	format.design !== ArticleDesign.WeekendEssay &&
+	hasImmersiveGridTitle(format, tags);
 
 /**
  * NOTE: Immersive Opinion pieces are not supported,

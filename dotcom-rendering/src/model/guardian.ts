@@ -1,5 +1,6 @@
 import type { EditionId } from '../lib/edition';
 import type { ConfigType, StageType, Switches } from '../types/config';
+import type { Newsletter } from '../types/content';
 import type { ReportError } from '../types/sentry';
 
 export interface Guardian {
@@ -40,6 +41,7 @@ export interface Guardian {
 			isSensitive?: boolean;
 			sponsorshipType?: string;
 			section?: string;
+			promotedNewsletter?: Newsletter;
 		};
 		libs: {
 			googletag: string;
@@ -95,6 +97,7 @@ export const createGuardian = ({
 	brazeApiKey,
 	googleRecaptchaSiteKey,
 	googleRecaptchaSiteKeyVisible,
+	promotedNewsletter,
 	unknownConfig = {},
 }: {
 	stage: StageType;
@@ -116,6 +119,7 @@ export const createGuardian = ({
 	brazeApiKey?: string;
 	googleRecaptchaSiteKey?: string;
 	googleRecaptchaSiteKeyVisible?: string;
+	promotedNewsletter?: Newsletter;
 	/**
 	 * In the case of articles we don't know the exact values that need to exist
 	 * on the window.guardian.config.page property so rather than filter them we
@@ -153,6 +157,7 @@ export const createGuardian = ({
 				brazeApiKey,
 				googleRecaptchaSiteKey,
 				googleRecaptchaSiteKeyVisible,
+				promotedNewsletter,
 			}),
 			libs: {
 				googletag: googletagUrl,

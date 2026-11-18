@@ -35,7 +35,7 @@ export const trails: Array<DCRFrontCard> = [
 		isExternalLink: false,
 		embedUri: undefined,
 		branding: undefined,
-		slideshowImages: undefined,
+		slideshowMedia: undefined,
 		showVideo: false,
 		image: {
 			src: 'https://media.guim.co.uk/ae0cb00e76ef1aa0ec283cfcfb91ba7378f8b9ec/0_0_5000_3000/master/5000.jpg',
@@ -73,7 +73,7 @@ export const trails: Array<DCRFrontCard> = [
 		isExternalLink: false,
 		embedUri: undefined,
 		branding: undefined,
-		slideshowImages: undefined,
+		slideshowMedia: undefined,
 		showVideo: false,
 		image: {
 			src: 'https://media.guim.co.uk/b403e3cfdc32f5b6ba5d3f38fa44ba2ebf388a1c/0_130_4178_2508/master/4178.jpg',
@@ -112,7 +112,7 @@ export const trails: Array<DCRFrontCard> = [
 		isExternalLink: false,
 		embedUri: undefined,
 		branding: undefined,
-		slideshowImages: undefined,
+		slideshowMedia: undefined,
 		showVideo: false,
 		image: {
 			src: 'https://media.guim.co.uk/dc9dcb8a8d29815e132f798b1d3e7acd528a9df3/0_295_5256_3153/master/5256.jpg',
@@ -149,7 +149,7 @@ export const trails: Array<DCRFrontCard> = [
 		isExternalLink: false,
 		embedUri: undefined,
 		branding: undefined,
-		slideshowImages: undefined,
+		slideshowMedia: undefined,
 		showVideo: false,
 		image: {
 			src: 'https://media.guim.co.uk/3718341a0b0da9a1d13f640c097a1388177fee8b/0_22_6000_3600/master/6000.jpg',
@@ -306,7 +306,7 @@ export const newsletterSignupCard: DCRFrontCard = {
 	isExternalLink: false,
 	embedUri: undefined,
 	branding: undefined,
-	slideshowImages: undefined,
+	slideshowMedia: undefined,
 	showVideo: false,
 	isImmersive: false,
 	image: {
@@ -358,7 +358,7 @@ export const defaultCard: DCRFrontCard = {
 	isExternalLink: false,
 	embedUri: undefined,
 	branding: undefined,
-	slideshowImages: undefined,
+	slideshowMedia: undefined,
 	showVideo: false,
 	image: {
 		src: 'https://media.guim.co.uk/dc9dcb8a8d29815e132f798b1d3e7acd528a9df3/0_295_5256_3153/master/5256.jpg',

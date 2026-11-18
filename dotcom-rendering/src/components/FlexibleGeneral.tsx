@@ -1,7 +1,7 @@
 import { isUndefined } from '@guardian/libs';
 import { safeParse } from 'valibot';
 import { ArticleDesign } from '../lib/articleFormat';
-import { isMediaCard } from '../lib/cardHelpers';
+import { isMediaCard, isMiniNavSupported } from '../lib/cardHelpers';
 import { isWithinTwelveHours } from '../lib/formatTime';
 import { palette } from '../palette';
 import type { BoostLevel } from '../types/content';
@@ -41,6 +41,7 @@ type Props = {
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
 	isStorylines: boolean;
+	isUserOptedInToMiniNav: boolean;
 };
 
 type RowLayout = 'oneCardHalfWidth' | 'oneCardFullWidth' | 'twoCard';
@@ -292,6 +293,7 @@ type SplashCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
 	isStorylines: boolean;
+	isUserOptedInToMiniNav: boolean;
 };
 
 const SplashCardLayout = ({
@@ -306,6 +308,7 @@ const SplashCardLayout = ({
 	containerLevel,
 	collectionId,
 	isStorylines,
+	isUserOptedInToMiniNav,
 }: SplashCardLayoutProps) => {
 	const graphic = safeParse(GraphicSchema, {
 		electionDataUrl: card.dataUrl,
@@ -315,7 +318,9 @@ const SplashCardLayout = ({
 	});
 
 	if (graphic.success) {
-		return <EventGraphic graphic={graphic.output} />;
+		return (
+			<EventGraphic graphic={graphic.output} trackingLabel={'front'} />
+		);
 	}
 
 	const isSnapLink = card.snapData?.embedHtml;
@@ -412,6 +417,9 @@ const SplashCardLayout = ({
 					headlinePosition={card.showLivePlayable ? 'outer' : 'inner'}
 					starRatingSize="medium"
 					isStorylines={isStorylines}
+					isMiniNavSupported={
+						isUserOptedInToMiniNav && card.showMiniNav
+					}
 				/>
 			</LI>
 		</UL>
@@ -478,6 +486,7 @@ type FullWidthCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
 	isStorylines: boolean;
+	isUserOptedInToMiniNav: boolean;
 };
 
 const FullWidthCardLayout = ({
@@ -492,6 +501,7 @@ const FullWidthCardLayout = ({
 	containerLevel,
 	collectionId,
 	isStorylines,
+	isUserOptedInToMiniNav,
 }: FullWidthCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) {
@@ -573,6 +583,11 @@ const FullWidthCardLayout = ({
 					subtitleSize={subtitleSize}
 					starRatingSize="medium"
 					isStorylines={isStorylines}
+					isMiniNavSupported={
+						isUserOptedInToMiniNav &&
+						!!card.showMiniNav &&
+						isMiniNavSupported(card.boostLevel)
+					}
 				/>
 			</LI>
 		</UL>
@@ -664,6 +679,7 @@ const HalfWidthCardLayout = ({
 							trailText={undefined}
 							canPlayInline={false}
 							isStorylines={isStorylines}
+							isMiniNavSupported={false}
 						/>
 					</LI>
 				);
@@ -682,6 +698,7 @@ export const FlexibleGeneral = ({
 	containerLevel = 'Primary',
 	collectionId,
 	isStorylines,
+	isUserOptedInToMiniNav,
 }: Props) => {
 	const splashCards = [...groupedTrails.splash].map((card, i) => ({
 		...card,
@@ -713,6 +730,7 @@ export const FlexibleGeneral = ({
 							containerLevel={containerLevel}
 							collectionId={collectionId}
 							isStorylines={isStorylines}
+							isUserOptedInToMiniNav={isUserOptedInToMiniNav}
 						/>
 					);
 				})}
@@ -733,6 +751,7 @@ export const FlexibleGeneral = ({
 								containerLevel={containerLevel}
 								collectionId={collectionId}
 								isStorylines={isStorylines}
+								isUserOptedInToMiniNav={isUserOptedInToMiniNav}
 							/>
 						);
 

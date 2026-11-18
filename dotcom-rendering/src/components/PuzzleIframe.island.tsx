@@ -1,21 +1,29 @@
 import { css } from '@emotion/react';
 import { until } from '@guardian/source/foundations';
-import { useEffect, useRef, useState } from 'react';
-import { getAuthStatus, subscribeToAuthStateChange } from '../lib/identity';
+import { useEffect, useRef } from 'react';
+import { handleMovieGridAction } from '../lib/movieGridActions';
 import { resolvePuzzleIframeUrl } from '../lib/puzzleIframeUrl';
 import {
 	AMUSELABS_ORIGIN,
 	createAmuseLabsAdapter,
 	handleAmuseLabsMessage,
 } from '../lib/puzzleProgress/adapters/amuseLabs';
+import {
+	createMovieGridAdapter,
+	handleMovieGridMessage,
+	movieGridGames,
+} from '../lib/puzzleProgress/adapters/movieGrid';
 import { reportPuzzleProgress } from '../lib/puzzleProgress/reporter';
+import type { PuzzleProgressIdentity } from '../lib/puzzleProgress/types';
 import { useMatchMedia } from '../lib/useMatchMedia';
+import { usePuzzleGame } from '../lib/usePuzzleGame';
 import type { PuzzleConfig } from '../model/puzzles/puzzleConfigs';
 import { palette as themePalette } from '../palette';
 
 interface Props {
 	/** Authoritative dated URL from GET /game, when supplied by frontend. */
 	gameUrl?: string;
+	progressIdentity?: PuzzleProgressIdentity;
 	/**
 	 * The puzzle's own `PuzzleConfig`, used to resolve the provider-specific
 	 * iframe URL (`set`/`baseUrl`, etc., see `src/lib/puzzleIframeUrl.ts`)
@@ -54,8 +62,8 @@ type MinHeightTiers = { default: number; tablet: number; mobile: number };
  * not confirmed pixel-for-pixel against a real AmuseLabs/Wordiply embed
  * (see docs/puzzle-page.md's "Iframe height at narrower viewports" -
  * platform access for real measurement is being arranged separately), but
- * are deliberately tuned per puzzle instead of one generic guess for all
- * six.
+ * are deliberately tuned per puzzle instead of one generic guess for every
+ * game.
  *
  * Three tiers, matching AmuseLabs' own responsive reflow breakpoints:
  * - `default`: from `desktop` (980px) up.
@@ -80,6 +88,8 @@ const PUZZLE_MIN_HEIGHTS: Record<string, MinHeightTiers> = {
 	'sudoku-killer': { default: 620, tablet: 520, mobile: 630 },
 	'word-wheel': { default: 600, tablet: 750, mobile: 500 },
 	wordiply: { default: 600, tablet: 600, mobile: 600 },
+	'film-reveal': { default: 700, tablet: 700, mobile: 900 },
+	'on-the-ball': { default: 640, tablet: 700, mobile: 900 },
 };
 
 /**
@@ -212,52 +222,6 @@ export interface PuzzleContextMessage {
 }
 
 /**
- * Reactively resolves the current signed-in user's Guardian identity ID (or
- * `undefined` if signed out), re-checking whenever the underlying
- * identity-auth client reports an auth state change (e.g. the reader signs
- * in or out while already on this page, via a sign-in modal or another
- * tab) - not just once on mount.
- *
- * `isResolved` is `false` until the first auth check has finished, so that
- * "not signed in" can be told apart from "not known yet": the iframe must
- * not be given a `src` before that, or it would load once without the `uid`
- * and then again with it.
- */
-const usePuzzleUserId = (): {
-	userId: string | undefined;
-	isResolved: boolean;
-} => {
-	const [userId, setUserId] = useState<string | undefined>(undefined);
-	const [isResolved, setIsResolved] = useState(false);
-
-	useEffect(() => {
-		let isMounted = true;
-
-		const refresh = () => {
-			void getAuthStatus().then((authStatus) => {
-				if (!isMounted) return;
-				setUserId(
-					authStatus.kind === 'SignedIn'
-						? authStatus.idToken.claims.legacy_identity_id
-						: undefined,
-				);
-				setIsResolved(true);
-			});
-		};
-
-		refresh();
-		const unsubscribe = subscribeToAuthStateChange(refresh);
-
-		return () => {
-			isMounted = false;
-			unsubscribe();
-		};
-	}, []);
-
-	return { userId, isResolved };
-};
-
-/**
  * Reactively resolves whether dark mode is currently actually active:
  * returns `false` immediately (without touching `matchMedia` at all) when
  * `darkModeAvailable` is `false` for this page/request; otherwise reuses
@@ -320,34 +284,45 @@ export const buildPuzzleIframeSrc = (
 	}
 };
 
-/**
- * Reports the reader's progress to the Puzzles API (through the `frontend`
- * proxy) from the messages an AmuseLabs iframe posts to this window. Only
- * messages from the AmuseLabs origin AND from this component's own iframe are
- * considered. Other providers have no adapter yet.
- */
-const usePuzzleProgressReporting = (
+/** Check the iframe's origin/window and reset progress state whenever its URL changes. */
+const usePuzzleMessages = (
 	puzzleConfig: PuzzleConfig,
 	iframeRef: React.RefObject<HTMLIFrameElement>,
+	iframeSrc: string | undefined,
+	progressIdentity?: PuzzleProgressIdentity,
 ) => {
 	const isAmuseLabs = puzzleConfig.iframe.provider === 'amuselabs';
+	const movieGrid =
+		puzzleConfig.iframe.provider === 'moviegrid'
+			? movieGridGames[puzzleConfig.slug]
+			: undefined;
 
 	useEffect(() => {
-		if (!isAmuseLabs) return;
-
-		const adapter = createAmuseLabsAdapter();
+		const adapter = isAmuseLabs
+			? createAmuseLabsAdapter()
+			: movieGrid && progressIdentity
+				? createMovieGridAdapter(movieGrid, progressIdentity)
+				: undefined;
+		if (!adapter && !movieGrid) return;
+		const origin = isAmuseLabs ? AMUSELABS_ORIGIN : movieGrid?.origin;
 
 		const onMessage = (event: MessageEvent<unknown>) => {
-			if (event.origin !== AMUSELABS_ORIGIN) return;
+			if (event.origin !== origin) return;
 			if (event.source !== iframeRef.current?.contentWindow) return;
 
-			const progress = handleAmuseLabsMessage(adapter, event.data);
+			if (movieGrid) {
+				void handleMovieGridAction(event.data).catch(console.error);
+			}
+			if (!adapter) return;
+			const progress = isAmuseLabs
+				? handleAmuseLabsMessage(adapter, event.data)
+				: handleMovieGridMessage(adapter, event.data);
 			if (progress) void reportPuzzleProgress(progress);
 		};
 
 		window.addEventListener('message', onMessage);
 		return () => window.removeEventListener('message', onMessage);
-	}, [isAmuseLabs, iframeRef]);
+	}, [isAmuseLabs, movieGrid, progressIdentity, iframeRef, iframeSrc]);
 };
 
 const postContextMessage = (
@@ -377,7 +352,7 @@ const postContextMessage = (
  * The provider-specific portion of the URL (e.g. AmuseLabs' `uid`/
  * `darkMode=0|1` query params) is resolved separately per provider, see
  * `buildPuzzleIframeSrc`'s doc comment. Because `src` is derived from the
- * reactive `usePuzzleUserId()`/`usePuzzleDarkMode()` results, the iframe is
+ * reactive `usePuzzleGame()`/`usePuzzleDarkMode()` results, the iframe is
  * automatically reloaded by the browser (a fresh `src` triggers a new
  * navigation) whenever the reader's sign-in state or OS colour-scheme
  * preference changes while on the page - no manual reload fallback is
@@ -390,25 +365,40 @@ const postContextMessage = (
  */
 export const PuzzleIframe = ({
 	gameUrl,
+	progressIdentity,
 	puzzleConfig,
 	title,
 	darkModeAvailable,
 	puzzleDate,
 }: Props) => {
-	const { userId, isResolved } = usePuzzleUserId();
+	const {
+		userId,
+		isResolved,
+		hasError,
+		gameUrl: resolvedGameUrl,
+	} = usePuzzleGame(puzzleConfig.slug, puzzleDate, gameUrl);
 	const darkMode = usePuzzleDarkMode(darkModeAvailable);
 	const context = buildPuzzleContext(userId, darkMode, puzzleDate);
-	const iframeSrc = buildPuzzleIframeSrc(puzzleConfig, context, gameUrl);
 	const iframeRef = useRef<HTMLIFrameElement>(null);
 
-	usePuzzleProgressReporting(puzzleConfig, iframeRef);
+	// API-backed puzzles wait for authentication and their personalised game URL.
+	const shouldLoad =
+		isResolved ||
+		(process.env.NODE_ENV === 'development' && gameUrl === undefined);
+	const iframeSrc =
+		shouldLoad && !hasError
+			? buildPuzzleIframeSrc(puzzleConfig, context, resolvedGameUrl)
+			: undefined;
 
-	// In development the islands do not hydrate when the page is opened
-	// straight from the local `frontend` (its `/assets/` cannot serve this
-	// repo's chunks), so the server-rendered `src` is all there is. Waiting
-	// for the auth check there would leave the puzzle blank. The one extra
-	// load this allows is accepted locally: CODE and PROD wait as below.
-	const shouldLoad = isResolved || process.env.NODE_ENV === 'development';
+	usePuzzleMessages(puzzleConfig, iframeRef, iframeSrc, progressIdentity);
+
+	if (hasError) {
+		return (
+			<p role="alert">
+				Unable to load this puzzle. Please reload the page to try again.
+			</p>
+		);
+	}
 
 	return (
 		<iframe
@@ -417,7 +407,7 @@ export const PuzzleIframe = ({
 			// No `src` until the reader is known, so the puzzle loads once, with
 			// the right `uid`, instead of loading anonymously and then again.
 			// The frame keeps its `min-height`, so nothing shifts when it loads.
-			src={shouldLoad ? iframeSrc : undefined}
+			src={iframeSrc}
 			title={title}
 			loading="lazy"
 			sandbox="allow-scripts allow-same-origin allow-popups allow-forms"

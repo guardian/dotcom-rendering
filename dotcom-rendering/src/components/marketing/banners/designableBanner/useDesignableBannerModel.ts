@@ -13,12 +13,10 @@ import {
 	useMatchMedia,
 } from '../../../../lib/useMatchMedia';
 import { getChoiceCards } from '../../lib/choiceCards';
-import { createClickEventFromTracking } from '../../lib/tracking';
 import type { BannerRenderProps } from '../common/types';
 import { setChannelClosedTimestamp } from '../utils/localStorage';
 import type { BannerData } from './BannerProps';
 import { buildBannerSelectors } from './bannerSelectors';
-import { getComponentIds } from './componentIds';
 import type {
 	BannerTemplateSettings,
 	ChoiceCardDesignSettings,
@@ -55,7 +53,7 @@ const buildHeaderImageSettings = (
 	return buildImageSettings(design.headerImage);
 };
 
-const buildChoiceCardSettings = (
+export const buildChoiceCardSettings = (
 	design: ConfigurableDesign,
 ): ChoiceCardDesignSettings | undefined => {
 	if (design.visual?.kind !== 'ChoiceCards') {
@@ -63,9 +61,11 @@ const buildChoiceCardSettings = (
 	}
 	const {
 		buttonColour,
+		buttonOpacity,
 		buttonTextColour,
 		buttonBorderColour,
 		buttonSelectColour,
+		buttonSelectOpacity,
 		buttonSelectTextColour,
 		buttonSelectBorderColour,
 		buttonSelectMarkerColour,
@@ -76,6 +76,7 @@ const buildChoiceCardSettings = (
 		buttonColour: buttonColour
 			? hexColourToString(buttonColour)
 			: undefined,
+		buttonOpacity: buttonOpacity ?? undefined,
 		buttonTextColour: buttonTextColour
 			? hexColourToString(buttonTextColour)
 			: undefined,
@@ -85,6 +86,7 @@ const buildChoiceCardSettings = (
 		buttonSelectColour: buttonSelectColour
 			? hexColourToString(buttonSelectColour)
 			: undefined,
+		buttonSelectOpacity: buttonSelectOpacity ?? undefined,
 		buttonSelectTextColour: buttonSelectTextColour
 			? hexColourToString(buttonSelectTextColour)
 			: undefined,
@@ -158,10 +160,11 @@ export const useDesignableBannerModel = ({
 	const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
 
 	const handleClose = useCallback((): void => {
+		onCloseClick();
 		setChannelClosedTimestamp(bannerChannel);
 		setIsOpen(false);
 		document.body.focus();
-	}, [bannerChannel]);
+	}, [bannerChannel, onCloseClick]);
 
 	const handleToggleCollapse = useCallback(() => {
 		const nextCollapsed = !isCollapsed;
@@ -253,81 +256,6 @@ export const useDesignableBannerModel = ({
 		};
 	}, [design]);
 
-	// Create tracking handlers that always run
-	const componentIds = getComponentIds('designable-banner');
-	const trackingHandlers = useMemo(() => {
-		const clickHandlerFor = (componentId: string, close: boolean) => {
-			return (): void => {
-				const componentClickEvent = createClickEventFromTracking(
-					tracking,
-					componentId,
-				);
-				void submitComponentEvent?.(componentClickEvent);
-				if (close) {
-					// This would need the onClose function from withCloseable HOC
-					// For now, just handle tracking
-				}
-			};
-		};
-
-		return {
-			onCloseClick: clickHandlerFor(componentIds.close, true),
-			onCollapseClick: clickHandlerFor(componentIds.collapse, false),
-			onExpandClick: clickHandlerFor(componentIds.expand, false),
-			onCtaClick: clickHandlerFor(componentIds.cta, true),
-			onSecondaryCtaClick: clickHandlerFor(
-				componentIds.secondaryCta,
-				true,
-			),
-		};
-	}, [
-		tracking,
-		submitComponentEvent,
-		componentIds.close,
-		componentIds.collapse,
-		componentIds.expand,
-		componentIds.cta,
-		componentIds.secondaryCta,
-	]);
-
-	// Create combined handlers that run both tracking and prop handlers
-	const combinedHandlers = useMemo(() => {
-		return {
-			onClose: () => {
-				// Always run tracking
-				trackingHandlers.onCloseClick();
-				// Also run prop handler if it exists
-				onCloseClick();
-				// Run the close handler
-				handleClose();
-			},
-			onCtaClick: () => {
-				trackingHandlers.onCtaClick();
-				onCtaClick();
-			},
-			onSecondaryCtaClick: () => {
-				trackingHandlers.onSecondaryCtaClick();
-				onSecondaryCtaClick();
-			},
-			onCollapseClick: () => {
-				trackingHandlers.onCollapseClick();
-				onCollapseClick();
-			},
-			onExpandClick: () => {
-				trackingHandlers.onExpandClick();
-				onExpandClick();
-			},
-		};
-	}, [
-		trackingHandlers,
-		onCloseClick,
-		onCtaClick,
-		onSecondaryCtaClick,
-		onCollapseClick,
-		onExpandClick,
-		handleClose,
-	]);
-
 	const bannerData: BannerData | null = useMemo(() => {
 		if (!design || !settings) {
 			return null;
@@ -365,10 +293,10 @@ export const useDesignableBannerModel = ({
 			choices: choiceCards,
 			selectedChoiceCard,
 			actions: {
-				onClose: combinedHandlers.onClose,
+				onClose: handleClose,
 				onToggleCollapse: handleToggleCollapse,
-				onCtaClick: combinedHandlers.onCtaClick,
-				onSecondaryCtaClick: combinedHandlers.onSecondaryCtaClick,
+				onCtaClick,
+				onSecondaryCtaClick,
 				onChoiceCardChange: setSelectedChoiceCardState,
 				submitComponentEvent,
 			},
@@ -389,7 +317,9 @@ export const useDesignableBannerModel = ({
 		isTabletOrAbove,
 		choiceCards,
 		selectedChoiceCard,
-		combinedHandlers,
+		handleClose,
+		onCtaClick,
+		onSecondaryCtaClick,
 		handleToggleCollapse,
 		submitComponentEvent,
 		separateArticleCount,

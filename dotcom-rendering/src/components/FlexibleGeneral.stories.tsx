@@ -38,7 +38,6 @@ import { FrontSection } from './FrontSection';
 
 const emptyGroupedTrails: DCRGroupedTrails = {
 	standard: [],
-	snap: [],
 	splash: [],
 };
 
@@ -174,6 +173,7 @@ const meta = {
 		aspectRatio: '5:4',
 		collectionId: 1,
 		isStorylines: false,
+		isUserOptedInToMiniNav: true,
 	},
 	render: ({ frontSectionTitle, ...args }) => (
 		<FrontSection
@@ -202,6 +202,7 @@ export const SplashWithStandards: Story = {
 				boostLevel: index === 0 ? 'boost' : 'default',
 			})),
 		},
+		isUserOptedInToMiniNav: true,
 	},
 };
 
@@ -212,6 +213,7 @@ export const SplashWithSublinks: Story = {
 			...emptyGroupedTrails,
 			splash: [{ ...splashCard, image: undefined }],
 		},
+		isUserOptedInToMiniNav: true,
 	},
 	render: (args) => {
 		const Section = ({
@@ -302,6 +304,7 @@ export const SplashBoostLevels: Story = {
 			...emptyGroupedTrails,
 			splash: [{ ...splashCard, image: undefined }],
 		},
+		isUserOptedInToMiniNav: true,
 	},
 	render: (args) => {
 		const Section = ({
@@ -346,6 +349,7 @@ export const SplashWithImageSupression: Story = {
 			...emptyGroupedTrails,
 			splash: [{ ...splashCard, image: undefined }],
 		},
+		isUserOptedInToMiniNav: true,
 	},
 	render: (args) => {
 		const Section = ({
@@ -397,6 +401,7 @@ export const SplashWithLiveUpdates: Story = {
 						...emptyGroupedTrails,
 						splash: [{ ...liveUpdatesCard, boostLevel }],
 					}}
+					isUserOptedInToMiniNav={true}
 				/>
 			</FrontSection>
 		);
@@ -424,6 +429,7 @@ export const SplashWithSnapLinkAndStandards: Story = {
 				boostLevel: index === 0 ? 'boost' : 'default',
 			})),
 		},
+		isUserOptedInToMiniNav: true,
 	},
 };
 
@@ -445,6 +451,7 @@ export const StandardBoostedWithLiveUpdates: Story = {
 						...emptyGroupedTrails,
 						standard: [{ ...liveUpdatesCard, boostLevel }],
 					}}
+					isUserOptedInToMiniNav={true}
 				/>
 			</FrontSection>
 		);
@@ -477,6 +484,7 @@ export const StandardCards: Story = {
 				...youtubeVideoTrails.slice(0, 2),
 			],
 		},
+		isUserOptedInToMiniNav: true,
 	},
 };
 
@@ -506,6 +514,7 @@ export const WithSpecialPaletteVariations = {
 			],
 			standard: standardCards.slice(0, 2),
 		},
+		isUserOptedInToMiniNav: true,
 	},
 	render: (args) => (
 		<>
@@ -536,6 +545,7 @@ export const SecondaryContainerStandardCards: Story = {
 			...emptyGroupedTrails,
 			standard: standardCards.slice(0, 4),
 		},
+		isUserOptedInToMiniNav: true,
 	},
 };
 
@@ -550,6 +560,7 @@ export const ImmersiveCardsSplashAndStandard: Story = {
 			],
 			standard: [{ ...trails[0], isImmersive: true }],
 		},
+		isUserOptedInToMiniNav: true,
 	},
 };
 
@@ -571,6 +582,7 @@ export const SelfHostedLoopVideoCardsInSplashSlots: Story = {
 						...emptyGroupedTrails,
 						splash: [{ ...video, boostLevel }],
 					}}
+					isUserOptedInToMiniNav={true}
 				/>
 			</FrontSection>
 		);
@@ -618,6 +630,7 @@ export const SelfHostedDefaultVideoCardsInSplashSlots: Story = {
 						...emptyGroupedTrails,
 						splash: [{ ...video, boostLevel }],
 					}}
+					isUserOptedInToMiniNav={true}
 				/>
 			</FrontSection>
 		);
@@ -663,6 +676,7 @@ export const YoutubeVideoCardInSplashSlot: Story = {
 						...emptyGroupedTrails,
 						splash: [{ ...youtubeVideoTrails[0], boostLevel }],
 					}}
+					isUserOptedInToMiniNav={true}
 				/>
 			</FrontSection>
 		);
@@ -697,6 +711,7 @@ export const YoutubeVideoCardInStandardSlot: Story = {
 						...emptyGroupedTrails,
 						standard: [{ ...youtubeVideoTrails[0], boostLevel }],
 					}}
+					isUserOptedInToMiniNav={true}
 				/>
 			</FrontSection>
 		);
@@ -724,6 +739,7 @@ export const SelfHostedVideoInStandardSlot: Story = {
 			...emptyGroupedTrails,
 			standard: [selfHostedLoopVideo54Card], // Self-hosted video is disabled at standard card size
 		},
+		isUserOptedInToMiniNav: true,
 	},
 };
 
@@ -739,6 +755,7 @@ export const StandardBoostedMediaCardWithSublinks: Story = {
 				supportingContent: getSublinks(2),
 			})),
 		},
+		isUserOptedInToMiniNav: true,
 	},
 };
 
@@ -757,6 +774,7 @@ export const SplashWithSlideshow: Story = {
 			],
 		},
 		collectionId: 1,
+		isUserOptedInToMiniNav: true,
 	},
 	render: (args) => {
 		const Section = ({
@@ -897,6 +915,7 @@ export const StandardCardsWithSlideshow: Story = {
 			],
 		},
 		collectionId: 1,
+		isUserOptedInToMiniNav: true,
 	},
 };
 
@@ -917,6 +936,7 @@ export const EventGraphic = {
 			standard: trails.slice(4, 9),
 		},
 		collectionId: 1,
+		isUserOptedInToMiniNav: true,
 	},
 	decorators: (Story) => {
 		global.fetch = customMockFetch([

@@ -159,7 +159,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			case 'static/feature/2':
 				return '4:5';
 			case 'flexible/general':
-			case 'flexible/special':
 			case 'scrollable/small':
 			case 'scrollable/medium':
 			case 'static/medium/4':
@@ -197,6 +196,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					frontId={front.pressedPage.id}
 					collectionId={0}
 					hasPageSkin={hasPageSkin}
+					isUserOptedInToMiniNav={false}
 				/>
 			)
 		);
@@ -265,6 +265,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					)}
 					sectionId={front.config.section}
 					contentType={front.config.contentType}
+					canonicalUrl={front.canonicalUrl}
 				/>
 
 				{isPaidContent && (
@@ -316,6 +317,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					} | ${ophanName}`;
 					const mostPopularTitle = 'Most popular';
 
+					const isUserOptedInToMiniNav =
+						front.config.serverSideABTests[
+							'fronts-and-curation-card-mini-nav'
+						] === 'variant';
 					/**
 					 * We only shrink the content of certain sections to place the Most Popular
 					 * content on the right-hand side. Other sections remain full-width.
@@ -554,6 +559,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									sectionId={ophanName}
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
+									isUserOptedInToMiniNav={
+										isUserOptedInToMiniNav
+									}
 								/>
 							</FrontSection>
 

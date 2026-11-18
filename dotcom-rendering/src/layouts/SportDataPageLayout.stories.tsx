@@ -6,7 +6,7 @@ import { extractNAV } from '../model/extract-nav';
 import { SportDataPageLayout } from './SportDataPageLayout';
 
 const meta = {
-	title: 'Components/Sport Data Page Layout',
+	title: 'Layouts/Sport Data Page Layout',
 	component: SportDataPageLayout,
 };
 

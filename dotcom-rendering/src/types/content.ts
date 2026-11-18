@@ -1,4 +1,5 @@
 import { type CrosswordProps } from '@guardian/react-crossword';
+import { type ElectionComponentsJson } from '../components/ElectionTrackers/electionComponent';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { VideoPlayerFormat } from './mainMedia';
 
@@ -565,6 +566,13 @@ export interface RecipeFeaturedImage {
 	mediaApiUri?: string;
 }
 
+export interface EventGraphicBlockElement {
+	_type: 'model.dotcomrendering.pageElements.EventGraphicBlockElement';
+	elementId: string;
+	components: ElectionComponentsJson;
+	dataUrl: URL;
+}
+
 export interface RecipeBlockElement {
 	_type: 'model.dotcomrendering.pageElements.RecipeBlockElement';
 	elementId?: string;
@@ -876,6 +884,11 @@ interface WitnessTypeBlockElement extends ThirdPartyEmbeddedContent {
 export interface CrosswordElement {
 	_type: 'model.dotcomrendering.pageElements.CrosswordElement';
 	crossword: CrosswordProps['data'];
+	/**
+	 * Set, as `true`, only when this crossword is premium and the puzzles hub
+	 * v3 test is on. Absent otherwise, so the element is as it always was.
+	 */
+	requiresSubscription?: true;
 }
 
 export type FEElement =
@@ -946,7 +959,8 @@ export type FEElement =
 	| ProductBlockElement
 	| ProductSummaryBlockElement
 	| EnhancedProductSummaryElement
-	| RecipeBlockElement;
+	| RecipeBlockElement
+	| EventGraphicBlockElement;
 
 // -------------------------------------
 // Misc

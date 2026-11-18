@@ -43,6 +43,7 @@ const mainMenuLinkStyle = css`
 type Props = {
 	readerRevenueLinks: ReaderRevenuePositions;
 	editionId: EditionId;
+	showSupportLink?: boolean;
 };
 
 /**
@@ -51,6 +52,7 @@ type Props = {
 export const ReaderRevenueLinks = ({
 	readerRevenueLinks,
 	editionId,
+	showSupportLink = true,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const pageViewId = usePageViewId(renderingTarget);
@@ -87,12 +89,16 @@ export const ReaderRevenueLinks = ({
 	];
 
 	const links: LinkType[] = [
-		{
-			longTitle: 'Support us',
-			title: 'Support us',
-			mobileOnly: true,
-			url: readerRevenueLinks.sideMenu.support,
-		},
+		...(showSupportLink
+			? [
+					{
+						longTitle: 'Support us',
+						title: 'Support us',
+						mobileOnly: true,
+						url: readerRevenueLinks.sideMenu.support,
+					},
+				]
+			: []),
 		{
 			longTitle: 'Print subscriptions',
 			title: 'Print subscriptions',

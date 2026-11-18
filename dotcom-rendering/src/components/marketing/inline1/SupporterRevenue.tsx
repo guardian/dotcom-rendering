@@ -10,7 +10,9 @@ import {
 import { SvgGuardianLogo } from '@guardian/source/react-components';
 import { LinkButton } from '@guardian/source/react-components';
 import type { Inline1Props } from '@guardian/support-dotcom-components/dist/shared/types/props/inline1';
+import sanitize from 'sanitize-html';
 import type { ReactComponent } from '../lib/ReactComponent';
+import { useInline1Tracking } from './utils/useInline1Tracking';
 
 const outerContainerStyles = css`
 	border-top: 1px solid ${palette.neutral[73]};
@@ -103,7 +105,20 @@ const imageStyles = css`
 	object-fit: cover;
 `;
 
-const SupporterRevenue: ReactComponent<Inline1Props> = ({ variant }) => {
+// This is used to sanitize the HTML for the title
+// and description to allow for custom styling in RRCP
+const allowedHTMLTags = ['s', 'em', 'strong', 'a'];
+
+export const SupporterRevenue: ReactComponent<Inline1Props> = ({
+	submitComponentEvent,
+	tracking,
+	variant,
+}) => {
+	const { setNode, sendEvent } = useInline1Tracking({
+		tracking,
+		submitComponentEvent,
+	});
+
 	if (variant.message.type != 'Inline1SupportMessage') {
 		return;
 	}
@@ -116,6 +131,7 @@ const SupporterRevenue: ReactComponent<Inline1Props> = ({ variant }) => {
 		<section
 			css={outerContainerStyles}
 			aria-labelledby="supporter-revenue-heading"
+			ref={setNode}
 		>
 			<div css={innerContainerStyles}>
 				<div css={guardianLogoContainerStyles}>
@@ -130,15 +146,29 @@ const SupporterRevenue: ReactComponent<Inline1Props> = ({ variant }) => {
 						/>
 					</div>
 				)}
-				<h2 id="supporter-revenue-heading" css={headingStyles}>
-					{heading}
-				</h2>
-				<p css={bodyStyles}>{body}</p>
+				<h2
+					id="supporter-revenue-heading"
+					css={headingStyles}
+					dangerouslySetInnerHTML={{
+						__html: sanitize(heading, {
+							allowedTags: allowedHTMLTags,
+						}),
+					}}
+				></h2>
+				<p
+					css={bodyStyles}
+					dangerouslySetInnerHTML={{
+						__html: sanitize(body, {
+							allowedTags: allowedHTMLTags,
+						}),
+					}}
+				></p>
 				<div css={ctaContainerStyles}>
 					<LinkButton
 						cssOverrides={ctaButtonStyles}
 						theme={ctaButtonTheme}
 						href={cta.baseUrl}
+						onClick={() => sendEvent('CLICK', 'cta')}
 					>
 						{cta.text}
 					</LinkButton>
@@ -147,5 +177,3 @@ const SupporterRevenue: ReactComponent<Inline1Props> = ({ variant }) => {
 		</section>
 	);
 };
-
-export default SupporterRevenue;

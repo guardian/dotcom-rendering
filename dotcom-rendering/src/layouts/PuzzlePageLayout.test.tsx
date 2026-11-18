@@ -3,10 +3,10 @@ import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
 import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
 import { ConfigProvider } from '../components/ConfigContext';
 import {
-	puzzlesHubV1Experiment,
-	puzzlesHubV1Participation,
 	puzzlesHubV2Experiment,
 	puzzlesHubV2Participation,
+	puzzlesHubV3Experiment,
+	puzzlesHubV3Participation,
 } from '../lib/puzzlesHubVersionExperiment';
 import { extractNAV } from '../model/extract-nav';
 import { getPuzzleConfig } from '../model/puzzles/puzzleConfigs';
@@ -51,10 +51,10 @@ jest.mock('../lib/useAB', () => ({
 	useAB: jest.fn().mockReturnValue(null),
 }));
 
-const v1On = puzzlesHubV1Participation(puzzlesHubV1Experiment.variant);
-const v1AndV2On = {
-	...v1On,
-	...puzzlesHubV2Participation(puzzlesHubV2Experiment.variant),
+const v2On = puzzlesHubV2Participation(puzzlesHubV2Experiment.variant);
+const v2AndV3On = {
+	...v2On,
+	...puzzlesHubV3Participation(puzzlesHubV3Experiment.variant),
 };
 
 const renderPuzzlePageLayout = (
@@ -86,6 +86,58 @@ const renderPuzzlePageLayout = (
 };
 
 describe('PuzzlePageLayout', () => {
+	it('passes the API progress identity into the access gate island for hydration', () => {
+		const page = createPuzzlePage('film-reveal');
+		const progressIdentity = {
+			puzzleId: 'moviegrid-filmreveal-394',
+			puzzleType: 'FILMREVEAL',
+			publishDate: '2026-11-02T00:00:00Z',
+		};
+		const { container } = renderPuzzlePageLayout('film-reveal', {
+			instance: { ...page.instance, progressIdentity },
+		});
+		const props = container
+			.querySelector('gu-island[name="PuzzleAccessGate"]')
+			?.getAttribute('props');
+		expect(JSON.parse(props!)).toEqual(
+			expect.objectContaining({ progressIdentity }),
+		);
+	});
+
+	it.each([
+		['film-reveal', 'Film reveal'],
+		['on-the-ball', 'On the ball'],
+	])(
+		'renders the %s headline and trivia section link without print',
+		(slug, title) => {
+			renderPuzzlePageLayout(slug);
+
+			expect(
+				screen.getByRole('heading', { level: 1, name: title }),
+			).toBeInTheDocument();
+			expect(
+				screen.getByRole('link', { name: 'Trivia & quizzes' }),
+			).toHaveAttribute(
+				'href',
+				'/puzzles-and-games/trivia-and-quizzes/archive',
+			);
+			const preferredSource = screen.getByRole('link', {
+				name: 'Prefer the Guardian on Google',
+			});
+			expect(preferredSource).toHaveAttribute(
+				'href',
+				'https://www.google.com/preferences/source?q=theguardian.com',
+			);
+			expect(preferredSource).toHaveAttribute(
+				'data-print-layout',
+				'hide',
+			);
+			expect(
+				screen.queryByRole('button', { name: /print/i }),
+			).not.toBeInTheDocument();
+		},
+	);
+
 	it.each([
 		{ slug: 'word-wheel', isAdFreeUser: false },
 		{ slug: 'word-wheel', isAdFreeUser: true },
@@ -170,7 +222,7 @@ describe('PuzzlePageLayout', () => {
 			container.querySelector('a[data-component="series"]'),
 		).toHaveAttribute(
 			'href',
-			'/puzzles-and-games/logic-puzzles/sudoku-easy',
+			'/puzzles-and-games/logic-puzzles/sudoku-easy/archive',
 		);
 		expect(
 			container.querySelector('a[data-component="section"]'),
@@ -214,7 +266,7 @@ describe('PuzzlePageLayout', () => {
 			const { container } = renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: {},
+					edition: 'UK',
 				},
 			});
 
@@ -231,7 +283,7 @@ describe('PuzzlePageLayout', () => {
 			const { container } = renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: v1On,
+					edition: 'INT',
 				},
 			});
 
@@ -251,7 +303,8 @@ describe('PuzzlePageLayout', () => {
 			const { container } = renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: v1AndV2On,
+					edition: 'INT',
+					serverSideABTests: v2On,
 				},
 			});
 
@@ -263,11 +316,26 @@ describe('PuzzlePageLayout', () => {
 
 	describe('print button (Sudoku-only, per PR #16700 review)', () => {
 		it('renders the print button for a sudoku puzzle', () => {
-			renderPuzzlePageLayout('sudoku-easy');
+			const { container } = renderPuzzlePageLayout('sudoku-easy');
 
 			expect(
 				screen.getByRole('button', { name: 'Print version' }),
-			).toBeInTheDocument();
+			).toHaveAttribute(
+				'data-link-name',
+				'puzzles | print-request | slug-sudoku-easy | date-2026-09-11 | provider-amuselabs',
+			);
+			const props = container
+				.querySelector('gu-island[name="ShareButton"]')
+				?.getAttribute('props');
+			expect(JSON.parse(props!)).toEqual(
+				expect.objectContaining({
+					puzzleTrackingContext: {
+						slug: 'sudoku-easy',
+						date: '2026-09-11',
+						provider: 'amuselabs',
+					},
+				}),
+			);
 		});
 
 		it('does not render the print button for word-wheel', () => {
@@ -289,10 +357,10 @@ describe('PuzzlePageLayout', () => {
 
 	describe('"More from Puzzles & Games" rail (v1-scoped feature)', () => {
 		it('renders the rail when data is present AND v1 is enabled', () => {
-			renderPuzzlePageLayout('sudoku-easy', {
+			const { container } = renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: v1On,
+					edition: 'INT',
 				},
 			});
 
@@ -301,13 +369,24 @@ describe('PuzzlePageLayout', () => {
 					name: 'More from Puzzles & games',
 				}),
 			).toBeInTheDocument();
+			expect(
+				container.querySelector(
+					'[data-component="puzzles-more-from:puzzle-page"]',
+				),
+			).toBeInTheDocument();
+			const props = container
+				.querySelector('gu-island[name="RelatedPuzzlesRailEnhanced"]')
+				?.getAttribute('props');
+			expect(JSON.parse(props!)).toEqual(
+				expect.objectContaining({ source: 'puzzle-page' }),
+			);
 		});
 
 		it('does not render the rail when moreFromPuzzlesAndGames is empty, even with v1 enabled', () => {
 			renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: v1On,
+					edition: 'INT',
 				},
 				instance: {
 					...createPuzzlePage('sudoku-easy').instance,
@@ -336,7 +415,7 @@ describe('PuzzlePageLayout', () => {
 			renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
-					serverSideABTests: {},
+					edition: 'UK',
 				},
 			});
 
@@ -362,8 +441,13 @@ describe('PuzzlePageLayout', () => {
 				headerSlot?.closest('[data-print-layout="hide"]')
 					?.parentElement,
 			).toBe(container);
+			const merchandisingSlot = container.querySelector(
+				'#dfp-ad--merchandising-high',
+			);
+			expect(merchandisingSlot).toBeInTheDocument();
+			expect(merchandisingSlot).not.toHaveAttribute('data-label-show');
 			expect(
-				container.querySelector('#dfp-ad--merchandising-high'),
+				merchandisingSlot?.closest('[data-print-layout="hide"]'),
 			).toBeInTheDocument();
 			const game = container.querySelector(
 				'[data-layout="PuzzlePageLayout"] article',
@@ -403,5 +487,90 @@ describe('PuzzlePageLayout', () => {
 				container.querySelector('#dfp-ad--crossword-banner-mobile'),
 			).not.toBeInTheDocument();
 		});
+
+		const renderPremiumPuzzle = (
+			serverSideABTests: Record<string, string>,
+			requiresSubscription: boolean | undefined = true,
+			edition: 'INT' | 'UK' = 'INT',
+		) => {
+			const base = createPuzzlePage('sudoku-easy');
+			return renderPuzzlePageLayout('sudoku-easy', {
+				isAdFreeUser: false,
+				config: { ...base.config, edition, serverSideABTests },
+				instance: { ...base.instance, requiresSubscription },
+			});
+		};
+
+		const gateProps = (container: HTMLElement) =>
+			JSON.parse(
+				container
+					.querySelector('gu-island[name="PuzzleAccessGate"]')
+					?.getAttribute('props') ?? '{}',
+			) as { requiresSubscription?: boolean };
+
+		it('does not render any ad slots for a premium puzzle, even for a non-ad-free reader', () => {
+			const { container } = renderPremiumPuzzle(v2AndV3On);
+
+			expect(
+				container.querySelector('#dfp-ad--top-above-nav'),
+			).not.toBeInTheDocument();
+			expect(
+				container.querySelector('#dfp-ad--merchandising-high'),
+			).not.toBeInTheDocument();
+			expect(
+				container.querySelector('#dfp-ad--merchandising'),
+			).not.toBeInTheDocument();
+			expect(
+				container.querySelector('#dfp-ad--right'),
+			).not.toBeInTheDocument();
+			expect(
+				container.querySelector('#dfp-ad--crossword-banner-mobile'),
+			).not.toBeInTheDocument();
+			expect(gateProps(container).requiresSubscription).toBe(true);
+		});
+
+		it('still renders ad slots when the puzzle is explicitly not premium', () => {
+			const { container } = renderPremiumPuzzle(v2AndV3On, false);
+
+			expect(
+				container.querySelector('#dfp-ad--merchandising-high'),
+			).toBeInTheDocument();
+			expect(gateProps(container).requiresSubscription).toBe(false);
+		});
+
+		it.each([
+			['no test participation', {}, 'INT'],
+			['v2 only', v2On, 'INT'],
+			[
+				'v3 without v2',
+				puzzlesHubV3Participation(puzzlesHubV3Experiment.variant),
+				'INT',
+			],
+			[
+				'v3 in control',
+				{
+					...v2On,
+					...puzzlesHubV3Participation(
+						puzzlesHubV3Experiment.control,
+					),
+				},
+				'INT',
+			],
+			['v2 and v3 outside the hub editions', v2AndV3On, 'UK'],
+		] as const)(
+			'treats a premium puzzle as free outside puzzles-new-hub-v3 (%s)',
+			(_label, serverSideABTests, edition) => {
+				const { container } = renderPremiumPuzzle(
+					serverSideABTests,
+					true,
+					edition,
+				);
+
+				expect(
+					container.querySelector('#dfp-ad--merchandising-high'),
+				).toBeInTheDocument();
+				expect(gateProps(container).requiresSubscription).toBe(false);
+			},
+		);
 	});
 });

@@ -2,6 +2,7 @@ import type { FEFormat } from '../frontend/feArticle';
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { Block } from './blocks';
 import type { ReaderRevenuePositions } from './commercial';
+import type { StageType } from './config';
 import type { CustomSubnav } from './customSubnav';
 
 /**
@@ -25,6 +26,7 @@ export interface FEBlocksRequest {
 	serverSideABTests?: Record<string, string>;
 	keywordIds: string;
 	shouldHideAds: boolean;
+	stage: StageType;
 }
 
 /**

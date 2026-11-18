@@ -3,6 +3,7 @@ import {
 	from,
 	remSpace,
 	palette as sourcePalette,
+	space,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
@@ -19,7 +20,7 @@ import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Logo } from '../components/Masthead/Titlepiece/Logo';
 import { PrintButton } from '../components/PrintButton.island';
-import { PuzzleIframe } from '../components/PuzzleIframe.island';
+import { PuzzleAccessGate } from '../components/PuzzleAccessGate.island';
 import { PuzzlesUsefulLinks } from '../components/PuzzlesSupporting';
 import { RelatedPuzzlesRailEnhanced } from '../components/RelatedPuzzlesRailEnhanced.island';
 import { RightColumn } from '../components/RightColumn';
@@ -29,19 +30,23 @@ import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
+	Pillar,
 } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
+import { PUZZLE_MODAL_ROOT_ID } from '../lib/puzzleAccess';
+import type { PuzzleActionContext } from '../lib/puzzleActionTracking';
 import { formatPuzzleDate } from '../lib/puzzleDate';
-import { getPuzzleGroupPalette } from '../lib/puzzleGroupPalette';
+import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
 import {
-	isPuzzlesHubV1Enabled,
 	isPuzzlesHubV2Enabled,
+	isPuzzlesHubV3Enabled,
 } from '../lib/puzzlesHubVersionExperiment';
 import {
 	getPuzzlesSubNavLinks,
 	PUZZLES_SUBNAV_PARENT,
 } from '../lib/puzzlesSubNav';
+import { puzzleAccentStyles } from '../lib/puzzlesTheme';
 import { enhanceBranding } from '../model/enhanceCommercialProperties';
 import type { NavType, SubNavType } from '../model/extract-nav';
 import type { PuzzleConfig } from '../model/puzzles/puzzleConfigs';
@@ -65,7 +70,7 @@ import { BannerWrapper } from './lib/stickiness';
  *
  * The **one deliberate content difference**, per explicit product/design
  * direction: the crossword game itself (`ArticleBody` rendering the
- * `crossword` block) is replaced by `PuzzleIframe.island` in the `body`
+ * `crossword` block) is replaced by `PuzzleAccessGate.island` (which renders `PuzzleIframe`, or the premium puzzles modal) in the `body`
  * grid area. Puzzle Page is scoped to iframe-based puzzles only; the
  * crossword-only game/data model has no equivalent here.
  *
@@ -88,9 +93,21 @@ import { BannerWrapper } from './lib/stickiness';
  * a fixed value instead of a derived one.
  */
 
+const merchandisingAdStyles = css`
+	.ad-slot.ad-slot--rendered {
+		/* Fluid creatives reset the slot's default padding. */
+		padding-bottom: ${space[6]}px;
+
+		&:not([data-label-show='true']) {
+			border-top: 1px solid ${sourcePalette.neutral[86]};
+		}
+	}
+`;
+
 const puzzleGroupLabels: Record<PuzzleConfig['puzzleGroup'], string> = {
 	'logic-puzzles': 'Logic puzzles',
 	'word-games': 'Word games',
+	trivia: 'Trivia & quizzes',
 };
 
 /**
@@ -110,6 +127,8 @@ const puzzleFamilyNames: Record<string, string> = {
 	'sudoku-killer': 'Sudoku',
 	'word-wheel': 'Word wheel',
 	wordiply: 'Wordiply',
+	'film-reveal': 'Film reveal',
+	'on-the-ball': 'On the ball',
 };
 
 /**
@@ -130,6 +149,8 @@ const puzzleHeadlineNames: Record<string, string> = {
 	'sudoku-killer': 'Killer sudoku',
 	'word-wheel': 'Word wheel',
 	wordiply: 'Wordiply',
+	'film-reveal': 'Film reveal',
+	'on-the-ball': 'On the ball',
 };
 
 /**
@@ -179,11 +200,9 @@ const AGE_WARNING_SUPPRESSION_TAGS: TagType[] = [
  * `width: 100%` styling needs too, so this reuses that existing,
  * documented case rather than inventing a new one.
  *
- * `theme` follows the puzzle's group (`getPuzzleGroupPalette`): news for
- * crosswords, opinion for word games, sport for logic puzzles. This is what
- * makes `pillarPalette`-driven colours (the share button, print button
- * border, comments, etc, see `paletteDeclarations.ts`) resolve to the
- * group's colour across the whole page.
+ * `theme` is the same fixed `Pillar.Lifestyle` for every group: it only
+ * provides the page's neutral colours (background, lines). Each group's accent
+ * colour comes from `puzzleAccentStyles`, not from the theme.
  *
  * **Exported** so `PuzzlePage.tsx` can pass this exact same value to
  * `rootStyles()` for its page-wide `<Global>` styles. `themePalette()`
@@ -197,13 +216,11 @@ const AGE_WARNING_SUPPRESSION_TAGS: TagType[] = [
  * with red instead of Lifestyle pink, regardless of what `puzzlePageFormat`
  * itself said.
  */
-export const getPuzzlePageFormat = (
-	puzzleGroup: PuzzleConfig['puzzleGroup'],
-): ArticleFormat => ({
+export const puzzlePageFormat: ArticleFormat = {
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Crossword,
-	theme: getPuzzleGroupPalette(puzzleGroup).theme,
-});
+	theme: Pillar.Lifestyle,
+};
 
 /**
  * Identical to `CrosswordLayout.tsx`'s own `CrosswordGrid`: the same grid
@@ -316,6 +333,21 @@ const stretchLines = css`
 `;
 
 /**
+ * Positioned so the unlock modal, which `PuzzleAccessGate` renders into it
+ * (see `PUZZLE_MODAL_ROOT_ID`), covers exactly the page content and leaves
+ * the header and the footer reachable.
+ *
+ * `position: relative` alone does not create a stacking context, so the
+ * modal's z-index would compete with the header's (for example the expanded
+ * navigation) and cover it. `isolation: isolate` keeps the modal's stacking
+ * inside `<main>`.
+ */
+const mainStyles = css`
+	position: relative;
+	isolation: isolate;
+`;
+
+/**
  * The `/PuzzlePage` handler resolves and validates the `PuzzleConfig` for
  * the request's `slug` before rendering; it is passed alongside the raw
  * payload rather than re-derived here so `PuzzlePageLayout` has a single,
@@ -355,7 +387,6 @@ export const PuzzlePageLayout = ({
 }: Props) => {
 	const { config, instance, editionId, puzzleConfig } = puzzlePage;
 	const { isPaidContent, host, hasSurveyAd } = config;
-	const puzzlePageFormat = getPuzzlePageFormat(puzzleConfig.puzzleGroup);
 
 	// Puzzle Page instances have no comments/discussion concept at all:
 	// `FEPuzzlePageType` carries no `isCommentable` flag or per-instance
@@ -363,11 +394,14 @@ export const PuzzlePageLayout = ({
 	// Hardcoded permanently off, mirroring exactly how `CrosswordLayout`
 	// gates its own (there, real) `showComments` Section, just with a
 	// fixed value instead of a derived one.
+	// NOTE: if comments are ever enabled, they must also stay off for premium
+	// puzzles (`!requiresSubscription`): the unlock modal covers the
+	// page, so a section the reader cannot reach makes no sense.
 	const showComments = false;
 
 	// The "More from Puzzles & Games" rail is a v1-scoped feature (per the
-	// Puzzles & Games rollout plan - see abTests.ts's puzzles-new-hub-v1
-	// JSDoc), not a v0 one - so it must not render just because
+	// Puzzles & Games rollout plan - see `isPuzzlesHubAvailable`), not a v0
+	// one - so it must not render just because
 	// instance.moreFromPuzzlesAndGames happens to be non-empty.
 	// if (instance.moreFromPuzzlesAndGames?.length === 0) {
 	//  instance.moreFromPuzzlesAndGames = [
@@ -380,7 +414,13 @@ export const PuzzlePageLayout = ({
 	//    },
 	//  ];
 	// }
-	const isV1Enabled = isPuzzlesHubV1Enabled(config);
+	const isV1Enabled = isPuzzlesHubAvailable(config);
+
+	// The premium puzzles access control (the unlock modal, the access check
+	// and no ads) only has an effect for readers in `puzzles-new-hub-v3`.
+	// Outside it every puzzle behaves as a free one, whatever `frontend` sends.
+	const requiresSubscription =
+		isPuzzlesHubV3Enabled(config) && instance.requiresSubscription === true;
 
 	const showRelated =
 		!!instance.moreFromPuzzlesAndGames?.length && isV1Enabled;
@@ -391,7 +431,13 @@ export const PuzzlePageLayout = ({
 	// `Front`/`TagPage`/`SportDataPage`) can gate ads here too, instead of
 	// rendering them unconditionally regardless of whether the reader has
 	// actually paid for an ad-free subscription.
-	const renderAds = canRenderAds(puzzlePage);
+	//
+	// Premium puzzles never render ads: a reader with access is a subscriber
+	// (ad-free), and a reader without access only sees the unlock modal, and
+	// ads behind its overlay could be seen badly and not clicked. This is
+	// decided here, from a property of the puzzle, so the cached HTML holds
+	// nothing about the reader and no ad is requested and then hidden.
+	const renderAds = canRenderAds(puzzlePage) && !requiresSubscription;
 
 	// `getContributionsServiceUrl` reads `config.contributionsServiceUrl`,
 	// a field `ConfigType` doesn't carry for Puzzle Page requests. Hardcoded
@@ -399,7 +445,16 @@ export const PuzzlePageLayout = ({
 	const contributionsServiceUrl = '';
 
 	const labelText = puzzleGroupLabels[puzzleConfig.puzzleGroup];
+	const puzzleGroupPath =
+		puzzleConfig.puzzleGroup === 'trivia'
+			? 'trivia-and-quizzes'
+			: puzzleConfig.puzzleGroup;
 	const displayDate = formatPuzzleDate(instance.puzzleDate);
+	const puzzleTrackingContext: PuzzleActionContext = {
+		slug: puzzleConfig.slug,
+		date: instance.puzzleDate,
+		provider: puzzleConfig.iframe.provider,
+	};
 	const puzzleFamilyName =
 		puzzleFamilyNames[puzzleConfig.slug] ?? instance.title;
 	const puzzleHeadlineText =
@@ -416,7 +471,7 @@ export const PuzzlePageLayout = ({
 	 */
 	const puzzleFamilyTag: TagType[] = [
 		{
-			id: `puzzles-and-games/${puzzleConfig.puzzleGroup}/${puzzleConfig.slug}`,
+			id: `puzzles-and-games/${puzzleGroupPath}/${puzzleConfig.slug}/archive`,
 			type: 'Series',
 			title: puzzleFamilyName,
 		},
@@ -477,12 +532,6 @@ export const PuzzlePageLayout = ({
 					discussionApiUrl={config.discussionApiUrl}
 					idApiUrl={config.idApiUrl}
 					contributionsServiceUrl={contributionsServiceUrl}
-					// `puzzlePageFormat.theme` is never `ArticleSpecial.Labs`
-					// (never `ArticleSpecial.Labs`), so `CrosswordLayout`'s
-					// derived `format.theme !== ArticleSpecial.Labs` check
-					// always evaluates `true` here - hardcoded directly
-					// rather than keeping a comparison TypeScript can prove
-					// is always true.
 					showSubNav={true}
 					showSlimNav={false}
 					hasPageSkin={false}
@@ -491,6 +540,7 @@ export const PuzzlePageLayout = ({
 					tagIds={[]}
 					sectionId={config.section}
 					contentType="Game"
+					canonicalUrl={puzzlePage.canonicalUrl}
 				/>
 			</div>
 
@@ -509,7 +559,17 @@ export const PuzzlePageLayout = ({
 				)}
 			</div>
 
-			<main data-layout="PuzzlePageLayout">
+			<main
+				id={PUZZLE_MODAL_ROOT_ID}
+				data-layout="PuzzlePageLayout"
+				css={[
+					puzzleAccentStyles(
+						puzzleConfig.puzzleGroup,
+						darkModeAvailable,
+					),
+					mainStyles,
+				]}
+			>
 				<Section
 					fullWidth={true}
 					showTopBorder={false}
@@ -524,7 +584,7 @@ export const PuzzlePageLayout = ({
 									format={puzzlePageFormat}
 									tags={puzzleFamilyTag}
 									sectionLabel={labelText}
-									sectionUrl={`puzzles-and-games/${puzzleConfig.puzzleGroup}/archive`}
+									sectionUrl={`puzzles-and-games/${puzzleGroupPath}/archive`}
 									guardianBaseURL={GUARDIAN_BASE_URL}
 								/>
 							</GridItem>
@@ -570,7 +630,12 @@ export const PuzzlePageLayout = ({
 												priority="feature"
 												defer={{ until: 'visible' }}
 											>
-												<PrintButton />
+												<PrintButton
+													puzzleTrackingSource="puzzle-page"
+													puzzleTrackingContext={
+														puzzleTrackingContext
+													}
+												/>
 											</Island>
 										</div>
 									)}
@@ -598,6 +663,10 @@ export const PuzzlePageLayout = ({
 										}
 										shortUrlId={config.shortUrlId}
 										hidePreferredSourceOnPrint={true}
+										isPuzzlePage={true}
+										puzzleTrackingContext={
+											puzzleTrackingContext
+										}
 									/>
 								</div>
 							</GridItem>
@@ -620,8 +689,11 @@ export const PuzzlePageLayout = ({
                         so waiting for the island to be seen would delay
                         the puzzle itself. */}
 										<Island priority="critical">
-											<PuzzleIframe
+											<PuzzleAccessGate
 												gameUrl={instance.gameUrl}
+												progressIdentity={
+													instance.progressIdentity
+												}
 												puzzleConfig={puzzleConfig}
 												title={instance.title}
 												darkModeAvailable={
@@ -630,6 +702,16 @@ export const PuzzlePageLayout = ({
 												puzzleDate={
 													instance.puzzleDate ?? null
 												}
+												requiresSubscription={
+													requiresSubscription
+												}
+												ajaxUrl={config.ajaxUrl}
+												puzzleId={
+													instance.progressIdentity
+														?.puzzleId
+												}
+												idUrl={config.idUrl}
+												returnToArchivePath={`/puzzles-and-games/${puzzleGroupPath}/archive`}
 											/>
 										</Island>
 									</ArticleContainer>
@@ -707,6 +789,7 @@ export const PuzzlePageLayout = ({
 								defer={{ until: 'visible' }}
 							>
 								<RelatedPuzzlesRailEnhanced
+									source="puzzle-page"
 									items={
 										instance.moreFromPuzzlesAndGames ?? []
 									}
@@ -725,11 +808,15 @@ export const PuzzlePageLayout = ({
 						backgroundColour={themePalette('--ad-background')}
 						element="aside"
 					>
-						<AdSlot
+						<div
+							css={merchandisingAdStyles}
 							data-print-layout="hide"
-							position="merchandising-high"
-							display={puzzlePageFormat.display}
-						/>
+						>
+							<AdSlot
+								position="merchandising-high"
+								display={puzzlePageFormat.display}
+							/>
+						</div>
 					</Section>
 				)}
 

@@ -8,6 +8,8 @@ import {
 import type { PuzzleItem } from '../types/puzzlesPage';
 import { MorePuzzlesRows } from './MorePuzzlesCard';
 
+export type RelatedPuzzlesSource = 'puzzle-page' | 'crossword-page' | 'archive';
+
 /**
  * The heading column's width matches `PuzzleGrid`'s own `title`/`meta`
  * column exactly (140px from "leftCol", 220px from "wide" - see
@@ -98,12 +100,22 @@ const relatedRailHeadingName = css`
  * The heading itself ("More from" / "Puzzles & games") is plain text in a
  * single colour, not a link.
  */
-export const RelatedPuzzlesRail = ({ items }: { items: PuzzleItem[] }) => (
+export const RelatedPuzzlesRail = ({
+	items,
+	source,
+}: {
+	items: PuzzleItem[];
+	source: RelatedPuzzlesSource;
+}) => (
 	<div css={relatedRailStyles}>
 		<h2 css={relatedRailHeading}>
 			More from{' '}
 			<span css={relatedRailHeadingName}>Puzzles &amp; games</span>
 		</h2>
-		<MorePuzzlesRows items={items} mobileScrollable={true} />
+		<MorePuzzlesRows
+			items={items}
+			mobileScrollable={true}
+			ophanComponentName={`puzzles-more-from:${source}`}
+		/>
 	</div>
 );

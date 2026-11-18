@@ -3,7 +3,10 @@
   --
   the palette object is large and ordering helps knowing where to insert new elements
 */
-import { palette as sourcePalette } from '@guardian/source/foundations';
+import {
+	calculateHoverColour,
+	palette as sourcePalette,
+} from '@guardian/source/foundations';
 import {
 	themeButton,
 	themeButtonBrand,
@@ -226,8 +229,16 @@ const headlineBackgroundLight: PaletteFunction = ({
 	switch (display) {
 		case ArticleDisplay.Immersive:
 			switch (theme) {
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[300];
+				case Pillar.Lifestyle:
+					return '#310028';
+				case Pillar.Culture:
+					return '#251F15';
+				case Pillar.Sport:
+					return '#00243A';
+				case Pillar.Opinion:
+					return '#3E1302';
+				case Pillar.News:
+					return sourcePalette.neutral[10];
 				default:
 					return sourcePalette.neutral[7];
 			}
@@ -236,7 +247,6 @@ const headlineBackgroundLight: PaletteFunction = ({
 		case ArticleDisplay.Standard:
 			switch (design) {
 				case ArticleDesign.Gallery:
-					return sourcePalette.neutral[7];
 				case ArticleDesign.Interview:
 					return sourcePalette.neutral[7];
 				default:
@@ -252,7 +262,7 @@ const headlineBackgroundDark: PaletteFunction = ({
 	display,
 	theme,
 }) => {
-	if (display === ArticleDisplay.Immersive) return sourcePalette.neutral[7];
+	if (display === ArticleDisplay.Immersive) return sourcePalette.neutral[10];
 
 	switch (design) {
 		case ArticleDesign.DeadBlog:
@@ -297,28 +307,6 @@ const headlineBackgroundDark: PaletteFunction = ({
 			return sourcePalette.neutral[10];
 	}
 };
-
-// Merge this with the above functions once the new immersive grid layouts
-// are fully rolled out and the old layout removed
-const headlineBackgroundImmersiveLight: PaletteFunction = ({ theme }) => {
-	switch (theme) {
-		case Pillar.Lifestyle:
-			return '#310028';
-		case Pillar.Culture:
-			return '#251F15';
-		case Pillar.Sport:
-			return '#00243A';
-		case Pillar.Opinion:
-			return '#3E1302';
-		case Pillar.News:
-			return sourcePalette.neutral[10];
-		default:
-			return sourcePalette.neutral[7];
-	}
-};
-
-const headlineBackgroundImmersiveDark: PaletteFunction = () =>
-	sourcePalette.neutral[10];
 
 const headlineBlogBackgroundLight: PaletteFunction = ({
 	design,
@@ -3411,7 +3399,12 @@ const articleBackgroundLight: PaletteFunction = ({
 		}
 		case ArticleDesign.Interactive:
 		case ArticleDesign.FullPageInteractive:
-			return 'transparent';
+			switch (display) {
+				case ArticleDisplay.Showcase:
+					return sourcePalette.neutral[100];
+				default:
+					return 'transparent';
+			}
 		case ArticleDesign.Gallery:
 			return '#0d0d0d';
 		case ArticleDesign.HostedGallery:
@@ -3437,8 +3430,6 @@ const articleBackgroundLight: PaletteFunction = ({
 
 const articleBackgroundDark: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
-		case ArticleDesign.WeekendEssay:
-			return sourcePalette.news[800];
 		case ArticleDesign.DeadBlog:
 			return sourcePalette.neutral[7];
 		case ArticleDesign.LiveBlog:
@@ -4380,6 +4371,7 @@ const subMetaBackgroundLight: PaletteFunction = ({
 					return sourcePalette.neutral[97];
 			}
 		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
 			return sourcePalette.opinion[800];
 		case ArticleDesign.Comment:
 			switch (theme) {
@@ -4388,8 +4380,6 @@ const subMetaBackgroundLight: PaletteFunction = ({
 				default:
 					return sourcePalette.opinion[800];
 			}
-		case ArticleDesign.Editorial:
-			return sourcePalette.opinion[800];
 		case ArticleDesign.Analysis:
 			switch (theme) {
 				case ArticleSpecial.SpecialReportAlt:
@@ -4397,6 +4387,8 @@ const subMetaBackgroundLight: PaletteFunction = ({
 				default:
 					return sourcePalette.news[800];
 			}
+		case ArticleDesign.WeekendEssay:
+			return sourcePalette.news[800];
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
@@ -4591,12 +4583,12 @@ const syndicationButtonTextDark: PaletteFunction = ({ design, theme }) => {
 			switch (design) {
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
-					return sourcePalette.neutral[46];
+					return sourcePalette.neutral[86];
 				default:
 					return sourcePalette.specialReportAlt[100];
 			}
 		default:
-			return sourcePalette.neutral[46];
+			return sourcePalette.neutral[86];
 	}
 };
 
@@ -4908,15 +4900,6 @@ const linkKickerTextDark: PaletteFunction = ({ theme }) => {
 	}
 };
 
-const ageWarningWrapperBackground: PaletteFunction = (format) => {
-	switch (format.design) {
-		case ArticleDesign.Interview:
-		case ArticleDesign.Gallery:
-			return 'transparent';
-		default:
-			return headlineBackgroundLight(format);
-	}
-};
 const ageWarningBackgroundLight: PaletteFunction = () =>
 	sourcePalette.brandAlt[400];
 const ageWarningBackgroundDark: PaletteFunction = () =>
@@ -5951,10 +5934,17 @@ const productButtonPrimaryBackgroundLight: PaletteFunction = () =>
 	sourcePalette.lifestyle[300];
 const productButtonPrimaryBackgroundDark: PaletteFunction = () =>
 	sourcePalette.lifestyle[500];
+
 const productButtonPrimaryBackgroundHoverLight: PaletteFunction = () =>
-	'#660055';
+	calculateHoverColour(sourcePalette.lifestyle[300]);
 const productButtonPrimaryBackgroundHoverDark: PaletteFunction = () =>
-	'#FF8ACC';
+	calculateHoverColour(sourcePalette.lifestyle[500]);
+
+const productButtonTertiaryBackgroundHoverLight: PaletteFunction = () =>
+	calculateHoverColour('transparent', sourcePalette.lifestyle[300]);
+const productButtonTertiaryBackgroundHoverDark: PaletteFunction = () =>
+	calculateHoverColour('transparent', sourcePalette.lifestyle[500]);
+
 const productButtonPrimaryTextDark: PaletteFunction = () =>
 	sourcePalette.neutral[7];
 const productButtonPrimaryTextLight: PaletteFunction = () =>
@@ -6892,10 +6882,6 @@ const paletteColours = {
 		light: ageWarningText,
 		dark: ageWarningText,
 	},
-	'--age-warning-wrapper-background': {
-		light: ageWarningWrapperBackground,
-		dark: ageWarningWrapperBackground,
-	},
 	'--apps-directory-page-nav-background': {
 		light: () => sourcePalette.neutral[97],
 		dark: () => sourcePalette.neutral[10],
@@ -7793,10 +7779,6 @@ const paletteColours = {
 		light: headlineBackgroundLight,
 		dark: headlineBackgroundDark,
 	},
-	'--headline-background-immersive': {
-		light: headlineBackgroundImmersiveLight,
-		dark: headlineBackgroundImmersiveDark,
-	},
 	'--headline-blog-background': {
 		light: headlineBlogBackgroundLight,
 		dark: headlineBlogBackgroundDark,
@@ -8300,6 +8282,10 @@ const paletteColours = {
 	'--product-button-primary-text': {
 		light: productButtonPrimaryTextLight,
 		dark: productButtonPrimaryTextDark,
+	},
+	'--product-button-tertiary-background-hover': {
+		light: productButtonTertiaryBackgroundHoverLight,
+		dark: productButtonTertiaryBackgroundHoverDark,
 	},
 	'--product-card-background': {
 		light: productCardBackgroundLight,

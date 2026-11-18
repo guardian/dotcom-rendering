@@ -16,7 +16,7 @@ describe('InteractiveLayoutAtom', () => {
 					design: 0,
 					theme: 0,
 				}}
-				articleArrangement="interactive"
+				articleArrangement="interactiveStandard"
 			/>,
 		);
 

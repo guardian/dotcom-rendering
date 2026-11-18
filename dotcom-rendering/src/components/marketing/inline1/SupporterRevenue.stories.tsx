@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import lzstring from 'lz-string';
-import SupporterRevenue from './SupporterRevenue';
+import { SupporterRevenue } from './SupporterRevenue';
 import { props } from './utils/storybook';
 
 const style = css`
@@ -9,16 +9,12 @@ const style = css`
 	margin: 3em auto;
 `;
 
-const { variant } = props;
-
 type WithJsonProps<T> = T & { json?: string };
 type Props = WithJsonProps<React.ComponentProps<typeof SupporterRevenue>>;
 const meta: Meta<Props> = {
 	component: SupporterRevenue,
-	title: 'Components/marketing/SupporterRevenue',
-	args: {
-		variant,
-	},
+	title: 'Components/marketing/inline1/SupporterRevenue',
+	args: props,
 	render: ({ json, ...args }) => {
 		const jsonProps = json
 			? JSON.parse(lzstring.decompressFromEncodedURIComponent(json))

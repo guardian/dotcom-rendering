@@ -37,6 +37,8 @@ interface Props {
 	showSlimNav?: boolean;
 	hasPageSkin?: boolean;
 	pageId?: string;
+	canonicalUrl?: string;
+	showReaderRevenueLinks?: boolean;
 }
 
 const gridContent = css`
@@ -225,6 +227,12 @@ const slimNavBurgerOverrides = css`
 	}
 `;
 
+const slimNavPageSkinBurgerOverrides = css`
+	${from.leftCol} {
+		right: 356px;
+	}
+`;
+
 const expandedNavStyles = css`
 	${gridContent}
 	grid-row: 2;
@@ -333,6 +341,8 @@ export const Titlepiece = ({
 	showSlimNav,
 	hasPageSkin,
 	pageId = '',
+	canonicalUrl,
+	showReaderRevenueLinks = true,
 }: Props) => {
 	const { showBanner } = useEditionSwitcherBanner(pageId, editionId);
 
@@ -574,6 +584,9 @@ export const Titlepiece = ({
 					burgerStyles,
 					!hasPageSkin && burgerStylesFromLeftCol,
 					showSlimNav && slimNavBurgerOverrides,
+					showSlimNav &&
+						hasPageSkin &&
+						slimNavPageSkinBurgerOverrides,
 				]}
 			>
 				<VeggieBurger />
@@ -585,6 +598,7 @@ export const Titlepiece = ({
 					nav={nav}
 					editionId={editionId}
 					hasPageSkin={hasPageSkin}
+					showReaderRevenueLinks={showReaderRevenueLinks}
 				/>
 			</div>
 
@@ -617,9 +631,10 @@ export const Titlepiece = ({
 				>
 					<CustomSubNav
 						customSubNav={customSubnav.data}
-						currentNavLink={nav.currentNavLink}
 						renderingPage={customSubnav.renderingPage}
 						hasPageSkin={hasPageSkin}
+						pageId={pageId}
+						canonicalUrl={canonicalUrl}
 					/>
 				</div>
 			)}

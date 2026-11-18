@@ -242,6 +242,75 @@ describe('resolvePuzzleIframeUrl', () => {
 	});
 });
 
+describe('MovieGrid game URLs', () => {
+	it.each(['film-reveal', 'on-the-ball'])(
+		'preserves API provider identity for signed-out %s',
+		(slug) => {
+			const url = new URL(
+				resolvePuzzleIframeUrl(
+					puzzleConfigs[slug]!,
+					{ userId: null, darkMode: false },
+					`https://example.com/${slug}?id=opaque&uid=previous-reader`,
+				),
+			);
+			expect(url.searchParams.get('uid')).toBe('previous-reader');
+			expect(url.searchParams.get('id')).toBe('opaque');
+		},
+	);
+
+	it.each(['film-reveal', 'on-the-ball'])(
+		'does not replace API provider identity with the internal account for %s',
+		(slug) => {
+			const url = new URL(
+				resolvePuzzleIframeUrl(
+					puzzleConfigs[slug]!,
+					{ userId: 'current-reader', darkMode: false },
+					`https://example.com/${slug}?id=opaque&uid=previous-reader`,
+				),
+			);
+			expect(url.searchParams.get('uid')).toBe('previous-reader');
+			expect(url.searchParams.getAll('uid')).toHaveLength(1);
+			expect(url.searchParams.get('id')).toBe('opaque');
+		},
+	);
+
+	it.each(['film-reveal', 'on-the-ball'])(
+		'requires an API URL for %s rather than guessing a vendor URL',
+		(slug) => {
+			expect(() =>
+				resolvePuzzleIframeUrl(puzzleConfigs[slug]!, {
+					userId: null,
+					darkMode: false,
+				}),
+			).toThrow('MovieGrid requires an API-provided gameUrl.');
+		},
+	);
+
+	it.each([
+		['film-reveal', false],
+		['film-reveal', true],
+		['on-the-ball', false],
+		['on-the-ball', true],
+	] as const)(
+		'preserves the API URL for %s with darkMode %s',
+		(slug, darkMode) => {
+			const url = new URL(
+				resolvePuzzleIframeUrl(
+					puzzleConfigs[slug]!,
+					{ userId: 'reader', darkMode, puzzleDate: '2026-10-28' },
+					`https://example.com/${slug}/opaque-id?token=keep&darkMode=old`,
+				),
+			);
+			expect(url.pathname).toBe(`/${slug}/opaque-id`);
+			expect(Object.fromEntries(url.searchParams)).toEqual({
+				token: 'keep',
+				darkMode: darkMode ? '1' : '0',
+				platform: 'web',
+			});
+		},
+	);
+});
+
 describe('API game URLs', () => {
 	it('preserves the API path, opaque puzzle id and provider parameters', () => {
 		const url = new URL(
@@ -252,7 +321,7 @@ describe('API game URLs', () => {
 					darkMode: true,
 					puzzleDate: '2026-09-26',
 				},
-				'https://tg.amuselabs.com/guardian/date-picker?set=api-series&id=opaque-id&embed=1&token=keep',
+				'https://tg.amuselabs.com/guardian/date-picker?set=api-series&id=opaque-id&embed=1&token=keep&uid=api-user',
 			),
 		);
 		expect(url.pathname).toBe('/guardian/date-picker');
@@ -261,21 +330,32 @@ describe('API game URLs', () => {
 			id: 'opaque-id',
 			embed: '1',
 			token: 'keep',
-			uid: 'reader',
+			uid: 'api-user',
 			darkMode: '1',
 		});
 	});
 
-	it('removes stale identity when signed out', () => {
+	it('preserves the API identity when signed out', () => {
 		const url = new URL(
 			resolvePuzzleIframeUrl(
 				puzzleConfigs['word-wheel']!,
 				{ userId: null, darkMode: false },
-				'https://tg.amuselabs.com/guardian/date-picker?id=opaque&uid=stale',
+				'https://tg.amuselabs.com/guardian/date-picker?id=opaque&uid=api-user',
+			),
+		);
+		expect(url.searchParams.get('uid')).toBe('api-user');
+		expect(url.searchParams.get('id')).toBe('opaque');
+	});
+
+	it('does not add a session identity when the API URL has no uid', () => {
+		const url = new URL(
+			resolvePuzzleIframeUrl(
+				puzzleConfigs['sudoku-easy']!,
+				{ userId: 'reader', darkMode: false },
+				'https://tg.amuselabs.com/guardian/date-picker?id=opaque',
 			),
 		);
 		expect(url.searchParams.has('uid')).toBe(false);
-		expect(url.searchParams.get('id')).toBe('opaque');
 	});
 
 	it('leaves Wordiply provider parameters unchanged', () => {
