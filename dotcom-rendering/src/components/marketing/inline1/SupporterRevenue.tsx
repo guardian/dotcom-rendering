@@ -105,12 +105,12 @@ const imageStyles = css`
 	img {
 		object-fit: cover;
 		height: 126px;
-		width: 157px;
+		width: 158px;
 	}
 
 	${until.tablet} {
 		img {
-			width: 210px;
+			min-width: 210px;
 		}
 	}
 `;
