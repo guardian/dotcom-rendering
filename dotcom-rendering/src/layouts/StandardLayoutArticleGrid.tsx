@@ -213,11 +213,7 @@ export const StandardLayoutArticleGrid = ({
 	const immersiveHeaderHeight =
 		minHeaderHeightPx + (isLabs ? LABS_HEADER_HEIGHT : 0);
 
-	const topHatTestingPage = '/p/x4zt8y';
-	const layoutType =
-		article.config.shortUrlId === topHatTestingPage
-			? 'interactiveTopHat'
-			: getLayoutType(format, mainMediaOrientation);
+	const layoutType = getLayoutType(format, mainMediaOrientation);
 
 	const setCentreRule = (gridLayout: LayoutType) => {
 		if (
@@ -299,7 +295,11 @@ export const StandardLayoutArticleGrid = ({
 
 	const topHatFurnitureBackgroundStyles = css`
 		z-index: ${getZIndex('mediaOverlay')};
-		background: rgba(255, 255, 255, 0.9);
+		background-color: color-mix(
+			in srgb,
+			${themePalette('--article-background')} 90%,
+			transparent
+		);
 		padding: 0 10px;
 	`;
 
@@ -465,6 +465,10 @@ export const StandardLayoutArticleGrid = ({
 								margin-top: ${space[2]}px;
 							`
 						: undefined,
+					isInteractiveTopHat &&
+						css`
+							z-index: ${getZIndex('mediaOverlay')};
+						`,
 				]}
 			>
 				<div>
@@ -686,7 +690,7 @@ export const StandardLayoutArticleGrid = ({
 					isInteractiveTopHat &&
 						css`
 							${topHatFurnitureBackgroundStyles}
-							padding-top: 10px;
+							padding-top: ${space[1]}px;
 						`,
 				]}
 			>
@@ -851,7 +855,7 @@ export const StandardLayoutArticleGrid = ({
 					layoutType === 'interactiveTopHat' &&
 						css`
 							${topHatFurnitureBackgroundStyles}
-							padding-bottom: 10px;
+							padding-bottom: ${space[4]}px;
 						`,
 				]}
 			>

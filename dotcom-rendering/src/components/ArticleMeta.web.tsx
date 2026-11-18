@@ -343,11 +343,14 @@ export const ArticleMeta = ({
 	puzzleTrackingContext,
 }: Props) => {
 	const { renderingTarget } = useConfig();
-	const showPreferredSource = hasPreferredSourceButton(
-		renderingTarget,
-		format,
-		isPuzzlePage,
-	);
+
+	const isBrandedTopHat =
+		layoutType === 'interactiveTopHat' && branding != null;
+
+	const showPreferredSource =
+		hasPreferredSourceButton(renderingTarget, format, isPuzzlePage) &&
+		!isBrandedTopHat;
+
 	const isImmersiveGrid = layoutType?.startsWith('immersive') ?? false;
 	const stackImmersiveMetaAtLeftCol = layoutType === 'immersiveLandscape';
 	const soleContributor = getSoleContributor(tags, byline);
@@ -398,7 +401,7 @@ export const ArticleMeta = ({
 			css={metaContainer(format, layoutType)}
 		>
 			<div css={meta(format)}>
-				{branding && (
+				{branding && layoutType !== 'interactiveTopHat' && (
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<Branding branding={branding} format={format} />
 					</Island>
@@ -562,7 +565,7 @@ export const ArticleMeta = ({
 					css={metaFlex}
 					style={preferredSourceMetaFlex(showPreferredSource)}
 				>
-					{renderingTarget === 'Web' && (
+					{renderingTarget === 'Web' && !isBrandedTopHat && (
 						<div
 							className={
 								isInteractive
@@ -682,6 +685,11 @@ export const ArticleMeta = ({
 							</div>
 						</Hide>
 					)}
+				{layoutType === 'interactiveTopHat' && branding && (
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<Branding branding={branding} format={format} />
+					</Island>
+				)}
 			</div>
 		</div>
 	);

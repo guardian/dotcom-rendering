@@ -52,7 +52,13 @@ const immersiveWrapper = css`
 	overflow: hidden;
 `;
 
-const chooseWrapper = (format: ArticleFormat) => {
+const chooseWrapper = (
+	format: ArticleFormat,
+	articleArrangement?: LayoutType,
+) => {
+	if (articleArrangement === 'interactiveTopHat') {
+		return '';
+	}
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
 			return immersiveWrapper;
@@ -149,7 +155,7 @@ export const MainMedia = ({
 		<div
 			css={[
 				mainMedia,
-				chooseWrapper(format),
+				chooseWrapper(format, articleArrangement),
 				articleArrangement === 'immersivePortrait' &&
 					format.design === ArticleDesign.WeekendEssay &&
 					weekendReadFrame,
