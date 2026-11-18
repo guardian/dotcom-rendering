@@ -101,6 +101,10 @@ export const ArticleTitle = ({
 						immersiveGridMargins,
 					hasImmersivePortraitTitleRule &&
 						immersivePortraitSeriesRule,
+					layoutType === 'interactiveTopHat' &&
+						css`
+							width: 100%;
+						`,
 				]}
 			>
 				<SeriesSectionLink
