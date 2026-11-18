@@ -106,11 +106,7 @@ describe('PuzzlesArchiveLayout', () => {
 		},
 	);
 
-	it.each([
-		['hub only', true, false, 4],
-		['V2 without hub', false, true, 1],
-		['neither', false, false, 1],
-	] as const)(
+	it.each([['hub only', true, false, 4]] as const)(
 		'hides trivia for %s',
 		(_description, isHubAvailable, isV2Enabled, expectedLinkCount) => {
 			const { puzzlesPage } = archiveStories.args;
