@@ -78,7 +78,7 @@ const PrivacySettings = ({
 					onClick={privacySettingsClickHandler}
 					cssOverrides={linkStyles}
 				>
-					US resident - Do Not Sell or Share
+					US resident - Do not sell or share
 				</ButtonLink>
 				&nbsp;&#183;&nbsp;
 			</>

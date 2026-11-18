@@ -2,14 +2,12 @@ import type {
 	Inline1Props,
 	Tracking,
 } from '@guardian/support-dotcom-components/dist/shared/types';
-import { useEffect } from 'react';
 import { useIsSignedIn } from '../../../lib/useAuthStatus';
-import { useIsInView } from '../../../lib/useIsInView';
 import { useNewsletterSubscription } from '../../../lib/useNewsletterSubscription';
 import { NewsletterSignupCardContainer } from '../../NewsletterSignupCardContainer';
 import { NewsletterSignupForm } from '../../NewsletterSignupForm.island';
 import type { ReactComponent } from '../lib/ReactComponent';
-import { recordInline1View } from './utils/viewCount';
+import { useInline1Tracking } from './utils/useInline1Tracking';
 
 type NewsletterMessage = Extract<
 	Inline1Props['variant']['message'],
@@ -30,6 +28,7 @@ const isValidNewsletterMessage = (message: NewsletterMessage) =>
 	message.frequency !== undefined;
 
 export const Newsletter: ReactComponent<Inline1Props> = ({
+	submitComponentEvent,
 	variant,
 	tracking,
 }) => {
@@ -41,6 +40,7 @@ export const Newsletter: ReactComponent<Inline1Props> = ({
 			<NewsletterForm
 				message={variant.message as ValidNewsletterMessage}
 				tracking={tracking}
+				submitComponentEvent={submitComponentEvent}
 			/>
 		);
 	}
@@ -50,8 +50,9 @@ export const Newsletter: ReactComponent<Inline1Props> = ({
 
 const NewsletterForm: ReactComponent<{
 	message: ValidNewsletterMessage;
+	submitComponentEvent: Inline1Props['submitComponentEvent'];
 	tracking: Tracking;
-}> = ({ message, tracking }) => {
+}> = ({ message, submitComponentEvent, tracking }) => {
 	const newsletterName = message.newsletterName;
 	const heading = message.heading;
 	const description = message.body;
@@ -65,15 +66,10 @@ const NewsletterForm: ReactComponent<{
 		window.guardian.config.page.idApiUrl,
 	);
 
-	const [hasBeenSeen, setNode] = useIsInView({
-		debounce: true,
-		threshold: 0,
+	const { setNode, sendEvent } = useInline1Tracking({
+		tracking,
+		submitComponentEvent,
 	});
-	useEffect(() => {
-		if (hasBeenSeen === true) {
-			recordInline1View(tracking.abTestName);
-		}
-	}, [hasBeenSeen, tracking.abTestName]);
 
 	return (
 		<div ref={setNode}>
@@ -91,6 +87,7 @@ const NewsletterForm: ReactComponent<{
 					frequency={frequency}
 					componentId={componentId}
 					isAlreadySubscribed={isSubscribed}
+					onSubmitButtonClick={() => sendEvent('CLICK', 'cta')}
 				/>
 			</NewsletterSignupCardContainer>
 		</div>
