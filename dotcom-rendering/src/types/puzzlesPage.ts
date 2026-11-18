@@ -100,6 +100,9 @@ export type PuzzlesArchiveItem = {
 	progress: number;
 	/** The Puzzles API's state for the reader; absent when it reports none. */
 	gameStatus?: GameStatus;
+	/** Optional while Frontend and Puzzle API deploy independently. */
+	isWithinFreeWindow?: boolean;
+	hasPremiumEntitlement?: boolean;
 	setterName?: string;
 	url: string;
 };

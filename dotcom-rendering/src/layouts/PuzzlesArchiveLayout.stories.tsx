@@ -38,6 +38,8 @@ const archive: PuzzlesArchive = {
 		return {
 			puzzleType: mini.puzzleType,
 			date: `2026-08-${day}`,
+			isWithinFreeWindow: index + 1 >= 20,
+			hasPremiumEntitlement: false,
 			progress: [15, 21, 24, 25].includes(index + 1)
 				? 100
 				: index + 1 === 11
@@ -157,6 +159,22 @@ export const AdFree = {
 	parameters: lightParameters,
 } satisfies Story;
 
+export const PremiumSubscriber = {
+	args: {
+		puzzlesPage: createPuzzlesPage({
+			archive: {
+				...archive,
+				items: archive.items.map((item) => ({
+					...item,
+					hasPremiumEntitlement: true,
+				})),
+			},
+			config,
+		}),
+	},
+	parameters: lightParameters,
+} satisfies Story;
+
 const archiveItems = (
 	puzzle: { puzzleType: string; slug?: string },
 	setterName?: string,
@@ -166,6 +184,8 @@ const archiveItems = (
 		return {
 			puzzleType: puzzle.puzzleType,
 			date: `2026-08-${day}`,
+			isWithinFreeWindow: index + 1 >= 20,
+			hasPremiumEntitlement: false,
 			progress: [15, 21, 24, 25].includes(index + 1) ? 100 : 0,
 			...(setterName && { setterName }),
 			url: `/puzzles-and-games/${puzzle.slug}/2026-08-${day}`,

@@ -406,6 +406,176 @@ describe('PuzzlesArchiveCalendar', () => {
 	});
 
 	it.each([
+		[false, false, true],
+		[true, false, false],
+		[false, true, false],
+		[true, true, false],
+		[undefined, undefined, false],
+	])(
+		'for free window=%s and premium=%s shows a star=%s',
+		(isWithinFreeWindow, hasPremiumEntitlement, showStar) => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={{
+						...archive,
+						items: [
+							{
+								...archive.items[0]!,
+								isWithinFreeWindow,
+								hasPremiumEntitlement,
+							},
+						],
+					}}
+				/>,
+			);
+
+			const day = within(
+				screen.getByTestId('archive-calendar'),
+			).getByRole('link');
+			expect(day).toHaveAccessibleName(
+				`2026-09-02, ${showStar ? 'Supporter exclusive' : 'available'}`,
+			);
+			expect(day).toHaveAttribute('href', archive.items[0]!.url);
+			expect(
+				day.querySelector('.supporter-exclusive-icon') !== null,
+			).toBe(showStar);
+			if (showStar) {
+				expect(day).toHaveAttribute('data-supporter-exclusive', 'true');
+				expect(day.querySelector('svg')).toHaveAttribute('width', '12');
+				expect(day.querySelector('svg')).toHaveAttribute(
+					'height',
+					'12',
+				);
+			} else {
+				expect(day).not.toHaveAttribute('data-supporter-exclusive');
+			}
+			expect(
+				screen
+					.getByText('Supporter exclusive', {
+						selector: 'span.supporter-exclusive',
+					})
+					.querySelector('svg'),
+			).toHaveAttribute('aria-hidden', 'true');
+		},
+	);
+
+	it('preserves the played indicator on a supporter-exclusive puzzle', () => {
+		render(
+			<PuzzlesArchiveCalendar
+				initialArchive={{
+					...archive,
+					items: [
+						{
+							...archive.items[0]!,
+							gameStatus: 'completed',
+							isWithinFreeWindow: false,
+							hasPremiumEntitlement: false,
+						},
+					],
+				}}
+			/>,
+		);
+
+		const day = screen.getByRole('link', {
+			name: '2026-09-02, Supporter exclusive, completed',
+		});
+		expect(day.querySelector('.completed-icon')).toBeInTheDocument();
+		expect(
+			day.querySelector('.supporter-exclusive-icon'),
+		).toBeInTheDocument();
+	});
+
+	it.each([true, false])(
+		'refreshes access indicators using the signed-in user’s entitlement=%s',
+		async (premium) => {
+			mockedGetAuthStatus.mockResolvedValue({
+				kind: 'SignedIn',
+				accessToken: { accessToken: 'access-token' },
+				idToken: {},
+			} as never);
+			const initialArchive = {
+				...archive,
+				items: [
+					{
+						...archive.items[0]!,
+						isWithinFreeWindow: false,
+						hasPremiumEntitlement: false,
+					},
+				],
+			};
+			const fetchMock = jest.fn().mockResolvedValue({
+				ok: true,
+				json: async () => ({
+					...initialArchive,
+					items: [
+						{
+							...initialArchive.items[0],
+							hasPremiumEntitlement: premium,
+						},
+					],
+				}),
+			});
+			Object.defineProperty(global, 'fetch', {
+				configurable: true,
+				value: fetchMock,
+			});
+			render(<PuzzlesArchiveCalendar initialArchive={initialArchive} />);
+
+			await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(1));
+			await waitFor(() =>
+				expect(screen.getByTestId('archive-calendar')).toHaveAttribute(
+					'aria-busy',
+					'false',
+				),
+			);
+			expect(fetchMock).toHaveBeenCalledWith(
+				expect.any(URL),
+				expect.objectContaining({
+					headers: {
+						Accept: 'application/json',
+						Authorization: 'Bearer access-token',
+					},
+				}),
+			);
+			const day = within(
+				screen.getByTestId('archive-calendar'),
+			).getByRole('link');
+			expect(
+				day.querySelector('.supporter-exclusive-icon') !== null,
+			).toBe(!premium);
+		},
+	);
+
+	it.each(['isWithinFreeWindow', 'hasPremiumEntitlement'])(
+		'rejects a non-boolean %s in a fetched archive',
+		async (field) => {
+			mockedGetAuthStatus.mockResolvedValue({
+				kind: 'SignedIn',
+				accessToken: { accessToken: 'access-token' },
+				idToken: {},
+			} as never);
+			Object.defineProperty(global, 'fetch', {
+				configurable: true,
+				value: jest.fn().mockResolvedValue({
+					ok: true,
+					json: async () => ({
+						...archive,
+						items: [{ ...archive.items[0]!, [field]: 'false' }],
+					}),
+				}),
+			});
+			render(<PuzzlesArchiveCalendar initialArchive={archive} />);
+
+			expect(await screen.findByRole('alert')).toHaveTextContent(
+				'The archive could not be loaded.',
+			);
+			expect(
+				screen.getByRole('link', { name: '2026-09-02, available' }),
+			).toBeInTheDocument();
+		},
+	);
+
+	it.each([
 		'',
 		'https://api.nextgen.guardianapps.co.uk',
 		'//api.nextgen.guardianapps.co.uk',
