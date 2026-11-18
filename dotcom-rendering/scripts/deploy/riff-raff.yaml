@@ -87,13 +87,5 @@ deployments:
       cloudFormationStackByTags: false
       cloudFormationStackName: interactive-rendering
       amiParameter: AMIInteractiverendering
-  # interactive-rendering autoscaling
-  interactive-rendering:
-    type: autoscaling
-    parameters:
-      bucketSsmKey: /account/services/dotcom-artifact.bucket
-      # Default is 900 (15 mins), this is 25 mins
-      secondsToWait: 1500
     dependencies:
       - frontend-static
-      - interactive-rendering-cfn
