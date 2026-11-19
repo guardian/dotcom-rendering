@@ -22,13 +22,13 @@ describe('isPuzzlesHubV2Enabled', () => {
 		).toBe(true);
 	});
 
-	it('is false when v2 is in variant but the hub is not available', () => {
+	it('is true in the UK edition when v2 is in variant', () => {
 		expect(
 			isPuzzlesHubV2Enabled({
 				edition: 'UK',
 				serverSideABTests: { ...v2On },
 			}),
-		).toBe(false);
+		).toBe(true);
 	});
 
 	it('is false when the hub is available but v2 is in control', () => {
@@ -78,13 +78,13 @@ describe('isPuzzlesHubV3Enabled', () => {
 		).toBe(false);
 	});
 
-	it('is false when v2 and v3 are in variant but the hub is not available', () => {
+	it('is true in the UK edition when v2 and v3 are in variant', () => {
 		expect(
 			isPuzzlesHubV3Enabled({
 				edition: 'UK',
 				serverSideABTests: { ...v2On, ...v3On },
 			}),
-		).toBe(false);
+		).toBe(true);
 	});
 
 	it('is false when the hub and v2 are on but v3 is off or has no participation', () => {

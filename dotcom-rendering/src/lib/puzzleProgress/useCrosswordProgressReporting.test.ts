@@ -104,23 +104,6 @@ describe('useCrosswordProgressReporting', () => {
 		);
 	});
 
-	it.each(['UK'] as const)(
-		'reports nothing for a reader outside the hub editions (%p)',
-		(edition) => {
-			setEdition(edition);
-			const { result, unmount } = renderHook(() =>
-				useCrosswordProgressReporting(data),
-			);
-
-			result.current(change(10));
-			result.current(change(100, true));
-			unmount();
-			jest.advanceTimersByTime(IN_PROGRESS_DEBOUNCE_MS);
-
-			expect(mockedReport).not.toHaveBeenCalled();
-		},
-	);
-
 	it('reports nothing for a crossword type the API does not know', () => {
 		const { result } = renderHook(() =>
 			useCrosswordProgressReporting({ ...data, crosswordType: 'speedy' }),

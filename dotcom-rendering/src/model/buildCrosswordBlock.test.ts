@@ -56,17 +56,6 @@ describe('buildCrosswordBlock', () => {
 		expect(element).not.toHaveProperty('requiresSubscription');
 	});
 
-	it('leaves the element as it was when the edition does not have the hub', () => {
-		const element = elementOf(
-			articleWith({
-				requiresSubscription: true,
-				tests: allTestsOn,
-				edition: 'UK',
-			}),
-		);
-		expect(element).not.toHaveProperty('requiresSubscription');
-	});
-
 	it('leaves the element as it was when the flag is not sent', () => {
 		expect(
 			elementOf(articleWith({ tests: allTestsOn })),

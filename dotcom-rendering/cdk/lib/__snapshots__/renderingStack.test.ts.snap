@@ -6984,24 +6984,16 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
       "GuSubnetListParameter",
       "GuSubnetListParameter",
       "GuLoadBalancedAppExperimental",
-      "GuInstanceRole",
-      "GuSsmSshPolicy",
-      "GuDescribeEC2Policy",
-      "GuLoggingStreamNameParameter",
-      "GuLogShippingPolicy",
-      "GuGetDistributablePolicy",
-      "GuParameterStoreReadPolicy",
-      "GuAmiParameter",
-      "GuHttpsEgressSecurityGroup",
-      "GuAutoScalingGroup",
-      "GuApplicationTargetGroup",
       "GuRepository",
       "GuArtifactsAccountId",
       "GuRepository",
+      "GuLoggingStreamNameParameter",
       "GuHttpsEgressSecurityGroup",
       "GuECSManagedInstanceRoleExperimental",
       "GuECSInstanceRolePolicyForManagedInstancesExperimental",
       "GuRiffRaffDeploymentIdParameterExperimental",
+      "GuLogShippingPolicy",
+      "GuParameterStoreReadPolicy",
       "GuApplicationTargetGroup",
       "GuCertificate",
       "GuApplicationLoadBalancer",
@@ -7024,10 +7016,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
     },
   },
   "Parameters": {
-    "AMIInteractiverendering": {
-      "Description": "Amazon Machine Image ID for the app interactive-rendering. Use this in conjunction with AMIgo to keep AMIs up to date.",
-      "Type": "AWS::EC2::Image::Id",
-    },
     "AccessLoggingBucket": {
       "Default": "/account/services/access-logging/bucket",
       "Description": "S3 bucket to store your access logs",
@@ -7087,9 +7075,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
         "PolicyName": "AllowPolicyCloudwatchLogsA783E5B4",
         "Roles": [
           {
-            "Ref": "InstanceRoleInteractiverenderingA0F05C94",
-          },
-          {
             "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
           },
         ],
@@ -7124,9 +7109,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
         },
         "PolicyName": "AllowPolicyDescribeDecryptKmsE91286F3",
         "Roles": [
-          {
-            "Ref": "InstanceRoleInteractiverenderingA0F05C94",
-          },
           {
             "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
           },
@@ -7177,86 +7159,11 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
         "PolicyName": "AllowPolicyGetSsmParamsByPathB54B2DE8",
         "Roles": [
           {
-            "Ref": "InstanceRoleInteractiverenderingA0F05C94",
-          },
-          {
             "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
-    },
-    "AutoScalingGroupInteractiverenderingASGCDA22918": {
-      "Properties": {
-        "HealthCheckGracePeriod": 120,
-        "HealthCheckType": "ELB",
-        "LaunchTemplate": {
-          "LaunchTemplateId": {
-            "Ref": "frontendCODEinteractiverenderingD1F3B137",
-          },
-          "Version": {
-            "Fn::GetAtt": [
-              "frontendCODEinteractiverenderingD1F3B137",
-              "LatestVersionNumber",
-            ],
-          },
-        },
-        "MaxSize": "3",
-        "MetricsCollection": [
-          {
-            "Granularity": "1Minute",
-          },
-        ],
-        "MinSize": "1",
-        "Tags": [
-          {
-            "Key": "App",
-            "PropagateAtLaunch": true,
-            "Value": "interactive-rendering",
-          },
-          {
-            "Key": "gu:cdk:version",
-            "PropagateAtLaunch": true,
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "PropagateAtLaunch": true,
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "LogKinesisStreamName",
-            "PropagateAtLaunch": true,
-            "Value": {
-              "Ref": "LoggingStreamName",
-            },
-          },
-          {
-            "Key": "Stack",
-            "PropagateAtLaunch": true,
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "PropagateAtLaunch": true,
-            "Value": "CODE",
-          },
-          {
-            "Key": "SystemdUnit",
-            "PropagateAtLaunch": true,
-            "Value": "interactive-rendering.service",
-          },
-        ],
-        "TargetGroupARNs": [
-          {
-            "Ref": "TargetGroupInteractiverenderingB3F5F6D3",
-          },
-        ],
-        "VPCZoneIdentifier": {
-          "Ref": "interactiverenderingPrivateSubnets",
-        },
-      },
-      "Type": "AWS::AutoScaling::AutoScalingGroup",
     },
     "CertificateInteractiverendering5C218F28": {
       "DeletionPolicy": "Retain",
@@ -7292,32 +7199,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
       },
       "Type": "AWS::CertificateManager::Certificate",
       "UpdateReplacePolicy": "Retain",
-    },
-    "DescribeEC2PolicyFF5F9295": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
-                "autoscaling:DescribeAutoScalingInstances",
-                "autoscaling:DescribeAutoScalingGroups",
-                "ec2:DescribeTags",
-                "ec2:DescribeInstances",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "describe-ec2-policy",
-        "Roles": [
-          {
-            "Ref": "InstanceRoleInteractiverenderingA0F05C94",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
     },
     "ECSInfrastructureRoleE492121F": {
       "Properties": {
@@ -7504,8 +7385,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
         "ECSManagedInstancesRole1E652558",
         "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
         "EcsTaskDefinitionTaskRoleB7B6D8DD",
-        "ListenerInteractiverenderingDeterministicRouteToEc2Rule85263C36",
-        "ListenerInteractiverenderingDeterministicRouteToEcsRule3CF4950C",
         "ListenerInteractiverenderingB2E016A6",
         "ManagedInstancesCapacityProviderC2946447",
       ],
@@ -8145,78 +8024,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
       },
       "Type": "AWS::IAM::Policy",
     },
-    "GetDistributablePolicyInteractiverendering381AFC49": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": "s3:GetObject",
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:aws:s3:::",
-                    {
-                      "Ref": "DistributionBucketName",
-                    },
-                    "/frontend/CODE/interactive-rendering/*",
-                  ],
-                ],
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "GetDistributablePolicyInteractiverendering381AFC49",
-        "Roles": [
-          {
-            "Ref": "InstanceRoleInteractiverenderingA0F05C94",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "GuHttpsEgressSecurityGroupInteractiverendering8AC409C4": {
-      "Properties": {
-        "GroupDescription": "Allow all outbound HTTPS traffic",
-        "SecurityGroupEgress": [
-          {
-            "CidrIp": "0.0.0.0/0",
-            "Description": "Allow all outbound HTTPS traffic",
-            "FromPort": 443,
-            "IpProtocol": "tcp",
-            "ToPort": 443,
-          },
-        ],
-        "Tags": [
-          {
-            "Key": "App",
-            "Value": "interactive-rendering",
-          },
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "CODE",
-          },
-        ],
-        "VpcId": {
-          "Ref": "VpcId",
-        },
-      },
-      "Type": "AWS::EC2::SecurityGroup",
-    },
     "GuHttpsEgressSecurityGroupInteractiverenderingecs077B4B99": {
       "Properties": {
         "GroupDescription": "Allow all outbound HTTPS traffic",
@@ -8299,48 +8106,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
     },
-    "GuHttpsEgressSecurityGroupInteractiverenderingfromInteractiveRenderingCODEInternalIngressSecurityGroupInteractiverendering4C54400F9000604E8775": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "FromPort": 9000,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupInteractiverendering8AC409C4",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": {
-          "Fn::GetAtt": [
-            "InternalIngressSecurityGroupInteractiverendering71ED4A41",
-            "GroupId",
-          ],
-        },
-        "ToPort": 9000,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
-    "GuHttpsEgressSecurityGroupInteractiverenderingfromInteractiveRenderingCODELoadBalancerInteractiverenderingSecurityGroup11A1BC2490000A31C01B": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "FromPort": 9000,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupInteractiverendering8AC409C4",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": {
-          "Fn::GetAtt": [
-            "LoadBalancerInteractiverenderingSecurityGroupBDDFF9AB",
-            "GroupId",
-          ],
-        },
-        "ToPort": 9000,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
     "GuLogShippingPolicy981BFE5A": {
       "Properties": {
         "PolicyDocument": {
@@ -8373,54 +8138,11 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
         "PolicyName": "GuLogShippingPolicy981BFE5A",
         "Roles": [
           {
-            "Ref": "InstanceRoleInteractiverenderingA0F05C94",
-          },
-          {
             "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
-    },
-    "InstanceRoleInteractiverenderingA0F05C94": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "Service": "ec2.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "Path": "/",
-        "Tags": [
-          {
-            "Key": "App",
-            "Value": "interactive-rendering",
-          },
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "CODE",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
     },
     "InteractiverenderingEcsTargetGroupInteractiverendering62D942CE": {
       "Properties": {
@@ -8511,27 +8233,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "InternalIngressSecurityGroupInteractiverenderingtoInteractiveRenderingCODEGuHttpsEgressSecurityGroupInteractiverenderingE68466639000AF9FB151": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "DestinationSecurityGroupId": {
-          "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupInteractiverendering8AC409C4",
-            "GroupId",
-          ],
-        },
-        "FromPort": 9000,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "InternalIngressSecurityGroupInteractiverendering71ED4A41",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "ToPort": 9000,
-      },
-      "Type": "AWS::EC2::SecurityGroupEgress",
-    },
     "InternalIngressSecurityGroupInteractiverenderingtoInteractiveRenderingCODEGuHttpsEgressSecurityGroupInteractiverenderingecs8283E2219000B7C80545": {
       "Properties": {
         "Description": "Load balancer to target",
@@ -8564,21 +8265,8 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
         ],
         "DefaultActions": [
           {
-            "ForwardConfig": {
-              "TargetGroups": [
-                {
-                  "TargetGroupArn": {
-                    "Ref": "TargetGroupInteractiverenderingB3F5F6D3",
-                  },
-                  "Weight": 0,
-                },
-                {
-                  "TargetGroupArn": {
-                    "Ref": "InteractiverenderingEcsTargetGroupInteractiverendering62D942CE",
-                  },
-                  "Weight": 1,
-                },
-              ],
+            "TargetGroupArn": {
+              "Ref": "InteractiverenderingEcsTargetGroupInteractiverendering62D942CE",
             },
             "Type": "forward",
           },
@@ -8613,106 +8301,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
         ],
       },
       "Type": "AWS::ElasticLoadBalancingV2::Listener",
-    },
-    "ListenerInteractiverenderingDeterministicRouteToEc2Rule85263C36": {
-      "Properties": {
-        "Actions": [
-          {
-            "TargetGroupArn": {
-              "Ref": "TargetGroupInteractiverenderingB3F5F6D3",
-            },
-            "Type": "forward",
-          },
-        ],
-        "Conditions": [
-          {
-            "Field": "http-header",
-            "HttpHeaderConfig": {
-              "HttpHeaderName": "X-Gu-Target-Group",
-              "Values": [
-                "ec2",
-              ],
-            },
-          },
-        ],
-        "ListenerArn": {
-          "Ref": "ListenerInteractiverenderingB2E016A6",
-        },
-        "Priority": 10,
-        "Tags": [
-          {
-            "Key": "App",
-            "Value": "interactive-rendering",
-          },
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "CODE",
-          },
-        ],
-      },
-      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
-    },
-    "ListenerInteractiverenderingDeterministicRouteToEcsRule3CF4950C": {
-      "Properties": {
-        "Actions": [
-          {
-            "TargetGroupArn": {
-              "Ref": "InteractiverenderingEcsTargetGroupInteractiverendering62D942CE",
-            },
-            "Type": "forward",
-          },
-        ],
-        "Conditions": [
-          {
-            "Field": "http-header",
-            "HttpHeaderConfig": {
-              "HttpHeaderName": "X-Gu-Target-Group",
-              "Values": [
-                "ecs",
-              ],
-            },
-          },
-        ],
-        "ListenerArn": {
-          "Ref": "ListenerInteractiverenderingB2E016A6",
-        },
-        "Priority": 11,
-        "Tags": [
-          {
-            "Key": "App",
-            "Value": "interactive-rendering",
-          },
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "CODE",
-          },
-        ],
-      },
-      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
     },
     "LoadBalancerDNS": {
       "Properties": {
@@ -8839,27 +8427,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
         },
       },
       "Type": "AWS::EC2::SecurityGroup",
-    },
-    "LoadBalancerInteractiverenderingSecurityGrouptoInteractiveRenderingCODEGuHttpsEgressSecurityGroupInteractiverenderingE68466639000550ED22B": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "DestinationSecurityGroupId": {
-          "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupInteractiverendering8AC409C4",
-            "GroupId",
-          ],
-        },
-        "FromPort": 9000,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "LoadBalancerInteractiverenderingSecurityGroupBDDFF9AB",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "ToPort": 9000,
-      },
-      "Type": "AWS::EC2::SecurityGroupEgress",
     },
     "LoadBalancerInteractiverenderingSecurityGrouptoInteractiveRenderingCODEGuHttpsEgressSecurityGroupInteractiverenderingecs8283E221900026C6441D": {
       "Properties": {
@@ -9000,9 +8567,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
         "PolicyName": "parameter-store-read-policy",
         "Roles": [
           {
-            "Ref": "InstanceRoleInteractiverenderingA0F05C94",
-          },
-          {
             "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
           },
         ],
@@ -9024,276 +8588,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
         "Value": "https://interactive-rendering.code.dev-guardianapis.com",
       },
       "Type": "AWS::SSM::Parameter",
-    },
-    "SsmSshPolicy4CFC977E": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
-                "ec2messages:AcknowledgeMessage",
-                "ec2messages:DeleteMessage",
-                "ec2messages:FailMessage",
-                "ec2messages:GetEndpoint",
-                "ec2messages:GetMessages",
-                "ec2messages:SendReply",
-                "ssm:UpdateInstanceInformation",
-                "ssm:ListInstanceAssociations",
-                "ssm:DescribeInstanceProperties",
-                "ssm:DescribeDocumentParameters",
-                "ssmmessages:CreateControlChannel",
-                "ssmmessages:CreateDataChannel",
-                "ssmmessages:OpenControlChannel",
-                "ssmmessages:OpenDataChannel",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "ssm-ssh-policy",
-        "Roles": [
-          {
-            "Ref": "InstanceRoleInteractiverenderingA0F05C94",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "TargetGroupInteractiverenderingB3F5F6D3": {
-      "Properties": {
-        "HealthCheckIntervalSeconds": 10,
-        "HealthCheckPath": "/_healthcheck",
-        "HealthCheckProtocol": "HTTP",
-        "HealthCheckTimeoutSeconds": 5,
-        "HealthyThresholdCount": 5,
-        "Port": 9000,
-        "Protocol": "HTTP",
-        "Tags": [
-          {
-            "Key": "App",
-            "Value": "interactive-rendering",
-          },
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "CODE",
-          },
-        ],
-        "TargetGroupAttributes": [
-          {
-            "Key": "deregistration_delay.timeout_seconds",
-            "Value": "30",
-          },
-          {
-            "Key": "stickiness.enabled",
-            "Value": "false",
-          },
-        ],
-        "TargetType": "instance",
-        "UnhealthyThresholdCount": 2,
-        "VpcId": {
-          "Ref": "VpcId",
-        },
-      },
-      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
-    },
-    "frontendCODEinteractiverenderingD1F3B137": {
-      "DependsOn": [
-        "InstanceRoleInteractiverenderingA0F05C94",
-      ],
-      "Properties": {
-        "LaunchTemplateData": {
-          "IamInstanceProfile": {
-            "Arn": {
-              "Fn::GetAtt": [
-                "frontendCODEinteractiverenderingProfileB86599B4",
-                "Arn",
-              ],
-            },
-          },
-          "ImageId": {
-            "Ref": "AMIInteractiverendering",
-          },
-          "InstanceType": "t4g.micro",
-          "MetadataOptions": {
-            "HttpTokens": "required",
-            "InstanceMetadataTags": "enabled",
-          },
-          "Monitoring": {
-            "Enabled": true,
-          },
-          "SecurityGroupIds": [
-            {
-              "Fn::GetAtt": [
-                "GuHttpsEgressSecurityGroupInteractiverendering8AC409C4",
-                "GroupId",
-              ],
-            },
-          ],
-          "TagSpecifications": [
-            {
-              "ResourceType": "instance",
-              "Tags": [
-                {
-                  "Key": "App",
-                  "Value": "interactive-rendering",
-                },
-                {
-                  "Key": "gu:cdk:version",
-                  "Value": "TEST",
-                },
-                {
-                  "Key": "gu:repo",
-                  "Value": "guardian/dotcom-rendering",
-                },
-                {
-                  "Key": "Name",
-                  "Value": "InteractiveRendering-CODE/frontend-CODE-interactive-rendering",
-                },
-                {
-                  "Key": "Stack",
-                  "Value": "frontend",
-                },
-                {
-                  "Key": "Stage",
-                  "Value": "CODE",
-                },
-              ],
-            },
-            {
-              "ResourceType": "volume",
-              "Tags": [
-                {
-                  "Key": "App",
-                  "Value": "interactive-rendering",
-                },
-                {
-                  "Key": "gu:cdk:version",
-                  "Value": "TEST",
-                },
-                {
-                  "Key": "gu:repo",
-                  "Value": "guardian/dotcom-rendering",
-                },
-                {
-                  "Key": "Name",
-                  "Value": "InteractiveRendering-CODE/frontend-CODE-interactive-rendering",
-                },
-                {
-                  "Key": "Stack",
-                  "Value": "frontend",
-                },
-                {
-                  "Key": "Stage",
-                  "Value": "CODE",
-                },
-              ],
-            },
-          ],
-          "UserData": {
-            "Fn::Base64": {
-              "Fn::Join": [
-                "",
-                [
-                  "#!/bin/bash
-set -ev
-groupadd frontend
-useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering
-cd /home/dotcom-rendering
-aws --region eu-west-1 s3 cp s3://",
-                  {
-                    "Ref": "DistributionBucketName",
-                  },
-                  "/frontend/CODE/interactive-rendering/interactive-rendering.tar.gz ./
-tar -zxf interactive-rendering.tar.gz interactive-rendering
-chown -R dotcom-rendering:frontend interactive-rendering
-cd interactive-rendering
-mkdir /var/log/dotcom-rendering
-chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
-cat > /etc/systemd/system/interactive-rendering.service << EOF
-[Unit]
-Description=interactive-rendering
-After=network.target
-[Service]
-WorkingDirectory=/home/dotcom-rendering/interactive-rendering
-Type=simple
-User=dotcom-rendering
-Group=frontend
-StandardError=journal
-StandardOutput=journal
-Environment=TERM=xterm-256color
-Environment=NODE_ENV=production
-Environment=GU_STAGE=CODE
-Environment=GU_APP=interactive-rendering
-Environment=GU_STACK=frontend
-ExecStart=make prod
-Restart=on-failure
-[Install]
-WantedBy=multi-user.target
-EOF
-systemctl enable interactive-rendering
-systemctl start interactive-rendering",
-                ],
-              ],
-            },
-          },
-        },
-        "TagSpecifications": [
-          {
-            "ResourceType": "launch-template",
-            "Tags": [
-              {
-                "Key": "App",
-                "Value": "interactive-rendering",
-              },
-              {
-                "Key": "gu:cdk:version",
-                "Value": "TEST",
-              },
-              {
-                "Key": "gu:repo",
-                "Value": "guardian/dotcom-rendering",
-              },
-              {
-                "Key": "Name",
-                "Value": "InteractiveRendering-CODE/frontend-CODE-interactive-rendering",
-              },
-              {
-                "Key": "Stack",
-                "Value": "frontend",
-              },
-              {
-                "Key": "Stage",
-                "Value": "CODE",
-              },
-            ],
-          },
-        ],
-      },
-      "Type": "AWS::EC2::LaunchTemplate",
-    },
-    "frontendCODEinteractiverenderingProfileB86599B4": {
-      "Properties": {
-        "Roles": [
-          {
-            "Ref": "InstanceRoleInteractiverenderingA0F05C94",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::InstanceProfile",
     },
     "interactiverenderingCpuScaling89946FA4": {
       "Properties": {
@@ -9362,24 +8656,16 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
       "GuSubnetListParameter",
       "GuSubnetListParameter",
       "GuLoadBalancedAppExperimental",
-      "GuInstanceRole",
-      "GuSsmSshPolicy",
-      "GuDescribeEC2Policy",
-      "GuLoggingStreamNameParameter",
-      "GuLogShippingPolicy",
-      "GuGetDistributablePolicy",
-      "GuParameterStoreReadPolicy",
-      "GuAmiParameter",
-      "GuHttpsEgressSecurityGroup",
-      "GuAutoScalingGroup",
-      "GuApplicationTargetGroup",
       "GuRepository",
       "GuArtifactsAccountId",
       "GuRepository",
+      "GuLoggingStreamNameParameter",
       "GuHttpsEgressSecurityGroup",
       "GuECSManagedInstanceRoleExperimental",
       "GuECSInstanceRolePolicyForManagedInstancesExperimental",
       "GuRiffRaffDeploymentIdParameterExperimental",
+      "GuLogShippingPolicy",
+      "GuParameterStoreReadPolicy",
       "GuApplicationTargetGroup",
       "GuCertificate",
       "GuApplicationLoadBalancer",
@@ -9387,7 +8673,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
       "GuHttpsApplicationListener",
       "GuSecurityGroup",
       "GuAlb5xxPercentageAlarm",
-      "GuUnhealthyInstancesAlarm",
       "GuCname",
     ],
     "gu:cdk:version": "TEST",
@@ -9404,10 +8689,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
     },
   },
   "Parameters": {
-    "AMIInteractiverendering": {
-      "Description": "Amazon Machine Image ID for the app interactive-rendering. Use this in conjunction with AMIgo to keep AMIs up to date.",
-      "Type": "AWS::EC2::Image::Id",
-    },
     "AccessLoggingBucket": {
       "Default": "/account/services/access-logging/bucket",
       "Description": "S3 bucket to store your access logs",
@@ -9467,9 +8748,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
         "PolicyName": "AllowPolicyCloudwatchLogsA783E5B4",
         "Roles": [
           {
-            "Ref": "InstanceRoleInteractiverenderingA0F05C94",
-          },
-          {
             "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
           },
         ],
@@ -9504,9 +8782,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
         },
         "PolicyName": "AllowPolicyDescribeDecryptKmsE91286F3",
         "Roles": [
-          {
-            "Ref": "InstanceRoleInteractiverenderingA0F05C94",
-          },
           {
             "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
           },
@@ -9557,197 +8832,11 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
         "PolicyName": "AllowPolicyGetSsmParamsByPathB54B2DE8",
         "Roles": [
           {
-            "Ref": "InstanceRoleInteractiverenderingA0F05C94",
-          },
-          {
             "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
-    },
-    "AutoScalingGroupInteractiverenderingASGCDA22918": {
-      "Properties": {
-        "HealthCheckGracePeriod": 120,
-        "HealthCheckType": "ELB",
-        "LaunchTemplate": {
-          "LaunchTemplateId": {
-            "Ref": "frontendPRODinteractiverenderingEABC55EF",
-          },
-          "Version": {
-            "Fn::GetAtt": [
-              "frontendPRODinteractiverenderingEABC55EF",
-              "LatestVersionNumber",
-            ],
-          },
-        },
-        "MaxSize": "30",
-        "MetricsCollection": [
-          {
-            "Granularity": "1Minute",
-          },
-        ],
-        "MinSize": "3",
-        "Tags": [
-          {
-            "Key": "App",
-            "PropagateAtLaunch": true,
-            "Value": "interactive-rendering",
-          },
-          {
-            "Key": "gu:cdk:version",
-            "PropagateAtLaunch": true,
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "PropagateAtLaunch": true,
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "LogKinesisStreamName",
-            "PropagateAtLaunch": true,
-            "Value": {
-              "Ref": "LoggingStreamName",
-            },
-          },
-          {
-            "Key": "Stack",
-            "PropagateAtLaunch": true,
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "PropagateAtLaunch": true,
-            "Value": "PROD",
-          },
-          {
-            "Key": "SystemdUnit",
-            "PropagateAtLaunch": true,
-            "Value": "interactive-rendering.service",
-          },
-        ],
-        "TargetGroupARNs": [
-          {
-            "Ref": "TargetGroupInteractiverenderingB3F5F6D3",
-          },
-        ],
-        "VPCZoneIdentifier": {
-          "Ref": "interactiverenderingPrivateSubnets",
-        },
-      },
-      "Type": "AWS::AutoScaling::AutoScalingGroup",
-    },
-    "CPUScaleUpPolicyUpperAlarm7E15DD91": {
-      "Properties": {
-        "AlarmActions": [
-          {
-            "Ref": "CPUScaleUpPolicyUpperPolicyDEE5DA77",
-          },
-          {
-            "Ref": "CPUScalingAlertsTopic9D0083F7",
-          },
-        ],
-        "AlarmDescription": "Upper threshold scaling alarm",
-        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
-        "Dimensions": [
-          {
-            "Name": "AutoScalingGroupName",
-            "Value": {
-              "Ref": "AutoScalingGroupInteractiverenderingASGCDA22918",
-            },
-          },
-        ],
-        "EvaluationPeriods": 2,
-        "ExtendedStatistic": "p90",
-        "MetricName": "CPUUtilization",
-        "Namespace": "AWS/EC2",
-        "Period": 30,
-        "Tags": [
-          {
-            "Key": "App",
-            "Value": "interactive-rendering",
-          },
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "PROD",
-          },
-        ],
-        "Threshold": 60,
-        "Unit": "Percent",
-      },
-      "Type": "AWS::CloudWatch::Alarm",
-    },
-    "CPUScaleUpPolicyUpperPolicyDEE5DA77": {
-      "Properties": {
-        "AdjustmentType": "PercentChangeInCapacity",
-        "AutoScalingGroupName": {
-          "Ref": "AutoScalingGroupInteractiverenderingASGCDA22918",
-        },
-        "MetricAggregationType": "Average",
-        "PolicyType": "StepScaling",
-        "StepAdjustments": [
-          {
-            "MetricIntervalLowerBound": 0,
-            "MetricIntervalUpperBound": 20,
-            "ScalingAdjustment": 50,
-          },
-          {
-            "MetricIntervalLowerBound": 20,
-            "ScalingAdjustment": 80,
-          },
-        ],
-      },
-      "Type": "AWS::AutoScaling::ScalingPolicy",
-    },
-    "CPUScalingAlertsSubscriptionEmail170D6D82": {
-      "Properties": {
-        "Endpoint": "dotcom.platform@theguardian.com",
-        "Protocol": "email",
-        "TopicArn": {
-          "Ref": "CPUScalingAlertsTopic9D0083F7",
-        },
-      },
-      "Type": "AWS::SNS::Subscription",
-    },
-    "CPUScalingAlertsTopic9D0083F7": {
-      "Properties": {
-        "Tags": [
-          {
-            "Key": "App",
-            "Value": "interactive-rendering",
-          },
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "PROD",
-          },
-        ],
-      },
-      "Type": "AWS::SNS::Topic",
     },
     "CertificateInteractiverendering5C218F28": {
       "DeletionPolicy": "Retain",
@@ -9783,32 +8872,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
       },
       "Type": "AWS::CertificateManager::Certificate",
       "UpdateReplacePolicy": "Retain",
-    },
-    "DescribeEC2PolicyFF5F9295": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
-                "autoscaling:DescribeAutoScalingInstances",
-                "autoscaling:DescribeAutoScalingGroups",
-                "ec2:DescribeTags",
-                "ec2:DescribeInstances",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "describe-ec2-policy",
-        "Roles": [
-          {
-            "Ref": "InstanceRoleInteractiverenderingA0F05C94",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
     },
     "ECSInfrastructureRoleE492121F": {
       "Properties": {
@@ -9995,8 +9058,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
         "ECSManagedInstancesRole1E652558",
         "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
         "EcsTaskDefinitionTaskRoleB7B6D8DD",
-        "ListenerInteractiverenderingDeterministicRouteToEc2Rule85263C36",
-        "ListenerInteractiverenderingDeterministicRouteToEcsRule3CF4950C",
         "ListenerInteractiverenderingB2E016A6",
         "ManagedInstancesCapacityProviderC2946447",
       ],
@@ -10636,78 +9697,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
       },
       "Type": "AWS::IAM::Policy",
     },
-    "GetDistributablePolicyInteractiverendering381AFC49": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": "s3:GetObject",
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:aws:s3:::",
-                    {
-                      "Ref": "DistributionBucketName",
-                    },
-                    "/frontend/PROD/interactive-rendering/*",
-                  ],
-                ],
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "GetDistributablePolicyInteractiverendering381AFC49",
-        "Roles": [
-          {
-            "Ref": "InstanceRoleInteractiverenderingA0F05C94",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "GuHttpsEgressSecurityGroupInteractiverendering8AC409C4": {
-      "Properties": {
-        "GroupDescription": "Allow all outbound HTTPS traffic",
-        "SecurityGroupEgress": [
-          {
-            "CidrIp": "0.0.0.0/0",
-            "Description": "Allow all outbound HTTPS traffic",
-            "FromPort": 443,
-            "IpProtocol": "tcp",
-            "ToPort": 443,
-          },
-        ],
-        "Tags": [
-          {
-            "Key": "App",
-            "Value": "interactive-rendering",
-          },
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "PROD",
-          },
-        ],
-        "VpcId": {
-          "Ref": "VpcId",
-        },
-      },
-      "Type": "AWS::EC2::SecurityGroup",
-    },
     "GuHttpsEgressSecurityGroupInteractiverenderingecs077B4B99": {
       "Properties": {
         "GroupDescription": "Allow all outbound HTTPS traffic",
@@ -10790,48 +9779,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
     },
-    "GuHttpsEgressSecurityGroupInteractiverenderingfromInteractiveRenderingPRODInternalIngressSecurityGroupInteractiverendering4EAEE1A3900095B63859": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "FromPort": 9000,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupInteractiverendering8AC409C4",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": {
-          "Fn::GetAtt": [
-            "InternalIngressSecurityGroupInteractiverendering71ED4A41",
-            "GroupId",
-          ],
-        },
-        "ToPort": 9000,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
-    "GuHttpsEgressSecurityGroupInteractiverenderingfromInteractiveRenderingPRODLoadBalancerInteractiverenderingSecurityGroup485B80A49000041FB020": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "FromPort": 9000,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupInteractiverendering8AC409C4",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": {
-          "Fn::GetAtt": [
-            "LoadBalancerInteractiverenderingSecurityGroupBDDFF9AB",
-            "GroupId",
-          ],
-        },
-        "ToPort": 9000,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
     "GuLogShippingPolicy981BFE5A": {
       "Properties": {
         "PolicyDocument": {
@@ -10863,9 +9810,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
         },
         "PolicyName": "GuLogShippingPolicy981BFE5A",
         "Roles": [
-          {
-            "Ref": "InstanceRoleInteractiverenderingA0F05C94",
-          },
           {
             "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
           },
@@ -10998,46 +9942,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
       },
       "Type": "AWS::CloudWatch::Alarm",
     },
-    "InstanceRoleInteractiverenderingA0F05C94": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "Service": "ec2.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "Path": "/",
-        "Tags": [
-          {
-            "Key": "App",
-            "Value": "interactive-rendering",
-          },
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "PROD",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
     "InteractiverenderingEcsTargetGroupInteractiverendering62D942CE": {
       "Properties": {
         "HealthCheckIntervalSeconds": 10,
@@ -11127,27 +10031,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "InternalIngressSecurityGroupInteractiverenderingtoInteractiveRenderingPRODGuHttpsEgressSecurityGroupInteractiverendering7D2C46D0900008151B0F": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "DestinationSecurityGroupId": {
-          "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupInteractiverendering8AC409C4",
-            "GroupId",
-          ],
-        },
-        "FromPort": 9000,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "InternalIngressSecurityGroupInteractiverendering71ED4A41",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "ToPort": 9000,
-      },
-      "Type": "AWS::EC2::SecurityGroupEgress",
-    },
     "InternalIngressSecurityGroupInteractiverenderingtoInteractiveRenderingPRODGuHttpsEgressSecurityGroupInteractiverenderingecs38AFE05D90002C893945": {
       "Properties": {
         "Description": "Load balancer to target",
@@ -11169,205 +10052,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
-    "LatencyScaleDownPolicyLowerAlarm3AAA79CF": {
-      "Properties": {
-        "AlarmActions": [
-          {
-            "Ref": "LatencyScaleDownPolicyLowerPolicy5B8C5A01",
-          },
-        ],
-        "AlarmDescription": "Lower threshold scaling alarm",
-        "ComparisonOperator": "LessThanOrEqualToThreshold",
-        "Dimensions": [
-          {
-            "Name": "LoadBalancer",
-            "Value": {
-              "Fn::GetAtt": [
-                "LoadBalancerInteractiverenderingB53453B9",
-                "LoadBalancerFullName",
-              ],
-            },
-          },
-          {
-            "Name": "TargetGroup",
-            "Value": {
-              "Fn::GetAtt": [
-                "TargetGroupInteractiverenderingB3F5F6D3",
-                "TargetGroupFullName",
-              ],
-            },
-          },
-        ],
-        "EvaluationPeriods": 10,
-        "MetricName": "TargetResponseTime",
-        "Namespace": "AWS/ApplicationELB",
-        "Period": 30,
-        "Statistic": "Average",
-        "Tags": [
-          {
-            "Key": "App",
-            "Value": "interactive-rendering",
-          },
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "PROD",
-          },
-        ],
-        "Threshold": 0.15,
-      },
-      "Type": "AWS::CloudWatch::Alarm",
-    },
-    "LatencyScaleDownPolicyLowerPolicy5B8C5A01": {
-      "Properties": {
-        "AdjustmentType": "ChangeInCapacity",
-        "AutoScalingGroupName": {
-          "Ref": "AutoScalingGroupInteractiverenderingASGCDA22918",
-        },
-        "MetricAggregationType": "Average",
-        "PolicyType": "StepScaling",
-        "StepAdjustments": [
-          {
-            "MetricIntervalUpperBound": 0,
-            "ScalingAdjustment": -1,
-          },
-        ],
-      },
-      "Type": "AWS::AutoScaling::ScalingPolicy",
-    },
-    "LatencyScaleUpPolicyUpperAlarmB2CCE62D": {
-      "Properties": {
-        "AlarmActions": [
-          {
-            "Ref": "LatencyScaleUpPolicyUpperPolicy4A22B34C",
-          },
-          {
-            "Ref": "LatencyScalingAlertsTopic1A322157",
-          },
-        ],
-        "AlarmDescription": "Upper threshold scaling alarm",
-        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
-        "Dimensions": [
-          {
-            "Name": "LoadBalancer",
-            "Value": {
-              "Fn::GetAtt": [
-                "LoadBalancerInteractiverenderingB53453B9",
-                "LoadBalancerFullName",
-              ],
-            },
-          },
-          {
-            "Name": "TargetGroup",
-            "Value": {
-              "Fn::GetAtt": [
-                "TargetGroupInteractiverenderingB3F5F6D3",
-                "TargetGroupFullName",
-              ],
-            },
-          },
-        ],
-        "EvaluationPeriods": 2,
-        "MetricName": "TargetResponseTime",
-        "Namespace": "AWS/ApplicationELB",
-        "Period": 30,
-        "Statistic": "Average",
-        "Tags": [
-          {
-            "Key": "App",
-            "Value": "interactive-rendering",
-          },
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "PROD",
-          },
-        ],
-        "Threshold": 0.2,
-      },
-      "Type": "AWS::CloudWatch::Alarm",
-    },
-    "LatencyScaleUpPolicyUpperPolicy4A22B34C": {
-      "Properties": {
-        "AdjustmentType": "PercentChangeInCapacity",
-        "AutoScalingGroupName": {
-          "Ref": "AutoScalingGroupInteractiverenderingASGCDA22918",
-        },
-        "MetricAggregationType": "Average",
-        "PolicyType": "StepScaling",
-        "StepAdjustments": [
-          {
-            "MetricIntervalLowerBound": 0,
-            "MetricIntervalUpperBound": 0.09999999999999998,
-            "ScalingAdjustment": 50,
-          },
-          {
-            "MetricIntervalLowerBound": 0.09999999999999998,
-            "ScalingAdjustment": 80,
-          },
-        ],
-      },
-      "Type": "AWS::AutoScaling::ScalingPolicy",
-    },
-    "LatencyScalingAlertsSubscriptionEmailF1826DAB": {
-      "Properties": {
-        "Endpoint": "dotcom.platform@theguardian.com",
-        "Protocol": "email",
-        "TopicArn": {
-          "Ref": "LatencyScalingAlertsTopic1A322157",
-        },
-      },
-      "Type": "AWS::SNS::Subscription",
-    },
-    "LatencyScalingAlertsTopic1A322157": {
-      "Properties": {
-        "Tags": [
-          {
-            "Key": "App",
-            "Value": "interactive-rendering",
-          },
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "PROD",
-          },
-        ],
-      },
-      "Type": "AWS::SNS::Topic",
-    },
     "ListenerInteractiverenderingB2E016A6": {
       "Properties": {
         "Certificates": [
@@ -11379,21 +10063,8 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
         ],
         "DefaultActions": [
           {
-            "ForwardConfig": {
-              "TargetGroups": [
-                {
-                  "TargetGroupArn": {
-                    "Ref": "TargetGroupInteractiverenderingB3F5F6D3",
-                  },
-                  "Weight": 0,
-                },
-                {
-                  "TargetGroupArn": {
-                    "Ref": "InteractiverenderingEcsTargetGroupInteractiverendering62D942CE",
-                  },
-                  "Weight": 1,
-                },
-              ],
+            "TargetGroupArn": {
+              "Ref": "InteractiverenderingEcsTargetGroupInteractiverendering62D942CE",
             },
             "Type": "forward",
           },
@@ -11428,106 +10099,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
         ],
       },
       "Type": "AWS::ElasticLoadBalancingV2::Listener",
-    },
-    "ListenerInteractiverenderingDeterministicRouteToEc2Rule85263C36": {
-      "Properties": {
-        "Actions": [
-          {
-            "TargetGroupArn": {
-              "Ref": "TargetGroupInteractiverenderingB3F5F6D3",
-            },
-            "Type": "forward",
-          },
-        ],
-        "Conditions": [
-          {
-            "Field": "http-header",
-            "HttpHeaderConfig": {
-              "HttpHeaderName": "X-Gu-Target-Group",
-              "Values": [
-                "ec2",
-              ],
-            },
-          },
-        ],
-        "ListenerArn": {
-          "Ref": "ListenerInteractiverenderingB2E016A6",
-        },
-        "Priority": 10,
-        "Tags": [
-          {
-            "Key": "App",
-            "Value": "interactive-rendering",
-          },
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "PROD",
-          },
-        ],
-      },
-      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
-    },
-    "ListenerInteractiverenderingDeterministicRouteToEcsRule3CF4950C": {
-      "Properties": {
-        "Actions": [
-          {
-            "TargetGroupArn": {
-              "Ref": "InteractiverenderingEcsTargetGroupInteractiverendering62D942CE",
-            },
-            "Type": "forward",
-          },
-        ],
-        "Conditions": [
-          {
-            "Field": "http-header",
-            "HttpHeaderConfig": {
-              "HttpHeaderName": "X-Gu-Target-Group",
-              "Values": [
-                "ecs",
-              ],
-            },
-          },
-        ],
-        "ListenerArn": {
-          "Ref": "ListenerInteractiverenderingB2E016A6",
-        },
-        "Priority": 11,
-        "Tags": [
-          {
-            "Key": "App",
-            "Value": "interactive-rendering",
-          },
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "PROD",
-          },
-        ],
-      },
-      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
     },
     "LoadBalancerDNS": {
       "Properties": {
@@ -11654,27 +10225,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
         },
       },
       "Type": "AWS::EC2::SecurityGroup",
-    },
-    "LoadBalancerInteractiverenderingSecurityGrouptoInteractiveRenderingPRODGuHttpsEgressSecurityGroupInteractiverendering7D2C46D09000634366C2": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "DestinationSecurityGroupId": {
-          "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupInteractiverendering8AC409C4",
-            "GroupId",
-          ],
-        },
-        "FromPort": 9000,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "LoadBalancerInteractiverenderingSecurityGroupBDDFF9AB",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "ToPort": 9000,
-      },
-      "Type": "AWS::EC2::SecurityGroupEgress",
     },
     "LoadBalancerInteractiverenderingSecurityGrouptoInteractiveRenderingPRODGuHttpsEgressSecurityGroupInteractiverenderingecs38AFE05D9000E2269A15": {
       "Properties": {
@@ -11812,9 +10362,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
         "PolicyName": "parameter-store-read-policy",
         "Roles": [
           {
-            "Ref": "InstanceRoleInteractiverenderingA0F05C94",
-          },
-          {
             "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
           },
         ],
@@ -11836,395 +10383,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
         "Value": "https://interactive-rendering.guardianapis.com",
       },
       "Type": "AWS::SSM::Parameter",
-    },
-    "SsmSshPolicy4CFC977E": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
-                "ec2messages:AcknowledgeMessage",
-                "ec2messages:DeleteMessage",
-                "ec2messages:FailMessage",
-                "ec2messages:GetEndpoint",
-                "ec2messages:GetMessages",
-                "ec2messages:SendReply",
-                "ssm:UpdateInstanceInformation",
-                "ssm:ListInstanceAssociations",
-                "ssm:DescribeInstanceProperties",
-                "ssm:DescribeDocumentParameters",
-                "ssmmessages:CreateControlChannel",
-                "ssmmessages:CreateDataChannel",
-                "ssmmessages:OpenControlChannel",
-                "ssmmessages:OpenDataChannel",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "ssm-ssh-policy",
-        "Roles": [
-          {
-            "Ref": "InstanceRoleInteractiverenderingA0F05C94",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "TargetGroupInteractiverenderingB3F5F6D3": {
-      "Properties": {
-        "HealthCheckIntervalSeconds": 10,
-        "HealthCheckPath": "/_healthcheck",
-        "HealthCheckProtocol": "HTTP",
-        "HealthCheckTimeoutSeconds": 5,
-        "HealthyThresholdCount": 5,
-        "Port": 9000,
-        "Protocol": "HTTP",
-        "Tags": [
-          {
-            "Key": "App",
-            "Value": "interactive-rendering",
-          },
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "PROD",
-          },
-        ],
-        "TargetGroupAttributes": [
-          {
-            "Key": "deregistration_delay.timeout_seconds",
-            "Value": "30",
-          },
-          {
-            "Key": "stickiness.enabled",
-            "Value": "false",
-          },
-        ],
-        "TargetType": "instance",
-        "UnhealthyThresholdCount": 2,
-        "VpcId": {
-          "Ref": "VpcId",
-        },
-      },
-      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
-    },
-    "UnhealthyInstancesAlarmInteractiverendering51E66D23": {
-      "Properties": {
-        "ActionsEnabled": true,
-        "AlarmActions": [
-          {
-            "Fn::Join": [
-              "",
-              [
-                "arn:aws:sns:eu-west-1:",
-                {
-                  "Ref": "AWS::AccountId",
-                },
-                ":Frontend-PROD-CriticalAlerts",
-              ],
-            ],
-          },
-        ],
-        "AlarmDescription": "interactive-rendering's instances have failed healthchecks several times over the last 1 hour.
-      This typically results in the AutoScaling Group cycling instances and can lead to problems with deployment,
-      scaling or handling traffic spikes.
-
-      Check interactive-rendering's application logs or ssh onto an unhealthy instance in order to debug these problems.",
-        "AlarmName": "Unhealthy instances for interactive-rendering in PROD",
-        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
-        "DatapointsToAlarm": 30,
-        "Dimensions": [
-          {
-            "Name": "LoadBalancer",
-            "Value": {
-              "Fn::Join": [
-                "",
-                [
-                  {
-                    "Fn::Select": [
-                      1,
-                      {
-                        "Fn::Split": [
-                          "/",
-                          {
-                            "Ref": "ListenerInteractiverenderingB2E016A6",
-                          },
-                        ],
-                      },
-                    ],
-                  },
-                  "/",
-                  {
-                    "Fn::Select": [
-                      2,
-                      {
-                        "Fn::Split": [
-                          "/",
-                          {
-                            "Ref": "ListenerInteractiverenderingB2E016A6",
-                          },
-                        ],
-                      },
-                    ],
-                  },
-                  "/",
-                  {
-                    "Fn::Select": [
-                      3,
-                      {
-                        "Fn::Split": [
-                          "/",
-                          {
-                            "Ref": "ListenerInteractiverenderingB2E016A6",
-                          },
-                        ],
-                      },
-                    ],
-                  },
-                ],
-              ],
-            },
-          },
-          {
-            "Name": "TargetGroup",
-            "Value": {
-              "Fn::GetAtt": [
-                "TargetGroupInteractiverenderingB3F5F6D3",
-                "TargetGroupFullName",
-              ],
-            },
-          },
-        ],
-        "EvaluationPeriods": 60,
-        "MetricName": "UnHealthyHostCount",
-        "Namespace": "AWS/ApplicationELB",
-        "Period": 60,
-        "Statistic": "Maximum",
-        "Tags": [
-          {
-            "Key": "App",
-            "Value": "interactive-rendering",
-          },
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "PROD",
-          },
-        ],
-        "Threshold": 1,
-        "TreatMissingData": "notBreaching",
-      },
-      "Type": "AWS::CloudWatch::Alarm",
-    },
-    "frontendPRODinteractiverenderingEABC55EF": {
-      "DependsOn": [
-        "InstanceRoleInteractiverenderingA0F05C94",
-      ],
-      "Properties": {
-        "LaunchTemplateData": {
-          "IamInstanceProfile": {
-            "Arn": {
-              "Fn::GetAtt": [
-                "frontendPRODinteractiverenderingProfileB2B85FC0",
-                "Arn",
-              ],
-            },
-          },
-          "ImageId": {
-            "Ref": "AMIInteractiverendering",
-          },
-          "InstanceType": "c8g.medium",
-          "MetadataOptions": {
-            "HttpTokens": "required",
-            "InstanceMetadataTags": "enabled",
-          },
-          "Monitoring": {
-            "Enabled": true,
-          },
-          "SecurityGroupIds": [
-            {
-              "Fn::GetAtt": [
-                "GuHttpsEgressSecurityGroupInteractiverendering8AC409C4",
-                "GroupId",
-              ],
-            },
-          ],
-          "TagSpecifications": [
-            {
-              "ResourceType": "instance",
-              "Tags": [
-                {
-                  "Key": "App",
-                  "Value": "interactive-rendering",
-                },
-                {
-                  "Key": "gu:cdk:version",
-                  "Value": "TEST",
-                },
-                {
-                  "Key": "gu:repo",
-                  "Value": "guardian/dotcom-rendering",
-                },
-                {
-                  "Key": "Name",
-                  "Value": "InteractiveRendering-PROD/frontend-PROD-interactive-rendering",
-                },
-                {
-                  "Key": "Stack",
-                  "Value": "frontend",
-                },
-                {
-                  "Key": "Stage",
-                  "Value": "PROD",
-                },
-              ],
-            },
-            {
-              "ResourceType": "volume",
-              "Tags": [
-                {
-                  "Key": "App",
-                  "Value": "interactive-rendering",
-                },
-                {
-                  "Key": "gu:cdk:version",
-                  "Value": "TEST",
-                },
-                {
-                  "Key": "gu:repo",
-                  "Value": "guardian/dotcom-rendering",
-                },
-                {
-                  "Key": "Name",
-                  "Value": "InteractiveRendering-PROD/frontend-PROD-interactive-rendering",
-                },
-                {
-                  "Key": "Stack",
-                  "Value": "frontend",
-                },
-                {
-                  "Key": "Stage",
-                  "Value": "PROD",
-                },
-              ],
-            },
-          ],
-          "UserData": {
-            "Fn::Base64": {
-              "Fn::Join": [
-                "",
-                [
-                  "#!/bin/bash
-set -ev
-groupadd frontend
-useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering
-cd /home/dotcom-rendering
-aws --region eu-west-1 s3 cp s3://",
-                  {
-                    "Ref": "DistributionBucketName",
-                  },
-                  "/frontend/PROD/interactive-rendering/interactive-rendering.tar.gz ./
-tar -zxf interactive-rendering.tar.gz interactive-rendering
-chown -R dotcom-rendering:frontend interactive-rendering
-cd interactive-rendering
-mkdir /var/log/dotcom-rendering
-chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
-cat > /etc/systemd/system/interactive-rendering.service << EOF
-[Unit]
-Description=interactive-rendering
-After=network.target
-[Service]
-WorkingDirectory=/home/dotcom-rendering/interactive-rendering
-Type=simple
-User=dotcom-rendering
-Group=frontend
-StandardError=journal
-StandardOutput=journal
-Environment=TERM=xterm-256color
-Environment=NODE_ENV=production
-Environment=GU_STAGE=PROD
-Environment=GU_APP=interactive-rendering
-Environment=GU_STACK=frontend
-ExecStart=make prod
-Restart=on-failure
-[Install]
-WantedBy=multi-user.target
-EOF
-systemctl enable interactive-rendering
-systemctl start interactive-rendering",
-                ],
-              ],
-            },
-          },
-        },
-        "TagSpecifications": [
-          {
-            "ResourceType": "launch-template",
-            "Tags": [
-              {
-                "Key": "App",
-                "Value": "interactive-rendering",
-              },
-              {
-                "Key": "gu:cdk:version",
-                "Value": "TEST",
-              },
-              {
-                "Key": "gu:repo",
-                "Value": "guardian/dotcom-rendering",
-              },
-              {
-                "Key": "Name",
-                "Value": "InteractiveRendering-PROD/frontend-PROD-interactive-rendering",
-              },
-              {
-                "Key": "Stack",
-                "Value": "frontend",
-              },
-              {
-                "Key": "Stage",
-                "Value": "PROD",
-              },
-            ],
-          },
-        ],
-      },
-      "Type": "AWS::EC2::LaunchTemplate",
-    },
-    "frontendPRODinteractiverenderingProfileB2B85FC0": {
-      "Properties": {
-        "Roles": [
-          {
-            "Ref": "InstanceRoleInteractiverenderingA0F05C94",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::InstanceProfile",
     },
     "interactiverenderingCpuScaling89946FA4": {
       "Properties": {

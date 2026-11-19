@@ -7,6 +7,7 @@ import {
 	type ArticleFormat,
 	isOpinionDesign,
 } from '../../lib/articleFormat';
+import type { ArticleDeprecated } from '../../types/article';
 
 export type LayoutType =
 	| 'standard'
@@ -487,4 +488,45 @@ export const getLayoutType = (
 						: 'standard';
 			}
 	}
+};
+
+const getImageOrientation = (
+	aspectRatio: string,
+): 'portrait' | 'landscape' | 'square' => {
+	const [width, height] = aspectRatio.split(':').map(Number);
+	if (width == null || height == null) return 'landscape';
+	if (height > width) return 'portrait';
+	if (width > height) return 'landscape';
+	return 'square';
+};
+
+export const getMainMediaInfo: {
+	(article: ArticleDeprecated): {
+		mainMediaAspectRatio: string | undefined;
+		mainMediaOrientation: 'portrait' | 'landscape' | 'square';
+	};
+} = (article: ArticleDeprecated) => {
+	const mainMedia = article.mainMediaElements[0];
+	const mainMediaType = mainMedia?._type;
+
+	const isMainMediaImage =
+		mainMediaType ===
+		'model.dotcomrendering.pageElements.ImageBlockElement';
+	const isMainMediaAtom =
+		mainMediaType ===
+		'model.dotcomrendering.pageElements.MediaAtomBlockElement';
+
+	const aspectRatio = isMainMediaImage
+		? mainMedia.media.allImages[0]?.fields.aspectRatio
+		: isMainMediaAtom
+			? mainMedia.assets[0]?.aspectRatio
+			: undefined;
+
+	return {
+		mainMediaAspectRatio: aspectRatio,
+		mainMediaOrientation:
+			aspectRatio != null
+				? getImageOrientation(aspectRatio)
+				: 'landscape',
+	};
 };

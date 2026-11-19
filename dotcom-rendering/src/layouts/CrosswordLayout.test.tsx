@@ -124,7 +124,7 @@ const renderCrosswordLayout = ({
 	);
 };
 
-it('passes crossword context to both metadata share placements', () => {
+it('passes crossword context to the metadata share placement', () => {
 	const { container } = renderCrosswordLayout({ withQuickSeries: true });
 	const shareProps = Array.from(
 		container.querySelectorAll('gu-island[name="ShareButton"]'),
@@ -140,7 +140,7 @@ it('passes crossword context to both metadata share placements', () => {
 			puzzleTrackingContext,
 		})),
 	).toEqual(
-		['ArticleMeta', 'SubMeta'].map((context) => ({
+		['ArticleMeta'].map((context) => ({
 			context,
 			puzzleTrackingContext: {
 				slug: 'quick',
@@ -152,14 +152,6 @@ it('passes crossword context to both metadata share placements', () => {
 });
 
 describe('CrosswordLayout app download link', () => {
-	it('renders the link when the hub is unavailable', () => {
-		renderCrosswordLayout({});
-
-		expect(
-			screen.getByRole('link', { name: 'Download the Guardian app' }),
-		).toBeInTheDocument();
-	});
-
 	it('does not render the link when the hub is available', () => {
 		renderCrosswordLayout({ edition: 'INT' });
 
@@ -205,14 +197,6 @@ describe('CrosswordLayout useful links', () => {
 
 	it('does not render the section when frontend does not send it', () => {
 		renderCrosswordLayout({ edition: 'INT' });
-
-		expect(
-			screen.queryByRole('heading', { name: 'Useful links' }),
-		).not.toBeInTheDocument();
-	});
-
-	it('does not render the section when v1 is disabled, even with data present', () => {
-		renderCrosswordLayout({ puzzlesSupporting });
 
 		expect(
 			screen.queryByRole('heading', { name: 'Useful links' }),
@@ -267,18 +251,6 @@ describe('CrosswordLayout "More from Puzzles & games" rail', () => {
 			}),
 		).not.toBeInTheDocument();
 	});
-
-	it('does not render the rail when v1 is disabled, even with data present', () => {
-		renderCrosswordLayout({
-			moreFromPuzzlesAndGames: relatedPuzzles,
-		});
-
-		expect(
-			screen.queryByRole('heading', {
-				name: 'More from Puzzles & games',
-			}),
-		).not.toBeInTheDocument();
-	});
 });
 
 describe('CrosswordLayout Puzzle Page design (v1)', () => {
@@ -316,15 +288,6 @@ describe('CrosswordLayout Puzzle Page design (v1)', () => {
 		expect(container.querySelectorAll('aside nav').length).toBe(0);
 	});
 
-	it('keeps the original design when v1 is disabled', () => {
-		renderCrosswordLayout({});
-
-		expect(screen.queryAllByText('Word games')).toHaveLength(0);
-		expect(
-			screen.getByText('Explore more on these topics'),
-		).toBeInTheDocument();
-	});
-
 	it('points the title section link at the relative crosswords archive', () => {
 		const { container } = renderCrosswordLayout({
 			edition: 'INT',
@@ -360,27 +323,6 @@ describe('CrosswordLayout Puzzle Page design (v1)', () => {
 		expect(
 			container.querySelector('a[data-component="series"]'),
 		).toHaveAttribute('href', '/puzzles-and-games/crosswords/archive');
-	});
-
-	it('keeps the original title series link when v1 is disabled', () => {
-		const { container } = renderCrosswordLayout({
-			withQuickSeries: true,
-		});
-
-		expect(
-			container.querySelector('a[data-component="series"]'),
-		).toHaveAttribute(
-			'href',
-			expect.stringMatching(/crosswords\/series\/quick$/),
-		);
-	});
-
-	it('keeps the original title section link when v1 is disabled', () => {
-		const { container } = renderCrosswordLayout({});
-
-		expect(
-			container.querySelector('a[data-component="section"]'),
-		).not.toHaveAttribute('href', '/puzzles-and-games/crosswords/archive');
 	});
 
 	it('applies the new design even when there is no rail data', () => {
