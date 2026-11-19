@@ -2199,31 +2199,39 @@ const brandingLinkLight: PaletteFunction = ({ design, theme }) => {
 	if (design === ArticleDesign.Crossword) {
 		return sourcePalette.neutral[7];
 	}
-	if (design === ArticleDesign.Gallery) {
-		return sourcePalette.neutral[86];
-	}
+
 	switch (theme) {
 		case ArticleSpecial.Labs:
-			return sourcePalette.neutral[7];
+			switch (design) {
+				case ArticleDesign.Gallery:
+				case ArticleDesign.Audio:
+					return sourcePalette.neutral[86];
+				default:
+					return sourcePalette.neutral[7];
+			}
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[400];
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.news[400];
 		case Pillar.News:
 			switch (design) {
-				case ArticleDesign.Picture:
-				case ArticleDesign.Video:
-				case ArticleDesign.Audio:
-					return sourcePalette.neutral[86];
 				case ArticleDesign.Analysis:
 					return sourcePalette.news[300];
 				default:
 					return sourcePalette.news[400];
 			}
 		default:
-			return pillarPalette(theme, 400);
+			switch (design) {
+				case ArticleDesign.Gallery:
+				case ArticleDesign.Audio:
+				case ArticleDesign.Video:
+					return sourcePalette.neutral[86];
+				default:
+					return pillarPalette(theme, 400);
+			}
 	}
 };
+
 const brandingLinkDark: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Crossword:
