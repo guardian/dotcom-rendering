@@ -309,19 +309,28 @@ const webImmersiveLabsArticleWithSupportingCaption = {
 	},
 	blocks: webImmersiveLabsArticle.frontendData.blocks.map((block) => ({
 		...block,
-		elements: block.elements.map((element) =>
-			element._type ===
-				'model.dotcomrendering.pageElements.ImageBlockElement' &&
-			element.role === 'supporting'
-				? {
-						...element,
-						data: {
-							...element.data,
-							caption: 'Statue of Queen Elizabeth II.',
-						},
-					}
-				: element,
-		),
+		elements: block.elements
+			// Live campaign embeds inject a fixed footer and global CSS after render.
+			.filter(
+				(element) =>
+					element._type !==
+						'model.dotcomrendering.pageElements.InteractiveBlockElement' &&
+					element._type !==
+						'model.dotcomrendering.pageElements.EmbedBlockElement',
+			)
+			.map((element) =>
+				element._type ===
+					'model.dotcomrendering.pageElements.ImageBlockElement' &&
+				element.role === 'supporting'
+					? {
+							...element,
+							data: {
+								...element.data,
+								caption: 'Statue of Queen Elizabeth II.',
+							},
+						}
+					: element,
+			),
 	})),
 };
 
@@ -382,6 +391,14 @@ export const WebImmersiveLabsWithPageSkin: Story = {
 		await expect(labsHeader).not.toBeNull();
 		await expect(mainMedia).not.toBeNull();
 		await expect(brandingLogo).not.toBeNull();
+		await expect(
+			canvasElement.querySelector('[data-name="top-above-nav"]'),
+		).not.toBeInTheDocument();
+		await expect(
+			canvasElement.querySelector(
+				'.element-interactive, [data-testid="embed-block"]',
+			),
+		).not.toBeInTheDocument();
 
 		if (mainMedia === null || brandingLogo === null) {
 			throw new Error('Expected main media and Labs branding');
