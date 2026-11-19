@@ -2173,8 +2173,6 @@ const brandingLabelLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Crossword:
 			return sourcePalette.neutral[7];
-		case ArticleDesign.Video:
-		case ArticleDesign.Audio:
 		case ArticleDesign.Picture:
 			switch (theme) {
 				case ArticleSpecial.Labs:
@@ -2182,6 +2180,8 @@ const brandingLabelLight: PaletteFunction = ({ design, theme }) => {
 				default:
 					return sourcePalette.neutral[7];
 			}
+		case ArticleDesign.Video:
+		case ArticleDesign.Audio:
 		case ArticleDesign.Gallery:
 		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[86];
