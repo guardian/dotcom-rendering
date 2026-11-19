@@ -12,6 +12,7 @@ const containerStyles = css`
 	contain: layout;
 `;
 
+// TODO: Apply white background to older interactive atoms
 const iframe = css`
 	width: 100%;
 	background-color: ${palette('--interactive-atom-background')};
