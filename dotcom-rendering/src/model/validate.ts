@@ -84,7 +84,7 @@ export const validateAsEditionsCrosswordType = (
 	}
 	throw new TypeError(
 		`Unable to validate request body for editions crosswords.\n
-		${JSON.stringify(validateEditionsCrossword.errors, null, 2)}`,
+    ${JSON.stringify(validateEditionsCrossword.errors, null, 2)}`,
 	);
 };
 
@@ -118,7 +118,7 @@ export const validateAsAllEditorialNewslettersPageType = (
 	if (validateAllEditorialNewslettersPage(data)) return data;
 	throw new TypeError(
 		`Unable to validate request body for newsletters page.\n
-		${JSON.stringify(validateAllEditorialNewslettersPage.errors, null, 2)}`,
+    ${JSON.stringify(validateAllEditorialNewslettersPage.errors, null, 2)}`,
 	);
 };
 
@@ -368,6 +368,10 @@ const isArchiveItem = (value: unknown): boolean =>
 	isString(value.puzzleType) &&
 	/^\d{4}-\d{2}-\d{2}$/.test(String(value.date)) &&
 	typeof value.progress === 'number' &&
+	(value.isWithinFreeWindow === undefined ||
+		typeof value.isWithinFreeWindow === 'boolean') &&
+	(value.hasPremiumEntitlement === undefined ||
+		typeof value.hasPremiumEntitlement === 'boolean') &&
 	(value.setterName === undefined || isString(value.setterName)) &&
 	isString(value.url);
 

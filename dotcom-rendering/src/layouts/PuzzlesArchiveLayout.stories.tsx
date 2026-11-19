@@ -5,6 +5,8 @@ import { createPuzzlesPage } from '../../fixtures/manual/puzzlesPage';
 import {
 	puzzlesHubV2Experiment,
 	puzzlesHubV2Participation,
+	puzzlesHubV3Experiment,
+	puzzlesHubV3Participation,
 } from '../lib/puzzlesHubVersionExperiment';
 import { extractNAV } from '../model/extract-nav';
 import type { PuzzlesArchive } from '../types/puzzlesPage';
@@ -38,6 +40,8 @@ const archive: PuzzlesArchive = {
 		return {
 			puzzleType: mini.puzzleType,
 			date: `2026-08-${day}`,
+			isWithinFreeWindow: index + 1 >= 20,
+			hasPremiumEntitlement: false,
 			progress: [15, 21, 24, 25].includes(index + 1)
 				? 100
 				: index + 1 === 11
@@ -84,6 +88,7 @@ const config = {
 	edition: 'INT' as const,
 	serverSideABTests: {
 		...puzzlesHubV2Participation(puzzlesHubV2Experiment.variant),
+		...puzzlesHubV3Participation(puzzlesHubV3Experiment.variant),
 	},
 };
 const puzzlesPage = createPuzzlesPage({ archive, config });
@@ -150,9 +155,45 @@ export const WithAds = {
 	parameters: lightParameters,
 } satisfies Story;
 
+export const WithoutPremiumExperiment = {
+	args: {
+		puzzlesPage: createPuzzlesPage({
+			archive,
+			config: {
+				...config,
+				serverSideABTests: {
+					...puzzlesHubV2Participation(
+						puzzlesHubV2Experiment.variant,
+					),
+					...puzzlesHubV3Participation(
+						puzzlesHubV3Experiment.control,
+					),
+				},
+			},
+		}),
+	},
+	parameters: lightParameters,
+} satisfies Story;
+
 export const AdFree = {
 	args: {
 		puzzlesPage: { ...puzzlesPage, isAdFreeUser: true },
+	},
+	parameters: lightParameters,
+} satisfies Story;
+
+export const PremiumSubscriber = {
+	args: {
+		puzzlesPage: createPuzzlesPage({
+			archive: {
+				...archive,
+				items: archive.items.map((item) => ({
+					...item,
+					hasPremiumEntitlement: true,
+				})),
+			},
+			config,
+		}),
 	},
 	parameters: lightParameters,
 } satisfies Story;
@@ -166,6 +207,8 @@ const archiveItems = (
 		return {
 			puzzleType: puzzle.puzzleType,
 			date: `2026-08-${day}`,
+			isWithinFreeWindow: index + 1 >= 20,
+			hasPremiumEntitlement: false,
 			progress: [15, 21, 24, 25].includes(index + 1) ? 100 : 0,
 			...(setterName && { setterName }),
 			url: `/puzzles-and-games/${puzzle.slug}/2026-08-${day}`,
