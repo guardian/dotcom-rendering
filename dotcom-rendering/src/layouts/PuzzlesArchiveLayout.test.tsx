@@ -5,6 +5,7 @@ import type { ReactNode } from 'react';
 import { createPuzzlesPage } from '../../fixtures/manual/puzzlesPage';
 import { Island } from '../components/Island';
 import { SubNav } from '../components/Masthead/Titlepiece/SubNav';
+import { PUZZLES_HUB_EDITIONS } from '../lib/puzzlesHubAccess';
 import {
 	puzzlesHubV2Experiment,
 	puzzlesHubV2Participation,
@@ -70,7 +71,7 @@ describe('PuzzlesArchiveLayout', () => {
 		['INT', 'variant', 'control', false],
 		['INT', 'variant', undefined, false],
 		['INT', 'control', 'variant', false],
-		['UK', 'variant', 'variant', false],
+		['UK', 'variant', 'variant', PUZZLES_HUB_EDITIONS.includes('UK')],
 	] as const)(
 		'gates premium indicators for edition=%s, v2=%s, v3=%s',
 		(edition, v2, v3, expected) => {
@@ -151,7 +152,11 @@ describe('PuzzlesArchiveLayout', () => {
 		},
 	);
 
-	it.each([['hub only', true, false, 4]] as const)(
+	it.each([
+		['hub only', true, false, 4],
+		['V2 without hub', false, true, 1],
+		['neither', false, false, 1],
+	] as const)(
 		'hides trivia for %s',
 		(_description, isHubAvailable, isV2Enabled, expectedLinkCount) => {
 			const { puzzlesPage } = archiveStories.args;
