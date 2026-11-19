@@ -345,7 +345,10 @@ export const StandardLayoutArticleGrid = ({
 					`,
 				isInteractiveTopHat &&
 					css`
-						grid-template-rows: 300px auto;
+						grid-template-rows: 100px auto;
+						${from.desktop} {
+							grid-template-rows: 20vh auto;
+						}
 					`,
 			]}
 		>
