@@ -307,7 +307,9 @@ const invertedWrapper = css`
 const ageWarningMargins = (format: ArticleFormat) => {
 	if (
 		format.design === ArticleDesign.Gallery ||
-		format.display === ArticleDisplay.Immersive
+		format.display === ArticleDisplay.Immersive ||
+		(format.design === ArticleDesign.Interactive &&
+			format.display === ArticleDisplay.Showcase)
 	) {
 		return '';
 	}
