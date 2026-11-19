@@ -223,6 +223,8 @@ const SuccessMessage = ({
 	newsletterName: string;
 	frequency: string;
 }) => {
+	const { renderingTarget } = useConfig();
+
 	return (
 		<div css={responseBoxStyles}>
 			<InlineSuccess size="medium">
@@ -235,15 +237,17 @@ const SuccessMessage = ({
 					</span>
 				</span>
 			</InlineSuccess>
-			<LinkButton
-				href="/email-newsletters?INTCMP=DOTCOM_NEWSLETTER_SIGNUP_CARD"
-				priority="tertiary"
-				theme={tertiaryButtonTheme}
-				cssOverrides={tryAgainButtonStyles}
-				data-ignore="global-link-styling"
-			>
-				Browse more newsletters
-			</LinkButton>
+			{renderingTarget === 'Web' && (
+				<LinkButton
+					href="/email-newsletters?INTCMP=DOTCOM_NEWSLETTER_SIGNUP_CARD"
+					priority="tertiary"
+					theme={tertiaryButtonTheme}
+					cssOverrides={tryAgainButtonStyles}
+					data-ignore="global-link-styling"
+				>
+					Browse more newsletters
+				</LinkButton>
+			)}
 		</div>
 	);
 };

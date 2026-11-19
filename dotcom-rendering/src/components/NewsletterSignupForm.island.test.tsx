@@ -7,6 +7,7 @@ import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
 import { useBrowserId } from '../lib/useBrowserId';
 import { useCountryCode } from '../lib/useCountryCode';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { ConfigProvider } from './ConfigContext';
 import { NewsletterSignupForm } from './NewsletterSignupForm.island';
 
@@ -33,6 +34,13 @@ jest.mock('../lib/useBrowserId', () => ({
 
 jest.mock('../lib/useCountryCode', () => ({
 	useCountryCode: jest.fn(),
+}));
+
+jest.mock('../lib/bridgetApi', () => ({
+	getNewslettersClient: () => ({
+		getLoggedInUserEmail: () =>
+			Promise.resolve({ emailAddress: undefined }),
+	}),
 }));
 
 type RecaptchaProps = {
@@ -75,11 +83,14 @@ jest.mock('react-google-recaptcha', () => ({
 	),
 }));
 
-const renderForm = () =>
+const renderForm = (
+	renderingTarget: RenderingTarget = 'Web',
+	isAlreadySubscribed = false,
+) =>
 	render(
 		<ConfigProvider
 			value={{
-				renderingTarget: 'Web',
+				renderingTarget,
 				darkModeAvailable: false,
 				assetOrigin: '/',
 				editionId: 'UK',
@@ -90,6 +101,7 @@ const renderForm = () =>
 				newsletterName="Morning Briefing"
 				frequency="every day"
 				componentId="AR NewsletterSignupForm morning-briefing"
+				isAlreadySubscribed={isAlreadySubscribed}
 			/>
 		</ConfigProvider>,
 	);
@@ -151,6 +163,33 @@ const typeEmailAddress = async (
 	await testUser.type(screen.getByLabelText('Enter your email'), email);
 };
 
+const successStates = [
+	{
+		state: 'after signup',
+		showSuccess: async (renderingTarget: RenderingTarget) => {
+			const testUser = user.setup();
+			renderForm(renderingTarget);
+			await typeEmailAddress(testUser);
+			await testUser.click(
+				screen.getByRole('button', { name: 'Sign up' }),
+			);
+			expect(
+				await screen.findByText("You're signed up!"),
+			).toBeInTheDocument();
+		},
+	},
+	{
+		state: 'when already subscribed',
+		showSuccess: async (renderingTarget: RenderingTarget) => {
+			renderForm(renderingTarget, true);
+			expect(
+				await screen.findByText("You're signed up!"),
+			).toBeInTheDocument();
+			expect(global.fetch).not.toHaveBeenCalled();
+		},
+	},
+];
+
 describe('NewsletterSignupForm', () => {
 	const pageConfig = window.guardian.config
 		.page as typeof window.guardian.config.page & {
@@ -185,6 +224,31 @@ describe('NewsletterSignupForm', () => {
 		}
 		global.fetch = jest.fn().mockResolvedValue({ ok: true });
 	});
+
+	it.each(successStates)(
+		'shows the browse link on Web $state',
+		async ({ showSuccess }) => {
+			await showSuccess('Web');
+			expect(
+				screen.getByRole('link', { name: 'Browse more newsletters' }),
+			).toHaveAttribute(
+				'href',
+				'/email-newsletters?INTCMP=DOTCOM_NEWSLETTER_SIGNUP_CARD',
+			);
+		},
+	);
+
+	it.each(successStates)(
+		'hides the browse link in Apps $state',
+		async ({ showSuccess }) => {
+			await showSuccess('Apps');
+			expect(
+				screen.queryByRole('link', {
+					name: 'Browse more newsletters',
+				}),
+			).not.toBeInTheDocument();
+		},
+	);
 
 	it('submits for a signed-out user and includes marketing/browser fields', async () => {
 		const testUser = user.setup();
