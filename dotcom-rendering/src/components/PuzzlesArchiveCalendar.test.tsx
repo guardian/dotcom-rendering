@@ -434,15 +434,15 @@ describe('PuzzlesArchiveCalendar', () => {
 			);
 			expect(calendarIcon).toHaveAttribute(
 				'height',
-				showPremiumIndicators ? '14' : '15',
+				showPremiumIndicators ? '13.35119' : '15',
 			);
 			expect(legendIcon).toHaveAttribute(
 				'width',
-				showPremiumIndicators ? '16' : '13.3',
+				showPremiumIndicators ? '10.28516' : '13.3',
 			);
 			expect(legendIcon).toHaveAttribute(
 				'height',
-				showPremiumIndicators ? '14' : '13.3',
+				showPremiumIndicators ? '8.57096' : '13.3',
 			);
 			if (showPremiumIndicators) {
 				expect(calendarIcon?.querySelector('path')).toHaveAttribute(

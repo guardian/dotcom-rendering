@@ -60,13 +60,19 @@ const CalendarCompletedIcon = () => (
 	</svg>
 );
 
-const PremiumCompletedIcon = () => (
+const PremiumCompletedIcon = ({
+	width = 16,
+	height = 13.35119,
+}: {
+	width?: number;
+	height?: number;
+}) => (
 	<svg
 		aria-hidden="true"
 		focusable="false"
-		width="16"
-		height="14"
-		viewBox="0 0 16 14"
+		width={width}
+		height={height}
+		viewBox="0 0 16 13.3512"
 		fill="none"
 		xmlns="http://www.w3.org/2000/svg"
 	>
@@ -596,7 +602,7 @@ const premiumCalendarStyles = css`
 		right: 8px;
 		bottom: 8px;
 		width: 16px;
-		height: 14px;
+		height: 13.35119px;
 	}
 	${from.mobileMedium} {
 		--calendar-gap: 8px;
@@ -691,6 +697,7 @@ const premiumLegendStyles = css`
 		padding-left: 3px;
 	}
 	${from.leftCol} {
+		gap: ${space[3]}px;
 		> span {
 			display: grid;
 			grid-template-columns: 16px 1fr;
@@ -1389,7 +1396,10 @@ export const PuzzlesArchiveCalendar = ({
 				<span className="available">Available</span>
 				<span className="completed">
 					{showPremiumIndicators ? (
-						<PremiumCompletedIcon />
+						<PremiumCompletedIcon
+							width={10.28516}
+							height={8.57096}
+						/>
 					) : (
 						<PlayedLegendIcon />
 					)}
