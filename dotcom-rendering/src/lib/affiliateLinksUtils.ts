@@ -85,19 +85,23 @@ const createXcustValue = ({
 	abTestString,
 	utmParamsString,
 	xcustComponentId,
+	urlId,
 }: {
 	referrerDomain: string;
 	skimlinksAccountId: string;
 	abTestString: string;
 	utmParamsString: string;
 	xcustComponentId: string | null;
+	urlId: string;
 }): string => {
 	const xcustSegments = [
+		urlId,
 		'referrer',
 		referrerDomain,
 		'accountId',
 		skimlinksAccountId,
 	];
+
 	if (abTestString) {
 		xcustSegments.push('abTestParticipations', abTestString);
 	}
@@ -117,12 +121,14 @@ export const buildXcustParamForAffiliateLink = ({
 	utmParamsString,
 	referrerDomain,
 	xcustComponentId,
+	urlId,
 }: {
 	url: URL;
 	abTestParticipations?: ABParticipations;
 	utmParamsString: string;
 	referrerDomain: string;
 	xcustComponentId: string | null;
+	urlId: string;
 }): string => {
 	const abTestString = buildMergedAbTestString({
 		url: url.toString(),
@@ -135,5 +141,6 @@ export const buildXcustParamForAffiliateLink = ({
 		abTestString,
 		utmParamsString,
 		xcustComponentId,
+		urlId,
 	});
 };
