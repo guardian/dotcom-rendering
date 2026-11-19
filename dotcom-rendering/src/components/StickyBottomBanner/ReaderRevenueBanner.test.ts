@@ -19,16 +19,6 @@ jest.mock('../../lib/fetchEmail', () => ({
 	lazyFetchEmailWithTimeout: jest.fn(),
 }));
 
-jest.mock('../../lib/identity', () => ({
-	getAuthStatus: jest.fn(),
-}));
-
-jest.mock('../../lib/newsletterSubscriptionCache', () => ({
-	fetchNewsletterSubscriptions: jest.fn(),
-	getCachedSubscriptions: jest.fn(),
-	shouldInvalidateCache: jest.fn(),
-}));
-
 const mockGetCookie = jest.mocked(getCookie);
 mockGetCookie.mockReturnValue(null);
 
@@ -58,7 +48,6 @@ const buildBannerPayload = async (
 		userConsent,
 		hideSupportMessagingForUser: false,
 		inAuxiaVariant,
-		userSubscriptions: [],
 	});
 };
 
@@ -83,11 +72,11 @@ describe('getAuxiaRolloutMvtId', () => {
 });
 
 describe('banner request targeting payload', () => {
-	it.each([[[6042, 1234]], [[]]])(
-		'includes user subscriptions in the SDC payload: %j',
-		async (userSubscriptions: number[]) => {
+	it.each([true, false])(
+		'omits user subscriptions from the SDC payload when isSignedIn is %s',
+		async (isSignedIn) => {
 			const payload = await buildPayload({
-				isSignedIn: false,
+				isSignedIn,
 				contentType: 'Article',
 				shouldHideReaderRevenue: false,
 				isMinuteArticle: false,
@@ -100,36 +89,11 @@ describe('banner request targeting payload', () => {
 				asyncArticleCounts: Promise.resolve(undefined),
 				userConsent: true,
 				hideSupportMessagingForUser: false,
-				userSubscriptions,
 			});
 
-			expect(payload.targeting).toHaveProperty(
-				'userSubscriptions',
-				userSubscriptions,
-			);
+			expect(payload.targeting).not.toHaveProperty('userSubscriptions');
 		},
 	);
-
-	it('sends an empty subscription list when there are no subscriptions', async () => {
-		const payload = await buildPayload({
-			isSignedIn: true,
-			contentType: 'Article',
-			shouldHideReaderRevenue: false,
-			isMinuteArticle: false,
-			isPaidContent: false,
-			isSensitive: false,
-			tags: [],
-			contributionsServiceUrl: 'https://contributions.example.com',
-			countryCode: 'GB',
-			optedOutOfArticleCount: false,
-			asyncArticleCounts: Promise.resolve(undefined),
-			userConsent: true,
-			hideSupportMessagingForUser: false,
-			userSubscriptions: [],
-		});
-
-		expect(payload.targeting).toHaveProperty('userSubscriptions', []);
-	});
 
 	it.each([
 		['valid MVT ID', '123456', 123456],

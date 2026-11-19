@@ -1,4 +1,5 @@
 import type { AbTest } from '@guardian/ophan-tracker-js';
+import { neutral } from '@guardian/source/foundations';
 import { Button, TextInput } from '@guardian/source/react-components';
 import { ToggleSwitch } from '@guardian/source-development-kitchen/react-components';
 import { type ChangeEvent, useEffect } from 'react';
@@ -8,10 +9,11 @@ import { useNewsletterSignupForm } from '../../../../lib/useNewsletterSignupForm
 import { useConfig } from '../../../ConfigContext';
 import { NewsletterPrivacyMessage } from '../../../NewsletterPrivacyMessage';
 import { FailureMessage } from './ErrorMessage';
+import type { NewsletterBannerData } from './NewsletterBannerData';
 import { styles } from './NewsletterSignupForm.styles';
 
 type NewsletterSignupFormProps = {
-	newsletterId: string;
+	bannerData: NewsletterBannerData;
 	componentId: string;
 	abTest?: AbTest;
 	isModal?: boolean;
@@ -27,12 +29,26 @@ type NewsletterSignupFormProps = {
  */
 
 export const NewsletterSignupForm = ({
-	newsletterId,
+	bannerData,
 	componentId,
 	abTest,
 	isModal = false,
 	onSuccess,
 }: NewsletterSignupFormProps) => {
+	const newsletterId = bannerData.newsletter.identityName;
+	const {
+		emailInputTextColor,
+		emailInputBackgroundColor,
+		emailInputBorderColor,
+		signupButtonBackgroundColor,
+		signupButtonTextColor,
+		errorColor,
+		privacyTextColor,
+		borderColor,
+		toggleActiveColor,
+	} = bannerData.settings.newsletterBanner;
+	const bodyText =
+		bannerData.settings.containerSettings.textColor ?? neutral[20];
 	const { renderingTarget } = useConfig();
 	const hideMarketingToggle = useHideMarketingToggleForCountry();
 
@@ -105,8 +121,26 @@ export const NewsletterSignupForm = ({
 				{isSignedIn ? (
 					<input type="hidden" name="email" value={userEmail ?? ''} />
 				) : (
-					<div css={styles.emailField}>
+					<div
+						css={[
+							styles.emailField,
+							styles.validationError(errorColor),
+						]}
+					>
 						<TextInput
+							cssOverrides={styles.emailInputText(
+								emailInputTextColor,
+							)}
+							theme={{
+								textLabel: emailInputTextColor,
+								textUserInput: emailInputTextColor,
+								backgroundInput: emailInputBackgroundColor,
+								textError: errorColor,
+								borderError: errorColor,
+								...(emailInputBorderColor !== undefined && {
+									border: emailInputBorderColor,
+								}),
+							}}
 							name="email"
 							label="Enter your email"
 							type="email"
@@ -122,6 +156,13 @@ export const NewsletterSignupForm = ({
 				)}
 				<div css={styles.submitButtonContainer}>
 					<Button
+						theme={{
+							backgroundPrimary: signupButtonBackgroundColor,
+							backgroundPrimaryHover: signupButtonBackgroundColor,
+							...(signupButtonTextColor !== undefined && {
+								textPrimary: signupButtonTextColor,
+							}),
+						}}
 						cssOverrides={
 							isSignedIn
 								? [styles.submitButton, styles.signedInButton]
@@ -150,8 +191,14 @@ export const NewsletterSignupForm = ({
 										: 'none',
 								}}
 							>
-								<div css={styles.marketingToggleBox}>
+								<div
+									css={styles.marketingToggleBox(borderColor)}
+								>
 									<ToggleSwitch
+										cssOverrides={styles.toggleText(
+											bodyText,
+											toggleActiveColor,
+										)}
 										id={`marketing-opt-in-${newsletterId}`}
 										checked={marketingOptIn ?? false}
 										onClick={handleMarketingToggle}
@@ -163,6 +210,9 @@ export const NewsletterSignupForm = ({
 							<div css={styles.privacyContainer(isSignedIn)}>
 								<NewsletterPrivacyMessage
 									isSignedIn={isSignedIn}
+									cssOverrides={styles.privacyText(
+										privacyTextColor,
+									)}
 								/>
 							</div>
 						</div>
@@ -171,7 +221,11 @@ export const NewsletterSignupForm = ({
 			</form>
 
 			{showFailure && (
-				<FailureMessage text={failureMessage} onRetry={handleReset} />
+				<FailureMessage
+					bannerData={bannerData}
+					text={failureMessage}
+					onRetry={handleReset}
+				/>
 			)}
 			{captchaSiteKey !== undefined && captchaSiteKey !== '' && (
 				<div css={styles.recaptchaContainer}>
