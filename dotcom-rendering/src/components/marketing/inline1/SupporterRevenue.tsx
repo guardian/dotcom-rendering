@@ -12,6 +12,8 @@ import { LinkButton } from '@guardian/source/react-components';
 import type { Inline1Props } from '@guardian/support-dotcom-components/dist/shared/types/props/inline1';
 import sanitize from 'sanitize-html';
 import type { ReactComponent } from '../lib/ReactComponent';
+import type { ImageAttrs } from '../shared/ResponsiveImage';
+import { ResponsiveImage } from '../shared/ResponsiveImage';
 import { useInline1Tracking } from './utils/useInline1Tracking';
 
 const outerContainerStyles = css`
@@ -22,10 +24,10 @@ const outerContainerStyles = css`
 const innerContainerStyles = css`
 	background-color: ${palette.neutral[97]};
 	padding-top: ${space[2]}px;
-	padding-left: ${space[3]}px;
+	padding-left: 10px;
 	display: flex;
 	flex-direction: column;
-	gap: ${space[3]}px;
+	gap: ${space[2]}px;
 
 	${until.tablet} {
 		padding-right: ${space[3]}px;
@@ -37,7 +39,7 @@ const innerContainerStyles = css`
 			'heading logo'
 			'body    image'
 			'cta	 image';
-		gap: ${space[3]}px ${space[3]}px;
+		gap: 0px ${space[3]}px;
 	}
 `;
 
@@ -45,6 +47,8 @@ const headingStyles = css`
 	${headlineMedium24};
 	${from.tablet} {
 		grid-area: heading;
+		margin-bottom: 8px;
+		max-width: 428px;
 	}
 `;
 
@@ -64,8 +68,13 @@ const guardianLogoContainerStyles = css`
 
 const bodyStyles = css`
 	${textSans15};
+	${until.tablet} {
+		margin-bottom: 12px;
+	}
 	${from.tablet} {
 		grid-area: body;
+		margin-bottom: 40px;
+		max-width: 428px;
 	}
 `;
 
@@ -93,16 +102,23 @@ const ctaButtonStyles = css`
 const imageWrapperStyles = css`
 	display: flex;
 	align-items: flex-end;
-	height: 144px;
 	${from.tablet} {
 		grid-area: image;
 	}
 `;
 
 const imageStyles = css`
-	height: 131px;
-	width: 164px;
-	object-fit: cover;
+	img {
+		object-fit: cover;
+		height: 126px;
+		width: 158px;
+	}
+
+	${until.tablet} {
+		img {
+			min-width: 210px;
+		}
+	}
 `;
 
 // This is used to sanitize the HTML for the title
@@ -127,6 +143,34 @@ export const SupporterRevenue: ReactComponent<Inline1Props> = ({
 	const image = variant.message.image;
 	const cta = variant.message.primaryCta;
 
+	const images: ImageAttrs[] = [];
+	const baseImage = {
+		url: image?.desktopUrl ?? '',
+		media: '',
+		alt: image?.altText ?? '',
+	};
+
+	if (image) {
+		if (image.mobileUrl !== undefined && image.mobileUrl.length > 0) {
+			images.push({
+				url: image.mobileUrl,
+				media: '(max-width: 739px)',
+			});
+		}
+		if (image.tabletUrl !== undefined && image.tabletUrl.length > 0) {
+			images.push({
+				url: image.tabletUrl,
+				media: '(max-width: 979px)',
+			});
+		}
+		if (image.desktopUrl !== undefined && image.desktopUrl.length > 0) {
+			images.push({
+				url: image.desktopUrl,
+				media: '',
+			});
+		}
+	}
+
 	return (
 		<section
 			css={outerContainerStyles}
@@ -139,11 +183,11 @@ export const SupporterRevenue: ReactComponent<Inline1Props> = ({
 				</div>
 				{image && (
 					<div css={imageWrapperStyles}>
-						<img
-							src={image.desktopUrl}
-							css={imageStyles}
-							alt={image.altText}
-						/>
+						<ResponsiveImage
+							cssOverrides={imageStyles}
+							images={images}
+							baseImage={baseImage}
+						></ResponsiveImage>
 					</div>
 				)}
 				<h2

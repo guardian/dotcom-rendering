@@ -39,6 +39,7 @@ import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { InteractiveArticleGridDeprecated } from './interactives/InteractiveArticleGridDeprecated';
+import { getLayoutType, getMainMediaInfo } from './lib/articleArrangements';
 import { pageSkinContainer } from './lib/pageSkin';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 import { StandardLayoutArticleGrid } from './StandardLayoutArticleGrid';
@@ -113,6 +114,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const hasPageSkin =
 		isWeb && renderAds && (article.config.hasPageSkin ?? false);
 
+	const { mainMediaAspectRatio, mainMediaOrientation } =
+		getMainMediaInfo(article);
+	const layoutType = getLayoutType(format, mainMediaOrientation);
+
 	return (
 		<>
 			{hasPageSkin && (
@@ -143,7 +148,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 			{isWeb && (
 				<div data-print-layout="hide" id="bannerandheader">
-					{renderAds && (
+					{renderAds && layoutType !== 'immersiveLandscape' && (
 						<Stuck>
 							<Section
 								fullWidth={true}
@@ -256,6 +261,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							article={article}
 							format={format}
 							renderingTarget={renderingTarget}
+							layoutType={layoutType}
+							mainMediaAspectRatio={mainMediaAspectRatio}
 							hasPageSkin={hasPageSkin}
 						/>
 					)}

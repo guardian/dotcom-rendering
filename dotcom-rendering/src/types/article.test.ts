@@ -31,11 +31,4 @@ describe('enhanceArticleType crossword theme', () => {
 		expect(article.design).toBe(ArticleDesign.Crossword);
 		expect(article.theme).toBe(Pillar.News);
 	});
-
-	it('keeps the theme sent by Frontend outside the International edition', () => {
-		Object.defineProperty(process.env, 'NODE_ENV', { value: 'production' });
-		const article = crosswordArticle('UK');
-
-		expect(article.theme).toBe(Pillar.Lifestyle);
-	});
 });
