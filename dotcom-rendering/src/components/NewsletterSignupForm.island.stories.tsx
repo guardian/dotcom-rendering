@@ -160,6 +160,17 @@ export const Success = meta.story({
 	},
 });
 
+/** Subscription confirmed in apps. */
+export const SuccessApps = meta.story({
+	args: { ...defaultArgs },
+	parameters: { config: { renderingTarget: 'Apps' } },
+	beforeEach() {
+		mocked(useNewsletterSignupForm).mockReturnValue(
+			mockForm({ responseOk: true }),
+		);
+	},
+});
+
 /** Server returned a non-2xx response — error message and "Try again" button. */
 export const SubmissionFailed = meta.story({
 	args: { ...defaultArgs },
