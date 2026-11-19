@@ -425,11 +425,15 @@ export const SeriesSectionLink = ({
 							href={`${guardianBaseURL}/${sectionUrl}`}
 							format={format}
 							colour={sectionTitleColour}
+							fontCss={
+								isWeekendEssay
+									? secondaryFontStyles(format)
+									: undefined
+							}
 							extraCss={[
 								displayBlock,
 								isWeekendEssay
 									? css`
-											${headlineMedium17};
 											color: ${themePalette(
 												'--series-title-background',
 											)};
