@@ -5,7 +5,11 @@ import type { ReactNode } from 'react';
 import { createPuzzlesPage } from '../../fixtures/manual/puzzlesPage';
 import { Island } from '../components/Island';
 import { SubNav } from '../components/Masthead/Titlepiece/SubNav';
-import { PUZZLES_HUB_EDITIONS } from '../lib/puzzlesHubAccess';
+import type * as PuzzlesHubAccess from '../lib/puzzlesHubAccess';
+import {
+	isPuzzlesHubAvailable,
+	PUZZLES_HUB_EDITIONS,
+} from '../lib/puzzlesHubAccess';
 import {
 	puzzlesHubV2Experiment,
 	puzzlesHubV2Participation,
@@ -17,6 +21,16 @@ import archiveStories, {
 	LogicPuzzles,
 	WordGames,
 } from './PuzzlesArchiveLayout.stories';
+
+jest.mock('../lib/puzzlesHubAccess', () => {
+	const actual = jest.requireActual<typeof PuzzlesHubAccess>(
+		'../lib/puzzlesHubAccess',
+	);
+	return {
+		...actual,
+		isPuzzlesHubAvailable: jest.fn(actual.isPuzzlesHubAvailable),
+	};
+});
 
 jest.mock('../components/Masthead/Masthead', () => ({
 	Masthead: ({ nav }: { nav: NavType }) => (
@@ -65,6 +79,15 @@ const slotIds = () =>
 
 describe('PuzzlesArchiveLayout', () => {
 	const nav = extractNAV(createPuzzlesPage().nav);
+
+	beforeEach(() => {
+		const actual = jest.requireActual<typeof PuzzlesHubAccess>(
+			'../lib/puzzlesHubAccess',
+		);
+		jest.mocked(isPuzzlesHubAvailable).mockImplementation(
+			actual.isPuzzlesHubAvailable,
+		);
+	});
 
 	it.each([
 		['INT', 'variant', 'variant', true],
@@ -159,6 +182,8 @@ describe('PuzzlesArchiveLayout', () => {
 	] as const)(
 		'hides trivia for %s',
 		(_description, isHubAvailable, isV2Enabled, expectedLinkCount) => {
+			// Exercise navigation states independently of the edition rollout.
+			jest.mocked(isPuzzlesHubAvailable).mockReturnValue(isHubAvailable);
 			const { puzzlesPage } = archiveStories.args;
 			render(
 				<PuzzlesArchiveLayout
@@ -167,7 +192,7 @@ describe('PuzzlesArchiveLayout', () => {
 						...puzzlesPage,
 						config: {
 							...puzzlesPage.config,
-							edition: isHubAvailable ? 'INT' : 'UK',
+							edition: 'INT',
 							serverSideABTests: {
 								...puzzlesHubV2Participation(
 									isV2Enabled
