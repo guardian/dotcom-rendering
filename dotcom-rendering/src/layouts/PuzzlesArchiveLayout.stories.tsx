@@ -5,6 +5,8 @@ import { createPuzzlesPage } from '../../fixtures/manual/puzzlesPage';
 import {
 	puzzlesHubV2Experiment,
 	puzzlesHubV2Participation,
+	puzzlesHubV3Experiment,
+	puzzlesHubV3Participation,
 } from '../lib/puzzlesHubVersionExperiment';
 import { extractNAV } from '../model/extract-nav';
 import type { PuzzlesArchive } from '../types/puzzlesPage';
@@ -86,6 +88,7 @@ const config = {
 	edition: 'INT' as const,
 	serverSideABTests: {
 		...puzzlesHubV2Participation(puzzlesHubV2Experiment.variant),
+		...puzzlesHubV3Participation(puzzlesHubV3Experiment.variant),
 	},
 };
 const puzzlesPage = createPuzzlesPage({ archive, config });
@@ -149,6 +152,26 @@ const darkParameters = {
 };
 
 export const WithAds = {
+	parameters: lightParameters,
+} satisfies Story;
+
+export const WithoutPremiumExperiment = {
+	args: {
+		puzzlesPage: createPuzzlesPage({
+			archive,
+			config: {
+				...config,
+				serverSideABTests: {
+					...puzzlesHubV2Participation(
+						puzzlesHubV2Experiment.variant,
+					),
+					...puzzlesHubV3Participation(
+						puzzlesHubV3Experiment.control,
+					),
+				},
+			},
+		}),
+	},
 	parameters: lightParameters,
 } satisfies Story;
 

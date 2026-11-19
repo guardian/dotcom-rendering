@@ -8,6 +8,7 @@ import { SubNav } from '../components/Masthead/Titlepiece/SubNav';
 import {
 	puzzlesHubV2Experiment,
 	puzzlesHubV2Participation,
+	puzzlesHubV3Participation,
 } from '../lib/puzzlesHubVersionExperiment';
 import { extractNAV, type NavType } from '../model/extract-nav';
 import { PuzzlesArchiveLayout } from './PuzzlesArchiveLayout';
@@ -63,6 +64,50 @@ const slotIds = () =>
 
 describe('PuzzlesArchiveLayout', () => {
 	const nav = extractNAV(createPuzzlesPage().nav);
+
+	it.each([
+		['INT', 'variant', 'variant', true],
+		['INT', 'variant', 'control', false],
+		['INT', 'variant', undefined, false],
+		['INT', 'control', 'variant', false],
+		['UK', 'variant', 'variant', false],
+	] as const)(
+		'gates premium indicators for edition=%s, v2=%s, v3=%s',
+		(edition, v2, v3, expected) => {
+			jest.mocked(Island).mockClear();
+			const { puzzlesPage } = archiveStories.args;
+			render(
+				<PuzzlesArchiveLayout
+					NAV={nav}
+					puzzlesPage={{
+						...puzzlesPage,
+						config: {
+							...puzzlesPage.config,
+							edition,
+							serverSideABTests: {
+								...puzzlesHubV2Participation(v2),
+								...(v3 === undefined
+									? {}
+									: puzzlesHubV3Participation(v3)),
+							},
+						},
+					}}
+				/>,
+			);
+
+			expect(Island).toHaveBeenCalledWith(
+				expect.objectContaining({
+					children: expect.objectContaining({
+						props: expect.objectContaining({
+							initialArchive: puzzlesPage.archive,
+							showPremiumIndicators: expected,
+						}),
+					}),
+				}),
+				expect.anything(),
+			);
+		},
+	);
 
 	it.each([
 		['Crosswords', archiveStories.args],

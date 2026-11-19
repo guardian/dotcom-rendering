@@ -416,6 +416,7 @@ describe('PuzzlesArchiveCalendar', () => {
 		(isWithinFreeWindow, hasPremiumEntitlement, showStar) => {
 			render(
 				<PuzzlesArchiveCalendar
+					showPremiumIndicators={true}
 					initialArchive={{
 						...archive,
 						items: [
@@ -459,9 +460,45 @@ describe('PuzzlesArchiveCalendar', () => {
 		},
 	);
 
+	it.each([false, undefined])(
+		'hides premium indicators when the experiment is off (%s)',
+		(showPremiumIndicators) => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={{
+						...archive,
+						items: [
+							{
+								...archive.items[0]!,
+								isWithinFreeWindow: false,
+								hasPremiumEntitlement: false,
+							},
+						],
+					}}
+					showPremiumIndicators={showPremiumIndicators}
+				/>,
+			);
+
+			const day = screen.getByRole('link', {
+				name: '2026-09-02, available',
+			});
+			expect(day).not.toHaveAttribute('data-supporter-exclusive');
+			expect(
+				day.querySelector('.supporter-exclusive-icon'),
+			).not.toBeInTheDocument();
+			expect(
+				screen.queryByText('Supporter exclusive'),
+			).not.toBeInTheDocument();
+			expect(
+				screen.getByText('Available', { selector: 'span.available' }),
+			).toBeInTheDocument();
+		},
+	);
+
 	it('preserves the played indicator on a supporter-exclusive puzzle', () => {
 		render(
 			<PuzzlesArchiveCalendar
+				showPremiumIndicators={true}
 				initialArchive={{
 					...archive,
 					items: [
@@ -519,7 +556,12 @@ describe('PuzzlesArchiveCalendar', () => {
 				configurable: true,
 				value: fetchMock,
 			});
-			render(<PuzzlesArchiveCalendar initialArchive={initialArchive} />);
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={initialArchive}
+					showPremiumIndicators={true}
+				/>,
+			);
 
 			await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(1));
 			await waitFor(() =>

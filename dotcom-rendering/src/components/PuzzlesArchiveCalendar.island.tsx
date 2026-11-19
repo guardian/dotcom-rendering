@@ -729,8 +729,10 @@ const archiveMonth = (year: number, month: number): string =>
 
 export const PuzzlesArchiveCalendar = ({
 	initialArchive,
+	showPremiumIndicators = false,
 }: {
 	initialArchive: PuzzlesArchive;
+	showPremiumIndicators?: boolean;
 }) => {
 	const [archive, setArchive] = useState(initialArchive);
 	const [loading, setLoading] = useState(false);
@@ -1177,6 +1179,7 @@ export const PuzzlesArchiveCalendar = ({
 					}
 					const status = archiveStatus(cell.item);
 					const supporterExclusive =
+						showPremiumIndicators &&
 						cell.item?.isWithinFreeWindow === false &&
 						cell.item.hasPremiumEntitlement !== true;
 					const isToday = cell.date === todayDate;
@@ -1282,10 +1285,12 @@ export const PuzzlesArchiveCalendar = ({
 				</div>
 			)}
 			<div css={legendStyles}>
-				<span className="supporter-exclusive">
-					<SupporterExclusiveIcon />
-					Supporter exclusive
-				</span>
+				{showPremiumIndicators && (
+					<span className="supporter-exclusive">
+						<SupporterExclusiveIcon />
+						Supporter exclusive
+					</span>
+				)}
 				<span className="available">Available</span>
 				<span className="completed">
 					<PlayedLegendIcon />
