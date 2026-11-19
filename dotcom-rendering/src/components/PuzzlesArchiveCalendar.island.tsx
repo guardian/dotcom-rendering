@@ -28,12 +28,12 @@ export type CalendarCell = {
 	item?: PuzzlesArchiveItem;
 };
 
-const SupporterExclusiveIcon = () => (
+const SupporterExclusiveIcon = ({ size = 12 }: { size?: number }) => (
 	<svg
 		aria-hidden="true"
 		focusable="false"
-		width="12"
-		height="12"
+		width={size}
+		height={size}
 		viewBox="0 0 12 11"
 		fill="none"
 		xmlns="http://www.w3.org/2000/svg"
@@ -55,6 +55,23 @@ const CalendarCompletedIcon = () => (
 	>
 		<path
 			d="M1.35439 6.91457L5.20392 10.7352L16.6088 0L18 1.40926L5.36046 15H4.59147L0 8.32169L1.35439 6.91457Z"
+			fill="#22874D"
+		/>
+	</svg>
+);
+
+const PremiumCompletedIcon = () => (
+	<svg
+		aria-hidden="true"
+		focusable="false"
+		width="16"
+		height="14"
+		viewBox="0 0 16 14"
+		fill="none"
+		xmlns="http://www.w3.org/2000/svg"
+	>
+		<path
+			d="M1.2039 6.15452L4.62571 9.5552L14.7634 0L16 1.25435L4.76485 13.3512H4.08131L0 7.40697L1.2039 6.15452Z"
 			fill="#22874D"
 		/>
 	</svg>
@@ -434,12 +451,11 @@ const controlsStyles = css`
 `;
 
 const calendarStyles = css`
-	--calendar-gap: 4px;
-	--calendar-day-padding-block: 4px;
-	--calendar-day-padding-inline: 4px;
+	--calendar-gap: 8px;
+	--calendar-day-padding-block: 3px;
+	--calendar-day-padding-inline: 6px;
 	display: grid;
-	grid-template-columns: repeat(7, minmax(0, 44px));
-	justify-content: space-between;
+	grid-template-columns: repeat(7, minmax(0, 1fr));
 	column-gap: var(--calendar-gap);
 	row-gap: ${space[3]}px;
 	margin-top: ${space[5]}px;
@@ -476,10 +492,10 @@ const calendarStyles = css`
 	}
 	.day[data-status='available']:not([data-supporter-exclusive])::after {
 		position: absolute;
-		top: 8px;
-		right: 8px;
-		width: 8px;
-		height: 8px;
+		top: 4px;
+		right: 4px;
+		width: 5px;
+		height: 5px;
 		border-radius: 50%;
 		background: ${palette.notificationBlue[400]};
 		content: '';
@@ -536,23 +552,66 @@ const calendarStyles = css`
 		background: var(--puzzles-page-background, ${palette.neutral[100]});
 		color: var(--puzzles-unavailable-day-text, ${palette.neutral[46]});
 	}
-	${from.mobileMedium} {
-		--calendar-gap: 8px;
-	}
 	${from.phablet} {
 		grid-template-columns: repeat(7, 60px);
+		justify-content: space-between;
 		.setter-name {
 			font-size: 10px;
 			line-height: 12px;
 		}
 	}
 	${from.tablet} {
-		grid-template-columns: repeat(7, 72px);
+		--calendar-day-padding-block: 4px;
+		--calendar-day-padding-inline: 4px;
+		grid-template-columns: repeat(7, 68px);
 		.day-number {
 			font-size: 12px;
 		}
 		.setter-name {
 			display: block;
+		}
+	}
+	${from.desktop} {
+		grid-template-columns: repeat(7, 78px);
+	}
+`;
+
+const premiumCalendarStyles = css`
+	--calendar-gap: 4px;
+	--calendar-day-padding-block: 4px;
+	--calendar-day-padding-inline: 4px;
+	grid-template-columns: repeat(7, minmax(0, 44px));
+	justify-content: space-between;
+	.day[data-status='available'] {
+		background: var(--puzzles-page-background, ${palette.neutral[100]});
+		border-color: var(--puzzles-border-colour, ${palette.neutral[86]});
+	}
+	.day[data-status='available']:not([data-supporter-exclusive])::after {
+		top: 8px;
+		right: 8px;
+		width: 8px;
+		height: 8px;
+	}
+	.completed-icon {
+		right: 8px;
+		bottom: 8px;
+		width: 16px;
+		height: 14px;
+	}
+	${from.mobileMedium} {
+		--calendar-gap: 8px;
+	}
+	${from.phablet} {
+		grid-template-columns: repeat(7, 60px);
+	}
+	${from.tablet} {
+		grid-template-columns: repeat(7, 72px);
+		.day-number {
+			font-size: 14px;
+		}
+		.completed-icon {
+			right: 12px;
+			bottom: 12px;
 		}
 	}
 `;
@@ -619,6 +678,30 @@ const legendStyles = css`
 	}
 	${from.wide} {
 		left: -240px;
+	}
+`;
+
+const premiumLegendStyles = css`
+	.available::before {
+		width: 11px;
+		height: 11px;
+	}
+	.completed {
+		height: 16px;
+		padding-left: 3px;
+	}
+	${from.leftCol} {
+		> span {
+			display: grid;
+			grid-template-columns: 16px 1fr;
+		}
+		svg,
+		.available::before {
+			justify-self: center;
+		}
+		.completed {
+			padding-left: 0;
+		}
 	}
 `;
 
@@ -1159,7 +1242,10 @@ export const PuzzlesArchiveCalendar = ({
 				)}
 			</div>
 			<div
-				css={calendarStyles}
+				css={[
+					calendarStyles,
+					showPremiumIndicators && premiumCalendarStyles,
+				]}
 				data-testid="archive-calendar"
 				aria-busy={loading}
 			>
@@ -1221,7 +1307,11 @@ export const PuzzlesArchiveCalendar = ({
 									aria-hidden="true"
 									className="completed-icon"
 								>
-									<CalendarCompletedIcon />
+									{showPremiumIndicators ? (
+										<PremiumCompletedIcon />
+									) : (
+										<CalendarCompletedIcon />
+									)}
 								</span>
 							)}
 						</a>
@@ -1284,16 +1374,25 @@ export const PuzzlesArchiveCalendar = ({
 					</a>
 				</div>
 			)}
-			<div css={legendStyles}>
+			<div
+				css={[
+					legendStyles,
+					showPremiumIndicators && premiumLegendStyles,
+				]}
+			>
 				{showPremiumIndicators && (
 					<span className="supporter-exclusive">
-						<SupporterExclusiveIcon />
+						<SupporterExclusiveIcon size={14} />
 						Supporter exclusive
 					</span>
 				)}
 				<span className="available">Available</span>
 				<span className="completed">
-					<PlayedLegendIcon />
+					{showPremiumIndicators ? (
+						<PremiumCompletedIcon />
+					) : (
+						<PlayedLegendIcon />
+					)}
 					Played
 				</span>
 			</div>

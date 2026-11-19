@@ -405,6 +405,60 @@ describe('PuzzlesArchiveCalendar', () => {
 		);
 	});
 
+	it.each([false, true])(
+		'uses the appropriate completed icons for v3=%s',
+		(showPremiumIndicators) => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={{
+						...archive,
+						items: [
+							{ ...archive.items[0]!, gameStatus: 'completed' },
+						],
+					}}
+					showPremiumIndicators={showPremiumIndicators}
+				/>,
+			);
+
+			const day = screen.getByRole('link', {
+				name: '2026-09-02, completed',
+			});
+			const calendarIcon = day.querySelector('.completed-icon svg');
+			const legendIcon = screen
+				.getByText('Played', { selector: 'span.completed' })
+				.querySelector('svg');
+
+			expect(calendarIcon).toHaveAttribute(
+				'width',
+				showPremiumIndicators ? '16' : '18',
+			);
+			expect(calendarIcon).toHaveAttribute(
+				'height',
+				showPremiumIndicators ? '14' : '15',
+			);
+			expect(legendIcon).toHaveAttribute(
+				'width',
+				showPremiumIndicators ? '16' : '13.3',
+			);
+			expect(legendIcon).toHaveAttribute(
+				'height',
+				showPremiumIndicators ? '14' : '13.3',
+			);
+			if (showPremiumIndicators) {
+				expect(calendarIcon?.querySelector('path')).toHaveAttribute(
+					'd',
+					'M1.2039 6.15452L4.62571 9.5552L14.7634 0L16 1.25435L4.76485 13.3512H4.08131L0 7.40697L1.2039 6.15452Z',
+				);
+				expect(legendIcon?.innerHTML).toBe(calendarIcon?.innerHTML);
+				expect(
+					legendIcon?.querySelector('mask'),
+				).not.toBeInTheDocument();
+			} else {
+				expect(legendIcon?.querySelector('mask')).toBeInTheDocument();
+			}
+		},
+	);
+
 	it.each([
 		[false, false, true],
 		[true, false, false],
