@@ -8,10 +8,13 @@ import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { LayoutType } from './lib/articleArrangements';
 import { ArticleGridBody } from './StandardLayoutArticleGrid/ArticleGridBody';
-import { ArticleGridFooter } from './StandardLayoutArticleGrid/ArticleGridFooter';
-import { ArticleGridHeader } from './StandardLayoutArticleGrid/ArticleGridHeader';
+import { ArticleGridCaption } from './StandardLayoutArticleGrid/ArticleGridCaption';
+import { ArticleGridHeadline } from './StandardLayoutArticleGrid/ArticleGridHeadline';
 import { ArticleGridMainMedia } from './StandardLayoutArticleGrid/ArticleGridMainMedia';
+import { ArticleGridMeta } from './StandardLayoutArticleGrid/ArticleGridMeta';
 import { ArticleGridRightRail } from './StandardLayoutArticleGrid/ArticleGridRightRail';
+import { ArticleGridStandfirst } from './StandardLayoutArticleGrid/ArticleGridStandfirst';
+import { ArticleGridTitle } from './StandardLayoutArticleGrid/ArticleGridTitle';
 import { deriveArticleGridLayout } from './StandardLayoutArticleGrid/deriveArticleGridLayout';
 
 export const StandardLayoutArticleGrid = ({
@@ -131,12 +134,25 @@ export const StandardLayoutArticleGrid = ({
 				format={format}
 				layout={layout}
 			/>
-			<ArticleGridHeader
+			<ArticleGridTitle
 				article={article}
 				format={format}
 				layout={layout}
 			/>
-			<ArticleGridFooter
+			<ArticleGridHeadline
+				article={article}
+				format={format}
+				layout={layout}
+			/>
+			{isImmersive && (
+				<ArticleGridCaption format={format} layout={layout} />
+			)}
+			<ArticleGridStandfirst
+				article={article}
+				format={format}
+				layout={layout}
+			/>
+			<ArticleGridMeta
 				article={article}
 				format={format}
 				renderingTarget={renderingTarget}
