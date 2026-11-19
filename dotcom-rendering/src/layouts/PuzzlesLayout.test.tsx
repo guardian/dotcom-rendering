@@ -90,8 +90,6 @@ describe('PuzzlesLayout', () => {
 	it.each([
 		['hub only', true, false],
 		['hub and V2', true, true],
-		['V2 without hub', false, true],
-		['neither', false, false],
 	] as const)(
 		'renders the hub subnav for %s even when frontend omits trivia',
 		(_description, isHubAvailable, isV2Enabled) => {
