@@ -420,34 +420,30 @@ export const SeriesSectionLink = ({
 					>
 						{tag.title}
 					</TitleLink>
-					<Hide when="below" breakpoint="tablet">
-						<TitleLink
-							href={`${guardianBaseURL}/${sectionUrl}`}
-							format={format}
-							colour={sectionTitleColour}
-							fontCss={
-								isWeekendEssay
-									? secondaryFontStyles(format)
-									: undefined
-							}
-							extraCss={[
-								displayBlock,
-								isWeekendEssay
-									? css`
-											color: ${themePalette(
-												'--series-title-background',
-											)};
-										`
-									: isInteractiveTopHat
-										? topHatTagBackground
+					{immersiveOpinion && (
+						<Hide when="below" breakpoint="tablet">
+							<TitleLink
+								href={`${guardianBaseURL}/${sectionUrl}`}
+								format={format}
+								colour={sectionTitleColour}
+								extraCss={[
+									displayBlock,
+									isWeekendEssay
+										? css`
+												${headlineMedium17};
+												color: ${themePalette(
+													'--series-title-background',
+												)};
+											`
 										: seriesTitleBackground,
-							]}
-							data-component="section"
-							data-link-name="article section"
-						>
-							{sectionLabel}
-						</TitleLink>
-					</Hide>
+								]}
+								data-component="section"
+								data-link-name="article section"
+							>
+								{sectionLabel}
+							</TitleLink>
+						</Hide>
+					)}
 				</div>
 			);
 		}

@@ -307,11 +307,18 @@ const invertedWrapper = css`
 const ageWarningMargins = (format: ArticleFormat) => {
 	if (
 		format.design === ArticleDesign.Gallery ||
-		format.display === ArticleDisplay.Immersive ||
-		(format.design === ArticleDesign.Interactive &&
-			format.display === ArticleDisplay.Showcase)
+		format.display === ArticleDisplay.Immersive
 	) {
 		return '';
+	} else if (
+		format.design === ArticleDesign.Interactive &&
+		format.display === ArticleDisplay.Showcase
+	) {
+		return css`
+			margin-top: -${space[1]}px;
+			margin-left: -10px;
+			margin-bottom: 6px;
+		`;
 	}
 	return css`
 		margin-top: 12px;
