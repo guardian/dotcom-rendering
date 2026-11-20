@@ -12,6 +12,7 @@ import { LinkButton } from '@guardian/source/react-components';
 import type { Inline1Props } from '@guardian/support-dotcom-components/dist/shared/types/props/inline1';
 import sanitize from 'sanitize-html';
 import type { ReactComponent } from '../lib/ReactComponent';
+import { enrichSupportUrl } from '../lib/tracking';
 import type { ImageAttrs } from '../shared/ResponsiveImage';
 import { ResponsiveImage } from '../shared/ResponsiveImage';
 import { useInline1Tracking } from './utils/useInline1Tracking';
@@ -129,6 +130,7 @@ export const SupporterRevenue: ReactComponent<Inline1Props> = ({
 	submitComponentEvent,
 	tracking,
 	variant,
+	countryCode,
 }) => {
 	const { setNode, sendEvent } = useInline1Tracking({
 		tracking,
@@ -142,6 +144,12 @@ export const SupporterRevenue: ReactComponent<Inline1Props> = ({
 	const body = variant.message.body;
 	const image = variant.message.image;
 	const cta = variant.message.primaryCta;
+	const ctaUrl = enrichSupportUrl({
+		baseUrl: cta.baseUrl,
+		tracking,
+		promoCodes: [],
+		countryCode,
+	});
 
 	const images: ImageAttrs[] = [];
 	const baseImage = {
@@ -213,8 +221,8 @@ export const SupporterRevenue: ReactComponent<Inline1Props> = ({
 					<LinkButton
 						cssOverrides={ctaButtonStyles}
 						theme={ctaButtonTheme}
+						href={ctaUrl}
 						data-ignore="global-link-styling"
-						href={cta.baseUrl}
 						onClick={() => sendEvent('CLICK', 'cta')}
 					>
 						{cta.text}
