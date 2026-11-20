@@ -28,6 +28,23 @@ export type CalendarCell = {
 	item?: PuzzlesArchiveItem;
 };
 
+const SupporterExclusiveIcon = ({ size = 12 }: { size?: number }) => (
+	<svg
+		aria-hidden="true"
+		focusable="false"
+		width={size}
+		height={size}
+		viewBox="0 0 12 11"
+		fill="none"
+		xmlns="http://www.w3.org/2000/svg"
+	>
+		<path
+			d="M5.70703 0L7.05412 4.1459H11.4134L7.88666 6.7082L9.23374 10.8541L5.70703 8.2918L2.18032 10.8541L3.5274 6.7082L0.000692368 4.1459H4.35995L5.70703 0Z"
+			fill="#F3C100"
+		/>
+	</svg>
+);
+
 const CalendarCompletedIcon = () => (
 	<svg
 		width="18"
@@ -38,6 +55,29 @@ const CalendarCompletedIcon = () => (
 	>
 		<path
 			d="M1.35439 6.91457L5.20392 10.7352L16.6088 0L18 1.40926L5.36046 15H4.59147L0 8.32169L1.35439 6.91457Z"
+			fill="#22874D"
+		/>
+	</svg>
+);
+
+const PremiumCompletedIcon = ({
+	width = 16,
+	height = 13.35119,
+}: {
+	width?: number;
+	height?: number;
+}) => (
+	<svg
+		aria-hidden="true"
+		focusable="false"
+		width={width}
+		height={height}
+		viewBox="0 0 16 13.3512"
+		fill="none"
+		xmlns="http://www.w3.org/2000/svg"
+	>
+		<path
+			d="M1.2039 6.15452L4.62571 9.5552L14.7634 0L16 1.25435L4.76485 13.3512H4.08131L0 7.40697L1.2039 6.15452Z"
 			fill="#22874D"
 		/>
 	</svg>
@@ -108,6 +148,10 @@ const isArchiveItem = (value: unknown): value is PuzzlesArchiveItem => {
 		typeof item.puzzleType === 'string' &&
 		typeof item.date === 'string' &&
 		typeof item.progress === 'number' &&
+		(item.isWithinFreeWindow === undefined ||
+			typeof item.isWithinFreeWindow === 'boolean') &&
+		(item.hasPremiumEntitlement === undefined ||
+			typeof item.hasPremiumEntitlement === 'boolean') &&
 		(item.gameStatus === undefined ||
 			item.gameStatus === null ||
 			isGameStatus(item.gameStatus)) &&
@@ -176,8 +220,8 @@ const chipsStyles = css`
 `;
 
 const chipsFadeInKeyframes = keyframes`
-	from { opacity: 0; }
-	to { opacity: 1; }
+  from { opacity: 0; }
+  to { opacity: 1; }
 `;
 
 const chipsFadeStyles = css`
@@ -452,7 +496,7 @@ const calendarStyles = css`
 	.day.is-today .day-number {
 		font-weight: 700;
 	}
-	.day[data-status='available']::after {
+	.day[data-status='available']:not([data-supporter-exclusive])::after {
 		position: absolute;
 		top: 4px;
 		right: 4px;
@@ -461,6 +505,16 @@ const calendarStyles = css`
 		border-radius: 50%;
 		background: ${palette.notificationBlue[400]};
 		content: '';
+	}
+	.supporter-exclusive-icon {
+		position: absolute;
+		top: 8px;
+		right: 8px;
+		width: 12px;
+		height: 12px;
+		svg {
+			display: block;
+		}
 	}
 	.day[data-status='completed'] {
 		background: color-mix(
@@ -528,6 +582,46 @@ const calendarStyles = css`
 	}
 `;
 
+const premiumCalendarStyles = css`
+	--calendar-gap: 4px;
+	--calendar-day-padding-block: 4px;
+	--calendar-day-padding-inline: 4px;
+	grid-template-columns: repeat(7, minmax(0, 44px));
+	justify-content: space-between;
+	.day[data-status='available'] {
+		background: var(--puzzles-page-background, ${palette.neutral[100]});
+		border-color: var(--puzzles-border-colour, ${palette.neutral[86]});
+	}
+	.day[data-status='available']:not([data-supporter-exclusive])::after {
+		top: 8px;
+		right: 8px;
+		width: 8px;
+		height: 8px;
+	}
+	.completed-icon {
+		right: 8px;
+		bottom: 8px;
+		width: 16px;
+		height: 13.35119px;
+	}
+	${from.mobileMedium} {
+		--calendar-gap: 8px;
+	}
+	${from.phablet} {
+		grid-template-columns: repeat(7, 60px);
+	}
+	${from.tablet} {
+		grid-template-columns: repeat(7, 72px);
+		.day-number {
+			font-size: 14px;
+		}
+		.completed-icon {
+			right: 12px;
+			bottom: 12px;
+		}
+	}
+`;
+
 const monthLabelStyles = css`
 	position: relative;
 	justify-self: center;
@@ -556,6 +650,7 @@ const emptyMonthStyles = css`
 
 const legendStyles = css`
 	display: flex;
+	flex-wrap: wrap;
 	gap: ${space[4]}px;
 	margin-top: ${space[8]}px;
 	${textSans14};
@@ -575,7 +670,7 @@ const legendStyles = css`
 		content: '';
 		background: ${palette.notificationBlue[400]};
 	}
-	.completed svg {
+	svg {
 		display: block;
 		flex: 0 0 auto;
 	}
@@ -589,6 +684,31 @@ const legendStyles = css`
 	}
 	${from.wide} {
 		left: -240px;
+	}
+`;
+
+const premiumLegendStyles = css`
+	.available::before {
+		width: 11px;
+		height: 11px;
+	}
+	.completed {
+		height: 16px;
+		padding-left: 3px;
+	}
+	${from.leftCol} {
+		gap: ${space[3]}px;
+		> span {
+			display: grid;
+			grid-template-columns: 16px 1fr;
+		}
+		svg,
+		.available::before {
+			justify-self: center;
+		}
+		.completed {
+			padding-left: 0;
+		}
 	}
 `;
 
@@ -699,8 +819,10 @@ const archiveMonth = (year: number, month: number): string =>
 
 export const PuzzlesArchiveCalendar = ({
 	initialArchive,
+	showPremiumIndicators = false,
 }: {
 	initialArchive: PuzzlesArchive;
+	showPremiumIndicators?: boolean;
 }) => {
 	const [archive, setArchive] = useState(initialArchive);
 	const [loading, setLoading] = useState(false);
@@ -1127,7 +1249,10 @@ export const PuzzlesArchiveCalendar = ({
 				)}
 			</div>
 			<div
-				css={calendarStyles}
+				css={[
+					calendarStyles,
+					showPremiumIndicators && premiumCalendarStyles,
+				]}
 				data-testid="archive-calendar"
 				aria-busy={loading}
 			>
@@ -1146,13 +1271,20 @@ export const PuzzlesArchiveCalendar = ({
 						);
 					}
 					const status = archiveStatus(cell.item);
+					const supporterExclusive =
+						showPremiumIndicators &&
+						cell.item?.isWithinFreeWindow === false &&
+						cell.item.hasPremiumEntitlement !== true;
 					const isToday = cell.date === todayDate;
 					return cell.item ? (
 						<a
-							aria-label={`${cell.date}, ${status}`}
+							aria-label={`${cell.date}, ${supporterExclusive ? 'Supporter exclusive' : status}${supporterExclusive && status === 'completed' ? ', completed' : ''}`}
 							className={`day${isToday ? ' is-today' : ''}`}
 							data-date={cell.date}
 							data-status={status}
+							data-supporter-exclusive={
+								supporterExclusive || undefined
+							}
 							href={cell.item.url}
 							key={cell.date}
 							data-link-name={archiveLinkName(
@@ -1172,12 +1304,21 @@ export const PuzzlesArchiveCalendar = ({
 									</span>
 								)}
 							<span className="day-number">{cell.day}</span>
+							{supporterExclusive && (
+								<span className="supporter-exclusive-icon">
+									<SupporterExclusiveIcon />
+								</span>
+							)}
 							{status === 'completed' && (
 								<span
 									aria-hidden="true"
 									className="completed-icon"
 								>
-									<CalendarCompletedIcon />
+									{showPremiumIndicators ? (
+										<PremiumCompletedIcon />
+									) : (
+										<CalendarCompletedIcon />
+									)}
 								</span>
 							)}
 						</a>
@@ -1240,10 +1381,28 @@ export const PuzzlesArchiveCalendar = ({
 					</a>
 				</div>
 			)}
-			<div css={legendStyles}>
+			<div
+				css={[
+					legendStyles,
+					showPremiumIndicators && premiumLegendStyles,
+				]}
+			>
+				{showPremiumIndicators && (
+					<span className="supporter-exclusive">
+						<SupporterExclusiveIcon size={14} />
+						Supporter exclusive
+					</span>
+				)}
 				<span className="available">Available</span>
 				<span className="completed">
-					<PlayedLegendIcon />
+					{showPremiumIndicators ? (
+						<PremiumCompletedIcon
+							width={10.28516}
+							height={8.57096}
+						/>
+					) : (
+						<PlayedLegendIcon />
+					)}
 					Played
 				</span>
 			</div>

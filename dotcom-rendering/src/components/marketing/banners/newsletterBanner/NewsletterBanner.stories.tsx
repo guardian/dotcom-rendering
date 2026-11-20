@@ -7,12 +7,47 @@ import { useCountryCode } from '../../../../lib/useCountryCode';
 import { useNewsletterSignupForm } from '../../../../lib/useNewsletterSignupForm';
 import type { NewsletterSignupFormState } from '../../../../lib/useNewsletterSignupForm';
 import { useNewsletterSubscription } from '../../../../lib/useNewsletterSubscription';
-import { newsletterDesign, props } from '../utils/storybook';
+import {
+	newsletterDesign,
+	newsletterDesignDark,
+	props,
+} from '../utils/storybook';
 import { NewsletterBanner } from './NewsletterBanner';
+
+const headerImage = {
+	mobileUrl:
+		'https://uploads.guim.co.uk/2026/10/30/The_Stakes_image_Mobile.png',
+	tabletUrl: 'https://uploads.guim.co.uk/2026/10/30/The_Stakes_image.png',
+	desktopUrl: 'https://uploads.guim.co.uk/2026/10/30/The_Stakes_image.png',
+	altText: 'The Stakes newsletter',
+};
+
+const designs = {
+	Light: { ...newsletterDesign, headerImage },
+	Dark: {
+		...newsletterDesignDark,
+		headerImage: {
+			mobileUrl:
+				'https://i.guim.co.uk/img/media/3e54a72ccdf78508b8af96645b1ddbeb3907ffad/0_0_360_360/360.png?width=90&quality=100&s=4eb720cd36be529e66a20b6c7ed08640',
+			tabletUrl:
+				'https://i.guim.co.uk/img/media/1ffc36c9f7bb070eb67efcc74dd8f74d8c52cf9a/0_0_1968_1484/1968.jpg?width=1000&quality=100&s=7256eabe674d825b55abb14af6c62887',
+			desktopUrl:
+				'https://i.guim.co.uk/img/media/7688239a7cc28f7f95cb8f13b3073dba277db0dd/0_0_1840_1244/1840.jpg?width=460&quality=100&s=f79da6483ae56e30aae6e04f84b135c2',
+			altText: '',
+		},
+	},
+};
 
 const meta = preview.meta({
 	title: 'Components/marketing/NewsletterBanner',
 	component: NewsletterBanner,
+	argTypes: {
+		design: {
+			control: { type: 'select' },
+			options: Object.keys(designs),
+			mapping: designs,
+		},
+	},
 	parameters: {
 		layout: 'fullscreen',
 	},
@@ -44,18 +79,7 @@ const meta = preview.meta({
 			name: 'The Stakes 2026',
 			frequency: 'Weekly, plus breaking news alerts',
 		},
-		design: {
-			...newsletterDesign,
-			headerImage: {
-				mobileUrl:
-					'https://i.guim.co.uk/img/media/630a3735c02e195be89ab06fd1b8192959e282ab/0_0_1172_560/500.png?width=500&quality=75&s=937595b3f471d6591475955335c7c023',
-				tabletUrl:
-					'https://i.guim.co.uk/img/media/20cc6e0fa146574bb9c4ed410ac1a089fab02ce0/0_0_1428_1344/500.png?width=500&quality=75&s=fe64f647f74a3cb671f8035a473b895f',
-				desktopUrl:
-					'https://i.guim.co.uk/img/media/6c933a058d1ce37a5ad17f79895906150812dfee/0_0_1768_1420/500.png?width=500&quality=75&s=9277532ddf184a308e14218e3576543b',
-				altText: 'The Stakes newsletter',
-			},
-		},
+		design: designs.Light,
 		submitComponentEvent: async () => Promise.resolve(),
 		idApiUrl: 'https://idapi.theguardian.com',
 	},
@@ -135,6 +159,20 @@ export const SignedOut = meta.story({
 	},
 });
 
+export const InvalidEmail = meta.story({
+	beforeEach() {
+		mocked(useNewsletterSignupForm).mockReturnValue({
+			...signedOutFormState,
+			userEmail: 'invalid-email',
+			isInteracted: true,
+			showMarketingToggle: true,
+			marketingOptIn: true,
+			errorMessage: 'Incorrect email format. Please check.',
+			isValidationError: true,
+		});
+	},
+});
+
 export const SignedIn = meta.story({
 	beforeEach() {
 		mocked(useIsSignedIn).mockReturnValue(true);
@@ -144,6 +182,31 @@ export const SignedIn = meta.story({
 			isSignedIn: true,
 			isInteracted: true,
 		});
+	},
+});
+
+export const TabletBackgroundImage = meta.story({
+	parameters: {
+		viewport: {
+			options: {
+				phablet: {
+					name: 'phablet',
+					styles: {
+						width: '660px',
+						height: '1200px',
+					},
+				},
+			},
+		},
+	},
+	globals: {
+		viewport: { value: 'phablet', isRotated: false },
+	},
+	args: {
+		design: {
+			...designs.Dark,
+			tabletImageAsBackground: true,
+		},
 	},
 });
 

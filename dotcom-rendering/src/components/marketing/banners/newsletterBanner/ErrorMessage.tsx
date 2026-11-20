@@ -1,20 +1,16 @@
 import { css } from '@emotion/react';
-import {
-	palette,
-	space,
-	textSans17,
-	until,
-} from '@guardian/source/foundations';
+import { space, textSans17, until } from '@guardian/source/foundations';
 import {
 	Button,
 	Link,
 	SvgAlertRound,
 	SvgReload,
 } from '@guardian/source/react-components';
+import type { NewsletterBannerData } from './NewsletterBannerData';
 
-const responseBoxStyles = css`
+const responseBoxStyles = (borderColor: string) => css`
 	padding: 7px 12px 16px 7.5px;
-	border: 1px solid ${palette.neutral[86]};
+	border: 1px solid ${borderColor};
 	border-radius: 4px;
 	margin-top: ${space[2]}px;
 	${until.tablet} {
@@ -22,11 +18,11 @@ const responseBoxStyles = css`
 	}
 `;
 
-const errorContainerStyles = css`
+const errorContainerStyles = (errorColor: string) => css`
 	display: grid;
 	grid-template-columns: 32px minmax(0, 1fr);
 	column-gap: 7.5px;
-	color: ${palette.error[400]};
+	color: ${errorColor};
 
 	> svg {
 		width: 32px;
@@ -68,36 +64,58 @@ const retryButtonStyles = css`
 `;
 
 export const FailureMessage = ({
+	bannerData,
 	onRetry,
 	text,
 }: {
+	bannerData: NewsletterBannerData;
 	onRetry: React.MouseEventHandler<HTMLButtonElement>;
 	text: string;
-}) => (
-	<div css={[responseBoxStyles, errorContainerStyles]}>
-		<SvgAlertRound />
-		<div css={errorContentStyles}>
-			<span css={errorTextStyles} role="alert">
-				{text} Please try again or contact{' '}
-				<Link
-					href="mailto:customer.help@theguardian.com"
-					target="_blank"
-					rel="noreferrer"
-					cssOverrides={errorLinkStyles}
+}) => {
+	const {
+		errorColor,
+		signupButtonBackgroundColor,
+		signupButtonTextColor,
+		borderColor,
+	} = bannerData.settings.newsletterBanner;
+	return (
+		<div
+			css={[
+				responseBoxStyles(borderColor),
+				errorContainerStyles(errorColor),
+			]}
+		>
+			<SvgAlertRound />
+			<div css={errorContentStyles}>
+				<span css={errorTextStyles} role="alert">
+					{text} Please try again or contact{' '}
+					<Link
+						href="mailto:customer.help@theguardian.com"
+						target="_blank"
+						rel="noreferrer"
+						cssOverrides={errorLinkStyles}
+					>
+						customer.help@theguardian.com
+					</Link>
+				</span>
+				<Button
+					theme={{
+						backgroundPrimary: signupButtonBackgroundColor,
+						backgroundPrimaryHover: signupButtonBackgroundColor,
+						...(signupButtonTextColor !== undefined && {
+							textPrimary: signupButtonTextColor,
+						}),
+					}}
+					size="small"
+					priority="primary"
+					icon={<SvgReload />}
+					iconSide="right"
+					onClick={onRetry}
+					cssOverrides={retryButtonStyles}
 				>
-					customer.help@theguardian.com
-				</Link>
-			</span>
-			<Button
-				size="small"
-				priority="primary"
-				icon={<SvgReload />}
-				iconSide="right"
-				onClick={onRetry}
-				cssOverrides={retryButtonStyles}
-			>
-				Try again
-			</Button>
+					Try again
+				</Button>
+			</div>
 		</div>
-	</div>
-);
+	);
+};

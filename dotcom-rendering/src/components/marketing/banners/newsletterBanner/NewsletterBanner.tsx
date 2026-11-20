@@ -1,4 +1,3 @@
-import { hexColourToString } from '@guardian/support-dotcom-components';
 import type { BannerProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { PromotedNewsletter } from '@guardian/support-dotcom-components/dist/shared/types/props/banner';
 import type { ComponentType } from 'react';
@@ -12,6 +11,8 @@ import { BannerHeader } from '../designableBanner/components/BannerHeader';
 import { BannerVisual } from '../designableBanner/components/BannerVisual';
 import { useDesignableBannerModel } from '../designableBanner/useDesignableBannerModel';
 import { styles, transitionDurationMs } from './NewsletterBanner.styles';
+import type { NewsletterBannerData } from './NewsletterBannerData';
+import { buildNewsletterBannerSettings } from './NewsletterBannerData';
 import { NewsletterBannerLogo } from './NewsletterBannerLogo';
 import { NewsletterFrequencyTag } from './NewsletterFrequencyTag';
 import { NewsletterSignupForm } from './NewsletterSignupForm';
@@ -22,24 +23,14 @@ const buildNewsletterBannerData = (
 	baseBannerData: BannerData,
 	newsletter: PromotedNewsletter,
 	onClose: () => void,
-): BannerData => {
-	const baseImageSettings =
+): NewsletterBannerData => {
+	const imageSettings =
 		baseBannerData.settings.headerSettings?.headerImage ??
 		baseBannerData.settings.imageSettings;
-	const illustrationSquare: unknown = newsletter.illustrationSquare;
-	const hasIllustrationSquare =
-		typeof illustrationSquare === 'string' && illustrationSquare.length > 0;
-	const imageSettings =
-		baseImageSettings !== undefined && hasIllustrationSquare
-			? {
-					...baseImageSettings,
-					mobileUrl: illustrationSquare,
-					tabletUrl: illustrationSquare,
-				}
-			: baseImageSettings;
 
 	return {
 		...baseBannerData,
+		newsletter,
 		actions: {
 			...baseBannerData.actions,
 			onClose,
@@ -48,6 +39,7 @@ const buildNewsletterBannerData = (
 			...baseBannerData.selectors,
 			copyForViewport: {
 				...baseBannerData.selectors.copyForViewport,
+				highlightedText: undefined,
 				paragraphs:
 					newsletter.signUpDescription !== undefined
 						? [<>{newsletter.signUpDescription}</>]
@@ -64,6 +56,9 @@ const buildNewsletterBannerData = (
 		settings: {
 			...baseBannerData.settings,
 			imageSettings,
+			newsletterBanner: buildNewsletterBannerSettings(
+				baseBannerData.design,
+			),
 		},
 	};
 };
@@ -95,12 +90,21 @@ export const NewsletterBannerComponent = (
 		return null;
 	}
 
-	const { basic } = props.design.colours;
+	const tabletBackgroundUrl =
+		props.design.tabletImageAsBackground === true
+			? (
+					baseBannerData.settings.headerSettings?.headerImage ??
+					baseBannerData.settings.imageSettings
+				)?.tabletUrl
+			: undefined;
+	const hasTabletBackground =
+		tabletBackgroundUrl !== undefined && tabletBackgroundUrl.length > 0;
 	const bannerData = buildNewsletterBannerData(
 		baseBannerData,
 		newsletter,
 		isSuccess ? dismiss : baseBannerData.actions.onClose,
 	);
+	const dividerColor = bannerData.settings.newsletterBanner.divider;
 
 	return (
 		<div
@@ -111,15 +115,19 @@ export const NewsletterBannerComponent = (
 			{...(isDismissing ? { inert: '' } : {})}
 			css={[
 				styles.container(
-					hexColourToString(basic.background),
-					hexColourToString(basic.bodyText),
+					bannerData.settings.containerSettings.backgroundColour,
+					bannerData.settings.containerSettings.textColor ??
+						'inherit',
 				),
+				hasTabletBackground &&
+					!isSuccess &&
+					styles.tabletBackgroundImage(tabletBackgroundUrl),
 				styles.dismissal(isDismissing),
 			]}
 		>
 			<div css={styles.layout}>
-				<NewsletterBannerLogo />
-				<div css={styles.verticalLine} />
+				<NewsletterBannerLogo bannerData={bannerData} />
+				<div css={styles.verticalLine(dividerColor)} />
 				<div css={styles.panels}>
 					<div
 						css={styles.panel(!isSuccess)}
@@ -132,16 +140,28 @@ export const NewsletterBannerComponent = (
 									<div css={styles.content}>
 										<div css={styles.frequencyRow}>
 											<NewsletterFrequencyTag
-												frequency={newsletter.frequency}
+												bannerData={bannerData}
 											/>
 										</div>
-										<div css={styles.horizontalLine} />
-										<div css={styles.textImageRow}>
+										<div
+											css={styles.horizontalLine(
+												dividerColor,
+											)}
+										/>
+										<div
+											css={[
+												styles.textImageRow,
+												hasTabletBackground &&
+													styles.tabletBackgroundRow,
+											]}
+										>
 											<div css={styles.textCopy}>
 												<div
-													css={
-														styles.headingAfterDivider
-													}
+													css={[
+														styles.headingAfterDivider,
+														hasTabletBackground &&
+															styles.tabletBackgroundHeading,
+													]}
 												>
 													<BannerHeader
 														bannerData={bannerData}
@@ -153,16 +173,20 @@ export const NewsletterBannerComponent = (
 													/>
 												</div>
 											</div>
-											<div css={styles.mobileImage}>
+											<div
+												css={[
+													styles.mobileImage,
+													hasTabletBackground &&
+														styles.hideTabletImage,
+												]}
+											>
 												<BannerVisual
 													bannerData={bannerData}
 												/>
 											</div>
 										</div>
 										<NewsletterSignupForm
-											newsletterId={
-												newsletter.identityName
-											}
+											bannerData={bannerData}
 											componentId="newsletter_banner"
 											onSuccess={() => setIsSuccess(true)}
 										/>
@@ -181,10 +205,7 @@ export const NewsletterBannerComponent = (
 					>
 						<div>
 							<div css={styles.successContent}>
-								<SuccessMessage
-									newsletterName={newsletter.name}
-									frequency={newsletter.frequency}
-								/>
+								<SuccessMessage bannerData={bannerData} />
 							</div>
 						</div>
 					</div>

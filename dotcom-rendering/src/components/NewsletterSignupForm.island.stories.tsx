@@ -1,6 +1,7 @@
 import { createRef } from 'react';
 import type ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { fn, mocked } from 'storybook/test';
+import { allModes } from '../../.storybook/modes';
 import preview from '../../.storybook/preview';
 import { useCountryCode } from '../lib/useCountryCode';
 import { useNewsletterSignupForm } from '../lib/useNewsletterSignupForm';
@@ -46,6 +47,11 @@ const defaultArgs = {
 	newsletterName: 'Saturday Edition',
 	frequency: 'every Saturday',
 	componentId: 'AR NewsletterSignupForm saturday-edition',
+};
+
+const successChromaticModes = {
+	'vertical mobile': allModes['vertical mobile'],
+	'vertical tablet': allModes['vertical tablet'],
 };
 
 /** Shared no-op handlers — stories that focus on visual state don't need real callbacks. */
@@ -150,9 +156,27 @@ export const Loading = meta.story({
 	},
 });
 
-/** Subscription confirmed. */
+/** Subscription confirmed on the web. */
 export const Success = meta.story({
 	args: { ...defaultArgs },
+	parameters: {
+		config: { renderingTarget: 'Web' },
+		chromatic: { modes: successChromaticModes },
+	},
+	beforeEach() {
+		mocked(useNewsletterSignupForm).mockReturnValue(
+			mockForm({ responseOk: true }),
+		);
+	},
+});
+
+/** Subscription confirmed in apps. */
+export const SuccessApps = meta.story({
+	args: { ...defaultArgs },
+	parameters: {
+		config: { renderingTarget: 'Apps' },
+		chromatic: { modes: successChromaticModes },
+	},
 	beforeEach() {
 		mocked(useNewsletterSignupForm).mockReturnValue(
 			mockForm({ responseOk: true }),
@@ -211,12 +235,26 @@ export const CaptchaError = meta.story({
 	},
 });
 
-/** User is already subscribed — success message shown immediately. */
+/** User is already subscribed on the web. */
 export const AlreadySubscribed = meta.story({
 	args: { ...defaultArgs, isAlreadySubscribed: true },
-	parameters: { isSignedIn: true },
+	parameters: {
+		isSignedIn: true,
+		config: { renderingTarget: 'Web' },
+		chromatic: { modes: successChromaticModes },
+	},
 	beforeEach() {
 		mocked(useNewsletterSignupForm).mockReturnValue(mockForm({}));
+	},
+});
+
+/** User is already subscribed in apps. */
+export const AlreadySubscribedApps = meta.story({
+	args: { ...defaultArgs, isAlreadySubscribed: true },
+	parameters: {
+		isSignedIn: true,
+		config: { renderingTarget: 'Apps' },
+		chromatic: { modes: successChromaticModes },
 	},
 });
 

@@ -42,6 +42,58 @@ const validPage = () => ({
 
 describe('validateAsPuzzlesPageType', () => {
 	it.each([
+		[true, false, true],
+		[false, true, true],
+		[false, false, true],
+		[undefined, undefined, true],
+		['false', false, false],
+		[false, 'true', false],
+	])(
+		'validates archive access indicators (%s, %s)',
+		(isWithinFreeWindow, hasPremiumEntitlement, valid) => {
+			const puzzle = {
+				id: 'quick',
+				title: 'Quick',
+				puzzleType: 'CROSSWORD_QUICK',
+				set: 'quick',
+				path: '/puzzles-and-games/crosswords/quick/archive',
+			};
+			const item = {
+				puzzleType: puzzle.puzzleType,
+				date: '2026-10-01',
+				progress: 0,
+				url: '/crosswords/quick/123',
+				isWithinFreeWindow,
+				hasPremiumEntitlement,
+			};
+			const page = {
+				...validPage(),
+				archive: {
+					category: 'crosswords',
+					title: 'Crosswords',
+					description: 'Archive',
+					selectedPuzzle: puzzle,
+					puzzles: [puzzle],
+					year: 2026,
+					month: 10,
+					items: [item],
+					recentItems: [item],
+					hasError: false,
+					moreFrom: [],
+				},
+			};
+
+			if (valid) {
+				expect(validateAsPuzzlesPageType(page).archive).toEqual(
+					page.archive,
+				);
+			} else {
+				expect(() => validateAsPuzzlesPageType(page)).toThrow();
+			}
+		},
+	);
+
+	it.each([
 		['crosswords', 'Weekend', 'CROSSWORD_WEEKEND', 'weekend'],
 		['trivia-and-quizzes', 'Film reveal', 'FILMREVEAL', 'all'],
 		['trivia-and-quizzes', 'On the ball', 'ONTHEBALL', 'all'],
