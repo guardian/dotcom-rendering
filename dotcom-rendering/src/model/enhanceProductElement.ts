@@ -56,17 +56,17 @@ const getLowestPrice = (ctas: ProductCta[]): string | undefined => {
 		return value === undefined ? [] : [{ value, display, latestPrice }];
 	});
 
-	const cheapest = candidates.reduce<(typeof candidates)[number] | undefined>(
-		(lowest, candidate) =>
-			lowest === undefined || candidate.value < lowest.value
+	const lowest = candidates.reduce<(typeof candidates)[number] | undefined>(
+		(lowestSoFar, candidate) =>
+			lowestSoFar === undefined || candidate.value < lowestSoFar.value
 				? candidate
-				: lowest,
+				: lowestSoFar,
 		undefined,
 	);
 
-	return cheapest?.latestPrice
-		? `${cheapest.latestPrice.currencySymbol}${formatPrice(cheapest.value)}`
-		: cheapest?.display;
+	return lowest?.latestPrice
+		? `${lowest.latestPrice.currencySymbol}${formatPrice(lowest.value)}`
+		: lowest?.display;
 };
 
 const enhance =
