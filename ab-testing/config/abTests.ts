@@ -35,7 +35,7 @@ const ABTests: ABTest[] = [
 		name: "growth-holdback-group",
 		description:
 			"Test for 5% holdback group that does not qualify for any testing so long as the test is live in the RRCP",
-		owners: ["growth.dev@guardian.co.uk"],
+		owners: ["martech.dev@guardian.co.uk"],
 		expirationDate: "2027-01-01",
 		type: "client",
 		status: "ON",
@@ -47,7 +47,7 @@ const ABTests: ABTest[] = [
 	{
 		name: "growth-auxia-banner",
 		description: "Use Auxia API for deciding when to show a RR banner",
-		owners: ["growth.dev@guardian.co.uk"],
+		owners: ["martech.dev@guardian.co.uk"],
 		expirationDate: "2026-12-01",
 		type: "client",
 		status: "ON",
