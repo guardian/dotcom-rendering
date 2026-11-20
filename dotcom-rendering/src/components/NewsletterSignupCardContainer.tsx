@@ -24,6 +24,7 @@ export const NewsletterSignupCardContainer = ({
 	return (
 		<div
 			css={css`
+				margin-top: ${space[6]}px;
 				margin-bottom: ${space[6]}px;
 			`}
 		>
