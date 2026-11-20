@@ -281,7 +281,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Test the impact on ad density of regionalising Spacefinder for high value sections in Australia and New Zealand",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2027-11-19",
+		expirationDate: "2027-12-03",
 		type: "client",
 		status: "ON",
 		audienceSize: 10 / 100,
