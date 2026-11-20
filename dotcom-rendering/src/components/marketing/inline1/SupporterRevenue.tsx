@@ -175,6 +175,8 @@ export const SupporterRevenue: ReactComponent<Inline1Props> = ({
 		<section
 			css={outerContainerStyles}
 			aria-labelledby="supporter-revenue-heading"
+			data-message-type={variant.message.type}
+			data-testid={tracking.campaignCode}
 			ref={setNode}
 		>
 			<div css={innerContainerStyles}>

@@ -6,8 +6,8 @@ import {
 	SvgGuardianLogo,
 } from '@guardian/source/react-components';
 import type { Inline1Props } from '@guardian/support-dotcom-components/dist/shared/types';
-import type { ReactComponent } from '../../lib/ReactComponent';
-import { useInline1Tracking } from '../utils/useInline1Tracking';
+import type { ReactComponent } from '../lib/ReactComponent';
+import { useInline1Tracking } from './utils/useInline1Tracking';
 
 const outerContainerStyles = css`
 	border-top: 1px solid ${palette.neutral[73]};
@@ -148,6 +148,8 @@ export const Puzzles: ReactComponent<Inline1Props> = ({
 		<section
 			css={outerContainerStyles}
 			aria-label="Guardian Puzzles and Games"
+			data-message-type={variant.message.type}
+			data-testid={tracking.campaignCode}
 			ref={setNode}
 		>
 			<div css={innerContainerStyles(shouldHaveWhiteBackground)}>
