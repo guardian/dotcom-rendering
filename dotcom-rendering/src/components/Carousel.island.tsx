@@ -45,6 +45,7 @@ type Props = {
 	discussionApiUrl: string;
 	serverTime?: number;
 	renderingTarget: RenderingTarget;
+	isDocumentariesSeries?: boolean;
 };
 
 type ArticleProps = Props & {
@@ -464,6 +465,7 @@ type CarouselCardProps = {
 	onwardsSource?: OnwardsSource;
 	containerType?: DCRContainerType;
 	starRating?: StarRating;
+	isDocumentariesSeries?: boolean;
 };
 
 const CarouselCard = ({
@@ -486,8 +488,10 @@ const CarouselCard = ({
 	serverTime,
 	starRating,
 	index,
+	isDocumentariesSeries,
 }: CarouselCardProps) => {
-	const cardImagePosition = isOnwardContent ? 'bottom' : 'top';
+	const cardImagePosition =
+		isOnwardContent && !isDocumentariesSeries ? 'bottom' : 'top';
 
 	return (
 		<LI
@@ -532,7 +536,7 @@ const CarouselCard = ({
 				index={index}
 				showTopBarDesktop={!isOnwardContent}
 				showTopBarMobile={!isOnwardContent}
-				aspectRatio="5:4"
+				aspectRatio={isDocumentariesSeries ? '4:5' : '5:4'}
 				contentSpacing="small"
 			/>
 		</LI>
@@ -754,6 +758,7 @@ export const Carousel = ({
 	isOnwardContent = true,
 	serverTime,
 	renderingTarget,
+	isDocumentariesSeries,
 	...props
 }: ArticleProps | FrontProps) => {
 	const carouselRef = useRef<HTMLUListElement>(null);
@@ -1006,6 +1011,9 @@ export const Carousel = ({
 									discussionApiUrl={discussionApiUrl}
 									isOnwardContent={isOnwardContent}
 									starRating={starRating}
+									isDocumentariesSeries={
+										isDocumentariesSeries
+									}
 								/>
 							);
 						})}
