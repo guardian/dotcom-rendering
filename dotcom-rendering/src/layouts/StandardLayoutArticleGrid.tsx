@@ -294,7 +294,7 @@ export const StandardLayoutArticleGrid = ({
 				`,
 				grid.container,
 				hasPageSkin && grid.pageSkinContainer,
-				layoutType !== 'documentary' && grid.outerRules(),
+				grid.outerRules(),
 				setCentreRule(layoutType),
 				isImmersive &&
 					css`
@@ -318,11 +318,17 @@ export const StandardLayoutArticleGrid = ({
 									? '140px'
 									: '106px'} auto auto auto auto auto;
 						}
-						&::before,
-						&::after {
-							z-index: ${getZIndex('immersiveGridOuterRules')};
-						}
 					`,
+				isImmersiveWeekendRead ||
+					(layoutType === 'documentary' &&
+						css`
+							&::before,
+							&::after {
+								z-index: ${getZIndex(
+									'immersiveGridOuterRules',
+								)};
+							}
+						`),
 				hasPageSkin &&
 					css`
 						${from.desktop} {
@@ -364,9 +370,6 @@ export const StandardLayoutArticleGrid = ({
 									${!usesImmersiveImageProportions &&
 									mainMediaAspectRatio != null &&
 									`aspect-ratio: ${mainMediaAspectRatio.replace(':', ' / ')};`}
-									${isImmersiveLandscape &&
-									`margin-left: -20px;
-									margin-right: -20px;`}
 								}
 
 								${isImmersivePortrait &&
@@ -442,6 +445,11 @@ export const StandardLayoutArticleGrid = ({
 							${from.leftCol} {
 								aspect-ratio: 4 / 5;
 							}
+						`,
+					(isImmersiveLandscape || layoutType === 'documentary') &&
+						css`
+							margin-left: -20px;
+							margin-right: -20px;
 						`,
 					displayAvatarUrl && layoutType === 'picture'
 						? css`

@@ -263,7 +263,9 @@ const documentaryCss: LayoutCssMap = {
 	},
 	media: {
 		mobile: `grid-row: 1; ${grid.column.all};`,
-		tablet: `grid-row: 1; ${grid.column.all};`,
+		tablet: `grid-row: 1; ${grid.column.centre};`,
+		desktop: `grid-row: 1; ${grid.between('centre-column-start', 'right-column-end')};`,
+		leftCol: `grid-row: 1; ${grid.between('left-column-start', 'right-column-end')};`,
 	},
 	meta: {
 		mobile: 'grid-row: 4;',
