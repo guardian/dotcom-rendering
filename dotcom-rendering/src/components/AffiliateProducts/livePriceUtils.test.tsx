@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react';
+import { formatPrice } from '../../lib/formatPrice';
 import {
 	createAccessibleProductLabel,
 	createStrikeThroughProductLabel,
-	formatPrice,
 	getProductCtaLivePrice,
 	rewriteLabelWithLatestPrice,
 	shouldPutOldPriceInStrikethrough,

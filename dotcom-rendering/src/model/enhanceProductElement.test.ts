@@ -1,8 +1,13 @@
+import {
+	getProductLinkLabelWithPrice,
+	rewriteLabelWithLatestPrice,
+} from '../components/AffiliateProducts/livePriceUtils';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type {
 	FEElement,
 	ProductBlockElement,
+	ProductCta,
 	ProductImage,
 } from '../types/content';
 import { enhanceElements } from './enhanceBlocks';
@@ -237,6 +242,32 @@ describe('enhanceProductBlockElements', () => {
 		}
 
 		expect(enhanced.lowestPrice).toBe('£25.99');
+	});
+
+	it('formats the lowest live price with the same cents as the button label', () => {
+		const cta: ProductCta = {
+			...productBlockElement.productCtas[0]!,
+			text: '',
+			price: '$90',
+			latestPrice: { currencySymbol: '$', price: '94.4' },
+		};
+		const [enhanced] = enhanceProductElement(elementsEnhancer)([
+			{ ...productBlockElement, productCtas: [cta] },
+		]);
+
+		if (
+			enhanced?._type !==
+			'model.dotcomrendering.pageElements.ProductBlockElement'
+		) {
+			throw new Error('Expected a ProductBlockElement');
+		}
+
+		const buttonLabel = rewriteLabelWithLatestPrice(
+			cta.latestPrice,
+			getProductLinkLabelWithPrice(cta),
+		);
+		expect(buttonLabel).toBe('$94.40 at John Lewis');
+		expect(enhanced.lowestPrice).toBe('$94.40');
 	});
 
 	it('includes the currency symbol of the latest price', () => {
