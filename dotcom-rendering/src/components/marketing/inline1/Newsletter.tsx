@@ -72,7 +72,7 @@ const NewsletterForm: ReactComponent<{
 	});
 
 	return (
-		<div ref={setNode}>
+		<div data-testid={message.type} ref={setNode}>
 			<NewsletterSignupCard
 				name={newsletterName}
 				description={description}

@@ -148,6 +148,7 @@ export const Puzzles: ReactComponent<Inline1Props> = ({
 		<section
 			css={outerContainerStyles}
 			aria-label="Guardian Puzzles and Games"
+			data-testid={variant.message.type}
 			ref={setNode}
 		>
 			<div css={innerContainerStyles(shouldHaveWhiteBackground)}>
