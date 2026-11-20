@@ -1,4 +1,5 @@
 import { JSDOM } from 'jsdom';
+import { formatPrice } from '../lib/formatPrice';
 import type {
 	FEElement,
 	ProductBlockElement,
@@ -52,16 +53,20 @@ const getLowestPrice = (ctas: ProductCta[]): string | undefined => {
 			: price;
 		const value = parsePrice(display);
 
-		return value === undefined ? [] : [{ value, display }];
+		return value === undefined ? [] : [{ value, display, latestPrice }];
 	});
 
-	return candidates.reduce<(typeof candidates)[number] | undefined>(
-		(lowest, candidate) =>
-			lowest === undefined || candidate.value < lowest.value
+	const lowest = candidates.reduce<(typeof candidates)[number] | undefined>(
+		(lowestSoFar, candidate) =>
+			lowestSoFar === undefined || candidate.value < lowestSoFar.value
 				? candidate
-				: lowest,
+				: lowestSoFar,
 		undefined,
-	)?.display;
+	);
+
+	return lowest?.latestPrice
+		? `${lowest.latestPrice.currencySymbol}${formatPrice(lowest.value)}`
+		: lowest?.display;
 };
 
 const enhance =
