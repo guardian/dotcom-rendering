@@ -213,6 +213,7 @@ export const SupporterRevenue: ReactComponent<Inline1Props> = ({
 					<LinkButton
 						cssOverrides={ctaButtonStyles}
 						theme={ctaButtonTheme}
+						data-ignore="global-link-styling"
 						href={cta.baseUrl}
 						onClick={() => sendEvent('CLICK', 'cta')}
 					>
