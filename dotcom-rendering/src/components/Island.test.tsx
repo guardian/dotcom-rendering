@@ -28,6 +28,7 @@ import { MostViewedFooterData } from './MostViewedFooterData.island';
 import { MostViewedRightWithAd } from './MostViewedRightWithAd.island';
 import { OnwardsUpper } from './OnwardsUpper.island';
 import { ReaderRevenueDev } from './ReaderRevenueDev.island';
+import { RecordLivePricing } from './RecordLivePricing.island';
 import { SendTargetingParams } from './SendTargetingParams.island';
 import { SetABTests } from './SetABTests.island';
 import { SetAdTargeting } from './SetAdTargeting.island';
@@ -336,6 +337,10 @@ describe('Island: server-side rendering', () => {
 				<ReaderRevenueDev shouldHideReaderRevenue={false} />,
 			),
 		).not.toThrow();
+	});
+
+	test('RecordLivePricing', () => {
+		expect(() => renderToString(<RecordLivePricing />)).not.toThrow();
 	});
 
 	test('FooterReaderRevenueLinks', () => {

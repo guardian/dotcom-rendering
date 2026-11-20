@@ -1,9 +1,11 @@
 import { render } from '@testing-library/react';
 import {
+	applyLatestPriceToLabel,
 	createAccessibleProductLabel,
 	createStrikeThroughProductLabel,
 	formatPrice,
 	getProductCtaLivePrice,
+	getProductCtaLivePriceDisplay,
 	rewriteLabelWithLatestPrice,
 	shouldPutOldPriceInStrikethrough,
 } from './livePriceUtils';
@@ -252,5 +254,148 @@ describe('getProductCtaLivePrice', () => {
 		);
 		expect(container.querySelector('s')).toHaveTextContent('£1,299');
 		expect(container.textContent).toBe('£1,299 £1,000');
+	});
+});
+
+describe('applyLatestPriceToLabel', () => {
+	const label = '£10 at Shop';
+
+	it('does not present a live price when there is no latest price', () => {
+		expect(applyLatestPriceToLabel(undefined, label)).toEqual({
+			label,
+			livePriceDisplay: undefined,
+		});
+	});
+
+	it('does not present a live price when the label does not follow standard convention', () => {
+		expect(
+			applyLatestPriceToLabel(
+				{ currencySymbol: '£', price: '5' },
+				'Buy at Shop',
+			).livePriceDisplay,
+		).toBeUndefined();
+	});
+
+	it('does not present a live price when the currency symbols do not match', () => {
+		expect(
+			applyLatestPriceToLabel({ currencySymbol: '$', price: '5' }, label)
+				.livePriceDisplay,
+		).toBeUndefined();
+	});
+
+	it('does not present a live price when the latest price is not numeric', () => {
+		expect(
+			applyLatestPriceToLabel(
+				{ currencySymbol: '£', price: 'not a price' },
+				label,
+			).livePriceDisplay,
+		).toBeUndefined();
+	});
+
+	it('presents a live price when the price goes up', () => {
+		expect(
+			applyLatestPriceToLabel(
+				{ currencySymbol: '£', price: '12' },
+				label,
+			),
+		).toEqual({ label: '£12 at Shop', livePriceDisplay: 'live' });
+	});
+
+	it('presents a live price when the price drops slightly', () => {
+		expect(
+			applyLatestPriceToLabel({ currencySymbol: '£', price: '9' }, label),
+		).toEqual({ label: '£9 at Shop', livePriceDisplay: 'live' });
+	});
+
+	it('presents a live price when it is the same as the article price', () => {
+		expect(
+			applyLatestPriceToLabel(
+				{ currencySymbol: '£', price: '10' },
+				label,
+			),
+		).toEqual({ label: '£10 at Shop', livePriceDisplay: 'live' });
+	});
+
+	it('presents a struck through live price when the price drops significantly', () => {
+		expect(
+			applyLatestPriceToLabel({ currencySymbol: '£', price: '5' }, label),
+		).toEqual({
+			label: '~£10~ £5 at Shop',
+			livePriceDisplay: 'strikethrough',
+		});
+	});
+});
+
+describe('getProductCtaLivePriceDisplay', () => {
+	const cta = {
+		url: 'https://example.com',
+		text: '',
+		retailer: 'Shop',
+		price: '£10',
+	};
+
+	it('does not present a live price when there is no latest price', () => {
+		expect(getProductCtaLivePriceDisplay(cta)).toEqual({
+			content: '£10',
+			livePriceDisplay: undefined,
+		});
+	});
+
+	it('does not present a live price when the latest price is not numeric', () => {
+		expect(
+			getProductCtaLivePriceDisplay({
+				...cta,
+				latestPrice: { currencySymbol: '£', price: 'not a price' },
+			}).livePriceDisplay,
+		).toBeUndefined();
+	});
+
+	it('does not present a live price when the article price is not numeric', () => {
+		expect(
+			getProductCtaLivePriceDisplay({
+				...cta,
+				price: 'Price on request',
+				latestPrice: { currencySymbol: '£', price: '12' },
+			}),
+		).toEqual({ content: 'Price on request', livePriceDisplay: undefined });
+	});
+
+	it('presents a live price when the price goes up', () => {
+		expect(
+			getProductCtaLivePriceDisplay({
+				...cta,
+				latestPrice: { currencySymbol: '£', price: '12' },
+			}),
+		).toEqual({ content: '£12', livePriceDisplay: 'live' });
+	});
+
+	it('presents a live price when the price drops slightly', () => {
+		expect(
+			getProductCtaLivePriceDisplay({
+				...cta,
+				latestPrice: { currencySymbol: '£', price: '9' },
+			}),
+		).toEqual({ content: '£9', livePriceDisplay: 'live' });
+	});
+
+	it('presents a live price when it is the same as the article price', () => {
+		expect(
+			getProductCtaLivePriceDisplay({
+				...cta,
+				latestPrice: { currencySymbol: '£', price: '10' },
+			}),
+		).toEqual({ content: '£10', livePriceDisplay: 'live' });
+	});
+
+	it('presents a struck through live price when the price drops significantly', () => {
+		const { content, livePriceDisplay } = getProductCtaLivePriceDisplay({
+			...cta,
+			latestPrice: { currencySymbol: '£', price: '5' },
+		});
+
+		expect(livePriceDisplay).toBe('strikethrough');
+
+		const { container } = render(<>{content}</>);
+		expect(container.textContent).toBe('£10 £5');
 	});
 });
