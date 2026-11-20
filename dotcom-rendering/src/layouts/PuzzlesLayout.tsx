@@ -17,8 +17,12 @@ import {
 import { PuzzlesDirectoryProgress } from '../components/PuzzlesDirectoryProgress.island';
 import { Section } from '../components/Section';
 import { has } from '../lib/has-string';
+import { withoutMaxiCards } from '../lib/maxiCrossword';
 import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
-import { isPuzzlesHubV2Enabled } from '../lib/puzzlesHubVersionExperiment';
+import {
+	isPuzzlesHubV2Enabled,
+	isPuzzlesHubV3Enabled,
+} from '../lib/puzzlesHubVersionExperiment';
 import {
 	getPuzzlesSubNavLinks,
 	PUZZLES_SUBNAV_PARENT,
@@ -264,7 +268,11 @@ export const PuzzlesLayout = ({
 				)}
 				<Island priority="critical">
 					<PuzzlesDirectoryProgress
-						layout={puzzlesPage.layout}
+						layout={
+							isPuzzlesHubV3Enabled(puzzlesPage.config)
+								? puzzlesPage.layout
+								: withoutMaxiCards(puzzlesPage.layout)
+						}
 						renderAds={renderAds}
 						hideTopRule={!!branding}
 						containerBranding={Object.fromEntries(

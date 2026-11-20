@@ -13,7 +13,7 @@ import type {
 	PuzzlesLayoutType,
 } from '../types/puzzlesPage';
 import { Island } from './Island';
-import { Rows } from './PuzzleCard';
+import { PuzzleCard, Rows } from './PuzzleCard';
 import { getPuzzleUrl, PuzzlesDirectory } from './PuzzlesDirectory';
 
 jest.mock('./Island', () => ({
@@ -38,6 +38,54 @@ const section = (
 	variant: 'standard',
 	content: { items: [[item()]], nestedContainers: [] },
 	...overrides,
+});
+
+describe('Maxi crossword card', () => {
+	it.each([
+		['large', true, 'featured'],
+		['primary', false, 'primary'],
+		['compact', false, undefined],
+	] as const)(
+		'renders the %s variant with the appropriate artwork',
+		(cardVariant, isFeatured, artwork) => {
+			const { container } = render(
+				<PuzzleCard
+					isFeatured={isFeatured}
+					item={item({
+						title: 'Maxi',
+						type: 'crossword',
+						set: 'maxi',
+						cardVariant,
+						url: '/crosswords/maxi/1',
+						gameStatus:
+							cardVariant === 'primary'
+								? 'completed'
+								: 'in-progress',
+						progress: 45,
+					})}
+				/>,
+			);
+			expect(
+				screen.getByRole('link', { name: /Maxi crossword/ }),
+			).toHaveAttribute('href', '/crosswords/maxi/1');
+			expect(screen.getByText('New')).toBeInTheDocument();
+			expect(screen.getByText('Today')).toBeInTheDocument();
+			expect(
+				screen.getByText(
+					cardVariant === 'primary' ? 'Played' : 'In progress',
+				),
+			).toBeInTheDocument();
+			const image = container.querySelector('img');
+			if (artwork) {
+				expect(image).toHaveAttribute(
+					'src',
+					`https://uploads.guim.co.uk/2026/11/19/maxi-${artwork}.svg`,
+				);
+			} else {
+				expect(image).toBeNull();
+			}
+		},
+	);
 });
 
 describe('PuzzlesDirectory', () => {

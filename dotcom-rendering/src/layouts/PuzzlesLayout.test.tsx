@@ -11,6 +11,7 @@ import {
 } from '../lib/puzzlesHubVersionExperiment';
 import { extractNAV, type NavType } from '../model/extract-nav';
 import type { Branding } from '../types/branding';
+import type { PuzzlesLayoutType } from '../types/puzzlesPage';
 import { PuzzlesLayout } from './PuzzlesLayout';
 
 jest.mock('../components/Masthead/Masthead', () => ({
@@ -32,12 +33,15 @@ jest.mock('../components/PuzzlesDirectoryProgress.island', () => ({
 	PuzzlesDirectoryProgress: ({
 		hideTopRule,
 		containerBranding,
+		layout,
 	}: {
 		hideTopRule?: boolean;
+		layout: PuzzlesLayoutType;
 		containerBranding?: Partial<Record<string, Branding>>;
 	}) => (
 		<div
 			data-testid="directory"
+			data-layout-items={JSON.stringify(layout.containers)}
 			data-hide-top-rule={hideTopRule}
 			data-container-branding={JSON.stringify(containerBranding)}
 		/>
@@ -72,6 +76,68 @@ describe('PuzzlesLayout', () => {
 				Array.from(sheet.cssRules).map((rule) => rule.cssText),
 			),
 		].join('\n');
+
+	it.each([
+		['control', false],
+		['variant', true],
+	] as const)('filters Maxi for v3 %s', (v3, visible) => {
+		const quick = {
+			id: 'quick',
+			title: 'Quick',
+			type: 'crossword',
+			set: 'quick',
+			cardVariant: 'primary',
+		};
+		const maxi = { ...quick, id: 'maxi', title: 'Maxi', set: 'maxi' };
+		render(
+			<PuzzlesLayout
+				NAV={nav}
+				puzzlesPage={
+					{
+						...page(),
+						config: {
+							edition: 'UK',
+							switches: {},
+							serverSideABTests: {
+								'puzzles-new-hub-v2': 'variant',
+								'puzzles-new-hub-v3': v3,
+							},
+						},
+						layout: {
+							containers: [
+								{
+									id: 'crosswords',
+									title: 'Crosswords',
+									content: {
+										items: [[quick]],
+										nestedContainers: [
+											{
+												id: 'nested',
+												title: 'Nested',
+												content: {
+													items: [[maxi]],
+													nestedContainers: [],
+												},
+											},
+										],
+									},
+								},
+							],
+						},
+					} as never
+				}
+			/>,
+		);
+		const items = screen
+			.getByTestId('directory')
+			.getAttribute('data-layout-items');
+		expect(items).toContain('"id":"quick"');
+		if (visible) {
+			expect(items).toContain('"id":"maxi"');
+		} else {
+			expect(items).not.toContain('"id":"maxi"');
+		}
+	});
 
 	it('renders one branded page title without category filters', () => {
 		render(<PuzzlesLayout NAV={nav} puzzlesPage={page() as never} />);
