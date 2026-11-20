@@ -682,7 +682,12 @@ export const PuzzlePageLayout = ({
 							 * derived one.
 							 */}
 							<GridItem area="body" element="article">
-								<div css={frameContainerStyles}>
+								{/* The "Skip to main content" link's target (`SkipTo`), which
+								    `ArticleBody` provides on article pages but this page has none. */}
+								<div
+									id="maincontent"
+									css={frameContainerStyles}
+								>
 									<ArticleContainer format={puzzlePageFormat}>
 										{/* Not deferred until visible: the iframe has no `src`
                         until this island hydrates and the reader is known,
