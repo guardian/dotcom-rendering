@@ -50,6 +50,12 @@ export const puzzlesPageTheme = (
 					--puzzles-card-cadence-colour: ${palette.neutral[97]};
 					--puzzles-card-headline-colour: ${palette.neutral[97]};
 					--puzzles-card-text-colour: ${palette.neutral[86]};
+					--puzzles-maxi-headline-colour: ${getPuzzleGroupPalette(
+						'crosswords',
+					).accent};
+					--puzzles-maxi-card-radius: 8px;
+					--puzzles-maxi-played-background: ${palette.success[500]};
+					--puzzles-maxi-played-check: ${palette.neutral[20]};
 					--puzzles-headline-colour: ${palette.neutral[97]};
 					--puzzles-text-colour: ${palette.neutral[86]};
 					--puzzles-supporting-text-colour: ${palette.neutral[86]};

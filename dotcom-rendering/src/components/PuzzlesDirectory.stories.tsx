@@ -9,9 +9,11 @@ import { PuzzlesLayout } from '../layouts/PuzzlesLayout';
 import {
 	puzzlesHubV2Experiment,
 	puzzlesHubV2Participation,
+	puzzlesHubV3Experiment,
+	puzzlesHubV3Participation,
 } from '../lib/puzzlesHubVersionExperiment';
 import { extractNAV } from '../model/extract-nav';
-import type { PuzzlesLayoutType } from '../types/puzzlesPage';
+import type { PuzzleItem, PuzzlesLayoutType } from '../types/puzzlesPage';
 import { PuzzlesDirectory } from './PuzzlesDirectory';
 
 const layout: PuzzlesLayoutType = {
@@ -215,6 +217,90 @@ export const Sponsored = () => {
 			puzzlesPage={{ ...page, config }}
 			NAV={extractNAV(page.nav)}
 			branding={puzzlesBranding}
+		/>
+	);
+};
+
+export const MaxiCrossword = () => {
+	const maxi: PuzzleItem = {
+		id: 'maxi',
+		title: 'Maxi',
+		type: 'crossword',
+		set: 'maxi',
+		cardVariant: 'primary',
+		url: '/crosswords/maxi/1',
+		cadence: 'Today',
+	};
+	const page = createPuzzlesPage({
+		isAdFreeUser: true,
+		layout: {
+			containers: [
+				{
+					id: 'featured',
+					title: 'Featured today',
+					variant: 'featured',
+					content: {
+						items: [
+							[
+								{
+									...maxi,
+									id: 'featured-maxi',
+									cardVariant: 'large',
+									gameStatus: 'in-progress',
+									progress: 50,
+								},
+							],
+						],
+						nestedContainers: [],
+					},
+				},
+				{
+					id: 'crosswords',
+					title: 'Crosswords',
+					content: {
+						items: [
+							[
+								{
+									...maxi,
+									id: 'primary-maxi',
+									gameStatus: 'completed',
+								},
+							],
+							[
+								{
+									...maxi,
+									id: 'secondary-maxi',
+									cardVariant: 'compact',
+									cadence: 'Mon 16 Nov',
+									gameStatus: 'in-progress',
+									progress: 50,
+								},
+							],
+						],
+						nestedContainers: [],
+					},
+				},
+			],
+		},
+	});
+	return (
+		<PuzzlesLayout
+			darkModeAvailable={true}
+			puzzlesPage={{
+				...page,
+				config: {
+					...page.config,
+					serverSideABTests: {
+						...puzzlesHubV2Participation(
+							puzzlesHubV2Experiment.variant,
+						),
+						...puzzlesHubV3Participation(
+							puzzlesHubV3Experiment.variant,
+						),
+					},
+				},
+			}}
+			NAV={extractNAV(page.nav)}
 		/>
 	);
 };
