@@ -177,6 +177,7 @@ export const Puzzles: ReactComponent<Inline1Props> = ({
 					<LinkButton
 						cssOverrides={ctaButtonStyles}
 						theme={ctaButtonTheme}
+						data-ignore="global-link-styling"
 						href={'#'}
 						icon={<SvgArrowRightStraight />}
 						iconSide="right"
