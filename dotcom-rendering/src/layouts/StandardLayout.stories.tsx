@@ -12,6 +12,7 @@ import { ArticleDesign, ArticleDisplay } from '../lib/articleFormat';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { extractNAV } from '../model/extract-nav';
 import { enhanceArticleType } from '../types/article';
+import type { MediaAtomBlockElement } from '../types/content';
 import { StandardLayout } from './StandardLayout';
 
 const meta = {
@@ -308,19 +309,28 @@ const webImmersiveLabsArticleWithSupportingCaption = {
 	},
 	blocks: webImmersiveLabsArticle.frontendData.blocks.map((block) => ({
 		...block,
-		elements: block.elements.map((element) =>
-			element._type ===
-				'model.dotcomrendering.pageElements.ImageBlockElement' &&
-			element.role === 'supporting'
-				? {
-						...element,
-						data: {
-							...element.data,
-							caption: 'Statue of Queen Elizabeth II.',
-						},
-					}
-				: element,
-		),
+		elements: block.elements
+			// Live campaign embeds inject a fixed footer and global CSS after render.
+			.filter(
+				(element) =>
+					element._type !==
+						'model.dotcomrendering.pageElements.InteractiveBlockElement' &&
+					element._type !==
+						'model.dotcomrendering.pageElements.EmbedBlockElement',
+			)
+			.map((element) =>
+				element._type ===
+					'model.dotcomrendering.pageElements.ImageBlockElement' &&
+				element.role === 'supporting'
+					? {
+							...element,
+							data: {
+								...element.data,
+								caption: 'Statue of Queen Elizabeth II.',
+							},
+						}
+					: element,
+			),
 	})),
 };
 
@@ -381,6 +391,14 @@ export const WebImmersiveLabsWithPageSkin: Story = {
 		await expect(labsHeader).not.toBeNull();
 		await expect(mainMedia).not.toBeNull();
 		await expect(brandingLogo).not.toBeNull();
+		await expect(
+			canvasElement.querySelector('[data-name="top-above-nav"]'),
+		).not.toBeInTheDocument();
+		await expect(
+			canvasElement.querySelector(
+				'.element-interactive, [data-testid="embed-block"]',
+			),
+		).not.toBeInTheDocument();
 
 		if (mainMedia === null || brandingLogo === null) {
 			throw new Error('Expected main media and Labs branding');
@@ -424,6 +442,45 @@ const immersivePortraitFormat = {
 	theme: webImmersivePortraitArticle.theme,
 };
 
+const assertImmersivePortraitFooter = async (canvasElement: HTMLElement) => {
+	const media = canvasElement.querySelector<HTMLElement>(
+		'[data-gu-name="media"]',
+	);
+	const standfirst = canvasElement.querySelector<HTMLElement>(
+		'[data-gu-name="standfirst"]',
+	);
+	const metadata = canvasElement.querySelector<HTMLElement>(
+		'[data-gu-name="meta"]',
+	);
+
+	await expect(media).not.toBeNull();
+	await expect(standfirst).not.toBeNull();
+	await expect(metadata).not.toBeNull();
+	await expect(standfirst!.parentElement).toBe(media!.parentElement);
+	await expect(metadata!.parentElement).toBe(media!.parentElement);
+
+	const view = canvasElement.ownerDocument.defaultView;
+	if (view == null) throw new Error('Expected a window for the story canvas');
+
+	if (view.innerWidth >= breakpoints.leftCol) {
+		const centreRuleStyles = view.getComputedStyle(standfirst!, '::before');
+		const mediaRect = media!.getBoundingClientRect();
+		const standfirstRect = standfirst!.getBoundingClientRect();
+		const metadataRect = metadata!.getBoundingClientRect();
+
+		await expect(centreRuleStyles.width).toBe('1px');
+		await expect(
+			Math.abs(standfirstRect.top - metadataRect.top),
+		).toBeLessThan(1);
+		await expect(
+			Math.abs(standfirstRect.bottom - mediaRect.bottom),
+		).toBeLessThan(1);
+		await expect(
+			Math.abs(metadataRect.bottom - mediaRect.bottom),
+		).toBeLessThan(1);
+	}
+};
+
 export const WebImmersivePortrait: Story = {
 	args: {
 		renderingTarget: 'Web',
@@ -444,6 +501,104 @@ export const WebImmersivePortrait: Story = {
 		chromatic: {
 			modes: allLightBreakpointModes,
 		},
+	},
+	play: async ({ canvasElement }) => {
+		await assertImmersivePortraitFooter(canvasElement);
+	},
+};
+
+const portraitImage =
+	webImmersivePortraitArticle.frontendData.mainMediaElements.find(
+		(element) =>
+			element._type ===
+			'model.dotcomrendering.pageElements.ImageBlockElement',
+	);
+
+if (
+	portraitImage?._type !==
+	'model.dotcomrendering.pageElements.ImageBlockElement'
+) {
+	throw new Error(
+		'Expected the immersive portrait fixture to contain an image',
+	);
+}
+
+const posterImage = portraitImage.media.allImages[0];
+
+if (posterImage == null) {
+	throw new Error('Expected the immersive portrait image to have a source');
+}
+
+const portraitLoop: MediaAtomBlockElement = {
+	_type: 'model.dotcomrendering.pageElements.MediaAtomBlockElement',
+	elementId: 'immersive-portrait-loop',
+	id: 'immersive-portrait-loop',
+	assets: [
+		{
+			url: 'https://uploads.guim.co.uk/2026/08/27/Video__David_Newby._Styling__Melanie_Wilkinson--0a23361a-3cb6-4e45-84b8-d2a4921a89b7-1.0_480w_q8.mp4',
+			mimeType: 'video/mp4',
+			aspectRatio: '9:16',
+		},
+	],
+	posterImage: [
+		{
+			url: posterImage.url,
+			width: Number(posterImage.fields.width),
+		},
+	],
+	videoPlayerFormat: 'Loop',
+};
+
+export const WebImmersivePortraitLoop: Story = {
+	args: {
+		...WebImmersivePortrait.args,
+		article: {
+			...webImmersivePortraitArticle.frontendData,
+			shouldHideAds: true,
+			mainMediaElements: [portraitLoop],
+		},
+	},
+	parameters: {
+		...WebImmersivePortrait.parameters,
+		chromatic: {
+			modes: {
+				'light mobileMedium': allModes['light mobileMedium'],
+				'light tablet': {
+					...allModes.light,
+					viewport: breakpoints.tablet,
+				},
+				'light desktop': allModes['light desktop'],
+				'light wide': allModes['light wide'],
+			},
+		},
+	},
+	play: async ({ canvasElement }) => {
+		await assertImmersivePortraitFooter(canvasElement);
+
+		const video = canvasElement.querySelector<HTMLVideoElement>('video');
+		await expect(video).not.toBeNull();
+
+		const view = canvasElement.ownerDocument.defaultView;
+		if (view == null) {
+			throw new Error('Expected a window for the story canvas');
+		}
+
+		const videoStyles = view.getComputedStyle(video!);
+		await expect(videoStyles.objectFit).toBe('cover');
+		await expect(videoStyles.objectPosition).toBe('50% 0%');
+
+		if (view.innerWidth >= breakpoints.tablet) {
+			const media = canvasElement.querySelector<HTMLElement>(
+				'[data-gu-name="media"]',
+			);
+			await expect(media).not.toBeNull();
+			const { width, height } = media!.getBoundingClientRect();
+			const heightRatio =
+				view.innerWidth >= breakpoints.leftCol ? 5 / 4 : 16 / 9;
+			await expect(Math.abs(height - width * heightRatio)).toBeLessThan(
+				1,
+			);
+		}
 	},
 };
 
