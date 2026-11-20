@@ -73,10 +73,6 @@ export const FaciaRenderingPropsCODE: RenderingCDKStackProps = {
 	guApp: 'facia-rendering',
 	stage: 'CODE',
 	domainName: 'facia-rendering.code.dev-guardianapis.com',
-	ec2Props: {
-		scaling: { minimumInstances: 1, maximumInstances: 3 },
-		instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.SMALL),
-	},
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
 		cpu: 1024,
@@ -100,11 +96,6 @@ export const FaciaRenderingPropsCODE: RenderingCDKStackProps = {
 			},
 		},
 	},
-	// Route 100% traffic to ECS.
-	targetGroupWeights: {
-		ec2: 0,
-		ecs: 1,
-	},
 };
 new RenderingCDKStack(cdkApp, 'FaciaRendering-CODE', FaciaRenderingPropsCODE);
 
@@ -112,34 +103,6 @@ export const FaciaRenderingPropsPROD: RenderingCDKStackProps = {
 	guApp: 'facia-rendering',
 	stage: 'PROD',
 	domainName: 'facia-rendering.guardianapis.com',
-	ec2Props: {
-		scaling: {
-			minimumInstances: 21,
-			maximumInstances: 210,
-			policies: {
-				step: {
-					cpu: cpuScalingSteps,
-					latency: {
-						scalingStepsOut: [
-							// When latency is lower than 0.4s no scaling up
-							{ lower: 0, upper: 0.4, change: 0 },
-							// When latency is higher than 0.4s we scale up by 50%
-							{ lower: 0.4, change: 50 },
-							// When latency is higher than 0.5s we scale up by 80%
-							{ lower: 0.5, change: 80 },
-						],
-						scalingStepsIn: [
-							// When latency is higher than 0.35s no scaling down
-							{ lower: 0.35, change: 0 },
-							// When latency is lower than 0.35s we scale down by 1
-							{ upper: 0.35, lower: 0, change: -1 },
-						],
-					},
-				},
-			},
-		},
-		instanceType: InstanceType.of(InstanceClass.C8G, InstanceSize.MEDIUM),
-	},
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
 		cpu: 1024,
@@ -162,11 +125,6 @@ export const FaciaRenderingPropsPROD: RenderingCDKStackProps = {
 				allowedInstanceTypes: ['c8g.*'],
 			},
 		},
-	},
-	// Route 100% traffic to ECS.
-	targetGroupWeights: {
-		ec2: 0,
-		ecs: 1,
 	},
 };
 new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', FaciaRenderingPropsPROD);
