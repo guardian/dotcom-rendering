@@ -105,19 +105,6 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
 	},
-	{
-		name: "martech-header-sign-in-header-optimisation",
-		description: "Test removing the sign in wording from mobile",
-		owners: ["martech.dev@guardian.co.uk"],
-		status: "OFF",
-		expirationDate: "2026-11-10",
-		type: "client",
-		audienceSize: 90 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: false,
-	},
-
 	/**
 	 * Puzzles & Games rollout, tier v2 (future, no launch date confirmed
 	 * yet as of this writing).
