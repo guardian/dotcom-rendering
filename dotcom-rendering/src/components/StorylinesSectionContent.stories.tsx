@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import MockDate from 'mockdate';
 import { mockStorylinesSectionContent } from '../../fixtures/manual/storylines-section';
 import { StorylinesSectionContent } from './StorylinesSectionContent.island';

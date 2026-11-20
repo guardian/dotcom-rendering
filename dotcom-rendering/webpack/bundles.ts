@@ -1,3 +1,10 @@
+type ServerSideTests = {
+	[key: `${string}Variant`]: 'variant';
+	[key: `${string}Control`]: 'control';
+};
+
+type ServerSideTestNames = keyof ServerSideTests;
+
 /**
  * Controls whether we should build the variant bundle.
  *
@@ -7,9 +14,8 @@
  * Ensure Sentry sampling in sentry/sentryLoader.ts is adjusted for the sample
  * size of the test
  *
- * @type {boolean} prevent TS from narrowing this to its current value
  */
-const BUILD_VARIANT = false;
+export const BUILD_VARIANT: boolean = false;
 
 /**
  * Server-side test names for running variant test.
@@ -19,11 +25,7 @@ const BUILD_VARIANT = false;
  *
  * @see https://github.com/guardian/frontend/blob/main/common/app/experiments/Experiments.scala
  *
- * @type {(variant: 'Variant' | 'Control') => string}
  */
-const dcrJavascriptBundle = (variant) => `dcrJavascriptBundle${variant}`;
-
-module.exports = {
-	BUILD_VARIANT,
-	dcrJavascriptBundle,
-};
+export const dcrJavascriptBundle = (
+	variant: 'Variant' | 'Control',
+): ServerSideTestNames => `dcrJavascriptBundle${variant}`;

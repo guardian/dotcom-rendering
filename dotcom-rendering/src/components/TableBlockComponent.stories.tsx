@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react-webpack5';
+import type { Meta } from '@storybook/react-vite';
 import { TableBlockComponent } from './TableBlockComponent';
 
 const tableHtml = `<table data-embed-type="table" class="table table--football table--striped">

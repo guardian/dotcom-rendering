@@ -1,5 +1,5 @@
 import { SecondaryCtaType } from '@guardian/support-dotcom-components';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import lzstring from 'lz-string';
 import { choiceCardsSettings } from '../../../lib/storybook';
 import { design, stringToHexColour, tracking } from '../../utils/storybook';

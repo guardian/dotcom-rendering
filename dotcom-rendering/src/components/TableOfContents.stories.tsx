@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { article17, headlineBold24, space } from '@guardian/source/foundations';
-import type { StoryObj } from '@storybook/react-webpack5';
+import type { StoryObj } from '@storybook/react-vite';
 import { useId } from 'react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
