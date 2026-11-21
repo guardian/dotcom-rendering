@@ -109,13 +109,18 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const isFilterArticle = hasFilterTag(article.tags);
 
-	const renderAds = canRenderAds(article);
-	const hasPageSkin =
-		isWeb && renderAds && (article.config.hasPageSkin ?? false);
+	const documentaryId = 'news/series/the-guardian-documentary';
+	const isDocumentary = article.tags.some((tag) => tag.id === documentaryId);
 
 	const { mainMediaAspectRatio, mainMediaOrientation } =
 		getMainMediaInfo(article);
-	const layoutType = getLayoutType(format, mainMediaOrientation);
+	const layoutType = isDocumentary
+		? 'documentary'
+		: getLayoutType(format, mainMediaOrientation);
+
+	const renderAds = canRenderAds(article) && layoutType !== 'documentary';
+	const hasPageSkin =
+		isWeb && renderAds && (article.config.hasPageSkin ?? false);
 
 	return (
 		<>

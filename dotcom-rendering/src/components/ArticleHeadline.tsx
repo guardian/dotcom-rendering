@@ -340,9 +340,12 @@ const WithAgeWarning = ({
 	children: React.ReactNode;
 	snapToInverted?: boolean;
 }) => {
+	const isDocumentariesSeries = tags.some(
+		(tag) => tag.id === 'news/series/the-guardian-documentary',
+	);
 	const age = getAgeWarning(tags, webPublicationDateDeprecated);
 
-	if (age) {
+	if (age && !isDocumentariesSeries) {
 		return (
 			<>
 				<div

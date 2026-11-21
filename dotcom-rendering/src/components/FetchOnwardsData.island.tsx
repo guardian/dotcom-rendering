@@ -32,6 +32,7 @@ type Props = {
 	isAdFreeUser: boolean;
 	containerPosition: string;
 	webURL: string;
+	isDocumentariesSeries?: boolean;
 };
 
 type OnwardsResponse = {
@@ -81,6 +82,7 @@ export const FetchOnwardsData = ({
 	isAdFreeUser,
 	containerPosition,
 	webURL,
+	isDocumentariesSeries,
 }: Props) => {
 	const [hasBeenSeen, setIsInViewRef] = useIsInView({ rootMargin: `-100px` });
 
@@ -181,6 +183,7 @@ export const FetchOnwardsData = ({
 					discussionApiUrl={discussionApiUrl}
 					serverTime={serverTime}
 					renderingTarget={renderingTarget}
+					isDocumentariesSeries={isDocumentariesSeries}
 				/>
 			)}
 		</div>

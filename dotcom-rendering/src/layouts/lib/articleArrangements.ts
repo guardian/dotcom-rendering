@@ -14,6 +14,7 @@ export type LayoutType =
 	| 'showcase'
 	| 'media'
 	| 'picture'
+	| 'documentary'
 	| 'comment'
 	| 'interactiveStandard'
 	| 'interactiveTopHat'
@@ -247,6 +248,40 @@ const commentCss: LayoutCssMap = {
 	},
 };
 
+const documentaryCss: LayoutCssMap = {
+	title: {
+		mobile: 'display: none;',
+		tablet: 'display: none;',
+	},
+	headline: {
+		mobile: 'grid-row: 2;',
+		tablet: 'grid-row: 2;',
+	},
+	standfirst: {
+		mobile: 'grid-row: 3;',
+		tablet: 'grid-row: 3;',
+	},
+	media: {
+		mobile: `grid-row: 1; ${grid.column.all};`,
+		tablet: `grid-row: 1; ${grid.column.centre};`,
+		desktop: `grid-row: 1; ${grid.between('centre-column-start', 'right-column-end')};`,
+		leftCol: `grid-row: 1; ${grid.between('left-column-start', 'right-column-end')};`,
+	},
+	meta: {
+		mobile: 'grid-row: 4;',
+		tablet: 'grid-row: 4;',
+		desktop: `grid-row: 2 / span 2; ${grid.column.right};`,
+	},
+	body: {
+		mobile: 'display: none;',
+		tablet: 'display: none;',
+	},
+	'right-column': {
+		mobile: 'display: none;',
+		tablet: 'display: none;',
+	},
+};
+
 const immersivePortraitCss: LayoutCssMap = {
 	title: {
 		belowDesktop: 'grid-row: 1;',
@@ -389,6 +424,7 @@ const layoutCssMaps: Record<LayoutType, LayoutCssMap> = {
 	media: mediaCss,
 	picture: pictureCss,
 	comment: commentCss,
+	documentary: documentaryCss,
 	interactiveStandard: standardCss,
 	interactiveTopHat: interactiveTopHatCss,
 	immersiveLandscape: immersiveLandscapeCss,
@@ -471,9 +507,11 @@ export const getLayoutType = (
 		case ArticleDisplay.Showcase:
 			return format.design === ArticleDesign.Picture
 				? 'picture'
-				: format.design === ArticleDesign.Interactive
-					? 'interactiveTopHat'
-					: 'showcase';
+				: format.design === ArticleDesign.Video
+					? 'documentary'
+					: format.design === ArticleDesign.Interactive
+						? 'interactiveTopHat'
+						: 'showcase';
 
 		default:
 			switch (format.design) {
