@@ -180,7 +180,7 @@ archive. The hub remains at `/puzzles-and-games`; DCR's rendering endpoint is `/
 
 **Access control is enforced on both sides.** `frontend` gates reader
 access to these routes via its `PuzzlesHubAccess` edition check (currently
-the International, Europe and Australia editions) before it ever POSTs to DCR. DCR's own
+every edition) before it ever POSTs to DCR. DCR's own
 `/PuzzlePage` endpoint additionally checks the same edition rule itself
 (via `isPuzzlesHubAvailable`, mirroring
 `/PuzzlesPage`'s hub gate) and returns `404` when it isn't enabled for the
@@ -779,9 +779,9 @@ redeploy. The former `puzzles-new-hub` (v0) and `puzzles-new-hub-v1` tests
 were removed: everything they gated is now gated by `isPuzzlesHubAvailable`.
 
 - **The hub (formerly `puzzles-new-hub-v1`)**: available only in the
-  editions listed in `PUZZLES_HUB_EDITIONS` (currently International,
-  `INT`, Europe, `EUR`, and Australia, `AU`). To roll it out to another edition, add its id to that list
-  here and to `PuzzlesHubAccess.scala` in `frontend`. Gates
+  editions listed in `PUZZLES_HUB_EDITIONS` (currently every edition:
+  `INT`, `EUR`, `AU`, `US` and `UK`). To switch it off for an edition, remove
+  its id from that list here and from `PuzzlesHubAccess.scala` in `frontend`. Gates
   the Puzzles Hub page, the 6 puzzle pages (sudoku x4, word-wheel,
   wordiply), full hub sub-nav links, a sign-in-to-track-progress message, a
   calendar/archive view for crosswords/logic-puzzles/word-games (not
@@ -804,7 +804,7 @@ The corresponding gate-check helpers live in DCR:
 `isPuzzlesHubV2Enabled` (`src/lib/puzzlesHubVersionExperiment.ts`),
 cumulative, as described above.
 
-**Current state**: the hub is available in the International, Europe and Australia editions,
+**Current state**: the hub is available in every edition (`INT`, `EUR`, `AU`, `US` and `UK`),
 and v2 sits at `audienceSize: 0/100`. The hub gate is enforced at both
 layers: `frontend`'s route-level `PuzzlesHubAccess` check decides whether a
 request reaches `/PuzzlePage` at all, and DCR's `handlePuzzlePage`

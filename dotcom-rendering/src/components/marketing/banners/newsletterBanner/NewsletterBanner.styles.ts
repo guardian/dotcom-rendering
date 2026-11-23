@@ -4,7 +4,6 @@ import {
 	between,
 	from,
 	neutral,
-	palette,
 	space,
 	until,
 } from '@guardian/source/foundations';
@@ -206,6 +205,30 @@ export const styles = {
 	textCopy: css`
 		min-width: 0;
 	`,
+	tabletBackgroundImage: (url: string): SerializedStyles => css`
+		${between.phablet.and.desktop} {
+			background-image: url(${JSON.stringify(url)});
+			background-size: ${phabletContentMaxWidth} auto;
+			background-position: center 12px;
+			background-origin: border-box;
+			background-attachment: local;
+			background-repeat: no-repeat;
+		}
+	`,
+	tabletBackgroundRow: css`
+		${between.phablet.and.desktop} {
+			grid-template-columns: minmax(0, 1fr);
+
+			> div:first-of-type > div:first-of-type > div {
+				background-color: transparent;
+			}
+		}
+	`,
+	hideTabletImage: css`
+		${between.phablet.and.desktop} {
+			display: none;
+		}
+	`,
 	mobileImage: css`
 		width: 90px;
 		height: 90px;
@@ -251,10 +274,9 @@ export const styles = {
 			grid-area: auto;
 		}
 	`,
-	verticalLine: css`
+	verticalLine: (dividerColor: string): SerializedStyles => css`
 		grid-area: vert-line;
-		background-color: ${neutral[0]};
-		opacity: 0.2;
+		background-color: ${dividerColor};
 		pointer-events: none;
 
 		${until.leftCol} {
@@ -266,11 +288,10 @@ export const styles = {
 			margin-bottom: 0;
 		}
 	`,
-	horizontalLine: css`
+	horizontalLine: (dividerColor: string): SerializedStyles => css`
 		width: 100%;
 		height: 1px;
-		background-color: ${neutral[0]};
-		opacity: 0.2;
+		background-color: ${dividerColor};
 		pointer-events: none;
 
 		${until.mobile} {
@@ -282,7 +303,7 @@ export const styles = {
 				left: 0;
 				right: 0;
 				height: 1px;
-				background-color: ${neutral[0]};
+				background-color: ${dividerColor};
 			}
 		}
 	`,
@@ -295,9 +316,12 @@ export const styles = {
 			margin: 0;
 		}
 	`,
+	tabletBackgroundHeading: css`
+		${between.phablet.and.desktop} {
+			padding-top: 184px;
+		}
+	`,
 	subheading: css`
-		color: ${palette.neutral[20]};
-
 		> div {
 			margin-bottom: ${space[2]}px;
 			${until.desktop} {

@@ -16,6 +16,10 @@ for (const isFeatured of [false, true]) {
 			page,
 		}) => {
 			await disableCMP(context);
+			// Keep the fixture's card labels and dates after hydration.
+			await context.route('**/puzzles-and-games/progress', (route) =>
+				route.fulfill({ json: { results: [] } }),
+			);
 			await page.setViewportSize({ width, height: 900 });
 			const title = isFeatured ? 'Featured today' : 'Trivia & quizzes';
 			await loadPage({

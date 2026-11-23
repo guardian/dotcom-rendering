@@ -3,9 +3,12 @@ import { Standard as StandardFixture } from '../../fixtures/generated/fe-article
 import { ConfigProvider } from '../components/ConfigContext';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
+import { PUZZLE_MODAL_ROOT_ID } from '../lib/puzzleAccess';
 import {
 	puzzlesHubV2Experiment,
 	puzzlesHubV2Participation,
+	puzzlesHubV3Experiment,
+	puzzlesHubV3Participation,
 } from '../lib/puzzlesHubVersionExperiment';
 import { extractNAV } from '../model/extract-nav';
 import { enhanceArticleType } from '../types/article';
@@ -13,6 +16,12 @@ import type { PuzzleGameSupporting, PuzzleItem } from '../types/puzzlesPage';
 import { CrosswordLayout } from './CrosswordLayout';
 
 jest.mock('../lib/bridgetApi', () => jest.fn());
+jest.mock('../components/CrosswordComponent.island', () => ({
+	CrosswordComponent: () => <div data-testid="crossword" />,
+}));
+jest.mock('../components/CrosswordAccessGate.island', () => ({
+	CrosswordAccessGate: () => <div data-testid="crossword-gate" />,
+}));
 jest.mock('../lib/useMatchMedia', () => ({
 	...jest.requireActual('../lib/useMatchMedia'),
 	useMatchMedia: jest.fn(() => true),
@@ -36,6 +45,11 @@ jest.mock('../lib/useAB', () => ({
 }));
 
 const v2On = puzzlesHubV2Participation(puzzlesHubV2Experiment.variant);
+
+const v2AndV3On = {
+	...v2On,
+	...puzzlesHubV3Participation(puzzlesHubV3Experiment.variant),
+};
 
 const relatedPuzzles: PuzzleItem[] = [
 	{
@@ -68,6 +82,8 @@ const renderCrosswordLayout = ({
 	withQuickSeries = false,
 	crosswordType = 'quick',
 	puzzleArchivePath,
+	withCrossword = false,
+	crosswordRequiresSubscription,
 }: {
 	moreFromPuzzlesAndGames?: PuzzleItem[];
 	puzzlesSupporting?: PuzzleGameSupporting;
@@ -76,6 +92,8 @@ const renderCrosswordLayout = ({
 	withQuickSeries?: boolean;
 	crosswordType?: string;
 	puzzleArchivePath?: string;
+	withCrossword?: boolean;
+	crosswordRequiresSubscription?: boolean;
 }) => {
 	const article = enhanceArticleType(
 		{
@@ -96,6 +114,18 @@ const renderCrosswordLayout = ({
 					date: Date.UTC(2026, 10, 8),
 					entries: [],
 				} as unknown as typeof StandardFixture.crossword,
+			}),
+			...(withCrossword && {
+				// A crossword page has no body blocks of its own: the crossword is
+				// the only block, which is the one `ArticleBody` renders.
+				blocks: [],
+				crossword: {
+					crosswordType,
+					number: 28000,
+					date: Date.UTC(2020, 0, 1),
+					entries: [{ id: '1-across' }],
+				} as unknown as typeof StandardFixture.crossword,
+				crosswordRequiresSubscription,
 			}),
 			config: { ...StandardFixture.config, edition, serverSideABTests },
 		},
@@ -124,7 +154,7 @@ const renderCrosswordLayout = ({
 	);
 };
 
-it('passes crossword context to both metadata share placements', () => {
+it('passes crossword context to the metadata share placement', () => {
 	const { container } = renderCrosswordLayout({ withQuickSeries: true });
 	const shareProps = Array.from(
 		container.querySelectorAll('gu-island[name="ShareButton"]'),
@@ -140,7 +170,7 @@ it('passes crossword context to both metadata share placements', () => {
 			puzzleTrackingContext,
 		})),
 	).toEqual(
-		['ArticleMeta', 'SubMeta'].map((context) => ({
+		['ArticleMeta'].map((context) => ({
 			context,
 			puzzleTrackingContext: {
 				slug: 'quick',
@@ -152,14 +182,6 @@ it('passes crossword context to both metadata share placements', () => {
 });
 
 describe('CrosswordLayout app download link', () => {
-	it('renders the link when the hub is unavailable', () => {
-		renderCrosswordLayout({});
-
-		expect(
-			screen.getByRole('link', { name: 'Download the Guardian app' }),
-		).toBeInTheDocument();
-	});
-
 	it('does not render the link when the hub is available', () => {
 		renderCrosswordLayout({ edition: 'INT' });
 
@@ -216,14 +238,6 @@ describe('CrosswordLayout useful links', () => {
 			screen.queryByRole('heading', { name: 'Useful links' }),
 		).not.toBeInTheDocument();
 	});
-
-	it('does not render the section when v1 is disabled, even with data present', () => {
-		renderCrosswordLayout({ puzzlesSupporting });
-
-		expect(
-			screen.queryByRole('heading', { name: 'Useful links' }),
-		).not.toBeInTheDocument();
-	});
 });
 
 describe('CrosswordLayout "More from Puzzles & games" rail', () => {
@@ -273,18 +287,6 @@ describe('CrosswordLayout "More from Puzzles & games" rail', () => {
 			}),
 		).not.toBeInTheDocument();
 	});
-
-	it('does not render the rail when v1 is disabled, even with data present', () => {
-		renderCrosswordLayout({
-			moreFromPuzzlesAndGames: relatedPuzzles,
-		});
-
-		expect(
-			screen.queryByRole('heading', {
-				name: 'More from Puzzles & games',
-			}),
-		).not.toBeInTheDocument();
-	});
 });
 
 describe('CrosswordLayout Puzzle Page design (v1)', () => {
@@ -320,15 +322,6 @@ describe('CrosswordLayout Puzzle Page design (v1)', () => {
 			screen.queryByText('Reuse this content'),
 		).not.toBeInTheDocument();
 		expect(container.querySelectorAll('aside nav').length).toBe(0);
-	});
-
-	it('keeps the original design when v1 is disabled', () => {
-		renderCrosswordLayout({});
-
-		expect(screen.queryAllByText('Word games')).toHaveLength(0);
-		expect(
-			screen.getByText('Explore more on these topics'),
-		).toBeInTheDocument();
 	});
 
 	it('points the title section link at the relative crosswords archive', () => {
@@ -376,27 +369,6 @@ describe('CrosswordLayout Puzzle Page design (v1)', () => {
 		).toHaveAttribute('href', '/puzzles-and-games/crosswords/archive');
 	});
 
-	it('keeps the original title series link when v1 is disabled', () => {
-		const { container } = renderCrosswordLayout({
-			withQuickSeries: true,
-		});
-
-		expect(
-			container.querySelector('a[data-component="series"]'),
-		).toHaveAttribute(
-			'href',
-			expect.stringMatching(/crosswords\/series\/quick$/),
-		);
-	});
-
-	it('keeps the original title section link when v1 is disabled', () => {
-		const { container } = renderCrosswordLayout({});
-
-		expect(
-			container.querySelector('a[data-component="section"]'),
-		).not.toHaveAttribute('href', '/puzzles-and-games/crosswords/archive');
-	});
-
 	it('applies the new design even when there is no rail data', () => {
 		renderCrosswordLayout({ edition: 'INT' });
 
@@ -408,5 +380,107 @@ describe('CrosswordLayout Puzzle Page design (v1)', () => {
 		expect(
 			screen.queryByText('Explore more on these topics'),
 		).not.toBeInTheDocument();
+	});
+});
+
+describe('CrosswordLayout premium crosswords', () => {
+	it('gates a premium crossword when puzzles hub v3 is on', () => {
+		const { container } = renderCrosswordLayout({
+			withCrossword: true,
+			crosswordRequiresSubscription: true,
+			edition: 'INT',
+			serverSideABTests: v2AndV3On,
+		});
+
+		expect(screen.getByTestId('crossword-gate')).toBeInTheDocument();
+		expect(screen.queryByTestId('crossword')).not.toBeInTheDocument();
+		expect(
+			container.querySelector(`main#${PUZZLE_MODAL_ROOT_ID}`),
+		).not.toBeNull();
+	});
+
+	it.each([
+		['no test is on', {}],
+		['only v2 is on', v2On],
+	])(
+		'renders the crossword exactly as before when %s, even if frontend sent the flag',
+		(_, serverSideABTests) => {
+			const { container } = renderCrosswordLayout({
+				withCrossword: true,
+				crosswordRequiresSubscription: true,
+				edition: 'INT',
+				serverSideABTests,
+			});
+
+			expect(screen.getByTestId('crossword')).toBeInTheDocument();
+			expect(
+				screen.queryByTestId('crossword-gate'),
+			).not.toBeInTheDocument();
+			expect(container.querySelector('main[id]')).toBeNull();
+		},
+	);
+
+	it('does not gate a crossword frontend did not flag, with v3 on', () => {
+		const { container } = renderCrosswordLayout({
+			withCrossword: true,
+			edition: 'INT',
+			serverSideABTests: v2AndV3On,
+		});
+
+		expect(screen.getByTestId('crossword')).toBeInTheDocument();
+		expect(screen.queryByTestId('crossword-gate')).not.toBeInTheDocument();
+		expect(container.querySelector('main[id]')).toBeNull();
+	});
+
+	it('keeps the skip link target on a gated crossword', () => {
+		const { container } = renderCrosswordLayout({
+			withCrossword: true,
+			crosswordRequiresSubscription: true,
+			edition: 'INT',
+			serverSideABTests: v2AndV3On,
+		});
+
+		const targets = container.querySelectorAll('#maincontent');
+		expect(targets).toHaveLength(1);
+		expect(
+			targets[0]?.querySelector('gu-island[name="CrosswordAccessGate"]'),
+		).not.toBeNull();
+	});
+
+	it('shows no comment count on a gated crossword, and keeps it on an ungated one', () => {
+		const commentCount = 'gu-island[name="CommentCount"]';
+
+		const gated = renderCrosswordLayout({
+			withCrossword: true,
+			crosswordRequiresSubscription: true,
+			edition: 'INT',
+			serverSideABTests: v2AndV3On,
+		});
+		expect(gated.container.querySelector(commentCount)).toBeNull();
+		gated.unmount();
+
+		const ungated = renderCrosswordLayout({
+			withCrossword: true,
+			edition: 'INT',
+			serverSideABTests: v2AndV3On,
+		});
+		expect(ungated.container.querySelector(commentCount)).not.toBeNull();
+	});
+
+	it('keeps everything as before for a flagged crossword of a series the Puzzles API does not know', () => {
+		const commentCount = 'gu-island[name="CommentCount"]';
+		const { container } = renderCrosswordLayout({
+			withCrossword: true,
+			crosswordType: 'everyman',
+			crosswordRequiresSubscription: true,
+			edition: 'INT',
+			serverSideABTests: v2AndV3On,
+		});
+
+		expect(screen.getByTestId('crossword')).toBeInTheDocument();
+		expect(screen.queryByTestId('crossword-gate')).not.toBeInTheDocument();
+		expect(container.querySelector('main[id]')).toBeNull();
+		expect(container.querySelector(commentCount)).not.toBeNull();
+		expect(container.querySelectorAll('#maincontent')).toHaveLength(1);
 	});
 });

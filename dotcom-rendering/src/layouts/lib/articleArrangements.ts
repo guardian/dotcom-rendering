@@ -7,6 +7,7 @@ import {
 	type ArticleFormat,
 	isOpinionDesign,
 } from '../../lib/articleFormat';
+import type { ArticleDeprecated } from '../../types/article';
 
 export type LayoutType =
 	| 'standard'
@@ -459,31 +460,73 @@ export const getLayoutType = (
 	format: ArticleFormat,
 	mainMediaOrientation: 'portrait' | 'landscape' | 'square',
 ): LayoutType => {
-	// Pending: Display hint for interactive top hat articles, maybe 'Showcase'?
-	// return 'interactiveTopHat';
-	if (format.display === ArticleDisplay.Immersive) {
-		if (
-			mainMediaOrientation === 'portrait' ||
-			format.design === ArticleDesign.WeekendEssay
-		) {
-			return 'immersivePortrait';
-		}
-		// Square images are treated the same as landscape for immersive layouts.
-		return 'immersiveLandscape';
+	switch (format.display) {
+		case ArticleDisplay.Immersive:
+			// Square images are treated the same as landscape for immersive layouts.
+			return mainMediaOrientation === 'portrait' ||
+				format.design === ArticleDesign.WeekendEssay
+				? 'immersivePortrait'
+				: 'immersiveLandscape';
+
+		case ArticleDisplay.Showcase:
+			return format.design === ArticleDesign.Picture
+				? 'picture'
+				: format.design === ArticleDesign.Interactive
+					? 'interactiveTopHat'
+					: 'showcase';
+
+		default:
+			switch (format.design) {
+				case ArticleDesign.Video:
+				case ArticleDesign.Audio:
+					return 'media';
+				case ArticleDesign.Interactive:
+					return 'interactiveStandard';
+				default:
+					return isOpinionDesign(format.design)
+						? 'comment'
+						: 'standard';
+			}
 	}
-	if (
-		format.design === ArticleDesign.Video ||
-		format.design === ArticleDesign.Audio
-	) {
-		return 'media';
-	}
-	if (format.design === ArticleDesign.Picture) return 'picture';
-	if (format.display === ArticleDisplay.Showcase) return 'showcase';
-	if (isOpinionDesign(format.design)) {
-		return 'comment';
-	}
-	if (format.design === ArticleDesign.Interactive) {
-		return 'interactiveStandard';
-	}
-	return 'standard';
+};
+
+const getImageOrientation = (
+	aspectRatio: string,
+): 'portrait' | 'landscape' | 'square' => {
+	const [width, height] = aspectRatio.split(':').map(Number);
+	if (width == null || height == null) return 'landscape';
+	if (height > width) return 'portrait';
+	if (width > height) return 'landscape';
+	return 'square';
+};
+
+export const getMainMediaInfo: {
+	(article: ArticleDeprecated): {
+		mainMediaAspectRatio: string | undefined;
+		mainMediaOrientation: 'portrait' | 'landscape' | 'square';
+	};
+} = (article: ArticleDeprecated) => {
+	const mainMedia = article.mainMediaElements[0];
+	const mainMediaType = mainMedia?._type;
+
+	const isMainMediaImage =
+		mainMediaType ===
+		'model.dotcomrendering.pageElements.ImageBlockElement';
+	const isMainMediaAtom =
+		mainMediaType ===
+		'model.dotcomrendering.pageElements.MediaAtomBlockElement';
+
+	const aspectRatio = isMainMediaImage
+		? mainMedia.media.allImages[0]?.fields.aspectRatio
+		: isMainMediaAtom
+			? mainMedia.assets[0]?.aspectRatio
+			: undefined;
+
+	return {
+		mainMediaAspectRatio: aspectRatio,
+		mainMediaOrientation:
+			aspectRatio != null
+				? getImageOrientation(aspectRatio)
+				: 'landscape',
+	};
 };

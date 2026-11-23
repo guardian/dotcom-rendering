@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import lzstring from 'lz-string';
-import { tracking } from '../utils/storybook';
 import Puzzles from './Puzzles';
+import { tracking } from './utils/storybook';
 
 const style = css`
 	margin: 3em auto;

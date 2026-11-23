@@ -20,7 +20,10 @@ import { Section } from '../components/Section';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { center } from '../lib/center';
 import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
-import { isPuzzlesHubV2Enabled } from '../lib/puzzlesHubVersionExperiment';
+import {
+	isPuzzlesHubV2Enabled,
+	isPuzzlesHubV3Enabled,
+} from '../lib/puzzlesHubVersionExperiment';
 import {
 	getPuzzlesSubNavLinks,
 	PUZZLES_SUBNAV_PARENT,
@@ -273,6 +276,9 @@ export const PuzzlesArchiveLayout = ({
 								<Island priority="critical">
 									<PuzzlesArchiveCalendar
 										initialArchive={archive}
+										showPremiumIndicators={isPuzzlesHubV3Enabled(
+											puzzlesPage.config,
+										)}
 									/>
 								</Island>
 							</div>

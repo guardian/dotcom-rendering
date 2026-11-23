@@ -110,7 +110,7 @@ describe('handlePuzzlePage', () => {
 		(slug) => {
 			for (const [edition, serverSideABTests, allowed] of [
 				['INT', {}, false],
-				['UK', { 'puzzles-new-hub-v2': 'variant' }, false],
+				['UK', { 'puzzles-new-hub-v2': 'variant' }, true],
 				['INT', { 'puzzles-new-hub-v2': 'control' }, false],
 				['INT', { 'puzzles-new-hub-v2': 'unknown' }, false],
 				['INT', { 'puzzles-new-hub-v2': 'variant' }, true],
@@ -175,22 +175,6 @@ describe('handlePuzzlePage', () => {
 			}
 		}
 	});
-
-	it.each([
-		['UK', 'UK'],
-		['US', 'US'],
-	] as const)(
-		'returns 404 without mounting the renderer for the %s edition',
-		(_, edition) => {
-			const res = response();
-			const page = withConfig(createPuzzlePage('sudoku-easy'), edition);
-
-			invokeHandler(page, res);
-
-			expect(res.sendStatus).toHaveBeenCalledWith(404);
-			expect(mockedRenderPuzzlePage).not.toHaveBeenCalled();
-		},
-	);
 
 	it('returns 404 for an unknown slug even when in the International edition', () => {
 		const res = response();

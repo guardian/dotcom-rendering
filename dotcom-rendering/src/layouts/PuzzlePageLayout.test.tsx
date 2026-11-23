@@ -86,6 +86,11 @@ const renderPuzzlePageLayout = (
 };
 
 describe('PuzzlePageLayout', () => {
+	it('has the target of the "Skip to main content" link, once', () => {
+		const { container } = renderPuzzlePageLayout('film-reveal');
+		expect(container.querySelectorAll('#maincontent')).toHaveLength(1);
+	});
+
 	it('passes the API progress identity into the access gate island for hydration', () => {
 		const page = createPuzzlePage('film-reveal');
 		const progressIdentity = {
@@ -260,12 +265,9 @@ describe('PuzzlePageLayout', () => {
 	};
 	const triviaHref = '/puzzles-and-games/trivia-and-quizzes/archive';
 
-	it('renders only the "Puzzles & games" parent sub-nav link on V0 (default fixture state)', () => {
+	it('tracks the "Puzzles & games" parent sub-nav link', () => {
 		const { container } = renderPuzzlePageLayout('sudoku-easy');
 
-		expect(
-			screen.getAllByRole('link', { name: 'Puzzles & games' }).length,
-		).toBeGreaterThan(0);
 		expect(
 			container.querySelector(
 				'[data-testid="sub-nav"] a[href="/puzzles-and-games"]',
@@ -274,14 +276,6 @@ describe('PuzzlePageLayout', () => {
 			'data-link-name',
 			'header : subnav : Puzzles & games',
 		);
-
-		for (const href of Object.values(subNavChildHrefs)) {
-			expect(
-				container.querySelector(
-					`a[href="${href}"]:not([data-component="section"])`,
-				),
-			).not.toBeInTheDocument();
-		}
 	});
 
 	it('attributes Useful links to the puzzle page', () => {
@@ -306,23 +300,6 @@ describe('PuzzlePageLayout', () => {
 	});
 
 	describe('sub-nav child links (Crosswords/Word games/Logic puzzles/Trivia & quizzes, v1-scoped feature)', () => {
-		it('does not render when v1 is not enabled', () => {
-			const { container } = renderPuzzlePageLayout('sudoku-easy', {
-				config: {
-					...createPuzzlePage('sudoku-easy').config,
-					edition: 'UK',
-				},
-			});
-
-			for (const href of Object.values(subNavChildHrefs)) {
-				expect(
-					container.querySelector(
-						`a[href="${href}"]:not([data-component="section"])`,
-					),
-				).not.toBeInTheDocument();
-			}
-		});
-
 		it('renders Crosswords/Word games/Logic puzzles, but not Trivia & quizzes, when only v1 is enabled', () => {
 			const { container } = renderPuzzlePageLayout('sudoku-easy', {
 				config: {
@@ -435,31 +412,6 @@ describe('PuzzlePageLayout', () => {
 				instance: {
 					...createPuzzlePage('sudoku-easy').instance,
 					moreFromPuzzlesAndGames: [],
-				},
-			});
-
-			expect(
-				screen.queryByRole('heading', {
-					name: 'More from Puzzles & games',
-				}),
-			).not.toBeInTheDocument();
-		});
-
-		it('does not render the rail when data is present but v1 is not enabled (default fixture state)', () => {
-			renderPuzzlePageLayout('sudoku-easy');
-
-			expect(
-				screen.queryByRole('heading', {
-					name: 'More from Puzzles & games',
-				}),
-			).not.toBeInTheDocument();
-		});
-
-		it('does not render the rail when data is present and v1 is not enabled', () => {
-			renderPuzzlePageLayout('sudoku-easy', {
-				config: {
-					...createPuzzlePage('sudoku-easy').config,
-					edition: 'UK',
 				},
 			});
 
@@ -600,7 +552,6 @@ describe('PuzzlePageLayout', () => {
 				},
 				'INT',
 			],
-			['v2 and v3 outside the hub editions', v2AndV3On, 'UK'],
 		] as const)(
 			'treats a premium puzzle as free outside puzzles-new-hub-v3 (%s)',
 			(_label, serverSideABTests, edition) => {
