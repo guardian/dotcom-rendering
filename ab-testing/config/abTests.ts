@@ -277,8 +277,8 @@ const ABTests: ABTest[] = [
 		expirationDate: "2026-12-16",
 		type: "client",
 		status: "ON",
-		audienceSize: 0,
-		groups: ["enable"],
+		audienceSize: 5 / 100,
+		groups: ["control", "variable"],
 	},
 	{
 		name: "newsroom-ai-tag-page-storylines",
