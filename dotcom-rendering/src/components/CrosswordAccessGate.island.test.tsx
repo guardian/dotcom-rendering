@@ -24,8 +24,18 @@ jest.mock('./CrosswordComponent.island', () => ({
 	),
 }));
 jest.mock('./UnlockPremiumPuzzlesModal', () => ({
-	UnlockPremiumPuzzlesModal: ({ isSignedIn }: { isSignedIn?: boolean }) => (
-		<div data-testid="modal" data-signed-in={String(isSignedIn)} />
+	UnlockPremiumPuzzlesModal: ({
+		isSignedIn,
+		intcmp,
+	}: {
+		isSignedIn?: boolean;
+		intcmp?: string;
+	}) => (
+		<div
+			data-testid="modal"
+			data-signed-in={String(isSignedIn)}
+			data-intcmp={intcmp}
+		/>
 	),
 }));
 
@@ -78,6 +88,15 @@ describe('CrosswordAccessGate', () => {
 		);
 		expect(screen.queryByTestId('board')).not.toBeInTheDocument();
 		expect(mockedFetchPuzzleAccess).not.toHaveBeenCalled();
+	});
+
+	it('tells the modal which crossword series the reader came from', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedOut);
+		renderGate('quick-cryptic');
+		expect(await screen.findByTestId('modal')).toHaveAttribute(
+			'data-intcmp',
+			'puzzles_crossword-quick-cryptic',
+		);
 	});
 
 	it('asks about the crossword by its series qualified id and its UTC date', async () => {

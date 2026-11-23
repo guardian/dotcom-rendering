@@ -59,18 +59,25 @@ export const getCurrentPageUrl = (location: {
 /**
  * The "Subscribe" CTA of the premium puzzles modal: the Support site (region
  * is resolved by the Support site itself) with a `returnUrl`, a full `https`
- * URL, so the reader lands back where they came from after subscribing.
+ * URL, so the reader lands back where they came from after subscribing, and
+ * an `INTCMP` (campaign code) saying which series the reader came from (see
+ * `puzzlesAcquisition.ts`).
  */
 export const buildPremiumPuzzlesSubscribeUrl = ({
 	idUrl,
 	returnUrl,
+	intcmp,
 }: {
 	idUrl?: string;
 	returnUrl?: string;
+	intcmp?: string;
 }): string => {
 	const params = new URLSearchParams({ source: 'puzzles' });
 	if (returnUrl !== undefined) {
 		params.set('returnUrl', returnUrl);
+	}
+	if (intcmp !== undefined) {
+		params.set('INTCMP', intcmp);
 	}
 	return `${getSupportBaseUrl(idUrl)}/?${params.toString()}`;
 };
