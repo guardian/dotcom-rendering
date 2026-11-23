@@ -19,7 +19,7 @@ import {
 	immersiveLayer,
 	spacedColumn,
 	topHatFurnitureBackgroundStyles,
-} from './styles';
+} from './sharedStandardLayoutArticleGridStyles';
 
 const immersiveHeadlineOverlay = (
 	format: ArticleFormat,

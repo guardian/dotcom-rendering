@@ -6,7 +6,10 @@ import { getZIndex } from '../../lib/getZIndex';
 import type { ArticleDeprecated } from '../../types/article';
 import type { ArticleGridLayout } from './deriveArticleGridLayout';
 import { GridItem } from './GridItem';
-import { immersiveLayer, spacedColumn } from './styles';
+import {
+	immersiveLayer,
+	spacedColumn,
+} from './sharedStandardLayoutArticleGridStyles';
 
 export const ArticleGridTitle = ({
 	article,

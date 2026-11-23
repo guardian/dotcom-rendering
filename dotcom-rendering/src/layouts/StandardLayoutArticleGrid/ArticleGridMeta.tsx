@@ -16,7 +16,7 @@ import type { ArticleDeprecated } from '../../types/article';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type { ArticleGridLayout } from './deriveArticleGridLayout';
 import { GridItem } from './GridItem';
-import { topHatFurnitureBackgroundStyles } from './styles';
+import { topHatFurnitureBackgroundStyles } from './sharedStandardLayoutArticleGridStyles';
 
 const stretchLines = css`
 	${until.phablet} {

@@ -6,7 +6,7 @@ import type { ArticleFormat } from '../../lib/articleFormat';
 import type { ArticleDeprecated } from '../../types/article';
 import type { ArticleGridLayout } from './deriveArticleGridLayout';
 import { GridItem } from './GridItem';
-import { topHatFurnitureBackgroundStyles } from './styles';
+import { topHatFurnitureBackgroundStyles } from './sharedStandardLayoutArticleGridStyles';
 
 export const ArticleGridStandfirst = ({
 	article,

@@ -51,84 +51,84 @@ export const StandardLayoutArticleGrid = ({
 		? grid.centreRuleAt('[data-gu-name="standfirst"]')
 		: grid.centreRule(3);
 
-	return (
-		<article
-			css={[
+	const articleStyles = [
+		css`
+			background-color: ${themePalette('--article-background')};
+		`,
+		grid.container,
+		hasPageSkin && grid.pageSkinContainer,
+		grid.outerRules(),
+		!isLabs &&
+			layoutType !== 'interactiveStandard' &&
+			!isInteractiveTopHat &&
+			css`
+				${from.leftCol} {
+					${centreRuleStyles}
+					${isImmersiveLandscape &&
+					css`
+						& > *:nth-child(3)::before {
+							top: 100%;
+						}
+					`}
+				}
+			`,
+		isImmersive &&
+			css`
+				${until.tablet} {
+					--immersive-headline-overlap: ${ageWarning != null
+						? '96px'
+						: '48px'};
+				}
+				${ageWarning != null &&
 				css`
-					background-color: ${themePalette('--article-background')};
-				`,
-				grid.container,
-				hasPageSkin && grid.pageSkinContainer,
-				grid.outerRules(),
-				!isLabs &&
-					layoutType !== 'interactiveStandard' &&
-					!isInteractiveTopHat &&
-					css`
-						${from.leftCol} {
-							${centreRuleStyles}
-							${isImmersiveLandscape &&
-							css`
-								& > *:nth-child(3)::before {
-									top: 100%;
-								}
-							`}
-						}
-					`,
-				isImmersive &&
-					css`
-						${until.tablet} {
-							--immersive-headline-overlap: ${ageWarning != null
-								? '96px'
-								: '48px'};
-						}
-						${ageWarning != null &&
-						css`
-							${until.mobileMedium} {
-								--immersive-headline-overlap: 6.75rem;
-							}
-						`}
-					`,
-				isImmersiveLandscape &&
-					css`
-						${from.tablet} {
-							/* Two 57.5px headline lines, ending at the second baseline. */
-							grid-template-rows: auto auto ${ageWarning != null
-									? '140px'
-									: '106px'} auto auto auto auto auto;
-						}
-						&::before,
-						&::after {
-							z-index: ${getZIndex('immersiveGridOuterRules')};
-						}
-					`,
-				hasPageSkin &&
-					css`
-						${from.desktop} {
-							&::before {
-								left: 0;
-								grid-column: auto;
-								transform: none;
-							}
+					${until.mobileMedium} {
+						--immersive-headline-overlap: 6.75rem;
+					}
+				`}
+			`,
+		isImmersiveLandscape &&
+			css`
+				${from.tablet} {
+					/* Two 57.5px headline lines, ending at the second baseline. */
+					grid-template-rows: auto auto ${ageWarning != null
+							? '140px'
+							: '106px'} auto auto auto auto auto;
+				}
+				&::before,
+				&::after {
+					z-index: ${getZIndex('immersiveGridOuterRules')};
+				}
+			`,
+		hasPageSkin &&
+			css`
+				${from.desktop} {
+					&::before {
+						left: 0;
+						grid-column: auto;
+						transform: none;
+					}
 
-							&::after {
-								right: 0;
-								grid-column: auto;
-								transform: none;
-							}
-						}
-					`,
-				isImmersivePortrait &&
-					css`
-						${from.leftCol} {
-							grid-template-rows: 0.25fr 1fr max-content;
-						}
-					`,
-				isInteractiveTopHat &&
-					css`
-						grid-template-rows: 300px auto;
-					`,
-			]}
-		>
+					&::after {
+						right: 0;
+						grid-column: auto;
+						transform: none;
+					}
+				}
+			`,
+		isImmersivePortrait &&
+			css`
+				${from.leftCol} {
+					grid-template-rows: 0.25fr 1fr max-content;
+				}
+			`,
+		isInteractiveTopHat &&
+			css`
+				grid-template-rows: 300px auto;
+			`,
+	];
+
+	return (
+		<article css={articleStyles}>
 			<ArticleGridMainMedia
 				article={article}
 				format={format}
