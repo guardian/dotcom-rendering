@@ -278,7 +278,7 @@ const ABTests: ABTest[] = [
 		type: "client",
 		status: "ON",
 		audienceSize: 5 / 100,
-		groups: ["control", "variable"],
+		groups: ["control", "variant"],
 	},
 	{
 		name: "newsroom-ai-tag-page-storylines",
