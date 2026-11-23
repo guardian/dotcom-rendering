@@ -49,8 +49,8 @@ export const ArticleRenderingPropsCODE: RenderingCDKStackProps = {
 		managedInstancesProps: {},
 	},
 	targetGroupWeights: {
-		ec2: 1,
-		ecs: 0,
+		ec2: 0,
+		ecs: 1,
 	},
 };
 new RenderingCDKStack(
@@ -115,8 +115,8 @@ export const ArticleRenderingPropsPROD: RenderingCDKStackProps = {
 		},
 	},
 	targetGroupWeights: {
-		ec2: 1,
-		ecs: 0,
+		ec2: 99,
+		ecs: 1,
 	},
 };
 new RenderingCDKStack(
