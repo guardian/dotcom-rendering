@@ -2,6 +2,8 @@ import { App } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
 import { InstanceClass, InstanceSize, InstanceType } from 'aws-cdk-lib/aws-ec2';
 import {
+	ArticleRenderingPropsCODE,
+	ArticleRenderingPropsPROD,
 	FaciaRenderingPropsCODE,
 	FaciaRenderingPropsPROD,
 	InteractiveRenderingPropsCODE,
@@ -140,6 +142,29 @@ describe('The RenderingCDKStack', () => {
 			app,
 			'FaciaRendering-CODE',
 			FaciaRenderingPropsCODE,
+		);
+		const template = Template.fromStack(stack);
+		expect(template.toJSON()).toMatchSnapshot();
+	});
+
+	it('matches the snapshot for Article Rendering PROD (uses ECS)', () => {
+		const app = new App();
+		const stack = new RenderingCDKStack(
+			app,
+			'FaciaRendering-PROD',
+			ArticleRenderingPropsPROD,
+		);
+		const template = Template.fromStack(stack);
+		expect(template.toJSON()).toMatchSnapshot();
+	});
+
+	it('matches the snapshot for Article Rendering CODE (uses ECS)', () => {
+		const app = new App();
+
+		const stack = new RenderingCDKStack(
+			app,
+			'ArticleRendering-CODE',
+			ArticleRenderingPropsCODE,
 		);
 		const template = Template.fromStack(stack);
 		expect(template.toJSON()).toMatchSnapshot();

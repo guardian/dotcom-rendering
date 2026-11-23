@@ -25,7 +25,7 @@ const cpuScalingSteps = {
 };
 
 /** Article */
-new RenderingCDKStack(cdkApp, 'ArticleRendering-CODE', {
+export const ArticleRenderingPropsCODE: RenderingCDKStackProps = {
 	guApp: 'article-rendering',
 	stage: 'CODE',
 	domainName: 'article-rendering.code.dev-guardianapis.com',
@@ -33,8 +33,14 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-CODE', {
 		scaling: { minimumInstances: 1, maximumInstances: 3 },
 		instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.SMALL),
 	},
-});
-new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
+};
+new RenderingCDKStack(
+	cdkApp,
+	'ArticleRendering-CODE',
+	ArticleRenderingPropsCODE,
+);
+
+export const ArticleRenderingPropsPROD: RenderingCDKStackProps = {
 	guApp: 'article-rendering',
 	stage: 'PROD',
 	domainName: 'article-rendering.guardianapis.com',
@@ -66,7 +72,12 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 		},
 		instanceType: InstanceType.of(InstanceClass.C8G, InstanceSize.MEDIUM),
 	},
-});
+};
+new RenderingCDKStack(
+	cdkApp,
+	'ArticleRendering-PROD',
+	ArticleRenderingPropsPROD,
+);
 
 /** Facia aka Fronts */
 export const FaciaRenderingPropsCODE: RenderingCDKStackProps = {
