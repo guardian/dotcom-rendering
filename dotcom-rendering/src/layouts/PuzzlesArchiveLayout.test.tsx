@@ -5,9 +5,15 @@ import type { ReactNode } from 'react';
 import { createPuzzlesPage } from '../../fixtures/manual/puzzlesPage';
 import { Island } from '../components/Island';
 import { SubNav } from '../components/Masthead/Titlepiece/SubNav';
+import type * as PuzzlesHubAccess from '../lib/puzzlesHubAccess';
+import {
+	isPuzzlesHubAvailable,
+	PUZZLES_HUB_EDITIONS,
+} from '../lib/puzzlesHubAccess';
 import {
 	puzzlesHubV2Experiment,
 	puzzlesHubV2Participation,
+	puzzlesHubV3Participation,
 } from '../lib/puzzlesHubVersionExperiment';
 import { extractNAV, type NavType } from '../model/extract-nav';
 import { PuzzlesArchiveLayout } from './PuzzlesArchiveLayout';
@@ -15,6 +21,16 @@ import archiveStories, {
 	LogicPuzzles,
 	WordGames,
 } from './PuzzlesArchiveLayout.stories';
+
+jest.mock('../lib/puzzlesHubAccess', () => {
+	const actual = jest.requireActual<typeof PuzzlesHubAccess>(
+		'../lib/puzzlesHubAccess',
+	);
+	return {
+		...actual,
+		isPuzzlesHubAvailable: jest.fn(actual.isPuzzlesHubAvailable),
+	};
+});
 
 jest.mock('../components/Masthead/Masthead', () => ({
 	Masthead: ({ nav }: { nav: NavType }) => (
@@ -63,6 +79,59 @@ const slotIds = () =>
 
 describe('PuzzlesArchiveLayout', () => {
 	const nav = extractNAV(createPuzzlesPage().nav);
+
+	beforeEach(() => {
+		const actual = jest.requireActual<typeof PuzzlesHubAccess>(
+			'../lib/puzzlesHubAccess',
+		);
+		jest.mocked(isPuzzlesHubAvailable).mockImplementation(
+			actual.isPuzzlesHubAvailable,
+		);
+	});
+
+	it.each([
+		['INT', 'variant', 'variant', true],
+		['INT', 'variant', 'control', false],
+		['INT', 'variant', undefined, false],
+		['INT', 'control', 'variant', false],
+		['UK', 'variant', 'variant', PUZZLES_HUB_EDITIONS.includes('UK')],
+	] as const)(
+		'gates premium indicators for edition=%s, v2=%s, v3=%s',
+		(edition, v2, v3, expected) => {
+			jest.mocked(Island).mockClear();
+			const { puzzlesPage } = archiveStories.args;
+			render(
+				<PuzzlesArchiveLayout
+					NAV={nav}
+					puzzlesPage={{
+						...puzzlesPage,
+						config: {
+							...puzzlesPage.config,
+							edition,
+							serverSideABTests: {
+								...puzzlesHubV2Participation(v2),
+								...(v3 === undefined
+									? {}
+									: puzzlesHubV3Participation(v3)),
+							},
+						},
+					}}
+				/>,
+			);
+
+			expect(Island).toHaveBeenCalledWith(
+				expect.objectContaining({
+					children: expect.objectContaining({
+						props: expect.objectContaining({
+							initialArchive: puzzlesPage.archive,
+							showPremiumIndicators: expected,
+						}),
+					}),
+				}),
+				expect.anything(),
+			);
+		},
+	);
 
 	it.each([
 		['Crosswords', archiveStories.args],
@@ -113,6 +182,8 @@ describe('PuzzlesArchiveLayout', () => {
 	] as const)(
 		'hides trivia for %s',
 		(_description, isHubAvailable, isV2Enabled, expectedLinkCount) => {
+			// Exercise navigation states independently of the edition rollout.
+			jest.mocked(isPuzzlesHubAvailable).mockReturnValue(isHubAvailable);
 			const { puzzlesPage } = archiveStories.args;
 			render(
 				<PuzzlesArchiveLayout
@@ -121,7 +192,7 @@ describe('PuzzlesArchiveLayout', () => {
 						...puzzlesPage,
 						config: {
 							...puzzlesPage.config,
-							edition: isHubAvailable ? 'INT' : 'UK',
+							edition: 'INT',
 							serverSideABTests: {
 								...puzzlesHubV2Participation(
 									isV2Enabled

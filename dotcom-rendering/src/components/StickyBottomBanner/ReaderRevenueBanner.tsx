@@ -61,7 +61,6 @@ type BuildPayloadProps = BaseProps & {
 	asyncArticleCounts: Promise<ArticleCounts | undefined>;
 	userConsent: boolean;
 	hideSupportMessagingForUser: boolean;
-	userSubscriptions: number[];
 };
 
 const MAX_AUXIA_ROLLOUT_MVT_ID = 1_000_000;
@@ -173,7 +172,6 @@ export const buildPayload = async ({
 	inHoldbackGroup,
 	inAuxiaVariant,
 	isSensitive,
-	userSubscriptions,
 }: BuildPayloadProps): Promise<BannerPayload> => {
 	const getBrowserId = (): string | undefined => {
 		if (inAuxiaVariant !== true) {
@@ -225,7 +223,6 @@ export const buildPayload = async ({
 		inHoldbackGroup,
 		browserId: getBrowserId(),
 		isSensitive,
-		userSubscriptions,
 		...(auxiaRolloutMvtId === undefined ? {} : { auxiaRolloutMvtId }),
 	};
 
@@ -313,24 +310,6 @@ export const canShowRRBanner: CanShowFunctionType<
 	const userConsent = await hasRequiredConsents();
 
 	const optedOutOfArticleCount = await hasOptedOutOfArticleCount();
-	// Skip fetching user subscriptions for now
-	const userSubscriptions: number[] = [];
-	// if (isSignedIn) {
-	// 	const authStatus = await getAuthStatus();
-	// 	if (authStatus.kind === 'SignedIn') {
-	// 		const userId = authStatus.idToken.claims.sub;
-	// 		const cachedSubscriptions = getCachedSubscriptions();
-	// 		userSubscriptions =
-	// 			cachedSubscriptions &&
-	// 			!shouldInvalidateCache(cachedSubscriptions, userId)
-	// 				? cachedSubscriptions.listIds
-	// 				: ((await fetchNewsletterSubscriptions(
-	// 						idApiUrl,
-	// 						userId,
-	// 						authStatus,
-	// 					)) ?? []);
-	// 	}
-	// }
 	const bannerPayload = await buildPayload({
 		isSignedIn,
 		countryCode,
@@ -350,7 +329,6 @@ export const canShowRRBanner: CanShowFunctionType<
 		asyncArticleCounts,
 		userConsent,
 		hideSupportMessagingForUser,
-		userSubscriptions,
 		pageId,
 		inHoldbackGroup,
 		inAuxiaVariant,

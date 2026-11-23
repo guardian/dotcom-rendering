@@ -1,7 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source/foundations';
-import { palette } from '../../../../palette';
 import { contentTransitionEasing } from '../../shared/transitions';
 
 const newsletterFormTransition = `0.2s ${contentTransitionEasing}`;
@@ -13,12 +12,23 @@ export const styles = {
 		row-gap: ${space[2]}px;
 		align-items: end;
 
-		${until.tablet} {
+		${until.desktop} {
 			row-gap: ${space[3]}px;
 		}
 	`,
 	collapsedForm: css`
 		row-gap: 0;
+	`,
+	validationError: (errorColor: string): SerializedStyles => css`
+		[role='alert'] {
+			color: ${errorColor};
+		}
+	`,
+	emailInputText: (textColor: string): SerializedStyles => css`
+		&,
+		&:invalid[value]:not([value='']) {
+			color: ${textColor};
+		}
 	`,
 	bannerSignedInLayout: css`
 		grid-template-columns: minmax(0, 1fr);
@@ -34,7 +44,7 @@ export const styles = {
 		grid-template-columns: minmax(0, 1fr) auto;
 		grid-template-areas: 'email submit';
 
-		${until.tablet} {
+		${until.desktop} {
 			grid-template-columns: 1fr;
 			grid-template-areas:
 				'email'
@@ -53,15 +63,7 @@ export const styles = {
 		min-width: 0;
 
 		label div {
-			color: ${palette('--newsletter-signup-input-text')};
 			font-size: 14px;
-		}
-
-		input {
-			color: ${palette('--newsletter-signup-input-text')};
-			background-color: ${palette(
-				'--newsletter-signup-input-background',
-			)};
 		}
 
 		[role='alert'] {
@@ -112,18 +114,46 @@ export const styles = {
 		gap: ${space[3]}px;
 		min-width: 0;
 	`,
-	marketingToggleBox: css`
+	marketingToggleBox: (borderColor: string): SerializedStyles => css`
 		width: 100%;
 		padding: ${space[2]}px;
-		border: 1px solid ${palette('--card-border-supporting')};
+		border: 1px solid ${borderColor};
 		border-radius: 4px;
-		label {
-			color: ${palette('--newsletter-signup-toggle-text')};
-		}
+	`,
+	toggleText: (
+		textColor: string,
+		activeColor?: string,
+	): SerializedStyles => css`
+		color: ${textColor};
+		${activeColor !== undefined &&
+		css`
+			button[aria-checked='true'] {
+				background-color: ${activeColor};
+				border-color: ${activeColor};
+
+				&::before {
+					border-color: ${activeColor};
+				}
+			}
+		`}
 	`,
 	recaptchaContainer: css`
+		contain: layout;
+
 		.grecaptcha-badge {
 			visibility: hidden;
+		}
+	`,
+	privacyText: (textColor: string): SerializedStyles => css`
+		color: ${textColor};
+
+		/* Outrank the shared privacy styles and Source Link states. */
+		&& {
+			a,
+			a:hover,
+			strong {
+				color: inherit;
+			}
 		}
 	`,
 	privacyContainer: (
@@ -131,7 +161,7 @@ export const styles = {
 	): SerializedStyles => css`
 		margin-top: ${space[2]}px;
 		${until.tablet} {
-			margin-top: ${isSignedIn ? 0 : space[3]}px;
+			margin-top: ${isSignedIn !== false ? 0 : space[3]}px;
 		}
 		grid-column: 1 / -1;
 		${isSignedIn === true &&
@@ -144,13 +174,13 @@ export const styles = {
 		width: 100%;
 		display: flex;
 		gap: ${space[2]}px;
-		${from.tablet} {
+		${from.desktop} {
 			width: auto;
 		}
 	`,
 	submitButton: css`
 		width: 100%;
-		${from.tablet} {
+		${from.desktop} {
 			width: auto;
 		}
 	`,

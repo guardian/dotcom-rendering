@@ -44,7 +44,7 @@ const fetchComponent = (
 	}
 	if (message.type === 'Inline1PuzzlesMessage') {
 		return import(
-			/* webpackChunkName: "Puzzles" */ `../components/marketing/inline1/puzzles/Puzzles`
+			/* webpackChunkName: "Puzzles" */ `../components/marketing/inline1/Puzzles`
 		)
 			.then((module) => {
 				return module.Puzzles;
@@ -67,8 +67,13 @@ const render = <P extends object>(
 	slot: HTMLElement,
 ) => {
 	slot.innerHTML = '';
-	// override ad-slot-container style in parent element
+	// override ad-slot style in parent element
 	slot.style.textAlign = 'left';
+	slot.style.minHeight = 'auto';
+	if (slot.parentElement) {
+		// remove the default background color
+		slot.parentElement.style.backgroundColor = 'transparent';
+	}
 	createRoot(slot).render(
 		<ConfigProvider value={getConfig()}>
 			{createElement(Component, props)}

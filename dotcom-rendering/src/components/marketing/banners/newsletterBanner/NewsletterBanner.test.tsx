@@ -8,7 +8,7 @@ import type {
 	removeMediaRulePrefix,
 	useMatchMedia,
 } from '../../../../lib/useMatchMedia';
-import { design, props } from '../utils/storybook';
+import { newsletterDesign, props } from '../utils/storybook';
 import { NewsletterBanner } from './NewsletterBanner';
 
 const squareIllustration = 'https://example.com/newsletter-square.jpg';
@@ -24,7 +24,7 @@ const sdcNewsletterProps = {
 	submitComponentEvent: async () => Promise.resolve(),
 	isCollapsible: false,
 	design: {
-		...design,
+		...newsletterDesign,
 		headerImage: {
 			mobileUrl:
 				'https://i.guim.co.uk/img/media/630a3735c02e195be89ab06fd1b8192959e282ab/0_0_1172_560/500.png?width=500&quality=75&s=937595b3f471d6591475955335c7c023',
@@ -120,63 +120,29 @@ describe('NewsletterBanner configuration', () => {
 		).toBe(true);
 	});
 
-	it('uses the newsletter square illustration on mobile and tablet', () => {
-		const { container } = render(
+	it('renders the frequency icon without a configured icon color', () => {
+		const colours = {
+			...newsletterDesign.colours,
+			newsletterBanner: {
+				...newsletterDesign.colours.newsletterBanner,
+				frequencyIconColor: undefined,
+			},
+		};
+		render(
 			<NewsletterBanner
 				{...sdcNewsletterProps}
+				design={{
+					...sdcNewsletterProps.design,
+					colours,
+				}}
 				idApiUrl="https://idapi.theguardian.com"
 			/>,
 		);
 
 		expect(
-			testingScreen.getByRole('heading', {
-				name: 'Sign up for The Stakes 2026',
-			}),
+			testingScreen
+				.getByText('Free newsletter |')
+				.parentElement?.previousElementSibling?.querySelector('svg'),
 		).toBeInTheDocument();
-		expect(
-			testingScreen.queryByRole('heading', {
-				name: 'Configured banner heading',
-			}),
-		).not.toBeInTheDocument();
-		expect(
-			testingScreen.getByText(
-				'Get our weekly guide to the 2026 election.',
-			),
-		).toBeInTheDocument();
-		expect(
-			testingScreen.queryByText(
-				'From the races and candidates to watch to the issues shaping American politics.',
-			),
-		).not.toBeInTheDocument();
-		expect(
-			testingScreen.getAllByAltText('The Stakes 2026').length,
-		).toBeGreaterThan(0);
-
-		const mobileSources = container.querySelectorAll(
-			'source[media="(max-width: 739px)"]',
-		);
-		expect(mobileSources.length).toBeGreaterThan(0);
-		mobileSources.forEach((source) =>
-			expect(source).toHaveAttribute('srcset', squareIllustration),
-		);
-
-		const tabletSources = container.querySelectorAll(
-			'source[media="(max-width: 979px)"]',
-		);
-		expect(tabletSources.length).toBeGreaterThan(0);
-		tabletSources.forEach((source) =>
-			expect(source).toHaveAttribute('srcset', squareIllustration),
-		);
-
-		const desktopSources = container.querySelectorAll(
-			'source[media="(max-width: 1139px)"]',
-		);
-		expect(desktopSources.length).toBeGreaterThan(0);
-		desktopSources.forEach((source) =>
-			expect(source).toHaveAttribute(
-				'srcset',
-				sdcNewsletterProps.design.headerImage.desktopUrl,
-			),
-		);
 	});
 });

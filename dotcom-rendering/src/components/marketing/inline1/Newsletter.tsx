@@ -4,7 +4,7 @@ import type {
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useIsSignedIn } from '../../../lib/useAuthStatus';
 import { useNewsletterSubscription } from '../../../lib/useNewsletterSubscription';
-import { NewsletterSignupCardContainer } from '../../NewsletterSignupCardContainer';
+import { NewsletterSignupCard } from '../../NewsletterSignupCard';
 import { NewsletterSignupForm } from '../../NewsletterSignupForm.island';
 import type { ReactComponent } from '../lib/ReactComponent';
 import { useInline1Tracking } from './utils/useInline1Tracking';
@@ -72,8 +72,12 @@ const NewsletterForm: ReactComponent<{
 	});
 
 	return (
-		<div ref={setNode}>
-			<NewsletterSignupCardContainer
+		<div
+			data-message-type={message.type}
+			data-testid={tracking.campaignCode}
+			ref={setNode}
+		>
+			<NewsletterSignupCard
 				name={newsletterName}
 				description={description}
 				illustrationSquare={illustrationSquare}
@@ -89,7 +93,7 @@ const NewsletterForm: ReactComponent<{
 					isAlreadySubscribed={isSubscribed}
 					onSubmitButtonClick={() => sendEvent('CLICK', 'cta')}
 				/>
-			</NewsletterSignupCardContainer>
+			</NewsletterSignupCard>
 		</div>
 	);
 };

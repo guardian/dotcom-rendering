@@ -4,11 +4,18 @@ import type { EditionId } from './edition';
 /**
  * The editions the Puzzles & Games hub is available in.
  *
- * To roll the hub out to another edition, add its id here. Keep this in sync
+ * Every edition is listed, so the hub is available everywhere. To switch it
+ * off for an edition, remove its id here. Keep this in sync
  * with `PuzzlesHubAccess.scala` in `frontend`, which applies the same rule
  * before it ever calls DCR.
  */
-export const PUZZLES_HUB_EDITIONS: readonly EditionId[] = ['INT', 'EUR', 'AU'];
+export const PUZZLES_HUB_EDITIONS: readonly EditionId[] = [
+	'INT',
+	'EUR',
+	'AU',
+	'US',
+	'UK',
+];
 
 type PuzzlesHubAccessConfig = Pick<ConfigType, 'edition'>;
 

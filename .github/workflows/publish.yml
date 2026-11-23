@@ -67,20 +67,6 @@ jobs:
           rm -r article-rendering/*
           mv article-rendering.tar.gz article-rendering/
 
-      - name: Compress facia-rendering app server files
-        working-directory: dotcom-rendering/target
-        run: |
-          tar -zcf facia-rendering.tar.gz facia-rendering
-          rm -r facia-rendering/*
-          mv facia-rendering.tar.gz facia-rendering/
-
-      - name: Compress interactive-rendering app server files
-        working-directory: dotcom-rendering/target
-        run: |
-          tar -zcf interactive-rendering.tar.gz interactive-rendering
-          rm -r interactive-rendering/*
-          mv interactive-rendering.tar.gz interactive-rendering/
-
       # All rendering apps deployment
       - name: Upload rendering apps to RiffRaff
         uses: guardian/actions-riff-raff@v4.3.7
@@ -96,13 +82,9 @@ jobs:
               - dotcom-rendering/target/article-rendering
             facia-rendering-cfn:
               - dotcom-rendering/target/facia-rendering-cfn
-            facia-rendering:
-              - dotcom-rendering/target/facia-rendering
             tag-page-rendering-cfn:
               - dotcom-rendering/target/tag-page-rendering-cfn
             interactive-rendering-cfn:
               - dotcom-rendering/target/interactive-rendering-cfn
-            interactive-rendering:
-              - dotcom-rendering/target/interactive-rendering
             frontend-static:
               - dotcom-rendering/target/frontend-static

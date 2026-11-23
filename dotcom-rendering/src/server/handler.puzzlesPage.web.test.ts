@@ -114,10 +114,10 @@ describe('handlePuzzlesPage', () => {
 	it.each([
 		['International edition only', 'INT', {}, false],
 		[
-			'V2 variant outside International',
+			'V2 variant in the UK',
 			'UK',
 			{ 'puzzles-new-hub-v2': 'variant' },
-			false,
+			true,
 		],
 		[
 			'International with V2 control',
@@ -184,18 +184,6 @@ describe('handlePuzzlesPage', () => {
 		expect(renderPage).toHaveBeenCalledTimes(1);
 	});
 
-	it('does not render an archive outside the International edition', () => {
-		validate.mockReturnValue({
-			layout: { containers: [] },
-			archive: { moreFrom: [] },
-			config: { edition: 'UK', serverSideABTests: {} },
-		} as never);
-		const res = response();
-		handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
-		expect(res.sendStatus).toHaveBeenCalledWith(404);
-		expect(renderPage).not.toHaveBeenCalled();
-	});
-
 	it('renders outside the International edition in local development', () => {
 		const previousNodeEnvironment = process.env.NODE_ENV;
 		process.env.NODE_ENV = 'development';
@@ -218,18 +206,4 @@ describe('handlePuzzlesPage', () => {
 			}
 		}
 	});
-
-	it.each(['UK', 'US'])(
-		'returns 404 without mounting the renderer for the %s edition',
-		(edition) => {
-			validate.mockReturnValue({
-				layout: { containers: [] },
-				config: { edition, serverSideABTests: {} },
-			} as never);
-			const res = response();
-			handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
-			expect(res.sendStatus).toHaveBeenCalledWith(404);
-			expect(renderPage).not.toHaveBeenCalled();
-		},
-	);
 });
