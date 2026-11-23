@@ -33,7 +33,7 @@ export const ArticleGridTitle = ({
 	const isFootballMatchReport =
 		format.design === ArticleDesign.MatchReport &&
 		article.matchType === 'FootballMatchType' &&
-		article.matchStatsUrl != null;
+		!!article.matchStatsUrl;
 
 	return (
 		<GridItem

@@ -58,6 +58,36 @@ const mediaAtom = ({
 
 describe('deriveArticleGridLayout', () => {
 	it.each([
+		{ bylineLargeImageUrl: '', expected: undefined },
+		{ bylineLargeImageUrl: undefined, expected: undefined },
+		{
+			bylineLargeImageUrl: 'https://example.com/avatar.png',
+			expected: 'https://example.com/avatar.png',
+		},
+	])(
+		'normalizes the contributor avatar URL ($bylineLargeImageUrl)',
+		({ bylineLargeImageUrl, expected }) => {
+			const layout = deriveArticleGridLayout({
+				article: {
+					...article,
+					tags: article.tags.map((tag) =>
+						tag.type === 'Contributor'
+							? { ...tag, bylineLargeImageUrl }
+							: tag,
+					),
+				},
+				format: {
+					...immersiveFormat,
+					design: ArticleDesign.Picture,
+					display: ArticleDisplay.Standard,
+				},
+			});
+
+			expect(layout.avatarUrl).toBe(expected);
+		},
+	);
+
+	it.each([
 		{ display: ArticleDisplay.Standard, required: false, expected: false },
 		{ display: ArticleDisplay.Standard, required: true, expected: false },
 		{ display: ArticleDisplay.Immersive, required: false, expected: false },

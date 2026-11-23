@@ -69,8 +69,9 @@ export const deriveArticleGridLayout = ({
 			article.tags,
 			article.webPublicationDateDeprecated,
 		),
-		avatarUrl: getSoleContributor(article.tags, article.byline)
-			?.bylineLargeImageUrl,
+		avatarUrl:
+			getSoleContributor(article.tags, article.byline)
+				?.bylineLargeImageUrl || undefined,
 		captionText: decideMainMediaCaption(mainMedia),
 		immersiveHeaderHeight,
 		hasImmersiveAffiliateDisclaimer:
