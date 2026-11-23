@@ -277,22 +277,6 @@ const sectionTitleBackground = css`
 		6px 0 0 0 ${themePalette('--series-title-background')};
 `;
 
-// Temporary until top hat has a format display hint
-const topHatSeriesBackground = css`
-	width: fit-content;
-	padding: 3px 10px 4px 10px;
-	background-color: ${themePalette('--series-title-text')};
-`;
-
-const topHatTagBackground = css`
-	padding: 4px 10px 0 10px;
-	background-color: color-mix(
-		in srgb,
-		${themePalette('--article-background')} 90%,
-		transparent
-	);
-`;
-
 type LinkProps = {
 	href: string;
 	format: ArticleFormat;
@@ -382,9 +366,7 @@ export const SeriesSectionLink = ({
 
 	const titleColour = isMatch
 		? themePalette('--series-title-match-text')
-		: isInteractiveTopHat
-			? '#ffffff'
-			: themePalette('--series-title-text');
+		: themePalette('--series-title-text');
 	const sectionTitleColour = isMatch
 		? themePalette('--series-title-match-text')
 		: themePalette('--article-section-link-text');
@@ -411,59 +393,56 @@ export const SeriesSectionLink = ({
 											'--series-title-background',
 										)};
 									`
-								: isInteractiveTopHat
-									? topHatSeriesBackground
-									: seriesTitleBackground,
+								: seriesTitleBackground,
 						]}
 						data-component="series"
 						data-link-name="article series"
 					>
 						{tag.title}
 					</TitleLink>
-					<Hide when="below" breakpoint="tablet">
-						<TitleLink
-							href={`${guardianBaseURL}/${sectionUrl}`}
-							format={format}
-							colour={sectionTitleColour}
-							fontCss={
-								isWeekendEssay
-									? secondaryFontStyles(format)
-									: undefined
-							}
-							extraCss={[
-								displayBlock,
-								isWeekendEssay
-									? css`
-											color: ${themePalette(
-												'--series-title-background',
-											)};
-										`
-									: isInteractiveTopHat
-										? topHatTagBackground
+					{immersiveOpinion && (
+						<Hide when="below" breakpoint="tablet">
+							<TitleLink
+								href={`${guardianBaseURL}/${sectionUrl}`}
+								format={format}
+								colour={sectionTitleColour}
+								fontCss={
+									isWeekendEssay
+										? secondaryFontStyles(format)
+										: undefined
+								}
+								extraCss={[
+									displayBlock,
+									isWeekendEssay
+										? css`
+												color: ${themePalette(
+													'--series-title-background',
+												)};
+											`
 										: seriesTitleBackground,
-							]}
-							data-component="section"
-							data-link-name="article section"
-						>
-							{sectionLabel}
-						</TitleLink>
-					</Hide>
+								]}
+								data-component="section"
+								data-link-name="article section"
+							>
+								{sectionLabel}
+							</TitleLink>
+						</Hide>
+					)}
 				</div>
 			);
 		}
 
-		const topHatLinkCss = [displayBlock, topHatTagBackground];
 		const defaultLinkCss = [marginRight, sectionTitleBackground];
 
+		if (isInteractiveTopHat) return undefined;
+
 		return (
-			<div css={!isInteractiveTopHat && marginBottom}>
+			<div css={marginBottom}>
 				<TitleLink
 					href={`${guardianBaseURL}/${sectionUrl}`}
 					format={format}
 					colour={sectionTitleColour}
-					extraCss={
-						isInteractiveTopHat ? topHatLinkCss : defaultLinkCss
-					}
+					extraCss={defaultLinkCss}
 					data-component="section"
 					data-link-name="article section"
 				>
@@ -514,20 +493,6 @@ export const SeriesSectionLink = ({
 					colour={titleColour}
 					extraCss={[
 						invertedStyle(),
-						isImmersive &&
-							!hasLayoutType &&
-							css`
-								line-height: 28px;
-								${until.tablet} {
-									margin-left: 16px;
-									${from.mobileLandscape} {
-										margin-left: 24px;
-									}
-								}
-								${from.leftCol} {
-									line-height: 28px;
-								}
-							`,
 						isNotImmersivePortraitLayout && sectionPadding,
 						css`
 							background-color: ${themePalette(

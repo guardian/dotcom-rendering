@@ -5214,6 +5214,33 @@ const affiliateDisclaimerLinkLight: PaletteFunction = ({ design }) =>
 const affiliateDisclaimerLinkDark: PaletteFunction = () =>
 	affiliateDisclaimerThemes.dark.link;
 
+const seriesTitleBackgroundByTheme = (theme: ArticleTheme): string => {
+	switch (theme) {
+		case Pillar.Opinion:
+		case Pillar.News:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+			return pillarPalette(theme, 400);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[200];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[300];
+		default:
+			return 'transparent';
+	}
+};
+
+const usesSeriesTitleBackground = (
+	display: ArticleDisplay,
+	design: ArticleDesign,
+) =>
+	display === ArticleDisplay.Immersive ||
+	(display === ArticleDisplay.Showcase &&
+		design === ArticleDesign.Interactive) ||
+	design === ArticleDesign.Gallery ||
+	design === ArticleDesign.HostedGallery;
+
 const seriesTitleBackgroundLight: PaletteFunction = ({
 	theme,
 	display,
@@ -5222,43 +5249,19 @@ const seriesTitleBackgroundLight: PaletteFunction = ({
 	if (theme === ArticleSpecial.SpecialReport) {
 		return sourcePalette.brandAlt[400];
 	}
-	switch (display) {
-		case ArticleDisplay.Immersive:
-			switch (theme) {
-				case Pillar.Opinion:
-				case Pillar.News:
-				case Pillar.Sport:
-				case Pillar.Culture:
-				case Pillar.Lifestyle:
-					return pillarPalette(theme, 400);
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[200];
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReportAlt[300];
-			}
-		case ArticleDisplay.Showcase:
-		case ArticleDisplay.NumberedList:
-		case ArticleDisplay.Standard:
-		default:
-			switch (design) {
-				case ArticleDesign.Gallery:
-				case ArticleDesign.HostedGallery:
-					switch (theme) {
-						case Pillar.Opinion:
-						case Pillar.News:
-						case Pillar.Sport:
-						case Pillar.Culture:
-						case Pillar.Lifestyle:
-							return pillarPalette(theme, 400);
-						case ArticleSpecial.Labs:
-							return sourcePalette.labs[200];
-						case ArticleSpecial.SpecialReportAlt:
-							return sourcePalette.brandAlt[300];
-					}
-				default:
-					return 'transparent';
-			}
+	if (!usesSeriesTitleBackground(display, design)) return 'transparent';
+
+	if (
+		design === ArticleDesign.Gallery ||
+		design === ArticleDesign.HostedGallery
+	) {
+		// Gallery light has a different SpecialReportAlt value
+		if (theme === ArticleSpecial.SpecialReportAlt) {
+			return sourcePalette.brandAlt[300];
+		}
 	}
+
+	return seriesTitleBackgroundByTheme(theme);
 };
 
 const seriesTitleBackgroundDark: PaletteFunction = ({
@@ -5266,49 +5269,12 @@ const seriesTitleBackgroundDark: PaletteFunction = ({
 	display,
 	design,
 }) => {
-	switch (design) {
-		case ArticleDesign.Gallery:
-		case ArticleDesign.HostedGallery:
-			switch (theme) {
-				case Pillar.Opinion:
-				case Pillar.News:
-				case Pillar.Sport:
-				case Pillar.Culture:
-				case Pillar.Lifestyle:
-					return pillarPalette(theme, 400);
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[200];
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReportAlt[300];
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.brandAlt[400];
-			}
-		default: {
-			if (theme === ArticleSpecial.SpecialReport) {
-				return sourcePalette.brandAlt[400];
-			}
-			switch (display) {
-				case ArticleDisplay.Immersive:
-					switch (theme) {
-						case Pillar.Opinion:
-						case Pillar.News:
-						case Pillar.Sport:
-						case Pillar.Culture:
-						case Pillar.Lifestyle:
-							return pillarPalette(theme, 400);
-						case ArticleSpecial.Labs:
-							return sourcePalette.labs[200];
-						case ArticleSpecial.SpecialReportAlt:
-							return sourcePalette.specialReportAlt[300];
-					}
-				case ArticleDisplay.Showcase:
-				case ArticleDisplay.NumberedList:
-				case ArticleDisplay.Standard:
-				default:
-					return 'transparent';
-			}
-		}
+	if (theme === ArticleSpecial.SpecialReport) {
+		return sourcePalette.brandAlt[400];
 	}
+	if (!usesSeriesTitleBackground(display, design)) return 'transparent';
+
+	return seriesTitleBackgroundByTheme(theme);
 };
 
 const sectionTitleBackgroundLight: PaletteFunction = ({ theme, display }) => {
@@ -5451,7 +5417,9 @@ const seriesTitleTextLight: PaletteFunction = (format) => {
 		if (
 			format.display === ArticleDisplay.Immersive ||
 			format.design === ArticleDesign.Gallery ||
-			format.design === ArticleDesign.HostedGallery
+			format.design === ArticleDesign.HostedGallery ||
+			(format.design === ArticleDesign.Interactive &&
+				format.display === ArticleDisplay.Showcase)
 		) {
 			return sourcePalette.neutral[100];
 		}
