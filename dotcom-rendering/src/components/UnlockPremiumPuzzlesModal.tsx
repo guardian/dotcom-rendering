@@ -268,6 +268,11 @@ type Props = {
 	 * in. Defaults to the URL of the page the modal is shown on.
 	 */
 	returnUrl?: string;
+	/**
+	 * The campaign code (`INTCMP`) sent to Support with the "Subscribe" link,
+	 * from `puzzlesAcquisition.ts`. Left out of the link when absent.
+	 */
+	intcmp?: string;
 	/** Same-site path of the "Return to puzzle archive" button. */
 	returnToArchivePath: string;
 	/**
@@ -309,6 +314,7 @@ const useCurrentPageUrl = (): string | undefined => {
  */
 export const UnlockPremiumPuzzlesModal = ({
 	returnUrl: returnUrlOverride,
+	intcmp,
 	returnToArchivePath,
 	idUrl,
 	isSignedIn = false,
@@ -319,7 +325,11 @@ export const UnlockPremiumPuzzlesModal = ({
 }: Props) => {
 	const currentPageUrl = useCurrentPageUrl();
 	const returnUrl = returnUrlOverride ?? currentPageUrl;
-	const subscribeUrl = buildPremiumPuzzlesSubscribeUrl({ idUrl, returnUrl });
+	const subscribeUrl = buildPremiumPuzzlesSubscribeUrl({
+		idUrl,
+		returnUrl,
+		intcmp,
+	});
 	const archiveUrl = isSafeInternalPath(returnToArchivePath)
 		? returnToArchivePath
 		: '/';

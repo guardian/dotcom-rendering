@@ -112,6 +112,18 @@ describe('buildPremiumPuzzlesSubscribeUrl', () => {
 		);
 	});
 
+	it('adds the INTCMP campaign code after the return URL', () => {
+		const link = buildPremiumPuzzlesSubscribeUrl({
+			idUrl: 'https://profile.theguardian.com',
+			returnUrl: 'https://www.theguardian.com/puzzles-and-games',
+			intcmp: 'puzzles_sudoku-easy',
+		});
+		expect(link).toBe(
+			'https://support.theguardian.com/?source=puzzles&returnUrl=https%3A%2F%2Fwww.theguardian.com%2Fpuzzles-and-games&INTCMP=puzzles_sudoku-easy',
+		);
+		expect(link).not.toContain('returnTo');
+	});
+
 	it('only sends source when there is no return URL', () => {
 		expect(
 			buildPremiumPuzzlesSubscribeUrl({

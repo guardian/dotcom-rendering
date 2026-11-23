@@ -49,6 +49,10 @@ const puzzleTypeByCrosswordType: Record<string, PuzzleType> = {
 	'sunday-quick': 'CROSSWORD_SUNDAYQUICK',
 };
 
+/** Whether the Puzzles API knows this crossword type. */
+export const isSupportedCrosswordType = (crosswordType: string): boolean =>
+	Object.keys(puzzleTypeByCrosswordType).includes(crosswordType);
+
 type Identity = Pick<
 	PuzzleProgressEvent,
 	'puzzleId' | 'puzzleType' | 'publishDate'
