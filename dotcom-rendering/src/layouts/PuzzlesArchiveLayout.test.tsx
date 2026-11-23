@@ -10,11 +10,7 @@ import {
 	isPuzzlesHubAvailable,
 	PUZZLES_HUB_EDITIONS,
 } from '../lib/puzzlesHubAccess';
-import {
-	puzzlesHubV2Experiment,
-	puzzlesHubV2Participation,
-	puzzlesHubV3Participation,
-} from '../lib/puzzlesHubVersionExperiment';
+import { puzzlesHubV3Participation } from '../lib/puzzlesHubVersionExperiment';
 import { extractNAV, type NavType } from '../model/extract-nav';
 import { PuzzlesArchiveLayout } from './PuzzlesArchiveLayout';
 import archiveStories, {
@@ -90,14 +86,13 @@ describe('PuzzlesArchiveLayout', () => {
 	});
 
 	it.each([
-		['INT', 'variant', 'variant', true],
-		['INT', 'variant', 'control', false],
-		['INT', 'variant', undefined, false],
-		['INT', 'control', 'variant', false],
-		['UK', 'variant', 'variant', PUZZLES_HUB_EDITIONS.includes('UK')],
+		['INT', 'variant', true],
+		['INT', 'control', false],
+		['INT', undefined, false],
+		['UK', 'variant', PUZZLES_HUB_EDITIONS.includes('UK')],
 	] as const)(
-		'gates premium indicators for edition=%s, v2=%s, v3=%s',
-		(edition, v2, v3, expected) => {
+		'gates premium indicators for edition=%s, v3=%s',
+		(edition, v3, expected) => {
 			jest.mocked(Island).mockClear();
 			const { puzzlesPage } = archiveStories.args;
 			render(
@@ -109,7 +104,6 @@ describe('PuzzlesArchiveLayout', () => {
 							...puzzlesPage.config,
 							edition,
 							serverSideABTests: {
-								...puzzlesHubV2Participation(v2),
 								...(v3 === undefined
 									? {}
 									: puzzlesHubV3Participation(v3)),
@@ -138,7 +132,7 @@ describe('PuzzlesArchiveLayout', () => {
 		['Word games', { ...archiveStories.args, ...WordGames.args }],
 		['Logic puzzles', { ...archiveStories.args, ...LogicPuzzles.args }],
 	] as const)(
-		'shows all V2 subnav links and keeps %s selected in the archive story',
+		'shows all subnav links and keeps %s selected in the archive story',
 		(title, args) => {
 			render(<PuzzlesArchiveLayout {...args} />);
 			const masthead = within(screen.getByTestId('masthead'));
@@ -175,45 +169,16 @@ describe('PuzzlesArchiveLayout', () => {
 		},
 	);
 
-	it.each([
-		['hub only', true, false, 4],
-		['V2 without hub', false, true, 1],
-		['neither', false, false, 1],
-	] as const)(
-		'hides trivia for %s',
-		(_description, isHubAvailable, isV2Enabled, expectedLinkCount) => {
-			// Exercise navigation states independently of the edition rollout.
-			jest.mocked(isPuzzlesHubAvailable).mockReturnValue(isHubAvailable);
-			const { puzzlesPage } = archiveStories.args;
-			render(
-				<PuzzlesArchiveLayout
-					NAV={nav}
-					puzzlesPage={{
-						...puzzlesPage,
-						config: {
-							...puzzlesPage.config,
-							edition: 'INT',
-							serverSideABTests: {
-								...puzzlesHubV2Participation(
-									isV2Enabled
-										? puzzlesHubV2Experiment.variant
-										: puzzlesHubV2Experiment.control,
-								),
-							},
-						},
-					}}
-				/>,
-			);
-			const masthead = within(screen.getByTestId('masthead'));
-
-			expect(
-				masthead.queryByRole('link', { name: 'Trivia & quizzes' }),
-			).not.toBeInTheDocument();
-			expect(masthead.getAllByRole('link')).toHaveLength(
-				expectedLinkCount,
-			);
-		},
-	);
+	it('only shows the parent link when the hub is unavailable', () => {
+		jest.mocked(isPuzzlesHubAvailable).mockReturnValue(false);
+		const { puzzlesPage } = archiveStories.args;
+		render(<PuzzlesArchiveLayout NAV={nav} puzzlesPage={puzzlesPage} />);
+		const masthead = within(screen.getByTestId('masthead'));
+		expect(masthead.getAllByRole('link')).toHaveLength(1);
+		expect(
+			masthead.getByRole('link', { name: 'Puzzles & games' }),
+		).toBeInTheDocument();
+	});
 
 	it('renders the trivia archive with its Labs palette', () => {
 		const puzzlesPage = page(true);

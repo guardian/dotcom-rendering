@@ -70,9 +70,7 @@ test.describe('MovieGrid completion actions', () => {
 				instance: { title, puzzleDate: '2026-11-03', gameUrl },
 			});
 			fixture.config.edition = 'INT';
-			fixture.config.serverSideABTests = {
-				'puzzles-new-hub-v2': 'variant',
-			};
+			fixture.config.serverSideABTests = {};
 			if (!frontendOrigin) {
 				await page.route(path, (route) =>
 					route.continue({

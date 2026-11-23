@@ -20,8 +20,7 @@ const articleWith = ({
 		webPublicationSecondaryDateDisplay: '',
 	}) as unknown as FEArticle;
 
-const allTestsOn = {
-	'puzzles-new-hub-v2': 'variant',
+const premiumVariant = {
 	'puzzles-new-hub-v3': 'variant',
 };
 
@@ -29,10 +28,13 @@ const elementOf = (article: FEArticle) =>
 	buildCrosswordBlock(article)?.elements[0];
 
 describe('buildCrosswordBlock', () => {
-	it('marks the element as premium when the flag is sent, the edition has the hub and v2 and v3 are on', () => {
+	it('marks the element as premium when the flag is sent, the edition has the hub and the premium variant is on', () => {
 		expect(
 			elementOf(
-				articleWith({ requiresSubscription: true, tests: allTestsOn }),
+				articleWith({
+					requiresSubscription: true,
+					tests: premiumVariant,
+				}),
 			),
 		).toEqual({
 			_type: 'model.dotcomrendering.pageElements.CrosswordElement',
@@ -43,8 +45,7 @@ describe('buildCrosswordBlock', () => {
 
 	it.each([
 		['no test is on', {}],
-		['only v2 is on', { 'puzzles-new-hub-v2': 'variant' }],
-		['v3 is on without v2', { 'puzzles-new-hub-v3': 'variant' }],
+		['v3 is in control', { 'puzzles-new-hub-v3': 'control' }],
 	])('leaves the element as it was when %s', (_, tests) => {
 		const element = elementOf(
 			articleWith({ requiresSubscription: true, tests }),
@@ -58,13 +59,13 @@ describe('buildCrosswordBlock', () => {
 
 	it('leaves the element as it was when the flag is not sent', () => {
 		expect(
-			elementOf(articleWith({ tests: allTestsOn })),
+			elementOf(articleWith({ tests: premiumVariant })),
 		).not.toHaveProperty('requiresSubscription');
 	});
 
 	it('returns nothing when the article has no crossword', () => {
 		const article = {
-			...articleWith({ tests: allTestsOn }),
+			...articleWith({ tests: premiumVariant }),
 			crossword: undefined,
 		} as FEArticle;
 		expect(buildCrosswordBlock(article)).toBeUndefined();
