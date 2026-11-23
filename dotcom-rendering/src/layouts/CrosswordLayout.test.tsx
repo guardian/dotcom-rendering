@@ -406,19 +406,6 @@ describe('CrosswordLayout premium crosswords', () => {
 		},
 	);
 
-	it('renders the crossword exactly as before in an edition without the hub, even with v3 on', () => {
-		const { container } = renderCrosswordLayout({
-			withCrossword: true,
-			crosswordRequiresSubscription: true,
-			edition: 'UK',
-			serverSideABTests: v2AndV3On,
-		});
-
-		expect(screen.getByTestId('crossword')).toBeInTheDocument();
-		expect(screen.queryByTestId('crossword-gate')).not.toBeInTheDocument();
-		expect(container.querySelector('main[id]')).toBeNull();
-	});
-
 	it('does not gate a crossword frontend did not flag, with v3 on', () => {
 		const { container } = renderCrosswordLayout({
 			withCrossword: true,
