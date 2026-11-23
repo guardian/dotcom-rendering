@@ -198,10 +198,8 @@ Why:
 
 The modal and everything that depends on it only have an effect for readers in
 the `variant` group of `puzzles-new-hub-v3`, and only when the hub is available
-for the reader's edition (`isPuzzlesHubAvailable`) and `puzzles-new-hub-v2` is
-also on (the tiers are cumulative: v2 needs the hub, v3 needs the hub and v2).
-Outside it, every puzzle behaves as a
-free one, whatever `frontend` sends in `instance.requiresSubscription`: the
+for the reader's edition (`isPuzzlesHubAvailable`). Outside it, every puzzle
+behaves as a free one, whatever `frontend` sends in `instance.requiresSubscription`: the
 game loads at once, no access request is made and ads are rendered as usual.
 
 Why:

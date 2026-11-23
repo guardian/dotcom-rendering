@@ -38,10 +38,7 @@ import { PUZZLE_MODAL_ROOT_ID } from '../lib/puzzleAccess';
 import type { PuzzleActionContext } from '../lib/puzzleActionTracking';
 import { formatPuzzleDate } from '../lib/puzzleDate';
 import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
-import {
-	isPuzzlesHubV2Enabled,
-	isPuzzlesHubV3Enabled,
-} from '../lib/puzzlesHubVersionExperiment';
+import { isPuzzlesHubV3Enabled } from '../lib/puzzlesHubVersionExperiment';
 import {
 	getPuzzlesSubNavLinks,
 	PUZZLES_SUBNAV_PARENT,
@@ -489,10 +486,7 @@ export const PuzzlePageLayout = ({
 	 */
 	const puzzlesSubNav: SubNavType = {
 		parent: PUZZLES_SUBNAV_PARENT,
-		links: getPuzzlesSubNavLinks(
-			isV1Enabled,
-			isPuzzlesHubV2Enabled(config),
-		),
+		links: getPuzzlesSubNavLinks(isV1Enabled),
 	};
 
 	const puzzleNAV: NavType = {
