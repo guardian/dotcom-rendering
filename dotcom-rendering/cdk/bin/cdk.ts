@@ -115,8 +115,8 @@ export const ArticleRenderingPropsPROD: RenderingCDKStackProps = {
 		},
 	},
 	targetGroupWeights: {
-		ec2: 99,
-		ecs: 1,
+		ec2: 90,
+		ecs: 10,
 	},
 };
 new RenderingCDKStack(
