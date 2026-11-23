@@ -86,6 +86,11 @@ const renderPuzzlePageLayout = (
 };
 
 describe('PuzzlePageLayout', () => {
+	it('has the target of the "Skip to main content" link, once', () => {
+		const { container } = renderPuzzlePageLayout('film-reveal');
+		expect(container.querySelectorAll('#maincontent')).toHaveLength(1);
+	});
+
 	it('passes the API progress identity into the access gate island for hydration', () => {
 		const page = createPuzzlePage('film-reveal');
 		const progressIdentity = {
