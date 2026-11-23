@@ -44,7 +44,7 @@ const fetchComponent = (
 	}
 	if (message.type === 'Inline1PuzzlesMessage') {
 		return import(
-			/* webpackChunkName: "Puzzles" */ `../components/marketing/inline1/puzzles/Puzzles`
+			/* webpackChunkName: "Puzzles" */ `../components/marketing/inline1/Puzzles`
 		)
 			.then((module) => {
 				return module.Puzzles;
