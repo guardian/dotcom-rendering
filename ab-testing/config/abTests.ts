@@ -298,7 +298,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Test the impact of using IAB Taxonomy tags for ad targeting",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-11-25",
+		expirationDate: "2027-01-27",
 		type: "client",
 		status: "ON",
 		audienceSize: 0,
