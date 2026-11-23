@@ -33,6 +33,25 @@ export const ArticleRenderingPropsCODE: RenderingCDKStackProps = {
 		scaling: { minimumInstances: 1, maximumInstances: 3 },
 		instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.SMALL),
 	},
+	ecsProps: {
+		imageIdentifier: getImageIdentifier(),
+		cpu: 1024,
+		memoryLimitMiB: 2048,
+		scaling: {
+			minimumTasks: 1,
+			maximumTasks: 3,
+			cpuScaling: {
+				targetValue: 20,
+				scaleInCooldown: Duration.seconds(60),
+				scaleOutCooldown: Duration.seconds(60),
+			},
+		},
+		managedInstancesProps: {},
+	},
+	targetGroupWeights: {
+		ec2: 1,
+		ecs: 0,
+	},
 };
 new RenderingCDKStack(
 	cdkApp,
@@ -71,6 +90,33 @@ export const ArticleRenderingPropsPROD: RenderingCDKStackProps = {
 			},
 		},
 		instanceType: InstanceType.of(InstanceClass.C8G, InstanceSize.MEDIUM),
+	},
+	ecsProps: {
+		imageIdentifier: getImageIdentifier(),
+		cpu: 1024,
+		memoryLimitMiB: 2048,
+		scaling: {
+			minimumTasks: 42,
+			maximumTasks: 240,
+			cpuScaling: {
+				targetValue: 20,
+				// TODO: Tune cooldown values.
+				// https://docs.aws.amazon.com/autoscaling/application/userguide/target-tracking-scaling-policy-overview.html#target-tracking-cooldown
+				scaleInCooldown: Duration.seconds(60),
+				scaleOutCooldown: Duration.seconds(60),
+			},
+		},
+		managedInstancesProps: {
+			instancesRequirements: {
+				memoryMin: Size.mebibytes(2048),
+				vCpuCountMin: 1,
+				allowedInstanceTypes: ['c8g.*'],
+			},
+		},
+	},
+	targetGroupWeights: {
+		ec2: 1,
+		ecs: 0,
 	},
 };
 new RenderingCDKStack(

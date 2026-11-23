@@ -1689,6 +1689,14 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering CODE (
       "GuHttpsEgressSecurityGroup",
       "GuAutoScalingGroup",
       "GuApplicationTargetGroup",
+      "GuRepository",
+      "GuArtifactsAccountId",
+      "GuRepository",
+      "GuHttpsEgressSecurityGroup",
+      "GuECSManagedInstanceRoleExperimental",
+      "GuECSInstanceRolePolicyForManagedInstancesExperimental",
+      "GuRiffRaffDeploymentIdParameterExperimental",
+      "GuApplicationTargetGroup",
       "GuCertificate",
       "GuApplicationLoadBalancer",
       "GuAccessLoggingBucketParameter",
@@ -1719,6 +1727,11 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering CODE (
       "Description": "S3 bucket to store your access logs",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
+    "ArtifactsAccountId": {
+      "Default": "/organisation/accounts/artifacts",
+      "Description": "Account ID of the Artifacts account. Useful as some shared resources live here.",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
     "DistributionBucketName": {
       "Default": "/account/services/artifact.bucket",
       "Description": "SSM parameter containing the S3 bucket name holding distribution artifacts",
@@ -1728,6 +1741,10 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering CODE (
       "Default": "/account/services/logging.stream.name",
       "Description": "SSM parameter containing the Name (not ARN) on the kinesis stream",
       "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "RiffRaffDeploymentId": {
+      "Description": "Used by Riff-Raff to inject the deployment ID.",
+      "Type": "String",
     },
     "VpcId": {
       "Default": "/account/vpc/primary/id",
@@ -1766,6 +1783,9 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering CODE (
           {
             "Ref": "InstanceRoleArticlerendering0D4717E8",
           },
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
+          },
         ],
       },
       "Type": "AWS::IAM::Policy",
@@ -1800,6 +1820,9 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering CODE (
         "Roles": [
           {
             "Ref": "InstanceRoleArticlerendering0D4717E8",
+          },
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
           },
         ],
       },
@@ -1850,9 +1873,61 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering CODE (
           {
             "Ref": "InstanceRoleArticlerendering0D4717E8",
           },
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
+          },
         ],
       },
       "Type": "AWS::IAM::Policy",
+    },
+    "ArticlerenderingEcsTargetGroupArticlerenderingD522DD78": {
+      "Properties": {
+        "HealthCheckIntervalSeconds": 10,
+        "HealthCheckPath": "/_healthcheck",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 5,
+        "HealthyThresholdCount": 5,
+        "Port": 9000,
+        "Protocol": "HTTP",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "TargetGroupAttributes": [
+          {
+            "Key": "deregistration_delay.timeout_seconds",
+            "Value": "30",
+          },
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false",
+          },
+        ],
+        "TargetType": "ip",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
     },
     "AutoScalingGroupArticlerenderingASG8488C3F1": {
       "Properties": {
@@ -1987,6 +2062,832 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering CODE (
       },
       "Type": "AWS::IAM::Policy",
     },
+    "ECSInfrastructureRoleE492121F": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          "arn:aws:iam::aws:policy/AmazonECSInfrastructureRolePolicyForManagedInstances",
+        ],
+        "Policies": [
+          {
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Action": "iam:PassRole",
+                  "Condition": {
+                    "StringLike": {
+                      "iam:PassedToService": "ec2.*",
+                    },
+                  },
+                  "Effect": "Allow",
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "ECSManagedInstancesRole1E652558",
+                      "Arn",
+                    ],
+                  },
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "PassInstanceRoleToEC2",
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "ECSInstanceProfileBA4A4DA9": {
+      "Properties": {
+        "Roles": [
+          {
+            "Ref": "ECSManagedInstancesRole1E652558",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::InstanceProfile",
+    },
+    "ECSInstanceRolePolicyD0240271": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "ecs:DiscoverPollEndpoint",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            {
+              "Action": "ecs:RegisterContainerInstance",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "articlerenderingEcsCluster778E37FC",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": "ecs:Poll",
+              "Effect": "Allow",
+              "Resource": [
+                "arn:aws:ecs:*:*:container-instance/*",
+                "arn:aws:ecs:*:*:task-set/*",
+              ],
+            },
+            {
+              "Action": [
+                "ecs:StartTelemetrySession",
+                "ecs:PutSystemLogEvents",
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:ecs:*:*:container-instance/*",
+            },
+            {
+              "Action": [
+                "ecs:SubmitAttachmentStateChanges",
+                "ecs:SubmitTaskStateChange",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "articlerenderingEcsCluster778E37FC",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "ECSInstanceRolePolicyD0240271",
+        "Roles": [
+          {
+            "Ref": "ECSManagedInstancesRole1E652558",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "ECSManagedInstancesRole1E652558": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "EcsService81FC6EF6": {
+      "DependsOn": [
+        "ECSInstanceProfileBA4A4DA9",
+        "ECSManagedInstancesRole1E652558",
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+        "ListenerArticlerenderingDeterministicRouteToEc2Rule2FE1C744",
+        "ListenerArticlerenderingDeterministicRouteToEcsRule264A8CD2",
+        "ListenerArticlerendering9419D5F6",
+        "ManagedInstancesCapacityProviderC2946447",
+      ],
+      "Properties": {
+        "CapacityProviderStrategy": [
+          {
+            "CapacityProvider": {
+              "Ref": "ManagedInstancesCapacityProviderC2946447",
+            },
+            "Weight": 1,
+          },
+        ],
+        "Cluster": {
+          "Ref": "articlerenderingEcsCluster778E37FC",
+        },
+        "DeploymentConfiguration": {
+          "Alarms": {
+            "AlarmNames": [],
+            "Enable": false,
+            "Rollback": false,
+          },
+          "DeploymentCircuitBreaker": {
+            "Enable": true,
+            "Rollback": true,
+          },
+          "MaximumPercent": 200,
+          "MinimumHealthyPercent": 100,
+        },
+        "DeploymentController": {
+          "Type": "ECS",
+        },
+        "EnableECSManagedTags": false,
+        "HealthCheckGracePeriodSeconds": 60,
+        "LoadBalancers": [
+          {
+            "ContainerName": "article-rendering",
+            "ContainerPort": 9000,
+            "TargetGroupArn": {
+              "Ref": "ArticlerenderingEcsTargetGroupArticlerenderingD522DD78",
+            },
+          },
+        ],
+        "Monitoring": {
+          "MetricConfigurations": [
+            {
+              "MetricNames": [
+                "CPUUtilization",
+                "MemoryUtilization",
+              ],
+              "ResolutionSeconds": 20,
+            },
+          ],
+        },
+        "NetworkConfiguration": {
+          "AwsvpcConfiguration": {
+            "AssignPublicIp": "DISABLED",
+            "SecurityGroups": [
+              {
+                "Fn::GetAtt": [
+                  "GuHttpsEgressSecurityGroupArticlerenderingecs463B523D",
+                  "GroupId",
+                ],
+              },
+            ],
+            "Subnets": {
+              "Ref": "articlerenderingPrivateSubnets",
+            },
+          },
+        },
+        "PropagateTags": "SERVICE",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "TaskDefinition": {
+          "Ref": "EcsTaskDefinition63157ED3",
+        },
+      },
+      "Type": "AWS::ECS::Service",
+    },
+    "EcsServiceTaskCountTarget02FCCE22": {
+      "DependsOn": [
+        "ECSInstanceProfileBA4A4DA9",
+        "ECSManagedInstancesRole1E652558",
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+        "ManagedInstancesCapacityProviderC2946447",
+      ],
+      "Properties": {
+        "MaxCapacity": 3,
+        "MinCapacity": 1,
+        "ResourceId": {
+          "Fn::Join": [
+            "",
+            [
+              "service/",
+              {
+                "Ref": "articlerenderingEcsCluster778E37FC",
+              },
+              "/",
+              {
+                "Fn::GetAtt": [
+                  "EcsService81FC6EF6",
+                  "Name",
+                ],
+              },
+            ],
+          ],
+        },
+        "RoleARN": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":iam::",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService",
+            ],
+          ],
+        },
+        "ScalableDimension": "ecs:service:DesiredCount",
+        "ServiceNamespace": "ecs",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+    },
+    "EcsTaskDefinition63157ED3": {
+      "Properties": {
+        "ContainerDefinitions": [
+          {
+            "DependsOn": [
+              {
+                "Condition": "START",
+                "ContainerName": "aws-otel-collector",
+              },
+            ],
+            "DockerLabels": {
+              "RiffRaffDeploymentId": {
+                "Ref": "RiffRaffDeploymentId",
+              },
+            },
+            "Environment": [
+              {
+                "Name": "STACK",
+                "Value": "frontend",
+              },
+              {
+                "Name": "STAGE",
+                "Value": "CODE",
+              },
+              {
+                "Name": "APP",
+                "Value": "article-rendering",
+              },
+              {
+                "Name": "TASK_NAME",
+                "Value": "article-rendering",
+              },
+              {
+                "Name": "GU_REPO",
+                "Value": "guardian/dotcom-rendering",
+              },
+              {
+                "Name": "NODE_ENV",
+                "Value": "production",
+              },
+              {
+                "Name": "GU_STAGE",
+                "Value": "CODE",
+              },
+              {
+                "Name": "GU_APP",
+                "Value": "article-rendering",
+              },
+              {
+                "Name": "GU_STACK",
+                "Value": "frontend",
+              },
+              {
+                "Name": "OTEL_EXPORTER_OTLP_ENDPOINT",
+                "Value": "http://localhost:4318",
+              },
+              {
+                "Name": "OTEL_SERVICE_NAME",
+                "Value": "article-rendering",
+              },
+            ],
+            "Essential": true,
+            "Image": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Ref": "ArtifactsAccountId",
+                  },
+                  ".dkr.ecr.eu-west-1.",
+                  {
+                    "Ref": "AWS::URLSuffix",
+                  },
+                  "/guardian/dotcom-rendering/dotcom-rendering@sha256:12345",
+                ],
+              ],
+            },
+            "LogConfiguration": {
+              "LogDriver": "awsfirelens",
+              "Options": {
+                "Name": "kinesis_streams",
+                "region": "eu-west-1",
+                "retry_limit": "2",
+                "stream": {
+                  "Ref": "LoggingStreamName",
+                },
+              },
+            },
+            "Name": "article-rendering",
+            "PortMappings": [
+              {
+                "ContainerPort": 9000,
+                "Protocol": "tcp",
+              },
+            ],
+            "ReadonlyRootFilesystem": true,
+            "VersionConsistency": "disabled",
+          },
+          {
+            "Environment": [
+              {
+                "Name": "STACK",
+                "Value": "frontend",
+              },
+              {
+                "Name": "STAGE",
+                "Value": "CODE",
+              },
+              {
+                "Name": "APP",
+                "Value": "article-rendering",
+              },
+              {
+                "Name": "TASK_NAME",
+                "Value": "article-rendering",
+              },
+              {
+                "Name": "GU_REPO",
+                "Value": "guardian/dotcom-rendering",
+              },
+            ],
+            "Essential": true,
+            "FirelensConfiguration": {
+              "Type": "fluentbit",
+            },
+            "Image": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Ref": "ArtifactsAccountId",
+                  },
+                  ".dkr.ecr.eu-west-1.",
+                  {
+                    "Ref": "AWS::URLSuffix",
+                  },
+                  "/guardian/cdk/logging@sha256:32dce4e7a9e628b053ca42c271d7bbdf3697b4980c4612e845a15257c2bd1d99",
+                ],
+              ],
+            },
+            "LogConfiguration": {
+              "LogDriver": "awslogs",
+              "Options": {
+                "awslogs-group": {
+                  "Ref": "EcsTaskDefinitionLogShippingLogGroup0E405BD0",
+                },
+                "awslogs-region": "eu-west-1",
+                "awslogs-stream-prefix": "frontend/CODE/article-rendering/devx-logs-sidecar",
+              },
+            },
+            "MountPoints": [
+              {
+                "ContainerPath": "/init",
+                "ReadOnly": false,
+                "SourceVolume": "logging-volume",
+              },
+            ],
+            "Name": "LogShipping",
+            "ReadonlyRootFilesystem": true,
+            "VersionConsistency": "disabled",
+          },
+          {
+            "Command": [
+              "--config=/etc/ecs/ecs-default-config.yaml",
+            ],
+            "Cpu": 256,
+            "Essential": false,
+            "HealthCheck": {
+              "Command": [
+                "CMD",
+                "/healthcheck",
+              ],
+              "Interval": 5,
+              "Retries": 2,
+              "Timeout": 3,
+            },
+            "Image": "public.ecr.aws/aws-observability/aws-otel-collector@sha256:90b3180c21acb9497110480371a413ed91f2836077f8a8fb4507b019d3c481c0",
+            "LogConfiguration": {
+              "LogDriver": "awsfirelens",
+              "Options": {
+                "Name": "kinesis_streams",
+                "region": "eu-west-1",
+                "retry_limit": "2",
+                "stream": {
+                  "Ref": "LoggingStreamName",
+                },
+              },
+            },
+            "Memory": 512,
+            "Name": "aws-otel-collector",
+            "ReadonlyRootFilesystem": true,
+          },
+        ],
+        "Cpu": "1024",
+        "ExecutionRoleArn": {
+          "Fn::GetAtt": [
+            "EcsTaskDefinitionExecutionRoleBE450C73",
+            "Arn",
+          ],
+        },
+        "Family": "ArticleRenderingCODEEcsTaskDefinitionCFB2AAF0",
+        "Memory": "2048",
+        "NetworkMode": "awsvpc",
+        "RequiresCompatibilities": [
+          "MANAGED_INSTANCES",
+        ],
+        "RuntimePlatform": {
+          "CpuArchitecture": "ARM64",
+          "OperatingSystemFamily": "LINUX",
+        },
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "TaskRoleArn": {
+          "Fn::GetAtt": [
+            "EcsTaskDefinitionTaskRoleB7B6D8DD",
+            "Arn",
+          ],
+        },
+        "Volumes": [
+          {
+            "Name": "logging-volume",
+          },
+        ],
+      },
+      "Type": "AWS::ECS::TaskDefinition",
+    },
+    "EcsTaskDefinitionExecutionRoleBE450C73": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "EcsTaskDefinitionExecutionRoleDefaultPolicy1611A942": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":ecr:eu-west-1:",
+                    {
+                      "Ref": "ArtifactsAccountId",
+                    },
+                    ":repository/guardian/dotcom-rendering/dotcom-rendering",
+                  ],
+                ],
+              },
+            },
+            {
+              "Action": "ecr:GetAuthorizationToken",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            {
+              "Action": [
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":ecr:eu-west-1:",
+                    {
+                      "Ref": "ArtifactsAccountId",
+                    },
+                    ":repository/guardian/cdk/logging",
+                  ],
+                ],
+              },
+            },
+            {
+              "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "EcsTaskDefinitionLogShippingLogGroup0E405BD0",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "EcsTaskDefinitionExecutionRoleDefaultPolicy1611A942",
+        "Roles": [
+          {
+            "Ref": "EcsTaskDefinitionExecutionRoleBE450C73",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "EcsTaskDefinitionLogShippingLogGroup0E405BD0": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "RetentionInDays": 1,
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "EcsTaskDefinitionTaskRoleB7B6D8DD": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:PutLogEvents",
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:DescribeLogStreams",
+                "logs:DescribeLogGroups",
+                "logs:PutRetentionPolicy",
+                "xray:PutTraceSegments",
+                "xray:PutTelemetryRecords",
+                "xray:GetSamplingRules",
+                "xray:GetSamplingTargets",
+                "xray:GetSamplingStatisticSummaries",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "Roles": [
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
     "GetDistributablePolicyArticlerendering7F5C432B": {
       "Properties": {
         "PolicyDocument": {
@@ -2058,6 +2959,88 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering CODE (
         },
       },
       "Type": "AWS::EC2::SecurityGroup",
+    },
+    "GuHttpsEgressSecurityGroupArticlerenderingecs463B523D": {
+      "Properties": {
+        "GroupDescription": "Allow all outbound HTTPS traffic",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound HTTPS traffic",
+            "FromPort": 443,
+            "IpProtocol": "tcp",
+            "ToPort": 443,
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering-ecs",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "GuHttpsEgressSecurityGroupArticlerenderingecsfromArticleRenderingCODEInternalIngressSecurityGroupArticlerendering9629F60190000B9B2E74": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupArticlerenderingecs463B523D",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "InternalIngressSecurityGroupArticlerendering3856ADE0",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "GuHttpsEgressSecurityGroupArticlerenderingecsfromArticleRenderingCODELoadBalancerArticlerenderingSecurityGroup64C7B7C89000EE0525A0": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupArticlerenderingecs463B523D",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "LoadBalancerArticlerenderingSecurityGroupB13618F9",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
     },
     "GuHttpsEgressSecurityGroupArticlerenderingfromArticleRenderingCODEInternalIngressSecurityGroupArticlerendering9629F601900045261015": {
       "Properties": {
@@ -2134,6 +3117,9 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering CODE (
         "Roles": [
           {
             "Ref": "InstanceRoleArticlerendering0D4717E8",
+          },
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
           },
         ],
       },
@@ -2240,6 +3226,27 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering CODE (
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
+    "InternalIngressSecurityGroupArticlerenderingtoArticleRenderingCODEGuHttpsEgressSecurityGroupArticlerenderingecs4649E47D9000B8CB9728": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupArticlerenderingecs463B523D",
+            "GroupId",
+          ],
+        },
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "InternalIngressSecurityGroupArticlerendering3856ADE0",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
     "ListenerArticlerendering9419D5F6": {
       "Properties": {
         "Certificates": [
@@ -2251,8 +3258,21 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering CODE (
         ],
         "DefaultActions": [
           {
-            "TargetGroupArn": {
-              "Ref": "TargetGroupArticlerendering3605E498",
+            "ForwardConfig": {
+              "TargetGroups": [
+                {
+                  "TargetGroupArn": {
+                    "Ref": "TargetGroupArticlerendering3605E498",
+                  },
+                  "Weight": 1,
+                },
+                {
+                  "TargetGroupArn": {
+                    "Ref": "ArticlerenderingEcsTargetGroupArticlerenderingD522DD78",
+                  },
+                  "Weight": 0,
+                },
+              ],
             },
             "Type": "forward",
           },
@@ -2287,6 +3307,106 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering CODE (
         ],
       },
       "Type": "AWS::ElasticLoadBalancingV2::Listener",
+    },
+    "ListenerArticlerenderingDeterministicRouteToEc2Rule2FE1C744": {
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "TargetGroupArticlerendering3605E498",
+            },
+            "Type": "forward",
+          },
+        ],
+        "Conditions": [
+          {
+            "Field": "http-header",
+            "HttpHeaderConfig": {
+              "HttpHeaderName": "X-Gu-Target-Group",
+              "Values": [
+                "ec2",
+              ],
+            },
+          },
+        ],
+        "ListenerArn": {
+          "Ref": "ListenerArticlerendering9419D5F6",
+        },
+        "Priority": 10,
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+    },
+    "ListenerArticlerenderingDeterministicRouteToEcsRule264A8CD2": {
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "ArticlerenderingEcsTargetGroupArticlerenderingD522DD78",
+            },
+            "Type": "forward",
+          },
+        ],
+        "Conditions": [
+          {
+            "Field": "http-header",
+            "HttpHeaderConfig": {
+              "HttpHeaderName": "X-Gu-Target-Group",
+              "Values": [
+                "ecs",
+              ],
+            },
+          },
+        ],
+        "ListenerArn": {
+          "Ref": "ListenerArticlerendering9419D5F6",
+        },
+        "Priority": 11,
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
     },
     "LoadBalancerArticlerendering49883BBC": {
       "Properties": {
@@ -2418,6 +3538,27 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering CODE (
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
+    "LoadBalancerArticlerenderingSecurityGrouptoArticleRenderingCODEGuHttpsEgressSecurityGroupArticlerenderingecs4649E47D90002EEFECC3": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupArticlerenderingecs463B523D",
+            "GroupId",
+          ],
+        },
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "LoadBalancerArticlerenderingSecurityGroupB13618F9",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
     "LoadBalancerDNS": {
       "Properties": {
         "Name": "article-rendering.code.dev-guardianapis.com",
@@ -2434,6 +3575,79 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering CODE (
         "TTL": 3600,
       },
       "Type": "Guardian::DNS::RecordSet",
+    },
+    "ManagedInstancesCapacityProviderC2946447": {
+      "Properties": {
+        "ClusterName": {
+          "Ref": "articlerenderingEcsCluster778E37FC",
+        },
+        "ManagedInstancesProvider": {
+          "InfrastructureRoleArn": {
+            "Fn::GetAtt": [
+              "ECSInfrastructureRoleE492121F",
+              "Arn",
+            ],
+          },
+          "InstanceLaunchTemplate": {
+            "Ec2InstanceProfileArn": {
+              "Fn::GetAtt": [
+                "ECSInstanceProfileBA4A4DA9",
+                "Arn",
+              ],
+            },
+            "InstanceRequirements": {
+              "CpuManufacturers": [
+                "amazon-web-services",
+              ],
+              "InstanceGenerations": [
+                "current",
+              ],
+              "MemoryMiB": {
+                "Min": 2048,
+              },
+              "VCpuCount": {
+                "Min": 1,
+              },
+            },
+            "NetworkConfiguration": {
+              "SecurityGroups": [
+                {
+                  "Fn::GetAtt": [
+                    "GuHttpsEgressSecurityGroupArticlerenderingecs463B523D",
+                    "GroupId",
+                  ],
+                },
+              ],
+              "Subnets": {
+                "Ref": "articlerenderingPrivateSubnets",
+              },
+            },
+          },
+        },
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::ECS::CapacityProvider",
     },
     "ParameterStoreReadArticlerendering1D29E674": {
       "Properties": {
@@ -2481,6 +3695,9 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering CODE (
         "Roles": [
           {
             "Ref": "InstanceRoleArticlerendering0D4717E8",
+          },
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
           },
         ],
       },
@@ -2586,6 +3803,57 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering CODE (
         },
       },
       "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+    },
+    "articlerenderingCpuScaling661251A9": {
+      "Properties": {
+        "PolicyName": "ArticleRenderingCODEarticlerenderingCpuScalingC954D21F",
+        "PolicyType": "TargetTrackingScaling",
+        "ScalingTargetId": {
+          "Ref": "EcsServiceTaskCountTarget02FCCE22",
+        },
+        "TargetTrackingScalingPolicyConfiguration": {
+          "PredefinedMetricSpecification": {
+            "PredefinedMetricType": "ECSServiceAverageCPUUtilizationHighResolution",
+          },
+          "ScaleInCooldown": 60,
+          "ScaleOutCooldown": 60,
+          "TargetValue": 20,
+        },
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+    },
+    "articlerenderingEcsCluster778E37FC": {
+      "Properties": {
+        "ClusterSettings": [
+          {
+            "Name": "containerInsights",
+            "Value": "enhanced",
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE",
+          },
+        ],
+      },
+      "Type": "AWS::ECS::Cluster",
     },
     "frontendCODEarticlerenderingCAC5605E": {
       "DependsOn": [
@@ -2799,6 +4067,14 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering PROD (
       "GuHttpsEgressSecurityGroup",
       "GuAutoScalingGroup",
       "GuApplicationTargetGroup",
+      "GuRepository",
+      "GuArtifactsAccountId",
+      "GuRepository",
+      "GuHttpsEgressSecurityGroup",
+      "GuECSManagedInstanceRoleExperimental",
+      "GuECSInstanceRolePolicyForManagedInstancesExperimental",
+      "GuRiffRaffDeploymentIdParameterExperimental",
+      "GuApplicationTargetGroup",
       "GuCertificate",
       "GuApplicationLoadBalancer",
       "GuAccessLoggingBucketParameter",
@@ -2831,6 +4107,11 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering PROD (
       "Description": "S3 bucket to store your access logs",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
+    "ArtifactsAccountId": {
+      "Default": "/organisation/accounts/artifacts",
+      "Description": "Account ID of the Artifacts account. Useful as some shared resources live here.",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
     "DistributionBucketName": {
       "Default": "/account/services/artifact.bucket",
       "Description": "SSM parameter containing the S3 bucket name holding distribution artifacts",
@@ -2840,6 +4121,10 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering PROD (
       "Default": "/account/services/logging.stream.name",
       "Description": "SSM parameter containing the Name (not ARN) on the kinesis stream",
       "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "RiffRaffDeploymentId": {
+      "Description": "Used by Riff-Raff to inject the deployment ID.",
+      "Type": "String",
     },
     "VpcId": {
       "Default": "/account/vpc/primary/id",
@@ -2878,6 +4163,9 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering PROD (
           {
             "Ref": "InstanceRoleArticlerendering0D4717E8",
           },
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
+          },
         ],
       },
       "Type": "AWS::IAM::Policy",
@@ -2912,6 +4200,9 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering PROD (
         "Roles": [
           {
             "Ref": "InstanceRoleArticlerendering0D4717E8",
+          },
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
           },
         ],
       },
@@ -2962,9 +4253,61 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering PROD (
           {
             "Ref": "InstanceRoleArticlerendering0D4717E8",
           },
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
+          },
         ],
       },
       "Type": "AWS::IAM::Policy",
+    },
+    "ArticlerenderingEcsTargetGroupArticlerenderingD522DD78": {
+      "Properties": {
+        "HealthCheckIntervalSeconds": 10,
+        "HealthCheckPath": "/_healthcheck",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 5,
+        "HealthyThresholdCount": 5,
+        "Port": 9000,
+        "Protocol": "HTTP",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+        "TargetGroupAttributes": [
+          {
+            "Key": "deregistration_delay.timeout_seconds",
+            "Value": "30",
+          },
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false",
+          },
+        ],
+        "TargetType": "ip",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
     },
     "AutoScalingGroupArticlerenderingASG8488C3F1": {
       "Properties": {
@@ -3210,6 +4553,832 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering PROD (
       },
       "Type": "AWS::IAM::Policy",
     },
+    "ECSInfrastructureRoleE492121F": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          "arn:aws:iam::aws:policy/AmazonECSInfrastructureRolePolicyForManagedInstances",
+        ],
+        "Policies": [
+          {
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Action": "iam:PassRole",
+                  "Condition": {
+                    "StringLike": {
+                      "iam:PassedToService": "ec2.*",
+                    },
+                  },
+                  "Effect": "Allow",
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "ECSManagedInstancesRole1E652558",
+                      "Arn",
+                    ],
+                  },
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "PassInstanceRoleToEC2",
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "ECSInstanceProfileBA4A4DA9": {
+      "Properties": {
+        "Roles": [
+          {
+            "Ref": "ECSManagedInstancesRole1E652558",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::InstanceProfile",
+    },
+    "ECSInstanceRolePolicyD0240271": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "ecs:DiscoverPollEndpoint",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            {
+              "Action": "ecs:RegisterContainerInstance",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "articlerenderingEcsCluster778E37FC",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": "ecs:Poll",
+              "Effect": "Allow",
+              "Resource": [
+                "arn:aws:ecs:*:*:container-instance/*",
+                "arn:aws:ecs:*:*:task-set/*",
+              ],
+            },
+            {
+              "Action": [
+                "ecs:StartTelemetrySession",
+                "ecs:PutSystemLogEvents",
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:ecs:*:*:container-instance/*",
+            },
+            {
+              "Action": [
+                "ecs:SubmitAttachmentStateChanges",
+                "ecs:SubmitTaskStateChange",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "articlerenderingEcsCluster778E37FC",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "ECSInstanceRolePolicyD0240271",
+        "Roles": [
+          {
+            "Ref": "ECSManagedInstancesRole1E652558",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "ECSManagedInstancesRole1E652558": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "EcsService81FC6EF6": {
+      "DependsOn": [
+        "ECSInstanceProfileBA4A4DA9",
+        "ECSManagedInstancesRole1E652558",
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+        "ListenerArticlerenderingDeterministicRouteToEc2Rule2FE1C744",
+        "ListenerArticlerenderingDeterministicRouteToEcsRule264A8CD2",
+        "ListenerArticlerendering9419D5F6",
+        "ManagedInstancesCapacityProviderC2946447",
+      ],
+      "Properties": {
+        "CapacityProviderStrategy": [
+          {
+            "CapacityProvider": {
+              "Ref": "ManagedInstancesCapacityProviderC2946447",
+            },
+            "Weight": 1,
+          },
+        ],
+        "Cluster": {
+          "Ref": "articlerenderingEcsCluster778E37FC",
+        },
+        "DeploymentConfiguration": {
+          "Alarms": {
+            "AlarmNames": [],
+            "Enable": false,
+            "Rollback": false,
+          },
+          "DeploymentCircuitBreaker": {
+            "Enable": true,
+            "Rollback": true,
+          },
+          "MaximumPercent": 200,
+          "MinimumHealthyPercent": 100,
+        },
+        "DeploymentController": {
+          "Type": "ECS",
+        },
+        "EnableECSManagedTags": false,
+        "HealthCheckGracePeriodSeconds": 60,
+        "LoadBalancers": [
+          {
+            "ContainerName": "article-rendering",
+            "ContainerPort": 9000,
+            "TargetGroupArn": {
+              "Ref": "ArticlerenderingEcsTargetGroupArticlerenderingD522DD78",
+            },
+          },
+        ],
+        "Monitoring": {
+          "MetricConfigurations": [
+            {
+              "MetricNames": [
+                "CPUUtilization",
+                "MemoryUtilization",
+              ],
+              "ResolutionSeconds": 20,
+            },
+          ],
+        },
+        "NetworkConfiguration": {
+          "AwsvpcConfiguration": {
+            "AssignPublicIp": "DISABLED",
+            "SecurityGroups": [
+              {
+                "Fn::GetAtt": [
+                  "GuHttpsEgressSecurityGroupArticlerenderingecs463B523D",
+                  "GroupId",
+                ],
+              },
+            ],
+            "Subnets": {
+              "Ref": "articlerenderingPrivateSubnets",
+            },
+          },
+        },
+        "PropagateTags": "SERVICE",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+        "TaskDefinition": {
+          "Ref": "EcsTaskDefinition63157ED3",
+        },
+      },
+      "Type": "AWS::ECS::Service",
+    },
+    "EcsServiceTaskCountTarget02FCCE22": {
+      "DependsOn": [
+        "ECSInstanceProfileBA4A4DA9",
+        "ECSManagedInstancesRole1E652558",
+        "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "EcsTaskDefinitionTaskRoleB7B6D8DD",
+        "ManagedInstancesCapacityProviderC2946447",
+      ],
+      "Properties": {
+        "MaxCapacity": 240,
+        "MinCapacity": 42,
+        "ResourceId": {
+          "Fn::Join": [
+            "",
+            [
+              "service/",
+              {
+                "Ref": "articlerenderingEcsCluster778E37FC",
+              },
+              "/",
+              {
+                "Fn::GetAtt": [
+                  "EcsService81FC6EF6",
+                  "Name",
+                ],
+              },
+            ],
+          ],
+        },
+        "RoleARN": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":iam::",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService",
+            ],
+          ],
+        },
+        "ScalableDimension": "ecs:service:DesiredCount",
+        "ServiceNamespace": "ecs",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+    },
+    "EcsTaskDefinition63157ED3": {
+      "Properties": {
+        "ContainerDefinitions": [
+          {
+            "DependsOn": [
+              {
+                "Condition": "START",
+                "ContainerName": "aws-otel-collector",
+              },
+            ],
+            "DockerLabels": {
+              "RiffRaffDeploymentId": {
+                "Ref": "RiffRaffDeploymentId",
+              },
+            },
+            "Environment": [
+              {
+                "Name": "STACK",
+                "Value": "frontend",
+              },
+              {
+                "Name": "STAGE",
+                "Value": "PROD",
+              },
+              {
+                "Name": "APP",
+                "Value": "article-rendering",
+              },
+              {
+                "Name": "TASK_NAME",
+                "Value": "article-rendering",
+              },
+              {
+                "Name": "GU_REPO",
+                "Value": "guardian/dotcom-rendering",
+              },
+              {
+                "Name": "NODE_ENV",
+                "Value": "production",
+              },
+              {
+                "Name": "GU_STAGE",
+                "Value": "PROD",
+              },
+              {
+                "Name": "GU_APP",
+                "Value": "article-rendering",
+              },
+              {
+                "Name": "GU_STACK",
+                "Value": "frontend",
+              },
+              {
+                "Name": "OTEL_EXPORTER_OTLP_ENDPOINT",
+                "Value": "http://localhost:4318",
+              },
+              {
+                "Name": "OTEL_SERVICE_NAME",
+                "Value": "article-rendering",
+              },
+            ],
+            "Essential": true,
+            "Image": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Ref": "ArtifactsAccountId",
+                  },
+                  ".dkr.ecr.eu-west-1.",
+                  {
+                    "Ref": "AWS::URLSuffix",
+                  },
+                  "/guardian/dotcom-rendering/dotcom-rendering@sha256:12345",
+                ],
+              ],
+            },
+            "LogConfiguration": {
+              "LogDriver": "awsfirelens",
+              "Options": {
+                "Name": "kinesis_streams",
+                "region": "eu-west-1",
+                "retry_limit": "2",
+                "stream": {
+                  "Ref": "LoggingStreamName",
+                },
+              },
+            },
+            "Name": "article-rendering",
+            "PortMappings": [
+              {
+                "ContainerPort": 9000,
+                "Protocol": "tcp",
+              },
+            ],
+            "ReadonlyRootFilesystem": true,
+            "VersionConsistency": "disabled",
+          },
+          {
+            "Environment": [
+              {
+                "Name": "STACK",
+                "Value": "frontend",
+              },
+              {
+                "Name": "STAGE",
+                "Value": "PROD",
+              },
+              {
+                "Name": "APP",
+                "Value": "article-rendering",
+              },
+              {
+                "Name": "TASK_NAME",
+                "Value": "article-rendering",
+              },
+              {
+                "Name": "GU_REPO",
+                "Value": "guardian/dotcom-rendering",
+              },
+            ],
+            "Essential": true,
+            "FirelensConfiguration": {
+              "Type": "fluentbit",
+            },
+            "Image": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Ref": "ArtifactsAccountId",
+                  },
+                  ".dkr.ecr.eu-west-1.",
+                  {
+                    "Ref": "AWS::URLSuffix",
+                  },
+                  "/guardian/cdk/logging@sha256:32dce4e7a9e628b053ca42c271d7bbdf3697b4980c4612e845a15257c2bd1d99",
+                ],
+              ],
+            },
+            "LogConfiguration": {
+              "LogDriver": "awslogs",
+              "Options": {
+                "awslogs-group": {
+                  "Ref": "EcsTaskDefinitionLogShippingLogGroup0E405BD0",
+                },
+                "awslogs-region": "eu-west-1",
+                "awslogs-stream-prefix": "frontend/PROD/article-rendering/devx-logs-sidecar",
+              },
+            },
+            "MountPoints": [
+              {
+                "ContainerPath": "/init",
+                "ReadOnly": false,
+                "SourceVolume": "logging-volume",
+              },
+            ],
+            "Name": "LogShipping",
+            "ReadonlyRootFilesystem": true,
+            "VersionConsistency": "disabled",
+          },
+          {
+            "Command": [
+              "--config=/etc/ecs/ecs-default-config.yaml",
+            ],
+            "Cpu": 256,
+            "Essential": false,
+            "HealthCheck": {
+              "Command": [
+                "CMD",
+                "/healthcheck",
+              ],
+              "Interval": 5,
+              "Retries": 2,
+              "Timeout": 3,
+            },
+            "Image": "public.ecr.aws/aws-observability/aws-otel-collector@sha256:90b3180c21acb9497110480371a413ed91f2836077f8a8fb4507b019d3c481c0",
+            "LogConfiguration": {
+              "LogDriver": "awsfirelens",
+              "Options": {
+                "Name": "kinesis_streams",
+                "region": "eu-west-1",
+                "retry_limit": "2",
+                "stream": {
+                  "Ref": "LoggingStreamName",
+                },
+              },
+            },
+            "Memory": 512,
+            "Name": "aws-otel-collector",
+            "ReadonlyRootFilesystem": true,
+          },
+        ],
+        "Cpu": "1024",
+        "ExecutionRoleArn": {
+          "Fn::GetAtt": [
+            "EcsTaskDefinitionExecutionRoleBE450C73",
+            "Arn",
+          ],
+        },
+        "Family": "FaciaRenderingPRODEcsTaskDefinition9EA5D92F",
+        "Memory": "2048",
+        "NetworkMode": "awsvpc",
+        "RequiresCompatibilities": [
+          "MANAGED_INSTANCES",
+        ],
+        "RuntimePlatform": {
+          "CpuArchitecture": "ARM64",
+          "OperatingSystemFamily": "LINUX",
+        },
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+        "TaskRoleArn": {
+          "Fn::GetAtt": [
+            "EcsTaskDefinitionTaskRoleB7B6D8DD",
+            "Arn",
+          ],
+        },
+        "Volumes": [
+          {
+            "Name": "logging-volume",
+          },
+        ],
+      },
+      "Type": "AWS::ECS::TaskDefinition",
+    },
+    "EcsTaskDefinitionExecutionRoleBE450C73": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "EcsTaskDefinitionExecutionRoleDefaultPolicy1611A942": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":ecr:eu-west-1:",
+                    {
+                      "Ref": "ArtifactsAccountId",
+                    },
+                    ":repository/guardian/dotcom-rendering/dotcom-rendering",
+                  ],
+                ],
+              },
+            },
+            {
+              "Action": "ecr:GetAuthorizationToken",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            {
+              "Action": [
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":ecr:eu-west-1:",
+                    {
+                      "Ref": "ArtifactsAccountId",
+                    },
+                    ":repository/guardian/cdk/logging",
+                  ],
+                ],
+              },
+            },
+            {
+              "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "EcsTaskDefinitionLogShippingLogGroup0E405BD0",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "EcsTaskDefinitionExecutionRoleDefaultPolicy1611A942",
+        "Roles": [
+          {
+            "Ref": "EcsTaskDefinitionExecutionRoleBE450C73",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "EcsTaskDefinitionLogShippingLogGroup0E405BD0": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "RetentionInDays": 1,
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "EcsTaskDefinitionTaskRoleB7B6D8DD": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:PutLogEvents",
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:DescribeLogStreams",
+                "logs:DescribeLogGroups",
+                "logs:PutRetentionPolicy",
+                "xray:PutTraceSegments",
+                "xray:PutTelemetryRecords",
+                "xray:GetSamplingRules",
+                "xray:GetSamplingTargets",
+                "xray:GetSamplingStatisticSummaries",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "EcsTaskDefinitionTaskRoleDefaultPolicy1FD2F057",
+        "Roles": [
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
     "GetDistributablePolicyArticlerendering7F5C432B": {
       "Properties": {
         "PolicyDocument": {
@@ -3281,6 +5450,88 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering PROD (
         },
       },
       "Type": "AWS::EC2::SecurityGroup",
+    },
+    "GuHttpsEgressSecurityGroupArticlerenderingecs463B523D": {
+      "Properties": {
+        "GroupDescription": "Allow all outbound HTTPS traffic",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound HTTPS traffic",
+            "FromPort": 443,
+            "IpProtocol": "tcp",
+            "ToPort": 443,
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering-ecs",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "GuHttpsEgressSecurityGroupArticlerenderingecsfromFaciaRenderingPRODInternalIngressSecurityGroupArticlerenderingEAAA5CD49000DFADB87C": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupArticlerenderingecs463B523D",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "InternalIngressSecurityGroupArticlerendering3856ADE0",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "GuHttpsEgressSecurityGroupArticlerenderingecsfromFaciaRenderingPRODLoadBalancerArticlerenderingSecurityGroupC36B4A769000C13EF818": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupArticlerenderingecs463B523D",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "LoadBalancerArticlerenderingSecurityGroupB13618F9",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
     },
     "GuHttpsEgressSecurityGroupArticlerenderingfromFaciaRenderingPRODInternalIngressSecurityGroupArticlerenderingEAAA5CD49000824DB265": {
       "Properties": {
@@ -3357,6 +5608,9 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering PROD (
         "Roles": [
           {
             "Ref": "InstanceRoleArticlerendering0D4717E8",
+          },
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
           },
         ],
       },
@@ -3588,6 +5842,27 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering PROD (
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
+    "InternalIngressSecurityGroupArticlerenderingtoFaciaRenderingPRODGuHttpsEgressSecurityGroupArticlerenderingecs1FE45052900012158BE5": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupArticlerenderingecs463B523D",
+            "GroupId",
+          ],
+        },
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "InternalIngressSecurityGroupArticlerendering3856ADE0",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
     "LatencyScaleDownPolicyLowerAlarm3AAA79CF": {
       "Properties": {
         "AlarmActions": [
@@ -3798,8 +6073,21 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering PROD (
         ],
         "DefaultActions": [
           {
-            "TargetGroupArn": {
-              "Ref": "TargetGroupArticlerendering3605E498",
+            "ForwardConfig": {
+              "TargetGroups": [
+                {
+                  "TargetGroupArn": {
+                    "Ref": "TargetGroupArticlerendering3605E498",
+                  },
+                  "Weight": 1,
+                },
+                {
+                  "TargetGroupArn": {
+                    "Ref": "ArticlerenderingEcsTargetGroupArticlerenderingD522DD78",
+                  },
+                  "Weight": 0,
+                },
+              ],
             },
             "Type": "forward",
           },
@@ -3834,6 +6122,106 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering PROD (
         ],
       },
       "Type": "AWS::ElasticLoadBalancingV2::Listener",
+    },
+    "ListenerArticlerenderingDeterministicRouteToEc2Rule2FE1C744": {
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "TargetGroupArticlerendering3605E498",
+            },
+            "Type": "forward",
+          },
+        ],
+        "Conditions": [
+          {
+            "Field": "http-header",
+            "HttpHeaderConfig": {
+              "HttpHeaderName": "X-Gu-Target-Group",
+              "Values": [
+                "ec2",
+              ],
+            },
+          },
+        ],
+        "ListenerArn": {
+          "Ref": "ListenerArticlerendering9419D5F6",
+        },
+        "Priority": 10,
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+    },
+    "ListenerArticlerenderingDeterministicRouteToEcsRule264A8CD2": {
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "ArticlerenderingEcsTargetGroupArticlerenderingD522DD78",
+            },
+            "Type": "forward",
+          },
+        ],
+        "Conditions": [
+          {
+            "Field": "http-header",
+            "HttpHeaderConfig": {
+              "HttpHeaderName": "X-Gu-Target-Group",
+              "Values": [
+                "ecs",
+              ],
+            },
+          },
+        ],
+        "ListenerArn": {
+          "Ref": "ListenerArticlerendering9419D5F6",
+        },
+        "Priority": 11,
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
     },
     "LoadBalancerArticlerendering49883BBC": {
       "Properties": {
@@ -3965,6 +6353,27 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering PROD (
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
+    "LoadBalancerArticlerenderingSecurityGrouptoFaciaRenderingPRODGuHttpsEgressSecurityGroupArticlerenderingecs1FE4505290001E087429": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupArticlerenderingecs463B523D",
+            "GroupId",
+          ],
+        },
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "LoadBalancerArticlerenderingSecurityGroupB13618F9",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
     "LoadBalancerDNS": {
       "Properties": {
         "Name": "article-rendering.guardianapis.com",
@@ -3981,6 +6390,76 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering PROD (
         "TTL": 3600,
       },
       "Type": "Guardian::DNS::RecordSet",
+    },
+    "ManagedInstancesCapacityProviderC2946447": {
+      "Properties": {
+        "ClusterName": {
+          "Ref": "articlerenderingEcsCluster778E37FC",
+        },
+        "ManagedInstancesProvider": {
+          "InfrastructureRoleArn": {
+            "Fn::GetAtt": [
+              "ECSInfrastructureRoleE492121F",
+              "Arn",
+            ],
+          },
+          "InstanceLaunchTemplate": {
+            "Ec2InstanceProfileArn": {
+              "Fn::GetAtt": [
+                "ECSInstanceProfileBA4A4DA9",
+                "Arn",
+              ],
+            },
+            "InstanceRequirements": {
+              "AllowedInstanceTypes": [
+                "c8g.*",
+              ],
+              "MemoryMiB": {
+                "Min": 2048,
+              },
+              "VCpuCount": {
+                "Min": 1,
+              },
+            },
+            "NetworkConfiguration": {
+              "SecurityGroups": [
+                {
+                  "Fn::GetAtt": [
+                    "GuHttpsEgressSecurityGroupArticlerenderingecs463B523D",
+                    "GroupId",
+                  ],
+                },
+              ],
+              "Subnets": {
+                "Ref": "articlerenderingPrivateSubnets",
+              },
+            },
+          },
+        },
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::ECS::CapacityProvider",
     },
     "ParameterStoreReadArticlerendering1D29E674": {
       "Properties": {
@@ -4028,6 +6507,9 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering PROD (
         "Roles": [
           {
             "Ref": "InstanceRoleArticlerendering0D4717E8",
+          },
+          {
+            "Ref": "EcsTaskDefinitionTaskRoleB7B6D8DD",
           },
         ],
       },
@@ -4252,6 +6734,57 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering PROD (
         "TreatMissingData": "notBreaching",
       },
       "Type": "AWS::CloudWatch::Alarm",
+    },
+    "articlerenderingCpuScaling661251A9": {
+      "Properties": {
+        "PolicyName": "FaciaRenderingPRODarticlerenderingCpuScalingC75CCD8B",
+        "PolicyType": "TargetTrackingScaling",
+        "ScalingTargetId": {
+          "Ref": "EcsServiceTaskCountTarget02FCCE22",
+        },
+        "TargetTrackingScalingPolicyConfiguration": {
+          "PredefinedMetricSpecification": {
+            "PredefinedMetricType": "ECSServiceAverageCPUUtilizationHighResolution",
+          },
+          "ScaleInCooldown": 60,
+          "ScaleOutCooldown": 60,
+          "TargetValue": 20,
+        },
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+    },
+    "articlerenderingEcsCluster778E37FC": {
+      "Properties": {
+        "ClusterSettings": [
+          {
+            "Name": "containerInsights",
+            "Value": "enhanced",
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::ECS::Cluster",
     },
     "frontendPRODarticlerenderingC9709529": {
       "DependsOn": [
