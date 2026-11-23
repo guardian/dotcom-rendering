@@ -3,6 +3,7 @@ import type { CrosswordProps } from '@guardian/react-crossword';
 import { palette as sourcePalette } from '@guardian/source/foundations';
 import type { ComponentProps } from 'react';
 import { getCrosswordAccessIdentity } from '../lib/puzzleProgress/adapters/crossword';
+import { getCrosswordIntcmp } from '../lib/puzzlesAcquisition';
 import { renderInModalRoot, usePuzzleAccess } from '../lib/usePuzzleAccess';
 import { palette as themePalette } from '../palette';
 import { CrosswordComponent } from './CrosswordComponent.island';
@@ -67,6 +68,7 @@ export const CrosswordAccessGate = ({
 				renderInModalRoot(
 					<UnlockPremiumPuzzlesModal
 						idUrl={idUrl}
+						intcmp={getCrosswordIntcmp(data.crosswordType)}
 						isSignedIn={authState?.reader.isSignedIn}
 						returnToArchivePath={returnToArchivePath}
 					/>,
