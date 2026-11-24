@@ -143,6 +143,12 @@ export const Puzzles: ReactComponent<Inline1Props> = ({
 	const isAnalysis = page.tones.split(',').includes('Analysis');
 	const isOpinion = page.pillar === 'Opinion';
 	const shouldHaveWhiteBackground = isAnalysis || isOpinion;
+	const puzzleCtaUrl = `https://www.theguardian.com/puzzles-and-games?${new URLSearchParams(
+		{
+			INTCMP: tracking.campaignCode,
+			REFPVID: tracking.ophanPageId || 'not_found',
+		},
+	)}`;
 
 	return (
 		<section
@@ -178,7 +184,7 @@ export const Puzzles: ReactComponent<Inline1Props> = ({
 						cssOverrides={ctaButtonStyles}
 						theme={ctaButtonTheme}
 						data-ignore="global-link-styling"
-						href={'#'}
+						href={puzzleCtaUrl}
 						icon={<SvgArrowRightStraight />}
 						iconSide="right"
 						aria-label="Visit the Guardian puzzles and games hub."
