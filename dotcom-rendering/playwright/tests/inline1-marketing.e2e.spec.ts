@@ -10,9 +10,9 @@ import { loadPage } from '../lib/load-page';
 import { expectToExist } from '../lib/locators';
 
 const inline1Tests = {
-	puzzles: inline1PuzzlesMessageProps as Inline1Props,
-	newsletter: inline1NewsletterMessageProps as Inline1Props,
-	support: inline1SupportMessageProps as Inline1Props,
+	puzzles: inline1PuzzlesMessageProps,
+	newsletter: inline1NewsletterMessageProps,
+	support: inline1SupportMessageProps,
 } satisfies Record<string, Inline1Props>;
 
 test.describe('Inline1 Marketing E2E tests', () => {

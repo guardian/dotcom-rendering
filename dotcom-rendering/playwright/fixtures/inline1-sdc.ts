@@ -1,3 +1,5 @@
+import type { Inline1Props } from '@guardian/support-dotcom-components/dist/shared/types';
+
 export const inline1SupportMessageProps = {
 	variant: {
 		name: 'CONTROL',
@@ -28,9 +30,12 @@ export const inline1SupportMessageProps = {
 		abTestVariant: 'CONTROL',
 		campaignCode: 'TEST_CONTROL',
 		componentType: 'ACQUISITIONS_INLINE',
+		ophanPageId: '',
+		platformId: '',
+		referrerUrl: '',
 	},
 	countryCode: 'GB',
-};
+} satisfies Inline1Props;
 
 export const inline1PuzzlesMessageProps = {
 	variant: {
@@ -43,9 +48,12 @@ export const inline1PuzzlesMessageProps = {
 		abTestVariant: 'CONTROL',
 		campaignCode: 'TESTPUZZLES_CONTROL',
 		componentType: 'ACQUISITIONS_INLINE',
+		ophanPageId: '',
+		platformId: '',
+		referrerUrl: '',
 	},
 	countryCode: 'GB',
-};
+} satisfies Inline1Props;
 
 export const inline1NewsletterMessageProps = {
 	variant: {
@@ -69,6 +77,9 @@ export const inline1NewsletterMessageProps = {
 		abTestVariant: 'CONTROL',
 		campaignCode: 'TESTNEWSLETTER_CONTROL',
 		componentType: 'ACQUISITIONS_INLINE',
+		ophanPageId: '',
+		platformId: '',
+		referrerUrl: '',
 	},
 	countryCode: 'GB',
-};
+} satisfies Inline1Props;
