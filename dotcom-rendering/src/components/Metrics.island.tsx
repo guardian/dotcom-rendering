@@ -225,7 +225,7 @@ export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 			if (!isInMonitoringTest) return;
 
 			const mvtId = getCookie({
-				name: 'gu_v2_mvt_id',
+				name: 'gu_v3_mvt_id',
 				shouldMemoize: true,
 			});
 

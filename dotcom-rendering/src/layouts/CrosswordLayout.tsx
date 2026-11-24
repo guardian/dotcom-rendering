@@ -41,7 +41,6 @@ import { PUZZLE_MODAL_ROOT_ID } from '../lib/puzzleAccess';
 import { crosswordActionContext } from '../lib/puzzleActionTracking';
 import { getCrosswordAccessIdentity } from '../lib/puzzleProgress/adapters/crossword';
 import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
-import { isPuzzlesHubV2Enabled } from '../lib/puzzlesHubVersionExperiment';
 import {
 	getPuzzlesSubNavLinks,
 	PUZZLES_SUBNAV_PARENT,
@@ -224,10 +223,7 @@ export const CrosswordLayout = (props: Props) => {
 				...props.NAV,
 				subNavSections: {
 					parent: PUZZLES_SUBNAV_PARENT,
-					links: getPuzzlesSubNavLinks(
-						true,
-						isPuzzlesHubV2Enabled(article.config),
-					),
+					links: getPuzzlesSubNavLinks(true),
 				},
 				currentNavLink: 'Crosswords',
 			}
@@ -304,6 +300,7 @@ export const CrosswordLayout = (props: Props) => {
 								<div data-print-layout="hide">
 									<ArticleTitle
 										format={format}
+										ophanComponentLink="puzzles | in-page-nav | crossword-page"
 										tags={titleTags}
 										sectionLabel={article.sectionLabel}
 										sectionUrl={
@@ -662,6 +659,7 @@ export const CrosswordLayout = (props: Props) => {
 					<div data-print-layout="hide">
 						<PuzzlesUsefulLinks
 							id="crossword"
+							ophanComponentName="puzzles-useful-links:crossword-page"
 							title="Useful links"
 							links={article.puzzlesSupporting.usefulLinks}
 							newsletter={article.puzzlesSupporting.newsletter}

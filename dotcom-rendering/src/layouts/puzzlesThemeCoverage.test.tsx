@@ -9,10 +9,6 @@ import {
 	type ArticleTheme,
 	Pillar,
 } from '../lib/articleFormat';
-import {
-	puzzlesHubV2Experiment,
-	puzzlesHubV2Participation,
-} from '../lib/puzzlesHubVersionExperiment';
 import { puzzleAccentVariables } from '../lib/puzzlesTheme';
 import { extractNAV } from '../model/extract-nav';
 import { getPuzzleConfig } from '../model/puzzles/puzzleConfigs';
@@ -129,8 +125,6 @@ const config = {
 	editionId: 'UK' as const,
 };
 
-const hubOn = puzzlesHubV2Participation(puzzlesHubV2Experiment.variant);
-
 describe('Puzzles & games theme coverage', () => {
 	it('keeps a neutral background and lines on the puzzle page', () => {
 		const light = declarations(puzzlePageFormat.theme, 'light');
@@ -160,7 +154,7 @@ describe('Puzzles & games theme coverage', () => {
 			for (const signedIn of [false, true]) {
 				for (const [edition, serverSideABTests] of [
 					['UK', {}],
-					['INT', hubOn],
+					['INT', {}],
 				] as const) {
 					mockSignedIn = signedIn;
 					const puzzleConfig = getPuzzleConfig(slug);
@@ -219,7 +213,7 @@ describe('Puzzles & games theme coverage', () => {
 					config: {
 						...StandardFixture.config,
 						edition: 'INT',
-						serverSideABTests: hubOn,
+						serverSideABTests: {},
 					},
 				},
 				'Web',

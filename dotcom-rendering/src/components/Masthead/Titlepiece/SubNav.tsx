@@ -100,6 +100,11 @@ export const SubNav = ({
 							data-src-focus-disabled={true}
 							css={subnavLinkStyles}
 							href={subNavSections.parent.url}
+							data-link-name={nestedOphanComponents(
+								'header',
+								'subnav',
+								subNavSections.parent.longTitle,
+							)}
 						>
 							{subNavSections.parent.title}
 						</a>

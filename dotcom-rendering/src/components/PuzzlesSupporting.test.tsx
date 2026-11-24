@@ -95,6 +95,38 @@ describe('PuzzlesUsefulLinks', () => {
 		description: 'News and clues',
 	};
 
+	it('tracks only configured Useful links, retaining displayed order and newsletter tracking', () => {
+		render(
+			<PuzzlesUsefulLinks
+				id="game"
+				title="Useful links"
+				links={supporting.usefulLinks}
+				ophanComponentName="puzzles-useful-links:puzzle-page"
+				newsletter={{
+					...newsletter,
+					exampleUrl: '/newsletter-preview',
+				}}
+			/>,
+		);
+		for (const [
+			index,
+			{ title, url },
+		] of supporting.usefulLinks.entries()) {
+			const link = screen.getByRole('link', { name: title });
+			expect(link).toHaveAttribute('href', url);
+			expect(link).toHaveAttribute(
+				'data-link-name',
+				`puzzles | useful-link | link-@${index + 1}`,
+			);
+		}
+		const preview = screen.getByRole('link', { name: 'Preview latest' });
+		expect(preview).not.toHaveAttribute('data-component');
+		expect(preview).toHaveAttribute(
+			'data-link-name',
+			'puzzles newsletter preview : cluesletter',
+		);
+	});
+
 	it('links to the latest edition when the newsletter has an example URL', () => {
 		render(
 			<PuzzlesUsefulLinks
@@ -164,6 +196,9 @@ describe('PuzzlesSupporting', () => {
 		expect(
 			screen.getByRole('link', { name: 'Help Centre' }),
 		).toHaveAttribute('href', 'https://help.theguardian.com');
+		expect(
+			screen.getByRole('link', { name: 'Help Centre' }),
+		).not.toHaveAttribute('data-link-name');
 		expect(
 			screen.getByRole('heading', {
 				level: 3,
