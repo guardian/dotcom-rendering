@@ -34,3 +34,5 @@ catalog:
 minimumReleaseAge: 2880 # 2 day minimum package version age
 minimumReleaseAgeExclude:
   - '@guardian/*'
+overrides:
+  '@storybook/builder-webpack5>webpack-dev-middleware': '>=7.4.6'
