@@ -56,13 +56,13 @@ describe('Puzzles CTA', () => {
 				tracking={{ ...props.tracking, ophanPageId: '' }}
 			/>,
 		);
-		const fallbackUrl = new URL(
+		const urlWithoutPageViewId = new URL(
 			screen
 				.getByRole('link', {
 					name: 'Visit the Guardian puzzles and games hub.',
 				})
 				.getAttribute('href') ?? '',
 		);
-		expect(fallbackUrl.searchParams.get('REFPVID')).toBe('not_found');
+		expect(urlWithoutPageViewId.searchParams.get('REFPVID')).toBe('');
 	});
 });

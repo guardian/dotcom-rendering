@@ -146,7 +146,7 @@ export const Puzzles: ReactComponent<Inline1Props> = ({
 	const puzzleCtaUrl = `https://www.theguardian.com/puzzles-and-games?${new URLSearchParams(
 		{
 			INTCMP: tracking.campaignCode,
-			REFPVID: tracking.ophanPageId || 'not_found',
+			REFPVID: tracking.ophanPageId,
 		},
 	)}`;
 
