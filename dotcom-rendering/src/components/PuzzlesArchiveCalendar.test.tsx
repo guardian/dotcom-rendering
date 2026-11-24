@@ -1561,6 +1561,30 @@ describe('PuzzlesArchiveCalendar in-progress days', () => {
 		},
 	);
 
+	it.each([
+		[true, '3px'],
+		[false, ''],
+	])(
+		'rounds the day tiles only with the supporter exclusive calendar (v3=%s)',
+		(showPremiumIndicators, radius) => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={withItem({ gameStatus: 'in-progress' })}
+					showPremiumIndicators={showPremiumIndicators}
+				/>,
+			);
+
+			const days = Array.from(
+				document.querySelectorAll<HTMLElement>('.day'),
+			);
+
+			expect(days.length).toBeGreaterThan(1);
+			for (const day of days) {
+				expect(getComputedStyle(day).borderRadius).toBe(radius);
+			}
+		},
+	);
+
 	it('keeps the supporter exclusive star on a day in progress', () => {
 		render(
 			<PuzzlesArchiveCalendar

@@ -553,7 +553,6 @@ const calendarStyles = css`
 		padding: var(--calendar-day-padding-block)
 			var(--calendar-day-padding-inline);
 		border: 1px solid transparent;
-		border-radius: 3px;
 		background: var(--puzzles-card-background, ${palette.neutral[97]});
 		color: var(--puzzles-card-text-colour, ${palette.neutral[7]});
 		text-decoration: none;
@@ -666,6 +665,9 @@ const premiumCalendarStyles = css`
 	--calendar-day-padding-inline: 4px;
 	grid-template-columns: repeat(7, minmax(0, 44px));
 	justify-content: space-between;
+	.day {
+		border-radius: 3px;
+	}
 	.day[data-status='available'] {
 		background: var(--puzzles-page-background, ${palette.neutral[100]});
 		border-color: var(--puzzles-border-colour, ${palette.neutral[86]});
