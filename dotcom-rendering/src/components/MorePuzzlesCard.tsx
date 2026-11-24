@@ -9,11 +9,13 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { SvgCheckmark } from '@guardian/source/react-components';
+import { puzzleTypeForCard } from '../lib/puzzleCardProgress';
 import {
 	getPuzzleGroupPalette,
 	puzzleGroupForItemType,
 	type PuzzleGroupKey,
 } from '../lib/puzzleGroupPalette';
+import { showsInProgress } from '../lib/puzzleProgress/inProgressDisplay';
 import { palette as themePalette } from '../palette';
 import type { PuzzleItem } from '../types/puzzlesPage';
 import { useConfig } from './ConfigContext';
@@ -249,6 +251,9 @@ const MorePuzzlesCard = ({
 		item.image !== undefined &&
 		item.image.length > 0 &&
 		item.cardVariant !== 'compact';
+	const isInProgress =
+		item.gameStatus === 'in-progress' &&
+		showsInProgress(puzzleTypeForCard(item));
 	const contents = (
 		<>
 			<div css={cardTextStyles}>
@@ -274,6 +279,7 @@ const MorePuzzlesCard = ({
 					src={item.image}
 				/>
 			)}
+			{isInProgress && <span css={progressStyles}>In progress</span>}
 			{item.gameStatus === 'completed' && (
 				<span css={progressStyles}>
 					Played

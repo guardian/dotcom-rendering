@@ -11,7 +11,9 @@ import {
 	visuallyHidden,
 } from '@guardian/source/foundations';
 import { SvgCheckmark } from '@guardian/source/react-components';
+import { puzzleTypeForCard } from '../lib/puzzleCardProgress';
 import { getPuzzleGroupPalette } from '../lib/puzzleGroupPalette';
+import { showsInProgress } from '../lib/puzzleProgress/inProgressDisplay';
 import type { PuzzleItem } from '../types/puzzlesPage';
 
 /**
@@ -253,6 +255,9 @@ export const PuzzleCard = ({
 		item.cardVariant !== 'compact';
 	const needsCrosswordSuffix =
 		item.type === 'crossword' && !/\bcrossword\b/i.test(item.title);
+	const isInProgress =
+		item.gameStatus === 'in-progress' &&
+		showsInProgress(puzzleTypeForCard(item));
 	const contents = (
 		<>
 			<div css={cardTextStyles(isFeatured)}>
@@ -281,6 +286,7 @@ export const PuzzleCard = ({
 					src={item.image}
 				/>
 			)}
+			{isInProgress && <span css={playedStyles}>In progress</span>}
 			{item.gameStatus === 'completed' && (
 				<span css={playedStyles}>
 					Played

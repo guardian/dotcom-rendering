@@ -869,7 +869,7 @@ describe('PuzzlesArchiveCalendar', () => {
 		expect(screen.getByText('Sat 3 Oct')).toBeInTheDocument();
 	});
 
-	it('shows Played on the recent cards from the API state only', () => {
+	it('shows Played and In progress on the recent cards from the API state only', () => {
 		jest.useFakeTimers().setSystemTime(new Date('2026-10-07T12:00:00Z'));
 		const statuses = ['completed', 'in-progress', 'not-started'] as const;
 		const recentArchive: PuzzlesArchive = {
@@ -898,10 +898,39 @@ describe('PuzzlesArchiveCalendar', () => {
 				'Played',
 			),
 		).toBeInTheDocument();
-		expect(screen.queryByText('In progress')).not.toBeInTheDocument();
+		const inProgressCards = Array.from(
+			document.querySelectorAll<HTMLElement>('a[href$="/2026-10-06"]'),
+		);
+		expect(
+			within(
+				inProgressCards.find((card) => card.querySelector('time'))!,
+			).getByText('In progress'),
+		).toBeInTheDocument();
+		expect(screen.getAllByText('In progress')).toHaveLength(1);
 		expect(
 			screen.getAllByText('Played', { selector: '.played' }),
 		).toHaveLength(1);
+	});
+
+	it('never shows In progress on the recent cards of a crossword', () => {
+		jest.useFakeTimers().setSystemTime(new Date('2026-10-07T12:00:00Z'));
+		const crosswordArchive: PuzzlesArchive = {
+			...archive,
+			year: 2026,
+			month: 10,
+			items: ['2026-10-07', '2026-10-06'].map((date) => ({
+				...archive.items[0]!,
+				puzzleType: 'CROSSWORD_QUICK',
+				date,
+				progress: 50,
+				gameStatus: 'in-progress' as const,
+				url: `/crosswords/quick/${date}`,
+			})),
+		};
+
+		render(<PuzzlesArchiveCalendar initialArchive={crosswordArchive} />);
+
+		expect(screen.queryByText('In progress')).not.toBeInTheDocument();
 	});
 
 	it('keeps the calendar mounted and announces loading in the month controls', async () => {

@@ -20,6 +20,7 @@ import {
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { getAuthStatus } from '../lib/identity';
 import { isGameStatus } from '../lib/puzzleCardProgress';
+import { showsInProgress } from '../lib/puzzleProgress/inProgressDisplay';
 import type { PuzzlesArchive, PuzzlesArchiveItem } from '../types/puzzlesPage';
 
 export type CalendarCell = {
@@ -1133,6 +1134,10 @@ export const PuzzlesArchiveCalendar = ({
 								By: {item.setterName}
 							</span>
 						)}
+						{item.gameStatus === 'in-progress' &&
+							showsInProgress(item.puzzleType) && (
+								<span className="played">In progress</span>
+							)}
 						{item.gameStatus === 'completed' && (
 							<span className="played">
 								Played

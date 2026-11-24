@@ -563,6 +563,86 @@ describe('PuzzlesDirectory', () => {
 		expect(screen.getAllByText('Daily puzzle')).toHaveLength(2);
 	});
 
+	it('shows In progress for a game in progress, not for a crossword or an unknown game', () => {
+		render(
+			<PuzzlesDirectory
+				layout={{
+					containers: [
+						section({
+							content: {
+								items: [
+									[
+										item({
+											id: 'sudoku-easy',
+											title: 'Easy sudoku',
+											type: 'sudoku',
+											set: 'easy',
+											gameStatus: 'in-progress',
+										}),
+									],
+									[
+										item({
+											id: 'crossword-quick',
+											title: 'Quick crossword',
+											type: 'crossword',
+											set: 'quick',
+											gameStatus: 'in-progress',
+										}),
+									],
+									[
+										item({
+											id: 'unknown',
+											gameStatus: 'in-progress',
+										}),
+									],
+								],
+								nestedContainers: [],
+							},
+						}),
+					],
+				}}
+				renderAds={false}
+			/>,
+		);
+
+		const labels = screen.getAllByText('In progress');
+		expect(labels).toHaveLength(1);
+		expect(labels[0]?.closest('a, div')).toHaveTextContent('Easy sudoku');
+		expect(screen.queryByText('Played')).not.toBeInTheDocument();
+	});
+
+	it.each(['not-started', 'completed'] as const)(
+		'shows no In progress for a game that is %s',
+		(gameStatus) => {
+			render(
+				<PuzzlesDirectory
+					layout={{
+						containers: [
+							section({
+								content: {
+									items: [
+										[
+											item({
+												id: 'sudoku-easy',
+												type: 'sudoku',
+												set: 'easy',
+												gameStatus,
+											}),
+										],
+									],
+									nestedContainers: [],
+								},
+							}),
+						],
+					}}
+					renderAds={false}
+				/>,
+			);
+
+			expect(screen.queryByText('In progress')).not.toBeInTheDocument();
+		},
+	);
+
 	it('shows no state for a card the API reports nothing or not-started on', () => {
 		render(
 			<PuzzlesDirectory

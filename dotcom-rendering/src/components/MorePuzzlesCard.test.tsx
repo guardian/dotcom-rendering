@@ -201,10 +201,28 @@ describe('MorePuzzlesCard progress', () => {
 	});
 
 	it.each([undefined, 'not-started' as const, 'in-progress' as const])(
-		'shows nothing for status %s',
+		'shows no Played for status %s',
 		(status) => {
 			renderWithStatus(status);
 			expect(screen.queryByText('Played')).not.toBeInTheDocument();
+		},
+	);
+
+	it('shows In progress for a game in progress, but never for a crossword', () => {
+		renderWithStatus('in-progress');
+		const labels = screen.getAllByText('In progress');
+		expect(labels).toHaveLength(1);
+		expect(labels[0]?.closest('a')).toHaveTextContent('Easy sudoku');
+		expect(
+			screen.getByRole('link', { name: /Quick crossword/ }),
+		).not.toHaveTextContent('In progress');
+	});
+
+	it.each([undefined, 'not-started' as const, 'completed' as const])(
+		'shows no In progress for status %s',
+		(status) => {
+			renderWithStatus(status);
+			expect(screen.queryByText('In progress')).not.toBeInTheDocument();
 		},
 	);
 });
