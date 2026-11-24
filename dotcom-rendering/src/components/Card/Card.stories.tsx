@@ -820,6 +820,30 @@ export const WithAnAvatar = () => {
 	);
 };
 
+/**
+ * The hover state should only darken the visible parts of an image,
+ * not the transparent areas around it
+ */
+export const WithATransparentImage = () => {
+	return (
+		<CardWrapper>
+			<div
+				css={css`
+					width: 280px;
+				`}
+			>
+				<Card
+					{...basicCardProps}
+					image={{
+						src: 'https://uploads.guim.co.uk/2017/10/06/George-Monbiot,-L.png',
+						altText: 'George Monbiot',
+					}}
+				/>
+			</div>
+		</CardWrapper>
+	);
+};
+
 export const WhenVerticalAndThemeOpinion = () => {
 	return (
 		<>
