@@ -87,6 +87,51 @@ const PremiumCompletedIcon = ({
 	</svg>
 );
 
+const InProgressIcon = ({ size = 16 }: { size?: number }) => (
+	<svg
+		aria-hidden="true"
+		focusable="false"
+		width={size}
+		height={size}
+		viewBox="0 0 16 16"
+		fill="none"
+		xmlns="http://www.w3.org/2000/svg"
+	>
+		<path
+			d="M8 0C12.4183 0 16 3.58172 16 8C16 12.4183 12.4183 16 8 16V14.8571C11.7871 14.8571 14.8571 11.7871 14.8571 8C14.8571 4.2129 11.7871 1.14286 8 1.14286V0Z"
+			fill={palette.opinion[400]}
+		/>
+		<path
+			d="M7.10268 14.7991C7.39577 14.8373 7.69542 14.8571 8 14.8571V16C7.64582 16 7.29737 15.9743 6.95536 15.9297L7.10268 14.7991Z"
+			fill={palette.opinion[400]}
+		/>
+		<path
+			d="M3.82589 13.4408C4.29797 13.8036 4.81833 14.1062 5.375 14.3371L4.9375 15.3917C4.28684 15.1219 3.68013 14.7682 3.12946 14.3449L3.82589 13.4408Z"
+			fill={palette.opinion[400]}
+		/>
+		<path
+			d="M1.66295 10.625C1.89384 11.1817 2.19638 11.702 2.55915 12.1741L1.65402 12.8694C1.23081 12.3187 0.876893 11.7121 0.607143 11.0614L1.66295 10.625Z"
+			fill={palette.opinion[400]}
+		/>
+		<path
+			d="M1.20089 7.10268C1.16266 7.39577 1.14286 7.69542 1.14286 8C1.14286 8.30458 1.16266 8.60423 1.20089 8.89732L0.0691964 9.04353C0.0246848 8.70191 0 8.35375 0 8C0 7.64587 0.0245909 7.29732 0.0691964 6.95536L1.20089 7.10268Z"
+			fill={palette.opinion[400]}
+		/>
+		<path
+			d="M2.55915 3.82589C2.19638 4.29797 1.89384 4.81833 1.66295 5.375L0.607143 4.9375C0.876957 4.2869 1.23077 3.6801 1.65402 3.12946L2.55915 3.82589Z"
+			fill={palette.opinion[400]}
+		/>
+		<path
+			d="M5.375 1.66295C4.81833 1.89384 4.29797 2.19638 3.82589 2.55915L3.12946 1.65402C3.6801 1.23077 4.2869 0.876957 4.9375 0.607143L5.375 1.66295Z"
+			fill={palette.opinion[400]}
+		/>
+		<path
+			d="M8 1.14286C7.69542 1.14286 7.39577 1.16266 7.10268 1.20089L6.95536 0.0691964C7.29732 0.0245909 7.64587 0 8 0V1.14286Z"
+			fill={palette.opinion[400]}
+		/>
+	</svg>
+);
+
 const PlayedLegendIcon = () => (
 	<svg
 		aria-hidden="true"
@@ -138,12 +183,15 @@ export const buildCalendarCells = (
 
 export const archiveStatus = (
 	item: PuzzlesArchiveItem | undefined,
-): 'completed' | 'available' | 'unavailable' =>
+): 'completed' | 'in-progress' | 'available' | 'unavailable' =>
 	item === undefined
 		? 'unavailable'
 		: item.gameStatus === 'completed'
 			? 'completed'
-			: 'available';
+			: item.gameStatus === 'in-progress' &&
+				  showsInProgress(item.puzzleType)
+				? 'in-progress'
+				: 'available';
 
 const isArchiveItem = (value: unknown): value is PuzzlesArchiveItem => {
 	if (typeof value !== 'object' || value === null) return false;
@@ -505,6 +553,7 @@ const calendarStyles = css`
 		padding: var(--calendar-day-padding-block)
 			var(--calendar-day-padding-inline);
 		border: 1px solid transparent;
+		border-radius: 3px;
 		background: var(--puzzles-card-background, ${palette.neutral[97]});
 		color: var(--puzzles-card-text-colour, ${palette.neutral[7]});
 		text-decoration: none;
@@ -544,6 +593,9 @@ const calendarStyles = css`
 			${palette.neutral[100]}
 		);
 	}
+	.day[data-status='in-progress'] {
+		background: ${palette.opinion[800]};
+	}
 	.setter-name {
 		display: none;
 		position: absolute;
@@ -558,7 +610,8 @@ const calendarStyles = css`
 		transform: translateY(-50%);
 		white-space: nowrap;
 	}
-	.completed-icon {
+	.completed-icon,
+	.in-progress-icon {
 		position: absolute;
 		right: ${space[1]}px;
 		bottom: ${space[1]}px;
@@ -570,6 +623,10 @@ const calendarStyles = css`
 		svg {
 			display: block;
 		}
+	}
+	.in-progress-icon {
+		width: 16px;
+		height: 16px;
 	}
 	.day[data-status='unavailable'] {
 		border-color: var(
@@ -619,9 +676,12 @@ const premiumCalendarStyles = css`
 		width: 8px;
 		height: 8px;
 	}
-	.completed-icon {
+	.completed-icon,
+	.in-progress-icon {
 		right: 8px;
 		bottom: 8px;
+	}
+	.completed-icon {
 		width: 16px;
 		height: 13.35119px;
 	}
@@ -636,7 +696,8 @@ const premiumCalendarStyles = css`
 		.day-number {
 			font-size: 14px;
 		}
-		.completed-icon {
+		.completed-icon,
+		.in-progress-icon {
 			right: 12px;
 			bottom: 12px;
 		}
@@ -1308,6 +1369,8 @@ export const PuzzlesArchiveCalendar = ({
 						);
 					}
 					const status = archiveStatus(cell.item);
+					const statusText =
+						status === 'in-progress' ? 'in progress' : status;
 					const supporterExclusive =
 						showPremiumIndicators &&
 						cell.item?.isWithinFreeWindow === false &&
@@ -1315,7 +1378,7 @@ export const PuzzlesArchiveCalendar = ({
 					const isToday = cell.date === todayDate;
 					return cell.item ? (
 						<a
-							aria-label={`${cell.date}, ${supporterExclusive ? 'Supporter exclusive' : status}${supporterExclusive && status === 'completed' ? ', completed' : ''}`}
+							aria-label={`${cell.date}, ${supporterExclusive ? 'Supporter exclusive' : statusText}${supporterExclusive && (status === 'completed' || status === 'in-progress') ? `, ${statusText}` : ''}`}
 							className={`day${isToday ? ' is-today' : ''}`}
 							data-date={cell.date}
 							data-status={status}
@@ -1344,6 +1407,14 @@ export const PuzzlesArchiveCalendar = ({
 							{supporterExclusive && (
 								<span className="supporter-exclusive-icon">
 									<SupporterExclusiveIcon />
+								</span>
+							)}
+							{status === 'in-progress' && (
+								<span
+									aria-hidden="true"
+									className="in-progress-icon"
+								>
+									<InProgressIcon />
 								</span>
 							)}
 							{status === 'completed' && (
@@ -1431,6 +1502,14 @@ export const PuzzlesArchiveCalendar = ({
 					</span>
 				)}
 				<span className="available">Available</span>
+				{showsInProgress(archive.selectedPuzzle.puzzleType) && (
+					<span className="in-progress">
+						<InProgressIcon
+							size={showPremiumIndicators ? 11 : 13.3}
+						/>
+						In progress
+					</span>
+				)}
 				<span className="completed">
 					{showPremiumIndicators ? (
 						<PremiumCompletedIcon
