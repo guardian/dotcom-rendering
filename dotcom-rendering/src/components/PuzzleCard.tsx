@@ -14,7 +14,7 @@ import { SvgCheckmark } from '@guardian/source/react-components';
 import { puzzleTypeForCard } from '../lib/puzzleCardProgress';
 import { getPuzzleGroupPalette } from '../lib/puzzleGroupPalette';
 import {
-	progressPercentage,
+	IN_PROGRESS_BAR_PERCENTAGE,
 	showsInProgress,
 } from '../lib/puzzleProgress/inProgressDisplay';
 import type { PuzzleItem } from '../types/puzzlesPage';
@@ -279,7 +279,6 @@ export const PuzzleCard = ({
 	const isInProgress =
 		item.gameStatus === 'in-progress' &&
 		showsInProgress(puzzleTypeForCard(item));
-	const progress = progressPercentage(item.progress);
 	const contents = (
 		<>
 			<div css={cardTextStyles(isFeatured)}>
@@ -310,11 +309,11 @@ export const PuzzleCard = ({
 			)}
 			{isInProgress && (
 				<span css={[playedStyles, inProgressStyles]}>
-					{progress !== undefined && (
-						<span css={progressTrackStyles} aria-hidden="true">
-							<span style={{ width: `${progress}%` }} />
-						</span>
-					)}
+					<span css={progressTrackStyles} aria-hidden="true">
+						<span
+							style={{ width: `${IN_PROGRESS_BAR_PERCENTAGE}%` }}
+						/>
+					</span>
 					In progress
 				</span>
 			)}

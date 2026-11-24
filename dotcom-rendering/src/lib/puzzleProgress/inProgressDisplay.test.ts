@@ -1,6 +1,6 @@
 import {
+	IN_PROGRESS_BAR_PERCENTAGE,
 	inProgressDisplay,
-	progressPercentage,
 	showsInProgress,
 } from './inProgressDisplay';
 
@@ -89,26 +89,8 @@ describe('showsInProgress', () => {
 	});
 });
 
-describe('progressPercentage', () => {
-	it.each([
-		[0, 0],
-		[40, 40],
-		[99.5, 99.5],
-		[100, 100],
-	])('keeps %s as %s', (progress, expected) => {
-		expect(progressPercentage(progress)).toBe(expected);
-	});
-
-	it.each([
-		[-5, 0],
-		[150, 100],
-		[Number.POSITIVE_INFINITY, undefined],
-	])('limits %s to the range 0 to 100 (%s)', (progress, expected) => {
-		expect(progressPercentage(progress)).toBe(expected);
-	});
-
-	it('has no width without a usable value', () => {
-		expect(progressPercentage(undefined)).toBeUndefined();
-		expect(progressPercentage(Number.NaN)).toBeUndefined();
+describe('IN_PROGRESS_BAR_PERCENTAGE', () => {
+	it('is half, whatever the API reports', () => {
+		expect(IN_PROGRESS_BAR_PERCENTAGE).toBe(50);
 	});
 });

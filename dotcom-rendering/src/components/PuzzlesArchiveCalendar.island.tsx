@@ -21,7 +21,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { getAuthStatus } from '../lib/identity';
 import { isGameStatus } from '../lib/puzzleCardProgress';
 import {
-	progressPercentage,
+	IN_PROGRESS_BAR_PERCENTAGE,
 	showsInProgress,
 } from '../lib/puzzleProgress/inProgressDisplay';
 import type { PuzzlesArchive, PuzzlesArchiveItem } from '../types/puzzlesPage';
@@ -1157,19 +1157,16 @@ export const PuzzlesArchiveCalendar = ({
 						{item.gameStatus === 'in-progress' &&
 							showsInProgress(item.puzzleType) && (
 								<span className="played in-progress">
-									{progressPercentage(item.progress) !==
-										undefined && (
+									<span
+										aria-hidden="true"
+										className="progress-track"
+									>
 										<span
-											aria-hidden="true"
-											className="progress-track"
-										>
-											<span
-												style={{
-													width: `${progressPercentage(item.progress)}%`,
-												}}
-											/>
-										</span>
-									)}
+											style={{
+												width: `${IN_PROGRESS_BAR_PERCENTAGE}%`,
+											}}
+										/>
+									</span>
 									In progress
 								</span>
 							)}

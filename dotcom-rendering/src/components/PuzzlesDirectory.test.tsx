@@ -643,27 +643,15 @@ describe('PuzzlesDirectory', () => {
 				.getByText('In progress')
 				.querySelector<HTMLElement>('span[aria-hidden="true"] > span');
 
-		it('is as wide as the progress value, and hidden from assistive technology', () => {
-			renderSudoku({ progress: 40 });
-			expect(bar()?.style.width).toBe('40%');
-			expect(bar()?.parentElement).toHaveAttribute('aria-hidden', 'true');
-		});
-
-		it.each([
-			[0, '0%'],
-			[-5, '0%'],
-			[150, '100%'],
-		])('draws %s as %s', (progress, width) => {
-			renderSudoku({ progress });
-			expect(bar()?.style.width).toBe(width);
-		});
-
-		it.each([undefined, Number.NaN])(
-			'is not drawn for the progress value %s',
+		it.each([undefined, Number.NaN, -5, 0, 10, 50, 90, 100, 150])(
+			'is always half full, whatever the API progress value (%s)',
 			(progress) => {
 				renderSudoku({ progress });
-				expect(bar()).toBeNull();
-				expect(screen.getByText('In progress')).toBeInTheDocument();
+				expect(bar()?.style.width).toBe('50%');
+				expect(bar()?.parentElement).toHaveAttribute(
+					'aria-hidden',
+					'true',
+				);
 			},
 		);
 

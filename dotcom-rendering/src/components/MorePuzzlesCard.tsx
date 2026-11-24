@@ -16,7 +16,7 @@ import {
 	type PuzzleGroupKey,
 } from '../lib/puzzleGroupPalette';
 import {
-	progressPercentage,
+	IN_PROGRESS_BAR_PERCENTAGE,
 	showsInProgress,
 } from '../lib/puzzleProgress/inProgressDisplay';
 import { palette as themePalette } from '../palette';
@@ -275,7 +275,6 @@ const MorePuzzlesCard = ({
 	const isInProgress =
 		item.gameStatus === 'in-progress' &&
 		showsInProgress(puzzleTypeForCard(item));
-	const progress = progressPercentage(item.progress);
 	const contents = (
 		<>
 			<div css={cardTextStyles}>
@@ -303,11 +302,11 @@ const MorePuzzlesCard = ({
 			)}
 			{isInProgress && (
 				<span css={[progressStyles, inProgressStyles]}>
-					{progress !== undefined && (
-						<span css={progressTrackStyles} aria-hidden="true">
-							<span style={{ width: `${progress}%` }} />
-						</span>
-					)}
+					<span css={progressTrackStyles} aria-hidden="true">
+						<span
+							style={{ width: `${IN_PROGRESS_BAR_PERCENTAGE}%` }}
+						/>
+					</span>
 					In progress
 				</span>
 			)}

@@ -50,12 +50,7 @@ export const showsInProgress = (
 	display[puzzleType] === true;
 
 /**
- * The width of the progress bar, as a percentage from 0 to 100. `undefined`
- * when there is no usable progress value, so no bar is drawn.
+ * How full the progress bar is, as a percentage. Product decision: it does not
+ * follow the progress value the Puzzles API reports, it always shows half.
  */
-export const progressPercentage = (
-	progress: number | undefined,
-): number | undefined =>
-	progress !== undefined && Number.isFinite(progress)
-		? Math.max(0, Math.min(100, progress))
-		: undefined;
+export const IN_PROGRESS_BAR_PERCENTAGE = 50;

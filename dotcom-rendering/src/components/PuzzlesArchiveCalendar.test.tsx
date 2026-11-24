@@ -942,26 +942,17 @@ describe('PuzzlesArchiveCalendar', () => {
 				'[data-component="puzzles-archive-recent"] .progress-track > span',
 			);
 
-		it('is as wide as the progress value, and hidden from assistive technology', () => {
-			renderRecent(40);
-			expect(bar()?.style.width).toBe('40%');
-			expect(bar()?.parentElement).toHaveAttribute('aria-hidden', 'true');
-		});
-
-		it.each([
-			[0, '0%'],
-			[-5, '0%'],
-			[150, '100%'],
-		])('draws %s as %s', (progress, width) => {
-			renderRecent(progress);
-			expect(bar()?.style.width).toBe(width);
-		});
-
-		it('is not drawn without a usable progress value', () => {
-			renderRecent(Number.NaN);
-			expect(bar()).toBeNull();
-			expect(screen.getByText('In progress')).toBeInTheDocument();
-		});
+		it.each([Number.NaN, -5, 0, 10, 50, 90, 100, 150])(
+			'is always half full, whatever the API progress value (%s)',
+			(progress) => {
+				renderRecent(progress);
+				expect(bar()?.style.width).toBe('50%');
+				expect(bar()?.parentElement).toHaveAttribute(
+					'aria-hidden',
+					'true',
+				);
+			},
+		);
 
 		it('is not drawn for a crossword', () => {
 			renderRecent(40, 'CROSSWORD_QUICK');
