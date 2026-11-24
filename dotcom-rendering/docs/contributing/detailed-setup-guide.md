@@ -12,6 +12,41 @@ This high level diagram shows the difference between the data flow when DCR is u
 
 See [Getting Started](../../README.md#getting-started)
 
+### Developing in a dev container
+
+Install Docker Desktop, the VS Code Dev Containers extension, and mise using the
+getting-started guide. From the repository root, run:
+
+```bash
+mise trust
+mise install
+mise exec -- devenv generate
+```
+
+Run **Dev Containers: Reopen in Container** in VS Code and select the `user`
+configuration, or `shared` for the project-only setup.
+
+The [devenv configuration](../../../.devcontainer/devenv.yaml) is the source of
+truth. It enables mise, Node IDE support, and GitHub Copilot tooling. Mise reads
+Node and pnpm versions from the root `.nvmrc` and `package.json`, and the container
+installs the workspace dependencies automatically. The generator version is
+pinned in the root `mise.toml`.
+
+After changing the YAML, run `mise exec -- devenv generate` and commit the generated
+shared configuration. `mise exec -- devenv check` verifies it is up to date. Do not
+edit generated JSON directly. Personal preferences are merged into the git-ignored
+`user` configuration; see the [container guide](../../../.devcontainer/README.md).
+
+Linux dependencies are stored in Docker volumes separately from host dependencies.
+The source checkout is bind-mounted, so edits inside the container also change
+files on the host. Ports 3030 and 4002 are forwarded for development and Storybook.
+The configuration does not mount host credentials or the Docker socket.
+
+Use AI tools from the container window and enable their container-side extension
+if prompted. Container isolation does not prevent an AI provider from receiving
+code, and existing chats may still run commands on the host; start a new chat in
+the container window and verify its terminal reports Linux with `uname -s`.
+
 ### Previewing article on local
 
 You can preview an article from `theguardian.com` by appending the full URL to the path of your localhost article page. For example:

@@ -1,0 +1,38 @@
+# Run `mise exec -- devenv generate` after changing this file.
+name: dotcom-rendering
+
+modules:
+  - mise
+  - node
+  - github-copilot
+
+forwardPorts:
+  - 3030
+  - 4002
+
+plugins:
+  intellij: []
+  vscode:
+    - dbaeumer.vscode-eslint
+    - esbenp.prettier-vscode
+
+# Keep Linux dependencies separate from the host's dependencies.
+mounts:
+  - 'source=${devcontainerId}-root-modules,target=/workspaces/dotcom-rendering/node_modules,type=volume'
+  - 'source=${devcontainerId}-dcr-modules,target=/workspaces/dotcom-rendering/dotcom-rendering/node_modules,type=volume'
+  - 'source=${devcontainerId}-ab-modules,target=/workspaces/dotcom-rendering/ab-testing/node_modules,type=volume'
+  - 'source=${devcontainerId}-ab-cdk-modules,target=/workspaces/dotcom-rendering/ab-testing/cdk/node_modules,type=volume'
+  - 'source=${devcontainerId}-ab-config-modules,target=/workspaces/dotcom-rendering/ab-testing/config/node_modules,type=volume'
+  - 'source=${devcontainerId}-ab-deploy-modules,target=/workspaces/dotcom-rendering/ab-testing/deploy-lambda/node_modules,type=volume'
+  - 'source=${devcontainerId}-ab-frontend-modules,target=/workspaces/dotcom-rendering/ab-testing/frontend/node_modules,type=volume'
+  - 'source=${devcontainerId}-ab-notification-modules,target=/workspaces/dotcom-rendering/ab-testing/notification-lambda/node_modules,type=volume'
+
+postCreateCommand:
+  - cmd: >-
+      sudo chown "$(id -u):$(id -g)" node_modules dotcom-rendering/node_modules
+      ab-testing/node_modules ab-testing/cdk/node_modules ab-testing/config/node_modules
+      ab-testing/deploy-lambda/node_modules ab-testing/frontend/node_modules
+      ab-testing/notification-lambda/node_modules
+    workingDirectory: '.'
+  - cmd: 'mise exec -- pnpm install --frozen-lockfile'
+    workingDirectory: '.'

@@ -1,3 +1,6 @@
+[tools]
+"github:guardian/devenv" = "20261111-131338"
+
 [settings]
 # Read node version from .nvmrc
 # Read pnpm version from package.json
