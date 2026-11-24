@@ -2,11 +2,12 @@ import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import { UnlockPremiumPuzzlesModal } from './UnlockPremiumPuzzlesModal';
 
-const renderModal = (returnUrl?: string) =>
+const renderModal = (returnUrl?: string, intcmp?: string) =>
 	render(
 		<UnlockPremiumPuzzlesModal
 			idUrl="https://profile.theguardian.com"
 			returnUrl={returnUrl}
+			intcmp={intcmp}
 			returnToArchivePath="/puzzles-and-games/logic-puzzles/archive"
 		/>,
 	);
@@ -28,6 +29,23 @@ describe('UnlockPremiumPuzzlesModal', () => {
 			screen.getByRole('link', { name: 'sign in' }).getAttribute('href')!,
 		);
 		expect(signIn.searchParams.get('returnUrl')).toBe(returnUrl);
+	});
+
+	it('sends the campaign code to Support, and not to Identity', () => {
+		renderModal(undefined, 'puzzles_sudoku-easy');
+
+		const subscribe = new URL(
+			screen
+				.getByRole('link', { name: 'Subscribe' })
+				.getAttribute('href')!,
+		);
+		expect(subscribe.searchParams.get('source')).toBe('puzzles');
+		expect(subscribe.searchParams.get('INTCMP')).toBe(
+			'puzzles_sudoku-easy',
+		);
+		expect(
+			screen.getByRole('link', { name: 'sign in' }).getAttribute('href'),
+		).not.toContain('INTCMP');
 	});
 
 	it('leaves the return URL out when the page is not served over https', () => {

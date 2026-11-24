@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { palette as sourcePalette } from '@guardian/source/foundations';
 import type { ComponentProps } from 'react';
+import { getPuzzleIntcmp } from '../lib/puzzlesAcquisition';
 import { renderInModalRoot, usePuzzleAccess } from '../lib/usePuzzleAccess';
 import { buildFrameStyles, PuzzleIframe } from './PuzzleIframe.island';
 import { UnlockPremiumPuzzlesModal } from './UnlockPremiumPuzzlesModal';
@@ -73,6 +74,7 @@ export const PuzzleAccessGate = ({
 				renderInModalRoot(
 					<UnlockPremiumPuzzlesModal
 						idUrl={idUrl}
+						intcmp={getPuzzleIntcmp(iframeProps.puzzleConfig.slug)}
 						isSignedIn={authState?.reader.isSignedIn}
 						returnToArchivePath={returnToArchivePath}
 					/>,
