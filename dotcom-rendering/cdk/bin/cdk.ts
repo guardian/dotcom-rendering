@@ -25,6 +25,7 @@ const cpuScalingSteps = {
 };
 
 /** Article */
+// Note that this is deliberate for scaling testing purposes. The CODE stack is configured to use the PROD ECS settings.
 export const ArticleRenderingPropsCODE: RenderingCDKStackProps = {
 	guApp: 'article-rendering',
 	stage: 'CODE',
@@ -38,13 +39,20 @@ export const ArticleRenderingPropsCODE: RenderingCDKStackProps = {
 		cpu: 1024,
 		memoryLimitMiB: 2048,
 		scaling: {
-			minimumTasks: 1,
-			maximumTasks: 3,
+			minimumTasks: 42,
+			maximumTasks: 240,
 			cpuScaling: {
 				targetValue: 20,
+				// TODO: Tune cooldown values.
+				// https://docs.aws.amazon.com/autoscaling/application/userguide/target-tracking-scaling-policy-overview.html#target-tracking-cooldown
 				scaleInCooldown: Duration.seconds(60),
 				scaleOutCooldown: Duration.seconds(60),
 			},
+		},
+		instancesRequirements: {
+			memoryMin: Size.mebibytes(2048),
+			vCpuCountMin: 1,
+			allowedInstanceTypes: ['c8g.*'],
 		},
 	},
 	targetGroupWeights: {
@@ -52,6 +60,7 @@ export const ArticleRenderingPropsCODE: RenderingCDKStackProps = {
 		ecs: 1,
 	},
 };
+
 new RenderingCDKStack(
 	cdkApp,
 	'ArticleRendering-CODE',
@@ -116,6 +125,7 @@ export const ArticleRenderingPropsPROD: RenderingCDKStackProps = {
 		ecs: 1,
 	},
 };
+
 new RenderingCDKStack(
 	cdkApp,
 	'ArticleRendering-PROD',

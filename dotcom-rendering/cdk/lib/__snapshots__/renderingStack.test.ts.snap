@@ -2355,8 +2355,8 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering CODE (
         "ManagedInstancesCapacityProviderC2946447",
       ],
       "Properties": {
-        "MaxCapacity": 3,
-        "MinCapacity": 1,
+        "MaxCapacity": 240,
+        "MinCapacity": 42,
         "ResourceId": {
           "Fn::Join": [
             "",
@@ -3597,11 +3597,8 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering CODE (
               ],
             },
             "InstanceRequirements": {
-              "CpuManufacturers": [
-                "amazon-web-services",
-              ],
-              "InstanceGenerations": [
-                "current",
+              "AllowedInstanceTypes": [
+                "c8g.*",
               ],
               "MemoryMiB": {
                 "Min": 2048,
