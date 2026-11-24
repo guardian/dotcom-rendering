@@ -218,6 +218,65 @@ describe('MorePuzzlesCard progress', () => {
 		).not.toHaveTextContent('In progress');
 	});
 
+	describe('progress bar', () => {
+		const renderWithProgress = (progress: number | undefined) =>
+			render(
+				<ConfigProvider
+					value={{
+						renderingTarget: 'Web',
+						darkModeAvailable: false,
+						assetOrigin: '/',
+						editionId: 'UK',
+					}}
+				>
+					<MorePuzzlesRows
+						items={items.map((item) => ({
+							...item,
+							progress,
+							gameStatus: 'in-progress' as const,
+						}))}
+					/>
+				</ConfigProvider>,
+			);
+		const bar = () =>
+			screen
+				.getByText('In progress')
+				.querySelector<HTMLElement>('span[aria-hidden="true"] > span');
+
+		it('is as wide as the progress value, and hidden from assistive technology', () => {
+			renderWithProgress(40);
+			expect(bar()?.style.width).toBe('40%');
+			expect(bar()?.parentElement).toHaveAttribute('aria-hidden', 'true');
+		});
+
+		it.each([
+			[0, '0%'],
+			[-5, '0%'],
+			[150, '100%'],
+		])('draws %s as %s', (progress, width) => {
+			renderWithProgress(progress);
+			expect(bar()?.style.width).toBe(width);
+		});
+
+		it.each([undefined, Number.NaN])(
+			'is not drawn for the progress value %s',
+			(progress) => {
+				renderWithProgress(progress);
+				expect(bar()).toBeNull();
+				expect(screen.getByText('In progress')).toBeInTheDocument();
+			},
+		);
+
+		it('is not drawn for a crossword', () => {
+			renderWithProgress(40);
+			expect(
+				screen
+					.getByRole('link', { name: /Quick crossword/ })
+					.querySelector('span[aria-hidden="true"] > span'),
+			).toBeNull();
+		});
+	});
+
 	it.each([undefined, 'not-started' as const, 'completed' as const])(
 		'shows no In progress for status %s',
 		(status) => {

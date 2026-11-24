@@ -20,7 +20,10 @@ import {
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { getAuthStatus } from '../lib/identity';
 import { isGameStatus } from '../lib/puzzleCardProgress';
-import { showsInProgress } from '../lib/puzzleProgress/inProgressDisplay';
+import {
+	progressPercentage,
+	showsInProgress,
+} from '../lib/puzzleProgress/inProgressDisplay';
 import type { PuzzlesArchive, PuzzlesArchiveItem } from '../types/puzzlesPage';
 
 export type CalendarCell = {
@@ -395,6 +398,23 @@ const recentStyles = css`
 		gap: ${space[1]}px;
 		font-weight: bold;
 		line-height: 1;
+	}
+	.played.in-progress {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.progress-track {
+		display: block;
+		width: 80px;
+		height: 3px;
+		border-radius: 2px;
+		background: color-mix(in srgb, currentColor 20%, transparent);
+		span {
+			display: block;
+			height: 100%;
+			border-radius: inherit;
+			background: currentColor;
+		}
 	}
 	.completed-icon {
 		display: inline-flex;
@@ -1136,7 +1156,22 @@ export const PuzzlesArchiveCalendar = ({
 						)}
 						{item.gameStatus === 'in-progress' &&
 							showsInProgress(item.puzzleType) && (
-								<span className="played">In progress</span>
+								<span className="played in-progress">
+									{progressPercentage(item.progress) !==
+										undefined && (
+										<span
+											aria-hidden="true"
+											className="progress-track"
+										>
+											<span
+												style={{
+													width: `${progressPercentage(item.progress)}%`,
+												}}
+											/>
+										</span>
+									)}
+									In progress
+								</span>
 							)}
 						{item.gameStatus === 'completed' && (
 							<span className="played">

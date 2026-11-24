@@ -1,4 +1,8 @@
-import { inProgressDisplay, showsInProgress } from './inProgressDisplay';
+import {
+	inProgressDisplay,
+	progressPercentage,
+	showsInProgress,
+} from './inProgressDisplay';
 
 const entries = Object.entries(inProgressDisplay);
 const crosswords = entries.filter(([puzzleType]) =>
@@ -82,5 +86,29 @@ describe('showsInProgress', () => {
 		expect(showsInProgress('constructor', { SUDOKU_EASY: true })).toBe(
 			false,
 		);
+	});
+});
+
+describe('progressPercentage', () => {
+	it.each([
+		[0, 0],
+		[40, 40],
+		[99.5, 99.5],
+		[100, 100],
+	])('keeps %s as %s', (progress, expected) => {
+		expect(progressPercentage(progress)).toBe(expected);
+	});
+
+	it.each([
+		[-5, 0],
+		[150, 100],
+		[Number.POSITIVE_INFINITY, undefined],
+	])('limits %s to the range 0 to 100 (%s)', (progress, expected) => {
+		expect(progressPercentage(progress)).toBe(expected);
+	});
+
+	it('has no width without a usable value', () => {
+		expect(progressPercentage(undefined)).toBeUndefined();
+		expect(progressPercentage(Number.NaN)).toBeUndefined();
 	});
 });

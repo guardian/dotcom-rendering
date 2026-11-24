@@ -611,6 +611,76 @@ describe('PuzzlesDirectory', () => {
 		expect(screen.queryByText('Played')).not.toBeInTheDocument();
 	});
 
+	describe('progress bar', () => {
+		const renderSudoku = (overrides: Partial<PuzzleItem>) =>
+			render(
+				<PuzzlesDirectory
+					layout={{
+						containers: [
+							section({
+								content: {
+									items: [
+										[
+											item({
+												id: 'sudoku-easy',
+												type: 'sudoku',
+												set: 'easy',
+												gameStatus: 'in-progress',
+												...overrides,
+											}),
+										],
+									],
+									nestedContainers: [],
+								},
+							}),
+						],
+					}}
+					renderAds={false}
+				/>,
+			);
+		const bar = () =>
+			screen
+				.getByText('In progress')
+				.querySelector<HTMLElement>('span[aria-hidden="true"] > span');
+
+		it('is as wide as the progress value, and hidden from assistive technology', () => {
+			renderSudoku({ progress: 40 });
+			expect(bar()?.style.width).toBe('40%');
+			expect(bar()?.parentElement).toHaveAttribute('aria-hidden', 'true');
+		});
+
+		it.each([
+			[0, '0%'],
+			[-5, '0%'],
+			[150, '100%'],
+		])('draws %s as %s', (progress, width) => {
+			renderSudoku({ progress });
+			expect(bar()?.style.width).toBe(width);
+		});
+
+		it.each([undefined, Number.NaN])(
+			'is not drawn for the progress value %s',
+			(progress) => {
+				renderSudoku({ progress });
+				expect(bar()).toBeNull();
+				expect(screen.getByText('In progress')).toBeInTheDocument();
+			},
+		);
+
+		it('is not drawn for a crossword in progress', () => {
+			renderSudoku({
+				id: 'crossword-quick',
+				type: 'crossword',
+				set: 'quick',
+				progress: 40,
+			});
+			expect(screen.queryByText('In progress')).not.toBeInTheDocument();
+			expect(
+				document.querySelector('span[aria-hidden="true"] > span'),
+			).toBeNull();
+		});
+	});
+
 	it.each(['not-started', 'completed'] as const)(
 		'shows no In progress for a game that is %s',
 		(gameStatus) => {

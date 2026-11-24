@@ -48,3 +48,14 @@ export const showsInProgress = (
 	puzzleType !== undefined &&
 	Object.prototype.hasOwnProperty.call(display, puzzleType) &&
 	display[puzzleType] === true;
+
+/**
+ * The width of the progress bar, as a percentage from 0 to 100. `undefined`
+ * when there is no usable progress value, so no bar is drawn.
+ */
+export const progressPercentage = (
+	progress: number | undefined,
+): number | undefined =>
+	progress !== undefined && Number.isFinite(progress)
+		? Math.max(0, Math.min(100, progress))
+		: undefined;
