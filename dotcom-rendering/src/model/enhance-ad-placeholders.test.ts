@@ -237,6 +237,46 @@ describe('enhanceAdPlaceholders', () => {
 		});
 	});
 
+	describe('for interactive articles', () => {
+		const interactiveFormat = {
+			...exampleFormat,
+			design: ArticleDesign.Interactive,
+		};
+
+		it('inserts app ad placeholders at the standard positions', () => {
+			const input = getTestParagraphElements(11);
+			const output = enhanceAdPlaceholders(
+				interactiveFormat,
+				'Apps',
+				false,
+			)(input);
+
+			expect(
+				output.flatMap((element, index) =>
+					elementIsAdPlaceholder(element) ? [index] : [],
+				),
+			).toEqual([3, 10]);
+		});
+
+		it.each([
+			['Apps', true],
+			['Web', false],
+			['Web', true],
+		] as const)(
+			'does not insert placeholders for %s when shouldHideAds is %s',
+			(renderingTarget, shouldHideAds) => {
+				const input = getTestParagraphElements(11);
+				const output = enhanceAdPlaceholders(
+					interactiveFormat,
+					renderingTarget,
+					shouldHideAds,
+				)(input);
+
+				expect(output).toEqual(input);
+			},
+		);
+	});
+
 	describe('for gallery articles', () => {
 		const testCases = [
 			{ images: 0, expectedPositions: [] },

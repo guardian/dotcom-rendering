@@ -4,6 +4,7 @@ import {
 	palette as sourcePalette,
 	until,
 } from '@guardian/source/foundations';
+import { AdPortals } from '../components/AdPortals.island';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimer } from '../components/AffiliateProducts/AffiliateDisclaimer';
 import { Footer } from '../components/Footer';
@@ -16,7 +17,11 @@ import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { SubNav } from '../components/SubNav.island';
-import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	ArticleSpecial,
+} from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import type { EditionId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
@@ -287,6 +292,13 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 				backgroundColour={themePalette('--article-background')}
 				element="main"
 			>
+				{isApps &&
+					renderAds &&
+					format.design === ArticleDesign.Interactive && (
+						<Island priority="critical">
+							<AdPortals />
+						</Island>
+					)}
 				<article
 					id="maincontent"
 					lang={decideLanguage(article.lang)}
