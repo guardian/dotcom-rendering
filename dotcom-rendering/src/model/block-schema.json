@@ -4588,6 +4588,7 @@
                             "enum": [
                                 "cryptic",
                                 "everyman",
+                                "maxi",
                                 "mini",
                                 "prize",
                                 "quick",
