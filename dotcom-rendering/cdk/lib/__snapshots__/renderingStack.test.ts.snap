@@ -7788,7 +7788,7 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering CODE (us
           ],
         },
         "Family": "FaciaRenderingCODEEcsTaskDefinitionC6AC86CD",
-        "Memory": "2048",
+        "Memory": "1280",
         "NetworkMode": "awsvpc",
         "RequiresCompatibilities": [
           "MANAGED_INSTANCES",
@@ -8478,7 +8478,7 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering CODE (us
             },
             "InstanceRequirements": {
               "AllowedInstanceTypes": [
-                "c8g.*",
+                "c8g.medium",
               ],
               "MemoryMiB": {
                 "Min": 2048,
@@ -9460,7 +9460,7 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering PROD (us
           ],
         },
         "Family": "FaciaRenderingPRODEcsTaskDefinition9EA5D92F",
-        "Memory": "2048",
+        "Memory": "1280",
         "NetworkMode": "awsvpc",
         "RequiresCompatibilities": [
           "MANAGED_INSTANCES",
@@ -10275,7 +10275,7 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering PROD (us
             },
             "InstanceRequirements": {
               "AllowedInstanceTypes": [
-                "c8g.*",
+                "c8g.medium",
               ],
               "MemoryMiB": {
                 "Min": 2048,
