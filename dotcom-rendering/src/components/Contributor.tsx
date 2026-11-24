@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	from,
 	headlineMedium17,
 	palette as sourcePalette,
 	textEgyptianItalic17,
@@ -13,6 +14,7 @@ import {
 	type ArticleFormat,
 	ArticleSpecial,
 } from '../lib/articleFormat';
+import { getSoleContributor } from '../lib/byline';
 import { palette as schemedPalette } from '../palette';
 import type { TagType } from '../types/tag';
 import { BylineLink } from './BylineLink';
@@ -113,10 +115,11 @@ export const Contributor = ({
 	source,
 	layoutType,
 }: Props) => {
+	const isImmersiveGrid = layoutType?.startsWith('immersive') ?? false;
 	const shouldHide =
 		format.design === ArticleDesign.Interview &&
 		// Hide the contributor for interviews unless it's in the new immersive layout
-		!(layoutType?.startsWith('immersive') ?? false);
+		!isImmersiveGrid;
 	return (
 		<address
 			data-component="meta-byline"
@@ -136,6 +139,15 @@ export const Contributor = ({
 							labsBylineStyles(format.design),
 						format.design === ArticleDesign.LiveBlog &&
 							standfirstColourBelowDesktop,
+						isImmersiveGrid &&
+							getSoleContributor(tags, byline) &&
+							css`
+								${from.leftCol} {
+									> a + span {
+										display: block;
+									}
+								}
+							`,
 					]}
 				>
 					<BylineLink
