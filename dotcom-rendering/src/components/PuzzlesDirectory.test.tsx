@@ -58,10 +58,7 @@ describe('Maxi crossword card', () => {
 						cardVariant,
 						url: '/crosswords/maxi/1',
 						gameStatus:
-							cardVariant === 'primary'
-								? 'completed'
-								: 'in-progress',
-						progress: 45,
+							cardVariant === 'primary' ? 'completed' : undefined,
 					})}
 				/>,
 			);
@@ -70,11 +67,9 @@ describe('Maxi crossword card', () => {
 			).toHaveAttribute('href', '/crosswords/maxi/1');
 			expect(screen.getByText('New')).toBeInTheDocument();
 			expect(screen.getByText('Today')).toBeInTheDocument();
-			expect(
-				screen.getByText(
-					cardVariant === 'primary' ? 'Played' : 'In progress',
-				),
-			).toBeInTheDocument();
+			if (cardVariant === 'primary') {
+				expect(screen.getByText('Played')).toBeInTheDocument();
+			}
 			const image = container.querySelector('img');
 			if (artwork) {
 				expect(image).toHaveAttribute(

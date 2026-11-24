@@ -236,24 +236,6 @@ const newBadgeStyles = css`
 	line-height: 1;
 `;
 
-const inProgressStyles = css`
-	flex-direction: column;
-	align-items: flex-start;
-`;
-
-const progressTrackStyles = css`
-	width: 80px;
-	height: 3px;
-	border-radius: 2px;
-	background: color-mix(in srgb, currentColor 20%, transparent);
-	> span {
-		display: block;
-		height: 100%;
-		border-radius: inherit;
-		background: currentColor;
-	}
-`;
-
 const maxiPlayedStyles = css`
 	.completed-icon {
 		background: var(
@@ -321,10 +303,6 @@ export const PuzzleCard = ({
 		image !== undefined &&
 		image.length > 0 &&
 		item.cardVariant !== 'compact';
-	const progress =
-		item.progress !== undefined && Number.isFinite(item.progress)
-			? Math.max(0, Math.min(100, item.progress))
-			: undefined;
 	const needsCrosswordSuffix =
 		item.type === 'crossword' && !/\bcrossword\b/i.test(item.title);
 	const contents = (
@@ -362,16 +340,6 @@ export const PuzzleCard = ({
 					<span aria-hidden="true" className="completed-icon">
 						<SvgCheckmark />
 					</span>
-				</span>
-			)}
-			{isMaxi && item.gameStatus === 'in-progress' && (
-				<span css={[playedStyles, inProgressStyles]}>
-					{progress !== undefined && (
-						<span css={progressTrackStyles} aria-hidden="true">
-							<span style={{ width: `${progress}%` }} />
-						</span>
-					)}
-					In progress
 				</span>
 			)}
 		</>
