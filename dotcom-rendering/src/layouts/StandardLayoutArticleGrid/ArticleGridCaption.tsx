@@ -12,7 +12,7 @@ export const ArticleGridCaption = ({
 	format: ArticleFormat;
 	layout: ArticleGridLayout;
 }) => {
-	const { captionText, hasPageSkin, isImmersive, layoutType } = layout;
+	const { captionText, hasPageSkin, layoutType } = layout;
 
 	return (
 		<GridItem
@@ -24,16 +24,14 @@ export const ArticleGridCaption = ({
 				padding-top: ${space[2]}px;
 			`}
 		>
-			{isImmersive && (
-				<Caption
-					captionText={captionText}
-					format={format}
-					shouldLimitWidth={false}
-					isLeftCol={true}
-					isMainMedia={true}
-					showIconBelowLeftCol={true}
-				/>
-			)}
+			<Caption
+				captionText={captionText}
+				format={format}
+				shouldLimitWidth={false}
+				isLeftCol={true}
+				isMainMedia={true}
+				showIconBelowLeftCol={true}
+			/>
 		</GridItem>
 	);
 };

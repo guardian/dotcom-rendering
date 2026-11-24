@@ -338,6 +338,7 @@ const immersiveLandscapeCss: LayoutCssMap = {
 	caption: {
 		mobile: 'grid-row: 5;',
 		tablet: 'grid-row: 6;',
+		leftCol: `grid-row: 4; ${grid.column.left};`,
 	},
 	meta: {
 		mobile: 'grid-row: 6;',
