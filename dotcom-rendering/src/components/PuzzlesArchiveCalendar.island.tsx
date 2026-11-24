@@ -586,14 +586,20 @@ const calendarStyles = css`
 		}
 	}
 	.day[data-status='completed'] {
-		background: color-mix(
-			in srgb,
-			${palette.success[500]} 9%,
-			${palette.neutral[100]}
+		background: var(
+			--puzzles-completed-day-background,
+			color-mix(
+				in srgb,
+				${palette.success[500]} 9%,
+				${palette.neutral[100]}
+			)
 		);
 	}
 	.day[data-status='in-progress'] {
-		background: ${palette.opinion[800]};
+		background: var(
+			--puzzles-in-progress-day-background,
+			${palette.opinion[800]}
+		);
 	}
 	.setter-name {
 		display: none;
@@ -622,6 +628,9 @@ const calendarStyles = css`
 		svg {
 			display: block;
 		}
+	}
+	.completed-icon svg > path {
+		fill: var(--puzzles-completed-day-icon, ${palette.success[400]});
 	}
 	.in-progress-icon {
 		width: 16px;
@@ -757,6 +766,9 @@ const legendStyles = css`
 	svg {
 		display: block;
 		flex: 0 0 auto;
+	}
+	.completed svg > path {
+		fill: var(--puzzles-completed-day-icon, ${palette.success[400]});
 	}
 	${from.leftCol} {
 		position: absolute;
