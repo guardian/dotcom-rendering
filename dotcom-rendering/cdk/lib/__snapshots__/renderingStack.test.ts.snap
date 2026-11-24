@@ -3814,8 +3814,8 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering CODE (
           "PredefinedMetricSpecification": {
             "PredefinedMetricType": "ECSServiceAverageCPUUtilizationHighResolution",
           },
-          "ScaleInCooldown": 60,
-          "ScaleOutCooldown": 60,
+          "ScaleInCooldown": 20,
+          "ScaleOutCooldown": 20,
           "TargetValue": 20,
         },
       },
