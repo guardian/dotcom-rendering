@@ -1,7 +1,5 @@
 import type { RequestHandler } from 'express';
 import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
-import { withoutV2PuzzleItems } from '../lib/puzzlesHubLayout';
-import { isPuzzlesHubV2Enabled } from '../lib/puzzlesHubVersionExperiment';
 import { getPuzzleConfig } from '../model/puzzles/puzzleConfigs';
 import { validateAsPuzzlePageType } from '../model/validate.puzzlePage';
 import { makePrefetchHeader } from './lib/header';
@@ -20,8 +18,7 @@ export const handlePuzzlePage: RequestHandler = ({ body }, res) => {
 	if (
 		!puzzleConfig ||
 		(puzzleConfig.iframe.provider === 'moviegrid' &&
-			(!isPuzzlesHubV2Enabled(puzzlePage.config) ||
-				!puzzlePage.instance.gameUrl?.trim()))
+			!puzzlePage.instance.gameUrl?.trim())
 	) {
 		res.sendStatus(404);
 		return;
@@ -31,16 +28,6 @@ export const handlePuzzlePage: RequestHandler = ({ body }, res) => {
 		puzzlePage: {
 			...puzzlePage,
 			puzzleConfig,
-			instance: isPuzzlesHubV2Enabled(puzzlePage.config)
-				? puzzlePage.instance
-				: {
-						...puzzlePage.instance,
-						moreFromPuzzlesAndGames:
-							puzzlePage.instance.moreFromPuzzlesAndGames &&
-							withoutV2PuzzleItems(
-								puzzlePage.instance.moreFromPuzzlesAndGames,
-							),
-					},
 		},
 	});
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);

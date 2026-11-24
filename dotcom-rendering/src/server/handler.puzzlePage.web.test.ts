@@ -44,13 +44,12 @@ describe('handlePuzzlePage', () => {
 	const withConfig = (
 		page: ReturnType<typeof createPuzzlePage>,
 		edition: EditionId,
-		serverSideABTests: Record<string, string> = {},
 	) => ({
 		...page,
-		config: { ...page.config, edition, serverSideABTests },
+		config: { ...page.config, edition, serverSideABTests: {} },
 	});
 
-	it('omits V2 recommendations from existing puzzle pages', () => {
+	it('preserves trivia recommendations on existing puzzle pages without participation', () => {
 		const page = withConfig(createPuzzlePage('sudoku-easy'), 'INT');
 		const existing = page.instance.moreFromPuzzlesAndGames!;
 		page.instance.moreFromPuzzlesAndGames = [
@@ -63,7 +62,7 @@ describe('handlePuzzlePage', () => {
 		expect(
 			mockedRenderPuzzlePage.mock.calls[0]![0].puzzlePage.instance
 				.moreFromPuzzlesAndGames,
-		).toEqual(existing);
+		).toEqual(page.instance.moreFromPuzzlesAndGames);
 	});
 
 	it('renders the page for a known slug when the edition is International', () => {
@@ -106,32 +105,12 @@ describe('handlePuzzlePage', () => {
 	});
 
 	it.each(['film-reveal', 'on-the-ball'])(
-		'gates %s behind the International edition and V2 participation',
+		'renders %s without experiment participation in every hub edition',
 		(slug) => {
-			for (const [edition, serverSideABTests, allowed] of [
-				['INT', {}, false],
-				['UK', { 'puzzles-new-hub-v2': 'variant' }, true],
-				['INT', { 'puzzles-new-hub-v2': 'control' }, false],
-				['INT', { 'puzzles-new-hub-v2': 'unknown' }, false],
-				['INT', { 'puzzles-new-hub-v2': 'variant' }, true],
-			] as const) {
-				mockedRenderPuzzlePage.mockClear();
+			for (const edition of ['INT', 'EUR', 'AU', 'US', 'UK'] as const) {
 				const res = response();
-				invokeHandler(
-					withConfig(
-						createPuzzlePage(slug),
-						edition,
-						serverSideABTests,
-					),
-					res,
-				);
-				if (allowed) {
-					expect(res.status).toHaveBeenCalledWith(200);
-					expect(mockedRenderPuzzlePage).toHaveBeenCalledTimes(1);
-				} else {
-					expect(res.sendStatus).toHaveBeenCalledWith(404);
-					expect(mockedRenderPuzzlePage).not.toHaveBeenCalled();
-				}
+				invokeHandler(withConfig(createPuzzlePage(slug), edition), res);
+				expect(res.status).toHaveBeenCalledWith(200);
 			}
 		},
 	);
@@ -146,7 +125,6 @@ describe('handlePuzzlePage', () => {
 						instance: { title: slug, gameUrl },
 					}),
 					'INT',
-					{ 'puzzles-new-hub-v2': 'variant' },
 				);
 
 				invokeHandler(page, res);

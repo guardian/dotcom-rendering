@@ -38,10 +38,7 @@ import { PUZZLE_MODAL_ROOT_ID } from '../lib/puzzleAccess';
 import type { PuzzleActionContext } from '../lib/puzzleActionTracking';
 import { formatPuzzleDate } from '../lib/puzzleDate';
 import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
-import {
-	isPuzzlesHubV2Enabled,
-	isPuzzlesHubV3Enabled,
-} from '../lib/puzzlesHubVersionExperiment';
+import { isPuzzlesHubV3Enabled } from '../lib/puzzlesHubVersionExperiment';
 import {
 	getPuzzlesSubNavLinks,
 	PUZZLES_SUBNAV_PARENT,
@@ -489,10 +486,7 @@ export const PuzzlePageLayout = ({
 	 */
 	const puzzlesSubNav: SubNavType = {
 		parent: PUZZLES_SUBNAV_PARENT,
-		links: getPuzzlesSubNavLinks(
-			isV1Enabled,
-			isPuzzlesHubV2Enabled(config),
-		),
+		links: getPuzzlesSubNavLinks(isV1Enabled),
 	};
 
 	const puzzleNAV: NavType = {
@@ -582,6 +576,7 @@ export const PuzzlePageLayout = ({
 							<GridItem area="title" element="aside">
 								<ArticleTitle
 									format={puzzlePageFormat}
+									ophanComponentLink="puzzles | in-page-nav | puzzle-page"
 									tags={puzzleFamilyTag}
 									sectionLabel={labelText}
 									sectionUrl={`puzzles-and-games/${puzzleGroupPath}/archive`}
@@ -682,7 +677,12 @@ export const PuzzlePageLayout = ({
 							 * derived one.
 							 */}
 							<GridItem area="body" element="article">
-								<div css={frameContainerStyles}>
+								{/* The "Skip to main content" link's target (`SkipTo`), which
+								    `ArticleBody` provides on article pages but this page has none. */}
+								<div
+									id="maincontent"
+									css={frameContainerStyles}
+								>
 									<ArticleContainer format={puzzlePageFormat}>
 										{/* Not deferred until visible: the iframe has no `src`
                         until this island hydrates and the reader is known,
@@ -898,6 +898,7 @@ export const PuzzlePageLayout = ({
 					<div data-print-layout="hide">
 						<PuzzlesUsefulLinks
 							id="puzzle-page"
+							ophanComponentName="puzzles-useful-links:puzzle-page"
 							title="Useful links"
 							links={instance.puzzlesSupporting.usefulLinks}
 							newsletter={instance.puzzlesSupporting.newsletter}

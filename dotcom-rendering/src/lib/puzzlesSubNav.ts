@@ -8,8 +8,7 @@ import type { LinkType } from '../model/extract-nav';
  * supply it separately as `subNavSections.parent`.
  *
  * Without hub access only the parent link is shown. Hub access (edition gate)
- * adds Crosswords, Word games and Logic puzzles; v2 also adds Trivia & quizzes,
- * linking to its archive.
+ * adds Crosswords, Word games, Logic puzzles and Trivia & quizzes.
  */
 export const PUZZLES_SUBNAV_PARENT: LinkType = {
 	title: 'Puzzles & games',
@@ -33,21 +32,12 @@ const PUZZLES_SUBNAV_LINKS: LinkType[] = [
 		longTitle: 'Logic puzzles',
 		url: '/puzzles-and-games/logic-puzzles/archive',
 	},
+	{
+		title: 'Trivia & quizzes',
+		longTitle: 'Trivia & quizzes',
+		url: '/puzzles-and-games/trivia-and-quizzes/archive',
+	},
 ];
 
-/** Only shown once the v2 tier is on (`isPuzzlesHubV2Enabled`). */
-const TRIVIA_SUBNAV_LINK: LinkType = {
-	title: 'Trivia & quizzes',
-	longTitle: 'Trivia & quizzes',
-	url: '/puzzles-and-games/trivia-and-quizzes/archive',
-};
-
-export const getPuzzlesSubNavLinks = (
-	isV1Enabled: boolean,
-	isV2Enabled: boolean,
-): LinkType[] => {
-	if (!isV1Enabled) return [];
-	return isV2Enabled
-		? [...PUZZLES_SUBNAV_LINKS, TRIVIA_SUBNAV_LINK]
-		: PUZZLES_SUBNAV_LINKS;
-};
+export const getPuzzlesSubNavLinks = (isHubAvailable: boolean): LinkType[] =>
+	isHubAvailable ? PUZZLES_SUBNAV_LINKS : [];

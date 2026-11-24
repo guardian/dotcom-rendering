@@ -7,8 +7,6 @@ import {
 } from '../../fixtures/manual/puzzlesPage';
 import { PuzzlesLayout } from '../layouts/PuzzlesLayout';
 import {
-	puzzlesHubV2Experiment,
-	puzzlesHubV2Participation,
 	puzzlesHubV3Experiment,
 	puzzlesHubV3Participation,
 } from '../lib/puzzlesHubVersionExperiment';
@@ -208,9 +206,7 @@ export const Sponsored = () => {
 	const config = {
 		...page.config,
 		edition: 'INT' as const,
-		serverSideABTests: {
-			...puzzlesHubV2Participation(puzzlesHubV2Experiment.variant),
-		},
+		serverSideABTests: {},
 	};
 	return (
 		<PuzzlesLayout
@@ -287,9 +283,6 @@ export const MaxiCrossword = () => {
 				config: {
 					...page.config,
 					serverSideABTests: {
-						...puzzlesHubV2Participation(
-							puzzlesHubV2Experiment.variant,
-						),
 						...puzzlesHubV3Participation(
 							puzzlesHubV3Experiment.variant,
 						),

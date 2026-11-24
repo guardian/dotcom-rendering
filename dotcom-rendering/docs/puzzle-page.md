@@ -72,13 +72,9 @@ The archive sign-in prompt uses `data-component="puzzles-archive-sign-in"` and
 This measures link activations, not completed authentication; the existing sign-in
 destination and authentication behaviour are unchanged.
 
-Film reveal and On the ball require both an edition the hub is available in and
-`puzzles-new-hub-v2` for hub cards, game pages and trivia archives. Requests with
-only the edition gate omit the cards and receive 404 for those pages; existing
-puzzles are unchanged.
-Local development retains its gate bypass. Full-hub and archive stories explicitly
-enable v2 so Chromatic builds show all puzzle subnav categories without relying on
-that bypass.
+Film Reveal and On the Ball are available wherever the Puzzles & Games hub is
+available. Hub cards, game pages and trivia archives do not require experiment
+participation. Local development retains its edition-gate bypass.
 
 ## Sponsorship
 
@@ -762,54 +758,18 @@ darkMode: boolean, puzzleDate: string | null } }` and the
   `isPuzzlesHubAvailable` and returning `404` when it isn't enabled, in
   addition to (not instead of) `frontend`'s `PuzzlesHubAccess` gate that decides whether a
   reader ever reaches one of these puzzle-page URLs in the first place.
-  DCR also has a real, cumulative, code-change-free kill-switch for
-  individual _feature tiers_ within the rendered page, see "Feature-tier
-  rollout gating (v1/v2)" below.
-- **The Puzzles Hub (`src/layouts/PuzzlesLayout.tsx` and friends) is a
-  separate, unrelated feature** (a directory/listing page) and is not
-  documented in this file.
+  Premium puzzles retain a separate experiment gate, documented below.
 
-### Feature-tier rollout gating (v1/v2)
+### Puzzles & Games access
 
-The Puzzles & Games rollout is gated in two layers. The hub itself is
-gated by **edition** (`src/lib/puzzlesHubAccess.ts`), and the later v2 tier
-is a **cumulative** AB test on top of it (`ab-testing/config/abTests.ts`),
-so the v2 phase can be turned on/off without a DCR code change or
-redeploy. The former `puzzles-new-hub` (v0) and `puzzles-new-hub-v1` tests
-were removed: everything they gated is now gated by `isPuzzlesHubAvailable`.
+`isPuzzlesHubAvailable` gates the hub and its games, archives and navigation by
+edition. The hub is available in `INT`, `EUR`, `AU`, `US` and `UK`; keep
+`PUZZLES_HUB_EDITIONS` in sync with `PuzzlesHubAccess.scala` in Frontend. Film
+Reveal and On the Ball are available in all hub editions, including through
+hub tiles, recommendations, the sitemap and the Trivia & quizzes sub-nav.
 
-- **The hub (formerly `puzzles-new-hub-v1`)**: available only in the
-  editions listed in `PUZZLES_HUB_EDITIONS` (currently every edition:
-  `INT`, `EUR`, `AU`, `US` and `UK`). To switch it off for an edition, remove
-  its id from that list here and from `PuzzlesHubAccess.scala` in `frontend`. Gates
-  the Puzzles Hub page, the 6 puzzle pages (sudoku x4, word-wheel,
-  wordiply), full hub sub-nav links, a sign-in-to-track-progress message, a
-  calendar/archive view for crosswords/logic-puzzles/word-games (not
-  Wordiply), progress indicators, the "More from Puzzles & Games" rail,
-  newsletter signup, and changes to the existing crossword page (print CTA
-  repositioning, "play other puzzles" container). Removing an edition from
-  the list hides everything for it, including every later tier.
-- **`puzzles-new-hub-v2`**: a future layer, **on top of the hub**. It does
-  nothing unless the hub is _also_ available for the reader's edition. Activates: On the
-  Ball/Film Reveal (Trivia and Quizzes), a "Most played" container,
-  EventKit-driven navigation, migrating existing crossword pages onto the
-  Puzzle Page template, and search-engine mobile app nudges. No launch date
-  confirmed yet; kept at 0% until that work begins.
-
-To roll back v2 without a deploy, flip its `audienceSize`/`status` in
-`abTests.ts`. Rolling back the hub itself needs a deploy of both repos.
-
-The corresponding gate-check helpers live in DCR:
-`isPuzzlesHubAvailable` (`src/lib/puzzlesHubAccess.ts`) and
-`isPuzzlesHubV2Enabled` (`src/lib/puzzlesHubVersionExperiment.ts`),
-cumulative, as described above.
-
-**Current state**: the hub is available in every edition (`INT`, `EUR`, `AU`, `US` and `UK`),
-and v2 sits at `audienceSize: 0/100`. The hub gate is enforced at both
-layers: `frontend`'s route-level `PuzzlesHubAccess` check decides whether a
-request reaches `/PuzzlePage` at all, and DCR's `handlePuzzlePage`
-independently checks `isPuzzlesHubAvailable` before rendering. Future v2 work should be gated
-behind `isPuzzlesHubV2Enabled`.
+Premium puzzles are independent of this launch. They still require the hub
+and the `puzzles-new-hub-v3` variant; its audience remains at 0%.
 
 ### SEO risks to revisit before shipping calendar/archive features
 

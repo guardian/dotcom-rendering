@@ -54,7 +54,6 @@ for (const width of [375, 1280]) {
 						configOverrides: {
 							edition: 'INT',
 							serverSideABTests: {
-								'puzzles-new-hub-v2': 'variant',
 								'webx-dark-mode-web': 'enable',
 							},
 						},
@@ -136,7 +135,6 @@ for (const [slug, title] of [
 						configOverrides: {
 							edition: 'INT',
 							serverSideABTests: {
-								'puzzles-new-hub-v2': 'variant',
 								'webx-dark-mode-web':
 									mode === 'dark-disabled'
 										? 'control'

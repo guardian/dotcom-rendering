@@ -35,7 +35,7 @@ const ABTests: ABTest[] = [
 		name: "growth-holdback-group",
 		description:
 			"Test for 5% holdback group that does not qualify for any testing so long as the test is live in the RRCP",
-		owners: ["growth.dev@guardian.co.uk"],
+		owners: ["martech.dev@guardian.co.uk"],
 		expirationDate: "2027-01-01",
 		type: "client",
 		status: "ON",
@@ -47,7 +47,7 @@ const ABTests: ABTest[] = [
 	{
 		name: "growth-auxia-banner",
 		description: "Use Auxia API for deciding when to show a RR banner",
-		owners: ["growth.dev@guardian.co.uk"],
+		owners: ["martech.dev@guardian.co.uk"],
 		expirationDate: "2026-12-01",
 		type: "client",
 		status: "ON",
@@ -106,41 +106,12 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	/**
-	 * Puzzles & Games rollout, tier v2 (future, no launch date confirmed
-	 * yet as of this writing).
-	 *
-	 * Only takes effect when the Puzzles & Games hub is available for the
-	 * reader's edition (see `isPuzzlesHubAvailable` in DCR), so the rollout
-	 * can never end up in an inconsistent state.
-	 *
-	 * On top of the hub, this tier activates: the On the Ball and Film Reveal
-	 * iframe games (Trivia and Quizzes group), a "Most played" container,
-	 * EventKit-driven navigation, migrating existing crossword pages onto
-	 * the new Puzzle Page template, and search-engine mobile app nudges.
-	 *
-	 * Kept at 0% until that work begins; there is nothing to roll back yet.
-	 */
-	{
-		name: "puzzles-new-hub-v2",
-		description:
-			"Rollout of the v2 Puzzles & Games features (no date confirmed yet), on top of the Puzzles & Games hub",
-		owners: ["puzzles.team@guardian.co.uk"],
-		status: "ON",
-		expirationDate: "2026-12-31",
-		type: "server",
-		audienceSize: 0 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: false,
-	},
-	/**
 	 * Puzzles & Games rollout, tier v3: premium puzzles.
 	 *
-	 * Only takes effect when `puzzles-new-hub-v1` AND `puzzles-new-hub-v2` are
-	 * ALSO enabled for the reader, so the rollout can never end up in an
-	 * inconsistent state.
+	 * Only takes effect when the Puzzles & Games hub is available for the
+	 * reader’s edition.
 	 *
-	 * On top of v1 and v2, this tier activates the premium puzzles access control on
+	 * This tier activates the premium puzzles access control on
 	 * the Puzzle Page: puzzles older than 7 days need a Supporter Plus or
 	 * Digital Pack subscription, and readers without one see the "unlock
 	 * premium puzzles" modal instead of the game. The access check, the modal,
@@ -153,7 +124,7 @@ const ABTests: ABTest[] = [
 	{
 		name: "puzzles-new-hub-v3",
 		description:
-			"Rollout of the premium puzzles access control (modal for puzzles older than 7 days), on top of the puzzles-new-hub-v1 and v2 baseline",
+			"Rollout of the premium puzzles access control (modal for puzzles older than 7 days), on top of the edition-gated Puzzles & Games hub",
 		owners: ["puzzles.team@guardian.co.uk"],
 		status: "ON",
 		expirationDate: "2026-12-31",
@@ -306,8 +277,8 @@ const ABTests: ABTest[] = [
 		expirationDate: "2026-12-16",
 		type: "client",
 		status: "ON",
-		audienceSize: 0,
-		groups: ["enable"],
+		audienceSize: 5 / 100,
+		groups: ["control", "variant"],
 	},
 	{
 		name: "newsroom-ai-tag-page-storylines",
@@ -327,7 +298,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Test the impact of using IAB Taxonomy tags for ad targeting",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-11-25",
+		expirationDate: "2027-01-27",
 		type: "client",
 		status: "ON",
 		audienceSize: 0,
