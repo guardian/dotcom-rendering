@@ -84,11 +84,26 @@ export const doNotIndex = (
 		return false;
 	}
 
-	// DO index exempted tracking/commissioningdesk pages
-	const isCommissioningDeskAllowListed = [
+	// Filter fronts that match the allowlist but should NOT be indexed
+	const commissioningDeskBlockList = [
+		'/lifeandstyle/sleep+tracking/commissioningdesk/the-filter',
+		'/fashion+tracking/commissioningdesk/the-filter',
+		'/fashion/beauty+tracking/commissioningdesk/the-filter',
+		'/technology+tracking/commissioningdesk/the-filter',
+	];
+
+	// tracking/commissioningdesk pages that SHOULD be indexed
+	const commissioningDeskAllowList = [
 		'tracking/commissioningdesk/the-filter',
 		'tracking/commissioningdesk/filter-us',
-	].some((allowed) => canonicalUrl.includes(allowed));
+	];
+
+	// DO index exempted tracking/commissioningdesk pages
+	const isCommissioningDeskAllowListed =
+		!commissioningDeskBlockList.includes(new URL(canonicalUrl).pathname) &&
+		commissioningDeskAllowList.some((allowed) =>
+			canonicalUrl.includes(allowed),
+		);
 	if (isCommissioningDeskAllowListed) return false;
 
 	// Do NOT index tracking/commissioningdesk pages that are not allow-listed

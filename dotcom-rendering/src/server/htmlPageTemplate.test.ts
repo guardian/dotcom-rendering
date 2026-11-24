@@ -44,6 +44,12 @@ describe('doNotIndex', () => {
 				'https://www.theguardian.com/tracking/commissioningdesk/filter-us',
 			tags: undefined,
 		},
+		{
+			description: 'is an allow-listed Filter front not in the block list',
+			canonicalUrl:
+				'https://www.theguardian.com/lifeandstyle/kitchen+tracking/commissioningdesk/the-filter',
+			tags: undefined,
+		},
 	] satisfies {
 		description: string;
 		canonicalUrl: string | undefined;
@@ -63,6 +69,15 @@ describe('doNotIndex', () => {
 				undefined,
 			),
 		).toBe(true);
+	});
+
+	it.each([
+		'https://www.theguardian.com/lifeandstyle/sleep+tracking/commissioningdesk/the-filter',
+		'https://www.theguardian.com/fashion+tracking/commissioningdesk/the-filter',
+		'https://www.theguardian.com/fashion/beauty+tracking/commissioningdesk/the-filter',
+		'https://www.theguardian.com/technology+tracking/commissioningdesk/the-filter',
+	])('does NOT index block-listed Filter front %s', (canonicalUrl) => {
+		expect(doNotIndex('PROD', canonicalUrl, undefined)).toBe(true);
 	});
 
 	it('does NOT index pages in non-production environments', () => {
