@@ -10,11 +10,11 @@ type InProgressDisplayKey = PuzzleType | 'CROSSWORD_GENIUS';
 /**
  * Whether the "In progress" label and progress bar are shown for a puzzle.
  *
- * It is decided game by game. Every game shows it except the crosswords: a crossword started in the app has no board to
- * resume on the web (progress is not synced between them), so crosswords stay
- * `false` and keep showing exactly what they showed before. Typing this as a
- * `Record` makes a new puzzle type fail to compile until a decision is made
- * for it.
+ * It is decided game by game. Every game shows it except the crosswords: a
+ * crossword started in the app has no board to resume on the web (progress is
+ * not synced between them), so crosswords stay `false` and keep showing
+ * exactly what they showed before. Typing this as a `Record` makes a new
+ * puzzle type fail to compile until a decision is made for it.
  */
 export const inProgressDisplay: Record<InProgressDisplayKey, boolean> = {
 	CROSSWORD_QUICK: false,
