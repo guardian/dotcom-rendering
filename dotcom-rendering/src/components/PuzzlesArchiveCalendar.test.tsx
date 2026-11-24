@@ -639,8 +639,295 @@ describe('PuzzlesArchiveCalendar', () => {
 			expect(
 				day.querySelector('.supporter-exclusive-icon') !== null,
 			).toBe(!premium);
+			expect(screen.queryByText('Supporter exclusive') !== null).toBe(
+				!premium,
+			);
+			expect(
+				screen.queryByText(
+					'Supporter exclusive - you have ad-free access to the puzzles archive',
+				) !== null,
+			).toBe(premium);
+			expect(
+				screen.queryByRole('link', {
+					name: 'Sign in or create an account',
+				}),
+			).not.toBeInTheDocument();
 		},
 	);
+
+	it.each([
+		['mini', 'daily'],
+		['quick', 'from Monday to Saturday'],
+		['cryptic', 'from Monday to Friday'],
+		['quick-cryptic', 'every Saturday'],
+		['weekend', 'every Saturday'],
+		['prize', 'every Saturday'],
+		['quiptic', 'every Sunday'],
+		['sunday-quick', 'every Sunday'],
+		['genius', 'daily'],
+		['special', 'daily'],
+	])('shows the V3 publication schedule for %s', async (set, frequency) => {
+		await act(async () => {
+			render(
+				<PuzzlesArchiveCalendar
+					showPremiumIndicators={true}
+					initialArchive={{
+						...archive,
+						category: 'crosswords',
+						selectedPuzzle: { ...archive.selectedPuzzle, set },
+					}}
+				/>,
+			);
+		});
+		expect(
+			screen.getByText(`This puzzle is published ${frequency}.`),
+		).toBeInTheDocument();
+	});
+
+	it('defaults other puzzle categories to daily publication', async () => {
+		await act(async () => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={archive}
+					showPremiumIndicators={true}
+				/>,
+			);
+		});
+		expect(
+			screen.getByText('This puzzle is published daily.'),
+		).toBeInTheDocument();
+	});
+
+	it.each([
+		'https://profile.code.dev-theguardian.com',
+		'https://profile.theguardian.com',
+	])(
+		'shows the signed-out V3 progress prompt with the configured identity URL %s',
+		async (idUrl) => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={archive}
+					showPremiumIndicators={true}
+					idUrl={idUrl}
+				/>,
+			);
+			const link = await screen.findByRole('link', {
+				name: 'Sign in or create an account',
+			});
+			expect(link.getAttribute('href')).toMatch(`${idUrl}/signin?`);
+			expect(link.parentElement).toHaveTextContent(
+				'Want to track your progress? Sign in or create an account',
+			);
+			expect(link).toHaveTextContent(/^Sign in or create an account$/);
+			const icon = link.closest('[data-component]')?.querySelector('svg');
+			expect(icon).toHaveAttribute('width', '20');
+			expect(icon).toHaveAttribute('height', '20');
+			expect(icon).toHaveAttribute('aria-hidden', 'true');
+			expect(screen.getByText('Supporter exclusive')).toBeInTheDocument();
+		},
+	);
+
+	it('does not show a sign-in prompt while authentication is pending', () => {
+		mockedGetAuthStatus.mockReturnValue(new Promise(() => undefined));
+		render(
+			<PuzzlesArchiveCalendar
+				initialArchive={archive}
+				showPremiumIndicators={true}
+			/>,
+		);
+		expect(
+			screen.queryByRole('link', {
+				name: 'Sign in or create an account',
+			}),
+		).not.toBeInTheDocument();
+	});
+
+	it('does not claim subscriber access when the authenticated response has no entitlement', async () => {
+		mockedGetAuthStatus.mockResolvedValue({
+			kind: 'SignedIn',
+			accessToken: { accessToken: 'access-token' },
+			idToken: {},
+		} as never);
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: jest
+				.fn()
+				.mockResolvedValue({ ok: true, json: async () => archive }),
+		});
+		await act(async () => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={archive}
+					showPremiumIndicators={true}
+				/>,
+			);
+		});
+		expect(screen.getByText('Supporter exclusive')).toBeInTheDocument();
+		expect(
+			screen.queryByText(
+				'Supporter exclusive - you have ad-free access to the puzzles archive',
+			),
+		).not.toBeInTheDocument();
+		expect(
+			screen.queryByRole('link', {
+				name: 'Sign in or create an account',
+			}),
+		).not.toBeInTheDocument();
+	});
+
+	it.each([true, false])(
+		'does not add V3 messages or a subtitle outside V3 (signed in=%s)',
+		async (signedIn) => {
+			if (signedIn) {
+				mockedGetAuthStatus.mockResolvedValue({
+					kind: 'SignedIn',
+					accessToken: { accessToken: 'access-token' },
+					idToken: {},
+				} as never);
+			}
+			Object.defineProperty(global, 'fetch', {
+				configurable: true,
+				value: jest.fn().mockResolvedValue({
+					ok: true,
+					json: async () => ({
+						...archive,
+						items: archive.items.map((item) => ({
+							...item,
+							hasPremiumEntitlement: true,
+						})),
+					}),
+				}),
+			});
+			await act(async () => {
+				render(
+					<PuzzlesArchiveCalendar
+						initialArchive={archive}
+						showPremiumIndicators={false}
+					/>,
+				);
+			});
+			expect(
+				screen.queryByText(/This puzzle is published/),
+			).not.toBeInTheDocument();
+			expect(
+				screen.queryByText(/Supporter exclusive/),
+			).not.toBeInTheDocument();
+			expect(
+				screen.queryByRole('link', {
+					name: 'Sign in or create an account',
+				}),
+			).not.toBeInTheDocument();
+		},
+	);
+
+	it('updates the publication subtitle when the selected puzzle changes', async () => {
+		const quick = {
+			...archive.selectedPuzzle,
+			id: 'quick',
+			set: 'quick',
+			title: 'Quick',
+		};
+		const cryptic = {
+			...quick,
+			id: 'cryptic',
+			set: 'cryptic',
+			title: 'Cryptic',
+			path: '/puzzles-and-games/crosswords/cryptic/archive',
+		};
+		const initialArchive: PuzzlesArchive = {
+			...archive,
+			category: 'crosswords',
+			selectedPuzzle: quick,
+			puzzles: [quick, cryptic],
+		};
+		const selectedArchive = { ...initialArchive, selectedPuzzle: cryptic };
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: jest.fn().mockResolvedValue({
+				ok: true,
+				json: async () => selectedArchive,
+			}),
+		});
+		await act(async () => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={initialArchive}
+					showPremiumIndicators={true}
+				/>,
+			);
+		});
+		expect(
+			screen.getByText(
+				'This puzzle is published from Monday to Saturday.',
+			),
+		).toBeInTheDocument();
+		fireEvent.click(screen.getByRole('link', { name: 'Cryptic' }));
+		expect(
+			await screen.findByText(
+				'This puzzle is published from Monday to Friday.',
+			),
+		).toBeInTheDocument();
+		expect(
+			screen.queryByText(
+				'This puzzle is published from Monday to Saturday.',
+			),
+		).not.toBeInTheDocument();
+	});
+
+	it('uses recent puzzle entitlement for an empty month and resets the message after signing out', async () => {
+		mockedGetAuthStatus.mockResolvedValue({
+			kind: 'SignedIn',
+			accessToken: { accessToken: 'access-token' },
+			idToken: {},
+		} as never);
+		const premiumArchive = {
+			...archive,
+			items: [],
+			recentItems: archive.items.map((item) => ({
+				...item,
+				hasPremiumEntitlement: true,
+			})),
+		};
+		const fetchMock = jest
+			.fn()
+			.mockResolvedValue({ ok: true, json: async () => premiumArchive });
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		render(
+			<PuzzlesArchiveCalendar
+				initialArchive={archive}
+				showPremiumIndicators={true}
+			/>,
+		);
+		expect(
+			await screen.findByText(
+				'Supporter exclusive - you have ad-free access to the puzzles archive',
+			),
+		).toBeInTheDocument();
+		expect(
+			screen.queryByText('Supporter exclusive', { exact: true }),
+		).not.toBeInTheDocument();
+		mockedGetAuthStatus.mockResolvedValue({ kind: 'SignedOut' });
+		fetchMock.mockResolvedValue({ ok: true, json: async () => archive });
+		await act(async () => {
+			window.dispatchEvent(
+				new PageTransitionEvent('pageshow', { persisted: true }),
+			);
+		});
+		expect(
+			screen.queryByText(
+				'Supporter exclusive - you have ad-free access to the puzzles archive',
+			),
+		).not.toBeInTheDocument();
+		expect(
+			screen.getByText('Supporter exclusive', { exact: true }),
+		).toBeInTheDocument();
+		expect(
+			screen.getByRole('link', { name: 'Sign in or create an account' }),
+		).toBeInTheDocument();
+	});
 
 	it.each(['isWithinFreeWindow', 'hasPremiumEntitlement'])(
 		'rejects a non-boolean %s in a fetched archive',
