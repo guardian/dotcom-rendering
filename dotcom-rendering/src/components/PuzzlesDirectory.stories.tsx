@@ -6,10 +6,6 @@ import {
 	triviaPuzzlesContainer,
 } from '../../fixtures/manual/puzzlesPage';
 import { PuzzlesLayout } from '../layouts/PuzzlesLayout';
-import {
-	puzzlesHubV2Experiment,
-	puzzlesHubV2Participation,
-} from '../lib/puzzlesHubVersionExperiment';
 import { extractNAV } from '../model/extract-nav';
 import type { PuzzlesLayoutType } from '../types/puzzlesPage';
 import { PuzzlesDirectory } from './PuzzlesDirectory';
@@ -206,9 +202,7 @@ export const Sponsored = () => {
 	const config = {
 		...page.config,
 		edition: 'INT' as const,
-		serverSideABTests: {
-			...puzzlesHubV2Participation(puzzlesHubV2Experiment.variant),
-		},
+		serverSideABTests: {},
 	};
 	return (
 		<PuzzlesLayout

@@ -37,7 +37,7 @@ const dividerStyles = css`
 	clear: left;
 	border: none;
 	border-top: 1px solid ${themePalette('--newsletter-card-divider')};
-	margin: ${space[6]}px 0 ${space[2]}px;
+	margin: ${space[2]}px 0;
 `;
 
 const headerStyles = css`

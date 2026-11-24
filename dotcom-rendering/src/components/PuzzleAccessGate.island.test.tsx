@@ -23,8 +23,18 @@ jest.mock('./PuzzleIframe.island', () => ({
 	buildFrameStyles: () => undefined,
 }));
 jest.mock('./UnlockPremiumPuzzlesModal', () => ({
-	UnlockPremiumPuzzlesModal: ({ isSignedIn }: { isSignedIn?: boolean }) => (
-		<div data-testid="modal" data-signed-in={String(isSignedIn)} />
+	UnlockPremiumPuzzlesModal: ({
+		isSignedIn,
+		intcmp,
+	}: {
+		isSignedIn?: boolean;
+		intcmp?: string;
+	}) => (
+		<div
+			data-testid="modal"
+			data-signed-in={String(isSignedIn)}
+			data-intcmp={intcmp}
+		/>
 	),
 }));
 
@@ -89,6 +99,15 @@ describe('PuzzleAccessGate', () => {
 		);
 		expect(screen.queryByTestId('board')).not.toBeInTheDocument();
 		expect(mockedFetchPuzzleAccess).not.toHaveBeenCalled();
+	});
+
+	it('tells the modal which puzzle the reader came from', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedOut);
+		renderGate(true);
+		expect(await screen.findByTestId('modal')).toHaveAttribute(
+			'data-intcmp',
+			'puzzles_sudoku-easy',
+		);
 	});
 
 	it('shows neither board nor modal until a signed in reader without the hint is answered, then the board', async () => {

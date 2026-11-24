@@ -16,7 +16,7 @@ jest.mock('../components/marketing/inline1/Newsletter', () => ({
 	Newsletter: () => <div data-testid="newsletter" />,
 }));
 
-jest.mock('../components/marketing/inline1/puzzles/Puzzles', () => ({
+jest.mock('../components/marketing/inline1/Puzzles', () => ({
 	Puzzles: () => <div data-testid="puzzles" />,
 }));
 

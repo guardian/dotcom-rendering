@@ -5,10 +5,6 @@ import { Standard } from '../../fixtures/generated/fe-articles/Standard';
 import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
 import { SubNav } from '../components/Masthead/Titlepiece/SubNav';
 import { Sponsored } from '../components/PuzzlesDirectory.stories';
-import {
-	puzzlesHubV2Experiment,
-	puzzlesHubV2Participation,
-} from '../lib/puzzlesHubVersionExperiment';
 import { extractNAV, type NavType } from '../model/extract-nav';
 import type { Branding } from '../types/branding';
 import { PuzzlesLayout } from './PuzzlesLayout';
@@ -87,76 +83,54 @@ describe('PuzzlesLayout', () => {
 		).not.toBeInTheDocument();
 	});
 
-	it.each([
-		['hub only', true, false],
-		['hub and V2', true, true],
-	] as const)(
-		'renders the hub subnav for %s even when frontend omits trivia',
-		(_description, isHubAvailable, isV2Enabled) => {
-			const categoryLinks = (
-				[
-					['Crosswords', '/puzzles-and-games/crosswords/archive'],
-					['Word games', '/puzzles-and-games/word-games/archive'],
-					[
-						'Logic puzzles',
-						'/puzzles-and-games/logic-puzzles/archive',
-					],
-				] as const
-			).map(([title, url]) => ({ title, longTitle: title, url }));
-			const parent = {
-				title: 'Puzzles & games',
-				longTitle: 'Puzzles & games',
-				url: '/puzzles-and-games',
-			};
-			render(
-				<PuzzlesLayout
-					NAV={{
-						...nav,
-						subNavSections: { parent, links: categoryLinks },
-					}}
-					puzzlesPage={
-						{
-							...page(),
-							config: {
-								switches: {},
-								edition: isHubAvailable ? 'INT' : 'UK',
-								serverSideABTests: {
-									...puzzlesHubV2Participation(
-										isV2Enabled
-											? puzzlesHubV2Experiment.variant
-											: puzzlesHubV2Experiment.control,
-									),
-								},
-							},
-						} as never
-					}
-				/>,
-			);
+	it('renders the full hub subnav even when frontend omits trivia', () => {
+		const categoryLinks = (
+			[
+				['Crosswords', '/puzzles-and-games/crosswords/archive'],
+				['Word games', '/puzzles-and-games/word-games/archive'],
+				['Logic puzzles', '/puzzles-and-games/logic-puzzles/archive'],
+			] as const
+		).map(([title, url]) => ({ title, longTitle: title, url }));
+		const parent = {
+			title: 'Puzzles & games',
+			longTitle: 'Puzzles & games',
+			url: '/puzzles-and-games',
+		};
+		render(
+			<PuzzlesLayout
+				NAV={{
+					...nav,
+					subNavSections: { parent, links: categoryLinks },
+				}}
+				puzzlesPage={
+					{
+						...page(),
+						config: {
+							switches: {},
+							edition: 'INT',
+							serverSideABTests: {},
+						},
+					} as never
+				}
+			/>,
+		);
 
-			const hasTrivia = isHubAvailable && isV2Enabled;
-			expect(
-				screen.getAllByRole('link').map((link) => ({
-					title: link.textContent,
-					url: link.getAttribute('href'),
-				})),
-			).toEqual([
-				{ title: parent.title, url: parent.url },
-				...(isHubAvailable
-					? categoryLinks.map(({ title, url }) => ({ title, url }))
-					: []),
-				...(hasTrivia
-					? [
-							{
-								title: 'Trivia & quizzes',
-								url: '/puzzles-and-games/trivia-and-quizzes/archive',
-							},
-						]
-					: []),
-			]);
-		},
-	);
+		expect(
+			screen.getAllByRole('link').map((link) => ({
+				title: link.textContent,
+				url: link.getAttribute('href'),
+			})),
+		).toEqual([
+			{ title: parent.title, url: parent.url },
+			...categoryLinks.map(({ title, url }) => ({ title, url })),
+			{
+				title: 'Trivia & quizzes',
+				url: '/puzzles-and-games/trivia-and-quizzes/archive',
+			},
+		]);
+	});
 
-	it('renders the full V2 subnav in the Sponsored story without the development bypass', () => {
+	it('renders the full subnav in the Sponsored story without the development bypass', () => {
 		render(<Sponsored />);
 		const masthead = within(screen.getByTestId('masthead'));
 

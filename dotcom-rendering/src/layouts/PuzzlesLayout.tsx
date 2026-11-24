@@ -18,7 +18,6 @@ import { PuzzlesDirectoryProgress } from '../components/PuzzlesDirectoryProgress
 import { Section } from '../components/Section';
 import { has } from '../lib/has-string';
 import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
-import { isPuzzlesHubV2Enabled } from '../lib/puzzlesHubVersionExperiment';
 import {
 	getPuzzlesSubNavLinks,
 	PUZZLES_SUBNAV_PARENT,
@@ -189,7 +188,6 @@ export const PuzzlesLayout = ({
 				PUZZLES_SUBNAV_PARENT,
 				...getPuzzlesSubNavLinks(
 					isPuzzlesHubAvailable(puzzlesPage.config),
-					isPuzzlesHubV2Enabled(puzzlesPage.config),
 				),
 			],
 		},

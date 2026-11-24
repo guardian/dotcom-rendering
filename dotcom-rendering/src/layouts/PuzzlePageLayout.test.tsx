@@ -3,8 +3,6 @@ import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
 import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
 import { ConfigProvider } from '../components/ConfigContext';
 import {
-	puzzlesHubV2Experiment,
-	puzzlesHubV2Participation,
 	puzzlesHubV3Experiment,
 	puzzlesHubV3Participation,
 } from '../lib/puzzlesHubVersionExperiment';
@@ -51,11 +49,7 @@ jest.mock('../lib/useAB', () => ({
 	useAB: jest.fn().mockReturnValue(null),
 }));
 
-const v2On = puzzlesHubV2Participation(puzzlesHubV2Experiment.variant);
-const v2AndV3On = {
-	...v2On,
-	...puzzlesHubV3Participation(puzzlesHubV3Experiment.variant),
-};
+const v3On = puzzlesHubV3Participation(puzzlesHubV3Experiment.variant);
 
 const renderPuzzlePageLayout = (
 	slug: string,
@@ -86,6 +80,11 @@ const renderPuzzlePageLayout = (
 };
 
 describe('PuzzlePageLayout', () => {
+	it('has the target of the "Skip to main content" link, once', () => {
+		const { container } = renderPuzzlePageLayout('film-reveal');
+		expect(container.querySelectorAll('#maincontent')).toHaveLength(1);
+	});
+
 	it('passes the API progress identity into the access gate island for hydration', () => {
 		const page = createPuzzlePage('film-reveal');
 		const progressIdentity = {
@@ -116,7 +115,12 @@ describe('PuzzlePageLayout', () => {
 				screen.getByRole('heading', { level: 1, name: title }),
 			).toBeInTheDocument();
 			expect(
-				screen.getByRole('link', { name: 'Trivia & quizzes' }),
+				screen
+					.getAllByRole('link', { name: 'Trivia & quizzes' })
+					.find(
+						(link) =>
+							link.getAttribute('data-component') === 'section',
+					),
 			).toHaveAttribute(
 				'href',
 				'/puzzles-and-games/trivia-and-quizzes/archive',
@@ -227,6 +231,21 @@ describe('PuzzlePageLayout', () => {
 		expect(
 			container.querySelector('a[data-component="section"]'),
 		).toHaveAttribute('href', '/puzzles-and-games/logic-puzzles/archive');
+		for (const component of ['series', 'section']) {
+			const link = container.querySelector(
+				`a[data-component="${component}"]`,
+			);
+			expect(link).toHaveAttribute(
+				'data-link-name',
+				`article ${component}`,
+			);
+			expect(
+				link?.parentElement?.closest('[data-link-name]'),
+			).toHaveAttribute(
+				'data-link-name',
+				'puzzles | in-page-nav | puzzle-page',
+			);
+		}
 	});
 
 	/**
@@ -242,11 +261,45 @@ describe('PuzzlePageLayout', () => {
 		Crosswords: '/puzzles-and-games/crosswords/archive',
 		'Word games': '/puzzles-and-games/word-games/archive',
 		'Logic puzzles': '/puzzles-and-games/logic-puzzles/archive',
+		'Trivia & quizzes': '/puzzles-and-games/trivia-and-quizzes/archive',
 	};
-	const triviaHref = '/puzzles-and-games/trivia-and-quizzes/archive';
 
-	describe('sub-nav child links (Crosswords/Word games/Logic puzzles/Trivia & quizzes, v1-scoped feature)', () => {
-		it('renders Crosswords/Word games/Logic puzzles, but not Trivia & quizzes, when only v1 is enabled', () => {
+	it('tracks the "Puzzles & games" parent sub-nav link', () => {
+		const { container } = renderPuzzlePageLayout('sudoku-easy');
+
+		expect(
+			container.querySelector(
+				'[data-testid="sub-nav"] a[href="/puzzles-and-games"]',
+			),
+		).toHaveAttribute(
+			'data-link-name',
+			'header : subnav : Puzzles & games',
+		);
+	});
+
+	it('attributes Useful links to the puzzle page', () => {
+		const page = createPuzzlePage('sudoku-easy');
+		renderPuzzlePageLayout('sudoku-easy', {
+			config: { ...page.config, edition: 'INT' },
+			instance: {
+				...page.instance,
+				puzzlesSupporting: {
+					usefulLinks: [
+						{
+							title: 'Puzzle help',
+							url: 'https://example.com/help',
+						},
+					],
+				},
+			},
+		});
+		expect(
+			screen.getByRole('link', { name: 'Puzzle help' }),
+		).toHaveAttribute('data-component', 'puzzles-useful-links:puzzle-page');
+	});
+
+	describe('puzzles sub-nav child links', () => {
+		it('renders all categories without experiment participation', () => {
 			const { container } = renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
@@ -261,23 +314,6 @@ describe('PuzzlePageLayout', () => {
 				expect(link).toBeInTheDocument();
 				expect(link).toHaveTextContent(name);
 			}
-			expect(
-				container.querySelector(`a[href="${triviaHref}"]`),
-			).not.toBeInTheDocument();
-		});
-
-		it('also renders Trivia & quizzes when v2 is enabled', () => {
-			const { container } = renderPuzzlePageLayout('sudoku-easy', {
-				config: {
-					...createPuzzlePage('sudoku-easy').config,
-					edition: 'INT',
-					serverSideABTests: v2On,
-				},
-			});
-
-			expect(
-				container.querySelector(`a[href="${triviaHref}"]`),
-			).toHaveTextContent('Trivia & quizzes');
 		});
 	});
 
@@ -451,7 +487,7 @@ describe('PuzzlePageLayout', () => {
 			) as { requiresSubscription?: boolean };
 
 		it('does not render any ad slots for a premium puzzle, even for a non-ad-free reader', () => {
-			const { container } = renderPremiumPuzzle(v2AndV3On);
+			const { container } = renderPremiumPuzzle(v3On);
 
 			expect(
 				container.querySelector('#dfp-ad--top-above-nav'),
@@ -472,7 +508,7 @@ describe('PuzzlePageLayout', () => {
 		});
 
 		it('still renders ad slots when the puzzle is explicitly not premium', () => {
-			const { container } = renderPremiumPuzzle(v2AndV3On, false);
+			const { container } = renderPremiumPuzzle(v3On, false);
 
 			expect(
 				container.querySelector('#dfp-ad--merchandising-high'),
@@ -482,20 +518,9 @@ describe('PuzzlePageLayout', () => {
 
 		it.each([
 			['no test participation', {}, 'INT'],
-			['v2 only', v2On, 'INT'],
-			[
-				'v3 without v2',
-				puzzlesHubV3Participation(puzzlesHubV3Experiment.variant),
-				'INT',
-			],
 			[
 				'v3 in control',
-				{
-					...v2On,
-					...puzzlesHubV3Participation(
-						puzzlesHubV3Experiment.control,
-					),
-				},
+				puzzlesHubV3Participation(puzzlesHubV3Experiment.control),
 				'INT',
 			],
 		] as const)(

@@ -376,11 +376,13 @@ export const PuzzlesUsefulLinks = ({
 	title,
 	links,
 	newsletter,
+	ophanComponentName,
 }: {
 	id: string;
 	title: string;
 	links: PuzzleLink[];
 	newsletter?: PuzzlesNewsletter;
+	ophanComponentName?: string;
 }) => (
 	<section css={sectionStyles} aria-labelledby={`${id}-useful-links-title`}>
 		<h2 css={sectionTitleStyles} id={`${id}-useful-links-title`}>
@@ -388,11 +390,17 @@ export const PuzzlesUsefulLinks = ({
 		</h2>
 		<div css={usefulContentStyles(newsletter !== undefined)}>
 			<div css={usefulGridStyles(newsletter !== undefined)}>
-				{links.map((link) => (
+				{links.map((link, index) => (
 					<a
 						css={usefulLinkStyles}
 						href={link.url}
 						key={`${link.title}-${link.url}`}
+						data-component={ophanComponentName}
+						data-link-name={
+							ophanComponentName !== undefined
+								? `puzzles | useful-link | link-@${index + 1}`
+								: undefined
+						}
 						{...externalProps(link.url)}
 					>
 						<h3 css={usefulLinkTitleStyles}>{link.title}</h3>

@@ -49,6 +49,10 @@ const puzzleTypeByCrosswordType: Record<string, PuzzleType> = {
 	'sunday-quick': 'CROSSWORD_SUNDAYQUICK',
 };
 
+/** Whether the Puzzles API knows this crossword type. */
+export const isSupportedCrosswordType = (crosswordType: string): boolean =>
+	Object.keys(puzzleTypeByCrosswordType).includes(crosswordType);
+
 type Identity = Pick<
 	PuzzleProgressEvent,
 	'puzzleId' | 'puzzleType' | 'publishDate'
@@ -83,6 +87,24 @@ const identityOf = (data: CrosswordIdentityData): Identity | undefined => {
 		puzzleType,
 		publishDate: `${date.toISOString().slice(0, 10)}T00:00:00Z`,
 	};
+};
+
+/**
+ * What the access check needs to ask about a crossword: the same series
+ * qualified id the progress is stored under, and the puzzle's UTC date as
+ * `YYYY-MM-DD`. `undefined` for series the Puzzles API does not know, which
+ * are never gated.
+ */
+export const getCrosswordAccessIdentity = (
+	data: CrosswordIdentityData,
+): { puzzleId: string; puzzleDate: string } | undefined => {
+	const identity = identityOf(data);
+	return identity
+		? {
+				puzzleId: identity.puzzleId,
+				puzzleDate: identity.publishDate.slice(0, 10),
+			}
+		: undefined;
 };
 
 const isProgressChange = (raw: unknown): raw is CrosswordProgressChange =>
