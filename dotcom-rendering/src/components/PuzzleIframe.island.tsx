@@ -416,6 +416,12 @@ export const PuzzleIframe = ({
 			title={title}
 			loading="lazy"
 			sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+			// The min-heights above are sized so the puzzle never needs to
+			// scroll. Without this, browsers whose scrollbars take up space (for
+			// example Windows) show scrollbars inside the frame, because the
+			// player lays out slightly larger than the frame. Obsolete, but
+			// there is no CSS equivalent for a frame's own document.
+			scrolling="no"
 			onLoad={(event) => {
 				if (shouldLoad) {
 					postContextMessage(event.currentTarget, context);

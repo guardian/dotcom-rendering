@@ -567,6 +567,25 @@ describe('PuzzleIframe', () => {
 		});
 	});
 
+	it.each(['sudoku-easy', 'word-wheel', 'wordiply', 'film-reveal'])(
+		'does not let %s scroll inside its frame',
+		(slug) => {
+			mockedGetAuthStatus.mockResolvedValue(signedOut());
+			mockedUseMatchMedia.mockReturnValue(false);
+			render(
+				<PuzzleIframe
+					puzzleConfig={puzzleConfigs[slug]!}
+					title={slug}
+					darkModeAvailable={false}
+					puzzleDate={null}
+				/>,
+			);
+			expect(
+				testScreen.getByTitle<HTMLIFrameElement>(slug),
+			).toHaveAttribute('scrolling', 'no');
+		},
+	);
+
 	it.each(['film-reveal', 'on-the-ball'])(
 		'loads %s in the shared sandbox after authentication resolves',
 		async (slug) => {
