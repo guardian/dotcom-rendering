@@ -80,7 +80,7 @@ describe('doNotIndex', () => {
 		).toBe(true);
 	});
 
-	it('does NOT index pages with a no-index tag in production', () => {
+	it('does NOT index pages with a no-index tag in production, ignores allow listed page', () => {
 		expect(
 			doNotIndex(
 				'PROD',
