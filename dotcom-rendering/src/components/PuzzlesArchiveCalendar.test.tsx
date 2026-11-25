@@ -76,6 +76,14 @@ describe('archive calendar helpers', () => {
 				progress: 100,
 				gameStatus: 'in-progress',
 			}),
+		).toBe('in-progress');
+		expect(
+			archiveStatus({
+				...item,
+				puzzleType: 'CROSSWORD_QUICK',
+				progress: 100,
+				gameStatus: 'in-progress',
+			}),
 		).toBe('available');
 		expect(
 			archiveStatus({
@@ -906,7 +914,13 @@ describe('PuzzlesArchiveCalendar', () => {
 				inProgressCards.find((card) => card.querySelector('time'))!,
 			).getByText('In progress'),
 		).toBeInTheDocument();
-		expect(screen.getAllByText('In progress')).toHaveLength(1);
+		expect(
+			within(
+				document.querySelector<HTMLElement>(
+					'[data-component="puzzles-archive-recent"]',
+				)!,
+			).getAllByText('In progress'),
+		).toHaveLength(1);
 		expect(
 			screen.getAllByText('Played', { selector: '.played' }),
 		).toHaveLength(1);
@@ -921,6 +935,10 @@ describe('PuzzlesArchiveCalendar', () => {
 				<PuzzlesArchiveCalendar
 					initialArchive={{
 						...archive,
+						selectedPuzzle: {
+							...archive.selectedPuzzle,
+							puzzleType,
+						},
 						year: 2026,
 						month: 10,
 						items: [
@@ -965,6 +983,10 @@ describe('PuzzlesArchiveCalendar', () => {
 		jest.useFakeTimers().setSystemTime(new Date('2026-10-07T12:00:00Z'));
 		const crosswordArchive: PuzzlesArchive = {
 			...archive,
+			selectedPuzzle: {
+				...archive.selectedPuzzle,
+				puzzleType: 'CROSSWORD_QUICK',
+			},
 			year: 2026,
 			month: 10,
 			items: ['2026-10-07', '2026-10-06'].map((date) => ({
@@ -1497,4 +1519,173 @@ describe('PuzzlesArchiveCalendar', () => {
 			expect(screen.queryByRole('alert')).not.toBeInTheDocument();
 		},
 	);
+});
+
+describe('PuzzlesArchiveCalendar in-progress days', () => {
+	const withItem = (
+		overrides: Partial<PuzzlesArchive['items'][number]>,
+		puzzleType = 'SUDOKU_EASY',
+	): PuzzlesArchive => ({
+		...archive,
+		selectedPuzzle: { ...archive.selectedPuzzle, puzzleType },
+		items: [{ ...archive.items[0]!, puzzleType, ...overrides }],
+	});
+
+	it.each([false, true])(
+		'marks a game in progress with the dashed icon for v3=%s',
+		(showPremiumIndicators) => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={withItem({ gameStatus: 'in-progress' })}
+					showPremiumIndicators={showPremiumIndicators}
+				/>,
+			);
+
+			const day = screen.getByRole('link', {
+				name: '2026-09-02, in progress',
+			});
+			const icon = day.querySelector('.in-progress-icon svg');
+
+			expect(day).toHaveAttribute('data-status', 'in-progress');
+			expect(day.querySelector('.in-progress-icon')).toHaveAttribute(
+				'aria-hidden',
+				'true',
+			);
+			expect(icon).toHaveAttribute('width', '16');
+			expect(icon).toHaveAttribute('height', '16');
+			expect(icon?.querySelectorAll('path')).toHaveLength(8);
+			icon?.querySelectorAll('path').forEach((path) => {
+				expect(path).toHaveAttribute('fill', '#C74600');
+			});
+			expect(day.querySelector('.completed-icon')).toBeNull();
+		},
+	);
+
+	it.each([
+		[true, '3px'],
+		[false, ''],
+	])(
+		'rounds the day tiles only with the supporter exclusive calendar (v3=%s)',
+		(showPremiumIndicators, radius) => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={withItem({ gameStatus: 'in-progress' })}
+					showPremiumIndicators={showPremiumIndicators}
+				/>,
+			);
+
+			const days = Array.from(
+				document.querySelectorAll<HTMLElement>('.day'),
+			);
+
+			expect(days.length).toBeGreaterThan(1);
+			for (const day of days) {
+				expect(getComputedStyle(day).borderRadius).toBe(radius);
+			}
+		},
+	);
+
+	it('keeps the supporter exclusive star on a day in progress', () => {
+		render(
+			<PuzzlesArchiveCalendar
+				initialArchive={withItem({
+					gameStatus: 'in-progress',
+					isWithinFreeWindow: false,
+					hasPremiumEntitlement: false,
+				})}
+				showPremiumIndicators={true}
+			/>,
+		);
+
+		const day = screen.getByRole('link', {
+			name: '2026-09-02, Supporter exclusive, in progress',
+		});
+
+		expect(day).toHaveAttribute('data-status', 'in-progress');
+		expect(day.querySelector('.supporter-exclusive-icon')).not.toBeNull();
+		expect(day.querySelector('.in-progress-icon')).not.toBeNull();
+	});
+
+	it.each(['not-started', 'completed'] as const)(
+		'has no in progress icon for a day that is %s',
+		(gameStatus) => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={withItem({ gameStatus })}
+				/>,
+			);
+
+			expect(
+				document.querySelector('.in-progress-icon'),
+			).not.toBeInTheDocument();
+			expect(
+				document.querySelector('[data-status="in-progress"]'),
+			).not.toBeInTheDocument();
+		},
+	);
+
+	it('never marks a crossword day in progress', () => {
+		render(
+			<PuzzlesArchiveCalendar
+				initialArchive={withItem(
+					{ gameStatus: 'in-progress' },
+					'CROSSWORD_QUICK',
+				)}
+			/>,
+		);
+
+		expect(
+			screen.getByRole('link', { name: '2026-09-02, available' }),
+		).toHaveAttribute('data-status', 'available');
+		expect(document.querySelector('.in-progress-icon')).toBeNull();
+	});
+
+	it.each([
+		[false, '13.3'],
+		[true, '11'],
+	])(
+		'lists In progress in the legend for a game, v3=%s',
+		(showPremiumIndicators, size) => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={withItem({})}
+					showPremiumIndicators={showPremiumIndicators}
+				/>,
+			);
+
+			const legend = screen.getByText('In progress', {
+				selector: 'span.in-progress',
+			});
+			const icon = legend.querySelector('svg');
+
+			expect(icon).toHaveAttribute('width', size);
+			expect(icon).toHaveAttribute('height', size);
+			expect(
+				legend.compareDocumentPosition(
+					screen.getByText('Played', { selector: 'span.completed' }),
+				) & Node.DOCUMENT_POSITION_FOLLOWING,
+			).toBeTruthy();
+			expect(
+				screen
+					.getByText('Available', { selector: 'span.available' })
+					.compareDocumentPosition(legend) &
+					Node.DOCUMENT_POSITION_FOLLOWING,
+			).toBeTruthy();
+		},
+	);
+
+	it('leaves In progress out of the legend for a crossword', () => {
+		render(
+			<PuzzlesArchiveCalendar
+				initialArchive={withItem({}, 'CROSSWORD_QUICK')}
+			/>,
+		);
+
+		expect(
+			screen.queryByText('In progress', { selector: 'span.in-progress' }),
+		).not.toBeInTheDocument();
+		expect(
+			screen.getByText('Played', { selector: 'span.completed' }),
+		).toBeInTheDocument();
+	});
 });

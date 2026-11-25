@@ -6,6 +6,12 @@ import {
 } from './puzzleGroupPalette';
 
 /**
+ * The tick on a played day in dark mode (Utility / success 700 in the design).
+ * It is not in `@guardian/source`'s palette yet.
+ */
+const successTick = '#99E5BA';
+
+/**
  * Shared colours for the Puzzles hub and archive pages. Dark-mode overrides
  * are emitted only when the experiment makes dark mode available, matching
  * the gating used by the global page palette.
@@ -56,6 +62,10 @@ export const puzzlesPageTheme = (
 					--puzzles-border-colour: ${palette.neutral[46]};
 					--puzzles-unavailable-day-border: ${palette.neutral[20]};
 					--puzzles-unavailable-day-text: ${palette.neutral[60]};
+					--puzzles-completed-day-background: ${palette.success[300]};
+					--puzzles-completed-day-icon: ${successTick};
+					--puzzles-in-progress-day-background: ${palette
+						.opinion[100]};
 					${groupPalette &&
 					css`
 						--puzzles-primary: ${groupPalette.accent};
