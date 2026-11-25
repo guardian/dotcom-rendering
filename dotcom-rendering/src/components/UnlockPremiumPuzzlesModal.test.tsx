@@ -244,6 +244,42 @@ describe('UnlockPremiumPuzzlesModal', () => {
 			);
 		});
 
+		it('closes the gap under the line only while the hero is hidden', () => {
+			renderModal();
+			const rules = Array.from(document.styleSheets)
+				.flatMap((sheet) => Array.from(sheet.cssRules))
+				.map((rule) => rule.cssText);
+			const onlyInStickySheet = (rule: string) =>
+				rule.startsWith('@media') &&
+				/:not\(\[data-flow-with-page=["']true["']\]\)/.test(rule);
+
+			// The line is closer to the title: 12px instead of 16px
+			expect(
+				rules.find(
+					(rule) =>
+						onlyInStickySheet(rule) &&
+						rule.includes('margin-bottom: 12px'),
+				),
+			).toBeDefined();
+			// And the title adds no top margin of its own
+			expect(
+				rules.find(
+					(rule) =>
+						onlyInStickySheet(rule) &&
+						rule.includes('margin-top: 0'),
+				),
+			).toBeDefined();
+			// Everywhere else the line and the title keep their usual 16px
+			expect(
+				rules.find(
+					(rule) =>
+						!rule.startsWith('@media') &&
+						rule.includes('border-top: 1px solid') &&
+						rule.includes('margin-bottom: 16px'),
+				),
+			).toBeDefined();
+		});
+
 		it('is still rendered, so it can be shown when the modal flows with the page', () => {
 			const { container } = renderModal();
 			expect(container.querySelector('img')).toBeInTheDocument();

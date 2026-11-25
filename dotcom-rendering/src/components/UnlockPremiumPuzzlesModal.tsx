@@ -184,12 +184,30 @@ const headerStyles = css`
 	color: var(--unlock-modal-text);
 `;
 
+/**
+ * The body's children while the modal is the sticky bottom sheet, which is when
+ * the hero image is hidden (see `shouldFlowWithPage`). The container is the
+ * modal's wrapper, which sets MODAL_FLOW_ATTRIBUTE:
+ * wrapper > modal > body > child.
+ */
+const inStickySheet = `div:not([${MODAL_FLOW_ATTRIBUTE}='true']) > div > div > &`;
+
 const dividerStyles = css`
 	border: 0;
 	border-top: 1px solid var(--unlock-modal-divider);
 	margin-top: ${space[4]}px;
 	margin-bottom: ${space[4]}px;
 	width: 100%;
+
+	/* With no hero image, the title follows the line directly: the space under
+	   the line is made as large as the space above it, between the logo and the
+	   line. With the title's own top margin removed (see titleStyles), the
+	   title's line height adds a little, so this is a little smaller. */
+	${until.phablet} {
+		${inStickySheet} {
+			margin-bottom: ${space[3]}px;
+		}
+	}
 `;
 
 const heroStyles = css`
@@ -198,10 +216,9 @@ const heroStyles = css`
 
 	/* The sticky bottom sheet is short, so it has no room for the picture.
 	   When the modal flows with the page instead (see shouldFlowWithPage) it
-	   keeps it. The container is the modal's wrapper, which sets
-	   MODAL_FLOW_ATTRIBUTE: wrapper > modal > body > hero */
+	   keeps it. */
 	${until.phablet} {
-		div:not([${MODAL_FLOW_ATTRIBUTE}='true']) > div > div > & {
+		${inStickySheet} {
 			display: none;
 		}
 	}
@@ -221,6 +238,14 @@ const titleStyles = css`
 	color: var(--unlock-modal-title);
 	font-variant-numeric: lining-nums proportional-nums;
 	margin: ${space[4]}px 0;
+
+	/* Without the hero image above it, the space under the line is set by the
+	   line (see dividerStyles), so the title adds none of its own */
+	${until.phablet} {
+		${inStickySheet} {
+			margin-top: 0;
+		}
+	}
 `;
 
 const subtitleStyles = css`
