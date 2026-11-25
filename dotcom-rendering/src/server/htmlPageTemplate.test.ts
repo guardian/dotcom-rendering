@@ -14,35 +14,6 @@ const otherTag: TagType = {
 };
 
 describe('doNotIndex', () => {
-	const originalStage = process.env.GU_STAGE;
-
-	afterEach(() => {
-		if (originalStage === undefined) {
-			delete process.env.GU_STAGE;
-		} else {
-			process.env.GU_STAGE = originalStage;
-		}
-	});
-
-	it('does NOT index pages in non-production environments', () => {
-		process.env.GU_STAGE = 'CODE';
-
-		expect(doNotIndex('https://www.theguardian.com/example', [])).toBe(
-			true,
-		);
-	});
-
-	it('does NOT index pages with a no-index tag in production', () => {
-		process.env.GU_STAGE = 'PROD';
-
-		expect(
-			doNotIndex('https://www.theguardian.com/example', [
-				otherTag,
-				noIndexTag,
-			]),
-		).toBe(true);
-	});
-
 	it.each([
 		{
 			description: 'has no canonical URL',
@@ -50,10 +21,17 @@ describe('doNotIndex', () => {
 			tags: undefined,
 		},
 		{
-			description: 'has an ordinary canonical URL',
-			canonicalUrl: 'https://www.theguardian.com/example',
+			description: 'has an ordinary canonical front URL',
+			canonicalUrl: 'https://www.theguardian.com/uk',
 			tags: [otherTag],
 		},
+		{
+			description: 'has an ordinary canonical article URL',
+			canonicalUrl:
+				'https://www.theguardian.com/tv-and-radio/2026/nov/25/blade-runner-2099-review-tv-version-terrifying-visual-beauty',
+			tags: [otherTag],
+		},
+
 		{
 			description: 'is the allow-listed Filter page',
 			canonicalUrl:
@@ -71,21 +49,43 @@ describe('doNotIndex', () => {
 		canonicalUrl: string | undefined;
 		tags: TagType[] | undefined;
 	}[])(
-		'DOE index a production page that $description',
+		'DOES index a production page that $description',
 		({ canonicalUrl, tags }) => {
-			process.env.GU_STAGE = 'PROD';
-
-			expect(doNotIndex(canonicalUrl, tags)).toBe(false);
+			expect(doNotIndex('PROD', canonicalUrl, tags)).toBe(false);
 		},
 	);
 
 	it('does NOT index tracking/commissioningdesk pages', () => {
-		process.env.GU_STAGE = 'PROD';
-
 		expect(
 			doNotIndex(
+				'PROD',
 				'https://www.theguardian.com/tracking/commissioningdesk/other',
 				undefined,
+			),
+		).toBe(true);
+	});
+
+	it('does NOT index pages in non-production environments', () => {
+		expect(
+			doNotIndex('CODE', 'https://www.theguardian.com/example', []),
+		).toBe(true);
+	});
+
+	it('does NOT index pages with a no-index tag in production', () => {
+		expect(
+			doNotIndex('PROD', 'https://www.theguardian.com/example', [
+				otherTag,
+				noIndexTag,
+			]),
+		).toBe(true);
+	});
+
+	it('does NOT index pages with a no-index tag in production', () => {
+		expect(
+			doNotIndex(
+				'PROD',
+				'https://www.theguardian.com/tracking/commissioningdesk/filter-us',
+				[otherTag, noIndexTag],
 			),
 		).toBe(true);
 	});

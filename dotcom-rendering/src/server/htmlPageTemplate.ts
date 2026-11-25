@@ -65,11 +65,12 @@ const minifiedFontsCss = new CleanCSS().minify(rawFontsCss).styles;
  * Do NOT index if this function returns true
  */
 export const doNotIndex = (
+	stage: string,
 	canonicalUrl: string | undefined,
 	tags: TagType[] | undefined,
 ): boolean => {
 	// Do NOT index non-production environments
-	if (process.env.GU_STAGE !== 'PROD') return true;
+	if (stage !== 'PROD') return true;
 
 	// Do NOT index pages with a noindex tag
 	const hasNoIndexTag =
@@ -95,6 +96,7 @@ export const doNotIndex = (
 		return true;
 	}
 
+	// DO index all other pages by default
 	return false;
 };
 
@@ -304,7 +306,7 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <!--  This tag enables pages to be featured in Google Discover as large previews
                     See: https://developers.google.com/search/docs/advanced/mobile/google-discover?hl=en&visit_id=637424198370039526-3805703503&rd=1 -->
                 <meta name="robots" content="max-image-preview:large">
-				${doNotIndex(canonicalUrl, tags) ? '<meta name="robots" content="noindex">' : ''}
+				${doNotIndex(process.env.GU_STAGE ?? '', canonicalUrl, tags) ? '<meta name="robots" content="noindex">' : ''}
 
                 <script>
                     window.guardian = ${windowGuardian};
