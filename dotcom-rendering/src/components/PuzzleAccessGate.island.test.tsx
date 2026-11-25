@@ -101,6 +101,19 @@ describe('PuzzleAccessGate', () => {
 		expect(mockedFetchPuzzleAccess).not.toHaveBeenCalled();
 	});
 
+	it('colours the placeholder from the page theme, so it follows dark mode', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedOut);
+		renderGate(true);
+		await screen.findByTestId('modal');
+		// Emotion inserts rules through the CSSOM, so they are not in the
+		// style tags' text.
+		const rules = Array.from(document.styleSheets)
+			.flatMap((sheet) => Array.from(sheet.cssRules))
+			.map((rule) => rule.cssText)
+			.join('');
+		expect(rules).toContain('background-color: var(--ad-background)');
+	});
+
 	it('tells the modal which puzzle the reader came from', async () => {
 		mockedGetAuthStatus.mockResolvedValue(signedOut);
 		renderGate(true);

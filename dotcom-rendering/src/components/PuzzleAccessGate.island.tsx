@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
-import { palette as sourcePalette } from '@guardian/source/foundations';
 import type { ComponentProps } from 'react';
 import { getPuzzleIntcmp } from '../lib/puzzlesAcquisition';
 import { renderInModalRoot, usePuzzleAccess } from '../lib/usePuzzleAccess';
+import { palette as themePalette } from '../palette';
 import { buildFrameStyles, PuzzleIframe } from './PuzzleIframe.island';
 import { UnlockPremiumPuzzlesModal } from './UnlockPremiumPuzzlesModal';
 
@@ -23,8 +23,10 @@ type Props = ComponentProps<typeof PuzzleIframe> &
 		puzzleId?: string;
 	};
 
+// Themed so the placeholder follows the page in dark mode: the same light
+// grey as before in light mode, and a dark grey in dark mode.
 const placeholderStyles = css`
-	background-color: ${sourcePalette.neutral[97]};
+	background-color: ${themePalette('--ad-background')};
 `;
 
 /**
