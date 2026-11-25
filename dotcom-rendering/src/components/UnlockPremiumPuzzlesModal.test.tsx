@@ -87,32 +87,110 @@ describe('UnlockPremiumPuzzlesModal', () => {
 			screen.queryByText(/You are currently signed out/),
 		).not.toBeInTheDocument();
 	});
+	describe('spacing above the footer', () => {
+		const allRules = () =>
+			Array.from(document.styleSheets)
+				.flatMap((sheet) => Array.from(sheet.cssRules))
+				.map((rule) => rule.cssText);
+
+		it('has no bottom padding on the scrolling body, so the footer alone sets the gap', () => {
+			renderModal();
+			const bodyRule = allRules().find((rule) =>
+				rule.includes('overflow-y: auto'),
+			);
+
+			expect(bodyRule).toContain('padding: 16px 16px 0');
+		});
+
+		it('has no space after the last benefit on small screens only', () => {
+			renderModal();
+			const rules = allRules();
+
+			const smallScreen = rules.find(
+				(rule) =>
+					rule.startsWith('@media') &&
+					/li:last-child\s*\{[^}]*margin-bottom: 0/.test(rule),
+			);
+			expect(smallScreen).toBeDefined();
+
+			// Larger screens keep the list's own bottom margins, since the
+			// footer has no top padding there
+			const largeScreen = rules.find(
+				(rule) =>
+					!rule.startsWith('@media') &&
+					rule.includes('list-style: none') &&
+					rule.includes('margin: 0 0 8px'),
+			);
+			expect(largeScreen).toBeDefined();
+		});
+	});
+
 	describe('scroll shadow', () => {
 		const allRules = () =>
 			Array.from(document.styleSheets)
 				.flatMap((sheet) => Array.from(sheet.cssRules))
 				.map((rule) => rule.cssText);
 
-		it('draws the shadow on the scrolling body, hidden by a cover that moves with the content', () => {
-			renderModal();
-			const bodyRule = allRules().find((rule) =>
-				rule.includes('background-attachment: local,scroll'),
-			);
-
-			expect(bodyRule).toBeDefined();
-			expect(bodyRule).toContain('overflow-y: auto');
+		afterEach(() => {
+			jest.restoreAllMocks();
 		});
 
-		it('no longer keeps a permanent shadow on the footer', () => {
-			renderModal();
+		const mockBodyHeights = (
+			clientHeight: number,
+			scrollHeight: number,
+		) => {
+			jest.spyOn(
+				HTMLElement.prototype,
+				'clientHeight',
+				'get',
+			).mockReturnValue(clientHeight);
+			jest.spyOn(
+				HTMLElement.prototype,
+				'scrollHeight',
+				'get',
+			).mockReturnValue(scrollHeight);
+		};
 
+		it('shows the footer shadow only when the body is flagged as scrollable', () => {
+			renderModal();
+			const rules = allRules();
+
+			const shadowRule = rules.find(
+				(rule) =>
+					rule.includes('data-scrollable') &&
+					rule.includes('box-shadow'),
+			);
+			expect(shadowRule).toBeDefined();
+			expect(shadowRule).toContain("[data-scrollable='true']");
+
+			// And never as a permanent shadow
 			expect(
-				allRules().some((rule) =>
-					rule.includes(
-						'box-shadow: rgba(0, 0, 0, 0.15) 0px -4px 8px',
-					),
+				rules.some(
+					(rule) =>
+						!rule.includes('data-scrollable') &&
+						rule.includes(
+							'box-shadow: rgba(0, 0, 0, 0.15) 0px -4px 8px',
+						),
 				),
 			).toBe(false);
+		});
+
+		it('does not flag the body as scrollable when the content fits', () => {
+			mockBodyHeights(365, 365);
+			const { container } = renderModal();
+
+			expect(
+				container.querySelector('[data-scrollable]'),
+			).toHaveAttribute('data-scrollable', 'false');
+		});
+
+		it('flags the body as scrollable when the content is taller, even by a few pixels', () => {
+			mockBodyHeights(396, 404);
+			const { container } = renderModal();
+
+			expect(
+				container.querySelector('[data-scrollable]'),
+			).toHaveAttribute('data-scrollable', 'true');
 		});
 	});
 

@@ -1,5 +1,6 @@
 import {
 	getModalMaxHeight,
+	isScrollable,
 	shouldFlowWithPage,
 } from './premiumPuzzlesModalLayout';
 
@@ -61,5 +62,25 @@ describe('shouldFlowWithPage', () => {
 		expect(
 			shouldFlowWithPage({ viewportHeight: 600, wrapperTop: 900 }),
 		).toBe(true);
+	});
+});
+
+describe('isScrollable', () => {
+	it('is false when the content fits', () => {
+		expect(isScrollable({ clientHeight: 365, scrollHeight: 365 })).toBe(
+			false,
+		);
+	});
+
+	it('ignores a difference of one pixel, which is only rounding', () => {
+		expect(isScrollable({ clientHeight: 365, scrollHeight: 366 })).toBe(
+			false,
+		);
+	});
+
+	it('is true when the content is even slightly taller, as on an iPhone 16', () => {
+		expect(isScrollable({ clientHeight: 396, scrollHeight: 404 })).toBe(
+			true,
+		);
 	});
 });

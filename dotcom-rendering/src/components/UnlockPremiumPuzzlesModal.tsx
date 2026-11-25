@@ -19,8 +19,10 @@ import { useEffect, useRef, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import {
 	getModalMaxHeight,
+	isScrollable,
 	MODAL_FLOW_ATTRIBUTE,
 	MODAL_MAX_HEIGHT_PROPERTY,
+	MODAL_SCROLLABLE_ATTRIBUTE,
 	shouldFlowWithPage,
 } from '../lib/premiumPuzzlesModalLayout';
 import {
@@ -164,31 +166,13 @@ const bodyStyles = css`
 		flex: 1 1 auto;
 		min-height: 0;
 		overflow-y: auto;
-		padding: ${space[4]}px ${space[4]}px ${space[3]}px;
-
-		/* A shadow on the bottom edge, only while there is more to scroll to.
-		   The shadow stays put (scroll). The cover, in the modal's colour,
-		   moves with the content (local): it hides the shadow when the content
-		   fits, and once the reader has scrolled to the end. */
-		background-color: var(--unlock-modal-background);
-		background-image:
-			linear-gradient(transparent, var(--unlock-modal-background) 70%),
-			radial-gradient(
-				farthest-side at 50% 100%,
-				rgba(0, 0, 0, 0.2),
-				transparent
-			);
-		background-position: bottom, bottom;
-		background-size:
-			100% 40px,
-			100% 12px;
-		background-repeat: no-repeat;
-		background-attachment: local, scroll;
+		/* No bottom padding: the footer's own top padding gives the gap, so the
+		   content is not pushed to scroll by spacing that is not needed */
+		padding: ${space[4]}px ${space[4]}px 0;
 
 		[${MODAL_FLOW_ATTRIBUTE}='true'] > div > & {
 			flex: none;
 			overflow-y: visible;
-			background-image: none;
 		}
 	}
 `;
@@ -260,6 +244,17 @@ const benefitsStyles = css`
 		margin-bottom: ${space[2]}px;
 	}
 
+	/* On small screens the footer has its own top padding, which gives the
+	   space below the list. On larger screens it has none, so the list keeps
+	   its bottom margins. */
+	${until.phablet} {
+		margin-bottom: 0;
+
+		li:last-child {
+			margin-bottom: 0;
+		}
+	}
+
 	svg {
 		flex: none;
 		fill: var(--unlock-modal-tick);
@@ -276,6 +271,13 @@ const footerStyles = css`
 		position: relative;
 		padding: ${space[4]}px ${space[4]}px
 			calc(${space[6]}px + env(safe-area-inset-bottom, 0px));
+
+		/* A shadow on the footer's top edge, only while the body above it has
+		   more to scroll to (see MODAL_SCROLLABLE_ATTRIBUTE). With no
+		   overflow it would suggest there is content that is not there. */
+		[${MODAL_SCROLLABLE_ATTRIBUTE}='true'] + & {
+			box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.15);
+		}
 	}
 `;
 
@@ -409,6 +411,49 @@ export const UnlockPremiumPuzzlesModal = ({
 		: '/';
 
 	const blockerRef = useRef<HTMLDivElement>(null);
+	const bodyRef = useRef<HTMLDivElement>(null);
+
+	// Tells the footer whether the body above it has more to scroll to, so its
+	// shadow only shows then. The body's own size changes with the screen, and
+	// its content changes without it (fonts loading, text wrapping), so both
+	// are watched.
+	useEffect(() => {
+		const body = bodyRef.current;
+		if (!body) return;
+
+		const update = () => {
+			body.setAttribute(
+				MODAL_SCROLLABLE_ATTRIBUTE,
+				String(isScrollable(body)),
+			);
+		};
+
+		update();
+
+		// A resize also changes the modal's maximum height (see the effect
+		// below), which this has to see. Waiting a frame lets that happen first.
+		let frame: number | undefined;
+		const updateNextFrame = () => {
+			if (frame !== undefined) cancelAnimationFrame(frame);
+			frame = requestAnimationFrame(update);
+		};
+		window.addEventListener('resize', updateNextFrame);
+
+		const observer =
+			typeof ResizeObserver === 'undefined'
+				? undefined
+				: new ResizeObserver(update);
+		observer?.observe(body);
+		for (const child of Array.from(body.children)) {
+			observer?.observe(child);
+		}
+
+		return () => {
+			window.removeEventListener('resize', updateNextFrame);
+			if (frame !== undefined) cancelAnimationFrame(frame);
+			observer?.disconnect();
+		};
+	}, []);
 
 	// On small screens the modal is a bottom sheet whose height depends on how
 	// much room is left under the page header (see getModalMaxHeight). When
@@ -441,7 +486,7 @@ export const UnlockPremiumPuzzlesModal = ({
 		<div ref={blockerRef} css={[blockerStyles, cssOverrides]}>
 			<div css={overlayStyles}></div>
 			<div css={[modalStyles, modalTheme(darkModeAvailable)]}>
-				<div css={bodyStyles}>
+				<div ref={bodyRef} css={bodyStyles}>
 					<div css={headerStyles}>
 						<SvgGuardianLogo textColor="currentColor" width={98} />
 					</div>
