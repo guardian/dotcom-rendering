@@ -45,7 +45,8 @@ describe('doNotIndex', () => {
 			tags: undefined,
 		},
 		{
-			description: 'is an allow-listed Filter front not in the block list',
+			description:
+				'is an allow-listed Filter front not in the block list',
 			canonicalUrl:
 				'https://www.theguardian.com/lifeandstyle/kitchen+tracking/commissioningdesk/the-filter',
 			tags: undefined,
