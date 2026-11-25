@@ -404,6 +404,11 @@ export const PuzzleIframe = ({
 		<iframe
 			ref={iframeRef}
 			css={buildFrameStyles(puzzleConfig.slug)}
+			// Align the puzzle's own light/dark theme with the page. AmuseLabs
+			// follows `prefers-color-scheme` inside the frame (it ignores the
+			// `darkMode` URL param), and Safari only applies the page's
+			// `color-scheme` to the frame when it is set on the iframe itself.
+			style={{ colorScheme: darkMode ? 'dark' : 'light' }}
 			// No `src` until the reader is known, so the puzzle loads once, with
 			// the right `uid`, instead of loading anonymously and then again.
 			// The frame keeps its `min-height`, so nothing shifts when it loads.

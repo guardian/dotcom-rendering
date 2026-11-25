@@ -1041,6 +1041,9 @@ describe('PuzzleIframe', () => {
 		await waitFor(() =>
 			expect(getContextFromSrc(iframe.src).darkMode).toBe(false),
 		);
+		// The frame is pinned to light, so browsers that would otherwise use
+		// the OS preference (Safari) keep the puzzle in step with the page.
+		expect(iframe.style.colorScheme).toBe('light');
 	});
 
 	it('reports darkMode: true only when darkModeAvailable AND the OS/browser prefers dark', async () => {
@@ -1061,6 +1064,7 @@ describe('PuzzleIframe', () => {
 		await waitFor(() =>
 			expect(getContextFromSrc(iframe.src).darkMode).toBe(true),
 		);
+		expect(iframe.style.colorScheme).toBe('dark');
 	});
 
 	it('reacts to the OS/browser colour-scheme preference changing while mounted', async () => {
