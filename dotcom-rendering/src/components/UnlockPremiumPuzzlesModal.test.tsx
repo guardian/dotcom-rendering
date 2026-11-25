@@ -124,7 +124,7 @@ describe('UnlockPremiumPuzzlesModal', () => {
 			renderModal();
 			const css = renderedCss();
 
-			expect(css).toContain('--unlock-modal-background: #fef9f6');
+			expect(css).toContain('--unlock-modal-background: #FFFFFF');
 			expect(css).toContain('--unlock-modal-title: #052962');
 			expect(css).toContain('--unlock-modal-tick: #0077B6');
 		});

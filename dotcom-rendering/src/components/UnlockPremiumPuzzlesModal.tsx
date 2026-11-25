@@ -52,8 +52,7 @@ const ARCHIVE_BUTTON_CLASS = 'unlock-modal-archive-button';
  * (so the modal follows the page, including a page forced to light).
  */
 const modalTheme = (darkModeAvailable: boolean) => css`
-	/* stylelint-disable-next-line color-no-hex -- specified by the Design team for the modal background, not in the Source palette */
-	--unlock-modal-background: #fef9f6;
+	--unlock-modal-background: ${sourcePalette.neutral[100]};
 	--unlock-modal-title: ${sourcePalette.brand[400]};
 	--unlock-modal-text: ${sourcePalette.neutral[0]};
 	--unlock-modal-footnote: ${sourcePalette.neutral[0]};
