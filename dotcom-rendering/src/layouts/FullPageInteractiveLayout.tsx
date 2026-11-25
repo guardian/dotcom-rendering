@@ -8,7 +8,7 @@ import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimer } from '../components/AffiliateProducts/AffiliateDisclaimer';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
-import { InteractivesDisableArticleSwipe } from '../components/InteractivesDisableArticleSwipe.island';
+import { InteractivesDisableArticleSwipeInApps } from '../components/InteractivesDisableArticleSwipe.island';
 import { InteractivesNativePlatformWrapper } from '../components/InteractivesNativePlatformWrapper.island';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
@@ -219,7 +219,7 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 						<InteractivesNativePlatformWrapper />
 					</Island>
 					<Island priority="critical">
-						<InteractivesDisableArticleSwipe />
+						<InteractivesDisableArticleSwipeInApps />
 					</Island>
 					<Global styles={temporaryBodyCopyColourOverride} />
 				</>

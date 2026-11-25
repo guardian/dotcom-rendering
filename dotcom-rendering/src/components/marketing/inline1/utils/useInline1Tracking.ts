@@ -12,12 +12,19 @@ import { recordInline1View } from './viewCount';
 interface Props {
 	tracking: Tracking;
 	submitComponentEvent: Inline1Props['submitComponentEvent'];
+	messageType: Inline1Props['variant']['message']['type'];
 }
 
 interface Inline1Tracking {
 	setNode: Dispatch<SetStateAction<HTMLElement | null>>;
 	sendEvent: (action: TAction, idSuffix?: string) => void;
 }
+
+const messageTypeLabels: Record<Props['messageType'], string> = {
+	Inline1SupportMessage: 'SupporterRevenue',
+	Inline1NewsletterMessage: 'Newsletter',
+	Inline1PuzzlesMessage: 'Puzzles',
+};
 
 /**
  * Tracking hook for Inline1 components:
@@ -28,6 +35,7 @@ interface Inline1Tracking {
 export const useInline1Tracking = ({
 	tracking,
 	submitComponentEvent,
+	messageType,
 }: Props): Inline1Tracking => {
 	const sendEvent = useCallback(
 		(action: TAction, idSuffix?: string) => {
@@ -37,11 +45,17 @@ export const useInline1Tracking = ({
 				idSuffix != null
 					? `${campaignCode} : ${idSuffix}`
 					: campaignCode;
-			void submitComponentEvent(
-				createEventFromTracking(action)(tracking, componentId),
+			const event = createEventFromTracking(action)(
+				tracking,
+				componentId,
 			);
+			event.component.labels = [
+				...(event.component.labels ?? []),
+				messageTypeLabels[messageType],
+			];
+			void submitComponentEvent(event);
 		},
-		[tracking, submitComponentEvent],
+		[tracking, submitComponentEvent, messageType],
 	);
 
 	const [hasBeenSeen, setNode] = useIsInView({

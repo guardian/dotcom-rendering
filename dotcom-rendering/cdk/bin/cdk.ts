@@ -130,7 +130,7 @@ export const FaciaRenderingPropsCODE: RenderingCDKStackProps = {
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
 		cpu: 1024,
-		memoryLimitMiB: 2048,
+		memoryLimitMiB: 1280,
 		scaling: {
 			minimumTasks: 1,
 			maximumTasks: 3,
@@ -145,7 +145,7 @@ export const FaciaRenderingPropsCODE: RenderingCDKStackProps = {
 		instancesRequirements: {
 			memoryMin: Size.mebibytes(2048),
 			vCpuCountMin: 1,
-			allowedInstanceTypes: ['c8g.*'],
+			allowedInstanceTypes: ['c8g.medium'],
 		},
 	},
 };
@@ -158,7 +158,7 @@ export const FaciaRenderingPropsPROD: RenderingCDKStackProps = {
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
 		cpu: 1024,
-		memoryLimitMiB: 2048,
+		memoryLimitMiB: 1280,
 		scaling: {
 			minimumTasks: 21,
 			maximumTasks: 210,
@@ -173,7 +173,7 @@ export const FaciaRenderingPropsPROD: RenderingCDKStackProps = {
 		instancesRequirements: {
 			memoryMin: Size.mebibytes(2048),
 			vCpuCountMin: 1,
-			allowedInstanceTypes: ['c8g.*'],
+			allowedInstanceTypes: ['c8g.medium'],
 		},
 	},
 };

@@ -44,7 +44,7 @@ export interface CustomSubnav {
 	header: CustomSubnavHeader;
 	format: 'large' | 'compact';
 	links: CustomSubnavLink[];
-	pages: CustomSubnavTargetedPage[];
+	pages?: CustomSubnavTargetedPage[];
 	images?: CustomSubnavImage[];
 }
 
