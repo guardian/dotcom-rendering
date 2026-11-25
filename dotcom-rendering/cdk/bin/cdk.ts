@@ -46,7 +46,6 @@ export const ArticleRenderingPropsCODE: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
-		managedInstancesProps: {},
 	},
 	targetGroupWeights: {
 		ec2: 0,
@@ -106,12 +105,10 @@ export const ArticleRenderingPropsPROD: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
-		managedInstancesProps: {
-			instancesRequirements: {
-				memoryMin: Size.mebibytes(2048),
-				vCpuCountMin: 1,
-				allowedInstanceTypes: ['c8g.*'],
-			},
+		instancesRequirements: {
+			memoryMin: Size.mebibytes(2048),
+			vCpuCountMin: 1,
+			allowedInstanceTypes: ['c8g.*'],
 		},
 	},
 	targetGroupWeights: {
@@ -133,7 +130,7 @@ export const FaciaRenderingPropsCODE: RenderingCDKStackProps = {
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
 		cpu: 1024,
-		memoryLimitMiB: 2048,
+		memoryLimitMiB: 1280,
 		scaling: {
 			minimumTasks: 1,
 			maximumTasks: 3,
@@ -145,12 +142,10 @@ export const FaciaRenderingPropsCODE: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
-		managedInstancesProps: {
-			instancesRequirements: {
-				memoryMin: Size.mebibytes(2048),
-				vCpuCountMin: 1,
-				allowedInstanceTypes: ['c8g.*'],
-			},
+		instancesRequirements: {
+			memoryMin: Size.mebibytes(2048),
+			vCpuCountMin: 1,
+			allowedInstanceTypes: ['c8g.medium'],
 		},
 	},
 };
@@ -163,7 +158,7 @@ export const FaciaRenderingPropsPROD: RenderingCDKStackProps = {
 	ecsProps: {
 		imageIdentifier: getImageIdentifier(),
 		cpu: 1024,
-		memoryLimitMiB: 2048,
+		memoryLimitMiB: 1280,
 		scaling: {
 			minimumTasks: 21,
 			maximumTasks: 210,
@@ -175,12 +170,10 @@ export const FaciaRenderingPropsPROD: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
-		managedInstancesProps: {
-			instancesRequirements: {
-				memoryMin: Size.mebibytes(2048),
-				vCpuCountMin: 1,
-				allowedInstanceTypes: ['c8g.*'],
-			},
+		instancesRequirements: {
+			memoryMin: Size.mebibytes(2048),
+			vCpuCountMin: 1,
+			allowedInstanceTypes: ['c8g.medium'],
 		},
 	},
 };
@@ -204,12 +197,10 @@ export const TagPageRenderingPropsCODE: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
-		managedInstancesProps: {
-			instancesRequirements: {
-				memoryMin: Size.mebibytes(2048),
-				vCpuCountMin: 1,
-				allowedInstanceTypes: ['c8g.*'],
-			},
+		instancesRequirements: {
+			memoryMin: Size.mebibytes(2048),
+			vCpuCountMin: 1,
+			allowedInstanceTypes: ['c8g.*'],
 		},
 	},
 };
@@ -239,12 +230,10 @@ export const TagPageRenderingPropsPROD: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
-		managedInstancesProps: {
-			instancesRequirements: {
-				memoryMin: Size.mebibytes(2048),
-				vCpuCountMin: 1,
-				allowedInstanceTypes: ['c8g.*'],
-			},
+		instancesRequirements: {
+			memoryMin: Size.mebibytes(2048),
+			vCpuCountMin: 1,
+			allowedInstanceTypes: ['c8g.*'],
 		},
 	},
 };
@@ -274,7 +263,6 @@ export const InteractiveRenderingPropsCODE: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
-		managedInstancesProps: {},
 	},
 };
 /** Interactive */
@@ -303,12 +291,10 @@ export const InteractiveRenderingPropsPROD: RenderingCDKStackProps = {
 				scaleOutCooldown: Duration.seconds(60),
 			},
 		},
-		managedInstancesProps: {
-			instancesRequirements: {
-				memoryMin: Size.mebibytes(2048),
-				vCpuCountMin: 1,
-				allowedInstanceTypes: ['c8g.*'],
-			},
+		instancesRequirements: {
+			memoryMin: Size.mebibytes(2048),
+			vCpuCountMin: 1,
+			allowedInstanceTypes: ['c8g.*'],
 		},
 	},
 };

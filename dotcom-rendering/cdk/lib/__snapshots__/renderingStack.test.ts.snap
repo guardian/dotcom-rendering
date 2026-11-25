@@ -1691,7 +1691,6 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering CODE (
       "GuApplicationTargetGroup",
       "GuRepository",
       "GuArtifactsAccountId",
-      "GuRepository",
       "GuHttpsEgressSecurityGroup",
       "GuECSManagedInstanceRoleExperimental",
       "GuECSInstanceRolePolicyForManagedInstancesExperimental",
@@ -2518,47 +2517,73 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering CODE (
             "VersionConsistency": "disabled",
           },
           {
+            "Command": [
+              "/bin/bash",
+              "-c",
+              "mkdir -p /tmp/guardian && printf '%s\\n' "$GU_FLUENT_BIT_PARSERS" > /tmp/guardian/guardian-parsers.conf && printf '%s\\n' "$GU_FLUENT_BIT_CONFIG" > /tmp/guardian/guardian.conf && exec /init/fluent_bit_init_entrypoint.sh",
+            ],
             "Environment": [
               {
-                "Name": "STACK",
-                "Value": "frontend",
+                "Name": "aws_fluent_bit_init_file_1",
+                "Value": "/tmp/guardian/guardian-parsers.conf",
               },
               {
-                "Name": "STAGE",
-                "Value": "CODE",
+                "Name": "aws_fluent_bit_init_file_2",
+                "Value": "/ecs/ecs-metadata.conf",
               },
               {
-                "Name": "APP",
-                "Value": "article-rendering",
+                "Name": "aws_fluent_bit_init_file_3",
+                "Value": "/tmp/guardian/guardian.conf",
               },
               {
-                "Name": "TASK_NAME",
-                "Value": "article-rendering",
+                "Name": "OUTPUT_PLUGIN",
+                "Value": "null",
               },
               {
-                "Name": "GU_REPO",
-                "Value": "guardian/dotcom-rendering",
+                "Name": "GU_FLUENT_BIT_PARSERS",
+                "Value": "
+[PARSER]
+    Name json
+    Format json
+    Time_Key time
+    Time_Format %Y-%m-%dT%H:%M:%SZ",
+              },
+              {
+                "Name": "GU_FLUENT_BIT_CONFIG",
+                "Value": "
+[FILTER]
+    Name modify
+    Match *
+    Rename log message
+
+[FILTER]
+    Name parser
+    Match *
+    Key_Name message
+    Parser json
+    Reserve_Data On
+
+[FILTER]
+    Name modify
+    Match *
+    Add ShippedBy devx-logs
+    Add gu:logging-sidecar sha256:0aa2921b14e44b8f00e057c68a0a3bafb944261a1c5aac36362bf2e1be8bef4d
+    Add stack frontend
+    Add stage CODE
+    Add app article-rendering
+    Add gu:repo guardian/dotcom-rendering
+    Add task article-rendering
+
+[OUTPUT]
+    Name \${OUTPUT_PLUGIN}
+    Match *",
               },
             ],
             "Essential": true,
             "FirelensConfiguration": {
               "Type": "fluentbit",
             },
-            "Image": {
-              "Fn::Join": [
-                "",
-                [
-                  {
-                    "Ref": "ArtifactsAccountId",
-                  },
-                  ".dkr.ecr.eu-west-1.",
-                  {
-                    "Ref": "AWS::URLSuffix",
-                  },
-                  "/guardian/cdk/logging@sha256:32dce4e7a9e628b053ca42c271d7bbdf3697b4980c4612e845a15257c2bd1d99",
-                ],
-              ],
-            },
+            "Image": "public.ecr.aws/aws-observability/aws-for-fluent-bit:init-3.4.11@sha256:0aa2921b14e44b8f00e057c68a0a3bafb944261a1c5aac36362bf2e1be8bef4d",
             "LogConfiguration": {
               "LogDriver": "awslogs",
               "Options": {
@@ -2571,7 +2596,7 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering CODE (
             },
             "MountPoints": [
               {
-                "ContainerPath": "/init",
+                "ContainerPath": "/tmp",
                 "ReadOnly": false,
                 "SourceVolume": "logging-volume",
               },
@@ -2736,30 +2761,6 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering CODE (
               "Action": "ecr:GetAuthorizationToken",
               "Effect": "Allow",
               "Resource": "*",
-            },
-            {
-              "Action": [
-                "ecr:BatchCheckLayerAvailability",
-                "ecr:GetDownloadUrlForLayer",
-                "ecr:BatchGetImage",
-              ],
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition",
-                    },
-                    ":ecr:eu-west-1:",
-                    {
-                      "Ref": "ArtifactsAccountId",
-                    },
-                    ":repository/guardian/cdk/logging",
-                  ],
-                ],
-              },
             },
             {
               "Action": [
@@ -3623,6 +3624,7 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering CODE (
               },
             },
           },
+          "PropagateTags": "CAPACITY_PROVIDER",
         },
         "Tags": [
           {
@@ -4069,7 +4071,6 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering PROD (
       "GuApplicationTargetGroup",
       "GuRepository",
       "GuArtifactsAccountId",
-      "GuRepository",
       "GuHttpsEgressSecurityGroup",
       "GuECSManagedInstanceRoleExperimental",
       "GuECSInstanceRolePolicyForManagedInstancesExperimental",
@@ -5009,47 +5010,73 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering PROD (
             "VersionConsistency": "disabled",
           },
           {
+            "Command": [
+              "/bin/bash",
+              "-c",
+              "mkdir -p /tmp/guardian && printf '%s\\n' "$GU_FLUENT_BIT_PARSERS" > /tmp/guardian/guardian-parsers.conf && printf '%s\\n' "$GU_FLUENT_BIT_CONFIG" > /tmp/guardian/guardian.conf && exec /init/fluent_bit_init_entrypoint.sh",
+            ],
             "Environment": [
               {
-                "Name": "STACK",
-                "Value": "frontend",
+                "Name": "aws_fluent_bit_init_file_1",
+                "Value": "/tmp/guardian/guardian-parsers.conf",
               },
               {
-                "Name": "STAGE",
-                "Value": "PROD",
+                "Name": "aws_fluent_bit_init_file_2",
+                "Value": "/ecs/ecs-metadata.conf",
               },
               {
-                "Name": "APP",
-                "Value": "article-rendering",
+                "Name": "aws_fluent_bit_init_file_3",
+                "Value": "/tmp/guardian/guardian.conf",
               },
               {
-                "Name": "TASK_NAME",
-                "Value": "article-rendering",
+                "Name": "OUTPUT_PLUGIN",
+                "Value": "null",
               },
               {
-                "Name": "GU_REPO",
-                "Value": "guardian/dotcom-rendering",
+                "Name": "GU_FLUENT_BIT_PARSERS",
+                "Value": "
+[PARSER]
+    Name json
+    Format json
+    Time_Key time
+    Time_Format %Y-%m-%dT%H:%M:%SZ",
+              },
+              {
+                "Name": "GU_FLUENT_BIT_CONFIG",
+                "Value": "
+[FILTER]
+    Name modify
+    Match *
+    Rename log message
+
+[FILTER]
+    Name parser
+    Match *
+    Key_Name message
+    Parser json
+    Reserve_Data On
+
+[FILTER]
+    Name modify
+    Match *
+    Add ShippedBy devx-logs
+    Add gu:logging-sidecar sha256:0aa2921b14e44b8f00e057c68a0a3bafb944261a1c5aac36362bf2e1be8bef4d
+    Add stack frontend
+    Add stage PROD
+    Add app article-rendering
+    Add gu:repo guardian/dotcom-rendering
+    Add task article-rendering
+
+[OUTPUT]
+    Name \${OUTPUT_PLUGIN}
+    Match *",
               },
             ],
             "Essential": true,
             "FirelensConfiguration": {
               "Type": "fluentbit",
             },
-            "Image": {
-              "Fn::Join": [
-                "",
-                [
-                  {
-                    "Ref": "ArtifactsAccountId",
-                  },
-                  ".dkr.ecr.eu-west-1.",
-                  {
-                    "Ref": "AWS::URLSuffix",
-                  },
-                  "/guardian/cdk/logging@sha256:32dce4e7a9e628b053ca42c271d7bbdf3697b4980c4612e845a15257c2bd1d99",
-                ],
-              ],
-            },
+            "Image": "public.ecr.aws/aws-observability/aws-for-fluent-bit:init-3.4.11@sha256:0aa2921b14e44b8f00e057c68a0a3bafb944261a1c5aac36362bf2e1be8bef4d",
             "LogConfiguration": {
               "LogDriver": "awslogs",
               "Options": {
@@ -5062,7 +5089,7 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering PROD (
             },
             "MountPoints": [
               {
-                "ContainerPath": "/init",
+                "ContainerPath": "/tmp",
                 "ReadOnly": false,
                 "SourceVolume": "logging-volume",
               },
@@ -5227,30 +5254,6 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering PROD (
               "Action": "ecr:GetAuthorizationToken",
               "Effect": "Allow",
               "Resource": "*",
-            },
-            {
-              "Action": [
-                "ecr:BatchCheckLayerAvailability",
-                "ecr:GetDownloadUrlForLayer",
-                "ecr:BatchGetImage",
-              ],
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition",
-                    },
-                    ":ecr:eu-west-1:",
-                    {
-                      "Ref": "ArtifactsAccountId",
-                    },
-                    ":repository/guardian/cdk/logging",
-                  ],
-                ],
-              },
             },
             {
               "Action": [
@@ -6435,6 +6438,7 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering PROD (
               },
             },
           },
+          "PropagateTags": "CAPACITY_PROVIDER",
         },
         "Tags": [
           {
@@ -6989,7 +6993,6 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering CODE (us
       "GuLoadBalancedAppExperimental",
       "GuRepository",
       "GuArtifactsAccountId",
-      "GuRepository",
       "GuLoggingStreamNameParameter",
       "GuHttpsEgressSecurityGroup",
       "GuECSManagedInstanceRoleExperimental",
@@ -7657,47 +7660,73 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering CODE (us
             "VersionConsistency": "disabled",
           },
           {
+            "Command": [
+              "/bin/bash",
+              "-c",
+              "mkdir -p /tmp/guardian && printf '%s\\n' "$GU_FLUENT_BIT_PARSERS" > /tmp/guardian/guardian-parsers.conf && printf '%s\\n' "$GU_FLUENT_BIT_CONFIG" > /tmp/guardian/guardian.conf && exec /init/fluent_bit_init_entrypoint.sh",
+            ],
             "Environment": [
               {
-                "Name": "STACK",
-                "Value": "frontend",
+                "Name": "aws_fluent_bit_init_file_1",
+                "Value": "/tmp/guardian/guardian-parsers.conf",
               },
               {
-                "Name": "STAGE",
-                "Value": "CODE",
+                "Name": "aws_fluent_bit_init_file_2",
+                "Value": "/ecs/ecs-metadata.conf",
               },
               {
-                "Name": "APP",
-                "Value": "facia-rendering",
+                "Name": "aws_fluent_bit_init_file_3",
+                "Value": "/tmp/guardian/guardian.conf",
               },
               {
-                "Name": "TASK_NAME",
-                "Value": "facia-rendering",
+                "Name": "OUTPUT_PLUGIN",
+                "Value": "null",
               },
               {
-                "Name": "GU_REPO",
-                "Value": "guardian/dotcom-rendering",
+                "Name": "GU_FLUENT_BIT_PARSERS",
+                "Value": "
+[PARSER]
+    Name json
+    Format json
+    Time_Key time
+    Time_Format %Y-%m-%dT%H:%M:%SZ",
+              },
+              {
+                "Name": "GU_FLUENT_BIT_CONFIG",
+                "Value": "
+[FILTER]
+    Name modify
+    Match *
+    Rename log message
+
+[FILTER]
+    Name parser
+    Match *
+    Key_Name message
+    Parser json
+    Reserve_Data On
+
+[FILTER]
+    Name modify
+    Match *
+    Add ShippedBy devx-logs
+    Add gu:logging-sidecar sha256:0aa2921b14e44b8f00e057c68a0a3bafb944261a1c5aac36362bf2e1be8bef4d
+    Add stack frontend
+    Add stage CODE
+    Add app facia-rendering
+    Add gu:repo guardian/dotcom-rendering
+    Add task facia-rendering
+
+[OUTPUT]
+    Name \${OUTPUT_PLUGIN}
+    Match *",
               },
             ],
             "Essential": true,
             "FirelensConfiguration": {
               "Type": "fluentbit",
             },
-            "Image": {
-              "Fn::Join": [
-                "",
-                [
-                  {
-                    "Ref": "ArtifactsAccountId",
-                  },
-                  ".dkr.ecr.eu-west-1.",
-                  {
-                    "Ref": "AWS::URLSuffix",
-                  },
-                  "/guardian/cdk/logging@sha256:32dce4e7a9e628b053ca42c271d7bbdf3697b4980c4612e845a15257c2bd1d99",
-                ],
-              ],
-            },
+            "Image": "public.ecr.aws/aws-observability/aws-for-fluent-bit:init-3.4.11@sha256:0aa2921b14e44b8f00e057c68a0a3bafb944261a1c5aac36362bf2e1be8bef4d",
             "LogConfiguration": {
               "LogDriver": "awslogs",
               "Options": {
@@ -7710,7 +7739,7 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering CODE (us
             },
             "MountPoints": [
               {
-                "ContainerPath": "/init",
+                "ContainerPath": "/tmp",
                 "ReadOnly": false,
                 "SourceVolume": "logging-volume",
               },
@@ -7759,7 +7788,7 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering CODE (us
           ],
         },
         "Family": "FaciaRenderingCODEEcsTaskDefinitionC6AC86CD",
-        "Memory": "2048",
+        "Memory": "1280",
         "NetworkMode": "awsvpc",
         "RequiresCompatibilities": [
           "MANAGED_INSTANCES",
@@ -7875,30 +7904,6 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering CODE (us
               "Action": "ecr:GetAuthorizationToken",
               "Effect": "Allow",
               "Resource": "*",
-            },
-            {
-              "Action": [
-                "ecr:BatchCheckLayerAvailability",
-                "ecr:GetDownloadUrlForLayer",
-                "ecr:BatchGetImage",
-              ],
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition",
-                    },
-                    ":ecr:eu-west-1:",
-                    {
-                      "Ref": "ArtifactsAccountId",
-                    },
-                    ":repository/guardian/cdk/logging",
-                  ],
-                ],
-              },
             },
             {
               "Action": [
@@ -8473,7 +8478,7 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering CODE (us
             },
             "InstanceRequirements": {
               "AllowedInstanceTypes": [
-                "c8g.*",
+                "c8g.medium",
               ],
               "MemoryMiB": {
                 "Min": 2048,
@@ -8496,6 +8501,7 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering CODE (us
               },
             },
           },
+          "PropagateTags": "CAPACITY_PROVIDER",
         },
         "Tags": [
           {
@@ -8658,7 +8664,6 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering PROD (us
       "GuLoadBalancedAppExperimental",
       "GuRepository",
       "GuArtifactsAccountId",
-      "GuRepository",
       "GuLoggingStreamNameParameter",
       "GuHttpsEgressSecurityGroup",
       "GuECSManagedInstanceRoleExperimental",
@@ -9327,47 +9332,73 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering PROD (us
             "VersionConsistency": "disabled",
           },
           {
+            "Command": [
+              "/bin/bash",
+              "-c",
+              "mkdir -p /tmp/guardian && printf '%s\\n' "$GU_FLUENT_BIT_PARSERS" > /tmp/guardian/guardian-parsers.conf && printf '%s\\n' "$GU_FLUENT_BIT_CONFIG" > /tmp/guardian/guardian.conf && exec /init/fluent_bit_init_entrypoint.sh",
+            ],
             "Environment": [
               {
-                "Name": "STACK",
-                "Value": "frontend",
+                "Name": "aws_fluent_bit_init_file_1",
+                "Value": "/tmp/guardian/guardian-parsers.conf",
               },
               {
-                "Name": "STAGE",
-                "Value": "PROD",
+                "Name": "aws_fluent_bit_init_file_2",
+                "Value": "/ecs/ecs-metadata.conf",
               },
               {
-                "Name": "APP",
-                "Value": "facia-rendering",
+                "Name": "aws_fluent_bit_init_file_3",
+                "Value": "/tmp/guardian/guardian.conf",
               },
               {
-                "Name": "TASK_NAME",
-                "Value": "facia-rendering",
+                "Name": "OUTPUT_PLUGIN",
+                "Value": "null",
               },
               {
-                "Name": "GU_REPO",
-                "Value": "guardian/dotcom-rendering",
+                "Name": "GU_FLUENT_BIT_PARSERS",
+                "Value": "
+[PARSER]
+    Name json
+    Format json
+    Time_Key time
+    Time_Format %Y-%m-%dT%H:%M:%SZ",
+              },
+              {
+                "Name": "GU_FLUENT_BIT_CONFIG",
+                "Value": "
+[FILTER]
+    Name modify
+    Match *
+    Rename log message
+
+[FILTER]
+    Name parser
+    Match *
+    Key_Name message
+    Parser json
+    Reserve_Data On
+
+[FILTER]
+    Name modify
+    Match *
+    Add ShippedBy devx-logs
+    Add gu:logging-sidecar sha256:0aa2921b14e44b8f00e057c68a0a3bafb944261a1c5aac36362bf2e1be8bef4d
+    Add stack frontend
+    Add stage PROD
+    Add app facia-rendering
+    Add gu:repo guardian/dotcom-rendering
+    Add task facia-rendering
+
+[OUTPUT]
+    Name \${OUTPUT_PLUGIN}
+    Match *",
               },
             ],
             "Essential": true,
             "FirelensConfiguration": {
               "Type": "fluentbit",
             },
-            "Image": {
-              "Fn::Join": [
-                "",
-                [
-                  {
-                    "Ref": "ArtifactsAccountId",
-                  },
-                  ".dkr.ecr.eu-west-1.",
-                  {
-                    "Ref": "AWS::URLSuffix",
-                  },
-                  "/guardian/cdk/logging@sha256:32dce4e7a9e628b053ca42c271d7bbdf3697b4980c4612e845a15257c2bd1d99",
-                ],
-              ],
-            },
+            "Image": "public.ecr.aws/aws-observability/aws-for-fluent-bit:init-3.4.11@sha256:0aa2921b14e44b8f00e057c68a0a3bafb944261a1c5aac36362bf2e1be8bef4d",
             "LogConfiguration": {
               "LogDriver": "awslogs",
               "Options": {
@@ -9380,7 +9411,7 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering PROD (us
             },
             "MountPoints": [
               {
-                "ContainerPath": "/init",
+                "ContainerPath": "/tmp",
                 "ReadOnly": false,
                 "SourceVolume": "logging-volume",
               },
@@ -9429,7 +9460,7 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering PROD (us
           ],
         },
         "Family": "FaciaRenderingPRODEcsTaskDefinition9EA5D92F",
-        "Memory": "2048",
+        "Memory": "1280",
         "NetworkMode": "awsvpc",
         "RequiresCompatibilities": [
           "MANAGED_INSTANCES",
@@ -9545,30 +9576,6 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering PROD (us
               "Action": "ecr:GetAuthorizationToken",
               "Effect": "Allow",
               "Resource": "*",
-            },
-            {
-              "Action": [
-                "ecr:BatchCheckLayerAvailability",
-                "ecr:GetDownloadUrlForLayer",
-                "ecr:BatchGetImage",
-              ],
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition",
-                    },
-                    ":ecr:eu-west-1:",
-                    {
-                      "Ref": "ArtifactsAccountId",
-                    },
-                    ":repository/guardian/cdk/logging",
-                  ],
-                ],
-              },
             },
             {
               "Action": [
@@ -10268,7 +10275,7 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering PROD (us
             },
             "InstanceRequirements": {
               "AllowedInstanceTypes": [
-                "c8g.*",
+                "c8g.medium",
               ],
               "MemoryMiB": {
                 "Min": 2048,
@@ -10291,6 +10298,7 @@ exports[`The RenderingCDKStack matches the snapshot for Facia Rendering PROD (us
               },
             },
           },
+          "PropagateTags": "CAPACITY_PROVIDER",
         },
         "Tags": [
           {
@@ -10453,7 +10461,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
       "GuLoadBalancedAppExperimental",
       "GuRepository",
       "GuArtifactsAccountId",
-      "GuRepository",
       "GuLoggingStreamNameParameter",
       "GuHttpsEgressSecurityGroup",
       "GuECSManagedInstanceRoleExperimental",
@@ -11121,47 +11128,73 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
             "VersionConsistency": "disabled",
           },
           {
+            "Command": [
+              "/bin/bash",
+              "-c",
+              "mkdir -p /tmp/guardian && printf '%s\\n' "$GU_FLUENT_BIT_PARSERS" > /tmp/guardian/guardian-parsers.conf && printf '%s\\n' "$GU_FLUENT_BIT_CONFIG" > /tmp/guardian/guardian.conf && exec /init/fluent_bit_init_entrypoint.sh",
+            ],
             "Environment": [
               {
-                "Name": "STACK",
-                "Value": "frontend",
+                "Name": "aws_fluent_bit_init_file_1",
+                "Value": "/tmp/guardian/guardian-parsers.conf",
               },
               {
-                "Name": "STAGE",
-                "Value": "CODE",
+                "Name": "aws_fluent_bit_init_file_2",
+                "Value": "/ecs/ecs-metadata.conf",
               },
               {
-                "Name": "APP",
-                "Value": "interactive-rendering",
+                "Name": "aws_fluent_bit_init_file_3",
+                "Value": "/tmp/guardian/guardian.conf",
               },
               {
-                "Name": "TASK_NAME",
-                "Value": "interactive-rendering",
+                "Name": "OUTPUT_PLUGIN",
+                "Value": "null",
               },
               {
-                "Name": "GU_REPO",
-                "Value": "guardian/dotcom-rendering",
+                "Name": "GU_FLUENT_BIT_PARSERS",
+                "Value": "
+[PARSER]
+    Name json
+    Format json
+    Time_Key time
+    Time_Format %Y-%m-%dT%H:%M:%SZ",
+              },
+              {
+                "Name": "GU_FLUENT_BIT_CONFIG",
+                "Value": "
+[FILTER]
+    Name modify
+    Match *
+    Rename log message
+
+[FILTER]
+    Name parser
+    Match *
+    Key_Name message
+    Parser json
+    Reserve_Data On
+
+[FILTER]
+    Name modify
+    Match *
+    Add ShippedBy devx-logs
+    Add gu:logging-sidecar sha256:0aa2921b14e44b8f00e057c68a0a3bafb944261a1c5aac36362bf2e1be8bef4d
+    Add stack frontend
+    Add stage CODE
+    Add app interactive-rendering
+    Add gu:repo guardian/dotcom-rendering
+    Add task interactive-rendering
+
+[OUTPUT]
+    Name \${OUTPUT_PLUGIN}
+    Match *",
               },
             ],
             "Essential": true,
             "FirelensConfiguration": {
               "Type": "fluentbit",
             },
-            "Image": {
-              "Fn::Join": [
-                "",
-                [
-                  {
-                    "Ref": "ArtifactsAccountId",
-                  },
-                  ".dkr.ecr.eu-west-1.",
-                  {
-                    "Ref": "AWS::URLSuffix",
-                  },
-                  "/guardian/cdk/logging@sha256:32dce4e7a9e628b053ca42c271d7bbdf3697b4980c4612e845a15257c2bd1d99",
-                ],
-              ],
-            },
+            "Image": "public.ecr.aws/aws-observability/aws-for-fluent-bit:init-3.4.11@sha256:0aa2921b14e44b8f00e057c68a0a3bafb944261a1c5aac36362bf2e1be8bef4d",
             "LogConfiguration": {
               "LogDriver": "awslogs",
               "Options": {
@@ -11174,7 +11207,7 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
             },
             "MountPoints": [
               {
-                "ContainerPath": "/init",
+                "ContainerPath": "/tmp",
                 "ReadOnly": false,
                 "SourceVolume": "logging-volume",
               },
@@ -11339,30 +11372,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
               "Action": "ecr:GetAuthorizationToken",
               "Effect": "Allow",
               "Resource": "*",
-            },
-            {
-              "Action": [
-                "ecr:BatchCheckLayerAvailability",
-                "ecr:GetDownloadUrlForLayer",
-                "ecr:BatchGetImage",
-              ],
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition",
-                    },
-                    ":ecr:eu-west-1:",
-                    {
-                      "Ref": "ArtifactsAccountId",
-                    },
-                    ":repository/guardian/cdk/logging",
-                  ],
-                ],
-              },
             },
             {
               "Action": [
@@ -11963,6 +11972,7 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering CO
               },
             },
           },
+          "PropagateTags": "CAPACITY_PROVIDER",
         },
         "Tags": [
           {
@@ -12125,7 +12135,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
       "GuLoadBalancedAppExperimental",
       "GuRepository",
       "GuArtifactsAccountId",
-      "GuRepository",
       "GuLoggingStreamNameParameter",
       "GuHttpsEgressSecurityGroup",
       "GuECSManagedInstanceRoleExperimental",
@@ -12794,47 +12803,73 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
             "VersionConsistency": "disabled",
           },
           {
+            "Command": [
+              "/bin/bash",
+              "-c",
+              "mkdir -p /tmp/guardian && printf '%s\\n' "$GU_FLUENT_BIT_PARSERS" > /tmp/guardian/guardian-parsers.conf && printf '%s\\n' "$GU_FLUENT_BIT_CONFIG" > /tmp/guardian/guardian.conf && exec /init/fluent_bit_init_entrypoint.sh",
+            ],
             "Environment": [
               {
-                "Name": "STACK",
-                "Value": "frontend",
+                "Name": "aws_fluent_bit_init_file_1",
+                "Value": "/tmp/guardian/guardian-parsers.conf",
               },
               {
-                "Name": "STAGE",
-                "Value": "PROD",
+                "Name": "aws_fluent_bit_init_file_2",
+                "Value": "/ecs/ecs-metadata.conf",
               },
               {
-                "Name": "APP",
-                "Value": "interactive-rendering",
+                "Name": "aws_fluent_bit_init_file_3",
+                "Value": "/tmp/guardian/guardian.conf",
               },
               {
-                "Name": "TASK_NAME",
-                "Value": "interactive-rendering",
+                "Name": "OUTPUT_PLUGIN",
+                "Value": "null",
               },
               {
-                "Name": "GU_REPO",
-                "Value": "guardian/dotcom-rendering",
+                "Name": "GU_FLUENT_BIT_PARSERS",
+                "Value": "
+[PARSER]
+    Name json
+    Format json
+    Time_Key time
+    Time_Format %Y-%m-%dT%H:%M:%SZ",
+              },
+              {
+                "Name": "GU_FLUENT_BIT_CONFIG",
+                "Value": "
+[FILTER]
+    Name modify
+    Match *
+    Rename log message
+
+[FILTER]
+    Name parser
+    Match *
+    Key_Name message
+    Parser json
+    Reserve_Data On
+
+[FILTER]
+    Name modify
+    Match *
+    Add ShippedBy devx-logs
+    Add gu:logging-sidecar sha256:0aa2921b14e44b8f00e057c68a0a3bafb944261a1c5aac36362bf2e1be8bef4d
+    Add stack frontend
+    Add stage PROD
+    Add app interactive-rendering
+    Add gu:repo guardian/dotcom-rendering
+    Add task interactive-rendering
+
+[OUTPUT]
+    Name \${OUTPUT_PLUGIN}
+    Match *",
               },
             ],
             "Essential": true,
             "FirelensConfiguration": {
               "Type": "fluentbit",
             },
-            "Image": {
-              "Fn::Join": [
-                "",
-                [
-                  {
-                    "Ref": "ArtifactsAccountId",
-                  },
-                  ".dkr.ecr.eu-west-1.",
-                  {
-                    "Ref": "AWS::URLSuffix",
-                  },
-                  "/guardian/cdk/logging@sha256:32dce4e7a9e628b053ca42c271d7bbdf3697b4980c4612e845a15257c2bd1d99",
-                ],
-              ],
-            },
+            "Image": "public.ecr.aws/aws-observability/aws-for-fluent-bit:init-3.4.11@sha256:0aa2921b14e44b8f00e057c68a0a3bafb944261a1c5aac36362bf2e1be8bef4d",
             "LogConfiguration": {
               "LogDriver": "awslogs",
               "Options": {
@@ -12847,7 +12882,7 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
             },
             "MountPoints": [
               {
-                "ContainerPath": "/init",
+                "ContainerPath": "/tmp",
                 "ReadOnly": false,
                 "SourceVolume": "logging-volume",
               },
@@ -13012,30 +13047,6 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
               "Action": "ecr:GetAuthorizationToken",
               "Effect": "Allow",
               "Resource": "*",
-            },
-            {
-              "Action": [
-                "ecr:BatchCheckLayerAvailability",
-                "ecr:GetDownloadUrlForLayer",
-                "ecr:BatchGetImage",
-              ],
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition",
-                    },
-                    ":ecr:eu-west-1:",
-                    {
-                      "Ref": "ArtifactsAccountId",
-                    },
-                    ":repository/guardian/cdk/logging",
-                  ],
-                ],
-              },
             },
             {
               "Action": [
@@ -13758,6 +13769,7 @@ exports[`The RenderingCDKStack matches the snapshot for Interactive Rendering PR
               },
             },
           },
+          "PropagateTags": "CAPACITY_PROVIDER",
         },
         "Tags": [
           {
@@ -13920,7 +13932,6 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
       "GuLoadBalancedAppExperimental",
       "GuRepository",
       "GuArtifactsAccountId",
-      "GuRepository",
       "GuLoggingStreamNameParameter",
       "GuHttpsEgressSecurityGroup",
       "GuECSManagedInstanceRoleExperimental",
@@ -14588,47 +14599,73 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
             "VersionConsistency": "disabled",
           },
           {
+            "Command": [
+              "/bin/bash",
+              "-c",
+              "mkdir -p /tmp/guardian && printf '%s\\n' "$GU_FLUENT_BIT_PARSERS" > /tmp/guardian/guardian-parsers.conf && printf '%s\\n' "$GU_FLUENT_BIT_CONFIG" > /tmp/guardian/guardian.conf && exec /init/fluent_bit_init_entrypoint.sh",
+            ],
             "Environment": [
               {
-                "Name": "STACK",
-                "Value": "frontend",
+                "Name": "aws_fluent_bit_init_file_1",
+                "Value": "/tmp/guardian/guardian-parsers.conf",
               },
               {
-                "Name": "STAGE",
-                "Value": "CODE",
+                "Name": "aws_fluent_bit_init_file_2",
+                "Value": "/ecs/ecs-metadata.conf",
               },
               {
-                "Name": "APP",
-                "Value": "tag-page-rendering",
+                "Name": "aws_fluent_bit_init_file_3",
+                "Value": "/tmp/guardian/guardian.conf",
               },
               {
-                "Name": "TASK_NAME",
-                "Value": "tag-page-rendering",
+                "Name": "OUTPUT_PLUGIN",
+                "Value": "null",
               },
               {
-                "Name": "GU_REPO",
-                "Value": "guardian/dotcom-rendering",
+                "Name": "GU_FLUENT_BIT_PARSERS",
+                "Value": "
+[PARSER]
+    Name json
+    Format json
+    Time_Key time
+    Time_Format %Y-%m-%dT%H:%M:%SZ",
+              },
+              {
+                "Name": "GU_FLUENT_BIT_CONFIG",
+                "Value": "
+[FILTER]
+    Name modify
+    Match *
+    Rename log message
+
+[FILTER]
+    Name parser
+    Match *
+    Key_Name message
+    Parser json
+    Reserve_Data On
+
+[FILTER]
+    Name modify
+    Match *
+    Add ShippedBy devx-logs
+    Add gu:logging-sidecar sha256:0aa2921b14e44b8f00e057c68a0a3bafb944261a1c5aac36362bf2e1be8bef4d
+    Add stack frontend
+    Add stage CODE
+    Add app tag-page-rendering
+    Add gu:repo guardian/dotcom-rendering
+    Add task tag-page-rendering
+
+[OUTPUT]
+    Name \${OUTPUT_PLUGIN}
+    Match *",
               },
             ],
             "Essential": true,
             "FirelensConfiguration": {
               "Type": "fluentbit",
             },
-            "Image": {
-              "Fn::Join": [
-                "",
-                [
-                  {
-                    "Ref": "ArtifactsAccountId",
-                  },
-                  ".dkr.ecr.eu-west-1.",
-                  {
-                    "Ref": "AWS::URLSuffix",
-                  },
-                  "/guardian/cdk/logging@sha256:32dce4e7a9e628b053ca42c271d7bbdf3697b4980c4612e845a15257c2bd1d99",
-                ],
-              ],
-            },
+            "Image": "public.ecr.aws/aws-observability/aws-for-fluent-bit:init-3.4.11@sha256:0aa2921b14e44b8f00e057c68a0a3bafb944261a1c5aac36362bf2e1be8bef4d",
             "LogConfiguration": {
               "LogDriver": "awslogs",
               "Options": {
@@ -14641,7 +14678,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
             },
             "MountPoints": [
               {
-                "ContainerPath": "/init",
+                "ContainerPath": "/tmp",
                 "ReadOnly": false,
                 "SourceVolume": "logging-volume",
               },
@@ -14806,30 +14843,6 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
               "Action": "ecr:GetAuthorizationToken",
               "Effect": "Allow",
               "Resource": "*",
-            },
-            {
-              "Action": [
-                "ecr:BatchCheckLayerAvailability",
-                "ecr:GetDownloadUrlForLayer",
-                "ecr:BatchGetImage",
-              ],
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition",
-                    },
-                    ":ecr:eu-west-1:",
-                    {
-                      "Ref": "ArtifactsAccountId",
-                    },
-                    ":repository/guardian/cdk/logging",
-                  ],
-                ],
-              },
             },
             {
               "Action": [
@@ -15378,6 +15391,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering CODE 
               },
             },
           },
+          "PropagateTags": "CAPACITY_PROVIDER",
         },
         "Tags": [
           {
@@ -15589,7 +15603,6 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
       "GuLoadBalancedAppExperimental",
       "GuRepository",
       "GuArtifactsAccountId",
-      "GuRepository",
       "GuLoggingStreamNameParameter",
       "GuHttpsEgressSecurityGroup",
       "GuECSManagedInstanceRoleExperimental",
@@ -16258,47 +16271,73 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
             "VersionConsistency": "disabled",
           },
           {
+            "Command": [
+              "/bin/bash",
+              "-c",
+              "mkdir -p /tmp/guardian && printf '%s\\n' "$GU_FLUENT_BIT_PARSERS" > /tmp/guardian/guardian-parsers.conf && printf '%s\\n' "$GU_FLUENT_BIT_CONFIG" > /tmp/guardian/guardian.conf && exec /init/fluent_bit_init_entrypoint.sh",
+            ],
             "Environment": [
               {
-                "Name": "STACK",
-                "Value": "frontend",
+                "Name": "aws_fluent_bit_init_file_1",
+                "Value": "/tmp/guardian/guardian-parsers.conf",
               },
               {
-                "Name": "STAGE",
-                "Value": "PROD",
+                "Name": "aws_fluent_bit_init_file_2",
+                "Value": "/ecs/ecs-metadata.conf",
               },
               {
-                "Name": "APP",
-                "Value": "tag-page-rendering",
+                "Name": "aws_fluent_bit_init_file_3",
+                "Value": "/tmp/guardian/guardian.conf",
               },
               {
-                "Name": "TASK_NAME",
-                "Value": "tag-page-rendering",
+                "Name": "OUTPUT_PLUGIN",
+                "Value": "null",
               },
               {
-                "Name": "GU_REPO",
-                "Value": "guardian/dotcom-rendering",
+                "Name": "GU_FLUENT_BIT_PARSERS",
+                "Value": "
+[PARSER]
+    Name json
+    Format json
+    Time_Key time
+    Time_Format %Y-%m-%dT%H:%M:%SZ",
+              },
+              {
+                "Name": "GU_FLUENT_BIT_CONFIG",
+                "Value": "
+[FILTER]
+    Name modify
+    Match *
+    Rename log message
+
+[FILTER]
+    Name parser
+    Match *
+    Key_Name message
+    Parser json
+    Reserve_Data On
+
+[FILTER]
+    Name modify
+    Match *
+    Add ShippedBy devx-logs
+    Add gu:logging-sidecar sha256:0aa2921b14e44b8f00e057c68a0a3bafb944261a1c5aac36362bf2e1be8bef4d
+    Add stack frontend
+    Add stage PROD
+    Add app tag-page-rendering
+    Add gu:repo guardian/dotcom-rendering
+    Add task tag-page-rendering
+
+[OUTPUT]
+    Name \${OUTPUT_PLUGIN}
+    Match *",
               },
             ],
             "Essential": true,
             "FirelensConfiguration": {
               "Type": "fluentbit",
             },
-            "Image": {
-              "Fn::Join": [
-                "",
-                [
-                  {
-                    "Ref": "ArtifactsAccountId",
-                  },
-                  ".dkr.ecr.eu-west-1.",
-                  {
-                    "Ref": "AWS::URLSuffix",
-                  },
-                  "/guardian/cdk/logging@sha256:32dce4e7a9e628b053ca42c271d7bbdf3697b4980c4612e845a15257c2bd1d99",
-                ],
-              ],
-            },
+            "Image": "public.ecr.aws/aws-observability/aws-for-fluent-bit:init-3.4.11@sha256:0aa2921b14e44b8f00e057c68a0a3bafb944261a1c5aac36362bf2e1be8bef4d",
             "LogConfiguration": {
               "LogDriver": "awslogs",
               "Options": {
@@ -16311,7 +16350,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
             },
             "MountPoints": [
               {
-                "ContainerPath": "/init",
+                "ContainerPath": "/tmp",
                 "ReadOnly": false,
                 "SourceVolume": "logging-volume",
               },
@@ -16476,30 +16515,6 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
               "Action": "ecr:GetAuthorizationToken",
               "Effect": "Allow",
               "Resource": "*",
-            },
-            {
-              "Action": [
-                "ecr:BatchCheckLayerAvailability",
-                "ecr:GetDownloadUrlForLayer",
-                "ecr:BatchGetImage",
-              ],
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition",
-                    },
-                    ":ecr:eu-west-1:",
-                    {
-                      "Ref": "ArtifactsAccountId",
-                    },
-                    ":repository/guardian/cdk/logging",
-                  ],
-                ],
-              },
             },
             {
               "Action": [
@@ -17173,6 +17188,7 @@ exports[`The RenderingCDKStack matches the snapshot for Tag Page Rendering PROD 
               },
             },
           },
+          "PropagateTags": "CAPACITY_PROVIDER",
         },
         "Tags": [
           {

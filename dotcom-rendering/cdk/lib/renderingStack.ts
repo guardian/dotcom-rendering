@@ -301,8 +301,8 @@ export class RenderingCDKStack extends CDKStack {
 							scaling: ecsProps.scaling,
 							provisionManagedSecurityRole:
 								ecsProps.provisionManagedSecurityRole,
-							managedInstancesProps:
-								ecsProps.managedInstancesProps,
+							instancesRequirements:
+								ecsProps.instancesRequirements,
 						},
 					}),
 			...(targetGroupWeights == null ? {} : { targetGroupWeights }),

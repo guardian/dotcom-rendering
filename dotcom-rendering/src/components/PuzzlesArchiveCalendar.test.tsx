@@ -1156,7 +1156,7 @@ describe('PuzzlesArchiveCalendar', () => {
 		expect(screen.getByText('Sat 3 Oct')).toBeInTheDocument();
 	});
 
-	it('shows Played on the recent cards from the API state only', () => {
+	it('shows Played and In progress on the recent cards from the API state only', () => {
 		jest.useFakeTimers().setSystemTime(new Date('2026-10-07T12:00:00Z'));
 		const statuses = ['completed', 'in-progress', 'not-started'] as const;
 		const recentArchive: PuzzlesArchive = {
@@ -1185,10 +1185,88 @@ describe('PuzzlesArchiveCalendar', () => {
 				'Played',
 			),
 		).toBeInTheDocument();
-		expect(screen.queryByText('In progress')).not.toBeInTheDocument();
+		const inProgressCards = Array.from(
+			document.querySelectorAll<HTMLElement>('a[href$="/2026-10-06"]'),
+		);
+		expect(
+			within(
+				inProgressCards.find((card) => card.querySelector('time'))!,
+			).getByText('In progress'),
+		).toBeInTheDocument();
+		expect(screen.getAllByText('In progress')).toHaveLength(1);
 		expect(
 			screen.getAllByText('Played', { selector: '.played' }),
 		).toHaveLength(1);
+	});
+
+	describe('progress bar on the recent cards', () => {
+		const renderRecent = (progress: number, puzzleType = 'SUDOKU_EASY') => {
+			jest.useFakeTimers().setSystemTime(
+				new Date('2026-10-07T12:00:00Z'),
+			);
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={{
+						...archive,
+						year: 2026,
+						month: 10,
+						items: [
+							{
+								...archive.items[0]!,
+								puzzleType,
+								date: '2026-10-07',
+								progress,
+								gameStatus: 'in-progress',
+								url: '/puzzles-and-games/logic-puzzles/sudoku-easy/2026-10-07',
+							},
+						],
+					}}
+				/>,
+			);
+		};
+		const bar = () =>
+			document.querySelector<HTMLElement>(
+				'[data-component="puzzles-archive-recent"] .progress-track > span',
+			);
+
+		it.each([Number.NaN, -5, 0, 10, 50, 90, 100, 150])(
+			'is always half full, whatever the API progress value (%s)',
+			(progress) => {
+				renderRecent(progress);
+				expect(bar()?.style.width).toBe('50%');
+				expect(bar()?.parentElement).toHaveAttribute(
+					'aria-hidden',
+					'true',
+				);
+			},
+		);
+
+		it('is not drawn for a crossword', () => {
+			renderRecent(40, 'CROSSWORD_QUICK');
+			expect(bar()).toBeNull();
+			expect(screen.queryByText('In progress')).not.toBeInTheDocument();
+		});
+	});
+
+	it('never shows In progress on the recent cards of a crossword', () => {
+		jest.useFakeTimers().setSystemTime(new Date('2026-10-07T12:00:00Z'));
+		const crosswordArchive: PuzzlesArchive = {
+			...archive,
+			year: 2026,
+			month: 10,
+			items: ['2026-10-07', '2026-10-06'].map((date) => ({
+				...archive.items[0]!,
+				puzzleType: 'CROSSWORD_QUICK',
+				date,
+				progress: 50,
+				gameStatus: 'in-progress' as const,
+				url: `/crosswords/quick/${date}`,
+			})),
+		};
+
+		render(<PuzzlesArchiveCalendar initialArchive={crosswordArchive} />);
+
+		expect(screen.queryByText('In progress')).not.toBeInTheDocument();
 	});
 
 	it('keeps the calendar mounted and announces loading in the month controls', async () => {
