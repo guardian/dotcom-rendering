@@ -3967,8 +3967,7 @@
                 "format",
                 "header",
                 "id",
-                "links",
-                "pages"
+                "links"
             ]
         },
         "CustomSubnavHeader": {
