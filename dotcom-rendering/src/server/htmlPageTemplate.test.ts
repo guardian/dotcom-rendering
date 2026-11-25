@@ -2,7 +2,7 @@ import type { TagType } from '../types/tag';
 import { doNotIndex } from './htmlPageTemplate';
 
 const noIndexTag: TagType = {
-	id: 'tracking/platformfunctional/no-index',
+	id: 'production-monitoring/production-monitoring',
 	type: 'tracking',
 	title: 'No index',
 };

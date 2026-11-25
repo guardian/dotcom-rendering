@@ -75,7 +75,7 @@ export const doNotIndex = (
 	// Do NOT index pages with a noindex tag
 	const hasNoIndexTag =
 		tags?.some(
-			(tag) => tag.id === 'tracking/platformfunctional/no-index',
+			(tag) => tag.id === 'production-monitoring/production-monitoring',
 		) ?? false;
 	if (hasNoIndexTag) return true;
 
