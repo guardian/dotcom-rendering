@@ -193,6 +193,16 @@ const heroStyles = css`
 	display: flex;
 	justify-content: center;
 
+	/* The sticky bottom sheet is short, so it has no room for the picture.
+	   When the modal flows with the page instead (see shouldFlowWithPage) it
+	   keeps it. The container is the modal's wrapper, which sets
+	   MODAL_FLOW_ATTRIBUTE: wrapper > modal > body > hero */
+	${until.phablet} {
+		div:not([${MODAL_FLOW_ATTRIBUTE}='true']) > div > div > & {
+			display: none;
+		}
+	}
+
 	img {
 		display: block;
 		width: 100%;

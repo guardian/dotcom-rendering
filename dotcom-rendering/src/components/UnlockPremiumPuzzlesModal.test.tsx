@@ -87,6 +87,32 @@ describe('UnlockPremiumPuzzlesModal', () => {
 			screen.queryByText(/You are currently signed out/),
 		).not.toBeInTheDocument();
 	});
+	describe('hero image', () => {
+		it('is hidden on small screens only while the modal is a sticky bottom sheet', () => {
+			renderModal();
+			const rules = Array.from(document.styleSheets)
+				.flatMap((sheet) => Array.from(sheet.cssRules))
+				.map((rule) => rule.cssText);
+			const hideRule = rules.find(
+				(rule) =>
+					rule.includes('data-flow-with-page') &&
+					rule.includes('display: none'),
+			);
+
+			expect(hideRule).toBeDefined();
+			// Only in the small screen layout, and not when the modal flows with the page
+			expect(hideRule).toContain('max-width');
+			expect(hideRule).toMatch(
+				/:not\(\[data-flow-with-page=["']true["']\]\)/,
+			);
+		});
+
+		it('is still rendered, so it can be shown when the modal flows with the page', () => {
+			const { container } = renderModal();
+			expect(container.querySelector('img')).toBeInTheDocument();
+		});
+	});
+
 	describe('colours', () => {
 		const renderedCss = () =>
 			Array.from(document.styleSheets)
