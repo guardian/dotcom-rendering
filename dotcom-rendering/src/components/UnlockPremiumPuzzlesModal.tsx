@@ -42,6 +42,47 @@ const HERO_IMAGE_URL =
 const HERO_IMAGE_WIDTH = 556;
 const HERO_IMAGE_HEIGHT = 207;
 
+/** Lets the dark mode theme style the archive button's hover. */
+const ARCHIVE_BUTTON_CLASS = 'unlock-modal-archive-button';
+
+/**
+ * The modal's colours, as custom properties on the modal itself. The values
+ * set here are the light ones. When dark mode is available they are replaced
+ * in dark mode, the same way `puzzlesPageTheme` does it for the Puzzles pages
+ * (so the modal follows the page, including a page forced to light).
+ */
+const modalTheme = (darkModeAvailable: boolean) => css`
+	/* stylelint-disable-next-line color-no-hex -- specified by the Design team for the modal background, not in the Source palette */
+	--unlock-modal-background: #fef9f6;
+	--unlock-modal-title: ${sourcePalette.brand[400]};
+	--unlock-modal-text: ${sourcePalette.neutral[0]};
+	--unlock-modal-footnote: ${sourcePalette.neutral[0]};
+	--unlock-modal-tick: ${sourcePalette.brand[500]};
+	--unlock-modal-link: ${sourcePalette.brand[500]};
+	--unlock-modal-divider: ${sourcePalette.neutral[86]};
+	--unlock-modal-secondary: ${sourcePalette.brand[400]};
+
+	${darkModeAvailable &&
+	css`
+		@media (prefers-color-scheme: dark) {
+			html:not([data-color-scheme='light']) & {
+				--unlock-modal-background: ${sourcePalette.neutral[20]};
+				--unlock-modal-title: ${sourcePalette.neutral[97]};
+				--unlock-modal-text: ${sourcePalette.neutral[97]};
+				--unlock-modal-footnote: ${sourcePalette.neutral[86]};
+				--unlock-modal-tick: ${sourcePalette.brand[800]};
+				--unlock-modal-link: ${sourcePalette.brand[800]};
+				--unlock-modal-divider: ${sourcePalette.neutral[46]};
+				--unlock-modal-secondary: ${sourcePalette.neutral[97]};
+
+				.${ARCHIVE_BUTTON_CLASS}:hover {
+					background-color: ${sourcePalette.neutral[10]};
+				}
+			}
+		}
+	`}
+`;
+
 const blockerStyles = css`
 	position: absolute;
 	top: 0;
@@ -90,8 +131,7 @@ const modalStyles = css`
 	padding-left: ${space[4]}px;
 	padding-right: ${space[4]}px;
 	padding-bottom: ${space[6]}px;
-	/* stylelint-disable-next-line color-no-hex -- specified by the Design team for the modal background, not in the Source palette */
-	background-color: #fef9f6;
+	background-color: var(--unlock-modal-background);
 	border-radius: ${space[3]}px;
 
 	${until.phablet} {
@@ -137,11 +177,13 @@ const bodyStyles = css`
 const headerStyles = css`
 	display: flex;
 	justify-content: flex-end;
+	/* The logo is drawn in the current colour */
+	color: var(--unlock-modal-text);
 `;
 
 const dividerStyles = css`
 	border: 0;
-	border-top: 1px solid ${sourcePalette.neutral[86]};
+	border-top: 1px solid var(--unlock-modal-divider);
 	margin-top: ${space[4]}px;
 	margin-bottom: ${space[4]}px;
 	width: 100%;
@@ -163,21 +205,21 @@ const heroStyles = css`
 
 const titleStyles = css`
 	${headlineMedium24};
-	color: ${sourcePalette.brand[400]};
+	color: var(--unlock-modal-title);
 	font-variant-numeric: lining-nums proportional-nums;
 	margin: ${space[4]}px 0;
 `;
 
 const subtitleStyles = css`
 	${textEgyptianBold17};
-	color: ${sourcePalette.neutral[0]};
+	color: var(--unlock-modal-text);
 	margin-top: ${space[2]}px;
 	margin-bottom: ${space[3]}px;
 `;
 
 const benefitsStyles = css`
 	${textEgyptian17};
-	color: ${sourcePalette.neutral[0]};
+	color: var(--unlock-modal-text);
 	list-style: none;
 	margin: 0 0 ${space[2]}px;
 	padding: 0;
@@ -191,7 +233,7 @@ const benefitsStyles = css`
 
 	svg {
 		flex: none;
-		fill: ${sourcePalette.brand[500]};
+		fill: var(--unlock-modal-tick);
 	}
 `;
 
@@ -233,17 +275,18 @@ const subscribeButtonStyles = css`
 
 const archiveButtonStyles = css`
 	border-radius: 40px;
-	border: 2px solid ${sourcePalette.brand[400]};
+	border: 2px solid var(--unlock-modal-secondary);
+	color: var(--unlock-modal-secondary);
 `;
 
 const footnoteStyles = css`
 	${textSans14};
-	color: ${sourcePalette.neutral[0]};
+	color: var(--unlock-modal-footnote);
 	text-align: center;
 
 	a {
 		${textSansBold14};
-		color: ${sourcePalette.brand[500]};
+		color: var(--unlock-modal-link);
 		text-decoration-line: underline;
 		text-decoration-style: solid;
 		text-decoration-skip-ink: none;
@@ -286,6 +329,12 @@ type Props = {
 	 * Defaults to signed out.
 	 */
 	isSignedIn?: boolean;
+	/**
+	 * Whether dark mode is available for this page (the `webx-dark-mode-web`
+	 * test). When it is, the modal uses its dark colours for readers whose
+	 * device prefers dark. Defaults to `false`: always light.
+	 */
+	darkModeAvailable?: boolean;
 	title?: string;
 	subtitle?: string;
 	benefits?: string[];
@@ -318,6 +367,7 @@ export const UnlockPremiumPuzzlesModal = ({
 	returnToArchivePath,
 	idUrl,
 	isSignedIn = false,
+	darkModeAvailable = false,
 	title = DEFAULT_TITLE,
 	subtitle = DEFAULT_SUBTITLE,
 	benefits = DEFAULT_BENEFITS,
@@ -366,13 +416,10 @@ export const UnlockPremiumPuzzlesModal = ({
 	return (
 		<div ref={blockerRef} css={[blockerStyles, cssOverrides]}>
 			<div css={overlayStyles}></div>
-			<div css={modalStyles}>
+			<div css={[modalStyles, modalTheme(darkModeAvailable)]}>
 				<div css={bodyStyles}>
 					<div css={headerStyles}>
-						<SvgGuardianLogo
-							textColor={sourcePalette.neutral[0]}
-							width={98}
-						/>
+						<SvgGuardianLogo textColor="currentColor" width={98} />
 					</div>
 					<hr css={dividerStyles} />
 					<div css={heroStyles}>
@@ -407,6 +454,7 @@ export const UnlockPremiumPuzzlesModal = ({
 						<LinkButton
 							href={archiveUrl}
 							priority="tertiary"
+							className={ARCHIVE_BUTTON_CLASS}
 							cssOverrides={archiveButtonStyles}
 						>
 							Return to puzzle archive

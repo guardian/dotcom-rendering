@@ -26,14 +26,17 @@ jest.mock('./UnlockPremiumPuzzlesModal', () => ({
 	UnlockPremiumPuzzlesModal: ({
 		isSignedIn,
 		intcmp,
+		darkModeAvailable,
 	}: {
 		isSignedIn?: boolean;
 		intcmp?: string;
+		darkModeAvailable?: boolean;
 	}) => (
 		<div
 			data-testid="modal"
 			data-signed-in={String(isSignedIn)}
 			data-intcmp={intcmp}
+			data-dark-mode={String(darkModeAvailable)}
 		/>
 	),
 }));
@@ -53,12 +56,15 @@ const signedIn = {
 
 const signedOut = { kind: 'SignedOut' } as const;
 
-const renderGate = (requiresSubscription?: boolean) =>
+const renderGate = (
+	requiresSubscription?: boolean,
+	darkModeAvailable = false,
+) =>
 	render(
 		<PuzzleAccessGate
 			puzzleConfig={puzzleConfigs['sudoku-easy']!}
 			title="Easy sudoku"
-			darkModeAvailable={false}
+			darkModeAvailable={darkModeAvailable}
 			puzzleDate="2026-11-01"
 			requiresSubscription={requiresSubscription}
 			ajaxUrl="https://ajax.example.com"
@@ -112,6 +118,15 @@ describe('PuzzleAccessGate', () => {
 			.map((rule) => rule.cssText)
 			.join('');
 		expect(rules).toContain('background-color: var(--ad-background)');
+	});
+
+	it('tells the modal whether dark mode is available', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedOut);
+		renderGate(true, true);
+		expect(await screen.findByTestId('modal')).toHaveAttribute(
+			'data-dark-mode',
+			'true',
+		);
 	});
 
 	it('tells the modal which puzzle the reader came from', async () => {

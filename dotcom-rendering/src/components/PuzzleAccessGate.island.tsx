@@ -78,6 +78,7 @@ export const PuzzleAccessGate = ({
 						idUrl={idUrl}
 						intcmp={getPuzzleIntcmp(iframeProps.puzzleConfig.slug)}
 						isSignedIn={authState?.reader.isSignedIn}
+						darkModeAvailable={iframeProps.darkModeAvailable}
 						returnToArchivePath={returnToArchivePath}
 					/>,
 				)}

@@ -87,4 +87,38 @@ describe('UnlockPremiumPuzzlesModal', () => {
 			screen.queryByText(/You are currently signed out/),
 		).not.toBeInTheDocument();
 	});
+	describe('colours', () => {
+		const renderedCss = () =>
+			Array.from(document.styleSheets)
+				.flatMap((sheet) => Array.from(sheet.cssRules))
+				.map((rule) => rule.cssText)
+				.join('\n');
+
+		it('uses the light colours by default', () => {
+			renderModal();
+			const css = renderedCss();
+
+			expect(css).toContain('--unlock-modal-background: #fef9f6');
+			expect(css).toContain('--unlock-modal-title: #052962');
+			expect(css).toContain('--unlock-modal-tick: #0077B6');
+		});
+
+		it('uses the dark colours from the design when dark mode is available', () => {
+			render(
+				<UnlockPremiumPuzzlesModal
+					idUrl="https://profile.theguardian.com"
+					darkModeAvailable={true}
+					returnToArchivePath="/puzzles-and-games/logic-puzzles/archive"
+				/>,
+			);
+			const css = renderedCss();
+
+			expect(css).toContain('prefers-color-scheme: dark');
+			expect(css).toContain('--unlock-modal-background: #333333');
+			expect(css).toContain('--unlock-modal-title: #F6F6F6');
+			expect(css).toContain('--unlock-modal-text: #F6F6F6');
+			expect(css).toContain('--unlock-modal-tick: #C1D8FC');
+			expect(css).toContain('--unlock-modal-link: #C1D8FC');
+		});
+	});
 });
