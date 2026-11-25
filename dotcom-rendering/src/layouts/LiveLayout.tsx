@@ -46,7 +46,6 @@ import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { SubMeta } from '../components/SubMeta';
-import { SubNav } from '../components/SubNav.island';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
@@ -1036,25 +1035,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 			{isWeb && (
 				<>
-					{props.NAV.subNavSections && (
-						<Section
-							fullWidth={true}
-							padSides={false}
-							element="aside"
-						>
-							<Island
-								priority="enhancement"
-								defer={{ until: 'visible' }}
-							>
-								<SubNav
-									subNavSections={props.NAV.subNavSections}
-									currentNavLink={props.NAV.currentNavLink}
-									position="footer"
-								/>
-							</Island>
-						</Section>
-					)}
-
 					<Section
 						fullWidth={true}
 						padSides={false}

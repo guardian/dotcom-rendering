@@ -32,7 +32,6 @@ import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { SubMeta } from '../components/SubMeta';
-import { SubNav } from '../components/SubNav.island';
 import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
@@ -667,18 +666,6 @@ export const CrosswordLayout = (props: Props) => {
 					</div>
 				)}
 			</main>
-
-			{!isPuzzlesHubV1 && props.NAV.subNavSections && (
-				<Section fullWidth={true} padSides={false} element="aside">
-					<Island priority="enhancement" defer={{ until: 'visible' }}>
-						<SubNav
-							subNavSections={props.NAV.subNavSections}
-							currentNavLink={props.NAV.currentNavLink}
-							position="footer"
-						/>
-					</Island>
-				</Section>
-			)}
 
 			<Section
 				fullWidth={true}

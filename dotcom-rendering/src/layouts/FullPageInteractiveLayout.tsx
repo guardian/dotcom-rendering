@@ -15,7 +15,6 @@ import { LabsHeader } from '../components/LabsHeader';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
-import { SubNav } from '../components/SubNav.island';
 import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import type { EditionId } from '../lib/edition';
@@ -309,24 +308,6 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 					/>
 				</article>
 			</Section>
-
-			{isWeb && props.NAV.subNavSections && (
-				<Section
-					fullWidth={true}
-					padSides={false}
-					backgroundColour={themePalette('--article-background')}
-					element="aside"
-				>
-					<Island priority="enhancement" defer={{ until: 'visible' }}>
-						<SubNav
-							subNavSections={props.NAV.subNavSections}
-							currentNavLink={props.NAV.currentNavLink}
-							position="footer"
-							isInteractive={true}
-						/>
-					</Island>
-				</Section>
-			)}
 
 			{isWeb && (
 				<>

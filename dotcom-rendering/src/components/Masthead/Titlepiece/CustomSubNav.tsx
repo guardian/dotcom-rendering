@@ -124,7 +124,7 @@ const cardMiniNavHeaderGapStyles = css`
 
 /** Article subnavs have a divider separating the header text from the scrollable list. */
 const articleDividerStyles = css`
-	${articleHeaderGapStyles}
+	${articleHeaderGapStyles};
 	border-left: 1px solid ${themePalette('--masthead-nav-lines')};
 `;
 
@@ -451,11 +451,6 @@ export const CustomSubNav = ({
 						<ul
 							css={[imageListStyles, scrollableSubNavStyles]}
 							role="list"
-							style={{
-								'--sub-nav-link': themePalette(
-									'--sub-nav-link-header',
-								),
-							}}
 						>
 							{linkItems}
 						</ul>
@@ -478,11 +473,6 @@ export const CustomSubNav = ({
 							scrollableSubNavStyles,
 						]}
 						role="list"
-						style={{
-							'--sub-nav-link': themePalette(
-								'--sub-nav-link-header',
-							),
-						}}
 					>
 						{linkItems}
 					</ul>
@@ -513,11 +503,6 @@ export const CustomSubNav = ({
 							inlineListSizingStyles,
 						]}
 						role="list"
-						style={{
-							'--sub-nav-link': themePalette(
-								'--sub-nav-link-header',
-							),
-						}}
 					>
 						{linkItems}
 					</ul>
@@ -543,11 +528,6 @@ export const CustomSubNav = ({
 							inlineListSizingStyles,
 						]}
 						role="list"
-						style={{
-							'--sub-nav-link': themePalette(
-								'--sub-nav-link-header',
-							),
-						}}
 					>
 						{linkItems}
 					</ul>

@@ -20,7 +20,7 @@ type Props = {
 };
 
 const subNavStyles = css`
-	${textSans14}
+	${textSans14};
 	display: flex;
 	column-gap: ${space[2]}px;
 	color: inherit;
@@ -87,9 +87,6 @@ export const SubNav = ({
 					scrollableSubNavStyles,
 				]}
 				role="list"
-				style={{
-					'--sub-nav-link': themePalette('--sub-nav-link-header'),
-				}}
 			>
 				{subNavSections.parent && (
 					<li
