@@ -166,9 +166,29 @@ const bodyStyles = css`
 		overflow-y: auto;
 		padding: ${space[4]}px ${space[4]}px ${space[3]}px;
 
+		/* A shadow on the bottom edge, only while there is more to scroll to.
+		   The shadow stays put (scroll). The cover, in the modal's colour,
+		   moves with the content (local): it hides the shadow when the content
+		   fits, and once the reader has scrolled to the end. */
+		background-color: var(--unlock-modal-background);
+		background-image:
+			linear-gradient(transparent, var(--unlock-modal-background) 70%),
+			radial-gradient(
+				farthest-side at 50% 100%,
+				rgba(0, 0, 0, 0.2),
+				transparent
+			);
+		background-position: bottom, bottom;
+		background-size:
+			100% 40px,
+			100% 12px;
+		background-repeat: no-repeat;
+		background-attachment: local, scroll;
+
 		[${MODAL_FLOW_ATTRIBUTE}='true'] > div > & {
 			flex: none;
 			overflow-y: visible;
+			background-image: none;
 		}
 	}
 `;
@@ -256,11 +276,6 @@ const footerStyles = css`
 		position: relative;
 		padding: ${space[4]}px ${space[4]}px
 			calc(${space[6]}px + env(safe-area-inset-bottom, 0px));
-		box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.15);
-
-		[${MODAL_FLOW_ATTRIBUTE}='true'] > div > & {
-			box-shadow: none;
-		}
 	}
 `;
 

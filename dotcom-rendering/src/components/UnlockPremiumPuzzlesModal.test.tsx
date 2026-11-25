@@ -87,6 +87,35 @@ describe('UnlockPremiumPuzzlesModal', () => {
 			screen.queryByText(/You are currently signed out/),
 		).not.toBeInTheDocument();
 	});
+	describe('scroll shadow', () => {
+		const allRules = () =>
+			Array.from(document.styleSheets)
+				.flatMap((sheet) => Array.from(sheet.cssRules))
+				.map((rule) => rule.cssText);
+
+		it('draws the shadow on the scrolling body, hidden by a cover that moves with the content', () => {
+			renderModal();
+			const bodyRule = allRules().find((rule) =>
+				rule.includes('background-attachment: local,scroll'),
+			);
+
+			expect(bodyRule).toBeDefined();
+			expect(bodyRule).toContain('overflow-y: auto');
+		});
+
+		it('no longer keeps a permanent shadow on the footer', () => {
+			renderModal();
+
+			expect(
+				allRules().some((rule) =>
+					rule.includes(
+						'box-shadow: rgba(0, 0, 0, 0.15) 0px -4px 8px',
+					),
+				),
+			).toBe(false);
+		});
+	});
+
 	describe('hero image', () => {
 		it('is hidden on small screens only while the modal is a sticky bottom sheet', () => {
 			renderModal();
