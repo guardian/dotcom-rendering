@@ -126,6 +126,7 @@ export const Puzzles: ReactComponent<Inline1Props> = ({
 	const { setNode, sendEvent } = useInline1Tracking({
 		tracking,
 		submitComponentEvent,
+		messageType: variant.message.type,
 	});
 
 	if (variant.message.type != 'Inline1PuzzlesMessage') {

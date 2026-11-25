@@ -69,6 +69,7 @@ const NewsletterForm: ReactComponent<{
 	const { setNode, sendEvent } = useInline1Tracking({
 		tracking,
 		submitComponentEvent,
+		messageType: message.type,
 	});
 
 	return (
