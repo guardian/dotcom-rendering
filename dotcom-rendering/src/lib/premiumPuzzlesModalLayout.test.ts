@@ -1,6 +1,6 @@
 import {
 	getModalMaxHeight,
-	isScrollable,
+	hasMoreToScroll,
 	shouldFlowWithPage,
 } from './premiumPuzzlesModalLayout';
 
@@ -65,22 +65,54 @@ describe('shouldFlowWithPage', () => {
 	});
 });
 
-describe('isScrollable', () => {
+describe('hasMoreToScroll', () => {
 	it('is false when the content fits', () => {
-		expect(isScrollable({ clientHeight: 365, scrollHeight: 365 })).toBe(
-			false,
-		);
+		expect(
+			hasMoreToScroll({
+				clientHeight: 365,
+				scrollHeight: 365,
+				scrollTop: 0,
+			}),
+		).toBe(false);
 	});
 
 	it('ignores a difference of one pixel, which is only rounding', () => {
-		expect(isScrollable({ clientHeight: 365, scrollHeight: 366 })).toBe(
-			false,
-		);
+		expect(
+			hasMoreToScroll({
+				clientHeight: 365,
+				scrollHeight: 366,
+				scrollTop: 0,
+			}),
+		).toBe(false);
 	});
 
-	it('is true when the content is even slightly taller, as on an iPhone 16', () => {
-		expect(isScrollable({ clientHeight: 396, scrollHeight: 404 })).toBe(
-			true,
-		);
+	it('is true when there is more below, even by a few pixels, as on an iPhone 16', () => {
+		expect(
+			hasMoreToScroll({
+				clientHeight: 396,
+				scrollHeight: 404,
+				scrollTop: 0,
+			}),
+		).toBe(true);
+	});
+
+	it('is true part of the way through the scroll', () => {
+		expect(
+			hasMoreToScroll({
+				clientHeight: 300,
+				scrollHeight: 500,
+				scrollTop: 120,
+			}),
+		).toBe(true);
+	});
+
+	it('is false once the reader has scrolled to the end', () => {
+		expect(
+			hasMoreToScroll({
+				clientHeight: 396,
+				scrollHeight: 404,
+				scrollTop: 8,
+			}),
+		).toBe(false);
 	});
 });

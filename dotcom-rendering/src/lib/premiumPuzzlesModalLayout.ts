@@ -18,11 +18,11 @@ const MIN_HEIGHT_PX = 320;
 export const MODAL_FLOW_ATTRIBUTE = 'data-flow-with-page';
 
 /**
- * The data attribute set on the modal's scrolling body while its content is
- * taller than the body (see `isScrollable`). The footer's shadow, which shows
- * that there is more to scroll to, depends on it.
+ * The data attribute set on the modal's scrolling body while there is more
+ * content below what is visible (see `hasMoreToScroll`). The footer's shadow,
+ * which shows that there is more to scroll to, depends on it.
  */
-export const MODAL_SCROLLABLE_ATTRIBUTE = 'data-scrollable';
+export const MODAL_MORE_BELOW_ATTRIBUTE = 'data-more-below';
 
 /**
  * The CSS custom property the modal's maximum height is passed in.
@@ -80,18 +80,22 @@ export const shouldFlowWithPage = ({
 }): boolean => viewportHeight - wrapperTop < MIN_HEIGHT_PX;
 
 /**
- * Whether the content of an element is taller than the element itself, so that
- * it scrolls. A difference of one pixel or less is ignored: browsers round the
- * two heights differently, so an element that fits can still report one pixel
- * of overflow.
+ * Whether there is more content below what an element shows, so that the reader
+ * can scroll further. It is false when the content fits, and once the reader
+ * has scrolled to the end. A difference of one pixel or less is ignored:
+ * browsers round these heights differently, so an element that fits (or is at
+ * its end) can still report one pixel more.
  *
  * @param clientHeight the visible height of the element
  * @param scrollHeight the full height of its content
+ * @param scrollTop how far the content is scrolled
  */
-export const isScrollable = ({
+export const hasMoreToScroll = ({
 	clientHeight,
 	scrollHeight,
+	scrollTop,
 }: {
 	clientHeight: number;
 	scrollHeight: number;
-}): boolean => scrollHeight - clientHeight > 1;
+	scrollTop: number;
+}): boolean => scrollHeight - clientHeight - scrollTop > 1;

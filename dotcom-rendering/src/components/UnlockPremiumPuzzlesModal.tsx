@@ -19,10 +19,10 @@ import { useEffect, useRef, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import {
 	getModalMaxHeight,
-	isScrollable,
+	hasMoreToScroll,
 	MODAL_FLOW_ATTRIBUTE,
 	MODAL_MAX_HEIGHT_PROPERTY,
-	MODAL_SCROLLABLE_ATTRIBUTE,
+	MODAL_MORE_BELOW_ATTRIBUTE,
 	shouldFlowWithPage,
 } from '../lib/premiumPuzzlesModalLayout';
 import {
@@ -272,10 +272,18 @@ const footerStyles = css`
 		padding: ${space[4]}px ${space[4]}px
 			calc(${space[6]}px + env(safe-area-inset-bottom, 0px));
 
+		/* The shadow fades in and out as the reader scrolls, instead of
+		   switching on and off */
+		transition: box-shadow 0.25s ease;
+
+		@media (prefers-reduced-motion: reduce) {
+			transition: none;
+		}
+
 		/* A shadow on the footer's top edge, only while the body above it has
-		   more to scroll to (see MODAL_SCROLLABLE_ATTRIBUTE). With no
-		   overflow it would suggest there is content that is not there. */
-		[${MODAL_SCROLLABLE_ATTRIBUTE}='true'] + & {
+		   more to scroll to (see MODAL_MORE_BELOW_ATTRIBUTE). Otherwise it would
+		   suggest there is content that is not there. */
+		[${MODAL_MORE_BELOW_ATTRIBUTE}='true'] + & {
 			box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.15);
 		}
 	}
@@ -414,17 +422,18 @@ export const UnlockPremiumPuzzlesModal = ({
 	const bodyRef = useRef<HTMLDivElement>(null);
 
 	// Tells the footer whether the body above it has more to scroll to, so its
-	// shadow only shows then. The body's own size changes with the screen, and
+	// shadow only shows then: not when everything fits, and not once the reader
+	// has scrolled to the end. The body's own size changes with the screen, and
 	// its content changes without it (fonts loading, text wrapping), so both
-	// are watched.
+	// are watched, along with the scrolling itself.
 	useEffect(() => {
 		const body = bodyRef.current;
 		if (!body) return;
 
 		const update = () => {
 			body.setAttribute(
-				MODAL_SCROLLABLE_ATTRIBUTE,
-				String(isScrollable(body)),
+				MODAL_MORE_BELOW_ATTRIBUTE,
+				String(hasMoreToScroll(body)),
 			);
 		};
 
@@ -438,6 +447,7 @@ export const UnlockPremiumPuzzlesModal = ({
 			frame = requestAnimationFrame(update);
 		};
 		window.addEventListener('resize', updateNextFrame);
+		body.addEventListener('scroll', update, { passive: true });
 
 		const observer =
 			typeof ResizeObserver === 'undefined'
@@ -450,6 +460,7 @@ export const UnlockPremiumPuzzlesModal = ({
 
 		return () => {
 			window.removeEventListener('resize', updateNextFrame);
+			body.removeEventListener('scroll', update);
 			if (frame !== undefined) cancelAnimationFrame(frame);
 			observer?.disconnect();
 		};

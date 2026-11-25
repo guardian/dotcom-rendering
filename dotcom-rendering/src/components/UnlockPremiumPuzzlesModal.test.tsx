@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { UnlockPremiumPuzzlesModal } from './UnlockPremiumPuzzlesModal';
 
 const renderModal = (returnUrl?: string, intcmp?: string) =>
@@ -135,39 +135,45 @@ describe('UnlockPremiumPuzzlesModal', () => {
 			jest.restoreAllMocks();
 		});
 
-		const mockBodyHeights = (
-			clientHeight: number,
-			scrollHeight: number,
-		) => {
-			jest.spyOn(
-				HTMLElement.prototype,
-				'clientHeight',
-				'get',
-			).mockReturnValue(clientHeight);
-			jest.spyOn(
-				HTMLElement.prototype,
-				'scrollHeight',
-				'get',
-			).mockReturnValue(scrollHeight);
+		const mockBody = ({
+			clientHeight,
+			scrollHeight,
+			scrollTop = 0,
+		}: {
+			clientHeight: number;
+			scrollHeight: number;
+			scrollTop?: number;
+		}) => {
+			const heights = { clientHeight, scrollHeight, scrollTop };
+			for (const [property, value] of Object.entries(heights)) {
+				jest.spyOn(
+					HTMLElement.prototype,
+					property as keyof typeof heights,
+					'get',
+				).mockReturnValue(value);
+			}
 		};
 
-		it('shows the footer shadow only when the body is flagged as scrollable', () => {
+		const getBody = (container: HTMLElement) =>
+			container.querySelector('[data-more-below]');
+
+		it('shows the footer shadow only while there is more below', () => {
 			renderModal();
 			const rules = allRules();
 
 			const shadowRule = rules.find(
 				(rule) =>
-					rule.includes('data-scrollable') &&
+					rule.includes('data-more-below') &&
 					rule.includes('box-shadow'),
 			);
 			expect(shadowRule).toBeDefined();
-			expect(shadowRule).toContain("[data-scrollable='true']");
+			expect(shadowRule).toContain("[data-more-below='true']");
 
 			// And never as a permanent shadow
 			expect(
 				rules.some(
 					(rule) =>
-						!rule.includes('data-scrollable') &&
+						!rule.includes('data-more-below') &&
 						rule.includes(
 							'box-shadow: rgba(0, 0, 0, 0.15) 0px -4px 8px',
 						),
@@ -175,22 +181,46 @@ describe('UnlockPremiumPuzzlesModal', () => {
 			).toBe(false);
 		});
 
-		it('does not flag the body as scrollable when the content fits', () => {
-			mockBodyHeights(365, 365);
-			const { container } = renderModal();
+		it('fades the shadow in and out, unless the reader prefers reduced motion', () => {
+			renderModal();
+			const rules = allRules().join('\n');
 
-			expect(
-				container.querySelector('[data-scrollable]'),
-			).toHaveAttribute('data-scrollable', 'false');
+			expect(rules).toContain('transition: box-shadow 0.25s ease');
+			expect(rules).toMatch(
+				/prefers-reduced-motion:\s*reduce[^{]*\{[^}]*transition: none/,
+			);
 		});
 
-		it('flags the body as scrollable when the content is taller, even by a few pixels', () => {
-			mockBodyHeights(396, 404);
+		it('has nothing below when the content fits', () => {
+			mockBody({ clientHeight: 365, scrollHeight: 365 });
 			const { container } = renderModal();
 
-			expect(
-				container.querySelector('[data-scrollable]'),
-			).toHaveAttribute('data-scrollable', 'true');
+			expect(getBody(container)).toHaveAttribute(
+				'data-more-below',
+				'false',
+			);
+		});
+
+		it('has more below when the content is taller, even by a few pixels', () => {
+			mockBody({ clientHeight: 396, scrollHeight: 404 });
+			const { container } = renderModal();
+
+			expect(getBody(container)).toHaveAttribute(
+				'data-more-below',
+				'true',
+			);
+		});
+
+		it('has nothing below once the reader scrolls to the end', () => {
+			mockBody({ clientHeight: 396, scrollHeight: 404 });
+			const { container } = renderModal();
+			const body = getBody(container)!;
+			expect(body).toHaveAttribute('data-more-below', 'true');
+
+			mockBody({ clientHeight: 396, scrollHeight: 404, scrollTop: 8 });
+			fireEvent.scroll(body);
+
+			expect(body).toHaveAttribute('data-more-below', 'false');
 		});
 	});
 
