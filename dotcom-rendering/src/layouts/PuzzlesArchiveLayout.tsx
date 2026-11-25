@@ -272,6 +272,7 @@ export const PuzzlesArchiveLayout = ({
 								<Island priority="critical">
 									<PuzzlesArchiveCalendar
 										initialArchive={archive}
+										idUrl={puzzlesPage.config.idUrl}
 										showPremiumIndicators={isPuzzlesHubV3Enabled(
 											puzzlesPage.config,
 										)}

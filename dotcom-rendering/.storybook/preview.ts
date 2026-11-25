@@ -21,6 +21,8 @@ import {
 
 // Set up module mocking for auth and newsletter subscription hooks
 // @ts-ignore -- Storybook wants the file extension, TS does not.
+sb.mock(import('../src/lib/identity.ts'), { spy: true });
+// @ts-ignore -- Storybook wants the file extension, TS does not.
 sb.mock(import('../src/lib/useNewsletterSubscription.ts'), { spy: true });
 // @ts-ignore -- Storybook wants the file extension, TS does not.
 sb.mock(import('../src/lib/useAuthStatus.ts'), { spy: true });
