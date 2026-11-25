@@ -64,7 +64,7 @@ const minifiedFontsCss = new CleanCSS().minify(rawFontsCss).styles;
  * Determines whether a page should not be indexed by search engines
  * Do NOT index if this function returns true
  */
-const doNotIndex = (
+export const doNotIndex = (
 	canonicalUrl: string | undefined,
 	tags: TagType[] | undefined,
 ): boolean => {
