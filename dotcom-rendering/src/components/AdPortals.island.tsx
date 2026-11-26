@@ -173,20 +173,27 @@ export const AdPortals = ({
 	 * they've changed.
 	 * - Debounce any calls to the Bridget `updateAdverts` method.
 	 *
-	 * We also listen for animationend and transitionend events on the document,
-	 * since CSS animations on placeholder elements (such as padding or margin
-	 * changes) can shift ad positions without changing the body height.
+	 * We also listen for scroll events. Interactive atoms on the page can
+	 * manipulate layout in arbitrary ways — animations, style changes, dynamic
+	 * content — which may shift ad slot positions. Scroll is the most reliable
+	 * signal that positions need rechecking, since it is the event that causes
+	 * the user to encounter those shifts. The handler is debounced to avoid
+	 * forcing layout recalculation on every scroll tick.
 	 */
 	useEffect(() => {
 		let resizeObserver: ResizeObserver | undefined = undefined;
 
-		const handleAnimationEnd = () => {
-			const newAdPositions = calculateAdPositions(adSlots.current);
-			if (adsHaveMoved(adPositions.current, newAdPositions)) {
-				void debounceUpdateAds(newAdPositions);
-				adPositions.current = newAdPositions;
-			}
-		};
+		const handleScroll = libDebounce(
+			() => {
+				const newAdPositions = calculateAdPositions(adSlots.current);
+				if (adsHaveMoved(adPositions.current, newAdPositions)) {
+					void debounceUpdateAds(newAdPositions);
+					adPositions.current = newAdPositions;
+				}
+			},
+			100,
+			{ leading: true },
+		);
 
 		if (
 			adPlaceholders.length !== 0 &&
@@ -198,8 +205,9 @@ export const AdPortals = ({
 				.insertAdverts(adPositions.current)
 				.catch(() => console.error('Error inserting ads'));
 
-			document.addEventListener('animationend', handleAnimationEnd);
-			document.addEventListener('transitionend', handleAnimationEnd);
+			document.addEventListener('scroll', handleScroll, {
+				passive: true,
+			});
 
 			resizeObserver = new ResizeObserver((entries) => {
 				if (
@@ -231,8 +239,8 @@ export const AdPortals = ({
 
 		return () => {
 			resizeObserver?.disconnect();
-			document.removeEventListener('animationend', handleAnimationEnd);
-			document.removeEventListener('transitionend', handleAnimationEnd);
+			document.removeEventListener('scroll', handleScroll);
+			handleScroll.cancel();
 		};
 	}, [adPlaceholders, rightAdPlaceholder, tryRightAligned]);
 
