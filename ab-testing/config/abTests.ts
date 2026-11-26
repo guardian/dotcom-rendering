@@ -135,6 +135,19 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
+		name: "puzzles-new-hub-v4",
+		description:
+			"Independent rollout of the Maxi crossword in Puzzles & Games",
+		owners: ["puzzles.team@guardian.co.uk"],
+		status: "ON",
+		expirationDate: "2026-12-31",
+		type: "server",
+		audienceSize: 0 / 100,
+		audienceSpace: "B",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
+	{
 		name: "fronts-and-curation-card-mini-nav",
 		description: "Opt-in preview of mini subnavs on front cards",
 		owners: ["fronts.and.curation@guardian.co.uk"],

@@ -74,9 +74,11 @@ describe('PuzzlesLayout', () => {
 		].join('\n');
 
 	it.each([
-		['control', false],
-		['variant', true],
-	] as const)('filters Maxi for v3 %s', (v3, visible) => {
+		['no assignment', {}, false],
+		['V3 only', { 'puzzles-new-hub-v3': 'variant' }, false],
+		['V4 control', { 'puzzles-new-hub-v4': 'control' }, false],
+		['V4 without V3', { 'puzzles-new-hub-v4': 'variant' }, true],
+	] as const)('filters Maxi for %s', (_, serverSideABTests, visible) => {
 		const quick = {
 			id: 'quick',
 			title: 'Quick',
@@ -94,9 +96,7 @@ describe('PuzzlesLayout', () => {
 						config: {
 							edition: 'UK',
 							switches: {},
-							serverSideABTests: {
-								'puzzles-new-hub-v3': v3,
-							},
+							serverSideABTests,
 						},
 						layout: {
 							containers: [
