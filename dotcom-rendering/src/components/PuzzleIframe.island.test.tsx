@@ -567,6 +567,25 @@ describe('PuzzleIframe', () => {
 		});
 	});
 
+	it.each(['sudoku-easy', 'word-wheel', 'wordiply', 'film-reveal'])(
+		'does not let %s scroll inside its frame',
+		(slug) => {
+			mockedGetAuthStatus.mockResolvedValue(signedOut());
+			mockedUseMatchMedia.mockReturnValue(false);
+			render(
+				<PuzzleIframe
+					puzzleConfig={puzzleConfigs[slug]!}
+					title={slug}
+					darkModeAvailable={false}
+					puzzleDate={null}
+				/>,
+			);
+			expect(
+				testScreen.getByTitle<HTMLIFrameElement>(slug),
+			).toHaveAttribute('scrolling', 'no');
+		},
+	);
+
 	it.each(['film-reveal', 'on-the-ball'])(
 		'loads %s in the shared sandbox after authentication resolves',
 		async (slug) => {
@@ -1041,6 +1060,9 @@ describe('PuzzleIframe', () => {
 		await waitFor(() =>
 			expect(getContextFromSrc(iframe.src).darkMode).toBe(false),
 		);
+		// The frame is pinned to light, so browsers that would otherwise use
+		// the OS preference (Safari) keep the puzzle in step with the page.
+		expect(iframe.style.colorScheme).toBe('light');
 	});
 
 	it('reports darkMode: true only when darkModeAvailable AND the OS/browser prefers dark', async () => {
@@ -1061,6 +1083,7 @@ describe('PuzzleIframe', () => {
 		await waitFor(() =>
 			expect(getContextFromSrc(iframe.src).darkMode).toBe(true),
 		);
+		expect(iframe.style.colorScheme).toBe('dark');
 	});
 
 	it('reacts to the OS/browser colour-scheme preference changing while mounted', async () => {

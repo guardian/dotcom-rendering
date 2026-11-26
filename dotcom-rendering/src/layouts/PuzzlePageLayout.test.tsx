@@ -55,6 +55,7 @@ const renderPuzzlePageLayout = (
 	slug: string,
 	overrides: Parameters<typeof createPuzzlePage>[1] = {},
 	branding?: Branding,
+	darkModeAvailable = false,
 ) => {
 	const puzzlePage = createPuzzlePage(slug, overrides);
 	const puzzleConfig = getPuzzleConfig(slug);
@@ -64,7 +65,7 @@ const renderPuzzlePageLayout = (
 		<ConfigProvider
 			value={{
 				renderingTarget: 'Web',
-				darkModeAvailable: false,
+				darkModeAvailable,
 				assetOrigin: '/',
 				editionId: 'UK',
 			}}
@@ -72,7 +73,7 @@ const renderPuzzlePageLayout = (
 			<PuzzlePageLayout
 				puzzlePage={{ ...puzzlePage, puzzleConfig }}
 				NAV={extractNAV(puzzlePage.nav)}
-				darkModeAvailable={false}
+				darkModeAvailable={darkModeAvailable}
 				branding={branding}
 			/>
 		</ConfigProvider>,
@@ -296,6 +297,46 @@ describe('PuzzlePageLayout', () => {
 		expect(
 			screen.getByRole('link', { name: 'Puzzle help' }),
 		).toHaveAttribute('data-component', 'puzzles-useful-links:puzzle-page');
+	});
+
+	describe('Useful links colours', () => {
+		const renderedCss = () =>
+			Array.from(document.styleSheets)
+				.flatMap((sheet) => Array.from(sheet.cssRules))
+				.map((rule) => rule.cssText)
+				.join('\n');
+
+		const renderWithUsefulLinks = (darkModeAvailable: boolean) => {
+			const page = createPuzzlePage('sudoku-easy');
+			renderPuzzlePageLayout(
+				'sudoku-easy',
+				{
+					config: { ...page.config, edition: 'INT' },
+					instance: {
+						...page.instance,
+						puzzlesSupporting: {
+							usefulLinks: [
+								{
+									title: 'Puzzle help',
+									url: 'https://example.com/help',
+								},
+							],
+						},
+					},
+				},
+				undefined,
+				darkModeAvailable,
+			);
+		};
+
+		it('defines the puzzles colours for the links, with dark mode when available', () => {
+			renderWithUsefulLinks(true);
+			const css = renderedCss();
+
+			expect(css).toContain('--puzzles-page-background');
+			expect(css).toContain('prefers-color-scheme: dark');
+			expect(css).toContain('--puzzles-text-colour: #DCDCDC');
+		});
 	});
 
 	describe('puzzles sub-nav child links', () => {

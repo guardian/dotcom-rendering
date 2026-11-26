@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { UnlockPremiumPuzzlesModal } from './UnlockPremiumPuzzlesModal';
 
 const renderModal = (returnUrl?: string, intcmp?: string) =>
@@ -86,5 +86,238 @@ describe('UnlockPremiumPuzzlesModal', () => {
 		expect(
 			screen.queryByText(/You are currently signed out/),
 		).not.toBeInTheDocument();
+	});
+	describe('spacing above the footer', () => {
+		const allRules = () =>
+			Array.from(document.styleSheets)
+				.flatMap((sheet) => Array.from(sheet.cssRules))
+				.map((rule) => rule.cssText);
+
+		it('has no bottom padding on the scrolling body, so the footer alone sets the gap', () => {
+			renderModal();
+			const bodyRule = allRules().find((rule) =>
+				rule.includes('overflow-y: auto'),
+			);
+
+			expect(bodyRule).toContain('padding: 16px 16px 0');
+		});
+
+		it('has no space after the last benefit on small screens only', () => {
+			renderModal();
+			const rules = allRules();
+
+			const smallScreen = rules.find(
+				(rule) =>
+					rule.startsWith('@media') &&
+					/li:last-child\s*\{[^}]*margin-bottom: 0/.test(rule),
+			);
+			expect(smallScreen).toBeDefined();
+
+			// Larger screens keep the list's own bottom margins, since the
+			// footer has no top padding there
+			const largeScreen = rules.find(
+				(rule) =>
+					!rule.startsWith('@media') &&
+					rule.includes('list-style: none') &&
+					rule.includes('margin: 0 0 8px'),
+			);
+			expect(largeScreen).toBeDefined();
+		});
+	});
+
+	describe('scroll shadow', () => {
+		const allRules = () =>
+			Array.from(document.styleSheets)
+				.flatMap((sheet) => Array.from(sheet.cssRules))
+				.map((rule) => rule.cssText);
+
+		afterEach(() => {
+			jest.restoreAllMocks();
+		});
+
+		const mockBody = ({
+			clientHeight,
+			scrollHeight,
+			scrollTop = 0,
+		}: {
+			clientHeight: number;
+			scrollHeight: number;
+			scrollTop?: number;
+		}) => {
+			const heights = { clientHeight, scrollHeight, scrollTop };
+			for (const [property, value] of Object.entries(heights)) {
+				jest.spyOn(
+					HTMLElement.prototype,
+					property as keyof typeof heights,
+					'get',
+				).mockReturnValue(value);
+			}
+		};
+
+		const getBody = (container: HTMLElement) =>
+			container.querySelector('[data-more-below]');
+
+		it('shows the footer shadow only while there is more below', () => {
+			renderModal();
+			const rules = allRules();
+
+			const shadowRule = rules.find(
+				(rule) =>
+					rule.includes('data-more-below') &&
+					rule.includes('box-shadow'),
+			);
+			expect(shadowRule).toBeDefined();
+			expect(shadowRule).toContain("[data-more-below='true']");
+
+			// And never as a permanent shadow
+			expect(
+				rules.some(
+					(rule) =>
+						!rule.includes('data-more-below') &&
+						rule.includes(
+							'box-shadow: rgba(0, 0, 0, 0.15) 0px -4px 8px',
+						),
+				),
+			).toBe(false);
+		});
+
+		it('fades the shadow in and out, unless the reader prefers reduced motion', () => {
+			renderModal();
+			const rules = allRules().join('\n');
+
+			expect(rules).toContain('transition: box-shadow 0.25s ease');
+			expect(rules).toMatch(
+				/prefers-reduced-motion:\s*reduce[^{]*\{[^}]*transition: none/,
+			);
+		});
+
+		it('has nothing below when the content fits', () => {
+			mockBody({ clientHeight: 365, scrollHeight: 365 });
+			const { container } = renderModal();
+
+			expect(getBody(container)).toHaveAttribute(
+				'data-more-below',
+				'false',
+			);
+		});
+
+		it('has more below when the content is taller, even by a few pixels', () => {
+			mockBody({ clientHeight: 396, scrollHeight: 404 });
+			const { container } = renderModal();
+
+			expect(getBody(container)).toHaveAttribute(
+				'data-more-below',
+				'true',
+			);
+		});
+
+		it('has nothing below once the reader scrolls to the end', () => {
+			mockBody({ clientHeight: 396, scrollHeight: 404 });
+			const { container } = renderModal();
+			const body = getBody(container)!;
+			expect(body).toHaveAttribute('data-more-below', 'true');
+
+			mockBody({ clientHeight: 396, scrollHeight: 404, scrollTop: 8 });
+			fireEvent.scroll(body);
+
+			expect(body).toHaveAttribute('data-more-below', 'false');
+		});
+	});
+
+	describe('hero image', () => {
+		it('is hidden on small screens only while the modal is a sticky bottom sheet', () => {
+			renderModal();
+			const rules = Array.from(document.styleSheets)
+				.flatMap((sheet) => Array.from(sheet.cssRules))
+				.map((rule) => rule.cssText);
+			const hideRule = rules.find(
+				(rule) =>
+					rule.includes('data-flow-with-page') &&
+					rule.includes('display: none'),
+			);
+
+			expect(hideRule).toBeDefined();
+			// Only in the small screen layout, and not when the modal flows with the page
+			expect(hideRule).toContain('max-width');
+			expect(hideRule).toMatch(
+				/:not\(\[data-flow-with-page=["']true["']\]\)/,
+			);
+		});
+
+		it('closes the gap under the line only while the hero is hidden', () => {
+			renderModal();
+			const rules = Array.from(document.styleSheets)
+				.flatMap((sheet) => Array.from(sheet.cssRules))
+				.map((rule) => rule.cssText);
+			const onlyInStickySheet = (rule: string) =>
+				rule.startsWith('@media') &&
+				/:not\(\[data-flow-with-page=["']true["']\]\)/.test(rule);
+
+			// The line is closer to the title: 12px instead of 16px
+			expect(
+				rules.find(
+					(rule) =>
+						onlyInStickySheet(rule) &&
+						rule.includes('margin-bottom: 12px'),
+				),
+			).toBeDefined();
+			// And the title adds no top margin of its own
+			expect(
+				rules.find(
+					(rule) =>
+						onlyInStickySheet(rule) &&
+						rule.includes('margin-top: 0'),
+				),
+			).toBeDefined();
+			// Everywhere else the line and the title keep their usual 16px
+			expect(
+				rules.find(
+					(rule) =>
+						!rule.startsWith('@media') &&
+						rule.includes('border-top: 1px solid') &&
+						rule.includes('margin-bottom: 16px'),
+				),
+			).toBeDefined();
+		});
+
+		it('is still rendered, so it can be shown when the modal flows with the page', () => {
+			const { container } = renderModal();
+			expect(container.querySelector('img')).toBeInTheDocument();
+		});
+	});
+
+	describe('colours', () => {
+		const renderedCss = () =>
+			Array.from(document.styleSheets)
+				.flatMap((sheet) => Array.from(sheet.cssRules))
+				.map((rule) => rule.cssText)
+				.join('\n');
+
+		it('uses the light colours by default', () => {
+			renderModal();
+			const css = renderedCss();
+
+			expect(css).toContain('--unlock-modal-background: #FFFFFF');
+			expect(css).toContain('--unlock-modal-title: #052962');
+			expect(css).toContain('--unlock-modal-tick: #0077B6');
+		});
+
+		it('uses the dark colours from the design when dark mode is available', () => {
+			render(
+				<UnlockPremiumPuzzlesModal
+					idUrl="https://profile.theguardian.com"
+					darkModeAvailable={true}
+					returnToArchivePath="/puzzles-and-games/logic-puzzles/archive"
+				/>,
+			);
+			const css = renderedCss();
+
+			expect(css).toContain('prefers-color-scheme: dark');
+			expect(css).toContain('--unlock-modal-background: #333333');
+			expect(css).toContain('--unlock-modal-title: #F6F6F6');
+			expect(css).toContain('--unlock-modal-text: #F6F6F6');
+			expect(css).toContain('--unlock-modal-tick: #C1D8FC');
+			expect(css).toContain('--unlock-modal-link: #C1D8FC');
+		});
 	});
 });

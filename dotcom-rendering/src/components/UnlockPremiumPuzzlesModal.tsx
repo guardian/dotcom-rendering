@@ -19,8 +19,10 @@ import { useEffect, useRef, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import {
 	getModalMaxHeight,
+	hasMoreToScroll,
 	MODAL_FLOW_ATTRIBUTE,
 	MODAL_MAX_HEIGHT_PROPERTY,
+	MODAL_MORE_BELOW_ATTRIBUTE,
 	shouldFlowWithPage,
 } from '../lib/premiumPuzzlesModalLayout';
 import {
@@ -41,6 +43,46 @@ const HERO_IMAGE_URL =
 	'https://i.guim.co.uk/img/uploads/2026/11/09/HERO-01-2.png?width=360&dpr=2&s=none';
 const HERO_IMAGE_WIDTH = 556;
 const HERO_IMAGE_HEIGHT = 207;
+
+/** Lets the dark mode theme style the archive button's hover. */
+const ARCHIVE_BUTTON_CLASS = 'unlock-modal-archive-button';
+
+/**
+ * The modal's colours, as custom properties on the modal itself. The values
+ * set here are the light ones. When dark mode is available they are replaced
+ * in dark mode, the same way `puzzlesPageTheme` does it for the Puzzles pages
+ * (so the modal follows the page, including a page forced to light).
+ */
+const modalTheme = (darkModeAvailable: boolean) => css`
+	--unlock-modal-background: ${sourcePalette.neutral[100]};
+	--unlock-modal-title: ${sourcePalette.brand[400]};
+	--unlock-modal-text: ${sourcePalette.neutral[0]};
+	--unlock-modal-footnote: ${sourcePalette.neutral[0]};
+	--unlock-modal-tick: ${sourcePalette.brand[500]};
+	--unlock-modal-link: ${sourcePalette.brand[500]};
+	--unlock-modal-divider: ${sourcePalette.neutral[86]};
+	--unlock-modal-secondary: ${sourcePalette.brand[400]};
+
+	${darkModeAvailable &&
+	css`
+		@media (prefers-color-scheme: dark) {
+			html:not([data-color-scheme='light']) & {
+				--unlock-modal-background: ${sourcePalette.neutral[20]};
+				--unlock-modal-title: ${sourcePalette.neutral[97]};
+				--unlock-modal-text: ${sourcePalette.neutral[97]};
+				--unlock-modal-footnote: ${sourcePalette.neutral[86]};
+				--unlock-modal-tick: ${sourcePalette.brand[800]};
+				--unlock-modal-link: ${sourcePalette.brand[800]};
+				--unlock-modal-divider: ${sourcePalette.neutral[46]};
+				--unlock-modal-secondary: ${sourcePalette.neutral[97]};
+
+				.${ARCHIVE_BUTTON_CLASS}:hover {
+					background-color: ${sourcePalette.neutral[10]};
+				}
+			}
+		}
+	`}
+`;
 
 const blockerStyles = css`
 	position: absolute;
@@ -90,8 +132,7 @@ const modalStyles = css`
 	padding-left: ${space[4]}px;
 	padding-right: ${space[4]}px;
 	padding-bottom: ${space[6]}px;
-	/* stylelint-disable-next-line color-no-hex -- specified by the Design team for the modal background, not in the Source palette */
-	background-color: #fef9f6;
+	background-color: var(--unlock-modal-background);
 	border-radius: ${space[3]}px;
 
 	${until.phablet} {
@@ -125,7 +166,9 @@ const bodyStyles = css`
 		flex: 1 1 auto;
 		min-height: 0;
 		overflow-y: auto;
-		padding: ${space[4]}px ${space[4]}px ${space[3]}px;
+		/* No bottom padding: the footer's own top padding gives the gap, so the
+		   content is not pushed to scroll by spacing that is not needed */
+		padding: ${space[4]}px ${space[4]}px 0;
 
 		[${MODAL_FLOW_ATTRIBUTE}='true'] > div > & {
 			flex: none;
@@ -137,19 +180,48 @@ const bodyStyles = css`
 const headerStyles = css`
 	display: flex;
 	justify-content: flex-end;
+	/* The logo is drawn in the current colour */
+	color: var(--unlock-modal-text);
 `;
+
+/**
+ * The body's children while the modal is the sticky bottom sheet, which is when
+ * the hero image is hidden (see `shouldFlowWithPage`). The container is the
+ * modal's wrapper, which sets MODAL_FLOW_ATTRIBUTE:
+ * wrapper > modal > body > child.
+ */
+const inStickySheet = `div:not([${MODAL_FLOW_ATTRIBUTE}='true']) > div > div > &`;
 
 const dividerStyles = css`
 	border: 0;
-	border-top: 1px solid ${sourcePalette.neutral[86]};
+	border-top: 1px solid var(--unlock-modal-divider);
 	margin-top: ${space[4]}px;
 	margin-bottom: ${space[4]}px;
 	width: 100%;
+
+	/* With no hero image, the title follows the line directly: the space under
+	   the line is made as large as the space above it, between the logo and the
+	   line. With the title's own top margin removed (see titleStyles), the
+	   title's line height adds a little, so this is a little smaller. */
+	${until.phablet} {
+		${inStickySheet} {
+			margin-bottom: ${space[3]}px;
+		}
+	}
 `;
 
 const heroStyles = css`
 	display: flex;
 	justify-content: center;
+
+	/* The sticky bottom sheet is short, so it has no room for the picture.
+	   When the modal flows with the page instead (see shouldFlowWithPage) it
+	   keeps it. */
+	${until.phablet} {
+		${inStickySheet} {
+			display: none;
+		}
+	}
 
 	img {
 		display: block;
@@ -163,21 +235,29 @@ const heroStyles = css`
 
 const titleStyles = css`
 	${headlineMedium24};
-	color: ${sourcePalette.brand[400]};
+	color: var(--unlock-modal-title);
 	font-variant-numeric: lining-nums proportional-nums;
 	margin: ${space[4]}px 0;
+
+	/* Without the hero image above it, the space under the line is set by the
+	   line (see dividerStyles), so the title adds none of its own */
+	${until.phablet} {
+		${inStickySheet} {
+			margin-top: 0;
+		}
+	}
 `;
 
 const subtitleStyles = css`
 	${textEgyptianBold17};
-	color: ${sourcePalette.neutral[0]};
+	color: var(--unlock-modal-text);
 	margin-top: ${space[2]}px;
 	margin-bottom: ${space[3]}px;
 `;
 
 const benefitsStyles = css`
 	${textEgyptian17};
-	color: ${sourcePalette.neutral[0]};
+	color: var(--unlock-modal-text);
 	list-style: none;
 	margin: 0 0 ${space[2]}px;
 	padding: 0;
@@ -189,9 +269,20 @@ const benefitsStyles = css`
 		margin-bottom: ${space[2]}px;
 	}
 
+	/* On small screens the footer has its own top padding, which gives the
+	   space below the list. On larger screens it has none, so the list keeps
+	   its bottom margins. */
+	${until.phablet} {
+		margin-bottom: 0;
+
+		li:last-child {
+			margin-bottom: 0;
+		}
+	}
+
 	svg {
 		flex: none;
-		fill: ${sourcePalette.brand[500]};
+		fill: var(--unlock-modal-tick);
 	}
 `;
 
@@ -205,10 +296,20 @@ const footerStyles = css`
 		position: relative;
 		padding: ${space[4]}px ${space[4]}px
 			calc(${space[6]}px + env(safe-area-inset-bottom, 0px));
-		box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.15);
 
-		[${MODAL_FLOW_ATTRIBUTE}='true'] > div > & {
-			box-shadow: none;
+		/* The shadow fades in and out as the reader scrolls, instead of
+		   switching on and off */
+		transition: box-shadow 0.25s ease;
+
+		@media (prefers-reduced-motion: reduce) {
+			transition: none;
+		}
+
+		/* A shadow on the footer's top edge, only while the body above it has
+		   more to scroll to (see MODAL_MORE_BELOW_ATTRIBUTE). Otherwise it would
+		   suggest there is content that is not there. */
+		[${MODAL_MORE_BELOW_ATTRIBUTE}='true'] + & {
+			box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.15);
 		}
 	}
 `;
@@ -233,17 +334,18 @@ const subscribeButtonStyles = css`
 
 const archiveButtonStyles = css`
 	border-radius: 40px;
-	border: 2px solid ${sourcePalette.brand[400]};
+	border: 2px solid var(--unlock-modal-secondary);
+	color: var(--unlock-modal-secondary);
 `;
 
 const footnoteStyles = css`
 	${textSans14};
-	color: ${sourcePalette.neutral[0]};
+	color: var(--unlock-modal-footnote);
 	text-align: center;
 
 	a {
 		${textSansBold14};
-		color: ${sourcePalette.brand[500]};
+		color: var(--unlock-modal-link);
 		text-decoration-line: underline;
 		text-decoration-style: solid;
 		text-decoration-skip-ink: none;
@@ -286,6 +388,12 @@ type Props = {
 	 * Defaults to signed out.
 	 */
 	isSignedIn?: boolean;
+	/**
+	 * Whether dark mode is available for this page (the `webx-dark-mode-web`
+	 * test). When it is, the modal uses its dark colours for readers whose
+	 * device prefers dark. Defaults to `false`: always light.
+	 */
+	darkModeAvailable?: boolean;
 	title?: string;
 	subtitle?: string;
 	benefits?: string[];
@@ -318,6 +426,7 @@ export const UnlockPremiumPuzzlesModal = ({
 	returnToArchivePath,
 	idUrl,
 	isSignedIn = false,
+	darkModeAvailable = false,
 	title = DEFAULT_TITLE,
 	subtitle = DEFAULT_SUBTITLE,
 	benefits = DEFAULT_BENEFITS,
@@ -335,6 +444,52 @@ export const UnlockPremiumPuzzlesModal = ({
 		: '/';
 
 	const blockerRef = useRef<HTMLDivElement>(null);
+	const bodyRef = useRef<HTMLDivElement>(null);
+
+	// Tells the footer whether the body above it has more to scroll to, so its
+	// shadow only shows then: not when everything fits, and not once the reader
+	// has scrolled to the end. The body's own size changes with the screen, and
+	// its content changes without it (fonts loading, text wrapping), so both
+	// are watched, along with the scrolling itself.
+	useEffect(() => {
+		const body = bodyRef.current;
+		if (!body) return;
+
+		const update = () => {
+			body.setAttribute(
+				MODAL_MORE_BELOW_ATTRIBUTE,
+				String(hasMoreToScroll(body)),
+			);
+		};
+
+		update();
+
+		// A resize also changes the modal's maximum height (see the effect
+		// below), which this has to see. Waiting a frame lets that happen first.
+		let frame: number | undefined;
+		const updateNextFrame = () => {
+			if (frame !== undefined) cancelAnimationFrame(frame);
+			frame = requestAnimationFrame(update);
+		};
+		window.addEventListener('resize', updateNextFrame);
+		body.addEventListener('scroll', update, { passive: true });
+
+		const observer =
+			typeof ResizeObserver === 'undefined'
+				? undefined
+				: new ResizeObserver(update);
+		observer?.observe(body);
+		for (const child of Array.from(body.children)) {
+			observer?.observe(child);
+		}
+
+		return () => {
+			window.removeEventListener('resize', updateNextFrame);
+			body.removeEventListener('scroll', update);
+			if (frame !== undefined) cancelAnimationFrame(frame);
+			observer?.disconnect();
+		};
+	}, []);
 
 	// On small screens the modal is a bottom sheet whose height depends on how
 	// much room is left under the page header (see getModalMaxHeight). When
@@ -366,13 +521,10 @@ export const UnlockPremiumPuzzlesModal = ({
 	return (
 		<div ref={blockerRef} css={[blockerStyles, cssOverrides]}>
 			<div css={overlayStyles}></div>
-			<div css={modalStyles}>
-				<div css={bodyStyles}>
+			<div css={[modalStyles, modalTheme(darkModeAvailable)]}>
+				<div ref={bodyRef} css={bodyStyles}>
 					<div css={headerStyles}>
-						<SvgGuardianLogo
-							textColor={sourcePalette.neutral[0]}
-							width={98}
-						/>
+						<SvgGuardianLogo textColor="currentColor" width={98} />
 					</div>
 					<hr css={dividerStyles} />
 					<div css={heroStyles}>
@@ -407,6 +559,7 @@ export const UnlockPremiumPuzzlesModal = ({
 						<LinkButton
 							href={archiveUrl}
 							priority="tertiary"
+							className={ARCHIVE_BUTTON_CLASS}
 							cssOverrides={archiveButtonStyles}
 						>
 							Return to puzzle archive
