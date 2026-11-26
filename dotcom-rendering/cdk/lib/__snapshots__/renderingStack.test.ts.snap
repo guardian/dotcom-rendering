@@ -4848,8 +4848,8 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering PROD (
         "ManagedInstancesCapacityProviderC2946447",
       ],
       "Properties": {
-        "MaxCapacity": 240,
-        "MinCapacity": 42,
+        "MaxCapacity": 3,
+        "MinCapacity": 1,
         "ResourceId": {
           "Fn::Join": [
             "",

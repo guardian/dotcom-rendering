@@ -95,8 +95,8 @@ export const ArticleRenderingPropsPROD: RenderingCDKStackProps = {
 		cpu: 1024,
 		memoryLimitMiB: 2048,
 		scaling: {
-			minimumTasks: 42,
-			maximumTasks: 240,
+			minimumTasks: 1,
+			maximumTasks: 3,
 			cpuScaling: {
 				targetValue: 20,
 				// TODO: Tune cooldown values.
