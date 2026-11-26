@@ -6,6 +6,7 @@ import {
 	SvgGuardianLogo,
 } from '@guardian/source/react-components';
 import type { Inline1Props } from '@guardian/support-dotcom-components/dist/shared/types';
+import { InlineSkipToWrapper } from '../../InlineSkipToWrapper';
 import type { ReactComponent } from '../lib/ReactComponent';
 import { useInline1Tracking } from './utils/useInline1Tracking';
 
@@ -152,50 +153,55 @@ export const Puzzles: ReactComponent<Inline1Props> = ({
 	)}`;
 
 	return (
-		<section
-			css={outerContainerStyles}
-			aria-label="Guardian Puzzles and Games"
-			data-message-type={variant.message.type}
-			data-testid={tracking.campaignCode}
-			ref={setNode}
+		<InlineSkipToWrapper
+			id={`Puzzles-skip-link`}
+			blockDescription="puzzles promotion"
 		>
-			<div css={innerContainerStyles(shouldHaveWhiteBackground)}>
-				<div css={guardianLogoContainerStyles}>
-					<SvgGuardianLogo aria-hidden="true" />
-				</div>
-				<div css={mainContentContainerStyles}>
-					<div css={logoAndImageContainerStyles}>
-						<img
-							src="https://media.guim.co.uk/06a5eec896bfae86e67f2faed6de8945d73eb9e7/0_0_1060_448/1060.png"
-							css={puzzlesLogoStyles}
-							alt="Guardian Puzzles and Games Logo"
-						/>
-						<img
-							src="https://media.guim.co.uk/e4888726777698a44873ab6480adb7f24ee90d01/0_0_1398_601/1398.png"
-							css={imageStyles}
-							alt="An octopus leaning against an owl. The owl is attempting a crossword."
-						></img>
+			<aside
+				css={outerContainerStyles}
+				aria-label="Guardian Puzzles and Games"
+				data-message-type={variant.message.type}
+				data-testid={tracking.campaignCode}
+				ref={setNode}
+			>
+				<div css={innerContainerStyles(shouldHaveWhiteBackground)}>
+					<div css={guardianLogoContainerStyles}>
+						<SvgGuardianLogo aria-hidden="true" />
 					</div>
+					<div css={mainContentContainerStyles}>
+						<div css={logoAndImageContainerStyles}>
+							<img
+								src="https://media.guim.co.uk/06a5eec896bfae86e67f2faed6de8945d73eb9e7/0_0_1060_448/1060.png"
+								css={puzzlesLogoStyles}
+								alt=""
+							/>
+							<img
+								src="https://media.guim.co.uk/e4888726777698a44873ab6480adb7f24ee90d01/0_0_1398_601/1398.png"
+								css={imageStyles}
+								alt=""
+							></img>
+						</div>
 
-					<p css={bodyStyles}>
-						Whether you have one minute or all day, our new puzzles
-						and games hub has something you&rsquo;ll love.
-					</p>
-					<LinkButton
-						cssOverrides={ctaButtonStyles}
-						theme={ctaButtonTheme}
-						data-ignore="global-link-styling"
-						href={puzzleCtaUrl}
-						icon={<SvgArrowRightStraight />}
-						iconSide="right"
-						aria-label="Visit the Guardian puzzles and games hub."
-						onClick={() => sendEvent('CLICK', 'cta')}
-					>
-						Play now
-					</LinkButton>
+						<p css={bodyStyles}>
+							Whether you have one minute or all day, our new
+							puzzles and games hub has something you&rsquo;ll
+							love.
+						</p>
+						<LinkButton
+							cssOverrides={ctaButtonStyles}
+							theme={ctaButtonTheme}
+							data-ignore="global-link-styling"
+							href={puzzleCtaUrl}
+							icon={<SvgArrowRightStraight />}
+							iconSide="right"
+							onClick={() => sendEvent('CLICK', 'cta')}
+						>
+							Play now
+						</LinkButton>
+					</div>
 				</div>
-			</div>
-		</section>
+			</aside>
+		</InlineSkipToWrapper>
 	);
 };
 

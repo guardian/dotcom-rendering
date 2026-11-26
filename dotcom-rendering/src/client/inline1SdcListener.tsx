@@ -70,6 +70,7 @@ const render = <P extends object>(
 	// override ad-slot style in parent element
 	slot.style.textAlign = 'left';
 	slot.style.minHeight = 'auto';
+	slot.removeAttribute('aria-hidden');
 	if (slot.parentElement) {
 		// remove the default background color
 		slot.parentElement.style.backgroundColor = 'transparent';

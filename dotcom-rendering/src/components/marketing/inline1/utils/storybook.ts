@@ -19,7 +19,6 @@ const supportVariant = {
 				'https://i.guim.co.uk/img/media/d5fd46298bb30b3f4779a625df0a1c1054431474/68_428_3058_3819/master/3058.jpg?width=157&dpr=2&s=none',
 			desktopUrl:
 				'https://i.guim.co.uk/img/media/d5fd46298bb30b3f4779a625df0a1c1054431474/68_428_3058_3819/master/3058.jpg?width=157&dpr=2&s=none',
-			altText: 'Feast app download',
 		},
 	},
 };

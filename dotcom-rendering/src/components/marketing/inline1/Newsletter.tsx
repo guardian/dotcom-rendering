@@ -4,6 +4,7 @@ import type {
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useIsSignedIn } from '../../../lib/useAuthStatus';
 import { useNewsletterSubscription } from '../../../lib/useNewsletterSubscription';
+import { InlineSkipToWrapper } from '../../InlineSkipToWrapper';
 import { NewsletterSignupCard } from '../../NewsletterSignupCard';
 import { NewsletterSignupForm } from '../../NewsletterSignupForm.island';
 import type { ReactComponent } from '../lib/ReactComponent';
@@ -73,28 +74,33 @@ const NewsletterForm: ReactComponent<{
 	});
 
 	return (
-		<div
-			data-message-type={message.type}
-			data-testid={tracking.campaignCode}
-			ref={setNode}
+		<InlineSkipToWrapper
+			id={`EmailSignup-skip-link`}
+			blockDescription="newsletter promotion"
 		>
-			<NewsletterSignupCard
-				name={newsletterName}
-				description={description}
-				illustrationSquare={illustrationSquare}
-				frequency={frequency}
-				isSignedIn={isSignedIn}
-				heading={heading}
+			<div
+				data-message-type={message.type}
+				data-testid={tracking.campaignCode}
+				ref={setNode}
 			>
-				<NewsletterSignupForm
-					newsletterId={newsletterId}
-					newsletterName={newsletterName}
+				<NewsletterSignupCard
+					name={newsletterName}
+					description={description}
+					illustrationSquare={illustrationSquare}
 					frequency={frequency}
-					componentId={componentId}
-					isAlreadySubscribed={isSubscribed}
-					onSubmitButtonClick={() => sendEvent('CLICK', 'cta')}
-				/>
-			</NewsletterSignupCard>
-		</div>
+					isSignedIn={isSignedIn}
+					heading={heading}
+				>
+					<NewsletterSignupForm
+						newsletterId={newsletterId}
+						newsletterName={newsletterName}
+						frequency={frequency}
+						componentId={componentId}
+						isAlreadySubscribed={isSubscribed}
+						onSubmitButtonClick={() => sendEvent('CLICK', 'cta')}
+					/>
+				</NewsletterSignupCard>
+			</div>
+		</InlineSkipToWrapper>
 	);
 };
