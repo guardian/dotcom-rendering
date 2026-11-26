@@ -172,9 +172,21 @@ export const AdPortals = ({
 	 * - Check the new ad positions against the previous ones to make sure
 	 * they've changed.
 	 * - Debounce any calls to the Bridget `updateAdverts` method.
+	 *
+	 * We also listen for animationend and transitionend events on the document,
+	 * since CSS animations on placeholder elements (such as padding or margin
+	 * changes) can shift ad positions without changing the body height.
 	 */
 	useEffect(() => {
 		let resizeObserver: ResizeObserver | undefined = undefined;
+
+		const handleAnimationEnd = () => {
+			const newAdPositions = calculateAdPositions(adSlots.current);
+			if (adsHaveMoved(adPositions.current, newAdPositions)) {
+				void debounceUpdateAds(newAdPositions);
+				adPositions.current = newAdPositions;
+			}
+		};
 
 		if (
 			adPlaceholders.length !== 0 &&
@@ -185,6 +197,9 @@ export const AdPortals = ({
 			void getCommercialClient()
 				.insertAdverts(adPositions.current)
 				.catch(() => console.error('Error inserting ads'));
+
+			document.addEventListener('animationend', handleAnimationEnd);
+			document.addEventListener('transitionend', handleAnimationEnd);
 
 			resizeObserver = new ResizeObserver((entries) => {
 				if (
@@ -214,7 +229,11 @@ export const AdPortals = ({
 			}
 		}
 
-		return () => resizeObserver?.disconnect();
+		return () => {
+			resizeObserver?.disconnect();
+			document.removeEventListener('animationend', handleAnimationEnd);
+			document.removeEventListener('transitionend', handleAnimationEnd);
+		};
 	}, [adPlaceholders, rightAdPlaceholder, tryRightAligned]);
 
 	const renderAdSlot = (id: string) => (
