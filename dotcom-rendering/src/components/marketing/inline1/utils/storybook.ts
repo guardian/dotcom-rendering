@@ -22,6 +22,16 @@ const variant = {
 				'https://uploads.guim.co.uk/2025/06/12/not_for_sale_bg_scaled.svg',
 			altText: 'Optional img',
 		},
+		styleId: 'business-as-usual',
+		themeId: 'support-default',
+		colours: {
+			backgroundColor: '#F1F8FC',
+			headlineColor: '#052962',
+			guardianLogoColor: '#000000',
+			fontColor: '#000000',
+			ctaBackgroundColor: '#FFE500',
+			ctaFontColor: '#052962',
+		},
 	},
 };
 

@@ -19,8 +19,8 @@ const outerContainerStyles = css`
 	padding-top: ${space[2]}px;
 `;
 
-const innerContainerStyles = css`
-	background-color: ${palette.neutral[97]};
+const innerContainerStyles = (backgroundColor: string) => css`
+	background-color: ${backgroundColor};
 	padding-top: ${space[2]}px;
 	padding-left: ${space[3]}px;
 	display: flex;
@@ -41,8 +41,9 @@ const innerContainerStyles = css`
 	}
 `;
 
-const headingStyles = css`
+const headingStyles = (color: string) => css`
 	${headlineMedium24};
+	color: ${color};
 	${from.tablet} {
 		grid-area: heading;
 	}
@@ -62,8 +63,10 @@ const guardianLogoContainerStyles = css`
 	}
 `;
 
-const bodyStyles = css`
+const bodyStyles = (color: string) => css`
 	${textSans15};
+	color: ${color};
+
 	${from.tablet} {
 		grid-area: body;
 	}
@@ -78,11 +81,10 @@ const ctaContainerStyles = css`
 	}
 `;
 
-const ctaButtonTheme = {
-	textPrimary: palette.neutral[7],
-	backgroundPrimary: palette.brandAlt[400],
-	backgroundPrimaryHover: palette.brandAlt[300],
-};
+const ctaButtonTheme = (textColor: string, backgroundColor: string) => ({
+	textPrimary: textColor,
+	backgroundPrimary: backgroundColor,
+});
 
 const ctaButtonStyles = css`
 	${until.tablet} {
@@ -122,10 +124,12 @@ export const SupporterRevenue: ReactComponent<Inline1Props> = ({
 	if (variant.message.type != 'Inline1SupportMessage') {
 		return;
 	}
+
 	const heading = variant.message.heading;
 	const body = variant.message.body;
 	const image = variant.message.image;
 	const cta = variant.message.primaryCta;
+	const colours = variant.message.colours;
 
 	return (
 		<section
@@ -133,9 +137,12 @@ export const SupporterRevenue: ReactComponent<Inline1Props> = ({
 			aria-labelledby="supporter-revenue-heading"
 			ref={setNode}
 		>
-			<div css={innerContainerStyles}>
+			<div css={innerContainerStyles(colours.backgroundColor)}>
 				<div css={guardianLogoContainerStyles}>
-					<SvgGuardianLogo width={75} />
+					<SvgGuardianLogo
+						textColor={colours.guardianLogoColor}
+						width={75}
+					/>
 				</div>
 				{image && (
 					<div css={imageWrapperStyles}>
@@ -148,7 +155,7 @@ export const SupporterRevenue: ReactComponent<Inline1Props> = ({
 				)}
 				<h2
 					id="supporter-revenue-heading"
-					css={headingStyles}
+					css={headingStyles(colours.headlineColor)}
 					dangerouslySetInnerHTML={{
 						__html: sanitize(heading, {
 							allowedTags: allowedHTMLTags,
@@ -156,7 +163,7 @@ export const SupporterRevenue: ReactComponent<Inline1Props> = ({
 					}}
 				></h2>
 				<p
-					css={bodyStyles}
+					css={bodyStyles(colours.fontColor)}
 					dangerouslySetInnerHTML={{
 						__html: sanitize(body, {
 							allowedTags: allowedHTMLTags,
@@ -166,7 +173,10 @@ export const SupporterRevenue: ReactComponent<Inline1Props> = ({
 				<div css={ctaContainerStyles}>
 					<LinkButton
 						cssOverrides={ctaButtonStyles}
-						theme={ctaButtonTheme}
+						theme={ctaButtonTheme(
+							colours.ctaFontColor,
+							colours.ctaBackgroundColor,
+						)}
 						href={cta.baseUrl}
 						onClick={() => sendEvent('CLICK', 'cta')}
 					>
