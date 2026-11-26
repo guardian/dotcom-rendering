@@ -141,6 +141,7 @@ export const NewsletterBannerComponent = (
 										<div css={styles.frequencyRow}>
 											<NewsletterFrequencyTag
 												bannerData={bannerData}
+												hideFrequency={true}
 											/>
 										</div>
 										<div
