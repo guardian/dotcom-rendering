@@ -163,6 +163,10 @@ export const AdPortals = ({
 	 * the number of placeholders, then the ad slot references haven't been set
 	 * up correctly and we shouldn't try to insert or update ads.
 	 *
+	 * We defer the initial insertion until the browser is idle, so that fonts,
+	 * images, and interactive atoms have had a chance to settle before we
+	 * calculate ad positions.
+	 *
 	 * Update Ads
 	 *
 	 * Ask the native layer to update the positions of the adverts whenever the
@@ -182,6 +186,9 @@ export const AdPortals = ({
 	 */
 	useEffect(() => {
 		let resizeObserver: ResizeObserver | undefined = undefined;
+		let idleCallbackHandle: number | undefined = undefined;
+		let timeoutHandle: ReturnType<typeof setTimeout> | undefined =
+			undefined;
 
 		const handleScroll = libDebounce(
 			() => {
@@ -199,11 +206,21 @@ export const AdPortals = ({
 			adPlaceholders.length !== 0 &&
 			adPlaceholders.length === adSlots.current.length
 		) {
-			adPositions.current = calculateAdPositions(adSlots.current);
-			bodyHeight.current = document.body.clientHeight;
-			void getCommercialClient()
-				.insertAdverts(adPositions.current)
-				.catch(() => console.error('Error inserting ads'));
+			const insertAds = () => {
+				adPositions.current = calculateAdPositions(adSlots.current);
+				bodyHeight.current = document.body.clientHeight;
+				void getCommercialClient()
+					.insertAdverts(adPositions.current)
+					.catch(() => console.error('Error inserting ads'));
+			};
+
+			if ('requestIdleCallback' in window) {
+				idleCallbackHandle = requestIdleCallback(insertAds, {
+					timeout: 1000,
+				});
+			} else {
+				timeoutHandle = setTimeout(insertAds, 200);
+			}
 
 			document.addEventListener('scroll', handleScroll, {
 				passive: true,
@@ -241,6 +258,12 @@ export const AdPortals = ({
 			resizeObserver?.disconnect();
 			document.removeEventListener('scroll', handleScroll);
 			handleScroll.cancel();
+			if (idleCallbackHandle !== undefined) {
+				cancelIdleCallback(idleCallbackHandle);
+			}
+			if (timeoutHandle !== undefined) {
+				clearTimeout(timeoutHandle);
+			}
 		};
 	}, [adPlaceholders, rightAdPlaceholder, tryRightAligned]);
 
