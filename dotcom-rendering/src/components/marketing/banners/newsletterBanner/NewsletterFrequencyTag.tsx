@@ -47,21 +47,24 @@ const badgeStyles = (actionColor: string, iconColor: string) => css`
 
 export const NewsletterFrequencyTag = ({
 	bannerData,
+	hideFrequency = false,
 }: {
 	bannerData: NewsletterBannerData;
+	hideFrequency?: boolean;
 }) => {
 	const { actionColor, frequencyIconColor } =
 		bannerData.settings.newsletterBanner;
+	const { frequency } = bannerData.newsletter;
 	return (
 		<div css={frequencyTagStyles(actionColor)}>
 			<span css={badgeStyles(actionColor, frequencyIconColor)}>
 				<SvgNewsletterFilled />
 			</span>
 			<span css={frequencyTextStyles}>
-				<span css={frequencyLabelStyles}>Free newsletter |</span>
-				<span css={frequencyLabelStyles}>
-					{bannerData.newsletter.frequency}
-				</span>
+				<span css={frequencyLabelStyles}>Free newsletter</span>
+				{!hideFrequency && (
+					<span css={frequencyLabelStyles}>| {frequency}</span>
+				)}
 			</span>
 		</div>
 	);
