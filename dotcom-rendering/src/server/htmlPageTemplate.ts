@@ -99,6 +99,9 @@ export const doNotIndex = (
 	];
 
 	// DO index exempted tracking/commissioningdesk pages
+	// The block list is an exact match on the path, so we strip the domain
+	// (the base URL handles relative URLs). The allow list is a substring
+	// match, so it can check the full canonical URL.
 	const isCommissioningDeskAllowListed =
 		!commissioningDeskBlockList.includes(
 			new URL(canonicalUrl, 'https://www.theguardian.com').pathname,
