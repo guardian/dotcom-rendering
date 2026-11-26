@@ -10,7 +10,8 @@ import { DiscussionLayout } from '../components/DiscussionLayout';
 import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.island';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
-import { InteractivesDisableArticleSwipe } from '../components/InteractivesDisableArticleSwipe.island';
+import { InteractivesDisableArticleSwipeInApps } from '../components/InteractivesDisableArticleSwipe.island';
+import { InteractivesNativePlatformWrapper } from '../components/InteractivesNativePlatformWrapper.island';
 import { InteractivesScrollbarWidth } from '../components/InteractivesScrollbarWidth.island';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
@@ -132,9 +133,16 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 			{isInteractive && (
 				<>
 					<InteractivesScrollbarWidth />
-					<Island priority="critical">
-						<InteractivesDisableArticleSwipe />
-					</Island>
+					{isApps && (
+						<>
+							<Island priority="critical">
+								<InteractivesNativePlatformWrapper />
+							</Island>
+							<Island priority="critical">
+								<InteractivesDisableArticleSwipeInApps />
+							</Island>
+						</>
+					)}
 				</>
 			)}
 

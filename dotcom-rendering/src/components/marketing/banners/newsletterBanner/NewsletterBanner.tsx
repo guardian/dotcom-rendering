@@ -47,7 +47,7 @@ const buildNewsletterBannerData = (
 			},
 			headingCopy: {
 				...baseBannerData.selectors.headingCopy,
-				heading: <>Sign up for {newsletter.name}</>,
+				heading: <>{newsletter.name}</>,
 			},
 			showHeaderImage: false,
 			showBody: true,
@@ -141,6 +141,7 @@ export const NewsletterBannerComponent = (
 										<div css={styles.frequencyRow}>
 											<NewsletterFrequencyTag
 												bannerData={bannerData}
+												hideFrequency={true}
 											/>
 										</div>
 										<div

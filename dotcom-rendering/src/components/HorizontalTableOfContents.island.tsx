@@ -14,9 +14,11 @@ import {
 } from '@guardian/source/react-components';
 import type { RefObject } from 'react';
 import { useEffect, useRef, useState } from 'react';
+import { getInteractionClient } from '../lib/bridgetApi';
 import { getZIndex } from '../lib/getZIndex';
 import type { TableOfContentsItem } from '../model/enhanceTableOfContents';
 import { palette } from '../palette';
+import { useConfig } from './ConfigContext';
 
 interface Props {
 	tableOfContents: TableOfContentsItem[];
@@ -494,6 +496,15 @@ export const HorizontalTableOfContents = ({ tableOfContents }: Props) => {
 	const { canScrollPrev, canScrollNext } = useScrollableSides(navRef);
 	useCentredCurrentLink(navRef, currentSectionId);
 
+	const { renderingTarget } = useConfig();
+	const isApps = renderingTarget === 'Apps';
+
+	const disableArticleSwipe = (disable: boolean) => {
+		void getInteractionClient()
+			.disableArticleSwipe(disable)
+			.catch(() => undefined);
+	};
+
 	const scrollNav = (direction: ScrollDirection) => {
 		if (navRef.current) scrollByOneItem(navRef.current, direction);
 	};
@@ -514,7 +525,20 @@ export const HorizontalTableOfContents = ({ tableOfContents }: Props) => {
 					/>
 				)}
 
-				<nav ref={navRef} css={scrollStyles} aria-label="Sections">
+				<nav
+					ref={navRef}
+					css={scrollStyles}
+					aria-label="Sections"
+					onTouchStart={
+						isApps ? () => disableArticleSwipe(true) : undefined
+					}
+					onTouchEnd={
+						isApps ? () => disableArticleSwipe(false) : undefined
+					}
+					onTouchCancel={
+						isApps ? () => disableArticleSwipe(false) : undefined
+					}
+				>
 					<ul css={listStyles}>
 						{tableOfContents.map((item, index) => (
 							<li key={item.id} css={itemStyles}>

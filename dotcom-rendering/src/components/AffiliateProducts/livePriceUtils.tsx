@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
+import { formatPrice } from '../../lib/formatPrice';
 import type { AffiliateProductPrice, ProductCta } from '../../types/content';
 
 const strikeThroughRegex = /~([^~]+)~(.*)/;
@@ -85,11 +86,6 @@ export const shouldPutOldPriceInStrikethrough = (
 	articlePrice: number,
 ) => latestPrice <= articlePrice * 0.9 && articlePrice - latestPrice >= 5;
 
-const priceFormatter = new Intl.NumberFormat('en-GB', {
-	minimumFractionDigits: 2,
-	maximumFractionDigits: 2,
-});
-
 const getFormattedLatestPrice = (
 	latestPrice: AffiliateProductPrice,
 ): { numericPrice: number; formattedPrice: string } | undefined => {
@@ -103,9 +99,6 @@ const getFormattedLatestPrice = (
 		formattedPrice: `${latestPrice.currencySymbol}${formatPrice(numericPrice)}`,
 	};
 };
-
-export const formatPrice = (price: number): string =>
-	priceFormatter.format(price).replace(/\.00$/, '');
 
 const priceRegex = /([£$])(\d+,?\d*(\.\d{2})?)/;
 export const extractPriceFromLabel = (

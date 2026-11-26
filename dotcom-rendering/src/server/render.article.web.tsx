@@ -219,6 +219,7 @@ window.twttr = (function(d, s, id) {
 				'color-scheme': 'light',
 			}),
 		},
+		tags: frontendData.tags,
 	});
 
 	return { html: pageHtml, prefetchScripts };
@@ -440,6 +441,7 @@ window.twttr = (function(d, s, id) {
 		config,
 		hasLiveBlogTopAd: !!frontendData.config.hasLiveBlogTopAd,
 		hasSurveyAd: !!frontendData.config.hasSurveyAd,
+		tags: frontendData.tags,
 	});
 
 	return { html: pageHtml, prefetchScripts };

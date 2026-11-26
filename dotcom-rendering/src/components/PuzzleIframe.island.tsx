@@ -404,6 +404,11 @@ export const PuzzleIframe = ({
 		<iframe
 			ref={iframeRef}
 			css={buildFrameStyles(puzzleConfig.slug)}
+			// Align the puzzle's own light/dark theme with the page. AmuseLabs
+			// follows `prefers-color-scheme` inside the frame (it ignores the
+			// `darkMode` URL param), and Safari only applies the page's
+			// `color-scheme` to the frame when it is set on the iframe itself.
+			style={{ colorScheme: darkMode ? 'dark' : 'light' }}
 			// No `src` until the reader is known, so the puzzle loads once, with
 			// the right `uid`, instead of loading anonymously and then again.
 			// The frame keeps its `min-height`, so nothing shifts when it loads.
@@ -411,6 +416,12 @@ export const PuzzleIframe = ({
 			title={title}
 			loading="lazy"
 			sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+			// The min-heights above are sized so the puzzle never needs to
+			// scroll. Without this, browsers whose scrollbars take up space (for
+			// example Windows) show scrollbars inside the frame, because the
+			// player lays out slightly larger than the frame. Obsolete, but
+			// there is no CSS equivalent for a frame's own document.
+			scrolling="no"
 			onLoad={(event) => {
 				if (shouldLoad) {
 					postContextMessage(event.currentTarget, context);

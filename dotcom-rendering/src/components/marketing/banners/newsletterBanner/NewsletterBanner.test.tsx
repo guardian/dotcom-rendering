@@ -141,7 +141,7 @@ describe('NewsletterBanner configuration', () => {
 
 		expect(
 			testingScreen
-				.getByText('Free newsletter |')
+				.getByText('Free newsletter')
 				.parentElement?.previousElementSibling?.querySelector('svg'),
 		).toBeInTheDocument();
 	});

@@ -76,6 +76,14 @@ describe('archive calendar helpers', () => {
 				progress: 100,
 				gameStatus: 'in-progress',
 			}),
+		).toBe('in-progress');
+		expect(
+			archiveStatus({
+				...item,
+				puzzleType: 'CROSSWORD_QUICK',
+				progress: 100,
+				gameStatus: 'in-progress',
+			}),
 		).toBe('available');
 		expect(
 			archiveStatus({
@@ -639,8 +647,295 @@ describe('PuzzlesArchiveCalendar', () => {
 			expect(
 				day.querySelector('.supporter-exclusive-icon') !== null,
 			).toBe(!premium);
+			expect(screen.queryByText('Supporter exclusive') !== null).toBe(
+				!premium,
+			);
+			expect(
+				screen.queryByText(
+					'Supporter exclusive - you have ad-free access to the puzzles archive',
+				) !== null,
+			).toBe(premium);
+			expect(
+				screen.queryByRole('link', {
+					name: 'Sign in or create an account',
+				}),
+			).not.toBeInTheDocument();
 		},
 	);
+
+	it.each([
+		['mini', 'daily'],
+		['quick', 'from Monday to Saturday'],
+		['cryptic', 'from Monday to Friday'],
+		['quick-cryptic', 'every Saturday'],
+		['weekend', 'every Saturday'],
+		['prize', 'every Saturday'],
+		['quiptic', 'every Sunday'],
+		['sunday-quick', 'every Sunday'],
+		['genius', 'daily'],
+		['special', 'daily'],
+	])('shows the V3 publication schedule for %s', async (set, frequency) => {
+		await act(async () => {
+			render(
+				<PuzzlesArchiveCalendar
+					showPremiumIndicators={true}
+					initialArchive={{
+						...archive,
+						category: 'crosswords',
+						selectedPuzzle: { ...archive.selectedPuzzle, set },
+					}}
+				/>,
+			);
+		});
+		expect(
+			screen.getByText(`This puzzle is published ${frequency}.`),
+		).toBeInTheDocument();
+	});
+
+	it('defaults other puzzle categories to daily publication', async () => {
+		await act(async () => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={archive}
+					showPremiumIndicators={true}
+				/>,
+			);
+		});
+		expect(
+			screen.getByText('This puzzle is published daily.'),
+		).toBeInTheDocument();
+	});
+
+	it.each([
+		'https://profile.code.dev-theguardian.com',
+		'https://profile.theguardian.com',
+	])(
+		'shows the signed-out V3 progress prompt with the configured identity URL %s',
+		async (idUrl) => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={archive}
+					showPremiumIndicators={true}
+					idUrl={idUrl}
+				/>,
+			);
+			const link = await screen.findByRole('link', {
+				name: 'Sign in or create an account',
+			});
+			expect(link.getAttribute('href')).toMatch(`${idUrl}/signin?`);
+			expect(link.parentElement).toHaveTextContent(
+				'Want to track your progress? Sign in or create an account',
+			);
+			expect(link).toHaveTextContent(/^Sign in or create an account$/);
+			const icon = link.closest('[data-component]')?.querySelector('svg');
+			expect(icon).toHaveAttribute('width', '20');
+			expect(icon).toHaveAttribute('height', '20');
+			expect(icon).toHaveAttribute('aria-hidden', 'true');
+			expect(screen.getByText('Supporter exclusive')).toBeInTheDocument();
+		},
+	);
+
+	it('does not show a sign-in prompt while authentication is pending', () => {
+		mockedGetAuthStatus.mockReturnValue(new Promise(() => undefined));
+		render(
+			<PuzzlesArchiveCalendar
+				initialArchive={archive}
+				showPremiumIndicators={true}
+			/>,
+		);
+		expect(
+			screen.queryByRole('link', {
+				name: 'Sign in or create an account',
+			}),
+		).not.toBeInTheDocument();
+	});
+
+	it('does not claim subscriber access when the authenticated response has no entitlement', async () => {
+		mockedGetAuthStatus.mockResolvedValue({
+			kind: 'SignedIn',
+			accessToken: { accessToken: 'access-token' },
+			idToken: {},
+		} as never);
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: jest
+				.fn()
+				.mockResolvedValue({ ok: true, json: async () => archive }),
+		});
+		await act(async () => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={archive}
+					showPremiumIndicators={true}
+				/>,
+			);
+		});
+		expect(screen.getByText('Supporter exclusive')).toBeInTheDocument();
+		expect(
+			screen.queryByText(
+				'Supporter exclusive - you have ad-free access to the puzzles archive',
+			),
+		).not.toBeInTheDocument();
+		expect(
+			screen.queryByRole('link', {
+				name: 'Sign in or create an account',
+			}),
+		).not.toBeInTheDocument();
+	});
+
+	it.each([true, false])(
+		'does not add V3 messages or a subtitle outside V3 (signed in=%s)',
+		async (signedIn) => {
+			if (signedIn) {
+				mockedGetAuthStatus.mockResolvedValue({
+					kind: 'SignedIn',
+					accessToken: { accessToken: 'access-token' },
+					idToken: {},
+				} as never);
+			}
+			Object.defineProperty(global, 'fetch', {
+				configurable: true,
+				value: jest.fn().mockResolvedValue({
+					ok: true,
+					json: async () => ({
+						...archive,
+						items: archive.items.map((item) => ({
+							...item,
+							hasPremiumEntitlement: true,
+						})),
+					}),
+				}),
+			});
+			await act(async () => {
+				render(
+					<PuzzlesArchiveCalendar
+						initialArchive={archive}
+						showPremiumIndicators={false}
+					/>,
+				);
+			});
+			expect(
+				screen.queryByText(/This puzzle is published/),
+			).not.toBeInTheDocument();
+			expect(
+				screen.queryByText(/Supporter exclusive/),
+			).not.toBeInTheDocument();
+			expect(
+				screen.queryByRole('link', {
+					name: 'Sign in or create an account',
+				}),
+			).not.toBeInTheDocument();
+		},
+	);
+
+	it('updates the publication subtitle when the selected puzzle changes', async () => {
+		const quick = {
+			...archive.selectedPuzzle,
+			id: 'quick',
+			set: 'quick',
+			title: 'Quick',
+		};
+		const cryptic = {
+			...quick,
+			id: 'cryptic',
+			set: 'cryptic',
+			title: 'Cryptic',
+			path: '/puzzles-and-games/crosswords/cryptic/archive',
+		};
+		const initialArchive: PuzzlesArchive = {
+			...archive,
+			category: 'crosswords',
+			selectedPuzzle: quick,
+			puzzles: [quick, cryptic],
+		};
+		const selectedArchive = { ...initialArchive, selectedPuzzle: cryptic };
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: jest.fn().mockResolvedValue({
+				ok: true,
+				json: async () => selectedArchive,
+			}),
+		});
+		await act(async () => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={initialArchive}
+					showPremiumIndicators={true}
+				/>,
+			);
+		});
+		expect(
+			screen.getByText(
+				'This puzzle is published from Monday to Saturday.',
+			),
+		).toBeInTheDocument();
+		fireEvent.click(screen.getByRole('link', { name: 'Cryptic' }));
+		expect(
+			await screen.findByText(
+				'This puzzle is published from Monday to Friday.',
+			),
+		).toBeInTheDocument();
+		expect(
+			screen.queryByText(
+				'This puzzle is published from Monday to Saturday.',
+			),
+		).not.toBeInTheDocument();
+	});
+
+	it('uses recent puzzle entitlement for an empty month and resets the message after signing out', async () => {
+		mockedGetAuthStatus.mockResolvedValue({
+			kind: 'SignedIn',
+			accessToken: { accessToken: 'access-token' },
+			idToken: {},
+		} as never);
+		const premiumArchive = {
+			...archive,
+			items: [],
+			recentItems: archive.items.map((item) => ({
+				...item,
+				hasPremiumEntitlement: true,
+			})),
+		};
+		const fetchMock = jest
+			.fn()
+			.mockResolvedValue({ ok: true, json: async () => premiumArchive });
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		render(
+			<PuzzlesArchiveCalendar
+				initialArchive={archive}
+				showPremiumIndicators={true}
+			/>,
+		);
+		expect(
+			await screen.findByText(
+				'Supporter exclusive - you have ad-free access to the puzzles archive',
+			),
+		).toBeInTheDocument();
+		expect(
+			screen.queryByText('Supporter exclusive', { exact: true }),
+		).not.toBeInTheDocument();
+		mockedGetAuthStatus.mockResolvedValue({ kind: 'SignedOut' });
+		fetchMock.mockResolvedValue({ ok: true, json: async () => archive });
+		await act(async () => {
+			window.dispatchEvent(
+				new PageTransitionEvent('pageshow', { persisted: true }),
+			);
+		});
+		expect(
+			screen.queryByText(
+				'Supporter exclusive - you have ad-free access to the puzzles archive',
+			),
+		).not.toBeInTheDocument();
+		expect(
+			screen.getByText('Supporter exclusive', { exact: true }),
+		).toBeInTheDocument();
+		expect(
+			screen.getByRole('link', { name: 'Sign in or create an account' }),
+		).toBeInTheDocument();
+	});
 
 	it.each(['isWithinFreeWindow', 'hasPremiumEntitlement'])(
 		'rejects a non-boolean %s in a fetched archive',
@@ -869,7 +1164,7 @@ describe('PuzzlesArchiveCalendar', () => {
 		expect(screen.getByText('Sat 3 Oct')).toBeInTheDocument();
 	});
 
-	it('shows Played on the recent cards from the API state only', () => {
+	it('shows Played and In progress on the recent cards from the API state only', () => {
 		jest.useFakeTimers().setSystemTime(new Date('2026-10-07T12:00:00Z'));
 		const statuses = ['completed', 'in-progress', 'not-started'] as const;
 		const recentArchive: PuzzlesArchive = {
@@ -898,10 +1193,102 @@ describe('PuzzlesArchiveCalendar', () => {
 				'Played',
 			),
 		).toBeInTheDocument();
-		expect(screen.queryByText('In progress')).not.toBeInTheDocument();
+		const inProgressCards = Array.from(
+			document.querySelectorAll<HTMLElement>('a[href$="/2026-10-06"]'),
+		);
+		expect(
+			within(
+				inProgressCards.find((card) => card.querySelector('time'))!,
+			).getByText('In progress'),
+		).toBeInTheDocument();
+		expect(
+			within(
+				document.querySelector<HTMLElement>(
+					'[data-component="puzzles-archive-recent"]',
+				)!,
+			).getAllByText('In progress'),
+		).toHaveLength(1);
 		expect(
 			screen.getAllByText('Played', { selector: '.played' }),
 		).toHaveLength(1);
+	});
+
+	describe('progress bar on the recent cards', () => {
+		const renderRecent = (progress: number, puzzleType = 'SUDOKU_EASY') => {
+			jest.useFakeTimers().setSystemTime(
+				new Date('2026-10-07T12:00:00Z'),
+			);
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={{
+						...archive,
+						selectedPuzzle: {
+							...archive.selectedPuzzle,
+							puzzleType,
+						},
+						year: 2026,
+						month: 10,
+						items: [
+							{
+								...archive.items[0]!,
+								puzzleType,
+								date: '2026-10-07',
+								progress,
+								gameStatus: 'in-progress',
+								url: '/puzzles-and-games/logic-puzzles/sudoku-easy/2026-10-07',
+							},
+						],
+					}}
+				/>,
+			);
+		};
+		const bar = () =>
+			document.querySelector<HTMLElement>(
+				'[data-component="puzzles-archive-recent"] .progress-track > span',
+			);
+
+		it.each([Number.NaN, -5, 0, 10, 50, 90, 100, 150])(
+			'is always half full, whatever the API progress value (%s)',
+			(progress) => {
+				renderRecent(progress);
+				expect(bar()?.style.width).toBe('50%');
+				expect(bar()?.parentElement).toHaveAttribute(
+					'aria-hidden',
+					'true',
+				);
+			},
+		);
+
+		it('is not drawn for a crossword', () => {
+			renderRecent(40, 'CROSSWORD_QUICK');
+			expect(bar()).toBeNull();
+			expect(screen.queryByText('In progress')).not.toBeInTheDocument();
+		});
+	});
+
+	it('never shows In progress on the recent cards of a crossword', () => {
+		jest.useFakeTimers().setSystemTime(new Date('2026-10-07T12:00:00Z'));
+		const crosswordArchive: PuzzlesArchive = {
+			...archive,
+			selectedPuzzle: {
+				...archive.selectedPuzzle,
+				puzzleType: 'CROSSWORD_QUICK',
+			},
+			year: 2026,
+			month: 10,
+			items: ['2026-10-07', '2026-10-06'].map((date) => ({
+				...archive.items[0]!,
+				puzzleType: 'CROSSWORD_QUICK',
+				date,
+				progress: 50,
+				gameStatus: 'in-progress' as const,
+				url: `/crosswords/quick/${date}`,
+			})),
+		};
+
+		render(<PuzzlesArchiveCalendar initialArchive={crosswordArchive} />);
+
+		expect(screen.queryByText('In progress')).not.toBeInTheDocument();
 	});
 
 	it('keeps the calendar mounted and announces loading in the month controls', async () => {
@@ -1419,4 +1806,173 @@ describe('PuzzlesArchiveCalendar', () => {
 			expect(screen.queryByRole('alert')).not.toBeInTheDocument();
 		},
 	);
+});
+
+describe('PuzzlesArchiveCalendar in-progress days', () => {
+	const withItem = (
+		overrides: Partial<PuzzlesArchive['items'][number]>,
+		puzzleType = 'SUDOKU_EASY',
+	): PuzzlesArchive => ({
+		...archive,
+		selectedPuzzle: { ...archive.selectedPuzzle, puzzleType },
+		items: [{ ...archive.items[0]!, puzzleType, ...overrides }],
+	});
+
+	it.each([false, true])(
+		'marks a game in progress with the dashed icon for v3=%s',
+		(showPremiumIndicators) => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={withItem({ gameStatus: 'in-progress' })}
+					showPremiumIndicators={showPremiumIndicators}
+				/>,
+			);
+
+			const day = screen.getByRole('link', {
+				name: '2026-09-02, in progress',
+			});
+			const icon = day.querySelector('.in-progress-icon svg');
+
+			expect(day).toHaveAttribute('data-status', 'in-progress');
+			expect(day.querySelector('.in-progress-icon')).toHaveAttribute(
+				'aria-hidden',
+				'true',
+			);
+			expect(icon).toHaveAttribute('width', '16');
+			expect(icon).toHaveAttribute('height', '16');
+			expect(icon?.querySelectorAll('path')).toHaveLength(8);
+			icon?.querySelectorAll('path').forEach((path) => {
+				expect(path).toHaveAttribute('fill', '#C74600');
+			});
+			expect(day.querySelector('.completed-icon')).toBeNull();
+		},
+	);
+
+	it.each([
+		[true, '3px'],
+		[false, ''],
+	])(
+		'rounds the day tiles only with the supporter exclusive calendar (v3=%s)',
+		(showPremiumIndicators, radius) => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={withItem({ gameStatus: 'in-progress' })}
+					showPremiumIndicators={showPremiumIndicators}
+				/>,
+			);
+
+			const days = Array.from(
+				document.querySelectorAll<HTMLElement>('.day'),
+			);
+
+			expect(days.length).toBeGreaterThan(1);
+			for (const day of days) {
+				expect(getComputedStyle(day).borderRadius).toBe(radius);
+			}
+		},
+	);
+
+	it('keeps the supporter exclusive star on a day in progress', () => {
+		render(
+			<PuzzlesArchiveCalendar
+				initialArchive={withItem({
+					gameStatus: 'in-progress',
+					isWithinFreeWindow: false,
+					hasPremiumEntitlement: false,
+				})}
+				showPremiumIndicators={true}
+			/>,
+		);
+
+		const day = screen.getByRole('link', {
+			name: '2026-09-02, Supporter exclusive, in progress',
+		});
+
+		expect(day).toHaveAttribute('data-status', 'in-progress');
+		expect(day.querySelector('.supporter-exclusive-icon')).not.toBeNull();
+		expect(day.querySelector('.in-progress-icon')).not.toBeNull();
+	});
+
+	it.each(['not-started', 'completed'] as const)(
+		'has no in progress icon for a day that is %s',
+		(gameStatus) => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={withItem({ gameStatus })}
+				/>,
+			);
+
+			expect(
+				document.querySelector('.in-progress-icon'),
+			).not.toBeInTheDocument();
+			expect(
+				document.querySelector('[data-status="in-progress"]'),
+			).not.toBeInTheDocument();
+		},
+	);
+
+	it('never marks a crossword day in progress', () => {
+		render(
+			<PuzzlesArchiveCalendar
+				initialArchive={withItem(
+					{ gameStatus: 'in-progress' },
+					'CROSSWORD_QUICK',
+				)}
+			/>,
+		);
+
+		expect(
+			screen.getByRole('link', { name: '2026-09-02, available' }),
+		).toHaveAttribute('data-status', 'available');
+		expect(document.querySelector('.in-progress-icon')).toBeNull();
+	});
+
+	it.each([
+		[false, '13.3'],
+		[true, '11'],
+	])(
+		'lists In progress in the legend for a game, v3=%s',
+		(showPremiumIndicators, size) => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={withItem({})}
+					showPremiumIndicators={showPremiumIndicators}
+				/>,
+			);
+
+			const legend = screen.getByText('In progress', {
+				selector: 'span.in-progress',
+			});
+			const icon = legend.querySelector('svg');
+
+			expect(icon).toHaveAttribute('width', size);
+			expect(icon).toHaveAttribute('height', size);
+			expect(
+				legend.compareDocumentPosition(
+					screen.getByText('Played', { selector: 'span.completed' }),
+				) & Node.DOCUMENT_POSITION_FOLLOWING,
+			).toBeTruthy();
+			expect(
+				screen
+					.getByText('Available', { selector: 'span.available' })
+					.compareDocumentPosition(legend) &
+					Node.DOCUMENT_POSITION_FOLLOWING,
+			).toBeTruthy();
+		},
+	);
+
+	it('leaves In progress out of the legend for a crossword', () => {
+		render(
+			<PuzzlesArchiveCalendar
+				initialArchive={withItem({}, 'CROSSWORD_QUICK')}
+			/>,
+		);
+
+		expect(
+			screen.queryByText('In progress', { selector: 'span.in-progress' }),
+		).not.toBeInTheDocument();
+		expect(
+			screen.getByText('Played', { selector: 'span.completed' }),
+		).toBeInTheDocument();
+	});
 });
