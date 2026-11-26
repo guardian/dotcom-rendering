@@ -130,6 +130,7 @@ window.twttr = (function(d, s, id) {
 				'article-theme': getArticleThemeString(theme)!,
 			}),
 		},
+		tags: frontendData.tags,
 	});
 
 	return {
@@ -311,6 +312,7 @@ window.twttr = (function(d, s, id) {
 				'article-theme': getArticleThemeString(theme)!,
 			}),
 		},
+		tags: frontendData.tags,
 	});
 
 	return {

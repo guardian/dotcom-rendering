@@ -7,6 +7,7 @@ import { escapeData } from '../lib/escapeData';
 import { rawFontsCss } from '../lib/fonts-css';
 import type { Guardian } from '../model/guardian';
 import type { Config } from '../types/configContext';
+import type { TagType } from '../types/tag';
 import { GIT_COMMIT_HASH } from './prout';
 
 type BaseProps = {
@@ -27,6 +28,7 @@ type BaseProps = {
 	weAreHiring: boolean;
 	rssFeedUrl?: string;
 	dataAttributes?: { [key: string]: string };
+	tags?: TagType[];
 };
 
 interface WebProps extends BaseProps {
@@ -58,6 +60,46 @@ const fontPreloadTags = fontFiles
 
 const minifiedFontsCss = new CleanCSS().minify(rawFontsCss).styles;
 
+/**
+ * Determines whether a page should not be indexed by search engines
+ * Do NOT index if this function returns true
+ */
+export const doNotIndex = (
+	stage: string,
+	canonicalUrl: string | undefined,
+	tags: TagType[] | undefined,
+): boolean => {
+	// Do NOT index non-production environments
+	if (stage !== 'PROD') return true;
+
+	// Do NOT index pages with a noindex tag
+	const hasNoIndexTag =
+		tags?.some(
+			(tag) => tag.id === 'production-monitoring/production-monitoring',
+		) ?? false;
+	if (hasNoIndexTag) return true;
+
+	// DO index pages without a canonical URL
+	if (canonicalUrl === undefined) {
+		return false;
+	}
+
+	// DO index exempted tracking/commissioningdesk pages
+	const isCommissioningDeskAllowListed = [
+		'tracking/commissioningdesk/the-filter',
+		'tracking/commissioningdesk/filter-us',
+	].some((allowed) => canonicalUrl.includes(allowed));
+	if (isCommissioningDeskAllowListed) return false;
+
+	// Do NOT index tracking/commissioningdesk pages that are not allow-listed
+	if (canonicalUrl.includes('tracking/commissioningdesk')) {
+		return true;
+	}
+
+	// DO index all other pages by default
+	return false;
+};
+
 export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 	const {
 		css,
@@ -77,22 +119,8 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 		config,
 		rssFeedUrl,
 		dataAttributes,
+		tags,
 	} = props;
-
-	const doNotIndex = (): boolean => {
-		if (process.env.GU_STAGE !== 'PROD') return true;
-		if (!canonicalUrl) return false;
-
-		const isAllowListed = [
-			'tracking/commissioningdesk/the-filter',
-			'tracking/commissioningdesk/filter-us',
-		].some((allowed) => canonicalUrl.includes(allowed));
-
-		return (
-			canonicalUrl.includes('tracking/commissioningdesk') &&
-			!isAllowListed
-		);
-	};
 
 	/**
 	 * We escape windowGuardian here to prevent errors when the data
@@ -278,7 +306,7 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <!--  This tag enables pages to be featured in Google Discover as large previews
                     See: https://developers.google.com/search/docs/advanced/mobile/google-discover?hl=en&visit_id=637424198370039526-3805703503&rd=1 -->
                 <meta name="robots" content="max-image-preview:large">
-				${doNotIndex() ? '<meta name="robots" content="noindex">' : ''}
+				${doNotIndex(process.env.GU_STAGE ?? '', canonicalUrl, tags) ? '<meta name="robots" content="noindex">' : ''}
 
                 <script>
                     window.guardian = ${windowGuardian};

@@ -12,6 +12,7 @@ import {
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { polyfillIO } from '../lib/polyfill.io';
 import { themeToPillar } from '../lib/themeToPillar';
+import { enhanceTags } from '../model/enhanceTags';
 import type { NavType } from '../model/extract-nav';
 import { extractNAV } from '../model/extract-nav';
 import { createGuardian } from '../model/guardian';
@@ -251,6 +252,7 @@ export const renderTagPage = ({
 		canonicalUrl: tagPage.canonicalUrl,
 		config,
 		rssFeedUrl: tagPage.webURL + '/rss',
+		tags: enhanceTags(tagPage.tags),
 	});
 	return {
 		html: pageHtml,
