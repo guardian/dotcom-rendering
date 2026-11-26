@@ -227,10 +227,8 @@ test.describe('Interactivity', () => {
 				await loadPage({ page, path: `/Article/${articleUrl}` });
 
 				await page.locator('[data-testid=veggie-burger]').focus();
-				// TODO tabbing from the burger element now takes two presses to get to the sub nav
-				// The first tab goes to the hidden expanded menu element
-				// Replicated in PROD. possible a11y regression
-				await page.keyboard.press('Tab');
+				// The collapsed expanded menu is visibility: hidden on mobile, so it is
+				// skipped in the tab order and a single Tab reaches the sub nav
 				await page.keyboard.press('Tab');
 
 				await expect(

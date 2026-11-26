@@ -15,7 +15,11 @@ const collapsedMenuStyles = css`
 	${until.desktop} {
 		/* the negative translateX makes the nav hide to the side */
 		transform: translateX(-110%);
-		transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+		/* hide from keyboard and assistive tech when collapsed so it is skipped in tab order */
+		visibility: hidden;
+		transition:
+			transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+			visibility 0.4s;
 		bottom: 0;
 		height: 100%;
 		overflow: auto;
@@ -32,6 +36,7 @@ export const expandedMenuStyles = css`
 	${until.desktop} {
 		/* menu appears from left of screen on mobile when translateX is set to 0% */
 		transform: translateX(0%);
+		visibility: visible;
 	}
 	${from.desktop} {
 		display: block;
