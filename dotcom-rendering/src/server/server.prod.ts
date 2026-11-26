@@ -17,28 +17,41 @@ import {
 } from './handler.article.web';
 import { handleAppsAssets } from './handler.assets.apps';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
+import { handleAppsEventGraphic } from './handler.eventGraphic.apps';
+import { handleFootballMatchDayEmbed } from './handler.footballMatchDayEmbed';
 import { handleFront, handleTagPage } from './handler.front.web';
+import { handlePuzzlePage } from './handler.puzzlePage.web';
+import { handlePuzzlesPage } from './handler.puzzlesPage.web';
 import {
 	handleAppsFootballMatchPage,
-	handleCricketMatchPage,
 	handleFootballMatchListPage,
 	handleFootballMatchPage,
 	handleFootballTablesPage,
 } from './handler.sportDataPage';
 import { handleAppsThrasher } from './handler.thrasher.apps';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
+import { responseHeaderMiddleware } from './lib/header-middleware';
 import { logger } from './lib/logging';
 import { requestLoggerMiddleware } from './lib/logging-middleware';
 import { recordError } from './lib/logging-store';
+import {
+	createExpressJsonWrapper,
+	createRequestTracingMiddleware,
+} from './lib/request-handler-middleware';
 
 export const prodServer = (): void => {
 	logger.info('dotcom-rendering is GO.');
 
 	const app = express();
 
-	app.use(express.json({ limit: '50mb' }));
+	// Starts a span just before calling express.json, and ends it on its callback
+	const expressJson = express.json({ limit: '50mb' });
+	const expressJsonWrapper = createExpressJsonWrapper(expressJson);
+
+	app.use(expressJsonWrapper);
 	app.use(requestLoggerMiddleware);
 	app.use(compression());
+	app.use(responseHeaderMiddleware);
 
 	app.get('/_healthcheck', (req: Request, res: Response) => {
 		res.status(200).send('OKAY');
@@ -51,15 +64,21 @@ export const prodServer = (): void => {
 		app.use('/assets', express.static(__dirname));
 	}
 
+	const requestTracingMiddleware = createRequestTracingMiddleware();
+
+	app.use(requestTracingMiddleware);
+
 	app.post('/Article', handleArticle);
 	app.post('/Interactive', handleInteractive);
 	app.post('/Blocks', handleBlocks);
 	app.post('/Front', handleFront);
 	app.post('/TagPage', handleTagPage);
+	app.post('/PuzzlesPage', handlePuzzlesPage);
+	app.post('/PuzzlePage', handlePuzzlePage);
 	app.post('/FootballMatchListPage', handleFootballMatchListPage);
-	app.post('/CricketMatchPage', handleCricketMatchPage);
 	app.post('/FootballTablesPage', handleFootballTablesPage);
 	app.post('/FootballMatchSummaryPage', handleFootballMatchPage);
+	app.post('/FootballMatchDayEmbed', handleFootballMatchDayEmbed);
 	app.post('/HostedContent', handleHostedContent);
 
 	app.post('/EmailNewsletters', handleAllEditorialNewslettersPage);
@@ -69,7 +88,8 @@ export const prodServer = (): void => {
 	app.post('/EditionsCrossword', handleEditionsCrossword);
 	app.post('/AppsHostedContent', handleAppsHostedContent);
 	app.post('/AppsComponent/thrasher/:name', handleAppsThrasher);
-	app.use('/AppsFootballMatchSummaryPage', handleAppsFootballMatchPage);
+	app.post('/AppsComponent', handleAppsEventGraphic);
+	app.post('/AppsFootballMatchSummaryPage', handleAppsFootballMatchPage);
 
 	app.get('/assets/rendered-items-assets', handleAppsAssets);
 
@@ -78,7 +98,7 @@ export const prodServer = (): void => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- all params to error handlers must be declared
 	const handleError: ErrorRequestHandler = (e, _req, res, _next) => {
 		const message =
-			e instanceof Error ? e.stack ?? 'Unknown stack' : 'Unknown error';
+			e instanceof Error ? (e.stack ?? 'Unknown stack') : 'Unknown error';
 
 		if (e instanceof TypeError) {
 			res.status(400).send(`<pre>${message}</pre>`);

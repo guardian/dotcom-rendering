@@ -15,6 +15,7 @@ import {
 } from '@guardian/source/foundations';
 import sanitise from 'sanitize-html';
 import { grid } from '../../src/grid';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
 	ArticleDesign,
@@ -27,11 +28,14 @@ import { palette } from '../palette';
 type Props = {
 	format: ArticleFormat;
 	standfirst: string;
+	layoutType?: LayoutType;
 };
 
 const nestedStyles = (format: ArticleFormat) => {
 	const offset = format.display === ArticleDisplay.Immersive ? space[6] : 19;
 	return css`
+		overflow-wrap: anywhere;
+
 		li {
 			margin-bottom: 6px;
 			padding-left: ${offset}px;
@@ -90,6 +94,10 @@ const decideFont = ({ display, design, theme }: ArticleFormat) => {
 			}
 			return css`
 				${headlineMedium20}
+			`;
+		case ArticleDesign.HostedGallery:
+			return css`
+				${textSans24};
 			`;
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Comment:
@@ -322,6 +330,7 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 						color: ${palette('--standfirst-text')};
 					`;
 				case ArticleDesign.Gallery:
+				case ArticleDesign.HostedGallery:
 					return css`
 						${grid.span('centre-column-start', 5)}
 						color: ${palette('--standfirst-text')};
@@ -385,8 +394,22 @@ const hoverStyles = css`
 	}
 `;
 
-export const Standfirst = ({ format, standfirst }: Props) => {
-	if (standfirst.trim() === '') return null;
+const immersiveGridOverrides = css`
+	padding-top: 0;
+	max-width: none;
+
+	color: ${palette('--standfirst-text-immersive')};
+
+	${from.tablet} {
+		max-width: none;
+		${headlineMedium20};
+	}
+`;
+
+export const Standfirst = ({ format, standfirst, layoutType }: Props) => {
+	if (standfirst.trim() === '') {
+		return null;
+	}
 	return (
 		<>
 			<div
@@ -396,6 +419,9 @@ export const Standfirst = ({ format, standfirst }: Props) => {
 					decideFont(format),
 					decidePadding(format),
 					hoverStyles,
+					layoutType?.startsWith('immersive')
+						? immersiveGridOverrides
+						: undefined,
 				]}
 				className={
 					format.design === ArticleDesign.Interactive

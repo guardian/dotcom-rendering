@@ -10,7 +10,7 @@ templates:
       amiEncrypted: true
       amiTags:
         # Keep the Node version in sync with `.nvmrc`
-        Recipe: dotcom-rendering-ARM-jammy-node-22.18.0
+        Recipe: dotcom-rendering-ARM-jammy-node-24
         AmigoStage: PROD
 deployments:
   frontend-static:
@@ -48,61 +48,34 @@ deployments:
       - article-rendering-cfn
   # facia-rendering cloudformation
   facia-rendering-cfn:
-    template: cloudformation
+    type: cloud-formation
     parameters:
       templateStagePaths:
         CODE: FaciaRendering-CODE.template.json
         PROD: FaciaRendering-PROD.template.json
       cloudFormationStackByTags: false
       cloudFormationStackName: facia-rendering
-      amiParameter: AMIFaciarendering
-  # facia-rendering autoscaling
-  facia-rendering:
-    type: autoscaling
-    parameters:
-      bucketSsmKey: /account/services/dotcom-artifact.bucket
-      # Default is 900 (15 mins), this is 25 mins
-      secondsToWait: 1500
     dependencies:
       - frontend-static
-      - facia-rendering-cfn
   # tag-page-rendering cloudformation
   tag-page-rendering-cfn:
-    template: cloudformation
+    type: cloud-formation
     parameters:
       templateStagePaths:
         CODE: TagPageRendering-CODE.template.json
         PROD: TagPageRendering-PROD.template.json
       cloudFormationStackByTags: false
       cloudFormationStackName: tag-page-rendering
-      amiParameter: AMITagpagerendering
-  # tag-page-rendering autoscaling
-  tag-page-rendering:
-    type: autoscaling
-    parameters:
-      bucketSsmKey: /account/services/dotcom-artifact.bucket
-      # Default is 900 (15 mins), this is 25 mins
-      secondsToWait: 1500
     dependencies:
       - frontend-static
-      - tag-page-rendering-cfn
   # interactive-rendering cloudformation
   interactive-rendering-cfn:
-    template: cloudformation
+    type: cloud-formation
     parameters:
       templateStagePaths:
         CODE: InteractiveRendering-CODE.template.json
         PROD: InteractiveRendering-PROD.template.json
       cloudFormationStackByTags: false
       cloudFormationStackName: interactive-rendering
-      amiParameter: AMIInteractiverendering
-  # interactive-rendering autoscaling
-  interactive-rendering:
-    type: autoscaling
-    parameters:
-      bucketSsmKey: /account/services/dotcom-artifact.bucket
-      # Default is 900 (15 mins), this is 25 mins
-      secondsToWait: 1500
     dependencies:
       - frontend-static
-      - interactive-rendering-cfn

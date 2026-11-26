@@ -25,7 +25,7 @@ cdk-synth:
 cdk-diff:
 	@pnpm cdk diff --path-metadata false --version-reporting false --profile frontend
 
-riffraff-bundle: clean-dist build cdk-synth
+riffraff-bundle:
 	$(call log, "creating riffraff bundle")
 	@node ./scripts/deploy/build-riffraff-bundle.mjs
 
@@ -66,7 +66,13 @@ storybook-dev: clear clean-dist install
 	$(call log, "starting Storybook DEV server")
 	@pnpm storybook
 
+storybook-dev-proxy: clear clean-dist install
+	$(call log, "starting Storybook DEV reverse proxy server")
+	@pnpm storybook-proxy
+
 storybook: storybook-dev
+
+storybook-proxy: storybook-dev-proxy
 
 # tests #####################################
 
@@ -81,6 +87,10 @@ playwright-open: clear clean-dist install build
 buildCheck:
 	$(call log, "checking build files")
 	@node ./scripts/test/build-check.js
+
+check-islands:
+	$(call log, "checking island component locations")
+	@node ./scripts/islands/check-islands.mts
 
 # quality #########################################
 
@@ -140,7 +150,7 @@ clean-dist:
 
 clean-deps:
 	$(call log, "trashing dependencies")
-	@rm -rf node_modules
+	@pnpm clean
 
 install: check-env
 	$(call log, "refreshing dependencies")

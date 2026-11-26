@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { getZIndex } from '../lib/getZIndex';
+import { convertCurrentTimeToProgressPercentage } from '../lib/video';
 import { palette } from '../palette';
 
 const styles = css`
@@ -37,7 +38,9 @@ type Props = {
  * A. It was not possible to properly style the native progress element in Safari.
  */
 export const VideoProgressBar = ({ videoId, currentTime, duration }: Props) => {
-	if (duration <= 0) return null;
+	if (duration <= 0) {
+		return null;
+	}
 
 	/**
 	 * We achieve a smooth progress bar by using CSS transitions. Given that
@@ -49,11 +52,11 @@ export const VideoProgressBar = ({ videoId, currentTime, duration }: Props) => {
 	 */
 	const adjustedDuration = duration > 1 ? duration - 0.25 : duration;
 
-	const progressPercentage = Math.min(
-		(currentTime * 100) / adjustedDuration,
-		100,
+	const progressPercentage = convertCurrentTimeToProgressPercentage(
+		currentTime,
+		adjustedDuration,
 	);
-	if (Number.isNaN(progressPercentage)) {
+	if (progressPercentage === null) {
 		return null;
 	}
 

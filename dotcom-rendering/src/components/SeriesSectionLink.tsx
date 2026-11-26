@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, type SerializedStyles } from '@emotion/react';
 import {
 	between,
 	from,
@@ -12,13 +12,16 @@ import {
 	textSansBold20,
 	until,
 } from '@guardian/source/foundations';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
 	ArticleSpecial,
+	isImmersiveOpinion,
 } from '../lib/articleFormat';
+import { getZIndex } from '../lib/getZIndex';
 import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
 import { Hide } from './Hide';
@@ -27,6 +30,7 @@ import { PulsingDot } from './PulsingDot.island';
 
 type Props = {
 	format: ArticleFormat;
+	layoutType?: LayoutType;
 	tags: TagType[];
 	sectionLabel: string;
 	sectionUrl: string;
@@ -41,7 +45,20 @@ const sectionLabelLink = css`
 	}
 `;
 
-const rowBelowLeftCol = (format: ArticleFormat) => {
+const rowBelowLeftCol = (format: ArticleFormat, layoutType?: LayoutType) => {
+	if (layoutType === 'interactiveTopHat') {
+		return css`
+			display: flex;
+			flex-direction: column;
+		`;
+	}
+	if (format.design === ArticleDesign.WeekendEssay) {
+		return css`
+			display: flex;
+			flex-direction: column;
+		`;
+	}
+
 	if (
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog
@@ -83,23 +100,14 @@ const marginRight = css`
 	}
 `;
 
-const invertedStyle = (design: ArticleDesign) => {
-	if (design === ArticleDesign.Gallery) {
-		return '';
-	}
-	return css`
-		/* Handle text wrapping onto a new line */
-		white-space: pre-wrap;
-		box-decoration-break: clone;
-		line-height: 28px;
-		${from.leftCol} {
-			line-height: 28px;
-		}
-		padding-right: ${space[1]}px;
-		padding-top: ${space[1]}px;
-		padding-bottom: ${space[3]}px;
-	`;
-};
+const invertedStyle = () => css`
+	/* Handle text wrapping onto a new line */
+	white-space: pre-wrap;
+	box-decoration-break: clone;
+	padding-right: ${space[1]}px;
+	padding-top: ${space[1]}px;
+	padding-bottom: ${space[2]}px;
+`;
 
 const fontStyles = (format: ArticleFormat) => {
 	switch (format.design) {
@@ -184,29 +192,169 @@ const breakWord = css`
 	word-break: break-word;
 `;
 
-const sectionPadding = (design: ArticleDesign) => {
-	if (design === ArticleDesign.Gallery) {
-		return css`
-			padding: 0 ${space[2]}px 0 ${space[3]}px;
-
-			${between.mobileLandscape.and.tablet} {
-				padding-left: ${space[5]}px;
-			}
-		`;
+const sectionPadding = css`
+	padding-left: 10px;
+	${from.mobileLandscape} {
+		padding-left: 18px;
 	}
-	return css`
-		padding-left: 10px;
-		${from.mobileLandscape} {
-			padding-left: 18px;
-		}
+	${from.tablet} {
+		padding-left: ${space[1]}px;
+	}
+`;
+
+const immersiveGridTitleBelowDesktop = css`
+	${until.desktop} {
+		color: white;
+		padding: 3px 6px 4px 6px;
+	}
+`;
+
+const immersiveLandscapeTitle = css`
+	position: relative;
+	line-height: 28px;
+	padding: 2px 2px 4px;
+
+	${until.tablet} {
+		margin-left: ${space[2]}px;
+	}
+	${from.tablet} {
+		margin-left: -24px;
+		padding-left: 2px;
+	}
+	${until.desktop} {
+		padding: 2px 2px 4px;
+	}
+	${from.desktop} {
+		margin-left: -14px;
+	}
+	${from.leftCol} {
+		margin-left: -4px;
+		line-height: 28px;
+	}
+	${from.wide} {
+		line-height: 32px;
+	}
+
+	span {
 		${from.tablet} {
-			padding-left: ${space[1]}px;
+			padding-left: 12px;
 		}
-	`;
+		${from.leftCol} {
+			padding-left: 2px;
+		}
+	}
+`;
+
+const immersiveGridTitleWrapperBelowDesktop = css`
+	${until.desktop} {
+		padding-inline: 10px;
+	}
+	${until.tablet} {
+		padding-inline: 20px;
+	}
+	${until.mobileLandscape} {
+		padding-inline: 10px;
+	}
+`;
+
+const galleryTitleWrapper = css`
+	${until.desktop} {
+		overflow: hidden;
+	}
+`;
+
+const seriesTitleBackground = css`
+	background-color: ${themePalette('--series-title-background')};
+	box-shadow:
+		-6px 0 0 0 ${themePalette('--series-title-background')},
+		6px 0 0 0 ${themePalette('--series-title-background')};
+`;
+
+const sectionTitleBackground = css`
+	background-color: ${themePalette('--section-title-background')};
+	box-shadow:
+		-6px 0 0 0 ${themePalette('--series-title-background')},
+		6px 0 0 0 ${themePalette('--series-title-background')};
+`;
+
+// Temporary until top hat has a format display hint
+const topHatSeriesBackground = css`
+	width: fit-content;
+	padding: 3px 10px 4px 10px;
+	background-color: ${themePalette('--series-title-text')};
+`;
+
+const topHatTagBackground = css`
+	padding: 4px 10px 0 10px;
+	background-color: color-mix(
+		in srgb,
+		${themePalette('--article-background')} 90%,
+		transparent
+	);
+`;
+
+type LinkProps = {
+	href: string;
+	format: ArticleFormat;
+	colour: string;
+	fontCss?: SerializedStyles;
+	extraCss?: (SerializedStyles | false)[];
+	className?: string;
+	'data-component': string;
+	'data-link-name': string;
+	children: React.ReactNode;
 };
+
+const TitleLink = ({
+	href,
+	format,
+	colour,
+	fontCss = fontStyles(format),
+	extraCss = [],
+	className,
+	children,
+	...dataProps
+}: LinkProps) => (
+	<a
+		href={href}
+		className={className}
+		css={[
+			sectionLabelLink,
+			fontCss,
+			breakWord,
+			css`
+				color: ${colour};
+			`,
+			...extraCss,
+		]}
+		{...dataProps}
+	>
+		<span>{children}</span>
+	</a>
+);
+
+const LiveBlogPulsingDot = ({ format }: { format: ArticleFormat }) => (
+	<Hide when="above" breakpoint="desktop">
+		{format.design === ArticleDesign.LiveBlog && (
+			<span
+				css={[
+					fontStyles(format),
+					css`
+						color: ${themePalette('--series-title-text')};
+					`,
+				]}
+			>
+				<Island priority="enhancement" defer={{ until: 'visible' }}>
+					<PulsingDot />
+				</Island>
+			</span>
+		)}
+	</Hide>
+);
 
 export const SeriesSectionLink = ({
 	format,
+	layoutType,
 	tags,
 	sectionLabel,
 	sectionUrl,
@@ -226,42 +374,198 @@ export const SeriesSectionLink = ({
 			(tag.type === 'Publication' && tag.title === 'The Observer'),
 	);
 
-	// If we have a tag, use it to show 2 section titles
-	// Observer opinion (commentisfree) articles should prioritise
-	// the publication tag over the commentisfree tag.
 	const tag = observerTag && isCommentIsFree ? observerTag : seriesTag;
-
-	const hasSeriesTag = tag && tag.type === 'Series';
-
+	const hasSeriesTag = tag?.type === 'Series';
 	const isLabs = format.theme === ArticleSpecial.Labs;
+	const isWeekendEssay = format.design === ArticleDesign.WeekendEssay;
+	const isInteractiveTopHat = layoutType === 'interactiveTopHat';
 
 	const titleColour = isMatch
 		? themePalette('--series-title-match-text')
-		: themePalette('--series-title-text');
+		: isInteractiveTopHat
+			? '#ffffff'
+			: themePalette('--series-title-text');
+	const sectionTitleColour = isMatch
+		? themePalette('--series-title-match-text')
+		: themePalette('--article-section-link-text');
 
-	if (
-		format.display === ArticleDisplay.Immersive &&
-		(format.design === ArticleDesign.Comment ||
-			format.design === ArticleDesign.Editorial ||
-			format.design === ArticleDesign.Letter)
-	) {
+	const isImmersive = format.display === ArticleDisplay.Immersive;
+	const immersiveOpinion = isImmersiveOpinion(format);
+	const isGallery = format.design === ArticleDesign.Gallery;
+
+	// Immersive opinion articles get a distinct treatment: highlighted links
+	// with both series and section shown (or just section if no tag).
+	if (immersiveOpinion || isInteractiveTopHat) {
 		if (tag) {
-			// We have a tag, we're not immersive, show both series and section titles
 			return (
-				// Sometimes the tags/titles are shown inline, sometimes stacked
-				<div css={rowBelowLeftCol(format)}>
-					<a
+				<div css={rowBelowLeftCol(format, layoutType)}>
+					<TitleLink
 						href={`${guardianBaseURL}/${tag.id}`}
-						css={[
-							sectionLabelLink,
+						format={format}
+						colour={titleColour}
+						extraCss={[
 							marginRight,
-							fontStyles(format),
-							breakWord,
+							isWeekendEssay
+								? css`
+										color: ${themePalette(
+											'--series-title-background',
+										)};
+									`
+								: isInteractiveTopHat
+									? topHatSeriesBackground
+									: seriesTitleBackground,
+						]}
+						data-component="series"
+						data-link-name="article series"
+					>
+						{tag.title}
+					</TitleLink>
+					<Hide when="below" breakpoint="tablet">
+						<TitleLink
+							href={`${guardianBaseURL}/${sectionUrl}`}
+							format={format}
+							colour={sectionTitleColour}
+							fontCss={
+								isWeekendEssay
+									? secondaryFontStyles(format)
+									: undefined
+							}
+							extraCss={[
+								displayBlock,
+								isWeekendEssay
+									? css`
+											color: ${themePalette(
+												'--series-title-background',
+											)};
+										`
+									: isInteractiveTopHat
+										? topHatTagBackground
+										: seriesTitleBackground,
+							]}
+							data-component="section"
+							data-link-name="article section"
+						>
+							{sectionLabel}
+						</TitleLink>
+					</Hide>
+				</div>
+			);
+		}
+
+		const topHatLinkCss = [displayBlock, topHatTagBackground];
+		const defaultLinkCss = [marginRight, sectionTitleBackground];
+
+		return (
+			<div css={!isInteractiveTopHat && marginBottom}>
+				<TitleLink
+					href={`${guardianBaseURL}/${sectionUrl}`}
+					format={format}
+					colour={sectionTitleColour}
+					extraCss={
+						isInteractiveTopHat ? topHatLinkCss : defaultLinkCss
+					}
+					data-component="section"
+					data-link-name="article section"
+				>
+					{sectionLabel}
+				</TitleLink>
+			</div>
+		);
+	}
+
+	// Other immersives and galleries show an inverted title block,
+	// but only when there's a series tag or it's a Labs article.
+	if (isImmersive || isGallery) {
+		if (!hasSeriesTag && !isLabs) return null;
+
+		const title = tag?.title ?? sectionLabel;
+		const linkExt = tag?.id ?? sectionUrl;
+		const hasLayoutType = isImmersive && layoutType !== undefined;
+		const isNotImmersivePortraitLayout = layoutType !== 'immersivePortrait';
+		const isImmersiveLandscapeLayout = layoutType === 'immersiveLandscape';
+		const isImmersivePortraitLayout = layoutType === 'immersivePortrait';
+
+		return (
+			<div
+				css={[
+					hasLayoutType
+						? immersiveGridTitleWrapperBelowDesktop
+						: undefined,
+					isGallery && galleryTitleWrapper,
+					isImmersivePortraitLayout &&
+						css`
+							${between.tablet.and.desktop} {
+								padding-inline: 12px;
+							}
+							${between.desktop.and.leftCol} {
+								padding-left: 6px;
+							}
+							${from.desktop} {
+								bottom: 2px;
+								position: relative;
+								z-index: ${getZIndex('articleHeadline')};
+							}
+						`,
+				]}
+			>
+				<TitleLink
+					href={`${guardianBaseURL}/${linkExt}`}
+					format={format}
+					colour={titleColour}
+					extraCss={[
+						invertedStyle(),
+						isImmersive &&
+							!hasLayoutType &&
 							css`
-								color: ${titleColour};
-								background-color: ${themePalette(
-									'--series-title-background',
-								)};
+								line-height: 28px;
+								${until.tablet} {
+									margin-left: 16px;
+									${from.mobileLandscape} {
+										margin-left: 24px;
+									}
+								}
+								${from.leftCol} {
+									line-height: 28px;
+								}
+							`,
+						isNotImmersivePortraitLayout && sectionPadding,
+						css`
+							background-color: ${themePalette(
+								'--series-title-background',
+							)};
+						`,
+						hasLayoutType &&
+							isNotImmersivePortraitLayout &&
+							immersiveGridTitleBelowDesktop,
+						isImmersiveLandscapeLayout && immersiveLandscapeTitle,
+						isImmersiveLandscapeLayout &&
+							isLabs &&
+							css`
+								${from.wide} {
+									bottom: 1px;
+								}
+							`,
+						isGallery &&
+							css`
+								position: relative;
+								${until.desktop} {
+									box-shadow: 0 4px 0
+										${themePalette(
+											'--series-title-background',
+										)};
+								}
+								${from.wide} {
+									line-height: 28px;
+								}
+							`,
+						isImmersive &&
+							css`
+								filter: drop-shadow(
+									0 1px 0
+										${themePalette(
+											'--series-title-background',
+										)}
+								);
 								box-shadow:
 									-6px 0 0 0
 										${themePalette(
@@ -272,192 +576,85 @@ export const SeriesSectionLink = ({
 											'--series-title-background',
 										)};
 							`,
-						]}
-						data-component="series"
-						data-link-name="article series"
-					>
-						<span>{tag.title}</span>
-					</a>
+						isImmersivePortraitLayout &&
+							css`
+								line-height: 28px;
+								padding: 2px 2px 4px;
+								${until.tablet} {
+									margin-left: ${space[2]}px;
+								}
+								${from.leftCol} {
+									line-height: 28px;
+								}
+								${from.wide} {
+									line-height: 32px;
+								}
+							`,
+						hasLayoutType &&
+							css`
+								position: relative;
+								left: -6px;
+								box-shadow: none;
 
-					<Hide when="below" breakpoint="tablet">
-						<a
-							href={`${guardianBaseURL}/${sectionUrl}`}
-							css={[
-								sectionLabelLink,
-								fontStyles(format),
-								displayBlock,
-								breakWord,
-								css`
-									color: ${themePalette(
-										'--series-title-text',
-									)};
-									background-color: ${themePalette(
-										'--section-title-background',
-									)};
-									box-shadow:
-										-6px 0 0 0
-											${themePalette(
-												'--series-title-background',
-											)},
-										6px 0 0 0
-											${themePalette(
-												'--series-title-background',
-											)};
-								`,
-							]}
-							data-component="section"
-							data-link-name="article section"
-						>
-							<span>{sectionLabel}</span>
-						</a>
-					</Hide>
-				</div>
-			);
-		}
-		// There's no tag so fallback to section title
-		return (
-			<div css={marginBottom}>
-				<a
-					href={`${guardianBaseURL}/${sectionUrl}`}
-					css={[
-						sectionLabelLink,
-						marginRight,
-						fontStyles(format),
-						breakWord,
-						css`
-							color: ${titleColour};
-							background-color: ${themePalette(
-								'--section-title-background',
-							)};
-							box-shadow:
-								-6px 0 0 0
-									${themePalette('--series-title-background')},
-								6px 0 0 0
-									${themePalette('--series-title-background')};
-						`,
-					]}
-					data-component="section"
-					data-link-name="article section"
+								&& {
+									padding-inline: 6px;
+
+									${isImmersiveLandscapeLayout &&
+									css`
+										${from.tablet} {
+											padding-left: 20px;
+										}
+										${from.leftCol} {
+											padding-left: 10px;
+										}
+									`}
+								}
+
+								span {
+									padding-left: 0;
+								}
+
+								${isImmersivePortraitLayout
+									? until.desktop
+									: until.tablet} {
+									left: 0;
+									margin-left: 0;
+								}
+							`,
+					].filter(Boolean)}
+					data-component="series"
+					data-link-name="article series"
 				>
-					<span>{sectionLabel}</span>
-				</a>
+					{title}
+				</TitleLink>
 			</div>
 		);
 	}
 
-	if (
-		format.display === ArticleDisplay.Immersive ||
-		format.design === ArticleDesign.Gallery
-	) {
-		if (!!hasSeriesTag || isLabs) {
-			const title = tag?.title ? tag.title : sectionLabel;
-			const linkExt = tag?.id ? tag.id : sectionUrl;
-			return (
-				<div>
-					<a
-						css={[
-							sectionLabelLink,
-							fontStyles(format),
-							invertedStyle(format.design),
-							breakWord,
-							sectionPadding(format.design),
-							css`
-								color: ${titleColour};
-								background-color: ${themePalette(
-									'--series-title-background',
-								)};
-							`,
-							format.design === ArticleDesign.Gallery &&
-								css`
-									display: inline-block;
-									position: relative;
-								`,
-							format.display === ArticleDisplay.Immersive &&
-								css`
-									box-shadow:
-										-6px 0 0 0
-											${themePalette(
-												'--series-title-background',
-											)},
-										6px 0 0 0
-											${themePalette(
-												'--series-title-background',
-											)};
-								`,
-						]}
-						href={`${guardianBaseURL}/${linkExt}`}
-						data-component="series"
-						data-link-name="article series"
-					>
-						<span>{title}</span>
-					</a>
-				</div>
-			);
-		}
-		// Immersives show nothing at all if there's no series tag
-		return null;
-	}
+	// Standard layout: series tag + section label, or just section label.
 	if (tag) {
-		// We have a tag, we're not immersive, show both series and section titles
 		return (
-			// Sometimes the tags/titles are shown inline, sometimes stacked
 			<div css={rowBelowLeftCol(format)}>
-				<Hide when="above" breakpoint="desktop">
-					{format.design === ArticleDesign.LiveBlog && (
-						<span
-							css={[
-								fontStyles(format),
-								css`
-									color: ${titleColour};
-								`,
-							]}
-						>
-							<Island
-								priority="enhancement"
-								defer={{ until: 'visible' }}
-							>
-								<PulsingDot />
-							</Island>
-						</span>
-					)}
-				</Hide>
-				<a
+				<LiveBlogPulsingDot format={format} />
+				<TitleLink
 					href={`${guardianBaseURL}/${tag.id}`}
-					css={[
-						sectionLabelLink,
-						css`
-							color: ${titleColour};
-							background-color: ${themePalette(
-								'--series-title-background',
-							)};
-						`,
-						marginRight,
-						fontStyles(format),
-						breakWord,
-						css`
-							box-shadow:
-								-6px 0 0 0
-									${themePalette('--series-title-background')},
-								6px 0 0 0
-									${themePalette('--series-title-background')};
-						`,
-					]}
+					format={format}
+					colour={titleColour}
+					extraCss={[marginRight, seriesTitleBackground]}
 					data-component="series"
 					data-link-name="article series"
 				>
-					<span>{tag.title}</span>
-				</a>
-
+					{tag.title}
+				</TitleLink>
 				<Hide when="below" breakpoint="tablet">
-					<a
+					<TitleLink
 						href={`${guardianBaseURL}/${sectionUrl}`}
-						css={[
-							sectionLabelLink,
-							secondaryFontStyles(format),
+						format={format}
+						colour={sectionTitleColour}
+						fontCss={secondaryFontStyles(format)}
+						extraCss={[
 							displayBlock,
-							breakWord,
 							css`
-								color: ${titleColour};
 								background-color: ${themePalette(
 									'--section-title-background',
 								)};
@@ -466,54 +663,27 @@ export const SeriesSectionLink = ({
 						data-component="section"
 						data-link-name="article section"
 					>
-						<span>{sectionLabel}</span>
-					</a>
+						{sectionLabel}
+					</TitleLink>
 				</Hide>
 			</div>
 		);
 	}
-	// There's no tag so fallback to section title
+
 	return (
 		<>
-			<Hide when="above" breakpoint="desktop">
-				{format.design === ArticleDesign.LiveBlog && (
-					<span
-						css={[
-							fontStyles(format),
-							css`
-								color: ${titleColour};
-							`,
-						]}
-					>
-						<Island
-							priority="enhancement"
-							defer={{ until: 'visible' }}
-						>
-							<PulsingDot />
-						</Island>
-					</span>
-				)}
-			</Hide>
-			<a
+			<LiveBlogPulsingDot format={format} />
+			<TitleLink
 				href={`${guardianBaseURL}/${sectionUrl}`}
-				css={[
-					sectionLabelLink,
-					css`
-						color: ${titleColour};
-						background-color: ${themePalette(
-							'--section-title-background',
-						)};
-					`,
-					marginRight,
-					fontStyles(format),
-					breakWord,
-				]}
+				format={format}
+				colour={sectionTitleColour}
+				extraCss={[marginRight]}
+				className={interactiveLegacyClasses.labelLink}
 				data-component="section"
 				data-link-name="article section"
-				className={interactiveLegacyClasses.labelLink}
 			>
-				<span>{sectionLabel}</span>
-			</a>
+				{sectionLabel}
+			</TitleLink>
 		</>
 	);
 };

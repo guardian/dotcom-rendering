@@ -1,3 +1,4 @@
+import type { CountryCode } from '@guardian/libs';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { buildAuxiaGateDisplayData } from '../../lib/auxia';
@@ -28,6 +29,7 @@ export const SignInGatePortal = ({
 	pageId,
 	contributionsServiceUrl,
 	auxiaGateDisplayData,
+	contentType,
 }: {
 	host?: string;
 	isPaidContent: boolean;
@@ -35,6 +37,7 @@ export const SignInGatePortal = ({
 	pageId: string;
 	contributionsServiceUrl: string;
 	auxiaGateDisplayData: AuxiaGateDisplayData;
+	contentType?: string;
 }) => {
 	const [shouldShowGate, setShouldShowGate] = useState<boolean>(false);
 	const [targetElement, setTargetElement] = useState<HTMLElement | null>(
@@ -129,6 +132,7 @@ export const SignInGatePortal = ({
 				pageId={pageId}
 				contributionsServiceUrl={contributionsServiceUrl}
 				auxiaGateDisplayData={auxiaGateDisplayData}
+				contentType={contentType}
 			/>
 		</Island>,
 		targetElement,
@@ -146,11 +150,11 @@ export interface CanShowSignInGateProps {
 	isPreview: boolean;
 	pageId: string;
 	contributionsServiceUrl: string;
-	isInAuxiaControlGroup: boolean;
 	editionId?: EditionId;
 	contentType?: string;
 	sectionId?: string;
 	tags?: TagType[];
+	countryCode?: CountryCode;
 }
 export const canShowSignInGatePortal = async ({
 	isSignedIn,
@@ -158,13 +162,13 @@ export const canShowSignInGatePortal = async ({
 	isPreview,
 	pageId,
 	contributionsServiceUrl,
-	isInAuxiaControlGroup,
 	editionId,
 	contentType,
 	sectionId,
 	tags,
+	countryCode,
 }: CanShowSignInGateProps): Promise<CanShowResult<AuxiaGateDisplayData>> => {
-	if (!window.guardian.config.switches.signInGate) {
+	if (window.guardian.config.switches.signInGate !== true) {
 		// Gates are disabled from the Frontend switchboard
 		return Promise.resolve({ show: false });
 	}
@@ -176,7 +180,7 @@ export const canShowSignInGatePortal = async ({
 		return Promise.resolve({ show: false });
 	}
 
-	if (isPaidContent || isPreview || isSignedIn) {
+	if (isPaidContent || isPreview || isSignedIn === true) {
 		return Promise.resolve({ show: false });
 	}
 
@@ -194,21 +198,32 @@ export const canShowSignInGatePortal = async ({
 		return Promise.resolve({ show: false });
 	}
 
+	// Gandalf (comment group: gandalf) — the Guardian-managed sign-in gate
+	// journey is currently New Zealand only, and every other country gates on
+	// articles only. Surfaces that can never display the gate (e.g. a front in
+	// GB) are filtered out here so they make no request to SDC at all.
+	if (contentType !== 'Article' && countryCode !== 'NZ') {
+		return Promise.resolve({ show: false });
+	}
+
 	try {
 		const auxiaData = await buildAuxiaGateDisplayData(
 			contributionsServiceUrl,
-			pageId ?? '',
+			pageId,
 			editionId,
 			contentType,
 			sectionId,
 			tags,
 			retrieveLastGateDismissedCount('AuxiaSignInGate'),
-			isInAuxiaControlGroup,
 		);
 
+		if (auxiaData === undefined) {
+			return { show: false };
+		}
+
 		return {
-			show: auxiaData?.auxiaData.userTreatment !== undefined,
-			meta: auxiaData as AuxiaGateDisplayData,
+			show: auxiaData.auxiaData.userTreatment !== undefined,
+			meta: auxiaData,
 		};
 	} catch (e) {
 		const message = `SignInGatePortal canShowSignInGatePortal - error: ${String(

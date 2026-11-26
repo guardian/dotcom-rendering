@@ -3,7 +3,7 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
 import type { ArticleElementRenderer } from '../lib/renderElement';
 import { palette } from '../palette';
-import type { ServerSideTests, Switches } from '../types/config';
+import type { Switches } from '../types/config';
 import type { QAndAExplainer, StarRating } from '../types/content';
 import { QAndAExplainer as QAndAExplainerComponent } from './QAndAExplainer';
 
@@ -15,7 +15,6 @@ interface Props {
 	pageId: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	abTests: ServerSideTests;
 	switches: Switches;
 	editionId: EditionId;
 	hideCaption?: boolean;
@@ -44,7 +43,6 @@ export const QAndAExplainers = ({
 	isAdFreeUser,
 	isSensitive,
 	switches,
-	abTests,
 	editionId,
 	hideCaption,
 	starRating,
@@ -63,7 +61,6 @@ export const QAndAExplainers = ({
 				isAdFreeUser={isAdFreeUser}
 				isSensitive={isSensitive}
 				switches={switches}
-				abTests={abTests}
 				editionId={editionId}
 				hideCaption={hideCaption}
 				starRating={starRating}

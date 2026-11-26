@@ -3,7 +3,10 @@
   --
   the palette object is large and ordering helps knowing where to insert new elements
 */
-import { palette as sourcePalette } from '@guardian/source/foundations';
+import {
+	calculateHoverColour,
+	palette as sourcePalette,
+} from '@guardian/source/foundations';
 import {
 	themeButton,
 	themeButtonBrand,
@@ -48,6 +51,18 @@ const pillarPalette = (
 			return sourcePalette.opinion[lightness];
 	}
 };
+
+const labsMediaDesigns: ArticleDesign[] = [
+	ArticleDesign.Video,
+	ArticleDesign.Audio,
+	ArticleDesign.Picture,
+];
+
+const labsHostedDesigns: ArticleDesign[] = [
+	ArticleDesign.HostedArticle,
+	ArticleDesign.HostedVideo,
+	ArticleDesign.HostedGallery,
+];
 
 const textblockBulletLight: PaletteFunction = ({ theme, design }) => {
 	switch (theme) {
@@ -101,12 +116,13 @@ const headlineTextLight: PaletteFunction = ({ design, display, theme }) => {
 						case ArticleSpecial.SpecialReport:
 							return sourcePalette.specialReport[200];
 						case ArticleSpecial.Labs:
-							return sourcePalette.labs[200];
+							return sourcePalette.labs[100];
 						default:
 							return pillarPalette(theme, 200);
 					}
 				}
 				case ArticleDesign.Gallery:
+				case ArticleDesign.HostedGallery:
 					return sourcePalette.neutral[100];
 				case ArticleDesign.LiveBlog: {
 					switch (theme) {
@@ -157,7 +173,7 @@ const headlineTextDark: PaletteFunction = ({ design, display, theme }) => {
 						case ArticleSpecial.SpecialReport:
 							return sourcePalette.specialReport[500];
 						case ArticleSpecial.Labs:
-							return sourcePalette.labs[400];
+							return sourcePalette.labs[500];
 						default:
 							return pillarPalette(theme, 500);
 					}
@@ -179,6 +195,7 @@ const headlineTextDark: PaletteFunction = ({ design, display, theme }) => {
 					}
 				}
 				case ArticleDesign.Gallery:
+				case ArticleDesign.HostedGallery:
 					return sourcePalette.neutral[86];
 				default:
 					return sourcePalette.neutral[97];
@@ -193,6 +210,17 @@ const headlineMatchTextLight: PaletteFunction = (format) =>
 const headlineMatchTextDark: PaletteFunction = (format) =>
 	seriesTitleMatchTextDark(format);
 
+/**
+ * Only used by the non-inverted immersive grid layouts (portrait, and
+ * landscape feature), whose headlines sit on a plain or light blurred
+ * background rather than the solid dark box `--headline-colour` expects.
+ */
+const immersiveGridHeadlineTextLight: PaletteFunction = () =>
+	sourcePalette.neutral[7];
+
+const immersiveGridHeadlineTextDark: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+
 const headlineBackgroundLight: PaletteFunction = ({
 	display,
 	design,
@@ -201,8 +229,16 @@ const headlineBackgroundLight: PaletteFunction = ({
 	switch (display) {
 		case ArticleDisplay.Immersive:
 			switch (theme) {
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[300];
+				case Pillar.Lifestyle:
+					return '#310028';
+				case Pillar.Culture:
+					return '#251F15';
+				case Pillar.Sport:
+					return '#00243A';
+				case Pillar.Opinion:
+					return '#3E1302';
+				case Pillar.News:
+					return sourcePalette.neutral[10];
 				default:
 					return sourcePalette.neutral[7];
 			}
@@ -211,7 +247,6 @@ const headlineBackgroundLight: PaletteFunction = ({
 		case ArticleDisplay.Standard:
 			switch (design) {
 				case ArticleDesign.Gallery:
-					return sourcePalette.neutral[7];
 				case ArticleDesign.Interview:
 					return sourcePalette.neutral[7];
 				default:
@@ -227,7 +262,7 @@ const headlineBackgroundDark: PaletteFunction = ({
 	display,
 	theme,
 }) => {
-	if (display === ArticleDisplay.Immersive) return sourcePalette.neutral[7];
+	if (display === ArticleDisplay.Immersive) return sourcePalette.neutral[10];
 
 	switch (design) {
 		case ArticleDesign.DeadBlog:
@@ -249,6 +284,7 @@ const headlineBackgroundDark: PaletteFunction = ({
 					return sourcePalette.neutral[20];
 			}
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[10];
 		case ArticleDesign.Standard:
 		case ArticleDesign.Review:
@@ -317,7 +353,7 @@ const headlineBylineLight: PaletteFunction = ({ design, display, theme }) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.news[400];
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[100];
 				default:
 					return pillarPalette(theme, 400);
 			}
@@ -341,7 +377,7 @@ const headlineBylineDark: PaletteFunction = ({ design, display, theme }) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[700];
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.labs[500];
 				default:
 					return pillarPalette(theme, 500);
 			}
@@ -359,6 +395,7 @@ const headlineBylineDark: PaletteFunction = ({ design, display, theme }) => {
 const bylineLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[86];
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
@@ -381,7 +418,7 @@ const bylineLight: PaletteFunction = ({ design, theme }) => {
 				case Pillar.Opinion:
 					return sourcePalette.opinion[300];
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.labs[100];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[400];
 				case ArticleSpecial.SpecialReportAlt:
@@ -509,6 +546,7 @@ const bylineBackgroundDark: PaletteFunction = ({ design, theme }) => {
 const bylineAnchorLight: PaletteFunction = ({ design, theme, display }) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[86];
 		case ArticleDesign.Analysis:
 			switch (theme) {
@@ -520,7 +558,7 @@ const bylineAnchorLight: PaletteFunction = ({ design, theme, display }) => {
 				case Pillar.Opinion:
 					return sourcePalette.opinion[400];
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.brandAlt[300];
 				case ArticleSpecial.SpecialReportAlt:
@@ -538,7 +576,7 @@ const bylineAnchorLight: PaletteFunction = ({ design, theme, display }) => {
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 400);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[400];
 				case ArticleSpecial.SpecialReportAlt:
@@ -559,7 +597,7 @@ const bylineAnchorLight: PaletteFunction = ({ design, theme, display }) => {
 						case Pillar.Lifestyle:
 							return pillarPalette(theme, 400);
 						case ArticleSpecial.Labs:
-							return sourcePalette.labs[300];
+							return sourcePalette.labs[200];
 						case ArticleSpecial.SpecialReport:
 							return sourcePalette.specialReport[400];
 						case ArticleSpecial.SpecialReportAlt:
@@ -583,7 +621,7 @@ const bylineAnchorLight: PaletteFunction = ({ design, theme, display }) => {
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 400);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[400];
 				case ArticleSpecial.SpecialReportAlt:
@@ -607,7 +645,7 @@ const bylineAnchorLight: PaletteFunction = ({ design, theme, display }) => {
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 400);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[400];
 				case ArticleSpecial.SpecialReportAlt:
@@ -619,6 +657,7 @@ const bylineAnchorLight: PaletteFunction = ({ design, theme, display }) => {
 const bylineAnchorDark: PaletteFunction = ({ design, theme, display }) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[86];
 		case ArticleDesign.Analysis:
 			switch (theme) {
@@ -649,7 +688,7 @@ const bylineAnchorDark: PaletteFunction = ({ design, theme, display }) => {
 						case Pillar.Lifestyle:
 							return pillarPalette(theme, 500);
 						case ArticleSpecial.Labs:
-							return sourcePalette.labs[400];
+							return sourcePalette.labs[500];
 						case ArticleSpecial.SpecialReport:
 							return sourcePalette.specialReport[500];
 						case ArticleSpecial.SpecialReportAlt:
@@ -673,7 +712,7 @@ const bylineAnchorDark: PaletteFunction = ({ design, theme, display }) => {
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 500);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.labs[500];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
@@ -689,7 +728,7 @@ const bylineAnchorDark: PaletteFunction = ({ design, theme, display }) => {
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 500);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.labs[500];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
@@ -700,7 +739,7 @@ const bylineAnchorDark: PaletteFunction = ({ design, theme, display }) => {
 		case ArticleDesign.Audio:
 			switch (theme) {
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.labs[500];
 				default:
 					return sourcePalette.neutral[60];
 			}
@@ -713,7 +752,7 @@ const bylineAnchorDark: PaletteFunction = ({ design, theme, display }) => {
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 500);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.labs[500];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
@@ -733,7 +772,7 @@ const bylineHoverLight: PaletteFunction = ({ design, theme }) => {
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 200);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[200];
+					return sourcePalette.labs[100];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.brandAlt[200];
 				case ArticleSpecial.SpecialReportAlt:
@@ -834,7 +873,7 @@ const bylineHoverDark: PaletteFunction = ({ design, theme }) => {
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 600);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[500];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[400];
 				case ArticleSpecial.SpecialReportAlt:
@@ -850,7 +889,7 @@ const bylineHoverDark: PaletteFunction = ({ design, theme }) => {
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 600);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[500];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[400];
 				case ArticleSpecial.SpecialReportAlt:
@@ -865,7 +904,7 @@ const bylineHoverDark: PaletteFunction = ({ design, theme }) => {
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 600);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[500];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[700];
 				case ArticleSpecial.SpecialReportAlt:
@@ -979,6 +1018,7 @@ export const tabs = {
 const datelineLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 			switch (theme) {
 				case ArticleSpecial.Labs:
 					return sourcePalette.neutral[86];
@@ -1120,8 +1160,47 @@ const headingLineDark: PaletteFunction = (format: ArticleFormat) => {
 	}
 };
 
-const subheadingTextLight = ({ design, theme }: ArticleFormat) => {
-	switch (design) {
+/**
+ * H3 subheadings in body copy always take the pillar colour, regardless of
+ * design. H2 subheadings only do so for some designs, so
+ * {@link subheadingTextLight} reuses this for those.
+ */
+const subheadingLevel3TextLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+			return pillarPalette(theme, 200);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[200];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[200];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[100];
+	}
+};
+
+const subheadingLevel3TextDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+			return pillarPalette(theme, 500);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[500];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[800];
+	}
+};
+
+const subheadingTextLight: PaletteFunction = (format) => {
+	switch (format.design) {
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Analysis:
@@ -1129,20 +1208,9 @@ const subheadingTextLight = ({ design, theme }: ArticleFormat) => {
 		case ArticleDesign.Interview:
 		case ArticleDesign.Recipe:
 		case ArticleDesign.Review:
-			switch (theme) {
-				case Pillar.News:
-				case Pillar.Opinion:
-				case Pillar.Sport:
-				case Pillar.Culture:
-				case Pillar.Lifestyle:
-					return pillarPalette(theme, 200);
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[200];
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[200];
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReportAlt[100];
-			}
+			return (
+				subheadingLevel3TextLight(format) ?? sourcePalette.neutral[7]
+			);
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Standard:
 		case ArticleDesign.Profile:
@@ -1155,8 +1223,8 @@ const subheadingTextLight = ({ design, theme }: ArticleFormat) => {
 	}
 };
 
-const subheadingTextDark = ({ design, theme }: ArticleFormat) => {
-	switch (design) {
+const subheadingTextDark: PaletteFunction = (format) => {
+	switch (format.design) {
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Analysis:
@@ -1164,20 +1232,9 @@ const subheadingTextDark = ({ design, theme }: ArticleFormat) => {
 		case ArticleDesign.Interview:
 		case ArticleDesign.Recipe:
 		case ArticleDesign.Review:
-			switch (theme) {
-				case Pillar.News:
-				case Pillar.Opinion:
-				case Pillar.Sport:
-				case Pillar.Culture:
-				case Pillar.Lifestyle:
-					return pillarPalette(theme, 500);
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[500];
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReportAlt[800];
-			}
+			return (
+				subheadingLevel3TextDark(format) ?? sourcePalette.neutral[86]
+			);
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Standard:
 		case ArticleDesign.Profile:
@@ -1196,6 +1253,7 @@ const avatarDark: PaletteFunction = () => sourcePalette.neutral[93];
 const followTextLight: PaletteFunction = ({ design }) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[86];
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.Picture:
@@ -1212,6 +1270,7 @@ const followTextDark: PaletteFunction = ({ design }) => {
 		case ArticleDesign.DeadBlog:
 			return sourcePalette.neutral[100];
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[86];
 		default:
 			return sourcePalette.neutral[86];
@@ -1242,6 +1301,7 @@ const followIconBackgroundLight: PaletteFunction = ({ design, theme }) => {
 					return sourcePalette.news[800];
 			}
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[7];
 		case ArticleDesign.Comment:
 		case ArticleDesign.Letter:
@@ -1272,6 +1332,10 @@ const followIconBackgroundLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 const followIconBackgroundDark: PaletteFunction = ({ theme, design }) => {
+	if (theme === ArticleSpecial.Labs && design !== ArticleDesign.LiveBlog) {
+		return sourcePalette.neutral[7];
+	}
+
 	switch (design) {
 		case ArticleDesign.DeadBlog:
 			return sourcePalette.neutral[7];
@@ -1301,8 +1365,13 @@ const followIconBackgroundDark: PaletteFunction = ({ theme, design }) => {
 };
 
 const followIconFillLight: PaletteFunction = ({ design, theme }) => {
+	if (theme === ArticleSpecial.Labs && design !== ArticleDesign.LiveBlog) {
+		return sourcePalette.labs[200];
+	}
+
 	switch (design) {
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 			switch (theme) {
 				case Pillar.Opinion:
 					return sourcePalette.opinion[500];
@@ -1346,8 +1415,6 @@ const followIconFillLight: PaletteFunction = ({ design, theme }) => {
 					return sourcePalette.culture[400];
 				case Pillar.Lifestyle:
 					return sourcePalette.lifestyle[400];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[300];
 				case ArticleSpecial.SpecialReportAlt:
@@ -1378,8 +1445,6 @@ const followIconFillLight: PaletteFunction = ({ design, theme }) => {
 					return sourcePalette.culture[400];
 				case Pillar.Lifestyle:
 					return sourcePalette.lifestyle[400];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[300];
 				case ArticleSpecial.SpecialReportAlt:
@@ -1409,13 +1474,15 @@ const followIconFillLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 const followIconFillDark: PaletteFunction = ({ theme, design }) => {
+	if (theme === ArticleSpecial.Labs && design !== ArticleDesign.LiveBlog) {
+		return sourcePalette.labs[500];
+	}
+
 	switch (design) {
 		case ArticleDesign.LiveBlog:
 			return sourcePalette.neutral[93];
 		case ArticleDesign.Standard:
 			switch (theme) {
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
 				case Pillar.Opinion:
 					return sourcePalette.opinion[500];
 				case Pillar.Sport:
@@ -1453,8 +1520,6 @@ const followIconFillDark: PaletteFunction = ({ theme, design }) => {
 					return sourcePalette.culture[500];
 				case Pillar.Lifestyle:
 					return sourcePalette.lifestyle[500];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[700];
 				case ArticleSpecial.SpecialReportAlt:
@@ -1474,7 +1539,7 @@ const followIconFillDark: PaletteFunction = ({ theme, design }) => {
 				case Pillar.Lifestyle:
 					return sourcePalette.lifestyle[500];
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[500];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[700];
 				case ArticleSpecial.SpecialReportAlt:
@@ -1706,7 +1771,7 @@ const blockQuoteLinkLight: PaletteFunction = (format: ArticleFormat) => {
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.specialReportAlt[200];
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[300];
+			return sourcePalette.labs[200];
 	}
 };
 
@@ -1723,7 +1788,7 @@ const blockQuoteLinkDark: PaletteFunction = (format: ArticleFormat) => {
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.specialReportAlt[300];
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[400];
+			return sourcePalette.labs[500];
 	}
 };
 
@@ -1868,10 +1933,112 @@ const tableBlockBorderTopDark: PaletteFunction = () =>
 
 const tableOfContentsLight: PaletteFunction = () => sourcePalette.neutral[7];
 const tableOfContentsDark: PaletteFunction = () => sourcePalette.neutral[86];
+/**
+ * The pillar accent used throughout The Filter's "Jump to" bar: its label,
+ * chevron, rules and the item for the section currently being read. Mirrors
+ * `--article-link-text`, the established treatment for pillar-tinted text,
+ * with the two steps adjusted where they fall short of AA on this surface.
+ */
+const tableOfContentsAccentLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		/** `lifestyle[400]` is too light to sit on the bar's surface. */
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[300];
+		case ArticleSpecial.Labs:
+			return sourcePalette.neutral[7];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[400];
+		default:
+			return pillarPalette(theme, 400);
+	}
+};
+const tableOfContentsAccentDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		/**
+		 * `news[500]` only reaches 4.07:1 against the bar's dark surface, so
+		 * the label would fall below AA. The next step up clears it at 7.89:1.
+		 */
+		case Pillar.News:
+			return sourcePalette.news[600];
+		case Pillar.Sport:
+		case Pillar.Lifestyle:
+		case Pillar.Culture:
+		case Pillar.Opinion:
+			return pillarPalette(theme, 500);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[500];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[300];
+	}
+};
+/**
+ * A raised surface for The Filter's sticky "Jump to" bar. Only the filter
+ * variant of the table of contents uses this; the default table of contents
+ * sits directly on `--article-background`.
+ */
+const tableOfContentsBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const tableOfContentsBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
 const tableOfContentsBorderLight: PaletteFunction = () =>
 	sourcePalette.neutral[86];
 const tableOfContentsBorderDark: PaletteFunction = () =>
 	sourcePalette.neutral[20];
+/**
+ * The fill behind a "Jump to" item being hovered, matching the treatment in
+ * the edition picker. One step off the bar's own surface in each scheme: the
+ * neutral scale has nothing between `20` and `38`, so the dark step is the
+ * larger of the two.
+ */
+const tableOfContentsHoverLight: PaletteFunction = () =>
+	sourcePalette.neutral[93];
+const tableOfContentsHoverDark: PaletteFunction = () =>
+	sourcePalette.neutral[38];
+
+/**
+ * The horizontal table of contents: a sticky bar of links to an article's
+ * sections, e.g. on The Filter's immersive articles. A pillar-tinted bar, with
+ * the inactive links one step darker than the border so that they pass AA at
+ * 14px on the light surface.
+ */
+const tableOfContentsHorizontalPillar = (
+	theme: ArticleTheme,
+	lightness: 100 | 200 | 300 | 400 | 500 | 600 | 800,
+	fallback: string,
+): string => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.SpecialReportAlt:
+			return fallback;
+		default:
+			return pillarPalette(theme, lightness);
+	}
+};
+const tableOfContentsHorizontalBackgroundLight: PaletteFunction = ({ theme }) =>
+	tableOfContentsHorizontalPillar(theme, 800, sourcePalette.neutral[97]);
+const tableOfContentsHorizontalBackgroundDark: PaletteFunction = ({ theme }) =>
+	tableOfContentsHorizontalPillar(theme, 100, sourcePalette.neutral[10]);
+const tableOfContentsHorizontalBorderLight: PaletteFunction = ({ theme }) =>
+	tableOfContentsHorizontalPillar(theme, 400, sourcePalette.neutral[46]);
+const tableOfContentsHorizontalBorderDark: PaletteFunction = ({ theme }) =>
+	tableOfContentsHorizontalPillar(theme, 500, sourcePalette.neutral[60]);
+const tableOfContentsHorizontalTextLight: PaletteFunction = ({ theme }) =>
+	tableOfContentsHorizontalPillar(theme, 300, sourcePalette.neutral[20]);
+const tableOfContentsHorizontalTextDark: PaletteFunction = ({ theme }) =>
+	tableOfContentsHorizontalPillar(theme, 500, sourcePalette.neutral[73]);
+const tableOfContentsHorizontalTextActiveLight: PaletteFunction = ({ theme }) =>
+	tableOfContentsHorizontalPillar(theme, 100, sourcePalette.neutral[7]);
+const tableOfContentsHorizontalTextActiveDark: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const tableOfContentsHorizontalTextHoverLight: PaletteFunction = ({ theme }) =>
+	tableOfContentsHorizontalPillar(theme, 100, sourcePalette.neutral[7]);
+const tableOfContentsHorizontalTextHoverDark: PaletteFunction = () =>
+	sourcePalette.neutral[97];
 
 const podcastMetaTitleLight: PaletteFunction = () => sourcePalette.neutral[97];
 const podcastMetaTitleDark: PaletteFunction = () => sourcePalette.neutral[97];
@@ -1927,6 +2094,8 @@ const articleInnerAdBackgroundLight: PaletteFunction = ({ design, theme }) => {
 			return sourcePalette.neutral[93];
 		case ArticleDesign.Gallery:
 			return sourcePalette.neutral[7];
+		case ArticleDesign.HostedGallery:
+			return sourcePalette.neutral[10];
 		default:
 			return sourcePalette.neutral[97];
 	}
@@ -1936,6 +2105,7 @@ const articleInnerAdBackgroundDark: PaletteFunction = ({ design }) => {
 		case ArticleDesign.LiveBlog:
 			return sourcePalette.neutral[7];
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[10];
 		default:
 			return sourcePalette.neutral[20];
@@ -1976,6 +2146,7 @@ const appsFooterBackgroundLight: PaletteFunction = () =>
 const appsFooterBackgroundDark: PaletteFunction = (format: ArticleFormat) => {
 	switch (format.design) {
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[10];
 		default:
 			return sourcePalette.neutral[0];
@@ -2000,8 +2171,8 @@ const clickToViewButtonHoverDark: PaletteFunction = () =>
 
 const brandingLabelLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
-		case ArticleDesign.Video:
-		case ArticleDesign.Audio:
+		case ArticleDesign.Crossword:
+			return sourcePalette.neutral[7];
 		case ArticleDesign.Picture:
 			switch (theme) {
 				case ArticleSpecial.Labs:
@@ -2009,9 +2180,15 @@ const brandingLabelLight: PaletteFunction = ({ design, theme }) => {
 				default:
 					return sourcePalette.neutral[7];
 			}
+		case ArticleDesign.Video:
+		case ArticleDesign.Audio:
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[86];
 		default:
+			if (theme === ArticleSpecial.Labs) {
+				return sourcePalette.labs[100];
+			}
 			return sourcePalette.neutral[20];
 	}
 };
@@ -2019,6 +2196,9 @@ const brandingLabelDark: PaletteFunction = () => sourcePalette.neutral[86];
 const brandingBorderLight: PaletteFunction = () => sourcePalette.neutral[86];
 const brandingBorderDark: PaletteFunction = () => sourcePalette.neutral[20];
 const brandingLinkLight: PaletteFunction = ({ design, theme }) => {
+	if (design === ArticleDesign.Crossword) {
+		return sourcePalette.neutral[7];
+	}
 	if (design === ArticleDesign.Gallery) {
 		return sourcePalette.neutral[86];
 	}
@@ -2046,6 +2226,8 @@ const brandingLinkLight: PaletteFunction = ({ design, theme }) => {
 };
 const brandingLinkDark: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
+		case ArticleDesign.Crossword:
+			return sourcePalette.neutral[86];
 		case ArticleDesign.Gallery:
 			switch (theme) {
 				case Pillar.News:
@@ -2135,6 +2317,7 @@ const standfirstBulletDark: PaletteFunction = ({ design, theme }) => {
 					return sourcePalette.neutral[86];
 			}
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 		default:
 			switch (theme) {
 				case Pillar.News:
@@ -2308,6 +2491,7 @@ const standfirstBackgroundDark: PaletteFunction = ({ design, theme }) => {
 					return sourcePalette.neutral[10];
 			}
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 		default:
 			return sourcePalette.neutral[10];
 	}
@@ -2339,7 +2523,7 @@ const standfirstLinkTextLight: PaletteFunction = ({ design, theme }) => {
 				case Pillar.Lifestyle:
 					return sourcePalette.lifestyle[300];
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[300];
 				case ArticleSpecial.SpecialReportAlt:
@@ -2357,7 +2541,7 @@ const standfirstLinkTextLight: PaletteFunction = ({ design, theme }) => {
 				case Pillar.Lifestyle:
 					return sourcePalette.lifestyle[300];
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[300];
 				case ArticleSpecial.SpecialReportAlt:
@@ -2374,6 +2558,7 @@ const standfirstLinkTextLight: PaletteFunction = ({ design, theme }) => {
 			}
 		case ArticleDesign.Audio:
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[86];
 		default:
 			switch (theme) {
@@ -2405,6 +2590,7 @@ const standfirstLinkTextDark: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.Video:
 			return sourcePalette.neutral[86];
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 		case ArticleDesign.Picture:
 			switch (theme) {
 				case Pillar.News:
@@ -2418,7 +2604,7 @@ const standfirstLinkTextDark: PaletteFunction = ({ design, theme }) => {
 				case Pillar.Opinion:
 					return sourcePalette.opinion[500];
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[500];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
@@ -2450,6 +2636,21 @@ const standfirstLinkTextDark: PaletteFunction = ({ design, theme }) => {
 };
 
 const standfirstTextLight: PaletteFunction = (format) => {
+	if (
+		format.theme === ArticleSpecial.Labs &&
+		![
+			ArticleDesign.LiveBlog,
+			...labsMediaDesigns,
+			...labsHostedDesigns,
+		].includes(format.design)
+	) {
+		if (format.design === ArticleDesign.Gallery) {
+			return sourcePalette.labs[500];
+		}
+
+		return sourcePalette.labs[100];
+	}
+
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
 			return sourcePalette.neutral[100];
@@ -2463,6 +2664,7 @@ const standfirstTextLight: PaletteFunction = (format) => {
 					return sourcePalette.neutral[86];
 			}
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[86];
 		default:
 			if (
@@ -2476,21 +2678,28 @@ const standfirstTextLight: PaletteFunction = (format) => {
 };
 
 const standfirstTextDark: PaletteFunction = ({ design, display, theme }) => {
+	if (
+		theme === ArticleSpecial.Labs &&
+		![
+			ArticleDesign.LiveBlog,
+			...labsMediaDesigns,
+			...labsHostedDesigns,
+		].includes(design)
+	) {
+		return sourcePalette.labs[500];
+	}
+
 	switch (design) {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 			return sourcePalette.neutral[93];
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[86];
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
-			switch (theme) {
-				case ArticleSpecial.Labs:
-					return sourcePalette.neutral[7];
-				default:
-					return sourcePalette.neutral[86];
-			}
+			return sourcePalette.neutral[86];
 		case ArticleDesign.Standard:
 		case ArticleDesign.Review:
 		case ArticleDesign.Explainer:
@@ -2519,9 +2728,36 @@ const standfirstTextDark: PaletteFunction = ({ design, display, theme }) => {
 	}
 };
 
+// Merge this with the above functions once the new immersive grid layouts
+// are fully rolled out and the old layout removed
+const standfirstTextImmersiveLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.Lifestyle:
+			return '#650054';
+		case Pillar.Culture:
+			return '#574835';
+		case Pillar.Sport:
+			return '#004E7C';
+		default:
+			return sourcePalette.neutral[7];
+	}
+};
+
+const standfirstTextImmersiveDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.Lifestyle:
+			return '#FFABDB';
+		case Pillar.Culture:
+			return '#EACCA0';
+		case Pillar.Sport:
+			return '#00B2FF';
+		default:
+			return sourcePalette.neutral[86];
+	}
+};
+
 const cardBorderTopLight: PaletteFunction = () => sourcePalette.neutral[73];
-const cardBorderTopDark: PaletteFunction = (format) =>
-	cardBorderTopLight(format);
+const cardBorderTopDark: PaletteFunction = () => sourcePalette.neutral[46];
 
 const cardBorderSupportingLight: PaletteFunction = () =>
 	sourcePalette.neutral[86];
@@ -2550,7 +2786,12 @@ const cardMediaBackgroundDark: PaletteFunction = () =>
 const cardMediaWaveformLight: PaletteFunction = () => sourcePalette.neutral[86];
 const cardMediaWaveformDark: PaletteFunction = () => sourcePalette.neutral[38];
 
-const cardHeadlineTextLight: PaletteFunction = () => sourcePalette.neutral[7];
+const cardHeadlineTextLight: PaletteFunction = (format) => {
+	if (format.design === ArticleDesign.HostedGallery) {
+		return sourcePalette.neutral[97];
+	}
+	return sourcePalette.neutral[7];
+};
 
 const cardTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
@@ -2634,7 +2875,7 @@ const cardKickerTextDark: PaletteFunction = ({ theme }) => {
 		case Pillar.Opinion:
 			return pillarPalette(theme, 500);
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[400];
+			return sourcePalette.labs[500];
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.news[500];
 		case ArticleSpecial.SpecialReportAlt:
@@ -2730,6 +2971,7 @@ const captionTextLight: PaletteFunction = ({ design, theme }) => {
 				case ArticleDesign.Video:
 				case ArticleDesign.Audio:
 				case ArticleDesign.Gallery:
+				case ArticleDesign.HostedGallery:
 					return sourcePalette.neutral[86];
 				default:
 					return sourcePalette.neutral[46];
@@ -2758,6 +3000,7 @@ const captionTextDark: PaletteFunction = ({ design, theme }) => {
 					return sourcePalette.neutral[60];
 			}
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[86];
 		default:
 			return sourcePalette.neutral[60];
@@ -2769,6 +3012,7 @@ const captionMainMediaTextLight: PaletteFunction = (format) => {
 		case ArticleDesign.PhotoEssay:
 			return sourcePalette.neutral[46];
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 			switch (format.theme) {
 				case ArticleSpecial.Labs:
 					return captionTextLight(format);
@@ -2797,6 +3041,7 @@ const captionLink: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.NewsletterSignup:
 			return sourcePalette.neutral[0];
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[86];
 		default:
 			switch (theme) {
@@ -2826,13 +3071,90 @@ const captionOverlayText: PaletteFunction = () => {
 	return sourcePalette.neutral[100];
 };
 
-const keyEventBulletLight: PaletteFunction = () => sourcePalette.neutral[46];
-const keyEventBulletDark: PaletteFunction = () => sourcePalette.neutral[60];
+const keyEventBulletLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[300];
+		case Pillar.Sport:
+			return sourcePalette.sport[300];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[300];
+		case Pillar.Culture:
+			return sourcePalette.culture[300];
+		case Pillar.Opinion:
+			// opinion[300] is deprecated and is the same value as opinion[400]
+			return sourcePalette.opinion[400];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[300];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[300];
+	}
+};
 
-const keyEventBulletHoverLight: PaletteFunction = () =>
-	sourcePalette.neutral[0];
-const keyEventBulletHoverDark: PaletteFunction = () =>
-	sourcePalette.neutral[86];
+const keyEventBulletDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[500];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[500];
+		case Pillar.Sport:
+			return sourcePalette.sport[500];
+		case Pillar.Culture:
+			return sourcePalette.culture[500];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[500];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[500];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[300];
+	}
+};
+
+const keyEventBulletHoverLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[200];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[200];
+		case Pillar.Sport:
+			return sourcePalette.sport[200];
+		case Pillar.Culture:
+			return sourcePalette.culture[200];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[200];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[200];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[200];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+	}
+};
+
+const keyEventBulletHoverDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[200];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[200];
+		case Pillar.Sport:
+			return sourcePalette.sport[200];
+		case Pillar.Culture:
+			return sourcePalette.culture[200];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[200];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[200];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[200];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+	}
+};
 
 const keyEventTitleLight: PaletteFunction = () => sourcePalette.neutral[7];
 const keyEventTitleDark: PaletteFunction = () => sourcePalette.neutral[86];
@@ -2850,7 +3172,7 @@ const keyEventTextLight: PaletteFunction = ({ theme }) => {
 		case Pillar.Opinion:
 			return sourcePalette.opinion[300];
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[300];
+			return sourcePalette.labs[100];
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[300];
 		case ArticleSpecial.SpecialReportAlt:
@@ -2872,7 +3194,7 @@ const keyEventTextDark: PaletteFunction = ({ theme }) => {
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[500];
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[400];
+			return sourcePalette.labs[500];
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.specialReportAlt[300];
 	}
@@ -2930,7 +3252,7 @@ const numberedListTitleDark: PaletteFunction = ({ theme }) => {
 		case Pillar.Opinion:
 			return pillarPalette(theme, 500);
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[400];
+			return sourcePalette.labs[500];
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[500];
 		case ArticleSpecial.SpecialReportAlt:
@@ -3036,6 +3358,8 @@ const articleBackgroundLight: PaletteFunction = ({
 	theme,
 }) => {
 	switch (design) {
+		case ArticleDesign.WeekendEssay:
+			return sourcePalette.news[800];
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 			switch (theme) {
@@ -3075,9 +3399,16 @@ const articleBackgroundLight: PaletteFunction = ({
 		}
 		case ArticleDesign.Interactive:
 		case ArticleDesign.FullPageInteractive:
-			return 'transparent';
+			switch (display) {
+				case ArticleDisplay.Showcase:
+					return sourcePalette.neutral[100];
+				default:
+					return 'transparent';
+			}
 		case ArticleDesign.Gallery:
 			return '#0d0d0d';
+		case ArticleDesign.HostedGallery:
+			return sourcePalette.neutral[10];
 		default:
 			switch (theme) {
 				case ArticleSpecial.SpecialReport:
@@ -3122,6 +3453,7 @@ const articleBackgroundDark: PaletteFunction = ({ design, theme }) => {
 					return sourcePalette.neutral[10];
 			}
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 		default:
 			return sourcePalette.neutral[10];
 	}
@@ -3139,7 +3471,8 @@ const articleInnerBackgroundLight: PaletteFunction = ({ design, theme }) => {
 			}
 		case ArticleDesign.Gallery:
 			return sourcePalette.neutral[7];
-
+		case ArticleDesign.HostedGallery:
+			return sourcePalette.neutral[10];
 		default:
 			return 'transparent';
 	}
@@ -3156,6 +3489,7 @@ const articleInnerBackgroundDark: PaletteFunction = ({ design, theme }) => {
 					return sourcePalette.neutral[0];
 			}
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[10];
 
 		default:
@@ -3266,7 +3600,7 @@ const articleLinkTextDark: PaletteFunction = ({ display, theme }) => {
 				case Pillar.Opinion:
 					return pillarPalette(theme, 500);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.labs[500];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
@@ -3283,7 +3617,12 @@ const articleLinkBorderLight: PaletteFunction = ({ design, theme }) => {
 		return sourcePalette.neutral[46];
 	}
 
-	if (design === ArticleDesign.Gallery) return sourcePalette.neutral[46];
+	if (
+		design === ArticleDesign.Gallery ||
+		design === ArticleDesign.HostedGallery
+	) {
+		return sourcePalette.neutral[46];
+	}
 	if (theme === ArticleSpecial.Labs) return sourcePalette.neutral[60];
 	if (theme === ArticleSpecial.SpecialReport) {
 		return sourcePalette.specialReport[300];
@@ -3439,6 +3778,8 @@ const articleBorderLight: PaletteFunction = ({ design, theme }) => {
 				case ArticleDesign.HostedArticle:
 				case ArticleDesign.HostedVideo:
 					return sourcePalette.neutral[86];
+				case ArticleDesign.HostedGallery:
+					return sourcePalette.neutral[20];
 				default:
 					return sourcePalette.neutral[60];
 			}
@@ -3455,7 +3796,10 @@ const articleBorderLight: PaletteFunction = ({ design, theme }) => {
 };
 
 const articleSectionBorderLight: PaletteFunction = (format) => {
-	if (format.design === ArticleDesign.Gallery) {
+	if (
+		format.design === ArticleDesign.Gallery ||
+		format.design === ArticleDesign.HostedGallery
+	) {
 		return sourcePalette.neutral[86];
 	}
 
@@ -3477,7 +3821,10 @@ const footerBorderDark: PaletteFunction = () => {
 const articleBorderDark: PaletteFunction = () => sourcePalette.neutral[20];
 
 const straightLinesLight: PaletteFunction = (format) => {
-	if (format.design === ArticleDesign.Gallery) {
+	if (
+		format.design === ArticleDesign.Gallery ||
+		format.design === ArticleDesign.HostedGallery
+	) {
 		return sourcePalette.neutral[20];
 	}
 	if (format.theme === ArticleSpecial.SpecialReportAlt) {
@@ -3619,7 +3966,7 @@ const pullQuoteTextLight: PaletteFunction = ({
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 200);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[200];
+					return sourcePalette.labs[100];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[200];
 				case ArticleSpecial.SpecialReportAlt:
@@ -3653,7 +4000,7 @@ const pullQuoteTextDark: PaletteFunction = ({
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 500);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.labs[500];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
@@ -3722,7 +4069,6 @@ const shareButtonHoverLight: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.Video:
 		case ArticleDesign.Picture:
 		case ArticleDesign.HostedArticle:
-		case ArticleDesign.HostedGallery:
 		case ArticleDesign.HostedVideo:
 			switch (theme) {
 				case ArticleSpecial.Labs:
@@ -3731,6 +4077,7 @@ const shareButtonHoverLight: PaletteFunction = ({ design, theme }) => {
 					return sourcePalette.neutral[7];
 			}
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[7];
 		default:
 			return sourcePalette.neutral[100];
@@ -3759,6 +4106,7 @@ const shareButtonBorderDark: PaletteFunction = () => sourcePalette.neutral[20];
 const shareButtonBorderMetaLight: PaletteFunction = ({ design }) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[38];
 		default:
 			return sourcePalette.neutral[86];
@@ -3774,6 +4122,7 @@ const shareButtonBorderXSmallLight: PaletteFunction = ({ design }) => {
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 		case ArticleDesign.Picture:
+		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[46];
 		default:
 			return sourcePalette.neutral[86];
@@ -3786,6 +4135,7 @@ const shareButtonCopiedLight: PaletteFunction = ({ design }) => {
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 		case ArticleDesign.Picture:
+		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[86];
 		default:
 			return sourcePalette.neutral[7];
@@ -3795,14 +4145,26 @@ const shareButtonCopiedLight: PaletteFunction = ({ design }) => {
 const shareButtonCopiedDark: PaletteFunction = () => sourcePalette.neutral[86];
 
 const shareButtonLight: PaletteFunction = ({ design, theme, display }) => {
+	if (
+		theme === ArticleSpecial.Labs &&
+		![
+			ArticleDesign.LiveBlog,
+			ArticleDesign.Gallery,
+			...labsMediaDesigns,
+			...labsHostedDesigns,
+		].includes(design)
+	) {
+		return sourcePalette.labs[200];
+	}
+
 	switch (design) {
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[86];
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 		case ArticleDesign.Picture:
 		case ArticleDesign.HostedArticle:
-		case ArticleDesign.HostedGallery:
 		case ArticleDesign.HostedVideo:
 			switch (theme) {
 				case ArticleSpecial.Labs:
@@ -3825,12 +4187,12 @@ const shareButtonLight: PaletteFunction = ({ design, theme, display }) => {
 			switch (theme) {
 				case Pillar.News:
 					return sourcePalette.news[300];
-				case ArticleSpecial.Labs:
-					return sourcePalette.neutral[7];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[300];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[100];
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[7];
 				default:
 					return pillarPalette(theme, 400);
 			}
@@ -3862,8 +4224,23 @@ const shareButtonLight: PaletteFunction = ({ design, theme, display }) => {
 };
 
 const shareButtonDark: PaletteFunction = ({ design, theme }) => {
+	if (
+		theme === ArticleSpecial.Labs &&
+		![
+			ArticleDesign.LiveBlog,
+			ArticleDesign.Gallery,
+			...labsMediaDesigns,
+			...labsHostedDesigns,
+		].includes(design)
+	) {
+		return sourcePalette.labs[500];
+	}
+
 	switch (design) {
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedArticle:
+		case ArticleDesign.HostedGallery:
+		case ArticleDesign.HostedVideo:
 			return sourcePalette.neutral[86];
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
@@ -3877,7 +4254,7 @@ const shareButtonDark: PaletteFunction = ({ design, theme }) => {
 		default:
 			switch (theme) {
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.labs[500];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
@@ -3926,7 +4303,7 @@ const liveBlockContainerBackgroundDark: PaletteFunction = () =>
 const liveBlockBorderTopLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[400];
+			return sourcePalette.labs[500];
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[400];
 		case ArticleSpecial.SpecialReportAlt:
@@ -3946,7 +4323,10 @@ const liveBlockBorderBottomDark: PaletteFunction = () =>
 const subMetaLabelTextLight: PaletteFunction = ({ theme, design }) => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
-			if (design === ArticleDesign.Gallery) {
+			if (
+				design === ArticleDesign.Gallery ||
+				design === ArticleDesign.HostedGallery
+			) {
 				return sourcePalette.neutral[60];
 			}
 			return sourcePalette.neutral[7];
@@ -3991,6 +4371,7 @@ const subMetaBackgroundLight: PaletteFunction = ({
 					return sourcePalette.neutral[97];
 			}
 		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
 			return sourcePalette.opinion[800];
 		case ArticleDesign.Comment:
 			switch (theme) {
@@ -3999,8 +4380,6 @@ const subMetaBackgroundLight: PaletteFunction = ({
 				default:
 					return sourcePalette.opinion[800];
 			}
-		case ArticleDesign.Editorial:
-			return sourcePalette.opinion[800];
 		case ArticleDesign.Analysis:
 			switch (theme) {
 				case ArticleSpecial.SpecialReportAlt:
@@ -4008,6 +4387,8 @@ const subMetaBackgroundLight: PaletteFunction = ({
 				default:
 					return sourcePalette.news[800];
 			}
+		case ArticleDesign.WeekendEssay:
+			return sourcePalette.news[800];
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
@@ -4018,6 +4399,7 @@ const subMetaBackgroundLight: PaletteFunction = ({
 					return sourcePalette.neutral[7];
 			}
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[7];
 
 		default:
@@ -4073,6 +4455,7 @@ const subMetaTextLight: PaletteFunction = ({ design, theme }) => {
 		case ArticleSpecial.Labs:
 			switch (design) {
 				case ArticleDesign.Gallery:
+				case ArticleDesign.HostedGallery:
 					return sourcePalette.neutral[86];
 				default:
 					return sourcePalette.neutral[7];
@@ -4085,6 +4468,7 @@ const subMetaTextLight: PaletteFunction = ({ design, theme }) => {
 				case ArticleDesign.Video:
 				case ArticleDesign.Audio:
 				case ArticleDesign.Gallery:
+				case ArticleDesign.HostedGallery:
 					return sourcePalette.neutral[86];
 				case ArticleDesign.DeadBlog:
 				case ArticleDesign.LiveBlog:
@@ -4129,7 +4513,7 @@ const subMetaTextDark: PaletteFunction = ({ design, theme }) => {
 			return sourcePalette.specialReport[700];
 
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[400];
+			return sourcePalette.labs[500];
 
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.specialReportAlt[300];
@@ -4137,6 +4521,7 @@ const subMetaTextDark: PaletteFunction = ({ design, theme }) => {
 			switch (design) {
 				case ArticleDesign.Picture:
 				case ArticleDesign.Gallery:
+				case ArticleDesign.HostedGallery:
 					return sourcePalette.neutral[86];
 				default:
 					return pillarPalette(theme, 500);
@@ -4150,10 +4535,12 @@ const subMetaTextHoverLight: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 		case ArticleDesign.Picture:
+		case ArticleDesign.HostedGallery:
 			switch (theme) {
 				case ArticleSpecial.Labs:
 					switch (design) {
 						case ArticleDesign.Gallery:
+						case ArticleDesign.HostedGallery:
 							return sourcePalette.neutral[7];
 						default:
 							return sourcePalette.neutral[100];
@@ -4196,12 +4583,12 @@ const syndicationButtonTextDark: PaletteFunction = ({ design, theme }) => {
 			switch (design) {
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
-					return sourcePalette.neutral[46];
+					return sourcePalette.neutral[86];
 				default:
 					return sourcePalette.specialReportAlt[100];
 			}
 		default:
-			return sourcePalette.neutral[46];
+			return sourcePalette.neutral[86];
 	}
 };
 
@@ -4346,7 +4733,7 @@ const dropCapLight: PaletteFunction = ({ theme }) => {
 		case Pillar.Lifestyle:
 			return pillarPalette(theme, 200);
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[200];
+			return sourcePalette.labs[100];
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[200];
 		case ArticleSpecial.SpecialReportAlt:
@@ -4363,7 +4750,7 @@ const dropCapDark: PaletteFunction = ({ theme }) => {
 		case Pillar.News:
 			return pillarPalette(theme, 500);
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[300];
+			return sourcePalette.labs[500];
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[500];
 		case ArticleSpecial.SpecialReportAlt:
@@ -4470,7 +4857,7 @@ const linkKickerTextLight: PaletteFunction = ({ design, theme }) => {
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[400];
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[200];
 			}
@@ -4489,7 +4876,7 @@ const linkKickerTextLight: PaletteFunction = ({ design, theme }) => {
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[400];
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[200];
 			}
@@ -4507,21 +4894,12 @@ const linkKickerTextDark: PaletteFunction = ({ theme }) => {
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.news[500];
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[400];
+			return sourcePalette.labs[500];
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.specialReportAlt[200];
 	}
 };
 
-const ageWarningWrapperBackground: PaletteFunction = (format) => {
-	switch (format.design) {
-		case ArticleDesign.Interview:
-		case ArticleDesign.Gallery:
-			return 'transparent';
-		default:
-			return headlineBackgroundLight(format);
-	}
-};
 const ageWarningBackgroundLight: PaletteFunction = () =>
 	sourcePalette.brandAlt[400];
 const ageWarningBackgroundDark: PaletteFunction = () =>
@@ -4790,38 +5168,51 @@ const richLinkQuoteFillLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const affiliateDisclaimerBackgroundLight: PaletteFunction = ({ design }) => {
-	return design === ArticleDesign.Analysis
-		? '#F2E8E6'
-		: sourcePalette.neutral[97];
+const affiliateDisclaimerThemes = {
+	light: {
+		bg: sourcePalette.neutral[97],
+		text: sourcePalette.neutral[7],
+		link: sourcePalette.lifestyle[400],
+	},
+	dark: {
+		bg: sourcePalette.neutral[20],
+		text: sourcePalette.neutral[86],
+		link: sourcePalette.lifestyle[450],
+	},
 };
-const affiliateDisclaimerBackgroundDark: PaletteFunction = () =>
-	sourcePalette.neutral[20];
-const affiliateDisclaimerBackgroundHoverLight: PaletteFunction = ({
+
+const affiliateDisclaimerLightTheme = ({
 	design,
+}: {
+	design: ArticleDesign;
 }) => {
-	return design === ArticleDesign.Analysis
-		? '#e9d9d5' //not available in colour palette. Check with design to update or change.
-		: sourcePalette.neutral[93];
-};
-const affiliateDisclaimerBackgroundHoverDark: PaletteFunction = () =>
-	sourcePalette.neutral[10];
-
-const affiliateDisclaimerTextLight: PaletteFunction = () => {
-	return sourcePalette.neutral[86];
-};
-
-const affiliateDisclaimerTextDark: PaletteFunction = () => {
-	return sourcePalette.neutral[73];
+	switch (design) {
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+			return affiliateDisclaimerThemes.dark;
+		default:
+			return affiliateDisclaimerThemes.light;
+	}
 };
 
-const affiliateDisclaimerTextHoverLight: PaletteFunction = () => {
-	return sourcePalette.neutral[73];
-};
+const affiliateDisclaimerBackgroundLight: PaletteFunction = ({ design }) =>
+	affiliateDisclaimerLightTheme({ design }).bg;
 
-const affiliateDisclaimerTextHoverDark: PaletteFunction = () => {
-	return sourcePalette.neutral[86];
-};
+const affiliateDisclaimerBackgroundDark: PaletteFunction = () =>
+	affiliateDisclaimerThemes.dark.bg;
+
+const affiliateDisclaimerTextLight: PaletteFunction = ({ design }) =>
+	affiliateDisclaimerLightTheme({ design }).text;
+
+const affiliateDisclaimerTextDark: PaletteFunction = () =>
+	affiliateDisclaimerThemes.dark.text;
+
+const affiliateDisclaimerLinkLight: PaletteFunction = ({ design }) =>
+	affiliateDisclaimerLightTheme({ design }).link;
+
+const affiliateDisclaimerLinkDark: PaletteFunction = () =>
+	affiliateDisclaimerThemes.dark.link;
 
 const seriesTitleBackgroundLight: PaletteFunction = ({
 	theme,
@@ -4841,7 +5232,7 @@ const seriesTitleBackgroundLight: PaletteFunction = ({
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 400);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[300];
 			}
@@ -4851,6 +5242,7 @@ const seriesTitleBackgroundLight: PaletteFunction = ({
 		default:
 			switch (design) {
 				case ArticleDesign.Gallery:
+				case ArticleDesign.HostedGallery:
 					switch (theme) {
 						case Pillar.Opinion:
 						case Pillar.News:
@@ -4859,7 +5251,7 @@ const seriesTitleBackgroundLight: PaletteFunction = ({
 						case Pillar.Lifestyle:
 							return pillarPalette(theme, 400);
 						case ArticleSpecial.Labs:
-							return sourcePalette.labs[400];
+							return sourcePalette.labs[200];
 						case ArticleSpecial.SpecialReportAlt:
 							return sourcePalette.brandAlt[300];
 					}
@@ -4876,6 +5268,7 @@ const seriesTitleBackgroundDark: PaletteFunction = ({
 }) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 			switch (theme) {
 				case Pillar.Opinion:
 				case Pillar.News:
@@ -4884,7 +5277,7 @@ const seriesTitleBackgroundDark: PaletteFunction = ({
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 400);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
+					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[300];
 				case ArticleSpecial.SpecialReport:
@@ -4904,7 +5297,7 @@ const seriesTitleBackgroundDark: PaletteFunction = ({
 						case Pillar.Lifestyle:
 							return pillarPalette(theme, 400);
 						case ArticleSpecial.Labs:
-							return sourcePalette.labs[300];
+							return sourcePalette.labs[200];
 						case ArticleSpecial.SpecialReportAlt:
 							return sourcePalette.specialReportAlt[300];
 					}
@@ -4942,10 +5335,11 @@ const sectionTitleBackgroundLight: PaletteFunction = ({ theme, display }) => {
 			return 'transparent';
 	}
 };
-const seriesTitleTextLight: PaletteFunction = ({ theme, display, design }) => {
-	if (theme === ArticleSpecial.Labs && design !== ArticleDesign.LiveBlog) {
-		return sourcePalette.neutral[7];
-	}
+const seriesOrSectionTitleTextLight: PaletteFunction = ({
+	theme,
+	display,
+	design,
+}) => {
 	if (
 		theme === ArticleSpecial.SpecialReportAlt &&
 		design !== ArticleDesign.LiveBlog &&
@@ -4960,7 +5354,10 @@ const seriesTitleTextLight: PaletteFunction = ({ theme, display, design }) => {
 		return sourcePalette.specialReport[300];
 	}
 
-	if (design === ArticleDesign.Gallery) {
+	if (
+		design === ArticleDesign.Gallery ||
+		design === ArticleDesign.HostedGallery
+	) {
 		return sourcePalette.neutral[100];
 	}
 
@@ -4983,7 +5380,7 @@ const seriesTitleTextLight: PaletteFunction = ({ theme, display, design }) => {
 						case ArticleSpecial.SpecialReportAlt:
 							return sourcePalette.news[400];
 						case ArticleSpecial.Labs:
-							return sourcePalette.labs[300];
+							return sourcePalette.labs[200];
 					}
 
 				case ArticleDesign.Analysis:
@@ -4996,7 +5393,7 @@ const seriesTitleTextLight: PaletteFunction = ({ theme, display, design }) => {
 						case Pillar.Lifestyle:
 							return pillarPalette(theme, 400);
 						case ArticleSpecial.Labs:
-							return sourcePalette.labs[400];
+							return sourcePalette.labs[200];
 						case ArticleSpecial.SpecialReportAlt:
 							return sourcePalette.specialReportAlt[200];
 					}
@@ -5025,7 +5422,7 @@ const seriesTitleTextLight: PaletteFunction = ({ theme, display, design }) => {
 						case Pillar.Lifestyle:
 							return pillarPalette(theme, 500);
 						case ArticleSpecial.Labs:
-							return sourcePalette.labs[400];
+							return sourcePalette.labs[200];
 						case ArticleSpecial.SpecialReportAlt:
 							return sourcePalette.specialReportAlt[200];
 					}
@@ -5038,7 +5435,7 @@ const seriesTitleTextLight: PaletteFunction = ({ theme, display, design }) => {
 						case Pillar.Lifestyle:
 							return pillarPalette(theme, 400);
 						case ArticleSpecial.Labs:
-							return sourcePalette.labs[400];
+							return sourcePalette.labs[200];
 						case ArticleSpecial.SpecialReportAlt:
 							return sourcePalette.specialReportAlt[200];
 					}
@@ -5047,10 +5444,42 @@ const seriesTitleTextLight: PaletteFunction = ({ theme, display, design }) => {
 			return sourcePalette.neutral[7];
 	}
 };
-const seriesTitleTextDark: PaletteFunction = ({ design, theme, display }) => {
+
+/** Used by the series tag only; the article section link keeps `articleSectionLinkTextLight` */
+const seriesTitleTextLight: PaletteFunction = (format) => {
+	if (format.theme === ArticleSpecial.Labs) {
+		if (
+			format.display === ArticleDisplay.Immersive ||
+			format.design === ArticleDesign.Gallery ||
+			format.design === ArticleDesign.HostedGallery
+		) {
+			return sourcePalette.neutral[100];
+		}
+		if (format.design !== ArticleDesign.LiveBlog) {
+			return sourcePalette.neutral[7];
+		}
+	}
+	return seriesOrSectionTitleTextLight(format);
+};
+
+const articleSectionLinkTextLight: PaletteFunction = (format) => {
+	if (
+		format.theme === ArticleSpecial.Labs &&
+		format.design !== ArticleDesign.LiveBlog
+	) {
+		return sourcePalette.neutral[7];
+	}
+	return seriesOrSectionTitleTextLight(format);
+};
+const seriesOrSectionTitleTextDark: PaletteFunction = ({
+	design,
+	theme,
+	display,
+}) => {
 	if (display === ArticleDisplay.Immersive) return sourcePalette.neutral[100];
 	switch (design) {
 		case ArticleDesign.Gallery:
+		case ArticleDesign.HostedGallery:
 			return sourcePalette.neutral[100];
 		case ArticleDesign.Analysis:
 			switch (theme) {
@@ -5083,12 +5512,12 @@ const seriesTitleTextDark: PaletteFunction = ({ design, theme, display }) => {
 				case Pillar.Culture:
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 500);
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[700];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[500];
 			}
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
@@ -5099,12 +5528,12 @@ const seriesTitleTextDark: PaletteFunction = ({ design, theme, display }) => {
 				case Pillar.Culture:
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 500);
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[300];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[500];
 			}
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
@@ -5119,7 +5548,7 @@ const seriesTitleTextDark: PaletteFunction = ({ design, theme, display }) => {
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 500);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.labs[500];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
@@ -5127,6 +5556,14 @@ const seriesTitleTextDark: PaletteFunction = ({ design, theme, display }) => {
 			}
 	}
 };
+
+/** Used by the series tag only; the article section link keeps `articleSectionLinkTextDark` */
+const seriesTitleTextDark: PaletteFunction = (format) =>
+	seriesOrSectionTitleTextDark(format);
+
+const articleSectionLinkTextDark: PaletteFunction =
+	seriesOrSectionTitleTextDark;
+
 const seriesTitleMatchTextLight: PaletteFunction = (format) => {
 	if (
 		format.design === ArticleDesign.MatchReport ||
@@ -5164,7 +5601,7 @@ const privacyTextSupportingLight: PaletteFunction = () =>
 const privacyTextSupportingSubduedLight: PaletteFunction = () =>
 	sourcePalette.neutral[46];
 const privacyTextSupportingSubduedDark: PaletteFunction = () =>
-	sourcePalette.neutral[60];
+	sourcePalette.neutral[73];
 
 const productCarouselCardBorderLight: PaletteFunction = () =>
 	sourcePalette.neutral[86];
@@ -5265,7 +5702,7 @@ const commentCountFillDark: PaletteFunction = ({ design, theme }) => {
 			case Pillar.Lifestyle:
 				return pillarPalette(theme, 500);
 			case ArticleSpecial.Labs:
-				return sourcePalette.labs[400];
+				return sourcePalette.labs[500];
 			case ArticleSpecial.SpecialReport:
 				return sourcePalette.specialReport[500];
 			case ArticleSpecial.SpecialReportAlt:
@@ -5337,7 +5774,7 @@ const explainerAtomAccentDark: PaletteFunction = () =>
 const signInLinkLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[300];
+			return sourcePalette.labs[200];
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[300];
 		case ArticleSpecial.SpecialReportAlt:
@@ -5382,7 +5819,7 @@ const speechBubbleBackgroundLight: PaletteFunction = ({ theme, design }) => {
 		case Pillar.Lifestyle:
 			return pillarPalette(theme, 400);
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[400];
+			return sourcePalette.labs[200];
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[400];
 		case ArticleSpecial.SpecialReportAlt:
@@ -5497,10 +5934,17 @@ const productButtonPrimaryBackgroundLight: PaletteFunction = () =>
 	sourcePalette.lifestyle[300];
 const productButtonPrimaryBackgroundDark: PaletteFunction = () =>
 	sourcePalette.lifestyle[500];
+
 const productButtonPrimaryBackgroundHoverLight: PaletteFunction = () =>
-	'#660055';
+	calculateHoverColour(sourcePalette.lifestyle[300]);
 const productButtonPrimaryBackgroundHoverDark: PaletteFunction = () =>
-	'#FF8ACC';
+	calculateHoverColour(sourcePalette.lifestyle[500]);
+
+const productButtonTertiaryBackgroundHoverLight: PaletteFunction = () =>
+	calculateHoverColour('transparent', sourcePalette.lifestyle[300]);
+const productButtonTertiaryBackgroundHoverDark: PaletteFunction = () =>
+	calculateHoverColour('transparent', sourcePalette.lifestyle[500]);
+
 const productButtonPrimaryTextDark: PaletteFunction = () =>
 	sourcePalette.neutral[7];
 const productButtonPrimaryTextLight: PaletteFunction = () =>
@@ -5519,7 +5963,7 @@ const discussionPrimaryButtonBackgroundLight: PaletteFunction = ({ theme }) => {
 		case Pillar.Opinion:
 			return sourcePalette.opinion[400];
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[300];
+			return sourcePalette.labs[200];
 		default:
 			return sourcePalette.news[300];
 	}
@@ -5654,6 +6098,15 @@ const discussionLoadingShimmerLight: PaletteFunction = () =>
 const discussionLoadingShimmerDark: PaletteFunction = () =>
 	sourcePalette.neutral[46];
 
+const onwardTextLight: PaletteFunction = (format) => {
+	if (format.design === ArticleDesign.HostedGallery) {
+		return sourcePalette.neutral[86];
+	}
+	return sourcePalette.neutral[7];
+};
+
+const onwardTextDark: PaletteFunction = () => sourcePalette.neutral[86];
+
 const paginationTextLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.News:
@@ -5667,7 +6120,7 @@ const paginationTextLight: PaletteFunction = ({ theme }) => {
 		case Pillar.Opinion:
 			return sourcePalette.opinion[300];
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[300];
+			return sourcePalette.labs[200];
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[300];
 		case ArticleSpecial.SpecialReportAlt:
@@ -5963,7 +6416,7 @@ const highlightsCardKickerTextDark: PaletteFunction = (format) => {
 		case Pillar.Lifestyle:
 			return pillarPalette(format.theme, 500);
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[200];
+			return sourcePalette.labs[500];
 		case ArticleSpecial.SpecialReport:
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.news[500];
@@ -6125,18 +6578,6 @@ const designTagBackground: PaletteFunction = ({ theme }) => {
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.specialReportAlt[100];
 	}
-};
-
-const cricketScoreboardBorderTop: PaletteFunction = () => {
-	return sourcePalette.sport[300];
-};
-
-const cricketScoreboardDivider: PaletteFunction = () => {
-	return sourcePalette.neutral[86];
-};
-
-const cricketScoreboardLinkText: PaletteFunction = () => {
-	return sourcePalette.sport[300];
 };
 
 const imageTitleBackground: PaletteFunction = ({ design, theme }) => {
@@ -6307,6 +6748,39 @@ const storylinesTitles: PaletteFunction = () => sourcePalette.brand[400];
 const storylinesActiveTab: PaletteFunction = () => sourcePalette.neutral[60];
 const storylinesInactiveTab: PaletteFunction = () => sourcePalette.neutral[38];
 
+const customSubnavHeaderTextLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+			return pillarPalette(theme, 500);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[500];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[300];
+	}
+};
+const customSubnavHeaderTextDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+			return pillarPalette(theme, 500);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+	}
+};
+
 // ----- Palette ----- //
 
 /**
@@ -6392,17 +6866,13 @@ const paletteColours = {
 		light: affiliateDisclaimerBackgroundLight,
 		dark: affiliateDisclaimerBackgroundDark,
 	},
-	'--affiliate-disclaimer-background-hover': {
-		light: affiliateDisclaimerBackgroundHoverLight,
-		dark: affiliateDisclaimerBackgroundHoverDark,
+	'--affiliate-disclaimer-link': {
+		light: affiliateDisclaimerLinkLight,
+		dark: affiliateDisclaimerLinkDark,
 	},
 	'--affiliate-disclaimer-text': {
 		light: affiliateDisclaimerTextLight,
 		dark: affiliateDisclaimerTextDark,
-	},
-	'--affiliate-disclaimer-text-hover': {
-		light: affiliateDisclaimerTextHoverLight,
-		dark: affiliateDisclaimerTextHoverDark,
 	},
 	'--age-warning-background': {
 		light: ageWarningBackgroundLight,
@@ -6412,9 +6882,13 @@ const paletteColours = {
 		light: ageWarningText,
 		dark: ageWarningText,
 	},
-	'--age-warning-wrapper-background': {
-		light: ageWarningWrapperBackground,
-		dark: ageWarningWrapperBackground,
+	'--apps-directory-page-nav-background': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[10],
+	},
+	'--apps-directory-page-nav-primary-link-color': {
+		light: () => sourcePalette.sport[400],
+		dark: () => sourcePalette.sport[500],
 	},
 	'--apps-epic-background': {
 		light: appsEpicBackgroundLight,
@@ -6479,6 +6953,10 @@ const paletteColours = {
 	'--article-section-border': {
 		light: articleSectionBorderLight,
 		dark: articleSectionBorderDark,
+	},
+	'--article-section-link-text': {
+		light: articleSectionLinkTextLight,
+		dark: articleSectionLinkTextDark,
 	},
 	'--article-section-secondary-title': {
 		light: articleSectionSecondaryTitleLight,
@@ -6816,20 +7294,28 @@ const paletteColours = {
 		light: commentFormInputBackgroundLight,
 		dark: commentFormInputBackgroundDark,
 	},
-	'--cricket-scoreboard-border-top': {
-		light: cricketScoreboardBorderTop,
-		dark: cricketScoreboardBorderTop,
-	},
-	'--cricket-scoreboard-divider': {
-		light: cricketScoreboardDivider,
-		dark: cricketScoreboardDivider,
-	},
-	'--cricket-scoreboard-link-text': {
-		light: cricketScoreboardLinkText,
-		dark: cricketScoreboardLinkText,
-	},
 	'--cricket-scorecard-divider': {
 		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--cricket-scorecard-first-team-color': {
+		light: () => sourcePalette.sport[400],
+		dark: () => sourcePalette.sport[400],
+	},
+	'--cricket-scorecard-first-team-lineup-color': {
+		light: () => sourcePalette.sport[400],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--cricket-scorecard-innings-heading-text': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--cricket-scorecard-second-team-color': {
+		light: () => sourcePalette.sport[100],
+		dark: () => sourcePalette.sport[100],
+	},
+	'--cricket-scorecard-second-team-lineup-color': {
+		light: () => sourcePalette.sport[100],
 		dark: () => sourcePalette.neutral[86],
 	},
 	'--crossword-anagram-helper-background': {
@@ -6847,6 +7333,10 @@ const paletteColours = {
 	'--crossword-text': {
 		light: crosswordTextLight,
 		dark: crosswordTextDark,
+	},
+	'--custom-subnav-header-text': {
+		light: customSubnavHeaderTextLight,
+		dark: customSubnavHeaderTextDark,
 	},
 	'--dateline': {
 		light: datelineLight,
@@ -7000,6 +7490,22 @@ const paletteColours = {
 		light: editorialButtonText,
 		dark: editorialButtonTextDark,
 	},
+	'--election-tracker-border': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--election-tracker-button-background': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--election-tracker-button-text': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[7],
+	},
+	'--election-tracker-refresh': {
+		light: () => sourcePalette.neutral[38],
+		dark: () => sourcePalette.neutral[86],
+	},
 	'--email-signup-button-background': {
 		light: emailSignupButtonBackgroundLight,
 		dark: emailSignupButtonBackgroundDark,
@@ -7152,6 +7658,10 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[100],
 	},
+	'--football-match-header-fixture-result-score-secondary-text': {
+		light: () => `${sourcePalette.neutral[100]}99`,
+		dark: () => `${sourcePalette.neutral[100]}99`,
+	},
 	'--football-match-header-fixture-result-secondary-text': {
 		light: () => sourcePalette.sport[700],
 		dark: () => sourcePalette.sport[700],
@@ -7171,6 +7681,10 @@ const paletteColours = {
 	'--football-match-header-live-primary-text': {
 		light: () => sourcePalette.neutral[7],
 		dark: () => sourcePalette.neutral[7],
+	},
+	'--football-match-header-live-score-secondary-text': {
+		light: () => `${sourcePalette.neutral[7]}ab`,
+		dark: () => `${sourcePalette.neutral[7]}ab`,
 	},
 	'--football-match-header-live-selected': {
 		light: () => sourcePalette.neutral[7],
@@ -7218,19 +7732,19 @@ const paletteColours = {
 	},
 	'--football-pre-match-background': {
 		light: () => sourcePalette.sport[800],
-		dark: () => sourcePalette.sport[800], // TODO: Update with dark mode colour
+		dark: () => sourcePalette.neutral[10],
 	},
 	'--football-pre-match-button': {
-		light: () => sourcePalette.sport[300],
-		dark: () => sourcePalette.sport[300], // TODO: Update with dark mode colour
+		light: () => sourcePalette.sport[400],
+		dark: () => sourcePalette.sport[500],
 	},
 	'--football-pre-match-button-hover': {
 		light: () => '#c8e4f3', // replace with Source's `calculateHoverColour` when available
-		dark: () => '#c8e4f3',
+		dark: () => '#4d4d4d',
 	},
 	'--football-pre-match-kickoff': {
-		light: () => sourcePalette.sport[300],
-		dark: () => sourcePalette.sport[300], // TODO: Update with dark mode colour
+		light: () => sourcePalette.sport[400],
+		dark: () => sourcePalette.sport[500],
 	},
 	'--football-score-border': {
 		light: () => sourcePalette.neutral[7],
@@ -7329,6 +7843,10 @@ const paletteColours = {
 		light: imageTitleBackground,
 		dark: imageTitleBackground,
 	},
+	'--immersive-grid-headline-colour': {
+		light: immersiveGridHeadlineTextLight,
+		dark: immersiveGridHeadlineTextDark,
+	},
 	'--interactive-atom-background': {
 		light: interactiveAtomBackgroundLight,
 		dark: interactiveAtomBackgroundDark,
@@ -7403,7 +7921,7 @@ const paletteColours = {
 	},
 	'--labs-about-dropdown-link': {
 		light: () => sourcePalette.labs[200],
-		dark: () => sourcePalette.labs[400],
+		dark: () => sourcePalette.labs[500],
 	},
 	'--labs-about-dropdown-text': {
 		light: () => sourcePalette.neutral[7],
@@ -7415,7 +7933,7 @@ const paletteColours = {
 	},
 	'--labs-header-label-text': {
 		light: () => sourcePalette.labs[100],
-		dark: () => sourcePalette.labs[700],
+		dark: () => sourcePalette.labs[500],
 	},
 	'--labs-header-title': {
 		light: () => sourcePalette.neutral[0],
@@ -7565,18 +8083,6 @@ const paletteColours = {
 		light: multiBylineNonLinkedTextLight,
 		dark: multiBylineNonLinkedTextDark,
 	},
-	'--narrow-play-icon-background': {
-		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
-		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
-	},
-	'--narrow-play-icon-border': {
-		light: () => sourcePalette.neutral[60],
-		dark: () => sourcePalette.neutral[60],
-	},
-	'--narrow-play-icon-fill': {
-		light: () => sourcePalette.neutral[100],
-		dark: () => sourcePalette.neutral[100],
-	},
 	'--nav-reader-revenue-link-text': {
 		light: navReaderRevenueLinkText,
 		dark: navReaderRevenueLinkText,
@@ -7592,6 +8098,74 @@ const paletteColours = {
 	'--nav-search-bar-text': {
 		light: navSearchBarText,
 		dark: navSearchBarText,
+	},
+	'--newsletter-browse-more-button-border': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[46],
+	},
+	'--newsletter-browse-more-button-hover': {
+		light: () => sourcePalette.brand[800],
+		dark: () => sourcePalette.brand[300],
+	},
+	'--newsletter-browse-more-button-text': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--newsletter-card-background': {
+		light: () => '#F3F7FF',
+		dark: () => sourcePalette.brand[100],
+	},
+	'--newsletter-card-badge-background': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.brand[600],
+	},
+	'--newsletter-card-badge-icon': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--newsletter-card-description': {
+		light: () => sourcePalette.neutral[20],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--newsletter-card-divider': {
+		light: () => sourcePalette.neutral[73],
+		dark: () => sourcePalette.neutral[46],
+	},
+	'--newsletter-card-frequency-tag': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--newsletter-card-title': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--newsletter-highlights-card-headline': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--newsletter-signup-input-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.brand[300],
+	},
+	'--newsletter-signup-input-text': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--newsletter-signup-submit-background': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--newsletter-signup-submit-background-hover': {
+		light: () => sourcePalette.brand[600],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--newsletter-signup-submit-text': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.brand[400],
+	},
+	'--newsletter-signup-toggle-text': {
+		light: () => sourcePalette.neutral[20],
+		dark: () => sourcePalette.neutral[73],
 	},
 	'--numbered-list-heading': {
 		light: numberedListHeadingLight,
@@ -7626,8 +8200,8 @@ const paletteColours = {
 		dark: () => sourcePalette.neutral[20],
 	},
 	'--onward-text': {
-		light: () => sourcePalette.neutral[7],
-		dark: () => sourcePalette.neutral[86],
+		light: onwardTextLight,
+		dark: onwardTextDark,
 	},
 	'--pagination-text': {
 		light: paginationTextLight,
@@ -7708,6 +8282,10 @@ const paletteColours = {
 	'--product-button-primary-text': {
 		light: productButtonPrimaryTextLight,
 		dark: productButtonPrimaryTextDark,
+	},
+	'--product-button-tertiary-background-hover': {
+		light: productButtonTertiaryBackgroundHoverLight,
+		dark: productButtonTertiaryBackgroundHoverDark,
 	},
 	'--product-card-background': {
 		light: productCardBackgroundLight,
@@ -8025,6 +8603,10 @@ const paletteColours = {
 		 */
 		dark: () => '#606060',
 	},
+	'--stacked-progress-excluded-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[38],
+	},
 	'--stacked-progress-to-win': {
 		light: () => sourcePalette.neutral[7],
 		dark: () => sourcePalette.neutral[86],
@@ -8068,6 +8650,10 @@ const paletteColours = {
 	'--standfirst-text': {
 		light: standfirstTextLight,
 		dark: standfirstTextDark,
+	},
+	'--standfirst-text-immersive': {
+		light: standfirstTextImmersiveLight,
+		dark: standfirstTextImmersiveDark,
 	},
 	'--star-rating-background': {
 		light: starRatingBackgroundColourLight,
@@ -8149,6 +8735,10 @@ const paletteColours = {
 		light: subNavMoreLight,
 		dark: subNavMoreDark,
 	},
+	'--subheading-level-3-text': {
+		light: subheadingLevel3TextLight,
+		dark: subheadingLevel3TextDark,
+	},
 	'--subheading-text': {
 		light: subheadingTextLight,
 		dark: subheadingTextDark,
@@ -8197,9 +8787,41 @@ const paletteColours = {
 		light: tableOfContentsLight,
 		dark: tableOfContentsDark,
 	},
+	'--table-of-contents-accent': {
+		light: tableOfContentsAccentLight,
+		dark: tableOfContentsAccentDark,
+	},
+	'--table-of-contents-background': {
+		light: tableOfContentsBackgroundLight,
+		dark: tableOfContentsBackgroundDark,
+	},
 	'--table-of-contents-border': {
 		light: tableOfContentsBorderLight,
 		dark: tableOfContentsBorderDark,
+	},
+	'--table-of-contents-horizontal-background': {
+		light: tableOfContentsHorizontalBackgroundLight,
+		dark: tableOfContentsHorizontalBackgroundDark,
+	},
+	'--table-of-contents-horizontal-border': {
+		light: tableOfContentsHorizontalBorderLight,
+		dark: tableOfContentsHorizontalBorderDark,
+	},
+	'--table-of-contents-horizontal-text': {
+		light: tableOfContentsHorizontalTextLight,
+		dark: tableOfContentsHorizontalTextDark,
+	},
+	'--table-of-contents-horizontal-text-active': {
+		light: tableOfContentsHorizontalTextActiveLight,
+		dark: tableOfContentsHorizontalTextActiveDark,
+	},
+	'--table-of-contents-horizontal-text-hover': {
+		light: tableOfContentsHorizontalTextHoverLight,
+		dark: tableOfContentsHorizontalTextHoverDark,
+	},
+	'--table-of-contents-hover': {
+		light: tableOfContentsHoverLight,
+		dark: tableOfContentsHoverDark,
 	},
 	'--tabs-input': {
 		light: () => sourcePalette.neutral[100],
@@ -8321,9 +8943,21 @@ const paletteColours = {
 		light: () => '#093CA3',
 		dark: () => '#3261DB',
 	},
+	'--us-elections-democrats-alt': {
+		light: () => '#DAD7F5',
+		dark: () => '#DAD7F5',
+	},
+	'--us-elections-others': {
+		light: () => '#848484',
+		dark: () => sourcePalette.neutral[46],
+	},
 	'--us-elections-republicans': {
 		light: () => sourcePalette.news[400],
 		dark: () => '#DC2E1C',
+	},
+	'--us-elections-republicans-alt': {
+		light: () => '#FFDBD4',
+		dark: () => '#FFDBD4',
 	},
 	'--values-with-change-border': {
 		light: () => sourcePalette.neutral[86],
@@ -8365,6 +8999,10 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[93],
 		dark: () => sourcePalette.neutral[93],
 	},
+	'--video-fullscreen-background': {
+		light: () => sourcePalette.neutral[0],
+		dark: () => sourcePalette.neutral[0],
+	},
 	'--video-icon': {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[100],
@@ -8380,6 +9018,14 @@ const paletteColours = {
 	'--video-progress-bar-background': {
 		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
 		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
+	},
+	'--video-progress-bar-interactive-background': {
+		light: () => transparentColour(sourcePalette.neutral[100], 0.5),
+		dark: () => transparentColour(sourcePalette.neutral[100], 0.5),
+	},
+	'--video-progress-bar-interactive-value': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
 	},
 	'--video-progress-bar-value': {
 		light: () => sourcePalette.neutral[86],
@@ -8482,4 +9128,7 @@ const paletteDeclarations = (
 			`${colourName}: ${colour[colourScheme](format)};`,
 	);
 
-export { type ColourName, paletteDeclarations };
+const isColourName = (s: string): s is ColourName =>
+	Object.prototype.hasOwnProperty.call(paletteColours, s);
+
+export { type ColourName, paletteDeclarations, isColourName };

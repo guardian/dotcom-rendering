@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { between, from, space, until } from '@guardian/source/foundations';
+import { from, space, until } from '@guardian/source/foundations';
 import { getZIndex } from '../../../lib/getZIndex';
 import type { CardMediaType } from '../../../types/layout';
 import type { ArticleMedia } from '../../../types/mainMedia';
@@ -33,7 +33,6 @@ type Props = {
 	articleMedia?: ArticleMedia;
 	mediaPositionOnDesktop: MediaPositionType;
 	mediaPositionOnMobile: MediaPositionType;
-	isFrontContainerOrGallerySecondaryOnward: boolean;
 	isSmallCard: boolean;
 	padMedia?: boolean;
 };
@@ -49,6 +48,17 @@ const mediaOverlayContainerStyles = css`
 	pointer-events: none;
 `;
 
+const hideMediaOnMobileStyles = css`
+	${until.tablet} {
+		display: none;
+	}
+`;
+
+const avatarStyles = css`
+	display: flex;
+	justify-content: flex-end;
+`;
+
 /**
  * There is zero padding on the side of the media where the text is.
  */
@@ -62,6 +72,7 @@ const mediaPaddingStyles = (
 		padding-top: ${mediaPositionOnMobile !== 'bottom' && `${space[2]}px`};
 		padding-bottom: ${mediaPositionOnMobile !== 'top' && `${space[2]}px`};
 	}
+
 	${from.tablet} {
 		padding-left: ${mediaPositionOnDesktop !== 'right' && `${space[2]}px`};
 		padding-right: ${mediaPositionOnDesktop !== 'left' && `${space[2]}px`};
@@ -78,44 +89,15 @@ const flexBasisStyles = ({
 	mediaSize,
 	mediaType,
 	isSmallCard,
-	isFrontContainerOrGallerySecondaryOnward,
 }: {
 	mediaSize: MediaSizeType;
 	mediaType: CardMediaType;
 	isSmallCard: boolean;
-	isFrontContainerOrGallerySecondaryOnward: boolean;
 }): SerializedStyles => {
-	if (!isFrontContainerOrGallerySecondaryOnward) {
-		switch (mediaSize) {
-			default:
-			case 'small':
-				return css`
-					flex-basis: 25%;
-					${between.tablet.and.desktop} {
-						flex-basis: 40%;
-					}
-					${from.desktop} {
-						flex-basis: 30%;
-					}
-				`;
-			case 'medium':
-				return css`
-					flex-basis: 50%;
-				`;
-			case 'large':
-				return css`
-					flex-basis: 66%;
-				`;
-			case 'jumbo':
-				return css`
-					flex-basis: 75%;
-				`;
-		}
-	}
-
 	if (mediaType === 'podcast' && !isSmallCard) {
 		return css`
 			flex-basis: 120px;
+
 			${from.desktop} {
 				flex-basis: 168px;
 			}
@@ -134,6 +116,7 @@ const flexBasisStyles = ({
 				${from.tablet} {
 					flex-basis: 460px;
 				}
+
 				${from.desktop} {
 					flex-basis: 620px;
 				}
@@ -143,6 +126,7 @@ const flexBasisStyles = ({
 				${from.tablet} {
 					flex-basis: 520px;
 				}
+
 				${from.desktop} {
 					flex-basis: 700px;
 				}
@@ -167,18 +151,7 @@ const fixMediaWidthStyles = (width: number) => css`
 	align-self: flex-start;
 `;
 
-const fixMobileMediaWidth = (
-	isFrontContainerOrGallerySecondaryOnward: boolean,
-	isSmallCard: boolean,
-) => {
-	if (!isFrontContainerOrGallerySecondaryOnward) {
-		return css`
-			${until.tablet} {
-				${fixMediaWidthStyles(mediaFixedSize.small)}
-			}
-		`;
-	}
-
+const fixMobileMediaWidth = (isSmallCard: boolean) => {
 	const size = isSmallCard ? mediaFixedSize.tiny : mediaFixedSize.small;
 
 	return css`
@@ -188,13 +161,11 @@ const fixMobileMediaWidth = (
 	`;
 };
 
-const fixDesktopMediaWidth = () => {
-	return css`
-		${from.tablet} {
-			${fixMediaWidthStyles(mediaFixedSize.small)}
-		}
-	`;
-};
+const fixDesktopMediaWidth = css`
+	${from.tablet} {
+		${fixMediaWidthStyles(mediaFixedSize.small)}
+	}
+`;
 
 export const MediaWrapper = ({
 	children,
@@ -203,7 +174,6 @@ export const MediaWrapper = ({
 	articleMedia,
 	mediaPositionOnDesktop,
 	mediaPositionOnMobile,
-	isFrontContainerOrGallerySecondaryOnward,
 	isSmallCard,
 	padMedia,
 }: Props) => {
@@ -227,27 +197,13 @@ export const MediaWrapper = ({
 						mediaSize,
 						mediaType,
 						isSmallCard,
-						isFrontContainerOrGallerySecondaryOnward,
 					}),
-				mediaType === 'avatar' &&
-					css`
-						display: flex;
-						justify-content: flex-end;
-					`,
-				/* If no media position for mobile is provided then hide the media */
-				mediaPositionOnMobile === 'none' &&
-					css`
-						${until.tablet} {
-							display: none;
-						}
-					`,
+				mediaType === 'avatar' && avatarStyles,
+				mediaPositionOnMobile === 'none' && hideMediaOnMobileStyles,
 				isHorizontalOnMobile &&
 					mediaType !== 'podcast' &&
-					fixMobileMediaWidth(
-						isFrontContainerOrGallerySecondaryOnward,
-						isSmallCard,
-					),
-				isSmallCard && fixDesktopMediaWidth(),
+					fixMobileMediaWidth(isSmallCard),
+				isSmallCard && fixDesktopMediaWidth,
 				isHorizontalOnDesktop &&
 					css`
 						${from.tablet} {
@@ -257,6 +213,7 @@ export const MediaWrapper = ({
 				css`
 					/* position relative is required here to bound the image overlay */
 					position: relative;
+
 					img {
 						width: 100%;
 						display: block;

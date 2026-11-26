@@ -2,20 +2,14 @@ import { ArticleDesign, ArticleDisplay } from '../lib/articleFormat';
 import type { NavType } from '../model/extract-nav';
 import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { AudioLayout } from './AudioLayout';
-import { CommentLayout } from './CommentLayout';
 import { CrosswordLayout } from './CrosswordLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
 import { GalleryLayout } from './GalleryLayout';
 import { HostedArticleLayout } from './HostedArticleLayout';
 import { HostedGalleryLayout } from './HostedGalleryLayout';
 import { HostedVideoLayout } from './HostedVideoLayout';
-import { ImmersiveLayout } from './ImmersiveLayout';
-import { InteractiveLayout } from './InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
 import { NewsletterSignupLayout } from './NewsletterSignupLayout';
-import { PictureLayout } from './PictureLayout';
-import { ShowcaseLayout } from './ShowcaseLayout';
 import { StandardLayout } from './StandardLayout';
 
 interface BaseProps {
@@ -35,7 +29,6 @@ interface WebProps extends BaseProps {
 export type Props = WebProps | AppProps;
 
 const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
-	const notSupported = <pre>Not supported</pre>;
 	const format = {
 		design: article.design,
 		display: article.display,
@@ -58,7 +51,7 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 				}
 				default: {
 					return (
-						<ImmersiveLayout
+						<StandardLayout
 							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
@@ -81,29 +74,9 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 							serverTime={serverTime}
 						/>
 					);
-				case ArticleDesign.Comment:
-				case ArticleDesign.Editorial:
-				case ArticleDesign.Letter:
-					return (
-						<CommentLayout
-							article={article.frontendData}
-							format={format}
-							renderingTarget={renderingTarget}
-							serverTime={serverTime}
-						/>
-					);
-				case ArticleDesign.Picture:
-					return (
-						<PictureLayout
-							article={article.frontendData}
-							format={format}
-							renderingTarget={renderingTarget}
-							serverTime={serverTime}
-						/>
-					);
 				default:
 					return (
-						<ShowcaseLayout
+						<StandardLayout
 							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
@@ -115,16 +88,6 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 		case ArticleDisplay.Standard:
 		default: {
 			switch (article.design) {
-				case ArticleDesign.Interactive:
-					return (
-						<InteractiveLayout
-							article={article.frontendData}
-							format={format}
-							renderingTarget={renderingTarget}
-							serverTime={serverTime}
-						/>
-					);
-
 				case ArticleDesign.FullPageInteractive: {
 					return (
 						<FullPageInteractiveLayout
@@ -144,20 +107,15 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 							serverTime={serverTime}
 						/>
 					);
-				case ArticleDesign.Comment:
-				case ArticleDesign.Editorial:
-				case ArticleDesign.Letter:
+				case ArticleDesign.NewsletterSignup:
 					return (
-						<CommentLayout
+						<NewsletterSignupLayout
 							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
 							serverTime={serverTime}
 						/>
 					);
-				case ArticleDesign.NewsletterSignup:
-					// Should be NewsletterSignup once implemented for apps
-					return notSupported;
 				case ArticleDesign.Gallery:
 					return (
 						<GalleryLayout
@@ -167,9 +125,16 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 						/>
 					);
 				case ArticleDesign.HostedArticle:
-				case ArticleDesign.HostedVideo:
 					return (
 						<HostedArticleLayout
+							content={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
+				case ArticleDesign.HostedVideo:
+					return (
+						<HostedVideoLayout
 							content={article}
 							format={format}
 							renderingTarget={renderingTarget}
@@ -178,18 +143,9 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 				case ArticleDesign.HostedGallery:
 					return (
 						<HostedGalleryLayout
-							content={article}
+							gallery={article}
 							format={format}
 							renderingTarget={renderingTarget}
-						/>
-					);
-				case ArticleDesign.Audio:
-					return (
-						<AudioLayout
-							article={article.frontendData}
-							format={format}
-							renderingTarget={renderingTarget}
-							serverTime={serverTime}
 						/>
 					);
 				default:
@@ -230,7 +186,7 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 				}
 				default: {
 					return (
-						<ImmersiveLayout
+						<StandardLayout
 							article={article.frontendData}
 							format={format}
 							NAV={NAV}
@@ -255,31 +211,9 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 							serverTime={serverTime}
 						/>
 					);
-				case ArticleDesign.Comment:
-				case ArticleDesign.Editorial:
-				case ArticleDesign.Letter:
-					return (
-						<CommentLayout
-							article={article.frontendData}
-							NAV={NAV}
-							format={format}
-							renderingTarget={renderingTarget}
-							serverTime={serverTime}
-						/>
-					);
-				case ArticleDesign.Picture:
-					return (
-						<PictureLayout
-							article={article.frontendData}
-							NAV={NAV}
-							format={format}
-							renderingTarget={renderingTarget}
-							serverTime={serverTime}
-						/>
-					);
 				default:
 					return (
-						<ShowcaseLayout
+						<StandardLayout
 							article={article.frontendData}
 							NAV={NAV}
 							format={format}
@@ -292,16 +226,6 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 		case ArticleDisplay.Standard:
 		default: {
 			switch (article.design) {
-				case ArticleDesign.Interactive:
-					return (
-						<InteractiveLayout
-							article={article.frontendData}
-							NAV={NAV}
-							format={format}
-							renderingTarget={renderingTarget}
-							serverTime={serverTime}
-						/>
-					);
 				case ArticleDesign.FullPageInteractive: {
 					return (
 						<FullPageInteractiveLayout
@@ -323,34 +247,12 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 							serverTime={serverTime}
 						/>
 					);
-				case ArticleDesign.Comment:
-				case ArticleDesign.Editorial:
-				case ArticleDesign.Letter:
-					return (
-						<CommentLayout
-							article={article.frontendData}
-							NAV={NAV}
-							format={format}
-							renderingTarget={renderingTarget}
-							serverTime={serverTime}
-						/>
-					);
 				case ArticleDesign.NewsletterSignup:
 					return (
 						<NewsletterSignupLayout
 							article={article.frontendData}
 							NAV={NAV}
 							format={format}
-							renderingTarget={renderingTarget}
-							serverTime={serverTime}
-						/>
-					);
-				case ArticleDesign.Audio:
-					return (
-						<AudioLayout
-							article={article.frontendData}
-							format={format}
-							NAV={NAV}
 							renderingTarget={renderingTarget}
 							serverTime={serverTime}
 						/>
@@ -391,7 +293,7 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 				case ArticleDesign.HostedGallery:
 					return (
 						<HostedGalleryLayout
-							content={article}
+							gallery={article}
 							format={format}
 							renderingTarget={renderingTarget}
 						/>

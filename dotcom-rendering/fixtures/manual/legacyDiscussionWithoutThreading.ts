@@ -28,6 +28,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 13,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '2479941',
 					displayName: 'madmonty',
@@ -50,6 +51,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 5,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '2870517',
 					displayName: 'GSC82',
@@ -72,6 +74,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 12,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '794075',
 					displayName: 'Alasdairca',
@@ -94,6 +97,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 2,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '3111076',
 					displayName: 'philstyle',
@@ -116,6 +120,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 9,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '1331497',
 					displayName: 'DoctorDark',
@@ -138,6 +143,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 5,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '4279254',
 					displayName: 'bordighera1',
@@ -160,6 +166,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 0,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '4530494',
 					displayName: 'jobrian',
@@ -182,6 +189,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 11,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '1954291',
 					displayName: 'drabacus',
@@ -204,6 +212,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 12,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '4311896',
 					displayName: 'SteB1',
@@ -226,6 +235,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 8,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '1301439',
 					displayName: 'WaitForPete',
@@ -248,6 +258,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 1,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '3596779',
 					displayName: 'Ecoboy1980',
@@ -270,6 +281,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 4,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '4387033',
 					displayName: 'Atomant77',
@@ -292,6 +304,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 2,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '1268926',
 					displayName: 'kvms',
@@ -314,6 +327,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 5,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '3874929',
 					displayName: 'carnaptious99',
@@ -336,6 +350,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 2,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '4568262',
 					displayName: 'JimmerInManila',
@@ -358,6 +373,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 5,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '2427181',
 					displayName: 'CharlesArthur',
@@ -384,6 +400,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 3,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '4188282',
 					displayName: 'sparclear',
@@ -406,6 +423,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 1,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '4573193',
 					displayName: 'PanYanPickle',
@@ -428,6 +446,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 1,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '4311896',
 					displayName: 'SteB1',
@@ -450,6 +469,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 3,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '4368868',
 					displayName: 'kitenet',
@@ -472,6 +492,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 1,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '3699054',
 					displayName: 'NeverMindTheBollocks',
@@ -494,6 +515,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 2,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '4212243',
 					displayName: 'grumpygrowlygirlie',
@@ -516,6 +538,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 1,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '4311896',
 					displayName: 'SteB1',
@@ -538,6 +561,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 6,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '4741862',
 					displayName: 'EstherHegt',
@@ -560,6 +584,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 4,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '4311896',
 					displayName: 'SteB1',
@@ -582,6 +607,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 3,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '4641408',
 					displayName: 'MrRatfan1976',
@@ -604,6 +630,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 0,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '4487660',
 					displayName: 'MrPiggles',
@@ -626,6 +653,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 1,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '2411079',
 					displayName: 'antipodean1',
@@ -648,6 +676,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 4,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '4741862',
 					displayName: 'EstherHegt',
@@ -670,6 +699,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 4,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '4323663',
 					displayName: 'thepoisongarden',
@@ -692,6 +722,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 2,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '4742115',
 					displayName: 'NickAltena',
@@ -714,6 +745,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 1,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '4741862',
 					displayName: 'EstherHegt',
@@ -736,6 +768,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 3,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '4311896',
 					displayName: 'SteB1',
@@ -758,6 +791,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 0,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '4641408',
 					displayName: 'MrRatfan1976',
@@ -780,6 +814,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 3,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '4311896',
 					displayName: 'SteB1',
@@ -802,6 +837,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 1,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '4641408',
 					displayName: 'MrRatfan1976',
@@ -824,6 +860,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 3,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '4741862',
 					displayName: 'EstherHegt',
@@ -846,6 +883,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 1,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '4742115',
 					displayName: 'NickAltena',
@@ -868,6 +906,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 1,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '2411079',
 					displayName: 'antipodean1',
@@ -890,6 +929,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 1,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '3237256',
 					displayName: 'PizzaRe',
@@ -912,6 +952,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 1,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '4323663',
 					displayName: 'thepoisongarden',
@@ -934,6 +975,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 0,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '2456210',
 					displayName: 'paulhs',
@@ -956,6 +998,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 0,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '3699054',
 					displayName: 'NeverMindTheBollocks',
@@ -978,6 +1021,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 2,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '3938636',
 					displayName: 'lxy001',
@@ -1000,6 +1044,7 @@ export const legacyDiscussionWithoutThreading = {
 				numResponses: 0,
 				numRecommends: 2,
 				isHighlighted: false,
+				responseTo: undefined,
 				userProfile: {
 					userId: '4741862',
 					displayName: 'EstherHegt',

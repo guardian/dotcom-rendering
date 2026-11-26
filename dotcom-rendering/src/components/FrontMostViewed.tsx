@@ -54,7 +54,7 @@ export const FrontMostViewed = ({
 			? {
 					heading: 'Deeply read',
 					trails: deeplyRead,
-			  }
+				}
 			: undefined;
 
 	const mostViewedItems = tabs.length > 0 ? tabs[0] : undefined;

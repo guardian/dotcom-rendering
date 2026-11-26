@@ -1,0 +1,35 @@
+import { css } from '@emotion/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import lzstring from 'lz-string';
+import { SupporterRevenue } from './SupporterRevenue';
+import { supportProps } from './utils/storybook';
+
+const style = css`
+	max-width: 620px;
+	margin: 3em auto;
+`;
+
+type WithJsonProps<T> = T & { json?: string };
+type Props = WithJsonProps<React.ComponentProps<typeof SupporterRevenue>>;
+const meta: Meta<Props> = {
+	component: SupporterRevenue,
+	title: 'Components/marketing/inline1/SupporterRevenue',
+	args: supportProps,
+	render: ({ json, ...args }) => {
+		const jsonProps = json
+			? JSON.parse(lzstring.decompressFromEncodedURIComponent(json))
+			: {};
+
+		return (
+			<div css={style}>
+				<SupporterRevenue {...args} {...jsonProps} />
+			</div>
+		);
+	},
+};
+export default meta;
+
+type Story = StoryObj<Props>;
+export const Default: Story = {
+	name: 'Basic SupporterRevenue',
+};

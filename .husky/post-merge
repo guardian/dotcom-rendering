@@ -1,14 +1,6 @@
 RED='\033[0;31m'
 ENDCOLOR='\033[0m'
 
-# Delete old yarn-based stuff while transitioning from yarn to pnpm. It can be
-# removed once we're confident that pnpm is working.
-if [ -d ".yarn" ]; then
-	echo "${RED}This application now uses pnpm. Cleaning up old yarn stuff...${ENDCOLOR}"
-	rm -rf .yarn
-	rm -rf **/node_modules # belt-and-braces
-fi
-
 changedFiles="$(git diff-tree -r --name-only --no-commit-id HEAD@{1} HEAD)"
 changedLock="$(echo "$changedFiles" | { grep -E 'pnpm-lock.yaml' || :; })"
 changedNode="$(echo "$changedFiles" | { grep '.nvmrc' || :; })"

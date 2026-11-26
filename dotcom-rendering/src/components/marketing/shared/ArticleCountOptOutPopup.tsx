@@ -117,12 +117,12 @@ const overlayContainer = (
 		? css`
 				top: 0px;
 				left: 0px;
-		  `
+			`
 		: css`
 				left: ${space[4]}px;
 				right: ${space[4]}px;
 				${isBanner(type) ? 'bottom: 21px;' : ''}
-		  `}
+			`}
 	display: block;
 
 	${from.tablet} {
@@ -131,11 +131,11 @@ const overlayContainer = (
 					top: 10px;
 					left: 10px;
 					width: 450px;
-			  `
+				`
 			: css`
 					width: 400px;
 					left: 0;
-			  `}
+				`}
 	}
 `;
 

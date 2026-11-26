@@ -18,7 +18,9 @@ export const submitComponentEventTracking = async (
 	componentEvent: ComponentEvent,
 	renderingTarget: RenderingTarget,
 ) => {
-	if (isServer) return;
+	if (isServer) {
+		return;
+	}
 
 	const ophan = await getOphan(renderingTarget);
 	ophan.record({ componentEvent });

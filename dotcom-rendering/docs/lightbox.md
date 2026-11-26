@@ -14,20 +14,20 @@ Frontend's lightbox was added to the Guardian's website in 2014. [The PR to add 
 
 ### Parity with Frontend
 
--   History navigation closes lightbox
--   Permalinks to images
--   Traps focus
--   Optimises image loading
--   Images are scaled to the viewport
+- History navigation closes lightbox
+- Permalinks to images
+- Traps focus
+- Optimises image loading
+- Images are scaled to the viewport
 
 ### New in DCR
 
--   Native scrolling
--   Defers hydration
--   Fullscreen API
--   Deduplicates images
--   Links to posts in liveblogs
--   Remembers display preferences for caption
+- Native scrolling
+- Defers hydration
+- Fullscreen API
+- Deduplicates images
+- Links to posts in liveblogs
+- Remembers display preferences for caption
 
 ## How it gets hydrated
 
@@ -87,9 +87,9 @@ This file sets a series of event listeners and when these are triggered it runs 
 `scroll`
 When the list of images is scrolled to a new position, either manually or by clicking the pervious/next buttons, then there is a new image being shown so we:
 
--   Update the visual indication showing which image is selected
--   Edit the url hash to point to this new `img-[position]`
--   Start to eager load any adjacent images
+- Update the visual indication showing which image is selected
+- Edit the url hash to point to this new `img-[position]`
+- Start to eager load any adjacent images
 
 `popstate`
 When the reader clicks back or forward, the popstate event is fired. This can happen when the lightbox is open or closed. When it does we either open or close the lightbox based on if it has an `img-[n]` hash or not.
@@ -105,10 +105,10 @@ An `<img>` tag will fire this 'load' event when the image that it depends on has
 `click` or `mousedown`
 There are four controls on lightbox which respond to click or mousedown events.
 
--   close - Closes the lightbox by calling `history.back()`
--   next - Navigates inside the lightbox using `scrollTo()`, you can also just manually scroll, it's the same
--   previous - Navigates inside the lightbox using `scrollTo()`, you can also just manually scroll, it's the same
--   toggle info - Show / Hide the info `aside` element
+- close - Closes the lightbox by calling `history.back()`
+- next - Navigates inside the lightbox using `scrollTo()`, you can also just manually scroll, it's the same
+- previous - Navigates inside the lightbox using `scrollTo()`, you can also just manually scroll, it's the same
+- toggle info - Show / Hide the info `aside` element
 
 The next and previous actions trigger the `scroll` event.
 

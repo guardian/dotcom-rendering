@@ -39,7 +39,7 @@ describe('ConfigContext', () => {
 				assetOrigin: '/',
 				editionId: 'INT',
 			},
-		] as const satisfies ReadonlyArray<Config>)(
+		] as const satisfies readonly Config[])(
 			'useConfig hook provides correct config: "%o"',
 			(config) => {
 				const Component = () => {

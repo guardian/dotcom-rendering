@@ -22,8 +22,8 @@ const Cursor = ({
 			cursor: ${isScrubbing
 				? 'grabbing'
 				: canJumpToPoint
-				? 'pointer'
-				: 'default'};
+					? 'pointer'
+					: 'default'};
 
 			/* this is the yellow '|' cursor */
 			border-left: ${cursorWidth} solid ${palette.brandAlt[400]};
@@ -39,8 +39,8 @@ const Cursor = ({
 				cursor: ${isScrubbing
 					? 'grabbing'
 					: canJumpToPoint
-					? 'grab'
-					: 'default'};
+						? 'grab'
+						: 'default'};
 			}
 		`}
 		style={{
@@ -75,8 +75,8 @@ export const ProgressBar = ({
 				cursor: ${isScrubbing
 					? 'grabbing'
 					: canJumpToPoint
-					? 'pointer'
-					: 'default'};
+						? 'pointer'
+						: 'default'};
 
 				${from.leftCol} {
 					border-top: none;

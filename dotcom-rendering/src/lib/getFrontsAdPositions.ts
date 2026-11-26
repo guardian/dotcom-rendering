@@ -6,12 +6,6 @@ import {
 } from './commercial-constants';
 import { frontsBannerExcludedCollections } from './frontsBannerAdExclusions';
 
-type FlexibleSpecialGroupedCounts = {
-	snap: number;
-	splash: number;
-	standard: number;
-};
-
 type FlexibleGeneralGroupedCounts = {
 	gigaboostedSplash: number;
 	megaboostedSplash: number;
@@ -144,6 +138,7 @@ const isEvenIndex = (_collection: unknown, index: number): boolean =>
 const getMobileAdPositions = (
 	collections: AdCandidate[],
 	pageId: string,
+	maxMobileAds = MAX_FRONTS_MOBILE_ADS,
 ): number[] => {
 	const merchHighPosition = getMerchHighPosition(collections);
 	const hasSecondaryContainers = hasSecondaryLevelContainers(collections);
@@ -167,7 +162,7 @@ const getMobileAdPositions = (
 				: (acc: number[], el: number) => [...acc, el], // returns the original array
 			[],
 		)
-		.slice(0, MAX_FRONTS_MOBILE_ADS);
+		.slice(0, maxMobileAds);
 
 	return adPositions;
 };
@@ -231,35 +226,6 @@ const getFlexibleGeneralHeight = (grouped: DCRGroupedTrails) => {
 };
 
 /**
- * Predicted relative heights of the cards that can be found in a flexible/special container.
- */
-const flexibleSpecialCardHeights = {
-	snap: 1.5,
-	splash: 2,
-	standard: 0.5,
-};
-
-/**
- * Estimates the height of a flexible/special container.
- */
-const getFlexibleSpecialHeight = (grouped: DCRGroupedTrails) => {
-	const groupedCounts = {
-		snap: grouped.snap.length,
-		// The first standard card in a fleixible/special collection is always a splash card.
-		splash: grouped.standard.length ? 1 : 0,
-		standard: Math.max(grouped.standard.length - 1, 0),
-	} satisfies FlexibleSpecialGroupedCounts;
-
-	return Object.entries(groupedCounts).reduce((acc, [key, value]) => {
-		const cardHeight =
-			flexibleSpecialCardHeights[
-				key as keyof typeof flexibleSpecialCardHeights
-			];
-		return acc + value * cardHeight;
-	}, 0);
-};
-
-/**
  * Estimates the height of a collection.
  *
  * A result of 3 would approximately be the height of a typical desktop viewport (~900px).
@@ -287,9 +253,6 @@ const getCollectionHeight = (collection: AdCandidate): number => {
 
 		case 'static/feature/2':
 			return 2;
-
-		case 'flexible/special':
-			return getFlexibleSpecialHeight(grouped);
 
 		case 'flexible/general':
 			return getFlexibleGeneralHeight(grouped);
@@ -359,9 +322,8 @@ const canInsertDesktopAd = (
 const getDesktopAdPositions = (
 	collections: AdCandidate[],
 	pageId: string,
+	maxAdsAllowed = MAX_FRONTS_BANNER_ADS,
 ): number[] => {
-	const maxAdsAllowed = MAX_FRONTS_BANNER_ADS;
-
 	const adPositionsFromReducer = collections.reduce<{
 		heightSinceAd: number;
 		adPositions: number[];

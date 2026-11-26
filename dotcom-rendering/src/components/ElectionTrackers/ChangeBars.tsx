@@ -189,11 +189,11 @@ const Bar = ({
 				? {
 						justifyContent: 'start',
 						order: 1,
-				  }
+					}
 				: {
 						justifyContent: 'end',
 						order: 0,
-				  }
+					}
 		}
 	>
 		<div
@@ -220,11 +220,11 @@ const ChangeText = ({ change }: { change: Change['change'] }) => (
 				? {
 						justifyContent: 'end',
 						borderBottomStyle: 'solid',
-				  }
+					}
 				: {
 						justifyContent: 'flex-start',
 						borderTopStyle: 'solid',
-				  }
+					}
 		}
 	>
 		<div

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ABTest } from '../../../../types.js';
+	import { AudienceSpaces, type ABTest } from "../../../../config/types";
 
 	interface Props {
 		tests: ABTest[];
@@ -20,12 +20,10 @@
 	const BAR_MARGIN_X = 0.1;
 	const BAR_MARGIN_Y = 2;
 
-	const testSpaces = ['A', 'B', 'C'];
+	const chartHeight = AudienceSpaces.length * BAR_HEIGHT + BAR_HEIGHT + 16;
 
-	const chartHeight = testSpaces.length * BAR_HEIGHT + BAR_HEIGHT + 16;
-
-	const testsBySpace = testSpaces.map((space) => {
-		if (space === 'A') {
+	const testsBySpace = AudienceSpaces.map((space) => {
+		if (space === "A") {
 			return tests.filter(
 				(test) => test.audienceSpace === space || !test.audienceSpace,
 			);

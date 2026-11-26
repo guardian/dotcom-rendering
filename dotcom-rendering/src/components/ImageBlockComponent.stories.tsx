@@ -100,6 +100,33 @@ export const Immersive = () => {
 };
 Immersive.storyName = 'with role immersive';
 
+export const DownpageImageOnImmersiveArticle = () => {
+	const format = {
+		display: ArticleDisplay.Immersive,
+		design: ArticleDesign.Standard,
+		theme: Pillar.News,
+	} as const;
+
+	return (
+		<Wrapper>
+			<Figure format={format} isMainMedia={false} role="inline">
+				<ImageBlockComponent
+					element={{ ...image, role: 'inline' }}
+					format={format}
+				/>
+			</Figure>
+		</Wrapper>
+	);
+};
+DownpageImageOnImmersiveArticle.storyName =
+	'with downpage image on immersive article';
+DownpageImageOnImmersiveArticle.story = {
+	parameters: {
+		viewport: { defaultViewport: 'mobileMedium' },
+		chromatic: { viewports: [375] },
+	},
+};
+
 export const Showcase = () => {
 	return (
 		<Wrapper>

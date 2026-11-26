@@ -1,5 +1,4 @@
 import type { RequestHandler } from 'express';
-import type { ConfigType } from '../../types/config';
 import { logger } from './logging';
 import { loggingStore } from './logging-store';
 
@@ -9,15 +8,6 @@ const hasPageId = (body: unknown): body is { pageId: string } => {
 		typeof body === 'object' &&
 		'pageId' in body &&
 		typeof body.pageId === 'string'
-	);
-};
-
-const hasConfig = (body: unknown): body is { config: ConfigType } => {
-	return (
-		!!body &&
-		typeof body === 'object' &&
-		'config' in body &&
-		typeof body.config === 'object'
 	);
 };
 
@@ -37,9 +27,6 @@ export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
 		},
 		requestId: requestId ?? 'request-id-not-provided',
 		timing: {},
-		abTests: hasConfig(req.body)
-			? JSON.stringify(req.body.config.abTests)
-			: '{no-ab-tests-found}',
 	};
 
 	res.on('finish', () => {

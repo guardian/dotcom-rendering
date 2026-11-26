@@ -1,8 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { isObject, isString } from '@guardian/libs';
-import { BUILD_VARIANT, dcrJavascriptBundle } from '../../webpack/bundles';
-import type { ServerSideTests, Switches } from '../types/config';
+import { BUILD_VARIANT } from '../../webpack/bundles';
 import { makeMemoizedFunction } from './memoize';
 
 interface AssetHash {
@@ -138,13 +137,8 @@ export const generateScriptTags = (scripts: string[]): string[] =>
 		].join('\n');
 	});
 
-export const getModulesBuild = ({
-	tests,
-}: {
-	tests: ServerSideTests;
-	switches: Switches;
-}): Extract<Build, `client.web${string}`> => {
-	if (BUILD_VARIANT && tests[dcrJavascriptBundle('Variant')] === 'variant') {
+export const getModulesBuild = (): Extract<Build, `client.web${string}`> => {
+	if (BUILD_VARIANT) {
 		return 'client.web.variant';
 	}
 	return 'client.web';

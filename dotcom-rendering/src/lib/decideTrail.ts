@@ -23,7 +23,7 @@ export const decideTrail = (trail: FETrailType, index = 0): TrailType => {
 		? {
 				src: trail.image,
 				altText: '', // TODO: Do we get this from frontend?
-		  }
+			}
 		: undefined;
 
 	return {
@@ -45,7 +45,7 @@ export const decideTrailWithMasterImage = (
 		? {
 				src: trail.masterImage,
 				altText: '',
-		  }
+			}
 		: undefined;
 
 	return {
@@ -78,7 +78,7 @@ export const decideTrailWithMasterImagePreferred = (
 		? {
 				src: imageUrl,
 				altText: '',
-		  }
+			}
 		: undefined;
 
 	return {

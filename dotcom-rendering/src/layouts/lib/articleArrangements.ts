@@ -1,0 +1,532 @@
+import { css, type SerializedStyles } from '@emotion/react';
+import { from, until } from '@guardian/source/foundations';
+import { grid } from '../../grid';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	isOpinionDesign,
+} from '../../lib/articleFormat';
+import type { ArticleDeprecated } from '../../types/article';
+
+export type LayoutType =
+	| 'standard'
+	| 'showcase'
+	| 'media'
+	| 'picture'
+	| 'comment'
+	| 'interactiveStandard'
+	| 'interactiveTopHat'
+	| 'immersiveLandscape'
+	| 'immersivePortrait';
+
+export type Area =
+	| 'title'
+	| 'headline'
+	| 'standfirst'
+	| 'caption'
+	| 'media'
+	| 'meta'
+	| 'body'
+	| 'right-column';
+
+type Breakpoint =
+	| 'mobile'
+	| 'tablet'
+	| 'belowDesktop'
+	| 'desktop'
+	| 'leftCol'
+	| 'wide';
+
+const breakpointQueries: Record<Breakpoint, string> = {
+	mobile: until.tablet,
+	tablet: from.tablet,
+	belowDesktop: until.desktop,
+	desktop: from.desktop,
+	leftCol: from.leftCol,
+	wide: from.wide,
+};
+
+// Raw CSS overrides per area per breakpoint. Entries are only needed when an area
+// deviates from the default: centre column, single-column mobile layout with areas
+// in DOM order (media → title → headline → standfirst → meta → body → right-column).
+
+type AreaCss = Partial<Record<Breakpoint, string>>;
+type LayoutCssMap = Partial<Record<Area, AreaCss>>;
+
+const standardCss: LayoutCssMap = {
+	title: {
+		tablet: 'grid-row: 1;',
+		leftCol: `grid-row: 1; ${grid.column.left}`,
+	},
+	headline: {
+		tablet: 'grid-row: 2;',
+		leftCol: 'grid-row: 1;',
+	},
+	standfirst: {
+		tablet: 'grid-row: 3;',
+		leftCol: 'grid-row: 2;',
+	},
+	media: {
+		tablet: 'grid-row: 4;',
+		leftCol: 'grid-row: 3;',
+	},
+	meta: {
+		tablet: 'grid-row: 5;',
+		leftCol: `grid-row: 3 / span 2; ${grid.column.left};`,
+	},
+	body: {
+		tablet: 'grid-row: 6;',
+		leftCol: 'grid-row: 4;',
+	},
+	'right-column': {
+		desktop: `grid-row: 1 / span 6; ${grid.column.right};`,
+		leftCol: `grid-row: 1 / span 4; ${grid.column.right};`,
+	},
+};
+
+const showcaseCss: LayoutCssMap = {
+	title: {
+		tablet: 'grid-row: 1;',
+		leftCol: `grid-row: 1; ${grid.column.left}`,
+	},
+	headline: {
+		tablet: 'grid-row: 2;',
+		leftCol: 'grid-row: 1;',
+	},
+	standfirst: {
+		tablet: 'grid-row: 3;',
+	},
+	media: {
+		tablet: 'grid-row: 4;',
+		leftCol: `grid-row: 2; ${grid.between(
+			'centre-column-start',
+			'right-column-end',
+		)}`,
+	},
+	meta: {
+		tablet: 'grid-row: 5;',
+		leftCol: `grid-row: 2 / span 2; ${grid.column.left};`,
+	},
+	body: {
+		tablet: 'grid-row: 6;',
+		leftCol: 'grid-row: 4;',
+	},
+	'right-column': {
+		desktop: `grid-row: 1 / span 6; ${grid.column.right};`,
+		leftCol: `grid-row: 3 / span 2; ${grid.column.right};`,
+	},
+};
+
+const mediaCss: LayoutCssMap = {
+	title: {
+		mobile: 'grid-row: 1;',
+		tablet: 'grid-row: 1;',
+		leftCol: `grid-row: 1; ${grid.column.left};`,
+	},
+	headline: {
+		mobile: 'grid-row: 2;',
+		tablet: 'grid-row: 2;',
+		leftCol: 'grid-row: 1;',
+	},
+	media: {
+		mobile: 'grid-row: 3;',
+		tablet: 'grid-row: 3;',
+		desktop: `grid-row: 3; ${grid.between(
+			'centre-column-start',
+			'right-column-start',
+		)};`,
+		leftCol: `grid-row: 2; ${grid.between(
+			'centre-column-start',
+			'right-column-start',
+		)};`,
+	},
+	standfirst: {
+		mobile: 'grid-row: 4;',
+		tablet: 'grid-row: 4;',
+		desktop: `grid-row: 4; ${grid.between(
+			'centre-column-start',
+			'right-column-start',
+		)};`,
+		leftCol: `grid-row: 3; ${grid.between(
+			'centre-column-start',
+			'right-column-start',
+		)};`,
+	},
+	meta: {
+		mobile: 'grid-row: 5;',
+		tablet: 'grid-row: 5;',
+		leftCol: `grid-row: 2 / span 3; ${grid.column.left};`,
+	},
+	body: {
+		desktop: `grid-row: 6; ${grid.between(
+			'centre-column-start',
+			'right-column-start',
+		)};`,
+		leftCol: `grid-row: 4; ${grid.between(
+			'centre-column-start',
+			'right-column-start',
+		)};`,
+	},
+	'right-column': {
+		desktop: `grid-row: 3 / span 4; ${grid.column.right};`,
+		leftCol: `grid-row: 2 / span 3; ${grid.column.right};`,
+	},
+};
+
+const pictureCss: LayoutCssMap = {
+	title: {
+		mobile: 'grid-row: 1;',
+		tablet: 'grid-row: 1;',
+		leftCol: grid.column.left,
+	},
+	headline: {
+		mobile: 'grid-row: 2;',
+		tablet: 'grid-row: 2;',
+		desktop: grid.between('centre-column-start', 'right-column-end'),
+		leftCol: 'grid-row: 1;',
+	},
+	standfirst: {
+		mobile: 'grid-row: 4;',
+		tablet: 'grid-row: 4;',
+		leftCol: 'grid-row: 2;',
+	},
+	media: {
+		mobile: 'grid-row: 5;',
+		tablet: 'grid-row: 5;',
+		desktop: grid.between('centre-column-start', 'right-column-end'),
+		leftCol: `grid-row: 3;`,
+	},
+	meta: {
+		mobile: 'grid-row: 3;',
+		tablet: 'grid-row: 3;',
+		desktop: grid.between('centre-column-start', 'right-column-end'),
+		leftCol: `grid-row: 3 / span 2; ${grid.column.left};`,
+	},
+	body: {
+		tablet: 'grid-row: 6;',
+		desktop: grid.between('centre-column-start', 'right-column-end'),
+		leftCol: `grid-row: 5;`,
+	},
+};
+
+const commentCss: LayoutCssMap = {
+	title: {
+		mobile: 'grid-row: 1;',
+		tablet: 'grid-row: 1;',
+		leftCol: `grid-row: 1; ${grid.column.left}`,
+	},
+	headline: {
+		mobile: 'grid-row: 2;',
+		tablet: 'grid-row: 2;',
+		leftCol: 'grid-row: 1;',
+	},
+	standfirst: {
+		mobile: 'grid-row: 3;',
+		tablet: 'grid-row: 3;',
+		leftCol: 'grid-row: 2;',
+	},
+	media: {
+		mobile: 'grid-row: 5;',
+		tablet: 'grid-row: 5;',
+		leftCol: 'grid-row: 3;',
+	},
+	meta: {
+		mobile: 'grid-row: 4;',
+		tablet: 'grid-row: 4;',
+		leftCol: `grid-row: 2 / span 2; ${grid.column.left};`,
+	},
+	body: {
+		mobile: 'grid-row: 6;',
+		tablet: 'grid-row: 6;',
+		leftCol: 'grid-row: 4;',
+	},
+	'right-column': {
+		desktop: `grid-row: 1 / span 6; ${grid.column.right};`,
+		leftCol: `grid-row: 1 / span 4; ${grid.column.right};`,
+	},
+};
+
+const immersivePortraitCss: LayoutCssMap = {
+	title: {
+		belowDesktop: 'grid-row: 1;',
+		mobile: `${grid.column.all} grid-row: 2; align-self: end; padding-bottom: var(--immersive-headline-overlap);`,
+		tablet: `grid-row: 2; ${grid.between('centre-column-start', 'centre-column-end')};`,
+		desktop: `grid-row: 1; ${grid.between('centre-column-start', 8)};`,
+		leftCol: `${grid.between('left-column-start', 9)};`,
+		wide: `${grid.between('left-column-start', 10)};`,
+	},
+	headline: {
+		belowDesktop: 'grid-row: 2;',
+		mobile: `${grid.column.all} grid-row: 3; margin-top: calc(-1 * var(--immersive-headline-overlap));`,
+		tablet: `grid-row: 3 / span 2; ${grid.between('centre-column-start', 'centre-column-end')};`,
+		desktop: `grid-row: 2; ${grid.between('centre-column-start', 8)};`,
+		leftCol: `grid-row: 2; ${grid.between('left-column-start', 9)};`,
+		wide: `grid-row: 2; ${grid.between('left-column-start', 10)};`,
+	},
+	media: {
+		belowDesktop: 'grid-row: 3;',
+		mobile: `${grid.column.all} grid-row: 1 / span 2;`,
+		tablet: `grid-row: 1 / span 3; ${grid.between('centre-column-start', 'centre-column-end')};`,
+		desktop: `grid-row: 1 / span 4; ${grid.between(8, 'right-column-end')};`,
+		leftCol: `grid-row: 1 / span 3; ${grid.between(9, 'right-column-end')};`,
+		wide: `grid-row: 1 / span 3; ${grid.between(10, 'right-column-end')};`,
+	},
+	standfirst: {
+		belowDesktop: 'grid-row: 4;',
+		tablet: 'grid-row: 5;',
+		desktop: `grid-row: 3; ${grid.between('centre-column-start', 7)};`,
+		leftCol: `grid-row: 3; ${grid.between('centre-column-start', 8)};`,
+		wide: `grid-row: 3; ${grid.between('centre-column-start', 9)};`,
+	},
+	caption: {
+		belowDesktop: 'grid-row: 5;',
+		tablet: 'grid-row: 6;',
+		desktop: `grid-row: 5;`,
+		leftCol: `grid-row: 4; ${grid.column.left};`,
+	},
+	meta: {
+		belowDesktop: 'grid-row: 6;',
+		tablet: 'grid-row: 7;',
+		desktop: `grid-row: 4; ${grid.between('centre-column-start', 8)};`,
+		leftCol: `grid-row: 3; ${grid.column.left};`,
+	},
+	body: {
+		belowDesktop: 'grid-row: 7;',
+		tablet: 'grid-row: 8;',
+		desktop: 'grid-row: 6;',
+		leftCol: 'grid-row: 4;',
+	},
+	'right-column': {
+		desktop: `grid-row: 5 / span 2; ${grid.column.right};`,
+		leftCol: `grid-row: 4; ${grid.column.right};`,
+	},
+};
+
+const immersiveWeekendReadBelowDesktop: Partial<Record<Area, string>> = {
+	title: `grid-row: 1; ${grid.column.centre} align-self: start; padding-bottom: 0;`,
+	headline: `grid-row: 2; ${grid.column.centre} margin-top: 0;`,
+	media: 'grid-row: 3;',
+	caption: 'grid-row: 4;',
+	standfirst: 'grid-row: 5;',
+	meta: 'grid-row: 6;',
+	body: 'grid-row: 7;',
+};
+
+const immersiveLandscapeCss: LayoutCssMap = {
+	title: {
+		mobile: `${grid.column.all} grid-row: 2; align-self: end; padding-bottom: var(--immersive-headline-overlap);`,
+		tablet: `grid-row: 2; ${grid.between('centre-column-start', 'centre-column-end')};`,
+		desktop: 'grid-row: 2;',
+	},
+	headline: {
+		mobile: `${grid.column.all} grid-row: 3; margin-top: calc(-1 * var(--immersive-headline-overlap));`,
+		tablet: `grid-row: 3 / span 2; ${grid.between('centre-column-start', 'centre-column-end')};`,
+		desktop: 'grid-row: 3 / span 2;',
+		wide: `${grid.between('centre-column-start', 14)};`,
+	},
+	media: {
+		mobile: `${grid.column.all} grid-row: 1 / span 2;`,
+		tablet: `grid-row: 1 / span 3; ${grid.between('centre-column-start', 'centre-column-end')};`,
+		desktop: `grid-row: 1 / span 3; ${grid.between('centre-column-start', 'right-column-end')};`,
+		leftCol: `grid-row: 1 / span 3; ${grid.between('left-column-start', 'right-column-end')};`,
+	},
+	standfirst: {
+		mobile: 'grid-row: 4;',
+		tablet: 'grid-row: 5;',
+	},
+	caption: {
+		mobile: 'grid-row: 5;',
+		tablet: 'grid-row: 6;',
+	},
+	meta: {
+		mobile: 'grid-row: 6;',
+		tablet: `grid-row: 7;`,
+		leftCol: `grid-row: 5 / span 2; ${grid.column.left};`,
+	},
+	body: {
+		mobile: 'grid-row: 7;',
+		tablet: 'grid-row: 8;',
+		leftCol: 'grid-row: 6;',
+	},
+	'right-column': {
+		desktop: `grid-row: 6 / span 3; ${grid.column.right};`,
+	},
+};
+
+const interactiveTopHatCss: LayoutCssMap = {
+	title: {
+		mobile: 'grid-row: 2;',
+		tablet: 'grid-row: 2;',
+	},
+	headline: {
+		mobile: 'grid-row: 3;',
+		tablet: 'grid-row: 3;',
+	},
+	standfirst: {
+		mobile: 'grid-row: 4;',
+		tablet: 'grid-row: 4;',
+	},
+	media: {
+		mobile: `grid-row: 1 / span 7; ${grid.column.all}`,
+		tablet: `grid-row: 1 / span 7; ${grid.column.all}`,
+	},
+	meta: {
+		mobile: 'grid-row: 5;',
+		tablet: 'grid-row: 5;',
+	},
+	body: {
+		tablet: 'grid-row: 8;',
+	},
+	'right-column': {
+		desktop: `grid-row: 8; ${grid.column.right};`,
+	},
+};
+
+const layoutCssMaps: Record<LayoutType, LayoutCssMap> = {
+	standard: standardCss,
+	showcase: showcaseCss,
+	media: mediaCss,
+	picture: pictureCss,
+	comment: commentCss,
+	interactiveStandard: standardCss,
+	interactiveTopHat: interactiveTopHatCss,
+	immersiveLandscape: immersiveLandscapeCss,
+	immersivePortrait: immersivePortraitCss,
+};
+
+/**
+ * Returns the Emotion CSS needed to position a single grid item — its
+ * default column, its row at each breakpoint, and any column overrides.
+ * The grid item _must_ be inside a {@link grid} module container.
+ *
+ * All items default to the centre column. Per-breakpoint overrides for
+ * `grid-row` and `grid-column` are applied on top via media queries,
+ * looked up from the plain CSS maps defined in this file.
+ *
+ * @param area - The named piece of article furniture to position (e.g. `'headline'`, `'body'`).
+ * @param layoutType - See {@link LayoutType}. Determines which CSS map to use for lookups.
+ * @param format - Keeps Weekend Read headers above the media below desktop.
+ * @param hasPageSkin - Keeps item placement on the desktop arrangement at wider viewports.
+ *
+ * @example
+ * // In a React component:
+ * <div css={gridItemCss('headline', 'standard')} />
+ */
+export const gridItemCss = (
+	area: Area,
+	layoutType: LayoutType,
+	format?: ArticleFormat,
+	hasPageSkin = false,
+): SerializedStyles => {
+	const areaOverrides = layoutCssMaps[layoutType][area] ?? {};
+	const weekendReadStyles =
+		layoutType === 'immersivePortrait' &&
+		format?.design === ArticleDesign.WeekendEssay
+			? immersiveWeekendReadBelowDesktop[area]
+			: undefined;
+
+	const breakpointCss = Object.entries(areaOverrides)
+		.filter(([bp]) => !hasPageSkin || (bp !== 'leftCol' && bp !== 'wide'))
+		.map(
+			([bp, styles]) => css`
+				${breakpointQueries[bp as Breakpoint]} {
+					${styles}
+				}
+			`,
+		);
+
+	// All items default to the centre column; breakpoint entries above
+	// override grid-row and grid-column as needed.
+	return css`
+		grid-column: centre-column-start / centre-column-end;
+		${breakpointCss}
+		${weekendReadStyles &&
+		css`
+			${until.desktop} {
+				${weekendReadStyles}
+			}
+		`}
+	`;
+};
+
+/**
+ * Determines which {@link LayoutType} to render. Immersive layouts are
+ * split by orientation (portrait vs. landscape/square) and by whether the
+ * format is a Feature, since each combination has a distinct grid
+ * arrangement. Non-immersive formats fall back to media/showcase/standard.
+ */
+export const getLayoutType = (
+	format: ArticleFormat,
+	mainMediaOrientation: 'portrait' | 'landscape' | 'square',
+): LayoutType => {
+	switch (format.display) {
+		case ArticleDisplay.Immersive:
+			// Square images are treated the same as landscape for immersive layouts.
+			return mainMediaOrientation === 'portrait' ||
+				format.design === ArticleDesign.WeekendEssay
+				? 'immersivePortrait'
+				: 'immersiveLandscape';
+
+		case ArticleDisplay.Showcase:
+			return format.design === ArticleDesign.Picture
+				? 'picture'
+				: format.design === ArticleDesign.Interactive
+					? 'interactiveTopHat'
+					: 'showcase';
+
+		default:
+			switch (format.design) {
+				case ArticleDesign.Video:
+				case ArticleDesign.Audio:
+					return 'media';
+				case ArticleDesign.Interactive:
+					return 'interactiveStandard';
+				default:
+					return isOpinionDesign(format.design)
+						? 'comment'
+						: 'standard';
+			}
+	}
+};
+
+const getImageOrientation = (
+	aspectRatio: string,
+): 'portrait' | 'landscape' | 'square' => {
+	const [width, height] = aspectRatio.split(':').map(Number);
+	if (width == null || height == null) return 'landscape';
+	if (height > width) return 'portrait';
+	if (width > height) return 'landscape';
+	return 'square';
+};
+
+export const getMainMediaInfo: {
+	(article: ArticleDeprecated): {
+		mainMediaAspectRatio: string | undefined;
+		mainMediaOrientation: 'portrait' | 'landscape' | 'square';
+	};
+} = (article: ArticleDeprecated) => {
+	const mainMedia = article.mainMediaElements[0];
+	const mainMediaType = mainMedia?._type;
+
+	const isMainMediaImage =
+		mainMediaType ===
+		'model.dotcomrendering.pageElements.ImageBlockElement';
+	const isMainMediaAtom =
+		mainMediaType ===
+		'model.dotcomrendering.pageElements.MediaAtomBlockElement';
+
+	const aspectRatio = isMainMediaImage
+		? mainMedia.media.allImages[0]?.fields.aspectRatio
+		: isMainMediaAtom
+			? mainMedia.assets[0]?.aspectRatio
+			: undefined;
+
+	return {
+		mainMediaAspectRatio: aspectRatio,
+		mainMediaOrientation:
+			aspectRatio != null
+				? getImageOrientation(aspectRatio)
+				: 'landscape',
+	};
+};

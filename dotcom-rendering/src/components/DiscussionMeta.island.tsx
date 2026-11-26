@@ -34,7 +34,7 @@ export const DiscussionMeta = ({
 			? joinUrl(
 					discussionApiUrl,
 					'profile/me?strict_sanctions_check=false',
-			  )
+				)
 			: undefined,
 		{},
 		authStatus.kind === 'SignedIn'

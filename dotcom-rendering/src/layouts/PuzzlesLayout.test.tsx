@@ -1,0 +1,366 @@
+import '@testing-library/jest-dom';
+import { render, screen, within } from '@testing-library/react';
+import type { ReactNode } from 'react';
+import { Standard } from '../../fixtures/generated/fe-articles/Standard';
+import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
+import { SubNav } from '../components/Masthead/Titlepiece/SubNav';
+import { Sponsored } from '../components/PuzzlesDirectory.stories';
+import { extractNAV, type NavType } from '../model/extract-nav';
+import type { Branding } from '../types/branding';
+import { PuzzlesLayout } from './PuzzlesLayout';
+
+jest.mock('../components/Masthead/Masthead', () => ({
+	Masthead: ({ nav }: { nav: NavType }) => (
+		<header data-testid="masthead">
+			{nav.subNavSections && (
+				<SubNav
+					subNavSections={nav.subNavSections}
+					currentNavLink={nav.currentNavLink}
+				/>
+			)}
+		</header>
+	),
+}));
+jest.mock('../components/Footer', () => ({
+	Footer: () => <div data-testid="footer" />,
+}));
+jest.mock('../components/PuzzlesDirectoryProgress.island', () => ({
+	PuzzlesDirectoryProgress: ({
+		hideTopRule,
+		containerBranding,
+	}: {
+		hideTopRule?: boolean;
+		containerBranding?: Partial<Record<string, Branding>>;
+	}) => (
+		<div
+			data-testid="directory"
+			data-hide-top-rule={hideTopRule}
+			data-container-branding={JSON.stringify(containerBranding)}
+		/>
+	),
+}));
+jest.mock('../components/Section', () => ({
+	Section: ({ children }: { children: ReactNode }) => <div>{children}</div>,
+}));
+jest.mock('./lib/stickiness', () => ({
+	Stuck: ({ children }: { children: ReactNode }) => children,
+}));
+
+const page = (isAdFreeUser = false) => ({
+	isAdFreeUser,
+	editionId: 'UK',
+	contributionsServiceUrl: '',
+	config: { switches: {}, serverSideABTests: {} },
+	pageFooter: {},
+	layout: {
+		containers: [],
+	},
+});
+
+describe('PuzzlesLayout', () => {
+	const nav = { ...extractNAV(Standard.nav), subNavSections: undefined };
+	const renderedCss = () =>
+		[
+			...Array.from(document.querySelectorAll('style')).map(
+				(style) => style.textContent ?? '',
+			),
+			...Array.from(document.styleSheets).flatMap((sheet) =>
+				Array.from(sheet.cssRules).map((rule) => rule.cssText),
+			),
+		].join('\n');
+
+	it('renders one branded page title without category filters', () => {
+		render(<PuzzlesLayout NAV={nav} puzzlesPage={page() as never} />);
+		expect(
+			screen.getByRole('heading', {
+				level: 1,
+				name: 'Puzzles & games',
+			}),
+		).toBeInTheDocument();
+		expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1);
+		expect(
+			screen.queryByRole('navigation', { name: 'Puzzles categories' }),
+		).not.toBeInTheDocument();
+	});
+
+	it('renders the full hub subnav even when frontend omits trivia', () => {
+		const categoryLinks = (
+			[
+				['Crosswords', '/puzzles-and-games/crosswords/archive'],
+				['Word games', '/puzzles-and-games/word-games/archive'],
+				['Logic puzzles', '/puzzles-and-games/logic-puzzles/archive'],
+			] as const
+		).map(([title, url]) => ({ title, longTitle: title, url }));
+		const parent = {
+			title: 'Puzzles & games',
+			longTitle: 'Puzzles & games',
+			url: '/puzzles-and-games',
+		};
+		render(
+			<PuzzlesLayout
+				NAV={{
+					...nav,
+					subNavSections: { parent, links: categoryLinks },
+				}}
+				puzzlesPage={
+					{
+						...page(),
+						config: {
+							switches: {},
+							edition: 'INT',
+							serverSideABTests: {},
+						},
+					} as never
+				}
+			/>,
+		);
+
+		expect(
+			screen.getAllByRole('link').map((link) => ({
+				title: link.textContent,
+				url: link.getAttribute('href'),
+			})),
+		).toEqual([
+			{ title: parent.title, url: parent.url },
+			...categoryLinks.map(({ title, url }) => ({ title, url })),
+			{
+				title: 'Trivia & quizzes',
+				url: '/puzzles-and-games/trivia-and-quizzes/archive',
+			},
+		]);
+	});
+
+	it('renders the full subnav in the Sponsored story without the development bypass', () => {
+		render(<Sponsored />);
+		const masthead = within(screen.getByTestId('masthead'));
+
+		expect(
+			masthead.getAllByRole('link').map((link) => link.textContent),
+		).toEqual([
+			'Puzzles & games',
+			'Crosswords',
+			'Word games',
+			'Logic puzzles',
+			'Trivia & quizzes',
+		]);
+		expect(
+			masthead.getByRole('link', { name: 'Trivia & quizzes' }),
+		).toHaveAttribute(
+			'href',
+			'/puzzles-and-games/trivia-and-quizzes/archive',
+		);
+	});
+
+	it.each(['AU', 'UK'])(
+		'selects only %s container branding independently of hub branding',
+		(editionId) => {
+			render(
+				<PuzzlesLayout
+					NAV={nav}
+					branding={puzzlesBranding}
+					puzzlesPage={
+						{
+							...page(true),
+							editionId,
+							layout: {
+								containers: [
+									{
+										id: 'crosswords',
+										title: 'Crosswords',
+										content: {
+											items: [],
+											nestedContainers: [],
+										},
+										commercialProperties: {
+											AU: {
+												adTargeting: [],
+												branding: puzzlesBranding,
+											},
+										},
+									},
+									{
+										id: 'word-games',
+										title: 'Word games',
+										content: {
+											items: [],
+											nestedContainers: [],
+										},
+									},
+								],
+							},
+						} as never
+					}
+				/>,
+			);
+
+			expect(screen.getByTestId('directory')).toHaveAttribute(
+				'data-container-branding',
+				JSON.stringify(
+					editionId === 'AU' ? { crosswords: puzzlesBranding } : {},
+				),
+			);
+		},
+	);
+
+	it('uses the requested puzzle palette when dark mode is available', () => {
+		render(
+			<PuzzlesLayout
+				darkModeAvailable={true}
+				NAV={nav}
+				puzzlesPage={page() as never}
+			/>,
+		);
+		const css = renderedCss();
+
+		expect(css).toContain('prefers-color-scheme: dark');
+		expect(css).toContain('--puzzles-page-background: #1A1A1A');
+		expect(css).toContain('--puzzles-header-background: #333333');
+		expect(css).toContain('--puzzles-card-background: #333333');
+		expect(css).toContain('--puzzles-headline-colour: #F6F6F6');
+		expect(css).toContain('--puzzles-text-colour: #DCDCDC');
+	});
+
+	it('renders only the desktop header slot and respects ad-free input', () => {
+		const { rerender } = render(
+			<PuzzlesLayout NAV={nav} puzzlesPage={page(true) as never} />,
+		);
+		expect(document.querySelector('.js-ad-slot')).not.toBeInTheDocument();
+		expect(screen.getByTestId('masthead')).toBeInTheDocument();
+		expect(screen.getByTestId('footer')).toBeInTheDocument();
+		rerender(
+			<PuzzlesLayout NAV={nav} puzzlesPage={page(false) as never} />,
+		);
+		expect(
+			document.getElementById('dfp-ad--top-above-nav'),
+		).toBeInTheDocument();
+		expect(
+			document.getElementById('dfp-ad--mobile-above-nav'),
+		).not.toBeInTheDocument();
+	});
+	it('renders sponsored artwork with the lockup in the header only when branding is provided', () => {
+		const getHeader = () =>
+			screen
+				.getByRole('heading', { level: 1, name: 'Puzzles & games' })
+				.closest('header')!;
+		const { rerender } = render(
+			<PuzzlesLayout
+				NAV={nav}
+				puzzlesPage={page() as never}
+				branding={puzzlesBranding}
+			/>,
+		);
+		expect(getHeader()).toHaveTextContent('Supported by');
+		expect(getHeader().querySelector('img')).toHaveAttribute(
+			'src',
+			'https://i.guim.co.uk/img/uploads/2026/10/12/header-sponsored-mobile-360px.png?width=360&dpr=2&s=none',
+		);
+		expect(
+			Array.from(getHeader().querySelectorAll('source'), (source) =>
+				source.getAttribute('srcset'),
+			),
+		).toEqual(
+			[
+				'wide-1440px',
+				'leftcol-1280px',
+				'desktop-1024px',
+				'tablet-768px',
+				'mobile-phablet-667px',
+				'mobile-landscape-480px',
+				'mobile-medium-393px',
+			].map(
+				(name) =>
+					`https://i.guim.co.uk/img/uploads/2026/10/12/header-sponsored-${name}.png?width=${name.match(/(\d+)px$/)![1]}&dpr=2&s=none`,
+			),
+		);
+		expect(
+			screen.getByRole('link', {
+				name: 'Visit the Example sponsor website',
+			}),
+		).toHaveAttribute('href', 'https://example.com');
+		const aboutLink = screen.getByRole('link', {
+			name: 'About this content',
+		});
+		expect(aboutLink).toHaveAttribute('href', 'https://example.com/about');
+		expect(getHeader()).not.toContainElement(aboutLink);
+		expect(screen.getByTestId('directory')).toHaveAttribute(
+			'data-hide-top-rule',
+			'true',
+		);
+		rerender(<PuzzlesLayout NAV={nav} puzzlesPage={page() as never} />);
+		expect(screen.queryByText('Supported by')).not.toBeInTheDocument();
+		expect(
+			screen.queryByRole('link', { name: 'About this content' }),
+		).not.toBeInTheDocument();
+		expect(screen.getByTestId('directory')).toHaveAttribute(
+			'data-hide-top-rule',
+			'false',
+		);
+		expect(getHeader().querySelector('img')).toHaveAttribute(
+			'src',
+			'https://i.guim.co.uk/img/uploads/2026/09/15/header-mobile-360px.png?width=360&dpr=2&s=none',
+		);
+	});
+
+	it('omits the About link when the sponsor has no about URL', () => {
+		render(
+			<PuzzlesLayout
+				NAV={nav}
+				puzzlesPage={page() as never}
+				branding={{ ...puzzlesBranding, aboutThisLink: '' }}
+			/>,
+		);
+		expect(screen.getByText('Supported by')).toBeInTheDocument();
+		expect(
+			screen.queryByRole('link', { name: 'About this content' }),
+		).not.toBeInTheDocument();
+	});
+
+	it('renders the illustrated header with responsive sources and a fixed height', () => {
+		render(<PuzzlesLayout NAV={nav} puzzlesPage={page() as never} />);
+		const header = screen
+			.getByRole('heading', {
+				level: 1,
+				name: 'Puzzles & games',
+			})
+			.closest('header')!;
+		expect(header).toHaveStyle({ height: '230px' });
+		expect(header).toHaveStyle({
+			background: 'var(--puzzles-header-background, #fef9f5)',
+		});
+		const picture = header.querySelector('picture')!;
+		const sources = Array.from(picture.querySelectorAll('source'));
+		const expected = [
+			[1728, 'header-desktop-1728px', 1728],
+			[1300, 'header-wide-1440px', 1440],
+			[1140, 'header-leftcol-1280px', 1280],
+			[980, 'header-desktop-1024px', 1024],
+			[740, 'header-tablet-768px', 768],
+			[660, 'header-mobile-phablet-669px', 669],
+			[480, 'header-mobile-landscape-480px', 480],
+			[375, 'header-mobile-medium-393px', 393],
+		];
+		expect(sources).toHaveLength(expected.length);
+		for (const [
+			index,
+			[width, filename, imageWidth],
+		] of expected.entries()) {
+			expect(sources[index]).toHaveAttribute(
+				'media',
+				`(min-width: ${width}px)`,
+			);
+			expect(sources[index]).toHaveAttribute(
+				'srcset',
+				`https://i.guim.co.uk/img/uploads/2026/09/15/${filename}.png?width=${imageWidth}&dpr=2&s=none`,
+			);
+		}
+		expect(picture.querySelector('img')).toHaveAttribute(
+			'src',
+			'https://i.guim.co.uk/img/uploads/2026/09/15/header-mobile-360px.png?width=360&dpr=2&s=none',
+		);
+		expect(picture.querySelector('img')).toHaveAttribute(
+			'alt',
+			'An owl carrying a crossword grid beside an octopus reading a puzzle',
+		);
+		expect(picture.querySelector('img')).not.toHaveAttribute('aria-hidden');
+	});
+});

@@ -1,0 +1,571 @@
+import { css } from '@emotion/react';
+import {
+	between,
+	from,
+	headlineBold20,
+	headlineBold24,
+	palette,
+	space,
+	textSans14,
+	until,
+	visuallyHidden,
+} from '@guardian/source/foundations';
+import { SvgCheckmark } from '@guardian/source/react-components';
+import { puzzleTypeForCard } from '../lib/puzzleCardProgress';
+import { getPuzzleGroupPalette } from '../lib/puzzleGroupPalette';
+import {
+	IN_PROGRESS_BAR_PERCENTAGE,
+	showsInProgress,
+} from '../lib/puzzleProgress/inProgressDisplay';
+import type { PuzzleItem } from '../types/puzzlesPage';
+
+/**
+ * Shared with `PuzzlesDirectory.tsx` (the Puzzles Hub listing page): both the
+ * Hub's own card grid and any other surface that needs to render `PuzzleItem`s
+ * in the same visual style (e.g. `PuzzlePageLayout`'s "More from Puzzles &
+ * games" rail) render through this one card/row implementation, so the two
+ * surfaces can never visually drift apart.
+ */
+
+export const getPuzzleUrl = (item: PuzzleItem): string | undefined => {
+	const slug = item.slug;
+	if (
+		item.variant === 'archive-page' &&
+		slug !== undefined &&
+		slug.length > 0
+	) {
+		return `/puzzles-and-games/${slug}/archive`;
+	}
+	if (
+		item.variant === 'iframe-page' &&
+		slug !== undefined &&
+		slug.length > 0
+	) {
+		return item.date !== undefined && item.date.length > 0
+			? `/puzzles-and-games/${slug}/${item.date}`
+			: `/puzzles-and-games/${slug}`;
+	}
+	const url = item.url;
+	if (
+		url !== undefined &&
+		(url.startsWith('/puzzles-and-games') ||
+			url.startsWith('/crosswords/') ||
+			/^https?:\/\//.test(url))
+	) {
+		return url;
+	}
+	return undefined;
+};
+
+export const externalProps = (url: string) =>
+	/^https?:\/\//.test(url)
+		? { rel: 'noopener noreferrer', target: '_blank' as const }
+		: {};
+
+const puzzleColours = (item: PuzzleItem) => {
+	switch (item.type) {
+		case 'crossword':
+			return { background: palette.news[800], title: palette.news[300] };
+		case 'sudoku':
+			return {
+				background: palette.sport[800],
+				title: palette.sport[400],
+			};
+		case 'wordiply':
+		case 'word-wheel':
+			return {
+				background: palette.opinion[800],
+				title: palette.opinion[400],
+			};
+		case 'film-reveal':
+		case 'on-the-ball':
+		case 'trivia': {
+			const { tint, primary } = getPuzzleGroupPalette('trivia');
+			return { background: tint, title: primary };
+		}
+		default:
+			return {
+				background: item.backgroundColour,
+				title: palette.neutral[7],
+			};
+	}
+};
+
+const cardStyles = (
+	variant: PuzzleItem['cardVariant'],
+	hasImage: boolean,
+	isFeatured: boolean,
+) => css`
+	position: relative;
+	display: block;
+	width: 100%;
+	min-width: 0;
+	min-height: ${variant === 'compact' ? 104 : 145}px;
+	height: ${variant === 'compact' ? 'auto' : '145px'};
+	${hasImage &&
+	css`
+		padding-right: 181px;
+	`}
+	box-sizing: border-box;
+	color: var(--puzzles-card-text-colour, ${palette.neutral[7]});
+	text-decoration: none;
+
+	${from.tablet} {
+		max-width: ${variant === 'compact' ? 'none' : '340px'};
+	}
+
+	${from.desktop} {
+		max-width: ${variant === 'compact' ? 'none' : '460px'};
+		min-height: ${variant === 'compact' ? 104 : 176}px;
+		height: ${variant === 'compact' ? 'auto' : '176px'};
+		${hasImage &&
+		css`
+			padding-right: 220px;
+		`}
+	}
+
+	${isFeatured &&
+	css`
+		${from.leftCol} {
+			min-height: 368px;
+			height: 368px;
+			padding-right: 0;
+		}
+	`}
+
+	:hover .puzzle-card-title {
+		text-decoration: underline;
+	}
+
+	:focus-visible {
+		outline: 3px solid ${palette.brand[500]};
+		outline-offset: 2px;
+	}
+`;
+
+const cardColourStyles = (background: string | undefined) => {
+	const lightBackground = background ?? palette.neutral[100];
+	return css`
+		background-color: ${lightBackground};
+		background-color: var(--puzzles-card-background, ${lightBackground});
+	`;
+};
+
+const cardTextStyles = (isFeatured: boolean) => css`
+	position: relative;
+	z-index: ${isFeatured ? 1 : 'auto'};
+	display: flex;
+	min-width: 0;
+	flex-direction: column;
+	padding: ${space[1]}px ${space[2]}px ${space[2]}px;
+`;
+
+const cardTitleStyles = (
+	variant: PuzzleItem['cardVariant'],
+	lightColour: string,
+) => css`
+	margin: 0;
+	${variant === 'compact' ? headlineBold20 : headlineBold24};
+	color: var(--puzzles-card-headline-colour, ${lightColour});
+	line-height: 1.15;
+`;
+
+const hiddenCrosswordSuffixStyles = css`
+	${visuallyHidden};
+`;
+
+const cadenceStyles = css`
+	color: var(--puzzles-card-cadence-colour, ${palette.neutral[7]});
+	${textSans14};
+	line-height: 1.3;
+`;
+
+const setterStyles = css`
+	color: var(--puzzles-card-text-colour, ${palette.news[300]});
+	${textSans14};
+	line-height: 1.3;
+`;
+
+const playedStyles = css`
+	position: absolute;
+	z-index: 1;
+	bottom: ${space[2]}px;
+	left: ${space[2]}px;
+	display: inline-flex;
+	align-items: center;
+	gap: ${space[1]}px;
+	${textSans14};
+	font-weight: bold;
+	line-height: 1;
+	.completed-icon {
+		display: inline-flex;
+		width: 14px;
+		height: 14px;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		background: ${palette.success[400]};
+		color: ${palette.neutral[100]};
+	}
+	svg {
+		width: 11px;
+		height: 11px;
+		fill: currentColor;
+	}
+`;
+
+const inProgressStyles = css`
+	flex-direction: column;
+	align-items: flex-start;
+`;
+
+const progressTrackStyles = css`
+	width: 80px;
+	height: 3px;
+	border-radius: 2px;
+	background: color-mix(in srgb, currentColor 20%, transparent);
+	> span {
+		display: block;
+		height: 100%;
+		border-radius: inherit;
+		background: currentColor;
+	}
+`;
+
+const cardImageStyles = (isFeatured: boolean) => css`
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 181px;
+	height: 145px;
+	min-height: 0;
+	object-fit: contain;
+	${from.desktop} {
+		width: 220px;
+		height: 176px;
+	}
+
+	${isFeatured &&
+	css`
+		${from.leftCol} {
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			width: 345px;
+			max-width: 75%;
+			height: 276px;
+		}
+	`}
+`;
+
+export const PuzzleCard = ({
+	isFeatured,
+	item,
+	dataLinkName,
+}: {
+	isFeatured: boolean;
+	item: PuzzleItem;
+	dataLinkName?: string;
+}) => {
+	const url = getPuzzleUrl(item);
+	const colours = puzzleColours(item);
+	const setter = item.type === 'crossword' ? item.setter?.trim() : undefined;
+	const hasImage =
+		item.image !== undefined &&
+		item.image.length > 0 &&
+		item.cardVariant !== 'compact';
+	const needsCrosswordSuffix =
+		item.type === 'crossword' && !/\bcrossword\b/i.test(item.title);
+	const isInProgress =
+		item.gameStatus === 'in-progress' &&
+		showsInProgress(puzzleTypeForCard(item));
+	const contents = (
+		<>
+			<div css={cardTextStyles(isFeatured)}>
+				<h3
+					className="puzzle-card-title"
+					css={cardTitleStyles(item.cardVariant, colours.title)}
+				>
+					{item.title}
+					{needsCrosswordSuffix && (
+						<span css={hiddenCrosswordSuffixStyles}>
+							{' '}
+							crossword
+						</span>
+					)}
+				</h3>
+				{item.cadence !== undefined && item.cadence.length > 0 && (
+					<span css={cadenceStyles}>{item.cadence}</span>
+				)}
+				{setter && <span css={setterStyles}>By: {setter}</span>}
+			</div>
+			{hasImage && (
+				<img
+					alt={item.imageAlt?.trim() || `${item.title} illustration`}
+					aria-hidden="true"
+					css={cardImageStyles(isFeatured)}
+					src={item.image}
+				/>
+			)}
+			{isInProgress && (
+				<span css={[playedStyles, inProgressStyles]}>
+					<span css={progressTrackStyles} aria-hidden="true">
+						<span
+							style={{ width: `${IN_PROGRESS_BAR_PERCENTAGE}%` }}
+						/>
+					</span>
+					In progress
+				</span>
+			)}
+			{item.gameStatus === 'completed' && (
+				<span css={playedStyles}>
+					Played
+					<span aria-hidden="true" className="completed-icon">
+						<SvgCheckmark />
+					</span>
+				</span>
+			)}
+		</>
+	);
+	const styles = [
+		cardStyles(item.cardVariant, hasImage, isFeatured),
+		cardColourStyles(colours.background),
+	];
+	return url !== undefined ? (
+		<a
+			css={styles}
+			href={url}
+			data-link-name={dataLinkName}
+			{...externalProps(url)}
+		>
+			{contents}
+		</a>
+	) : (
+		<article css={styles}>{contents}</article>
+	);
+};
+
+/*
+ * Horizontal separators between cards, as `[above, below]` in px: the space
+ * between the card above and the separator, and between the separator and
+ * the card below. Below the tablet breakpoint the values depend on the card
+ * size; from tablet they are the same for every card.
+ */
+const normalSeparator = [16, 8] as const;
+const smallSeparator = [8, 6] as const;
+const tabletSeparator = [16, 10] as const;
+
+const isSmallCard = (variant: PuzzleItem['cardVariant'] | undefined) =>
+	variant === 'compact';
+
+export const rowsStyles = css`
+	--puzzles-gap: 16px;
+	--puzzles-group-above: ${normalSeparator[0]}px;
+	--puzzles-group-below: ${normalSeparator[1]}px;
+	display: flex;
+	min-width: 0;
+	flex-direction: column;
+	${from.phablet} {
+		--puzzles-gap: 24px;
+	}
+
+	${from.tablet} {
+		--puzzles-gap: 20px;
+		--puzzles-group-above: ${tabletSeparator[0]}px;
+		--puzzles-group-below: ${tabletSeparator[1]}px;
+	}
+	/*
+	 * Each card group after the first is spaced from the previous one by the
+	 * separator above and below it. The above space follows the size of the
+	 * cards in the previous group, the below space the size of its own.
+	 */
+	${until.tablet} {
+		> ul[data-card-size='small'] + ul {
+			--puzzles-group-above: ${smallSeparator[0]}px;
+		}
+		> ul + ul[data-card-size='small'] {
+			--puzzles-group-below: ${smallSeparator[1]}px;
+		}
+	}
+	> ul ~ ul {
+		margin-top: calc(
+			var(--puzzles-group-above) + var(--puzzles-group-below)
+		);
+	}
+	> ul ~ ul::before {
+		position: absolute;
+		top: calc(var(--puzzles-group-below) * -1);
+		right: 0;
+		left: 0;
+		border-top: 1px solid
+			var(--puzzles-border-colour, ${palette.neutral[86]});
+		content: '';
+		pointer-events: none;
+	}
+`;
+
+const cardGridStyles = (columns: number, tracks = columns) => css`
+	grid-template-columns: repeat(${tracks}, minmax(0, 1fr));
+	> li {
+		grid-column: auto;
+	}
+	> li::before,
+	> li::after,
+	> li:not(:first-child)::before,
+	> li:not(:first-child)::after {
+		content: none;
+	}
+	> li:nth-child(n + ${columns + 1})::before {
+		position: absolute;
+		top: calc(var(--puzzles-row-below) * -1);
+		right: 0;
+		left: 0;
+		border-top: 1px solid
+			var(--puzzles-border-colour, ${palette.neutral[86]});
+		content: '';
+		pointer-events: none;
+	}
+	${columns > 1 &&
+	css`
+		> li:not(:nth-child(${columns}n + 1))::after {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: calc(var(--puzzles-gap) / -2);
+			border-left: 1px solid
+				var(--puzzles-border-colour, ${palette.neutral[86]});
+			content: '';
+			pointer-events: none;
+		}
+	`}
+`;
+
+const tabletCompactGridStyles = (count: number) => {
+	const columns = Math.min(count, 3);
+	const remainder = count % 3;
+
+	return css`
+		${cardGridStyles(columns, 6)};
+		> li {
+			grid-column: span ${count < 3 ? 6 / columns : 2};
+		}
+		${count > 3 &&
+		remainder === 2 &&
+		css`
+			> li:nth-last-child(-n + 2) {
+				grid-column: span 3;
+			}
+		`}
+		${count > 3 &&
+		remainder === 1 &&
+		css`
+			> li:last-child {
+				grid-column: span 6;
+			}
+		`}
+	`;
+};
+
+export const rowStyles = (
+	variant: PuzzleItem['cardVariant'],
+	count: number,
+) => {
+	const mobileColumns = variant === 'compact' ? Math.min(count, 2) : 1;
+	const tabletColumns =
+		variant === 'compact' ? Math.min(count, 3) : Math.min(count, 2);
+	const desktopColumns =
+		variant === 'compact' ? Math.min(count, 5) : Math.min(count, 2);
+
+	const [separatorAbove, separatorBelow] = isSmallCard(variant)
+		? smallSeparator
+		: normalSeparator;
+
+	return css`
+		position: relative;
+		display: grid;
+		--puzzles-row-below: ${separatorBelow}px;
+		${cardGridStyles(mobileColumns)};
+		gap: ${separatorAbove + separatorBelow}px 16px;
+		${from.phablet} {
+			column-gap: 24px;
+		}
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		> li {
+			position: relative;
+		}
+
+		${from.tablet} {
+			${cardGridStyles(tabletColumns)};
+			--puzzles-row-below: ${tabletSeparator[1]}px;
+			column-gap: 20px;
+			row-gap: ${tabletSeparator[0] + tabletSeparator[1]}px;
+			max-width: 700px;
+		}
+		${variant === 'compact' &&
+		css`
+			${between.tablet.and.desktop} {
+				${tabletCompactGridStyles(count)};
+			}
+		`}
+		${from.desktop} {
+			${cardGridStyles(desktopColumns)};
+			max-width: 940px;
+		}
+	`;
+};
+
+export const Rows = ({
+	isFeatured = false,
+	rows,
+	ophanComponentName,
+}: {
+	isFeatured?: boolean;
+	rows: PuzzleItem[][];
+	ophanComponentName?: string;
+}) => {
+	const populatedRows = rows.filter((row) => row.length > 0);
+
+	return (
+		<div css={rowsStyles} data-component={ophanComponentName}>
+			{populatedRows.map((row, groupIndex) => {
+				const offset = populatedRows
+					.slice(0, groupIndex)
+					.reduce(
+						(total, previousRow) => total + previousRow.length,
+						0,
+					);
+
+				return (
+					<ul
+						data-card-size={
+							isSmallCard(row[0]?.cardVariant)
+								? 'small'
+								: 'normal'
+						}
+						css={rowStyles(
+							row[0]?.cardVariant ?? 'primary',
+							row.length,
+						)}
+						key={row.map(({ id }) => id).join('-')}
+					>
+						{row.map((item, index) => (
+							<li key={item.id}>
+								<PuzzleCard
+									isFeatured={isFeatured}
+									item={item}
+									dataLinkName={
+										ophanComponentName !== undefined
+											? `puzzles | group-${groupIndex} | card-@${offset + index + 1} | card-${item.id}`
+											: undefined
+									}
+								/>
+							</li>
+						))}
+					</ul>
+				);
+			})}
+		</div>
+	);
+};

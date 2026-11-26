@@ -26,6 +26,7 @@ const indices = [
 	'sign-in-gate',
 	'lightbox',
 	'youTubeFullscreen',
+	'selfHostedFullscreen',
 
 	// Sticky video and button need to be above everything
 	'sticky-video-button',
@@ -57,6 +58,12 @@ const indices = [
 	// Edition selector in nav - needs to be below stickyAdWrapper
 	'editionDropdown',
 
+	// Used liveblogs, needs to appear over other content
+	'stickyYoutubePlayer',
+
+	// Interscroller ads need their own stacking context to force the background image below the ad to stop it capturing mouse events
+	'interscrollerAd',
+
 	// The content displayed by the Details component
 	'summaryDetails',
 
@@ -78,13 +85,16 @@ const indices = [
 	// Sticky table of contents element
 	'tableOfContents',
 
-	// Article headline (should be above main media)
-	'articleHeadline',
-	'immersiveBlackBox',
-
 	// Body
 	'bodyArea',
 	'rightColumnArea',
+
+	// Vertical grid rule lines, kept above the main media and furniture
+	'immersiveGridOuterRules',
+
+	// Article headline (should be above main media)
+	'articleHeadline',
+	'immersiveBlackBox',
 
 	// Media overlay
 	'mediaOverlay',
@@ -92,10 +102,9 @@ const indices = [
 	// Self-hosted video
 	'video-progress-bar-foreground',
 	'video-progress-bar-background',
+	'video-controls-container',
+	'video-card-link',
 	'video-container',
-
-	// Main media
-	'mainMedia',
 
 	// The carousel buttons of the highlights container that sits above the header.
 	// Needs to be above 'card-link'.
@@ -106,6 +115,9 @@ const indices = [
 	'card-nested-link',
 	'card-link',
 	'card-podcast-image',
+
+	// discussion modals and dropdowns
+	'discussion',
 ] as const;
 
 // Implementation code - you don't need to change this to get a new index

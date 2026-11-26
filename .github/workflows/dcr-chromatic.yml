@@ -1,41 +1,64 @@
 name: DCR Chromatic 👓
 
 on:
+  merge_group:
+    types: [checks_requested]
   push:
     branches: [main]
   pull_request:
     types: [opened, labeled, synchronize]
 
 jobs:
+  check-paths:
+    name: Check changed paths
+    uses: ./.github/workflows/check-chromatic-paths.yml
+
   chromatic:
     name: Chromatic
     runs-on: ubuntu-latest
-    # Run Chromatic only if `run_chromatic` label has been applied or we're
-    # pushing to `main`.
-    if: contains(github.event.pull_request.labels.*.name, 'run_chromatic')  ||  github.ref == 'refs/heads/main'
+    needs: check-paths
+    # Always run so the required "UI Tests: dotcom_rendering" status check is always
+    # reported. When skipping, Chromatic posts a passing status without building Storybook.
     steps:
       - name: Checkout - On Pull Request
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         if: ${{ github.event_name == 'pull_request'}}
         with:
           fetch-depth: 0
           # By default the pull_request event will run on a ephermeral merge commit which simulates a merge between the pull request
           # and the target branch. This can cause issues with Chromatic https://www.chromatic.com/docs/turbosnap#github-pullrequest-triggers
           # Hopefully by checking out the HEAD commit of a PR instead of the merge commit we can avoid some of those issues.
-          ref: ${{ github.event.pull_request.head.sha }}
+          # We fallback to github.sha in case the workflow is triggered by a merge_group event, which doesn't have a pull_request object, see https://www.chromatic.com/docs/faq/merge-queue-ref/
+          ref: ${{ github.event.pull_request.head.ref || github.sha }}
+
       - name: Checkout - On Push Event
-        uses: actions/checkout@v6
-        if: ${{ github.event_name == 'push'}}
+        uses: actions/checkout@v7
+        if: ${{ github.event_name == 'push' || github.event_name == 'merge_group' }}
         with:
           fetch-depth: 0
 
       - name: Set up Node environment
-        uses: ./.github/actions/setup-node-env
+        # Only needed for a full Chromatic run.
+        if: |
+          github.event_name == 'push' || github.event_name == 'merge_group' ||
+          (github.event_name == 'pull_request' &&
+            contains(github.event.pull_request.labels.*.name, 'run_chromatic'))
+        uses: pnpm/setup@v3
+        with:
+          cache: true
 
+        # If on push to main, always run the Chromatic step.
+        # If on a PR and the run_chromatic label is present, run the Chromatic step.
+        # If on a PR and no relevant files have been touched, run the Chromatic step with skip: true, so the check appears as skipped instead of absent.
       - name: Chromatic - DCR
         env:
           NODE_OPTIONS: '--max_old_space_size=4096'
-        uses: chromaui/action@v13.3.0
+        uses: chromaui/action@v18.14.6
+        if: |
+          (github.event_name == 'push' || github.event_name == 'merge_group') ||
+          (github.event_name == 'pull_request' &&
+            contains(github.event.pull_request.labels.*.name, 'run_chromatic')) ||
+          (github.event_name == 'pull_request' && needs.check-paths.outputs.relevant != 'true')
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__DOTCOM_RENDERING }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -45,16 +68,23 @@ jobs:
           workingDir: dotcom-rendering
           buildScriptName: 'build-storybook'
           exitOnceUploaded: true
+          # Skip on PRs when no relevant UI files changed and the run_chromatic label isn't present (so that chromatic can still be run even if it's not required)
+          # Chromatic will post a passing status without building Storybook.
+          skip: ${{ github.event_name == 'pull_request' && needs.check-paths.outputs.relevant != 'true' && !contains(github.event.pull_request.labels.*.name, 'run_chromatic') }}
 
   remove-label:
-    if: github.ref != 'refs/heads/main'
+    # Only remove label when Chromatic actually ran (label present and relevant changes)
+    if: |
+      github.event_name == 'pull_request' &&
+      contains(github.event.pull_request.labels.*.name, 'run_chromatic') &&
+      needs.check-paths.outputs.relevant == 'true'
     runs-on: ubuntu-latest
-    needs: chromatic
+    needs: [check-paths, chromatic]
     permissions:
       pull-requests: write
     steps:
       - name: Remove run_chromatic label
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             await github.rest.issues.removeLabel({

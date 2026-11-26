@@ -92,12 +92,12 @@ export const headerWrapper = (
 			: secondaryCta;
 
 		const renderedMobileContent = mobileContent
-			? ({
+			? {
 					heading: mobileContent.heading,
 					subheading: mobileContent.subheading,
 					primaryCta: mobilePrimaryCta,
 					secondaryCta: mobileSecondaryCta,
-			  } as HeaderRenderedContent)
+				}
 			: undefined;
 
 		const { abTestName, abTestVariant, componentType, campaignCode } =
@@ -177,6 +177,7 @@ const validate = (props: unknown): props is HeaderProps => {
 export const validatedHeaderWrapper = (
 	Header: ReactComponent<HeaderRenderProps>,
 ): ReactComponent<HeaderProps> => {
+	// eslint-disable-next-line react/display-name -- this is not a React component, but a function that returns one
 	return (props: HeaderProps) => {
 		if (validate(props)) {
 			const Module = headerWrapper(Header);

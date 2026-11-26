@@ -6,10 +6,10 @@ The [editorial newsletters page](https://www.theguardian.com/email-newsletters) 
 
 It is served using a dedicated route handler ([dotcom-rendering/src/server/handler.allEditorialNewslettersPage.web.ts](https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/server/handler.allEditorialNewslettersPage.web.ts)) and layout, but follows broadly the same pattern as the article and fronts pages, IE:
 
--   frontend posts a JSON body to the route for the page (https://www.theguardian.com/email-newsletters.json will output the page model)
--   the JSON is validated against the schema for the page model
--   the page model is "enhanced" ([see dotcom-rendering/src/model/enhance-newsletters-page.ts](https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/model/enhance-newsletters-page.ts))
--   the enhanced page model is passed to a render function to produece the HTML to return to frontend
+- frontend posts a JSON body to the route for the page (https://www.theguardian.com/email-newsletters.json will output the page model)
+- the JSON is validated against the schema for the page model
+- the page model is "enhanced" ([see dotcom-rendering/src/model/enhance-newsletters-page.ts](https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/model/enhance-newsletters-page.ts))
+- the enhanced page model is passed to a render function to produece the HTML to return to frontend
 
 ## Arranging the Newsletters
 

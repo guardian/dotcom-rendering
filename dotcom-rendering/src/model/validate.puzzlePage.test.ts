@@ -1,0 +1,244 @@
+import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
+import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
+import { validateAsPuzzlePageType } from './validate.puzzlePage';
+
+const clone = <T>(value: T): T => JSON.parse(JSON.stringify(value)) as T;
+
+const expectInvalid = (page: unknown) =>
+	expect(() => validateAsPuzzlePageType(page)).toThrow(
+		'Unable to validate request body for puzzle page.',
+	);
+
+describe('validateAsPuzzlePageType', () => {
+	it('accepts commercial properties for only sponsored editions', () => {
+		const page = createPuzzlePage('word-wheel', {
+			commercialProperties: {
+				AU: { adTargeting: [], branding: puzzlesBranding },
+			},
+		});
+		expect(
+			validateAsPuzzlePageType(page).commercialProperties?.AU?.branding,
+		).toEqual(puzzlesBranding);
+	});
+
+	it.each([
+		null,
+		[],
+		{ XX: { adTargeting: [] } },
+		{ AU: { adTargeting: [], branding: { sponsorName: 'Missing logo' } } },
+	])(
+		'rejects invalid game commercial properties: %j',
+		(commercialProperties) => {
+			expectInvalid({
+				...createPuzzlePage('word-wheel'),
+				commercialProperties,
+			});
+		},
+	);
+
+	it('preserves the API game URL in the page instance', () => {
+		const page = createPuzzlePage('sudoku-easy');
+		page.instance.gameUrl =
+			'https://tg.amuselabs.com/guardian/date-picker?id=opaque';
+		expect(validateAsPuzzlePageType(page).instance.gameUrl).toBe(
+			page.instance.gameUrl,
+		);
+	});
+
+	it('preserves the authoritative progress identity when present and accepts older payloads without it', () => {
+		const page = createPuzzlePage('film-reveal');
+		expect(
+			validateAsPuzzlePageType(page).instance.progressIdentity,
+		).toBeUndefined();
+		page.instance.progressIdentity = {
+			puzzleId: 'moviegrid-filmreveal-394',
+			puzzleType: 'FILMREVEAL',
+			publishDate: '2026-11-02T00:00:00Z',
+		};
+		expect(
+			validateAsPuzzlePageType(page).instance.progressIdentity,
+		).toEqual(page.instance.progressIdentity);
+	});
+
+	it('preserves requiresSubscription and accepts older payloads without it', () => {
+		const page = createPuzzlePage('sudoku-easy');
+		expect(
+			validateAsPuzzlePageType(page).instance.requiresSubscription,
+		).toBeUndefined();
+		page.instance.requiresSubscription = true;
+		expect(
+			validateAsPuzzlePageType(page).instance.requiresSubscription,
+		).toBe(true);
+	});
+
+	it.each(['true', 1, null, {}])(
+		'rejects a non-boolean requiresSubscription: %j',
+		(requiresSubscription) => {
+			const page = createPuzzlePage('sudoku-easy');
+			expectInvalid({
+				...page,
+				instance: { ...page.instance, requiresSubscription },
+			});
+		},
+	);
+
+	it.each([
+		null,
+		[],
+		{},
+		{
+			puzzleId: '',
+			puzzleType: 'FILMREVEAL',
+			publishDate: '2026-11-02T00:00:00Z',
+		},
+		{ puzzleId: 'id', puzzleType: 42, publishDate: '2026-11-02T00:00:00Z' },
+		{ puzzleId: 'id', puzzleType: 'FILMREVEAL' },
+	])('rejects a malformed progress identity: %j', (progressIdentity) => {
+		const page = createPuzzlePage('film-reveal');
+		expectInvalid({
+			...page,
+			instance: { ...page.instance, progressIdentity },
+		});
+	});
+
+	it('rejects a non-string game URL', () => {
+		const page = clone(createPuzzlePage('sudoku-easy')) as unknown as {
+			instance: { gameUrl: unknown };
+		};
+		page.instance.gameUrl = 42;
+		expectInvalid(page);
+	});
+
+	it('accepts a valid iframe payload', () => {
+		const page = createPuzzlePage('sudoku-easy');
+		expect(validateAsPuzzlePageType(page).slug).toBe('sudoku-easy');
+	});
+
+	it.each([
+		'id',
+		'slug',
+		'webTitle',
+		'canonicalUrl',
+		'editionId',
+		'instance',
+	])('rejects a missing required page field: %s', (field) => {
+		const page = clone(
+			createPuzzlePage('sudoku-easy'),
+		) as unknown as Record<string, unknown>;
+		delete page[field];
+		expectInvalid(page);
+	});
+
+	it('accepts a payload with isAdFreeUser absent, matching frontend\u2019s current /PuzzlePage requests (frontend does not send this field yet)', () => {
+		const page = clone(
+			createPuzzlePage('sudoku-easy'),
+		) as unknown as Record<string, unknown>;
+		delete page.isAdFreeUser;
+		expect(validateAsPuzzlePageType(page).isAdFreeUser).toBeUndefined();
+	});
+
+	it('rejects a non-boolean isAdFreeUser', () => {
+		const page = clone(createPuzzlePage('sudoku-easy')) as unknown as {
+			isAdFreeUser: unknown;
+		};
+		page.isAdFreeUser = 'true';
+		expectInvalid(page);
+	});
+
+	it('accepts isAdFreeUser: true', () => {
+		const page = createPuzzlePage('sudoku-easy', { isAdFreeUser: true });
+		expect(validateAsPuzzlePageType(page).isAdFreeUser).toBe(true);
+	});
+
+	it('rejects a config without server-side participations', () => {
+		const page = clone(createPuzzlePage('sudoku-easy')) as unknown as {
+			config: Record<string, unknown>;
+		};
+		delete page.config.serverSideABTests;
+		expectInvalid(page);
+	});
+
+	it('rejects navigation that is not an object', () => {
+		const page = clone(createPuzzlePage('sudoku-easy')) as unknown as {
+			nav: unknown;
+		};
+		page.nav = [];
+		expectInvalid(page);
+	});
+
+	it('rejects an unknown edition id', () => {
+		const page = clone(createPuzzlePage('sudoku-easy')) as unknown as {
+			editionId: string;
+		};
+		page.editionId = 'NOT_AN_EDITION';
+		expectInvalid(page);
+	});
+
+	it('rejects an instance missing its required title', () => {
+		const page = clone(createPuzzlePage('sudoku-easy'));
+		(page.instance as unknown as { title?: string }).title = undefined;
+		expectInvalid(page);
+	});
+
+	it('rejects an invalid item in moreFromPuzzlesAndGames', () => {
+		const page = clone(createPuzzlePage('sudoku-easy'));
+		page.instance.moreFromPuzzlesAndGames = [
+			{ id: 'bad' },
+		] as unknown as typeof page.instance.moreFromPuzzlesAndGames;
+		expectInvalid(page);
+	});
+
+	it('accepts a newsletter-only puzzlesSupporting', () => {
+		const page = clone(createPuzzlePage('sudoku-easy'));
+		page.instance.puzzlesSupporting = {
+			usefulLinks: [],
+			newsletter: {
+				identityName: 'cluesletter',
+				name: 'Cluesletter',
+				frequency: 'Weekly',
+				description: 'News and clues',
+			},
+		};
+		expect(
+			validateAsPuzzlePageType(page).instance.puzzlesSupporting
+				?.newsletter?.identityName,
+		).toBe('cluesletter');
+	});
+
+	it('rejects an incomplete newsletter in puzzlesSupporting', () => {
+		const page = clone(createPuzzlePage('sudoku-easy'));
+		page.instance.puzzlesSupporting = {
+			usefulLinks: [],
+			newsletter: { identityName: 'cluesletter' },
+		} as unknown as typeof page.instance.puzzlesSupporting;
+		expectInvalid(page);
+	});
+
+	it('accepts a payload with puzzleDate present', () => {
+		const page = createPuzzlePage('sudoku-easy', {
+			instance: {
+				...createPuzzlePage('sudoku-easy').instance,
+				puzzleDate: '2026-09-11',
+			},
+		});
+		expect(validateAsPuzzlePageType(page).instance.puzzleDate).toBe(
+			'2026-09-11',
+		);
+	});
+
+	it('accepts a payload with puzzleDate absent', () => {
+		const page = clone(createPuzzlePage('sudoku-easy'));
+		delete (page.instance as { puzzleDate?: string }).puzzleDate;
+		expect(
+			validateAsPuzzlePageType(page).instance.puzzleDate,
+		).toBeUndefined();
+	});
+
+	it('rejects a non-string puzzleDate', () => {
+		const page = clone(createPuzzlePage('sudoku-easy')) as unknown as {
+			instance: { puzzleDate?: unknown };
+		};
+		page.instance.puzzleDate = 20260911;
+		expectInvalid(page);
+	});
+});

@@ -1,0 +1,243 @@
+import type { AbTest } from '@guardian/ophan-tracker-js';
+import { neutral } from '@guardian/source/foundations';
+import { Button, TextInput } from '@guardian/source/react-components';
+import { ToggleSwitch } from '@guardian/source-development-kitchen/react-components';
+import { type ChangeEvent, useEffect } from 'react';
+import ReactGoogleRecaptcha from 'react-google-recaptcha';
+import { useHideMarketingToggleForCountry } from '../../../../lib/useHideMarketingToggleForCountry';
+import { useNewsletterSignupForm } from '../../../../lib/useNewsletterSignupForm';
+import { useConfig } from '../../../ConfigContext';
+import { NewsletterPrivacyMessage } from '../../../NewsletterPrivacyMessage';
+import { FailureMessage } from './ErrorMessage';
+import type { NewsletterBannerData } from './NewsletterBannerData';
+import { styles } from './NewsletterSignupForm.styles';
+
+type NewsletterSignupFormProps = {
+	bannerData: NewsletterBannerData;
+	componentId: string;
+	abTest?: AbTest;
+	isModal?: boolean;
+	onSuccess?: () => void;
+};
+
+/**
+ * # Newsletter Signup Form
+ *
+ * Renders a newsletter signup form with email input, optional marketing opt-in
+ * toggle, privacy message, reCAPTCHA, and success/failure feedback states.
+ * All logic lives in {@link useNewsletterSignupForm}.
+ */
+
+export const NewsletterSignupForm = ({
+	bannerData,
+	componentId,
+	abTest,
+	isModal = false,
+	onSuccess,
+}: NewsletterSignupFormProps) => {
+	const newsletterId = bannerData.newsletter.identityName;
+	const {
+		emailInputTextColor,
+		emailInputBackgroundColor,
+		emailInputBorderColor,
+		signupButtonBackgroundColor,
+		signupButtonTextColor,
+		errorColor,
+		privacyTextColor,
+		borderColor,
+		toggleActiveColor,
+	} = bannerData.settings.newsletterBanner;
+	const bodyText =
+		bannerData.settings.containerSettings.textColor ?? neutral[20];
+	const { renderingTarget } = useConfig();
+	const hideMarketingToggle = useHideMarketingToggleForCountry();
+
+	const {
+		userEmail,
+		isSignedIn,
+		isInteracted,
+		showMarketingToggle,
+		marketingOptIn,
+		isWaitingForResponse,
+		responseOk,
+		errorMessage,
+		isValidationError,
+		recaptchaRef,
+		captchaSiteKey,
+		handleCaptchaComplete,
+		handleCaptchaLoadError,
+		handleEmailChange,
+		handleEmailFocus,
+		handleEmailInvalid,
+		handleMarketingToggle,
+		handleSubmit,
+		handleSubmitButtonClick,
+		handleReset,
+	} = useNewsletterSignupForm(
+		newsletterId,
+		renderingTarget,
+		componentId,
+		abTest,
+		hideMarketingToggle,
+	);
+
+	const hasResponse = typeof responseOk === 'boolean';
+	const hasNonValidationError =
+		errorMessage !== undefined && errorMessage !== '' && !isValidationError;
+	const isSuccess = hasResponse && !!responseOk;
+	const showForm = (!hasResponse || isSuccess) && !hasNonValidationError;
+
+	useEffect(() => {
+		if (isSuccess) onSuccess?.();
+	}, [isSuccess, onSuccess]);
+
+	// Show the failure box for server errors (responseOk === false) and for
+	// reCAPTCHA / network errors that occur before a response is received.
+	const showFailure = (hasResponse && !responseOk) || hasNonValidationError;
+	const failureMessage = hasNonValidationError
+		? errorMessage
+		: 'Sign up failed.';
+	const showAdditionalFields =
+		isModal || isInteracted || (userEmail ?? '') !== '';
+	// isValidationError comes from the hook — true only for inline field
+	// errors (empty / bad format), false for reCAPTCHA / network errors.
+
+	return (
+		<>
+			<form
+				onSubmit={handleSubmit}
+				id={`newsletter-signup-${newsletterId}`}
+				style={{
+					display: !showForm ? 'none' : undefined,
+				}}
+				css={[
+					styles.form,
+					isSignedIn
+						? styles.bannerSignedInLayout
+						: styles.bannerSignedOutLayout,
+					!showAdditionalFields && styles.collapsedForm,
+				]}
+			>
+				{isSignedIn ? (
+					<input type="hidden" name="email" value={userEmail ?? ''} />
+				) : (
+					<div
+						css={[
+							styles.emailField,
+							styles.validationError(errorColor),
+						]}
+					>
+						<TextInput
+							cssOverrides={styles.emailInputText(
+								emailInputTextColor,
+							)}
+							theme={{
+								textLabel: emailInputTextColor,
+								textUserInput: emailInputTextColor,
+								backgroundInput: emailInputBackgroundColor,
+								textError: errorColor,
+								borderError: errorColor,
+								...(emailInputBorderColor !== undefined && {
+									border: emailInputBorderColor,
+								}),
+							}}
+							name="email"
+							label="Enter your email"
+							type="email"
+							value={userEmail ?? ''}
+							error={isValidationError ? errorMessage : undefined}
+							onFocus={handleEmailFocus}
+							onChange={(e: ChangeEvent<HTMLInputElement>) =>
+								handleEmailChange(e.target.value)
+							}
+							onInvalid={handleEmailInvalid}
+						/>
+					</div>
+				)}
+				<div css={styles.submitButtonContainer}>
+					<Button
+						theme={{
+							backgroundPrimary: signupButtonBackgroundColor,
+							backgroundPrimaryHover: signupButtonBackgroundColor,
+							...(signupButtonTextColor !== undefined && {
+								textPrimary: signupButtonTextColor,
+							}),
+						}}
+						cssOverrides={
+							isSignedIn
+								? [styles.submitButton, styles.signedInButton]
+								: styles.submitButton
+						}
+						onClick={handleSubmitButtonClick}
+						type="submit"
+						isLoading={isWaitingForResponse}
+						loadingAnnouncement="Signing you up…"
+						disabled={isWaitingForResponse}
+					>
+						Sign up
+					</Button>
+				</div>
+				<div
+					aria-hidden={!showAdditionalFields}
+					css={styles.additionalFields(showAdditionalFields)}
+				>
+					<div>
+						<div css={styles.additionalFieldsContent}>
+							<div
+								css={styles.toggleContainer}
+								style={{
+									display: showMarketingToggle
+										? undefined
+										: 'none',
+								}}
+							>
+								<div
+									css={styles.marketingToggleBox(borderColor)}
+								>
+									<ToggleSwitch
+										cssOverrides={styles.toggleText(
+											bodyText,
+											toggleActiveColor,
+										)}
+										id={`marketing-opt-in-${newsletterId}`}
+										checked={marketingOptIn ?? false}
+										onClick={handleMarketingToggle}
+										label="Get updates about our journalism and ways to support and enjoy our work. Toggle to opt out."
+										labelPosition="left"
+									/>
+								</div>
+							</div>
+							<div css={styles.privacyContainer(isSignedIn)}>
+								<NewsletterPrivacyMessage
+									isSignedIn={isSignedIn}
+									cssOverrides={styles.privacyText(
+										privacyTextColor,
+									)}
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+
+			{showFailure && (
+				<FailureMessage
+					bannerData={bannerData}
+					text={failureMessage}
+					onRetry={handleReset}
+				/>
+			)}
+			{captchaSiteKey !== undefined && captchaSiteKey !== '' && (
+				<div css={styles.recaptchaContainer}>
+					<ReactGoogleRecaptcha
+						sitekey={captchaSiteKey}
+						ref={recaptchaRef}
+						onChange={handleCaptchaComplete}
+						onErrored={handleCaptchaLoadError}
+						size="invisible"
+					/>
+				</div>
+			)}
+		</>
+	);
+};

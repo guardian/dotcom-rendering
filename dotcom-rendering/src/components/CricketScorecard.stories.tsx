@@ -1,33 +1,31 @@
-import { breakpoints } from '@guardian/source/foundations';
+import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
+import { allModes } from '../../.storybook/modes';
 import preview from '../../.storybook/preview';
-import { CricketScorecard as CricketScorecardComponent } from './CricketScorecard';
+import { CricketScorecardNew as CricketScorecardNewComponent } from './CricketScorecard';
 
 const meta = preview.meta({
-	component: CricketScorecardComponent,
-	title: 'Components/CricketScorecard',
-	decorators: [
-		// To make the story not shoved in the corner.
-		(Story) => (
-			<>
-				<div css={{ padding: 16 }}>
-					<Story />
-				</div>
-			</>
-		),
-	],
+	component: CricketScorecardNewComponent,
+	title: 'Components/CricketScorecardNew',
+	decorators: [centreColumnDecorator],
 	parameters: {
 		chromatic: {
-			viewports: [breakpoints.mobileLandscape],
+			modes: {
+				'light leftCol': allModes['light leftCol'],
+			},
 		},
 	},
 });
 
-export const CricketScorecard = meta.story({
-	name: 'Cricket Scorecard',
+export const CricketScorecardNew = meta.story({
+	name: 'Cricket Scorecard (New)',
 	args: {
 		allInnings: [
 			{
 				description: 'India first innings',
+				battingTeam: 'India',
+				order: 1,
+				declared: false,
+				forfeited: false,
 				inningsTotals: {
 					runs: 254,
 					overs: '49.0',
@@ -49,6 +47,9 @@ export const CricketScorecard = meta.story({
 						fours: 7,
 						sixes: 3,
 						howOut: 'st Latham b Ravindra',
+						out: true,
+						onStrike: false,
+						nonStrike: true,
 					},
 					{
 						name: 'Shubman Gill',
@@ -57,6 +58,9 @@ export const CricketScorecard = meta.story({
 						fours: 0,
 						sixes: 1,
 						howOut: 'c Phillips b Santner',
+						out: true,
+						onStrike: false,
+						nonStrike: true,
 					},
 					{
 						name: 'Virat Kohli',
@@ -65,6 +69,9 @@ export const CricketScorecard = meta.story({
 						fours: 0,
 						sixes: 0,
 						howOut: 'lbw b Bracewell',
+						out: true,
+						onStrike: false,
+						nonStrike: true,
 					},
 					{
 						name: 'Shreyas Iyer',
@@ -73,6 +80,42 @@ export const CricketScorecard = meta.story({
 						fours: 2,
 						sixes: 2,
 						howOut: 'c Ravindra b Santner',
+						out: true,
+						onStrike: false,
+						nonStrike: true,
+					},
+					{
+						name: 'Lokesh Rahul',
+						ballsFaced: 45,
+						runs: 39,
+						fours: 3,
+						sixes: 0,
+						howOut: 'run out (Williamson)',
+						out: true,
+						onStrike: false,
+						nonStrike: true,
+					},
+					{
+						name: 'Hardik Pandya',
+						ballsFaced: 18,
+						runs: 22,
+						fours: 2,
+						sixes: 1,
+						howOut: 'c Bracewell b Smith',
+						out: true,
+						nonStrike: true,
+						onStrike: false,
+					},
+					{
+						name: 'Ravindra Jadeja',
+						ballsFaced: 24,
+						runs: 30,
+						fours: 1,
+						sixes: 0,
+						howOut: 'not out',
+						out: false,
+						onStrike: true,
+						nonStrike: true,
 					},
 				],
 				bowlers: [
@@ -144,6 +187,11 @@ export const CricketScorecard = meta.story({
 				],
 			},
 			{
+				description: 'New Zealand first innings',
+				battingTeam: 'New Zealand',
+				order: 2,
+				declared: false,
+				forfeited: false,
 				inningsTotals: {
 					runs: 254,
 					overs: '49.0',
@@ -157,7 +205,6 @@ export const CricketScorecard = meta.story({
 					penalties: 0,
 					wides: 13,
 				},
-				description: 'New Zealand first innings',
 				batters: [
 					{
 						name: 'Will Young',
@@ -166,6 +213,9 @@ export const CricketScorecard = meta.story({
 						fours: 2,
 						sixes: 0,
 						howOut: 'lbw b Vinod',
+						out: true,
+						onStrike: false,
+						nonStrike: true,
 					},
 					{
 						name: 'Rachin Ravindra',
@@ -174,6 +224,9 @@ export const CricketScorecard = meta.story({
 						fours: 4,
 						sixes: 1,
 						howOut: 'b Yadav',
+						out: true,
+						onStrike: false,
+						nonStrike: true,
 					},
 					{
 						name: 'Kane Williamson',
@@ -182,6 +235,9 @@ export const CricketScorecard = meta.story({
 						fours: 1,
 						sixes: 0,
 						howOut: 'c & b Yadav',
+						out: true,
+						onStrike: false,
+						nonStrike: true,
 					},
 					{
 						name: 'Daryl Mitchell',
@@ -190,6 +246,42 @@ export const CricketScorecard = meta.story({
 						fours: 3,
 						sixes: 0,
 						howOut: 'c Sharma b Ahmed',
+						out: true,
+						onStrike: false,
+						nonStrike: true,
+					},
+					{
+						name: 'Tom Latham',
+						ballsFaced: 56,
+						runs: 44,
+						fours: 4,
+						sixes: 0,
+						howOut: 'c Kohli b Shami',
+						out: true,
+						onStrike: false,
+						nonStrike: true,
+					},
+					{
+						name: 'Glenn Phillips',
+						ballsFaced: 34,
+						runs: 55,
+						fours: 3,
+						sixes: 3,
+						howOut: 'not out',
+						out: false,
+						onStrike: true,
+						nonStrike: true,
+					},
+					{
+						name: 'Michael Bracewell',
+						ballsFaced: 8,
+						runs: 5,
+						fours: 0,
+						sixes: 0,
+						howOut: 'not out',
+						out: false,
+						onStrike: false,
+						nonStrike: true,
 					},
 				],
 				bowlers: [
@@ -248,6 +340,7 @@ export const CricketScorecard = meta.story({
 			'R S Madugalle',
 		],
 		homeTeam: {
+			paID: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
 			name: 'India',
 			lineup: [
 				'Rohit Sharma',
@@ -264,6 +357,7 @@ export const CricketScorecard = meta.story({
 			],
 		},
 		awayTeam: {
+			paID: 'b2c3d4e5-f6a7-8901-bcde-f12345678901',
 			name: 'New Zealand',
 			lineup: [
 				'Rachin Ravindra',

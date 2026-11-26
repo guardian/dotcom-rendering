@@ -4,6 +4,7 @@ import { from, space, until } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { ReactNode } from 'react';
 import { grid } from '../grid';
+import { type LayoutType } from '../layouts/lib/articleArrangements';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
 	ArticleDesign,
@@ -36,6 +37,7 @@ import { PodcastMeta } from './PodcastMeta';
 
 type Props = {
 	format: ArticleFormat;
+	layoutType?: LayoutType;
 	byline?: string;
 	tags: TagType[];
 	primaryDateline: string;
@@ -188,10 +190,10 @@ const MetaGridCommentCount = ({
 
 const MetaGridDateline = ({
 	children,
-	isImmersiveOrAnalysisWithMultipleAuthors,
+	useBylineArea,
 }: {
 	children: ReactNode;
-	isImmersiveOrAnalysisWithMultipleAuthors: boolean;
+	useBylineArea: boolean;
 }) => (
 	<div
 		css={css`
@@ -199,9 +201,7 @@ const MetaGridDateline = ({
 			margin-bottom: ${space[4]}px;
 		`}
 		style={{
-			gridArea: isImmersiveOrAnalysisWithMultipleAuthors
-				? 'byline'
-				: 'dateline',
+			gridArea: useBylineArea ? 'byline' : 'dateline',
 		}}
 	>
 		{children}
@@ -242,6 +242,7 @@ const galleryMetaContainer = css`
 export const ArticleMetaApps = ({
 	branding,
 	format,
+	layoutType,
 	byline,
 	tags,
 	primaryDateline,
@@ -253,9 +254,10 @@ export const ArticleMetaApps = ({
 	headline,
 	mainMediaElements,
 }: Props) => {
+	const isImmersiveGrid = layoutType?.startsWith('immersive') ?? false;
 	const soleContributor = getSoleContributor(tags, byline);
 	const authorName = soleContributor?.title ?? 'Author Image';
-	const avatarUrl = shouldShowAvatar(format)
+	const avatarUrl = shouldShowAvatar(format, isImmersiveGrid)
 		? soleContributor?.bylineLargeImageUrl
 		: undefined;
 
@@ -279,6 +281,9 @@ export const ArticleMetaApps = ({
 
 	const isImmersiveOrAnalysisWithMultipleAuthors =
 		(isAnalysis || isImmersive) && !!byline && isUndefined(soleContributor);
+
+	const showContributor =
+		shouldShowContributor(format, isImmersiveGrid) && !!byline;
 
 	const shouldShowListenToArticleButton =
 		!!pageId && !(isLiveBlog || isPicture || isGallery || isVideo);
@@ -328,16 +333,18 @@ export const ArticleMetaApps = ({
 					</MetaGridAvatar>
 				)}
 				<MetaGridByline isComment={isComment}>
-					{shouldShowContributor(format) && !!byline && (
+					{showContributor && (
 						<Contributor
 							byline={byline}
 							tags={tags}
 							format={format}
+							layoutType={layoutType}
 						/>
 					)}
-					{shouldShowFollowButtons(
-						isComment || isAnalysis || isImmersive,
-					) &&
+					{!showContributor &&
+						shouldShowFollowButtons(
+							isComment || isAnalysis || isImmersive,
+						) &&
 						soleContributor && (
 							<Island
 								priority="feature"
@@ -388,8 +395,9 @@ export const ArticleMetaApps = ({
 					/>
 				)}
 				<MetaGridDateline
-					isImmersiveOrAnalysisWithMultipleAuthors={
-						isImmersiveOrAnalysisWithMultipleAuthors
+					useBylineArea={
+						isImmersiveOrAnalysisWithMultipleAuthors &&
+						!showContributor
 					}
 				>
 					<Dateline
@@ -442,6 +450,9 @@ const LiveblogNotifications = (props: {
 					id={props.pageId}
 					displayName={props.headline}
 					notificationType="content"
+					colour="--follow-text"
+					backgroundColour="--follow-icon-background"
+					iconColour="--follow-icon-fill"
 				/>
 			</Island>
 		</div>

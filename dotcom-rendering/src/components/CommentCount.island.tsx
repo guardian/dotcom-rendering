@@ -85,7 +85,9 @@ export const CommentCount = ({ discussionApiUrl, shortUrlId }: Props) => {
 	const commentCount = useCommentCount(discussionApiUrl, shortUrlId);
 
 	// If the comment count is 0 we still want to display it
-	if (isUndefined(commentCount)) return null;
+	if (isUndefined(commentCount)) {
+		return null;
+	}
 
 	const { short, long } = formatCount(commentCount);
 

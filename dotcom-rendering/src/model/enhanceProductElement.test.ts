@@ -1,8 +1,13 @@
+import {
+	getProductLinkLabelWithPrice,
+	rewriteLabelWithLatestPrice,
+} from '../components/AffiliateProducts/livePriceUtils';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type {
 	FEElement,
 	ProductBlockElement,
+	ProductCta,
 	ProductImage,
 } from '../types/content';
 import { enhanceElements } from './enhanceBlocks';
@@ -41,6 +46,7 @@ const productBlockElement: ProductBlockElement = {
 			html: '<h2>Unique Heading.</h2>',
 		},
 	],
+	id: '123',
 	displayType: 'InlineOnly',
 	productCtas: [
 		{
@@ -82,6 +88,7 @@ const elementsEnhancer = enhanceElements(
 		hasAffiliateLinksDisclaimer: false,
 		shouldHideAds: false,
 		pageId: '',
+		stage: 'DEV',
 	},
 	true,
 );
@@ -94,9 +101,8 @@ describe('enhanceProductBlockElements', () => {
 
 	const enhancedElements = result[0];
 	if (
-		enhancedElements === undefined ||
-		enhancedElements._type !==
-			'model.dotcomrendering.pageElements.ProductBlockElement'
+		enhancedElements?._type !==
+		'model.dotcomrendering.pageElements.ProductBlockElement'
 	) {
 		throw new Error(
 			'Expected "enhancedElements" to be a ProductBlockElement',
@@ -124,9 +130,8 @@ describe('enhanceProductBlockElements', () => {
 
 		const enhancedElementNoCtas = resultNoCtas[0];
 		if (
-			enhancedElementNoCtas === undefined ||
-			enhancedElementNoCtas._type !==
-				'model.dotcomrendering.pageElements.ProductBlockElement'
+			enhancedElementNoCtas?._type !==
+			'model.dotcomrendering.pageElements.ProductBlockElement'
 		) {
 			throw new Error(
 				'Expected "enhancedElementNoCtas" to be a ProductBlockElement',
@@ -156,9 +161,8 @@ describe('enhanceProductBlockElements', () => {
 
 		const enhancedElementWithNaN = resultWithNaN[0];
 		if (
-			enhancedElementWithNaN === undefined ||
-			enhancedElementWithNaN._type !==
-				'model.dotcomrendering.pageElements.ProductBlockElement'
+			enhancedElementWithNaN?._type !==
+			'model.dotcomrendering.pageElements.ProductBlockElement'
 		) {
 			throw new Error(
 				'Expected "enhancedElementWithNaN" to be a ProductBlockElement',
@@ -166,6 +170,165 @@ describe('enhanceProductBlockElements', () => {
 		}
 
 		expect(enhancedElementWithNaN.lowestPrice).toEqual('£29.99');
+	});
+
+	it('uses latestPrice for lowest price', () => {
+		const productBlockWithLatestPrice: ProductBlockElement = {
+			...productBlockElement,
+			productCtas: [
+				{
+					url: 'https://www.johnlewis.com/bosch-twk7203gb-sky-variable-temperature-kettle-1-7l-black/p3228625',
+					text: 'Buy now',
+					retailer: 'John Lewis',
+					price: '£29.99',
+					latestPrice: {
+						currencySymbol: '£',
+						price: '19.99',
+					},
+				},
+				{
+					url: 'https://www.johnlewis.com/bosch-xyz',
+					text: 'Buy now',
+					retailer: 'John Lewis',
+					price: '£26.99',
+					latestPrice: {
+						currencySymbol: '£',
+						price: '25.99',
+					},
+				},
+				...productBlockElement.productCtas,
+			],
+		};
+
+		const [enhanced] = enhanceProductElement(elementsEnhancer)([
+			productBlockWithLatestPrice,
+		]);
+
+		if (
+			enhanced?._type !==
+			'model.dotcomrendering.pageElements.ProductBlockElement'
+		) {
+			throw new Error('Expected a ProductBlockElement');
+		}
+
+		expect(enhanced.lowestPrice).toBe('£19.99');
+	});
+
+	it('uses the latestPrice for lowest price even when it is higher than the CTA price', () => {
+		const productBlockWithLatestPrice: ProductBlockElement = {
+			...productBlockElement,
+			productCtas: [
+				{
+					...productBlockElement.productCtas[0]!,
+					price: '£19.99',
+					latestPrice: {
+						currencySymbol: '£',
+						price: '25.99',
+					},
+				},
+				...productBlockElement.productCtas,
+			],
+		};
+
+		const [enhanced] = enhanceProductElement(elementsEnhancer)([
+			productBlockWithLatestPrice,
+		]);
+
+		if (
+			enhanced?._type !==
+			'model.dotcomrendering.pageElements.ProductBlockElement'
+		) {
+			throw new Error('Expected a ProductBlockElement');
+		}
+
+		expect(enhanced.lowestPrice).toBe('£25.99');
+	});
+
+	it('formats the lowest live price with the same cents as the button label', () => {
+		const cta: ProductCta = {
+			...productBlockElement.productCtas[0]!,
+			text: '',
+			price: '$90',
+			latestPrice: { currencySymbol: '$', price: '94.4' },
+		};
+		const [enhanced] = enhanceProductElement(elementsEnhancer)([
+			{ ...productBlockElement, productCtas: [cta] },
+		]);
+
+		if (
+			enhanced?._type !==
+			'model.dotcomrendering.pageElements.ProductBlockElement'
+		) {
+			throw new Error('Expected a ProductBlockElement');
+		}
+
+		const buttonLabel = rewriteLabelWithLatestPrice(
+			cta.latestPrice,
+			getProductLinkLabelWithPrice(cta),
+		);
+		expect(buttonLabel).toBe('$94.40 at John Lewis');
+		expect(enhanced.lowestPrice).toBe('$94.40');
+	});
+
+	it('includes the currency symbol of the latest price', () => {
+		const productBlockWithDollarPrice: ProductBlockElement = {
+			...productBlockElement,
+			productCtas: [
+				{
+					...productBlockElement.productCtas[0]!,
+					price: '$29.99',
+					latestPrice: {
+						currencySymbol: '$',
+						price: '9.99',
+					},
+				},
+			],
+		};
+
+		const [enhanced] = enhanceProductElement(elementsEnhancer)([
+			productBlockWithDollarPrice,
+		]);
+
+		if (
+			enhanced?._type !==
+			'model.dotcomrendering.pageElements.ProductBlockElement'
+		) {
+			throw new Error('Expected a ProductBlockElement');
+		}
+
+		expect(enhanced.lowestPrice).toBe('$9.99');
+	});
+
+	it('ignores an invalid latest price and still considers the CTA price', () => {
+		const productBlockWithInvalidLatestPrice: ProductBlockElement = {
+			...productBlockElement,
+			productCtas: [
+				{
+					url: 'https://www.johnlewis.com/bosch-twk7203gb-sky-variable-temperature-kettle-1-7l-black/p3228625',
+					text: 'Buy now',
+					retailer: 'John Lewis',
+					price: '£29.99',
+					latestPrice: {
+						currencySymbol: '£',
+						price: 'Fifteen',
+					},
+				},
+				...productBlockElement.productCtas,
+			],
+		};
+
+		const [enhanced] = enhanceProductElement(elementsEnhancer)([
+			productBlockWithInvalidLatestPrice,
+		]);
+
+		if (
+			enhanced?._type !==
+			'model.dotcomrendering.pageElements.ProductBlockElement'
+		) {
+			throw new Error('Expected a ProductBlockElement');
+		}
+
+		expect(enhanced.lowestPrice).toBe('£29.99');
 	});
 
 	it('extracts all html from primary heading and removes trailing `:` only', () => {

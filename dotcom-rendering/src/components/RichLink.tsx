@@ -218,8 +218,9 @@ export const RichLink = ({
 			data-print-layout="hide"
 			data-link-name={`rich-link-${richLinkIndex} | ${richLinkIndex}`}
 			data-component="rich-link"
-			css={backgroundStyles}
+			data-testid="rich-link"
 			data-name={isPlaceholder ? 'placeholder' : undefined}
+			css={backgroundStyles}
 		>
 			<FormatBoundary format={linkFormat}>
 				<a css={linkStyles} href={url}>
@@ -229,6 +230,8 @@ export const RichLink = ({
 						<div>
 							<img
 								css={imageStyles}
+								data-name="rich-link-image"
+								data-testid="rich-link-image"
 								src={imageData.thumbnailUrl}
 								alt={imageData.altText}
 								width={imageData.width}

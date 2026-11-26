@@ -1,6 +1,6 @@
 # DCAR: Dotcom & Apps Rendering
 
-This repository contains the rendering logic for theguardian.com and for a subset of articles in the live apps.
+This repository contains the rendering logic for theguardian.com and content in the live apps.
 
 ## Run
 

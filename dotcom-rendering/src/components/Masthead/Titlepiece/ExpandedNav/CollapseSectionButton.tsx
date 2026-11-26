@@ -88,7 +88,6 @@ export const CollapseSectionButton = ({
 		aria-haspopup="true"
 		aria-controls={ariaControls}
 		tabIndex={-1}
-		// eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role -- we’re using this label for a CSS-only toggle
 		role="menuitem"
 		data-testid={`column-collapse-${title}`}
 		data-link-name={nestedOphanComponents('header', 'secondary', title)}

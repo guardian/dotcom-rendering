@@ -1,37 +1,69 @@
 name: DCR CICD
 
 on:
+  merge_group:
+    types: [checks_requested]
   push:
+    branches-ignore:
+      - 'gh-readonly-queue/*'
 
 jobs:
-  container:
+  production-container:
     permissions:
-      packages: write
-    uses: ./.github/workflows/container.yml
+      contents: read
+      id-token: write # Required to exchange for AWS credentials using OIDC
+      pull-requests: write # Required by guardian/actions-ecr to comment on PRs
+    uses: ./.github/workflows/container-production.yml
+    secrets:
+      GU_ARTIFACTS_ROLE_ARN: ${{ secrets.GU_ARTIFACTS_ROLE_ARN }}
 
   prettier:
+    if: github.ref != 'refs/heads/main'
     uses: ./.github/workflows/prettier.yml
 
   jest:
+    if: github.ref != 'refs/heads/main'
     uses: ./.github/workflows/jest.yml
 
   lint:
+    if: github.ref != 'refs/heads/main'
     uses: ./.github/workflows/lint.yml
 
+  islands:
+    if: github.ref != 'refs/heads/main'
+    uses: ./.github/workflows/check-islands.yml
+
   playwright:
-    needs: [container]
+    needs: [production-container]
+    if: github.ref != 'refs/heads/main'
+    permissions:
+      contents: read
+      id-token: write # Required to exchange for AWS credentials using OIDC
     uses: ./.github/workflows/playwright.yml
+    secrets:
+      GU_ARTIFACTS_ROLE_ARN: ${{ secrets.GU_ARTIFACTS_ROLE_ARN }}
     with:
-      container-image: ${{ needs.container.outputs.container-image }}
+      production-image-digest: ${{ needs.production-container.outputs.imageDigest }}
 
   publish:
     permissions:
       id-token: write
       contents: read
       pull-requests: write # required by riff-raff action
-    needs: [container, prettier, jest, lint, playwright]
+    needs: [production-container, islands, prettier, jest, lint, playwright]
+    # We don't need a riff-raff deployment for merge_group events.
+    # `!cancelled()` forces this job to be evaluated even when some of the
+    # `needs` jobs are skipped (the checks are skipped on push to main), and
+    # `!contains(needs.*.result, 'failure')` still blocks publish if any needed
+    # job actually failed. Without a status-check function here, a skipped
+    # dependency would cause this job to be skipped as well.
+    if: >-
+      !cancelled() &&
+      !contains(needs.*.result, 'failure') &&
+      github.event_name == 'push'
     uses: ./.github/workflows/publish.yml
     with:
-      container-image: ${{ needs.container.outputs.container-image }}
+      production-image-digest: ${{ needs.production-container.outputs.imageDigest }}
     secrets:
       GU_RIFF_RAFF_ROLE_ARN: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
+      GU_ARTIFACTS_ROLE_ARN: ${{ secrets.GU_ARTIFACTS_ROLE_ARN }}

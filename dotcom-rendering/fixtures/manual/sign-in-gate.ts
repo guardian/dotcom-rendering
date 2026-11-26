@@ -1,4 +1,5 @@
 import type { AuxiaAPIResponseDataUserTreatment } from '../../src/components/SignInGate/types';
+import { PROFILE_SIGN_IN_URL } from '../../src/lib/routeUtils';
 
 export const mockAuxiaResponseDismissible = {
 	status: true,
@@ -16,7 +17,7 @@ export const mockAuxiaResponseDismissible = {
 					"Sign in to keep reading.\n\nIt's free, and we'll bring you right back here in under a minute.",
 				body: '',
 				first_cta_name: 'Create a free account',
-				first_cta_link: 'https://profile.theguardian.com/register',
+				first_cta_link: PROFILE_SIGN_IN_URL,
 				second_cta_name: "I'll do it later",
 			}),
 		} as AuxiaAPIResponseDataUserTreatment,
@@ -35,7 +36,7 @@ export const mockAuxiaResponseDismissibleV2 = {
 				subtitle: '',
 				body: "It's free and only takes 30 seconds.",
 				first_cta_name: 'Create account',
-				first_cta_link: 'https://profile.theguardian.com/register',
+				first_cta_link: PROFILE_SIGN_IN_URL,
 				second_cta_name: "I'll do it later",
 			}),
 		},
@@ -58,7 +59,7 @@ export const mockAuxiaResponseNonDismissible = {
 					"Sign in to keep reading. It's free, and we'll bring you right back here in under a minute.",
 				body: '',
 				first_cta_name: 'Create a free account',
-				first_cta_link: 'https://profile.theguardian.com/register',
+				first_cta_link: PROFILE_SIGN_IN_URL,
 				second_cta_name: '', // Empty makes it non-dismissible
 			}),
 		} as AuxiaAPIResponseDataUserTreatment,
@@ -78,7 +79,7 @@ export const mockAuxiaResponseNonDismissibleV2 = {
 					"Once you are signed in, we'll bring you back here shortly.",
 				body: '',
 				first_cta_name: 'Create account',
-				first_cta_link: 'https://profile.theguardian.com/register',
+				first_cta_link: PROFILE_SIGN_IN_URL,
 				second_cta_name: '',
 			}),
 		},
@@ -100,7 +101,7 @@ export const mockAuxiaResponseLegacy = {
 				subtitle: '',
 				body: '',
 				first_cta_name: 'Create a free account',
-				first_cta_link: 'https://profile.theguardian.com/register',
+				first_cta_link: PROFILE_SIGN_IN_URL,
 				second_cta_name: 'Not now',
 			}),
 		} as AuxiaAPIResponseDataUserTreatment,

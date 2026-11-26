@@ -59,7 +59,6 @@ export const Feature: FEArticle = {
 		},
 	],
 	main: '<figure class="element element-atom"> <gu-atom data-atom-id="d904f65f-f5c1-4786-8d7a-54fc2a4abe72" data-atom-type="media"> \n  <div>\n   <iframe frameborder="0" allowfullscreen="true" src="https://www.youtube-nocookie.com/embed/7z3iv-HkI7o?showinfo=0&amp;rel=0"></iframe>\n  </div>\n </gu-atom> \n</figure>',
-	filterKeyEvents: false,
 	keyEvents: [],
 	blocks: [
 		{
@@ -1268,7 +1267,6 @@ export const Feature: FEArticle = {
 		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
-		abTests: {},
 		serverSideABTests: {},
 		edition: 'UK',
 		ipsosTag: 'environment',

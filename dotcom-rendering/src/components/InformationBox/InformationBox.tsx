@@ -11,7 +11,7 @@ import {
 	textSansBold14,
 } from '@guardian/source/foundations';
 import type { PropsWithChildren } from 'react';
-import React from 'react';
+import type React from 'react';
 
 const informationBoxStyles = css`
 	background-color: ${palette.neutral[93]};

@@ -68,7 +68,7 @@ export const MerchandisingSlot = ({
 				showTopBorder={false}
 				showSideBorders={false}
 				shouldCenter={false}
-				backgroundColour={themePalette('--article-section-background')}
+				backgroundColour={themePalette('--ad-background')}
 				element="aside"
 			>
 				{hasPageSkin ? (

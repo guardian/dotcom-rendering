@@ -31,8 +31,8 @@ the effort required at code review.
 Performance targets should be discoverable and highly visible. If they are not met, developers should receive feedback at
 the earliest opportunity.
 
--   [Speedcurve dashboard](https://speedcurve.com/guardian/favorite/?d=30&db=23315&de=1&ds=1)
--   [Bundle size](https://github.com/guardian/dotcom-rendering/blob/main/docs/principles/lines-in-the-sand.md#our-javascript-bundle-size-will-not-exceed-120kb)
+- [Speedcurve dashboard](https://speedcurve.com/guardian/favorite/?d=30&db=23315&de=1&ds=1)
+- [Bundle size](https://github.com/guardian/dotcom-rendering/blob/main/docs/principles/lines-in-the-sand.md#our-javascript-bundle-size-will-not-exceed-120kb)
 
 ## We only deliver the assets that the page needs
 
@@ -88,9 +88,9 @@ As a principle, we should initially build all core components in isolation as th
 
 When you create components in Storybook you:
 
--   Consider the api
--   Think about the different ways the component could be used
--   Become the consumer of the component (when you write the stories)
+- Consider the api
+- Think about the different ways the component could be used
+- Become the consumer of the component (when you write the stories)
 
 This leads to cleaner components that are easier to understand which is useful for the immediate DCR team and then, if we decide to actually share the component later, to others outside DCR.
 

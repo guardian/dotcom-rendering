@@ -1,13 +1,12 @@
-import type { ConsentState } from '@guardian/libs';
+import type { ConsentState } from '@guardian/consent-manager';
 import { useEffect, useState } from 'react';
-import type { ArticleFormat } from '../lib/articleFormat';
-import { useBetaAB } from '../lib/useAB';
+import { type ArticleFormat } from '../lib/articleFormat';
+import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
 import type { AdTargeting } from '../types/commercial';
 import type { AspectRatio } from '../types/front';
 import type { ArticleMedia } from '../types/mainMedia';
 import { Caption } from './Caption';
-import type { PlayButtonSize } from './Card/components/PlayIcon';
 import type { ResponsiveFontSize } from './CardHeadline';
 import { useConfig } from './ConfigContext';
 import { ophanTrackerApps, ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
@@ -19,7 +18,7 @@ const adTargetingDisabled: AdTargeting = { disableAds: true };
 type Props = {
 	id: string;
 	assetId: string;
-	index: number;
+	index: number | string;
 	mediaTitle?: string;
 	altText?: string;
 	expired: boolean;
@@ -35,8 +34,6 @@ type Props = {
 	stickyVideos: boolean;
 	kickerText?: string;
 	pauseOffscreenVideo?: boolean;
-	iconSizeOnDesktop: PlayButtonSize;
-	iconSizeOnMobile: PlayButtonSize;
 	hidePillOnMobile: boolean;
 	enableAds: boolean;
 	aspectRatio?: AspectRatio;
@@ -78,8 +75,6 @@ export const YoutubeBlockComponent = ({
 	stickyVideos,
 	kickerText,
 	pauseOffscreenVideo = false,
-	iconSizeOnDesktop,
-	iconSizeOnMobile,
 	hidePillOnMobile,
 	enableAds,
 	aspectRatio,
@@ -108,7 +103,7 @@ export const YoutubeBlockComponent = ({
 	const adTargeting = useAdTargeting(duration);
 	const { renderingTarget } = useConfig();
 
-	const abTests = useBetaAB();
+	const abTests = useAB();
 	const abTestParticipations = abTests?.getParticipations() ?? {};
 
 	/**
@@ -126,11 +121,12 @@ export const YoutubeBlockComponent = ({
 			return posterImage;
 		}
 
-		// For Standard Articles and Liveblog Articles with a Video atom for
+		// For Standard Articles, Liveblog Articles and Hosted Video Articles with a Video atom for
 		// their main media we need to display the poster image.
 		if (
 			contentLayout?.toLowerCase() === 'standardlayout' ||
-			contentLayout?.toLowerCase() === 'livebloglayout'
+			contentLayout?.toLowerCase() === 'livebloglayout' ||
+			contentLayout?.toLowerCase() === 'hostedvideolayout'
 		) {
 			return posterImage;
 		}
@@ -143,7 +139,8 @@ export const YoutubeBlockComponent = ({
 	useEffect(() => {
 		if (renderingTarget === 'Web') {
 			const defineConsentState = async () => {
-				const { onConsentChange } = await import('@guardian/libs');
+				const { onConsentChange } =
+					await import('@guardian/consent-manager');
 				onConsentChange((newConsent: ConsentState) => {
 					setConsentState(newConsent);
 				});
@@ -209,8 +206,6 @@ export const YoutubeBlockComponent = ({
 				abTestParticipations={abTestParticipations}
 				kicker={kickerText}
 				shouldPauseOutOfView={pauseOffscreenVideo}
-				iconSizeOnDesktop={iconSizeOnDesktop}
-				iconSizeOnMobile={iconSizeOnMobile}
 				hidePillOnMobile={hidePillOnMobile}
 				renderingTarget={renderingTarget}
 				aspectRatio={aspectRatio}

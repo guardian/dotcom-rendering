@@ -4,6 +4,7 @@ export const stringifyFileBase64 = (file: File): Promise<string> =>
 		reader.addEventListener(
 			'load',
 			() => {
+				// eslint-disable-next-line @typescript-eslint/no-base-to-string -- reader.result is string | ArrayBuffer, but we only expect string here since we use readAsDataURL
 				const fileAsBase64 = reader.result
 					?.toString()
 					.split(';base64,')[1];

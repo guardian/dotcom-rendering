@@ -35,6 +35,8 @@ const enhanceFront = (body: unknown): Front => {
 			data.pressedPage.frontProperties.commercial.editionBrandings,
 			data.editionId,
 		),
+		serverSideABTests: data.config.serverSideABTests,
+		featureSwitches: data.config.switches,
 	});
 
 	return {
@@ -113,7 +115,7 @@ const enhanceTagPage = (body: unknown): TagPage => {
 	const tagPageBranding = branding
 		? decideTagPageBranding({
 				branding,
-		  })
+			})
 		: undefined;
 
 	const enhancedCards = enhanceCards(data.contents, {
@@ -122,6 +124,8 @@ const enhanceTagPage = (body: unknown): TagPage => {
 		discussionApiUrl: data.config.discussionApiUrl,
 		editionId: data.editionId,
 		stripBranding: !!tagPageBranding,
+		serverSideABTests: data.config.serverSideABTests,
+		featureSwitches: data.config.switches,
 	});
 
 	const speed = getSpeedFromTrails(data.contents);
@@ -144,7 +148,7 @@ const enhanceTagPage = (body: unknown): TagPage => {
 						...data.pagination,
 						sectionName: data.webTitle,
 						pageId: data.pageId,
-				  }
+					}
 				: undefined,
 		trendingTopics: extractTrendingTopics(data.contents, data.pageId),
 		header: {

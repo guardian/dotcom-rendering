@@ -2,10 +2,7 @@
 // Copy these to .vscode/settings.json to apply them to your editor – but don't commit it!
 // https://github.com/guardian/recommendations/blob/main/VSCode.md#do-not-commit-vscode
 {
-	"deno.enablePaths": ["scripts/deno"],
-	"deno.lint": true,
-	"deno.unstable": false,
-	"typescript.tsdk": "node_modules/typescript/lib",
+	"js/ts.tsdk.path": "./dotcom-rendering/node_modules/typescript/lib",
 	"git.branchProtection": ["main"],
-	"eslint.workingDirectories": ["./dotcom-rendering"]
+	"eslint.workingDirectories": ["./dotcom-rendering", "./ab-testing"]
 }

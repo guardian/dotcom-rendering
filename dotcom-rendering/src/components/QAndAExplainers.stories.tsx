@@ -47,7 +47,6 @@ export const AllThemes = meta.story({
 			display: ArticleDisplay.Standard,
 			theme: Pillar.News,
 		},
-		abTests: {},
 		/**
 		 * This is used for rich links. An empty string isn't technically valid,
 		 * but there are no rich links in this example.

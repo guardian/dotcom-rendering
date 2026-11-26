@@ -1,6 +1,7 @@
 import { isUndefined } from '@guardian/libs';
 import type { BrowserContext, Page, Request } from '@playwright/test';
 import { expect, test } from '@playwright/test';
+import { ORIGIN } from '../../playwright.config';
 import { allowRejectAll, cmpAcceptAll, cmpRejectAll } from '../lib/cmp';
 import { addCookie } from '../lib/cookies';
 import { loadPage } from '../lib/load-page';
@@ -15,6 +16,7 @@ const optOutOfArticleCountConsent = async (context: BrowserContext) => {
 const ARTICLE_PATH =
 	'/Article/https://www.theguardian.com/politics/2019/nov/20/jeremy-corbyn-boris-johnson-tv-debate-watched-by-67-million-people';
 const RR_BANNER_URL = 'https://contributions.guardianapis.com/banner';
+const LOCAL_ASSET_ORIGIN = `${ORIGIN}/`;
 
 const requestBodyHasProperties = (
 	request: Request,
@@ -58,6 +60,14 @@ test.describe('The banner', function () {
 			waitUntil: 'domcontentloaded',
 			region: 'GB',
 			preventSupportBanner: false,
+			overrides: {
+				configOverrides: {
+					frontendAssetsFullURL: LOCAL_ASSET_ORIGIN,
+				},
+				switchOverrides: {
+					consentManagement: true,
+				},
+			},
 		});
 		await cmpAcceptAll(page);
 
@@ -81,6 +91,11 @@ test.describe('Sign-in gate portal', function () {
 			waitUntil: 'domcontentloaded',
 			region: 'GB',
 			preventSupportBanner: false,
+			overrides: {
+				configOverrides: {
+					frontendAssetsFullURL: LOCAL_ASSET_ORIGIN,
+				},
+			},
 			queryParamsOn: true,
 			queryParams: { showgate: 'true' },
 		});
@@ -88,13 +103,73 @@ test.describe('Sign-in gate portal', function () {
 		await cmpAcceptAll(page);
 
 		await page.evaluate(() => {
-			// Set geolocation to IE to force the sign-in gate to appear
-			window.localStorage.setItem('gu.geo.override', 'IE');
+			// Set geolocation to IE to force the sign-in gate to appear.
+			// storage.local expects the { value } wrapper format.
+			window.localStorage.setItem(
+				'gu.geo.override',
+				JSON.stringify({ value: 'IE' }),
+			);
 		});
 
 		await page.reload({ waitUntil: 'domcontentloaded' });
 
 		await auxiaRequestPromise;
+	});
+
+	test('sends the daily view count for New Zealand readers', async ({
+		page,
+		context,
+	}) => {
+		await optOutOfArticleCountConsent(context);
+
+		const auxiaUrl =
+			'https://contributions.guardianapis.com/auxia/get-treatments';
+		const auxiaRequestPromise = page.waitForRequest((request) => {
+			if (!requestBodyHasProperties(request, auxiaUrl, ['isSupporter'])) {
+				return false;
+			}
+			const body = request.postDataJSON() as Record<string, unknown>;
+			// Match only the post-reload request: the first load runs with the
+			// default (GB) geolocation.
+			return body.countryCode === 'NZ';
+		});
+
+		await loadPage({
+			page,
+			path: ARTICLE_PATH,
+			waitUntil: 'domcontentloaded',
+			region: 'GB',
+			preventSupportBanner: false,
+			overrides: {
+				configOverrides: {
+					frontendAssetsFullURL: LOCAL_ASSET_ORIGIN,
+				},
+			},
+		});
+
+		await cmpAcceptAll(page);
+
+		// Set geolocation to NZ for the Gandalf proof of concept. This must be
+		// an init script (not page.evaluate) because loadPage registers its
+		// own init script that resets gu.geo.override to GB on every
+		// navigation, including the reload below; init scripts run in
+		// registration order, so this one runs last and wins. storage.local
+		// expects the { value } wrapper format that storage.local.set writes.
+		await page.addInitScript(() => {
+			window.localStorage.setItem(
+				'gu.geo.override',
+				JSON.stringify({ value: 'NZ' }),
+			);
+		});
+
+		await page.reload({ waitUntil: 'domcontentloaded' });
+
+		const auxiaRequest = await auxiaRequestPromise;
+		const body = auxiaRequest.postDataJSON() as Record<string, unknown>;
+		expect(body.countryCode).toBe('NZ');
+		// Two article loads today, each increments gu.history.dailyArticleCount
+		// including the current pageview, so the second load sends 2.
+		expect(body.dailyArticleCount).toBe(2);
 	});
 });
 
@@ -147,6 +222,16 @@ test.describe('Banner browserId targeting', function () {
 			waitUntil: 'domcontentloaded',
 			region: 'GB',
 			preventSupportBanner: false,
+			overrides: {
+				configOverrides: {
+					frontendAssetsFullURL: LOCAL_ASSET_ORIGIN,
+				},
+				switchOverrides: {
+					consentManagement: true,
+				},
+			},
+			queryParamsOn: true,
+			queryParams: { _sp_geo_override: 'GB-XX' },
 		});
 
 		if (acceptConsent) {
@@ -177,8 +262,7 @@ test.describe('Banner browserId targeting', function () {
 		expect(browserId).toBe('test-browser-id');
 	});
 
-	// Skip this test because it doesn't work in the github actions run. It does however work locally
-	test.skip('does not send browserId when user has not consented, even if in the auxia variant', async ({
+	test('does not send browserId when user has not consented, even if in the auxia variant', async ({
 		page,
 		context,
 	}) => {
@@ -188,6 +272,12 @@ test.describe('Banner browserId targeting', function () {
 			acceptConsent: false,
 			inAuxiaVariant: true,
 		});
+
+		// CI/CD runs these tests with US geolocation, and fixing the origin to GB in loadPage is not enough for CMP initialization to conclude that the country is GDPR-applied.
+		// If gdprApplies is false, TCData is allowed to be minimal. If GDPR does not apply to this user in this context then only gdprApplies, tcfPolicyVersion, cmpId and cmpVersion shall exist in the object. (If GDPR does not apply to this user in this context then only gdprApplies, tcfPolicyVersion, cmpId and cmpVersion shall exist in the object.)
+		// @Guardian/content-management-platform uses the _sp_geo_override query parameter to override geo location in non-production environments.
+		const currentUrl = new URL(page.url());
+		expect(currentUrl.searchParams.get('_sp_geo_override')).toBe('GB-XX');
 
 		const browserId = getBannerRequestField(
 			bannerRequest,

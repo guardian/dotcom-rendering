@@ -24,8 +24,7 @@ export type ValidClientId =
 	| 'subscriptions';
 
 export interface PersistableQueryParams
-	extends TrackingQueryParams,
-		StringifiableRecord {
+	extends TrackingQueryParams, StringifiableRecord {
 	returnUrl: string;
 	clientId?: ValidClientId;
 	fromURI?: string;
@@ -36,8 +35,7 @@ export interface PersistableQueryParams
 }
 
 export interface QueryParams
-	extends PersistableQueryParams,
-		StringifiableRecord {
+	extends PersistableQueryParams, StringifiableRecord {
 	emailVerified?: boolean;
 	emailSentSuccess?: boolean;
 	csrfError?: boolean;

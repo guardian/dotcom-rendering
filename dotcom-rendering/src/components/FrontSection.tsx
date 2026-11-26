@@ -589,7 +589,7 @@ export const FrontSection = ({
 		? getOphanComponents({
 				branding: collectionBranding.branding,
 				locationPrefix: 'front-container',
-		  })
+			})
 		: undefined;
 
 	return (
@@ -623,7 +623,7 @@ export const FrontSection = ({
 								? primaryLevelTopBorder(
 										title,
 										showSectionColours,
-								  )
+									)
 								: secondaryLevelTopBorder
 						}
 					/>
@@ -666,11 +666,11 @@ export const FrontSection = ({
 										containerLevel === 'Secondary'
 											? schemePalette(
 													'--article-section-secondary-title',
-											  )
+												)
 											: articleSectionTitleStyles(
 													title,
 													showSectionColours,
-											  )
+												)
 									}
 									// On paid fronts the title is not treated as a link
 									url={

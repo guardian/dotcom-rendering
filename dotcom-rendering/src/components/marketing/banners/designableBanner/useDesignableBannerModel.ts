@@ -1,0 +1,331 @@
+import { from } from '@guardian/source/foundations';
+import { hexColourToString } from '@guardian/support-dotcom-components';
+import type {
+	BannerDesignHeaderImage,
+	BannerDesignImage,
+	ConfigurableDesign,
+	Image as SupportImage,
+} from '@guardian/support-dotcom-components/dist/shared/types';
+import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
+import { useCallback, useMemo, useState } from 'react';
+import {
+	removeMediaRulePrefix,
+	useMatchMedia,
+} from '../../../../lib/useMatchMedia';
+import { getChoiceCards } from '../../lib/choiceCards';
+import type { BannerRenderProps } from '../common/types';
+import { setChannelClosedTimestamp } from '../utils/localStorage';
+import type { BannerData } from './BannerProps';
+import { buildBannerSelectors } from './bannerSelectors';
+import type {
+	BannerTemplateSettings,
+	ChoiceCardDesignSettings,
+} from './settings';
+
+const buildImageSettings = (
+	design: BannerDesignImage | BannerDesignHeaderImage,
+): SupportImage | undefined => {
+	return {
+		mainUrl: design.mobileUrl,
+		mobileUrl: design.mobileUrl,
+		tabletUrl: design.tabletUrl,
+		desktopUrl: design.desktopUrl,
+		wideUrl: design.desktopUrl,
+		altText: design.altText,
+	};
+};
+
+const buildMainImageSettings = (
+	design: ConfigurableDesign,
+): SupportImage | undefined => {
+	if (design.visual?.kind !== 'Image') {
+		return undefined;
+	}
+	return buildImageSettings(design.visual);
+};
+
+const buildHeaderImageSettings = (
+	design: ConfigurableDesign,
+): SupportImage | undefined => {
+	if (!design.headerImage) {
+		return undefined;
+	}
+	return buildImageSettings(design.headerImage);
+};
+
+export const buildChoiceCardSettings = (
+	design: ConfigurableDesign,
+): ChoiceCardDesignSettings | undefined => {
+	if (design.visual?.kind !== 'ChoiceCards') {
+		return undefined;
+	}
+	const {
+		buttonColour,
+		buttonOpacity,
+		buttonTextColour,
+		buttonBorderColour,
+		buttonSelectColour,
+		buttonSelectOpacity,
+		buttonSelectTextColour,
+		buttonSelectBorderColour,
+		buttonSelectMarkerColour,
+		pillTextColour,
+		pillBackgroundColour,
+	} = design.visual;
+	return {
+		buttonColour: buttonColour
+			? hexColourToString(buttonColour)
+			: undefined,
+		buttonOpacity: buttonOpacity ?? undefined,
+		buttonTextColour: buttonTextColour
+			? hexColourToString(buttonTextColour)
+			: undefined,
+		buttonBorderColour: buttonBorderColour
+			? hexColourToString(buttonBorderColour)
+			: undefined,
+		buttonSelectColour: buttonSelectColour
+			? hexColourToString(buttonSelectColour)
+			: undefined,
+		buttonSelectOpacity: buttonSelectOpacity ?? undefined,
+		buttonSelectTextColour: buttonSelectTextColour
+			? hexColourToString(buttonSelectTextColour)
+			: undefined,
+		buttonSelectBorderColour: buttonSelectBorderColour
+			? hexColourToString(buttonSelectBorderColour)
+			: undefined,
+		buttonSelectMarkerColour: buttonSelectMarkerColour
+			? hexColourToString(buttonSelectMarkerColour)
+			: undefined,
+		pillTextColour: pillTextColour
+			? hexColourToString(pillTextColour)
+			: undefined,
+		pillBackgroundColour: pillBackgroundColour
+			? hexColourToString(pillBackgroundColour)
+			: undefined,
+	};
+};
+
+export const useDesignableBannerModel = ({
+	content,
+	onCloseClick,
+	onCollapseClick,
+	onExpandClick,
+	articleCounts,
+	onCtaClick,
+	onSecondaryCtaClick,
+	bannerChannel,
+	reminderTracking,
+	separateArticleCountSettings,
+	tickerSettings,
+	choiceCardsSettings,
+	submitComponentEvent,
+	tracking,
+	design,
+	countryCode,
+	promoCodes,
+	separateArticleCount,
+	isCollapsible,
+}: BannerRenderProps): {
+	isOpen: boolean;
+	bannerData: BannerData | null;
+} => {
+	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
+	const [isOpen, setIsOpen] = useState(true);
+
+	const choiceCards = useMemo(
+		() => getChoiceCards(isTabletOrAbove, choiceCardsSettings),
+		[isTabletOrAbove, choiceCardsSettings],
+	);
+
+	const defaultChoiceCard = choiceCards?.find(
+		(cc: ChoiceCard) => cc.isDefault,
+	);
+
+	const [selectedChoiceCardState, setSelectedChoiceCardState] = useState<
+		ChoiceCard | undefined
+	>(defaultChoiceCard);
+
+	const selectedChoiceCard = useMemo(() => {
+		if (!choiceCards || choiceCards.length === 0) {
+			return undefined;
+		}
+		return selectedChoiceCardState;
+	}, [choiceCards, selectedChoiceCardState]);
+
+	const isCollapsableBanner: boolean =
+		isCollapsible ??
+		(tracking.abTestVariant.includes('COLLAPSABLE_V1') ||
+			tracking.abTestVariant.includes('COLLAPSABLE_V2_MAYBE_LATER'));
+
+	const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
+
+	const handleClose = useCallback((): void => {
+		onCloseClick();
+		setChannelClosedTimestamp(bannerChannel);
+		setIsOpen(false);
+		document.body.focus();
+	}, [bannerChannel, onCloseClick]);
+
+	const handleToggleCollapse = useCallback(() => {
+		const nextCollapsed = !isCollapsed;
+		setIsCollapsed(nextCollapsed);
+		if (nextCollapsed) {
+			onCollapseClick();
+		} else {
+			onExpandClick();
+		}
+	}, [isCollapsed, onCollapseClick, onExpandClick]);
+
+	const settings = useMemo((): BannerTemplateSettings | undefined => {
+		if (!design) {
+			return undefined;
+		}
+
+		const {
+			basic,
+			primaryCta,
+			secondaryCta,
+			highlightedText,
+			closeButton,
+			ticker,
+		} = design.colours;
+
+		const imageSettings = buildMainImageSettings(design);
+		const choiceCardSettings = buildChoiceCardSettings(design);
+
+		return {
+			containerSettings: {
+				backgroundColour: hexColourToString(basic.background),
+				textColor: hexColourToString(basic.bodyText),
+			},
+			headerSettings: {
+				textColour: hexColourToString(basic.headerText),
+				headerImage: buildHeaderImageSettings(design),
+			},
+			primaryCtaSettings: {
+				default: {
+					backgroundColour: hexColourToString(
+						primaryCta.default.background,
+					),
+					textColour: hexColourToString(primaryCta.default.text),
+				},
+			},
+			secondaryCtaSettings: {
+				default: {
+					backgroundColour: hexColourToString(
+						secondaryCta.default.background,
+					),
+					textColour: hexColourToString(secondaryCta.default.text),
+					border: `1px solid ${
+						secondaryCta.default.border
+							? hexColourToString(secondaryCta.default.border)
+							: undefined
+					}`,
+				},
+			},
+			closeButtonSettings: {
+				default: {
+					backgroundColour: hexColourToString(
+						closeButton.default.background,
+					),
+					textColour: hexColourToString(closeButton.default.text),
+					border: `1px solid ${
+						closeButton.default.border
+							? hexColourToString(closeButton.default.border)
+							: '#DCDCDC'
+					}`,
+				},
+			},
+			highlightedTextSettings: {
+				textColour: hexColourToString(highlightedText.text),
+				highlightColour: hexColourToString(highlightedText.highlight),
+			},
+			articleCountTextColour: hexColourToString(basic.articleCountText),
+			choiceCardSettings,
+			imageSettings,
+			bannerId: 'designable-banner',
+			tickerStylingSettings: {
+				filledProgressColour: hexColourToString(ticker.filledProgress),
+				progressBarBackgroundColour: hexColourToString(
+					ticker.progressBarBackground,
+				),
+				headlineColour: hexColourToString(ticker.headlineColour),
+				totalColour: hexColourToString(ticker.totalColour),
+				goalColour: hexColourToString(ticker.goalColour),
+			},
+		};
+	}, [design]);
+
+	const bannerData: BannerData | null = useMemo(() => {
+		if (!design || !settings) {
+			return null;
+		}
+
+		const selectors = buildBannerSelectors({
+			content,
+			isTabletOrAbove,
+			isCollapsed,
+			choiceCards,
+			selectedChoiceCard,
+			settings,
+			tickerSettings,
+			separateArticleCount,
+			separateArticleCountSettings,
+			articleCounts,
+		});
+
+		return {
+			bannerChannel,
+			content,
+			design,
+			tracking,
+			articleCounts,
+			tickerSettings,
+			separateArticleCount,
+			separateArticleCountSettings,
+			promoCodes,
+			countryCode,
+			reminderTracking,
+			settings,
+			isCollapsed,
+			isCollapsible: isCollapsableBanner,
+			isTabletOrAbove,
+			choices: choiceCards,
+			selectedChoiceCard,
+			actions: {
+				onClose: handleClose,
+				onToggleCollapse: handleToggleCollapse,
+				onCtaClick,
+				onSecondaryCtaClick,
+				onChoiceCardChange: setSelectedChoiceCardState,
+				submitComponentEvent,
+			},
+			selectors,
+		};
+	}, [
+		content,
+		design,
+		tracking,
+		articleCounts,
+		tickerSettings,
+		separateArticleCountSettings,
+		promoCodes,
+		countryCode,
+		settings,
+		isCollapsed,
+		isCollapsableBanner,
+		isTabletOrAbove,
+		choiceCards,
+		selectedChoiceCard,
+		handleClose,
+		onCtaClick,
+		onSecondaryCtaClick,
+		handleToggleCollapse,
+		submitComponentEvent,
+		separateArticleCount,
+		reminderTracking,
+		bannerChannel,
+	]);
+
+	return { isOpen, bannerData };
+};

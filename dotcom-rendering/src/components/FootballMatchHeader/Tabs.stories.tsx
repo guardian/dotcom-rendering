@@ -10,6 +10,7 @@ const meta = preview.meta({
 export const MatchInfoWhenFixture = meta.story({
 	args: {
 		selected: 'info',
+		sportKind: 'football',
 		matchKind: 'Fixture',
 	},
 	parameters: {
@@ -25,8 +26,9 @@ export const LiveWhenLive = meta.story({
 	...MatchInfoWhenFixture.input,
 	args: {
 		selected: 'live',
+		sportKind: 'football',
 		matchKind: 'Live',
-		infoURL: new URL(
+		infoTab: new URL(
 			'https://www.theguardian.com/football/match/2025/nov/26/arsenal-v-bayernmunich',
 		),
 	},
@@ -42,10 +44,29 @@ export const ReportWhenResult = meta.story({
 	...MatchInfoWhenFixture.input,
 	args: {
 		selected: 'report',
+		sportKind: 'football',
 		matchKind: 'Result',
-		liveURL: new URL(
+		liveTab: new URL(
 			'https://www.theguardian.com/football/live/2025/nov/26/arsenal-v-bayern-munich-champions-league-live',
 		),
-		infoURL: LiveWhenLive.input.args.infoURL,
+		infoTab: LiveWhenLive.input.args.infoTab,
+	},
+});
+
+export const ButtonInfoTab = meta.story({
+	...MatchInfoWhenFixture.input,
+	args: {
+		selected: 'live',
+		sportKind: 'football',
+		matchKind: 'Live',
+		infoTab: () => {
+			//
+		},
+	},
+	parameters: {
+		colourSchemeBackground: {
+			light: palette('--football-match-header-live-background'),
+			dark: palette('--football-match-header-live-background'),
+		},
 	},
 });

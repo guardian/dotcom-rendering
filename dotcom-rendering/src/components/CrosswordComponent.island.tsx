@@ -15,6 +15,7 @@ import { Hide } from '@guardian/source/react-components';
 import libDebounce from 'lodash.debounce';
 import type { ReactNode } from 'react';
 import { memo, useEffect, useRef, useState } from 'react';
+import { useCrosswordProgressReporting } from '../lib/puzzleProgress/useCrosswordProgressReporting';
 import { removeMediaRulePrefix, useMatchMedia } from '../lib/useMatchMedia';
 import { palette } from '../palette';
 import { AdSlot } from './AdSlot.web';
@@ -71,7 +72,9 @@ const Layout: CrosswordProps['Layout'] = ({
 
 	const updateGradientVisibility = () => {
 		const clueList = cluesRef.current;
-		if (!clueList) return;
+		if (!clueList) {
+			return;
+		}
 		const scrollPos = clueList.scrollTop;
 		const maxScroll = clueList.scrollHeight - clueList.clientHeight;
 		setShowGradient(scrollPos < maxScroll - 16);
@@ -79,7 +82,9 @@ const Layout: CrosswordProps['Layout'] = ({
 
 	useEffect(() => {
 		const clueList = cluesRef.current;
-		if (!clueList) return;
+		if (!clueList) {
+			return;
+		}
 
 		updateGradientVisibility();
 
@@ -250,14 +255,19 @@ export const CrosswordComponent = ({
 }: {
 	data: CrosswordProps['data'];
 	canRenderAds?: boolean;
-}) => (
-	<ReactCrossword
-		data={data}
-		Layout={Layout}
-		MobileBannerAd={canRenderAds ? MobileBannerAdComponent : undefined}
-		textColor={palette('--crossword-text')}
-		anagramHelperBackgroundColor={palette(
-			'--crossword-anagram-helper-background',
-		)}
-	/>
-);
+}) => {
+	const onProgressChange = useCrosswordProgressReporting(data);
+
+	return (
+		<ReactCrossword
+			data={data}
+			Layout={Layout}
+			MobileBannerAd={canRenderAds ? MobileBannerAdComponent : undefined}
+			onProgressChange={onProgressChange}
+			textColor={palette('--crossword-text')}
+			anagramHelperBackgroundColor={palette(
+				'--crossword-anagram-helper-background',
+			)}
+		/>
+	);
+};

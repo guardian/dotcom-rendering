@@ -3,7 +3,7 @@ import type {
 	BrazeArticleContext,
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
-import { adSizes, type SizeMapping } from '@guardian/commercial-core';
+import { adSizes } from '@guardian/commercial-core';
 import type { CountryCode } from '@guardian/libs';
 import { isUndefined } from '@guardian/libs';
 import { palette } from '@guardian/source/foundations';
@@ -24,7 +24,7 @@ import type {
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
-import { useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useCountryCode } from '../lib/useCountryCode';
@@ -43,7 +43,6 @@ type Props = {
 	contentType: string;
 	sectionId: string;
 	shouldHideReaderRevenue: boolean;
-	isMinuteArticle: boolean;
 	isPaidContent: boolean;
 	tags: TagType[];
 	contributionsServiceUrl: string;
@@ -52,10 +51,12 @@ type Props = {
 	renderAds: boolean;
 	isLabs: boolean;
 	articleEndSlot: boolean;
+	isSensitive: boolean;
 };
 
 const slotStyles = css`
 	color: ${palette.neutral[7]};
+	margin: 12px auto;
 `;
 
 const buildReaderRevenueEpicConfig = (
@@ -109,7 +110,6 @@ export const SlotBodyEnd = ({
 	contentType,
 	sectionId,
 	shouldHideReaderRevenue,
-	isMinuteArticle,
 	isPaidContent,
 	tags,
 	contributionsServiceUrl,
@@ -118,22 +118,31 @@ export const SlotBodyEnd = ({
 	renderAds,
 	isLabs,
 	articleEndSlot,
+	isSensitive,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const { brazeMessages, braze } = useBraze(idApiUrl, renderingTarget);
 	const countryCode = useCountryCode('slot-body-end');
 	const isSignedIn = useIsSignedIn();
 	const ophanPageViewId = usePageViewId(renderingTarget);
-	const abTests = useBetaAB();
+	const abTests = useAB();
 	const [pickMessageResult, setPickMessageResult] =
 		useState<PickMessageResult | null>(null);
 	const [asyncArticleCount, setAsyncArticleCount] =
 		useState<Promise<WeeklyArticleHistory | undefined>>();
 
-	const showPublicGood = countryCode === 'US';
+	const isInUS = countryCode === 'US';
+	const isInArticleEndHeaderBiddingTest = abTests?.isUserInTestGroup(
+		'commercial-article-end-header-bidding',
+		'variant',
+	);
 
 	const showArticleEndSlot =
-		renderAds && !isLabs && showPublicGood && articleEndSlot;
+		renderAds &&
+		!isLabs &&
+		isInUS &&
+		articleEndSlot &&
+		isInArticleEndHeaderBiddingTest;
 
 	useEffect(() => {
 		setAsyncArticleCount(
@@ -158,10 +167,8 @@ export const SlotBodyEnd = ({
 		const readerRevenueEpic = buildReaderRevenueEpicConfig({
 			isSignedIn,
 			countryCode,
-			contentType,
 			sectionId,
 			shouldHideReaderRevenue,
-			isMinuteArticle,
 			isPaidContent,
 			tags,
 			contributionsServiceUrl,
@@ -175,6 +182,7 @@ export const SlotBodyEnd = ({
 					'growth-holdback-group',
 					'control',
 				) ?? false,
+			isSensitive,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
 			section: sectionId,
@@ -205,9 +213,7 @@ export const SlotBodyEnd = ({
 		};
 		pickMessage(epicConfig, renderingTarget)
 			.then((result) => {
-				if (result.type === 'MessageSelected') {
-					setPickMessageResult(result);
-				}
+				setPickMessageResult(result);
 			})
 			.catch((e) =>
 				console.error(`SlotBodyEnd pickMessage - error: ${String(e)}`),
@@ -220,7 +226,6 @@ export const SlotBodyEnd = ({
 		contentType,
 		contributionsServiceUrl,
 		idApiUrl,
-		isMinuteArticle,
 		isPaidContent,
 		renderingTarget,
 		sectionId,
@@ -230,6 +235,7 @@ export const SlotBodyEnd = ({
 		pageId,
 		braze,
 		abTests,
+		isSensitive,
 	]);
 
 	useEffect(() => {
@@ -237,14 +243,13 @@ export const SlotBodyEnd = ({
 			pickMessageResult?.type === 'NoMessageSelected' &&
 			showArticleEndSlot
 		) {
-			const additionalSizes = (): SizeMapping => {
-				return { mobile: [adSizes.fluid] }; // Public Good additional ad slot sizes
-			};
 			document.dispatchEvent(
 				new CustomEvent('gu.commercial.slot.fill', {
 					detail: {
 						slotId: 'dfp-ad--article-end',
-						additionalSizes: additionalSizes(),
+						additionalSizes: {
+							mobile: [adSizes.mpu],
+						},
 					},
 				}),
 			);

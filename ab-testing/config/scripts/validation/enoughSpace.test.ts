@@ -1,13 +1,13 @@
 import { throws } from "node:assert";
 import test from "node:test";
-import type { ABTest } from "../../types.ts";
+import type { ABTest, AudienceSpaceId } from "../../types.ts";
 import { enoughSpace } from "./enoughSpace.ts";
 
 // Helper function to create a test AB test object
 function createABTest(
 	name: string,
 	audienceSize: number,
-	audienceSpace?: "A" | "B" | "C",
+	audienceSpace?: AudienceSpaceId,
 ): ABTest {
 	return {
 		name: `commercial-${name}` as const,

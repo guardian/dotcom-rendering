@@ -10,6 +10,8 @@ import type { ArticleMedia } from '../../../types/mainMedia';
 import { CardPill } from '../../CardPill';
 
 const contentStyles = css`
+	/* Ensure that the footer is a positioned element so it can appear on top of other positioned elements */
+	position: relative;
 	margin-top: auto;
 	display: flex;
 	justify-content: flex-start;
@@ -61,7 +63,6 @@ type Props = {
 	media?: ArticleMedia;
 	isNewsletter?: boolean;
 	shouldReserveSpace?: { mobile: boolean; desktop: boolean };
-	isStorylines?: boolean;
 };
 
 export const CardFooter = ({
@@ -72,7 +73,6 @@ export const CardFooter = ({
 	media,
 	isNewsletter,
 	shouldReserveSpace,
-	isStorylines,
 }: Props) => {
 	const shouldShowBranding =
 		format.theme === ArticleSpecial.Labs && !!cardBranding;
@@ -88,13 +88,6 @@ export const CardFooter = ({
 		return (
 			<footer css={contentStyles}>
 				{shouldShowBranding && cardBranding}
-
-				{/**
-				 * Usually, we either display the pill or the footer,
-				 * but if the card appears in the storylines section on tag pages
-				 * then we do want to display the date on these cards as well as the media pill.
-				 * */}
-				{isStorylines && age}
 
 				<CardPill
 					media={media}

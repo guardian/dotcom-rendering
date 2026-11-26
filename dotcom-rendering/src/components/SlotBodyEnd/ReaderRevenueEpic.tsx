@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
+import { cmp } from '@guardian/consent-manager';
 import {
-	cmp,
 	getCookie,
 	log,
 	startPerformanceMeasure,
@@ -31,6 +31,7 @@ import type { CanShowResult } from '../../lib/messagePicker';
 import { getEpic } from '../../lib/sdcRequests';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type { TagType } from '../../types/tag';
+import { hasRequiredConsents } from '../SignInGate/displayRules';
 
 const wrapperMargins = css`
 	margin: 18px 0;
@@ -40,10 +41,8 @@ const wrapperMargins = css`
 export type CanShowData = {
 	isSignedIn: boolean;
 	countryCode?: string;
-	contentType: string;
 	sectionId: string;
 	shouldHideReaderRevenue: boolean;
-	isMinuteArticle: boolean;
 	isPaidContent: boolean;
 	tags: TagType[];
 	contributionsServiceUrl: string;
@@ -53,16 +52,16 @@ export type CanShowData = {
 	ophanPageViewId: string;
 	pageId?: string;
 	inHoldbackGroup?: boolean;
+	isSensitive: boolean;
+	browserId?: string;
 };
 
 const buildPayload = async (
 	data: CanShowData & { hideSupportMessagingForUser: boolean },
 ): Promise<EpicPayload> => ({
 	targeting: {
-		contentType: data.contentType,
 		sectionId: data.sectionId,
 		shouldHideReaderRevenue: data.shouldHideReaderRevenue,
-		isMinuteArticle: data.isMinuteArticle,
 		isPaidContent: data.isPaidContent,
 		tags: data.tags,
 		showSupportMessaging: !data.hideSupportMessagingForUser,
@@ -75,6 +74,8 @@ const buildPayload = async (
 		isSignedIn: data.isSignedIn,
 		pageId: data.pageId,
 		inHoldbackGroup: data.inHoldbackGroup,
+		isSensitive: data.isSensitive,
+		browserId: data.browserId,
 	},
 });
 
@@ -106,8 +107,19 @@ export const canShowReaderRevenueEpic = async (
 		'contributions-epic-data',
 	);
 
+	//Send user consent status to the epic API
+	const userConsent = await hasRequiredConsents();
+
+	const getBrowserId = (): string | undefined => {
+		if (!userConsent) {
+			return undefined;
+		}
+		return getCookie({ name: 'bwid', shouldMemoize: true }) ?? undefined;
+	};
+
 	const contributionsPayload = await buildPayload({
 		...data,
+		browserId: getBrowserId(),
 		hideSupportMessagingForUser,
 	});
 

@@ -101,6 +101,7 @@ type Props = {
 	editionId: EditionId;
 	nav: NavType;
 	hasPageSkin?: boolean;
+	showReaderRevenueLinks?: boolean;
 };
 
 /**
@@ -108,7 +109,12 @@ type Props = {
  * secondary pillar links, other Guardian links as well as
  * non journalistic links for support asks and other marketing.
  */
-export const ExpandedNav = ({ nav, editionId, hasPageSkin }: Props) => {
+export const ExpandedNav = ({
+	nav,
+	editionId,
+	hasPageSkin,
+	showReaderRevenueLinks = true,
+}: Props) => {
 	return (
 		<div
 			id={expandedMenuId}
@@ -127,6 +133,7 @@ export const ExpandedNav = ({ nav, editionId, hasPageSkin }: Props) => {
 						editionId={editionId}
 						nav={nav}
 						hasPageSkin={hasPageSkin}
+						showReaderRevenueLinks={showReaderRevenueLinks}
 					/>
 				</div>
 			</div>

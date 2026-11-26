@@ -1,17 +1,24 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
+import { ukGeneralFinal } from '../../fixtures/manual/electionTrackers/ukGeneralFinal';
 import {
 	audioTrails,
 	galleryTrails,
 	getSublinks,
 	opinionTrails,
+	selfHostedDefaultVideo169Card,
+	selfHostedDefaultVideo45Card,
+	selfHostedDefaultVideo53Card,
+	selfHostedDefaultVideo54Card,
+	selfHostedDefaultVideo916Card,
 	selfHostedLoopVideo169Card,
 	selfHostedLoopVideo45Card,
 	selfHostedLoopVideo53Card,
 	selfHostedLoopVideo54Card,
 	selfHostedLoopVideo916Card,
 	slideshowCard,
+	snapLink,
 	trails,
 	youtubeVideoTrails,
 } from '../../fixtures/manual/trails';
@@ -31,7 +38,6 @@ import { FrontSection } from './FrontSection';
 
 const emptyGroupedTrails: DCRGroupedTrails = {
 	standard: [],
-	snap: [],
 	splash: [],
 };
 
@@ -42,6 +48,13 @@ const splashCard = {
 	trailText: 'Trail text for splash card',
 	kickerText: 'Kicker for splash card',
 };
+
+const boostLevels = [
+	'gigaboost',
+	'megaboost',
+	'boost',
+	'default',
+] as BoostLevel[];
 
 /**
  * This creates a list of 8 standard cards which contain:
@@ -159,6 +172,8 @@ const meta = {
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
 		collectionId: 1,
+		isStorylines: false,
+		isUserOptedInToMiniNav: true,
 	},
 	render: ({ frontSectionTitle, ...args }) => (
 		<FrontSection
@@ -184,10 +199,10 @@ export const SplashWithStandards: Story = {
 			splash: [{ ...splashCard, supportingContent: [] }],
 			standard: standardCards.map((card, index) => ({
 				...card,
-				isBoosted: index === 0,
 				boostLevel: index === 0 ? 'boost' : 'default',
 			})),
 		},
+		isUserOptedInToMiniNav: true,
 	},
 };
 
@@ -198,6 +213,7 @@ export const SplashWithSublinks: Story = {
 			...emptyGroupedTrails,
 			splash: [{ ...splashCard, image: undefined }],
 		},
+		isUserOptedInToMiniNav: true,
 	},
 	render: (args) => {
 		const Section = ({
@@ -288,6 +304,7 @@ export const SplashBoostLevels: Story = {
 			...emptyGroupedTrails,
 			splash: [{ ...splashCard, image: undefined }],
 		},
+		isUserOptedInToMiniNav: true,
 	},
 	render: (args) => {
 		const Section = ({
@@ -332,6 +349,7 @@ export const SplashWithImageSupression: Story = {
 			...emptyGroupedTrails,
 			splash: [{ ...splashCard, image: undefined }],
 		},
+		isUserOptedInToMiniNav: true,
 	},
 	render: (args) => {
 		const Section = ({
@@ -383,6 +401,7 @@ export const SplashWithLiveUpdates: Story = {
 						...emptyGroupedTrails,
 						splash: [{ ...liveUpdatesCard, boostLevel }],
 					}}
+					isUserOptedInToMiniNav={true}
 				/>
 			</FrontSection>
 		);
@@ -395,6 +414,22 @@ export const SplashWithLiveUpdates: Story = {
 				<Section title="Giga boosted" boostLevel="gigaboost" />
 			</>
 		);
+	},
+};
+
+export const SplashWithSnapLinkAndStandards: Story = {
+	name: 'Splash with snap link and big and standard cards',
+	args: {
+		frontSectionTitle: 'Splash with snap link and standards',
+		groupedTrails: {
+			...emptyGroupedTrails,
+			splash: [{ ...snapLink }, { ...splashCard, supportingContent: [] }],
+			standard: standardCards.map((card, index) => ({
+				...card,
+				boostLevel: index === 0 ? 'boost' : 'default',
+			})),
+		},
+		isUserOptedInToMiniNav: true,
 	},
 };
 
@@ -416,6 +451,7 @@ export const StandardBoostedWithLiveUpdates: Story = {
 						...emptyGroupedTrails,
 						standard: [{ ...liveUpdatesCard, boostLevel }],
 					}}
+					isUserOptedInToMiniNav={true}
 				/>
 			</FrontSection>
 		);
@@ -448,11 +484,7 @@ export const StandardCards: Story = {
 				...youtubeVideoTrails.slice(0, 2),
 			],
 		},
-	},
-	parameters: {
-		chromatic: {
-			disableSnapshot: true,
-		},
+		isUserOptedInToMiniNav: true,
 	},
 };
 
@@ -482,6 +514,7 @@ export const WithSpecialPaletteVariations = {
 			],
 			standard: standardCards.slice(0, 2),
 		},
+		isUserOptedInToMiniNav: true,
 	},
 	render: (args) => (
 		<>
@@ -512,6 +545,7 @@ export const SecondaryContainerStandardCards: Story = {
 			...emptyGroupedTrails,
 			standard: standardCards.slice(0, 4),
 		},
+		isUserOptedInToMiniNav: true,
 	},
 };
 
@@ -526,11 +560,11 @@ export const ImmersiveCardsSplashAndStandard: Story = {
 			],
 			standard: [{ ...trails[0], isImmersive: true }],
 		},
+		isUserOptedInToMiniNav: true,
 	},
 };
 
-export const SelfHostedVideoCardsInSplashSlots: Story = {
-	name: 'Self-hosted video cards in Splash slots',
+export const SelfHostedLoopVideoCardsInSplashSlots: Story = {
 	render: (args) => {
 		const Section = ({
 			title,
@@ -548,16 +582,10 @@ export const SelfHostedVideoCardsInSplashSlots: Story = {
 						...emptyGroupedTrails,
 						splash: [{ ...video, boostLevel }],
 					}}
+					isUserOptedInToMiniNav={true}
 				/>
 			</FrontSection>
 		);
-
-		const boostLevels = [
-			'gigaboost',
-			'megaboost',
-			'boost',
-			'default',
-		] as BoostLevel[];
 
 		const videos = [
 			selfHostedLoopVideo54Card,
@@ -584,6 +612,124 @@ export const SelfHostedVideoCardsInSplashSlots: Story = {
 	},
 };
 
+export const SelfHostedDefaultVideoCardsInSplashSlots: Story = {
+	render: (args) => {
+		const Section = ({
+			title,
+			video,
+			boostLevel,
+		}: {
+			title: string;
+			video: DCRFrontCard;
+			boostLevel?: BoostLevel;
+		}) => (
+			<FrontSection title={title} editionId="UK" showTopBorder={false}>
+				<FlexibleGeneral
+					{...args}
+					groupedTrails={{
+						...emptyGroupedTrails,
+						splash: [{ ...video, boostLevel }],
+					}}
+					isUserOptedInToMiniNav={true}
+				/>
+			</FrontSection>
+		);
+
+		const videos = [
+			selfHostedDefaultVideo54Card,
+			selfHostedDefaultVideo45Card,
+			selfHostedDefaultVideo53Card,
+			selfHostedDefaultVideo916Card,
+			selfHostedDefaultVideo169Card,
+		];
+
+		return (
+			<>
+				{videos.map((video) =>
+					boostLevels.map((boostLevel) => (
+						<Section
+							key={`${video.headline}-${boostLevel}`}
+							title={boostLevel}
+							video={video}
+							boostLevel={boostLevel}
+						/>
+					)),
+				)}
+			</>
+		);
+	},
+};
+
+export const YoutubeVideoCardInSplashSlot: Story = {
+	render: (args) => {
+		const Section = ({
+			title,
+			boostLevel,
+		}: {
+			title: string;
+			boostLevel?: BoostLevel;
+		}) => (
+			<FrontSection title={title} editionId="UK" showTopBorder={false}>
+				<FlexibleGeneral
+					{...args}
+					groupedTrails={{
+						...emptyGroupedTrails,
+						splash: [{ ...youtubeVideoTrails[0], boostLevel }],
+					}}
+					isUserOptedInToMiniNav={true}
+				/>
+			</FrontSection>
+		);
+
+		return (
+			<>
+				{boostLevels.map((boostLevel) => (
+					<Section
+						key={boostLevel}
+						title={boostLevel}
+						boostLevel={boostLevel}
+					/>
+				))}
+			</>
+		);
+	},
+};
+
+export const YoutubeVideoCardInStandardSlot: Story = {
+	render: (args) => {
+		const Section = ({
+			title,
+			boostLevel,
+		}: {
+			title: string;
+			boostLevel?: BoostLevel;
+		}) => (
+			<FrontSection title={title} editionId="UK" showTopBorder={false}>
+				<FlexibleGeneral
+					{...args}
+					groupedTrails={{
+						...emptyGroupedTrails,
+						standard: [{ ...youtubeVideoTrails[0], boostLevel }],
+					}}
+					isUserOptedInToMiniNav={true}
+				/>
+			</FrontSection>
+		);
+
+		return (
+			<>
+				{boostLevels.map((boostLevel) => (
+					<Section
+						key={boostLevel}
+						title={boostLevel}
+						boostLevel={boostLevel}
+					/>
+				))}
+			</>
+		);
+	},
+};
+
 export const SelfHostedVideoInStandardSlot: Story = {
 	name: 'Self-hosted video cards in standard slot',
 	args: {
@@ -593,6 +739,7 @@ export const SelfHostedVideoInStandardSlot: Story = {
 			...emptyGroupedTrails,
 			standard: [selfHostedLoopVideo54Card], // Self-hosted video is disabled at standard card size
 		},
+		isUserOptedInToMiniNav: true,
 	},
 };
 
@@ -608,6 +755,7 @@ export const StandardBoostedMediaCardWithSublinks: Story = {
 				supportingContent: getSublinks(2),
 			})),
 		},
+		isUserOptedInToMiniNav: true,
 	},
 };
 
@@ -626,6 +774,7 @@ export const SplashWithSlideshow: Story = {
 			],
 		},
 		collectionId: 1,
+		isUserOptedInToMiniNav: true,
 	},
 	render: (args) => {
 		const Section = ({
@@ -766,5 +915,38 @@ export const StandardCardsWithSlideshow: Story = {
 			],
 		},
 		collectionId: 1,
+		isUserOptedInToMiniNav: true,
 	},
 };
+
+export const EventGraphic = {
+	args: {
+		frontSectionTitle: 'Event graphic example',
+		groupedTrails: {
+			...emptyGroupedTrails,
+			splash: [
+				{
+					...splashCard,
+					graphicKind: 'electionTracker',
+					dataUrl: 'https://www.theguardian.com/mock-event-graphic',
+					eventData: ukGeneralFinal,
+				},
+				splashCard,
+			],
+			standard: trails.slice(4, 9),
+		},
+		collectionId: 1,
+		isUserOptedInToMiniNav: true,
+	},
+	decorators: (Story) => {
+		global.fetch = customMockFetch([
+			{
+				mockedMethod: 'GET',
+				mockedUrl: 'https://www.theguardian.com/mock-event-graphic',
+				mockedStatus: 200,
+				mockedBody: ukGeneralFinal,
+			},
+		]);
+		return <Story />;
+	},
+} satisfies Story;

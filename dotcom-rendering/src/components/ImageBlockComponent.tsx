@@ -1,3 +1,4 @@
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { ImageBlockElement } from '../types/content';
 import { ImageComponent } from './ImageComponent';
@@ -10,6 +11,7 @@ type Props = {
 	isMainMedia?: boolean;
 	isAvatar?: boolean;
 	isTimeline?: boolean;
+	articleArrangement?: LayoutType;
 };
 
 export const ImageBlockComponent = ({
@@ -20,6 +22,7 @@ export const ImageBlockComponent = ({
 	isMainMedia,
 	isAvatar,
 	isTimeline = false,
+	articleArrangement,
 }: Props) => {
 	const { role } = element;
 	return (
@@ -32,6 +35,7 @@ export const ImageBlockComponent = ({
 			title={title}
 			isAvatar={isAvatar}
 			isTimeline={isTimeline}
+			articleArrangement={articleArrangement}
 		/>
 	);
 };

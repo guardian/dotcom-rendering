@@ -13,6 +13,7 @@ const mockProductElement: FEElement = {
 	displayType: 'InlineOnly',
 	starRating: '5',
 	productName: 'Product Name',
+	id: '123',
 };
 
 describe('Enhance h2 Embeds', () => {

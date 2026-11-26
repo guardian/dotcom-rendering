@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { isString } from '@guardian/libs';
-import type { ComponentEvent, TAction } from '@guardian/ophan-tracker-js';
+import type { AbTest } from '@guardian/ophan-tracker-js';
 import { space, textSans14, until } from '@guardian/source/foundations';
 import {
 	Button,
@@ -19,11 +19,25 @@ import { useEffect, useRef, useState } from 'react';
 // that version will compile and render but is non-functional.
 // Use the default export instead.
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
-import { submitComponentEvent } from '../client/ophan/ophan';
 import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
+import {
+	getEffectiveMarketingOptIn,
+	getMarketingOptInType,
+} from '../lib/newsletter-marketing-opt-in';
+import {
+	getErrorType,
+	getResponseFailureDetails,
+} from '../lib/newsletterSignupFailureDetails';
+import {
+	EVENT_DESCRIPTION_TO_ACTION,
+	NEWSLETTER_SIGNUP_COMPONENT_ID,
+	type NewsletterEventDescription,
+	sendNewsletterSignupEvent,
+} from '../lib/newsletterSignupTracking';
 import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
 import { useBrowserId } from '../lib/useBrowserId';
+import { useHideMarketingToggleForCountry } from '../lib/useHideMarketingToggleForCountry';
 import { palette } from '../palette';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
@@ -31,17 +45,18 @@ import { useConfig } from './ConfigContext';
 // The Google documentation specifies that if the 'recaptcha-badge' is hidden,
 // their T+C's must be displayed instead. While this component hides the
 // badge, its parent must include the T+C along side it.
-// The T+C are not included in this componet directly to reduce layout shift
+// The T+C are not included in this component directly to reduce layout shift
 // from the island hydrating (placeholder height for the text can't
 // be accurately predicated for every breakpoint).
 // https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
 
-type OphanABTest = ComponentEvent['abTest'];
-
 type Props = {
 	newsletterId: string;
 	successDescription: string;
-	abTest?: OphanABTest;
+	abTest?: AbTest;
+	emailInputNameOverride?: string;
+	emailInputIdOverride?: string;
+	addCountryField?: boolean;
 };
 
 const formStyles = css`
@@ -108,6 +123,14 @@ const optInCheckboxTextSmall = css`
 	}
 `;
 
+/*
+ * The country form field is used here to try and fool bots into filling the field in
+ * and therefore be able to detect them
+ */
+const countryFieldStyles = css`
+	display: none;
+`;
+
 const ErrorMessageWithAdvice = ({ text }: { text?: string }) => (
 	<InlineError>
 		<span>
@@ -136,9 +159,19 @@ const buildFormData = (
 	emailAddress: string,
 	newsletterId: string,
 	token: string,
-	marketingOptIn?: boolean,
-	browserId?: string,
+	additionalOptions?: {
+		marketingOptIn?: boolean;
+		browserId?: string;
+		marketingOptInHiddenForCountry?: boolean;
+		countryValue?: string;
+	},
 ): FormData => {
+	const {
+		marketingOptIn,
+		browserId,
+		marketingOptInHiddenForCountry,
+		countryValue,
+	} = additionalOptions ?? {};
 	const pageRef = window.location.origin + window.location.pathname;
 	const refViewId = window.guardian.ophan?.pageViewId ?? '';
 
@@ -157,18 +190,38 @@ const buildFormData = (
 		formData.append('marketing', marketingOptIn ? 'true' : 'false');
 	}
 
+	if (marketingOptInHiddenForCountry === true) {
+		formData.append('marketingOptInHidden', 'true');
+	}
+
 	if (browserId !== undefined) {
 		formData.append('browserId', browserId);
+	}
+
+	/*
+		The country form field is used here to try and fool bots into filling the field in
+	*/
+	if (countryValue !== undefined) {
+		formData.append('country', countryValue);
 	}
 
 	return formData;
 };
 
-const resolveEmailIfSignedIn = async (): Promise<string | undefined> => {
+const resolveEmailForSignedInUser = async (
+	isSignedIn: boolean | 'Pending',
+): Promise<string | undefined> => {
+	if (isSignedIn !== true) {
+		return;
+	}
 	const { idApiUrl } = window.guardian.config.page;
-	if (!idApiUrl) return;
+	if (!idApiUrl) {
+		return;
+	}
 	const fetchedEmail = await lazyFetchEmailWithTimeout()();
-	if (!fetchedEmail) return;
+	if (!fetchedEmail) {
+		return;
+	}
 	return fetchedEmail;
 };
 
@@ -196,72 +249,26 @@ const postFormData = async (
 		},
 	});
 };
-
-type EventDescription =
-	| 'click-button'
-	| 'form-submission'
-	| 'submission-confirmed'
-	| 'submission-failed'
-	| 'open-captcha'
-	| 'captcha-load-error'
-	| 'form-submit-error'
-	| 'captcha-not-passed'
-	| 'captcha-passed';
-
 const sendTracking = (
 	newsletterId: string,
-	eventDescription: EventDescription,
+	eventDescription: NewsletterEventDescription,
 	renderingTarget: RenderingTarget,
-	abTest?: OphanABTest,
+	isSignedIn: boolean | 'Pending',
+	abTest?: AbTest,
+	extraDetails?: Record<string, unknown>,
 ): void => {
-	let action: TAction = 'CLICK';
-
-	switch (eventDescription) {
-		case 'form-submission':
-		case 'captcha-not-passed':
-		case 'captcha-passed':
-			action = 'ANSWER';
-			break;
-		case 'submission-confirmed':
-			action = 'SUBSCRIBE';
-			break;
-		case 'captcha-load-error':
-		case 'form-submit-error':
-		case 'submission-failed':
-			action = 'CLOSE';
-			break;
-		case 'open-captcha':
-			action = 'EXPAND';
-			break;
-		case 'click-button':
-		default:
-			action = 'CLICK';
-			break;
-	}
-
-	// The data team use a custom date format for timestamps,
-	// (yyy-MM-dd hh:mm:ss.ssssss UTC)
-	// and will cast the integer value  to this
-	// format at their end
-	const value = JSON.stringify({
-		eventDescription,
-		newsletterId,
-		timestamp: Date.now(),
-	});
-
-	void submitComponentEvent(
-		{
-			action,
-			value,
-			//check if this can be used or needs to be added
-			component: {
-				componentType: 'NEWSLETTER_SUBSCRIPTION',
-				id: `AR SecureSignup ${newsletterId}`,
-			},
-			abTest,
-		},
+	sendNewsletterSignupEvent({
+		action: EVENT_DESCRIPTION_TO_ACTION[eventDescription],
+		identityName: newsletterId,
+		componentId: NEWSLETTER_SIGNUP_COMPONENT_ID.secureSignup(newsletterId),
 		renderingTarget,
-	);
+		value: {
+			...extraDetails,
+			eventDescription,
+			isSignedIn,
+		},
+		abTest,
+	});
 };
 
 /**
@@ -277,6 +284,9 @@ export const SecureSignup = ({
 	newsletterId,
 	successDescription,
 	abTest,
+	emailInputNameOverride,
+	emailInputIdOverride,
+	addCountryField = false,
 }: Props) => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>();
@@ -295,6 +305,9 @@ export const SecureSignup = ({
 	);
 	const isSignedIn = useIsSignedIn();
 	const authStatus = useAuthStatus();
+	const hideMarketingToggle = useHideMarketingToggleForCountry();
+	const marketingOptInHiddenForCountry =
+		hideMarketingToggle && isSignedIn === false;
 
 	useEffect(() => {
 		if (isSignedIn !== 'Pending' && !isSignedIn) {
@@ -304,11 +317,16 @@ export const SecureSignup = ({
 
 	useEffect(() => {
 		setCaptchaSiteKey(window.guardian.config.page.googleRecaptchaSiteKey);
-		void resolveEmailIfSignedIn().then((email) => {
-			setUserEmail(email);
-			setHideEmailInput(isString(email));
-		});
 	}, []);
+
+	useEffect(() => {
+		if (isSignedIn === true) {
+			void resolveEmailForSignedInUser(isSignedIn).then((email) => {
+				setUserEmail(email);
+				setHideEmailInput(isString(email));
+			});
+		}
+	}, [isSignedIn]);
 	const { renderingTarget } = useConfig();
 	const browserId = useBrowserId();
 
@@ -318,16 +336,39 @@ export const SecureSignup = ({
 		const input: HTMLInputElement | null =
 			document.querySelector('input[type="email"]') ?? null;
 		const emailAddress: string = input?.value ?? '';
-
-		sendTracking(newsletterId, 'form-submission', renderingTarget, abTest);
-
-		const formData = buildFormData(
-			emailAddress,
-			newsletterId,
-			token,
+		const effectiveMarketingOptIn = getEffectiveMarketingOptIn({
+			marketingOptInHiddenForCountry,
+			isSignedIn,
 			marketingOptIn,
-			browserId,
+		});
+		const marketingOptInType = getMarketingOptInType({
+			marketingOptInHiddenForCountry,
+			isSignedIn,
+			effectiveMarketingOptIn,
+		});
+		const possibleCountryInput: HTMLInputElement | null =
+			document.querySelector(
+				`#secure-signup-${newsletterId} input[name="country"]`,
+			) ?? null;
+		const countryValue = possibleCountryInput?.value;
+
+		sendTracking(
+			newsletterId,
+			'form-submission',
+			renderingTarget,
+			isSignedIn,
+			abTest,
+			marketingOptInType ? { marketingOptInType } : undefined,
 		);
+
+		const formData = buildFormData(emailAddress, newsletterId, token, {
+			marketingOptIn: effectiveMarketingOptIn,
+			browserId,
+			marketingOptInHiddenForCountry: marketingOptInHiddenForCountry
+				? true
+				: undefined,
+			countryValue,
+		});
 
 		const response = await postFormData(
 			window.guardian.config.page.ajaxUrl + '/email',
@@ -345,11 +386,29 @@ export const SecureSignup = ({
 			clearSubscriptionCache();
 		}
 
+		const trackingDetails: Record<string, unknown> = {};
+
+		if (marketingOptInType) {
+			trackingDetails.marketingOptInType = marketingOptInType;
+		}
+
+		if (!response.ok) {
+			trackingDetails.responseStatus = response.status;
+			Object.assign(
+				trackingDetails,
+				await getResponseFailureDetails(response),
+			);
+		}
+
 		sendTracking(
 			newsletterId,
 			response.ok ? 'submission-confirmed' : 'submission-failed',
 			renderingTarget,
+			isSignedIn,
 			abTest,
+			Object.keys(trackingDetails).length > 0
+				? trackingDetails
+				: undefined,
 		);
 	};
 
@@ -364,6 +423,7 @@ export const SecureSignup = ({
 			newsletterId,
 			'captcha-load-error',
 			renderingTarget,
+			isSignedIn,
 			abTest,
 		);
 		setErrorMessage(`Sorry, the reCAPTCHA failed to load.`);
@@ -376,20 +436,28 @@ export const SecureSignup = ({
 				newsletterId,
 				'captcha-not-passed',
 				renderingTarget,
+				isSignedIn,
 				abTest,
 			);
 			return;
 		}
-		sendTracking(newsletterId, 'captcha-passed', renderingTarget, abTest);
+		sendTracking(
+			newsletterId,
+			'captcha-passed',
+			renderingTarget,
+			isSignedIn,
+			abTest,
+		);
 		setIsWaitingForResponse(true);
 		submitForm(token).catch((error) => {
-			// eslint-disable-next-line no-console -- unexpected error
 			console.error(error);
 			sendTracking(
 				newsletterId,
 				'form-submit-error',
 				renderingTarget,
+				isSignedIn,
 				abTest,
+				{ errorType: getErrorType(error) },
 			);
 			setErrorMessage(`Sorry, there was an error signing you up.`);
 			setIsWaitingForResponse(false);
@@ -397,7 +465,23 @@ export const SecureSignup = ({
 	};
 
 	const handleClick = (): void => {
-		sendTracking(newsletterId, 'click-button', renderingTarget, abTest);
+		sendTracking(
+			newsletterId,
+			'click-button',
+			renderingTarget,
+			isSignedIn,
+			abTest,
+		);
+	};
+
+	const handleEmailFocus = (): void => {
+		sendTracking(
+			newsletterId,
+			'email-input-focused',
+			renderingTarget,
+			isSignedIn,
+			abTest,
+		);
 	};
 
 	const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
@@ -406,7 +490,13 @@ export const SecureSignup = ({
 			return;
 		}
 		setErrorMessage(undefined);
-		sendTracking(newsletterId, 'open-captcha', renderingTarget, abTest);
+		sendTracking(
+			newsletterId,
+			'open-captcha',
+			renderingTarget,
+			isSignedIn,
+			abTest,
+		);
 		recaptchaRef.current?.execute();
 	};
 
@@ -427,13 +517,15 @@ export const SecureSignup = ({
 				<TextInput
 					hidden={hideEmailInput}
 					hideLabel={hideEmailInput}
-					name="email"
+					name={emailInputNameOverride ?? 'email'}
+					id={emailInputIdOverride}
 					label="Enter your email address"
 					type="email"
 					value={userEmail ?? ''}
 					onChange={(e) => setUserEmail(e.target.value)}
+					onFocus={handleEmailFocus}
 				/>
-				{isSignedIn === false && (
+				{isSignedIn !== true && !marketingOptInHiddenForCountry && (
 					<CheckboxGroup
 						name="marketing-preferences"
 						label="Marketing preferences"
@@ -449,6 +541,23 @@ export const SecureSignup = ({
 							}
 						/>
 					</CheckboxGroup>
+				)}
+				{/*
+					The country form field is used here to try and fool bots into filling the field in
+				*/}
+				{addCountryField && (
+					<TextInput
+						name="country"
+						label="country"
+						hideLabel={true}
+						type="text"
+						maxLength={100}
+						optional={true}
+						tabIndex={-1}
+						autoComplete="off"
+						aria-hidden="true"
+						cssOverrides={countryFieldStyles}
+					/>
 				)}
 				<Button onClick={handleClick} size="small" type="submit">
 					Sign up

@@ -12,7 +12,7 @@ import type { Result } from '../lib/result';
 import { palette } from '../palette';
 import type { FootballMatchListPageKind, Region } from '../sportDataPage';
 import { AdSlot } from './AdSlot.web';
-import { DirectoryPageNav } from './DirectoryPageNav';
+import { DirectoryPageNavIsland } from './DirectoryPageNavIsland';
 import { FootballCompetitionSelect } from './FootballCompetitionSelect';
 import { FootballMatchList } from './FootballMatchList';
 
@@ -59,7 +59,8 @@ export const FootballMatchesPage = ({
 	pageId,
 }: Props) => (
 	<>
-		<DirectoryPageNav pageId={pageId} />
+		<DirectoryPageNavIsland pageId={pageId} />
+
 		<main
 			id="maincontent"
 			data-layout="FootballDataPageLayout"

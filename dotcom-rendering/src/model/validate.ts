@@ -2,15 +2,15 @@ import { isObject, isString } from '@guardian/libs';
 import type { Options } from 'ajv';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
+import type { FEAppsComponentEventGraphic } from '../frontend/feAppsComponentEventGraphic';
 import type { FEArticle } from '../frontend/feArticle';
-import type { FECricketMatchPage } from '../frontend/feCricketMatchPage';
 import type { FEFootballMatchInfoPage } from '../frontend/feFootballMatchInfoPage';
 import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPage';
 import type { FEFootballTablesPage } from '../frontend/feFootballTablesPage';
 import type { FEFront } from '../frontend/feFront';
 import type { FETagPage } from '../frontend/feTagPage';
+import feAppsComponentEventGraphicSchema from '../frontend/schemas/feAppsComponentEventGraphic.json';
 import articleSchema from '../frontend/schemas/feArticle.json';
-import cricketMatchPageSchema from '../frontend/schemas/feCricketMatchPage.json';
 import footballMatchInfoPageSchema from '../frontend/schemas/feFootballMatchInfoPage.json';
 import footballMatchListPageSchema from '../frontend/schemas/feFootballMatchListPage.json';
 import footballTablesPageSchema from '../frontend/schemas/feFootballTablesPage.json';
@@ -19,9 +19,15 @@ import tagPageSchema from '../frontend/schemas/feTagPage.json';
 import type { Block } from '../types/blocks';
 import type { FEEditionsCrosswords } from '../types/editionsCrossword';
 import type { FENewslettersPageType } from '../types/newslettersPage';
+import type {
+	FEPuzzlesPageType,
+	PuzzleContainer,
+	PuzzleItem,
+} from '../types/puzzlesPage';
 import blockSchema from './block-schema.json';
 import editionsCrosswordSchema from './editions-crossword-schema.json';
 import newslettersPageSchema from './newsletter-page-schema.json';
+import { isPuzzlesCommercialProperties } from './validate.puzzlesCommercialProperties';
 
 const options: Options = {
 	verbose: false,
@@ -50,12 +56,13 @@ const validateFootballMatchListPage = ajv.compile<FEFootballMatchListPage>(
 const validateFootballTablesPage = ajv.compile<FEFootballTablesPage>(
 	footballTablesPageSchema,
 );
-const validateCricketMatchPage = ajv.compile<FECricketMatchPage>(
-	cricketMatchPageSchema,
-);
+
 const validateFootballMatchInfoPage = ajv.compile<FEFootballMatchInfoPage>(
 	footballMatchInfoPageSchema,
 );
+
+const validateFEAppsComponentEventGraphic =
+	ajv.compile<FEAppsComponentEventGraphic>(feAppsComponentEventGraphicSchema);
 
 export const validateAsFEArticle = (data: unknown): FEArticle => {
 	if (validateArticle(data)) return data;
@@ -77,7 +84,7 @@ export const validateAsEditionsCrosswordType = (
 	}
 	throw new TypeError(
 		`Unable to validate request body for editions crosswords.\n
-		${JSON.stringify(validateEditionsCrossword.errors, null, 2)}`,
+    ${JSON.stringify(validateEditionsCrossword.errors, null, 2)}`,
 	);
 };
 
@@ -111,7 +118,7 @@ export const validateAsAllEditorialNewslettersPageType = (
 	if (validateAllEditorialNewslettersPage(data)) return data;
 	throw new TypeError(
 		`Unable to validate request body for newsletters page.\n
-		${JSON.stringify(validateAllEditorialNewslettersPage.errors, null, 2)}`,
+    ${JSON.stringify(validateAllEditorialNewslettersPage.errors, null, 2)}`,
 	);
 };
 
@@ -155,22 +162,6 @@ export const validateAsFootballTablesPage = (
 	);
 };
 
-export const validateAsCricketMatchPageType = (
-	data: unknown,
-): FECricketMatchPage => {
-	if (validateCricketMatchPage(data)) return data;
-
-	const url =
-		isObject(data) && isObject(data.config) && isString(data.config.pageId)
-			? data.config.pageId
-			: 'unknown url';
-
-	throw new TypeError(
-		`Unable to validate request body for url ${url}.\n
-            ${JSON.stringify(validateCricketMatchPage.errors, null, 2)}`,
-	);
-};
-
 export const validateAsFootballMatchPageType = (
 	data: unknown,
 ): FEFootballMatchInfoPage => {
@@ -185,4 +176,295 @@ export const validateAsFootballMatchPageType = (
 		`Unable to validate request body for url ${url}.\n
             ${JSON.stringify(validateFootballMatchInfoPage.errors, null, 2)}`,
 	);
+};
+
+export const validateAsFEAppsComponentEventGraphic = (
+	data: unknown,
+): FEAppsComponentEventGraphic => {
+	if (validateFEAppsComponentEventGraphic(data)) return data;
+
+	const url =
+		isObject(data) && isString(data.webURL) ? data.webURL : 'unknown url';
+
+	throw new TypeError(
+		`Unable to validate request body for url ${url}.\n
+            ${JSON.stringify(validateFEAppsComponentEventGraphic.errors, null, 2)}`,
+	);
+};
+
+const identifier = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const colour = /^#[0-9a-f]{6}$/i;
+const isoDate = /^\d{4}-\d{2}-\d{2}$/;
+const cardVariants = new Set(['large', 'primary', 'compact', 'archive']);
+const containerVariants = new Set(['featured', 'standard', 'ad', 'supporting']);
+const isPuzzleDestination = (url: string) =>
+	url.startsWith('/puzzles-and-games') ||
+	url.startsWith('/crosswords/series/') ||
+	/^https?:\/\//.test(url);
+
+const isPuzzleItem = (data: unknown): data is PuzzleItem =>
+	isObject(data) &&
+	isString(data.id) &&
+	identifier.test(data.id) &&
+	isString(data.title) &&
+	isString(data.type) &&
+	isString(data.set) &&
+	isString(data.cardVariant) &&
+	cardVariants.has(data.cardVariant) &&
+	(data.cadence === undefined ||
+		(isString(data.cadence) && data.cadence.trim().length > 0)) &&
+	(data.url === undefined || isString(data.url)) &&
+	(data.image === undefined || isString(data.image)) &&
+	(data.imageAlt === undefined || isString(data.imageAlt)) &&
+	(data.setter === undefined || isString(data.setter)) &&
+	(data.date === undefined ||
+		(isString(data.date) && isoDate.test(data.date))) &&
+	(data.slug === undefined || isString(data.slug)) &&
+	(data.index === undefined || Number.isInteger(data.index)) &&
+	(data.variant === undefined || isString(data.variant)) &&
+	(data.backgroundColour === undefined ||
+		(isString(data.backgroundColour) &&
+			colour.test(data.backgroundColour)));
+
+const isSupportingContent = (data: unknown): boolean =>
+	isObject(data) &&
+	isString(data.usefulLinksTitle) &&
+	data.usefulLinksTitle.trim().length > 0 &&
+	Array.isArray(data.usefulLinks) &&
+	data.usefulLinks.every(
+		(link) =>
+			isObject(link) &&
+			isString(link.title) &&
+			link.title.trim().length > 0 &&
+			isString(link.url) &&
+			isPuzzleDestination(link.url),
+	) &&
+	(data.newsletter === undefined ||
+		(isObject(data.newsletter) &&
+			isString(data.newsletter.identityName) &&
+			data.newsletter.identityName.trim().length > 0 &&
+			isString(data.newsletter.name) &&
+			data.newsletter.name.trim().length > 0 &&
+			isString(data.newsletter.frequency) &&
+			data.newsletter.frequency.trim().length > 0 &&
+			isString(data.newsletter.description) &&
+			data.newsletter.description.trim().length > 0 &&
+			(data.newsletter.illustrationSquare === undefined ||
+				isString(data.newsletter.illustrationSquare)) &&
+			(data.newsletter.exampleUrl === undefined ||
+				isString(data.newsletter.exampleUrl)))) &&
+	isString(data.popularTitle) &&
+	data.popularTitle.trim().length > 0 &&
+	Array.isArray(data.popularGroups) &&
+	data.popularGroups.every(
+		(group) =>
+			isObject(group) &&
+			isString(group.title) &&
+			group.title.trim().length > 0 &&
+			Array.isArray(group.itemIds) &&
+			group.itemIds.length > 0 &&
+			group.itemIds.every(isString),
+	);
+
+const isPuzzleContainer = (data: unknown): data is PuzzleContainer => {
+	if (
+		!isObject(data) ||
+		!isString(data.id) ||
+		!identifier.test(data.id) ||
+		!isString(data.title) ||
+		(data.variant !== undefined &&
+			(!isString(data.variant) ||
+				!containerVariants.has(data.variant))) ||
+		(data.enabled !== undefined && typeof data.enabled !== 'boolean') ||
+		(data.desktopSpan !== undefined &&
+			(!Number.isInteger(data.desktopSpan) ||
+				(data.desktopSpan as number) < 1 ||
+				(data.desktopSpan as number) > 12)) ||
+		(data.adSlot !== undefined &&
+			(!isString(data.adSlot) ||
+				(!/^inline[1-9][0-9]*$/.test(data.adSlot) &&
+					data.adSlot !== 'mostpop'))) ||
+		(data.supporting !== undefined &&
+			!isSupportingContent(data.supporting)) ||
+		(data.commercialProperties !== undefined &&
+			!isPuzzlesCommercialProperties(data.commercialProperties)) ||
+		!isObject(data.content)
+	) {
+		return false;
+	}
+
+	const { content } = data;
+	const itemsValid =
+		Array.isArray(content.items) &&
+		content.items.every(
+			(row) => Array.isArray(row) && row.every(isPuzzleItem),
+		);
+	const nestedValid =
+		Array.isArray(content.nestedContainers) &&
+		content.nestedContainers.every(isPuzzleContainer);
+	const archiveValid =
+		(content.archive === undefined || isPuzzleItem(content.archive)) &&
+		(content.archiveChoices === undefined ||
+			(Array.isArray(content.archiveChoices) &&
+				content.archiveChoices.length >= 1 &&
+				content.archiveChoices.every(isPuzzleItem))) &&
+		!(
+			content.archive !== undefined &&
+			content.archiveChoices !== undefined
+		);
+	const isAd = data.variant === 'ad';
+	const isSupporting = data.variant === 'supporting';
+	const adValid = isAd
+		? data.adSlot !== undefined &&
+			/^inline[1-9][0-9]*$/.test(data.adSlot) &&
+			data.title === '' &&
+			Array.isArray(content.items) &&
+			content.items.length === 0 &&
+			Array.isArray(content.nestedContainers) &&
+			content.nestedContainers.length === 0 &&
+			content.archive === undefined &&
+			content.archiveChoices === undefined &&
+			data.supporting === undefined &&
+			data.enabled === undefined
+		: isSupporting
+			? data.title === '' &&
+				data.supporting !== undefined &&
+				(data.adSlot === undefined || data.adSlot === 'mostpop') &&
+				Array.isArray(content.items) &&
+				content.items.length === 0 &&
+				Array.isArray(content.nestedContainers) &&
+				content.nestedContainers.length === 0 &&
+				content.archive === undefined &&
+				content.archiveChoices === undefined &&
+				data.enabled === undefined
+			: data.adSlot === undefined &&
+				data.supporting === undefined &&
+				(data.enabled === undefined || data.variant === 'featured') &&
+				data.title.trim().length > 0;
+
+	return itemsValid && nestedValid && archiveValid && adValid;
+};
+
+const flattenPuzzleContainers = (
+	containers: PuzzleContainer[],
+): PuzzleContainer[] => [
+	...containers,
+	...containers.flatMap((container) =>
+		flattenPuzzleContainers(container.content.nestedContainers),
+	),
+];
+
+const isArchivePuzzle = (value: unknown): boolean =>
+	isObject(value) &&
+	isString(value.id) &&
+	isString(value.title) &&
+	isString(value.puzzleType) &&
+	(value.slug === undefined || isString(value.slug)) &&
+	isString(value.set) &&
+	isString(value.path);
+
+const isArchiveItem = (value: unknown): boolean =>
+	isObject(value) &&
+	isString(value.puzzleType) &&
+	/^\d{4}-\d{2}-\d{2}$/.test(String(value.date)) &&
+	typeof value.progress === 'number' &&
+	(value.isWithinFreeWindow === undefined ||
+		typeof value.isWithinFreeWindow === 'boolean') &&
+	(value.hasPremiumEntitlement === undefined ||
+		typeof value.hasPremiumEntitlement === 'boolean') &&
+	(value.setterName === undefined || isString(value.setterName)) &&
+	isString(value.url);
+
+const isPuzzlesArchive = (value: unknown): boolean =>
+	isObject(value) &&
+	[
+		'crosswords',
+		'word-games',
+		'logic-puzzles',
+		'trivia-and-quizzes',
+	].includes(String(value.category)) &&
+	isString(value.title) &&
+	isString(value.description) &&
+	isArchivePuzzle(value.selectedPuzzle) &&
+	Array.isArray(value.puzzles) &&
+	value.puzzles.every(isArchivePuzzle) &&
+	Number.isInteger(value.year) &&
+	Number.isInteger(value.month) &&
+	Number(value.month) >= 1 &&
+	Number(value.month) <= 12 &&
+	Array.isArray(value.items) &&
+	value.items.every(isArchiveItem) &&
+	(value.recentItems === undefined ||
+		(Array.isArray(value.recentItems) &&
+			value.recentItems.every(isArchiveItem))) &&
+	typeof value.hasError === 'boolean' &&
+	Array.isArray(value.moreFrom) &&
+	value.moreFrom.every((item) => isPuzzleItem(item));
+
+export const validateAsPuzzlesPageType = (data: unknown): FEPuzzlesPageType => {
+	if (
+		!isObject(data) ||
+		!isString(data.id) ||
+		!isString(data.webTitle) ||
+		!isString(data.editionId) ||
+		!isObject(data.config) ||
+		!isObject(data.nav) ||
+		!isObject(data.pageFooter) ||
+		!isString(data.canonicalUrl) ||
+		typeof data.isAdFreeUser !== 'boolean' ||
+		!isObject(data.layout) ||
+		!Array.isArray(data.layout.containers) ||
+		!data.layout.containers.every(isPuzzleContainer) ||
+		(data.archive !== undefined && !isPuzzlesArchive(data.archive)) ||
+		(data.commercialProperties !== undefined &&
+			!isPuzzlesCommercialProperties(data.commercialProperties))
+	) {
+		throw new TypeError(
+			'Unable to validate request body for puzzles page.',
+		);
+	}
+
+	const page = data as unknown as FEPuzzlesPageType;
+	const containers = flattenPuzzleContainers(page.layout.containers);
+	const items = containers.flatMap((container) => [
+		...container.content.items.flat(),
+		...(container.content.archive ? [container.content.archive] : []),
+		...(container.content.archiveChoices ?? []),
+	]);
+	const unique = (values: string[]) => new Set(values).size === values.length;
+	const containerIds = containers.map(({ id }) => id);
+	const itemIds = items.map(({ id }) => id);
+	const adSlots = containers.flatMap(({ adSlot }) =>
+		adSlot === undefined ? [] : [adSlot],
+	);
+	const popularReferencesValid = containers.every((container) =>
+		(container.supporting?.popularGroups ?? []).every((group) =>
+			group.itemIds.every((id) => itemIds.includes(id)),
+		),
+	);
+	const topLevelOnlyContainersValid = containers
+		.slice(page.layout.containers.length)
+		.every(({ variant }) => variant !== 'ad' && variant !== 'supporting');
+	const containerSponsorshipValid = containers.every(
+		(container) =>
+			container.commercialProperties === undefined ||
+			(page.layout.containers.includes(container) &&
+				container.variant !== 'ad' &&
+				container.variant !== 'supporting'),
+	);
+
+	if (
+		!unique(containerIds) ||
+		!unique(itemIds) ||
+		!unique(adSlots) ||
+		!popularReferencesValid ||
+		!topLevelOnlyContainersValid ||
+		!containerSponsorshipValid
+	) {
+		throw new TypeError(
+			'Unable to validate request body for puzzles page.',
+		);
+	}
+
+	return page;
 };

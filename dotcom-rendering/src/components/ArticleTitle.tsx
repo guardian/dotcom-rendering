@@ -1,21 +1,26 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
 import { grid } from '../../src/grid';
+import { type LayoutType } from '../layouts/lib/articleArrangements';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
+	hasImmersiveGridTitleRule,
 } from '../lib/articleFormat';
+import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
 import { SeriesSectionLink } from './SeriesSectionLink';
 
 type Props = {
 	format: ArticleFormat;
-	tags: TagType[];
+	layoutType?: LayoutType;
 	sectionLabel: string;
+	tags: TagType[];
 	sectionUrl: string;
 	guardianBaseURL: string;
 	isMatch?: boolean;
+	ophanComponentLink?: string;
 };
 
 const sectionStyles = css`
@@ -27,18 +32,24 @@ const sectionStyles = css`
 	}
 `;
 
-const immersiveMargins = css`
-	max-width: 400px;
+const immersiveGridMargins = css`
+	max-width: 80vw;
 	min-width: 200px;
-	margin-bottom: 4px;
-	/*
-        Make sure we vertically align the title font with the body font
-    */
-	${from.tablet} {
-		margin-left: 16px;
-	}
-	${from.leftCol} {
-		margin-left: 25px;
+	margin-bottom: 0;
+`;
+
+const immersivePortraitSeriesRule = css`
+	${from.desktop} {
+		display: flex;
+		align-items: flex-end;
+		width: calc(100% + 2px);
+		max-width: none;
+
+		&::after {
+			content: '';
+			flex: 1;
+			border-bottom: 1px solid ${themePalette('--article-border')};
+		}
 	}
 `;
 
@@ -57,33 +68,82 @@ const galleryStyles = css`
 
 export const ArticleTitle = ({
 	format,
+	layoutType,
 	tags,
 	sectionLabel,
 	sectionUrl,
 	guardianBaseURL,
 	isMatch,
-}: Props) => (
-	<div
-		css={[
-			format.design === ArticleDesign.Gallery && galleryStyles,
-			sectionStyles,
-		]}
-	>
+	ophanComponentLink,
+}: Props) => {
+	const hasImmersivePortraitTitleRule =
+		layoutType === 'immersivePortrait' &&
+		hasImmersiveGridTitleRule(format, tags);
+
+	return (
 		<div
-			css={
-				format.display === ArticleDisplay.Immersive
-					? immersiveMargins
-					: undefined
-			}
+			data-link-name={ophanComponentLink}
+			css={[
+				[ArticleDesign.Gallery, ArticleDesign.HostedGallery].includes(
+					format.design,
+				) && galleryStyles,
+				sectionStyles,
+				layoutType === 'immersivePortrait' &&
+					format.design === ArticleDesign.WeekendEssay &&
+					css`
+						position: relative;
+						min-height: 71px;
+						height: 100%;
+					`,
+			]}
 		>
-			<SeriesSectionLink
-				format={format}
-				tags={tags}
-				sectionLabel={sectionLabel}
-				sectionUrl={sectionUrl}
-				guardianBaseURL={guardianBaseURL}
-				isMatch={isMatch}
-			/>
+			<div
+				css={[
+					format.display === ArticleDisplay.Immersive &&
+						format.design !== ArticleDesign.WeekendEssay &&
+						immersiveGridMargins,
+					hasImmersivePortraitTitleRule &&
+						immersivePortraitSeriesRule,
+					layoutType === 'interactiveTopHat' &&
+						css`
+							width: 100%;
+						`,
+				]}
+			>
+				<SeriesSectionLink
+					format={format}
+					layoutType={layoutType}
+					tags={tags}
+					sectionLabel={sectionLabel}
+					sectionUrl={sectionUrl}
+					guardianBaseURL={guardianBaseURL}
+					isMatch={isMatch}
+				/>
+			</div>
+			{layoutType === 'immersivePortrait' &&
+				format.design === ArticleDesign.WeekendEssay && (
+					<img
+						src="https://interactive.guim.co.uk/atoms/2025/04/2025-weekend-essay-test/assets/v/1791480673/book.gif"
+						alt="Book"
+						data-chromatic="ignore"
+						css={css`
+							position: absolute;
+							right: 0;
+							bottom: 0;
+							width: 70px;
+							height: 70px;
+							${from.leftCol} {
+								width: 110px;
+								height: 110px;
+							}
+							@media (prefers-color-scheme: dark) {
+								:root:not([data-color-scheme='light']) & {
+									filter: invert(1);
+								}
+							}
+						`}
+					/>
+				)}
 		</div>
-	</div>
-);
+	);
+};

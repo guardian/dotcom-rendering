@@ -6,7 +6,7 @@ type Props = {
 	showClock: boolean;
 	serverTime?: number;
 	webPublicationDate: string;
-	isStorylines?: boolean;
+	isStorylines: boolean;
 };
 
 export const FeatureCardCardAge = ({

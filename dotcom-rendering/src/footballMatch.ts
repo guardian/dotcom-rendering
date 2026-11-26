@@ -8,9 +8,13 @@ import type {
 } from './frontend/feFootballMatchInfoPage';
 import type { Result } from './lib/result';
 import { error, ok } from './lib/result';
-import { cleanTeamName } from './sportDataPage';
 
-const eventTypes = ['substitution', 'dismissal', 'booking'] as const;
+const eventTypes = [
+	'substitution',
+	'substitution-injury',
+	'dismissal',
+	'booking',
+] as const;
 const isEventType = isOneOf(eventTypes);
 
 export type PlayerEvent = {
@@ -98,7 +102,7 @@ const parseTeam = (
 ): Result<ParserError, FootballTeam> =>
 	parsePlayers(feFootballMatchTeam.players).map((players) => ({
 		id: feFootballMatchTeam.id,
-		name: cleanTeamName(feFootballMatchTeam.name),
+		name: feFootballMatchTeam.name,
 		codename: feFootballMatchTeam.codename,
 		score: feFootballMatchTeam.score,
 		scorers: feFootballMatchTeam.scorers,

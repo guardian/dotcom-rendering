@@ -4,7 +4,6 @@ import { getZIndex } from '../../../lib/getZIndex';
 
 const fauxLinkStyles = css`
 	position: absolute;
-	z-index: ${getZIndex('card-link')};
 	top: 0;
 	right: 0;
 	bottom: 0;
@@ -16,28 +15,35 @@ const fauxLinkStyles = css`
 	}
 `;
 
+const zIndexStyles = css`
+	z-index: ${getZIndex('card-link')};
+`;
+
 type Props = {
 	linkTo: string;
 	headlineText: string;
 	dataLinkName?: string;
 	isExternalLink: boolean;
+	headlineTestUuid?: string;
 };
 
 const InternalLink = ({
 	linkTo,
 	headlineText,
 	dataLinkName,
+	headlineTestUuid,
 }: {
 	linkTo: string;
 	headlineText: string;
 	dataLinkName?: string;
+	headlineTestUuid?: string;
 }) => {
 	return (
-		// eslint-disable-next-line jsx-a11y/anchor-has-content -- we have an aria-label attribute describing the content
 		<a
 			href={linkTo}
-			css={fauxLinkStyles}
+			css={[fauxLinkStyles, zIndexStyles]}
 			data-link-name={dataLinkName}
+			data-fronts-test-uuid={headlineTestUuid}
 			aria-label={headlineText}
 		/>
 	);
@@ -47,17 +53,19 @@ const ExternalLink = ({
 	linkTo,
 	headlineText,
 	dataLinkName,
+	headlineTestUuid,
 }: {
 	linkTo: string;
 	headlineText: string;
 	dataLinkName?: string;
+	headlineTestUuid?: string;
 }) => {
 	return (
-		// eslint-disable-next-line jsx-a11y/anchor-has-content -- we have an aria-label attribute describing the content
 		<a
 			href={linkTo}
-			css={fauxLinkStyles}
+			css={[fauxLinkStyles, zIndexStyles]}
 			data-link-name={dataLinkName}
+			data-fronts-test-uuid={headlineTestUuid}
 			aria-label={headlineText + ' (opens in new tab)'}
 			target="_blank"
 			rel="noreferrer"
@@ -70,6 +78,7 @@ export const CardLink = ({
 	headlineText,
 	dataLinkName = 'article', //this makes sense if the link is to an article, but should this say something like "external" if it's an external link? are there any other uses/alternatives?
 	isExternalLink,
+	headlineTestUuid,
 }: Props) => {
 	return (
 		<>
@@ -78,6 +87,7 @@ export const CardLink = ({
 					linkTo={linkTo}
 					headlineText={headlineText}
 					dataLinkName={dataLinkName}
+					headlineTestUuid={headlineTestUuid}
 				/>
 			)}
 			{!isExternalLink && (
@@ -85,6 +95,7 @@ export const CardLink = ({
 					linkTo={linkTo}
 					headlineText={headlineText}
 					dataLinkName={dataLinkName}
+					headlineTestUuid={headlineTestUuid}
 				/>
 			)}
 		</>

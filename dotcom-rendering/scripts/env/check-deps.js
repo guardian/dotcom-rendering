@@ -10,7 +10,9 @@ if (pkg.devDependencies) {
 
 const mismatches = Object.entries(pkg.dependencies).filter(
 	([, version]) =>
-		!semver.valid(version) && !version.startsWith('workspace:'),
+		!semver.valid(version) &&
+		!version.startsWith('workspace:') &&
+		!version.startsWith('catalog:'),
 );
 
 if (mismatches.length !== 0) {

@@ -1,4 +1,5 @@
 import { type CrosswordProps } from '@guardian/react-crossword';
+import { type ElectionComponentsJson } from '../components/ElectionTrackers/electionComponent';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { VideoPlayerFormat } from './mainMedia';
 
@@ -347,6 +348,7 @@ export interface InteractiveAtomBlockElement {
 	css?: string;
 	placeholderUrl?: string;
 	role?: RoleType | 'fullWidth';
+	customData?: string;
 }
 
 // Can't guarantee anything in interactiveBlockElement :shrug:
@@ -427,10 +429,12 @@ export interface ListItem {
 
 export interface LinkBlockElement {
 	_type: 'model.dotcomrendering.pageElements.LinkBlockElement';
+	elementId: string;
 	url: string;
 	label: string;
 	linkType: 'ProductButton' | 'StandardButton';
 	priority?: 'Primary' | 'Tertiary';
+	latestPrice?: AffiliateProductPrice;
 }
 
 export interface ListBlockElement {
@@ -469,6 +473,7 @@ export interface MediaAtomBlockElement {
 	duration?: number;
 	videoPlayerFormat?: VideoPlayerFormat;
 	role?: RoleType;
+	caption?: string;
 }
 
 export interface MultiImageBlockElement {
@@ -519,14 +524,62 @@ export interface ProductBlockElement {
 	content: FEElement[];
 	h2Id?: string;
 	displayType: ProductDisplayType;
+	id: string;
 	productCtas: ProductCta[];
 	lowestPrice?: string;
 }
 
-export interface ProductSummaryElement {
-	_type: 'model.dotcomrendering.pageElements.ProductSummaryElement';
-	matchedProducts: ProductBlockElement[];
-	variant: 'carousel' | 'stacked-default' | 'stacked-expanded';
+export interface SummaryProductRef {
+	productId: string;
+	ctaIndex: number;
+}
+
+export interface SummaryProduct {
+	productBlock: ProductBlockElement;
+	ctaIndex: number;
+}
+
+export interface ProductSummaryBlockElement {
+	_type: 'model.dotcomrendering.pageElements.ProductSummaryBlockElement';
+	products: SummaryProductRef[];
+	displayType: ProductSummaryDisplayType;
+	title: string;
+}
+
+export interface EnhancedProductSummaryElement {
+	_type: 'model.dotcomrendering.pageElements.EnhancedProductSummaryElement';
+	products: SummaryProduct[];
+	displayType: ProductSummaryDisplayType;
+	title: string;
+}
+
+export interface RecipeFeaturedImage {
+	url: string;
+	mediaId: string;
+	cropId: string;
+	source?: string;
+	photographer?: string;
+	imageType?: string;
+	caption?: string;
+	width?: number;
+	height?: number;
+	mediaApiUri?: string;
+}
+
+export interface EventGraphicBlockElement {
+	_type: 'model.dotcomrendering.pageElements.EventGraphicBlockElement';
+	elementId: string;
+	components: ElectionComponentsJson;
+	dataUrl: URL;
+}
+
+export interface RecipeBlockElement {
+	_type: 'model.dotcomrendering.pageElements.RecipeBlockElement';
+	elementId?: string;
+	id: string;
+	title?: string;
+	description?: string;
+	featuredImage?: RecipeFeaturedImage;
 }
 
 interface ProfileAtomBlockElement {
@@ -752,6 +805,7 @@ export interface YoutubeBlockElement {
 	overrideImage?: string;
 	altText?: string;
 	role?: RoleType;
+	caption?: string;
 }
 
 interface WitnessTypeDataBase {
@@ -815,6 +869,7 @@ export interface WitnessAssetType {
 		name?: string;
 	};
 }
+
 interface WitnessTypeBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.WitnessBlockElement';
 	elementId: string;
@@ -829,6 +884,11 @@ interface WitnessTypeBlockElement extends ThirdPartyEmbeddedContent {
 export interface CrosswordElement {
 	_type: 'model.dotcomrendering.pageElements.CrosswordElement';
 	crossword: CrosswordProps['data'];
+	/**
+	 * Set, as `true`, only when this crossword is premium and the puzzles hub
+	 * v3 test is on. Absent otherwise, so the element is as it always was.
+	 */
+	requiresSubscription?: true;
 }
 
 export type FEElement =
@@ -897,7 +957,10 @@ export type FEElement =
 	| WitnessTypeBlockElement
 	| CrosswordElement
 	| ProductBlockElement
-	| ProductSummaryElement;
+	| ProductSummaryBlockElement
+	| EnhancedProductSummaryElement
+	| RecipeBlockElement
+	| EventGraphicBlockElement;
 
 // -------------------------------------
 // Misc
@@ -929,6 +992,11 @@ export interface ImageSource {
 	srcSet: SrcSetItem[];
 }
 
+export type AffiliateProductPrice = {
+	currencySymbol: string;
+	price: string;
+};
+
 export type ProductDisplayType =
 	| 'InlineOnly'
 	| 'ProductCardOnly'
@@ -939,6 +1007,7 @@ export type ProductCta = {
 	text: string;
 	retailer: string;
 	price: string;
+	latestPrice?: AffiliateProductPrice;
 };
 
 export type ProductCustomAttribute = {
@@ -955,6 +1024,12 @@ export type ProductStarRating =
 	| '5'
 	| 'none-selected';
 
+export type ProductSummaryDisplayType =
+	| 'Carousel'
+	| 'CtaList'
+	| 'StackedCard'
+	| 'StackedCardExpanded';
+
 export interface SrcSetItem {
 	src: string;
 	width: number;
@@ -968,6 +1043,7 @@ export interface ProductImage {
 	displayCredit: boolean;
 	height: number;
 	width: number;
+	position?: number;
 }
 
 export interface Image {
@@ -1000,6 +1076,7 @@ export interface VideoAssets {
 		width?: string;
 		caption?: string;
 	};
+	hasAudio?: boolean;
 }
 
 interface AudioAsset {
@@ -1056,6 +1133,13 @@ export type ImageForLightbox = {
 	 * Used to show when a liveblog image was posted
 	 */
 	firstPublished?: number;
+	/**
+	 * The buy/retailer CTAs for the product this image belongs to — either
+	 * the product's own card photo, or an image nested in its review body.
+	 * Priority is implicit in array order (index 0 is primary), matching
+	 * `ProductCardButtons`.
+	 */
+	productCtas?: ProductCta[];
 };
 
 // -------------------------------------
@@ -1201,8 +1285,11 @@ export type Newsletter = {
 	successDescription: string;
 	theme: string;
 	group: string;
+	category?: string;
 	regionFocus?: string;
 	illustrationCard?: string;
+	illustrationSquare?: string;
+	exampleUrl?: string;
 };
 
 export type NewsletterLayout = {

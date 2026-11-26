@@ -11,14 +11,17 @@ import type {
 	ArticleCountType,
 	BannerChannel,
 	ConfigurableDesign,
-	SelectedAmountsVariant,
 	SeparateArticleCount,
 	TickerSettings,
 } from '@guardian/support-dotcom-components/dist/shared/types';
+import type { PromotedNewsletter } from '@guardian/support-dotcom-components/dist/shared/types/props/banner';
 import type { ChoiceCardsSettings } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/types/props/shared';
 
-export type BannerId = 'designable-banner' | 'sign-in-prompt-banner';
+export type BannerId =
+	| 'designable-banner'
+	| 'sign-in-prompt-banner'
+	| 'newsletter-banner';
 
 export interface BannerEnrichedCta {
 	ctaUrl: string;
@@ -47,7 +50,7 @@ export interface ContributionsReminderTracking {
 
 export interface BannerRenderedContent {
 	heading: JSX.Element | JSX.Element[] | null;
-	paragraphs: (JSX.Element | JSX.Element[])[];
+	paragraphs: Array<JSX.Element | JSX.Element[]>;
 	highlightedText?: JSX.Element | JSX.Element[] | null;
 	primaryCta: BannerEnrichedCta | null;
 	secondaryCta: BannerEnrichedSecondaryCta | null;
@@ -72,16 +75,16 @@ export interface BannerRenderProps {
 	countryCode?: string;
 	fetchEmail?: () => Promise<string | null>;
 	tickerSettings?: TickerSettings;
-	isSupporter?: boolean;
 	articleCounts: ArticleCounts; // TODO - export
 	countType?: ArticleCountType;
 	separateArticleCount?: boolean;
 	separateArticleCountSettings?: SeparateArticleCount;
-	choiceCardAmounts?: SelectedAmountsVariant;
 	choiceCardsSettings?: ChoiceCardsSettings;
 	tracking: Tracking;
 	submitComponentEvent?: (componentEvent: ComponentEvent) => Promise<void>;
 	design?: ConfigurableDesign;
 	promoCodes?: string[];
 	isCollapsible?: boolean;
+	idApiUrl?: string;
+	promotedNewsletter?: PromotedNewsletter;
 }

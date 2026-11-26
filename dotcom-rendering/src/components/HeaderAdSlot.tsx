@@ -1,4 +1,5 @@
 import { css, Global } from '@emotion/react';
+import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
 import { AdSlot } from './AdSlot.web';
 import { Hide } from './Hide';
@@ -8,7 +9,7 @@ const headerWrapper = css`
 `;
 
 const headerAdWrapperStyles = css`
-	z-index: 1080;
+	z-index: ${getZIndex('stickyAdWrapper')};
 	width: 100%;
 	background-color: ${palette('--ad-background')};
 	border-bottom: 1px solid ${palette('--ad-border')};
@@ -21,7 +22,11 @@ const headerAdWrapperStyles = css`
 	top: 0;
 `;
 
-export const HeaderAdSlot = () => {
+export const HeaderAdSlot = ({
+	includeMobile = false,
+}: {
+	includeMobile?: boolean;
+}) => {
 	return (
 		<div css={headerWrapper}>
 			<Global
@@ -37,6 +42,16 @@ export const HeaderAdSlot = () => {
 					}
 				`}
 			/>
+			{includeMobile && (
+				<Hide when="above" breakpoint="tablet">
+					<div
+						css={headerAdWrapperStyles}
+						className="top-banner-ad-container"
+					>
+						<AdSlot position="mobile-above-nav" />
+					</div>
+				</Hide>
+			)}
 			<Hide when="below" breakpoint="tablet">
 				<div
 					css={headerAdWrapperStyles}

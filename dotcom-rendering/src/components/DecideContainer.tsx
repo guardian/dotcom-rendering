@@ -7,8 +7,8 @@ import type {
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
+import { GraphicSchema } from './EventGraphic';
 import { FlexibleGeneral } from './FlexibleGeneral';
-import { FlexibleSpecial } from './FlexibleSpecial';
 import { Island } from './Island';
 import { NavList } from './NavList';
 import { ScrollableFeature } from './ScrollableFeature.island';
@@ -31,6 +31,8 @@ type Props = {
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
+	hasPageSkin?: boolean;
+	isUserOptedInToMiniNav: boolean;
 };
 
 export const DecideContainer = ({
@@ -46,6 +48,8 @@ export const DecideContainer = ({
 	frontId,
 	collectionId,
 	containerLevel,
+	hasPageSkin,
+	isUserOptedInToMiniNav,
 }: Props) => {
 	switch (containerType) {
 		case 'nav/list':
@@ -55,20 +59,12 @@ export const DecideContainer = ({
 		case 'scrollable/highlights':
 			return (
 				<Island priority="critical" defer={{ until: 'visible' }}>
-					<ScrollableHighlights trails={trails} frontId={frontId} />
+					<ScrollableHighlights
+						trails={trails}
+						frontId={frontId}
+						hasPageSkin={hasPageSkin}
+					/>
 				</Island>
-			);
-		case 'flexible/special':
-			return (
-				<FlexibleSpecial
-					groupedTrails={groupedTrails}
-					containerPalette={containerPalette}
-					hideAge={hideAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-					aspectRatio={aspectRatio}
-					collectionId={collectionId}
-				/>
 			);
 		case 'flexible/general':
 			return (
@@ -81,6 +77,8 @@ export const DecideContainer = ({
 					aspectRatio={aspectRatio}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
+					isStorylines={false}
+					isUserOptedInToMiniNav={isUserOptedInToMiniNav}
 				/>
 			);
 		case 'scrollable/small':
@@ -150,3 +148,4 @@ export const DecideContainer = ({
 			return null;
 	}
 };
+export { GraphicSchema };

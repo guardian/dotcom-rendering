@@ -16,6 +16,9 @@ updates:
       - dependency-name: '@types/node'
         update-types:
           - 'version-update:semver-major'
+      - dependency-name: 'eslint'
+        update-types:
+          - 'version-update:semver-major'
 
     open-pull-requests-limit: 10
     groups:
@@ -36,6 +39,9 @@ updates:
       jest:
         patterns:
           - 'jest*'
+      opentelemetry:
+        patterns:
+          - '@opentelemetry/*'
       react:
         patterns:
           - 'react*'
@@ -47,6 +53,11 @@ updates:
       storybook:
         patterns:
           - '*storybook*'
+      svelte:
+        patterns:
+          - '@sveltejs/*'
+          - 'svelte'
+          - 'svelte-check'
       swc:
         patterns:
           - '@swc/*'
@@ -60,7 +71,19 @@ updates:
         exclude-patterns:
           - '@storybook/*'
   - package-ecosystem: 'github-actions'
-    directory: '/'
+    directory: '/.github/workflows'
     schedule:
       interval: 'daily'
     rebase-strategy: 'disabled'
+
+  # Keeps Production.dockerfile at repo root up-to-date
+  - package-ecosystem: 'docker'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+
+  # Keeps docker-compose.yaml at repo root up-to-date
+  - package-ecosystem: 'docker-compose'
+    directory: '/'
+    schedule:
+      interval: 'daily'

@@ -1,3 +1,4 @@
+import { log } from '@guardian/libs';
 import type { FEFormat } from '../frontend/feArticle';
 import { type ArticleFormat, decideFormat } from '../lib/articleFormat';
 import { useApi } from '../lib/useApi';
@@ -56,7 +57,7 @@ const buildUrl = (
 		const path = new URL(element.url).pathname;
 		return `${ajaxUrl}/embed/card${path}.json?dcr=true`;
 	} catch (error) {
-		console.error(`Failed to build a url with "${element.url}"`);
+		log('dotcom', `Failed to build rich link url with "${element.url}"`);
 		return undefined;
 	}
 };
@@ -125,7 +126,9 @@ export const RichLinkComponent = ({
 		window.guardian.modules.sentry.reportError(error, 'rich-link');
 	}
 
-	if (!data) return null;
+	if (!data) {
+		return null;
+	}
 
 	const richLinkImageData = {
 		thumbnailUrl: data.thumbnailUrl,

@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
-import type { ConsentState, CountryCode } from '@guardian/libs';
-import { getCookie, onConsent } from '@guardian/libs';
+import type { ConsentState } from '@guardian/consent-manager';
+import { onConsent } from '@guardian/consent-manager';
+import type { CountryCode } from '@guardian/libs';
+import { getCookie } from '@guardian/libs';
 import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import { abandonedBasketSchema } from '@guardian/support-dotcom-components';
 import type {
@@ -50,6 +52,7 @@ type BaseProps = {
 	pageId?: string;
 	inHoldbackGroup?: boolean;
 	inAuxiaVariant?: boolean;
+	inNoShowMobileAboveNavVariant?: boolean;
 };
 
 type BuildPayloadProps = BaseProps & {
@@ -58,6 +61,28 @@ type BuildPayloadProps = BaseProps & {
 	asyncArticleCounts: Promise<ArticleCounts | undefined>;
 	userConsent: boolean;
 	hideSupportMessagingForUser: boolean;
+};
+
+const MAX_AUXIA_ROLLOUT_MVT_ID = 1_000_000;
+
+export const getAuxiaRolloutMvtId = (
+	inAuxiaVariant: boolean | undefined,
+	userConsent: boolean,
+	mvtIdCookie: string | null,
+): number | undefined => {
+	if (
+		inAuxiaVariant !== true ||
+		!userConsent ||
+		mvtIdCookie === null ||
+		!/^\d+$/.test(mvtIdCookie)
+	) {
+		return undefined;
+	}
+
+	const mvtId = Number(mvtIdCookie);
+	return Number.isInteger(mvtId) && mvtId < MAX_AUXIA_ROLLOUT_MVT_ID
+		? mvtId
+		: undefined;
 };
 
 type CanShowProps = BaseProps & {
@@ -73,6 +98,19 @@ type CanShowProps = BaseProps & {
 export type CanShowFunctionType<T> = (
 	props: CanShowProps,
 ) => Promise<CanShowResult<T>>;
+
+// the test includes the crossword pages (tag type/crossword) and the crosswords front (pageId === 'crosswords')
+const isInMobileAboveNavTest = (
+	tags: TagType[],
+	renderingTarget: RenderingTarget,
+	pageId?: string,
+): boolean => {
+	return (
+		(tags.some((tag) => tag.id === 'type/crossword') ||
+			pageId === 'crosswords') &&
+		renderingTarget === 'Web'
+	);
+};
 
 const getArticleCountToday = (
 	articleCounts: ArticleCounts | undefined,
@@ -91,7 +129,9 @@ const getArticleCountToday = (
 function parseAbandonedBasket(
 	cookie: string | null,
 ): AbandonedBasket | undefined {
-	if (!cookie) return;
+	if (cookie === null || cookie.length === 0) {
+		return;
+	}
 
 	const parsedResult = abandonedBasketSchema.safeParse(JSON.parse(cookie));
 	if (!parsedResult.success) {
@@ -112,7 +152,7 @@ export const hasRequiredConsents = (): Promise<boolean> =>
 		.then(({ canTarget }: ConsentState) => canTarget)
 		.catch(() => false);
 
-const buildPayload = async ({
+export const buildPayload = async ({
 	isSignedIn,
 	shouldHideReaderRevenue,
 	isPaidContent,
@@ -131,47 +171,62 @@ const buildPayload = async ({
 	pageId,
 	inHoldbackGroup,
 	inAuxiaVariant,
+	isSensitive,
 }: BuildPayloadProps): Promise<BannerPayload> => {
 	const getBrowserId = (): string | undefined => {
-		if (!inAuxiaVariant) return undefined;
-		if (!userConsent) return undefined;
+		if (inAuxiaVariant !== true) {
+			return undefined;
+		}
+		if (!userConsent) {
+			return undefined;
+		}
 		return getCookie({ name: 'bwid', shouldMemoize: true }) ?? undefined;
 	};
+	const auxiaRolloutMvtId =
+		inAuxiaVariant === true && userConsent
+			? getAuxiaRolloutMvtId(
+					inAuxiaVariant,
+					userConsent,
+					getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
+				)
+			: undefined;
 
 	const articleCounts = await asyncArticleCounts;
 	const weeklyArticleHistory = articleCounts?.weeklyArticleHistory;
 	const articleCountToday = getArticleCountToday(articleCounts);
 
-	return {
-		targeting: {
-			shouldHideReaderRevenue,
-			isPaidContent,
-			showSupportMessaging: !hideSupportMessagingForUser,
-			engagementBannerLastClosedAt,
-			subscriptionBannerLastClosedAt,
-			signInBannerLastClosedAt,
-			abandonedBasketBannerLastClosedAt,
-			mvtId: Number(
-				getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
-			),
-			countryCode,
-			weeklyArticleHistory,
-			articleCountToday,
-			hasOptedOutOfArticleCount: optedOutOfArticleCount,
-			sectionId,
-			tagIds: tags.map((tag) => tag.id),
-			contentType,
-			purchaseInfo: getPurchaseInfo(),
-			isSignedIn,
-			hasConsented: userConsent,
-			abandonedBasket: parseAbandonedBasket(
-				getCookie({ name: 'GU_CO_INCOMPLETE', shouldMemoize: true }),
-			),
-			pageId,
-			inHoldbackGroup,
-			browserId: getBrowserId(),
-		},
+	const targeting: BannerPayload['targeting'] & {
+		auxiaRolloutMvtId?: number;
+	} = {
+		shouldHideReaderRevenue,
+		isPaidContent,
+		showSupportMessaging: !hideSupportMessagingForUser,
+		engagementBannerLastClosedAt,
+		subscriptionBannerLastClosedAt,
+		signInBannerLastClosedAt,
+		abandonedBasketBannerLastClosedAt,
+		mvtId: Number(getCookie({ name: 'GU_mvt_id', shouldMemoize: true })),
+		countryCode,
+		weeklyArticleHistory,
+		articleCountToday,
+		hasOptedOutOfArticleCount: optedOutOfArticleCount,
+		sectionId,
+		tagIds: tags.map((tag) => tag.id),
+		contentType,
+		purchaseInfo: getPurchaseInfo(),
+		isSignedIn,
+		hasConsented: userConsent,
+		abandonedBasket: parseAbandonedBasket(
+			getCookie({ name: 'GU_CO_INCOMPLETE', shouldMemoize: true }),
+		),
+		pageId,
+		inHoldbackGroup,
+		browserId: getBrowserId(),
+		isSensitive,
+		...(auxiaRolloutMvtId === undefined ? {} : { auxiaRolloutMvtId }),
 	};
+
+	return { targeting };
 };
 
 export const canShowRRBanner: CanShowFunctionType<
@@ -199,8 +254,18 @@ export const canShowRRBanner: CanShowFunctionType<
 	pageId,
 	inHoldbackGroup,
 	inAuxiaVariant,
+	inNoShowMobileAboveNavVariant,
 }) => {
-	if (!remoteBannerConfig) return { show: false };
+	if (
+		inNoShowMobileAboveNavVariant === true &&
+		isInMobileAboveNavTest(tags, renderingTarget, pageId)
+	) {
+		return { show: false };
+	}
+
+	if (!remoteBannerConfig) {
+		return { show: false };
+	}
 
 	if (shouldHideReaderRevenue || isPaidContent || isPreview) {
 		// We never serve Reader Revenue banners in this case
@@ -215,11 +280,15 @@ export const canShowRRBanner: CanShowFunctionType<
 
 	const purchaseInfo = getPurchaseInfo();
 	const showSignInPrompt =
-		purchaseInfo && !isSignedIn && !signInBannerLastClosedAt;
+		purchaseInfo !== undefined &&
+		!isSignedIn &&
+		signInBannerLastClosedAt === undefined;
 
 	const hasForceBannerParam = window.location.search.includes('force-banner');
+	const hasPreviewBannerParam =
+		window.location.search.includes('preview-banner');
 
-	if (!showSignInPrompt && !hasForceBannerParam) {
+	if (!showSignInPrompt && !hasForceBannerParam && !hasPreviewBannerParam) {
 		// Don't show a banner if one was closed recently. This is to improve user experience by not showing banners on consecutive pageviews
 		if (
 			recentlyClosedBanner(engagementBannerLastClosedAt) ||
@@ -229,8 +298,8 @@ export const canShowRRBanner: CanShowFunctionType<
 		}
 		// Don't ask the API for a banner again if it's recently told us not to show one. This is an optimisation to reduce traffic to the API
 		if (
-			engagementBannerLastClosedAt &&
-			subscriptionBannerLastClosedAt &&
+			engagementBannerLastClosedAt !== undefined &&
+			subscriptionBannerLastClosedAt !== undefined &&
 			withinLocalNoBannerCachePeriod()
 		) {
 			return { show: false };
@@ -273,7 +342,10 @@ export const canShowRRBanner: CanShowFunctionType<
 		headers,
 	);
 	if (!response.data) {
-		if (engagementBannerLastClosedAt && subscriptionBannerLastClosedAt) {
+		if (
+			engagementBannerLastClosedAt !== undefined &&
+			subscriptionBannerLastClosedAt !== undefined
+		) {
 			setLocalNoBannerCachePeriod();
 		}
 		return { show: false };
@@ -297,6 +369,7 @@ export const canShowRRBanner: CanShowFunctionType<
 		fetchEmail,
 		submitComponentEvent: (componentEvent: ComponentEvent) =>
 			submitComponentEvent(componentEvent, renderingTarget),
+		contributionsServiceUrl,
 	};
 
 	return {
@@ -311,17 +384,24 @@ export const canShowRRBanner: CanShowFunctionType<
 export const ReaderRevenueBanner = ({
 	name,
 	props,
-}: ModuleData<BannerProps>) => {
+	idApiUrl,
+}: ModuleData<BannerProps> & {
+	idApiUrl: string;
+}) => {
 	const [Banner, setBanner] = useState<React.ElementType | null>(null);
-
 	useEffect(() => {
 		(name === 'SignInPromptBanner'
 			? /* webpackChunkName: "sign-in-prompt-banner" */
-			  import(`../marketing/banners/signInPrompt/SignInPromptBanner`)
-			: /* webpackChunkName: "designable-banner-v2" */
-			  import(`../marketing/banners/designableBanner/v2/Banner`)
+				import(`../marketing/banners/signInPrompt/SignInPromptBanner`)
+			: name === 'NewsletterBanner'
+				? /* webpackChunkName: "newsletter-banner" */
+					import(
+						`../marketing/banners/newsletterBanner/NewsletterBanner`
+					)
+				: /* webpackChunkName: "designable-banner" */
+					import(`../marketing/banners/designableBanner/Banner`)
 		)
-			.then((bannerModule: { [key: string]: React.ElementType }) => {
+			.then((bannerModule: Record<string, React.ElementType>) => {
 				setBanner(() => bannerModule[name] ?? null);
 			})
 			.catch((error) => {
@@ -343,7 +423,7 @@ export const ReaderRevenueBanner = ({
 				`}
 			>
 				{}
-				<Banner {...props} />
+				<Banner {...props} idApiUrl={idApiUrl} />
 			</div>
 		);
 	}

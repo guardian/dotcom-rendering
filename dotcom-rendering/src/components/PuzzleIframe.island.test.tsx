@@ -1,0 +1,1347 @@
+import {
+	act,
+	render,
+	screen as testScreen,
+	waitFor,
+} from '@testing-library/react';
+import { getAuthStatus, subscribeToAuthStateChange } from '../lib/identity';
+import { handleMovieGridAction } from '../lib/movieGridActions';
+import { reportPuzzleProgress } from '../lib/puzzleProgress/reporter';
+import { useMatchMedia } from '../lib/useMatchMedia';
+import { puzzleConfigs } from '../model/puzzles/puzzleConfigs';
+import {
+	buildFrameStyles,
+	buildPuzzleIframeSrc,
+	type PuzzleContext,
+	PuzzleIframe,
+} from './PuzzleIframe.island';
+
+jest.mock('../lib/identity', () => ({
+	getAuthStatus: jest.fn(),
+	subscribeToAuthStateChange: jest.fn(),
+}));
+
+jest.mock('../lib/movieGridActions', () => ({
+	handleMovieGridAction: jest.fn(),
+}));
+
+jest.mock('../lib/puzzleProgress/reporter', () => ({
+	reportPuzzleProgress: jest.fn(),
+}));
+
+jest.mock('../lib/useMatchMedia', () => ({
+	useMatchMedia: jest.fn(() => false),
+}));
+
+const mockedGetAuthStatus = jest.mocked(getAuthStatus);
+const mockedSubscribeToAuthStateChange = jest.mocked(
+	subscribeToAuthStateChange,
+);
+const mockedUseMatchMedia = jest.mocked(useMatchMedia);
+
+const signedIn = (legacyIdentityId: string) => ({
+	kind: 'SignedIn' as const,
+	accessToken: { accessToken: 'reader-access-token' } as never,
+	idToken: {
+		claims: { legacy_identity_id: legacyIdentityId },
+	} as never,
+});
+
+const signedOut = () => ({ kind: 'SignedOut' as const });
+
+const contextParam = (context: PuzzleContext) =>
+	`guardian-puzzle-context=${encodeURIComponent(JSON.stringify(context))}`;
+
+const sudokuEasyConfig = puzzleConfigs['sudoku-easy']!;
+const wordiplyConfig = puzzleConfigs.wordiply!;
+
+describe('buildPuzzleIframeSrc', () => {
+	it.each(['film-reveal', 'on-the-ball'])(
+		'adds context and dark mode to the API-provided %s URL without adding uid',
+		(slug) => {
+			const context: PuzzleContext = {
+				userId: 'reader',
+				darkMode: true,
+				puzzleDate: '2026-10-28',
+			};
+			const url = new URL(
+				buildPuzzleIframeSrc(
+					puzzleConfigs[slug]!,
+					context,
+					`https://example.com/${slug}?id=opaque&embed=1`,
+				),
+			);
+
+			expect(url.pathname).toBe(`/${slug}`);
+			expect(url.searchParams.get('id')).toBe('opaque');
+			expect(url.searchParams.get('embed')).toBe('1');
+			expect(url.searchParams.get('darkMode')).toBe('1');
+			expect(url.searchParams.has('uid')).toBe(false);
+			expect(
+				JSON.parse(url.searchParams.get('guardian-puzzle-context')!),
+			).toEqual(context);
+		},
+	);
+
+	it('adds reader context to the API game URL without deriving a different puzzle', () => {
+		const context: PuzzleContext = {
+			userId: 'reader',
+			darkMode: true,
+			puzzleDate: '2026-09-26',
+		};
+		const url = new URL(
+			buildPuzzleIframeSrc(
+				sudokuEasyConfig,
+				context,
+				'https://tg.amuselabs.com/guardian/date-picker?set=api-series&id=opaque&embed=1&uid=api-user',
+			),
+		);
+		expect(url.pathname).toBe('/guardian/date-picker');
+		expect(url.searchParams.get('id')).toBe('opaque');
+		expect(url.searchParams.get('set')).toBe('api-series');
+		expect(url.searchParams.get('uid')).toBe('api-user');
+		expect(
+			JSON.parse(url.searchParams.get('guardian-puzzle-context')!),
+		).toEqual(context);
+	});
+
+	it('resolves the provider URL then appends guardian-puzzle-context on top', () => {
+		const context: PuzzleContext = {
+			userId: null,
+			darkMode: false,
+			puzzleDate: null,
+		};
+		expect(buildPuzzleIframeSrc(sudokuEasyConfig, context)).toBe(
+			`https://tg.amuselabs.com/guardian/date-picker?set=guardian-sudoku-easy&embed=1&idx=1&darkMode=0&${contextParam(
+				context,
+			)}`,
+		);
+	});
+
+	it('preserves the provider-resolved uid/darkMode params when appending guardian-puzzle-context', () => {
+		const context: PuzzleContext = {
+			userId: 'abc123',
+			darkMode: true,
+			puzzleDate: '2026-09-15',
+		};
+		const src = buildPuzzleIframeSrc(sudokuEasyConfig, context);
+		const url = new URL(src);
+
+		expect(url.searchParams.get('uid')).toBe('abc123');
+		expect(url.searchParams.get('darkMode')).toBe('1');
+		expect(url.searchParams.get('guardian-puzzle-context')).toBe(
+			JSON.stringify(context),
+		);
+	});
+
+	it('always includes guardian-puzzle-context, even when signed out and dark mode is off', () => {
+		const context: PuzzleContext = {
+			userId: null,
+			darkMode: false,
+			puzzleDate: null,
+		};
+		expect(buildPuzzleIframeSrc(sudokuEasyConfig, context)).toContain(
+			'guardian-puzzle-context=',
+		);
+	});
+
+	it('applies guardian-puzzle-context uniformly to a non-AmuseLabs provider too (wordiply)', () => {
+		const context: PuzzleContext = {
+			userId: 'abc123',
+			darkMode: true,
+			puzzleDate: null,
+		};
+		const src = buildPuzzleIframeSrc(wordiplyConfig, context);
+		const url = new URL(src);
+
+		expect(url.origin + url.pathname).toBe('https://www.wordiply.com/');
+		expect(url.searchParams.get('guardian-puzzle-context')).toBe(
+			JSON.stringify(context),
+		);
+		// Wordiply has no confirmed uid/darkMode query param support, so
+		// neither is provider-added, only DCR's own generic context blob is.
+		expect(url.searchParams.has('uid')).toBe(false);
+		expect(url.searchParams.has('darkMode')).toBe(false);
+	});
+});
+
+describe('buildFrameStyles', () => {
+	// Per-slug min-height overrides, hardcoded in PUZZLE_MIN_HEIGHTS - see
+	// the doc comment above buildFrameStyles and docs/puzzle-page.md. This
+	// only asserts the CSS text is present, not real browser layout/
+	// rendering (jsdom does not evaluate media queries), there is no
+	// existing convention in this codebase for deeper breakpoint-driven
+	// CSS testing.
+	it('uses the hardcoded default min-height for a known slug', () => {
+		expect(buildFrameStyles('sudoku-easy').styles).toContain(
+			'min-height:620px;',
+		);
+	});
+
+	it('changes min-height between the tablet and desktop breakpoints for a known slug', () => {
+		expect(buildFrameStyles('sudoku-easy').styles).toMatch(
+			/max-width:\s*979\.9px/,
+		);
+		expect(buildFrameStyles('sudoku-easy').styles).toContain(
+			'min-height:520px;',
+		);
+	});
+
+	it('increases min-height further below the tablet breakpoint for a known slug', () => {
+		expect(buildFrameStyles('sudoku-easy').styles).toMatch(
+			/max-width:\s*739\.9px/,
+		);
+		expect(buildFrameStyles('sudoku-easy').styles).toContain(
+			'min-height:630px;',
+		);
+	});
+
+	it.each([
+		['film-reveal', 700],
+		['on-the-ball', 640],
+	] as const)(
+		'uses the measured desktop height for %s and preserves the narrower tiers',
+		(slug, desktopHeight) => {
+			const styles = buildFrameStyles(slug).styles.replace(/\s+/g, '');
+			expect(styles.split('@media')[0]).toContain(
+				`min-height:${desktopHeight}px;`,
+			);
+			expect(styles).toContain(
+				'@media(max-width:979.9px){min-height:700px;}',
+			);
+			expect(styles).toContain(
+				'@media(max-width:739.9px){min-height:900px;}',
+			);
+		},
+	);
+
+	it('falls back to the default min-heights for an unrecognised slug', () => {
+		expect(buildFrameStyles('unknown-slug').styles).toContain(
+			'min-height:500px;',
+		);
+		expect(buildFrameStyles('unknown-slug').styles).toContain(
+			'min-height:700px;',
+		);
+		expect(buildFrameStyles('unknown-slug').styles).toContain(
+			'min-height:900px;',
+		);
+	});
+
+	it('includes a visible border around the iframe', () => {
+		expect(buildFrameStyles('sudoku-easy').styles).toMatch(
+			/border:1px solid var\(--article-border\);/,
+		);
+	});
+
+	it('does not add a pointer:coarse override for a slug with no touch-specific heights', () => {
+		expect(buildFrameStyles('sudoku-easy').styles).not.toContain(
+			'pointer: coarse',
+		);
+	});
+
+	it('uses the non-touch min-heights for wordiply by default', () => {
+		expect(buildFrameStyles('wordiply').styles).toContain(
+			'min-height:600px;',
+		);
+	});
+
+	it('adds a pointer:coarse override with the touch-specific min-heights for wordiply', () => {
+		const styles = buildFrameStyles('wordiply').styles;
+		// Whitespace/newlines inside the nested `@media (pointer: coarse)`
+		// block vary depending on how Emotion serialises the nested
+		// template literal, so this normalises whitespace before matching
+		// rather than asserting on an exact, brittle substring.
+		const normalisedStyles = styles.replace(/\s+/g, ' ');
+
+		expect(normalisedStyles).toContain('@media (pointer: coarse)');
+
+		// The pointer:coarse block is written last, so its min-height
+		// values (800/600/600) appear after the non-touch ones (600/600/600)
+		// in the generated CSS text - later source order wins the cascade
+		// for a touch device.
+		const touchBlockStart = normalisedStyles.indexOf(
+			'@media (pointer: coarse)',
+		);
+		const touchBlock = normalisedStyles.slice(touchBlockStart);
+
+		expect(touchBlock).toContain('min-height: 800px;');
+		expect(touchBlock).toContain('min-height: 600px;');
+	});
+
+	it('uses a 600px min-height below tablet for wordiply on non-touch devices', () => {
+		const normalisedStyles = buildFrameStyles('wordiply').styles.replace(
+			/\s+/g,
+			' ',
+		);
+		// Only the part before the pointer:coarse override is non-touch.
+		const nonTouchStyles = normalisedStyles.slice(
+			0,
+			normalisedStyles.indexOf('@media (pointer: coarse)'),
+		);
+
+		expect(nonTouchStyles).toContain(
+			'@media (max-width: 739.9px){min-height:600px;}',
+		);
+	});
+
+	it('uses a 600px min-height below tablet for wordiply on touch devices', () => {
+		const normalisedStyles = buildFrameStyles('wordiply').styles.replace(
+			/\s+/g,
+			' ',
+		);
+		const touchBlock = normalisedStyles.slice(
+			normalisedStyles.indexOf('@media (pointer: coarse)'),
+		);
+
+		expect(touchBlock).toContain(
+			'@media (max-width: 739.9px) { min-height: 600px; }',
+		);
+	});
+});
+
+describe('PuzzleIframe', () => {
+	let unsubscribe: jest.Mock;
+	const originalFetch = Object.getOwnPropertyDescriptor(global, 'fetch');
+	const pageConfig = window.guardian.config.page;
+	const originalAjaxUrl = pageConfig.ajaxUrl;
+
+	beforeEach(() => {
+		jest.resetAllMocks();
+		unsubscribe = jest.fn();
+		mockedSubscribeToAuthStateChange.mockReturnValue(unsubscribe);
+		mockedUseMatchMedia.mockReturnValue(false);
+		pageConfig.ajaxUrl = 'https://code.api.nextgen.guardianapps.co.uk';
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			writable: true,
+			value: jest.fn().mockImplementation((url: string) => {
+				const gameUrl = url.includes('/film-reveal/')
+					? 'https://moviegrid.io/guardian/archive?id=394'
+					: url.includes('/on-the-ball/')
+						? 'https://sportsreveal.io/guardian/archive?id=394'
+						: 'https://tg.amuselabs.com/guardian/date-picker?set=from-api&id=opaque-id&embed=1&uid=api-user';
+				return Promise.resolve({
+					ok: true,
+					json: () => Promise.resolve({ gameUrl }),
+				});
+			}),
+		});
+		jest.mocked(handleMovieGridAction).mockResolvedValue(undefined);
+	});
+
+	afterEach(() => {
+		pageConfig.ajaxUrl = originalAjaxUrl;
+		if (originalFetch) {
+			Object.defineProperty(global, 'fetch', originalFetch);
+		} else {
+			Reflect.deleteProperty(global, 'fetch');
+		}
+	});
+
+	const getContextFromSrc = (src: string): PuzzleContext => {
+		const url = new URL(src);
+		return JSON.parse(
+			url.searchParams.get('guardian-puzzle-context') ?? '{}',
+		) as PuzzleContext;
+	};
+
+	const getUidFromSrc = (src: string): string | null =>
+		new URL(src).searchParams.get('uid');
+
+	const getDarkModeParamFromSrc = (src: string): string | null =>
+		new URL(src).searchParams.get('darkMode');
+
+	it.each(['', 'https://code.api.nextgen.guardianapps.co.uk'])(
+		'loads the API-selected puzzle through ajaxUrl=%s after authentication resolves',
+		async (ajaxUrl) => {
+			pageConfig.ajaxUrl = ajaxUrl;
+			mockedGetAuthStatus.mockResolvedValue(signedIn('reader'));
+			render(
+				<PuzzleIframe
+					puzzleConfig={sudokuEasyConfig}
+					title="API puzzle"
+					darkModeAvailable={false}
+					puzzleDate="2026-09-26"
+					gameUrl="https://tg.amuselabs.com/guardian/date-picker?set=from-api&id=opaque-id&embed=1&uid=api-user"
+				/>,
+			);
+			const iframe =
+				await testScreen.findByTitle<HTMLIFrameElement>('API puzzle');
+			await waitFor(() =>
+				expect(new URL(iframe.src).searchParams.get('uid')).toBe(
+					'api-user',
+				),
+			);
+			expect(new URL(iframe.src).searchParams.get('id')).toBe(
+				'opaque-id',
+			);
+			expect(new URL(iframe.src).searchParams.get('set')).toBe(
+				'from-api',
+			);
+			expect(global.fetch).toHaveBeenCalledWith(
+				`${ajaxUrl}/puzzles-and-games/game/sudoku-easy/2026-09-26.json`,
+				expect.objectContaining({
+					cache: 'no-store',
+					credentials: 'same-origin',
+					headers: {
+						Accept: 'application/json',
+						Authorization: 'Bearer reader-access-token',
+					},
+				}),
+			);
+			expect(iframe.src).not.toContain('reader-access-token');
+		},
+	);
+
+	it.each([
+		['film-reveal', 'https://moviegrid.io'],
+		['on-the-ball', 'https://sportsreveal.io'],
+	])(
+		'handles %s copy/share messages without requiring progress identity',
+		async (slug, origin) => {
+			mockedGetAuthStatus.mockResolvedValue(signedOut());
+			const { unmount } = render(
+				<PuzzleIframe
+					puzzleConfig={puzzleConfigs[slug]!}
+					title={slug}
+					darkModeAvailable={false}
+					puzzleDate="2026-11-03"
+					gameUrl={`${origin}/guardian/archive?id=394`}
+				/>,
+			);
+			const iframe = testScreen.getByTitle<HTMLIFrameElement>(slug);
+			await waitFor(() => expect(iframe).toHaveAttribute('src'));
+			const data = {
+				event: 'copy_game',
+				puzzle: 'on_the_ball',
+				share_text: 'Results',
+				share_url: 'https://guardian.go.link/1oRLv',
+			};
+			const dispatch = (messageOrigin: string, source: Window | null) =>
+				act(() => {
+					window.dispatchEvent(
+						new MessageEvent('message', {
+							origin: messageOrigin,
+							source,
+							data,
+						}),
+					);
+				});
+			dispatch('https://other.example', iframe.contentWindow);
+			dispatch(origin, window);
+			expect(handleMovieGridAction).not.toHaveBeenCalled();
+			dispatch(origin, iframe.contentWindow);
+			expect(handleMovieGridAction).toHaveBeenCalledWith(data);
+			expect(reportPuzzleProgress).not.toHaveBeenCalled();
+			unmount();
+			jest.mocked(handleMovieGridAction).mockClear();
+			dispatch(origin, iframe.contentWindow);
+			expect(handleMovieGridAction).not.toHaveBeenCalled();
+		},
+	);
+
+	it.each([
+		['film-reveal', 'https://moviegrid.io', 'film_reveal', 'FILMREVEAL'],
+		['on-the-ball', 'https://sportsreveal.io', 'on_the_ball', 'ONTHEBALL'],
+	])(
+		'reports %s progress only from its own provider and iframe',
+		async (slug, origin, puzzle, puzzleType) => {
+			mockedGetAuthStatus.mockResolvedValue(signedIn('reader'));
+			const progressIdentity = {
+				puzzleId: 'canonical-api-id',
+				puzzleType,
+				publishDate: '2026-11-02T00:00:00Z',
+			};
+			const { unmount } = render(
+				<PuzzleIframe
+					puzzleConfig={puzzleConfigs[slug]!}
+					title={slug}
+					darkModeAvailable={false}
+					puzzleDate="2026-11-02"
+					gameUrl={`${origin}/guardian/archive?id=provider-id`}
+					progressIdentity={progressIdentity}
+				/>,
+			);
+			const iframe = testScreen.getByTitle<HTMLIFrameElement>(slug);
+			await waitFor(() => expect(iframe).toHaveAttribute('src'));
+			const dispatch = (
+				messageOrigin: string,
+				source: Window | null,
+				event: string,
+				game = puzzle,
+			) =>
+				act(() => {
+					window.dispatchEvent(
+						new MessageEvent('message', {
+							origin: messageOrigin,
+							source,
+							data: { event, puzzle: game },
+						}),
+					);
+				});
+			dispatch(`${origin}.example.com`, iframe.contentWindow, 'end_game');
+			dispatch(origin, window, 'end_game');
+			dispatch(origin, null, 'end_game');
+			dispatch(origin, iframe.contentWindow, 'end_game', 'another_game');
+			dispatch(origin, iframe.contentWindow, 'start_game');
+			expect(reportPuzzleProgress).not.toHaveBeenCalled();
+
+			dispatch(origin, iframe.contentWindow, 'input');
+			expect(reportPuzzleProgress).toHaveBeenNthCalledWith(1, {
+				...progressIdentity,
+				gameStatus: 'in-progress',
+				progress: 1,
+			});
+			dispatch(origin, iframe.contentWindow, 'end_game');
+			expect(reportPuzzleProgress).toHaveBeenNthCalledWith(2, {
+				...progressIdentity,
+				gameStatus: 'completed',
+				progress: 100,
+			});
+			dispatch(origin, iframe.contentWindow, 'input');
+			expect(reportPuzzleProgress).toHaveBeenCalledTimes(2);
+			const source = iframe.contentWindow;
+			unmount();
+			dispatch(origin, source, 'end_game');
+			expect(reportPuzzleProgress).toHaveBeenCalledTimes(2);
+		},
+	);
+
+	it('does not infer MovieGrid progress identity from the iframe URL', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedIn('reader'));
+		render(
+			<PuzzleIframe
+				puzzleConfig={puzzleConfigs['film-reveal']!}
+				title="Film reveal"
+				darkModeAvailable={false}
+				puzzleDate="2026-11-02"
+				gameUrl="https://moviegrid.io/guardian/archive?id=394"
+			/>,
+		);
+		const iframe = testScreen.getByTitle<HTMLIFrameElement>('Film reveal');
+		await waitFor(() => expect(iframe).toHaveAttribute('src'));
+		act(() => {
+			window.dispatchEvent(
+				new MessageEvent('message', {
+					origin: 'https://moviegrid.io',
+					source: iframe.contentWindow,
+					data: { event: 'end_game', puzzle: 'film_reveal' },
+				}),
+			);
+		});
+		expect(reportPuzzleProgress).not.toHaveBeenCalled();
+	});
+
+	it('preserves AmuseLabs completion reporting', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedIn('reader'));
+		render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="Sudoku"
+				darkModeAvailable={false}
+				puzzleDate="2026-11-02"
+			/>,
+		);
+		const iframe = testScreen.getByTitle<HTMLIFrameElement>('Sudoku');
+		await waitFor(() => expect(iframe).toHaveAttribute('src'));
+		act(() => {
+			window.dispatchEvent(
+				new MessageEvent('message', {
+					origin: 'https://tg.amuselabs.com',
+					source: iframe.contentWindow,
+					data: JSON.stringify({
+						type: 'PUZZLE_COMPLETE',
+						id: 'guardian-sudoku-easy-20261102',
+						series: 'guardian-sudoku-easy',
+						completedCorrectly: true,
+					}),
+				}),
+			);
+		});
+		expect(reportPuzzleProgress).toHaveBeenCalledWith({
+			puzzleId: 'guardian-sudoku-easy-20261102',
+			puzzleType: 'SUDOKU_EASY',
+			publishDate: '2026-11-02T00:00:00Z',
+			gameStatus: 'completed',
+			progress: 100,
+		});
+	});
+
+	it.each(['sudoku-easy', 'word-wheel', 'wordiply', 'film-reveal'])(
+		'does not let %s scroll inside its frame',
+		(slug) => {
+			mockedGetAuthStatus.mockResolvedValue(signedOut());
+			mockedUseMatchMedia.mockReturnValue(false);
+			render(
+				<PuzzleIframe
+					puzzleConfig={puzzleConfigs[slug]!}
+					title={slug}
+					darkModeAvailable={false}
+					puzzleDate={null}
+				/>,
+			);
+			expect(
+				testScreen.getByTitle<HTMLIFrameElement>(slug),
+			).toHaveAttribute('scrolling', 'no');
+		},
+	);
+
+	it.each(['film-reveal', 'on-the-ball'])(
+		'loads %s in the shared sandbox after authentication resolves',
+		async (slug) => {
+			mockedGetAuthStatus.mockResolvedValue(signedIn('reader'));
+			mockedUseMatchMedia.mockReturnValue(true);
+			render(
+				<PuzzleIframe
+					puzzleConfig={puzzleConfigs[slug]!}
+					title={slug}
+					darkModeAvailable={true}
+					puzzleDate="2026-10-28"
+					gameUrl={`https://example.com/${slug}?id=opaque`}
+				/>,
+			);
+			const iframe = testScreen.getByTitle<HTMLIFrameElement>(slug);
+			expect(iframe).not.toHaveAttribute('src');
+			await waitFor(() =>
+				expect(getDarkModeParamFromSrc(iframe.src)).toBe('1'),
+			);
+			expect(iframe).toHaveAttribute(
+				'sandbox',
+				'allow-scripts allow-same-origin allow-popups allow-forms',
+			);
+			expect(getUidFromSrc(iframe.src)).toBeNull();
+			expect(getContextFromSrc(iframe.src)).toEqual({
+				userId: 'reader',
+				darkMode: true,
+				puzzleDate: '2026-10-28',
+			});
+		},
+	);
+
+	it.each(['film-reveal', 'on-the-ball'])(
+		'reloads %s with the API identity when the reader changes',
+		async (slug) => {
+			mockedGetAuthStatus.mockResolvedValue(signedOut());
+			render(
+				<PuzzleIframe
+					puzzleConfig={puzzleConfigs[slug]!}
+					title={slug}
+					darkModeAvailable={false}
+					puzzleDate="2026-11-03"
+					gameUrl={`https://example.com/${slug}?id=opaque&uid=stale`}
+				/>,
+			);
+			const iframe = testScreen.getByTitle<HTMLIFrameElement>(slug);
+			await waitFor(() => expect(iframe).toHaveAttribute('src'));
+			expect(getUidFromSrc(iframe.src)).toBeNull();
+			const onAuthChange =
+				mockedSubscribeToAuthStateChange.mock.calls[0]![0];
+			for (const [userId, playerId] of [
+				['account-a', 'api-player-a'],
+				['account-b', 'api-player-b'],
+				[null, 'api-guest'],
+			] as const) {
+				mockedGetAuthStatus.mockResolvedValue(
+					userId === null ? signedOut() : signedIn(userId),
+				);
+				jest.mocked(global.fetch).mockResolvedValueOnce({
+					ok: true,
+					json: () =>
+						Promise.resolve({
+							gameUrl: `https://example.com/${slug}?id=api-puzzle&uid=${playerId}`,
+						}),
+				} as Response);
+				await act(async () => {
+					onAuthChange();
+				});
+				await waitFor(() =>
+					expect(getUidFromSrc(iframe.src)).toBe(playerId),
+				);
+				expect(new URL(iframe.src).searchParams.get('id')).toBe(
+					'api-puzzle',
+				);
+				expect(getContextFromSrc(iframe.src).userId).toBe(userId);
+			}
+		},
+	);
+
+	it.each([
+		['film-reveal', 'https://moviegrid.io', 'film_reveal', 'FILMREVEAL'],
+		['on-the-ball', 'https://sportsreveal.io', 'on_the_ball', 'ONTHEBALL'],
+	])(
+		'resets %s completion tracking when switching accounts',
+		async (slug, origin, puzzle, puzzleType) => {
+			mockedGetAuthStatus.mockResolvedValue(signedIn('account-a'));
+			jest.mocked(global.fetch).mockResolvedValueOnce({
+				ok: true,
+				json: () =>
+					Promise.resolve({
+						gameUrl: `${origin}/guardian/archive?id=394&uid=api-player-a`,
+					}),
+			} as Response);
+			const progressIdentity = {
+				puzzleId: 'api-puzzle',
+				puzzleType,
+				publishDate: '2026-11-03T00:00:00Z',
+			};
+			render(
+				<PuzzleIframe
+					puzzleConfig={puzzleConfigs[slug]!}
+					title={slug}
+					darkModeAvailable={false}
+					puzzleDate="2026-11-03"
+					gameUrl={`${origin}/guardian/archive?id=394`}
+					progressIdentity={progressIdentity}
+				/>,
+			);
+			const iframe = testScreen.getByTitle<HTMLIFrameElement>(slug);
+			await waitFor(() =>
+				expect(getUidFromSrc(iframe.src)).toBe('api-player-a'),
+			);
+			const dispatch = (event: string) =>
+				act(() => {
+					window.dispatchEvent(
+						new MessageEvent('message', {
+							origin,
+							source: iframe.contentWindow,
+							data: { event, puzzle },
+						}),
+					);
+				});
+			dispatch('end_game');
+			expect(reportPuzzleProgress).toHaveBeenCalledWith(
+				expect.objectContaining({ gameStatus: 'completed' }),
+			);
+			jest.mocked(reportPuzzleProgress).mockClear();
+			mockedGetAuthStatus.mockResolvedValue(signedIn('account-b'));
+			jest.mocked(global.fetch).mockResolvedValueOnce({
+				ok: true,
+				json: () =>
+					Promise.resolve({
+						gameUrl: `${origin}/guardian/archive?id=394&uid=api-player-b`,
+					}),
+			} as Response);
+			await act(async () => {
+				mockedSubscribeToAuthStateChange.mock.calls[0]![0]();
+			});
+			await waitFor(() =>
+				expect(getUidFromSrc(iframe.src)).toBe('api-player-b'),
+			);
+			dispatch('input');
+			expect(reportPuzzleProgress).toHaveBeenCalledWith(
+				expect.objectContaining({ gameStatus: 'in-progress' }),
+			);
+		},
+	);
+
+	it('waits for the authenticated game URL before loading the iframe', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedIn('reader'));
+		let resolveGame: (response: Response) => void = () => undefined;
+		jest.mocked(global.fetch).mockImplementationOnce(
+			() =>
+				new Promise<Response>((resolve) => {
+					resolveGame = resolve;
+				}),
+		);
+		render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="API puzzle"
+				darkModeAvailable={false}
+				puzzleDate="2026-09-26"
+				gameUrl="https://tg.amuselabs.com/guardian/date-picker?id=anonymous"
+			/>,
+		);
+		await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(1));
+		const iframe = testScreen.getByTitle<HTMLIFrameElement>('API puzzle');
+		expect(iframe.getAttribute('src')).toBeNull();
+		await act(() =>
+			Promise.resolve(
+				resolveGame({
+					ok: true,
+					json: () =>
+						Promise.resolve({
+							gameUrl:
+								'https://tg.amuselabs.com/guardian/date-picker?id=selected&uid=api-user',
+						}),
+				} as Response),
+			),
+		);
+		await waitFor(() =>
+			expect(new URL(iframe.src).searchParams.get('uid')).toBe(
+				'api-user',
+			),
+		);
+		expect(new URL(iframe.src).searchParams.get('id')).toBe('selected');
+	});
+
+	it('automatically loads the API URL without Authorization when signed out', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedOut());
+		jest.mocked(global.fetch).mockResolvedValueOnce({
+			ok: true,
+			json: () =>
+				Promise.resolve({
+					gameUrl:
+						'https://tg.amuselabs.com/guardian/date-picker?id=anonymous-api',
+				}),
+		} as Response);
+		render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="API puzzle"
+				darkModeAvailable={false}
+				puzzleDate="2026-09-26"
+				gameUrl="https://tg.amuselabs.com/guardian/date-picker?id=anonymous"
+			/>,
+		);
+		const iframe = testScreen.getByTitle<HTMLIFrameElement>('API puzzle');
+		await waitFor(() =>
+			expect(new URL(iframe.src).searchParams.get('id')).toBe(
+				'anonymous-api',
+			),
+		);
+		expect(new URL(iframe.src).searchParams.has('uid')).toBe(false);
+		expect(global.fetch).toHaveBeenCalledTimes(1);
+		expect(global.fetch).toHaveBeenCalledWith(
+			'https://code.api.nextgen.guardianapps.co.uk/puzzles-and-games/game/sudoku-easy/2026-09-26.json',
+			expect.objectContaining({
+				cache: 'no-store',
+				headers: { Accept: 'application/json' },
+			}),
+		);
+	});
+
+	it('fetches a personalised URL when the reader signs in after an anonymous lookup', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedOut());
+		jest.mocked(global.fetch).mockResolvedValueOnce({
+			ok: true,
+			json: () =>
+				Promise.resolve({
+					gameUrl:
+						'https://tg.amuselabs.com/guardian/date-picker?id=anonymous-api',
+				}),
+		} as Response);
+		render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="API puzzle"
+				darkModeAvailable={false}
+				puzzleDate="2026-09-26"
+				gameUrl="https://tg.amuselabs.com/guardian/date-picker?id=anonymous"
+			/>,
+		);
+		const iframe = testScreen.getByTitle<HTMLIFrameElement>('API puzzle');
+		await waitFor(() =>
+			expect(new URL(iframe.src).searchParams.get('id')).toBe(
+				'anonymous-api',
+			),
+		);
+		mockedGetAuthStatus.mockResolvedValue(signedIn('reader'));
+		await act(() =>
+			Promise.resolve(
+				mockedSubscribeToAuthStateChange.mock.calls[0]![0](),
+			),
+		);
+		await waitFor(() =>
+			expect(new URL(iframe.src).searchParams.get('uid')).toBe(
+				'api-user',
+			),
+		);
+		expect(global.fetch).toHaveBeenCalledTimes(2);
+		expect(global.fetch).toHaveBeenLastCalledWith(
+			'https://code.api.nextgen.guardianapps.co.uk/puzzles-and-games/game/sudoku-easy/2026-09-26.json',
+			expect.objectContaining({
+				headers: {
+					Accept: 'application/json',
+					Authorization: 'Bearer reader-access-token',
+				},
+			}),
+		);
+	});
+
+	it('does not add uid when the authenticated API response has none', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedIn('reader'));
+		jest.mocked(global.fetch).mockResolvedValueOnce({
+			ok: true,
+			json: () =>
+				Promise.resolve({
+					gameUrl:
+						'https://tg.amuselabs.com/guardian/date-picker?id=selected',
+				}),
+		} as Response);
+		render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="API puzzle"
+				darkModeAvailable={false}
+				puzzleDate="2026-09-26"
+				gameUrl="https://tg.amuselabs.com/guardian/date-picker?id=anonymous"
+			/>,
+		);
+		const iframe = testScreen.getByTitle<HTMLIFrameElement>('API puzzle');
+		await waitFor(() =>
+			expect(new URL(iframe.src).searchParams.get('id')).toBe('selected'),
+		);
+		expect(new URL(iframe.src).searchParams.has('uid')).toBe(false);
+	});
+
+	it('discards a pending authenticated lookup when the reader signs out', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedIn('reader'));
+		let resolveGame: (response: Response) => void = () => undefined;
+		jest.mocked(global.fetch).mockImplementationOnce(
+			() =>
+				new Promise<Response>((resolve) => {
+					resolveGame = resolve;
+				}),
+		);
+		render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="API puzzle"
+				darkModeAvailable={false}
+				puzzleDate="2026-09-26"
+				gameUrl="https://tg.amuselabs.com/guardian/date-picker?id=anonymous"
+			/>,
+		);
+		await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(1));
+		mockedGetAuthStatus.mockResolvedValue(signedOut());
+		jest.mocked(global.fetch).mockResolvedValueOnce({
+			ok: true,
+			json: () =>
+				Promise.resolve({
+					gameUrl:
+						'https://tg.amuselabs.com/guardian/date-picker?id=anonymous',
+				}),
+		} as Response);
+		await act(() =>
+			Promise.resolve(
+				mockedSubscribeToAuthStateChange.mock.calls[0]![0](),
+			),
+		);
+		const iframe = testScreen.getByTitle<HTMLIFrameElement>('API puzzle');
+		await waitFor(() =>
+			expect(new URL(iframe.src).searchParams.get('id')).toBe(
+				'anonymous',
+			),
+		);
+		await act(() =>
+			Promise.resolve(
+				resolveGame({
+					ok: true,
+					json: () =>
+						Promise.resolve({
+							gameUrl:
+								'https://tg.amuselabs.com/guardian/date-picker?id=selected&uid=api-user',
+						}),
+				} as Response),
+			),
+		);
+		expect(new URL(iframe.src).searchParams.get('id')).toBe('anonymous');
+		expect(new URL(iframe.src).searchParams.has('uid')).toBe(false);
+	});
+
+	it.each(
+		['sudoku-easy', 'film-reveal', 'on-the-ball'].flatMap((slug) =>
+			[{ ok: false }, { ok: true, json: () => Promise.resolve({}) }].map(
+				(response) => ({ slug, response }),
+			),
+		),
+	)(
+		'shows an error instead of loading a fallback when $slug lookup fails: $response',
+		async ({ slug, response }) => {
+			mockedGetAuthStatus.mockResolvedValue(signedIn('reader'));
+			jest.mocked(global.fetch).mockResolvedValueOnce(
+				response as Response,
+			);
+			render(
+				<PuzzleIframe
+					puzzleConfig={puzzleConfigs[slug]!}
+					title="API puzzle"
+					darkModeAvailable={false}
+					puzzleDate="2026-09-26"
+					gameUrl="https://tg.amuselabs.com/guardian/date-picker?id=anonymous"
+				/>,
+			);
+			expect(await testScreen.findByRole('alert')).toHaveTextContent(
+				'Unable to load this puzzle',
+			);
+			expect(testScreen.queryByTitle('API puzzle')).toBeNull();
+		},
+	);
+
+	it('has no src until the auth check resolves, then loads once with the uid', async () => {
+		let resolveAuth: (status: ReturnType<typeof signedIn>) => void = () =>
+			undefined;
+		mockedGetAuthStatus.mockReturnValue(
+			new Promise((resolve) => {
+				resolveAuth = resolve;
+			}),
+		);
+
+		render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="Puzzle"
+				darkModeAvailable={false}
+				puzzleDate={null}
+			/>,
+		);
+
+		const iframe =
+			await testScreen.findByTitle<HTMLIFrameElement>('Puzzle');
+		expect(iframe.getAttribute('src')).toBeNull();
+
+		resolveAuth(signedIn('user-123'));
+
+		await waitFor(() => expect(getUidFromSrc(iframe.src)).toBe('user-123'));
+	});
+
+	it('renders userId: null and darkMode: false while signed out with dark mode unavailable', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedOut());
+
+		render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="Puzzle"
+				darkModeAvailable={false}
+				puzzleDate={null}
+			/>,
+		);
+
+		const iframe =
+			await testScreen.findByTitle<HTMLIFrameElement>('Puzzle');
+		await waitFor(() =>
+			expect(getContextFromSrc(iframe.src)).toEqual({
+				userId: null,
+				darkMode: false,
+				puzzleDate: null,
+			}),
+		);
+	});
+
+	it('includes the userId in the context once signed in', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedIn('user-123'));
+
+		render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="Puzzle"
+				darkModeAvailable={false}
+				puzzleDate={null}
+			/>,
+		);
+
+		const iframe =
+			await testScreen.findByTitle<HTMLIFrameElement>('Puzzle');
+		await waitFor(() =>
+			expect(getContextFromSrc(iframe.src)).toEqual({
+				userId: 'user-123',
+				darkMode: false,
+				puzzleDate: null,
+			}),
+		);
+	});
+
+	it('does not check prefers-color-scheme at all when darkModeAvailable is false', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedOut());
+		mockedUseMatchMedia.mockReturnValue(true);
+
+		render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="Puzzle"
+				darkModeAvailable={false}
+				puzzleDate={null}
+			/>,
+		);
+
+		const iframe =
+			await testScreen.findByTitle<HTMLIFrameElement>('Puzzle');
+		await waitFor(() =>
+			expect(getContextFromSrc(iframe.src).darkMode).toBe(false),
+		);
+		// The frame is pinned to light, so browsers that would otherwise use
+		// the OS preference (Safari) keep the puzzle in step with the page.
+		expect(iframe.style.colorScheme).toBe('light');
+	});
+
+	it('reports darkMode: true only when darkModeAvailable AND the OS/browser prefers dark', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedOut());
+		mockedUseMatchMedia.mockReturnValue(true);
+
+		render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="Puzzle"
+				darkModeAvailable={true}
+				puzzleDate={null}
+			/>,
+		);
+
+		const iframe =
+			await testScreen.findByTitle<HTMLIFrameElement>('Puzzle');
+		await waitFor(() =>
+			expect(getContextFromSrc(iframe.src).darkMode).toBe(true),
+		);
+		expect(iframe.style.colorScheme).toBe('dark');
+	});
+
+	it('reacts to the OS/browser colour-scheme preference changing while mounted', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedOut());
+		mockedUseMatchMedia.mockReturnValue(false);
+
+		const { rerender } = render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="Puzzle"
+				darkModeAvailable={true}
+				puzzleDate={null}
+			/>,
+		);
+
+		const iframe =
+			await testScreen.findByTitle<HTMLIFrameElement>('Puzzle');
+		await waitFor(() =>
+			expect(getContextFromSrc(iframe.src).darkMode).toBe(false),
+		);
+
+		// Simulate useMatchMedia reacting to a live prefers-color-scheme
+		// change (it is itself reactive via useSyncExternalStore) by
+		// updating its mocked return value and re-rendering, mirroring how
+		// a real OS theme switch would cause useMatchMedia to return a new
+		// value and this component to re-render.
+		mockedUseMatchMedia.mockReturnValue(true);
+		rerender(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="Puzzle"
+				darkModeAvailable={true}
+				puzzleDate={null}
+			/>,
+		);
+
+		await waitFor(() =>
+			expect(getContextFromSrc(iframe.src).darkMode).toBe(true),
+		);
+	});
+
+	it('posts the puzzle context to the iframe once loaded', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedIn('user-123'));
+		mockedUseMatchMedia.mockReturnValue(true);
+
+		render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="Puzzle"
+				darkModeAvailable={true}
+				puzzleDate={null}
+			/>,
+		);
+
+		const iframe =
+			await testScreen.findByTitle<HTMLIFrameElement>('Puzzle');
+		const postMessage = jest.fn();
+		Object.defineProperty(iframe, 'contentWindow', {
+			value: { postMessage },
+			configurable: true,
+		});
+
+		await act(() => {
+			iframe.dispatchEvent(new Event('load'));
+			return Promise.resolve();
+		});
+
+		expect(postMessage).toHaveBeenCalledWith(
+			{
+				type: 'guardian-puzzle-context',
+				context: {
+					userId: 'user-123',
+					darkMode: true,
+					puzzleDate: null,
+				},
+			},
+			'*',
+		);
+	});
+
+	it('subscribes to auth state changes and updates the context if the user signs out', async () => {
+		mockedGetAuthStatus.mockResolvedValueOnce(signedIn('user-123'));
+
+		render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="Puzzle"
+				darkModeAvailable={false}
+				puzzleDate={null}
+			/>,
+		);
+
+		const iframe =
+			await testScreen.findByTitle<HTMLIFrameElement>('Puzzle');
+		await waitFor(() =>
+			expect(getContextFromSrc(iframe.src).userId).toBe('user-123'),
+		);
+
+		expect(mockedSubscribeToAuthStateChange).toHaveBeenCalledTimes(1);
+		const onAuthStateChange =
+			mockedSubscribeToAuthStateChange.mock.calls[0]![0];
+
+		mockedGetAuthStatus.mockResolvedValueOnce(signedOut());
+		await act(() => Promise.resolve(onAuthStateChange()));
+
+		await waitFor(() =>
+			expect(getContextFromSrc(iframe.src).userId).toBe(null),
+		);
+	});
+
+	it('unsubscribes from auth state changes on unmount', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedOut());
+
+		const { unmount } = render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="Puzzle"
+				darkModeAvailable={false}
+				puzzleDate={null}
+			/>,
+		);
+
+		await testScreen.findByTitle('Puzzle');
+		unmount();
+
+		expect(unsubscribe).toHaveBeenCalledTimes(1);
+	});
+
+	it('includes puzzleDate in the context when provided', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedOut());
+
+		render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="Puzzle"
+				darkModeAvailable={false}
+				puzzleDate="2026-09-15"
+			/>,
+		);
+
+		const iframe =
+			await testScreen.findByTitle<HTMLIFrameElement>('Puzzle');
+		await waitFor(() =>
+			expect(getContextFromSrc(iframe.src).puzzleDate).toBe('2026-09-15'),
+		);
+	});
+
+	it('reports puzzleDate: null in the context when not provided', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedOut());
+
+		render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="Puzzle"
+				darkModeAvailable={false}
+				puzzleDate={null}
+			/>,
+		);
+
+		const iframe =
+			await testScreen.findByTitle<HTMLIFrameElement>('Puzzle');
+		await waitFor(() =>
+			expect(getContextFromSrc(iframe.src).puzzleDate).toBeNull(),
+		);
+	});
+
+	it('includes uid and darkMode=1 (AmuseLabs-specific) alongside guardian-puzzle-context once signed in with dark mode on', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedIn('user-123'));
+		mockedUseMatchMedia.mockReturnValue(true);
+
+		render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="Puzzle"
+				darkModeAvailable={true}
+				puzzleDate={null}
+			/>,
+		);
+
+		const iframe =
+			await testScreen.findByTitle<HTMLIFrameElement>('Puzzle');
+		await waitFor(() => expect(getUidFromSrc(iframe.src)).toBe('user-123'));
+		expect(getDarkModeParamFromSrc(iframe.src)).toBe('1');
+		expect(
+			new URL(iframe.src).searchParams.has('guardian-puzzle-context'),
+		).toBe(true);
+	});
+
+	it('omits uid entirely while signed out, but still sends darkMode=0 (AmuseLabs-specific)', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedOut());
+
+		render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="Puzzle"
+				darkModeAvailable={false}
+				puzzleDate={null}
+			/>,
+		);
+
+		const iframe =
+			await testScreen.findByTitle<HTMLIFrameElement>('Puzzle');
+		await waitFor(() =>
+			expect(getContextFromSrc(iframe.src).userId).toBeNull(),
+		);
+		expect(new URL(iframe.src).searchParams.has('uid')).toBe(false);
+		expect(getDarkModeParamFromSrc(iframe.src)).toBe('0');
+		expect(
+			new URL(iframe.src).searchParams.has('guardian-puzzle-context'),
+		).toBe(true);
+	});
+
+	it('removes uid again if the reader signs back out', async () => {
+		mockedGetAuthStatus.mockResolvedValueOnce(signedIn('user-123'));
+
+		render(
+			<PuzzleIframe
+				puzzleConfig={sudokuEasyConfig}
+				title="Puzzle"
+				darkModeAvailable={false}
+				puzzleDate={null}
+			/>,
+		);
+
+		const iframe =
+			await testScreen.findByTitle<HTMLIFrameElement>('Puzzle');
+		await waitFor(() => expect(getUidFromSrc(iframe.src)).toBe('user-123'));
+
+		const onAuthStateChange =
+			mockedSubscribeToAuthStateChange.mock.calls[0]![0];
+		mockedGetAuthStatus.mockResolvedValueOnce(signedOut());
+		await act(() => Promise.resolve(onAuthStateChange()));
+
+		await waitFor(() => expect(getUidFromSrc(iframe.src)).toBeNull());
+	});
+
+	it('does not add uid/darkMode query params for a non-AmuseLabs provider (wordiply)', async () => {
+		mockedGetAuthStatus.mockResolvedValue(signedIn('user-123'));
+		mockedUseMatchMedia.mockReturnValue(true);
+
+		render(
+			<PuzzleIframe
+				puzzleConfig={wordiplyConfig}
+				title="Puzzle"
+				darkModeAvailable={true}
+				puzzleDate={null}
+			/>,
+		);
+
+		const iframe =
+			await testScreen.findByTitle<HTMLIFrameElement>('Puzzle');
+		await waitFor(() =>
+			expect(
+				new URL(iframe.src).searchParams.has('guardian-puzzle-context'),
+			).toBe(true),
+		);
+		expect(new URL(iframe.src).searchParams.has('uid')).toBe(false);
+		expect(new URL(iframe.src).searchParams.has('darkMode')).toBe(false);
+		expect(iframe.src.startsWith('https://www.wordiply.com/')).toBe(true);
+	});
+});

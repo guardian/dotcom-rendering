@@ -66,6 +66,9 @@ const getLoaders = (build) => {
  * @returns {import('webpack').Configuration}
  */
 module.exports = ({ build }) => ({
+	experiments: {
+		css: true,
+	},
 	entry: {
 		index: getEntryIndex(build),
 		debug: './src/client/debug/debug.ts',
@@ -99,11 +102,13 @@ module.exports = ({ build }) => ({
 							},
 						},
 					},
-			  },
+				},
 	output: {
 		filename: (data) => {
 			// We don't want to hash the debug script so it can be used in bookmarklets
-			if (data.chunk.name === 'debug') return `[name].js`;
+			if (data.chunk.name === 'debug') {
+				return `[name].js`;
+			}
 			return generateName(build);
 		},
 		chunkFilename: generateName(build),
@@ -121,7 +126,7 @@ module.exports = ({ build }) => ({
 					new webpack.ProvidePlugin({
 						Buffer: ['buffer', 'Buffer'],
 					}),
-			  ]
+				]
 			: []),
 	],
 	externals: getExternalModules(build),
@@ -134,7 +139,10 @@ module.exports = ({ build }) => ({
 			},
 			{
 				test: /\.css$/,
-				use: ['to-string-loader', 'css-loader'],
+				type: 'css/auto',
+				parser: {
+					exportType: 'text',
+				},
 			},
 			svgr,
 		],

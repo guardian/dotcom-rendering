@@ -3,7 +3,7 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
 import type { ArticleElementRenderer } from '../lib/renderElement';
 import { palette } from '../palette';
-import type { ServerSideTests, Switches } from '../types/config';
+import type { Switches } from '../types/config';
 import type { MiniProfile, StarRating } from '../types/content';
 import { MiniProfile as MiniProfileComponent } from './MiniProfile';
 
@@ -14,7 +14,6 @@ interface MiniProfilesProps {
 	pageId: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	abTests: ServerSideTests;
 	switches: Switches;
 	editionId: EditionId;
 	hideCaption?: boolean;
@@ -45,7 +44,6 @@ export const MiniProfiles = ({
 	isAdFreeUser,
 	isSensitive,
 	switches,
-	abTests,
 	editionId,
 	hideCaption,
 	starRating,
@@ -59,7 +57,6 @@ export const MiniProfiles = ({
 	return (
 		<ol data-ignore="global-ol-styling">
 			{miniProfiles.map((miniProfile, index) => (
-				// eslint-disable-next-line react/no-array-index-key -- Title should usually be identical, but in case it isn't, also use array index
 				<MiniProfileComponent
 					miniProfile={miniProfile}
 					format={format}
@@ -80,7 +77,6 @@ export const MiniProfiles = ({
 							isAdFreeUser={isAdFreeUser}
 							isSensitive={isSensitive}
 							switches={switches}
-							abTests={abTests}
 							editionId={editionId}
 							hideCaption={hideCaption}
 							starRating={starRating}

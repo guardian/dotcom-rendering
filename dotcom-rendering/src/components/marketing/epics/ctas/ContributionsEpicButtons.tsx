@@ -55,16 +55,12 @@ const PrimaryCtaButton = ({
 	cta,
 	tracking,
 	countryCode,
-	amountsTestName,
-	amountsVariantName,
 	promoCodes,
 	submitComponentEvent,
 }: {
 	cta?: Cta;
 	tracking: Tracking;
 	countryCode?: string;
-	amountsTestName?: string;
-	amountsVariantName?: string;
 	promoCodes: string[];
 	submitComponentEvent?: (event: ComponentEvent) => void;
 }): JSX.Element | null => {
@@ -79,8 +75,6 @@ const PrimaryCtaButton = ({
 		tracking,
 		promoCodes: promoCodes ?? [],
 		countryCode,
-		amountsAbTestName: amountsTestName,
-		amountsAbTestVariant: amountsVariantName,
 	});
 
 	return (
@@ -139,8 +133,6 @@ interface ContributionsEpicButtonsProps {
 	isReminderActive: boolean;
 	isSignedIn: boolean;
 	threeTierSelectedChoiceCard?: ChoiceCard;
-	amountsTestName?: string;
-	amountsVariantName?: string;
 	promoCodes: string[];
 }
 
@@ -153,8 +145,6 @@ export const ContributionsEpicButtons = ({
 	isReminderActive,
 	isSignedIn,
 	threeTierSelectedChoiceCard,
-	amountsTestName,
-	amountsVariantName,
 	promoCodes,
 }: ContributionsEpicButtonsProps): JSX.Element | null => {
 	const [hasBeenSeen, setNode] = useIsInView({
@@ -209,8 +199,6 @@ export const ContributionsEpicButtons = ({
 							cta={getCta(variant.cta)}
 							tracking={tracking}
 							promoCodes={promoCodes}
-							amountsTestName={amountsTestName}
-							amountsVariantName={amountsVariantName}
 							countryCode={countryCode}
 							submitComponentEvent={submitComponentEvent}
 						/>

@@ -92,8 +92,12 @@ describe('CommentContainer', () => {
 				setPreviewBody={() => {}}
 				reportAbuse={() => Promise.resolve(ok(true))}
 				expandCommentReplies={(id, responses) => {
-					if (commentBeingRepliedTo?.id !== id) return;
-					if (!commentBeingRepliedTo.responses) return;
+					if (commentBeingRepliedTo?.id !== id) {
+						return;
+					}
+					if (!commentBeingRepliedTo.responses) {
+						return;
+					}
 					commentBeingRepliedTo.responses = responses;
 				}}
 				isExpanded={true}
@@ -189,8 +193,12 @@ describe('CommentContainer', () => {
 				setPreviewBody={() => {}}
 				reportAbuse={() => Promise.resolve(ok(true))}
 				expandCommentReplies={(id, responses) => {
-					if (commentBeingRepliedTo?.id !== id) return;
-					if (!commentBeingRepliedTo.responses) return;
+					if (commentBeingRepliedTo?.id !== id) {
+						return;
+					}
+					if (!commentBeingRepliedTo.responses) {
+						return;
+					}
 					commentBeingRepliedTo.responses = responses;
 				}}
 				isExpanded={true}

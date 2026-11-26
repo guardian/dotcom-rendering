@@ -1,0 +1,283 @@
+import { createRef } from 'react';
+import type ReactGoogleRecaptcha from 'react-google-recaptcha';
+import { fn, mocked } from 'storybook/test';
+import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
+import { useCountryCode } from '../lib/useCountryCode';
+import { useNewsletterSignupForm } from '../lib/useNewsletterSignupForm';
+import type { NewsletterSignupFormState } from '../lib/useNewsletterSignupForm';
+import { NewsletterSignupCard } from './NewsletterSignupCard';
+import { NewsletterSignupForm } from './NewsletterSignupForm.island';
+import { Section } from './Section';
+
+const meta = preview.meta({
+	title: 'Components/Newsletter Signup Form',
+	component: NewsletterSignupForm,
+	decorators: [
+		(
+			Story,
+			{
+				parameters,
+			}: {
+				parameters: { isSignedIn?: boolean };
+			},
+		) => (
+			<Section
+				title="NewsletterSignupForm"
+				showTopBorder={true}
+				padContent={false}
+				centralBorder="partial"
+			>
+				<NewsletterSignupCard
+					name="Saturday Edition"
+					frequency="Weekly"
+					description="An exclusive roundup of the week's best Guardian journalism from the editor-in-chief, Katharine Viner, free to your inbox every Saturday."
+					illustrationSquare="https://media.guim.co.uk/efd4be7a85fd7fb5118c712b7087c758bbf45e6b/0_0_1000_1000/500.jpg"
+					isSignedIn={parameters.isSignedIn === true}
+				>
+					<Story />
+				</NewsletterSignupCard>
+			</Section>
+		),
+	],
+});
+
+const defaultArgs = {
+	newsletterId: 'saturday-edition',
+	newsletterName: 'Saturday Edition',
+	frequency: 'every Saturday',
+	componentId: 'AR NewsletterSignupForm saturday-edition',
+};
+
+const successChromaticModes = {
+	'vertical mobile': allModes['vertical mobile'],
+	'vertical tablet': allModes['vertical tablet'],
+};
+
+/** Shared no-op handlers — stories that focus on visual state don't need real callbacks. */
+const noopHandlers: Pick<
+	NewsletterSignupFormState,
+	| 'handleEmailChange'
+	| 'handleEmailFocus'
+	| 'handleEmailInvalid'
+	| 'handleMarketingToggle'
+	| 'handleSubmit'
+	| 'handleSubmitButtonClick'
+	| 'handleReset'
+	| 'handleCaptchaComplete'
+	| 'handleCaptchaLoadError'
+> = {
+	handleEmailChange: fn(),
+	handleEmailFocus: fn(),
+	handleEmailInvalid: fn(),
+	handleMarketingToggle: fn(),
+	handleSubmit: fn(),
+	handleSubmitButtonClick: fn(),
+	handleReset: fn(),
+	handleCaptchaComplete: fn(),
+	handleCaptchaLoadError: fn(),
+};
+
+const mockForm = (state: Partial<NewsletterSignupFormState>) => ({
+	userEmail: undefined,
+	isSignedIn: false,
+	isInteracted: false,
+	showMarketingToggle: false,
+	marketingOptIn: undefined,
+	marketingOptInHiddenForCountry: false,
+	isWaitingForResponse: false,
+	responseOk: undefined,
+	errorMessage: undefined,
+	isValidationError: false,
+	recaptchaRef: createRef<ReactGoogleRecaptcha>(),
+	captchaSiteKey: undefined,
+	...noopHandlers,
+	...state,
+});
+
+// ---------------------------------------------------------------------------
+// Stories
+// ---------------------------------------------------------------------------
+
+/** Signed-out idle state. Preview button appears above the form. */
+export const SignedOut = meta.story({
+	args: defaultArgs,
+	beforeEach() {
+		mocked(useNewsletterSignupForm).mockReturnValue(
+			mockForm({ showMarketingToggle: false }),
+		);
+	},
+});
+
+/**
+ * After the user focuses the email field — marketing toggle and privacy
+ * message are revealed, email typed in, ready to submit.
+ */
+export const SignedOutWithEmail = meta.story({
+	args: defaultArgs,
+	beforeEach() {
+		mocked(useNewsletterSignupForm).mockReturnValue(
+			mockForm({
+				userEmail: 'reader@example.com',
+				isInteracted: true,
+				showMarketingToggle: true,
+				marketingOptIn: true,
+			}),
+		);
+	},
+});
+
+/**
+ * Signed-in user — email pre-filled from Identity, email input hidden,
+ * marketing toggle hidden, preview button moves into the submit row.
+ */
+export const SignedIn = meta.story({
+	args: defaultArgs,
+	parameters: { isSignedIn: true },
+	beforeEach() {
+		mocked(useNewsletterSignupForm).mockReturnValue(
+			mockForm({
+				userEmail: 'reader@example.com',
+				isSignedIn: true,
+				isInteracted: true,
+				showMarketingToggle: false,
+			}),
+		);
+	},
+});
+
+/** Spinner shown while the POST request is in-flight; form is hidden. */
+export const Loading = meta.story({
+	args: defaultArgs,
+	beforeEach() {
+		mocked(useNewsletterSignupForm).mockReturnValue(
+			mockForm({ isWaitingForResponse: true }),
+		);
+	},
+});
+
+/** Subscription confirmed on the web. */
+export const Success = meta.story({
+	args: { ...defaultArgs },
+	parameters: {
+		config: { renderingTarget: 'Web' },
+		chromatic: { modes: successChromaticModes },
+	},
+	beforeEach() {
+		mocked(useNewsletterSignupForm).mockReturnValue(
+			mockForm({ responseOk: true }),
+		);
+	},
+});
+
+/** Subscription confirmed in apps. */
+export const SuccessApps = meta.story({
+	args: { ...defaultArgs },
+	parameters: {
+		config: { renderingTarget: 'Apps' },
+		chromatic: { modes: successChromaticModes },
+	},
+	beforeEach() {
+		mocked(useNewsletterSignupForm).mockReturnValue(
+			mockForm({ responseOk: true }),
+		);
+	},
+});
+
+/** Server returned a non-2xx response — error message and "Try again" button. */
+export const SubmissionFailed = meta.story({
+	args: { ...defaultArgs },
+	beforeEach() {
+		mocked(useNewsletterSignupForm).mockReturnValue(
+			mockForm({ responseOk: false }),
+		);
+	},
+});
+
+/** User submitted without entering an email — inline validation error on the input. */
+export const ValidationError = meta.story({
+	args: defaultArgs,
+	beforeEach() {
+		mocked(useNewsletterSignupForm).mockReturnValue(
+			mockForm({
+				errorMessage: 'Please enter your email address.',
+				isValidationError: true,
+			}),
+		);
+	},
+});
+
+/** User submitted with a malformed email — browser fires `invalid`, shown inline on the input. */
+export const InvalidEmail = meta.story({
+	args: defaultArgs,
+	beforeEach() {
+		mocked(useNewsletterSignupForm).mockReturnValue(
+			mockForm({
+				userEmail: 'not-an-email',
+				isInteracted: true,
+				errorMessage: 'Incorrect email format. Please check.',
+				isValidationError: true,
+			}),
+		);
+	},
+});
+
+/** reCAPTCHA failed — form replaced by bordered error box. */
+export const CaptchaError = meta.story({
+	args: defaultArgs,
+	beforeEach() {
+		mocked(useNewsletterSignupForm).mockReturnValue(
+			mockForm({
+				errorMessage: 'Sorry, the reCAPTCHA failed to load.',
+				isValidationError: false,
+			}),
+		);
+	},
+});
+
+/** User is already subscribed on the web. */
+export const AlreadySubscribed = meta.story({
+	args: { ...defaultArgs, isAlreadySubscribed: true },
+	parameters: {
+		isSignedIn: true,
+		config: { renderingTarget: 'Web' },
+		chromatic: { modes: successChromaticModes },
+	},
+	beforeEach() {
+		mocked(useNewsletterSignupForm).mockReturnValue(mockForm({}));
+	},
+});
+
+/** User is already subscribed in apps. */
+export const AlreadySubscribedApps = meta.story({
+	args: { ...defaultArgs, isAlreadySubscribed: true },
+	parameters: {
+		isSignedIn: true,
+		config: { renderingTarget: 'Apps' },
+		chromatic: { modes: successChromaticModes },
+	},
+});
+
+/**
+ * US user — marketing toggle is hidden and the user is silently enrolled in
+ * similar_guardian_products.
+ */
+export const USHideMarketingToggle = meta.story({
+	args: defaultArgs,
+	beforeEach() {
+		mocked(useCountryCode).mockReturnValue('US');
+		window.guardian.config.switches['usSignupHideMarketingToggle'] = true;
+		mocked(useNewsletterSignupForm).mockReturnValue(
+			mockForm({
+				userEmail: 'reader@example.com',
+				isInteracted: true,
+				showMarketingToggle: false,
+				marketingOptIn: true,
+			}),
+		);
+	},
+	afterEach() {
+		mocked(useCountryCode).mockReset();
+		window.guardian.config.switches['usSignupHideMarketingToggle'] = false;
+	},
+});

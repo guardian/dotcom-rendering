@@ -1,24 +1,40 @@
+import { hostedPaletteDecorator } from '../../.storybook/decorators/themeDecorator';
 import { allModes } from '../../.storybook/modes';
 import preview from '../../.storybook/preview';
 import { hostedVideo } from '../../fixtures/manual/hostedVideo';
+import { hostedOnwardsTrails } from '../../fixtures/manual/onwardsTrails';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
 } from '../lib/articleFormat';
+import { customMockFetch } from '../lib/mockRESTCalls';
 import { enhanceArticleType } from '../types/article';
 import { HostedVideoLayout } from './HostedVideoLayout';
+
+const mockOnwardsContentFetch = customMockFetch([
+	{
+		mockedMethod: 'GET',
+		mockedUrl: `${hostedVideo.config.ajaxUrl}/${hostedVideo.config.pageId}/onward.json`,
+		mockedStatus: 200,
+		mockedBody: { trails: hostedOnwardsTrails },
+	},
+]);
+
+const { hostedCampaignColour = '' } =
+	hostedVideo.commercialProperties.UK.branding ?? {};
 
 const meta = preview.meta({
 	title: 'Layouts/HostedVideo',
 	component: HostedVideoLayout,
 	parameters: {
-		chromatic: {
-			modes: {
-				'light leftCol': allModes['light leftCol'],
-			},
-		},
+		config: { darkModeAvailable: true },
 	},
+	render: (args) => {
+		global.fetch = mockOnwardsContentFetch;
+		return <HostedVideoLayout {...args} />;
+	},
+	decorators: hostedPaletteDecorator(hostedCampaignColour),
 });
 
 const format = {
@@ -40,7 +56,7 @@ export const Apps = meta.story({
 		},
 		chromatic: {
 			modes: {
-				'light mobileMedium': allModes['light mobileMedium'],
+				'vertical mobileMedium': allModes['vertical mobileMedium'],
 			},
 		},
 	},
@@ -55,6 +71,11 @@ export const Web = meta.story({
 	parameters: {
 		config: {
 			renderingTarget: 'Web',
+		},
+		chromatic: {
+			modes: {
+				'light leftCol': allModes['light leftCol'],
+			},
 		},
 	},
 });

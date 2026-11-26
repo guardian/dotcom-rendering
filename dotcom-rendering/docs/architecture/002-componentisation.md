@@ -10,8 +10,8 @@ Frontend can be hard to work with in part as a consequence of the markup, logic 
 
 It can be difficult to:
 
--   reason about how these concerns intersect
--   find styles that apply to specific markup
+- reason about how these concerns intersect
+- find styles that apply to specific markup
 
 If you change or delete some styles, it’s difficult to know the extent to which this changes the website
 

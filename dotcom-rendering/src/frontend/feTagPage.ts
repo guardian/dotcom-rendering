@@ -26,7 +26,5 @@ export type FETagPage = {
 	forceDay: boolean;
 	canonicalUrl?: string;
 	contributionsServiceUrl: string;
-	// This comment is needed to ensure null is recognised properly in the schema
-	/** @nullable true */
 	storylinesContent?: StorylinesContent | null;
 };

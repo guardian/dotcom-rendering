@@ -1,8 +1,11 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import { between, from, space, until } from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { CSSProperties } from 'react';
 import type { FEArticle } from '../frontend/feArticle';
+import { type LayoutType } from '../layouts/lib/articleArrangements';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
 	ArticleDesign,
@@ -19,6 +22,12 @@ import {
 } from '../lib/articleMeta';
 import { getAudioData } from '../lib/audio-data';
 import { getSoleContributor } from '../lib/byline';
+import { decideMainMediaCaption } from '../lib/decide-caption';
+import {
+	crosswordActionContext,
+	type PuzzleActionContext,
+} from '../lib/puzzleActionTracking';
+import { hasFilterTag, isRepublished } from '../lib/theFilter';
 import { palette as themePalette } from '../palette';
 import { hasPreferredSourceButton } from '../preferredSource';
 import type { Branding as BrandingType } from '../types/branding';
@@ -26,6 +35,7 @@ import type { FEElement } from '../types/content';
 import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
 import { Branding } from './Branding.island';
+import { Caption } from './Caption';
 import { CommentCount } from './CommentCount.island';
 import { useConfig } from './ConfigContext';
 import { Contributor } from './Contributor';
@@ -35,9 +45,11 @@ import { Island } from './Island';
 import { PodcastMeta } from './PodcastMeta';
 import { PreferredSourceButton } from './PreferredSourceButton';
 import { ShareButton } from './ShareButton.island';
+import { TimeDateline } from './TimeDateline';
 
 type Props = {
 	format: ArticleFormat;
+	layoutType?: LayoutType;
 	pageId: string;
 	webTitle: string;
 	byline?: string;
@@ -45,12 +57,17 @@ type Props = {
 	tags: TagType[];
 	primaryDateline: string;
 	secondaryDateline: string;
+	webPublicationDate?: string;
+	firstPublicationDate?: string;
 	branding?: BrandingType;
 	discussionApiUrl: string;
 	shortUrlId: string;
 	isCommentable: boolean;
 	mainMediaElements?: FEElement[];
 	crossword?: FEArticle['crossword'];
+	hidePreferredSourceOnPrint?: boolean;
+	isPuzzlePage?: boolean;
+	puzzleTrackingContext?: PuzzleActionContext;
 };
 
 const meta = (format: ArticleFormat) => {
@@ -103,11 +120,7 @@ const metaFlex = css`
 `;
 
 const preferredSourceMetaFlex = (hasButton: boolean): CSSProperties =>
-	hasButton
-		? {
-				marginBottom: 8,
-		  }
-		: {};
+	hasButton ? { marginBottom: 8 } : {};
 
 const stretchLines = css`
 	display: block;
@@ -146,11 +159,7 @@ const metaExtras = (isPictureContent: boolean) => css`
 `;
 
 const preferredSourceMetaExtras = (hasButton: boolean): CSSProperties =>
-	hasButton
-		? {
-				paddingTop: 8,
-		  }
-		: {};
+	hasButton ? { paddingTop: 8 } : {};
 
 const metaNumbers = (isPictureContent: boolean) => css`
 	border-top: 1px solid ${themePalette('--article-border')};
@@ -170,7 +179,10 @@ const metaNumbers = (isPictureContent: boolean) => css`
 	}
 `;
 
-export const metaContainer = (format: ArticleFormat) => {
+export const metaContainer = (
+	format: ArticleFormat,
+	layoutType?: LayoutType,
+) => {
 	const defaultMargins = css`
 		${until.phablet} {
 			margin-left: -20px;
@@ -188,7 +200,9 @@ export const metaContainer = (format: ArticleFormat) => {
 		case ArticleDisplay.Standard: {
 			switch (format.design) {
 				case ArticleDesign.PhotoEssay:
-					return format.theme === ArticleSpecial.Labs
+					return ((format.theme === ArticleSpecial.Labs ||
+						layoutType?.startsWith('immersive')) ??
+						false)
 						? defaultMargins
 						: css`
 								${until.phablet} {
@@ -205,7 +219,7 @@ export const metaContainer = (format: ArticleFormat) => {
 								${from.wide} {
 									margin-left: 40px;
 								}
-						  `;
+							`;
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
 				case ArticleDesign.Gallery: {
@@ -243,6 +257,36 @@ const MetaAvatarContainer = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
+const ImmersiveMetaAvatarContainer = ({
+	children,
+	stackAtLeftCol,
+}: {
+	children: React.ReactNode;
+	stackAtLeftCol: boolean;
+}) => (
+	<div
+		css={css`
+			width: 60px;
+			height: 60px;
+			margin-top: 3px;
+			margin-right: 10px;
+			margin-bottom: 12px;
+			margin-left: 0px;
+
+			${stackAtLeftCol &&
+			css`
+				${between.leftCol.and.wide} {
+					width: 140px;
+					height: 140px;
+					margin-top: 6px;
+				}
+			`}
+		`}
+	>
+		{children}
+	</div>
+);
+
 const RowBelowLeftCol = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
@@ -270,9 +314,16 @@ const metaNumbersExtrasLiveBlog = css`
 	}
 `;
 
+const immersivePortraitRightPadding = css`
+	${from.leftCol} {
+		padding-right: 10px;
+	}
+`;
+
 export const ArticleMeta = ({
 	branding,
 	format,
+	layoutType,
 	pageId,
 	webTitle,
 	byline,
@@ -280,21 +331,32 @@ export const ArticleMeta = ({
 	tags,
 	primaryDateline,
 	secondaryDateline,
+	webPublicationDate,
+	firstPublicationDate,
 	discussionApiUrl,
 	shortUrlId,
 	isCommentable,
 	mainMediaElements,
 	crossword,
+	hidePreferredSourceOnPrint,
+	isPuzzlePage = false,
+	puzzleTrackingContext,
 }: Props) => {
 	const { renderingTarget } = useConfig();
-	const showPreferredSource = hasPreferredSourceButton(
-		renderingTarget,
-		format,
-	);
+
+	const isBrandedTopHat =
+		layoutType === 'interactiveTopHat' && branding != null;
+
+	const showPreferredSource =
+		hasPreferredSourceButton(renderingTarget, format, isPuzzlePage) &&
+		!isBrandedTopHat;
+
+	const isImmersiveGrid = layoutType?.startsWith('immersive') ?? false;
+	const stackImmersiveMetaAtLeftCol = layoutType === 'immersiveLandscape';
 	const soleContributor = getSoleContributor(tags, byline);
 	const authorName = soleContributor?.title ?? 'Author Image';
 
-	const avatarUrl = shouldShowAvatar(format)
+	const avatarUrl = shouldShowAvatar(format, isImmersiveGrid)
 		? soleContributor?.bylineLargeImageUrl
 		: undefined;
 	const isInteractive = format.design === ArticleDesign.Interactive;
@@ -308,15 +370,38 @@ export const ArticleMeta = ({
 	const podcast = getPodcast(tags);
 	const rssFeedUrl = getRssFeedUrl(tags);
 
+	const isFilterArticle = hasFilterTag(tags);
+	const showUpdatedLabel =
+		isFilterArticle &&
+		webPublicationDate !== undefined &&
+		isRepublished(firstPublicationDate, webPublicationDate);
+
+	const mediaType:
+		| 'YouTubeVideo'
+		| 'SelfHostedVideo'
+		| 'Audio'
+		| 'Gallery'
+		| undefined =
+		mainMediaElements?.[0]?._type ===
+		'model.dotcomrendering.pageElements.ImageBlockElement'
+			? 'Gallery'
+			: mainMediaElements?.[0]?._type ===
+				  'model.dotcomrendering.pageElements.AudioBlockElement'
+				? 'Audio'
+				: mainMediaElements?.[0]?._type ===
+					  'model.dotcomrendering.pageElements.MediaAtomBlockElement'
+					? 'SelfHostedVideo'
+					: undefined;
+
 	return (
 		<div
 			className={
 				isInteractive ? interactiveLegacyClasses.metaContainer : ''
 			}
-			css={metaContainer(format)}
+			css={metaContainer(format, layoutType)}
 		>
 			<div css={meta(format)}>
-				{branding && (
+				{branding && layoutType !== 'interactiveTopHat' && (
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<Branding branding={branding} format={format} />
 					</Island>
@@ -337,14 +422,33 @@ export const ArticleMeta = ({
 				) : (
 					''
 				)}
-				<RowBelowLeftCol>
-					<>
+				{isImmersiveGrid ? (
+					<div
+						css={css`
+							display: flex;
+							flex-direction: row;
+
+							${stackImmersiveMetaAtLeftCol &&
+							css`
+								${between.leftCol.and.wide} {
+									flex-direction: column;
+								}
+							`}
+						`}
+					>
 						{!!avatarUrl && (
-							<MetaAvatarContainer>
+							<ImmersiveMetaAvatarContainer
+								stackAtLeftCol={stackImmersiveMetaAtLeftCol}
+							>
 								<Avatar src={avatarUrl} alt={authorName} />
-							</MetaAvatarContainer>
+							</ImmersiveMetaAvatarContainer>
 						)}
-						<div>
+						<div
+							css={
+								layoutType === 'immersivePortrait' &&
+								immersivePortraitRightPadding
+							}
+						>
 							{isAudio && podcast && seriesTag && (
 								<PodcastMeta
 									series={seriesTag}
@@ -359,12 +463,13 @@ export const ArticleMeta = ({
 								/>
 							)}
 
-							{shouldShowContributor(format) && (
+							{shouldShowContributor(format, isImmersiveGrid) && (
 								<Contributor
 									byline={byline}
 									tags={tags}
 									format={format}
 									source={source}
+									layoutType={layoutType}
 								/>
 							)}
 
@@ -375,21 +480,92 @@ export const ArticleMeta = ({
 								/>
 							)}
 
-							<Dateline
-								primaryDateline={primaryDateline}
-								secondaryDateline={secondaryDateline}
-								format={format}
-							/>
+							{!isUndefined(webPublicationDate) &&
+							isFilterArticle ? (
+								<TimeDateline
+									primaryDateline={primaryDateline}
+									webPublicationDate={webPublicationDate}
+									format={format}
+									showUpdatedLabel={showUpdatedLabel}
+								/>
+							) : (
+								<Dateline
+									primaryDateline={primaryDateline}
+									secondaryDateline={secondaryDateline}
+									format={format}
+								/>
+							)}
 						</div>
-					</>
-				</RowBelowLeftCol>
+					</div>
+				) : (
+					<RowBelowLeftCol>
+						<>
+							{!!avatarUrl && (
+								<MetaAvatarContainer>
+									<Avatar src={avatarUrl} alt={authorName} />
+								</MetaAvatarContainer>
+							)}
+							<div>
+								{isAudio && podcast && seriesTag && (
+									<PodcastMeta
+										series={seriesTag}
+										format={format}
+										image={podcast.image}
+										spotifyUrl={podcast.spotifyUrl}
+										subscriptionUrl={
+											podcast.subscriptionUrl
+										}
+										audioDownloadUrl={
+											audioData?.audioDownloadUrl
+										}
+										rssFeedUrl={rssFeedUrl}
+									/>
+								)}
 
+								{shouldShowContributor(
+									format,
+									isImmersiveGrid,
+								) && (
+									<Contributor
+										byline={byline}
+										tags={tags}
+										format={format}
+										source={source}
+									/>
+								)}
+
+								{crossword?.creator && (
+									<CrosswordSetter
+										setter={crossword.creator.name}
+										profileUrl={crossword.creator.webUrl}
+									/>
+								)}
+
+								{!isUndefined(webPublicationDate) &&
+								isFilterArticle ? (
+									<TimeDateline
+										primaryDateline={primaryDateline}
+										webPublicationDate={webPublicationDate}
+										format={format}
+										showUpdatedLabel={showUpdatedLabel}
+									/>
+								) : (
+									<Dateline
+										primaryDateline={primaryDateline}
+										secondaryDateline={secondaryDateline}
+										format={format}
+									/>
+								)}
+							</div>
+						</>
+					</RowBelowLeftCol>
+				)}
 				<div
 					data-print-layout="hide"
 					css={metaFlex}
 					style={preferredSourceMetaFlex(showPreferredSource)}
 				>
-					{renderingTarget === 'Web' && (
+					{renderingTarget === 'Web' && !isBrandedTopHat && (
 						<div
 							className={
 								isInteractive
@@ -417,6 +593,18 @@ export const ArticleMeta = ({
 									webTitle={webTitle}
 									format={format}
 									context="ArticleMeta"
+									puzzleTrackingContext={
+										puzzleTrackingContext ??
+										crosswordActionContext(crossword)
+									}
+									puzzleTrackingSource={
+										isPuzzlePage
+											? 'puzzle-page'
+											: format.design ===
+												  ArticleDesign.Crossword
+												? 'crossword-page'
+												: undefined
+									}
 								/>
 							</Island>
 						</div>
@@ -441,6 +629,8 @@ export const ArticleMeta = ({
 								display: flex;
 								flex-direction: row;
 								align-items: flex-start;
+								${layoutType === 'immersivePortrait' &&
+								immersivePortraitRightPadding}
 							`}
 						>
 							<div>
@@ -459,7 +649,47 @@ export const ArticleMeta = ({
 						</div>
 					</div>
 				</div>
-				{showPreferredSource ? <PreferredSourceButton /> : null}
+				{showPreferredSource ? (
+					<div
+						css={
+							layoutType === 'immersivePortrait' &&
+							immersivePortraitRightPadding
+						}
+					>
+						<PreferredSourceButton
+							hidePreferredSourceOnPrint={
+								hidePreferredSourceOnPrint
+							}
+						/>
+					</div>
+				) : null}
+				{layoutType === 'immersiveLandscape' &&
+					mainMediaElements?.[0] && (
+						<Hide until="leftCol">
+							<div
+								css={css`
+									margin-top: ${space[2]}px;
+								`}
+							>
+								<Caption
+									captionText={decideMainMediaCaption(
+										mainMediaElements[0],
+									)}
+									format={format}
+									shouldLimitWidth={false}
+									isLeftCol={true}
+									isMainMedia={true}
+									layoutType={layoutType}
+									mediaType={mediaType}
+								/>
+							</div>
+						</Hide>
+					)}
+				{layoutType === 'interactiveTopHat' && branding && (
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<Branding branding={branding} format={format} />
+					</Island>
+				)}
 			</div>
 		</div>
 	);

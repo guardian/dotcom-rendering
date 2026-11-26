@@ -1,4 +1,3 @@
-import type { ABTest, ABTestAPI } from '@guardian/ab-core';
 import { activeABtests } from '@guardian/ab-testing-config';
 import {
 	bypassCommercialMetricsSampling,
@@ -9,31 +8,27 @@ import {
 	bypassCoreWebVitalsSampling,
 	initCoreWebVitals,
 } from '@guardian/core-web-vitals';
-import { isUndefined } from '@guardian/libs';
+import { getCookie, isUndefined } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
-import { useAB, useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { useBrowserId } from '../lib/useBrowserId';
 import { useDetectAdBlock } from '../lib/useDetectAdBlock';
+import { useOnce } from '../lib/useOnce';
 import { usePageViewId } from '../lib/usePageViewId';
-import type { ServerSideTests } from '../types/config';
 import { useConfig } from './ConfigContext';
 
 type Props = {
 	commercialMetricsEnabled: boolean;
-	tests: ServerSideTests;
 };
 
 const sampling = 1 / 100;
 /** defining this here allows to share this with other metrics */
 const willRecordCoreWebVitals = Math.random() < sampling;
 
-// For these tests switch off sampling and collect metrics for 100% of views
-const clientSideTestsToForceMetrics: ABTest[] = [
-	/* keep array multi-line */
-];
-
-const shouldCollectMetricsForBetaTests = (userTestParticipations: string[]) => {
+export const shouldCollectMetricsForTests = (
+	userTestParticipations: string[],
+) => {
 	const userParticipationConfigs = activeABtests.filter((test) =>
 		userTestParticipations.includes(test.name),
 	);
@@ -58,6 +53,35 @@ const useDev = () => {
 	return isDev;
 };
 
+const logMvt = (
+	mvtId: string | null,
+	oldMvtId: string | null,
+	abTestCookie: string | null,
+) => {
+	const logsEndpoint = window.guardian.config.page.isDev
+		? '//logs.code.dev-guardianapis.com/log'
+		: '//logs.guardianapis.com/log';
+
+	void fetch(logsEndpoint, {
+		method: 'POST',
+		body: JSON.stringify({
+			label: 'webx.ab-testing',
+			properties: [
+				{ name: 'mvtId', value: mvtId },
+				{ name: 'oldMvtId', value: oldMvtId },
+				{
+					name: 'pageviewId',
+					value: window.guardian.config.ophan.pageViewId,
+				},
+				{ name: 'abTestCookie', value: abTestCookie },
+			],
+		}),
+		keepalive: true,
+		cache: 'no-store',
+		mode: 'no-cors',
+	});
+};
+
 /**
  * Record relevant metrics to our data warehouse:
  * - Core Web Vitals
@@ -72,9 +96,8 @@ const useDev = () => {
  *
  * (No visual story exists as this does not render anything)
  */
-export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
-	const abTestApi = useAB()?.api;
-	const betaABTest = useBetaAB();
+export const Metrics = ({ commercialMetricsEnabled }: Props) => {
+	const abTests = useAB();
 	const adBlockerInUse = useAdBlockInUse();
 	const detectedAdBlocker = useDetectAdBlock();
 
@@ -84,34 +107,37 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 
 	const isDev = useDev();
 
-	const userInServerSideTest = Object.keys(tests).length > 0;
+	const userParticipations = abTests?.getParticipations() ?? {};
 
-	const userBetaParticipations = betaABTest?.getParticipations() ?? {};
-
-	const collectBetaTestMetrics = shouldCollectMetricsForBetaTests(
-		Object.keys(userBetaParticipations),
+	const collectTestMetrics = shouldCollectMetricsForTests(
+		Object.keys(userParticipations),
 	);
 
 	const shouldBypassSampling = useCallback(
-		(api: ABTestAPI) =>
-			willRecordCoreWebVitals ||
-			userInServerSideTest ||
-			collectBetaTestMetrics ||
-			clientSideTestsToForceMetrics.some((test) =>
-				api.runnableTest(test),
-			),
+		() => willRecordCoreWebVitals || collectTestMetrics,
+		[collectTestMetrics],
+	);
 
-		[userInServerSideTest, collectBetaTestMetrics],
+	const isInMonitoringTest = abTests?.isUserInTest(
+		'webx-monitor-group-contamination-v2',
 	);
 
 	useEffect(
 		function coreWebVitals() {
-			if (isUndefined(abTestApi)) return;
-			if (isUndefined(browserId)) return;
-			if (isUndefined(isDev)) return;
-			if (isUndefined(pageViewId)) return;
+			if (isUndefined(abTests)) {
+				return;
+			}
+			if (isUndefined(browserId)) {
+				return;
+			}
+			if (isUndefined(isDev)) {
+				return;
+			}
+			if (isUndefined(pageViewId)) {
+				return;
+			}
 
-			const bypassSampling = shouldBypassSampling(abTestApi);
+			const bypassSampling = shouldBypassSampling();
 
 			/**
 			 * We rely on `bypassSampling` rather than the built-in sampling,
@@ -131,21 +157,33 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 				void bypassCoreWebVitalsSampling('commercial');
 			}
 		},
-		[abTestApi, browserId, isDev, pageViewId, shouldBypassSampling],
+		[abTests, browserId, isDev, pageViewId, shouldBypassSampling],
 	);
 
 	useEffect(
 		function commercialMetrics() {
 			// Only send metrics if the switch is enabled
-			if (!commercialMetricsEnabled) return;
+			if (!commercialMetricsEnabled) {
+				return;
+			}
 
-			if (isUndefined(abTestApi)) return;
-			if (isUndefined(adBlockerInUse)) return;
-			if (isUndefined(browserId)) return;
-			if (isUndefined(isDev)) return;
-			if (isUndefined(pageViewId)) return;
+			if (isUndefined(abTests)) {
+				return;
+			}
+			if (isUndefined(adBlockerInUse)) {
+				return;
+			}
+			if (isUndefined(browserId)) {
+				return;
+			}
+			if (isUndefined(isDev)) {
+				return;
+			}
+			if (isUndefined(pageViewId)) {
+				return;
+			}
 
-			const bypassSampling = shouldBypassSampling(abTestApi);
+			const bypassSampling = shouldBypassSampling();
 
 			// This is a new detection method we are trying, so we want to record it separately to `adBlockerInUse`
 			EventTimer.get().setProperty(
@@ -171,7 +209,7 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 				);
 		},
 		[
-			abTestApi,
+			abTests,
 			adBlockerInUse,
 			detectedAdBlocker,
 			browserId,
@@ -180,6 +218,30 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 			pageViewId,
 			shouldBypassSampling,
 		],
+	);
+
+	useOnce(
+		function reportMvtId() {
+			if (!isInMonitoringTest) return;
+
+			const mvtId = getCookie({
+				name: 'gu_v3_mvt_id',
+				shouldMemoize: true,
+			});
+
+			const oldMvtId = getCookie({
+				name: 'GU_mvt_id',
+				shouldMemoize: true,
+			});
+
+			const rawClientABTests = getCookie({
+				name: 'gu_client_ab_tests',
+				shouldMemoize: true,
+			});
+
+			logMvt(mvtId, oldMvtId, rawClientABTests);
+		},
+		[isInMonitoringTest],
 	);
 
 	// We don’t render anything

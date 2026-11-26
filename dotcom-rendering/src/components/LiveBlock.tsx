@@ -4,7 +4,7 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { Block } from '../types/blocks';
-import type { ServerSideTests, Switches } from '../types/config';
+import type { Switches } from '../types/config';
 import { Island } from './Island';
 import { LastUpdated } from './LastUpdated';
 import { LiveBlockContainer } from './LiveBlockContainer';
@@ -19,7 +19,6 @@ type Props = {
 	ajaxUrl: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	abTests: ServerSideTests;
 	switches: Switches;
 	isLiveUpdate?: boolean;
 	isPinnedPost: boolean;
@@ -39,7 +38,6 @@ export const LiveBlock = ({
 	ajaxUrl,
 	isAdFreeUser,
 	isSensitive,
-	abTests,
 	switches,
 	isLiveUpdate,
 	isPinnedPost,
@@ -49,7 +47,9 @@ export const LiveBlock = ({
 	serverTime,
 	idApiUrl,
 }: Props) => {
-	if (block.elements.length === 0) return null;
+	if (block.elements.length === 0) {
+		return null;
+	}
 
 	// Decide if the block has been updated or not
 	const lastUpdated =
@@ -74,28 +74,28 @@ export const LiveBlock = ({
 			isOriginalPinnedPost={isOriginalPinnedPost}
 			serverTime={serverTime}
 		>
-			{block.elements.map((element, index) => (
-				<RenderArticleElement
-					// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
-					key={index}
-					format={format}
-					element={element}
-					ajaxUrl={ajaxUrl}
-					host={host}
-					index={index}
-					isMainMedia={false}
-					pageId={pageId}
-					webTitle={webTitle}
-					isAdFreeUser={isAdFreeUser}
-					isSensitive={isSensitive}
-					abTests={abTests}
-					switches={switches}
-					isPinnedPost={isPinnedPost}
-					editionId={editionId}
-					shouldHideAds={shouldHideAds}
-					idApiUrl={idApiUrl}
-				/>
-			))}
+			{block.elements.map((element, index) => {
+				return (
+					<RenderArticleElement
+						key={index}
+						format={format}
+						element={element}
+						ajaxUrl={ajaxUrl}
+						host={host}
+						index={index}
+						isMainMedia={false}
+						pageId={pageId}
+						webTitle={webTitle}
+						isAdFreeUser={isAdFreeUser}
+						isSensitive={isSensitive}
+						switches={switches}
+						isPinnedPost={isPinnedPost}
+						editionId={editionId}
+						shouldHideAds={shouldHideAds}
+						idApiUrl={idApiUrl}
+					/>
+				);
+			})}
 			<footer
 				css={css`
 					display: flex;

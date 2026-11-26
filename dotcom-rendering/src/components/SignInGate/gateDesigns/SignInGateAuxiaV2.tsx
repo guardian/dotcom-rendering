@@ -24,6 +24,7 @@ import { InformationBox } from '../../InformationBox/InformationBox';
 import { GuardianTerms } from '../../Terms/Terms';
 import { trackLink } from '../componentEventTracking';
 import type { SignInGatePropsAuxia, TreatmentContentDecoded } from '../types';
+import { buildRegisterHref } from './shared';
 
 const DividerWithOr = () => {
 	return (
@@ -54,6 +55,8 @@ export const SignInGateAuxiaV2 = ({
 	} = JSON.parse(userTreatment.treatmentContent) as TreatmentContentDecoded;
 
 	const firstCtaLink = ensureValidCtaUrl(rawCtaLink);
+
+	const registerHref = buildRegisterHref(firstCtaLink, queryParams);
 
 	const isDismissible = userTreatment.treatmentType.startsWith(
 		'DISMISSABLE_SIGN_IN_GATE',
@@ -121,7 +124,6 @@ export const SignInGateAuxiaV2 = ({
 	};
 
 	return (
-		// eslint-disable-next-line jsx-a11y/no-static-element-interactions -- div needs click and keyup handlers for modal backdrop dismiss functionality
 		<div
 			css={modalOverlay}
 			className={dismissStatusLabel}
@@ -261,11 +263,11 @@ export const SignInGateAuxiaV2 = ({
 							</InformationBox>
 						</div>
 
-						{has(firstCtaName) && has(firstCtaLink) && (
+						{has(firstCtaName) && (
 							<p css={createAccountText}>
 								Not signed in before?{' '}
 								<ExternalLink
-									href={firstCtaLink}
+									href={registerHref}
 									onClick={() => {
 										trackLink(
 											ophanComponentId,

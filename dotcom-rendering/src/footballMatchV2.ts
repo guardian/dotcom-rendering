@@ -9,7 +9,6 @@ import type {
 } from './frontend/feFootballMatchListPage';
 import { oneOf, parseDate } from './lib/parse';
 import { error, type Result } from './lib/result';
-import { cleanTeamName } from './sportDataPage';
 
 /**
  * There are three states a football match can be in.
@@ -64,13 +63,19 @@ type MatchData = {
 	venue?: string;
 };
 
+export type Scorer = {
+	name: string;
+	time?: string;
+	otherInfo?: string;
+};
+
 /**
  * Once a match has started, we can bundle together information about a team,
  * such as its name, with its score and which players have scored.
  */
 type FootballMatchTeamWithScore = FootballTeam & {
 	score: number;
-	scorers: string[];
+	scorers: Scorer[];
 };
 
 type FootballDayInvalidDate = {
@@ -130,6 +135,24 @@ const parseMatchDate = (date: string): Result<string, Date> => {
 	return parseDate(isoDate);
 };
 
+const parseScorers = (scorers: string | undefined): Scorer[] =>
+	scorers?.split(',').map((scorer) => {
+		const [, name, time, otherInfo] =
+			scorer.match(/(.*) \((\d+)\s?(.*)?\)/) ?? [];
+
+		if (!name || !time) {
+			return {
+				name: scorer,
+			};
+		}
+
+		return {
+			name,
+			time,
+			otherInfo,
+		};
+	}) ?? [];
+
 const parseFixture = (
 	feFixture: FEFixture | FEMatchDay,
 ): Result<ParserError, MatchFixture> => {
@@ -154,12 +177,14 @@ const parseFixture = (
 			kickOff: dateTimeISOString,
 			venue: feFixture.venue?.name,
 			homeTeam: {
-				name: cleanTeamName(feFixture.homeTeam.name),
+				name: feFixture.homeTeam.name,
 				paID: feFixture.homeTeam.id,
+				teamUrl: feFixture.homeTeam.teamUrl,
 			},
 			awayTeam: {
-				name: cleanTeamName(feFixture.awayTeam.name),
+				name: feFixture.awayTeam.name,
 				paID: feFixture.awayTeam.id,
+				teamUrl: feFixture.awayTeam.teamUrl,
 			},
 		}));
 };
@@ -199,16 +224,18 @@ const parseMatchResult = (
 			kickOff: dateTimeISOString,
 			venue: feResult.venue?.name,
 			homeTeam: {
-				name: cleanTeamName(feResult.homeTeam.name),
+				name: feResult.homeTeam.name,
 				paID: feResult.homeTeam.id,
 				score: homeScore,
-				scorers: feResult.homeTeam.scorers?.split(',') ?? [],
+				scorers: parseScorers(feResult.homeTeam.scorers),
+				teamUrl: feResult.homeTeam.teamUrl,
 			},
 			awayTeam: {
-				name: cleanTeamName(feResult.awayTeam.name),
+				name: feResult.awayTeam.name,
 				paID: feResult.awayTeam.id,
 				score: awayScore,
-				scorers: feResult.awayTeam.scorers?.split(',') ?? [],
+				scorers: parseScorers(feResult.awayTeam.scorers),
+				teamUrl: feResult.awayTeam.teamUrl,
 			},
 			comment: feResult.comments,
 		}));
@@ -249,19 +276,21 @@ const parseLiveMatch = (
 			kickOff: dateTimeISOString,
 			venue: feMatchDay.venue?.name,
 			homeTeam: {
-				name: cleanTeamName(feMatchDay.homeTeam.name),
+				name: feMatchDay.homeTeam.name,
 				paID: feMatchDay.homeTeam.id,
 				score: homeScore,
-				scorers: feMatchDay.homeTeam.scorers?.split(',') ?? [],
+				scorers: parseScorers(feMatchDay.homeTeam.scorers),
+				teamUrl: feMatchDay.homeTeam.teamUrl,
 			},
 			awayTeam: {
-				name: cleanTeamName(feMatchDay.awayTeam.name),
+				name: feMatchDay.awayTeam.name,
 				paID: feMatchDay.awayTeam.id,
 				score: awayScore,
-				scorers: feMatchDay.awayTeam.scorers?.split(',') ?? [],
+				scorers: parseScorers(feMatchDay.awayTeam.scorers),
+				teamUrl: feMatchDay.awayTeam.teamUrl,
 			},
 			dateTimeISOString,
-			comment: cleanTeamName(feMatchDay.comments ?? ''),
+			comment: feMatchDay.comments ?? '',
 			status: replaceLiveMatchStatus(feMatchDay.matchStatus),
 		}));
 };

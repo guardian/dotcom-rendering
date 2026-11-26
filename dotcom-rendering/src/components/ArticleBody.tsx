@@ -1,11 +1,14 @@
 import { css } from '@emotion/react';
 import {
 	between,
+	from,
 	headlineBold24,
+	pxToRem,
 	remSpace,
 	textEgyptian17,
 	textSansBold20,
 } from '@guardian/source/foundations';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -15,14 +18,22 @@ import { ArticleRenderer } from '../lib/ArticleRenderer';
 import type { EditionId } from '../lib/edition';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { revealStyles } from '../lib/revealStyles';
+import { hasFilterTag } from '../lib/theFilter';
 import type { TableOfContentsItem } from '../model/enhanceTableOfContents';
 import { palette as themePalette } from '../palette';
 import type { Block } from '../types/blocks';
-import type { ServerSideTests, Switches } from '../types/config';
+import type { Switches } from '../types/config';
 import type { TagType } from '../types/tag';
+import {
+	HORIZONTAL_TABLE_OF_CONTENTS_SCROLL_MARGIN,
+	HorizontalTableOfContents,
+} from './HorizontalTableOfContents.island';
 import { Island } from './Island';
 import { LiveBlogRenderer } from './LiveBlogRenderer';
-import { TableOfContents } from './TableOfContents.island';
+import {
+	FILTER_TOC_SCROLL_OFFSET,
+	TableOfContents,
+} from './TableOfContents.island';
 import { textBlockStyles } from './TextBlockComponent';
 
 type Props = {
@@ -49,16 +60,28 @@ type Props = {
 	isDev: boolean;
 	onFirstPage?: boolean;
 	keyEvents?: Block[];
-	filterKeyEvents?: boolean;
-	abTests: ServerSideTests;
 	tableOfContents?: TableOfContentsItem[];
+	tableOfContentsStyle?: 'default' | 'horizontal';
 	lang?: string;
 	isRightToLeftLang?: boolean;
 	shouldHideAds: boolean;
 	serverTime?: number;
 	idApiUrl?: string;
-	accentColor?: string;
+	articleArrangement?: LayoutType;
+	hasPageSkin?: boolean;
 };
+
+/**
+ * Stops section headings landing underneath the sticky horizontal table of
+ * contents when a reader follows one of its links. The links target h2s, plus
+ * h3s for mini profiles in a sectioned list.
+ */
+const horizontalTableOfContentsHeadingOffset = css`
+	h2[id],
+	h3[id] {
+		scroll-margin-top: ${HORIZONTAL_TABLE_OF_CONTENTS_SCROLL_MARGIN}px;
+	}
+`;
 
 const globalOlStyles = () => css`
 	ol:not([data-ignore='global-ol-styling']) {
@@ -82,11 +105,19 @@ const hostedContentH2Styles = css`
 	}
 `;
 
+/**
+ * Numbered lists build their own faux h3s (see `addH3s` in
+ * enhance-numbered-lists), which predate the body copy h3 styling and must keep
+ * their own type, colour and spacing. Every property set by
+ * `subheadingLevel3Styles` is restated here so none of it leaks through.
+ */
 const globalH3Styles = (display: ArticleDisplay) => css`
 	${display === ArticleDisplay.NumberedList &&
 	`
 		h3 {
 			${headlineBold24};
+			color: ${themePalette('--textblock-text')};
+			padding: 0;
 			margin-bottom: ${remSpace[2]};
 		}
 	`}
@@ -104,16 +135,31 @@ const bodyPadding = css`
 	}
 `;
 
-const hostedContentLinkStyles = (accentColor?: string) => css`
-	a:not([data-ignore='global-link-styling']) {
-		text-decoration: none;
-		border-bottom: 1px solid ${themePalette('--article-link-border')};
-		color: ${accentColor ?? themePalette('--article-link-text')};
+/**
+ * Page skins use the desktop grid at wider viewport breakpoints, so body
+ * furniture must keep its desktop positioning rather than moving into the
+ * usual left column outside the article.
+ */
+const pageSkinBodyStyles = css`
+	${from.leftCol} {
+		figure[data-spacefinder-role='supporting'],
+		figure[data-spacefinder-role='thumbnail'],
+		figure[data-spacefinder-role='showcase'],
+		figure[data-spacefinder-role='richLink'] {
+			margin-left: 0;
+		}
 
-		:hover {
-			color: ${accentColor ?? themePalette('--article-link-text-hover')};
-			border-bottom: 1px solid
-				${accentColor ?? themePalette('--article-link-border-hover')};
+		figure[data-spacefinder-role='supporting'] > figcaption,
+		figure[data-spacefinder-role='showcase'] > figcaption,
+		figure[data-spacefinder-role='immersive'] > figcaption {
+			position: static;
+		}
+
+		figure[data-spacefinder-role='immersive'] {
+			width: auto;
+			max-width: none;
+			margin-left: -20px;
+			margin-right: -340px;
 		}
 	}
 `;
@@ -129,6 +175,17 @@ const globalLinkStyles = () => css`
 			border-bottom: 1px solid
 				${themePalette('--article-link-border-hover')};
 		}
+	}
+`;
+
+/**
+ * Stops subheadings landing underneath The Filter's sticky "Jump to" bar when
+ * a reader follows one of its links. Native fragment navigation honours
+ * `scroll-margin-top`, so this needs no JavaScript.
+ */
+const filterSubheadingOffset = css`
+	h2[id] {
+		scroll-margin-top: ${pxToRem(FILTER_TOC_SCROLL_OFFSET)};
 	}
 `;
 
@@ -154,17 +211,17 @@ export const ArticleBody = ({
 	isDev,
 	onFirstPage = false,
 	keyEvents = [],
-	filterKeyEvents = false,
 	keywordIds,
-	abTests,
 	tableOfContents,
+	tableOfContentsStyle = 'default',
 	lang,
 	isRightToLeftLang = false,
 	editionId,
 	shouldHideAds,
 	serverTime,
 	idApiUrl,
-	accentColor,
+	articleArrangement,
+	hasPageSkin = false,
 }: Props) => {
 	const isInteractiveContent =
 		format.design === ArticleDesign.Interactive ||
@@ -173,6 +230,9 @@ export const ArticleBody = ({
 		format.design === ArticleDesign.HostedArticle ||
 		format.design === ArticleDesign.HostedVideo ||
 		format.design === ArticleDesign.HostedGallery;
+	const isFilterArticle = hasFilterTag(tags);
+	const hasTableOfContents =
+		tableOfContents !== undefined && tableOfContents.length > 0;
 	const language = decideLanguage(lang);
 	const languageDirection = decideLanguageDirection(isRightToLeftLang);
 	const hasObserverPublicationTag = tags.find(
@@ -221,7 +281,6 @@ export const ArticleBody = ({
 					pageId={pageId}
 					webTitle={webTitle}
 					ajaxUrl={ajaxUrl}
-					abTests={abTests}
 					switches={switches}
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
@@ -233,7 +292,6 @@ export const ArticleBody = ({
 					contributionsServiceUrl={contributionsServiceUrl}
 					onFirstPage={onFirstPage}
 					keyEvents={keyEvents}
-					filterKeyEvents={filterKeyEvents}
 					keywordIds={keywordIds}
 					editionId={editionId}
 					shouldHideAds={shouldHideAds}
@@ -245,12 +303,19 @@ export const ArticleBody = ({
 	}
 	return (
 		<>
-			{tableOfContents && tableOfContents.length > 0 && (
+			{hasTableOfContents && (
 				<Island priority="critical" defer={{ until: 'visible' }}>
-					<TableOfContents
-						tableOfContents={tableOfContents}
-						format={format}
-					></TableOfContents>
+					{tableOfContentsStyle === 'horizontal' ? (
+						<HorizontalTableOfContents
+							tableOfContents={tableOfContents}
+						/>
+					) : (
+						<TableOfContents
+							tableOfContents={tableOfContents}
+							format={format}
+							isFilterArticle={isFilterArticle}
+						></TableOfContents>
+					)}
 				</Island>
 			)}
 			<div
@@ -262,10 +327,13 @@ export const ArticleBody = ({
 					globalOlStyles(),
 					globalStrongStyles,
 					globalLinkStyles(),
-					isHostedContent && [
-						hostedContentH2Styles,
-						hostedContentLinkStyles(accentColor),
-					],
+					hasPageSkin && pageSkinBodyStyles,
+					isHostedContent && [hostedContentH2Styles],
+					tableOfContentsStyle === 'horizontal'
+						? horizontalTableOfContentsHeadingOffset
+						: isFilterArticle &&
+							hasTableOfContents &&
+							filterSubheadingOffset,
 				]}
 				lang={language}
 				dir={languageDirection}
@@ -287,11 +355,11 @@ export const ArticleBody = ({
 					isDev={isDev}
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
-					abTests={abTests}
 					editionId={editionId}
 					contributionsServiceUrl={contributionsServiceUrl}
 					shouldHideAds={shouldHideAds}
 					idApiUrl={idApiUrl}
+					articleArrangement={articleArrangement}
 				/>
 			</div>
 			{hasObserverPublicationTag && <ObserverFooter />}

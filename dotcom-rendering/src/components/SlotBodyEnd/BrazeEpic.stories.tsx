@@ -2,9 +2,7 @@ import type { BrazeEndOfArticleComponent } from '@guardian/braze-components';
 import type { ReactElement } from 'react';
 import { useEffect, useState } from 'react';
 
-type BrazeMessageProps = {
-	[key: string]: string | undefined;
-};
+type BrazeMessageProps = Record<string, string | undefined>;
 
 export default {
 	component: 'BrazeEpics',

@@ -50,13 +50,13 @@ export const FootballTableForm = ({
 				const styles = isWin
 					? winStyles
 					: isLoss
-					? lossStyles
-					: drawStyles;
+						? lossStyles
+						: drawStyles;
 				const title = isWin
 					? `Won ${self.score}-${foe.score} against ${foe.name}`
 					: isLoss
-					? `Lost ${self.score}-${foe.score} to ${foe.name}`
-					: `Drew ${self.score}-${foe.score} with ${foe.name}`;
+						? `Lost ${self.score}-${foe.score} to ${foe.name}`
+						: `Drew ${self.score}-${foe.score} with ${foe.name}`;
 
 				return (
 					<span

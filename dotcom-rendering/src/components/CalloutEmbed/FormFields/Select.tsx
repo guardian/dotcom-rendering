@@ -2,10 +2,10 @@ import { Select as SourceSelect } from '@guardian/source/react-components';
 import type { CampaignFieldSelect } from '../../../types/content';
 
 type Props = {
-	validationErrors?: { [key in string]: string };
+	validationErrors?: Record<string, string>;
 	formField: CampaignFieldSelect;
-	formData: { [key in string]: any };
-	setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
+	formData: Record<string, any>;
+	setFormData: React.Dispatch<React.SetStateAction<Record<string, any>>>;
 };
 
 export const Select = ({
@@ -28,6 +28,7 @@ export const Select = ({
 			})
 		}
 		optional={!formField.required}
+		// eslint-disable-next-line react/no-children-prop -- the Select component requires options to be passed as children
 		children={formField.options.map((option, index) => (
 			<option key={index} value={option.value}>
 				{option.value}

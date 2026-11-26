@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { Article } from '../docs/article';
-import { CricketScorecard } from '../docs/cricketScorecard';
 import { EditionsCrosswords } from '../docs/editionsCrosswords';
 import { FootballFixtures } from '../docs/footballFixtures';
 import { FootballLive } from '../docs/footballLive';
@@ -39,10 +38,6 @@ pages.get('/football-tables', sendReact('Football Tables', <FootballTables />));
 pages.get(
 	'/football-match-summary',
 	sendReact('Football Match Summary', <FootballMatchSummary />),
-);
-pages.get(
-	'/cricket-scorecard',
-	sendReact('Cricket Scorecard', <CricketScorecard />),
 );
 
 export { pages };

@@ -12,20 +12,13 @@ import { ThreeTierChoiceCards } from '../../shared/ThreeTierChoiceCards';
 import { ContributionsEpicButtons } from './ContributionsEpicButtons';
 import { ContributionsEpicReminder } from './ContributionsEpicReminder';
 
-type Props = EpicProps & {
-	amountsTestName?: string;
-	amountsVariantName?: string;
-};
-
-export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
+export const ContributionsEpicCtasContainer: ReactComponent<EpicProps> = ({
 	variant,
 	countryCode,
 	tracking,
 	submitComponentEvent,
 	fetchEmail,
-	amountsTestName,
-	amountsVariantName,
-}: Props): JSX.Element => {
+}: EpicProps): JSX.Element => {
 	// reminders
 	const [fetchedEmail, setFetchedEmail] = useState<string | undefined>(
 		undefined,
@@ -78,8 +71,6 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 				isReminderActive={isReminderActive}
 				isSignedIn={Boolean(fetchedEmail)}
 				threeTierSelectedChoiceCard={selectedChoiceCard}
-				amountsTestName={amountsTestName}
-				amountsVariantName={amountsVariantName}
 				promoCodes={variant.promoCodes ?? []}
 			/>
 			{isReminderActive && showReminderFields && (

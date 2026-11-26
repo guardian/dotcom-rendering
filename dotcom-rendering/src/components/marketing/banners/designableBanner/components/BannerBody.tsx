@@ -1,0 +1,65 @@
+import { css } from '@emotion/react';
+import { from, space, textSans15 } from '@guardian/source/foundations';
+import type { BannerData } from '../BannerProps';
+import { createBannerBodyCopy } from './BannerText';
+
+const getStyles = (
+	highlightedTextColour: string,
+	highlightColour?: string,
+) => ({
+	container: css`
+		margin-bottom: ${space[4]}px;
+
+		${from.tablet} {
+			margin-bottom: ${space[6]}px;
+		}
+
+		p {
+			margin: 0 0 0.5em 0;
+		}
+		${textSans15};
+		span {
+			${textSans15};
+		}
+		.rr_banner_highlight > span {
+			font-weight: 700;
+		}
+	`,
+	highlightedText: css`
+		display: inline;
+		color: ${highlightedTextColour};
+
+		${highlightColour !== undefined && highlightColour.length > 0
+			? `
+            background: ${highlightColour};
+            box-shadow: 2px 0 0 ${highlightColour}, -2px 0 0 ${highlightColour};
+            box-decoration-break: clone;
+        `
+			: ''}
+	`,
+});
+
+export const BannerBody = ({
+	bannerData,
+}: {
+	bannerData: BannerData;
+}): JSX.Element | null => {
+	const highlightedTextColour =
+		bannerData.settings.highlightedTextSettings.textColour;
+	const highlightColour =
+		bannerData.settings.highlightedTextSettings.highlightColour;
+
+	const styles = getStyles(highlightedTextColour, highlightColour);
+	const { copyForViewport, showBody } = bannerData.selectors;
+
+	return (
+		<div css={styles.container}>
+			{showBody &&
+				createBannerBodyCopy(
+					copyForViewport.paragraphs,
+					copyForViewport.highlightedText,
+					styles,
+				)}
+		</div>
+	);
+};

@@ -2,6 +2,10 @@ import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import {
+	selfHostedLoopVideo45Card,
+	selfHostedLoopVideo53Card,
+} from '../../fixtures/manual/trails';
+import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
@@ -37,6 +41,7 @@ const cardProps: CardProps = {
 	collectionId: 1,
 	starRatingSize: 'medium',
 	uniqueId: `collection-1-feature-0`,
+	isStorylines: false,
 };
 
 const aBasicLink = {
@@ -422,21 +427,7 @@ export const WithSelfHostedLoopVideo = {
 	args: {
 		...cardProps,
 		showVideo: true,
-		mainMedia: {
-			type: 'SelfHostedVideo',
-			videoStyle: 'Loop',
-			atomId: 'atom-id-123',
-			sources: [
-				{
-					src: 'https://uploads.guim.co.uk/2026/01/09/Front_loop__Iran_TiF_Latest--64220ebf-d63d-48dd-9317-16b3b150a4ac-1.1.m3u8',
-					mimeType: 'application/vnd.apple.mpegurl',
-					width: 576,
-					height: 720,
-				},
-			],
-			aspectRatio: 4 / 5,
-			duration: 18,
-		},
+		mainMedia: selfHostedLoopVideo45Card.mainMedia,
 	},
 } satisfies Story;
 
@@ -469,18 +460,7 @@ export const WithSelfHostedImmersiveLoopVideo = {
 	args: {
 		...WithSelfHostedLoopVideo.args,
 		...Immersive.args,
-		mainMedia: {
-			...WithSelfHostedLoopVideo.args.mainMedia,
-			sources: [
-				{
-					src: 'https://uploads.guim.co.uk/2025/11/27/5_3_Test--26763e61-c16b-4c10-8c16-3f11882da154-1.0.mp4',
-					mimeType: 'video/mp4',
-					width: 1200,
-					height: 720,
-				},
-			],
-			aspectRatio: 5 / 3,
-		},
+		mainMedia: selfHostedLoopVideo53Card.mainMedia,
 	},
 } satisfies Story;
 
@@ -512,19 +492,7 @@ export const WithReplacementMediaOnGalleryCard = {
 		...Gallery.args,
 		showVideo: true,
 		mainMedia: {
-			type: 'SelfHostedVideo',
-			videoStyle: 'Loop',
-			atomId: 'atom-id-123',
-			sources: [
-				{
-					src: 'https://uploads.guim.co.uk/2026/01/09/Front_loop__Iran_TiF_Latest--64220ebf-d63d-48dd-9317-16b3b150a4ac-1.1.m3u8',
-					mimeType: 'application/vnd.apple.mpegurl',
-					width: 576,
-					height: 720,
-				},
-			],
-			aspectRatio: 4 / 5,
-			duration: 18,
+			...WithSelfHostedLoopVideo.args.mainMedia,
 		},
 	},
 } satisfies Story;
@@ -534,19 +502,7 @@ export const WithReplacementMediaOnVideoCard = {
 		...YoutubeVideo.args,
 		showVideo: true,
 		mainMedia: {
-			type: 'SelfHostedVideo',
-			videoStyle: 'Loop',
-			atomId: 'atom-id-123',
-			sources: [
-				{
-					src: 'https://uploads.guim.co.uk/2026/01/09/Front_loop__Iran_TiF_Latest--64220ebf-d63d-48dd-9317-16b3b150a4ac-1.1.m3u8',
-					mimeType: 'application/vnd.apple.mpegurl',
-					width: 576,
-					height: 720,
-				},
-			],
-			aspectRatio: 4 / 5,
-			duration: 18,
+			...WithSelfHostedLoopVideo.args.mainMedia,
 		},
 	},
 } satisfies Story;
@@ -556,19 +512,20 @@ export const WithReplacementMediaOnPodcastCard = {
 		...Podcast.args,
 		showVideo: true,
 		mainMedia: {
-			type: 'SelfHostedVideo',
-			videoStyle: 'Loop',
-			atomId: 'atom-id-123',
-			sources: [
-				{
-					src: 'https://uploads.guim.co.uk/2026/01/09/Front_loop__Iran_TiF_Latest--64220ebf-d63d-48dd-9317-16b3b150a4ac-1.1.m3u8',
-					mimeType: 'application/vnd.apple.mpegurl',
-					width: 576,
-					height: 720,
-				},
-			],
-			aspectRatio: 4 / 5,
-			duration: 18,
+			...WithSelfHostedLoopVideo.args.mainMedia,
 		},
+	},
+} satisfies Story;
+
+export const WithStorylines = {
+	name: 'With Storylines (should always show story age)',
+	args: {
+		/** The effect of isStorylines is to always show the age of the story
+		 * regardless of the age of the story.
+		 */
+		webPublicationDate: new Date(
+			Date.now() - 24 * 60 * 60 * 1000,
+		).toString(),
+		isStorylines: true,
 	},
 } satisfies Story;

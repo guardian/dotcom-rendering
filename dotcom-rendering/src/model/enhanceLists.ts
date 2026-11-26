@@ -84,8 +84,9 @@ const constructMultiByline =
 		if (contributorImageOverrideUrl) {
 			imageUrl = contributorImageOverrideUrl;
 		} else if (tags) {
-			imageUrl = tags.find((tag) => tag.id === contributorIdsArray[0])
-				?.bylineImageUrl;
+			imageUrl = tags.find(
+				(tag) => tag.id === contributorIdsArray[0],
+			)?.bylineImageUrl;
 		}
 
 		// if the element is missing its title, byline, or bylineHtml for any reason, we will skip it

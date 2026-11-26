@@ -62,12 +62,12 @@ With the core experience, content is legible and styling is basic.
 
 We will support some core JavaScript features:
 
--   tracking
--   error logging
--   commercial code
--   some simple identity checks, such as showing premium content for paying members
--   performance monitoring
--   scroll and resize throttling
+- tracking
+- error logging
+- commercial code
+- some simple identity checks, such as showing premium content for paying members
+- performance monitoring
+- scroll and resize throttling
 
 The following screenshot is from dotcom-rendering running in IE8. The content is readable and images appear.
 The pillar colours are visible. Links are clickable. However, it uses fallback fonts (mostly Georgia). The

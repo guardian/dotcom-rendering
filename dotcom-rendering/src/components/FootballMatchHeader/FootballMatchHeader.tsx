@@ -5,45 +5,62 @@ import {
 	headlineBold20Object,
 	headlineBold24Object,
 	space,
+	textSans12Object,
 	textSans14Object,
 	textSans15Object,
+	textSansBold12Object,
 	textSansBold14Object,
 	textSansBold17Object,
 	textSansItalic14Object,
 	textSansItalic15Object,
 	until,
 } from '@guardian/source/foundations';
-import { type ComponentProps, useMemo } from 'react';
+import { useMemo } from 'react';
 import type { SWRConfiguration } from 'swr';
 import useSWR from 'swr';
-import type { FootballMatch } from '../../footballMatchV2';
+import type { FootballMatch, Scorer } from '../../footballMatchV2';
 import { grid } from '../../grid';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
+import type {
+	EnvironmentClient,
+	LiveActivitiesClient,
+	MatchNotificationsClient,
+	NotificationsClient,
+} from '../../lib/bridgetApi';
 import {
 	type EditionId,
 	getLocaleFromEdition,
 	getTimeZoneFromEdition,
 } from '../../lib/edition';
 import { palette } from '../../palette';
-import type { ColourName } from '../../paletteDeclarations';
 import type { ArticleDeprecated } from '../../types/article';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import { BigNumber } from '../BigNumber';
 import { FootballCrest } from '../FootballCrest';
+import { MatchHeaderFallback } from '../MatchHeaderFallback';
 import { Placeholder } from '../Placeholder';
-import { background, border, primaryText, secondaryText } from './colours';
-import { FootballMatchHeaderFallback } from './FootballMatchHeaderFallback';
+import {
+	background,
+	border,
+	primaryText,
+	scoreSecondaryText,
+	secondaryText,
+} from './colours';
 import { type HeaderData, parse as parseHeaderData } from './headerData';
+import { Hr } from './Hr';
+import { Notifications } from './Notifications';
+import type { TabName } from './Tabs';
 import { Tabs } from './Tabs';
 
 export type FootballMatchHeaderProps = {
-	initialTab: ComponentProps<typeof Tabs>['selected'];
+	initialTab: TabName;
 	initialData?: HeaderData;
 	leagueName: string;
 	leagueURL?: string;
 	edition: EditionId;
 	matchHeaderURL: string;
 	renderingTarget: RenderingTarget;
+	baseUrl: string;
 	format?: ArticleFormat;
 	article?: ArticleDeprecated;
 };
@@ -51,6 +68,10 @@ export type FootballMatchHeaderProps = {
 type Props = FootballMatchHeaderProps & {
 	getHeaderData: (url: string) => Promise<unknown>;
 	refreshInterval: number;
+	notificationsClient: NotificationsClient;
+	matchNotificationsClient: MatchNotificationsClient;
+	environmentClient: EnvironmentClient;
+	liveActivitiesClient: LiveActivitiesClient;
 };
 
 export const FootballMatchHeader = (props: Props) => {
@@ -71,7 +92,7 @@ export const FootballMatchHeader = (props: Props) => {
 				props.format.design === ArticleDesign.DeadBlog)
 		) {
 			return (
-				<FootballMatchHeaderFallback
+				<MatchHeaderFallback
 					format={props.format}
 					article={props.article}
 				/>
@@ -102,14 +123,18 @@ export const FootballMatchHeader = (props: Props) => {
 		>
 			<div
 				css={{
-					'&': css(grid.paddedContainer),
+					'&': css(
+						grid.paddedContainer,
+						grid.outerRules(
+							palette(
+								'--football-match-header-fixture-result-border',
+							),
+						),
+					),
 					[from.tablet]: {
 						borderColor: palette(
 							'--football-match-header-fixture-result-border',
 						),
-						borderStyle: 'solid',
-						borderLeftWidth: 1,
-						borderRightWidth: 1,
 					},
 				}}
 			>
@@ -120,10 +145,25 @@ export const FootballMatchHeader = (props: Props) => {
 					edition={props.edition}
 				/>
 				<Hr borderStyle="dotted" borderColour={border(match.kind)} />
-				<Teams match={match} />
+				<Teams match={match} baseUrl={props.baseUrl} />
 				<Comment match={match} />
+				<Notifications
+					edition={props.edition}
+					match={match}
+					notificationsClient={props.notificationsClient}
+					matchNotificationsClient={props.matchNotificationsClient}
+					environmentClient={props.environmentClient}
+					liveActivitiesClient={props.liveActivitiesClient}
+				/>
 				<Hr borderStyle="solid" borderColour={border(match.kind)} />
-				<Tabs {...tabs} />
+				<Tabs
+					sportKind="football"
+					matchKind={match.kind}
+					selected={props.initialTab}
+					reportTab={tabs.reportURL}
+					liveTab={tabs.liveURL}
+					infoTab={tabs.infoURL}
+				/>
 			</div>
 		</section>
 	);
@@ -141,7 +181,7 @@ const swrOptions = (refreshInterval: number): SWRConfiguration<HeaderData> => ({
 
 const fetcher =
 	(
-		selected: Props['initialTab'],
+		selected: TabName,
 		renderingTarget: RenderingTarget,
 		getHeaderData: Props['getHeaderData'],
 	) =>
@@ -283,29 +323,7 @@ const kickOffFormatterForEdition = (edition: EditionId): Intl.DateTimeFormat =>
 		timeZone: getTimeZoneFromEdition(edition),
 	});
 
-const Hr = (props: {
-	borderStyle: 'dotted' | 'solid';
-	borderColour: ColourName;
-}) => (
-	<hr
-		css={{
-			'&': css(grid.column.all),
-			margin: 0,
-			width: '100%',
-			borderWidth: 0,
-			borderBottomWidth: 1,
-			[from.leftCol]: {
-				display: 'none',
-			},
-		}}
-		style={{
-			borderBottomColor: palette(props.borderColour),
-			borderBottomStyle: props.borderStyle,
-		}}
-	/>
-);
-
-const Teams = (props: { match: FootballMatch }) => (
+const Teams = (props: { match: FootballMatch; baseUrl: string }) => (
 	<div
 		css={{
 			'&': css(grid.column.centre),
@@ -319,60 +337,80 @@ const Teams = (props: { match: FootballMatch }) => (
 			},
 		}}
 	>
-		<Team team="homeTeam" match={props.match} />
-		<Team team="awayTeam" match={props.match} />
+		<Team team="homeTeam" match={props.match} baseUrl={props.baseUrl} />
+		<Team team="awayTeam" match={props.match} baseUrl={props.baseUrl} />
 	</div>
 );
 
 const Team = (props: {
 	team: 'homeTeam' | 'awayTeam';
 	match: FootballMatch;
+	baseUrl: string;
 }) => (
 	<div
 		css={{
 			flex: '1 1 50%',
 			wordBreak: 'break-word',
 			borderLeftStyle: 'solid',
+			borderLeftColor: 'var(--border-left-colour)',
 			'&:last-of-type': {
 				paddingLeft: space[2],
 				borderLeftWidth: 1,
 			},
 			[from.leftCol]: {
-				paddingLeft: space[2],
-				borderLeftWidth: 1,
 				paddingTop: space[3],
+				position: 'relative',
+				'&:first-of-type::before': {
+					content: '""',
+					top: 0,
+					left: -10,
+					width: 1,
+					backgroundColor: 'var(--border-left-colour)',
+					position: 'absolute',
+					height: '100%',
+				},
 			},
 		}}
 		style={{
-			borderLeftColor: palette(border(props.match.kind)),
+			'--border-left-colour': palette(border(props.match.kind)),
 		}}
 	>
-		<TeamName name={props.match[props.team].name} />
+		<TeamName
+			name={props.match[props.team].name}
+			teamUrl={props.match[props.team].teamUrl}
+			baseUrl={props.baseUrl}
+		/>
 		<span
 			css={{
 				display: 'flex',
 				// Creates a new stacking context for z-index.
 				isolation: 'isolate',
+				flexDirection: 'row-reverse',
+				justifyContent: 'start',
 			}}
 		>
-			<Crest
-				name={props.match[props.team].name}
-				paID={props.match[props.team].paID}
-			/>
 			{props.match.kind !== 'Fixture' ? (
 				<Score
 					score={props.match[props.team].score}
 					matchKind={props.match.kind}
 				/>
 			) : null}
+			<Crest paID={props.match[props.team].paID} />
 		</span>
 		{props.match.kind !== 'Fixture' ? (
-			<Scorers scorers={props.match[props.team].scorers} />
+			<Scorers
+				scorers={props.match[props.team].scorers}
+				matchKind={props.match.kind}
+			/>
 		) : null}
 	</div>
 );
 
-const TeamName = (props: { name: string }) => (
+const TeamName = (props: {
+	name: string;
+	teamUrl?: string;
+	baseUrl: string;
+}) => (
 	<p
 		css={{
 			...headlineBold20Object,
@@ -380,22 +418,36 @@ const TeamName = (props: { name: string }) => (
 			[from.leftCol]: headlineBold24Object,
 		}}
 	>
-		{props.name}
+		{props.teamUrl ? (
+			<a
+				href={`${props.baseUrl}${props.teamUrl}`}
+				css={{
+					color: 'inherit',
+					textDecoration: 'none',
+					'&:hover': { textDecoration: 'underline' },
+				}}
+			>
+				{props.name}
+			</a>
+		) : (
+			props.name
+		)}
 	</p>
 );
 
-const Crest = (props: { name: string; paID: string }) => (
+const Crest = (props: { paID: string }) => (
 	<picture
 		css={{
 			...circleStyles,
 			backgroundColor: 'white',
 			padding: space[1],
-			zIndex: 1,
+			// Ensures the crest is rendered on top of the score
+			transform: 'translateX(0)',
 		}}
 	>
 		<FootballCrest
 			teamId={props.paID}
-			altText={`${props.name} football crest`}
+			altText=""
 			width={40}
 			css={{
 				maxWidth: 40,
@@ -423,7 +475,6 @@ const Score = (props: { score: number; matchKind: FootballMatch['kind'] }) => (
 			borderWidth: 1,
 			borderStyle: 'solid',
 			transform: 'translateX(-10px)',
-			zIndex: 0,
 			svg: {
 				fill: 'var(--svg-fill)',
 				height: 30,
@@ -467,7 +518,10 @@ const ScoreNumber = (props: { score: number }) => {
 	}
 };
 
-const Scorers = (props: { scorers: string[] }) =>
+const Scorers = (props: {
+	scorers: Scorer[];
+	matchKind: FootballMatch['kind'];
+}) =>
 	props.scorers.length === 0 ? null : (
 		<ul
 			css={{
@@ -476,9 +530,40 @@ const Scorers = (props: { scorers: string[] }) =>
 				[from.leftCol]: textSans15Object,
 			}}
 		>
-			{props.scorers.map((scorer) => (
-				<li key={scorer}>{scorer}</li>
-			))}
+			{props.scorers.map(({ name, time, otherInfo }) => {
+				return (
+					<li
+						key={name + time + otherInfo}
+						css={{ paddingBottom: space[1] }}
+					>
+						{name}
+						<span
+							css={css({
+								...textSans12Object,
+								display: 'inline-block',
+								marginLeft: space[1],
+								padding: `1px ${space[1]}px`,
+								border: `1px solid ${palette(border(props.matchKind))}`,
+								borderRadius: 10,
+								minWidth: space[6],
+								color: `${palette(scoreSecondaryText(props.matchKind))}`,
+								textAlign: 'center',
+							})}
+						>
+							{time && (
+								<span
+									css={css({
+										...textSansBold12Object,
+									})}
+								>
+									{time}&apos;
+								</span>
+							)}
+							{otherInfo && ` ${otherInfo}`}
+						</span>
+					</li>
+				);
+			})}
 		</ul>
 	);
 

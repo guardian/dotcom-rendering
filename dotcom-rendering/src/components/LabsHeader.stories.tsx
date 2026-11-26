@@ -12,7 +12,7 @@ export const Default = () => {
 		<Section
 			fullWidth={true}
 			showTopBorder={false}
-			backgroundColour={palette.labs[400]}
+			backgroundColour={palette.labs[100]}
 			borderColour={palette.neutral[60]}
 		>
 			<LabsHeader editionId="UK" />

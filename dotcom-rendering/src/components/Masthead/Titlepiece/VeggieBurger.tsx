@@ -7,8 +7,6 @@ import { palette as themePalette } from '../../../palette';
 import { navInputCheckboxId, veggieBurgerId } from './constants';
 
 const labelStyles = css`
-	position: relative;
-	z-index: 1;
 	${`#${navInputCheckboxId}`}:checked ~ div & {
 		${until.desktop} {
 			/* Bump the z-index of the burger menu when expanded */
@@ -68,7 +66,6 @@ export const VeggieBurger = () => (
 			'show',
 		)}
 		tabIndex={0}
-		// eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role -- we’re using this label for a CSS-only toggle
 		role="button"
 		data-testid="veggie-burger"
 	>

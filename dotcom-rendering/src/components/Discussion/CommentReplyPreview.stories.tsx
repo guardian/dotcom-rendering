@@ -44,6 +44,7 @@ const commentBeingRepliedTo: CommentType = {
 		badge: [],
 	},
 	responses: [],
+	responseTo: undefined,
 	metaData: {
 		commentCount: 2,
 		staffCommenterCount: 1,

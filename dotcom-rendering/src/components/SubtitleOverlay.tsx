@@ -6,17 +6,35 @@ import {
 	textSans20,
 } from '@guardian/source/foundations';
 import { palette } from '../palette';
-import type { ControlsPosition, SubtitleSize } from './SelfHostedVideoPlayer';
+import type { SubtitleSize } from './SelfHostedVideoPlayer';
 
-const subtitleOverlayStyles = (position: ControlsPosition) => css`
+export type SubtitlesPosition =
+	/**
+	 * Subtitles are anchored to the top, leaving enough room for controls positioned at the top
+	 */
+	| 'top'
+	| 'bottom'
+	/**
+	 * Subtitles are anchored to the bottom, but leave enough room for a tall progress bar
+	 */
+	| 'bottom-elevated'
+	/**
+	 * Subtitles are anchored to the top on mobile and bottom on larger screens
+	 */
+	| 'top-on-mobile';
+
+const subtitleOverlayStyles = css`
 	width: 100%;
 	display: flex;
 	justify-content: center;
 	pointer-events: none;
 	position: absolute;
+`;
 
+const subtitlePositionStyles = (position: SubtitlesPosition) => css`
 	${position === 'top' && `top: ${space[4]}px;`};
 	${position === 'bottom' && `bottom: ${space[4]}px;`};
+	${position === 'bottom-elevated' && `bottom: ${space[12]}px;`};
 `;
 
 const cueBoxStyles = css`
@@ -62,10 +80,13 @@ export const SubtitleOverlay = ({
 }: {
 	text: string;
 	size: SubtitleSize;
-	position: 'top' | 'bottom';
+	position: SubtitlesPosition;
 }) => {
 	return (
-		<div css={subtitleOverlayStyles(position)}>
+		<div
+			role="status"
+			css={[subtitleOverlayStyles, subtitlePositionStyles(position)]}
+		>
 			<div css={cueBoxStyles}>
 				<div css={[cueStyles, cueTextStyles(size)]}>{text}</div>
 			</div>

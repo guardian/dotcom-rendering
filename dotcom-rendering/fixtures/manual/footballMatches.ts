@@ -19,6 +19,7 @@ const matchData = {
 	homeTeam: {
 		id: '44',
 		name: 'Home Team',
+		scorers: 'Person (1), Person (5 Pen)',
 	},
 	awayTeam: {
 		id: '2',

@@ -2,16 +2,16 @@ import {
 	array,
 	assert,
 	boolean,
-	type Infer,
+	type InferOutput,
+	looseObject,
 	nullable,
 	number,
-	object,
+	strictObject,
 	string,
-	type,
-} from "superstruct";
+} from "valibot";
 import { FastlyService } from "./service.ts";
 
-const fastlyDictionaryItemStruct = object({
+const fastlyDictionaryItemStruct = strictObject({
 	service_id: string(),
 	item_key: string(),
 	item_value: string(),
@@ -21,7 +21,9 @@ const fastlyDictionaryItemStruct = object({
 	deleted_at: nullable(string()),
 });
 
-export type FastlyDictionaryItem = Infer<typeof fastlyDictionaryItemStruct>;
+export type FastlyDictionaryItem = InferOutput<
+	typeof fastlyDictionaryItemStruct
+>;
 
 export type UpdateDictionaryItemRequest =
 	| {
@@ -52,7 +54,7 @@ export class FastlyClient {
 	}
 	/**
 	 * Fetch data from Fastly API
-	 * We're using fetch instead of the Fastly API client as it doesn't play nicely with Deno, nor is it typed
+	 * We're using a plain fetch instead of the Fastly API client as it isn't typed
 	 *
 	 * @param url - The URL to fetch
 	 * @param options - Fetch options
@@ -87,17 +89,17 @@ export class FastlyClient {
 		const serviceConfig = await this.fetch(`service/${serviceId}`);
 
 		assert(
-			serviceConfig,
-			type({
+			looseObject({
 				id: string(),
 				name: string(),
 				versions: array(
-					type({
+					looseObject({
 						active: boolean(),
 						number: number(),
 					}),
 				),
 			}),
+			serviceConfig,
 		);
 
 		if (serviceConfig.name !== serviceName) {
@@ -135,7 +137,7 @@ export class FastlyClient {
 		const dictionary = await this.fetch(
 			`service/${serviceId}/version/${activeVersion}/dictionary/${dictionaryName}`,
 		);
-		assert(dictionary, type({ id: string(), name: string() }));
+		assert(looseObject({ id: string(), name: string() }), dictionary);
 
 		return dictionary;
 	}
@@ -151,7 +153,7 @@ export class FastlyClient {
 			`service/${serviceId}/dictionary/${dictionaryId}/items?per_page=1000`,
 		);
 
-		assert(dictionary, array(fastlyDictionaryItemStruct));
+		assert(array(fastlyDictionaryItemStruct), dictionary);
 
 		return dictionary;
 	}
@@ -180,7 +182,7 @@ export class FastlyClient {
 			},
 		);
 
-		assert(dictionary, object({ status: string() }));
+		assert(strictObject({ status: string() }), dictionary);
 		if (dictionary.status !== "ok") {
 			throw new Error(
 				`Failed to update dictionary: ${dictionary.status}`,

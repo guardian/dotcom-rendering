@@ -280,7 +280,6 @@ export const Gallery: FEArticle = {
 		},
 	],
 	main: '<figure class="element element-image" data-media-id="3bafbf61b1d1efefc889c05c018bb1a970e8e150"> <img src="https://media.guim.co.uk/3bafbf61b1d1efefc889c05c018bb1a970e8e150/0_0_6501_4334/1000.jpg" alt="People take cover as smoke erupts and debris flies off a building" width="1000" height="667" class="gu-image" /> <figcaption> <span class="element-image__caption">An Israeli strike hits a building in Gaza City.</span> <span class="element-image__credit">Photograph: Jehad Alshrafi/AP</span> </figcaption> </figure>',
-	filterKeyEvents: false,
 	keyEvents: [],
 	blocks: [
 		{
@@ -6807,7 +6806,6 @@ export const Gallery: FEArticle = {
 		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
-		abTests: {},
 		serverSideABTests: {},
 		edition: 'UK',
 		ipsosTag: 'environment',

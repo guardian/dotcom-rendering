@@ -1,0 +1,115 @@
+import { breakpoints } from '@guardian/source/foundations';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
+import { puzzlesBranding } from '../../fixtures/manual/puzzlesBranding';
+import { extractNAV } from '../model/extract-nav';
+import { getPuzzleConfig } from '../model/puzzles/puzzleConfigs';
+import { puzzlePageFormat, PuzzlePageLayout } from './PuzzlePageLayout';
+
+const puzzlePage = createPuzzlePage('word-wheel');
+const puzzleConfig = getPuzzleConfig('word-wheel');
+if (!puzzleConfig) throw new Error('Missing Word wheel configuration');
+const storyPuzzleConfig = {
+	...puzzleConfig,
+	iframe: { provider: 'wordiply', baseUrl: 'about:blank' },
+} as const;
+
+const meta = {
+	title: 'Layouts/Puzzle Page',
+	component: PuzzlePageLayout,
+	args: {
+		puzzlePage: { ...puzzlePage, puzzleConfig: storyPuzzleConfig },
+		NAV: extractNAV(puzzlePage.nav),
+		darkModeAvailable: false,
+	},
+	parameters: {
+		formats: [puzzlePageFormat],
+		chromatic: {
+			viewports: [breakpoints.mobileMedium, breakpoints.wide],
+		},
+	},
+} satisfies Meta<typeof PuzzlePageLayout>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const WithAds = {} satisfies Story;
+
+export const AdFree = {
+	args: {
+		puzzlePage: {
+			...puzzlePage,
+			puzzleConfig: storyPuzzleConfig,
+			isAdFreeUser: true,
+		},
+	},
+} satisfies Story;
+
+export const Sponsored = {
+	args: {
+		branding: puzzlesBranding,
+	},
+} satisfies Story;
+
+// Production Saturday Edition data, standing in for the Cluesletter (which has no exampleUrl yet).
+const saturdayEdition = {
+	identityName: 'saturday-edition',
+	name: 'Saturday Edition',
+	frequency: 'Weekly',
+	description:
+		'An exclusive look at the week’s best Guardian journalism from the editor-in-chief, Katharine Viner',
+	illustrationSquare:
+		'https://media.guim.co.uk/efd4be7a85fd7fb5118c712b7087c758bbf45e6b/0_0_1000_1000/500.jpg',
+	exampleUrl: '/news/series/saturday-edition/latest',
+};
+
+const v1Config = {
+	...puzzlePage.config,
+	edition: 'INT' as const,
+};
+
+export const WithUsefulLinksAndNewsletter = {
+	args: {
+		puzzlePage: {
+			...puzzlePage,
+			config: v1Config,
+			puzzleConfig: storyPuzzleConfig,
+			instance: {
+				...puzzlePage.instance,
+				puzzlesSupporting: {
+					usefulLinks: [
+						{
+							title: 'Support the Guardian',
+							url: 'https://support.theguardian.com',
+						},
+						{
+							title: 'Help centre',
+							url: 'https://help.theguardian.com',
+						},
+					],
+					newsletter: saturdayEdition,
+				},
+			},
+		},
+	},
+} satisfies Story;
+
+const sudokuPage = createPuzzlePage('sudoku-easy');
+const sudokuConfig = getPuzzleConfig('sudoku-easy');
+if (!sudokuConfig) throw new Error('Missing Sudoku easy configuration');
+
+/** Logic puzzles take the sport theme, word games (above) the opinion theme. */
+export const LogicPuzzle = {
+	args: {
+		puzzlePage: {
+			...sudokuPage,
+			puzzleConfig: {
+				...sudokuConfig,
+				iframe: { provider: 'wordiply', baseUrl: 'about:blank' },
+			},
+		},
+	},
+	parameters: {
+		formats: [puzzlePageFormat],
+	},
+} satisfies Story;

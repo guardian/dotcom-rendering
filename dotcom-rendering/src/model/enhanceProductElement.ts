@@ -1,4 +1,5 @@
 import { JSDOM } from 'jsdom';
+import { formatPrice } from '../lib/formatPrice';
 import type {
 	FEElement,
 	ProductBlockElement,
@@ -18,12 +19,23 @@ const enhanceProductBlockElement = (
 	secondaryHeadingText: extractHeadingText(element.secondaryHeadingHtml),
 });
 
+const parsePrice = (price: string): number | undefined => {
+	const match = price.match(/[\d,.]+/);
+	if (!match) return undefined;
+
+	const value = Number.parseFloat(match[0].replace(/,/g, ''));
+	return Number.isNaN(value) ? undefined : value;
+};
+
 /**
  * Gets the lowest price from an array of product CTAs.
  *
  * Each CTA may contain a price in a localized string format (e.g. "£29.99", "$39.99").
  * Prices are validated upstream in Flexible Content:
  * https://github.com/guardian/flexible-content/blob/4e6097d3d23412432a9d8f50f2415a1ae622dc5b/composer/src/js/prosemirror-setup/elements/product/ProductSpec.tsx#L31
+ *
+ * Each CTA may also contain a live 'latestPrice' inserted on the server
+ * This latest price is retrieved from an external API and will be shown instead of the CTA price
  *
  * Implementation details:
  * - Extracts the floating-point number from the price string (e.g. "$26.99" → 26.99).
@@ -35,28 +47,26 @@ const enhanceProductBlockElement = (
  * @returns {string | undefined} The lowest price string, or `undefined` if no valid prices are found.
  */
 const getLowestPrice = (ctas: ProductCta[]): string | undefined => {
-	if (ctas.length === 0) {
-		return undefined;
-	}
+	const candidates = ctas.flatMap(({ price, latestPrice }) => {
+		const display = latestPrice
+			? `${latestPrice.currencySymbol}${latestPrice.price}`
+			: price;
+		const value = parsePrice(display);
 
-	let lowestCta: ProductCta | null = null;
-	let lowestPrice: number | null = null;
+		return value === undefined ? [] : [{ value, display, latestPrice }];
+	});
 
-	for (const cta of ctas) {
-		const priceMatch = cta.price.match(/[\d,.]+/);
-		if (priceMatch) {
-			const priceNumber = parseFloat(priceMatch[0].replace(/,/g, ''));
-			if (Number.isNaN(priceNumber)) {
-				continue;
-			}
-			if (lowestPrice === null || priceNumber < lowestPrice) {
-				lowestPrice = priceNumber;
-				lowestCta = cta;
-			}
-		}
-	}
+	const lowest = candidates.reduce<(typeof candidates)[number] | undefined>(
+		(lowestSoFar, candidate) =>
+			lowestSoFar === undefined || candidate.value < lowestSoFar.value
+				? candidate
+				: lowestSoFar,
+		undefined,
+	);
 
-	return lowestCta?.price;
+	return lowest?.latestPrice
+		? `${lowest.latestPrice.currencySymbol}${formatPrice(lowest.value)}`
+		: lowest?.display;
 };
 
 const enhance =

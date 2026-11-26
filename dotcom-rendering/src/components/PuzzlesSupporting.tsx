@@ -1,0 +1,581 @@
+import { css } from '@emotion/react';
+import {
+	from,
+	headlineBold24,
+	headlineBold28,
+	headlineMedium20,
+	palette,
+	space,
+	textSans12,
+	textSansBold14,
+} from '@guardian/source/foundations';
+import { LinkButton, SvgEye } from '@guardian/source/react-components';
+import { puzzlesContainerStyles } from '../lib/puzzlesContainerStyles';
+import type {
+	PuzzleContainer,
+	PuzzleItem,
+	PuzzleLink,
+	PuzzlesLayoutType,
+	PuzzlesNewsletter,
+	PuzzlesSupportingContent,
+} from '../types/puzzlesPage';
+import { AdSlot } from './AdSlot.web';
+import { Island } from './Island';
+import { NewsletterSignupCard } from './NewsletterSignupCard';
+import {
+	NewsletterSignupForm,
+	tertiaryButtonTheme,
+} from './NewsletterSignupForm.island';
+
+type Props = {
+	adSlot?: string;
+	id: string;
+	layout: PuzzlesLayoutType;
+	renderAds: boolean;
+	showNewsletter?: boolean;
+	showPopular?: boolean;
+	supporting: PuzzlesSupportingContent;
+};
+
+const borderColour = `var(--puzzles-border-colour, ${palette.neutral[86]})`;
+
+const sectionStyles = css`
+	display: grid;
+	${puzzlesContainerStyles};
+	background: var(--puzzles-page-background, ${palette.neutral[100]});
+
+	${from.leftCol} {
+		grid-template-columns: 170px minmax(0, 1fr);
+	}
+
+	${from.wide} {
+		grid-template-columns: 250px minmax(0, 1fr);
+	}
+`;
+
+const sectionTitleStyles = css`
+	min-width: 0;
+	margin: 0;
+	padding: 6px 10px 12px;
+	border-top: 1px solid ${borderColour};
+	${headlineBold24};
+	color: var(--puzzles-headline-colour, ${palette.neutral[7]});
+	line-height: 1;
+	overflow-wrap: break-word;
+
+	${from.mobileMedium} {
+		padding-right: 20px;
+		padding-left: 20px;
+	}
+
+	${from.tablet} {
+		${headlineBold28};
+	}
+
+	${from.desktop} {
+		/* Include the 1px side border in the 20px inset. */
+		padding-left: 19px;
+	}
+
+	${from.leftCol} {
+		padding-top: ${space[2]}px;
+		border-right: 1px solid ${borderColour};
+	}
+`;
+
+const usefulContentStyles = (hasNewsletter: boolean) => css`
+	display: grid;
+	min-width: 0;
+	border-top: 1px solid ${borderColour};
+
+	${hasNewsletter &&
+	css`
+		/* Match the puzzle content insets, including the container's side borders. */
+		padding: 8px 10px 0;
+		${from.mobileMedium} {
+			padding-right: 20px;
+			padding-left: 20px;
+		}
+		${from.desktop} {
+			padding-right: 19px;
+			padding-left: 19px;
+		}
+		${from.leftCol} {
+			padding-left: 9px;
+		}
+	`}
+`;
+
+const usefulGridStyles = (hasNewsletter: boolean) => css`
+	display: grid;
+	min-width: 0;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+
+	${hasNewsletter &&
+	css`
+		column-gap: 20px;
+
+		> a,
+		> a:first-of-type {
+			position: relative;
+			padding: 0 0 ${space[2]}px;
+			border-right: 0;
+
+			::after {
+				position: absolute;
+				top: 0;
+				right: -10px;
+				bottom: 0;
+				border-right: 1px solid ${borderColour};
+				content: '';
+				pointer-events: none;
+			}
+
+			:not(:last-of-type)::after {
+				max-height: 52px;
+			}
+
+			:nth-of-type(even)::after {
+				content: none;
+
+				${from.desktop} {
+					content: '';
+				}
+			}
+		}
+
+		${from.tablet} {
+			max-width: 700px;
+		}
+		${from.desktop} {
+			max-width: 940px;
+		}
+	`}
+
+	${from.desktop} {
+		grid-template-columns: repeat(${hasNewsletter ? 4 : 2}, minmax(0, 1fr));
+	}
+
+	${from.wide} {
+		grid-template-columns: ${hasNewsletter
+			? 'repeat(4, minmax(0, 1fr))'
+			: 'repeat(2, minmax(0, 490px))'};
+	}
+`;
+
+const usefulLinkStyles = css`
+	min-height: 44px;
+	padding: ${space[2]}px ${space[3]}px;
+	border-right: 1px solid ${borderColour};
+	color: var(--puzzles-text-colour, ${palette.neutral[7]});
+	text-decoration: none;
+	${headlineMedium20};
+
+	/* Align the first link with the container title and the cards above. */
+	:first-of-type {
+		padding-left: 10px;
+		${from.mobileMedium} {
+			padding-left: 20px;
+		}
+		${from.desktop} {
+			padding-left: 19px;
+		}
+		${from.leftCol} {
+			padding-left: 9px;
+		}
+	}
+
+	:hover {
+		text-decoration: underline;
+	}
+
+	:focus-visible {
+		outline: 3px solid ${palette.brand[500]};
+		outline-offset: -3px;
+	}
+`;
+
+const usefulLinkTitleStyles = css`
+	margin: 0;
+	font: inherit;
+`;
+
+const previewStyles = css`
+	margin: ${space[3]}px 0;
+`;
+
+const newsletterStyles = css`
+	--newsletter-card-inline-padding: ${space[2]}px;
+	grid-column: 1 / -1;
+	min-width: 0;
+
+	a ~ & {
+		border-top: 1px solid ${borderColour};
+	}
+
+	${from.desktop} {
+		grid-column: span 2;
+
+		a ~ & {
+			border-top: 0;
+		}
+	}
+`;
+
+const popularContentStyles = css`
+	display: block;
+	width: 100%;
+	min-width: 0;
+	box-sizing: border-box;
+	border-top: 1px solid ${borderColour};
+
+	${from.desktop} {
+		&:has([data-puzzles-ad='mostpop']) {
+			display: grid;
+			grid-template-columns: minmax(0, 1fr) 320px;
+		}
+	}
+`;
+
+const popularGroupsStyles = css`
+	display: grid;
+	width: 100%;
+	min-width: 0;
+	grid-template-columns: 1fr;
+
+	${from.tablet} {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+`;
+
+const popularGroupStyles = css`
+	min-width: 0;
+
+	& + & {
+		border-top: 1px solid ${borderColour};
+	}
+
+	${from.tablet} {
+		& + & {
+			border-top: 0;
+			border-left: 1px solid ${borderColour};
+		}
+	}
+`;
+
+const popularGroupTitleStyles = css`
+	margin: 0;
+	padding: ${space[2]}px ${space[3]}px;
+	border-bottom: 1px solid ${borderColour};
+	${textSansBold14};
+	color: var(--puzzles-headline-colour, ${palette.neutral[7]});
+`;
+
+const popularListStyles = css`
+	margin: 0;
+	padding: 0;
+	list-style: none;
+`;
+
+const popularItemStyles = css`
+	display: grid;
+	min-height: 56px;
+	grid-template-columns: 48px minmax(0, 1fr);
+	border-bottom: 1px solid ${borderColour};
+`;
+
+const rankStyles = css`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	${headlineBold24};
+	font-size: 38px;
+`;
+
+const popularLinkStyles = css`
+	display: flex;
+	min-width: 0;
+	flex-direction: column;
+	justify-content: center;
+	padding: ${space[1]}px ${space[2]}px;
+	color: var(--puzzles-text-colour, ${palette.neutral[7]});
+	text-decoration: none;
+
+	:hover strong {
+		text-decoration: underline;
+	}
+
+	:focus-visible {
+		outline: 3px solid ${palette.brand[500]};
+		outline-offset: -3px;
+	}
+
+	strong {
+		${textSansBold14};
+	}
+
+	span {
+		${textSans12};
+	}
+`;
+
+const mostPopAdStyles = css`
+	display: none;
+
+	${from.desktop} {
+		display: block;
+		width: 320px;
+		box-sizing: border-box;
+		padding: ${space[6]}px ${space[3]}px;
+	}
+`;
+
+const flattenItems = (containers: PuzzleContainer[]): PuzzleItem[] =>
+	containers.flatMap((container) => [
+		...container.content.items.flat(),
+		...flattenItems(container.content.nestedContainers),
+	]);
+
+const puzzleUrl = (item: PuzzleItem): string | undefined => {
+	const slug = item.slug;
+	if (
+		item.variant === 'archive-page' &&
+		slug !== undefined &&
+		slug.length > 0
+	) {
+		return `/puzzles-and-games/${slug}/archive`;
+	}
+	if (
+		item.variant === 'iframe-page' &&
+		slug !== undefined &&
+		slug.length > 0
+	) {
+		return item.date !== undefined && item.date.length > 0
+			? `/puzzles-and-games/${slug}/${item.date}`
+			: `/puzzles-and-games/${slug}`;
+	}
+	const url = item.url;
+	if (
+		url !== undefined &&
+		(url.startsWith('/puzzles-and-games') ||
+			url.startsWith('/crosswords/') ||
+			/^https?:\/\//.test(url))
+	) {
+		return url;
+	}
+	return undefined;
+};
+
+const externalProps = (url: string) =>
+	/^https?:\/\//.test(url)
+		? { rel: 'noopener noreferrer', target: '_blank' as const }
+		: {};
+
+export const PuzzlesUsefulLinks = ({
+	id,
+	title,
+	links,
+	newsletter,
+	ophanComponentName,
+}: {
+	id: string;
+	title: string;
+	links: PuzzleLink[];
+	newsletter?: PuzzlesNewsletter;
+	ophanComponentName?: string;
+}) => (
+	<section css={sectionStyles} aria-labelledby={`${id}-useful-links-title`}>
+		<h2 css={sectionTitleStyles} id={`${id}-useful-links-title`}>
+			{title}
+		</h2>
+		<div css={usefulContentStyles(newsletter !== undefined)}>
+			<div css={usefulGridStyles(newsletter !== undefined)}>
+				{links.map((link, index) => (
+					<a
+						css={usefulLinkStyles}
+						href={link.url}
+						key={`${link.title}-${link.url}`}
+						data-component={ophanComponentName}
+						data-link-name={
+							ophanComponentName !== undefined
+								? `puzzles | useful-link | link-@${index + 1}`
+								: undefined
+						}
+						{...externalProps(link.url)}
+					>
+						<h3 css={usefulLinkTitleStyles}>{link.title}</h3>
+					</a>
+				))}
+				{newsletter !== undefined && (
+					<div css={newsletterStyles}>
+						<NewsletterSignupCard
+							description={newsletter.description}
+							frequency={newsletter.frequency}
+							illustrationSquare={newsletter.illustrationSquare}
+							// TODO hide ilustrations when we implement this
+							// illustrationAlt={`${newsletter.name} newsletter illustration`}
+							// hideIllustrationFromScreenReaders={true}
+							isModal={true}
+							name={newsletter.name}
+						>
+							{newsletter.exampleUrl !== undefined && (
+								<div css={previewStyles}>
+									<LinkButton
+										href={newsletter.exampleUrl}
+										target="_blank"
+										rel="noreferrer"
+										priority="tertiary"
+										size="small"
+										icon={<SvgEye />}
+										iconSide="left"
+										theme={tertiaryButtonTheme}
+										data-link-name={`puzzles newsletter preview : ${newsletter.identityName}`}
+									>
+										Preview latest
+									</LinkButton>
+								</div>
+							)}
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
+								<NewsletterSignupForm
+									componentId={`Puzzles NewsletterSignupForm ${newsletter.identityName}`}
+									frequency={newsletter.frequency}
+									newsletterId={newsletter.identityName}
+									newsletterName={newsletter.name}
+								/>
+							</Island>
+						</NewsletterSignupCard>
+					</div>
+				)}
+			</div>
+		</div>
+	</section>
+);
+
+export const PuzzlesSupporting = ({
+	adSlot,
+	id,
+	layout,
+	renderAds,
+	// Keep these sections available, but hide them from the hub for now.
+	showNewsletter = false,
+	showPopular = false,
+	supporting,
+}: Props) => {
+	const itemsById = new Map(
+		flattenItems(layout.containers).map((item) => [item.id, item]),
+	);
+	const hasMostPopAd = renderAds && adSlot === 'mostpop';
+
+	return (
+		<>
+			<PuzzlesUsefulLinks
+				id={id}
+				title={supporting.usefulLinksTitle}
+				links={supporting.usefulLinks}
+				newsletter={showNewsletter ? supporting.newsletter : undefined}
+			/>
+			{showPopular && (
+				<section
+					css={sectionStyles}
+					aria-labelledby={`${id}-popular-title`}
+				>
+					<h2 css={sectionTitleStyles} id={`${id}-popular-title`}>
+						{supporting.popularTitle}
+					</h2>
+					<div css={popularContentStyles}>
+						<div css={popularGroupsStyles}>
+							{supporting.popularGroups.map((group) => {
+								const items = group.itemIds
+									.map((_id) => itemsById.get(_id))
+									.filter(
+										(item): item is PuzzleItem =>
+											item !== undefined,
+									);
+								if (items.length === 0) {
+									return null;
+								}
+								return (
+									<section
+										css={popularGroupStyles}
+										key={group.title}
+									>
+										<h3 css={popularGroupTitleStyles}>
+											{group.title}
+										</h3>
+										<ol css={popularListStyles}>
+											{items.map((item, index) => {
+												const url = puzzleUrl(item);
+												const contents = (
+													<>
+														<strong>
+															{item.title}
+														</strong>
+														{item.cadence !==
+															undefined &&
+															item.cadence
+																.length > 0 && (
+																<span>
+																	{
+																		item.cadence
+																	}
+																</span>
+															)}
+													</>
+												);
+												return (
+													<li
+														css={popularItemStyles}
+														key={item.id}
+													>
+														<span
+															aria-hidden="true"
+															css={rankStyles}
+														>
+															{index + 1}
+														</span>
+														{url !== undefined ? (
+															<a
+																css={
+																	popularLinkStyles
+																}
+																href={url}
+																{...externalProps(
+																	url,
+																)}
+															>
+																{contents}
+															</a>
+														) : (
+															<div
+																css={
+																	popularLinkStyles
+																}
+															>
+																{contents}
+															</div>
+														)}
+													</li>
+												);
+											})}
+										</ol>
+									</section>
+								);
+							})}
+						</div>
+						{hasMostPopAd && (
+							<div
+								css={mostPopAdStyles}
+								data-puzzles-ad="mostpop"
+							>
+								<AdSlot position="mostpop" />
+							</div>
+						)}
+					</div>
+				</section>
+			)}
+		</>
+	);
+};

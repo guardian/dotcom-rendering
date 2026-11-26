@@ -4,7 +4,7 @@ import {
 	ADDITIONAL_REQUEST_PATH,
 	IMPRESSION_REQUEST_PATH,
 	interceptOphanRequest,
-} from 'playwright/lib/ophan';
+} from '../../playwright/lib/ophan';
 import {
 	allowRejectAll,
 	cmpAcceptAll,

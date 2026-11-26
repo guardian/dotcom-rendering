@@ -60,7 +60,7 @@ const objAsParams = (obj: any): string => {
 	const params = Object.keys(obj)
 		.map((key) => {
 			// TODO: Refactor this for better typesafety. See https://github.com/guardian/dotcom-rendering/pull/8057/commits/da4667399d4a7726589f1944ac60380f1f3f36e1
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/restrict-template-expressions -- type issues here cannot be avoided with this implementation
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- type issues here cannot be avoided with this implementation
 			return `${key}=${obj[key]}`;
 		})
 		.join('&');
@@ -242,7 +242,9 @@ export const getPicks = async (
 		},
 	});
 
-	if (!jsonResult.ok) return error(jsonResult.error);
+	if (!jsonResult.ok) {
+		return error(jsonResult.error);
+	}
 
 	const result = safeParse(discussionApiResponseSchema, jsonResult.value);
 
@@ -380,11 +382,15 @@ export const pickComment =
 			credentials: authOptions.credentials,
 		});
 
-		if (!jsonResult.ok) return error(jsonResult.error);
+		if (!jsonResult.ok) {
+			return error(jsonResult.error);
+		}
 
 		const result = safeParse(pickResponseSchema, jsonResult.value);
 
-		if (!result.success) return error('ParsingError');
+		if (!result.success) {
+			return error('ParsingError');
+		}
 
 		return ok(true);
 	};
@@ -407,11 +413,15 @@ export const unPickComment =
 			credentials: authOptions.credentials,
 		});
 
-		if (!jsonResult.ok) return error(jsonResult.error);
+		if (!jsonResult.ok) {
+			return error(jsonResult.error);
+		}
 
 		const result = safeParse(pickResponseSchema, jsonResult.value);
 
-		if (!result.success) return error('ParsingError');
+		if (!result.success) {
+			return error('ParsingError');
+		}
 
 		return ok(false);
 	};
@@ -435,7 +445,9 @@ export const getAllReplies = async (
 		},
 	});
 
-	if (!jsonResult.ok) return error(jsonResult.error);
+	if (!jsonResult.ok) {
+		return error(jsonResult.error);
+	}
 
 	return parseRepliesResponse(jsonResult.value);
 };
@@ -465,7 +477,9 @@ export const getCommentContext = async (
 
 	const jsonResult = await fetchJSON(url + '?' + params.toString());
 
-	if (!jsonResult.ok) return error(jsonResult.error);
+	if (!jsonResult.ok) {
+		return error(jsonResult.error);
+	}
 
 	const result = safeParse(getCommentContextResponseSchema, jsonResult.value);
 

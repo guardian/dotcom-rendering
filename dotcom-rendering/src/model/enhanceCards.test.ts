@@ -1,10 +1,20 @@
-import type { FEMediaAsset, FEMediaAtom } from '../frontend/feFront';
+import type {
+	FEFrontCardStyle,
+	FEMediaAsset,
+	FEMediaAtom,
+	FEMultimediaSlideshow,
+	FESupportingContent,
+} from '../frontend/feFront';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import type { Image } from '../types/content';
+import type { FrontEditorialTest, VariantMeta } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
 import {
 	decideArticleMedia,
+	decideMultimediaSlideshow,
 	decideReplacementMedia,
 	getActiveMediaAtom,
+	getFrontEditorialTestData,
 	getMediaMetadata,
 } from './enhanceCards';
 
@@ -19,6 +29,7 @@ describe('Enhance Cards', () => {
 			height: 400,
 			width: 500,
 		},
+		hasAudio: true,
 	};
 	const largeMp4Asset: FEMediaAsset = {
 		...testMp4Asset,
@@ -27,6 +38,7 @@ describe('Enhance Cards', () => {
 			height: 900,
 			width: 720,
 		},
+		hasAudio: true,
 	};
 	const testM3u8Asset: FEMediaAsset = {
 		id: 'https://guim-example.co.uk/atomID-1.m3u8',
@@ -38,6 +50,7 @@ describe('Enhance Cards', () => {
 			height: 400,
 			width: 500,
 		},
+		hasAudio: true,
 	};
 	const largeM3u8Asset: FEMediaAsset = {
 		...testM3u8Asset,
@@ -46,6 +59,7 @@ describe('Enhance Cards', () => {
 			height: 900,
 			width: 720,
 		},
+		hasAudio: true,
 	};
 	const testSubtitleAsset: FEMediaAsset = {
 		id: 'https://guim-example.co.uk/atomID-1.vtt',
@@ -75,20 +89,20 @@ describe('Enhance Cards', () => {
 
 	describe('getActiveMediaAtom', () => {
 		it('returns only SelfHostedVideo if the first asset is a self-hosted video', () => {
-			const videoReplace = true;
 			const mediaAtom = {
 				...testMediaAtom,
 				assets: [testMp4Asset, testYoutubeAsset],
 			};
 			const cardTrailImage = '';
 
-			expect(
-				getActiveMediaAtom(videoReplace, mediaAtom, cardTrailImage),
-			).toEqual({
+			expect(getActiveMediaAtom(mediaAtom, cardTrailImage)).toEqual({
 				atomId: 'atomID',
 				duration: 15,
 				aspectRatio: 5 / 4,
-				image: '',
+				image: {
+					src: '',
+					aspectRatio: '5:4',
+				},
 				type: 'SelfHostedVideo',
 				videoStyle: 'Loop',
 				subtitleSource: undefined,
@@ -98,22 +112,20 @@ describe('Enhance Cards', () => {
 						src: 'https://guim-example.co.uk/atomID-1.mp4',
 						height: 400,
 						width: 500,
+						hasAudio: true,
 					},
 				],
 			});
 		});
 
 		it('returns only YoutubeVideo if the first asset is a YouTube video', () => {
-			const videoReplace = true;
 			const mediaAtom = {
 				...testMediaAtom,
 				assets: [testYoutubeAsset, testMp4Asset],
 			};
 			const cardTrailImage = '';
 
-			expect(
-				getActiveMediaAtom(videoReplace, mediaAtom, cardTrailImage),
-			).toEqual({
+			expect(getActiveMediaAtom(mediaAtom, cardTrailImage)).toEqual({
 				type: 'YoutubeVideo',
 				id: 'atomID',
 				videoId: 'test-youtube-id',
@@ -129,7 +141,6 @@ describe('Enhance Cards', () => {
 		});
 
 		it('returns only one YoutubeVideo if there are multiple YouTube assets', () => {
-			const videoReplace = true;
 			const mediaAtom = {
 				...testMediaAtom,
 				assets: [
@@ -143,9 +154,7 @@ describe('Enhance Cards', () => {
 			};
 			const cardTrailImage = '';
 
-			expect(
-				getActiveMediaAtom(videoReplace, mediaAtom, cardTrailImage),
-			).toEqual({
+			expect(getActiveMediaAtom(mediaAtom, cardTrailImage)).toEqual({
 				type: 'YoutubeVideo',
 				id: 'atomID',
 				videoId: 'test-youtube-id',
@@ -161,7 +170,6 @@ describe('Enhance Cards', () => {
 		});
 
 		it('prioritises MP4 assets over m3u8 assets', () => {
-			const videoReplace = true;
 			const mediaAtom = {
 				...testMediaAtom,
 				assets: [
@@ -173,60 +181,65 @@ describe('Enhance Cards', () => {
 			};
 			const cardTrailImage = '';
 
-			expect(
-				getActiveMediaAtom(videoReplace, mediaAtom, cardTrailImage),
-			).toEqual({
+			expect(getActiveMediaAtom(mediaAtom, cardTrailImage)).toEqual({
 				atomId: 'atomID',
 				duration: 15,
 				aspectRatio: 5 / 4,
-				image: '',
 				type: 'SelfHostedVideo',
 				videoStyle: 'Loop',
 				subtitleSource: undefined,
+				image: {
+					src: '',
+					aspectRatio: '5:4',
+				},
 				sources: [
 					{
 						mimeType: 'video/mp4',
 						src: 'https://guim-example.co.uk/atomID-1.mp4',
 						height: 400,
 						width: 500,
+						hasAudio: true,
 					},
 					{
 						mimeType: 'video/mp4',
 						src: 'https://guim-example.co.uk/atomID-2.mp4',
 						height: 900,
 						width: 720,
+						hasAudio: true,
 					},
 					{
 						mimeType: 'application/x-mpegURL',
 						src: 'https://guim-example.co.uk/atomID-1.m3u8',
 						height: 400,
 						width: 500,
+						hasAudio: true,
 					},
 					{
 						mimeType: 'application/x-mpegURL',
 						src: 'https://guim-example.co.uk/atomID-2.m3u8',
 						height: 900,
 						width: 720,
+						hasAudio: true,
 					},
 				],
 			});
 		});
 
 		it('filters out non-video assets', () => {
-			const videoReplace = true;
 			const mediaAtom: FEMediaAtom = {
 				...testMediaAtom,
 				assets: [testSubtitleAsset, testM3u8Asset, testMp4Asset],
 			};
 			const cardTrailImage = '';
 
-			expect(
-				getActiveMediaAtom(videoReplace, mediaAtom, cardTrailImage),
-			).toEqual({
+			expect(getActiveMediaAtom(mediaAtom, cardTrailImage)).toEqual({
 				atomId: 'atomID',
 				duration: 15,
 				aspectRatio: 5 / 4,
-				image: '',
+				image: {
+					src: '',
+					aspectRatio: '5:4',
+				},
 				type: 'SelfHostedVideo',
 				videoStyle: 'Loop',
 				subtitleSource: 'https://guim-example.co.uk/atomID-1.vtt',
@@ -236,12 +249,14 @@ describe('Enhance Cards', () => {
 						src: 'https://guim-example.co.uk/atomID-1.mp4',
 						height: 400,
 						width: 500,
+						hasAudio: true,
 					},
 					{
 						mimeType: 'application/x-mpegURL',
 						src: 'https://guim-example.co.uk/atomID-1.m3u8',
 						height: 400,
 						width: 500,
+						hasAudio: true,
 					},
 				],
 			});
@@ -278,6 +293,10 @@ describe('Enhance Cards', () => {
 				sources: [],
 				aspectRatio: 5 / 4,
 				duration: 151,
+				image: {
+					src: '',
+					aspectRatio: '5:4',
+				},
 			};
 
 			expect(getMediaMetadata(testSelfHostedMainMedia)).toEqual({
@@ -426,13 +445,17 @@ describe('Enhance Cards', () => {
 				atomId: 'atomID',
 				duration: 15,
 				aspectRatio: 5 / 4,
-				image: 'https://guim-example.co.uk/video-image',
+				image: {
+					src: 'https://guim-example.co.uk/video-image',
+					aspectRatio: '5:4',
+				},
 				sources: [
 					{
 						mimeType: 'video/mp4',
 						src: 'https://guim-example.co.uk/atomID-1.mp4',
 						height: 400,
 						width: 500,
+						hasAudio: true,
 					},
 				],
 				videoStyle: 'Loop',
@@ -442,7 +465,7 @@ describe('Enhance Cards', () => {
 
 	describe('decideReplacementMedia', () => {
 		it('returns undefined if a mediaAtom is not provided', () => {
-			expect(decideReplacementMedia()).toEqual(undefined);
+			expect(decideReplacementMedia(true, true)).toEqual(undefined);
 		});
 
 		it('returns undefined if a mediaAtom is provided but showMainVideo and videoReplace are both false', () => {
@@ -451,7 +474,7 @@ describe('Enhance Cards', () => {
 			const videoReplace = false;
 
 			expect(
-				decideReplacementMedia(showMainVideo, mediaAtom, videoReplace),
+				decideReplacementMedia(showMainVideo, videoReplace, mediaAtom),
 			).toEqual(undefined);
 		});
 
@@ -461,7 +484,7 @@ describe('Enhance Cards', () => {
 			const videoReplace = false;
 
 			expect(
-				decideReplacementMedia(showMainVideo, mediaAtom, videoReplace),
+				decideReplacementMedia(showMainVideo, videoReplace, mediaAtom),
 			).toEqual({
 				atomId: 'atomID',
 				duration: 15,
@@ -472,10 +495,15 @@ describe('Enhance Cards', () => {
 						src: 'https://guim-example.co.uk/atomID-1.mp4',
 						height: 400,
 						width: 500,
+						hasAudio: true,
 					},
 				],
 				type: 'SelfHostedVideo',
 				videoStyle: 'Loop',
+				image: {
+					src: undefined,
+					aspectRatio: '5:4',
+				},
 			});
 		});
 
@@ -485,24 +513,537 @@ describe('Enhance Cards', () => {
 			const videoReplace = true;
 
 			expect(
-				decideReplacementMedia(showMainVideo, mediaAtom, videoReplace),
+				decideReplacementMedia(showMainVideo, videoReplace, mediaAtom),
 			).toEqual({
 				type: 'SelfHostedVideo',
 				atomId: 'atomID',
 				duration: 15,
 				aspectRatio: 5 / 4,
-				image: undefined,
+				image: {
+					src: undefined,
+					aspectRatio: '5:4',
+				},
 				sources: [
 					{
 						mimeType: 'video/mp4',
 						src: 'https://guim-example.co.uk/atomID-1.mp4',
 						height: 400,
 						width: 500,
+						hasAudio: true,
 					},
 				],
 				subtitleSource: undefined,
 				videoStyle: 'Loop',
 			});
+		});
+	});
+
+	describe('decideMultimediaSlideshow', () => {
+		const smallImage: Image = {
+			index: 0,
+			fields: { width: '500', height: '400' },
+			mediaType: 'image',
+			url: 'https://media.guim.co.uk/slide/500.jpg',
+		};
+		const largeImage: Image = {
+			...smallImage,
+			fields: { width: '1000', height: '800' },
+			url: 'https://media.guim.co.uk/slide/1000.jpg',
+		};
+		const multimediaSlideshow: FEMultimediaSlideshow = {
+			id: 'slideshow-id',
+			aspectRatio: '5:4',
+			slides: [
+				{
+					content: {
+						type: 'Image',
+						item: {
+							image: { allImages: [smallImage, largeImage] },
+						},
+					},
+					caption: 'Image caption',
+				},
+				{
+					content: {
+						type: 'Video',
+						item: {
+							mediaAtom: {
+								...testMediaAtom,
+								assets: [testMp4Asset],
+								posterImage: { allImages: [largeImage] },
+							},
+						},
+					},
+					caption: 'Video caption',
+				},
+			],
+		};
+
+		it('returns undefined if multimediaSlideshowReplace is false', () => {
+			expect(
+				decideMultimediaSlideshow(false, multimediaSlideshow),
+			).toEqual(undefined);
+		});
+
+		it('converts image and self-hosted video slides in order', () => {
+			expect(
+				decideMultimediaSlideshow(true, multimediaSlideshow),
+			).toEqual([
+				{
+					type: 'image',
+					imageSrc: 'https://media.guim.co.uk/slide/1000.jpg',
+					imageCaption: 'Image caption',
+				},
+				{
+					type: 'video',
+					video: {
+						type: 'SelfHostedVideo',
+						videoStyle: 'Loop',
+						atomId: 'atomID',
+						sources: [
+							{
+								mimeType: 'video/mp4',
+								src: 'https://guim-example.co.uk/atomID-1.mp4',
+								height: 400,
+								width: 500,
+								hasAudio: true,
+							},
+						],
+						subtitleSource: undefined,
+						aspectRatio: 5 / 4,
+						duration: 15,
+						image: {
+							src: 'https://media.guim.co.uk/slide/1000.jpg',
+							aspectRatio: '5:4',
+						},
+					},
+					caption: 'Video caption',
+				},
+			]);
+		});
+
+		it('uses the card image as the poster of a video without one, like video cards', () => {
+			const slideshow: FEMultimediaSlideshow = {
+				id: 'slideshow-id',
+				slides: [
+					{
+						content: {
+							type: 'Video',
+							item: { mediaAtom: testMediaAtom },
+						},
+					},
+				],
+			};
+
+			expect(
+				decideMultimediaSlideshow(
+					true,
+					slideshow,
+					'https://media.guim.co.uk/card.jpg',
+				)?.[0],
+			).toMatchObject({
+				type: 'video',
+				video: { image: { src: 'https://media.guim.co.uk/card.jpg' } },
+			});
+		});
+
+		it('converts YouTube video slides', () => {
+			const slideshow: FEMultimediaSlideshow = {
+				id: 'slideshow-id',
+				slides: [
+					{
+						content: {
+							type: 'Video',
+							item: {
+								mediaAtom: {
+									...testMediaAtom,
+									assets: [testYoutubeAsset],
+								},
+							},
+						},
+						caption: 'YouTube caption',
+					},
+				],
+			};
+
+			expect(decideMultimediaSlideshow(true, slideshow)).toEqual([
+				{
+					type: 'video',
+					video: {
+						type: 'YoutubeVideo',
+						id: 'atomID',
+						videoId: 'test-youtube-id',
+						duration: 15,
+						title: 'Example video',
+						width: 500,
+						height: 300,
+						origin: '',
+						expired: false,
+						isLive: false,
+					},
+					caption: 'YouTube caption',
+				},
+			]);
+		});
+
+		it('drops self-hosted video slides the player cannot show, and returns undefined if none remain', () => {
+			const unplayable: FEMultimediaSlideshow = {
+				id: 'slideshow-id',
+				slides: [
+					{
+						content: {
+							type: 'Video',
+							item: {
+								mediaAtom: {
+									...testMediaAtom,
+									posterImage: { allImages: [largeImage] },
+									assets: [
+										{
+											...testMp4Asset,
+											mimeType: 'video/webm',
+										},
+									],
+								},
+							},
+						},
+					},
+					{
+						content: {
+							type: 'Video',
+							item: { mediaAtom: testMediaAtom },
+						},
+					},
+				],
+			};
+
+			expect(decideMultimediaSlideshow(true, unplayable)).toEqual(
+				undefined,
+			);
+		});
+	});
+
+	describe('getFrontEditorialTestData', () => {
+		const cardWithNoEditorialTest = {
+			properties: {
+				isBreaking: false,
+				showKickerTag: false,
+				showByline: false,
+				isLiveBlog: false,
+				isCrossword: false,
+				webTitle: '',
+				editionBrandings: [],
+				tests: [],
+			},
+			header: {
+				isVideo: false,
+				isComment: false,
+				isGallery: false,
+				isAudio: false,
+				headline: 'Headline',
+				url: '',
+				hasMainVideoElement: false,
+			},
+			card: {
+				id: '',
+				cardStyle: {
+					type: 'DefaultCardstyle' as FEFrontCardStyle,
+				},
+				shortUrl: '',
+				group: '',
+				isLive: false,
+			},
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: false,
+			},
+			display: {
+				showBoostedHeadline: false,
+				showQuotedHeadline: false,
+				imageHide: false,
+				showLivePlayable: false,
+			},
+			type: '',
+		};
+
+		const oneHourInMilliseconds = 60 * 60 * 1000;
+
+		const cardWithEditorialTest = {
+			...cardWithNoEditorialTest,
+			properties: {
+				...cardWithNoEditorialTest.properties,
+				tests: [
+					{
+						testUuid: 'uuid',
+						variantMeta: [
+							{
+								id: 'A',
+								meta: {
+									headline: 'Headline A',
+								},
+							},
+							{
+								id: 'B',
+								meta: {
+									headline: 'Headline B',
+								},
+							},
+						] as VariantMeta[],
+						startDate: Date.now() - oneHourInMilliseconds,
+						expiryDate: Date.now() + oneHourInMilliseconds,
+						frontsThisTestCanRunOn: ['us', 'au', 'uk'],
+						hasManuallyEndedOnThisTrail: false,
+					},
+				],
+			},
+		};
+
+		const cardWithEditorialTestWithUndefinedVariantMeta = {
+			...cardWithEditorialTest,
+			properties: {
+				...cardWithEditorialTest.properties,
+				tests: [
+					{
+						...cardWithEditorialTest.properties.tests[0],
+						variantMeta: [
+							{
+								id: 'A',
+								meta: {
+									headline: undefined,
+								},
+							},
+						],
+					} as FrontEditorialTest,
+				],
+			},
+		};
+
+		const cardWithExpiredEditorialTest = {
+			...cardWithEditorialTest,
+			properties: {
+				...cardWithEditorialTest.properties,
+				tests: [
+					{
+						...cardWithEditorialTest.properties.tests[0],
+						expiryDate: Date.now() - oneHourInMilliseconds,
+					} as FrontEditorialTest,
+				],
+			},
+		};
+
+		const cardWithManuallyEndedEditorialTest = {
+			...cardWithEditorialTest,
+			properties: {
+				...cardWithEditorialTest.properties,
+				tests: [
+					{
+						...cardWithEditorialTest.properties.tests[0],
+						hasManuallyEndedOnThisTrail: true,
+					} as FrontEditorialTest,
+				],
+			},
+		};
+
+		const cardWithSublinkWithEditorialTest = {
+			...cardWithNoEditorialTest,
+			supportingContent: [cardWithEditorialTest],
+		};
+
+		const cardWithSublinkWithExpiredEditorialTest = {
+			...cardWithNoEditorialTest,
+			supportingContent: [cardWithExpiredEditorialTest],
+		};
+
+		it('returns undefined if no editorial test exists on the card, page is not in allowed fronts list, and user is not in a test bucket', () => {
+			expect(
+				getFrontEditorialTestData(
+					cardWithNoEditorialTest,
+					{},
+					true,
+					'invalid-test-front',
+				),
+			).toEqual(undefined);
+		});
+
+		it('returns undefined if editorial test exists and page is in allowed fronts list, but user is not in a test bucket', () => {
+			expect(
+				getFrontEditorialTestData(
+					cardWithEditorialTest,
+					{},
+					true,
+					'us',
+				),
+			).toEqual(undefined);
+		});
+
+		it('returns undefined if user is in a test bucket and page is in allowed fronts list, but editorial test does not exist', () => {
+			expect(
+				getFrontEditorialTestData(
+					cardWithNoEditorialTest,
+					{
+						'fronts-and-curation-editorial-test': 'a',
+					},
+					true,
+					'us',
+				),
+			).toEqual(undefined);
+		});
+
+		it('returns undefined if editorial test exists and user is in a test bucket, but page is not in allowed fronts list', () => {
+			expect(
+				getFrontEditorialTestData(
+					cardWithEditorialTest,
+					{
+						'fronts-and-curation-editorial-test': 'a',
+					},
+					true,
+					'invalid-test-front',
+				),
+			).toEqual(undefined);
+		});
+
+		it('returns undefined if editorial test exists, page is in allowed fronts list, user is in a variant bucket, but the feature switch is turned off ', () => {
+			expect(
+				getFrontEditorialTestData(
+					cardWithEditorialTest,
+					{
+						'fronts-and-curation-editorial-test': 'a',
+					},
+					false,
+					'us',
+				),
+			).toEqual(undefined);
+		});
+
+		it('returns headline A & test uuid if editorial test exists, page is in allowed fronts list, and user is in bucket A', () => {
+			expect(
+				getFrontEditorialTestData(
+					cardWithEditorialTest,
+					{
+						'fronts-and-curation-editorial-test': 'a',
+					},
+					true,
+					'us',
+				),
+			).toEqual({ headline: 'Headline A', uuid: 'uuid' });
+		});
+
+		it('returns headline B & test uuid if editorial test exists, page is in allowed fronts list, and user is in bucket B', () => {
+			expect(
+				getFrontEditorialTestData(
+					cardWithEditorialTest,
+					{
+						'fronts-and-curation-editorial-test': 'b',
+					},
+					true,
+					'us',
+				),
+			).toEqual({ headline: 'Headline B', uuid: 'uuid' });
+		});
+
+		it('returns the variant headline & test uuid on the AU front', () => {
+			expect(
+				getFrontEditorialTestData(
+					cardWithEditorialTest,
+					{
+						'fronts-and-curation-editorial-test': 'a',
+					},
+					true,
+					'au',
+				),
+			).toEqual({ headline: 'Headline A', uuid: 'uuid' });
+		});
+
+		it('returns undefined on a front outside the US and AU rollout, even if it is in the list of fronts this test can run on.', () => {
+			expect(
+				getFrontEditorialTestData(
+					cardWithEditorialTest,
+					{
+						'fronts-and-curation-editorial-test': 'a',
+					},
+					true,
+					'uk',
+				),
+			).toEqual(undefined);
+		});
+
+		it('returns undefined if the bucket name does not match a variant meta id', () => {
+			expect(
+				getFrontEditorialTestData(
+					cardWithEditorialTest,
+					{
+						'fronts-and-curation-editorial-test': 'c',
+					},
+					true,
+					'us',
+				),
+			).toEqual(undefined);
+		});
+
+		it('returns undefined if the variant headline is undefined', () => {
+			expect(
+				getFrontEditorialTestData(
+					cardWithEditorialTestWithUndefinedVariantMeta,
+					{
+						'fronts-and-curation-editorial-test': 'a',
+					},
+					true,
+					'us',
+				),
+			).toEqual(undefined);
+		});
+
+		it('returns undefined if an editorial test has expired', () => {
+			expect(
+				getFrontEditorialTestData(
+					cardWithExpiredEditorialTest,
+					{
+						'fronts-and-curation-editorial-test': 'a',
+					},
+					true,
+					'us',
+				),
+			).toEqual(undefined);
+		});
+
+		it('returns undefined if an editorial test has been manually ended', () => {
+			expect(
+				getFrontEditorialTestData(
+					cardWithManuallyEndedEditorialTest,
+					{
+						'fronts-and-curation-editorial-test': 'a',
+					},
+					true,
+					'us',
+				),
+			).toEqual(undefined);
+		});
+
+		it('returns the variant headline & test uuid if an editorial test is present on a sublink', () => {
+			expect(
+				getFrontEditorialTestData(
+					cardWithSublinkWithEditorialTest
+						.supportingContent[0] as FESupportingContent,
+					{
+						'fronts-and-curation-editorial-test': 'a',
+					},
+					true,
+					'us',
+				),
+			).toEqual({ headline: 'Headline A', uuid: 'uuid' });
+		});
+
+		it('returns undefined for a sublink if an editorial test is expired on a sublink', () => {
+			expect(
+				getFrontEditorialTestData(
+					cardWithSublinkWithExpiredEditorialTest
+						.supportingContent[0] as FESupportingContent,
+					{
+						'fronts-and-curation-editorial-test': 'a',
+					},
+					true,
+					'us',
+				),
+			).toEqual(undefined);
 		});
 	});
 });

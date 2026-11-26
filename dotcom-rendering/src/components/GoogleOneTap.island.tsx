@@ -7,7 +7,7 @@ import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useConsent } from '../lib/useConsent';
 import { useCountryCode } from '../lib/useCountryCode';
 import { useOnce } from '../lib/useOnce';
-import type { ServerSideTests, StageType, Switches } from '../types/config';
+import type { StageType, Switches } from '../types/config';
 
 type IdentityProviderConfig = {
 	configURL: string;
@@ -24,11 +24,7 @@ type CredentialsProvider = {
 	}) => Promise<{ token: string }>;
 };
 
-export const isGoogleOneTapEnabled = (
-	tests: ServerSideTests,
-	switches: Switches,
-): boolean =>
-	tests['googleOneTapVariant'] === 'variant' ||
+export const isGoogleOneTapEnabled = (switches: Switches): boolean =>
 	switches['googleOneTapSwitch'] === true;
 
 /**
@@ -64,7 +60,9 @@ export const extractEmailFromToken = (
 	token: string,
 ): Result<'ParsingError', string> => {
 	const payload = token.split('.')[1];
-	if (!payload) return error('ParsingError');
+	if (!payload) {
+		return error('ParsingError');
+	}
 	try {
 		const decoded = atob(payload);
 		const parsed = JSON.parse(decoded) as unknown;
@@ -121,7 +119,40 @@ const getProviders = (stage: StageType): IdentityProviderConfig[] => {
 	}
 };
 
-const ENABLED_COUNTRIES: CountryCode[] = ['IE', 'NZ', 'AU'];
+const ENABLED_COUNTRIES: CountryCode[] = [
+	'US', // United States
+	'NZ', // New Zealand
+	'AU', // Australia
+	'CA', // Canada
+	// EU27 Countries
+	'AT', // Austria
+	'BE', // Belgium
+	'BG', // Bulgaria
+	'CY', // Cyprus
+	'CZ', // Czechia
+	'DE', // Germany
+	'DK', // Denmark
+	'EE', // Estonia
+	'ES', // Spain
+	'FI', // Finland
+	'FR', // France
+	'GR', // Greece
+	'HR', // Croatia
+	'HU', // Hungary
+	'IE', // Ireland
+	'IT', // Italy
+	'LT', // Lithuania
+	'LU', // Luxembourg
+	'LV', // Latvia
+	'MT', // Malta
+	'NL', // Netherlands
+	'PL', // Poland
+	'PT', // Portugal
+	'RO', // Romania
+	'SE', // Sweden
+	'SI', // Slovenia
+	'SK', // Slovakia
+];
 
 export const initializeFedCM = async ({
 	isSignedIn,
@@ -149,8 +180,12 @@ export const initializeFedCM = async ({
 	);
 
 	// TODO: Expand Google One Tap to outside Ireland
-	if (!countryCode || !ENABLED_COUNTRIES.includes(countryCode)) return;
-	if (isSignedIn) return;
+	if (!countryCode || !ENABLED_COUNTRIES.includes(countryCode)) {
+		return;
+	}
+	if (isSignedIn) {
+		return;
+	}
 
 	/**
 	 * Firefox does not support the FedCM API at the time of writting,

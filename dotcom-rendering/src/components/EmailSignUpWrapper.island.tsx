@@ -1,84 +1,98 @@
-import type { Breakpoint } from '@guardian/source/foundations';
+import { useEffect, useRef } from 'react';
+import {
+	NEWSLETTER_SIGNUP_COMPONENT_ID,
+	sendNewsletterSignupEvent,
+} from '../lib/newsletterSignupTracking';
+import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useNewsletterSubscription } from '../lib/useNewsletterSubscription';
+import { useConfig } from './ConfigContext';
 import type { EmailSignUpProps } from './EmailSignup';
-import { EmailSignup } from './EmailSignup';
 import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 import { Island } from './Island';
-import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
-import { Placeholder } from './Placeholder';
-import { SecureSignup } from './SecureSignup.island';
-
-/**
- * Approximate heights of the EmailSignup component at different breakpoints.
- */
-const PLACEHOLDER_HEIGHTS = new Map<Breakpoint, number>([
-	['mobile', 220],
-	['tablet', 180],
-	['desktop', 180],
-]);
+import { NewsletterSignupCardContainer } from './NewsletterSignupCardContainer';
+import { NewsletterSignupForm } from './NewsletterSignupForm.island';
 
 interface EmailSignUpWrapperProps extends EmailSignUpProps {
 	index: number;
 	listId: number;
 	identityName: string;
-	successDescription: string;
+	/** Illustration image URL (square crop) for the NewsletterSignupCard */
+	illustrationSquare?: string;
 	idApiUrl: string;
-	/** You should only set this to true if the privacy message will be shown elsewhere on the page */
-	hidePrivacyMessage?: boolean;
-	/** Feature flag to enable hiding newsletter signup for already subscribed users */
-	hideNewsletterSignupComponentForSubscribers?: boolean;
 }
 
 /**
  * EmailSignUpWrapper as an island component.
  *
  * This component needs to be hydrated client-side because it uses
- * the useNewsletterSubscription hook which depends on auth status
- * to determine if the user is already subscribed to the newsletter.
- *
- * If the user is signed in and already subscribed, this component
- * will return null (hide the signup form).
+ * client-side hooks for auth status and tracking.
  */
 export const EmailSignUpWrapper = ({
 	index,
 	listId,
+	identityName,
 	idApiUrl,
-	hideNewsletterSignupComponentForSubscribers = false,
-	...emailSignUpProps
+	name,
+	description,
+	illustrationSquare,
+	frequency,
 }: EmailSignUpWrapperProps) => {
-	const isSubscribed = useNewsletterSubscription(
-		listId,
-		idApiUrl,
-		hideNewsletterSignupComponentForSubscribers,
-	);
+	const { renderingTarget } = useConfig();
+	const isSignedIn = useIsSignedIn();
+	const isSubscribed = useNewsletterSubscription(listId, idApiUrl);
 
-	// Show placeholder while subscription status is being determined
-	// This prevents layout shift in both subscribed and non-subscribed cases
-	if (isSubscribed === undefined) {
-		return <Placeholder heights={PLACEHOLDER_HEIGHTS} />;
-	}
+	const componentId =
+		NEWSLETTER_SIGNUP_COMPONENT_ID.inArticleSignupForm(identityName);
 
-	// Don't render if user is signed in and already subscribed
-	if (isSubscribed) {
-		return null;
-	}
+	const viewFiredRef = useRef(false);
+
+	useEffect(() => {
+		// Wait for subscription status — we only want to track a view of the
+		// actual signup form, not a loading state or success message.
+		if (isSubscribed === undefined) {
+			return;
+		}
+		// Don't fire if the user is already subscribed.
+		if (isSubscribed) {
+			return;
+		}
+		if (viewFiredRef.current) {
+			return;
+		}
+		viewFiredRef.current = true;
+		sendNewsletterSignupEvent({
+			action: 'VIEW',
+			identityName,
+			componentId,
+			renderingTarget,
+			value: {
+				eventDescription: 'newsletter-signup-viewed',
+			},
+		});
+	}, [componentId, identityName, isSubscribed, renderingTarget]);
 
 	return (
 		<InlineSkipToWrapper
 			id={`EmailSignup-skip-link-${index}`}
 			blockDescription="newsletter promotion"
 		>
-			<EmailSignup {...emailSignUpProps}>
+			<NewsletterSignupCardContainer
+				name={name}
+				description={description}
+				illustrationSquare={illustrationSquare}
+				frequency={frequency}
+				isSignedIn={isSignedIn}
+			>
 				<Island priority="feature" defer={{ until: 'visible' }}>
-					<SecureSignup
-						newsletterId={emailSignUpProps.identityName}
-						successDescription={emailSignUpProps.description}
+					<NewsletterSignupForm
+						newsletterId={identityName}
+						newsletterName={name}
+						frequency={frequency}
+						componentId={componentId}
+						isAlreadySubscribed={isSubscribed}
 					/>
 				</Island>
-				{!emailSignUpProps.hidePrivacyMessage && (
-					<NewsletterPrivacyMessage />
-				)}
-			</EmailSignup>
+			</NewsletterSignupCardContainer>
 		</InlineSkipToWrapper>
 	);
 };

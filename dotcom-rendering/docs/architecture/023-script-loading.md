@@ -8,12 +8,12 @@ When splitting our Javascript to use dynamic imports, we also needed to review o
 
 ## Decision
 
--   Move from script elements to dynamically loaded scripts
--   Use preload for high-priority scripts to ensure we get benefits of the preparser but let low priority scripts load with script injection
-    -   "Use the link tag and place it after the resource that will insert the preloaded resource"
--   Preload our main media image (can we do this?), then fonts, then the high priority Javascript (Our critical path)
--   For **dynamic imports**, implement a mechanism for **high priority** components or scripts that preloads these
--   For all other dynamic imports, rely on fetching after parsing
+- Move from script elements to dynamically loaded scripts
+- Use preload for high-priority scripts to ensure we get benefits of the preparser but let low priority scripts load with script injection
+    - "Use the link tag and place it after the resource that will insert the preloaded resource"
+- Preload our main media image (can we do this?), then fonts, then the high priority Javascript (Our critical path)
+- For **dynamic imports**, implement a mechanism for **high priority** components or scripts that preloads these
+- For all other dynamic imports, rely on fetching after parsing
 
 ## Status
 
@@ -57,9 +57,9 @@ The FF upgrade path is fairly good, 80% ish of FF users are on the latest, so by
 
 Some things to note, we current load high priority scripts in the head with `defer` and low priority scripts after the body with `async`.
 
--   "The `defer` attribute tells the browser not to wait for the script. Instead, the browser will continue to process the HTML, build DOM. The script loads “in the background”, and then runs when the DOM is fully built."
--   "Module scripts behave like `defer` by default – there's no way to make a module script block the HTML parser while it fetches."
--   "In other words, `async` scripts load in the background and run when ready. The DOM and other scripts don’t wait for them, and they don’t wait for anything. A fully independent script that runs when loaded. "
+- "The `defer` attribute tells the browser not to wait for the script. Instead, the browser will continue to process the HTML, build DOM. The script loads “in the background”, and then runs when the DOM is fully built."
+- "Module scripts behave like `defer` by default – there's no way to make a module script block the HTML parser while it fetches."
+- "In other words, `async` scripts load in the background and run when ready. The DOM and other scripts don’t wait for them, and they don’t wait for anything. A fully independent script that runs when loaded. "
 
 [Source](https://javascript.info/script-async-defer), [Source](https://jakearchibald.com/2017/es-modules-in-browsers/)
 
@@ -77,9 +77,9 @@ The **critical path** towards First Contentful Paint, is different depending on 
 
 That in mind, what is our critical path:
 
--   Main Media image (Unlikely to be in the cache)
--   Fonts (Likely to be in the cache)
--   Above fold components with Javascript interactivity
+- Main Media image (Unlikely to be in the cache)
+- Fonts (Likely to be in the cache)
+- Above fold components with Javascript interactivity
 
 I hope that preloading these items in order, gives us the biggest bang for our buck on preloading, without congesting the pipeline.
 
@@ -87,9 +87,9 @@ I hope that preloading these items in order, gives us the biggest bang for our b
 
 My recommendation then is this:
 
--   Move from script elements to dynamically loaded scripts
--   Use preload for high-priority scripts to ensure we get benefits of the preparser but let low priority scripts load with script injection
-    -   "Use the link tag and place it after the resource that will insert the preloaded resource"
--   Preload our main media image (can we do this?), then fonts, then the high priority Javascript (Our critical path)
--   For **dynamic imports**, implement a mechanism for **high priority** components or scripts that preloads these
--   For all other dynamic imports, rely on fetching after parsing
+- Move from script elements to dynamically loaded scripts
+- Use preload for high-priority scripts to ensure we get benefits of the preparser but let low priority scripts load with script injection
+    - "Use the link tag and place it after the resource that will insert the preloaded resource"
+- Preload our main media image (can we do this?), then fonts, then the high priority Javascript (Our critical path)
+- For **dynamic imports**, implement a mechanism for **high priority** components or scripts that preloads these
+- For all other dynamic imports, rely on fetching after parsing

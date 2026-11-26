@@ -151,7 +151,6 @@ Promise.all([
 	...copyFrontendStatic(),
 	copyRiffRaff(),
 ]).catch((err) => {
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- ignore
 	warn(err.stack);
 	process.exit(1);
 });

@@ -10,8 +10,9 @@ import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { CallToActionAtom } from '../components/CallToActionAtom';
 import { Caption } from '../components/Caption';
+import { FetchHostedOnwards } from '../components/FetchHostedOnwards.island';
 import { HostedContentDisclaimer } from '../components/HostedContentDisclaimer';
-import { HostedContentHeader } from '../components/HostedContentHeader';
+import { HostedContentHeader } from '../components/HostedContentHeader.island';
 import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
 import { Section } from '../components/Section';
@@ -108,7 +109,7 @@ const shareButtonStyles = css`
 	padding: ${space[1]}px;
 `;
 
-const standfirstStyles = css`
+const standfirstAndArticleBodyStyles = css`
 	${grid.column.centre}
 	grid-row-start: 5;
 
@@ -123,28 +124,21 @@ const standfirstStyles = css`
 `;
 
 const articleBodyStyles = css`
-	${grid.column.centre}
-
-	padding-bottom: ${space[6]}px;
+	margin-bottom: ${space[6]}px;
 
 	${from.desktop} {
-		${grid.between(4, 'right-column-end')}
-	}
-
-	${from.leftCol} {
-		${grid.column.centre}
+		margin-bottom: ${space[10]}px;
 	}
 `;
 
 const onwardContentStyles = css`
 	${grid.column.centre}
 
-	height: 20px;
-	background-color: lightgrey;
-	margin-bottom: ${space[6]}px;
+	margin-bottom: ${space[5]}px;
 
 	${from.desktop} {
 		${grid.span(4, 8)}
+		margin-bottom: ${space[10]}px;
 	}
 
 	${from.leftCol} {
@@ -154,7 +148,6 @@ const onwardContentStyles = css`
 `;
 
 const ctaStyles = css`
-	z-index: 1;
 	${grid.column.all}
 
 	overflow: hidden;
@@ -167,16 +160,16 @@ const ctaStyles = css`
 
 const sideBorders = css`
 	${from.desktop} {
-		/* box-sizing property needed to prevent the width of the grid taking into account the border width */
-		box-sizing: content-box;
-		border-left: 1px solid ${themePalette('--article-border')};
-		border-right: 1px solid ${themePalette('--article-border')};
+		box-shadow:
+			inset 1px 0 ${themePalette('--article-border')},
+			inset -1px 0 ${themePalette('--article-border')};
 	}
 `;
 
 export const HostedArticleLayout = (props: WebProps | AppProps) => {
 	const {
 		content: { frontendData },
+		renderingTarget,
 		format,
 	} = props;
 
@@ -218,7 +211,9 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 						padSides={false}
 						element="header"
 					>
-						<HostedContentHeader branding={branding} />
+						<Island priority="feature" defer={{ until: 'visible' }}>
+							<HostedContentHeader branding={branding} />
+						</Island>
 					</Section>
 				</Stuck>
 			) : null}
@@ -233,7 +228,6 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 							pageId={frontendData.pageId}
 							webTitle={frontendData.webTitle}
 							ajaxUrl={frontendData.config.ajaxUrl}
-							abTests={frontendData.config.abTests}
 							switches={frontendData.config.switches}
 							isAdFreeUser={frontendData.isAdFreeUser}
 							isSensitive={frontendData.config.isSensitive}
@@ -253,7 +247,7 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 					</div>
 
 					<div data-print-layout="hide" css={metaStyles}>
-						{props.renderingTarget === 'Web' && (
+						{renderingTarget === 'Web' && (
 							<div css={shareButtonStyles}>
 								<Island
 									priority="feature"
@@ -282,54 +276,60 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 						/>
 					</div>
 
-					<div css={standfirstStyles}>
+					<div css={standfirstAndArticleBodyStyles}>
 						<Standfirst
 							format={format}
 							standfirst={frontendData.standfirst}
 						/>
-					</div>
-					<div css={articleBodyStyles}>
-						<ArticleContainer format={format}>
-							<ArticleBody
-								format={format}
-								blocks={blocks}
-								editionId={frontendData.editionId}
-								host={frontendData.config.host}
-								pageId={frontendData.pageId}
-								webTitle={frontendData.webTitle}
-								ajaxUrl={frontendData.config.ajaxUrl}
-								isAdFreeUser={frontendData.isAdFreeUser}
-								switches={frontendData.config.switches}
-								sectionId={frontendData.config.section}
-								shouldHideReaderRevenue={
-									frontendData.shouldHideReaderRevenue
-								}
-								tags={frontendData.tags}
-								isPaidContent={
-									!!frontendData.config.isPaidContent
-								}
-								contributionsServiceUrl={
-									contributionsServiceUrl
-								}
-								contentType={frontendData.contentType}
-								idUrl={frontendData.config.idUrl ?? ''}
-								isSensitive={frontendData.config.isSensitive}
-								isDev={!!frontendData.config.isDev}
-								keywordIds={frontendData.config.keywordIds}
-								abTests={frontendData.config.abTests}
-								shouldHideAds={frontendData.shouldHideAds}
-								lang={frontendData.lang}
-								isRightToLeftLang={
-									frontendData.isRightToLeftLang
-								}
-								accentColor={branding?.hostedCampaignColour}
-							/>
-							<HostedContentDisclaimer />
-						</ArticleContainer>
+
+						<div css={articleBodyStyles}>
+							<ArticleContainer format={format}>
+								<ArticleBody
+									format={format}
+									blocks={blocks}
+									editionId={frontendData.editionId}
+									host={frontendData.config.host}
+									pageId={frontendData.pageId}
+									webTitle={frontendData.webTitle}
+									ajaxUrl={frontendData.config.ajaxUrl}
+									isAdFreeUser={frontendData.isAdFreeUser}
+									switches={frontendData.config.switches}
+									sectionId={frontendData.config.section}
+									shouldHideReaderRevenue={
+										frontendData.shouldHideReaderRevenue
+									}
+									tags={frontendData.tags}
+									isPaidContent={
+										!!frontendData.config.isPaidContent
+									}
+									contributionsServiceUrl={
+										contributionsServiceUrl
+									}
+									contentType={frontendData.contentType}
+									idUrl={frontendData.config.idUrl ?? ''}
+									isSensitive={
+										frontendData.config.isSensitive
+									}
+									isDev={!!frontendData.config.isDev}
+									keywordIds={frontendData.config.keywordIds}
+									shouldHideAds={frontendData.shouldHideAds}
+									lang={frontendData.lang}
+									isRightToLeftLang={
+										frontendData.isRightToLeftLang
+									}
+								/>
+								<HostedContentDisclaimer />
+							</ArticleContainer>
+						</div>
 					</div>
 
 					<div css={onwardContentStyles}>
-						{'Placeholder - onward content'}
+						<Island priority="feature" defer={{ until: 'idle' }}>
+							<FetchHostedOnwards
+								url={`${frontendData.config.ajaxUrl}/${frontendData.config.pageId}/onward.json`}
+								branding={branding}
+							/>
+						</Island>
 					</div>
 
 					{cta && (

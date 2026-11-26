@@ -289,7 +289,6 @@ export const NumberedList: FEArticle = {
 		},
 	],
 	main: '<figure class="element element-image" data-media-id="2ce8db064eabb9e22a69cc45a9b6d4e10d595f06"> \n <img src="https://media.guim.co.uk/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/1000.jpg" alt="best smartphone 2019" width="1000" height="600" class="gu-image"> \n <figcaption> <span class="element-image__caption">Which is the best premium smartphone for you? Check out this guide to the top mobile phones including iPhone, Samsung, Huawei, OnePlus and Google. </span> <span class="element-image__credit">Photograph: Samuel Gibbs/The Guardian</span> \n </figcaption> \n</figure>',
-	filterKeyEvents: false,
 	keyEvents: [],
 	blocks: [
 		{
@@ -5918,7 +5917,6 @@ export const NumberedList: FEArticle = {
 		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
-		abTests: {},
 		serverSideABTests: {},
 		edition: 'UK',
 		ipsosTag: 'environment',

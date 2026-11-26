@@ -9,7 +9,9 @@ const endNoteStyles = css`
 `;
 
 export const EndNote = ({ text }: { text?: string }) => {
-	if (!text) return null;
+	if (!text) {
+		return null;
+	}
 	return (
 		<p css={endNoteStyles}>
 			<em>{text}</em>

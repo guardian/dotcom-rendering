@@ -1,14 +1,14 @@
 import { css } from '@emotion/react';
-import { breakpoints, space, until } from '@guardian/source/foundations';
+import { breakpoints, from, space, until } from '@guardian/source/foundations';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
 } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
-import { getZIndex } from '../lib/getZIndex';
 import { RenderArticleElement } from '../lib/renderElement';
-import type { ServerSideTests, Switches } from '../types/config';
+import type { Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 
 const mainMedia = css`
@@ -48,12 +48,17 @@ const immersiveWrapper = css`
         we use this grow here to ensure the content fills the available height
     */
 	flex-grow: 1;
-	z-index: ${getZIndex('mainMedia')};
 	/* Prevent the immersive image 100vh from spilling into main content */
 	overflow: hidden;
 `;
 
-const chooseWrapper = (format: ArticleFormat) => {
+const chooseWrapper = (
+	format: ArticleFormat,
+	articleArrangement?: LayoutType,
+) => {
+	if (articleArrangement === 'interactiveTopHat') {
+		return '';
+	}
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
 			return immersiveWrapper;
@@ -75,10 +80,41 @@ const chooseWrapper = (format: ArticleFormat) => {
 					return noGutters;
 			}
 		}
+		case ArticleDisplay.Showcase:
+			switch (format.design) {
+				case ArticleDesign.Picture:
+					return '';
+				default:
+					return noGutters;
+			}
 		default:
 			return noGutters;
 	}
 };
+
+const weekendReadFrame = css`
+	position: relative;
+	padding: 10px;
+	${from.wide} {
+		padding: 15px;
+	}
+	::before {
+		content: '';
+		display: block;
+		background-image: url('https://uploads.guim.co.uk/2026/11/05/weekend-read-frame.png');
+		@media (prefers-color-scheme: dark) {
+			:root:not([data-color-scheme='light']) & {
+				filter: invert(1);
+			}
+		}
+		background-size: contain;
+		background-position: center;
+		background-repeat: no-repeat;
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+	}
+`;
 
 type Props = {
 	format: ArticleFormat;
@@ -90,12 +126,12 @@ type Props = {
 	ajaxUrl: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	abTests: ServerSideTests;
 	switches: Switches;
 	editionId: EditionId;
 	shouldHideAds: boolean;
 	contentType?: string;
 	contentLayout?: string;
+	articleArrangement?: LayoutType;
 };
 
 export const MainMedia = ({
@@ -108,18 +144,25 @@ export const MainMedia = ({
 	ajaxUrl,
 	isAdFreeUser,
 	isSensitive,
-	abTests,
 	switches,
 	editionId,
 	shouldHideAds,
 	contentType,
 	contentLayout,
+	articleArrangement,
 }: Props) => {
 	return (
-		<div css={[mainMedia, chooseWrapper(format)]}>
+		<div
+			css={[
+				mainMedia,
+				chooseWrapper(format, articleArrangement),
+				articleArrangement === 'immersivePortrait' &&
+					format.design === ArticleDesign.WeekendEssay &&
+					weekendReadFrame,
+			]}
+		>
 			{elements.map((element, index) => (
 				<RenderArticleElement
-					// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
 					key={index}
 					format={format}
 					element={element}
@@ -131,13 +174,13 @@ export const MainMedia = ({
 					webTitle={webTitle}
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
-					abTests={abTests}
 					switches={switches}
 					hideCaption={hideCaption}
 					editionId={editionId}
 					shouldHideAds={shouldHideAds}
 					contentType={contentType}
 					contentLayout={contentLayout}
+					articleArrangement={articleArrangement}
 				/>
 			))}
 		</div>

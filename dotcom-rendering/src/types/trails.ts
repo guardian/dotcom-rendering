@@ -42,7 +42,6 @@ export interface TrailType extends BaseTrailType {
 	/** @see JSX.IntrinsicAttributes["data-link-name"] */
 	dataLinkName: string;
 	discussionId?: string;
-	isBoosted?: boolean;
 	boostLevel?: BoostLevel;
 	image?: DCRFrontImage;
 	/* Media belonging to the source article */

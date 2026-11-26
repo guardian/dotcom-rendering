@@ -2,7 +2,8 @@ import type { FEFormat } from '../frontend/feArticle';
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { Block } from './blocks';
 import type { ReaderRevenuePositions } from './commercial';
-import type { ServerSideTests } from './config';
+import type { StageType } from './config';
+import type { CustomSubnav } from './customSubnav';
 
 /**
  * BlocksRequest is the expected body format for POST requests made to /Blocks
@@ -22,10 +23,10 @@ export interface FEBlocksRequest {
 	adUnit: string;
 	videoDuration?: number;
 	switches: { [key: string]: boolean };
-	abTests?: ServerSideTests;
 	serverSideABTests?: Record<string, string>;
 	keywordIds: string;
 	shouldHideAds: boolean;
+	stage: StageType;
 }
 
 /**
@@ -55,6 +56,7 @@ export interface FENavType {
 		parent?: FELinkType;
 		links: FELinkType[];
 	};
+	customSubnav?: CustomSubnav;
 	readerRevenueLinks: ReaderRevenuePositions;
 }
 

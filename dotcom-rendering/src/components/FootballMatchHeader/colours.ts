@@ -16,6 +16,13 @@ export const secondaryText = (matchKind: FootballMatch['kind']): ColourName =>
 		? '--football-match-header-live-primary-text'
 		: '--football-match-header-fixture-result-secondary-text';
 
+export const scoreSecondaryText = (
+	matchKind: FootballMatch['kind'],
+): ColourName =>
+	matchKind === 'Live'
+		? '--football-match-header-live-score-secondary-text'
+		: '--football-match-header-fixture-result-score-secondary-text';
+
 export const background = (matchKind: FootballMatch['kind']): ColourName =>
 	matchKind === 'Live'
 		? '--football-match-header-live-background'

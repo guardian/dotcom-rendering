@@ -288,7 +288,6 @@ export const SpecialReport: FEArticle = {
 		},
 	],
 	main: '<figure class="element element-image" data-media-id="d302a26f2229a71ab1dfa231208cefc9ae72e3e8"> \n <img src="https://media.guim.co.uk/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/1000.jpg" alt="Lindsey oil refinery in north Lincolnshire." width="1000" height="600" class="gu-image"> \n <figcaption> <span class="element-image__caption">Lindsey oil refinery in north Lincolnshire.</span> <span class="element-image__credit">Photograph: Christopher Furlong/Getty Images</span> \n </figcaption> \n</figure>',
-	filterKeyEvents: false,
 	keyEvents: [],
 	blocks: [
 		{
@@ -863,7 +862,6 @@ export const SpecialReport: FEArticle = {
 		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
-		abTests: {},
 		serverSideABTests: {},
 		edition: 'UK',
 		ipsosTag: 'environment',

@@ -12,6 +12,10 @@ import { StraightLines } from '@guardian/source-development-kitchen/react-compon
 import { Fragment } from 'react';
 import { grid } from '../grid';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
+import type {
+	PuzzleActionContext,
+	PuzzleActionSource,
+} from '../lib/puzzleActionTracking';
 import type { BaseLinkType } from '../model/extract-nav';
 import { palette } from '../palette';
 import { Island } from './Island';
@@ -34,6 +38,12 @@ const bottomPadding = css`
 
 const setMetaWidth = css`
 	position: relative;
+	padding-left: 10px;
+	padding-right: 10px;
+	${from.mobileLandscape} {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
 	${from.tablet} {
 		max-width: 620px;
 	}
@@ -42,12 +52,12 @@ const setMetaWidth = css`
 		margin-right: 310px;
 	}
 	${from.leftCol} {
-		margin-left: 150px;
+		margin-left: 170px;
 		padding-left: 10px;
 		border-left: 1px solid ${palette('--article-border')};
 	}
 	${from.wide} {
-		margin-left: 229px;
+		margin-left: 249px;
 	}
 `;
 
@@ -64,7 +74,8 @@ const listStyles = css`
 	display: flex;
 	flex-wrap: wrap;
 	gap: 1.5rem 0.25rem;
-	background-image: repeating-linear-gradient(
+	background-image:
+		repeating-linear-gradient(
 			to bottom,
 			${palette('--sub-meta-background')} 0px,
 			${palette('--sub-meta-background')} 2.25rem,
@@ -129,6 +140,9 @@ type Props = {
 	webUrl: string;
 	webTitle: string;
 	showBottomSocialButtons: boolean;
+	isDeprecatedInteractiveLayout?: boolean;
+	puzzleTrackingSource?: PuzzleActionSource;
+	puzzleTrackingContext?: PuzzleActionContext;
 };
 
 const syndicationButtonOverrides = css`
@@ -204,11 +218,18 @@ export const SubMeta = ({
 	webUrl,
 	webTitle,
 	showBottomSocialButtons,
+	isDeprecatedInteractiveLayout = false,
+	puzzleTrackingSource,
+	puzzleTrackingContext,
 }: Props) => {
 	const createLinks = () => {
 		const links: BaseLinkType[] = [];
-		if (subMetaSectionLinks.length > 0) links.push(...subMetaSectionLinks);
-		if (subMetaKeywordLinks.length > 0) links.push(...subMetaKeywordLinks);
+		if (subMetaSectionLinks.length > 0) {
+			links.push(...subMetaSectionLinks);
+		}
+		if (subMetaKeywordLinks.length > 0) {
+			links.push(...subMetaKeywordLinks);
+		}
 		return {
 			links,
 			hasLinks: links.length > 0,
@@ -224,9 +245,7 @@ export const SubMeta = ({
 		<div
 			data-print-layout="hide"
 			css={[
-				format.design === ArticleDesign.Interactive
-					? setMetaWidth
-					: undefined,
+				isDeprecatedInteractiveLayout ? setMetaWidth : undefined,
 				format.design === ArticleDesign.Gallery
 					? galleryStyles
 					: bottomPadding,
@@ -281,6 +300,8 @@ export const SubMeta = ({
 							webTitle={webTitle}
 							format={format}
 							context="SubMeta"
+							puzzleTrackingSource={puzzleTrackingSource}
+							puzzleTrackingContext={puzzleTrackingContext}
 						/>
 					</Island>
 					<div css={syndicationButtonOverrides}>

@@ -93,6 +93,6 @@ default ✓ [======================================] 10 VUs  1m0s
 
 If testing in CODE:
 
--   run the script from a detached instance
--   k6 may get killed by the OOM killer if an instance runs out of memory. First stop the DCR process using `systemctl stop {app-name}` where app-name is `article-rendering`, `facia-rendering` etc to free up memory. If the process is repeatedly killed, run from a larger instance type with more memory or run with a smaller number of VUs.
--   change the script endpoint to the loadbalancer of the stack you are interested in
+- run the script from a detached instance
+- k6 may get killed by the OOM killer if an instance runs out of memory. First stop the DCR process using `systemctl stop {app-name}` where app-name is `article-rendering`, `facia-rendering` etc to free up memory. If the process is repeatedly killed, run from a larger instance type with more memory or run with a smaller number of VUs.
+- change the script endpoint to the loadbalancer of the stack you are interested in

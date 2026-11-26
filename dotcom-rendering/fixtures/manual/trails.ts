@@ -704,11 +704,15 @@ export const selfHostedLoopVideo54Card = {
 				src: 'https://uploads.guim.co.uk/2025%2F06%2F20%2Ftesting+only%2C+please+ignore--3cb22b60-2c3f-48d6-8bce-38c956907cce-3.mp4',
 				width: 500,
 				height: 400,
+				hasAudio: true,
 			},
 		],
 		aspectRatio: 5 / 4,
 		duration: 30,
-		image: 'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_210_5472_3283/master/5472.jpg',
+		image: {
+			src: 'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_210_5472_3283/master/5472.jpg',
+			aspectRatio: '5:4',
+		},
 	},
 	image: {
 		src: 'https://media.guim.co.uk/966bf085fb982b1103aaba42a812b09726cc0a3c/1417_104_1378_1104/master/1378.jpg',
@@ -728,9 +732,14 @@ export const selfHostedLoopVideo45Card = {
 				src: 'https://uploads.guim.co.uk/2025/11/27/4_5_Test--1d34df3e-8c92-4090-8bb6-d79fc7fb9467-1.0.mp4',
 				width: 576,
 				height: 720,
+				hasAudio: true,
 			},
 		],
 		aspectRatio: 4 / 5,
+		image: {
+			...selfHostedLoopVideo54Card.mainMedia.image,
+			aspectRatio: '4:5',
+		},
 	},
 } satisfies DCRFrontCard;
 
@@ -745,10 +754,14 @@ export const selfHostedLoopVideo53Card = {
 				src: 'https://uploads.guim.co.uk/2025/11/27/5_3_Test--26763e61-c16b-4c10-8c16-3f11882da154-1.0.mp4',
 				width: 1200,
 				height: 720,
+				hasAudio: true,
 			},
 		],
-
 		aspectRatio: 5 / 3,
+		image: {
+			src: 'https://media.guim.co.uk/211404dc9a4a7fa10fcf6a2f08e930327b2f7f3c/0_184_2909_1637/2000.jpg',
+			aspectRatio: '5:3',
+		},
 	},
 } satisfies DCRFrontCard;
 
@@ -760,12 +773,17 @@ export const selfHostedLoopVideo916Card = {
 		sources: [
 			{
 				mimeType: 'video/mp4',
-				src: 'https://uploads.guimcode.co.uk/2025/11/12/5x4_test--ee49513c-bf16-4321-a444-09c9a037d584-4.0.mp4',
+				src: 'https://uploads.guim.co.uk/2026/06/05/Is_it_possible_to_walk_to_MetLife_Stadium_from_New_York_City_--e4247040-30a8-4bd4-990b-9b80f0e8616e-2.0_720h.mp4"',
 				width: 406,
 				height: 720,
+				hasAudio: true,
 			},
 		],
 		aspectRatio: 9 / 16,
+		image: {
+			src: 'https://uploads.guim.co.uk/2026/06/05/Is_it_possible_to_walk_to_MetLife_Stadium_from_New_York_City_--e4247040-30a8-4bd4-990b-9b80f0e8616e-2.0.0000000.jpg',
+			aspectRatio: '9:16',
+		},
 	},
 } satisfies DCRFrontCard;
 
@@ -773,16 +791,67 @@ export const selfHostedLoopVideo169Card = {
 	...selfHostedLoopVideo54Card,
 	headline: 'Self-hosted 16:9 loop video card',
 	mainMedia: {
-		...selfHostedLoopVideo54Card.mainMedia,
+		type: 'SelfHostedVideo',
+		videoStyle: 'Loop',
+		atomId: '3cb22b60-2c3f-48d6-8bce-38c956907cce',
+		duration: 30,
 		sources: [
 			{
 				mimeType: 'video/mp4',
-				src: 'https://uploads.guim.co.uk/2026/01/02/Social_media_footage_shows_person_trying_to_put_out_flames_in_Crans-Montana_bar___video--77ec00d2-7e58-4698-898c-08174f65a94b-1.0.mp4',
+				src: 'https://uploads.guim.co.uk/2026/06/24/Samsung_Galaxy_S26_Series_Main_Media--652aad98-a2ce-4cc5-98d8-f67eafea4819-1.0_720h.mp4',
 				width: 1280,
 				height: 720,
+				hasAudio: true,
 			},
 		],
 		aspectRatio: 16 / 9,
+		image: {
+			src: 'https://uploads.guim.co.uk/2026/06/24/Samsung_Galaxy_S26_Series_Main_Media--652aad98-a2ce-4cc5-98d8-f67eafea4819-1.0.0000000.jpg',
+			aspectRatio: '16:9',
+		},
+	},
+} satisfies DCRFrontCard;
+
+export const selfHostedDefaultVideo54Card = {
+	...selfHostedLoopVideo54Card,
+	headline: 'Self-hosted 5:4 default video card',
+	mainMedia: {
+		...selfHostedLoopVideo54Card.mainMedia,
+		videoStyle: 'Default',
+	},
+} satisfies DCRFrontCard;
+
+export const selfHostedDefaultVideo45Card = {
+	...selfHostedLoopVideo45Card,
+	headline: 'Self-hosted 4:5 default video card',
+	mainMedia: {
+		...selfHostedLoopVideo45Card.mainMedia,
+		videoStyle: 'Default',
+	},
+} satisfies DCRFrontCard;
+
+export const selfHostedDefaultVideo53Card = {
+	...selfHostedLoopVideo53Card,
+	headline: 'Self-hosted 5:3 default video card',
+	mainMedia: {
+		...selfHostedLoopVideo53Card.mainMedia,
+		videoStyle: 'Default',
+	},
+} satisfies DCRFrontCard;
+
+export const selfHostedDefaultVideo916Card = {
+	...selfHostedLoopVideo916Card,
+	mainMedia: {
+		...selfHostedLoopVideo916Card.mainMedia,
+		videoStyle: 'Default',
+	},
+} satisfies DCRFrontCard;
+
+export const selfHostedDefaultVideo169Card = {
+	...selfHostedLoopVideo169Card,
+	mainMedia: {
+		...selfHostedLoopVideo169Card.mainMedia,
+		videoStyle: 'Default',
 	},
 } satisfies DCRFrontCard;
 
@@ -792,7 +861,7 @@ export const slideshowCard: DCRFrontCard = {
 	url: '/uk-news/2025/jan/22/prince-harry-says-sun-publisher-made-historic-admission-as-he-settles-case',
 	headline: 'Headline for slideshow card',
 	trailText: 'Trail text for slideshow card',
-	slideshowImages: [
+	slideshowMedia: [
 		{
 			imageSrc:
 				'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/1000.jpg',

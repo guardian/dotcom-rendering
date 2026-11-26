@@ -1,0 +1,975 @@
+import { css } from '@emotion/react';
+import {
+	from,
+	remSpace,
+	palette as sourcePalette,
+	space,
+} from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
+import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
+import { ArticleContainer } from '../components/ArticleContainer';
+import { ArticleHeadline } from '../components/ArticleHeadline';
+import { ArticleMeta } from '../components/ArticleMeta.web';
+import { ArticleTitle } from '../components/ArticleTitle';
+import { DiscussionLayout } from '../components/DiscussionLayout';
+import { Footer } from '../components/Footer';
+import { GridItem } from '../components/GridItem';
+import { HeaderAdSlot } from '../components/HeaderAdSlot';
+import { Island } from '../components/Island';
+import { Masthead } from '../components/Masthead/Masthead';
+import { Logo } from '../components/Masthead/Titlepiece/Logo';
+import { PrintButton } from '../components/PrintButton.island';
+import { PuzzleAccessGate } from '../components/PuzzleAccessGate.island';
+import { PuzzlesUsefulLinks } from '../components/PuzzlesSupporting';
+import { RelatedPuzzlesRailEnhanced } from '../components/RelatedPuzzlesRailEnhanced.island';
+import { RightColumn } from '../components/RightColumn';
+import { Section } from '../components/Section';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	Pillar,
+} from '../lib/articleFormat';
+import { canRenderAds } from '../lib/canRenderAds';
+import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
+import { PUZZLE_MODAL_ROOT_ID } from '../lib/puzzleAccess';
+import type { PuzzleActionContext } from '../lib/puzzleActionTracking';
+import { formatPuzzleDate } from '../lib/puzzleDate';
+import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
+import { isPuzzlesHubV3Enabled } from '../lib/puzzlesHubVersionExperiment';
+import {
+	getPuzzlesSubNavLinks,
+	PUZZLES_SUBNAV_PARENT,
+} from '../lib/puzzlesSubNav';
+import { puzzleAccentStyles, puzzlesPageTheme } from '../lib/puzzlesTheme';
+import { enhanceBranding } from '../model/enhanceCommercialProperties';
+import type { NavType, SubNavType } from '../model/extract-nav';
+import type { PuzzleConfig } from '../model/puzzles/puzzleConfigs';
+import { palette as themePalette } from '../palette';
+import type { Branding } from '../types/branding';
+import type { FEPuzzlePageType } from '../types/puzzlePage';
+import type { TagType } from '../types/tag';
+import { BannerWrapper } from './lib/stickiness';
+
+/**
+ * A deliberate, near-verbatim structural replica of `CrosswordLayout.tsx`
+ * (sticky header ad, Masthead, survey ad, an `<article>` grid with
+ * title/headline/standfirst/meta rows and a `right-column` ad on wide
+ * viewports, a straight-line separator, SubMeta, merchandising ads,
+ * comments, sub-nav, footer, the contributions banner and the mobile
+ * sticky container), reusing the exact same generic + Article-domain
+ * components (`ArticleTitle`, `ArticleHeadline`, `ArticleMeta`, `SubMeta`,
+ * `DiscussionLayout`, `StickyBottomBanner`) that page uses, not
+ * Puzzle-Page-specific rewrites of them - see `CrosswordLayout.tsx` for the
+ * original this mirrors.
+ *
+ * The **one deliberate content difference**, per explicit product/design
+ * direction: the crossword game itself (`ArticleBody` rendering the
+ * `crossword` block) is replaced by `PuzzleAccessGate.island` (which renders `PuzzleIframe`, or the premium puzzles modal) in the `body`
+ * grid area. Puzzle Page is scoped to iframe-based puzzles only; the
+ * crossword-only game/data model has no equivalent here.
+ *
+ * Everywhere else, `FEPuzzlePageType` (`src/types/puzzlePage.ts`) simply
+ * doesn't carry the same fields `ArticleDeprecated` does (no `tags`,
+ * `byline`, `crossword`, `blocks`, `isCommentable`, `subMetaKeywordLinks`/
+ * `subMetaSectionLinks`, `pageType`, `shouldHideAds`, `guardianBaseURL`,
+ * etc. - see `docs/puzzle-page.md`'s "The `FEPuzzlePageType` request
+ * contract"). It does carry `isAdFreeUser`, though (see that field's own
+ * doc comment): ads are gated on `canRenderAds(puzzlePage)`, the same
+ * shared helper every other ad-supported DCR page type uses, rather than
+ * being hardcoded on. Rather than dropping every component with no real
+ * Puzzle Page data source, each is still rendered with the closest real
+ * data Puzzle Page actually has, and a **hardcoded, explicitly-commented
+ * fallback** (an empty array, `undefined`, or a `false` gate) everywhere a
+ * genuine Puzzle-Page equivalent doesn't exist - e.g. comments are
+ * permanently
+ * disabled below via `const showComments = false`, mirroring exactly how
+ * `CrosswordLayout` itself gates its own `showComments` Section, just with
+ * a fixed value instead of a derived one.
+ */
+
+const merchandisingAdStyles = css`
+	.ad-slot.ad-slot--rendered {
+		/* Fluid creatives reset the slot's default padding. */
+		padding-bottom: ${space[6]}px;
+
+		&:not([data-label-show='true']) {
+			border-top: 1px solid ${sourcePalette.neutral[86]};
+		}
+	}
+`;
+
+const puzzleGroupLabels: Record<PuzzleConfig['puzzleGroup'], string> = {
+	'logic-puzzles': 'Logic puzzles',
+	'word-games': 'Word games',
+	trivia: 'Trivia & quizzes',
+};
+
+/**
+ * The puzzle *family* name (e.g. "Sudoku" for every sudoku variant), used
+ * as the `ArticleTitle`/`SeriesSectionLink` "series" kicker - the same
+ * design pattern the real crossword page already uses for its own series
+ * tag (e.g. "Quick"), stacked above the section link (`puzzleGroupLabels`
+ * above, e.g. "Logic puzzles"). Neither `FEPuzzlePageType` nor
+ * `PuzzleConfig` carries a dedicated "family name" field distinct from the
+ * per-variant `instance.title`/SEO `title` template, so this is a small,
+ * explicit, hardcoded map instead, mirroring `puzzleGroupLabels`.
+ */
+const puzzleFamilyNames: Record<string, string> = {
+	'sudoku-easy': 'Sudoku',
+	'sudoku-medium': 'Sudoku',
+	'sudoku-hard': 'Sudoku',
+	'sudoku-killer': 'Sudoku',
+	'word-wheel': 'Word wheel',
+	wordiply: 'Wordiply',
+	'film-reveal': 'Film reveal',
+	'on-the-ball': 'On the ball',
+};
+
+/**
+ * The headline (`<h1>`) text for each puzzle, per explicit design
+ * direction: e.g. "Easy sudoku", not `instance.title`'s "Sudoku (easy)".
+ * This intentionally matches the word order already used in each entry's
+ * SEO `title` template in `puzzleConfigs.ts` (e.g. `"Easy sudoku {date} -
+ * logic puzzle | The Guardian"`) - just the plain noun phrase, without the
+ * date/suffix - rather than introducing a second, differently-worded copy
+ * source. Falls back to `instance.title` (the value `frontend` actually
+ * sends) for any slug not in this map, so an unrecognised/future slug
+ * still renders something instead of `undefined`.
+ */
+const puzzleHeadlineNames: Record<string, string> = {
+	'sudoku-easy': 'Easy sudoku',
+	'sudoku-medium': 'Medium sudoku',
+	'sudoku-hard': 'Hard sudoku',
+	'sudoku-killer': 'Killer sudoku',
+	'word-wheel': 'Word wheel',
+	wordiply: 'Wordiply',
+	'film-reveal': 'Film reveal',
+	'on-the-ball': 'On the ball',
+};
+
+/**
+ * Puzzle Page has no real equivalent of `ArticleDeprecated.guardianBaseURL`
+ * (see `docs/puzzle-page.md`'s contract table - it isn't part of
+ * `FEPuzzlePageType`). `ArticleTitle`/`SeriesSectionLink` build the
+ * series/section link's href as `${guardianBaseURL}/${...}`, so this is
+ * deliberately left empty rather than hardcoded to the production origin:
+ * the series ("Sudoku") and section ("Logic puzzles") links then resolve to
+ * root-relative paths (e.g. `/puzzles-and-games/logic-puzzles/archive`), same-origin
+ * on every environment, exactly like this layout's own hardcoded
+ * `PUZZLES_SUBNAV_LINKS` above - rather than always pointing at
+ * `https://www.theguardian.com` and hijacking local/test environments into
+ * navigating to production.
+ */
+const GUARDIAN_BASE_URL = '';
+
+/**
+ * `ArticleHeadline`'s "This article is more than X (days/months/years)
+ * old" age warning (`getAgeWarning`, `src/lib/age-warning.ts`) is meant for
+ * genuinely stale news content; it doesn't make sense for Puzzle Page,
+ * whose "publication date" isn't a real one at all (`instance.puzzleDate`
+ * is *which day's puzzle to show*, formatted for display, not when the
+ * page itself was published). `getAgeWarning` already special-cases
+ * exactly this situation for the closest existing content type,
+ * crosswords, by excluding any content tagged `type/crossword` - reused
+ * here verbatim, passed only to `ArticleHeadline` (the only place that
+ * warning is computed), rather than modifying that shared, generic
+ * article-domain logic.
+ */
+const AGE_WARNING_SUPPRESSION_TAGS: TagType[] = [
+	{ id: 'type/crossword', type: 'type', title: 'Crosswords' },
+];
+
+/**
+ * `ArticleTitle`/`ArticleHeadline`/`ArticleMeta`/`SubMeta`/`DiscussionLayout`/
+ * `StickyBottomBanner` only need an `ArticleFormat` to branch a handful of
+ * style/behaviour decisions (e.g. LiveBlog-specific spacing, headline
+ * weight). Puzzle pages have no equivalent concept, so a minimal, fixed
+ * format value is used to satisfy those prop contracts without fabricating
+ * article-specific data (tags, branding, etc.).
+ *
+ * `design: ArticleDesign.Crossword` is deliberately reused (not
+ * `Standard`): `ArticleContainer`'s width switch already special-cases
+ * `Crossword` as "the player manages its own width" (no fixed `620px`
+ * desktop max-width) - exactly the behaviour `PuzzleIframe`'s own
+ * `width: 100%` styling needs too, so this reuses that existing,
+ * documented case rather than inventing a new one.
+ *
+ * `theme` is the same fixed `Pillar.Lifestyle` for every group: it only
+ * provides the page's neutral colours (background, lines). Each group's accent
+ * colour comes from `puzzleAccentStyles`, not from the theme.
+ *
+ * **Exported** so `PuzzlePage.tsx` can pass this exact same value to
+ * `rootStyles()` for its page-wide `<Global>` styles. `themePalette()`
+ * (`src/palette.ts`) only ever emits a `var(--some-colour)` reference; the
+ * actual colour each CSS custom property resolves to is computed once,
+ * globally, by `rootStyles()`/`paletteDeclarations()` from whichever
+ * `ArticleFormat` `PuzzlePage.tsx` gives it - a separate, independent
+ * format value from this one. Before this was exported and reused, that
+ * `<Global>` format had its own, unsynchronised copy hardcoded to
+ * `Pillar.News`, which silently overrode every colour decision made here
+ * with red instead of Lifestyle pink, regardless of what `puzzlePageFormat`
+ * itself said.
+ */
+export const puzzlePageFormat: ArticleFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Crossword,
+	theme: Pillar.Lifestyle,
+};
+
+/**
+ * Identical to `CrosswordLayout.tsx`'s own `CrosswordGrid`: the same grid
+ * areas (including `instructions`, which Puzzle Page never populates, see
+ * the `instructions` `GridItem` below), the same breakpoints, the same
+ * print stylesheet.
+ */
+const PuzzleGrid = ({ children }: { children: React.ReactNode }) => (
+	<div
+		css={css`
+			display: grid;
+			width: 100%;
+			margin-left: 0;
+			grid-column-gap: 0px;
+			grid-template-columns: minmax(0, 1fr);
+			grid-template-areas:
+				'title'
+				'headline'
+				'standfirst'
+				'meta'
+				'instructions'
+				'body';
+
+			${from.leftCol} {
+				grid-column-gap: 20px;
+				grid-template-columns: 140px 1fr;
+				grid-template-areas:
+					'title  headline    '
+					'meta   standfirst  '
+					'meta   instructions'
+					'body   body        ';
+			}
+
+			${from.wide} {
+				grid-template-columns: 220px 1fr 300px;
+				grid-template-areas:
+					'title  headline      .'
+					'meta   standfirst    .'
+					'meta   instructions  .'
+					'body   body          right-column';
+			}
+
+			@media print {
+				grid-template-columns: 1fr;
+				grid-template-areas:
+					'title'
+					'headline'
+					'standfirst'
+					'meta'
+					'instructions'
+					'body';
+			}
+		`}
+	>
+		{children}
+	</div>
+);
+
+const maxWidth = css`
+	${from.desktop} {
+		max-width: 620px;
+	}
+`;
+
+/**
+ * The real `Masthead` (sign-in state, edition switcher, pillar nav links)
+ * is hidden entirely for print (see `data-print-layout="hide"` below) -
+ * none of that is meaningful on a printed page, and its blue background
+ * would waste ink. This is a standalone, print-only stand-in: just the
+ * logo, in black, on white.
+ *
+ * The `display: none` / `@media print` toggle lives here, in the
+ * component's own (hashed, bundle-invalidated) styles, rather than in the
+ * static `print.css` - a fixed, unhashed filename that is cached by the
+ * CDN/browsers for a year (see `riff-raff.yaml`) and won't pick up changes
+ * on deploy. See commit 500e9f543e ("Relocate due to print stylesheet
+ * caching") for the same issue hit previously.
+ */
+const printOnlyLogoContainerStyles = css`
+	display: none;
+	padding: ${remSpace[2]} 0;
+
+	svg {
+		width: 180px;
+		fill: ${sourcePalette.neutral[0]};
+	}
+
+	@media print {
+		display: block;
+	}
+`;
+
+const printOnlyLogoStyles = css`
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: flex-end;
+	padding-top: ${remSpace[6]};
+`;
+
+const frameContainerStyles = css`
+	margin-top: 16px;
+	margin-bottom: 16px;
+`;
+
+const stretchLines = css`
+	${from.leftCol} {
+		margin-left: 0;
+	}
+`;
+
+/**
+ * Positioned so the unlock modal, which `PuzzleAccessGate` renders into it
+ * (see `PUZZLE_MODAL_ROOT_ID`), covers exactly the page content and leaves
+ * the header and the footer reachable.
+ *
+ * `position: relative` alone does not create a stacking context, so the
+ * modal's z-index would compete with the header's (for example the expanded
+ * navigation) and cover it. `isolation: isolate` keeps the modal's stacking
+ * inside `<main>`.
+ */
+const mainStyles = css`
+	position: relative;
+	isolation: isolate;
+`;
+
+/**
+ * The `/PuzzlePage` handler resolves and validates the `PuzzleConfig` for
+ * the request's `slug` before rendering; it is passed alongside the raw
+ * payload rather than re-derived here so `PuzzlePageLayout` has a single,
+ * already-narrowed source of truth for rendering decisions.
+ */
+export type ResolvedPuzzlePage = FEPuzzlePageType & {
+	puzzleConfig: PuzzleConfig;
+};
+
+/**
+ * The separator lines around the meta. Always straight, whatever the group's
+ * theme: `DecideLines` would switch to dotted lines for the sport theme
+ * (logic puzzles), and these pages look the same across groups.
+ */
+const MetaLines = () => (
+	<StraightLines
+		count={4}
+		color={themePalette('--article-meta-lines')}
+		cssOverrides={css`
+			display: block;
+		`}
+	/>
+);
+
+interface Props {
+	puzzlePage: ResolvedPuzzlePage;
+	NAV: NavType;
+	darkModeAvailable: boolean;
+	branding?: Branding;
+}
+
+export const PuzzlePageLayout = ({
+	puzzlePage,
+	NAV,
+	darkModeAvailable,
+	branding,
+}: Props) => {
+	const { config, instance, editionId, puzzleConfig } = puzzlePage;
+	const { isPaidContent, host, hasSurveyAd } = config;
+
+	// Puzzle Page instances have no comments/discussion concept at all:
+	// `FEPuzzlePageType` carries no `isCommentable` flag or per-instance
+	// discussion identifiers (see docs/puzzle-page.md's contract table).
+	// Hardcoded permanently off, mirroring exactly how `CrosswordLayout`
+	// gates its own (there, real) `showComments` Section, just with a
+	// fixed value instead of a derived one.
+	// NOTE: if comments are ever enabled, they must also stay off for premium
+	// puzzles (`!requiresSubscription`): the unlock modal covers the
+	// page, so a section the reader cannot reach makes no sense.
+	const showComments = false;
+
+	// The "More from Puzzles & Games" rail is a v1-scoped feature (per the
+	// Puzzles & Games rollout plan - see `isPuzzlesHubAvailable`), not a v0
+	// one - so it must not render just because
+	// instance.moreFromPuzzlesAndGames happens to be non-empty.
+	// if (instance.moreFromPuzzlesAndGames?.length === 0) {
+	//  instance.moreFromPuzzlesAndGames = [
+	//    {
+	//      id: 'placeholder',
+	//      title: 'More puzzles coming soon',
+	//      type: 'Placeholder',
+	//      set: 'placeholder',
+	//      cardVariant: 'primary',
+	//    },
+	//  ];
+	// }
+	const isV1Enabled = isPuzzlesHubAvailable(config);
+
+	// The premium puzzles access control (the unlock modal, the access check
+	// and no ads) only has an effect for readers in `puzzles-new-hub-v3`.
+	// Outside it every puzzle behaves as a free one, whatever `frontend` sends.
+	const requiresSubscription =
+		isPuzzlesHubV3Enabled(config) && instance.requiresSubscription === true;
+
+	const showRelated =
+		!!instance.moreFromPuzzlesAndGames?.length && isV1Enabled;
+
+	// `FEPuzzlePageType` now carries `isAdFreeUser` (see that field's doc
+	// comment), so `canRenderAds` (the same shared helper every other
+	// ad-supported DCR page type already uses - `ArticleDeprecated`/
+	// `Front`/`TagPage`/`SportDataPage`) can gate ads here too, instead of
+	// rendering them unconditionally regardless of whether the reader has
+	// actually paid for an ad-free subscription.
+	//
+	// Premium puzzles never render ads: a reader with access is a subscriber
+	// (ad-free), and a reader without access only sees the unlock modal, and
+	// ads behind its overlay could be seen badly and not clicked. This is
+	// decided here, from a property of the puzzle, so the cached HTML holds
+	// nothing about the reader and no ad is requested and then hidden.
+	const renderAds = canRenderAds(puzzlePage) && !requiresSubscription;
+
+	// `getContributionsServiceUrl` reads `config.contributionsServiceUrl`,
+	// a field `ConfigType` doesn't carry for Puzzle Page requests. Hardcoded
+	// to the empty string, same as this layout's previous implementation.
+	const contributionsServiceUrl = '';
+
+	const labelText = puzzleGroupLabels[puzzleConfig.puzzleGroup];
+	const puzzleGroupPath =
+		puzzleConfig.puzzleGroup === 'trivia'
+			? 'trivia-and-quizzes'
+			: puzzleConfig.puzzleGroup;
+	const displayDate = formatPuzzleDate(instance.puzzleDate);
+	const puzzleTrackingContext: PuzzleActionContext = {
+		slug: puzzleConfig.slug,
+		date: instance.puzzleDate,
+		provider: puzzleConfig.iframe.provider,
+	};
+	const puzzleFamilyName =
+		puzzleFamilyNames[puzzleConfig.slug] ?? instance.title;
+	const puzzleHeadlineText =
+		puzzleHeadlineNames[puzzleConfig.slug] ?? instance.title;
+	/**
+	 * A single synthetic "Series"-type tag, existing purely to trigger
+	 * `SeriesSectionLink`'s already-existing "series name stacked above
+	 * section link" pattern (`if (tag) { ... }`, `hasSeriesTag` etc in
+	 * `SeriesSectionLink.tsx`) - the exact same two-tier kicker the real
+	 * crossword page gets from its own `Series`-type tags (e.g. "Quick"
+	 * stacked above "Crosswords"). `FEPuzzlePageType` has no real tag
+	 * data at all, so this is fabricated purely to reuse that existing
+	 * rendering branch rather than duplicating its markup/styles here.
+	 */
+	const puzzleFamilyTag: TagType[] = [
+		{
+			id: `puzzles-and-games/${puzzleGroupPath}/${puzzleConfig.slug}/archive`,
+			type: 'Series',
+			title: puzzleFamilyName,
+		},
+	];
+
+	/**
+	 * `NAV` (`extractNAV(puzzlePage.nav)`) carries whatever generic
+	 * navigation `frontend` resolved for this request; its
+	 * `subNavSections` has no real Puzzle Page equivalent (see
+	 * `getPuzzlesSubNavLinks`'s doc comment above). `Masthead`/`Titlepiece`
+	 * (header) and the footer's own `SubNav.island` both read
+	 * `subNavSections`/`currentNavLink` straight off the `NavType` they're
+	 * given, so this single override is reused for both, rather than
+	 * duplicating the hardcoded sub-nav in two places.
+	 */
+	const puzzlesSubNav: SubNavType = {
+		parent: PUZZLES_SUBNAV_PARENT,
+		links: getPuzzlesSubNavLinks(isV1Enabled),
+	};
+
+	const puzzleNAV: NavType = {
+		...NAV,
+		subNavSections: puzzlesSubNav,
+		currentNavLink: labelText,
+	};
+
+	return (
+		<>
+			{renderAds && (
+				<div data-print-layout="hide">
+					<Section
+						fullWidth={true}
+						showTopBorder={false}
+						showSideBorders={false}
+						padSides={false}
+						shouldCenter={false}
+					>
+						<HeaderAdSlot
+							includeMobile={shouldShowMobileAboveNavSlot(
+								config.serverSideABTests[
+									'commercial-mobile-above-nav-test'
+								],
+							)}
+						/>
+					</Section>
+				</div>
+			)}
+
+			<div data-print-layout="hide">
+				<Masthead
+					nav={puzzleNAV}
+					editionId={editionId}
+					idUrl={config.idUrl}
+					mmaUrl={config.mmaUrl}
+					discussionApiUrl={config.discussionApiUrl}
+					idApiUrl={config.idApiUrl}
+					contributionsServiceUrl={contributionsServiceUrl}
+					showSubNav={true}
+					showSlimNav={false}
+					hasPageSkin={false}
+					hasPageSkinContentSelfConstrain={false}
+					pageId={puzzlePage.id}
+					tagIds={[]}
+					sectionId={config.section}
+					contentType="Game"
+					canonicalUrl={puzzlePage.canonicalUrl}
+				/>
+			</div>
+
+			<div css={printOnlyLogoContainerStyles}>
+				<div css={printOnlyLogoStyles}>
+					<Logo />
+				</div>
+			</div>
+
+			<div data-print-layout="hide">
+				{renderAds && hasSurveyAd && (
+					<AdSlot
+						position="survey"
+						display={puzzlePageFormat.display}
+					/>
+				)}
+			</div>
+
+			<main
+				id={PUZZLE_MODAL_ROOT_ID}
+				data-layout="PuzzlePageLayout"
+				css={[
+					puzzleAccentStyles(
+						puzzleConfig.puzzleGroup,
+						darkModeAvailable,
+					),
+					mainStyles,
+				]}
+			>
+				<Section
+					fullWidth={true}
+					showTopBorder={false}
+					backgroundColour={themePalette('--article-background')}
+					borderColour={themePalette('--article-border')}
+					element="article"
+				>
+					<div>
+						<PuzzleGrid>
+							<GridItem area="title" element="aside">
+								<ArticleTitle
+									format={puzzlePageFormat}
+									ophanComponentLink="puzzles | in-page-nav | puzzle-page"
+									tags={puzzleFamilyTag}
+									sectionLabel={labelText}
+									sectionUrl={`puzzles-and-games/${puzzleGroupPath}/archive`}
+									guardianBaseURL={GUARDIAN_BASE_URL}
+								/>
+							</GridItem>
+							<GridItem area="headline">
+								<div css={maxWidth}>
+									<ArticleHeadline
+										format={puzzlePageFormat}
+										headlineString={puzzleHeadlineText}
+										tags={AGE_WARNING_SUPPRESSION_TAGS}
+										webPublicationDateDeprecated={
+											displayDate ?? ''
+										}
+									/>
+								</div>
+							</GridItem>
+							<GridItem area="standfirst">
+								<div data-print-layout="hide">
+									<Hide until="leftCol">
+										<MetaLines />
+									</Hide>
+									{/*
+									 * `CrosswordLinks`' one job is a
+									 * `crossword.pdf` "PDF version" link -
+									 * a crossword-only concept with no
+									 * Puzzle Page equivalent
+									 * (`FEPuzzlePageType` has no `crossword`
+									 * field at all). It occupies this same
+									 * grid slot, but with the real Puzzle
+									 * Page equivalent instead: a print
+									 * button, gated on
+									 * `puzzleConfig.printEnabled` (Sudoku
+									 * only, see `PrintButton`'s doc
+									 * comment).
+									 */}
+									{puzzleConfig.printEnabled && (
+										<div
+											css={css`
+												margin-top: ${remSpace[2]};
+												margin-bottom: ${remSpace[2]};
+											`}
+										>
+											<Island
+												priority="feature"
+												defer={{ until: 'visible' }}
+											>
+												<PrintButton
+													puzzleTrackingSource="puzzle-page"
+													puzzleTrackingContext={
+														puzzleTrackingContext
+													}
+												/>
+											</Island>
+										</div>
+									)}
+								</div>
+							</GridItem>
+							<GridItem area="meta" element="aside">
+								<div css={maxWidth}>
+									<div css={stretchLines}>
+										<MetaLines />
+									</div>
+									<ArticleMeta
+										branding={
+											branding &&
+											enhanceBranding(branding)
+										}
+										format={puzzlePageFormat}
+										pageId={puzzlePage.id}
+										webTitle={puzzlePage.webTitle}
+										tags={[]}
+										primaryDateline={displayDate ?? ''}
+										secondaryDateline=""
+										isCommentable={showComments}
+										discussionApiUrl={
+											config.discussionApiUrl
+										}
+										shortUrlId={config.shortUrlId}
+										hidePreferredSourceOnPrint={true}
+										isPuzzlePage={true}
+										puzzleTrackingContext={
+											puzzleTrackingContext
+										}
+									/>
+								</div>
+							</GridItem>
+							{/*
+							 * `instructions` (crossword-specific setter
+							 * instructions, e.g. Prize/Genius puzzles) has
+							 * no Puzzle Page equivalent - `FEPuzzlePageType`
+							 * carries no such field, so this `GridItem` is
+							 * never rendered, hardcoded off exactly like
+							 * `CrosswordLayout`'s own
+							 * `!!article.crossword?.instructions` gate,
+							 * just with a fixed `false` instead of a
+							 * derived one.
+							 */}
+							<GridItem area="body" element="article">
+								{/* The "Skip to main content" link's target (`SkipTo`), which
+								    `ArticleBody` provides on article pages but this page has none. */}
+								<div
+									id="maincontent"
+									css={frameContainerStyles}
+								>
+									<ArticleContainer format={puzzlePageFormat}>
+										{/* Not deferred until visible: the iframe has no `src`
+                        until this island hydrates and the reader is known,
+                        so waiting for the island to be seen would delay
+                        the puzzle itself. */}
+										<Island priority="critical">
+											<PuzzleAccessGate
+												gameUrl={instance.gameUrl}
+												progressIdentity={
+													instance.progressIdentity
+												}
+												puzzleConfig={puzzleConfig}
+												title={instance.title}
+												darkModeAvailable={
+													darkModeAvailable
+												}
+												puzzleDate={
+													instance.puzzleDate ?? null
+												}
+												requiresSubscription={
+													requiresSubscription
+												}
+												ajaxUrl={config.ajaxUrl}
+												puzzleId={
+													instance.progressIdentity
+														?.puzzleId
+												}
+												idUrl={config.idUrl}
+												returnToArchivePath={`/puzzles-and-games/${puzzleGroupPath}/archive`}
+											/>
+										</Island>
+									</ArticleContainer>
+								</div>
+							</GridItem>
+							<GridItem area="right-column">
+								<RightColumn showFrom="wide">
+									<div
+										css={css`
+											margin-top: ${remSpace[3]};
+										`}
+									>
+										{renderAds ? (
+											<AdSlot
+												position="right"
+												display={
+													puzzlePageFormat.display
+												}
+												isPaidContent={isPaidContent}
+												shouldHideReaderRevenue={
+													config.shouldHideReaderRevenue
+												}
+											/>
+										) : null}
+									</div>
+								</RightColumn>
+							</GridItem>
+						</PuzzleGrid>
+					</div>
+				</Section>
+
+				{renderAds && (
+					<Hide from="tablet">
+						<Section
+							fullWidth={true}
+							padSides={false}
+							showTopBorder={false}
+							showSideBorders={false}
+							backgroundColour={themePalette('--ad-background')}
+							element="aside"
+							hideFromPrintLayout={true}
+						>
+							<AdSlot position="crossword-banner-mobile" />
+						</Section>
+					</Hide>
+				)}
+
+				<Section
+					fullWidth={true}
+					showTopBorder={false}
+					padSides={false}
+					backgroundColour={themePalette('--article-background')}
+					hideFromPrintLayout={true}
+				>
+					<StraightLines
+						count={1}
+						color={themePalette('--straight-lines')}
+						cssOverrides={css`
+							display: block;
+						`}
+					/>
+				</Section>
+
+				{showRelated && (
+					<div data-print-layout="hide">
+						<Section
+							fullWidth={true}
+							showTopBorder={false}
+							backgroundColour={themePalette(
+								'--article-background',
+							)}
+						>
+							<Island
+								priority="enhancement"
+								defer={{ until: 'visible' }}
+							>
+								<RelatedPuzzlesRailEnhanced
+									source="puzzle-page"
+									items={
+										instance.moreFromPuzzlesAndGames ?? []
+									}
+								/>
+							</Island>
+						</Section>
+					</div>
+				)}
+
+				{renderAds && (
+					<Section
+						fullWidth={true}
+						padSides={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						backgroundColour={themePalette('--ad-background')}
+						element="aside"
+					>
+						<div
+							css={merchandisingAdStyles}
+							data-print-layout="hide"
+						>
+							<AdSlot
+								position="merchandising-high"
+								display={puzzlePageFormat.display}
+							/>
+						</div>
+					</Section>
+				)}
+
+				{showComments && (
+					<>
+						<Section
+							fullWidth={true}
+							padSides={true}
+							showTopBorder={false}
+							showSideBorders={true}
+							element="aside"
+						>
+							<div
+								css={css`
+									height: 20px;
+								`}
+							></div>
+						</Section>
+						<Section
+							fullWidth={true}
+							sectionId="comments"
+							element="section"
+							backgroundColour={themePalette(
+								'--discussion-section-background',
+							)}
+							borderColour={themePalette('--article-border')}
+							fontColour={themePalette('--discussion-text')}
+							hideFromPrintLayout={true}
+						>
+							<DiscussionLayout
+								discussionApiUrl={config.discussionApiUrl}
+								shortUrlId={config.shortUrlId}
+								format={puzzlePageFormat}
+								discussionD2Uid={config.discussionD2Uid}
+								discussionApiClientHeader={
+									config.discussionApiClientHeader
+								}
+								enableDiscussionSwitch={
+									!!config.switches.enableDiscussionSwitch
+								}
+								isAdFreeUser={!!puzzlePage.isAdFreeUser}
+								shouldHideAds={!renderAds}
+								idApiUrl={config.idApiUrl}
+							/>
+						</Section>
+						<Section
+							fullWidth={true}
+							padSides={true}
+							showTopBorder={false}
+							showSideBorders={true}
+							element="aside"
+						>
+							<div
+								css={css`
+									height: 20px;
+								`}
+							></div>
+						</Section>
+					</>
+				)}
+
+				{showComments && renderAds && (
+					<Section
+						fullWidth={true}
+						padSides={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						backgroundColour={themePalette('--ad-background')}
+						element="aside"
+					>
+						<AdSlot
+							position="merchandising"
+							display={puzzlePageFormat.display}
+						/>
+					</Section>
+				)}
+
+				{isV1Enabled && instance.puzzlesSupporting && (
+					<div
+						data-print-layout="hide"
+						// `PuzzlesUsefulLinks` reads the `--puzzles-*` colours,
+						// which only this theme defines (with dark mode when
+						// available). Without it the links stay light in dark mode.
+						css={puzzlesPageTheme(darkModeAvailable)}
+					>
+						<PuzzlesUsefulLinks
+							id="puzzle-page"
+							ophanComponentName="puzzles-useful-links:puzzle-page"
+							title="Useful links"
+							links={instance.puzzlesSupporting.usefulLinks}
+							newsletter={instance.puzzlesSupporting.newsletter}
+						/>
+					</div>
+				)}
+			</main>
+
+			{/*
+			 * `CrosswordLayout` also renders `NAV.subNavSections` again
+			 * here, just above its footer, via `SubNav.island` - a second,
+			 * scrollable copy of the same sub-nav row already shown in the
+			 * header (`Masthead`/`Titlepiece`). Per explicit product
+			 * feedback, that duplicate footer row doesn't make sense for
+			 * Puzzle Page's hardcoded sub-nav (see `getPuzzlesSubNavLinks`'s
+			 * doc comment above): the header copy is enough, so this second
+			 * rendering is intentionally omitted here rather than blindly
+			 * replicating every `CrosswordLayout` slot.
+			 */}
+
+			<Section
+				fullWidth={true}
+				padSides={false}
+				backgroundColour={sourcePalette.brand[400]}
+				borderColour={sourcePalette.brand[600]}
+				showSideBorders={false}
+				element="footer"
+			>
+				<Footer
+					pageFooter={puzzlePage.pageFooter}
+					selectedPillar={NAV.selectedPillar}
+					pillars={NAV.pillars}
+					urls={NAV.readerRevenueLinks.footer}
+					editionId={editionId}
+				/>
+			</Section>
+
+			<BannerWrapper data-print-layout="hide">
+				<Island priority="feature" defer={{ until: 'idle' }}>
+					<StickyBottomBanner
+						contentType="Game"
+						contributionsServiceUrl={contributionsServiceUrl}
+						idApiUrl={config.idApiUrl}
+						// Puzzle Page has no minute-article concept -
+						// `FEPuzzlePageType` carries no `pageType` field at
+						// all, so this is hardcoded off.
+						isMinuteArticle={false}
+						isPaidContent={!!isPaidContent}
+						isPreview={!!config.isPreview}
+						isSensitive={config.isSensitive}
+						pageId={puzzlePage.id}
+						sectionId={config.section}
+						shouldHideReaderRevenue={
+							!!config.shouldHideReaderRevenue
+						}
+						remoteBannerSwitch={!!config.switches.remoteBanner}
+						// Puzzle Page instances carry no `tags` at all
+						// (`FEPuzzlePageType` has no `tags` field), so this
+						// is hardcoded to an empty array.
+						tags={[]}
+						host={host}
+					/>
+				</Island>
+			</BannerWrapper>
+			{renderAds && <MobileStickyContainer data-print-layout="hide" />}
+		</>
+	);
+};

@@ -1,3 +1,4 @@
+import type { AffiliateProductPrice } from '../types/content';
 import { EditorialLinkButton } from './Button/EditorialLinkButton';
 import { ProductLinkButton } from './Button/ProductLinkButton';
 import { heightAutoStyle, wrapButtonTextStyle } from './Button/styles';
@@ -8,6 +9,8 @@ export type LinkBlockComponentProps = {
 	url: string;
 	linkType: 'StandardButton' | 'ProductButton';
 	priority?: 'Primary' | 'Tertiary';
+	// Only applicable to ProductButtons
+	latestPrice?: AffiliateProductPrice;
 };
 
 const LinkTypePriorityToButtonPriority = {
@@ -20,6 +23,7 @@ export const LinkBlockComponent = ({
 	url,
 	priority = 'Primary',
 	linkType,
+	latestPrice,
 }: LinkBlockComponentProps) => {
 	const buttonPriority = LinkTypePriorityToButtonPriority[priority];
 	switch (linkType) {
@@ -50,6 +54,7 @@ export const LinkBlockComponent = ({
 					label={label}
 					url={url}
 					dataComponent={'in-body-product-link-button'}
+					latestPrice={latestPrice}
 				/>
 			);
 		}

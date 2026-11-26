@@ -14,6 +14,12 @@ describe('getZIndex', () => {
 		expect(getZIndex('tableOfContents')).toBeGreaterThan(
 			getZIndex('articleHeadline'),
 		);
+		expect(getZIndex('subNavBanner')).toBeGreaterThan(
+			getZIndex('articleHeadline'),
+		);
+		expect(getZIndex('subNavBanner')).toBeGreaterThan(
+			getZIndex('bodyArea'),
+		);
 		expect(getZIndex('card-nested-link')).toBeGreaterThan(
 			getZIndex('card-link'),
 		);

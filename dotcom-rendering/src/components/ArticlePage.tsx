@@ -4,11 +4,10 @@ import { DecideLayout } from '../layouts/DecideLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { ArticleDesign } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
-import { filterABTestSwitches } from '../model/enhance-switches';
+import { isFilterPageId } from '../lib/theFilter';
 import type { NavType } from '../model/extract-nav';
 import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { AdmiralScript } from './AdmiralScript.island';
 import { AlreadyVisited } from './AlreadyVisited.island';
 import { BrazeMessaging } from './BrazeMessaging.island';
 import { useConfig } from './ConfigContext';
@@ -79,20 +78,21 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 			<Lightbox
 				format={format}
 				switches={frontendData.config.switches}
+				isFilterArticle={isFilterPageId(frontendData.pageId)}
 				{...(renderingTarget === 'Web'
 					? {
 							lightboxImages: frontendData.imagesForLightbox,
 							renderingTarget,
-					  }
+						}
 					: {
 							lightboxImages: frontendData.imagesForAppsLightbox,
 							renderingTarget,
-					  })}
+						})}
 			/>
 			<Island priority="enhancement" defer={{ until: 'idle' }}>
 				<FocusStyles />
 			</Island>
-			{!!frontendData.affiliateLinksDisclaimer && (
+			{frontendData.affiliateLinksDisclaimerRequired && (
 				<Island priority="feature" defer={{ until: 'idle' }}>
 					<EnhanceAffiliateLinks />
 				</Island>
@@ -103,19 +103,14 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 			)}
 			{renderingTarget === 'Web' && (
 				<>
-					<SkipTo id="navigation" label="Skip to navigation" />
 					<Island priority="feature" defer={{ until: 'idle' }}>
 						<AlreadyVisited />
-					</Island>
-					<Island priority="feature" defer={{ until: 'idle' }}>
-						<AdmiralScript />
 					</Island>
 					<Island priority="critical">
 						<Metrics
 							commercialMetricsEnabled={
 								!!frontendData.config.switches.commercialMetrics
 							}
-							tests={frontendData.config.abTests}
 						/>
 					</Island>
 					<Island priority="feature" defer={{ until: 'idle' }}>
@@ -133,21 +128,12 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					</Island>
 					<Island priority="critical">
 						<SetABTests
-							abTestSwitches={filterABTestSwitches(
-								frontendData.config.switches,
-							)}
-							pageIsSensitive={frontendData.config.isSensitive}
-							isDev={!!frontendData.config.isDev}
-							serverSideTests={frontendData.config.abTests}
 							serverSideABTests={
 								frontendData.config.serverSideABTests
 							}
 						/>
 					</Island>
-					{isGoogleOneTapEnabled(
-						frontendData.config.abTests,
-						frontendData.config.switches,
-					) && (
+					{isGoogleOneTapEnabled(frontendData.config.switches) && (
 						<Island
 							priority="enhancement"
 							defer={{ until: 'idle' }}

@@ -9,8 +9,6 @@ import {
 	space,
 	until,
 } from '@guardian/source/foundations';
-import { Hide } from '@guardian/source/react-components';
-import type { FEArticle } from '../frontend/feArticle';
 import { labelBoxStyles, labelHeight, labelStyles } from '../lib/adStyles';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { center as layoutCenterStyles } from '../lib/center';
@@ -108,6 +106,39 @@ const hideBelowDesktop = css`
 
 const containerMinHeight = getMinHeight(250, space[5]);
 
+const mobileAboveNavMinHeight = getMinHeight(
+	adSizes.mobileLeaderboardXl.height,
+	space[5],
+);
+
+const mobileAboveNavContainerStyles = css`
+	padding-bottom: ${space[5]}px;
+	position: relative;
+	margin: 0 auto;
+	text-align: left;
+	display: block;
+	width: 100%;
+	min-height: ${mobileAboveNavMinHeight}px;
+
+	&[mobile-above-nav-ad-rendered='true'] {
+		min-height: auto;
+	}
+
+	/* Ad placeholder grey box rendered while loading the ad */
+	&:not([mobile-above-nav-ad-rendered='true']) {
+		::before {
+			content: '';
+			position: absolute;
+			height: 100px;
+			width: 100%;
+			top: ${labelHeight}px;
+			left: 50%;
+			transform: translateX(-50%);
+			background-color: ${palette.neutral[93]};
+		}
+	}
+`;
+
 const topAboveNavContainerStyles = css`
 	padding-bottom: ${space[5]}px;
 	position: relative;
@@ -129,6 +160,7 @@ const topAboveNavContainerStyles = css`
 			position: absolute;
 			height: 250px;
 			width: 728px;
+			max-width: 100%;
 			top: ${labelHeight}px;
 			left: 50%;
 			transform: translateX(-50%);
@@ -290,13 +322,13 @@ const frontsBannerAdStyles = css`
 	}
 `;
 
+/**
+ * The article-end slot is used to display the Public Good advert in the US. However, this advert
+ * is not currently being used. Therefore, there is no minimum height on the slot, so that the
+ * slot does not expand (anticipating an advert) and then collapse (when no advert is served), causing CLS.
+ */
 const articleEndAdStyles = css`
 	position: relative;
-	min-height: 450px;
-
-	&.ad-slot--fluid {
-		min-height: 450px;
-	}
 `;
 
 const mostPopAdStyles = css`
@@ -352,10 +384,12 @@ const liveBlogTopContainerStyles = css`
 const mobileStickyAdStyles = css`
 	position: fixed;
 	bottom: 0;
-	width: 320px;
+	width: 100%;
 	margin: 0 auto;
 	right: 0;
 	left: 0;
+	text-align: center;
+	background-color: ${schemedPalette('--ad-background')};
 	z-index: ${getZIndex('mobileSticky')};
 	${from.phablet} {
 		display: none;
@@ -401,23 +435,14 @@ const mobileStickyAdStyles = css`
 		content: 'Advertisement';
 		display: block;
 		position: relative;
+		padding-left: calc((100% - ${adSizes.mobileLeaderboard.width}px) / 2);
+		padding-right: calc((100% - ${adSizes.mobileLeaderboard.width}px) / 2);
 		${labelBoxStyles}
 	}
 `;
 
-const mobileStickyAdStylesFullWidth = css`
-	width: 100%;
-	text-align: center;
-	background-color: ${palette.neutral[97]};
-
-	.ad-slot[data-label-show='true']::before {
-		padding-left: calc((100% - ${adSizes.mobilesticky.width}px) / 2);
-		padding-right: calc((100% - ${adSizes.mobilesticky.width}px) / 2);
-	}
-`;
-
 const crosswordBannerMobileAdStyles = css`
-	min-height: ${getMinHeight(adSizes.mobilesticky.height)}px;
+	min-height: ${getMinHeight(adSizes.mobileLeaderboard.height)}px;
 `;
 
 const galleryInlineAdStyles = css`
@@ -652,27 +677,44 @@ export const AdSlot = ({
 				</AdSlotWrapper>
 			);
 		}
+		case 'mobile-above-nav': {
+			return (
+				<AdSlotWrapper css={mobileAboveNavContainerStyles}>
+					<div
+						id="dfp-ad--mobile-above-nav"
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--mobile-above-nav',
+							'ad-slot--rendered',
+						].join(' ')}
+						data-link-name="ad slot mobile-above-nav"
+						data-name="mobile-above-nav"
+						data-testid="slot"
+						aria-hidden="true"
+					></div>
+				</AdSlotWrapper>
+			);
+		}
 		case 'mostpop': {
 			return (
-				<Hide until="tablet">
-					<AdSlotWrapper css={mostPopContainerStyles}>
-						<div
-							id="dfp-ad--mostpop"
-							className={[
-								'js-ad-slot',
-								'ad-slot',
-								'ad-slot--mostpop',
-								'ad-slot--mpu-banner-ad',
-								'ad-slot--rendered',
-							].join(' ')}
-							css={[mostPopAdStyles]}
-							data-link-name="ad slot mostpop"
-							data-name="mostpop"
-							data-testid="slot"
-							aria-hidden="true"
-						/>
-					</AdSlotWrapper>
-				</Hide>
+				<AdSlotWrapper css={mostPopContainerStyles}>
+					<div
+						id="dfp-ad--mostpop"
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--mostpop',
+							'ad-slot--mpu-banner-ad',
+							'ad-slot--rendered',
+						].join(' ')}
+						css={mostPopAdStyles}
+						data-link-name="ad slot mostpop"
+						data-name="mostpop"
+						data-testid="slot"
+						aria-hidden="true"
+					/>
+				</AdSlotWrapper>
 			);
 		}
 		case 'merchandising-high': {
@@ -990,22 +1032,8 @@ export const AdSlot = ({
 	}
 };
 
-type MobileStickyContainerProps = Pick<FEArticle, 'contentType' | 'pageId'>;
-
-export const MobileStickyContainer = ({
-	contentType,
-	pageId,
-}: MobileStickyContainerProps) => {
+export const MobileStickyContainer = () => {
 	return (
-		<div
-			className="mobilesticky-container"
-			css={[
-				mobileStickyAdStyles,
-				(contentType === 'Article' ||
-					contentType === 'Interactive' ||
-					pageId.startsWith('football/')) &&
-					mobileStickyAdStylesFullWidth,
-			]}
-		/>
+		<div className="mobilesticky-container" css={mobileStickyAdStyles} />
 	);
 };

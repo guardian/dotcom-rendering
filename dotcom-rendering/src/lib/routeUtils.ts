@@ -24,10 +24,10 @@ import type {
 export type ExtractRouteParams<T> = string extends T
 	? Record<string, string>
 	: T extends `${string}:${infer Param}/${infer Rest}`
-	? { [k in Param | keyof ExtractRouteParams<Rest>]?: string }
-	: T extends `${string}:${infer Param}`
-	? { [k in Param]?: string }
-	: Record<string, never>;
+		? { [k in Param | keyof ExtractRouteParams<Rest>]?: string }
+		: T extends `${string}:${infer Param}`
+			? { [k in Param]?: string }
+			: Record<string, never>;
 
 export type ConsentPath = 'newsletters' | 'data' | 'review';
 
@@ -125,6 +125,21 @@ export const ValidRoutePathsArray = [
 ] as const;
 
 export type RoutePaths = (typeof ValidRoutePathsArray)[number];
+
+/**
+ * The absolute URL of the Identity sign-in page (the "combined" sign-in and
+ * create-account flow). Prefer this over hardcoding the URL so there is a
+ * single place to update if the flow moves.
+ */
+export const PROFILE_SIGN_IN_URL =
+	'https://profile.theguardian.com/signin' satisfies RoutePaths;
+
+/**
+ * The absolute URL of the Identity social sign-in page, parameterised by
+ * provider (`:social`). Use with `buildUrlWithQueryParams`.
+ */
+export const PROFILE_SIGN_IN_SOCIAL_URL =
+	'https://profile.theguardian.com/signin/:social' satisfies RoutePaths;
 
 /**
  * These are all valid paths for the Identity API

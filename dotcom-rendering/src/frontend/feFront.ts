@@ -1,9 +1,17 @@
+import type { ElectionComponentsJson } from '../components/ElectionTrackers/electionComponent';
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
 import type { EditionBranding } from '../types/branding';
-import type { ServerSideTests, StageType, Switches } from '../types/config';
-import type { BoostLevel, Image, StarRating } from '../types/content';
+import type { StageType, Switches } from '../types/config';
+import type {
+	BoostLevel,
+	Image,
+	Newsletter,
+	StarRating,
+} from '../types/content';
+import type { CustomSubnav } from '../types/customSubnav';
 import type { FooterType } from '../types/footer';
+import type { FrontEditorialTest } from '../types/front';
 import type { FENavType } from '../types/frontend';
 import type { FETagType } from '../types/tag';
 import type { Territory } from '../types/territory';
@@ -45,7 +53,6 @@ export type FEContainer =
 	| 'nav/media-list'
 	| 'news/most-popular'
 	| 'scrollable/highlights'
-	| 'flexible/special'
 	| 'flexible/general'
 	| 'scrollable/small'
 	| 'scrollable/medium'
@@ -95,10 +102,12 @@ export interface FEMediaAsset {
 	platform: string;
 	mimeType?: string;
 	assetType: string;
+	aspectRatio?: string;
 	dimensions?: {
 		width: number;
 		height: number;
 	};
+	hasAudio?: boolean;
 }
 
 /** @see https://github.com/guardian/frontend/blob/0bf69f55a/common/app/model/content/Atom.scala#L158-L169 */
@@ -117,6 +126,23 @@ export interface FEMediaAtom {
 	// channelId?: string; // currently unused
 }
 
+export type FEMultimediaSlideshowSlide = {
+	content:
+		| { type: 'Image'; item: { image: { allImages: Image[] } } }
+		| { type: 'Video'; item: { mediaAtom: FEMediaAtom } };
+	caption?: string;
+	label?: string;
+	credit?: string;
+};
+
+/** Pressed by frontend from fapi-client's resolved slideshow (model.content.MultimediaSlideshowAtom) */
+export type FEMultimediaSlideshow = {
+	id: string;
+	title?: string;
+	aspectRatio?: string;
+	slides: FEMultimediaSlideshowSlide[];
+};
+
 export type FEFrontCard = {
 	properties: {
 		isBreaking: boolean;
@@ -130,6 +156,7 @@ export type FEFrontCard = {
 			showMainVideo: boolean;
 			imageSlideshowReplace: boolean;
 			videoReplace: boolean;
+			multimediaSlideshowReplace?: boolean;
 		};
 		showKickerTag: boolean;
 		showByline: boolean;
@@ -197,6 +224,9 @@ export type FEFrontCard = {
 		editionBrandings: EditionBranding[];
 		href?: string;
 		embedUri?: string;
+		newsletterData?: Newsletter;
+		miniNavData?: CustomSubnav;
+		tests?: FrontEditorialTest[];
 	};
 	header: {
 		isVideo: boolean;
@@ -245,22 +275,27 @@ export type FEFrontCard = {
 		discussionId?: string;
 	};
 	display: {
-		isBoosted: boolean;
 		boostLevel?: BoostLevel;
 		isImmersive?: boolean;
 		showBoostedHeadline: boolean;
 		showQuotedHeadline: boolean;
 		imageHide: boolean;
 		showLivePlayable: boolean;
+		showMiniNav?: boolean;
+		miniNavData?: CustomSubnav;
 	};
 	format?: FEFormat;
 	enriched?: FESnap;
 	mediaAtom?: FEMediaAtom;
+	multimediaSlideshow?: FEMultimediaSlideshow;
 	supportingContent?: FESupportingContent[];
 	cardStyle?: {
 		type: FEFrontCardStyle;
 	};
 	type: string;
+	dataUrl?: string;
+	graphicKind?: 'electionTracker';
+	eventData?: ElectionComponentsJson;
 };
 
 export type FESnap = {
@@ -314,84 +349,91 @@ export type FECollection = {
 };
 
 export type FEFrontConfig = {
-	avatarApiUrl: string;
-	externalEmbedHost: string;
-	ajaxUrl: string;
-	keywords: string;
-	revisionNumber: string;
-	isProd: boolean;
-	switches: Switches;
-	section: string;
-	keywordIds: string;
-	locationapiurl: string;
-	sharedAdTargeting: SharedAdTargeting;
-	buildNumber: string;
-	abTests: ServerSideTests;
-	serverSideABTests: Record<string, string>;
-	pbIndexSites: { [key: string]: unknown }[];
-	ampIframeUrl: string;
-	beaconUrl: string;
-	host: string;
-	brazeApiKey?: string;
-	calloutsUrl: string;
-	requiresMembershipAccess: boolean;
-	onwardWebSocket: string;
-	a9PublisherId: string;
-	contentType: string;
-	facebookIaAdUnitRoot: string;
-	ophanEmbedJsUrl: string;
-	idUrl: string;
-	dcrSentryDsn: string;
-	isFront: true;
-	idWebAppUrl: string;
-	discussionApiUrl: string;
-	sentryPublicApiKey: string;
-	omnitureAccount: string;
-	dfpAccountId: string;
-	pageId: string;
-	forecastsapiurl: string;
-	assetsPath: string;
-	pillar: string;
-	commercialBundleUrl: string;
-	discussionApiClientHeader: string;
-	membershipUrl: string;
-	dfpHost: string;
-	cardStyle?: string;
-	googletagUrl: string;
-	sentryHost: string;
-	shouldHideAdverts: boolean;
-	mmaUrl: string;
-	membershipAccess: string;
-	isPreview: boolean;
-	googletagJsUrl: string;
-	supportUrl: string;
-	edition: string;
-	ipsosTag: string;
-	ophanJsUrl: string;
-	isPaidContent?: boolean;
-	mobileAppsAdUnitRoot: string;
-	plistaPublicApiKey: string;
-	frontendAssetsFullURL: string;
-	googleSearchId: string;
-	allowUserGeneratedContent: boolean;
-	dfpAdUnitRoot: string;
-	idApiUrl: string;
-	omnitureAmpAccount: string;
 	adUnit: string;
-	hasPageSkin: boolean;
-	webTitle: string;
-	stripePublicToken: string;
-	googleRecaptchaSiteKey: string;
+	ajaxUrl: string;
+	brazeApiKey?: string;
+	commercialBundleUrl: string;
+	dcrSentryDsn: string;
+	dfpAccountId: string;
+	discussionApiClientHeader: string;
+	discussionApiUrl: string;
 	discussionD2Uid: string;
-	googleSearchUrl: string;
-	optimizeEpicUrl: string;
-	stage: StageType;
-	idOAuthUrl: string;
-	isSensitive: boolean;
+	edition: string;
+	frontendAssetsFullURL: string;
+	googleRecaptchaSiteKey: string;
+	googletagUrl: string;
+	hasPageSkin: boolean;
+	host: string;
+	idApiUrl: string;
+	idUrl: string;
+	ipsosTag: string;
 	isDev: boolean;
-	thirdPartyAppsAccount?: string;
+	isFront: true;
+	isPaidContent?: boolean;
+	isPreview: boolean;
+	isProd: boolean;
+	isSensitive: boolean;
+	keywordIds: string;
+	mmaUrl: string;
+	pageId: string;
+	section: string;
+	sentryHost: string;
+	sentryPublicApiKey: string;
+	serverSideABTests: Record<string, string>;
+	sharedAdTargeting: SharedAdTargeting;
+	stage: StageType;
+	supportUrl: string;
+	switches: Switches;
+	webTitle: string;
+} & FELegacyConfig;
+
+/**
+ * Config sent in the payload from frontend to DCR but seems to be not used here
+ *
+ * If not used we should remove these properties from the Frontend model
+ */
+type FELegacyConfig = {
+	a9PublisherId: string;
+	allowUserGeneratedContent: boolean;
+	ampIframeUrl: string;
+	assetsPath: string;
+	avatarApiUrl: string;
 	avatarImagesUrl: string;
+	beaconUrl: string;
+	buildNumber: string;
+	calloutsUrl: string;
+	cardStyle?: string;
+	contentType: string;
+	dfpAdUnitRoot: string;
+	dfpHost: string;
+	externalEmbedHost: string;
+	facebookIaAdUnitRoot: string;
 	fbAppId: string;
+	forecastsapiurl: string;
+	googleSearchId: string;
+	googleSearchUrl: string;
+	googletagJsUrl: string;
+	idOAuthUrl: string;
+	idWebAppUrl: string;
+	keywords: string;
+	locationapiurl: string;
+	membershipAccess: string;
+	membershipUrl: string;
+	mobileAppsAdUnitRoot: string;
+	omnitureAccount: string;
+	omnitureAmpAccount: string;
+	onwardWebSocket: string;
+	ophanEmbedJsUrl: string;
+	ophanJsUrl: string;
+	optimizeEpicUrl: string;
+	pbIndexSites: { [key: string]: unknown }[];
+	pillar: string;
+	plistaPublicApiKey: string;
+	requiresMembershipAccess: boolean;
+	revisionNumber: string;
+	shouldHideAdverts: boolean;
+	stripePublicToken: string;
+	thirdPartyAppsAccount?: string;
 };
 
 export type FESeoData = {
@@ -417,6 +459,7 @@ export type FESupportingContent = {
 	properties: {
 		href?: string;
 		webUrl?: string;
+		tests?: FrontEditorialTest[];
 	};
 	header: {
 		kicker?: {

@@ -73,7 +73,8 @@ export const NewslettersPageHeading = ({
 				<p css={subtitleStyle}>
 					{editionId !== 'AU' && (
 						<>
-							Choose from {newsletterCount} available newsletters.{' '}
+							Choose from {newsletterCount} available
+							newsletters.{' '}
 						</>
 					)}
 					The best Guardian journalism, free to your inbox

@@ -7,12 +7,17 @@ import {
 	SvgCheckmark,
 	SvgShareWeb,
 } from '@guardian/source/react-components';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
 	ArticleDesign,
 	type ArticleFormat,
 	ArticleSpecial,
 } from '../lib/articleFormat';
+import {
+	puzzleActionAttributes,
+	type PuzzleActionContext,
+	type PuzzleActionSource,
+} from '../lib/puzzleActionTracking';
 import { transparentColour } from '../lib/transparentColour';
 import { useMatchMedia } from '../lib/useMatchMedia';
 import { palette as themePalette } from '../palette';
@@ -33,9 +38,13 @@ type Props = {
 	webTitle: string;
 	format: ArticleFormat;
 	context: Context;
+	puzzleTrackingSource?: PuzzleActionSource;
+	puzzleTrackingContext?: PuzzleActionContext;
 };
 
 type ButtonKind = 'native' | 'copy' | 'email';
+
+type TrackingAttributes = ReturnType<typeof puzzleActionAttributes>;
 
 type Context = 'ArticleMeta' | 'LiveBlock' | 'SubMeta' | 'ImageCaption';
 
@@ -47,8 +56,8 @@ const sharedButtonStyles = (
 	border-color: ${isNonLabsGalleryMeta
 		? themePalette('--share-button-border-meta')
 		: sizeXSmall
-		? themePalette('--share-button-xsmall-border')
-		: themePalette('--share-button-border')};
+			? themePalette('--share-button-xsmall-border')
+			: themePalette('--share-button-border')};
 	height: ${sizeXSmall ? '24px' : '36px'};
 `;
 
@@ -133,12 +142,14 @@ export const CopyNativeShareButton = ({
 	isLiveBlogMeta,
 	isCopied,
 	isNonLabsGalleryMeta,
+	trackingAttributes,
 }: {
 	onShare: () => void;
 	size?: Size;
 	isLiveBlogMeta: boolean;
 	isCopied: boolean;
 	isNonLabsGalleryMeta: boolean;
+	trackingAttributes?: TrackingAttributes;
 }) => {
 	const sizeXSmall = size === 'xsmall';
 
@@ -158,6 +169,7 @@ export const CopyNativeShareButton = ({
 				isLiveBlogMeta && liveBlogMobileMeta(isCopied),
 			])}
 			data-gu-name="share-button"
+			{...trackingAttributes}
 		>
 			{isCopied ? 'Link copied' : 'Share'}
 		</Button>
@@ -169,17 +181,20 @@ export const EmailLink = ({
 	size,
 	isLiveBlogMeta,
 	isNonLabsGalleryMeta,
+	trackingAttributes,
 }: {
 	href: string;
 	size?: Size;
 	isLiveBlogMeta: boolean;
 	isNonLabsGalleryMeta: boolean;
+	trackingAttributes?: TrackingAttributes;
 }) => {
 	const sizeXSmall = size === 'xsmall';
 
 	return (
 		<LinkButton
 			href={href}
+			{...trackingAttributes}
 			size={size}
 			type="button"
 			priority="tertiary"
@@ -219,9 +234,16 @@ export const ShareButton = ({
 	webTitle,
 	format,
 	context,
+	puzzleTrackingSource,
+	puzzleTrackingContext,
 }: Props) => {
 	const [isCopied, setIsCopied] = useState(false);
 	const [buttonKind, setButtonKind] = useState<ButtonKind>('email');
+	const copyFeedbackTimer = useRef<ReturnType<typeof setTimeout> | undefined>(
+		undefined,
+	);
+
+	useEffect(() => () => clearTimeout(copyFeedbackTimer.current), []);
 
 	const isLiveBlogMeta =
 		format.design === ArticleDesign.LiveBlog && context === 'ArticleMeta';
@@ -264,12 +286,20 @@ export const ShareButton = ({
 	}, [shareData, isLiveBlogBlockDesktop]);
 
 	useEffect(() => {
-		if (!isCopied) return;
+		if (!isCopied) {
+			return;
+		}
 		const timer = setTimeout(() => {
 			setIsCopied(false);
 		}, 3000);
 		return () => clearTimeout(timer);
 	}, [isCopied]);
+
+	const trackingAttributes = puzzleActionAttributes(
+		puzzleTrackingSource,
+		`share-attempt | ${buttonKind} | ${context}`,
+		puzzleTrackingContext,
+	);
 
 	switch (buttonKind) {
 		case 'native':
@@ -278,6 +308,7 @@ export const ShareButton = ({
 					onShare={() => {
 						navigator.share(shareData).catch(console.error);
 					}}
+					trackingAttributes={trackingAttributes}
 					size={size}
 					isLiveBlogMeta={isLiveBlogMeta}
 					isCopied={isCopied}
@@ -291,10 +322,21 @@ export const ShareButton = ({
 						navigator.clipboard
 							.writeText(shareData.url)
 							.then(() => {
-								setIsCopied(true);
+								if (puzzleTrackingSource === undefined) {
+									setIsCopied(true);
+								} else {
+									// Keep the clicked icon attached until Ophan's
+									// document listener has captured its button.
+									clearTimeout(copyFeedbackTimer.current);
+									copyFeedbackTimer.current = setTimeout(
+										() => setIsCopied(true),
+										0,
+									);
+								}
 							})
 							.catch(console.error);
 					}}
+					trackingAttributes={trackingAttributes}
 					size={size}
 					isLiveBlogMeta={isLiveBlogMeta}
 					isCopied={isCopied}
@@ -305,6 +347,7 @@ export const ShareButton = ({
 			return (
 				<EmailLink
 					href={`mailto:?subject=${webTitle}&body=${shareData.url}`}
+					trackingAttributes={trackingAttributes}
 					size={size}
 					isLiveBlogMeta={isLiveBlogMeta}
 					isNonLabsGalleryMeta={isNonLabsGalleryMeta}

@@ -22,6 +22,8 @@ export const getOphan = async (
 
 	if (renderingTarget === 'Apps') {
 		cachedOphan = {
+			init: () => undefined,
+			sendInitialEvent: () => undefined,
 			setEventEmitter: () => undefined, // We don't currently have a custom eventEmitter on DCR - like 'mediator' in Frontend.
 			trackComponentAttention: () => undefined,
 			record: (e) => {
@@ -40,6 +42,9 @@ export const getOphan = async (
 					);
 				}
 			},
+			bumpViewId: () => undefined,
+			getViewId: () => 'Apps',
+			getPageViewId: () => 'Apps',
 			viewId: 'Apps',
 			pageViewId: 'Apps',
 		};
@@ -51,6 +56,8 @@ export const getOphan = async (
 	const { default: ophan } = await import(
 		/* webpackMode: "eager" */ '@guardian/ophan-tracker-js'
 	);
+
+	ophan.init('ng');
 
 	const record: (typeof ophan)['record'] = (event, callback) => {
 		ophan.record(event, callback);

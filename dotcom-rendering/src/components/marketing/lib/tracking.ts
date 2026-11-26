@@ -24,6 +24,59 @@ type LinkParams = {
 	acquisitionData: string;
 };
 
+const trackingParamNames: (keyof LinkParams)[] = [
+	'REFPVID',
+	'INTCMP',
+	'acquisitionData',
+];
+
+const singleValueTrackingParamNames = new Set<string>(trackingParamNames);
+
+const getQueryParams = (url: string): URLSearchParams => {
+	const queryStart = url.indexOf('?');
+	const hashStart = url.indexOf('#');
+	if (queryStart === -1 || (hashStart !== -1 && hashStart < queryStart)) {
+		return new URLSearchParams();
+	}
+	const queryEnd = hashStart === -1 ? url.length : hashStart;
+	return new URLSearchParams(url.slice(queryStart + 1, queryEnd));
+};
+
+const deduplicateQueryParams = (url: string): string => {
+	const hashIndex = url.indexOf('#');
+	const urlWithoutHash = hashIndex === -1 ? url : url.slice(0, hashIndex);
+	const hash = hashIndex === -1 ? '' : url.slice(hashIndex);
+	const queryStart = urlWithoutHash.indexOf('?');
+	if (queryStart === -1) return url;
+
+	const queryString = urlWithoutHash.slice(queryStart + 1);
+	const seenPairs = new Set<string>();
+	const seenTrackingParams = new Set<string>();
+	const deduplicatedQuery = queryString
+		.split('&')
+		.filter((param) => {
+			if (!param) return false;
+
+			const parsedParam = new URLSearchParams(param);
+			const name = parsedParam.keys().next().value;
+			if (name === undefined) return false;
+
+			if (singleValueTrackingParamNames.has(name)) {
+				if (seenTrackingParams.has(name)) return false;
+				seenTrackingParams.add(name);
+				return true;
+			}
+
+			const pair = JSON.stringify([name, parsedParam.get(name)]);
+			if (seenPairs.has(pair)) return false;
+			seenPairs.add(pair);
+			return true;
+		})
+		.join('&');
+
+	return `${urlWithoutHash.slice(0, queryStart)}?${deduplicatedQuery}${hash}`;
+};
+
 type AbTestObject = {
 	name: string;
 	variant: string;
@@ -34,8 +87,6 @@ const generateAbTestArray = (
 	abTestName: string,
 	abTestVariant: string,
 	targetingAbTest?: TargetingAbTest,
-	amountsAbTestName?: string,
-	amountsAbTestVariant?: string,
 ): AbTestObject[] => {
 	const abTests: AbTestObject[] = [
 		{
@@ -47,13 +98,6 @@ const generateAbTestArray = (
 		abTests.push({
 			name: targetingAbTest.testName,
 			variant: targetingAbTest.variantName,
-		});
-	}
-	if (amountsAbTestName && amountsAbTestVariant) {
-		abTests.push({
-			name: amountsAbTestName,
-			variant: amountsAbTestVariant,
-			testType: 'AMOUNTS_TEST',
 		});
 	}
 	return abTests;
@@ -95,21 +139,22 @@ const generateQueryString = (
 	return queryString.join('&');
 };
 
-const addTrackingParams = (
-	baseUrl: string,
-	params: Tracking,
-	amountsAbTestName?: string,
-	amountsAbTestVariant?: string,
-): string => {
+const addTrackingParams = (baseUrl: string, params: Tracking): string => {
 	const abTests = generateAbTestArray(
 		params.abTestName,
 		params.abTestVariant,
 		params.targetingAbTest,
-		amountsAbTestName,
-		amountsAbTestVariant,
 	);
 	const acquisitionData = encodeAcquisitionsData(params, abTests);
-	const queryString = generateQueryString(params, acquisitionData);
+	const existingQueryParams = getQueryParams(baseUrl);
+	const queryString = generateQueryString(params, acquisitionData)
+		.split('&')
+		.filter((param) => {
+			const paramName = param.split('=', 1)[0] ?? '';
+			return !existingQueryParams.has(paramName);
+		})
+		.join('&');
+	if (!queryString) return baseUrl;
 	const alreadyHasQueryString = baseUrl.includes('?');
 	return `${baseUrl}${alreadyHasQueryString ? '&' : '?'}${queryString}`;
 };
@@ -150,8 +195,15 @@ export const addAbandonedBasketAndTrackingParamsToUrl = (
 
 const addPromoCodesToUrl = (url: string, promoCodes: string[]): string => {
 	if (!promoCodes.length) return url;
+	const seenPromoCodes = new Set(getQueryParams(url).getAll('promoCode'));
+	const promoCodesToAdd = promoCodes.filter((code) => {
+		if (seenPromoCodes.has(code)) return false;
+		seenPromoCodes.add(code);
+		return true;
+	});
+	if (!promoCodesToAdd.length) return url;
 	const separator = url.includes('?') ? '&' : '?';
-	const promoParams = promoCodes
+	const promoParams = promoCodesToAdd
 		.map((code) => `promoCode=${encodeURIComponent(code)}`)
 		.join('&');
 	return `${url}${separator}${promoParams}`;
@@ -166,8 +218,6 @@ interface SupportUrlData {
 	tracking: Tracking; // tracking data to be added to the querystring
 	promoCodes: string[]; // any promo codes, to be added in the promoCodes parameter
 	countryCode?: string; // browser's country code
-	amountsAbTestName?: string; // amounts test name if applicable
-	amountsAbTestVariant?: string; // amounts test variant name if applicable
 }
 
 export const enrichSupportUrl = ({
@@ -175,22 +225,15 @@ export const enrichSupportUrl = ({
 	tracking,
 	promoCodes,
 	countryCode,
-	amountsAbTestName,
-	amountsAbTestVariant,
 }: SupportUrlData): string => {
 	if (!isSupportUrl(baseUrl)) {
 		return baseUrl;
 	}
 	const urlWithRegion = addRegionIdToSupportUrl(baseUrl, countryCode);
 
-	const withTracking = addTrackingParams(
-		urlWithRegion,
-		tracking,
-		amountsAbTestName,
-		amountsAbTestVariant,
-	);
+	const withTracking = addTrackingParams(urlWithRegion, tracking);
 
-	return addPromoCodesToUrl(withTracking, promoCodes);
+	return deduplicateQueryParams(addPromoCodesToUrl(withTracking, promoCodes));
 };
 
 const hrefRegex = /href="(.*?)"/g;
@@ -286,6 +329,7 @@ const addChoiceCardDestinationTestParam = (
 	url: string,
 	destination: ChoiceCard['destination'],
 	destinationTest: ChoiceCard['destinationTest'],
+	isRecurringProduct: boolean,
 ): string => {
 	if (!destinationTest || typeof destinationTest !== 'object') {
 		return url;
@@ -300,7 +344,7 @@ const addChoiceCardDestinationTestParam = (
 
 	const { testName, variantName } = parsedDestinationTest;
 	const paramKey =
-		destination === 'LandingPage'
+		isRecurringProduct || destination === 'LandingPage'
 			? 'force-landing-page'
 			: 'force-one-time-checkout';
 	const newParam = `${paramKey}=${testName}:${variantName}`;
@@ -322,7 +366,11 @@ export const addTrackingParamsToProfileUrl = (
 
 const SupportUrl = 'https://support.theguardian.com';
 
-export const getChoiceCardUrl = (choiceCard: ChoiceCard): string => {
+export const getChoiceCardUrl = (choiceCard?: ChoiceCard): string => {
+	if (!choiceCard) {
+		// No choice selected, send to landing page
+		return `${SupportUrl}/contribute`;
+	}
 	const { product } = choiceCard;
 	const destination = choiceCard.destination ?? 'LandingPage';
 	const { destinationTest } = choiceCard;
@@ -333,12 +381,14 @@ export const getChoiceCardUrl = (choiceCard: ChoiceCard): string => {
 				addChoiceCardsOneTimeParams(`${SupportUrl}/contribute`),
 				destination,
 				destinationTest,
+				false,
 			);
 		} else {
 			return addChoiceCardDestinationTestParam(
 				`${SupportUrl}/one-time-checkout`,
 				destination,
 				destinationTest,
+				false,
 			);
 		}
 	} else {
@@ -351,6 +401,7 @@ export const getChoiceCardUrl = (choiceCard: ChoiceCard): string => {
 			),
 			destination,
 			destinationTest,
+			true,
 		);
 	}
 };
@@ -374,7 +425,7 @@ export const buildAmpEpicCampaignCode = (
 	variantName: string,
 ): string => `AMP__${testName}__${variantName}`;
 
-const createEventFromTracking = (action: TAction) => {
+export const createEventFromTracking = (action: TAction) => {
 	return (tracking: Tracking, componentId: string): ComponentEvent => {
 		const {
 			abTestName,
@@ -389,14 +440,14 @@ const createEventFromTracking = (action: TAction) => {
 				? {
 						name: abTestName,
 						variant: abTestVariant,
-				  }
+					}
 				: null;
 
 		const targetingAbTest = tracking.targetingAbTest
 			? {
 					name: tracking.targetingAbTest.testName,
 					variant: tracking.targetingAbTest.variantName,
-			  }
+				}
 			: null;
 
 		return {

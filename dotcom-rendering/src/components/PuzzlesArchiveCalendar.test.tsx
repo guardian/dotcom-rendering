@@ -1,0 +1,1978 @@
+import {
+	act,
+	fireEvent,
+	render,
+	screen,
+	waitFor,
+	within,
+} from '@testing-library/react';
+import { getAuthStatus } from '../lib/identity';
+import type { PuzzlesArchive } from '../types/puzzlesPage';
+import {
+	archiveCardDate,
+	archivePageUrl,
+	archiveStatus,
+	buildCalendarCells,
+	canNavigateToNextMonth,
+	currentWeekdayLabel,
+	daysInMonth,
+	mondayFirstOffset,
+	PuzzlesArchiveCalendar,
+} from './PuzzlesArchiveCalendar.island';
+
+jest.mock('../lib/identity', () => ({
+	getAuthStatus: jest.fn(),
+}));
+
+const mockedGetAuthStatus = jest.mocked(getAuthStatus);
+
+const archive: PuzzlesArchive = {
+	category: 'logic-puzzles',
+	title: 'Logic puzzles',
+	description: 'Choose a puzzle.',
+	selectedPuzzle: {
+		id: 'sudoku-easy',
+		title: 'Easy sudoku',
+		puzzleType: 'SUDOKU_EASY',
+		slug: 'logic-puzzles/sudoku-easy',
+		set: 'easy',
+		path: '/puzzles-and-games/logic-puzzles/sudoku-easy/archive',
+	},
+	puzzles: [],
+	year: 2026,
+	month: 9,
+	items: [
+		{
+			puzzleType: 'SUDOKU_EASY',
+			date: '2026-09-02',
+			progress: 50,
+			setterName: 'Philistine',
+			url: '/puzzles-and-games/logic-puzzles/sudoku-easy/2026-09-02',
+		},
+	],
+	hasError: false,
+	moreFrom: [],
+};
+
+describe('archive calendar helpers', () => {
+	it('builds an archive URL that preserves the puzzle and month', () => {
+		expect(
+			archivePageUrl(
+				{ path: '/puzzles-and-games/crosswords/mini/archive' },
+				2026,
+				8,
+			),
+		).toBe('/puzzles-and-games/crosswords/mini/archive?year=2026&month=8');
+	});
+
+	it('maps the API status, not the progress value, to the day status', () => {
+		const item = archive.items[0]!;
+		expect(
+			archiveStatus({ ...item, progress: 10, gameStatus: 'completed' }),
+		).toBe('completed');
+		expect(
+			archiveStatus({
+				...item,
+				progress: 100,
+				gameStatus: 'in-progress',
+			}),
+		).toBe('in-progress');
+		expect(
+			archiveStatus({
+				...item,
+				puzzleType: 'CROSSWORD_QUICK',
+				progress: 100,
+				gameStatus: 'in-progress',
+			}),
+		).toBe('available');
+		expect(
+			archiveStatus({
+				...item,
+				progress: 100,
+				gameStatus: 'not-started',
+			}),
+		).toBe('available');
+		expect(archiveStatus({ ...item, progress: 100 })).toBe('available');
+		expect(archiveStatus(undefined)).toBe('unavailable');
+	});
+
+	it.each([
+		[2025, 2, 28],
+		[2024, 2, 29],
+		[2026, 4, 30],
+		[2026, 1, 31],
+	])('handles %s-%s with %s days', (year, month, expected) => {
+		expect(daysInMonth(year, month)).toBe(expected);
+	});
+
+	it('aligns Monday first and never creates dates from another month', () => {
+		expect(mondayFirstOffset(2026, 9)).toBe(1);
+		const cells = buildCalendarCells(2026, 9, archive.items);
+		expect(cells[0]).toBeNull();
+		expect(cells.filter(Boolean)).toHaveLength(30);
+		expect(
+			cells
+				.filter(Boolean)
+				.every((cell) => cell?.date.startsWith('2026-09')),
+		).toBe(true);
+	});
+
+	it('only allows navigating forward from a month before the current month', () => {
+		const today = new Date(2026, 9, 1);
+
+		expect(canNavigateToNextMonth(2026, 9, today)).toBe(true);
+		expect(canNavigateToNextMonth(2026, 10, today)).toBe(false);
+		expect(canNavigateToNextMonth(2026, 11, today)).toBe(false);
+	});
+
+	it('formats recent card dates relative to the current London date', () => {
+		const today = new Date('2026-10-07T12:00:00Z');
+
+		expect(archiveCardDate('2026-10-07', today)).toBe('Today');
+		expect(archiveCardDate('2026-10-06', today)).toBe('Yesterday');
+		expect(archiveCardDate('2026-10-03', today)).toBe('Sat 3 Oct');
+	});
+
+	it('resolves the current weekday in London', () => {
+		expect(currentWeekdayLabel(new Date('2026-10-07T12:00:00Z'))).toBe(
+			'We',
+		);
+	});
+});
+
+describe('PuzzlesArchiveCalendar', () => {
+	const pageConfig = window.guardian.config
+		.page as typeof window.guardian.config.page & { ajaxUrl?: string };
+	const originalAjaxUrl = pageConfig.ajaxUrl;
+
+	beforeEach(() => {
+		pageConfig.ajaxUrl = '';
+		mockedGetAuthStatus.mockResolvedValue({ kind: 'SignedOut' });
+		window.history.replaceState(
+			{},
+			'',
+			'/puzzles-and-games/logic-puzzles/archive',
+		);
+	});
+
+	afterEach(() => {
+		pageConfig.ajaxUrl = originalAjaxUrl;
+		jest.useRealTimers();
+		jest.restoreAllMocks();
+		Reflect.deleteProperty(global, 'fetch');
+	});
+
+	it('distinguishes type, recent-card and calendar-date selection context', () => {
+		const medium = {
+			...archive.selectedPuzzle,
+			id: 'sudoku-medium',
+			title: 'Medium sudoku',
+			slug: 'logic-puzzles/sudoku-medium',
+			set: 'medium',
+			path: '/puzzles-and-games/logic-puzzles/sudoku-medium/archive',
+		};
+		const { container } = render(
+			<PuzzlesArchiveCalendar
+				initialArchive={{
+					...archive,
+					puzzles: [archive.selectedPuzzle, medium],
+					recentItems: ['2026-09-01', '2026-09-03', '2026-09-02'].map(
+						(date) => ({ ...archive.items[0]!, date }),
+					),
+				}}
+			/>,
+		);
+		const type = screen.getByRole('link', { name: 'Medium sudoku' });
+		expect(type.closest('[data-component]')).toHaveAttribute(
+			'data-component',
+			'puzzles-archive-types',
+		);
+		expect(type).toHaveAttribute(
+			'data-link-name',
+			'archive | puzzle-type | logic-puzzles | puzzle-sudoku-easy | target-puzzle-sudoku-medium | month-2026-09',
+		);
+		expect(type).toHaveAttribute(
+			'href',
+			'/puzzles-and-games/logic-puzzles/sudoku-medium/archive?year=2026&month=9',
+		);
+
+		const recent = container.querySelectorAll(
+			'[data-component="puzzles-archive-recent"] a',
+		);
+		expect(
+			Array.from(recent, (link) => link.getAttribute('data-link-name')),
+		).toEqual([
+			'archive | recent | logic-puzzles | puzzle-sudoku-easy | date-2026-09-03 | card-@1',
+			'archive | recent | logic-puzzles | puzzle-sudoku-easy | date-2026-09-02 | card-@2',
+			'archive | recent | logic-puzzles | puzzle-sudoku-easy | date-2026-09-01 | card-@3',
+		]);
+		const date = screen.getByLabelText('2026-09-02, available');
+		expect(date.closest('[data-component]')).toHaveAttribute(
+			'data-component',
+			'puzzles-archive-calendar',
+		);
+		expect(date).toHaveAttribute(
+			'data-link-name',
+			'archive | date | logic-puzzles | puzzle-sudoku-easy | date-2026-09-02',
+		);
+		expect(
+			container.querySelector('[data-status="unavailable"]'),
+		).not.toHaveAttribute('data-link-name');
+	});
+
+	it('distinguishes the empty-month fallback and preserves year boundaries', () => {
+		render(
+			<PuzzlesArchiveCalendar
+				initialArchive={{ ...archive, month: 1, items: [] }}
+			/>,
+		);
+		expect(
+			screen.getByRole('link', { name: 'Previous month' }),
+		).toHaveAttribute(
+			'data-link-name',
+			'archive | previous-month | logic-puzzles | puzzle-sudoku-easy | month-2025-12',
+		);
+		expect(
+			screen.getByRole('link', { name: 'View previous month' }),
+		).toHaveAttribute(
+			'data-link-name',
+			'archive | previous-month-empty | logic-puzzles | puzzle-sudoku-easy | month-2025-12',
+		);
+	});
+
+	it('cancels a deferred selection when the calendar unmounts', async () => {
+		jest.useFakeTimers();
+		const fetchMock = jest.fn();
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		const { unmount } = render(
+			<PuzzlesArchiveCalendar initialArchive={archive} />,
+		);
+		fireEvent.click(screen.getByRole('link', { name: 'Previous month' }));
+		unmount();
+		await act(async () => {
+			jest.runOnlyPendingTimers();
+		});
+		expect(fetchMock).not.toHaveBeenCalled();
+	});
+
+	it.each([false, true])(
+		'refreshes restored calendar and recent-card progress after Back (signed in: %s)',
+		async (signedIn) => {
+			if (signedIn) {
+				mockedGetAuthStatus.mockResolvedValue({
+					kind: 'SignedIn',
+					accessToken: { accessToken: 'test-token' },
+					idToken: {},
+				} as never);
+			}
+			const completed = {
+				...archive,
+				items: [
+					{
+						...archive.items[0]!,
+						progress: 100,
+						gameStatus: 'completed',
+					},
+				],
+			};
+			const fetchMock = jest
+				.fn()
+				.mockResolvedValueOnce({
+					ok: true,
+					json: async () => (signedIn ? archive : completed),
+				})
+				.mockResolvedValue({ ok: true, json: async () => completed });
+			Object.defineProperty(global, 'fetch', {
+				configurable: true,
+				value: fetchMock,
+			});
+			render(<PuzzlesArchiveCalendar initialArchive={archive} />);
+			await act(async () => undefined);
+			expect(fetchMock).toHaveBeenCalledTimes(signedIn ? 1 : 0);
+			expect(
+				screen.getByLabelText('2026-09-02, available'),
+			).toBeInTheDocument();
+
+			fireEvent(
+				window,
+				new PageTransitionEvent('pageshow', { persisted: true }),
+			);
+
+			const completedDate = await screen.findByLabelText(
+				'2026-09-02, completed',
+			);
+			expect(completedDate).toHaveAttribute(
+				'data-link-name',
+				'archive | date | logic-puzzles | puzzle-sudoku-easy | date-2026-09-02',
+			);
+			expect(
+				screen.getByRole('link', { name: /Latest Easy sudoku/ }),
+			).toHaveAttribute(
+				'data-link-name',
+				'archive | recent | logic-puzzles | puzzle-sudoku-easy | date-2026-09-02 | card-@1',
+			);
+			expect(fetchMock).toHaveBeenCalledTimes(signedIn ? 2 : 1);
+			expect(fetchMock).toHaveBeenLastCalledWith(
+				expect.objectContaining({
+					pathname:
+						'/puzzles-and-games/logic-puzzles/archive-data/sudoku-easy/2026/9',
+				}),
+				expect.objectContaining({ cache: 'no-store' }),
+			);
+			expect(
+				within(
+					screen.getByRole('link', { name: /Latest Easy sudoku/ }),
+				).getByText('Played'),
+			).toBeInTheDocument();
+		},
+	);
+
+	it('does not refresh on the initial pageshow and removes the listener on unmount', async () => {
+		const fetchMock = jest.fn();
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		const { unmount } = render(
+			<PuzzlesArchiveCalendar initialArchive={archive} />,
+		);
+		await act(async () => undefined);
+		fireEvent(
+			window,
+			new PageTransitionEvent('pageshow', { persisted: false }),
+		);
+		await act(async () => undefined);
+		expect(fetchMock).not.toHaveBeenCalled();
+		unmount();
+		fireEvent(
+			window,
+			new PageTransitionEvent('pageshow', { persisted: true }),
+		);
+		await act(async () => undefined);
+		expect(fetchMock).not.toHaveBeenCalled();
+	});
+
+	it('links an available date to the API-derived exact puzzle destination', () => {
+		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
+		expect(screen.getByLabelText('2026-09-02, available')).toHaveAttribute(
+			'href',
+			archive.items[0]?.url,
+		);
+	});
+
+	it('shows the setter name inside an available date', () => {
+		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
+
+		expect(screen.getByTitle('Philistine')).toHaveStyle({
+			top: '50%',
+			textAlign: 'center',
+			transform: 'translateY(-50%)',
+		});
+	});
+
+	it('uses the full crossword name for the archive H2', () => {
+		render(
+			<PuzzlesArchiveCalendar
+				initialArchive={{
+					...archive,
+					category: 'crosswords',
+					selectedPuzzle: {
+						...archive.selectedPuzzle,
+						title: 'Mini',
+					},
+				}}
+			/>,
+		);
+
+		expect(
+			screen.getByRole('heading', {
+				level: 2,
+				name: 'Mini crossword',
+			}),
+		).toBeInTheDocument();
+	});
+
+	it('uses the outlined check icon in the Played legend', () => {
+		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
+
+		const playedLegend = screen.getByText('Played', {
+			selector: 'span.completed',
+		});
+		const playedIcon = playedLegend.querySelector('svg');
+
+		expect(playedIcon).toHaveAttribute('width', '13.3');
+		expect(playedIcon).toHaveAttribute('height', '13.3');
+		expect(playedIcon).toHaveAttribute('viewBox', '0 0 14 14');
+		expect(playedIcon?.querySelectorAll('path')).toHaveLength(3);
+		expect(playedIcon?.querySelectorAll('path')[2]).toHaveAttribute(
+			'fill',
+			'#22874D',
+		);
+	});
+
+	it.each([false, true])(
+		'uses the appropriate completed icons for v3=%s',
+		(showPremiumIndicators) => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={{
+						...archive,
+						items: [
+							{ ...archive.items[0]!, gameStatus: 'completed' },
+						],
+					}}
+					showPremiumIndicators={showPremiumIndicators}
+				/>,
+			);
+
+			const day = screen.getByRole('link', {
+				name: '2026-09-02, completed',
+			});
+			const calendarIcon = day.querySelector('.completed-icon svg');
+			const legendIcon = screen
+				.getByText('Played', { selector: 'span.completed' })
+				.querySelector('svg');
+
+			expect(calendarIcon).toHaveAttribute(
+				'width',
+				showPremiumIndicators ? '16' : '18',
+			);
+			expect(calendarIcon).toHaveAttribute(
+				'height',
+				showPremiumIndicators ? '13.35119' : '15',
+			);
+			expect(legendIcon).toHaveAttribute(
+				'width',
+				showPremiumIndicators ? '10.28516' : '13.3',
+			);
+			expect(legendIcon).toHaveAttribute(
+				'height',
+				showPremiumIndicators ? '8.57096' : '13.3',
+			);
+			if (showPremiumIndicators) {
+				expect(calendarIcon?.querySelector('path')).toHaveAttribute(
+					'd',
+					'M1.2039 6.15452L4.62571 9.5552L14.7634 0L16 1.25435L4.76485 13.3512H4.08131L0 7.40697L1.2039 6.15452Z',
+				);
+				expect(legendIcon?.innerHTML).toBe(calendarIcon?.innerHTML);
+				expect(
+					legendIcon?.querySelector('mask'),
+				).not.toBeInTheDocument();
+			} else {
+				expect(legendIcon?.querySelector('mask')).toBeInTheDocument();
+			}
+		},
+	);
+
+	it.each([
+		[false, false, true],
+		[true, false, false],
+		[false, true, false],
+		[true, true, false],
+		[undefined, undefined, false],
+	])(
+		'for free window=%s and premium=%s shows a star=%s',
+		(isWithinFreeWindow, hasPremiumEntitlement, showStar) => {
+			render(
+				<PuzzlesArchiveCalendar
+					showPremiumIndicators={true}
+					initialArchive={{
+						...archive,
+						items: [
+							{
+								...archive.items[0]!,
+								isWithinFreeWindow,
+								hasPremiumEntitlement,
+							},
+						],
+					}}
+				/>,
+			);
+
+			const day = within(
+				screen.getByTestId('archive-calendar'),
+			).getByRole('link');
+			expect(day).toHaveAccessibleName(
+				`2026-09-02, ${showStar ? 'Supporter exclusive' : 'available'}`,
+			);
+			expect(day).toHaveAttribute('href', archive.items[0]!.url);
+			expect(
+				day.querySelector('.supporter-exclusive-icon') !== null,
+			).toBe(showStar);
+			if (showStar) {
+				expect(day).toHaveAttribute('data-supporter-exclusive', 'true');
+				expect(day.querySelector('svg')).toHaveAttribute('width', '12');
+				expect(day.querySelector('svg')).toHaveAttribute(
+					'height',
+					'12',
+				);
+			} else {
+				expect(day).not.toHaveAttribute('data-supporter-exclusive');
+			}
+			expect(
+				screen
+					.getByText('Supporter exclusive', {
+						selector: 'span.supporter-exclusive',
+					})
+					.querySelector('svg'),
+			).toHaveAttribute('aria-hidden', 'true');
+		},
+	);
+
+	it.each([false, undefined])(
+		'hides premium indicators when the experiment is off (%s)',
+		(showPremiumIndicators) => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={{
+						...archive,
+						items: [
+							{
+								...archive.items[0]!,
+								isWithinFreeWindow: false,
+								hasPremiumEntitlement: false,
+							},
+						],
+					}}
+					showPremiumIndicators={showPremiumIndicators}
+				/>,
+			);
+
+			const day = screen.getByRole('link', {
+				name: '2026-09-02, available',
+			});
+			expect(day).not.toHaveAttribute('data-supporter-exclusive');
+			expect(
+				day.querySelector('.supporter-exclusive-icon'),
+			).not.toBeInTheDocument();
+			expect(
+				screen.queryByText('Supporter exclusive'),
+			).not.toBeInTheDocument();
+			expect(
+				screen.getByText('Available', { selector: 'span.available' }),
+			).toBeInTheDocument();
+		},
+	);
+
+	it('preserves the played indicator on a supporter-exclusive puzzle', () => {
+		render(
+			<PuzzlesArchiveCalendar
+				showPremiumIndicators={true}
+				initialArchive={{
+					...archive,
+					items: [
+						{
+							...archive.items[0]!,
+							gameStatus: 'completed',
+							isWithinFreeWindow: false,
+							hasPremiumEntitlement: false,
+						},
+					],
+				}}
+			/>,
+		);
+
+		const day = screen.getByRole('link', {
+			name: '2026-09-02, Supporter exclusive, completed',
+		});
+		expect(day.querySelector('.completed-icon')).toBeInTheDocument();
+		expect(
+			day.querySelector('.supporter-exclusive-icon'),
+		).toBeInTheDocument();
+	});
+
+	it.each([true, false])(
+		'refreshes access indicators using the signed-in user’s entitlement=%s',
+		async (premium) => {
+			mockedGetAuthStatus.mockResolvedValue({
+				kind: 'SignedIn',
+				accessToken: { accessToken: 'access-token' },
+				idToken: {},
+			} as never);
+			const initialArchive = {
+				...archive,
+				items: [
+					{
+						...archive.items[0]!,
+						isWithinFreeWindow: false,
+						hasPremiumEntitlement: false,
+					},
+				],
+			};
+			const fetchMock = jest.fn().mockResolvedValue({
+				ok: true,
+				json: async () => ({
+					...initialArchive,
+					items: [
+						{
+							...initialArchive.items[0],
+							hasPremiumEntitlement: premium,
+						},
+					],
+				}),
+			});
+			Object.defineProperty(global, 'fetch', {
+				configurable: true,
+				value: fetchMock,
+			});
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={initialArchive}
+					showPremiumIndicators={true}
+				/>,
+			);
+
+			await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(1));
+			await waitFor(() =>
+				expect(screen.getByTestId('archive-calendar')).toHaveAttribute(
+					'aria-busy',
+					'false',
+				),
+			);
+			expect(fetchMock).toHaveBeenCalledWith(
+				expect.any(URL),
+				expect.objectContaining({
+					headers: {
+						Accept: 'application/json',
+						Authorization: 'Bearer access-token',
+					},
+				}),
+			);
+			const day = within(
+				screen.getByTestId('archive-calendar'),
+			).getByRole('link');
+			expect(
+				day.querySelector('.supporter-exclusive-icon') !== null,
+			).toBe(!premium);
+			expect(screen.queryByText('Supporter exclusive') !== null).toBe(
+				!premium,
+			);
+			expect(
+				screen.queryByText(
+					'Supporter exclusive - you have ad-free access to the puzzles archive',
+				) !== null,
+			).toBe(premium);
+			expect(
+				screen.queryByRole('link', {
+					name: 'Sign in or create an account',
+				}),
+			).not.toBeInTheDocument();
+		},
+	);
+
+	it.each([
+		['mini', 'daily'],
+		['quick', 'from Monday to Saturday'],
+		['cryptic', 'from Monday to Friday'],
+		['quick-cryptic', 'every Saturday'],
+		['weekend', 'every Saturday'],
+		['prize', 'every Saturday'],
+		['quiptic', 'every Sunday'],
+		['sunday-quick', 'every Sunday'],
+		['genius', 'daily'],
+		['special', 'daily'],
+	])('shows the V3 publication schedule for %s', async (set, frequency) => {
+		await act(async () => {
+			render(
+				<PuzzlesArchiveCalendar
+					showPremiumIndicators={true}
+					initialArchive={{
+						...archive,
+						category: 'crosswords',
+						selectedPuzzle: { ...archive.selectedPuzzle, set },
+					}}
+				/>,
+			);
+		});
+		expect(
+			screen.getByText(`This puzzle is published ${frequency}.`),
+		).toBeInTheDocument();
+	});
+
+	it('defaults other puzzle categories to daily publication', async () => {
+		await act(async () => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={archive}
+					showPremiumIndicators={true}
+				/>,
+			);
+		});
+		expect(
+			screen.getByText('This puzzle is published daily.'),
+		).toBeInTheDocument();
+	});
+
+	it.each([
+		'https://profile.code.dev-theguardian.com',
+		'https://profile.theguardian.com',
+	])(
+		'shows the signed-out V3 progress prompt with the configured identity URL %s',
+		async (idUrl) => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={archive}
+					showPremiumIndicators={true}
+					idUrl={idUrl}
+				/>,
+			);
+			const link = await screen.findByRole('link', {
+				name: 'Sign in or create an account',
+			});
+			expect(link.getAttribute('href')).toMatch(`${idUrl}/signin?`);
+			expect(link.parentElement).toHaveTextContent(
+				'Want to track your progress? Sign in or create an account',
+			);
+			expect(link).toHaveTextContent(/^Sign in or create an account$/);
+			const icon = link.closest('[data-component]')?.querySelector('svg');
+			expect(icon).toHaveAttribute('width', '20');
+			expect(icon).toHaveAttribute('height', '20');
+			expect(icon).toHaveAttribute('aria-hidden', 'true');
+			expect(screen.getByText('Supporter exclusive')).toBeInTheDocument();
+		},
+	);
+
+	it('does not show a sign-in prompt while authentication is pending', () => {
+		mockedGetAuthStatus.mockReturnValue(new Promise(() => undefined));
+		render(
+			<PuzzlesArchiveCalendar
+				initialArchive={archive}
+				showPremiumIndicators={true}
+			/>,
+		);
+		expect(
+			screen.queryByRole('link', {
+				name: 'Sign in or create an account',
+			}),
+		).not.toBeInTheDocument();
+	});
+
+	it('does not claim subscriber access when the authenticated response has no entitlement', async () => {
+		mockedGetAuthStatus.mockResolvedValue({
+			kind: 'SignedIn',
+			accessToken: { accessToken: 'access-token' },
+			idToken: {},
+		} as never);
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: jest
+				.fn()
+				.mockResolvedValue({ ok: true, json: async () => archive }),
+		});
+		await act(async () => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={archive}
+					showPremiumIndicators={true}
+				/>,
+			);
+		});
+		expect(screen.getByText('Supporter exclusive')).toBeInTheDocument();
+		expect(
+			screen.queryByText(
+				'Supporter exclusive - you have ad-free access to the puzzles archive',
+			),
+		).not.toBeInTheDocument();
+		expect(
+			screen.queryByRole('link', {
+				name: 'Sign in or create an account',
+			}),
+		).not.toBeInTheDocument();
+	});
+
+	it.each([true, false])(
+		'does not add V3 messages or a subtitle outside V3 (signed in=%s)',
+		async (signedIn) => {
+			if (signedIn) {
+				mockedGetAuthStatus.mockResolvedValue({
+					kind: 'SignedIn',
+					accessToken: { accessToken: 'access-token' },
+					idToken: {},
+				} as never);
+			}
+			Object.defineProperty(global, 'fetch', {
+				configurable: true,
+				value: jest.fn().mockResolvedValue({
+					ok: true,
+					json: async () => ({
+						...archive,
+						items: archive.items.map((item) => ({
+							...item,
+							hasPremiumEntitlement: true,
+						})),
+					}),
+				}),
+			});
+			await act(async () => {
+				render(
+					<PuzzlesArchiveCalendar
+						initialArchive={archive}
+						showPremiumIndicators={false}
+					/>,
+				);
+			});
+			expect(
+				screen.queryByText(/This puzzle is published/),
+			).not.toBeInTheDocument();
+			expect(
+				screen.queryByText(/Supporter exclusive/),
+			).not.toBeInTheDocument();
+			expect(
+				screen.queryByRole('link', {
+					name: 'Sign in or create an account',
+				}),
+			).not.toBeInTheDocument();
+		},
+	);
+
+	it('updates the publication subtitle when the selected puzzle changes', async () => {
+		const quick = {
+			...archive.selectedPuzzle,
+			id: 'quick',
+			set: 'quick',
+			title: 'Quick',
+		};
+		const cryptic = {
+			...quick,
+			id: 'cryptic',
+			set: 'cryptic',
+			title: 'Cryptic',
+			path: '/puzzles-and-games/crosswords/cryptic/archive',
+		};
+		const initialArchive: PuzzlesArchive = {
+			...archive,
+			category: 'crosswords',
+			selectedPuzzle: quick,
+			puzzles: [quick, cryptic],
+		};
+		const selectedArchive = { ...initialArchive, selectedPuzzle: cryptic };
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: jest.fn().mockResolvedValue({
+				ok: true,
+				json: async () => selectedArchive,
+			}),
+		});
+		await act(async () => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={initialArchive}
+					showPremiumIndicators={true}
+				/>,
+			);
+		});
+		expect(
+			screen.getByText(
+				'This puzzle is published from Monday to Saturday.',
+			),
+		).toBeInTheDocument();
+		fireEvent.click(screen.getByRole('link', { name: 'Cryptic' }));
+		expect(
+			await screen.findByText(
+				'This puzzle is published from Monday to Friday.',
+			),
+		).toBeInTheDocument();
+		expect(
+			screen.queryByText(
+				'This puzzle is published from Monday to Saturday.',
+			),
+		).not.toBeInTheDocument();
+	});
+
+	it('uses recent puzzle entitlement for an empty month and resets the message after signing out', async () => {
+		mockedGetAuthStatus.mockResolvedValue({
+			kind: 'SignedIn',
+			accessToken: { accessToken: 'access-token' },
+			idToken: {},
+		} as never);
+		const premiumArchive = {
+			...archive,
+			items: [],
+			recentItems: archive.items.map((item) => ({
+				...item,
+				hasPremiumEntitlement: true,
+			})),
+		};
+		const fetchMock = jest
+			.fn()
+			.mockResolvedValue({ ok: true, json: async () => premiumArchive });
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		render(
+			<PuzzlesArchiveCalendar
+				initialArchive={archive}
+				showPremiumIndicators={true}
+			/>,
+		);
+		expect(
+			await screen.findByText(
+				'Supporter exclusive - you have ad-free access to the puzzles archive',
+			),
+		).toBeInTheDocument();
+		expect(
+			screen.queryByText('Supporter exclusive', { exact: true }),
+		).not.toBeInTheDocument();
+		mockedGetAuthStatus.mockResolvedValue({ kind: 'SignedOut' });
+		fetchMock.mockResolvedValue({ ok: true, json: async () => archive });
+		await act(async () => {
+			window.dispatchEvent(
+				new PageTransitionEvent('pageshow', { persisted: true }),
+			);
+		});
+		expect(
+			screen.queryByText(
+				'Supporter exclusive - you have ad-free access to the puzzles archive',
+			),
+		).not.toBeInTheDocument();
+		expect(
+			screen.getByText('Supporter exclusive', { exact: true }),
+		).toBeInTheDocument();
+		expect(
+			screen.getByRole('link', { name: 'Sign in or create an account' }),
+		).toBeInTheDocument();
+	});
+
+	it.each(['isWithinFreeWindow', 'hasPremiumEntitlement'])(
+		'rejects a non-boolean %s in a fetched archive',
+		async (field) => {
+			mockedGetAuthStatus.mockResolvedValue({
+				kind: 'SignedIn',
+				accessToken: { accessToken: 'access-token' },
+				idToken: {},
+			} as never);
+			Object.defineProperty(global, 'fetch', {
+				configurable: true,
+				value: jest.fn().mockResolvedValue({
+					ok: true,
+					json: async () => ({
+						...archive,
+						items: [{ ...archive.items[0]!, [field]: 'false' }],
+					}),
+				}),
+			});
+			render(<PuzzlesArchiveCalendar initialArchive={archive} />);
+
+			expect(await screen.findByRole('alert')).toHaveTextContent(
+				'The archive could not be loaded.',
+			);
+			expect(
+				screen.getByRole('link', { name: '2026-09-02, available' }),
+			).toBeInTheDocument();
+		},
+	);
+
+	it.each([
+		'',
+		'https://api.nextgen.guardianapps.co.uk',
+		'//api.nextgen.guardianapps.co.uk',
+		'https://services.code.dev-guardianapps.co.uk',
+	])(
+		'refreshes the initial archive with authenticated progress via ajaxUrl=%s',
+		async (ajaxUrl) => {
+			pageConfig.ajaxUrl = ajaxUrl;
+			mockedGetAuthStatus.mockResolvedValue({
+				kind: 'SignedIn',
+				accessToken: { accessToken: 'access-token' },
+				idToken: {},
+			} as never);
+			const authenticatedArchive = {
+				...archive,
+				items: [
+					{
+						...archive.items[0]!,
+						progress: 100,
+						gameStatus: 'completed',
+					},
+				],
+			};
+			const fetchMock = jest.fn().mockResolvedValue({
+				ok: true,
+				json: async () => authenticatedArchive,
+			});
+			Object.defineProperty(global, 'fetch', {
+				configurable: true,
+				value: fetchMock,
+			});
+
+			render(<PuzzlesArchiveCalendar initialArchive={archive} />);
+
+			await waitFor(() =>
+				expect(
+					screen.getByLabelText('2026-09-02, completed'),
+				).toBeInTheDocument(),
+			);
+			const completedCell = screen.getByLabelText(
+				'2026-09-02, completed',
+			);
+			const completedIcon = completedCell.querySelector(
+				'.completed-icon svg',
+			);
+			expect(completedIcon).toHaveAttribute('width', '18');
+			expect(completedIcon).toHaveAttribute('height', '15');
+			expect(completedIcon).toHaveAttribute('viewBox', '0 0 18 15');
+			expect(completedIcon?.querySelector('path')).toHaveAttribute(
+				'fill',
+				'#22874D',
+			);
+			const recentCard = screen.getByRole('link', {
+				name: /Latest Easy sudoku/,
+			});
+			expect(within(recentCard).getByText('Played')).toBeInTheDocument();
+			expect(
+				within(recentCard).getByText('Played').querySelector('svg'),
+			).toBeInTheDocument();
+			expect(fetchMock).toHaveBeenCalledWith(
+				expect.objectContaining({
+					origin: new URL(ajaxUrl || '/', window.location.origin)
+						.origin,
+					pathname:
+						'/puzzles-and-games/logic-puzzles/archive-data/sudoku-easy/2026/9',
+				}),
+				expect.objectContaining({
+					headers: expect.objectContaining({
+						Authorization: 'Bearer access-token',
+					}),
+				}),
+			);
+		},
+	);
+
+	it.each([
+		['film-reveal', 'FILMREVEAL'],
+		['on-the-ball', 'ONTHEBALL'],
+	])(
+		'refreshes %s completion through the uncached AJAX host',
+		async (slug, puzzleType) => {
+			pageConfig.ajaxUrl = 'https://api.nextgen.guardianapps.co.uk';
+			mockedGetAuthStatus.mockResolvedValue({
+				kind: 'SignedIn',
+				accessToken: { accessToken: 'access-token' },
+				idToken: {},
+			} as never);
+			const trivia: PuzzlesArchive = {
+				...archive,
+				category: 'trivia-and-quizzes',
+				selectedPuzzle: {
+					id: slug,
+					title: slug,
+					puzzleType,
+					slug: `trivia-and-quizzes/${slug}`,
+					set: 'all',
+					path: `/puzzles-and-games/trivia-and-quizzes/${slug}/archive`,
+				},
+				items: [{ ...archive.items[0]!, puzzleType }],
+			};
+			const fetchMock = jest.fn().mockResolvedValue({
+				ok: true,
+				json: async () => ({
+					...trivia,
+					items: [
+						{
+							...trivia.items[0],
+							progress: 100,
+							gameStatus: 'completed',
+						},
+					],
+				}),
+			});
+			Object.defineProperty(global, 'fetch', {
+				configurable: true,
+				value: fetchMock,
+			});
+			render(<PuzzlesArchiveCalendar initialArchive={trivia} />);
+
+			await waitFor(() =>
+				expect(
+					screen.getByLabelText('2026-09-02, completed'),
+				).toBeInTheDocument(),
+			);
+			expect(fetchMock).toHaveBeenCalledWith(
+				expect.objectContaining({
+					origin: 'https://api.nextgen.guardianapps.co.uk',
+					pathname: `/puzzles-and-games/trivia-and-quizzes/archive-data/${slug}/2026/9`,
+				}),
+				expect.objectContaining({
+					cache: 'no-store',
+					credentials: 'same-origin',
+					headers: expect.objectContaining({
+						Authorization: 'Bearer access-token',
+					}),
+				}),
+			);
+		},
+	);
+
+	it('bolds the current London weekday only in the current month', () => {
+		jest.useFakeTimers().setSystemTime(new Date('2026-10-07T12:00:00Z'));
+		const currentMonthArchive = {
+			...archive,
+			year: 2026,
+			month: 10,
+		};
+
+		const { unmount } = render(
+			<PuzzlesArchiveCalendar initialArchive={currentMonthArchive} />,
+		);
+
+		expect(screen.getByText('We')).toHaveClass('is-today');
+		expect(screen.getByText('Mo')).not.toHaveClass('is-today');
+
+		unmount();
+		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
+
+		expect(screen.getByText('We')).not.toHaveClass('is-today');
+	});
+
+	it('marks only the current London date in the calendar', () => {
+		jest.useFakeTimers().setSystemTime(new Date('2026-10-07T12:00:00Z'));
+		render(
+			<PuzzlesArchiveCalendar
+				initialArchive={{ ...archive, year: 2026, month: 10 }}
+			/>,
+		);
+
+		expect(document.querySelector('[data-date="2026-10-07"]')).toHaveClass(
+			'is-today',
+		);
+		expect(
+			document.querySelector('[data-date="2026-10-06"]'),
+		).not.toHaveClass('is-today');
+	});
+
+	it('labels the three recent cards with relative and short dates', () => {
+		jest.useFakeTimers().setSystemTime(new Date('2026-10-07T12:00:00Z'));
+		const recentArchive: PuzzlesArchive = {
+			...archive,
+			year: 2026,
+			month: 10,
+			items: ['2026-10-07', '2026-10-06', '2026-10-03'].map((date) => ({
+				...archive.items[0]!,
+				date,
+				url: `/puzzles-and-games/logic-puzzles/sudoku-easy/${date}`,
+			})),
+		};
+
+		render(<PuzzlesArchiveCalendar initialArchive={recentArchive} />);
+
+		expect(screen.getByText('Today')).toBeInTheDocument();
+		expect(screen.getByText('Yesterday')).toBeInTheDocument();
+		expect(screen.getByText('Sat 3 Oct')).toBeInTheDocument();
+	});
+
+	it('shows Played and In progress on the recent cards from the API state only', () => {
+		jest.useFakeTimers().setSystemTime(new Date('2026-10-07T12:00:00Z'));
+		const statuses = ['completed', 'in-progress', 'not-started'] as const;
+		const recentArchive: PuzzlesArchive = {
+			...archive,
+			year: 2026,
+			month: 10,
+			items: ['2026-10-07', '2026-10-06', '2026-10-03'].map(
+				(date, index) => ({
+					...archive.items[0]!,
+					date,
+					// The progress value is misleading on purpose: only the status counts.
+					progress: 50,
+					gameStatus: statuses[index],
+					url: `/puzzles-and-games/logic-puzzles/sudoku-easy/${date}`,
+				}),
+			),
+		};
+
+		render(<PuzzlesArchiveCalendar initialArchive={recentArchive} />);
+
+		const cards = Array.from(
+			document.querySelectorAll<HTMLElement>('a[href$="/2026-10-07"]'),
+		);
+		expect(
+			within(cards.find((card) => card.querySelector('time'))!).getByText(
+				'Played',
+			),
+		).toBeInTheDocument();
+		const inProgressCards = Array.from(
+			document.querySelectorAll<HTMLElement>('a[href$="/2026-10-06"]'),
+		);
+		expect(
+			within(
+				inProgressCards.find((card) => card.querySelector('time'))!,
+			).getByText('In progress'),
+		).toBeInTheDocument();
+		expect(
+			within(
+				document.querySelector<HTMLElement>(
+					'[data-component="puzzles-archive-recent"]',
+				)!,
+			).getAllByText('In progress'),
+		).toHaveLength(1);
+		expect(
+			screen.getAllByText('Played', { selector: '.played' }),
+		).toHaveLength(1);
+	});
+
+	describe('progress bar on the recent cards', () => {
+		const renderRecent = (progress: number, puzzleType = 'SUDOKU_EASY') => {
+			jest.useFakeTimers().setSystemTime(
+				new Date('2026-10-07T12:00:00Z'),
+			);
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={{
+						...archive,
+						selectedPuzzle: {
+							...archive.selectedPuzzle,
+							puzzleType,
+						},
+						year: 2026,
+						month: 10,
+						items: [
+							{
+								...archive.items[0]!,
+								puzzleType,
+								date: '2026-10-07',
+								progress,
+								gameStatus: 'in-progress',
+								url: '/puzzles-and-games/logic-puzzles/sudoku-easy/2026-10-07',
+							},
+						],
+					}}
+				/>,
+			);
+		};
+		const bar = () =>
+			document.querySelector<HTMLElement>(
+				'[data-component="puzzles-archive-recent"] .progress-track > span',
+			);
+
+		it.each([Number.NaN, -5, 0, 10, 50, 90, 100, 150])(
+			'is always half full, whatever the API progress value (%s)',
+			(progress) => {
+				renderRecent(progress);
+				expect(bar()?.style.width).toBe('50%');
+				expect(bar()?.parentElement).toHaveAttribute(
+					'aria-hidden',
+					'true',
+				);
+			},
+		);
+
+		it('is not drawn for a crossword', () => {
+			renderRecent(40, 'CROSSWORD_QUICK');
+			expect(bar()).toBeNull();
+			expect(screen.queryByText('In progress')).not.toBeInTheDocument();
+		});
+	});
+
+	it('never shows In progress on the recent cards of a crossword', () => {
+		jest.useFakeTimers().setSystemTime(new Date('2026-10-07T12:00:00Z'));
+		const crosswordArchive: PuzzlesArchive = {
+			...archive,
+			selectedPuzzle: {
+				...archive.selectedPuzzle,
+				puzzleType: 'CROSSWORD_QUICK',
+			},
+			year: 2026,
+			month: 10,
+			items: ['2026-10-07', '2026-10-06'].map((date) => ({
+				...archive.items[0]!,
+				puzzleType: 'CROSSWORD_QUICK',
+				date,
+				progress: 50,
+				gameStatus: 'in-progress' as const,
+				url: `/crosswords/quick/${date}`,
+			})),
+		};
+
+		render(<PuzzlesArchiveCalendar initialArchive={crosswordArchive} />);
+
+		expect(screen.queryByText('In progress')).not.toBeInTheDocument();
+	});
+
+	it('keeps the calendar mounted and announces loading in the month controls', async () => {
+		let resolveResponse!: (value: unknown) => void;
+		const fetchMock = jest.fn().mockReturnValue(
+			new Promise((resolve) => {
+				resolveResponse = resolve;
+			}),
+		);
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
+		const calendar = screen.getByTestId('archive-calendar');
+		const previous = screen.getByRole('link', { name: 'Previous month' });
+		const status = screen.getByRole('status');
+		expect(status).not.toHaveTextContent('Loading archive…');
+		expect(previous).toHaveAttribute(
+			'data-link-name',
+			'archive | previous-month | logic-puzzles | puzzle-sudoku-easy | month-2026-08',
+		);
+		fireEvent.click(previous);
+		await waitFor(() =>
+			expect(calendar).toHaveAttribute('aria-busy', 'true'),
+		);
+		expect(previous).not.toHaveAttribute('data-link-name');
+		expect(
+			screen.getByRole('link', { name: 'Next month' }),
+		).not.toHaveAttribute('data-link-name');
+		fireEvent.click(previous);
+		expect(calendar).toHaveAttribute('aria-busy', 'true');
+		expect(
+			screen.getByLabelText('2026-09-02, available'),
+		).toBeInTheDocument();
+		expect(status).toHaveTextContent('Loading archive…');
+		expect(previous.parentElement).toContainElement(status);
+		await act(async () =>
+			resolveResponse({
+				ok: true,
+				json: async () => ({ ...archive, month: 8, items: [] }),
+			}),
+		);
+		await screen.findByText('August 2026');
+		expect(screen.getByTestId('archive-calendar')).toBe(calendar);
+		expect(calendar).toHaveAttribute('aria-busy', 'false');
+		expect(status).not.toHaveTextContent('Loading archive…');
+		expect(previous).toHaveAttribute(
+			'data-link-name',
+			'archive | previous-month | logic-puzzles | puzzle-sudoku-easy | month-2026-07',
+		);
+		expect(
+			screen.getByRole('link', { name: 'Next month' }),
+		).toHaveAttribute(
+			'data-link-name',
+			'archive | next-month | logic-puzzles | puzzle-sudoku-easy | month-2026-09',
+		);
+		expect(fetchMock).toHaveBeenCalledTimes(1);
+	});
+
+	it('keeps the selected month and shows recent cards when only earlier publications exist', async () => {
+		const weekend: PuzzlesArchive = {
+			...archive,
+			category: 'crosswords',
+			month: 10,
+			selectedPuzzle: {
+				id: 'archive-weekend',
+				title: 'Weekend',
+				set: 'weekend',
+				puzzleType: 'CROSSWORD_WEEKEND',
+				path: '/puzzles-and-games/crosswords/weekend/archive',
+			},
+			items: [
+				{
+					...archive.items[0]!,
+					date: '2026-09-26',
+					url: '/crosswords/weekend/820',
+				},
+			],
+		};
+		const fetchMock = jest.fn().mockResolvedValue({
+			ok: true,
+			json: async () => ({ ...weekend, month: 9 }),
+		});
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		render(<PuzzlesArchiveCalendar initialArchive={weekend} />);
+		expect(screen.getByText('October 2026')).toBeInTheDocument();
+		expect(
+			screen.getByText(
+				'No Weekend crosswords are available for October 2026.',
+			),
+		).toBeInTheDocument();
+		expect(
+			screen.getByRole('link', { name: /Latest Weekend/ }),
+		).toHaveTextContent('Sat 26 Sep');
+		expect(
+			screen.getByRole('link', { name: /Latest Weekend/ }),
+		).toHaveTextContent('By: Philistine');
+		expect(fetchMock).not.toHaveBeenCalled();
+		fireEvent.click(
+			screen.getByRole('link', { name: 'View previous month' }),
+		);
+		await screen.findByText('September 2026');
+		expect(
+			screen.getByLabelText('2026-09-26, available'),
+		).toBeInTheDocument();
+		expect(
+			screen.queryByText(/No Weekend crosswords/),
+		).not.toBeInTheDocument();
+	});
+
+	it('does not describe an API failure as an empty month', async () => {
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: jest.fn().mockRejectedValue(new Error('Unavailable')),
+		});
+		render(
+			<PuzzlesArchiveCalendar
+				initialArchive={{ ...archive, items: [], hasError: true }}
+			/>,
+		);
+		await screen.findByRole('alert');
+		expect(
+			screen.queryByRole('link', { name: 'View previous month' }),
+		).not.toBeInTheDocument();
+		expect(
+			screen.queryByText(/No .* are available for/),
+		).not.toBeInTheDocument();
+	});
+
+	it('keeps the latest cards while navigating historical months and returning from cache', async () => {
+		const recentItems = ['2026-10-07', '2026-10-06', '2026-10-05'].map(
+			(date) => ({
+				...archive.items[0]!,
+				date,
+				url: `/latest/${date}`,
+			}),
+		);
+		const initialArchive = { ...archive, recentItems };
+		const previous = {
+			...initialArchive,
+			month: 8,
+			items: [
+				{
+					...archive.items[0]!,
+					date: '2026-08-31',
+					url: '/historical',
+				},
+			],
+		};
+		const fetchMock = jest
+			.fn()
+			.mockResolvedValue({ ok: true, json: async () => previous });
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		const { container } = render(
+			<PuzzlesArchiveCalendar initialArchive={initialArchive} />,
+		);
+		const cardDates = () =>
+			Array.from(container.querySelectorAll('time')).map(
+				(time) => time.dateTime,
+			);
+		expect(cardDates()).toEqual(recentItems.map((item) => item.date));
+		fireEvent.click(screen.getByRole('link', { name: 'Previous month' }));
+		await screen.findByText('August 2026');
+		expect(screen.getByLabelText('2026-08-31, available')).toHaveAttribute(
+			'href',
+			'/historical',
+		);
+		expect(cardDates()).toEqual(recentItems.map((item) => item.date));
+		fireEvent.click(screen.getByRole('link', { name: 'Next month' }));
+		await screen.findByText('September 2026');
+		expect(cardDates()).toEqual(recentItems.map((item) => item.date));
+		expect(fetchMock).toHaveBeenCalledTimes(1);
+	});
+
+	it('invalidates other cached months when restored and keeps the current selection', async () => {
+		const previous = {
+			...archive,
+			month: 8,
+			items: [{ ...archive.items[0]!, date: '2026-08-31' }],
+		};
+		const completed = {
+			...archive,
+			items: [
+				{
+					...archive.items[0]!,
+					progress: 100,
+					gameStatus: 'completed',
+				},
+			],
+		};
+		const completedPrevious = {
+			...previous,
+			items: [
+				{
+					...previous.items[0]!,
+					progress: 100,
+					gameStatus: 'completed',
+				},
+			],
+		};
+		const fetchMock = jest
+			.fn()
+			.mockResolvedValueOnce({ ok: true, json: async () => previous })
+			.mockResolvedValueOnce({ ok: true, json: async () => completed })
+			.mockResolvedValueOnce({
+				ok: true,
+				json: async () => completedPrevious,
+			});
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
+		await act(async () => undefined);
+		fireEvent.click(screen.getByRole('link', { name: 'Previous month' }));
+		await screen.findByText('August 2026');
+		fireEvent.click(screen.getByRole('link', { name: 'Next month' }));
+		await screen.findByText('September 2026');
+		expect(fetchMock).toHaveBeenCalledTimes(1);
+		const selection = window.location.search;
+
+		fireEvent(
+			window,
+			new PageTransitionEvent('pageshow', { persisted: true }),
+		);
+		await screen.findByLabelText('2026-09-02, completed');
+		expect(window.location.search).toBe(selection);
+		fireEvent.click(screen.getByRole('link', { name: 'Previous month' }));
+		await screen.findByLabelText('2026-08-31, completed');
+		expect(fetchMock).toHaveBeenCalledTimes(3);
+	});
+
+	it('does not replace explicitly empty recent cards with historical items', () => {
+		const { container } = render(
+			<PuzzlesArchiveCalendar
+				initialArchive={{ ...archive, recentItems: [] }}
+			/>,
+		);
+		expect(container.querySelectorAll('time')).toHaveLength(0);
+		expect(
+			screen.getByLabelText('2026-09-02, available'),
+		).toBeInTheDocument();
+	});
+
+	it('loads the previous month without navigating or reloading', async () => {
+		const previous = { ...archive, year: 2026, month: 8, items: [] };
+		const fetchMock = jest.fn().mockResolvedValue({
+			ok: true,
+			json: async () => previous,
+		});
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		render(<PuzzlesArchiveCalendar initialArchive={archive} />);
+		mockedGetAuthStatus.mockResolvedValue({
+			kind: 'SignedIn',
+			accessToken: { accessToken: 'access-token' },
+			idToken: {},
+		} as never);
+
+		fireEvent.click(screen.getByRole('link', { name: 'Previous month' }));
+		await waitFor(() =>
+			expect(screen.getByText('August 2026')).toBeInTheDocument(),
+		);
+		expect(fetchMock).toHaveBeenCalledWith(
+			expect.objectContaining({
+				pathname:
+					'/puzzles-and-games/logic-puzzles/archive-data/sudoku-easy/2026/8',
+				search: '',
+			}),
+			expect.objectContaining({
+				cache: 'no-store',
+				credentials: 'same-origin',
+				headers: {
+					Accept: 'application/json',
+					Authorization: 'Bearer access-token',
+				},
+			}),
+		);
+		expect(window.location.search).toContain('month=8');
+		Reflect.deleteProperty(global, 'fetch');
+	});
+
+	it('loads the next month without navigating or reloading', async () => {
+		const pastArchive = { ...archive, year: 2020, month: 9 };
+		const next = { ...pastArchive, month: 10, items: [] };
+		const fetchMock = jest.fn().mockResolvedValue({
+			ok: true,
+			json: async () => next,
+		});
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		render(<PuzzlesArchiveCalendar initialArchive={pastArchive} />);
+
+		fireEvent.click(screen.getByRole('link', { name: 'Next month' }));
+		await waitFor(() =>
+			expect(screen.getByText('October 2020')).toBeInTheDocument(),
+		);
+		Reflect.deleteProperty(global, 'fetch');
+	});
+
+	it('does not allow navigating beyond the current month', () => {
+		const today = new Date();
+		const current = {
+			...archive,
+			year: today.getFullYear(),
+			month: today.getMonth() + 1,
+		};
+		const fetchMock = jest.fn();
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		render(<PuzzlesArchiveCalendar initialArchive={current} />);
+
+		const nextButton = screen.getByRole('button', { name: 'Next month' });
+		expect(nextButton).toBeDisabled();
+		expect(nextButton).not.toHaveAttribute('data-link-name');
+		fireEvent.click(nextButton);
+		expect(fetchMock).not.toHaveBeenCalled();
+		Reflect.deleteProperty(global, 'fetch');
+	});
+
+	it('loads another puzzle without reloading the page', async () => {
+		const otherPuzzle: PuzzlesArchive['selectedPuzzle'] = {
+			id: 'sudoku-medium',
+			title: 'Medium sudoku',
+			puzzleType: 'SUDOKU_MEDIUM',
+			slug: 'logic-puzzles/sudoku-medium',
+			set: 'medium',
+			path: '/puzzles-and-games/logic-puzzles/sudoku-medium/archive',
+		};
+		const initialArchive = {
+			...archive,
+			puzzles: [archive.selectedPuzzle, otherPuzzle],
+		};
+		const selectedArchive = {
+			...initialArchive,
+			selectedPuzzle: otherPuzzle,
+			items: [],
+			recentItems: [
+				{
+					...archive.items[0]!,
+					puzzleType: 'SUDOKU_MEDIUM',
+					date: '2026-10-07',
+					url: '/puzzles-and-games/logic-puzzles/sudoku-medium/2026-10-07',
+				},
+			],
+		};
+		const fetchMock = jest.fn().mockResolvedValue({
+			ok: true,
+			json: async () => selectedArchive,
+		});
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		const pushState = jest.spyOn(window.history, 'pushState');
+		render(<PuzzlesArchiveCalendar initialArchive={initialArchive} />);
+
+		fireEvent.click(screen.getByRole('link', { name: 'Medium sudoku' }));
+
+		await waitFor(() =>
+			expect(
+				screen.getByRole('heading', { name: 'Medium sudoku' }),
+			).toBeInTheDocument(),
+		);
+		expect(fetchMock).toHaveBeenCalledWith(
+			expect.objectContaining({
+				pathname:
+					'/puzzles-and-games/logic-puzzles/archive-data/sudoku-medium/2026/9',
+				search: '',
+			}),
+			expect.objectContaining({ credentials: 'same-origin' }),
+		);
+		expect(pushState).toHaveBeenCalledWith(
+			{},
+			'',
+			expect.stringContaining(
+				'/puzzles-and-games/logic-puzzles/sudoku-medium/archive',
+			),
+		);
+		expect(
+			screen.getByRole('link', { name: /Latest Medium sudoku/ }),
+		).toHaveAttribute('href', selectedArchive.recentItems[0]!.url);
+		expect(
+			screen.getByRole('link', { name: /Latest Medium sudoku/ }),
+		).toHaveAttribute(
+			'data-link-name',
+			'archive | recent | logic-puzzles | puzzle-sudoku-medium | date-2026-10-07 | card-@1',
+		);
+		expect(
+			screen.getByRole('link', { name: 'Easy sudoku' }),
+		).toHaveAttribute(
+			'data-link-name',
+			'archive | puzzle-type | logic-puzzles | puzzle-sudoku-medium | target-puzzle-sudoku-easy | month-2026-09',
+		);
+		expect(
+			screen.queryByRole('link', { name: /Latest Easy sudoku/ }),
+		).not.toBeInTheDocument();
+
+		pushState.mockRestore();
+		Reflect.deleteProperty(global, 'fetch');
+	});
+
+	it('restores the browser selection when SSR received no query parameters', async () => {
+		const medium = {
+			...archive.selectedPuzzle,
+			id: 'sudoku-medium',
+			title: 'Medium sudoku',
+			path: '/puzzles-and-games/logic-puzzles/sudoku-medium/archive',
+		};
+		const initialArchive = {
+			...archive,
+			puzzles: [archive.selectedPuzzle, medium],
+		};
+		const fetchMock = jest.fn().mockResolvedValue({
+			ok: true,
+			json: async () => ({
+				...initialArchive,
+				selectedPuzzle: medium,
+				year: 2020,
+				month: 8,
+				items: [],
+			}),
+		});
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		window.history.replaceState(
+			{},
+			'',
+			'/puzzles-and-games/logic-puzzles/sudoku-medium/archive?year=2020&month=8',
+		);
+		render(<PuzzlesArchiveCalendar initialArchive={initialArchive} />);
+		await waitFor(() =>
+			expect(screen.getByText('August 2020')).toBeInTheDocument(),
+		);
+		expect(
+			screen.getByRole('link', { name: 'Medium sudoku' }),
+		).toHaveAttribute('aria-current', 'page');
+		expect(fetchMock).toHaveBeenCalledWith(
+			expect.objectContaining({
+				pathname:
+					'/puzzles-and-games/logic-puzzles/archive-data/sudoku-medium/2020/8',
+				search: '',
+			}),
+			expect.objectContaining({ credentials: 'same-origin' }),
+		);
+		window.history.replaceState(
+			{},
+			'',
+			'/puzzles-and-games/logic-puzzles/archive',
+		);
+		fireEvent(window, new PopStateEvent('popstate'));
+		await waitFor(() =>
+			expect(screen.getByText('September 2026')).toBeInTheDocument(),
+		);
+		expect(
+			screen.getByRole('link', { name: 'Easy sudoku' }),
+		).toHaveAttribute('aria-current', 'page');
+	});
+
+	it.each(['network', 'wrong selection', 'api error'])(
+		'keeps the page and allows retry after %s',
+		async (failure) => {
+			const fetchMock = jest.fn();
+			if (failure === 'network') {
+				fetchMock.mockRejectedValueOnce(new Error('Offline'));
+			} else {
+				fetchMock.mockResolvedValueOnce({
+					ok: true,
+					json: async () =>
+						failure === 'api error'
+							? { ...archive, month: 8, hasError: true }
+							: archive,
+				});
+			}
+			fetchMock.mockResolvedValueOnce({
+				ok: true,
+				json: async () => ({ ...archive, month: 8, items: [] }),
+			});
+			Object.defineProperty(global, 'fetch', {
+				configurable: true,
+				value: fetchMock,
+			});
+			const consoleError = jest
+				.spyOn(console, 'error')
+				.mockImplementation(() => undefined);
+			render(<PuzzlesArchiveCalendar initialArchive={archive} />);
+			expect(
+				fireEvent.click(
+					screen.getByRole('link', { name: 'Previous month' }),
+				),
+			).toBe(false);
+			await screen.findByRole('alert');
+			expect(screen.getByText('September 2026')).toBeInTheDocument();
+			expect(window.location.search).toBe('');
+			expect(consoleError).not.toHaveBeenCalled();
+			fireEvent.click(
+				screen.getByRole('link', { name: 'Previous month' }),
+			);
+			await screen.findByText('August 2026');
+			expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+		},
+	);
+});
+
+describe('PuzzlesArchiveCalendar in-progress days', () => {
+	const withItem = (
+		overrides: Partial<PuzzlesArchive['items'][number]>,
+		puzzleType = 'SUDOKU_EASY',
+	): PuzzlesArchive => ({
+		...archive,
+		selectedPuzzle: { ...archive.selectedPuzzle, puzzleType },
+		items: [{ ...archive.items[0]!, puzzleType, ...overrides }],
+	});
+
+	it.each([false, true])(
+		'marks a game in progress with the dashed icon for v3=%s',
+		(showPremiumIndicators) => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={withItem({ gameStatus: 'in-progress' })}
+					showPremiumIndicators={showPremiumIndicators}
+				/>,
+			);
+
+			const day = screen.getByRole('link', {
+				name: '2026-09-02, in progress',
+			});
+			const icon = day.querySelector('.in-progress-icon svg');
+
+			expect(day).toHaveAttribute('data-status', 'in-progress');
+			expect(day.querySelector('.in-progress-icon')).toHaveAttribute(
+				'aria-hidden',
+				'true',
+			);
+			expect(icon).toHaveAttribute('width', '16');
+			expect(icon).toHaveAttribute('height', '16');
+			expect(icon?.querySelectorAll('path')).toHaveLength(8);
+			icon?.querySelectorAll('path').forEach((path) => {
+				expect(path).toHaveAttribute('fill', '#C74600');
+			});
+			expect(day.querySelector('.completed-icon')).toBeNull();
+		},
+	);
+
+	it.each([
+		[true, '3px'],
+		[false, ''],
+	])(
+		'rounds the day tiles only with the supporter exclusive calendar (v3=%s)',
+		(showPremiumIndicators, radius) => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={withItem({ gameStatus: 'in-progress' })}
+					showPremiumIndicators={showPremiumIndicators}
+				/>,
+			);
+
+			const days = Array.from(
+				document.querySelectorAll<HTMLElement>('.day'),
+			);
+
+			expect(days.length).toBeGreaterThan(1);
+			for (const day of days) {
+				expect(getComputedStyle(day).borderRadius).toBe(radius);
+			}
+		},
+	);
+
+	it('keeps the supporter exclusive star on a day in progress', () => {
+		render(
+			<PuzzlesArchiveCalendar
+				initialArchive={withItem({
+					gameStatus: 'in-progress',
+					isWithinFreeWindow: false,
+					hasPremiumEntitlement: false,
+				})}
+				showPremiumIndicators={true}
+			/>,
+		);
+
+		const day = screen.getByRole('link', {
+			name: '2026-09-02, Supporter exclusive, in progress',
+		});
+
+		expect(day).toHaveAttribute('data-status', 'in-progress');
+		expect(day.querySelector('.supporter-exclusive-icon')).not.toBeNull();
+		expect(day.querySelector('.in-progress-icon')).not.toBeNull();
+	});
+
+	it.each(['not-started', 'completed'] as const)(
+		'has no in progress icon for a day that is %s',
+		(gameStatus) => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={withItem({ gameStatus })}
+				/>,
+			);
+
+			expect(
+				document.querySelector('.in-progress-icon'),
+			).not.toBeInTheDocument();
+			expect(
+				document.querySelector('[data-status="in-progress"]'),
+			).not.toBeInTheDocument();
+		},
+	);
+
+	it('never marks a crossword day in progress', () => {
+		render(
+			<PuzzlesArchiveCalendar
+				initialArchive={withItem(
+					{ gameStatus: 'in-progress' },
+					'CROSSWORD_QUICK',
+				)}
+			/>,
+		);
+
+		expect(
+			screen.getByRole('link', { name: '2026-09-02, available' }),
+		).toHaveAttribute('data-status', 'available');
+		expect(document.querySelector('.in-progress-icon')).toBeNull();
+	});
+
+	it.each([
+		[false, '13.3'],
+		[true, '11'],
+	])(
+		'lists In progress in the legend for a game, v3=%s',
+		(showPremiumIndicators, size) => {
+			render(
+				<PuzzlesArchiveCalendar
+					initialArchive={withItem({})}
+					showPremiumIndicators={showPremiumIndicators}
+				/>,
+			);
+
+			const legend = screen.getByText('In progress', {
+				selector: 'span.in-progress',
+			});
+			const icon = legend.querySelector('svg');
+
+			expect(icon).toHaveAttribute('width', size);
+			expect(icon).toHaveAttribute('height', size);
+			expect(
+				legend.compareDocumentPosition(
+					screen.getByText('Played', { selector: 'span.completed' }),
+				) & Node.DOCUMENT_POSITION_FOLLOWING,
+			).toBeTruthy();
+			expect(
+				screen
+					.getByText('Available', { selector: 'span.available' })
+					.compareDocumentPosition(legend) &
+					Node.DOCUMENT_POSITION_FOLLOWING,
+			).toBeTruthy();
+		},
+	);
+
+	it('leaves In progress out of the legend for a crossword', () => {
+		render(
+			<PuzzlesArchiveCalendar
+				initialArchive={withItem({}, 'CROSSWORD_QUICK')}
+			/>,
+		);
+
+		expect(
+			screen.queryByText('In progress', { selector: 'span.in-progress' }),
+		).not.toBeInTheDocument();
+		expect(
+			screen.getByText('Played', { selector: 'span.completed' }),
+		).toBeInTheDocument();
+	});
+});

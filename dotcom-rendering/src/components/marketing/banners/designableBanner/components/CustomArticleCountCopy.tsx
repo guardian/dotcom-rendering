@@ -37,9 +37,9 @@ export function CustomArticleCountCopy({
 }: CustomArticleCountProps): JSX.Element {
 	/**
 	 * E.g. the string:
-	 *   "You’ve read %%ARTICLE_COUNT%% articles in the last few weeks."
+	 *   "You've read %%ARTICLE_COUNT%% articles in the last few weeks."
 	 * needs to be split into:
-	 * - "You’ve read"
+	 * - "You've read"
 	 * - "articles"
 	 * - "in the last few weeks."
 	 */

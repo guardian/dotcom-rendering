@@ -7,6 +7,8 @@
 	"scripts": {
 		"postinstall": "./scripts/postinstall.sh",
 		"build:dcr": "cd dotcom-rendering && make build",
+		"storybook": "pnpm --filter @guardian/dotcom-rendering storybook",
+		"build-storybook": "pnpm --filter @guardian/dotcom-rendering build-storybook",
 		"chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
 		"prepare": "husky",
 		"lint-staged": "lint-staged",
@@ -14,17 +16,16 @@
 		"prettier:write": "prettier --ignore-unknown --write --cache ."
 	},
 	"lint-staged": {
-		"*": "prettier --ignore-unknown --write",
-		"ab-testing/**/*": "pnpm --filter @guardian/ab-testing-* lint-staged"
+		"*": "prettier --ignore-unknown --write"
 	},
 	"dependencies": {
-		"@guardian/prettier": "5.0.0",
-		"@types/chai": "5.2.2",
-		"chromatic": "13.3.4",
+		"@guardian/prettier": "10.0.0",
+		"@types/chai": "5.2.3",
+		"chromatic": "16.1.0",
 		"husky": "9.1.7",
-		"lint-staged": "15.2.0",
-		"prettier": "3.0.3",
-		"tslib": "2.6.2"
+		"lint-staged": "17.4.1",
+		"prettier": "3.8.3",
+		"tslib": "catalog:"
 	},
-	"packageManager": "pnpm@9.15.9"
+	"packageManager": "pnpm@12.14.0"
 }

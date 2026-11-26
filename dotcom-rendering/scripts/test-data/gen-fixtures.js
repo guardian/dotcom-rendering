@@ -1,6 +1,3 @@
-/* eslint-disable no-console -- script */
-/* eslint-disable @typescript-eslint/unbound-method -- path.resolve */
-
 const { execFileSync } = require('node:child_process');
 const fs = require('node:fs/promises');
 const { resolve } = require('node:path');
@@ -115,6 +112,22 @@ const articles = [
 		url: 'https://www.theguardian.com/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
 	},
 	{
+		name: 'LabsImmersiveParrtjima',
+		url: 'https://www.theguardian.com/parrtjima-2025-where-ancient-stories-come-to-light/2025/jan/15/ancient-stories-in-a-new-light-what-to-expect-as-parrtjima-returns-to-the-red-centre',
+	},
+	{
+		name: 'LabsImmersiveVictorianWater',
+		url: 'https://www.theguardian.com/victorian-government-make-every-drop-count/2026/mar/06/small-changes-big-wins-simple-ways-to-save-water-at-home',
+	},
+	{
+		name: 'LabsImmersiveGlobalX',
+		url: 'https://www.theguardian.com/global-x-invest-in-innovation/2026/apr/02/rare-earth-the-commodities-powering-our-ai-future',
+	},
+	{
+		name: 'LabsImmersiveFakeSpielberg',
+		url: 'https://www.theguardian.com/audible-true-crime-and-investigations/2026/jul/10/the-fake-spielberg-the-story-of-a-hollywood-conman',
+	},
+	{
 		name: 'NumberedList',
 		url: 'https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
 	},
@@ -127,12 +140,28 @@ const articles = [
 		url: 'https://www.theguardian.com/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
 	},
 	{
-		name: 'Picture',
+		name: 'PictureWithAvatarNoStandfirst',
 		url: 'https://www.theguardian.com/commentisfree/picture/2021/apr/25/nicola-jennings-no-10-boris-johnson-conservatives-sleaze-scandal-cartoon',
+	},
+	{
+		name: 'PictureWithAvatarAndStandfirst',
+		url: 'https://www.theguardian.com/commentisfree/picture/2026/aug/12/making-fun-of-the-english-is-an-australian-national-pastime-but-the-drought-in-britain-isnt-funny-at-all',
+	},
+	{
+		name: 'PictureWithStandfirstNoAvatar',
+		url: 'https://www.theguardian.com/football/picture/2026/sep/29/david-squires-on-manchester-city-verdict-nations-league-israel-republic-of-ireland',
 	},
 	{
 		name: 'Video',
 		url: 'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
+	},
+	{
+		name: 'AffiliateProductShowcase',
+		url: 'https://www.theguardian.com/thefilter/2026/may/04/things-you-loved-most-april-2026',
+	},
+	{
+		name: 'AffiliateProductStandard',
+		url: 'https://www.theguardian.com/thefilter-us/2025/dec/25/glass-food-containers-to-store-leftovers',
 	},
 ];
 
@@ -241,34 +270,6 @@ requests.push(
 		}),
 );
 
-// MatchReport fixtures
-requests.push(
-	// this URL may expire in the future; you can get a fresh one by finding a recent match
-	// from https://www.theguardian.com/tone/matchreports, then opening your network tab in
-	// your browser's devtools, and find a similar looking `api.nextgen` request, and copy
-	// that URL in here.
-	fetch(
-		'https://api.nextgen.guardianapps.co.uk/football/api/match-nav/2025/07/08/35854/7699.json?dcr=true&page=football%2F2025%2Fjul%2F08%2Fgermany-denmark-women-euro-2025-group-c-match-report',
-	)
-		.then((res) => res.json())
-		.then((json) => {
-			// Write the new fixture data
-			const contents = `${HEADER}
-import type { MatchReportType } from '../../src/types/matchReport';
-
-export const matchReport: MatchReportType = ${JSON.stringify(json, null, 4)}`;
-			return fs.writeFile(
-				`${root}/fixtures/generated/match-report.ts`,
-				contents,
-				'utf8',
-			);
-		})
-		.then(() => 'match-report.ts')
-		.catch((err) => {
-			throw new Error('Failed to create match-report.ts', { cause: err });
-		}),
-);
-
 // Series
 requests.push(
 	fetch(
@@ -363,7 +364,7 @@ requests.push(
 requests.push(
 	// This match data will expire after two months, find a new match if this needs updating
 	fetch(
-		'https://www.theguardian.com/sport/cricket/match/2025-08-04/england-cricket-team.json?dcr',
+		'https://www.theguardian.com/sport/cricket/match/2026-06-04/england-cricket-team.json?dcr',
 	)
 		.then((res) => res.json())
 		.then((json) => {

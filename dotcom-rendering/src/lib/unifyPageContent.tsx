@@ -6,14 +6,21 @@ export const unifyPageContent = ({
 	elementJs,
 	elementHtml,
 	renderingTarget,
+	customData,
+	forceLightColorScheme,
 }: {
 	elementCss?: string;
 	elementJs?: string;
 	elementHtml?: string;
 	renderingTarget: RenderingTarget;
+	customData?: string;
+	forceLightColorScheme?: boolean;
 }): string =>
 	renderToString(
-		<html lang="en">
+		<html
+			lang="en"
+			data-color-scheme={forceLightColorScheme ? 'light' : undefined}
+		>
 			<head>
 				<meta charSet="utf-8" />
 				<meta
@@ -29,6 +36,13 @@ export const unifyPageContent = ({
 					<div dangerouslySetInnerHTML={{ __html: elementHtml }} />
 				)}
 			</body>
+			{!!customData && (
+				<script
+					dangerouslySetInnerHTML={{
+						__html: `window.__atomCustomData = ${customData};`,
+					}}
+				/>
+			)}
 			{/* JS need to load on body render */}
 			{!!elementJs && (
 				<script dangerouslySetInnerHTML={{ __html: elementJs }} />

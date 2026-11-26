@@ -13,6 +13,7 @@ import { Hide, Link } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { ImageForLightbox } from '../types/content';
+import { ProductCardButtons } from './AffiliateProducts/ProductCardButtons';
 import { LightboxCaption } from './LightboxCaption';
 import { LightboxLoader } from './LightboxLoader';
 import { Picture } from './Picture';
@@ -21,6 +22,7 @@ import { StarRating } from './StarRating/StarRating';
 type Props = {
 	format: ArticleFormat;
 	images: ImageForLightbox[];
+	isFilterArticle?: boolean;
 };
 
 const liStyles = css`
@@ -134,6 +136,16 @@ const starRatingMarginStyles = css`
 		margin-bottom: ${space[3]}px;
 	}
 `;
+
+const productCtasStyles = css`
+	display: flex;
+	flex-direction: column;
+	gap: ${space[1]}px;
+	margin-bottom: ${space[2]}px;
+	${from.tablet} {
+		margin-bottom: ${space[3]}px;
+	}
+`;
 const Selection = ({
 	countOfImages,
 	initialPosition = 1,
@@ -179,7 +191,11 @@ const Selection = ({
 	);
 };
 
-export const LightboxImages = ({ format, images }: Props) => {
+export const LightboxImages = ({
+	format,
+	images,
+	isFilterArticle = false,
+}: Props) => {
 	const [loaded, setLoaded] = useState(new Set<number>());
 
 	useEffect(() => {
@@ -200,9 +216,13 @@ export const LightboxImages = ({ format, images }: Props) => {
 						return previousSize !== newSize ? new Set(set) : set;
 					});
 
+				const hasProductCtas = !!image.productCtas?.length;
+				// The "show info without needing to click 'i'" override is
+				// currently scoped to Filter articles only.
+				const alwaysShowInfo = hasProductCtas && isFilterArticle;
+
 				return (
 					<li
-						// eslint-disable-next-line react/no-array-index-key -- because we know this key is unique
 						key={`${image.masterUrl}-${index}`}
 						data-index={image.position}
 						data-element-id={image.elementId}
@@ -232,7 +252,14 @@ export const LightboxImages = ({ format, images }: Props) => {
 								onLoad={onLoad}
 								loading="lazy"
 							/>
-							<aside css={asideStyles}>
+							<aside
+								css={asideStyles}
+								className={
+									alwaysShowInfo
+										? 'lightbox-product-info'
+										: undefined
+								}
+							>
 								{!!image.title && (
 									<h2
 										css={css`
@@ -255,6 +282,22 @@ export const LightboxImages = ({ format, images }: Props) => {
 											size="medium"
 											rating={image.starRating}
 											useAlternativeTheme={true}
+										/>
+									</div>
+								)}
+
+								{!!image.productCtas?.length && (
+									<div
+										css={productCtasStyles}
+										data-component="product-lightbox-link"
+									>
+										<ProductCardButtons
+											productCtas={image.productCtas}
+											xCustComponentId="lightbox"
+											themeOverrides={{
+												backgroundTertiary:
+													palette.neutral[100],
+											}}
 										/>
 									</div>
 								)}

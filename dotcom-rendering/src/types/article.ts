@@ -3,9 +3,12 @@ import type { FEArticle } from '../frontend/feArticle';
 import {
 	ArticleDesign,
 	type ArticleDisplay,
+	type ArticleFormat,
 	type ArticleTheme,
 	decideFormat,
 } from '../lib/articleFormat';
+import { getPuzzleGroupPalette } from '../lib/puzzleGroupPalette';
+import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
 import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import { appsLightboxImages } from '../model/appsLightboxImages';
 import { buildCrosswordBlock } from '../model/buildCrosswordBlock';
@@ -33,10 +36,11 @@ import { type RenderingTarget } from './renderingTarget';
  *
  * @deprecated Replaced by {@linkcode Article}.
  */
-export type ArticleDeprecated = FEArticle & {
+export type ArticleDeprecated = Omit<FEArticle, 'affiliateLinksDisclaimer'> & {
 	imagesForLightbox: ImageForLightbox[];
 	imagesForAppsLightbox: ImageForAppsLightbox[];
 	tableOfContents?: TableOfContentsItem[];
+	affiliateLinksDisclaimerRequired: boolean;
 };
 
 export type ArticleFields = {
@@ -47,14 +51,16 @@ export type ArticleFields = {
 	serverTime?: number | undefined;
 };
 
+export type GalleryDesign = ArticleDesign.Gallery | ArticleDesign.HostedGallery;
+
 export type Gallery = ArticleFields & {
-	design: ArticleDesign.Gallery;
+	design: GalleryDesign;
 	bodyElements: (ImageBlockElement | AdPlaceholderBlockElement)[];
 	mainMedia?: ImageBlockElement;
 };
 
 export type OtherArticles = ArticleFields & {
-	design: Exclude<ArticleDesign, ArticleDesign.Gallery>;
+	design: Exclude<ArticleDesign, GalleryDesign>;
 };
 
 export type Article = Gallery | OtherArticles;
@@ -83,16 +89,38 @@ export const getGalleryMainMedia = (
 	return mainMedia;
 };
 
+/**
+ * Crosswords take the colour of the crosswords group (news) instead of the
+ * theme Frontend sends, but only in editions the Puzzles & Games hub is
+ * available in.
+ */
+const decideArticleFormat = (data: FEArticle): ArticleFormat => {
+	const format = decideFormat(data.format);
+	if (
+		format.design === ArticleDesign.Crossword &&
+		isPuzzlesHubAvailable(data.config)
+	) {
+		return { ...format, theme: getPuzzleGroupPalette('crosswords').theme };
+	}
+	return format;
+};
+
 export const enhanceArticleType = (
 	data: FEArticle,
 	renderingTarget: RenderingTarget,
 ): Article => {
-	const format = decideFormat(data.format);
+	const format = decideArticleFormat(data);
 
 	const serverTime = Date.now();
 
+	const mainMediaElementsData =
+		// Hosted Gallery pages do not display main media
+		format.design === ArticleDesign.HostedGallery
+			? []
+			: data.mainMediaElements;
+
 	const imagesForLightbox = data.config.switches.lightbox
-		? buildLightboxImages(data.format, data.blocks, data.mainMediaElements)
+		? buildLightboxImages(data.format, data.blocks, mainMediaElementsData)
 		: [];
 
 	const enhancedBlocks = enhanceBlocks(data.blocks, format, {
@@ -106,6 +134,7 @@ export const enhanceArticleType = (
 		pageId: data.pageId,
 		serverSideABTests: data.config.serverSideABTests,
 		switches: data.config.switches,
+		stage: data.config.stage,
 	});
 
 	const crosswordBlock = buildCrosswordBlock(data);
@@ -118,19 +147,28 @@ export const enhanceArticleType = (
 		imagesForLightbox,
 		true,
 		data.main,
-	)(data.mainMediaElements);
+	)(mainMediaElementsData);
+
+	const isGalleryPage = (design: ArticleDesign): design is GalleryDesign =>
+		design === ArticleDesign.Gallery ||
+		design === ArticleDesign.HostedGallery;
 
 	const storyPackage = parseStoryPackage(
 		data.storyPackage,
 		format.design === ArticleDesign.Gallery,
 	);
 
-	if (format.design === ArticleDesign.Gallery) {
-		const design = ArticleDesign.Gallery;
+	const affiliateLinksDisclaimerRequired =
+		data.affiliateLinksDisclaimer === 'true' ||
+		(data.affiliateLinksDisclaimer as unknown) === true;
+
+	if (isGalleryPage(format.design)) {
+		const { design } = format;
 
 		return {
 			frontendData: {
 				...data,
+				affiliateLinksDisclaimerRequired,
 				mainMediaElements,
 				blocks,
 				standfirst: enhanceStandfirst(data.standfirst),
@@ -176,6 +214,7 @@ export const enhanceArticleType = (
 		serverTime,
 		frontendData: {
 			...data,
+			affiliateLinksDisclaimerRequired,
 			mainMediaElements,
 			blocks,
 			pinnedPost: enhancePinnedPost(
@@ -183,6 +222,7 @@ export const enhanceArticleType = (
 				renderingTarget,
 				data.pinnedPost,
 				data.pageId,
+				data.config.stage,
 			),
 			standfirst: enhanceStandfirst(data.standfirst),
 			commercialProperties: enhanceCommercialProperties(

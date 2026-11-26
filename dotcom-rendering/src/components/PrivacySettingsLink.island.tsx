@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { cmp, onConsent } from '@guardian/libs';
-import type { ConsentFramework } from '@guardian/libs';
+import { cmp, onConsent } from '@guardian/consent-manager';
+import type { ConsentFramework } from '@guardian/consent-manager';
 import { palette } from '@guardian/source/foundations';
 import { ButtonLink } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
@@ -11,6 +11,8 @@ const footerLink = css`
 	padding-bottom: 12px;
 	display: block;
 	line-height: 19px;
+	text-align: left;
+	justify-content: flex-start;
 
 	:hover {
 		text-decoration: underline;
@@ -62,7 +64,7 @@ export const PrivacySettingsLink = ({ extraClasses }: Props) => {
 			}}
 		>
 			{framework === 'usnat'
-				? 'California resident – Do Not Sell or Share'
+				? 'Do not sell or share my personal information'
 				: 'Privacy settings'}
 		</ButtonLink>
 	);

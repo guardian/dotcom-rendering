@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { ABTest } from "../../../../types.js";
-	import OphanLink from "$lib/components/OphanLink.svelte";
-	import TestVariants from "$lib/components/TestVariants.svelte";
+	import type { ABTest } from "@guardian/ab-testing-config";
+	import OphanLink from "#lib/components/OphanLink.svelte";
+	import TestVariants from "#lib/components/TestVariants.svelte";
 	import GrafanaLink from "./GrafanaLink.svelte";
 
 	interface Props {

@@ -58,6 +58,7 @@ export type CricketInnings = {
 export type CricketMatch = {
 	matchId: string;
 	competitionName: string;
+	stage: string;
 	venueName: string;
 	teams: CricketTeam[];
 	innings: CricketInnings[];

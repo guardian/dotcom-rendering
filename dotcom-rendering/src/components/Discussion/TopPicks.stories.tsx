@@ -22,6 +22,7 @@ const comment: ReplyType = {
 	apiUrl: 'https://discussion.guardianapis.com/discussion-api/comment/25488498',
 	numRecommends: 0,
 	isHighlighted: false,
+	responses: undefined,
 	responseTo: {
 		displayName: 'FrankDeFord',
 		commentApiUrl:

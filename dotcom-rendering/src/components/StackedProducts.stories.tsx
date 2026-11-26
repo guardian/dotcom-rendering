@@ -1,15 +1,15 @@
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import preview from '../../.storybook/preview';
-import { exampleAtAGlanceProductArray } from '../../fixtures/manual/productBlockElement';
+import { exampleSummaryProducts } from '../../fixtures/manual/productBlockElement';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { StackedProducts } from './StackedProducts.island';
 
 const meta = preview.meta({
-	title: 'Components/Stacked Horizontal Summary Product Cards',
+	title: 'Components/Affiliate Products/Stacked Horizontal Summary Product Cards',
 	component: StackedProducts,
 	args: {
-		products: exampleAtAGlanceProductArray,
-		heading: 'At a glance',
+		products: exampleSummaryProducts,
+		title: 'At a glance',
 		format: {
 			design: ArticleDesign.Review,
 			display: ArticleDisplay.Standard,
@@ -24,13 +24,13 @@ export const Default = meta.story();
 
 export const FourProducts = meta.story({
 	args: {
-		products: exampleAtAGlanceProductArray.slice(0, 4),
+		products: exampleSummaryProducts.slice(0, 4),
 	},
 });
 
 export const AllCardsExpanded = meta.story({
 	args: {
-		products: exampleAtAGlanceProductArray.slice(0, 7),
+		products: exampleSummaryProducts.slice(0, 7),
 		showAllProducts: true,
 	},
 });

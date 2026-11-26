@@ -5,14 +5,14 @@
 There are significant differences between AMP and regular article rendering.
 These include:
 
--   The markup is different
--   The HTML structure/limitations are different
--   AMP does not require (or support) client-side custom Javascript, which means
-    webpack is likely a poor fit
--   From a project perspective, it seems that the two project change at different
-    rates (historically at least)
--   The caching rules are different
--   Ads are very different
+- The markup is different
+- The HTML structure/limitations are different
+- AMP does not require (or support) client-side custom Javascript, which means
+  webpack is likely a poor fit
+- From a project perspective, it seems that the two project change at different
+  rates (historically at least)
+- The caching rules are different
+- Ads are very different
 
 ..and more.
 
@@ -31,12 +31,12 @@ quickly while leaving room to separate things later if necessary.
 
 Within this, we will adhere to a couple of rules:
 
--   no `if (amp)` - branching is not permitted other than the absolute top-level
+- no `if (amp)` - branching is not permitted other than the absolute top-level
 
 There are many disadvantages to this kind of branching and it also would make it
 difficult to separate the projects later on.
 
--   no divergence of data model
+- no divergence of data model
 
 Instead, we will document pressures here and use any to bring forward
 discussions around moving things into a separate project. So note, the

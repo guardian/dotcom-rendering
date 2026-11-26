@@ -1,17 +1,20 @@
 import { css } from '@emotion/react';
 import {
+	from,
 	headlineMedium17,
 	palette as sourcePalette,
 	textEgyptianItalic17,
 	textSansItalic17,
 	until,
 } from '@guardian/source/foundations';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
 	ArticleDesign,
 	type ArticleFormat,
 	ArticleSpecial,
 } from '../lib/articleFormat';
+import { getSoleContributor } from '../lib/byline';
 import { palette as schemedPalette } from '../palette';
 import type { TagType } from '../types/tag';
 import { BylineLink } from './BylineLink';
@@ -102,37 +105,60 @@ type Props = {
 	source?: string;
 	tags: TagType[];
 	format: ArticleFormat;
+	layoutType?: LayoutType;
 };
 
-export const Contributor = ({ byline, tags, format, source }: Props) => (
-	<address
-		data-component="meta-byline"
-		data-link-name="byline"
-		data-gu-name="byline"
-	>
-		{format.design !== ArticleDesign.Interview && (
-			<div
-				className={
-					format.design === ArticleDesign.Interactive
-						? interactiveLegacyClasses.byline
-						: ''
-				}
-				css={[
-					bylineStyles(format),
-					format.theme === ArticleSpecial.Labs &&
-						labsBylineStyles(format.design),
-					format.design === ArticleDesign.LiveBlog &&
-						standfirstColourBelowDesktop,
-				]}
-			>
-				<BylineLink
-					byline={byline}
-					tags={tags}
-					source={source}
-					format={format}
-					isHeadline={false}
-				/>
-			</div>
-		)}
-	</address>
-);
+export const Contributor = ({
+	byline,
+	tags,
+	format,
+	source,
+	layoutType,
+}: Props) => {
+	const isImmersiveGrid = layoutType?.startsWith('immersive') ?? false;
+	const shouldHide =
+		format.design === ArticleDesign.Interview &&
+		// Hide the contributor for interviews unless it's in the new immersive layout
+		!isImmersiveGrid;
+	return (
+		<address
+			data-component="meta-byline"
+			data-link-name="byline"
+			data-gu-name="byline"
+		>
+			{!shouldHide && (
+				<div
+					className={
+						format.design === ArticleDesign.Interactive
+							? interactiveLegacyClasses.byline
+							: ''
+					}
+					css={[
+						bylineStyles(format),
+						format.theme === ArticleSpecial.Labs &&
+							labsBylineStyles(format.design),
+						format.design === ArticleDesign.LiveBlog &&
+							standfirstColourBelowDesktop,
+						isImmersiveGrid &&
+							getSoleContributor(tags, byline) &&
+							css`
+								${from.leftCol} {
+									> a + span {
+										display: block;
+									}
+								}
+							`,
+					]}
+				>
+					<BylineLink
+						byline={byline}
+						tags={tags}
+						source={source}
+						format={format}
+						isHeadline={false}
+					/>
+				</div>
+			)}
+		</address>
+	);
+};

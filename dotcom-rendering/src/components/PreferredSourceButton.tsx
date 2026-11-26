@@ -8,8 +8,15 @@ import {
 import { LinkButton, SvgGoogleBrand } from '@guardian/source/react-components';
 import { palette } from '../palette';
 
-export const PreferredSourceButton = () => (
+export const PreferredSourceButton = ({
+	hidePreferredSourceOnPrint,
+}: {
+	hidePreferredSourceOnPrint?: boolean;
+}) => (
 	<LinkButton
+		data-print-layout={
+			hidePreferredSourceOnPrint === true ? 'hide' : undefined
+		}
 		priority="tertiary"
 		icon={<SvgGoogleBrand />}
 		size="small"

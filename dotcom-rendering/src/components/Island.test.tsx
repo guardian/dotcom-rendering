@@ -263,7 +263,6 @@ describe('Island: server-side rendering', () => {
 					webTitle=""
 					ajaxUrl=""
 					pageId=""
-					filterKeyEvents={false}
 					enhanceTweetsSwitch={false}
 					onFirstPage={true}
 					webURL=""
@@ -287,6 +286,7 @@ describe('Island: server-side rendering', () => {
 					pageId={''}
 					keywordIds={''}
 					renderingTarget={'Web'}
+					isSensitive={false}
 				/>,
 			),
 		).not.toThrow();
@@ -296,7 +296,7 @@ describe('Island: server-side rendering', () => {
 		expect(() =>
 			renderToString(
 				<WithConfig>
-					<Metrics commercialMetricsEnabled={true} tests={{}} />
+					<Metrics commercialMetricsEnabled={true} />
 				</WithConfig>,
 			),
 		).not.toThrow();
@@ -369,14 +369,7 @@ describe('Island: server-side rendering', () => {
 		expect(() =>
 			renderToString(
 				<WithConfig>
-					<SetABTests
-						isDev={false}
-						pageIsSensitive={false}
-						abTestSwitches={{}}
-						serverSideTests={{}}
-						serverSideABTests={{}}
-					/>
-					,
+					<SetABTests serverSideABTests={{}} />,
 				</WithConfig>,
 			),
 		).not.toThrow();
@@ -421,7 +414,6 @@ describe('Island: server-side rendering', () => {
 						contentType={''}
 						sectionId={''}
 						shouldHideReaderRevenue={false}
-						isMinuteArticle={false}
 						isPaidContent={false}
 						tags={[]}
 						contributionsServiceUrl={''}
@@ -430,6 +422,7 @@ describe('Island: server-side rendering', () => {
 						renderAds={true}
 						isLabs={false}
 						articleEndSlot={true}
+						isSensitive={false}
 					/>
 				</WithConfig>,
 			),

@@ -6,10 +6,10 @@ An element which contains an embed which doesn't have its own element type.
 
 This has an `ElementType` of [EMBED](https://github.com/guardian/content-api-models/blob/master/models/src/main/thrift/content/v1.thrift#L55) with fields described by [EmbedElementFields](https://github.com/guardian/content-api-models/blob/master/models/src/main/thrift/content/v1.thrift#L622) containing four fields:
 
--   html
--   safeEmbedCode
--   alt
--   isMandatory
+- html
+- safeEmbedCode
+- alt
+- isMandatory
 
 This also has an asset type [EMBED](https://github.com/guardian/content-api-models/blob/master/models/src/main/thrift/content/v1.thrift#L203).
 

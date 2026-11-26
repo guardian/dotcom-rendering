@@ -5,9 +5,10 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
+import { AffiliateDisclaimer } from '../components/AffiliateProducts/AffiliateDisclaimer';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
-import { InteractivesDisableArticleSwipe } from '../components/InteractivesDisableArticleSwipe.island';
+import { InteractivesDisableArticleSwipeInApps } from '../components/InteractivesDisableArticleSwipe.island';
 import { InteractivesNativePlatformWrapper } from '../components/InteractivesNativePlatformWrapper.island';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
@@ -24,10 +25,10 @@ import { renderElement } from '../lib/renderElement';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
-import type { ServerSideTests, Switches } from '../types/config';
+import type { Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { temporaryBodyCopyColourOverride } from './InteractiveLayout';
+import { temporaryBodyCopyColourOverride } from './interactives/InteractiveArticleGridDeprecated';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -61,7 +62,6 @@ type RendererProps = {
 	ajaxUrl: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	abTests: ServerSideTests;
 	switches: Switches;
 	editionId: EditionId;
 	shouldHideAds: boolean;
@@ -76,7 +76,6 @@ const Renderer = ({
 	ajaxUrl,
 	isAdFreeUser,
 	isSensitive,
-	abTests,
 	switches,
 	editionId,
 	shouldHideAds,
@@ -98,7 +97,6 @@ const Renderer = ({
 			ajaxUrl,
 			isAdFreeUser,
 			isSensitive,
-			abTests,
 			switches,
 			editionId,
 			shouldHideAds,
@@ -177,11 +175,24 @@ const NavHeader = ({ article, NAV, renderAds }: HeaderProps) => {
 				idApiUrl={article.config.idApiUrl}
 				contributionsServiceUrl={article.contributionsServiceUrl}
 				showSubNav={false}
+				customSubnav={
+					NAV.customSubNav && {
+						data: NAV.customSubNav,
+						renderingPage: 'article',
+					}
+				}
 				showSlimNav={true}
 				hasPageSkin={false}
 				hasPageSkinContentSelfConstrain={false}
 				pageId={article.pageId}
+				tagIds={article.tags.map((tag) => tag.id)}
+				sectionId={article.config.section}
+				contentType={article.contentType}
+				canonicalUrl={article.canonicalUrl}
 			/>
+			{article.affiliateLinksDisclaimerRequired && (
+				<AffiliateDisclaimer />
+			)}
 		</section>
 	);
 };
@@ -208,7 +219,7 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 						<InteractivesNativePlatformWrapper />
 					</Island>
 					<Island priority="critical">
-						<InteractivesDisableArticleSwipe />
+						<InteractivesDisableArticleSwipeInApps />
 					</Island>
 					<Global styles={temporaryBodyCopyColourOverride} />
 				</>
@@ -234,7 +245,7 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 									fullWidth={true}
 									showTopBorder={false}
 									padSides={true}
-									backgroundColour={sourcePalette.labs[400]}
+									backgroundColour={sourcePalette.labs[100]}
 									borderColour={sourcePalette.neutral[60]}
 									sectionId="labs-header"
 								>
@@ -257,7 +268,7 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 							fullWidth={true}
 							showTopBorder={false}
 							padSides={true}
-							backgroundColour={sourcePalette.labs[400]}
+							backgroundColour={sourcePalette.labs[100]}
 							borderColour={sourcePalette.neutral[60]}
 							sectionId="labs-header"
 						>
@@ -290,7 +301,6 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 						pageId={article.pageId}
 						webTitle={article.webTitle}
 						ajaxUrl={article.config.ajaxUrl}
-						abTests={article.config.abTests}
 						switches={article.config.switches}
 						isAdFreeUser={article.isAdFreeUser}
 						isSensitive={article.config.isSensitive}
@@ -337,6 +347,9 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 						/>
 					</Section>
 
+					{/* Mount point for the sign-in gate portal, which is not
+					    provided by an article body on full page interactives */}
+					<div id="sign-in-gate" data-print-layout="hide" />
 					<BannerWrapper>
 						<Island priority="feature" defer={{ until: 'idle' }}>
 							<StickyBottomBanner
@@ -364,10 +377,9 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					<MobileStickyContainer
-						contentType={article.contentType}
-						pageId={article.pageId}
-					/>
+					{renderAds && (
+						<MobileStickyContainer data-print-layout="hide" />
+					)}
 				</>
 			)}
 		</>

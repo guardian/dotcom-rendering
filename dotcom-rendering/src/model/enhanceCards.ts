@@ -2,6 +2,7 @@ import { isUndefined } from '@guardian/libs';
 import type {
 	FEFrontCard,
 	FEMediaAtom,
+	FEMultimediaSlideshow,
 	FESupportingContent,
 } from '../frontend/feFront';
 import {
@@ -13,17 +14,22 @@ import { getSoleContributor } from '../lib/byline';
 import type { EditionId } from '../lib/edition';
 import type { Group } from '../lib/getDataLinkName';
 import { getDataLinkNameCard } from '../lib/getDataLinkName';
-import { getLargestImageSize } from '../lib/image';
+import { getLargestImage } from '../lib/image';
 import {
 	convertFEMediaAssetsToVideoAssets,
+	DEFAULT_IMAGE_ASPECT_RATIO,
 	extractValidSourcesFromAssets,
 	getAspectRatioFromSources,
 } from '../lib/video';
+import type { Switches } from '../types/config';
 import type { Image } from '../types/content';
 import type {
 	DCRFrontCard,
 	DCRSlideshowImage,
+	DCRSlideshowMedia,
+	DCRSlideshowVideo,
 	DCRSupportingContent,
+	FrontEditorialTest,
 } from '../types/front';
 import type { ArticleMedia, MainMedia } from '../types/mainMedia';
 import type { PodcastSeriesImage, TagType } from '../types/tag';
@@ -33,6 +39,9 @@ import { enhanceTags } from './enhanceTags';
 const enhanceSupportingContent = (
 	supportingContent: FESupportingContent[],
 	parentFormat: ArticleFormat,
+	serverSideABTests: Record<string, string>,
+	isEditorialABTestingEnabled: boolean,
+	pageId?: string,
 ): DCRSupportingContent[] => {
 	return supportingContent.map((subLink) => {
 		/** Use link format where available and fallback to parent otherwise */
@@ -47,10 +56,21 @@ const enhanceSupportingContent = (
 
 		return {
 			format: linkFormat,
-			headline: subLink.header.headline,
+			headline: decideHeadline(
+				subLink,
+				serverSideABTests,
+				isEditorialABTestingEnabled,
+				pageId,
+			),
 			url: decideUrl(subLink),
 			kickerText:
 				!kickerText && supportingContentIsLive ? 'Live' : kickerText,
+			headlineTestUuid: findHeadlineTestUuid(
+				subLink,
+				serverSideABTests,
+				isEditorialABTestingEnabled,
+				pageId,
+			),
 		};
 	});
 };
@@ -126,7 +146,7 @@ const getPodcastSeriesImage = (
 		? {
 				src: podcastFromTags.podcast.image,
 				altText: podcastFromTags.webTitle,
-		  }
+			}
 		: undefined;
 };
 
@@ -162,34 +182,144 @@ const decideSlideshowImages = (
 	return undefined;
 };
 
-const getLargestImageUrl = (images?: Image[]) => {
-	return getLargestImageSize(
-		images?.map(({ url, fields: { width } }) => ({
-			url,
-			width: Number(width),
-		})) ?? [],
-	)?.url;
+const decideVideoAtomImage = (
+	mediaAtomImages?: Image[],
+	fallbackImage?: string,
+): { src: string; imageAspectRatio?: string } | undefined => {
+	const largestMediaAtomImage = getLargestImage(mediaAtomImages);
+
+	if (largestMediaAtomImage) {
+		return {
+			src: largestMediaAtomImage.url,
+			imageAspectRatio: largestMediaAtomImage.fields.aspectRatio,
+		};
+	}
+
+	if (!isUndefined(fallbackImage)) {
+		return { src: fallbackImage };
+	}
+
+	return undefined;
 };
 
 /**
- * If we have a replacement video, we should prioritise the largest available trail image from the media atom.
- * For all other videos, we should prioritise the card's trail image.
+ * Checks if an editorial test is active by making sure it has not been manually ended,
+ * that it has a valid expiry date, and that the expiry date is in the future
  */
-const decideMediaAtomImage = (
-	videoReplace: boolean,
-	mediaAtom: FEMediaAtom,
-	cardTrailImage?: string,
-	isSelfHostedVideo?: boolean,
-) => {
-	const largestMediaAtomImage = isSelfHostedVideo
-		? getLargestImageUrl(mediaAtom.posterImage?.allImages)
-		: getLargestImageUrl(mediaAtom.trailImage?.allImages);
+const isActiveFrontEditorialTest = (test: FrontEditorialTest) =>
+	!test.hasManuallyEndedOnThisTrail &&
+	!!test.expiryDate &&
+	test.expiryDate > Date.now();
 
-	if (videoReplace) {
-		return largestMediaAtomImage ?? cardTrailImage;
+/**
+ * Looks through a list of editorial tests to see if there is an active test. If no active
+ * test is found, return undefined
+ */
+const findActiveFrontEditorialTest = (
+	tests: FrontEditorialTest[] | undefined,
+): FrontEditorialTest | undefined => {
+	return tests?.find((test) => isActiveFrontEditorialTest(test));
+};
+
+type FrontEditorialTestData = {
+	headline: string;
+	uuid: string;
+};
+
+/**
+ * Centralises the logic used by both the decideHeadline and findHeadlineTestUuid functions. Makes sure that
+ * the the testing switch is enabled, the page is in the test bucket, the test can run on the given front,
+ * and that a valid variant headline is defined before returning the variant headline and test UUID.
+ */
+export const getFrontEditorialTestData = (
+	faciaCard: FEFrontCard | FESupportingContent,
+	serverSideABTests: Record<string, string>,
+	isEditorialABTestingEnabled: boolean,
+	pageId?: string,
+): FrontEditorialTestData | undefined => {
+	const activeFrontEditorialTest = findActiveFrontEditorialTest(
+		faciaCard.properties.tests,
+	);
+
+	// don't return data if there is no active test on the card or editorial testing is switched off
+	if (!activeFrontEditorialTest || !isEditorialABTestingEnabled) {
+		return undefined;
 	}
 
-	return cardTrailImage ?? largestMediaAtomImage;
+	/*
+	 * Initial rollout of Editorial AB testing will be limited to the US and AU fronts only.
+	 * Removal of this front restriction will be covered by https://github.com/guardian/frontend/issues/29129
+	 */
+	const isAllowedNetworkFront = pageId === 'us' || pageId === 'au';
+	const testCanRunOnPage =
+		!isUndefined(pageId) &&
+		isAllowedNetworkFront &&
+		activeFrontEditorialTest.frontsThisTestCanRunOn.includes(pageId);
+
+	// don't return data if test cannot run on the current front
+	if (!testCanRunOnPage) return undefined;
+
+	const testBucket = serverSideABTests['fronts-and-curation-editorial-test'];
+
+	// don't return data if the pageview is not in the editorial test bucket
+	if (isUndefined(testBucket)) {
+		return undefined;
+	}
+
+	const variantMeta = activeFrontEditorialTest.variantMeta.find(
+		(variant) => variant.id.toLowerCase() === testBucket,
+	);
+
+	// make sure the variant headline isn't undefined and that it is of type string
+	if (typeof variantMeta?.meta.headline !== 'string') return undefined;
+
+	return {
+		headline: variantMeta.meta.headline,
+		uuid: activeFrontEditorialTest.testUuid,
+	};
+};
+
+/**
+ * Decide the headline to be shown for a given card. If there is an active editorial test on a card,
+ * return the variant headline matching the user test group. Otherwise, return the default headline
+ */
+export const decideHeadline = (
+	faciaCard: FEFrontCard | FESupportingContent,
+	serverSideABTests: Record<string, string>,
+	isEditorialABTestingEnabled: boolean,
+	pageId?: string,
+): string => {
+	const frontEditorialTestData = getFrontEditorialTestData(
+		faciaCard,
+		serverSideABTests,
+		isEditorialABTestingEnabled,
+		pageId,
+	);
+
+	if (isUndefined(frontEditorialTestData)) return faciaCard.header.headline;
+
+	return frontEditorialTestData.headline;
+};
+
+/**
+ * Find the UUID of a headline test if one is running on the card
+ */
+export const findHeadlineTestUuid = (
+	faciaCard: FEFrontCard | FESupportingContent,
+	serverSideABTests: Record<string, string>,
+	isEditorialABTestingEnabled: boolean,
+	pageId?: string,
+): string | undefined => {
+	const frontEditorialTestData = getFrontEditorialTestData(
+		faciaCard,
+		serverSideABTests,
+		isEditorialABTestingEnabled,
+		pageId,
+	);
+
+	if (isUndefined(frontEditorialTestData)) return undefined;
+
+	return frontEditorialTestData.uuid;
 };
 
 /**
@@ -199,7 +329,6 @@ const decideMediaAtomImage = (
  */
 
 export const getActiveMediaAtom = (
-	videoReplace: boolean,
 	mediaAtom?: FEMediaAtom,
 	cardTrailImage?: string,
 ): MainMedia | undefined => {
@@ -213,13 +342,6 @@ export const getActiveMediaAtom = (
 		)[0];
 		if (!firstVideoAsset) return undefined;
 
-		const image = decideMediaAtomImage(
-			videoReplace,
-			mediaAtom,
-			cardTrailImage,
-			firstVideoAsset.platform === 'Url',
-		);
-
 		/**
 		 * Each version of a media atom will contain assets for self-hosted OR YouTube, but not both.
 		 * Therefore, we check the platform of the first asset and assume the rest are the same.
@@ -232,21 +354,37 @@ export const getActiveMediaAtom = (
 				({ assetType }) => assetType === 'Subtitles',
 			);
 
+			const image = decideVideoAtomImage(
+				mediaAtom.posterImage?.allImages,
+				cardTrailImage,
+			);
+
+			const videoStyle = mediaAtom.videoPlayerFormat ?? 'Loop';
+
 			const videoAssets =
 				convertFEMediaAssetsToVideoAssets(selfHostedAssets);
-			const sources = extractValidSourcesFromAssets(videoAssets);
+
+			const sources = extractValidSourcesFromAssets(
+				videoAssets,
+				videoStyle,
+				mediaAtom.duration,
+			);
 
 			const aspectRatio = getAspectRatioFromSources(sources);
 
 			return {
 				type: 'SelfHostedVideo',
-				videoStyle: mediaAtom.videoPlayerFormat ?? 'Loop',
+				videoStyle,
 				atomId: mediaAtom.id,
 				sources,
 				subtitleSource: subtitleAsset?.id,
 				aspectRatio,
 				duration: mediaAtom.duration ?? 0,
-				image,
+				image: {
+					src: image?.src,
+					aspectRatio:
+						image?.imageAspectRatio ?? DEFAULT_IMAGE_ASPECT_RATIO,
+				},
 			};
 		}
 
@@ -254,6 +392,11 @@ export const getActiveMediaAtom = (
 		 * There should only be one asset for Youtube atoms, so we use the first one.
 		 */
 		if (firstVideoAsset.platform === 'Youtube') {
+			const image = decideVideoAtomImage(
+				mediaAtom.trailImage?.allImages,
+				cardTrailImage,
+			);
+
 			return {
 				type: 'YoutubeVideo',
 				id: mediaAtom.id,
@@ -270,7 +413,7 @@ export const getActiveMediaAtom = (
 				 * a soft contract with Editorial who manually set the duration of videos.
 				 */
 				isLive: mediaAtom.duration === 0,
-				image,
+				image: image?.src,
 			};
 		}
 	}
@@ -299,7 +442,7 @@ export const decideArticleMedia = (
 			};
 
 		case ArticleDesign.Video: {
-			return getActiveMediaAtom(false, mediaAtom, cardImage);
+			return getActiveMediaAtom(mediaAtom, cardImage);
 		}
 
 		default:
@@ -308,16 +451,64 @@ export const decideArticleMedia = (
 };
 
 export const decideReplacementMedia = (
-	showMainVideo?: boolean,
+	showMainVideo: boolean,
+	videoReplace: boolean,
 	mediaAtom?: FEMediaAtom,
-	videoReplace?: boolean,
 	cardImage?: string,
 ): MainMedia | undefined => {
 	/* Force video on the card when enabled by the fronts tool */
-	if (!!showMainVideo || !!videoReplace) {
-		return getActiveMediaAtom(!!videoReplace, mediaAtom, cardImage);
+	if (showMainVideo || videoReplace) {
+		return getActiveMediaAtom(mediaAtom, cardImage);
 	}
 	return undefined;
+};
+
+// Same players and poster fallback as video cards; the self-hosted player needs a source and a poster.
+const decideSlideshowVideo = (
+	mediaAtom: FEMediaAtom,
+	caption?: string,
+	cardImage?: string,
+): DCRSlideshowVideo | undefined => {
+	const video = getActiveMediaAtom(mediaAtom, cardImage);
+	if (
+		video?.type === 'YoutubeVideo' ||
+		(video?.type === 'SelfHostedVideo' &&
+			video.sources.length > 0 &&
+			!!video.image.src)
+	) {
+		return { type: 'video', video, caption };
+	}
+
+	return undefined;
+};
+
+export const decideMultimediaSlideshow = (
+	multimediaSlideshowReplace: boolean,
+	multimediaSlideshow?: FEMultimediaSlideshow,
+	cardImage?: string,
+): DCRSlideshowMedia[] | undefined => {
+	if (!multimediaSlideshowReplace || !multimediaSlideshow) return undefined;
+
+	const slides = multimediaSlideshow.slides.flatMap(
+		({ content, caption }): DCRSlideshowMedia[] => {
+			if (content.type === 'Image') {
+				const imageSrc = getLargestImage(
+					content.item.image.allImages,
+				)?.url;
+				return isUndefined(imageSrc)
+					? []
+					: [{ type: 'image', imageSrc, imageCaption: caption }];
+			}
+			const video = decideSlideshowVideo(
+				content.item.mediaAtom,
+				caption,
+				cardImage,
+			);
+			return video ? [video] : [];
+		},
+	);
+
+	return slides.length > 0 ? slides : undefined;
 };
 
 export const getMediaMetadata = (
@@ -359,6 +550,8 @@ export const enhanceCards = (
 		pageId,
 		discussionApiUrl,
 		stripBranding = false,
+		serverSideABTests,
+		featureSwitches,
 	}: {
 		cardInTagPage: boolean;
 		/** Used for the data link name to indicate card position in container */
@@ -368,6 +561,8 @@ export const enhanceCards = (
 		discussionApiUrl: string;
 		/** We strip branding from cards if the branding will appear at the collection level instead */
 		stripBranding?: boolean;
+		serverSideABTests: Record<string, string>;
+		featureSwitches: Switches;
 	},
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
@@ -379,9 +574,7 @@ export const enhanceCards = (
 				display: 'StandardDisplay',
 			},
 		);
-		const group: Group = `${Number(faciaCard.card.group)}${
-			faciaCard.display.isBoosted ? '+' : ''
-		}`;
+		const group: Group = `${Number(faciaCard.card.group)}`;
 
 		const dataLinkName = getDataLinkNameCard(
 			format,
@@ -398,6 +591,11 @@ export const enhanceCards = (
 			({ id, type }) =>
 				(type === 'Keyword' && id === 'info/newsletter-sign-up') ||
 				(type === 'Tone' && id === 'tone/newsletter-tone'),
+		);
+
+		const isNewsletterSignup = tags.some(
+			({ id, type }) =>
+				type === 'Keyword' && id === 'info/newsletter-sign-up',
 		);
 
 		const branding = faciaCard.properties.editionBrandings.find(
@@ -421,12 +619,12 @@ export const enhanceCards = (
 			imageSrc,
 		);
 		const replacementMainMedia = decideReplacementMedia(
-			faciaCard.properties.showMainVideo ??
-				faciaCard.properties.mediaSelect?.showMainVideo,
+			faciaCard.properties.showMainVideo === true ||
+				faciaCard.properties.mediaSelect?.showMainVideo === true,
+			faciaCard.properties.mediaSelect?.videoReplace === true,
 			faciaCard.mediaAtom ??
 				faciaCard.properties.maybeContent?.elements.mainMediaAtom ??
 				faciaCard.properties.maybeContent?.elements.mediaAtoms[0],
-			faciaCard.properties.mediaSelect?.videoReplace,
 			imageSrc,
 		);
 
@@ -435,11 +633,19 @@ export const enhanceCards = (
 		const articleMedia =
 			articleMainMedia && getMediaMetadata(articleMainMedia);
 
+		const isEditorialABTestingEnabled =
+			featureSwitches['editorialAbTests'] === true;
+
 		return {
 			format,
 			dataLinkName,
 			url: decideUrl(faciaCard),
-			headline: faciaCard.header.headline,
+			headline: decideHeadline(
+				faciaCard,
+				serverSideABTests,
+				isEditorialABTestingEnabled,
+				pageId,
+			),
 			trailText: faciaCard.card.trailText,
 			starRating: faciaCard.card.starRating,
 			webPublicationDate: !isUndefined(
@@ -447,11 +653,17 @@ export const enhanceCards = (
 			)
 				? new Date(
 						faciaCard.card.webPublicationDateOption,
-				  ).toISOString()
+					).toISOString()
 				: undefined,
 			kickerText: decideKicker(faciaCard, cardInTagPage, pageId),
 			supportingContent: faciaCard.supportingContent
-				? enhanceSupportingContent(faciaCard.supportingContent, format)
+				? enhanceSupportingContent(
+						faciaCard.supportingContent,
+						format,
+						serverSideABTests,
+						isEditorialABTestingEnabled,
+						pageId,
+					)
 				: undefined,
 			discussionApiUrl,
 			discussionId: faciaCard.discussion.isCommentable
@@ -460,11 +672,14 @@ export const enhanceCards = (
 			byline: faciaCard.properties.byline ?? undefined,
 			showByline: faciaCard.properties.showByline,
 			snapData: enhanceSnaps(faciaCard.enriched),
-			isBoosted: faciaCard.display.isBoosted,
 			boostLevel: faciaCard.display.boostLevel,
+			showMiniNav: faciaCard.display.showMiniNav ?? false,
+			miniNavData: faciaCard.display.miniNavData,
 			isImmersive: !!faciaCard.display.isImmersive,
 			isCrossword: faciaCard.properties.isCrossword,
 			isNewsletter,
+			isNewsletterSignup,
+			newsletterData: faciaCard.properties.newsletterData,
 			showQuotedHeadline: faciaCard.display.showQuotedHeadline,
 			// show latest 3 updates from a live blog
 			showLivePlayable: faciaCard.display.showLivePlayable,
@@ -475,14 +690,20 @@ export const enhanceCards = (
 					? decideAvatarUrl(
 							tags,
 							faciaCard.properties.maybeContent.trail.byline,
-					  )
+						)
 					: undefined,
 			mainMedia: cardMainMedia,
 			articleMedia,
 			isExternalLink: faciaCard.card.cardStyle.type === 'ExternalLink',
 			embedUri: faciaCard.properties.embedUri ?? undefined,
 			branding: stripBranding ? undefined : branding,
-			slideshowImages: decideSlideshowImages(faciaCard),
+			slideshowMedia:
+				decideMultimediaSlideshow(
+					faciaCard.properties.mediaSelect
+						?.multimediaSlideshowReplace === true,
+					faciaCard.multimediaSlideshow,
+					imageSrc,
+				) ?? decideSlideshowImages(faciaCard),
 			showVideo:
 				!!(
 					faciaCard.properties.showMainVideo ??
@@ -496,5 +717,14 @@ export const enhanceCards = (
 							?.allImages[0]?.fields.altText ?? '',
 				},
 			}),
+			headlineTestUuid: findHeadlineTestUuid(
+				faciaCard,
+				serverSideABTests,
+				isEditorialABTestingEnabled,
+				pageId,
+			),
+			dataUrl: faciaCard.dataUrl,
+			graphicKind: faciaCard.graphicKind,
+			eventData: faciaCard.eventData,
 		};
 	});

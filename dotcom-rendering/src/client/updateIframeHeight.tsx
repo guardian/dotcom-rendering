@@ -12,7 +12,9 @@ export const updateIframeHeight = (
 		...document.querySelectorAll<HTMLIFrameElement>(queryString),
 	];
 
-	if (iframes.length === 0) return Promise.resolve();
+	if (iframes.length === 0) {
+		return Promise.resolve();
+	}
 
 	window.addEventListener('message', (event) => {
 		const iframe = iframes.find((i) => {

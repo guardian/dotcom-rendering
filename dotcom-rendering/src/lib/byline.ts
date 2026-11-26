@@ -31,7 +31,6 @@ export const getSoleContributor = (
 		.filter(isContributor)
 		.filter(({ title }) => byline.includes(title));
 
-	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- we don’t have unchecked indexed access
 	if (otherContributor) return undefined;
 
 	return firstContributor;

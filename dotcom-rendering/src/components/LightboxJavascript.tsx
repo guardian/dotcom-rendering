@@ -18,10 +18,18 @@ const getPosition = (
 ): number | undefined => {
 	const scrollPosition = imageList.scrollLeft;
 	const liWidth = lightbox.querySelector('li')?.clientWidth;
-	if (scrollPosition === 0 && liWidth === 0) return;
-	if (isUndefined(liWidth)) return;
-	if (Number.isNaN(liWidth) || Number.isNaN(scrollPosition)) return;
-	if (scrollPosition === 0) return 1;
+	if (scrollPosition === 0 && liWidth === 0) {
+		return;
+	}
+	if (isUndefined(liWidth)) {
+		return;
+	}
+	if (Number.isNaN(liWidth) || Number.isNaN(scrollPosition)) {
+		return;
+	}
+	if (scrollPosition === 0) {
+		return 1;
+	}
 	return Math.round(scrollPosition / liWidth) + 1;
 };
 
@@ -39,13 +47,19 @@ const getTabbableElements = (
 ): HTMLElement[] => {
 	function getElements(parent: HTMLElement): HTMLElement[] {
 		return Array.from(
-			parent.querySelectorAll(
+			parent.querySelectorAll<HTMLElement>(
 				'button:not([disabled]), a:not([disabled]), input:not([disabled]), select:not([disabled])',
 			),
-		);
+			// Ignore elements that aren't rendered (e.g. the info toggle is
+			// hidden with `display: none` on Filter articles). They can't
+			// receive focus, so leaving them in the list would trap keyboard
+			// tabbing on the element before them.
+		).filter((element) => element.getClientRects().length > 0);
 	}
 	const currentPosition = getPosition(lightbox, imageList);
-	if (currentPosition == null) return [];
+	if (currentPosition == null) {
+		return [];
+	}
 	const currentPage = lightbox.querySelector<HTMLElement>(
 		`li[data-index="${currentPosition}"]`,
 	);
@@ -86,7 +100,9 @@ const exitFullscreen = async () => {
 };
 
 const restoreFocus = (previouslyFocused: Element) => {
-	if (!(previouslyFocused instanceof HTMLElement)) return;
+	if (!(previouslyFocused instanceof HTMLElement)) {
+		return;
+	}
 	previouslyFocused.focus();
 };
 
@@ -121,7 +137,9 @@ const scrollTo = (
 	// liWidth is the actual dom width in pixels of the containing li element for each image
 	const liWidth = lightbox.querySelector('li')?.clientWidth;
 
-	if (isUndefined(liWidth)) return;
+	if (isUndefined(liWidth)) {
+		return;
+	}
 	switch (position) {
 		case 0:
 		case 1: {
@@ -137,18 +155,20 @@ const scrollTo = (
 const getPreviousPosition = (position: number, length: number): number =>
 	position <= 1
 		? // Cycle around to the end
-		  length
+			length
 		: position - 1;
 
 const getNextPosition = (position: number, length: number): number =>
 	position >= length
 		? // Cycle back to the start
-		  1
+			1
 		: position + 1;
 
 const eagerLoad = (images: HTMLImageElement[], position: number) => {
 	const image = images[position - 1];
-	if (image) image.loading = 'eager';
+	if (image) {
+		image.loading = 'eager';
+	}
 };
 
 /**
@@ -214,7 +234,9 @@ const open = async (
 ) => {
 	log('dotcom', '💡 Opening lightbox.');
 	// Remember where we were so we can restore focus
-	if (document.activeElement) previouslyFocused = document.activeElement;
+	if (document.activeElement) {
+		previouslyFocused = document.activeElement;
+	}
 	// Try to open the lightbox in fullscreen mode. This may fail
 	await requestFullscreen(lightbox).catch(() => {
 		// fullscreen request failed
@@ -289,7 +311,10 @@ const toggleInfo = (
  *
  */
 
-const initialiseLightbox = (lightbox: HTMLElement) => {
+const initialiseLightbox = (
+	lightbox: HTMLElement,
+	isFilterArticle: boolean,
+) => {
 	log('dotcom', '💡 Initialising lightbox');
 
 	// --------------------------------------------------------------------------------
@@ -316,21 +341,47 @@ const initialiseLightbox = (lightbox: HTMLElement) => {
 		lightbox.querySelectorAll<HTMLImageElement>('li img'),
 	);
 
-	const captionLinks =
-		lightbox.querySelectorAll<HTMLAnchorElement>('li aside a');
+	const captionLinks = Array.from(
+		lightbox.querySelectorAll<HTMLAnchorElement>('li aside a'),
+	).filter(
+		(link) => !link.closest('[data-component="product-lightbox-link"]'),
+	);
 
-	if (!imageList) return;
-	if (!closeButton) return;
-	if (!previousButton) return;
-	if (!nextButton) return;
-	if (!infoButton) return;
+	if (!imageList) {
+		return;
+	}
+	if (!closeButton) {
+		return;
+	}
+	if (!previousButton) {
+		return;
+	}
+	if (!nextButton) {
+		return;
+	}
+	if (!infoButton) {
+		return;
+	}
 
 	// --------------------------------------------------------------------------------
 	// FUNCTIONS
 	// --------------------------------------------------------------------------------
 
+	// On Filter articles the info panel is always shown and the toggle button is
+	// hidden, so we disable every path that would toggle the caption. This keeps
+	// the info visible and avoids the mobile nav being hidden (a `hide-info` side
+	// effect) or polluting the shared `gu.prefs.lightbox-info` preference.
+	const handleToggleInfo = (force?: 'hide' | 'show') => {
+		if (isFilterArticle) {
+			return;
+		}
+		toggleInfo(lightbox, infoButton, force);
+	};
+
 	const handleKeydown = (event: KeyboardEvent) => {
-		if (event.ctrlKey || event.metaKey || event.altKey) return;
+		if (event.ctrlKey || event.metaKey || event.altKey) {
+			return;
+		}
 		switch (event.code) {
 			case 'Tab': {
 				event.preventDefault();
@@ -377,11 +428,11 @@ const initialiseLightbox = (lightbox: HTMLElement) => {
 			case 'ArrowRight':
 				return goForward(lightbox, images, nextButton, imageList);
 			case 'KeyI':
-				return toggleInfo(lightbox, infoButton);
+				return handleToggleInfo();
 			case 'ArrowUp':
-				return toggleInfo(lightbox, infoButton, 'show');
+				return handleToggleInfo('show');
 			case 'ArrowDown':
-				return toggleInfo(lightbox, infoButton, 'hide');
+				return handleToggleInfo('hide');
 			case 'KeyQ':
 			case 'Escape':
 				return void close(lightbox, handleKeydown);
@@ -394,7 +445,7 @@ const initialiseLightbox = (lightbox: HTMLElement) => {
 	for (const picture of pictures) {
 		// Clicking on the image toggles the caption
 		picture.addEventListener('mousedown', (event) => {
-			toggleInfo(lightbox, infoButton);
+			handleToggleInfo();
 			// We want to maintain focus so halt all further actions
 			event.preventDefault();
 			event.stopPropagation();
@@ -406,10 +457,14 @@ const initialiseLightbox = (lightbox: HTMLElement) => {
 		libDebounce(
 			() => {
 				const currentPosition = getPosition(lightbox, imageList);
-				if (isUndefined(currentPosition)) return;
+				if (isUndefined(currentPosition)) {
+					return;
+				}
 				const positionIndicator =
 					lightbox.querySelector<HTMLElement>('nav .selected'); // Eg. 2/4, as in image 2 of 4
-				if (!positionIndicator) return;
+				if (!positionIndicator) {
+					return;
+				}
 
 				onSelect(
 					positionIndicator,
@@ -434,7 +489,7 @@ const initialiseLightbox = (lightbox: HTMLElement) => {
 		goForward(lightbox, images, nextButton, imageList);
 	});
 	infoButton.addEventListener('click', () => {
-		toggleInfo(lightbox, infoButton);
+		handleToggleInfo();
 	});
 
 	for (const link of captionLinks) {
@@ -501,7 +556,9 @@ const initialiseLightbox = (lightbox: HTMLElement) => {
 
 	// Check the user's preferences to decide if we show the caption or not
 	const info = storage.local.get('gu.prefs.lightbox-info');
-	if (info === 'hide') toggleInfo(lightbox, infoButton, 'hide');
+	if (info === 'hide') {
+		handleToggleInfo('hide');
+	}
 
 	// Open the lightbox at the position given in the url hash
 	const { hash } = window.location;
@@ -554,9 +611,11 @@ const ulStyles = css`
 export const LightboxJavascript = ({
 	format,
 	images,
+	isFilterArticle = false,
 }: {
 	format: ArticleFormat;
 	images: ImageForLightbox[];
+	isFilterArticle?: boolean;
 }) => {
 	/**
 	 * Hydration has been requested so the first step is to render the list of images and put them into
@@ -574,21 +633,29 @@ export const LightboxJavascript = ({
 	const [initialised, setInitialised] = useState(false);
 
 	useEffect(() => {
-		if (!lightbox) return;
+		if (!lightbox) {
+			return;
+		}
 		if (initialised) {
 			log('dotcom', '💡 Lightbox already initialised, skipping');
 			return;
 		}
-		initialiseLightbox(lightbox);
+		initialiseLightbox(lightbox, isFilterArticle);
 		setInitialised(true);
-	}, [initialised, lightbox]);
+	}, [initialised, lightbox, isFilterArticle]);
 
-	if (!lightbox) return null;
+	if (!lightbox) {
+		return null;
+	}
 
 	log('dotcom', '💡 Generating HTML for lightbox images...');
 	return (
 		<ul css={ulStyles} aria-label="All images">
-			<LightboxImages format={format} images={images} />
+			<LightboxImages
+				format={format}
+				images={images}
+				isFilterArticle={isFilterArticle}
+			/>
 		</ul>
 	);
 };

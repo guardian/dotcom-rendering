@@ -1,7 +1,7 @@
 import type {
 	EmbedBlockElement,
 	ImageBlockElement,
-	TextBlockElement,
+	MediaAtomBlockElement,
 } from '../types/content';
 import { decideMainMediaCaption } from './decide-caption';
 
@@ -16,7 +16,7 @@ describe('decideMainMediaCaption', () => {
 					elementId: 'test-id',
 					html: '<p>test</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-				} as TextBlockElement),
+				}),
 			).toEqual('');
 		});
 	});
@@ -104,6 +104,34 @@ describe('decideMainMediaCaption', () => {
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
 				} as EmbedBlockElement),
 			).toEqual('test caption');
+		});
+	});
+
+	describe('MediaAtomBlockElement', () => {
+		const mockMediaAtomBlockElement = {
+			elementId: 'test-element-id',
+			id: 'test-atom-id',
+			assets: [],
+			_type: 'model.dotcomrendering.pageElements.MediaAtomBlockElement',
+		} as MediaAtomBlockElement;
+
+		it('uses the title when there is no caption', () => {
+			expect(
+				decideMainMediaCaption({
+					...mockMediaAtomBlockElement,
+					title: 'media atom title',
+				}),
+			).toEqual('media atom title');
+		});
+
+		it('prefers the caption when both caption and title exist', () => {
+			expect(
+				decideMainMediaCaption({
+					...mockMediaAtomBlockElement,
+					caption: 'media atom caption',
+					title: 'media atom title',
+				}),
+			).toEqual('media atom caption');
 		});
 	});
 });

@@ -6,7 +6,7 @@
 import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import lzstring from 'lz-string';
-import React from 'react';
+import type React from 'react';
 import { choiceCardsSettings } from '../lib/storybook';
 import { ContributionsLiveblogEpic } from './ContributionsLiveblogEpic';
 import { props } from './utils/storybook';

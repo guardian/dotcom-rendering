@@ -3,9 +3,9 @@ import type { CampaignFieldCheckbox } from '../../../types/content';
 
 type Props = {
 	formField: CampaignFieldCheckbox;
-	formData: { [key in string]: string[] };
-	setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
-	validationErrors?: { [key in string]: string };
+	formData: Record<string, string[]>;
+	setFormData: React.Dispatch<React.SetStateAction<Record<string, any>>>;
+	validationErrors?: Record<string, string>;
 };
 
 export const CheckboxSelect = ({

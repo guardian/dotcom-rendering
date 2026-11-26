@@ -1,6 +1,8 @@
+import { space } from '@guardian/source/foundations';
 import { AdPlaceholder } from '../components/AdPlaceholder.apps';
-import { AffiliateDisclaimerInline } from '../components/AffiliateDisclaimer';
+import { ProductElement } from '../components/AffiliateProducts/ProductElement';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.island';
+import { AudioPlayer } from '../components/AudioPlayer/AudioPlayer';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
 import { CalloutBlockComponent } from '../components/CalloutBlockComponent.island';
 import { CalloutEmbedBlockComponent } from '../components/CalloutEmbedBlockComponent.island';
@@ -12,6 +14,7 @@ import { CommentBlockComponent } from '../components/CommentBlockComponent';
 import { CrosswordComponent } from '../components/CrosswordComponent.island';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.island';
+import { ElectionTrackerWrapper } from '../components/ElectionTrackerWrapper.island';
 import { EmailSignUpWrapper } from '../components/EmailSignUpWrapper.island';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.island';
 import { ExplainerAtom } from '../components/ExplainerAtom';
@@ -19,6 +22,7 @@ import { Figure } from '../components/Figure';
 import { GuideAtomWrapper } from '../components/GuideAtomWrapper.island';
 import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
 import { HighlightBlockComponent } from '../components/HighlightBlockComponent';
+import { HostedEmbedBlockComponent } from '../components/HostedEmbedBlockComponent';
 import { ImageBlockComponent } from '../components/ImageBlockComponent';
 import { InstagramBlockComponent } from '../components/InstagramBlockComponent.island';
 import { InteractiveAtom } from '../components/InteractiveAtom';
@@ -37,7 +41,6 @@ import { MultiBylines } from '../components/MultiBylines';
 import { MultiImageBlockComponent } from '../components/MultiImageBlockComponent';
 import { NumberedTitleBlockComponent } from '../components/NumberedTitleBlockComponent';
 import { PersonalityQuizAtom } from '../components/PersonalityQuizAtom.island';
-import { ProductElement } from '../components/ProductElement';
 import { ProductSummary } from '../components/ProductSummary.island';
 import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.island';
 import { PullQuoteBlockComponent } from '../components/PullQuoteBlockComponent';
@@ -67,13 +70,18 @@ import {
 } from '../components/WitnessBlockComponent';
 import { YoutubeBlockComponent } from '../components/YoutubeBlockComponent.island';
 import { YoutubeEmbedBlockComponent } from '../components/YoutubeEmbedBlockComponent';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import {
 	interactiveLegacyFigureClasses,
 	isInteractive,
 } from '../layouts/lib/interactiveLegacyStyling';
-import type { ServerSideTests, Switches } from '../types/config';
+import type { Switches } from '../types/config';
 import type { FEElement, RoleType, StarRating } from '../types/content';
-import { ArticleDesign, type ArticleFormat } from './articleFormat';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	isHostedContentDesign,
+} from './articleFormat';
 import type { EditionId } from './edition';
 import { getLargestImageSize } from './image';
 
@@ -92,7 +100,6 @@ type Props = {
 	isSensitive: boolean;
 	switches: Switches;
 	isPinnedPost?: boolean;
-	abTests: ServerSideTests;
 	editionId: EditionId;
 	forceDropCap?: 'on' | 'off';
 	isTimeline?: boolean;
@@ -102,6 +109,7 @@ type Props = {
 	shouldHideAds: boolean;
 	contentType?: string;
 	contentLayout?: string;
+	articleArrangement?: LayoutType;
 	idApiUrl?: string;
 };
 
@@ -164,7 +172,6 @@ export const renderElement = ({
 	switches,
 	isSensitive,
 	isPinnedPost,
-	abTests,
 	editionId,
 	forceDropCap,
 	isTimeline = false,
@@ -174,6 +181,7 @@ export const renderElement = ({
 	shouldHideAds,
 	contentType,
 	contentLayout,
+	articleArrangement,
 	idApiUrl,
 }: Props) => {
 	const isBlog =
@@ -319,6 +327,17 @@ export const renderElement = ({
 					);
 				}
 
+				if (format.design === ArticleDesign.HostedArticle) {
+					return (
+						<HostedEmbedBlockComponent
+							html={element.html}
+							alt={element.alt ?? ''}
+							height={element.height}
+							width={element.width}
+						/>
+					);
+				}
+
 				return (
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<UnsafeEmbedBlockComponent
@@ -394,6 +413,7 @@ export const renderElement = ({
 					title={element.title}
 					isAvatar={element.isAvatar}
 					isTimeline={isTimeline}
+					articleArrangement={articleArrangement}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':
@@ -418,6 +438,12 @@ export const renderElement = ({
 						elementHtml={element.html}
 						elementJs={element.js}
 						elementCss={element.css}
+						customData={element.customData}
+						role={element.role ?? 'inline'}
+						type={element._type}
+						format={format}
+						articleArrangement={articleArrangement}
+						isMainMedia={isMainMedia}
 					/>
 				);
 			}
@@ -429,6 +455,7 @@ export const renderElement = ({
 					elementJs={element.js}
 					elementCss={element.css}
 					title={element.title}
+					customData={element.customData}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.InteractiveBlockElement': {
@@ -475,7 +502,6 @@ export const renderElement = ({
 					pageId={pageId}
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
-					abTests={abTests}
 					switches={switches}
 					editionId={editionId}
 					RenderArticleElement={RenderArticleElement}
@@ -503,10 +529,7 @@ export const renderElement = ({
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.MediaAtomBlockElement':
-			if (
-				element.videoPlayerFormat &&
-				['Loop', 'Cinemagraph'].includes(element.videoPlayerFormat)
-			) {
+			if (element.videoPlayerFormat) {
 				return (
 					<SelfHostedVideoInArticle
 						element={element}
@@ -514,6 +537,7 @@ export const renderElement = ({
 						isMainMedia={isMainMedia}
 						videoStyle={element.videoPlayerFormat}
 						role={element.role}
+						caption={element.caption ?? element.title}
 					/>
 				);
 			} else {
@@ -522,7 +546,7 @@ export const renderElement = ({
 						format={format}
 						assets={element.assets}
 						poster={element.posterImage?.[0]?.url}
-						caption={element.title}
+						caption={element.caption ?? element.title}
 						isMainMedia={isMainMedia}
 					/>
 				);
@@ -536,7 +560,6 @@ export const renderElement = ({
 					pageId={pageId}
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
-					abTests={abTests}
 					switches={switches}
 					editionId={editionId}
 					RenderArticleElement={RenderArticleElement}
@@ -554,7 +577,6 @@ export const renderElement = ({
 					pageId={pageId}
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
-					abTests={abTests}
 					switches={switches}
 					editionId={editionId}
 					RenderArticleElement={RenderArticleElement}
@@ -571,26 +593,30 @@ export const renderElement = ({
 					caption={element.caption}
 				/>
 			);
-		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
+		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement': {
+			const newsletter = element.newsletter;
 			const emailSignUpProps = {
 				index,
-				listId: element.newsletter.listId,
-				identityName: element.newsletter.identityName,
-				description: element.newsletter.description,
-				name: element.newsletter.name,
-				frequency: element.newsletter.frequency,
-				successDescription: element.newsletter.successDescription,
-				theme: element.newsletter.theme,
+				listId: newsletter.listId,
+				identityName: newsletter.identityName,
+				category: newsletter.category,
+				description: newsletter.description,
+				name: newsletter.name,
+				frequency: newsletter.frequency,
+				theme: newsletter.theme,
+				illustrationSquare: newsletter.illustrationSquare,
+				exampleUrl: newsletter.exampleUrl,
 				idApiUrl: idApiUrl ?? '',
-				hideNewsletterSignupComponentForSubscribers:
-					!!switches.hideNewsletterSignupComponentForSubscribers,
 			};
-			if (isListElement || isTimeline) return null;
+			if (isListElement || isTimeline) {
+				return null;
+			}
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
 					<EmailSignUpWrapper {...emailSignUpProps} />
 				</Island>
 			);
+		}
 		case 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement':
 			return renderAds && <AdPlaceholder />;
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
@@ -619,6 +645,7 @@ export const renderElement = ({
 					url={element.url}
 					linkType={element.linkType}
 					priority={element.priority}
+					latestPrice={element.latestPrice}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.ProductBlockElement':
@@ -626,7 +653,6 @@ export const renderElement = ({
 				<ProductElement
 					product={element}
 					ArticleElementComponent={getNestedArticleElement({
-						abTests,
 						ajaxUrl,
 						editionId,
 						isAdFreeUser,
@@ -674,7 +700,6 @@ export const renderElement = ({
 					pageId={pageId}
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
-					abTests={abTests}
 					switches={switches}
 					editionId={editionId}
 					RenderArticleElement={RenderArticleElement}
@@ -795,7 +820,6 @@ export const renderElement = ({
 				<Timeline
 					timeline={element}
 					ArticleElementComponent={getNestedArticleElement({
-						abTests,
 						ajaxUrl,
 						editionId,
 						isAdFreeUser,
@@ -946,22 +970,18 @@ export const renderElement = ({
 							getLargestImageSize(element.posterImage ?? [])?.url
 						}
 						duration={element.duration}
-						mediaTitle={element.mediaTitle}
+						mediaTitle={element.caption ?? element.mediaTitle}
 						altText={element.altText}
 						origin={host}
 						stickyVideos={!!(isBlog && switches.stickyVideos)}
-						enableAds={true}
-						iconSizeOnDesktop="large"
-						iconSizeOnMobile="large"
+						// YT ads on by default on all pages apart from hosted content
+						enableAds={!isHostedContentDesign(format.design)}
 						hidePillOnMobile={false}
 						contentType={contentType}
 						contentLayout={contentLayout}
 					/>
 				</Island>
 			);
-		case 'model.dotcomrendering.pageElements.DisclaimerBlockElement': {
-			return <AffiliateDisclaimerInline />;
-		}
 		case 'model.dotcomrendering.pageElements.CrosswordElement':
 			return (
 				<Island priority="critical" defer={{ until: 'visible' }}>
@@ -971,15 +991,44 @@ export const renderElement = ({
 					/>
 				</Island>
 			);
-		case 'model.dotcomrendering.pageElements.ProductSummaryElement':
+		case 'model.dotcomrendering.pageElements.EnhancedProductSummaryElement':
 			return (
 				<ProductSummary
-					products={element.matchedProducts}
+					title={element.title}
+					products={element.products}
 					format={format}
-					variant={element.variant}
+					displayType={element.displayType}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.AudioBlockElement':
+			return (
+				<AudioPlayer
+					element={element}
+					isSensitive={isSensitive}
+					isAcastEnabled={!!switches.acast}
+				/>
+			);
+		case 'model.dotcomrendering.pageElements.EventGraphicBlockElement':
+			return (
+				<div
+					css={{
+						marginBottom: 12,
+						'h3:not(:first-of-type)': {
+							paddingTop: space[4],
+						},
+					}}
+				>
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<ElectionTrackerWrapper
+							electionDataUrl={element.dataUrl.href}
+							electionComponents={element.components}
+							liveEffects={true}
+							// This trackingLabel is currently just used for liveblog and it's temporary
+							trackingLabel={'liveblog'}
+						/>
+					</Island>
+				</div>
+			);
 		case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.VideoBlockElement':
@@ -1023,7 +1072,6 @@ export const RenderArticleElement = ({
 	isSensitive,
 	switches,
 	isPinnedPost,
-	abTests,
 	editionId,
 	forceDropCap,
 	isTimeline,
@@ -1033,6 +1081,7 @@ export const RenderArticleElement = ({
 	shouldHideAds,
 	contentType,
 	contentLayout,
+	articleArrangement,
 	idApiUrl,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
@@ -1052,7 +1101,6 @@ export const RenderArticleElement = ({
 		isSensitive,
 		switches,
 		isPinnedPost,
-		abTests,
 		editionId,
 		forceDropCap,
 		isTimeline,
@@ -1062,10 +1110,18 @@ export const RenderArticleElement = ({
 		shouldHideAds,
 		contentType,
 		contentLayout,
+		articleArrangement,
 		idApiUrl,
 	});
 
-	const needsFigure = !bareElements.has(element._type);
+	const isInteractiveAtomInInteractiveGrid =
+		format.design === ArticleDesign.Interactive &&
+		articleArrangement !== undefined &&
+		element._type ===
+			'model.dotcomrendering.pageElements.InteractiveAtomBlockElement';
+
+	const needsFigure =
+		!bareElements.has(element._type) && !isInteractiveAtomInInteractiveGrid;
 
 	const role =
 		'role' in element
@@ -1086,6 +1142,7 @@ export const RenderArticleElement = ({
 			type={element._type}
 			format={format}
 			isTimeline={isTimeline}
+			articleArrangement={articleArrangement}
 		>
 			{el}
 		</Figure>
@@ -1107,6 +1164,7 @@ type ArticleLevelProps = Omit<Props, ElementLevelPropNames>;
 type ElementLevelProps = Pick<Props, ElementLevelPropNames>;
 
 export const getNestedArticleElement =
+	// eslint-disable-next-line react/display-name -- this is not a React component, but a function that returns one
 	(articleProps: ArticleLevelProps) => (elementProps: ElementLevelProps) => (
 		<RenderArticleElement {...articleProps} {...elementProps} />
 	);

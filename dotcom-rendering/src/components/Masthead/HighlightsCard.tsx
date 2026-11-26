@@ -37,6 +37,7 @@ export type HighlightsCardProps = {
 	byline?: string;
 	isExternalLink: boolean;
 	starRating?: Rating;
+	headlineTestUuid?: string;
 };
 
 const container = css`
@@ -135,6 +136,7 @@ export const HighlightsCard = ({
 	isExternalLink,
 	starRating,
 	articleMedia,
+	headlineTestUuid,
 }: HighlightsCardProps) => {
 	const isMediaCard = isMedia(format);
 
@@ -152,6 +154,7 @@ export const HighlightsCard = ({
 					headlineText={headlineText}
 					dataLinkName={dataLinkName}
 					isExternalLink={isExternalLink}
+					headlineTestUuid={headlineTestUuid}
 				/>
 
 				<div css={[content, shouldJustifyContent && spaceBetween]}>

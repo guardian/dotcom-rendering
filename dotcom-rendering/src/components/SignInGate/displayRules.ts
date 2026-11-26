@@ -1,6 +1,7 @@
 // use the dailyArticleCount from the local storage to see how many articles the user has viewed in a day
-import { onConsent } from '@guardian/libs';
-import type { ConsentState, CountryCode } from '@guardian/libs';
+import { onConsent } from '@guardian/consent-manager';
+import type { ConsentState } from '@guardian/consent-manager';
+import type { CountryCode } from '@guardian/libs';
 import type { DailyArticle } from '../../lib/dailyArticleCount';
 import { getDailyArticleCount } from '../../lib/dailyArticleCount';
 import type { TagType } from '../../types/tag';
@@ -200,6 +201,9 @@ export const pageIdIsAllowedForGating = (pageId: string): boolean => {
 	const denyPaths = [
 		'tips',
 		'help/ng-interactive/2017/mar/17/contact-the-guardian-securely',
+		'info/privacy',
+		'info/complaints-and-corrections',
+		'the-whole-picture',
 	];
 
 	return !denyPaths.some((denyPath) => pageId.startsWith(denyPath));

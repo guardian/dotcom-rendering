@@ -29,6 +29,7 @@ const createComment = (
 	isoDateTime: '2024-01-01T00:00:01Z',
 	numRecommends: 0,
 	status: 'visible',
+	responseTo: undefined,
 });
 
 const createReply = (id: string, body: string): ReplyType => ({
@@ -42,6 +43,7 @@ const createReply = (id: string, body: string): ReplyType => ({
 	isoDateTime: '2024-01-01T00:00:01Z',
 	numRecommends: 0,
 	status: 'visible',
+	responses: undefined,
 	responseTo: {
 		date: '',
 		isoDateTime: '',
@@ -142,7 +144,9 @@ describe('Discussion', () => {
 			});
 
 			expect(result.status).toBe('ok');
-			if (result.status !== 'ok') return;
+			if (result.status !== 'ok') {
+				return;
+			}
 
 			expect(result.discussion.comments.length).toBe(4);
 		});
@@ -175,13 +179,15 @@ describe('Discussion', () => {
 			});
 
 			expect(result.status).toBe('ok');
-			if (result.status !== 'ok') return;
+			if (result.status !== 'ok') {
+				return;
+			}
 
 			const comments = result.discussion.comments.filter(
-				({ responses }) => responses,
+				({ responses }) => !!responses,
 			);
 			const replies = result.discussion.comments.filter(
-				({ responseTo }) => responseTo,
+				({ responseTo }) => !!responseTo,
 			);
 			expect(comments.length).toBe(2);
 			expect(replies.length).toBe(3);

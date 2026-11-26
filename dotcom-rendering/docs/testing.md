@@ -126,7 +126,7 @@ Jest [Snapshot](https://jestjs.io/docs/en/snapshot-testing) tests make sure the 
 
 We will **not** be writing snapshot test Components for the following reasons:
 
--   Snapshots immortalise a Component’s current markup as the true markup, regardless of whether or not the component is correct.
--   Too easy to fix tests without fixing underlying bugs simply by running `jest --u` override command.
--   Increased risk of false negatives and false positives - If the tests fail when there are no bugs, that is a false negative. If the tests pass when there are bugs present, that is a false positive.
--   Developer time required to check snapshot test failures when simple non-breaking changes introduced, plus developer time required to review snapshot output in Pull Requests.
+- Snapshots immortalise a Component’s current markup as the true markup, regardless of whether or not the component is correct.
+- Too easy to fix tests without fixing underlying bugs simply by running `jest --u` override command.
+- Increased risk of false negatives and false positives - If the tests fail when there are no bugs, that is a false negative. If the tests pass when there are bugs present, that is a false positive.
+- Developer time required to check snapshot test failures when simple non-breaking changes introduced, plus developer time required to review snapshot output in Pull Requests.

@@ -9,30 +9,23 @@ import type { CSSProperties, ReactNode } from 'react';
 import type { FootballMatch } from '../../footballMatchV2';
 import { grid } from '../../grid';
 import { palette } from '../../palette';
+import type { RenderingTarget } from '../../types/renderingTarget';
+import { useConfig } from '../ConfigContext';
 import { border, primaryText, selected } from './colours';
+
+export type TabName = 'info' | 'live' | 'report';
 
 type Props = {
 	matchKind: FootballMatch['kind'];
-} & (
-	| {
-			selected: 'info';
-			reportURL?: URL;
-			liveURL?: URL;
-	  }
-	| {
-			selected: 'live';
-			reportURL?: URL;
-			infoURL: URL;
-	  }
-	| {
-			selected: 'report';
-			liveURL?: URL;
-			infoURL: URL;
-	  }
-);
+	sportKind: 'football' | 'cricket';
+	selected: TabName;
+	reportTab?: URL;
+	liveTab?: URL;
+	infoTab?: URL | (() => void);
+};
 
 export const Tabs = (props: Props) => (
-	<nav css={[grid.column.centre]}>
+	<nav css={[grid.column.centre]} aria-label="Match details navigation">
 		<ul
 			css={{
 				...headlineBold15Object,
@@ -54,14 +47,16 @@ export const Tabs = (props: Props) => (
 	</nav>
 );
 
-const MatchReport = (props: Props) => {
+const MatchReport = (
+	props: Pick<Props, 'selected' | 'matchKind' | 'reportTab'>,
+) => {
 	if (props.selected === 'report') {
 		return <Tab matchKind={props.matchKind}>Match report</Tab>;
 	}
 
-	if (props.reportURL !== undefined) {
+	if (props.reportTab !== undefined) {
 		return (
-			<Tab matchKind={props.matchKind} href={props.reportURL}>
+			<Tab matchKind={props.matchKind} href={props.reportTab}>
 				Match report
 			</Tab>
 		);
@@ -70,14 +65,14 @@ const MatchReport = (props: Props) => {
 	return null;
 };
 
-const LiveFeed = (props: Props) => {
+const LiveFeed = (props: Pick<Props, 'selected' | 'matchKind' | 'liveTab'>) => {
 	if (props.selected === 'live') {
 		return <Tab matchKind={props.matchKind}>Live feed</Tab>;
 	}
 
-	if (props.liveURL !== undefined) {
+	if (props.liveTab !== undefined) {
 		return (
-			<Tab matchKind={props.matchKind} href={props.liveURL}>
+			<Tab matchKind={props.matchKind} href={new URL(`${props.liveTab}`)}>
 				Live feed
 			</Tab>
 		);
@@ -86,59 +81,109 @@ const LiveFeed = (props: Props) => {
 	return null;
 };
 
-const MatchInfo = (props: Props) => {
+const MatchInfo = (
+	props: Pick<Props, 'selected' | 'matchKind' | 'sportKind' | 'infoTab'>,
+) => {
+	const tabText = props.sportKind === 'cricket' ? 'Scorecard' : 'Match info';
 	if (props.selected === 'info') {
-		return <Tab matchKind={props.matchKind}>Match info</Tab>;
+		return <Tab matchKind={props.matchKind}>{tabText}</Tab>;
 	}
 
-	return (
-		<Tab matchKind={props.matchKind} href={props.infoURL}>
-			Match info
-		</Tab>
-	);
+	if (props.infoTab instanceof URL) {
+		return (
+			<Tab matchKind={props.matchKind} href={props.infoTab}>
+				{tabText}
+			</Tab>
+		);
+	}
+
+	if (props.infoTab) {
+		return (
+			<Tab matchKind={props.matchKind} onClick={props.infoTab}>
+				{tabText}
+			</Tab>
+		);
+	}
+
+	return null;
 };
 
-const Tab = (props: {
-	children: ReactNode;
-	href?: URL;
-	matchKind: FootballMatch['kind'];
-}) => (
+const Tab = (
+	props: {
+		children: ReactNode;
+		matchKind: FootballMatch['kind'];
+		selected?: boolean;
+	} & (
+		| {
+				href?: URL;
+		  }
+		| {
+				onClick: () => void;
+		  }
+	),
+) => (
 	<li
 		css={{
 			// Ensures that if there are only two tabs they take up exactly 50%
 			flex: '1 1 50%',
 			borderLeftStyle: 'solid',
+			borderLeftColor: 'var(--border-left-colour)',
 			'&:not(:first-of-type)': {
 				paddingLeft: space[2],
 				borderLeftWidth: 1,
 			},
 			[from.leftCol]: {
-				paddingLeft: space[2],
-				borderLeftWidth: 1,
 				flex: '0 0 auto',
+				position: 'relative',
+				'&:first-of-type::before': {
+					content: '""',
+					top: 0,
+					left: -10,
+					width: 1,
+					backgroundColor: 'var(--border-left-colour)',
+					position: 'absolute',
+					height: '100%',
+				},
 			},
 		}}
 		style={{
-			borderLeftColor: palette(border(props.matchKind)),
+			'--border-left-colour': palette(border(props.matchKind)),
 		}}
 	>
-		<TabText href={props.href} matchKind={props.matchKind}>
-			{props.children}
-		</TabText>
+		{'onClick' in props ? (
+			<TabButton
+				onClick={props.onClick}
+				matchKind={props.matchKind}
+				selected={props.selected ?? false}
+			>
+				{props.children}
+			</TabButton>
+		) : (
+			<TabLink
+				href={props.href}
+				matchKind={props.matchKind}
+				selected={props.selected}
+			>
+				{props.children}
+			</TabLink>
+		)}
 	</li>
 );
 
-const TabText = (props: {
+const TabLink = (props: {
 	children: ReactNode;
 	href?: URL;
 	matchKind: FootballMatch['kind'];
+	selected?: boolean;
 }) => {
+	const { renderingTarget } = useConfig();
+
 	if (props.href !== undefined) {
 		return (
 			<a
 				href={props.href.toString()}
 				css={tabTextCss}
-				style={tabTextStyle(props.matchKind)}
+				style={tabTextStyle(props.matchKind, renderingTarget)}
 			>
 				{props.children}
 			</a>
@@ -149,12 +194,36 @@ const TabText = (props: {
 		<span
 			css={tabTextCss}
 			style={{
-				...tabTextStyle(props.matchKind),
+				...tabTextStyle(props.matchKind, renderingTarget),
 				borderBottomColor: palette(selected(props.matchKind)),
 			}}
+			aria-current={props.selected ?? 'page'}
 		>
 			{props.children}
 		</span>
+	);
+};
+
+const TabButton = (props: {
+	children: ReactNode;
+	onClick: () => void;
+	matchKind: FootballMatch['kind'];
+	selected: boolean;
+}) => {
+	const { renderingTarget } = useConfig();
+	return (
+		<button
+			type="button"
+			onClick={props.onClick}
+			css={[tabTextCss, resetButtonStyles]}
+			style={{
+				...tabTextStyle(props.matchKind, renderingTarget),
+				borderBottomColor: palette(selected(props.matchKind)),
+			}}
+			aria-current={props.selected && 'page'}
+		>
+			{props.children}
+		</button>
 	);
 };
 
@@ -174,7 +243,22 @@ const tabTextCss = css({
 	},
 });
 
-const tabTextStyle = (matchKind: FootballMatch['kind']): CSSProperties => ({
+const tabTextStyle = (
+	matchKind: FootballMatch['kind'],
+	renderingTarget: RenderingTarget,
+): CSSProperties => ({
 	color: palette(primaryText(matchKind)),
-	'--hover-colour': palette(selected(matchKind)),
+	'--hover-colour':
+		renderingTarget === 'Web'
+			? palette(selected(matchKind))
+			: 'transparent',
+});
+
+const resetButtonStyles = css({
+	background: 'none',
+	border: 'none',
+	cursor: 'pointer',
+	font: 'inherit',
+	padding: 0,
+	margin: 0,
 });

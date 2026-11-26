@@ -10,9 +10,9 @@ import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { CallToActionAtom } from '../components/CallToActionAtom';
-import { Caption } from '../components/Caption';
+import { FetchHostedOnwards } from '../components/FetchHostedOnwards.island';
 import { HostedContentDisclaimer } from '../components/HostedContentDisclaimer';
-import { HostedContentHeader } from '../components/HostedContentHeader';
+import { HostedContentHeader } from '../components/HostedContentHeader.island';
 import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
 import { Section } from '../components/Section';
@@ -21,7 +21,6 @@ import { Standfirst } from '../components/Standfirst';
 import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import { decideMainMediaCaption } from '../lib/decide-caption';
 import { palette as themePalette } from '../palette';
 import type { Article } from '../types/article';
 import type { Block } from '../types/blocks';
@@ -56,21 +55,8 @@ const mainMediaStyles = css`
 	grid-row-start: 1;
 	background-color: ${palette.neutral[10]};
 
-	z-index: 1;
 	overflow: hidden;
 	max-height: 600px;
-`;
-
-const captionStyles = css`
-	${grid.column.centre}
-	grid-row-start: 2;
-
-	${from.desktop} {
-		${grid.span(12, 2)}
-	}
-	${from.leftCol} {
-		${grid.column.right}
-	}
 `;
 
 const headlineStyles = css`
@@ -107,7 +93,7 @@ const shareButtonStyles = css`
 	padding: ${space[1]}px;
 `;
 
-const standfirstStyles = css`
+const standfirstAndArticleBodyStyles = css`
 	${grid.column.centre}
 	grid-row-start: 5;
 
@@ -122,42 +108,41 @@ const standfirstStyles = css`
 `;
 
 const articleBodyStyles = css`
-	${grid.column.centre}
-
-	padding-bottom: ${space[6]}px;
+	margin-bottom: ${space[6]}px;
 
 	${from.desktop} {
-		${grid.between(4, 'right-column-end')}
-	}
-
-	${from.leftCol} {
-		${grid.column.centre}
+		margin-bottom: ${space[10]}px;
 	}
 `;
 
 const onwardContentStyles = css`
 	${grid.column.centre}
+	grid-row-start: 6;
 
-	height: 20px;
-	background-color: lightgrey;
-	margin-bottom: ${space[6]}px;
+	margin-bottom: ${space[5]}px;
 
 	${from.desktop} {
 		${grid.span(4, 8)}
+		margin-bottom: ${space[10]}px;
 	}
 
 	${from.leftCol} {
+		grid-row: 2 / 5;
+		margin-top: ${space[4]}px;
 		${grid.column.right}
-		grid-row-start: 3;
 	}
 `;
 
 const ctaStyles = css`
-	z-index: 1;
 	${grid.column.all}
+	grid-row-start: 7;
 
 	overflow: hidden;
 	max-height: 400px;
+
+	${from.leftCol} {
+		grid-row-start: unset;
+	}
 	${from.wide} {
 		width: ${breakpoints.wide}px;
 		margin: auto;
@@ -177,12 +162,10 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 	const {
 		content: { frontendData },
 		format,
+		renderingTarget,
 	} = props;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(frontendData);
-
-	const mainMedia = frontendData.mainMediaElements[0];
-	const mainMediaCaptionText = decideMainMediaCaption(mainMedia);
 
 	const { branding } =
 		frontendData.commercialProperties[frontendData.editionId];
@@ -210,10 +193,12 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 						showTopBorder={false}
 						shouldCenter={false}
 						backgroundColour={sourcePalette.neutral[7]}
-						padSides={true}
+						padSides={false}
 						element="header"
 					>
-						<HostedContentHeader branding={branding} />
+						<Island priority="feature" defer={{ until: 'visible' }}>
+							<HostedContentHeader branding={branding} />
+						</Island>
 					</Section>
 				</Stuck>
 			) : null}
@@ -228,7 +213,6 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 							pageId={frontendData.pageId}
 							webTitle={frontendData.webTitle}
 							ajaxUrl={frontendData.config.ajaxUrl}
-							abTests={frontendData.config.abTests}
 							switches={frontendData.config.switches}
 							isAdFreeUser={frontendData.isAdFreeUser}
 							isSensitive={frontendData.config.isSensitive}
@@ -236,19 +220,12 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 							hideCaption={true}
 							shouldHideAds={true}
 							contentType={frontendData.contentType}
-						/>
-					</div>
-
-					<div css={captionStyles}>
-						<Caption
-							captionText={mainMediaCaptionText}
-							format={format}
-							isMainMedia={true}
+							contentLayout="HostedVideoLayout"
 						/>
 					</div>
 
 					<div data-print-layout="hide" css={metaStyles}>
-						{props.renderingTarget === 'Web' && (
+						{renderingTarget === 'Web' && (
 							<div css={shareButtonStyles}>
 								<Island
 									priority="feature"
@@ -277,55 +254,60 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 						/>
 					</div>
 
-					<div css={standfirstStyles}>
+					<div css={standfirstAndArticleBodyStyles}>
 						<Standfirst
 							format={format}
 							standfirst={frontendData.standfirst}
 						/>
-					</div>
 
-					<div css={articleBodyStyles}>
-						<ArticleContainer format={format}>
-							<ArticleBody
-								format={format}
-								blocks={blocks}
-								editionId={frontendData.editionId}
-								host={frontendData.config.host}
-								pageId={frontendData.pageId}
-								webTitle={frontendData.webTitle}
-								ajaxUrl={frontendData.config.ajaxUrl}
-								isAdFreeUser={frontendData.isAdFreeUser}
-								switches={frontendData.config.switches}
-								sectionId={frontendData.config.section}
-								shouldHideReaderRevenue={
-									frontendData.shouldHideReaderRevenue
-								}
-								tags={frontendData.tags}
-								isPaidContent={
-									!!frontendData.config.isPaidContent
-								}
-								contributionsServiceUrl={
-									contributionsServiceUrl
-								}
-								contentType={frontendData.contentType}
-								idUrl={frontendData.config.idUrl ?? ''}
-								isSensitive={frontendData.config.isSensitive}
-								isDev={!!frontendData.config.isDev}
-								keywordIds={frontendData.config.keywordIds}
-								abTests={frontendData.config.abTests}
-								shouldHideAds={frontendData.shouldHideAds}
-								lang={frontendData.lang}
-								isRightToLeftLang={
-									frontendData.isRightToLeftLang
-								}
-								accentColor={branding?.hostedCampaignColour}
-							/>
-							<HostedContentDisclaimer />
-						</ArticleContainer>
+						<div css={articleBodyStyles}>
+							<ArticleContainer format={format}>
+								<ArticleBody
+									format={format}
+									blocks={blocks}
+									editionId={frontendData.editionId}
+									host={frontendData.config.host}
+									pageId={frontendData.pageId}
+									webTitle={frontendData.webTitle}
+									ajaxUrl={frontendData.config.ajaxUrl}
+									isAdFreeUser={frontendData.isAdFreeUser}
+									switches={frontendData.config.switches}
+									sectionId={frontendData.config.section}
+									shouldHideReaderRevenue={
+										frontendData.shouldHideReaderRevenue
+									}
+									tags={frontendData.tags}
+									isPaidContent={
+										!!frontendData.config.isPaidContent
+									}
+									contributionsServiceUrl={
+										contributionsServiceUrl
+									}
+									contentType={frontendData.contentType}
+									idUrl={frontendData.config.idUrl ?? ''}
+									isSensitive={
+										frontendData.config.isSensitive
+									}
+									isDev={!!frontendData.config.isDev}
+									keywordIds={frontendData.config.keywordIds}
+									shouldHideAds={frontendData.shouldHideAds}
+									lang={frontendData.lang}
+									isRightToLeftLang={
+										frontendData.isRightToLeftLang
+									}
+								/>
+								<HostedContentDisclaimer />
+							</ArticleContainer>
+						</div>
 					</div>
 
 					<div css={onwardContentStyles}>
-						{'Placeholder - onward content'}
+						<Island priority="feature" defer={{ until: 'idle' }}>
+							<FetchHostedOnwards
+								url={`${frontendData.config.ajaxUrl}/${frontendData.config.pageId}/onward.json`}
+								branding={branding}
+							/>
+						</Island>
 					</div>
 
 					{cta && (
@@ -335,6 +317,7 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 								backgroundImage={cta.image}
 								text={cta.label}
 								buttonText={cta.btnText}
+								accentColor={branding?.hostedCampaignColour}
 							/>
 						</div>
 					)}

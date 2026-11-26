@@ -1,0 +1,144 @@
+import type { EditionId } from '../lib/edition';
+import type { GameStatus } from '../lib/puzzleProgress/types';
+import type { CommercialProperties } from './commercial';
+import type { ConfigType } from './config';
+import type { FooterType } from './footer';
+import type { FENavType } from './frontend';
+
+export type PuzzleCardVariant = 'large' | 'primary' | 'compact' | 'archive';
+
+export type PuzzleItem = {
+	id: string;
+	title: string;
+	type: string;
+	set: string;
+	cardVariant: PuzzleCardVariant;
+	cadence?: string;
+	url?: string;
+	image?: string;
+	imageAlt?: string;
+	setter?: string;
+	progress?: number;
+	/** The Puzzles API's state for the reader; absent when it reports nothing. */
+	gameStatus?: GameStatus;
+	date?: string;
+	slug?: string;
+	index?: number;
+	variant?: string;
+	backgroundColour?: string;
+};
+
+export type PuzzleContent = {
+	items: PuzzleItem[][];
+	nestedContainers: PuzzleContainer[];
+	archive?: PuzzleItem;
+	archiveChoices?: PuzzleItem[];
+};
+
+export type PuzzleContainer = {
+	id: string;
+	title: string;
+	variant?: 'featured' | 'standard' | 'ad' | 'supporting';
+	content: PuzzleContent;
+	enabled?: boolean;
+	desktopSpan?: number;
+	adSlot?: string;
+	supporting?: PuzzlesSupportingContent;
+	commercialProperties?: Partial<CommercialProperties>;
+};
+
+export type PuzzleLink = {
+	title: string;
+	url: string;
+};
+
+export type PuzzlesNewsletter = {
+	identityName: string;
+	name: string;
+	frequency: string;
+	description: string;
+	illustrationSquare?: string;
+	/** Link to a recent edition, from the newsletters tool. */
+	exampleUrl?: string;
+};
+
+export type PuzzlePopularityGroup = {
+	title: string;
+	itemIds: string[];
+};
+
+export type PuzzlesSupportingContent = {
+	usefulLinksTitle: string;
+	usefulLinks: PuzzleLink[];
+	newsletter?: PuzzlesNewsletter;
+	popularTitle: string;
+	popularGroups: PuzzlePopularityGroup[];
+};
+
+/** Useful links and newsletter shown above the footer on individual game pages. */
+export type PuzzleGameSupporting = {
+	usefulLinks: PuzzleLink[];
+	newsletter?: PuzzlesNewsletter;
+};
+
+export type PuzzlesLayoutType = {
+	containers: PuzzleContainer[];
+};
+export type PuzzlesArchivePuzzle = {
+	id: string;
+	title: string;
+	puzzleType: string;
+	slug?: string;
+	set: string;
+	/** Path of this puzzle's own archive page, e.g. `/puzzles-and-games/crosswords/quick/archive`. */
+	path: string;
+};
+
+export type PuzzlesArchiveItem = {
+	puzzleType: string;
+	date: string;
+	progress: number;
+	/** The Puzzles API's state for the reader; absent when it reports none. */
+	gameStatus?: GameStatus;
+	/** Optional while Frontend and Puzzle API deploy independently. */
+	isWithinFreeWindow?: boolean;
+	hasPremiumEntitlement?: boolean;
+	setterName?: string;
+	url: string;
+};
+
+export type PuzzlesArchive = {
+	category:
+		| 'crosswords'
+		| 'word-games'
+		| 'logic-puzzles'
+		| 'trivia-and-quizzes';
+	title: string;
+	description: string;
+	selectedPuzzle: PuzzlesArchivePuzzle;
+	puzzles: PuzzlesArchivePuzzle[];
+	year: number;
+	month: number;
+	items: PuzzlesArchiveItem[];
+	recentItems?: PuzzlesArchiveItem[];
+	hasError: boolean;
+	moreFrom: PuzzleItem[];
+};
+
+export interface FEPuzzlesPageType {
+	id: string;
+	editionId: EditionId;
+	editionLongForm: string;
+	contributionsServiceUrl: string;
+	webTitle: string;
+	description?: string;
+	config: ConfigType;
+	nav: FENavType;
+	pageFooter: FooterType;
+	canonicalUrl: string;
+	isAdFreeUser: boolean;
+	layout: PuzzlesLayoutType;
+	archive?: PuzzlesArchive;
+	/** Sponsorship per edition; editions without a sponsor may be omitted. */
+	commercialProperties?: Partial<CommercialProperties>;
+}

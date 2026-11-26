@@ -26,6 +26,7 @@ const commentData: CommentType = {
 		badge: [],
 	},
 	responses: [],
+	responseTo: undefined,
 	metaData: {
 		commentCount: 2,
 		staffCommenterCount: 1,
@@ -45,6 +46,7 @@ const threadComment: ReplyType = {
 	apiUrl: 'https://discussion.guardianapis.com/discussion-api/comment/25488498',
 	numRecommends: 0,
 	isHighlighted: false,
+	responses: undefined,
 	responseTo: {
 		displayName: 'FrankDeFord',
 		commentApiUrl:
@@ -80,6 +82,7 @@ const threadCommentWithLongUsernames: ReplyType = {
 	apiUrl: 'https://discussion.guardianapis.com/discussion-api/comment/25488498',
 	numRecommends: 0,
 	isHighlighted: false,
+	responses: undefined,
 	responseTo: {
 		displayName: 'FrankDeFord',
 		commentApiUrl:
@@ -115,6 +118,7 @@ const commentDataWithLongThread: CommentType = {
 	apiUrl: 'https://discussion.guardianapis.com/discussion-api/comment/25487686',
 	numRecommends: 0,
 	isHighlighted: false,
+	responseTo: undefined,
 	userProfile: {
 		userId: '2762428',
 		displayName: 'FrankDeFord',

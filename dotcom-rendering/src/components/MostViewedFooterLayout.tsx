@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import type { Breakpoint } from '@guardian/source/foundations';
 import { between, from, space } from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
 import { AdSlot } from './AdSlot.web';
 
 const stackBelow = (breakpoint: Breakpoint) => css`
@@ -85,7 +86,7 @@ const frontStyles = (hasPageSkin: boolean) => css`
 
 const adFreeStyles = css`
 	${between.desktop.and.leftCol} {
-		min-width: 960px;
+		min-width: min(960px, 100%);
 	}
 	${between.leftCol.and.wide} {
 		width: 75%;
@@ -128,16 +129,18 @@ export const MostViewedFooterLayout = ({
 				{children}
 			</div>
 			{renderAds && (
-				<div
-					css={advertMargin(
-						!!isFront,
-						isDeeplyRead,
-						isLiveblog,
-						hasPageSkin,
-					)}
-				>
-					<AdSlot position="mostpop" />
-				</div>
+				<Hide until="desktop">
+					<div
+						css={advertMargin(
+							!!isFront,
+							isDeeplyRead,
+							isLiveblog,
+							hasPageSkin,
+						)}
+					>
+						<AdSlot position="mostpop" />
+					</div>
+				</Hide>
 			)}
 		</div>
 	);

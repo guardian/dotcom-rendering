@@ -214,13 +214,13 @@ export const SubNav = ({
 						: palette('--sub-nav-link-footer'),
 			}}
 		>
-			{/* eslint-disable jsx-a11y/no-redundant-roles -- A11y fix for Safari {@see https://github.com/guardian/dotcom-rendering/pull/5041} */}
+			{}
 			<ul
 				ref={ulRef}
 				css={[expandSubNav ? expandedStyles : collapsedStyles]}
 				role="list"
 			>
-				{/* eslint-enable jsx-a11y/no-redundant-roles */}
+				{}
 				{subNavSections.parent && (
 					<li
 						key={subNavSections.parent.url}

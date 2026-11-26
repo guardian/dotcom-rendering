@@ -115,4 +115,9 @@ describe('articleIdentifierIsAllowed', () => {
 	expect(pageIdIsAllowedForGating('tips')).toBe(false);
 	expect(pageIdIsAllowedForGating('tips#test')).toBe(false);
 	expect(pageIdIsAllowedForGating('tips/test')).toBe(false);
+	expect(pageIdIsAllowedForGating('info/privacy')).toBe(false);
+	expect(pageIdIsAllowedForGating('info/complaints-and-corrections')).toBe(
+		false,
+	);
+	expect(pageIdIsAllowedForGating('the-whole-picture')).toBe(false);
 });

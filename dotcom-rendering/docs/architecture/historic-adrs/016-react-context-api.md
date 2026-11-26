@@ -9,9 +9,9 @@ the react context api to extract the `edition` property to prevent this.
 
 ## Decision
 
--   Our component tree is shallow so we shouldn't implement any 'magic' that
-    steps away from having explicit props showing where and what data a component is using.
--   This decision should be revisited as the codebase grows.
+- Our component tree is shallow so we shouldn't implement any 'magic' that
+  steps away from having explicit props showing where and what data a component is using.
+- This decision should be revisited as the codebase grows.
 
 ## Status
 

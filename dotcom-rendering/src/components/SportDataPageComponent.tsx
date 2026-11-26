@@ -4,7 +4,6 @@ import { SportDataPageLayout } from '../layouts/SportDataPageLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
-import { filterABTestSwitches } from '../model/enhance-switches';
 import type { AppSportDataPage, WebSportDataPage } from '../sportDataPage';
 import { AlreadyVisited } from './AlreadyVisited.island';
 import { useConfig } from './ConfigContext';
@@ -71,17 +70,10 @@ export const SportDataPageComponent = (props: Props) => {
 							commercialMetricsEnabled={
 								!!sportData.config.switches.commercialMetrics
 							}
-							tests={sportData.config.abTests}
 						/>
 					</Island>
 					<Island priority="critical">
 						<SetABTests
-							abTestSwitches={filterABTestSwitches(
-								sportData.config.switches,
-							)}
-							pageIsSensitive={sportData.config.isSensitive}
-							isDev={!!sportData.config.isDev}
-							serverSideTests={sportData.config.abTests}
 							serverSideABTests={
 								sportData.config.serverSideABTests
 							}

@@ -2,26 +2,26 @@
 
 ## Metadata
 
--   Date: 26th April 2021
--   Author: Josh Buckland
--   Platform concerned: Web & AMP(?)
+- Date: 26th April 2021
+- Author: Josh Buckland
+- Platform concerned: Web & AMP(?)
 
 ## Context
 
 We are due to use a third party, Gracenote, to supply us the data for our Olympics coverage. This tag will have to be included on certain pages, meaning that we need to conduct a review of the tag to ensure we're uncovering any privacy or performance concerns.
 
--   We will be using Gracenote for both the data and emebedded "core editorial content" around the Olympics. This frees up the visuals team from creating and supporting this content.
--   These will be classed differently to "editorial embeds" since they are supplying core editorial content.
+- We will be using Gracenote for both the data and emebedded "core editorial content" around the Olympics. This frees up the visuals team from creating and supporting this content.
+- These will be classed differently to "editorial embeds" since they are supplying core editorial content.
 
 ## Data privacy engineering review
 
--   Google Tag Manager and google analytics included in tag script.
--   `pixel.gif` request URL with minified query params sending a request to `https://widgets.sports.gracenote.com/` e.g.
-    -   `c`: 1422
-    -   `wid`: 1422-wintergames-medaltable-en_gb
-    -   `w`: default-medaltable
-    -   `t`: 1619445740490
--   There seem to be no dropped cookies or use of local storage by the tag.
+- Google Tag Manager and google analytics included in tag script.
+- `pixel.gif` request URL with minified query params sending a request to `https://widgets.sports.gracenote.com/` e.g.
+    - `c`: 1422
+    - `wid`: 1422-wintergames-medaltable-en_gb
+    - `w`: default-medaltable
+    - `t`: 1619445740490
+- There seem to be no dropped cookies or use of local storage by the tag.
 
 Standard HTTP headers and other data from the request will also be sent. This includes referrer, user agent and IP address.
 IP address in particular carries more significance both as an identifier and as a geolocator. We should seek confirmation as to what this information will/will not be used for.
@@ -51,17 +51,17 @@ There is a request to a script using https://www.instana.com/. The code suggests
 
 Adding a third-party script with access to the main window involve several risks:
 
--   Ability for the third-party script to modify content of the page
--   Ability for the third-party script to access cookies and local storage
--   Ability for the third-party script to redirect user to a different page and domain
--   Ability for the third-party script to fingerprint users
--   Ability for the third-party script to send/retrieve data over the network
+- Ability for the third-party script to modify content of the page
+- Ability for the third-party script to access cookies and local storage
+- Ability for the third-party script to redirect user to a different page and domain
+- Ability for the third-party script to fingerprint users
+- Ability for the third-party script to send/retrieve data over the network
 
 Unfortunately our current security control are not enough to prevent most of those behaviours:
 
--   Our CSP is allowing `unsafe-eval` and `unsafe-inline`
--   We are not loading each third-party scripts in an iframe with reduced capabilities.
--   We are not using [subresource intregrity](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity) to ensure content of script is not changing.
+- Our CSP is allowing `unsafe-eval` and `unsafe-inline`
+- We are not loading each third-party scripts in an iframe with reduced capabilities.
+- We are not using [subresource intregrity](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity) to ensure content of script is not changing.
 
 Additionally loading a third-party script from a storage not controlled by us, allows the content of the script to be modified from its original purpose for malicious activities. This is slightly complicated further as the initial script is used to load further scripts.
 
@@ -88,13 +88,13 @@ Finally, the script makes a regular call to update data every 10 seconds or so w
 
 ### Mitigations
 
--   Remove `https://www.googletagmanager.com/gtag/js?id=UA-xxx` request for 35kb
--   Remove `https://www.google-analytics.com/analytics.js`
--   Some flag SVGs have a large file size. Reviewing a [specific example](https://images.sports.gracenote.com/images/lib/basic/geo/country/flag/SVG/2203.svg), we can use a lossless SVG compressor, like https://vecta.io/nano, to remove 17.8% of the file size immediately.
--   The SVGs loaded in are 750w x 500h but are used in 42w x 28h containers. There may be potential to reduce complexity of SVGs, and thus file size, for use in small image containers that don't need the high resolution.
--   The CSS attempts to load several font-faces but the URL is defined as ` url("[object Module]#iefix")` in [the CSS](https://widgets.sports.gracenote.com/v2.6.43/widgets/default/medaltable.css). My assumption is that this is currently a bug, but if the widget loads in several fonts then there will be a major asset size increase. We should use system fonts where possible and avoid loading a number of large font assets.
--   There is an object-assign polyfill included in /v2.6.43/widgets/default/medaltable.js that is unlikely to be needed as Object.Assign is widely supported in browsers. If it is required, it also seems to be included twice.
--   The script loads react and react-dom 16. We've had success with Preact X and would recommend seeing if it would meet the needs of the widget for major file-size savings. 37kb+ vs 4kb minified + gzipped.
+- Remove `https://www.googletagmanager.com/gtag/js?id=UA-xxx` request for 35kb
+- Remove `https://www.google-analytics.com/analytics.js`
+- Some flag SVGs have a large file size. Reviewing a [specific example](https://images.sports.gracenote.com/images/lib/basic/geo/country/flag/SVG/2203.svg), we can use a lossless SVG compressor, like https://vecta.io/nano, to remove 17.8% of the file size immediately.
+- The SVGs loaded in are 750w x 500h but are used in 42w x 28h containers. There may be potential to reduce complexity of SVGs, and thus file size, for use in small image containers that don't need the high resolution.
+- The CSS attempts to load several font-faces but the URL is defined as ` url("[object Module]#iefix")` in [the CSS](https://widgets.sports.gracenote.com/v2.6.43/widgets/default/medaltable.css). My assumption is that this is currently a bug, but if the widget loads in several fonts then there will be a major asset size increase. We should use system fonts where possible and avoid loading a number of large font assets.
+- There is an object-assign polyfill included in /v2.6.43/widgets/default/medaltable.js that is unlikely to be needed as Object.Assign is widely supported in browsers. If it is required, it also seems to be included twice.
+- The script loads react and react-dom 16. We've had success with Preact X and would recommend seeing if it would meet the needs of the widget for major file-size savings. 37kb+ vs 4kb minified + gzipped.
 
 ### Initially implemented mitigations
 

@@ -23,6 +23,7 @@ describe('shouldShowContributor', () => {
 		...standardFormat,
 		display: ArticleDisplay.NumberedList,
 	};
+
 	const immersive = {
 		...standardFormat,
 		display: ArticleDisplay.Immersive,
@@ -50,5 +51,9 @@ describe('shouldShowContributor', () => {
 
 	it('should return false if Immersive display', () => {
 		expect(shouldShowContributor(immersive)).toBe(false);
+	});
+
+	it('should return true if Immersive display uses the new grid', () => {
+		expect(shouldShowContributor(immersive, true)).toBe(true);
 	});
 });

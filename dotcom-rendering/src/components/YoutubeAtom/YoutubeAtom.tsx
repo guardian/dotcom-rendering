@@ -1,11 +1,11 @@
-import type { ConsentState } from '@guardian/libs';
+import type { ConsentState } from '@guardian/consent-manager';
 import { useCallback, useState } from 'react';
 import type { ArticleFormat } from '../../lib/articleFormat';
+import { useIsInView } from '../../lib/useIsInView';
 import type { AdTargeting } from '../../types/commercial';
 import type { AspectRatio } from '../../types/front';
 import type { ArticleMedia } from '../../types/mainMedia';
 import type { RenderingTarget } from '../../types/renderingTarget';
-import type { PlayButtonSize } from '../Card/components/PlayIcon';
 import type { ResponsiveFontSize } from '../CardHeadline';
 import { MaintainAspectRatio } from '../MaintainAspectRatio';
 import { YoutubeAtomFeatureCardOverlay } from './YoutubeAtomFeatureCardOverlay';
@@ -23,7 +23,12 @@ export type VideoEventKey =
 	| 'skip'
 	| 'cued'
 	| 'resume'
-	| 'pause';
+	| 'pause'
+	| 'mute'
+	| 'unmute'
+	| 'enter_fullscreen'
+	| 'exit_fullscreen'
+	| 'view';
 
 export type Props = {
 	atomId: string;
@@ -45,8 +50,6 @@ export type Props = {
 	abTestParticipations: Record<string, string>;
 	kicker?: string;
 	shouldPauseOutOfView?: boolean;
-	iconSizeOnDesktop: PlayButtonSize;
-	iconSizeOnMobile: PlayButtonSize;
 	hidePillOnMobile: boolean;
 	renderingTarget: RenderingTarget;
 	aspectRatio?: AspectRatio;
@@ -101,8 +104,6 @@ export const YoutubeAtom = ({
 	kicker,
 	format,
 	shouldPauseOutOfView = false,
-	iconSizeOnDesktop,
-	iconSizeOnMobile,
 	hidePillOnMobile,
 	renderingTarget,
 	aspectRatio,
@@ -127,6 +128,12 @@ export const YoutubeAtom = ({
 	const [isActive, setIsActive] = useState<boolean>(false);
 	const [isClosed, setIsClosed] = useState<boolean>(false);
 	const [pauseVideo, setPauseVideo] = useState<boolean>(false);
+
+	const [isInView, setRef] = useIsInView({
+		threshold: 0.5,
+		repeat: true,
+		debounce: true,
+	});
 
 	/**
 	 * Consent and ad targeting are initially undefined and set by subsequent re-renders
@@ -191,6 +198,7 @@ export const YoutubeAtom = ({
 			data-atom-id={atomId}
 			data-video-id={videoId}
 			data-video-unique-id={uniqueId}
+			ref={setRef}
 		>
 			<YoutubeAtomSticky
 				uniqueId={uniqueId}
@@ -203,6 +211,7 @@ export const YoutubeAtom = ({
 				isClosed={isClosed}
 				setIsClosed={setIsClosed}
 				shouldPauseOutOfView={shouldPauseOutOfView}
+				isIntersecting={isInView}
 			>
 				<MaintainAspectRatio
 					height={height}
@@ -218,6 +227,7 @@ export const YoutubeAtom = ({
 						loadPlayer && consentState && adTargeting && (
 							<YoutubeAtomPlayer
 								videoId={videoId}
+								atomId={atomId}
 								uniqueId={uniqueId}
 								height={height}
 								width={width}
@@ -239,6 +249,9 @@ export const YoutubeAtom = ({
 								consentState={consentState}
 								abTestParticipations={abTestParticipations}
 								renderingTarget={renderingTarget}
+								isInView={
+									isInView == true || shouldStick == true
+								}
 							/>
 						)
 					}
@@ -281,8 +294,6 @@ export const YoutubeAtom = ({
 								title={title}
 								onClick={() => setOverlayClicked(true)}
 								format={format}
-								iconSizeOnDesktop={iconSizeOnDesktop}
-								iconSizeOnMobile={iconSizeOnMobile}
 								hidePillOnMobile={hidePillOnMobile}
 								aspectRatio={aspectRatio}
 								isLive={isLive}

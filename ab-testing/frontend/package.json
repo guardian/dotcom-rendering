@@ -3,6 +3,9 @@
 	"private": true,
 	"version": "0.0.1",
 	"type": "module",
+	"imports": {
+		"#lib/*": "./src/lib/*"
+	},
 	"scripts": {
 		"dev": "vite dev",
 		"build": "rm -rf ./output && vite build && mv ./output/index.html ./output/ab-tests.html",
@@ -13,13 +16,13 @@
 	},
 	"devDependencies": {
 		"@guardian/ab-testing-config": "workspace:ab-testing-config",
-		"@sveltejs/adapter-auto": "^6.0.0",
-		"@sveltejs/adapter-static": "^3.0.8",
-		"@sveltejs/kit": "^2.52.2",
-		"@sveltejs/vite-plugin-svelte": "^5.0.0",
-		"svelte": "^5.53.3",
-		"svelte-check": "^4.0.0",
-		"typescript": "^5.0.0",
-		"vite": "^6.2.6"
+		"@sveltejs/adapter-auto": "8.0.0",
+		"@sveltejs/adapter-static": "4.0.1",
+		"@sveltejs/kit": "3.1.1",
+		"@sveltejs/vite-plugin-svelte": "7.3.1",
+		"svelte": "5.57.3",
+		"svelte-check": "4.7.8",
+		"typescript": "catalog:",
+		"vite": "8.3.5"
 	}
 }

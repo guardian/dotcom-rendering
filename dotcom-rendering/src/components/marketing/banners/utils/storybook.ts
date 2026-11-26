@@ -139,9 +139,99 @@ export const design: ConfigurableDesign = {
 	},
 };
 
+export const newsletterDesign: ConfigurableDesign = {
+	colours: {
+		basic: {
+			background: stringToHexColour('F3F7FF'),
+			bodyText: stringToHexColour('333333'),
+			headerText: stringToHexColour('121212'),
+			articleCountText: stringToHexColour('000000'),
+			logo: stringToHexColour('000000'),
+		},
+		newsletterBanner: {
+			divider: stringToHexColour('DCDCDC'),
+			actionColor: stringToHexColour('052962'),
+			frequencyIconColor: stringToHexColour('FFFFFF'),
+			emailInputTextColor: stringToHexColour('121212'),
+			emailInputBackgroundColor: stringToHexColour('FFFFFF'),
+			errorColor: stringToHexColour('C70000'),
+			privacyTextColor: stringToHexColour('707070'),
+			toggleActiveColor: stringToHexColour('22874D'),
+			successIconColor: stringToHexColour('58D08B'),
+			browseButtonColor: stringToHexColour('052962'),
+		},
+		highlightedText: {
+			text: { r: '33', g: '33', b: '33', kind: 'hex' },
+			highlight: { r: 'F3', g: 'F7', b: 'FF', kind: 'hex' },
+		},
+		primaryCta: {
+			default: {
+				text: { r: '05', g: '29', b: '62', kind: 'hex' },
+				background: { r: 'FF', g: 'E5', b: '00', kind: 'hex' },
+			},
+		},
+		secondaryCta: {
+			default: {
+				text: { r: '00', g: '00', b: '00', kind: 'hex' },
+				background: { r: 'F1', g: 'F8', b: 'FC', kind: 'hex' },
+				border: { r: '00', g: '00', b: '00', kind: 'hex' },
+			},
+		},
+		closeButton: {
+			default: {
+				text: { r: '00', g: '00', b: '00', kind: 'hex' },
+				background: { r: 'E6', g: 'EC', b: 'EF', kind: 'hex' },
+				border: { r: 'E6', g: 'EC', b: 'EF', kind: 'hex' },
+			},
+		},
+		ticker: {
+			filledProgress: { r: '33', g: '33', b: '33', kind: 'hex' },
+			progressBarBackground: { r: 'F3', g: 'F7', b: 'FF', kind: 'hex' },
+			headlineColour: { r: '33', g: '33', b: '33', kind: 'hex' },
+			totalColour: { r: '33', g: '33', b: '33', kind: 'hex' },
+			goalColour: { r: '33', g: '33', b: '33', kind: 'hex' },
+		},
+	},
+};
+
+export const newsletterDesignDark: ConfigurableDesign = {
+	colours: {
+		...newsletterDesign.colours,
+		basic: {
+			background: stringToHexColour('1A1A1A'),
+			bodyText: stringToHexColour('EDEDED'),
+			headerText: stringToHexColour('FFFFFF'),
+			articleCountText: stringToHexColour('FFFFFF'),
+			logo: stringToHexColour('FFFFFF'),
+		},
+		newsletterBanner: {
+			divider: stringToHexColour('545454'),
+			actionColor: stringToHexColour('EACCA0'),
+			frequencyIconColor: stringToHexColour('1A1A1A'),
+			emailInputTextColor: stringToHexColour('EDEDED'),
+			emailInputBackgroundColor: stringToHexColour('333333'),
+			emailInputBorderColor: stringToHexColour('EDEDED'),
+			signupButtonBackgroundColor: stringToHexColour('FFFFFF'),
+			signupButtonTextColor: stringToHexColour('000000'),
+			errorColor: stringToHexColour('FF9081'),
+			privacyTextColor: stringToHexColour('EDEDED'),
+			borderColor: stringToHexColour('999999'),
+			toggleActiveColor: stringToHexColour('28A85F'),
+			successIconColor: stringToHexColour('58D08B'),
+			browseButtonColor: stringToHexColour('EDEDED'),
+		},
+		closeButton: {
+			default: {
+				text: stringToHexColour('FFFFFF'),
+				background: stringToHexColour('333333'),
+				border: stringToHexColour('333333'),
+			},
+		},
+	},
+};
+
 export const props: BannerProps = {
 	bannerChannel: 'contributions',
-	isSupporter: false,
 	countryCode: 'GB',
 	tracking,
 	content: contentWithHeading,

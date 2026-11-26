@@ -6,6 +6,7 @@ import {
 	ArticleDesign,
 	type ArticleFormat,
 	ArticleSpecial,
+	isOpinionDesign,
 } from '../../lib/articleFormat';
 import { isMediaCard } from '../../lib/cardHelpers';
 import { isWithinTwelveHours, secondsToDuration } from '../../lib/formatTime';
@@ -21,7 +22,7 @@ import type {
 	DCRContainerPalette,
 	DCRContainerType,
 	DCRFrontImage,
-	DCRSlideshowImage,
+	DCRSlideshowMedia,
 	DCRSnapType,
 	DCRSupportingContent,
 } from '../../types/front';
@@ -71,6 +72,7 @@ import { TrailText, type TrailTextSize } from './components/TrailText';
 export type Position = 'inner' | 'outer' | 'none';
 
 export type Props = {
+	headerContent?: React.ReactNode;
 	linkTo: string;
 	format: ArticleFormat;
 	/** The format of the article holding the card */
@@ -134,7 +136,7 @@ export type Props = {
 	discussionApiUrl: string;
 	discussionId?: string;
 	isExternalLink: boolean;
-	slideshowImages?: DCRSlideshowImage[];
+	slideshowMedia?: DCRSlideshowMedia[];
 	/** Determines if liveblog update links are displayed on a card */
 	showLivePlayable?: boolean;
 	liveUpdatesAlignment?: Alignment;
@@ -162,8 +164,10 @@ export type Props = {
 	subtitleSize?: SubtitleSize;
 	/** Determines if the headline should be positioned within the content or outside the content */
 	headlinePosition?: 'inner' | 'outer';
-	isStorylines?: boolean;
 	starRatingSize?: RatingSizeType;
+	contentSpacing?: 'small' | 'large';
+	headlineTestUuid?: string;
+	isStorylines?: boolean;
 };
 
 const waveformWrapper = (
@@ -254,7 +258,7 @@ const getMedia = ({
 	imageAltText,
 	avatarUrl,
 	isCrossword,
-	slideshowImages,
+	slideshowMedia,
 	mainMedia,
 	canPlayInline,
 	isFrontContainer,
@@ -263,7 +267,7 @@ const getMedia = ({
 	imageAltText?: string;
 	avatarUrl?: string;
 	isCrossword?: boolean;
-	slideshowImages?: DCRSlideshowImage[];
+	slideshowMedia?: DCRSlideshowMedia[];
 	mainMedia?: MainMedia;
 	canPlayInline?: boolean;
 	isFrontContainer: boolean;
@@ -295,11 +299,13 @@ const getMedia = ({
 		} as const;
 	}
 
-	if (slideshowImages && canPlayInline) {
-		return { type: 'slideshow', slideshowImages } as const;
+	if (slideshowMedia && canPlayInline) {
+		return { type: 'slideshow', slideshowMedia } as const;
 	}
 
-	if (avatarUrl) return { type: 'avatar', avatarUrl } as const;
+	if (avatarUrl) {
+		return { type: 'avatar', avatarUrl } as const;
+	}
 
 	if (
 		mainMedia?.type === 'Audio' &&
@@ -347,28 +353,8 @@ const decideSublinkPosition = (
 	return alignment === 'vertical' ? 'inner' : 'outer';
 };
 
-const determinePadContent = (
-	isMediaCardOrNewsletter: boolean,
-	isFrontContainer: boolean,
-	isOnwardContent: boolean,
-	isInGalleryContext: boolean,
-): 'large' | 'small' | undefined => {
-	if (isInGalleryContext) {
-		return undefined;
-	}
-
-	if (isMediaCardOrNewsletter) {
-		return isFrontContainer ? 'large' : 'small';
-	}
-
-	if (isOnwardContent) {
-		return 'small';
-	}
-
-	return undefined;
-};
-
 export const Card = ({
+	headerContent,
 	linkTo,
 	format,
 	contextFormat,
@@ -408,7 +394,7 @@ export const Card = ({
 	isNewsletter = false,
 	isOnwardContent = false,
 	isExternalLink,
-	slideshowImages,
+	slideshowMedia,
 	showLivePlayable = false,
 	liveUpdatesAlignment = 'vertical',
 	liveUpdatesPosition = 'inner',
@@ -426,9 +412,11 @@ export const Card = ({
 	showKickerImage = false,
 	headlinePosition = 'inner',
 	subtitleSize = 'small',
-	isStorylines = false,
 	starRatingSize = 'small',
 	articleMedia,
+	contentSpacing,
+	headlineTestUuid,
+	isStorylines = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -440,10 +428,7 @@ export const Card = ({
 	);
 	const showQuotes = !!showQuotedHeadline;
 
-	const isOpinion =
-		format.design === ArticleDesign.Comment ||
-		format.design === ArticleDesign.Editorial ||
-		format.design === ArticleDesign.Letter;
+	const isOpinion = isOpinionDesign(format.design);
 
 	/**
 	 * A "video article" refers to standalone video content presented as the main focus of the article.
@@ -451,10 +436,16 @@ export const Card = ({
 	 */
 	const isVideoArticle = format.design === ArticleDesign.Video;
 
+	const isOnwardsContent = onwardsSource !== undefined;
+
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const decideAge = () => {
-		if (!webPublicationDate || !showAge) return undefined;
+		const shouldShowAgeIfKnown = showAge || isStorylines;
+
+		if (!webPublicationDate || !shouldShowAgeIfKnown) {
+			return undefined;
+		}
 
 		return (
 			<CardAge
@@ -534,7 +525,7 @@ export const Card = ({
 		imageAltText: image?.altText,
 		avatarUrl,
 		isCrossword,
-		slideshowImages,
+		slideshowMedia,
 		mainMedia,
 		canPlayInline,
 		isFrontContainer,
@@ -547,9 +538,9 @@ export const Card = ({
 			media.type === 'cinemagraph');
 
 	const resolvedDataLinkName =
-		media && dataLinkName
+		media && !isUndefined(dataLinkName)
 			? appendLinkNameMedia(dataLinkName, media.type)
-			: dataLinkName;
+			: undefined;
 
 	/**
 	 * For opinion type cards with avatars (which aren't onwards content)
@@ -577,9 +568,7 @@ export const Card = ({
 	};
 
 	/* Whilst we migrate to the new container types, we need to check which container we are in. */
-	const isFlexibleContainer =
-		containerType === 'flexible/special' ||
-		containerType === 'flexible/general';
+	const isFlexibleContainer = containerType === 'flexible/general';
 
 	const isSmallCard = containerType === 'scrollable/small';
 
@@ -601,9 +590,7 @@ export const Card = ({
 		return 'tablet';
 	};
 
-	const shouldShowTrailText = isMoreGalleriesOnwardContent
-		? media?.type !== 'podcast' && isOnwardSplash
-		: media?.type !== 'podcast';
+	const shouldShowTrailText = media?.type !== 'podcast';
 
 	/**
 	 * Determines the gap of between card components based on card properties
@@ -626,23 +613,12 @@ export const Card = ({
 			}
 
 			return {
-				row: 'none',
-				column: 'none',
+				row: 'tiny',
+				column: 'tiny',
 			};
 		}
 
 		if (!isFrontContainer) {
-			/**
-			 * Media cards have 4px padding around the content so we have a
-			 * tiny (4px) gap to account for this and make it 8px total
-			 */
-			if (isMediaCardOrNewsletter) {
-				return {
-					row: 'tiny',
-					column: 'tiny',
-				};
-			}
-
 			return { row: 'small', column: 'small' };
 		}
 
@@ -679,8 +655,12 @@ export const Card = ({
 	 * - If `sublinkPosition` is `inner`, hides `SupportingContent` from tablet but displays it on smaller breakpoints.
 	 */
 	const decideOuterSublinks = () => {
-		if (!hasSublinks) return null;
-		if (sublinkPosition === 'none') return null;
+		if (!hasSublinks) {
+			return null;
+		}
+		if (sublinkPosition === 'none') {
+			return null;
+		}
 
 		const Sublinks = () => {
 			return isStorylines ? (
@@ -728,8 +708,12 @@ export const Card = ({
 	};
 
 	const decideInnerSublinks = () => {
-		if (!hasSublinks) return null;
-		if (sublinkPosition !== 'inner') return null;
+		if (!hasSublinks) {
+			return null;
+		}
+		if (sublinkPosition !== 'inner') {
+			return null;
+		}
 
 		const Sublinks = () => (
 			<Hide until={isFlexSplash ? 'desktop' : 'tablet'}>
@@ -764,7 +748,9 @@ export const Card = ({
 	 * Results in a clickable brand logo and sponsorship label
 	 */
 	const LabsBranding = () => {
-		if (!branding) return;
+		if (!branding) {
+			return;
+		}
 		const getLocationPrefix = () => {
 			if (!onwardsSource) {
 				return 'front-card';
@@ -780,7 +766,7 @@ export const Card = ({
 			? getOphanComponents({
 					branding,
 					locationPrefix,
-			  })
+				})
 			: undefined;
 
 		return (
@@ -832,6 +818,7 @@ export const Card = ({
 
 	return (
 		<CardWrapper
+			topBarPadding={headerContent ? 0 : undefined}
 			format={format}
 			showTopBarDesktop={showTopBarDesktop}
 			showTopBarMobile={showTopBarMobile}
@@ -842,11 +829,13 @@ export const Card = ({
 					: undefined
 			}
 		>
+			{headerContent}
 			<CardLink
 				linkTo={linkTo}
 				headlineText={headlineText}
 				dataLinkName={resolvedDataLinkName}
 				isExternalLink={isExternalLink}
+				headlineTestUuid={headlineTestUuid}
 			/>
 			{headlinePosition === 'outer' && (
 				<div
@@ -909,23 +898,23 @@ export const Card = ({
 						articleMedia={articleMedia}
 						mediaPositionOnDesktop={mediaPositionOnDesktop}
 						mediaPositionOnMobile={mediaPositionOnMobile}
-						padMedia={
-							isMediaCardOrNewsletter &&
-							isFrontContainer &&
-							!isGallerySecondaryOnward
-						}
-						isFrontContainerOrGallerySecondaryOnward={
-							isFrontContainer || isGallerySecondaryOnward
-						}
+						padMedia={isMediaCardOrNewsletter && !isOnwardsContent}
 						isSmallCard={isSmallCard}
 					>
 						{media.type === 'slideshow' && (
 							<Island
-								priority="feature"
+								// Critical like other video islands, as video slides need hydrating to play
+								priority={
+									media.slideshowMedia.some(
+										({ type }) => type === 'video',
+									)
+										? 'critical'
+										: 'feature'
+								}
 								defer={{ until: 'visible' }}
 							>
 								<SlideshowCarousel
-									images={media.slideshowImages}
+									images={media.slideshowMedia}
 									imageSize={mediaSize}
 									hasNavigationBackgroundColour={
 										!!hasSublinks
@@ -933,6 +922,9 @@ export const Card = ({
 									linkTo={linkTo}
 									linkAriaLabel={headlineText}
 									dataLinkName={resolvedDataLinkName}
+									uniqueId={uniqueId}
+									subtitleSize={subtitleSize}
+									format={format}
 								/>
 							</Island>
 						)}
@@ -961,8 +953,15 @@ export const Card = ({
 									uniqueId={uniqueId}
 									aspectRatio={media.mainMedia.aspectRatio}
 									videoStyle={media.mainMedia.videoStyle}
-									posterImage={media.mainMedia.image ?? ''}
-									fallbackImage={media.mainMedia.image ?? ''}
+									posterImage={
+										media.mainMedia.image.src ?? ''
+									}
+									posterImageAspectRatio={
+										media.mainMedia.image.aspectRatio
+									}
+									fallbackImage={
+										media.mainMedia.image.src ?? ''
+									}
 									fallbackImageSize={mediaSize}
 									fallbackImageLoading={imageLoading}
 									fallbackImageAlt={media.imageAltText}
@@ -972,8 +971,9 @@ export const Card = ({
 										media.mainMedia.subtitleSource
 									}
 									subtitleSize={subtitleSize}
-									minAspectRatio={4 / 5}
+									minAspectRatio={3 / 4}
 									containerAspectRatioDesktop={5 / 4}
+									preventAutoplay={false}
 								/>
 							</Island>
 						)}
@@ -1022,35 +1022,6 @@ export const Card = ({
 												hideCaption={true}
 												stickyVideos={false}
 												kickerText={kickerText}
-												/*
-												 * TODO: IMPROVE THIS MAPPING
-												 *
-												 * Image size defaults to small if not provided. However, if the
-												 * headline size is large or greater, we want to assume the image
-												 * is also large so that the play icon is correctly sized.
-												 */
-												iconSizeOnDesktop={
-													[
-														'small',
-														'medium',
-														'large',
-														'xlarge',
-														'xxlarge',
-													].includes(
-														headlineSizes?.desktop ??
-															'',
-													) || mediaSize !== 'small'
-														? 'large'
-														: 'small'
-												}
-												iconSizeOnMobile={
-													mediaPositionOnMobile ===
-														'left' ||
-													mediaPositionOnMobile ===
-														'right'
-														? 'small'
-														: 'large'
-												}
 												hidePillOnMobile={
 													mediaPositionOnMobile ===
 														'left' ||
@@ -1147,19 +1118,13 @@ export const Card = ({
 				<ContentWrapper
 					mediaSize={mediaSize}
 					isAvatar={media?.type === 'avatar'}
-					isFrontContainer={isFrontContainer}
 					mediaPositionOnDesktop={
 						media ? mediaPositionOnDesktop : 'none'
 					}
 					mediaPositionOnMobile={
 						media ? mediaPositionOnMobile : 'none'
 					}
-					padContent={determinePadContent(
-						isMediaCardOrNewsletter,
-						isFrontContainer,
-						isOnwardContent,
-						isInGalleryContext,
-					)}
+					padContent={contentSpacing}
 				>
 					{/* In the storylines section on tag pages, the flex splash is used to display key stories.
 						We don't display an article headline in the conventional sense, the key stories are instead displayed as "supporting content".

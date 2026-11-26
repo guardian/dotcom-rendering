@@ -287,7 +287,9 @@ const PersonalityQuizAnswers = ({
 
 	// in order to reset selection
 	useEffect(() => {
-		if (!globallySelectedAnswer) setSelectedAnswers(undefined);
+		if (!globallySelectedAnswer) {
+			setSelectedAnswers(undefined);
+		}
 	}, [globallySelectedAnswer, setSelectedAnswers]);
 
 	return (

@@ -22,7 +22,6 @@ const meta = preview.meta({
 });
 
 const groupedTrails = {
-	snap: [],
 	splash: [trails[0]],
 	standard: [
 		trails[1],

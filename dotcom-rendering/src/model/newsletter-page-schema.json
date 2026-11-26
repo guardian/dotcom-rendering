@@ -33,10 +33,19 @@
                     "group": {
                         "type": "string"
                     },
+                    "category": {
+                        "type": "string"
+                    },
                     "regionFocus": {
                         "type": "string"
                     },
                     "illustrationCard": {
+                        "type": "string"
+                    },
+                    "illustrationSquare": {
+                        "type": "string"
+                    },
+                    "exampleUrl": {
                         "type": "string"
                     }
                 },
@@ -120,10 +129,6 @@
                 "switches": {
                     "$ref": "#/definitions/Switches"
                 },
-                "abTests": {
-                    "description": "Narrowest representation of the server-side tests\nobject shape, which is [defined in `frontend`](https://github.com/guardian/frontend/blob/23743723030a041e4f4f59fa265ee2be0bb51825/common/app/experiments/ExperimentsDefinition.scala#L24-L26).\n\n**Note:** This type is not support by JSON-schema, it evaluates as `object`",
-                    "type": "object"
-                },
                 "serverSideABTests": {
                     "$ref": "#/definitions/Record<string,string>"
                 },
@@ -186,7 +191,6 @@
                 }
             },
             "required": [
-                "abTests",
                 "adUnit",
                 "ajaxUrl",
                 "commercialBundleUrl",
@@ -299,6 +303,7 @@
                     }
                 },
                 "currentNavLink": {
+                    "description": "Data types for the API request bodies from clients that require transformation before internal use.\nWhere data types are coming from Frontend we try to use the 'FE' prefix.\nPrior to this we used 'CAPI' as a prefix which wasn't entirely accurate, and some data structures never received the prefix, meaning some are still missing it.",
                     "$ref": "#/definitions/FELinkType"
                 },
                 "currentNavLinkTitle": {
@@ -311,6 +316,7 @@
                     "type": "object",
                     "properties": {
                         "parent": {
+                            "description": "Data types for the API request bodies from clients that require transformation before internal use.\nWhere data types are coming from Frontend we try to use the 'FE' prefix.\nPrior to this we used 'CAPI' as a prefix which wasn't entirely accurate, and some data structures never received the prefix, meaning some are still missing it.",
                             "$ref": "#/definitions/FELinkType"
                         },
                         "links": {
@@ -323,6 +329,9 @@
                     "required": [
                         "links"
                     ]
+                },
+                "customSubnav": {
+                    "$ref": "#/definitions/CustomSubnav"
                 },
                 "readerRevenueLinks": {
                     "$ref": "#/definitions/ReaderRevenuePositions"
@@ -359,7 +368,15 @@
                     }
                 },
                 "pillar": {
-                    "$ref": "#/definitions/LegacyPillar"
+                    "enum": [
+                        "culture",
+                        "labs",
+                        "lifestyle",
+                        "news",
+                        "opinion",
+                        "sport"
+                    ],
+                    "type": "string"
                 },
                 "more": {
                     "type": "boolean"
@@ -376,14 +393,145 @@
                 "url"
             ]
         },
-        "LegacyPillar": {
+        "CustomSubnav": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "header": {
+                    "$ref": "#/definitions/CustomSubnavHeader"
+                },
+                "format": {
+                    "enum": [
+                        "compact",
+                        "large"
+                    ],
+                    "type": "string"
+                },
+                "links": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomSubnavLink"
+                    }
+                },
+                "pages": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomSubnavTargetedPage"
+                    }
+                },
+                "images": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomSubnavImage"
+                    }
+                }
+            },
+            "required": [
+                "format",
+                "header",
+                "id",
+                "links"
+            ]
+        },
+        "CustomSubnavHeader": {
+            "type": "object",
+            "properties": {
+                "headerText": {
+                    "type": "string"
+                },
+                "showHeaderText": {
+                    "type": "boolean"
+                },
+                "dotcomPath": {
+                    "type": "string"
+                },
+                "copy": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "copy",
+                "headerText",
+                "showHeaderText"
+            ]
+        },
+        "CustomSubnavLink": {
+            "type": "object",
+            "properties": {
+                "linkText": {
+                    "type": "string"
+                },
+                "dotcomPath": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dotcomPath",
+                "linkText"
+            ]
+        },
+        "CustomSubnavTargetedPage": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "enum": [
+                        "article",
+                        "front",
+                        "hasTag"
+                    ],
+                    "type": "string"
+                },
+                "path": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "path",
+                "type"
+            ]
+        },
+        "CustomSubnavImage": {
+            "type": "object",
+            "properties": {
+                "imageSrc": {
+                    "type": "string"
+                },
+                "breakpoint": {
+                    "$ref": "#/definitions/CustomSubnavImageBreakpoint"
+                },
+                "platforms": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomSubnavImagePlatform"
+                    }
+                }
+            },
+            "required": [
+                "breakpoint",
+                "imageSrc",
+                "platforms"
+            ]
+        },
+        "CustomSubnavImageBreakpoint": {
             "enum": [
-                "culture",
-                "labs",
-                "lifestyle",
-                "news",
-                "opinion",
-                "sport"
+                "desktop",
+                "leftCol",
+                "mobile",
+                "mobileLandscape",
+                "mobileMedium",
+                "phablet",
+                "tablet",
+                "wide"
+            ],
+            "type": "string"
+        },
+        "CustomSubnavImagePlatform": {
+            "enum": [
+                "android",
+                "ios",
+                "web"
             ],
             "type": "string"
         },

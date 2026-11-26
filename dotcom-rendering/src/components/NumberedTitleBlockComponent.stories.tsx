@@ -22,7 +22,7 @@ const allThemes = [
 	ArticleSpecial.SpecialReportAlt,
 	ArticleSpecial.SpecialReport,
 	ArticleSpecial.Labs,
-] as const satisfies ReadonlyArray<ArticleTheme>;
+] as const satisfies readonly ArticleTheme[];
 
 const allThemeStandardVariations = allThemes.map((theme) => ({
 	design: ArticleDesign.Standard,

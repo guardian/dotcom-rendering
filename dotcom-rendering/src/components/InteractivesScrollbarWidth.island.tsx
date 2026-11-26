@@ -4,7 +4,9 @@ export const InteractivesScrollbarWidth = () => {
 	useEffect(() => {
 		const updateScrollbarWidth = () => {
 			const documentWidth = document.documentElement.clientWidth;
-			if (documentWidth <= 0) return;
+			if (documentWidth <= 0) {
+				return;
+			}
 
 			const scrollbarWidth = window.innerWidth - documentWidth;
 			const root = document.documentElement;

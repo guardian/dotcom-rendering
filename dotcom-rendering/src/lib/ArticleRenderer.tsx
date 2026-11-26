@@ -1,8 +1,12 @@
 import { css } from '@emotion/react';
+import { Fragment } from 'react';
 import { useConfig } from '../components/ConfigContext';
+import { FeastContextualNudge } from '../components/FeastContextualNudge.island';
+import { Island } from '../components/Island';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
-import type { ServerSideTests, Switches } from '../types/config';
-import type { FEElement } from '../types/content';
+import type { Switches } from '../types/config';
+import type { FEElement, RecipeBlockElement } from '../types/content';
 import type { TagType } from '../types/tag';
 import { spacefinderAdStyles } from './adStyles';
 import { ArticleDesign, type ArticleFormat } from './articleFormat';
@@ -14,6 +18,33 @@ import { withSignInGateSlot } from './withSignInGateSlot';
 const commercialPosition = css`
 	position: relative;
 `;
+
+const MAX_FEAST_NUDGES = 5;
+
+/**
+ * Assigns up to five numbered Braze placements across recipe sections,
+ * including the first and last section when there are more than five.
+ */
+export const getFeastNudgeIndex = (
+	sectionIndex: number,
+	sectionCount: number,
+): number | null => {
+	if (sectionIndex < 0 || sectionIndex >= sectionCount || sectionCount < 1) {
+		return null;
+	}
+
+	const nudgeCount = Math.min(MAX_FEAST_NUDGES, sectionCount);
+	if (nudgeCount === sectionCount) return sectionIndex + 1;
+
+	for (let slot = 0; slot < nudgeCount; slot++) {
+		const targetIndex = Math.round(
+			(slot * (sectionCount - 1)) / (nudgeCount - 1),
+		);
+		if (targetIndex === sectionIndex) return slot + 1;
+	}
+
+	return null;
+};
 
 type Props = {
 	format: ArticleFormat;
@@ -32,11 +63,11 @@ type Props = {
 	isDev: boolean;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	abTests: ServerSideTests;
 	editionId: EditionId;
 	contributionsServiceUrl: string;
 	shouldHideAds: boolean;
 	idApiUrl?: string;
+	articleArrangement?: LayoutType;
 };
 
 export const ArticleRenderer = ({
@@ -56,11 +87,11 @@ export const ArticleRenderer = ({
 	isAdFreeUser,
 	isSensitive,
 	isDev,
-	abTests,
 	editionId,
 	contributionsServiceUrl,
 	shouldHideAds,
 	idApiUrl,
+	articleArrangement,
 }: Props) => {
 	const isSectionedMiniProfilesArticle =
 		elements.filter(
@@ -72,7 +103,6 @@ export const ArticleRenderer = ({
 	const renderedElements = elements.map((element, index, { length }) => {
 		return (
 			<RenderArticleElement
-				// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
 				key={index}
 				format={format}
 				element={element}
@@ -85,12 +115,12 @@ export const ArticleRenderer = ({
 				isAdFreeUser={isAdFreeUser}
 				isSensitive={isSensitive}
 				switches={switches}
-				abTests={abTests}
 				editionId={editionId}
 				totalElements={length}
 				isSectionedMiniProfilesArticle={isSectionedMiniProfilesArticle}
 				shouldHideAds={shouldHideAds}
 				idApiUrl={idApiUrl}
+				articleArrangement={articleArrangement}
 			/>
 		);
 	});
@@ -101,11 +131,122 @@ export const ArticleRenderer = ({
 	 */
 	const { renderingTarget } = useConfig();
 
+	/**
+	 * For recipe articles, group elements into per-recipe sections separated
+	 * by SubheadingBlockElements. Each section gets the subheading followed by
+	 * a FeastContextualNudge (populated from the RecipeBlockElement if present, or
+	 * showing a fallback using the recipe name), then the remaining body elements.
+	 *
+	 * Elements that precede the first subheading are rendered as-is.
+	 */
+	const augmentedElements = (() => {
+		if (format.design !== ArticleDesign.Recipe) {
+			return renderedElements;
+		}
+
+		type RecipeSection = {
+			subheadingEl: JSX.Element;
+			recipe?: RecipeBlockElement;
+			recipeArticleTitle: string;
+			contentEls: JSX.Element[];
+			index: number;
+		};
+
+		const preSection: JSX.Element[] = [];
+		const sections: RecipeSection[] = [];
+		let current: RecipeSection | null = null;
+
+		for (const [i, el] of renderedElements.entries()) {
+			const data = elements[i];
+			if (
+				data?._type ===
+				'model.dotcomrendering.pageElements.SubheadingBlockElement'
+			) {
+				const recipeArticleTitle = data.html
+					.replace(/<[^>]+>/g, '')
+					.trim();
+				current = {
+					subheadingEl: el,
+					recipeArticleTitle,
+					contentEls: [],
+					index: sections.length,
+				};
+				sections.push(current);
+			} else if (current) {
+				if (
+					data?._type ===
+					'model.dotcomrendering.pageElements.RecipeBlockElement'
+				) {
+					// Store structured recipe data for the nudge; don't render as a body element.
+					current.recipe = data;
+				} else {
+					current.contentEls.push(el);
+				}
+			} else {
+				preSection.push(el);
+			}
+		}
+
+		const result: (JSX.Element | null | undefined)[] = [...preSection];
+
+		const sectionsWithNudgeIndex = sections.map((section) => ({
+			section,
+			nudgeIndex: getFeastNudgeIndex(section.index, sections.length),
+		}));
+
+		/**
+		 * Every recipe id that will get a nudge on this page, known upfront
+		 * (at most MAX_FEAST_NUDGES). Passed to every FeastContextualNudge
+		 * instance so that whichever one hydrates first can fetch the
+		 * reader's "Saved from web" state for the whole batch in a single
+		 * request (see `getFeastSavedFromTheWebRecipes`), rather than each
+		 * nudge querying just its own recipe id separately.
+		 */
+		const allNudgeRecipeIds = sectionsWithNudgeIndex
+			.filter(
+				({ section, nudgeIndex }) =>
+					section.recipe !== undefined && nudgeIndex !== null,
+			)
+			.map(({ section }) => section.recipe!.id);
+
+		for (const { section, nudgeIndex } of sectionsWithNudgeIndex) {
+			result.push(
+				<Fragment key={`recipe-section-${section.index}`}>
+					{section.subheadingEl}
+					{section.recipe && nudgeIndex !== null && (
+						<Island
+							priority="feature"
+							defer={{ until: 'visible' }}
+							role="inline"
+						>
+							<FeastContextualNudge
+								isDev={isDev}
+								pageId={pageId}
+								recipe={section.recipe}
+								recipeArticleTitle={section.recipeArticleTitle}
+								nudgeIndex={nudgeIndex}
+								idApiUrl={idApiUrl}
+								allNudgeRecipeIds={allNudgeRecipeIds}
+							/>
+						</Island>
+					)}
+					{section.contentEls}
+				</Fragment>,
+			);
+		}
+
+		return result;
+	})();
+
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
 	// );
 	// ^^ Until we decide where to do the "isomorphism split" in this this code is not safe here.
 	//    But should be soon.
+
+	const isInDeprecatedInteractiveLayout =
+		format.design === ArticleDesign.Interactive &&
+		articleArrangement === undefined;
 
 	return (
 		<div
@@ -115,17 +256,17 @@ export const ArticleRenderer = ({
 
 				// Note, this class MUST be on the *direct parent* of the
 				// elements for some legacy interactive styling to work.
-				format.design === ArticleDesign.Interactive
+				isInDeprecatedInteractiveLayout
 					? interactiveLegacyClasses.contentMainColumn
 					: '',
 			].join(' ')}
 			css={[commercialPosition, spacefinderAdStyles]}
 		>
 			{renderingTarget === 'Apps'
-				? renderedElements
+				? augmentedElements
 				: /* Insert the placeholder for the sign in gate on the 2nd article element */
-				  withSignInGateSlot({
-						renderedElements,
+					withSignInGateSlot({
+						renderedElements: augmentedElements,
 						contentType,
 						sectionId,
 						tags,
@@ -138,7 +279,7 @@ export const ArticleRenderer = ({
 						isDev,
 						contributionsServiceUrl,
 						editionId,
-				  })}
+					})}
 		</div>
 	); // classname that space finder is going to target for in-body ads in DCR
 };

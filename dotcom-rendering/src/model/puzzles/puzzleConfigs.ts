@@ -1,0 +1,403 @@
+import { formatPuzzleDateShort } from '../../lib/puzzleDate';
+
+/**
+ * DCR's single source of truth for the structural/rendering behaviour of
+ * each supported Puzzle Page slug.
+ *
+ * Puzzle Page is scoped to iframe-based puzzles only, crosswords remain on
+ * their existing, separate `/crosswords/*` flow
+ * (`ArticleDesign.Crossword` / `src/layouts/CrosswordLayout.tsx`), which is
+ * unrelated to this registry and is not unified into Puzzle Page. See
+ * `docs/puzzle-page.md` for the full picture.
+ *
+ * The registry contains sudoku (4 difficulties), word wheel, Wordiply,
+ * and MovieGrid's Film reveal and On the ball. MovieGrid games require an
+ * API-provided `instance.gameUrl`; DCR does not construct their URLs.
+ *
+ * `iframe` is a discriminated union keyed by `provider`, each entry holds
+ * only the minimal, provider-specific identity data needed to build its
+ * iframe URL (e.g. AmuseLabs' `set` identifier), not a pre-baked final URL
+ * string. Building the actual URL (including which query params a given
+ * provider does/doesn't accept) is the job of the per-provider strategy in
+ * `src/lib/puzzleIframeUrl.ts`, not this registry, see that module's doc
+ * comment for why this split exists.
+ */
+
+export const puzzleGroups = ['logic-puzzles', 'word-games', 'trivia'] as const;
+
+export type PuzzleGroup = (typeof puzzleGroups)[number];
+
+/**
+ * The set of puzzle iframe providers DCR knows how to build a URL for.
+ * Adding a provider means adding a `PuzzleIframeConfig` union variant and
+ * handling its URLs in `src/lib/puzzleIframeUrl.ts`.
+ */
+export type PuzzleProvider = 'amuselabs' | 'wordiply' | 'moviegrid';
+
+/**
+ * AmuseLabs-hosted puzzles (the sudoku variants, word-wheel) are
+ * identified by a `set` query param value, confirmed per-entry against the
+ * native (Android/iOS) apps' own real, working AmuseLabs integration
+ * (`remote_config_defaults.xml`/`PuzzleGameViewModel.kt`), e.g.
+ * `'guardian-sudoku-easy'`, `'guardian-killer-sudoku-medium'`. This is
+ * deliberately not derived from DCR's own `slug`: nothing guarantees
+ * AmuseLabs' naming matches ours, and it already silently didn't for
+ * killer sudoku, see docs/puzzle-page.md for that history. The actual URL
+ * (including `embed`/`idx`/`uid`/`darkMode`) is assembled by
+ * `buildAmuseLabsUrl` in `src/lib/puzzleIframeUrl.ts`, not stored here.
+ */
+export interface AmuseLabsIframeConfig {
+	provider: 'amuselabs';
+	set: string;
+	/**
+	 * Prefix of AmuseLabs' stable per-day puzzle id, which is
+	 * `{idPrefix}-{YYYYMMDD}` (e.g. `guardian-sudoku-medium-20261004`).
+	 * Confirmed from the real AmuseLabs picker's tiles. Like `set`, it is
+	 * not always derivable from it: killer sudoku's is `guardian-ksudoku-
+	 * medium` and word wheel's is `guardian-wordwheel`.
+	 */
+	idPrefix: string;
+	/**
+	 * The AmuseLabs player path a dated puzzle is loaded from (e.g.
+	 * `sudoku`, `wordf`), i.e. `/guardian/{playerPath}?id=...`. Confirmed
+	 * from the picker's own tile click behaviour (its `data-puzzle-type`).
+	 */
+	playerPath: string;
+}
+
+/**
+ * Wordiply's iframe is identified by its own base URL (there is no
+ * AmuseLabs-style `set` identifier or equivalent for it). The actual URL
+ * is assembled by `buildWordiplyUrl` in `src/lib/puzzleIframeUrl.ts` (today,
+ * that's just `baseUrl` unmodified, no confirmed query params exist yet
+ * for Wordiply).
+ */
+export interface WordiplyIframeConfig {
+	provider: 'wordiply';
+	baseUrl: string;
+}
+
+/** MovieGrid's dated URLs are supplied by the Puzzles API, never derived here. */
+export interface MovieGridIframeConfig {
+	provider: 'moviegrid';
+}
+
+export type PuzzleIframeConfig =
+	| AmuseLabsIframeConfig
+	| WordiplyIframeConfig
+	| MovieGridIframeConfig;
+
+export interface PuzzleConfig {
+	slug: string;
+	puzzleGroup: PuzzleGroup;
+	iframe: PuzzleIframeConfig;
+	shareEnabled: boolean;
+	/**
+	 * Whether the "Print" button is shown for this puzzle. Currently
+	 * `true` only for the 4 sudoku entries, by explicit product decision
+	 * (PR #16700 review): existing readers rely on printing to play
+	 * Sudoku, since there isn't really another way to do that on the web,
+	 * and the plan is to retire the current static Sudoku page once V0
+	 * ships. No other puzzle in this registry currently needs print, this
+	 * is a deliberate, puzzle-specific decision, not a generic per-puzzle
+	 * toggle without rationale, don't default new entries to `true`
+	 * without a similar, explicit product reason.
+	 */
+	printEnabled: boolean;
+	hasArchive: boolean;
+	/**
+	 * The SEO title template for this puzzle. May contain a `{date}` token,
+	 * substituted at render time (via `resolvePuzzleTitle`) with the
+	 * puzzle's `instance.puzzleDate` formatted as a short "d MMM yy" date
+	 * (e.g. `"15 Sep 26"`, see `formatPuzzleDateShort`). Used for the
+	 * `<title>` tag and `og:title`/`twitter:title` in
+	 * `render.puzzlePage.web.tsx`, deliberately *not* `webTitle` (the plain
+	 * string `frontend` sends, e.g. "Sudoku (easy)", which is still used
+	 * for other purposes such as the share button's pre-filled text, see
+	 * `docs/puzzle-page.md`).
+	 */
+	title: string;
+	/**
+	 * The SEO meta description template for this puzzle. May contain a
+	 * `{date}` placeholder token, substituted at render time (via
+	 * `resolvePuzzleDescription`) the same way as `title` above. Used as
+	 * the page's `<meta name="description">` (and, derived from it, its
+	 * Open Graph/Twitter card description) - see `render.puzzlePage.web.tsx`.
+	 * This exists specifically so every Puzzle Page has a clean, distinct
+	 * description rather than falling back to DCR's generic, site-wide
+	 * description (which risks Google/social previews auto-generating a
+	 * snippet from page content instead - see "SEO risks to revisit..." in
+	 * docs/puzzle-page.md for a concrete example of that failure mode
+	 * elsewhere on the site).
+	 */
+	description: string;
+	/**
+	 * An optional, full preview/share image URL for this puzzle, used to
+	 * populate `og:image`/`twitter:image` in `render.puzzlePage.web.tsx`.
+	 * Deliberately optional and unset on every current registry entry - DCR
+	 * has no site-wide default/fallback share image for pages without one
+	 * (confirmed by investigation; see docs/puzzle-page.md), so an unset
+	 * `image` simply omits `og:image`/`twitter:image` entirely, matching
+	 * existing sitewide behaviour rather than needing a placeholder. Leave
+	 * unset until a real, licensed preview image is provided for a given
+	 * puzzle - do not invent a placeholder URL here.
+	 */
+	image?: string;
+}
+
+const amuseLabsPuzzle = (
+	slug: string,
+	puzzleGroup: PuzzleGroup,
+	title: string,
+	description: string,
+	set: string,
+	printEnabled: boolean,
+	archive: Pick<AmuseLabsIframeConfig, 'idPrefix' | 'playerPath'>,
+): PuzzleConfig => ({
+	slug,
+	puzzleGroup,
+	iframe: { provider: 'amuselabs', set, ...archive },
+	shareEnabled: true,
+	printEnabled,
+	hasArchive: true,
+	title,
+	description,
+});
+
+/**
+ * The full set of supported Puzzle Page slugs. Keys match each entry's
+ * `slug` field (validated at load time by `validatePuzzleConfigs` below).
+ *
+ * AmuseLabs/Wordiply `title`/`description` copy is sourced verbatim from the
+ * product team's SEO spreadsheet: do not paraphrase it. Their "target search
+ * terms" comments are from that spreadsheet's "Search terms" column: each is
+ * reference-only context for future copy/content work, not implemented as
+ * a `<meta name="keywords">` tag (major search engines ignore that tag
+ * entirely, so it provides no real SEO benefit today, see
+ * docs/puzzle-page.md).
+ *
+ * Every AmuseLabs entry's `iframe.set` is its own independently-written
+ * identifier, confirmed against the native (Android/iOS) apps' own real,
+ * working AmuseLabs integration. Do not derive any of these from `slug` or
+ * from each other, see `AmuseLabsIframeConfig`'s doc comment for why.
+ */
+export const puzzleConfigs: Record<string, PuzzleConfig> = {
+	// Target search terms (reference only, not implemented as a meta tag):
+	// easy online sudoku, free online sudoku, guardian sudoku
+	'sudoku-easy': amuseLabsPuzzle(
+		'sudoku-easy',
+		'logic-puzzles',
+		'Easy sudoku {date} - logic puzzle | The Guardian',
+		'Easy sudoku {date}. Ease yourself in with this easy sudoku. Fill the grid with the numbers 1 to 9, appearing only once in every column, row and 3x3 box.',
+		'guardian-sudoku-easy',
+		true,
+		{ idPrefix: 'guardian-sudoku-easy', playerPath: 'sudoku' },
+	),
+	// Target search terms (reference only, not implemented as a meta tag):
+	// medium sudoku
+	'sudoku-medium': amuseLabsPuzzle(
+		'sudoku-medium',
+		'logic-puzzles',
+		'Medium sudoku {date} - logic puzzle | The Guardian',
+		'Medium sudoku {date}. Ready to master the medium sudoku? Fill the grid with the numbers 1 to 9, appearing only once in every column, row and 3x3 box.',
+		'guardian-sudoku-medium',
+		true,
+		{ idPrefix: 'guardian-sudoku-medium', playerPath: 'sudoku' },
+	),
+	// Target search terms (reference only, not implemented as a meta tag):
+	// hard sudoku
+	'sudoku-hard': amuseLabsPuzzle(
+		'sudoku-hard',
+		'logic-puzzles',
+		'Hard sudoku {date} - logic puzzle | The Guardian',
+		'Hard sudoku {date}. Ready to take on the hard sudoku? Fill the grid with the numbers 1 to 9, appearing only once in every column, row and 3x3 box.',
+		'guardian-sudoku-hard',
+		true,
+		{ idPrefix: 'guardian-sudoku-hard', playerPath: 'sudoku' },
+	),
+	// Target search terms (reference only, not implemented as a meta tag):
+	// killer sudoku
+	//
+	// This `set` value, `guardian-killer-sudoku-medium`, is NOT
+	// `guardian-sudoku-killer` (this DCR slug). It is confirmed from the
+	// native (Android/iOS) apps' real, working AmuseLabs integration: a
+	// different word order, plus an unexplained "-medium" suffix that is
+	// genuinely part of the real identifier, not a mistake. This was
+	// previously a live bug (built from a shared, slug-derived URL
+	// template), see docs/puzzle-page.md.
+	'sudoku-killer': amuseLabsPuzzle(
+		'sudoku-killer',
+		'logic-puzzles',
+		'Killer sudoku {date} - logic puzzle | The Guardian',
+		'Killer sudoku {date}. Killer sudoku adds a twist. Fill the grid with the numbers 1 to 9, appearing only once in every column, row and 3x3 box.',
+		'guardian-killer-sudoku-medium',
+		true,
+		{ idPrefix: 'guardian-ksudoku-medium', playerPath: 'sudoku' },
+	),
+	// Target search terms (reference only, not implemented as a meta tag):
+	// daily word wheel, word wheel puzzle, word wheel online, word wheel
+	// game, guardian word wheel, word wheel for today, guardian word wheel
+	// today
+	//
+	// printEnabled: false - print is Sudoku-only for V0 by explicit
+	// product decision (PR #16700 review), see PuzzleConfig.printEnabled's
+	// doc comment.
+	'word-wheel': amuseLabsPuzzle(
+		'word-wheel',
+		'word-games',
+		'Word wheel {date} - word game | The Guardian',
+		'Word wheel {date}. See how many words you can make out of the nine-letter daily word wheel, including the panagram.',
+		'guardian-word-wheel',
+		false,
+		{ idPrefix: 'guardian-wordwheel', playerPath: 'wordf' },
+	),
+	// Target search terms (reference only, not implemented as a meta tag):
+	// guardian wordiply, wordiply today
+	wordiply: {
+		slug: 'wordiply',
+		puzzleGroup: 'word-games',
+		iframe: {
+			provider: 'wordiply',
+			baseUrl: 'https://www.wordiply.com/',
+		},
+		shareEnabled: true,
+		// print is Sudoku-only for V0 by explicit product decision (PR
+		// #16700 review), see PuzzleConfig.printEnabled's doc comment.
+		printEnabled: false,
+		hasArchive: true,
+		title: 'Wordiply {date} - word game | The Guardian',
+		description:
+			'Wordiply {date}. Guess the longest word in five guesses that includes the starter word. The closer you are, the higher your length score.',
+	},
+	'film-reveal': {
+		slug: 'film-reveal',
+		puzzleGroup: 'trivia',
+		iframe: { provider: 'moviegrid' },
+		shareEnabled: true,
+		printEnabled: false,
+		hasArchive: true,
+		title: 'Film reveal {date} - film quiz | The Guardian',
+		description:
+			'Play Film reveal for {date}, the Guardian’s daily film quiz.',
+	},
+	'on-the-ball': {
+		slug: 'on-the-ball',
+		puzzleGroup: 'trivia',
+		iframe: { provider: 'moviegrid' },
+		shareEnabled: true,
+		printEnabled: false,
+		hasArchive: true,
+		title: 'On the ball {date} - football quiz | The Guardian',
+		description:
+			'Play On the ball for {date}, the Guardian’s daily football quiz.',
+	},
+};
+
+/**
+ * Look up a puzzle's structural config by slug. Returns `undefined` for an
+ * unknown slug so callers (e.g. the `/PuzzlePage` handler) can decide how to
+ * respond (404).
+ */
+export const getPuzzleConfig = (slug: string): PuzzleConfig | undefined =>
+	puzzleConfigs[slug];
+
+/**
+ * Substitutes `{date}` in a `title`/`description` template with the given
+ * `puzzleDate` (formatted short, via `formatPuzzleDateShort`), tidying up
+ * the surrounding punctuation/whitespace if `puzzleDate` is absent (e.g.
+ * `"Word wheel {date} - word game"` becomes `"Word wheel - word game"`,
+ * not `"Word wheel  - word game"`, if there's no date to interpolate).
+ */
+const resolveDateTemplate = (
+	template: string,
+	puzzleDate: string | undefined,
+): string => {
+	const shortDate = formatPuzzleDateShort(puzzleDate) ?? '';
+	return template
+		.replace('{date}', shortDate)
+		.replace(/\s{2,}/g, ' ')
+		.replace(/\s+([.,])/g, '$1')
+		.trim();
+};
+
+/**
+ * Resolve the final, date-substituted SEO title for a puzzle. See
+ * `PuzzleConfig.title`'s doc comment for what feeds this and what it's used
+ * for.
+ */
+export const resolvePuzzleTitle = (
+	config: PuzzleConfig,
+	puzzleDate: string | undefined,
+): string => resolveDateTemplate(config.title, puzzleDate);
+
+/**
+ * Resolve the final, date-substituted SEO meta description for a puzzle.
+ * See `PuzzleConfig.description`'s doc comment for what feeds this and what
+ * it's used for.
+ */
+export const resolvePuzzleDescription = (
+	config: PuzzleConfig,
+	puzzleDate: string | undefined,
+): string => resolveDateTemplate(config.description, puzzleDate);
+
+const isAbsoluteUrl = (value: string): boolean => {
+	try {
+		new URL(value);
+		return true;
+	} catch {
+		return false;
+	}
+};
+
+const isValidPuzzleIframeConfig = (iframe: PuzzleIframeConfig): boolean => {
+	switch (iframe.provider) {
+		case 'amuselabs':
+			return !!iframe.set.trim();
+		case 'wordiply':
+			return !!iframe.baseUrl.trim() && isAbsoluteUrl(iframe.baseUrl);
+		case 'moviegrid':
+			return true;
+		default: {
+			// Exhaustiveness check: adding a new PuzzleProvider without also
+			// adding a validation branch here is a compile error, not a
+			// silent runtime gap. Falls back to `false` (rather than
+			// returning the unrecognised value itself) so malformed data
+			// that bypasses the type system at runtime is still rejected.
+			const exhaustiveCheck: never = iframe;
+			void exhaustiveCheck;
+			return false;
+		}
+	}
+};
+
+const isValidPuzzleConfig = (key: string, config: PuzzleConfig): boolean => {
+	if (config.slug !== key) return false;
+	if (!puzzleGroups.includes(config.puzzleGroup)) return false;
+	if (!isValidPuzzleIframeConfig(config.iframe)) return false;
+	if (!config.title.trim()) return false;
+	if (!config.description.trim()) return false;
+	if (config.image !== undefined && !config.image.trim()) return false;
+	return true;
+};
+
+/**
+ * Fail fast if the registry itself is malformed (e.g. a mismatched slug key,
+ * a missing `iframe.provider`, an invalid provider-specific `iframe` config
+ * (empty `set` for AmuseLabs, missing/empty/non-absolute `baseUrl` for
+ * Wordiply), a missing/empty `title`/`description`, or a present-but-empty
+ * `image`). Run once at module load so a bad registry entry surfaces
+ * immediately rather than at request time.
+ */
+export const validatePuzzleConfigs = (
+	configs: Record<string, PuzzleConfig>,
+): void => {
+	for (const [key, config] of Object.entries(configs)) {
+		if (!isValidPuzzleConfig(key, config)) {
+			throw new TypeError(
+				`Invalid PuzzleConfig registry entry for slug "${key}".`,
+			);
+		}
+	}
+};
+
+validatePuzzleConfigs(puzzleConfigs);

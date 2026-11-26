@@ -14,9 +14,9 @@ type BannerTextStyleableAreas =
 	| 'copy'
 	| 'highlightedText';
 
-export type BannerTextStyles = {
-	[key in BannerTextStyleableAreas]?: SerializedStyles | SerializedStyles[];
-};
+export type BannerTextStyles = Partial<
+	Record<BannerTextStyleableAreas, SerializedStyles | SerializedStyles[]>
+>;
 
 const styles = {
 	paragraphs: css`
@@ -30,8 +30,8 @@ const styles = {
 };
 
 export const createBannerBodyCopy = (
-	paragraphs: (Array<JSX.Element> | JSX.Element)[],
-	highlightedText: Array<JSX.Element> | JSX.Element | null | undefined,
+	paragraphs: Array<JSX.Element[] | JSX.Element>,
+	highlightedText: JSX.Element[] | JSX.Element | null | undefined,
 	renderStyles: BannerTextStyles,
 ): JSX.Element[] | JSX.Element => {
 	const paragraphsToProcess = Array.isArray(paragraphs)

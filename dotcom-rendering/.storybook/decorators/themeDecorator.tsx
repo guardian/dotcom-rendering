@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { storybookPaletteDeclarations as paletteDeclarations } from '../mocks/paletteDeclarations';
 import {
 	palette as sourcePalette,
 	space,
@@ -12,8 +11,10 @@ import {
 	type StoryContext,
 	type StrictArgs,
 } from '@storybook/react-webpack5';
-import { ArticleFormat } from '../../src/lib/articleFormat';
 import type { CSSProperties } from 'react';
+import type { ArticleFormat } from '../../src/lib/articleFormat';
+import { storybookPaletteDeclarations as paletteDeclarations } from '../mocks/paletteDeclarations';
+import { hostedPaletteOverrides } from '../../src/lib/hostedContentStyles';
 
 const darkStoryCss = css`
 	background-color: ${sourcePalette.neutral[0]};
@@ -29,10 +30,10 @@ function backgroundColour<Args>(
 	context: StoryContext<Args>,
 ): CSSProperties['backgroundColor'] {
 	return colourScheme === 'light'
-		? context.parameters.colourSchemeBackground?.light ??
-				sourcePalette.neutral[100]
-		: context.parameters.colourSchemeBackground?.dark ??
-				sourcePalette.neutral[0];
+		? (context.parameters.colourSchemeBackground?.light ??
+				sourcePalette.neutral[100])
+		: (context.parameters.colourSchemeBackground?.dark ??
+				sourcePalette.neutral[0]);
 }
 
 function textColour<Args>(
@@ -40,10 +41,10 @@ function textColour<Args>(
 	context: StoryContext<Args>,
 ): CSSProperties['color'] {
 	return colourScheme === 'light'
-		? context.parameters.colourSchemeTextColour?.light ??
-				sourcePalette.neutral[7]
-		: context.parameters.colourSchemeTextColour?.dark ??
-				sourcePalette.neutral[97];
+		? (context.parameters.colourSchemeTextColour?.light ??
+				sourcePalette.neutral[7])
+		: (context.parameters.colourSchemeTextColour?.dark ??
+				sourcePalette.neutral[97]);
 }
 
 // ----- Decorators ----- //
@@ -112,4 +113,34 @@ export const browserThemeDecorator =
 				<Story />
 			</div>
 		</>
+	);
+
+/**
+ * Colour scheme decorator specifically for hosted content pages,
+ * where the accent colour from the branding overrides some palette colours
+ */
+export const hostedPaletteDecorator =
+	(accentColour: string): Decorator =>
+	(Story, context) => (
+		<div
+			css={css`
+				${hostedPaletteOverrides('light', accentColour)}
+				${!!context.parameters?.config?.darkModeAvailable
+					? css`
+							@media (prefers-color-scheme: dark) {
+								${hostedPaletteOverrides('dark', accentColour)}
+							}
+						`
+					: ''}
+
+				[data-color-scheme='light'] & {
+					${hostedPaletteOverrides('light', accentColour)}
+				}
+				[data-color-scheme='dark'] & {
+					${hostedPaletteOverrides('dark', accentColour)}
+				}
+			`}
+		>
+			<Story />
+		</div>
 	);

@@ -1,3 +1,4 @@
+import type { ElectionComponentsJson } from '../components/ElectionTrackers/electionComponent';
 import type {
 	FEAspectRatio,
 	FEContainer,
@@ -13,7 +14,8 @@ import type {
 } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
 import type { Branding, CollectionBranding } from './branding';
-import type { BoostLevel, StarRating } from './content';
+import type { BoostLevel, Newsletter, StarRating } from './content';
+import type { CustomSubnav } from './customSubnav';
 import type { FooterType } from './footer';
 import type { FENavType } from './frontend';
 import type { ArticleMedia, MainMedia } from './mainMedia';
@@ -80,6 +82,8 @@ export type DCRFrontCard = {
 	discussionApiUrl: string;
 	isExternalLink: boolean;
 	showLivePlayable: boolean;
+	showMiniNav?: boolean;
+	miniNavData?: CustomSubnav;
 	trailText?: string;
 	starRating?: StarRating;
 	webPublicationDate?: string;
@@ -87,11 +91,12 @@ export type DCRFrontCard = {
 	kickerText?: string;
 	supportingContent?: DCRSupportingContent[];
 	snapData?: DCRSnapType;
-	isBoosted?: boolean;
 	boostLevel?: BoostLevel;
 	isImmersive: boolean;
 	isCrossword?: boolean;
 	isNewsletter?: boolean;
+	isNewsletterSignup?: boolean;
+	newsletterData?: Newsletter;
 	discussionId?: string;
 	byline?: string;
 	showByline?: boolean;
@@ -99,17 +104,40 @@ export type DCRFrontCard = {
 	mainMedia?: MainMedia;
 	embedUri?: string;
 	branding?: Branding;
-	slideshowImages?: DCRSlideshowImage[];
+	slideshowMedia?: DCRSlideshowMedia[];
 	showVideo?: boolean;
 	uniqueId?: string;
 	serverTime?: number;
 	articleMedia?: ArticleMedia;
+	headlineTestUuid?: string;
+	dataUrl?: string;
+	graphicKind?: 'electionTracker';
+	eventData?: ElectionComponentsJson;
 };
 
 export type DCRSlideshowImage = {
+	/**
+	 * Discriminant for slideshow media. Optional for backwards compatibility:
+	 * a slide without a `type` is treated as an image.
+	 */
+	type?: 'image';
 	imageSrc: string;
 	imageCaption?: string;
 };
+
+/**
+ * A self-hosted or YouTube video slide, played with the same players as video cards.
+ */
+export type DCRSlideshowVideo = {
+	type: 'video';
+	video: Extract<MainMedia, { type: 'SelfHostedVideo' | 'YoutubeVideo' }>;
+	caption?: string;
+};
+
+/**
+ * A single slide in a media slideshow, which may be an image or a video.
+ */
+export type DCRSlideshowMedia = DCRSlideshowImage | DCRSlideshowVideo;
 
 export type DCRSnapType = {
 	embedHtml?: string;
@@ -141,7 +169,6 @@ export type DCRCollectionType = {
 };
 
 export type DCRGroupedTrails = {
-	snap: DCRFrontCard[];
 	standard: DCRFrontCard[];
 	splash: DCRFrontCard[];
 };
@@ -151,7 +178,8 @@ export type DCRSupportingContent = {
 	url?: string;
 	kickerText?: string;
 	format: ArticleFormat;
-	/** // AIStorylines: The date is shown in the supporting content for the key stories container in a tag page */
+	headlineTestUuid?: string;
+	/** Storylines: The date is shown in the supporting content for the key stories container in a tag page */
 	webPublicationDate?: string;
 };
 
@@ -169,4 +197,22 @@ export type TreatType = {
 	 * So for https://www.theguardian.com/uk it would be 'uk'
 	 */
 	pageId?: string;
+};
+
+export type VariantId = 'A' | 'B';
+
+export type VariantMeta = {
+	id: VariantId;
+	meta: {
+		[key: string]: unknown;
+	};
+};
+
+export type FrontEditorialTest = {
+	testUuid: string;
+	variantMeta: VariantMeta[];
+	startDate?: number;
+	expiryDate?: number;
+	frontsThisTestCanRunOn: string[];
+	hasManuallyEndedOnThisTrail: boolean;
 };

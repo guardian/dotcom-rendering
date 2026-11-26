@@ -27,6 +27,7 @@ export const comment = {
 		isClosedForComments: true,
 		isClosedForRecommendation: true,
 	},
+	responseTo: undefined,
 	responses: [
 		{
 			id: '138809396',
@@ -38,6 +39,7 @@ export const comment = {
 			apiUrl: 'https://discussion.guardianapis.com/discussion-api/comment/138809396',
 			numRecommends: 0,
 			isHighlighted: false,
+			responses: undefined,
 			responseTo: {
 				displayName: 'blipvert',
 				commentApiUrl:
@@ -68,6 +70,7 @@ export const comment = {
 			apiUrl: 'https://discussion.guardianapis.com/discussion-api/comment/138809487',
 			numRecommends: 30,
 			isHighlighted: false,
+			responses: undefined,
 			responseTo: {
 				displayName: 'blipvert',
 				commentApiUrl:
@@ -98,6 +101,7 @@ export const comment = {
 			apiUrl: 'https://discussion.guardianapis.com/discussion-api/comment/138809896',
 			numRecommends: 9,
 			isHighlighted: false,
+			responses: undefined,
 			responseTo: {
 				displayName: 'blipvert',
 				commentApiUrl:
@@ -128,6 +132,7 @@ export const comment = {
 			apiUrl: 'https://discussion.guardianapis.com/discussion-api/comment/138810191',
 			numRecommends: 20,
 			isHighlighted: false,
+			responses: undefined,
 			responseTo: {
 				displayName: 'AJVC1991',
 				commentApiUrl:

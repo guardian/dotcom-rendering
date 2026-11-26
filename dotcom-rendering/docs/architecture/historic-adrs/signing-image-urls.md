@@ -14,8 +14,8 @@ For a request to this service to be valid it needs to be signed. To date, that s
 
 ## Decision
 
--   DCR now signs requests to the FIO itself
--   Refactor `Picture.tsx` to simplify the construction of the `picture` tag
+- DCR now signs requests to the FIO itself
+- Refactor `Picture.tsx` to simplify the construction of the `picture` tag
 
 ## Status
 
@@ -27,9 +27,9 @@ Once it became possible to sign the image url in DCR and not have to depend on F
 
 The function `decideImageWidths` is the source of truth for what size images are used at each breakpoint depending on:
 
--   the role/weighting given to an image
--   the format for the article the image sits in and
--   whether the image is being used as the main media or not
+- the role/weighting given to an image
+- the format for the article the image sits in and
+- whether the image is being used as the main media or not
 
 There is now no other code anywhere else which influences this decision. This will make future changes easier.
 

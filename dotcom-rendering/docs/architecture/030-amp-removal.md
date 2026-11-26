@@ -10,17 +10,17 @@ In June 2021 an update to Google's Top Stories algorithm meant AMP was no longer
 
 ### Negatives
 
--   Issues with maintaining and updating AMP as a separate platform from a technical perspective
+- Issues with maintaining and updating AMP as a separate platform from a technical perspective
 
--   User experience impact of sign in & cookies for AMP
+- User experience impact of sign in & cookies for AMP
 
--   Design opportunities are limited on AMP
+- Design opportunities are limited on AMP
 
--   The website accessibility and performance improvements we make only affect web/apps
+- The website accessibility and performance improvements we make only affect web/apps
 
--   Better user experience editorially to land on a Guardian page than an AMP page when coming via Google
+- Better user experience editorially to land on a Guardian page than an AMP page when coming via Google
 
--   For contributions AMP is the worst performing platform between Apple News, Web and AMP
+- For contributions AMP is the worst performing platform between Apple News, Web and AMP
 
 More details in [Guardian and AMP](https://docs.google.com/document/d/1LLv_KFP5WVPis7KtWhJQNwZwWyJ_JuH2bDNxkAUymIU/edit?tab=t.0)
 

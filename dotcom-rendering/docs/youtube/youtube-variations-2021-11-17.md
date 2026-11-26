@@ -31,8 +31,8 @@ As of 17th November 2021
 
 <sup>4</sup> To view the CAPI output for an article:
 
--   [install Teleporter](https://s3-eu-west-1.amazonaws.com/gustaf-dist/composer/index.html)
--   when viewing an article open Teleporter and click the 'content-api live' link.
+- [install Teleporter](https://s3-eu-west-1.amazonaws.com/gustaf-dist/composer/index.html)
+- when viewing an article open Teleporter and click the 'content-api live' link.
 
 # Composer and YouTube Embeds
 

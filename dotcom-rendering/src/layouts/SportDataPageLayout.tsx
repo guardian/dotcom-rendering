@@ -1,7 +1,6 @@
 import { palette } from '@guardian/source/foundations';
 import { AdSlot } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.island';
-import { CricketScorecardPage } from '../components/CricketScorecardPage';
 import { FootballMatchesPageWrapper } from '../components/FootballMatchesPageWrapper.island';
 import { FootballMatchInfoPage } from '../components/FootballMatchInfoPage';
 import { FootballTablesPage } from '../components/FootballTablesPage';
@@ -14,6 +13,7 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { SubNav } from '../components/SubNav.island';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
+import { worldCup2026PageIds } from '../lib/worldCup2026';
 import { palette as themePalette } from '../palette';
 import type {
 	AppSportDataPage,
@@ -64,13 +64,6 @@ const SportsPage = ({
 					guardianBaseUrl={sportData.guardianBaseURL}
 				/>
 			);
-		case 'CricketMatch':
-			return (
-				<CricketScorecardPage
-					match={sportData.match}
-					guardianBaseUrl={sportData.guardianBaseURL}
-				/>
-			);
 		case 'FootballMatchSummary':
 			return (
 				<FootballMatchInfoPage
@@ -81,6 +74,7 @@ const SportsPage = ({
 					matchHeaderUrl={sportData.matchHeaderUrl}
 					table={sportData.group}
 					renderingTarget={renderingTarget}
+					baseUrl={sportData.guardianBaseURL}
 				/>
 			);
 	}
@@ -99,6 +93,10 @@ export const SportDataPageLayout = (
 	const renderAds = canRenderAds(sportData);
 
 	const contributionsServiceUrl = getContributionsServiceUrl(sportData);
+
+	const isWorldCup2026 = worldCup2026PageIds.includes(
+		sportData.config.pageId,
+	);
 
 	return (
 		<>
@@ -126,10 +124,13 @@ export const SportDataPageLayout = (
 						discussionApiUrl={sportData.config.discussionApiUrl}
 						idApiUrl={sportData.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
-						showSubNav={true}
+						showSubNav={!isWorldCup2026}
 						showSlimNav={false}
 						hasPageSkin={sportData.config.hasPageSkin}
 						pageId={sportData.config.pageId}
+						sectionId={sportData.config.section}
+						contentType={sportData.config.contentType}
+						canonicalUrl={sportData.canonicalUrl}
 					/>
 				</div>
 			)}

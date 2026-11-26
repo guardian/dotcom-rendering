@@ -14,7 +14,7 @@ export const replaceArticleCountWithLink = (
 	numArticles: number,
 	articleCountOptOutType: ArticleCountOptOutType,
 	tracking?: OphanTracking,
-): Array<JSX.Element> => {
+): JSX.Element[] => {
 	const nextWords: Array<string | null> = [];
 	const subbedText = text.replace(
 		/%%ARTICLE_COUNT%%( \w+)?/g,
@@ -62,7 +62,7 @@ export const replaceArticleCount = (
 	articleCountOptOutType: ArticleCountOptOutType,
 	tracking?: OphanTracking,
 	optOutLink = true,
-): Array<JSX.Element> | JSX.Element => {
+): JSX.Element[] | JSX.Element => {
 	if (optOutLink) {
 		return replaceArticleCountWithLink(
 			text,

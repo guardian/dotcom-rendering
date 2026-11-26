@@ -11,7 +11,6 @@ import {
 	getAllThemes,
 	Pillar,
 } from '../lib/articleFormat';
-import type { EditionId } from '../lib/edition';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { TextBlockElement } from '../types/content';
 import { MultiBylines } from './MultiBylines';
@@ -71,13 +70,12 @@ export const ThemeVariations = meta.story({
 			display: ArticleDisplay.Standard,
 			theme: Pillar.News,
 		},
-		abTests: {},
 		/**
 		 * This is used for rich links. An empty string isn't technically valid,
 		 * but there are no rich links in this example.
 		 */
 		ajaxUrl: '',
-		editionId: 'UK' as EditionId,
+		editionId: 'UK',
 		isAdFreeUser: false,
 		isSensitive: false,
 		pageId: 'testID',

@@ -16,10 +16,13 @@ import {
 } from './handler.article.web';
 import { handleAppsAssets } from './handler.assets.apps';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
+import { handleAppsEventGraphic } from './handler.eventGraphic.apps';
+import { handleFootballMatchDayEmbed } from './handler.footballMatchDayEmbed';
 import { handleFront, handleTagPage } from './handler.front.web';
+import { handlePuzzlePage } from './handler.puzzlePage.web';
+import { handlePuzzlesPage } from './handler.puzzlesPage.web';
 import {
 	handleAppsFootballMatchPage,
-	handleCricketMatchPage,
 	handleFootballMatchListPage,
 	handleFootballMatchPage,
 	handleFootballTablesPage,
@@ -27,6 +30,7 @@ import {
 import { handleAppsThrasher } from './handler.thrasher.apps';
 import { getABTestsFromQueryParams } from './lib/get-abtests-from-query-params';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
+import { responseHeaderMiddleware } from './lib/header-middleware';
 import { requestLoggerMiddleware } from './lib/logging-middleware';
 import { recordError } from './lib/logging-store';
 
@@ -104,11 +108,15 @@ const renderer = Router();
 renderer.use(getContentFromURLMiddleware);
 renderer.use(getABTestsFromQueryParams);
 renderer.use(requestLoggerMiddleware);
+renderer.use(responseHeaderMiddleware);
+
 renderer.get('/Article/*url', handleArticle);
 renderer.get('/Interactive/*url', handleInteractive);
 renderer.get('/Blocks/*url', handleBlocks);
 renderer.get('/Front/*url', handleFront);
 renderer.get('/TagPage/*url', handleTagPage);
+renderer.get('/PuzzlesPage/*url', handlePuzzlesPage);
+renderer.get('/PuzzlePage/*url', handlePuzzlePage);
 renderer.get('/EmailNewsletters/*url', handleAllEditorialNewslettersPage);
 renderer.get('/AppsArticle/*url', handleAppsArticle);
 renderer.get('/AppsInteractive/*url', handleAppsInteractive);
@@ -116,12 +124,15 @@ renderer.get('/AppsBlocks/*url', handleAppsBlocks);
 renderer.get('/EditionsCrossword/*url', handleEditionsCrossword);
 renderer.get('/FootballMatchListPage/*url', handleFootballMatchListPage);
 renderer.get('/FootballTablesPage/*url', handleFootballTablesPage);
-renderer.get('/CricketMatchPage/*url', handleCricketMatchPage);
 renderer.get('/FootballMatchSummaryPage/*url', handleFootballMatchPage);
 renderer.get('/AppsFootballMatchSummaryPage/*url', handleAppsFootballMatchPage);
 renderer.get('/HostedContent/*url', handleHostedContent);
 renderer.get('/AppsHostedContent/*url', handleAppsHostedContent);
+renderer.get('/FootballMatchDayEmbed/*url', handleFootballMatchDayEmbed);
+
+// App componenets
 renderer.get('/AppsComponent/thrasher/:name', handleAppsThrasher);
+renderer.get('/AppsComponent/*url', handleAppsEventGraphic);
 
 // POST routes for running frontend locally
 renderer.post('/Article', handleArticle);
@@ -129,6 +140,8 @@ renderer.post('/Interactive', handleInteractive);
 renderer.post('/Blocks', handleBlocks);
 renderer.post('/Front', handleFront);
 renderer.post('/TagPage', handleTagPage);
+renderer.post('/PuzzlesPage', handlePuzzlesPage);
+renderer.post('/PuzzlePage', handlePuzzlePage);
 renderer.post('/EmailNewsletters', handleAllEditorialNewslettersPage);
 renderer.post('/AppsArticle', handleAppsArticle);
 renderer.post('/AppsInteractive', handleAppsInteractive);
@@ -136,12 +149,13 @@ renderer.post('/AppsBlocks', handleAppsBlocks);
 renderer.post('/EditionsCrossword', handleEditionsCrossword);
 renderer.post('/FootballMatchListPage', handleFootballMatchListPage);
 renderer.post('/FootballTablesPage', handleFootballTablesPage);
-renderer.post('/CricketMatchPage', handleCricketMatchPage);
 renderer.post('/FootballMatchSummaryPage', handleFootballMatchPage);
 renderer.post('/AppsFootballMatchSummaryPage', handleAppsFootballMatchPage);
 renderer.post('/HostedContent', handleHostedContent);
 renderer.post('/AppsHostedContent', handleAppsHostedContent);
 renderer.post('/AppsComponent/thrasher/:name', handleAppsThrasher);
+renderer.post('/FootballMatchDayEmbed', handleFootballMatchDayEmbed);
+renderer.post('/AppsComponent', handleAppsEventGraphic);
 
 renderer.get('/assets/rendered-items-assets', handleAppsAssets);
 

@@ -71,8 +71,8 @@ export const ManyNewslettersFormFields: FC<ManyNewslettersFormFieldsProps> = ({
 		status === 'Failed'
 			? 'Sign up failed. Please try again'
 			: status === 'InvalidEmail'
-			? 'Please enter a valid email address'
-			: undefined;
+				? 'Please enter a valid email address'
+				: undefined;
 
 	return (
 		<div css={inputAndOptInWrapperStyle(visibleRecaptcha)}>

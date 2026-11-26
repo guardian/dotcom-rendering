@@ -7,17 +7,34 @@ type AllSpace = Map<string, FastlyTestParams[]>;
 type Team =
 	| "commercial"
 	// WebX in the canonical name for the team, when the last test using webex expires we should remove webex from this union type
-	| "webex"
 	| "webx"
 	| "thefilter"
+	| "newsletters"
 	| "fronts-and-curation"
-	| "growth";
+	| "growth"
+	| "feast"
+	| "martech"
+	| "identity-and-trust"
+	| "puzzles"
+	| "articles-and-publishing"
+	| "newsroom-ai";
 
 type TestName = `${Team}-${string}`;
 
 type Year = `${number}${number}${number}${number}`;
 type Month = `${number}${number}`;
 type Day = `${number}${number}`;
+
+/**
+ * The available audience spaces for AB tests.
+ *
+ * DO NOT modify this list without discussing WebX.
+ * Updating this list alone will not be enough to add a new audience space.
+ *
+ */
+const AudienceSpaces = ["A", "B", "C", "D", "E"] as const;
+
+type AudienceSpaceId = (typeof AudienceSpaces)[number];
 
 type ABTest = {
 	/** Name of the AB test */
@@ -35,14 +52,16 @@ type ABTest = {
 	 * Would be nice to know who changed the status last and when
 	 */
 	status: "ON" | "OFF";
-	/** The size of the test, all variants will be divided equally to fit */
+	/**
+	 * The total audience size for the test, split equally among all variants
+	 */
 	audienceSize: number;
 	/**
 	 * Each test space represents 100% of the audience
 	 * Having multiple test spaces allows deliberate overlapping of test audiences
 	 * Defaults to A
 	 */
-	audienceSpace?: "A" | "B" | "C";
+	audienceSpace?: AudienceSpaceId;
 	/** Test group definition */
 	groups: string[];
 	/**
@@ -64,4 +83,12 @@ type ABTest = {
 	shouldReportToOphan?: () => boolean;
 };
 
-export type { ABTest, FastlyTestParams, AudienceSpace, AllSpace };
+export { AudienceSpaces };
+
+export type {
+	ABTest,
+	FastlyTestParams,
+	AudienceSpace,
+	AllSpace,
+	AudienceSpaceId,
+};

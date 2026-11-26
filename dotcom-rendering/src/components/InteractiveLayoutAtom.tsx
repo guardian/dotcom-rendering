@@ -1,15 +1,20 @@
-import { css } from '@emotion/react';
-
-const containerStyles = css`
-	margin: 0;
-	padding: 0;
-`;
+import { css } from 'storybook/theming';
+import type { LayoutType } from '../layouts/lib/articleArrangements';
+import type { ArticleFormat } from '../lib/articleFormat';
+import type { RoleType } from '../types/content';
+import { defaultRoleStyles } from './Figure';
 
 export type InteractiveLayoutAtomType = {
 	id: string;
 	elementHtml?: string;
 	elementJs?: string;
 	elementCss?: string;
+	customData?: string;
+	role: RoleType | 'fullWidth';
+	type: string;
+	format: ArticleFormat;
+	articleArrangement?: LayoutType;
+	isMainMedia?: boolean;
 };
 
 export const InteractiveLayoutAtom = ({
@@ -17,12 +22,35 @@ export const InteractiveLayoutAtom = ({
 	elementHtml,
 	elementJs,
 	elementCss,
+	customData,
+	role,
+	type,
+	format,
+	articleArrangement,
+	isMainMedia = false,
 }: InteractiveLayoutAtomType) => (
 	<div
 		className="interactive interactive-atom"
-		css={containerStyles}
+		css={
+			// Interactive atoms in the grid based layout (i.e. with an article arrangement)
+			// have default role styles applied as they no longer have a figure wrapper
+			articleArrangement && !isMainMedia
+				? defaultRoleStyles(role, format)
+				: css`
+						margin: 0;
+						padding: 0;
+					`
+		}
 		data-atom-id={id}
 		data-atom-type="interactive-layout"
+		{...(customData ? { 'data-atom-custom-data': customData } : {})}
+		{...(articleArrangement
+			? {
+					'data-spacefinder-role':
+						role === 'fullWidth' ? 'immersive' : role,
+					'data-spacefinder-type': type,
+				}
+			: {})}
 	>
 		{!!elementCss && (
 			<style

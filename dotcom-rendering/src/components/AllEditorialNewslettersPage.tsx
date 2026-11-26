@@ -5,7 +5,6 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
 import type { NavType } from '../model/extract-nav';
 import type { DCRNewslettersPageType } from '../types/newslettersPage';
-import { AdmiralScript } from './AdmiralScript.island';
 import { AlreadyVisited } from './AlreadyVisited.island';
 import { useConfig } from './ConfigContext';
 import { FocusStyles } from './FocusStyles.island';
@@ -49,9 +48,6 @@ export const AllEditorialNewslettersPage = ({
 				<AlreadyVisited />
 			</Island>
 			<Island priority="feature" defer={{ until: 'idle' }}>
-				<AdmiralScript />
-			</Island>
-			<Island priority="feature" defer={{ until: 'idle' }}>
 				<FocusStyles />
 			</Island>
 			<Island priority="critical">
@@ -59,7 +55,6 @@ export const AllEditorialNewslettersPage = ({
 					commercialMetricsEnabled={
 						!!newslettersPage.config.switches.commercialMetrics
 					}
-					tests={newslettersPage.config.abTests}
 				/>
 			</Island>
 			<AllEditorialNewslettersPageLayout

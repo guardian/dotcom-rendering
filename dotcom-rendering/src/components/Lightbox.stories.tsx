@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import { storage } from '@guardian/libs';
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
@@ -8,7 +9,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '../lib/articleFormat';
-import type { ImageForLightbox } from '../types/content';
+import type { ImageForLightbox, ProductCta } from '../types/content';
 import { LightboxLayout } from './LightboxLayout.island';
 
 const Initialise = ({ children }: { children: React.ReactNode }) => {
@@ -88,6 +89,49 @@ export const WithCredit = {
 			theme: Pillar.News,
 		},
 		images: [{ ...testImage, displayCredit: true }],
+	},
+} satisfies Story;
+
+const testProductCtas: ProductCta[] = [
+	{
+		url: 'https://example.com/buy-1',
+		text: '',
+		retailer: 'Amazon',
+		price: '£19.99',
+	},
+	{
+		url: 'https://example.com/buy-2',
+		text: '',
+		retailer: 'John Lewis',
+		price: '£21.00',
+	},
+];
+
+export const WithProductCtas = {
+	args: {
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: Pillar.News,
+		},
+		images: [
+			{ ...testImage, title: 'Title', productCtas: testProductCtas },
+		],
+		isFilterArticle: true,
+	},
+} satisfies Story;
+
+export const WithProductCtasNonFilterArticle = {
+	args: {
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: Pillar.News,
+		},
+		images: [
+			{ ...testImage, title: 'Title', productCtas: testProductCtas },
+		],
+		isFilterArticle: false,
 	},
 } satisfies Story;
 
@@ -264,4 +308,30 @@ export const WithLabs = {
 			},
 		],
 	},
+} satisfies Story;
+
+export const WithHostedAccentColour = {
+	args: {
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.HostedGallery,
+			theme: ArticleSpecial.Labs,
+		},
+		images: [
+			{
+				...testImage,
+				title: 'Title',
+				displayCredit: true,
+			},
+		],
+	},
+	decorators: (Story) => (
+		<div
+			css={css`
+				--lightbox-divider: purple;
+			`}
+		>
+			{Story()}
+		</div>
+	),
 } satisfies Story;

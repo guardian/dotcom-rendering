@@ -105,9 +105,15 @@ type Props = {
 	editionId: EditionId;
 	nav: NavType;
 	hasPageSkin?: boolean;
+	showReaderRevenueLinks?: boolean;
 };
 
-export const Sections = ({ nav, editionId, hasPageSkin }: Props) => {
+export const Sections = ({
+	nav,
+	editionId,
+	hasPageSkin,
+	showReaderRevenueLinks = true,
+}: Props) => {
 	return (
 		<ul
 			css={[columnsStyle, !hasPageSkin && columnsStyleFromLeftCol]}
@@ -144,7 +150,7 @@ export const Sections = ({ nav, editionId, hasPageSkin }: Props) => {
 
 			<Hide from="desktop">
 				<li role="none">
-					<SearchBar />
+					<SearchBar searchId="gu-search-mobile" />
 				</li>
 			</Hide>
 			<div css={lineStyle}></div>
@@ -152,6 +158,7 @@ export const Sections = ({ nav, editionId, hasPageSkin }: Props) => {
 			<ReaderRevenueLinks
 				readerRevenueLinks={nav.readerRevenueLinks}
 				editionId={editionId}
+				showSupportLink={showReaderRevenueLinks}
 			/>
 
 			{/* Mobile only Brand Extensions list */}
@@ -164,7 +171,7 @@ export const Sections = ({ nav, editionId, hasPageSkin }: Props) => {
 
 			{/* Desktop only Brand Extensions list*/}
 			<li css={desktopBrandExtensionColumn} role="none">
-				<SearchBar />
+				<SearchBar searchId="gu-search-desktop" />
 
 				<ul
 					css={[

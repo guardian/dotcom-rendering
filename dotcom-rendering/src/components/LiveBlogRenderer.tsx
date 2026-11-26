@@ -2,11 +2,10 @@ import { Hide } from '@guardian/source/react-components';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
 import type { Block } from '../types/blocks';
-import type { ServerSideTests, Switches } from '../types/config';
+import type { Switches } from '../types/config';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
 import { EnhancePinnedPost } from './EnhancePinnedPost.island';
-import { FilterKeyEventsToggle } from './FilterKeyEventsToggle.island';
 import { Island } from './Island';
 import { KeyEventsCarousel } from './KeyEventsCarousel.island';
 import { LiveBlock } from './LiveBlock';
@@ -25,7 +24,6 @@ type Props = {
 	ajaxUrl: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	abTests: ServerSideTests;
 	switches: Switches;
 	isLiveUpdate: boolean;
 	sectionId: string;
@@ -36,7 +34,6 @@ type Props = {
 	contributionsServiceUrl: string;
 	onFirstPage: boolean;
 	keyEvents: Block[];
-	filterKeyEvents: boolean;
 	shouldHideAds: boolean;
 	serverTime?: number;
 	idApiUrl?: string;
@@ -50,7 +47,6 @@ export const LiveBlogRenderer = ({
 	pageId,
 	webTitle,
 	ajaxUrl,
-	abTests,
 	switches,
 	isAdFreeUser,
 	isSensitive,
@@ -63,7 +59,6 @@ export const LiveBlogRenderer = ({
 	contributionsServiceUrl,
 	onFirstPage,
 	keyEvents,
-	filterKeyEvents = false,
 	editionId,
 	shouldHideAds,
 	serverTime,
@@ -74,7 +69,7 @@ export const LiveBlogRenderer = ({
 
 	return (
 		<>
-			{pinnedPost && onFirstPage && !filterKeyEvents && (
+			{pinnedPost && onFirstPage && (
 				<>
 					<Island defer={{ until: 'idle' }} priority="feature">
 						<EnhancePinnedPost />
@@ -88,7 +83,6 @@ export const LiveBlogRenderer = ({
 							host={host}
 							ajaxUrl={ajaxUrl}
 							isLiveUpdate={isLiveUpdate}
-							abTests={abTests}
 							switches={switches}
 							isAdFreeUser={isAdFreeUser}
 							isSensitive={isSensitive}
@@ -106,16 +100,9 @@ export const LiveBlogRenderer = ({
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<KeyEventsCarousel
 							keyEvents={keyEvents}
-							filterKeyEvents={filterKeyEvents}
 							id={'key-events-carousel-mobile'}
 							renderingTarget={renderingTarget}
 							serverTime={serverTime}
-						/>
-					</Island>
-					<Island priority="feature" defer={{ until: 'visible' }}>
-						<FilterKeyEventsToggle
-							filterKeyEvents={filterKeyEvents}
-							id="filter-toggle-mobile"
 						/>
 					</Island>
 				</Hide>
@@ -132,7 +119,6 @@ export const LiveBlogRenderer = ({
 				host={host}
 				ajaxUrl={ajaxUrl}
 				isLiveUpdate={isLiveUpdate}
-				abTests={abTests}
 				switches={switches}
 				isAdFreeUser={isAdFreeUser}
 				isSensitive={isSensitive}
@@ -159,6 +145,7 @@ export const LiveBlogRenderer = ({
 						pageId={pageId}
 						keywordIds={keywordIds}
 						renderingTarget={renderingTarget}
+						isSensitive={isSensitive}
 					/>
 				</Island>
 			)}

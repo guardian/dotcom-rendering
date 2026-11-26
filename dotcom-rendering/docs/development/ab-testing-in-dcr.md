@@ -2,8 +2,6 @@
 
 This documentation covers the updated A/B test framework, developed by commercial-dev to support both client and server side A/B tests in DCR and launched in January 2026. If you're interested in how it works please visit the docs [here](https://github.com/guardian/dotcom-rendering/tree/main/ab-testing).
 
-Instructions for the legacy framework can still be found [here](./legacy-ab-testing-in-dcr.md).
-
 ## Creating a new A/B test
 
 ### 1. Configure your A/B test
@@ -43,7 +41,7 @@ When your PR is merged, the A/B test will be automatically deployed to Fastly an
 | expirationDate               | false    | A/B tests should have an expiration date set in the future. This is to ensure that tests do not run indefinitely. The duration of a test should be determined by how long we believe it will need to run in order to reach a statistically significant result - if you're unsure how long this is we'd recommend reaching out to our Data Analysts. Adding a buffer of an additional +2 weeks beyond the expected completion date will ensure tests do not end unexpectedly before we have a statistically significant result. <br><br>Expired tests will cause the A/B testing validation to fail, and will not be deployed. <br><br>Tests that expire while they are are in-flight will not be served by Fastly, and should be removed from the `abTest.ts` file as soon as possible. |
 | type                         | false    | All requests are processed by Fastly at the edge, however, A/B testing of server-side logic in Frontend or DCR will need to be cached separately. Client side tests do not need to be cached separately, as they are applied in the browser after the response is delivered. <br><br>Ensure that the `type` field is set to either `client` or `server` to indicate the type of test so that server side tests can be cached correctly, and client side tests are not splitting the cache unnecessarily. <br><br>There's a limit of the number of concurrent server-side tests that can be run, enforced by the validation script, so it's important to use client-side tests where possible.                                                                                           |
 | audienceSize                 | false    | The `audienceSize` is the size of the whole test and is divided between the test groups that you specify. For example, consider an audience size of 10% (`10 / 100`) with two test groups: control and variant. The control and variant test groups will each be allocated 5%. The "resolution" of sizing is down to 0.1%, so groups will be rounded to the nearest 0.1%. <br><br> **Caution:** If you ever need to run a 100% server-side test AKA the entire audience, start with a smaller test first e.g. 30%. This is because going from 0 -> 100% will invalidate the cache for all page views pretty much all at once. Starting with a smaller test will build up test group pages in the cache first, so there will be a less drastic spike in load on origin.                  |
-| audienceSpace                | true     | Ideally A/B tests would never overlap (users being in multiple tests), but sometimes this is unavoidable, for example when running a very large 50+% test without interrupting existing tests. <br><br>To add a test where there is not enough space in the default audience space (`A`), you can specify a different `audienceSpace` in the test definition. <br><br>For example if there are already 3 25% tests in space `A` totalling 75%, and you want to run a 50% test, you can set the `audienceSpace` to `B` to allow this test to overlap with the existing tests.                                                                                                                                                                                                            |
+| audienceSpace                | true     | Ideally A/B tests would never overlap (users being in multiple tests), but sometimes this is unavoidable, for example when running a very large 50+% test without interrupting existing tests. <br><br>To add a test where there is not enough space in the default audience space (`A`), you can specify a different `audienceSpace` in the test definition. <br><br>For example if there are already 3 25% tests in space `A` totalling 75%, and you want to run a 50% test, you can set the `audienceSpace` to `B` to allow this test to overlap with the existing tests. Currently there are [5 spaces configured](https://github.com/guardian/dotcom-rendering/blob/main/ab-testing/config/lib/constants.ts) [`A`,`B`,`C`,`D`,`E`].                                                |
 | groups                       | false    | Test group definitions, eg. `['control', 'variant']`. Convention is to have groups named control and variant, but you can name them as you wish. <br><br>A single group is also possible, for example if you're rolling out a new feature and don't need a control.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | shouldForceMetricsCollection | true     | `true` or `false`. Bypasses sampling to force metrics collection for this test. See DCR Metrics component for end usage.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 
@@ -53,18 +51,15 @@ Once your A/B test has been configured you can conditionally put your code chang
 
 #### In React Components (DCR)
 
-> [!NOTE]
-> You should use the `useBetaAB` hook described below in React components **_only_**.
-
 The `useAB` module exposes methods for getting a user's A/B test participations, this can be used **both client _and_ server side**.
 
 ```ts
 // Within the components
-import { useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 
 const someComponent = () => {
 	// Example usage of A/B tests
-	const abTests = useBetaAB();
+	const abTests = useAB();
 
 	// Am I in the test at all?
 	const isInTest = abTests?.isUserInTest('webex-example-test') ?? false;
@@ -153,9 +148,9 @@ Once opted-out of all tests you've opted into, you'll be back to your mvt based 
 
 These links are also in the [frontend admin](https://frontend.gutools.co.uk/analytics/ab-testing) and [CODE frontend admin](https://frontend.code.dev-gutools.co.uk/analytics/ab-testing).
 
--   Opt-in Example on PROD: `https://theguardian.com/ab-tests/opt-in/commercial-test-example:variant`
--   Opt-out Example on PROD: `https://theguardian.com/ab-tests/opt-out/commercial-test-example:variant`
--   Opt-out of all (opted in) tests on PROD: `https://theguardian.com/ab-tests/opt-out`
+- Opt-in Example on PROD: `https://theguardian.com/ab-tests/opt-in/commercial-test-example:variant`
+- Opt-out Example on PROD: `https://theguardian.com/ab-tests/opt-out/commercial-test-example:variant`
+- Opt-out of all (opted in) tests on PROD: `https://theguardian.com/ab-tests/opt-out`
 
 You can use the same routes on CODE.
 
@@ -165,9 +160,9 @@ A URL query parameter can be used to force yourself into a test locally. The par
 
 **Opt-in Example**
 
--   Articles: `http://localhost:3030/Article/https://www.theguardian.com/politics/2026/jan/08/go-back-home-farage-schoolmate-accounts-bring-total-alleging-racist-behaviour-to-34?ab-commercial-test-example=variant`
--   Fronts: `http://localhost:3030/Front/https://www.theguardian.com/international?ab-commercial-test-example=variant`
--   Interactives: `http://localhost:3030/Interactive/https://www.theguardian.com/global-development/ng-interactive/2022/jun/09/the-black-sea-blockade-mapping-the-impact-of-war-in-ukraine-on-the-worlds-food-supply-interactive?ab-commercial-test-example=variant`
+- Articles: `http://localhost:3030/Article/https://www.theguardian.com/politics/2026/jan/08/go-back-home-farage-schoolmate-accounts-bring-total-alleging-racist-behaviour-to-34?ab-commercial-test-example=variant`
+- Fronts: `http://localhost:3030/Front/https://www.theguardian.com/international?ab-commercial-test-example=variant`
+- Interactives: `http://localhost:3030/Interactive/https://www.theguardian.com/global-development/ng-interactive/2022/jun/09/the-black-sea-blockade-mapping-the-impact-of-war-in-ukraine-on-the-worlds-food-supply-interactive?ab-commercial-test-example=variant`
 
 You can verify that you're in the test by checking `window.guardian.modules.abTests.getParticipations()` in the browser console.
 

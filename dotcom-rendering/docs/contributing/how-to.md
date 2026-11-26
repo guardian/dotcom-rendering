@@ -49,3 +49,13 @@ We currently use [SWR](https://swr.vercel.app/) to manage AJAX requests on the
 client. Your starting point should be the [`useApi` hook](/dotcom-rendering/src/lib/useApi.ts),
 which is DCR's wrapper around SWR's own hook. Because this hook requires
 client-side React code, you will need to place your component in an `<Island>` wrapper.
+
+## How can I interact with the API on CODE/PROD?
+
+The DCR load balancers are configured to accept requests from within the VPC; they are not available on the public internet.
+To make requests to the API from your local machine, use the [SOCKS proxy](https://github.com/guardian/platform/blob/main/cdk/lib/socks-proxy.ts):
+
+1. Obtain AWS credentials via Janus, preferably using the minimal `socks-proxy` Developer Policy (`DeveloperPolicyGrants.frontendSocksProxy`)
+2. Run the `browse-with-socks-proxy` script from the [`guardian/platform` repo](https://github.com/guardian/platform/blob/main/scripts/browse-with-socks-proxy):
+   This will start a new instance of the Chrome browser with a SOCKS proxy configured to route request via an EC2 instance in the VPC.
+   You can now browse the DCR API on CODE/PROD from this browser instance.

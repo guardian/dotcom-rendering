@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import { from } from '@guardian/source/foundations';
 import { grid } from '../grid';
-import { type ArticleFormat } from '../lib/articleFormat';
+import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { getImage } from '../lib/image';
 import { type ImageBlockElement } from '../types/content';
 import { type RenderingTarget } from '../types/renderingTarget';
@@ -27,11 +27,24 @@ const styles = css`
 	}
 `;
 
+/**
+ * We don't show main media on hosted gallery pages
+ * but need to do this to keep the rest of the grid layout happy
+ */
+const hostedStyles = css`
+	${grid.column.all}
+	grid-row: 1/8;
+	height: 0;
+`;
+
 export const MainMediaGallery = ({
 	mainMedia,
 	format,
 	renderingTarget,
 }: Props) => {
+	if (format.design === ArticleDesign.HostedGallery) {
+		return <div css={hostedStyles}></div>;
+	}
 	// This is to support some galleries created in 2007 where mainMedia is missing
 	if (isUndefined(mainMedia)) {
 		return <div css={styles}></div>;

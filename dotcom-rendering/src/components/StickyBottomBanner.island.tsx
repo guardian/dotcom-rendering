@@ -2,11 +2,13 @@ import type {
 	BrazeArticleContext,
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
+import { cmp } from '@guardian/consent-manager';
 import type { CountryCode } from '@guardian/libs';
-import { cmp, isString, isUndefined, storage } from '@guardian/libs';
+import { isString, isUndefined, storage } from '@guardian/libs';
 import type { ModuleData } from '@guardian/support-dotcom-components/dist/dotcom/types';
 import type { BannerProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
+import { getAlreadyVisitedCount } from '../lib/alreadyVisited';
 import type { ArticleCounts } from '../lib/articleCount';
 import { getArticleCounts } from '../lib/articleCount';
 import {
@@ -19,7 +21,7 @@ import type {
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
-import { useAB, useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useCountryCode } from '../lib/useCountryCode';
@@ -27,6 +29,7 @@ import { usePageViewId } from '../lib/usePageViewId';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
+import { isInUsStateForAbTest } from './marketing/lib/consentBannerTest';
 import type { AuxiaGateDisplayData } from './SignInGate/types';
 import {
 	BrazeBanner,
@@ -60,7 +63,7 @@ type Props = {
 };
 
 type BrazeMeta = {
-	dataFromBraze: { [key: string]: string };
+	dataFromBraze: Record<string, string>;
 	logImpressionWithBraze: () => void;
 	logButtonClickWithBraze: (id: number) => void;
 };
@@ -122,6 +125,7 @@ const buildRRBannerConfigWith = ({
 		pageId,
 		inHoldbackGroup,
 		inAuxiaVariant,
+		inNoShowMobileAboveNavVariant,
 	}: {
 		isSignedIn: boolean;
 		countryCode: CountryCode;
@@ -141,6 +145,7 @@ const buildRRBannerConfigWith = ({
 		pageId?: string;
 		inHoldbackGroup?: boolean;
 		inAuxiaVariant?: boolean;
+		inNoShowMobileAboveNavVariant?: boolean;
 	}): CandidateConfig<ModuleData<BannerProps>> => {
 		return {
 			candidate: {
@@ -179,9 +184,14 @@ const buildRRBannerConfigWith = ({
 						pageId,
 						inHoldbackGroup,
 						inAuxiaVariant,
+						inNoShowMobileAboveNavVariant,
 					}),
 				show: ({ name, props }: ModuleData<BannerProps>) => (
-					<BannerComponent name={name} props={props} />
+					<BannerComponent
+						name={name}
+						props={props}
+						idApiUrl={idApiUrl}
+					/>
 				),
 			},
 			timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
@@ -206,6 +216,7 @@ const buildSignInGateConfig = (
 				pageId={canShowProps.pageId}
 				contributionsServiceUrl={canShowProps.contributionsServiceUrl}
 				auxiaGateDisplayData={meta}
+				contentType={canShowProps.contentType}
 			/>
 		),
 	},
@@ -278,14 +289,14 @@ export const StickyBottomBanner = ({
 	const countryCode = useCountryCode('sticky-bottom-banner');
 	const isSignedIn = useIsSignedIn();
 	const ophanPageViewId = usePageViewId(renderingTarget);
-	const abTestAPI = useAB()?.api;
-	const abTests = useBetaAB();
-	const isInAuxiaControlGroup = !!abTestAPI?.isUserInVariant(
-		'NoAuxiaSignInGate',
-		'control',
-	);
+	const abTests = useAB();
 	const inAuxiaVariant =
 		abTests?.isUserInTestGroup('growth-auxia-banner', 'variant') ?? false;
+	const inConsentBannerTestV2 =
+		abTests?.isUserInTestGroup(
+			'identity-and-trust-consent-rr-banner-us',
+			'variant-2',
+		) ?? false;
 
 	const [pickMessageResult, setPickMessageResult] =
 		useState<PickMessageResult | null>(null);
@@ -336,6 +347,11 @@ export const StickyBottomBanner = ({
 					'control',
 				) ?? false,
 			inAuxiaVariant,
+			inNoShowMobileAboveNavVariant:
+				abTests?.isUserInTestGroup(
+					'commercial-mobile-above-nav-test',
+					'variant2',
+				) ?? false,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
 			section: sectionId,
@@ -369,23 +385,32 @@ export const StickyBottomBanner = ({
 				pageId,
 				contributionsServiceUrl,
 				editionId,
-				isInAuxiaControlGroup,
+				countryCode,
 			},
 			host,
 		);
 
 		const hasForceBannerParam =
 			window.location.search.includes('force-banner');
+		const hasPreviewBannerParam =
+			window.location.search.includes('preview-banner');
 		const hasForceBrazeMessageParam = window.location.hash.includes(
 			'force-braze-message',
 		);
 
 		let candidates: SlotConfig['candidates'];
 
-		if (hasForceBannerParam) {
+		if (hasForceBannerParam || hasPreviewBannerParam) {
 			candidates = [CMP, readerRevenue];
 		} else if (hasForceBrazeMessageParam) {
 			candidates = [CMP, brazeBannersSystem, brazeBanner];
+		} else if (
+			inConsentBannerTestV2 &&
+			isInUsStateForAbTest() &&
+			getAlreadyVisitedCount() <= 1
+		) {
+			// Do not show a RR banner on the first pageview if in this test variant
+			candidates = [CMP, signInGate, brazeBannersSystem, brazeBanner];
 		} else {
 			candidates = [
 				CMP,
@@ -436,10 +461,10 @@ export const StickyBottomBanner = ({
 		ophanPageViewId,
 		pageId,
 		host,
-		isInAuxiaControlGroup,
 		braze,
 		abTests,
 		inAuxiaVariant,
+		inConsentBannerTestV2,
 	]);
 
 	/**

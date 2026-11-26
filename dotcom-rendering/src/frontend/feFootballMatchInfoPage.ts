@@ -1,10 +1,10 @@
 import {
 	array,
 	boolean,
+	type InferOutput,
 	number,
 	object,
 	optional,
-	type Output,
 	string,
 } from 'valibot';
 import type { FEFootballDataPage } from './feFootballDataPage';
@@ -16,7 +16,20 @@ const feFootballPlayerEventSchema = object({
 	eventType: string(),
 });
 
-export type FEFootballPlayerEvent = Output<typeof feFootballPlayerEventSchema>;
+const feFootballPlayerEventEnhancedSchema = object({
+	eventId: string(),
+	eventType: string(),
+	normalTime: string(),
+	addedTime: string(),
+});
+
+export type FEFootballPlayerEvent = InferOutput<
+	typeof feFootballPlayerEventSchema
+>;
+
+export type FEFootballPlayerEventEnhanced = InferOutput<
+	typeof feFootballPlayerEventEnhancedSchema
+>;
 
 const feFootballPlayerSchema = object({
 	id: string(),
@@ -27,9 +40,10 @@ const feFootballPlayerSchema = object({
 	timeOnPitch: string(),
 	shirtNumber: string(),
 	events: array(feFootballPlayerEventSchema),
+	enhancedEvents: array(feFootballPlayerEventEnhancedSchema),
 });
 
-export type FEFootballPlayer = Output<typeof feFootballPlayerSchema>;
+export type FEFootballPlayer = InferOutput<typeof feFootballPlayerSchema>;
 
 const feFootballTeamSchema = object({
 	id: string(),
@@ -47,7 +61,7 @@ const feFootballTeamSchema = object({
 	crest: string(),
 });
 
-export type FEFootballTeam = Output<typeof feFootballTeamSchema>;
+export type FEFootballTeam = InferOutput<typeof feFootballTeamSchema>;
 
 export const feFootballMatchStatsSchema = object({
 	id: string(),
@@ -57,18 +71,15 @@ export const feFootballMatchStatsSchema = object({
 	comments: optional(string()),
 });
 
-export type FEFootballMatchStats = Output<typeof feFootballMatchStatsSchema>;
+export type FEFootballMatchStats = InferOutput<
+	typeof feFootballMatchStatsSchema
+>;
 
 export type FEFootballMatchInfoPage = FEFootballDataPage & {
-	// This field name will need to get changed to matchStats in the future PRs.
-	// Since this change needs to happen in both frontend and DCAR, and it also
-	// needs to be backward compatible for a temporary duration, we will handle
-	// that in a separate PR.
-	footballMatch: FEFootballMatchStats;
+	matchStats: FEFootballMatchStats;
 	matchInfo: FEFootballMatch;
 	group?: FEGroupSummary;
 	competitionName: string;
-	matchUrl: string;
 	matchHeaderUrl: string;
 };
 
@@ -81,7 +92,9 @@ export const feFootballTeamSummarySchema = object({
 	colours: string(),
 });
 
-export type FEFootballTeamSummary = Output<typeof feFootballTeamSummarySchema>;
+export type FEFootballTeamSummary = InferOutput<
+	typeof feFootballTeamSummarySchema
+>;
 
 export const feFootballMatchStatsSummarySchema = object({
 	id: string(),
@@ -91,6 +104,6 @@ export const feFootballMatchStatsSummarySchema = object({
 	infoURL: string(),
 });
 
-export type FEFootballMatchStatsSummary = Output<
+export type FEFootballMatchStatsSummary = InferOutput<
 	typeof feFootballMatchStatsSummarySchema
 >;

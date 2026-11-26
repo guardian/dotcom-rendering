@@ -2,6 +2,7 @@ import { css, Global } from '@emotion/react';
 import {
 	from,
 	headlineBold14,
+	palette as sourcePalette,
 	space,
 	until,
 	visuallyHidden,
@@ -11,6 +12,7 @@ import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { useEditionSwitcherBanner } from '../lib/useEditionSwitcherBanner';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
+import type { CustomSubnavForPage } from '../types/customSubnav';
 import {
 	expandedMenuRootId,
 	navInputCheckboxId,
@@ -18,6 +20,7 @@ import {
 	smallMobilePageMargin,
 	veggieBurgerId,
 } from './Masthead/Titlepiece/constants';
+import { CustomSubNav } from './Masthead/Titlepiece/CustomSubNav';
 import { EditionDropdown } from './Masthead/Titlepiece/EditionDropdown';
 import { ExpandedNav } from './Masthead/Titlepiece/ExpandedNav/ExpandedNav';
 import { Grid } from './Masthead/Titlepiece/Grid';
@@ -30,9 +33,12 @@ interface Props {
 	nav: NavType;
 	editionId: EditionId;
 	showSubNav?: boolean;
+	customSubnav?: CustomSubnavForPage;
 	showSlimNav?: boolean;
 	hasPageSkin?: boolean;
 	pageId?: string;
+	canonicalUrl?: string;
+	showReaderRevenueLinks?: boolean;
 }
 
 const gridContent = css`
@@ -221,6 +227,12 @@ const slimNavBurgerOverrides = css`
 	}
 `;
 
+const slimNavPageSkinBurgerOverrides = css`
+	${from.leftCol} {
+		right: 356px;
+	}
+`;
+
 const expandedNavStyles = css`
 	${gridContent}
 	grid-row: 2;
@@ -313,15 +325,33 @@ const fadeStyles = css`
 		${themePalette('--masthead-nav-background')} 100%
 	);
 `;
+
+/** For the image custom subnav the row is white and full-bleed; CustomSubNav
+ * centres its own blue padded container on top (mirrors DirectoryPageNav). */
+const customSubnavImageWrapper = css`
+	grid-column: viewport-start / viewport-end;
+	grid-row: 3;
+	background-color: ${sourcePalette.neutral[100]};
+`;
 export const Titlepiece = ({
 	nav,
 	editionId,
 	showSubNav,
+	customSubnav,
 	showSlimNav,
 	hasPageSkin,
 	pageId = '',
+	canonicalUrl,
+	showReaderRevenueLinks = true,
 }: Props) => {
 	const { showBanner } = useEditionSwitcherBanner(pageId, editionId);
+
+	const hasCustomSubnavImage =
+		customSubnav?.renderingPage === 'front' &&
+		(customSubnav.data.images?.some((image) =>
+			image.platforms.includes('web'),
+		) ??
+			false);
 
 	return (
 		<Grid
@@ -554,6 +584,9 @@ export const Titlepiece = ({
 					burgerStyles,
 					!hasPageSkin && burgerStylesFromLeftCol,
 					showSlimNav && slimNavBurgerOverrides,
+					showSlimNav &&
+						hasPageSkin &&
+						slimNavPageSkinBurgerOverrides,
 				]}
 			>
 				<VeggieBurger />
@@ -565,6 +598,7 @@ export const Titlepiece = ({
 					nav={nav}
 					editionId={editionId}
 					hasPageSkin={hasPageSkin}
+					showReaderRevenueLinks={showReaderRevenueLinks}
 				/>
 			</div>
 
@@ -581,6 +615,27 @@ export const Titlepiece = ({
 						currentNavLink={nav.currentNavLink}
 					/>
 					<div css={fadeStyles} />
+				</div>
+			)}
+
+			{customSubnav && (
+				<div
+					css={
+						hasCustomSubnavImage
+							? customSubnavImageWrapper
+							: subNavWrapper
+					}
+					data-print-layout="hide"
+					data-testid="sub-nav"
+					data-component="sub-nav"
+				>
+					<CustomSubNav
+						customSubNav={customSubnav.data}
+						renderingPage={customSubnav.renderingPage}
+						hasPageSkin={hasPageSkin}
+						pageId={pageId}
+						canonicalUrl={canonicalUrl}
+					/>
 				</div>
 			)}
 		</Grid>

@@ -15,13 +15,13 @@ import type { RoleType } from '../types/content';
 
 type Props = {
 	elementId: string;
-	role: RoleType;
+	role: RoleType | 'productCard';
 	format: ArticleFormat;
 	isMainMedia?: boolean;
 	position: number;
 };
 
-function decideSize(role: RoleType, format: ArticleFormat) {
+function decideSize(role: RoleType | 'productCard', format: ArticleFormat) {
 	const smallStyles = css`
 		height: 32px;
 		width: 32px;
@@ -47,7 +47,8 @@ function decideSize(role: RoleType, format: ArticleFormat) {
 		default: {
 			switch (role) {
 				case 'halfWidth':
-				case 'supporting': {
+				case 'supporting':
+				case 'productCard': {
 					return smallStyles;
 				}
 				case 'inline':

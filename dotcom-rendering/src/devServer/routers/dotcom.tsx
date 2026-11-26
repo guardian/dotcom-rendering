@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { Article } from '../docs/article';
-import { CricketScorecard } from '../docs/cricketScorecard';
 import { Dotcom } from '../docs/dotcom';
 import { FootballFixtures } from '../docs/footballFixtures';
 import { FootballLive } from '../docs/footballLive';
@@ -37,10 +36,6 @@ dotcom.get(
 dotcom.get(
 	'/football-match-summary',
 	sendReact('Football Match Summary', <FootballMatchSummary />),
-);
-dotcom.get(
-	'/cricket-scorecard',
-	sendReact('Cricket Scorecard', <CricketScorecard />),
 );
 
 export { dotcom };

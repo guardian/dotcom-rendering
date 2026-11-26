@@ -27,7 +27,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { Link, SvgExternal } from '@guardian/source/react-components';
-import React from 'react';
+import type React from 'react';
 import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
@@ -239,6 +239,7 @@ export const CardHeadline = ({
 }: Props) => {
 	// The link is only applied directly to the headline if it is a sublink
 	const isSublink = !!linkTo;
+	const isStorylinesCard = isStorylines ?? false;
 
 	const fontStyles = getFonts(format, fontSizes);
 
@@ -249,10 +250,10 @@ export const CardHeadline = ({
 					isSublink ? 'card-sublink-headline' : 'card-headline'
 				}`}
 				css={[
-					isSublink && !isStorylines
+					isSublink && !isStorylinesCard
 						? css`
 								${textSans14}
-						  `
+							`
 						: fontStyles,
 				]}
 			>

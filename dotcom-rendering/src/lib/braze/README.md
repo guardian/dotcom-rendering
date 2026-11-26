@@ -35,10 +35,11 @@ The system is encapsulated primarily in `BrazeBannersSystem.tsx` and interacts w
 
 We map DCR-specific slots to Braze Placement IDs. This abstraction allows us to change the underlying ID without refactoring the components.
 
-| DCR Placement ID                             | Description                                                         |
-| :------------------------------------------- | :------------------------------------------------------------------ |
-| `BrazeBannersSystemPlacementId.EndOfArticle` | Appears at the bottom of the article body (Epic slot).              |
-| `BrazeBannersSystemPlacementId.Banner`       | Appears fixed at the bottom of the viewport (Sticky Bottom Banner). |
+| DCR Placement ID                                          | Description                                                         |
+| :-------------------------------------------------------- | :------------------------------------------------------------------ |
+| `BrazeBannersSystemPlacementId.EndOfArticle`              | Appears at the bottom of the article body (Epic slot).              |
+| `BrazeBannersSystemPlacementId.Banner`                    | Appears fixed at the bottom of the viewport (Sticky Bottom Banner). |
+| `BrazeBannersSystemPlacementId.FeastContextualNudge1`–`5` | Replaces up to five evenly distributed Feast contextual nudges.     |
 
 ### 2. Concurrency & Slot Priority
 
@@ -62,10 +63,10 @@ To ensure retrocompatibility during the migration phase, the `brazeBannersSystem
 
 Before a banner is requested or shown, the system performs strict checks:
 
--   **SDK Initialization**: Braze must be loaded.
--   **Content Type**: Suppressed on `Interactive` articles (for Epics).
--   **Commercial Rules**: Suppressed if Reader Revenue is hidden (e.g., paid content, sensitive pieces).
--   **Tag Exclusions**: Specific logic like the generic `suppressForTaylorReport`.
+- **SDK Initialization**: Braze must be loaded.
+- **Content Type**: Suppressed on `Interactive` articles (for Epics).
+- **Commercial Rules**: Suppressed if Reader Revenue is hidden (e.g., paid content, sensitive pieces).
+- **Tag Exclusions**: Specific logic like the generic `suppressForTaylorReport`.
 
 ### 4. Safety & Mitigations
 
@@ -75,10 +76,10 @@ Since Braze injects HTML/CSS dynamically, we employ several layers of safety:
 
 Because marketing teams have styling flexibility, there is a risk of campaigns targeting elements that no longer exist in DCR. The system includes a runtime **CSS Checker** (`runCssCheckerOnBrazeBanner`) which:
 
--   Parses the banner's HTML/CSS.
--   Validates that every CSS selector matches at least one element.
--   Logs warnings if "dead" selectors are found.
--   On failure: emits a `brazeBannersSystemLogger.warn` and logs a Braze custom event `braze_banner_css_validation_failed` (with `placementId`) for Braze-side alerting. The banner is **not** blocked from rendering — it is shown regardless, but the failure is recorded for awareness and action.
+- Parses the banner's HTML/CSS.
+- Validates that every CSS selector matches at least one element.
+- Logs warnings if "dead" selectors are found.
+- On failure: emits a `brazeBannersSystemLogger.warn` and logs a Braze custom event `braze_banner_css_validation_failed` (with `placementId`) for Braze-side alerting. The banner is **not** blocked from rendering — it is shown regardless, but the failure is recorded for awareness and action.
 
 This ensures broken creatives are caught during the QA process before launch.
 
@@ -86,37 +87,38 @@ This ensures broken creatives are caught during the QA process before launch.
 
 Banners are rendered inside an `iframe` (or Braze-managed shadow DOM context) to sandbox execution.
 
--   _Risk_: Advanced interaction requiring JS.
--   _Mitigation_: We establish a trust chain. Strict templates created by Design Systems are used.
--   _Security_: Cross-origin access is blocked; communication happens solely via the `postMessage` protocol.
+- _Risk_: Advanced interaction requiring JS.
+- _Mitigation_: We establish a trust chain. Strict templates created by Design Systems are used.
+- _Security_: Cross-origin access is blocked; communication happens solely via the `postMessage` protocol.
 
 ### 5. Rate Limiting (`refreshBanners`)
 
 Braze enforces a "Token Bucket" algorithm for refreshing banners (re-checking eligibility):
 
--   **Capacity**: 5 tokens per session.
--   **Refill**: 1 token every 3 minutes.
--   **Implementation**: The `refreshBanners()` function creates a race condition with a timeout. If the network is slow or tokens are empty, DCR proceeds without blocking the render.
+- **Capacity**: 5 tokens per session.
+- **Refill**: 1 token every 3 minutes.
+- **Page-aware requests**: DCR requests only placements whose `gu-island` exists on the current page.
+- **Implementation**: The `refreshBanners()` function creates a race condition with a timeout. A failed or timed-out placement is marked stale so cached eligibility is not rendered. Designable slots continue through message-picker fallbacks; Feast slots render the native Feast card. A later successful refresh marks the placements fresh again.
 
 ### 6. Wrapper Mode & Styling
 
 To support more complex designs while maintaining consistency, the system supports a **"Wrapper Mode"**.
 
--   **Enabled via**: `wrapperModeEnabled` (Boolean) Key-Value pair.
--   **Behavior**: When enabled, DCR applies specific styles to the **container** holding the Braze iframe, including:
-    -   `max-height: 65svh` (prevents banners from taking over the full screen).
-    -   `border-top: 1px solid black` (provides visual separation at all breakpoints — the previous phablet-level `border: none` override has been removed for consistency).
-    -   `overflow-y: auto` and `overflow-x: hidden` (allow vertical scrolling within the banner container on small/portrait screens).
-    -   `overscroll-behavior: none` (prevents scroll from propagating to the host page once the banner reaches its scroll boundary).
-    -   Dynamic Background Color (see below).
+- **Enabled via**: `wrapperModeEnabled` (Boolean) Key-Value pair.
+- **Behavior**: When enabled, DCR applies specific styles to the **container** holding the Braze iframe, including:
+    - `max-height: 65svh` (prevents banners from taking over the full screen).
+    - `border-top: 1px solid black` (provides visual separation at all breakpoints — the previous phablet-level `border: none` override has been removed for consistency).
+    - `overflow-y: auto` and `overflow-x: hidden` (allow vertical scrolling within the banner container on small/portrait screens).
+    - `overscroll-behavior: none` (prevents scroll from propagating to the host page once the banner reaches its scroll boundary).
+    - Dynamic Background Color (see below).
 
 #### Automatic Color Contrast
 
 When providing a background color in Wrapper Mode, DCR automatically calculates the optimal foreground (text/icon) color to ensure accessibility standards are met.
 
--   **Input**: `wrapperModeBackgroundColor` (Hex string).
--   **Algorithm**: Calculates perceived brightness using the formula `(r * 299 + g * 587 + b * 114) / 1000`.
--   **Result**: If brightness > 128, the foreground is **Black**. Otherwise, it is **White**.
+- **Input**: `wrapperModeBackgroundColor` (Hex string).
+- **Algorithm**: Calculates perceived brightness using the formula `(r * 299 + g * 587 + b * 114) / 1000`.
+- **Result**: If brightness > 128, the foreground is **Black**. Otherwise, it is **White**.
 
 ### 7. Configuration (Key-Value Pairs)
 
@@ -160,7 +162,7 @@ All user interactions with the banner are tracked with both a Braze banner click
 | Dismiss Banner       | `dismiss_button`              | `braze_banner_dismissed`             | `placementId`                                                                     |
 | CSS Validation Fail  | —                             | `braze_banner_css_validation_failed` | `placementId`                                                                     |
 
-> The Braze click (`logBannerClick`) feeds native Braze campaign reports, while the custom event (`logCustomEvent`) provides granular analytics available in Braze Data Export and BigQuery.
+> Dismissal also calls the Web SDK's `dismissBanner(banner)`. This records Braze's native dismissal and suppresses that Banner for the user. The Braze click and custom event remain for the existing reporting streams.
 
 ## Communication Protocol
 
@@ -168,15 +170,16 @@ The banner uses a `postMessage` protocol to interact with the host DCR page.
 
 ### Supported Message Types
 
-| Message Type                                       | Function                                              |
-| :------------------------------------------------- | :---------------------------------------------------- |
-| `BRAZE_BANNERS_SYSTEM:GET_AUTH_STATUS`             | Checks if user is `SignedIn`.                         |
-| `BRAZE_BANNERS_SYSTEM:GET_EMAIL_ADDRESS`           | Requests email (if signed in).                        |
-| `BRAZE_BANNERS_SYSTEM:NEWSLETTER_SUBSCRIBE`        | Subscribes to a newsletter ID.                        |
-| `BRAZE_BANNERS_SYSTEM:REMINDER_SUBSCRIBE`          | Creates a one-off reminder for contribution requests. |
-| `BRAZE_BANNERS_SYSTEM:NAVIGATE_TO_URL`             | Navigates the host page to a URL.                     |
-| `BRAZE_BANNERS_SYSTEM:DISMISS_BANNER`              | Removes the banner from the DOM.                      |
-| `BRAZE_BANNERS_SYSTEM:GET_SETTINGS_PROPERTY_VALUE` | Reads Key-Value pairs from the Campaign config.       |
+| Message Type                                       | Function                                               |
+| :------------------------------------------------- | :----------------------------------------------------- |
+| `BRAZE_BANNERS_SYSTEM:GET_AUTH_STATUS`             | Checks if user is `SignedIn`.                          |
+| `BRAZE_BANNERS_SYSTEM:GET_EMAIL_ADDRESS`           | Requests email (if signed in).                         |
+| `BRAZE_BANNERS_SYSTEM:NEWSLETTER_SUBSCRIBE`        | Subscribes to a newsletter ID.                         |
+| `BRAZE_BANNERS_SYSTEM:REMINDER_SUBSCRIBE`          | Creates a one-off reminder for contribution requests.  |
+| `BRAZE_BANNERS_SYSTEM:NAVIGATE_TO_URL`             | Navigates the host page to a URL.                      |
+| `BRAZE_BANNERS_SYSTEM:DISMISS_BANNER`              | Removes the banner from the DOM.                       |
+| `BRAZE_BANNERS_SYSTEM:GET_CONTEXT`                 | Reads the page context supplied by the host component. |
+| `BRAZE_BANNERS_SYSTEM:GET_SETTINGS_PROPERTY_VALUE` | Reads Key-Value pairs from the Campaign config.        |
 
 ### Feature Details
 
@@ -224,7 +227,7 @@ Subscribes the user to a newsletter.
 
 **Request Parameters**:
 
--   `newsletterId` (String, **Required**): The ID of the newsletter to subscribe to (e.g., "4156").
+- `newsletterId` (String, **Required**): The ID of the newsletter to subscribe to (e.g., "4156").
 
 **Response**:
 
@@ -245,11 +248,11 @@ Creates a one-off reminder for contribution requests.
 
 **Request Parameters**:
 
--   `reminderPeriod` (String, **Required**): The target date for the reminder in **YYYY-MM-DD** format (e.g., "2026-03-15").
--   `reminderComponent` (String, _Optional_): The component requesting the reminder. Defaults to `'BANNER'` if not provided.
-    -   Allowed values: `'BANNER'`, `'EPIC'`.
--   `reminderOption` (String, _Optional_): Specific reminder option/context. Defaults to `'recurring-contribution-upsell'` if not provided.
-    -   Example values: `'recurring-contribution-upsell'`, `'one-off-contribution'`, `'supporter-plus'`
+- `reminderPeriod` (String, **Required**): The target date for the reminder in **YYYY-MM-DD** format (e.g., "2026-03-15").
+- `reminderComponent` (String, _Optional_): The component requesting the reminder. Defaults to `'BANNER'` if not provided.
+    - Allowed values: `'BANNER'`, `'EPIC'`.
+- `reminderOption` (String, _Optional_): Specific reminder option/context. Defaults to `'recurring-contribution-upsell'` if not provided.
+    - Example values: `'recurring-contribution-upsell'`, `'one-off-contribution'`, `'supporter-plus'`
 
 **Response**:
 
@@ -262,10 +265,10 @@ Creates a one-off reminder for contribution requests.
 
 **Description**: Creates a one-off reminder for the user to be contacted about making a contribution at a future date. The system will:
 
--   Fetch the user's email address
--   Submit a reminder request to The Guardian's Support API
--   Set the platform as `'WEB'` and stage as `'PRE'` automatically
--   Return `true` if the reminder was successfully created, `false` otherwise
+- Fetch the user's email address
+- Submit a reminder request to The Guardian's Support API
+- Set the platform as `'WEB'` and stage as `'PRE'` automatically
+- Return `true` if the reminder was successfully created, `false` otherwise
 
 **Use Case**: Ideal for campaigns encouraging users to "remind me later" when they're unable or unwilling to contribute immediately. This helps re-engage users at a more convenient time.
 
@@ -277,9 +280,9 @@ Navigates the host DCR page to a URL (either in the same tab or a new tab).
 
 **Request Parameters**:
 
--   `url` (String, **Required**): The URL to navigate to.
--   `target` (String, _Optional_): Where to open the URL. Defaults to `'self'` if not provided.
-    -   Allowed values: `'self'`, `'blank'`.
+- `url` (String, **Required**): The URL to navigate to.
+- `target` (String, _Optional_): Where to open the URL. Defaults to `'self'` if not provided.
+    - Allowed values: `'self'`, `'blank'`.
 
 **Response**: None (navigation happens immediately)
 
@@ -295,7 +298,7 @@ Removes the banner from the DOM.
 
 **Response**: None (the banner is immediately removed)
 
-**Description**: Programmatically dismisses the banner, removing it from the page. Use this when the user clicks a close button or completes an action that should hide the banner.
+**Description**: Programmatically dismisses the banner, removes it from the page, and calls Braze's native `dismissBanner` API so the Banner is suppressed for that user. Duplicate SDK dismissals are safe and ignored by Braze.
 
 ---
 
@@ -305,7 +308,7 @@ Reads a specific Key-Value pair from the Campaign configuration.
 
 **Request Parameters**:
 
--   `key` (String, **Required**): The name of the property to retrieve.
+- `key` (String, **Required**): The name of the property to retrieve.
 
 **Response**:
 
@@ -692,9 +695,9 @@ const brazeCandidate = buildBrazeBannersSystemConfig(
 
 ## Migration & Future Steps
 
--   **Phase 1 (Current)**: Hybrid state. `brazeBannersSystem` runs alongside `braze-components`.
--   **Phase 2**: Master template creation (Newsletter, Epic, App Download).
--   **Phase 3**: Deprecation of `braze-components` once all Canvases are migrated to Braze Banners.
+- **Phase 1 (Current)**: Hybrid state. `brazeBannersSystem` runs alongside `braze-components`.
+- **Phase 2**: Master template creation (Newsletter, Epic, App Download).
+- **Phase 3**: Deprecation of `braze-components` once all Canvases are migrated to Braze Banners.
 
 ---
 

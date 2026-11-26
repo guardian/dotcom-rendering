@@ -1,34 +1,63 @@
 import type { FEMediaAsset } from '../frontend/feFront';
 import type { VideoAssets } from '../types/content';
+import type { VideoPlayerFormat } from '../types/mainMedia';
 
 export type CustomPlayEventDetail = { uniqueId: string };
 
 /** We expect all videos to include dimensions since the field was added to FEMediaAsset */
 export const DEFAULT_ASPECT_RATIO = 5 / 4;
 
+export const DEFAULT_IMAGE_ASPECT_RATIO = '5:4';
+
+/** * The maximum duration (in seconds) for a video to be considered "short". * Equals two 10-second time segments plus a small buffer. */
+const SHORT_VIDEO_MAX_DURATION = 20;
+
 export const customSelfHostedVideoPlayAudioEventName =
 	'self-hosted-video:play-with-audio';
 export const customYoutubePlayEventName = 'youtube-video:play';
+export const customYoutubePauseEventName = 'youtube-video:pause';
 
 export type Source = {
 	src: string;
 	mimeType: SupportedVideoFileType;
 	height: number;
 	width: number;
+	hasAudio: boolean;
 	aspectRatio?: string;
 };
 
 /**
  * Order is important here - the browser will use the first type it supports.
  */
-export const supportedVideoFileTypes = [
-	'video/mp4', // MP4 format
+const m3u8FileTypes = [
 	'application/x-mpegURL', // HLS format
 	'application/vnd.apple.mpegurl', // Alternative HLS format
 ] as const;
 
-export type SupportedVideoFileType = (typeof supportedVideoFileTypes)[number];
+const mp4FileTypes = [
+	'video/mp4', // MP4 format
+] as const;
 
+const allSupportedVideoFileTypes = [...mp4FileTypes, ...m3u8FileTypes] as const;
+
+export const supportedFileTypesPreferM3U8 = Array.from(
+	new Set([...m3u8FileTypes, ...allSupportedVideoFileTypes]),
+);
+
+export const supportedFileTypesPreferMp4 = Array.from(
+	new Set([...mp4FileTypes, ...allSupportedVideoFileTypes]),
+);
+
+export type SupportedVideoFileType =
+	(typeof allSupportedVideoFileTypes)[number];
+
+/**
+ * We use an arbitrary limit or 20 seconds before considering a video "long".
+ * Why 20? This is because we request the video in 10 second chunks.
+ * */
+const isLongVideo = (duration: number): boolean => {
+	return duration > SHORT_VIDEO_MAX_DURATION;
+};
 /**
  * The looping video player types its `sources` attribute as `Sources`.
  * However, looping videos in articles are delivered as media atoms, which type
@@ -37,12 +66,21 @@ export type SupportedVideoFileType = (typeof supportedVideoFileTypes)[number];
  */
 export const extractValidSourcesFromAssets = (
 	assets: VideoAssets[],
-): Source[] =>
+	videoStyle: VideoPlayerFormat,
+	videoDuration?: number,
+): Source[] => {
 	/**
-	 * Ensure sources are ordered by the order that MIME types are specified in
-	 * `supportedVideoFileTypes` as the browser picks the first one that it supports.
+	 * Sources are ordered because the browser will use the first source that it supports.
 	 */
-	supportedVideoFileTypes.reduce<Source[]>((acc, type) => {
+	const orderedMimeTypes =
+		/**
+		 * For videos that are 20 seconds or shorter, we prefer mp4 to avoid the overhead of HLS streaming.
+		 * */
+		videoStyle === 'Default' && isLongVideo(videoDuration ?? 0)
+			? supportedFileTypesPreferM3U8
+			: supportedFileTypesPreferMp4;
+
+	return orderedMimeTypes.reduce<Source[]>((acc, type) => {
 		const sourcesByType = assets.filter(
 			({ mimeType }) => mimeType === type,
 		);
@@ -54,20 +92,38 @@ export const extractValidSourcesFromAssets = (
 					height: asset.dimensions?.height ?? 0,
 					width: asset.dimensions?.width ?? 0,
 					aspectRatio: asset.aspectRatio,
+					/* we default to true for videos that were transcoded prior to audio detection */
+					hasAudio: asset.hasAudio ?? true,
 				})),
 			);
 		}
 		return acc;
 	}, []);
+};
 
 export const convertFEMediaAssetsToVideoAssets = (
 	assets: FEMediaAsset[],
 ): VideoAssets[] =>
-	assets.map(({ id, mimeType, dimensions }) => ({
+	assets.map(({ id, mimeType, aspectRatio, dimensions, hasAudio }) => ({
 		url: id,
 		mimeType,
+		aspectRatio,
 		dimensions,
+		hasAudio,
 	}));
+
+/**
+ * Round an aspect ratio value to 3 decimal places.
+ *
+ * This helps avoid floating point precision issues and ensures
+ * consistent aspect ratio values for rendering and comparisons.
+ *
+ * @param aspectRatio - The raw aspect ratio value to round up.
+ * @returns The aspect ratio rounded to 3 decimal places.
+ * */
+export const roundAspectRatio = (aspectRatio: number): number => {
+	return Number(aspectRatio.toFixed(3));
+};
 
 /**
  * Aspect ratio is needed for self-hosted video so that the browser knows how much
@@ -88,7 +144,7 @@ export const getAspectRatioFromSources = (sources: Source[]): number => {
 			width > 0 &&
 			height > 0
 		) {
-			return width / height;
+			return roundAspectRatio(width / height);
 		}
 	}
 
@@ -96,7 +152,7 @@ export const getAspectRatioFromSources = (sources: Source[]): number => {
 		return DEFAULT_ASPECT_RATIO;
 	}
 
-	return firstSource.width / firstSource.height;
+	return roundAspectRatio(firstSource.width / firstSource.height);
 };
 
 export const getSubtitleAsset = (assets: VideoAssets[]): string | undefined =>
@@ -125,7 +181,11 @@ export const findOptimisedSourcePerMimeType = (
 	sources: Source[],
 	screenWidth: number,
 ): Source[] => {
-	return supportedVideoFileTypes.reduce<Source[]>((acc, type) => {
+	const uniqueMimeTypes = Array.from(
+		new Set(sources.map(({ mimeType }) => mimeType)),
+	);
+
+	return uniqueMimeTypes.reduce<Source[]>((acc, type) => {
 		const sourcesForMimeType = sources.filter(
 			({ mimeType }) => mimeType === type,
 		);
@@ -140,4 +200,33 @@ export const findOptimisedSourcePerMimeType = (
 		if (optimisedSource) acc.push(optimisedSource);
 		return acc;
 	}, []);
+};
+
+export const convertCurrentTimeToProgressPercentage = (
+	currentTime: number,
+	duration: number,
+): number | null => {
+	if (currentTime < 0 || duration <= 0) return null;
+
+	return Math.min((currentTime * 100) / duration, 100);
+};
+
+export const convertProgressPercentageToCurrentTime = (
+	progressPercentage: number,
+	duration: number,
+): number | null => {
+	if (duration <= 0) return null;
+
+	const clampedPercentage = Math.max(0, Math.min(progressPercentage, 100));
+
+	return (clampedPercentage / 100) * duration;
+};
+
+export const formatTimeForDisplay = (timeInSeconds: number): string => {
+	const clampedTimeInSeconds = Math.max(0, timeInSeconds);
+
+	const minutes = Math.floor(clampedTimeInSeconds / 60);
+	const seconds = Math.floor(clampedTimeInSeconds % 60);
+
+	return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 };

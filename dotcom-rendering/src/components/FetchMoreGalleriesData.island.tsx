@@ -37,7 +37,7 @@ const toGalleryTrail = (trail: FETrailType, index: number): TrailType => {
 		? {
 				src: trail.masterImage,
 				altText: '',
-		  }
+			}
 		: undefined;
 
 	const trailMedia = getMedia(trail.galleryCount);

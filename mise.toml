@@ -1,0 +1,8 @@
+[settings]
+# Read node version from .nvmrc
+# Read pnpm version from package.json
+idiomatic_version_file_enable_tools = ["node", "pnpm"]
+
+[settings.status]
+# print tool versions that become active or inactive when changing directories
+show_tools = true

@@ -2,8 +2,17 @@ import { css } from '@emotion/react';
 import { breakpoints, space, textSans17 } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import type { ReactNode } from 'react';
+import {
+	selfHostedDefaultVideo54Card,
+	selfHostedLoopVideo54Card,
+} from '../../fixtures/manual/trails';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { palette } from '../palette';
-import type { DCRContainerPalette, DCRSlideshowImage } from '../types/front';
+import type {
+	DCRContainerPalette,
+	DCRSlideshowImage,
+	DCRSlideshowMedia,
+} from '../types/front';
 import { ContainerOverrides } from './ContainerOverrides';
 import { SlideshowCarousel } from './SlideshowCarousel.island';
 
@@ -45,6 +54,58 @@ const images = [
 			'https://media.guim.co.uk/ed66e9dc6a84de6bc0afe1965833f0fa4047c22d/0_324_3500_2100/3500.jpg',
 	},
 ] as const satisfies readonly DCRSlideshowImage[];
+
+/** One slide per self-hosted video style, using the same 5:4 video as the SelfHostedVideo stories */
+const loopVideoSlide = {
+	type: 'video',
+	video: selfHostedLoopVideo54Card.mainMedia,
+} as const satisfies DCRSlideshowMedia;
+
+// Distinct atom ids keep the slide keys unique
+const cinemagraphVideoSlide = {
+	type: 'video',
+	video: {
+		...selfHostedLoopVideo54Card.mainMedia,
+		atomId: 'cinemagraph-atom-id',
+		videoStyle: 'Cinemagraph',
+	},
+} as const satisfies DCRSlideshowMedia;
+
+const defaultVideoSlide = {
+	type: 'video',
+	video: {
+		...selfHostedDefaultVideo54Card.mainMedia,
+		atomId: 'default-atom-id',
+	},
+} as const satisfies DCRSlideshowMedia;
+
+// Same video as the FlexibleGeneral YouTube card stories
+const youtubeVideoSlide = {
+	type: 'video',
+	video: {
+		type: 'YoutubeVideo',
+		id: 'fa2ee832-c5e7-4305-8387-f0277d2d9e27',
+		videoId: '9kIN--VV2LQ',
+		duration: 117,
+		title: "Rashford and Garnacho omission from team to 'push them harder' says Amorim – video ",
+		width: 500,
+		height: 300,
+		origin: 'SNTV',
+		expired: false,
+		image: 'https://media.guim.co.uk/0cab2d745b3423b0fac318c9ee09b79678f568f8/0_56_3000_1688/3000.jpg',
+		isLive: false,
+	},
+} as const satisfies DCRSlideshowMedia;
+
+const mixedMedia = [
+	images[0],
+	loopVideoSlide,
+	images[1],
+	cinemagraphVideoSlide,
+	images[2],
+	defaultVideoSlide,
+	youtubeVideoSlide,
+] as const satisfies readonly DCRSlideshowMedia[];
 
 const Wrapper = ({
 	children,
@@ -94,6 +155,13 @@ const meta = {
 		linkTo: 'https://www.theguardian.com',
 		linkAriaLabel: 'news | group-3 | card-@1 | media-slideshow',
 		dataLinkName: 'slideshow-carousel',
+		uniqueId: 'slideshow-carousel',
+		subtitleSize: 'small',
+		format: {
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.News,
+		},
 	},
 	render: (args) => (
 		<Wrapper>
@@ -118,6 +186,30 @@ export const WithOneImage = {
 	args: {
 		images: images.slice(0, 1),
 	},
+} satisfies Story;
+
+export const WithVideoAndImages = {
+	args: {
+		images: mixedMedia,
+	},
+	render: (args) => (
+		<Wrapper heading="Slides: image, loop video, image, cinemagraph video, image, default video, YouTube video">
+			<SlideshowCarousel {...args} />
+		</Wrapper>
+	),
+} satisfies Story;
+
+export const WithOneVideo = {
+	args: {
+		images: [
+			{ ...loopVideoSlide, caption: 'A self-hosted looping video slide' },
+		],
+	},
+	render: (args) => (
+		<Wrapper heading="Loop video with a caption: the controls move to the top and the progress bar is hidden">
+			<SlideshowCarousel {...args} />
+		</Wrapper>
+	),
 } satisfies Story;
 
 const containerPalettes = [

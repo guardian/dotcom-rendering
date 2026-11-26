@@ -1,4 +1,4 @@
-import { onConsent } from '@guardian/libs';
+import { onConsent } from '@guardian/consent-manager';
 import { storage } from '@guardian/libs';
 
 /**
@@ -6,7 +6,7 @@ import { storage } from '@guardian/libs';
  */
 const AlreadyVisitedKey = 'gu.alreadyVisited';
 
-const getAlreadyVisitedCount = (): number => {
+export const getAlreadyVisitedCount = (): number => {
 	const alreadyVisited = parseInt(
 		storage.local.getRaw(AlreadyVisitedKey) ?? '',
 		10,

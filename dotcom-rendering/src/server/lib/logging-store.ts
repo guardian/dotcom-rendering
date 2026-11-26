@@ -18,7 +18,6 @@ export type DCRLoggingStore = {
 		method: string;
 	};
 	requestId: string;
-	abTests: string;
 	error?: {
 		message?: string;
 		stack?: string;

@@ -8,7 +8,7 @@ import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
-import { DirectoryPageNav } from '../components/DirectoryPageNav';
+import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { EditionSwitcherBanner } from '../components/EditionSwitcherBanner.island';
 import { Footer } from '../components/Footer';
 import { FrontMostViewed } from '../components/FrontMostViewed';
@@ -31,6 +31,11 @@ import { SubNav } from '../components/SubNav.island';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
+import {
+	MAX_FRONTS_BANNER_ADS as maxDesktopAds,
+	MAX_FRONTS_MOBILE_ADS as maxMobileAds,
+} from '../lib/commercial-constants';
+import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTest';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { editionList } from '../lib/edition';
 import {
@@ -40,6 +45,7 @@ import {
 } from '../lib/getFrontsAdPositions';
 import { hideAge } from '../lib/hideAge';
 import { ophanComponentId } from '../lib/ophan-helpers';
+import { worldCup2026PageIds } from '../lib/worldCup2026';
 import type { NavType } from '../model/extract-nav';
 import { palette as schemePalette } from '../palette';
 import type {
@@ -122,6 +128,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const hasPageSkin = renderAds && hasPageSkinConfig;
 
+	const isWorldCup2026 = worldCup2026PageIds.includes(pageId);
+
+	// A custom subnav replaces the standard section subnav when present
+	const showStandardSubNav =
+		!isPaidContent && !isWorldCup2026 && !NAV.customSubNav;
+
 	const filteredCollections = front.pressedPage.collections.filter(
 		(collection) => !isHighlights(collection),
 	);
@@ -129,11 +141,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const merchHighAdPosition = getMerchHighPosition(filteredCollections);
 
 	const mobileAdPositions = renderAds
-		? getMobileAdPositions(filteredCollections, pageId)
+		? getMobileAdPositions(filteredCollections, pageId, maxMobileAds)
 		: [];
 
 	const desktopAdPositions = renderAds
-		? getDesktopAdPositions(filteredCollections, pageId)
+		? getDesktopAdPositions(filteredCollections, pageId, maxDesktopAds)
 		: [];
 
 	const showMostPopular =
@@ -147,7 +159,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			case 'static/feature/2':
 				return '4:5';
 			case 'flexible/general':
-			case 'flexible/special':
 			case 'scrollable/small':
 			case 'scrollable/medium':
 			case 'static/medium/4':
@@ -184,6 +195,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					)}
 					frontId={front.pressedPage.id}
 					collectionId={0}
+					hasPageSkin={hasPageSkin}
+					isUserOptedInToMiniNav={false}
 				/>
 			)
 		);
@@ -204,7 +217,16 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								'--article-section-background',
 							)}
 						>
-							<HeaderAdSlot />
+							<HeaderAdSlot
+								includeMobile={
+									front.config.section === 'crosswords' &&
+									shouldShowMobileAboveNavSlot(
+										front.config.serverSideABTests[
+											'commercial-mobile-above-nav-test'
+										],
+									)
+								}
+							/>
 						</Section>
 					</Stuck>
 				)}
@@ -227,18 +249,30 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					discussionApiUrl={front.config.discussionApiUrl}
 					contributionsServiceUrl={contributionsServiceUrl}
 					idApiUrl={front.config.idApiUrl}
-					showSubNav={!isPaidContent}
+					showSubNav={showStandardSubNav}
+					customSubnav={
+						NAV.customSubNav && {
+							data: NAV.customSubNav,
+							renderingPage: 'front',
+						}
+					}
 					showSlimNav={false}
 					hasPageSkin={hasPageSkin}
 					hasPageSkinContentSelfConstrain={true}
 					pageId={pageId}
+					tagIds={front.trendingTopics?.map(
+						(tag) => tag.properties.id,
+					)}
+					sectionId={front.config.section}
+					contentType={front.config.contentType}
+					canonicalUrl={front.canonicalUrl}
 				/>
 
 				{isPaidContent && (
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
-						backgroundColour={sourcePalette.labs[400]}
+						backgroundColour={sourcePalette.labs[100]}
 						borderColour={sourcePalette.neutral[60]}
 						sectionId="labs-header"
 					>
@@ -261,7 +295,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						/>
 					</Island>
 				)}
-				<DirectoryPageNav pageId={pageId} />
+				<DirectoryPageNavIsland pageId={pageId} />
 
 				{filteredCollections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content
@@ -271,7 +305,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					const [trail] = trails;
 
 					// There are some containers that have zero trails. We don't want to render these
-					if (!trail) return null;
+					if (!trail) {
+						return null;
+					}
 
 					const imageLoading = index > 0 ? 'lazy' : 'eager';
 
@@ -281,6 +317,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					} | ${ophanName}`;
 					const mostPopularTitle = 'Most popular';
 
+					const isUserOptedInToMiniNav =
+						front.config.serverSideABTests[
+							'fronts-and-curation-card-mini-nav'
+						] === 'variant';
 					/**
 					 * We only shrink the content of certain sections to place the Most Popular
 					 * content on the right-hand side. Other sections remain full-width.
@@ -519,6 +559,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									sectionId={ophanName}
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
+									isUserOptedInToMiniNav={
+										isUserOptedInToMiniNav
+									}
 								/>
 							</FrontSection>
 
@@ -601,6 +644,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				/>
 			</Section>
 
+			{/* Mount point for the sign-in gate portal, which is not provided by
+			    an article body on fronts */}
+			<div id="sign-in-gate" data-print-layout="hide" />
 			<BannerWrapper data-print-layout="hide">
 				<Island priority="feature" defer={{ until: 'idle' }}>
 					<StickyBottomBanner

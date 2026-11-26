@@ -30,7 +30,7 @@ const ThumbImage = () => {
 export const Footer = ({
 	likeHandler,
 	dislikeHandler,
-	isStorylines,
+	isStorylines = false,
 }: {
 	likeHandler: () => void;
 	dislikeHandler: () => void;

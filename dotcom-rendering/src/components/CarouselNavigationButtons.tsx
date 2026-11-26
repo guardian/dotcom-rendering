@@ -82,7 +82,9 @@ export const CarouselNavigationButtons = ({
 		setPortalNode(node);
 	}, [sectionId]);
 
-	if (!portalNode) return null;
+	if (!portalNode) {
+		return null;
+	}
 
 	return ReactDOM.createPortal(
 		<div

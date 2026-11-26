@@ -2,6 +2,38 @@
 
 ## Why?
 
+## How has this change been tested?
+
+<!--
+
+## Tests
+
+Where applicable please add automated tests.
+
+If you'd like help testing your changes as part of the PR review process then mention that explicitly here.
+
+### Automated tests
+
+- unit tests
+  - https://jestjs.io/docs/using-matchers
+- component tests
+  - https://testing-library.com/docs/react-testing-library/example-intro
+- Storybook interaction tests
+  - https://storybook.js.org/docs/writing-tests/interaction-testing
+- Storybook stories for Chromatic visual regression testing
+  - https://storybook.js.org/docs/writing-stories
+- Playwright e2e tests
+  - https://playwright.dev/docs/writing-tests
+
+You can find examples of each type of test in the repo.
+
+### Manual testing
+
+- running the change locally and verifying correct behaviour
+- deploying to CODE and verifying correct behaviour
+
+-->
+
 ## Screenshots
 
 | Before      | After      |

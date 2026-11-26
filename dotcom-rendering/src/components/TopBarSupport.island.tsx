@@ -22,7 +22,7 @@ import {
 	shouldHideSupportMessaging,
 } from '../lib/contributions';
 import { getHeader } from '../lib/sdcRequests';
-import { useBetaAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { usePageViewId } from '../lib/usePageViewId';
@@ -31,6 +31,9 @@ import { useConfig } from './ConfigContext';
 type Props = {
 	contributionsServiceUrl: string;
 	pageUrl: string;
+	tagIds?: string[];
+	sectionId?: string;
+	contentType?: string;
 };
 
 const headerStyles = css`
@@ -45,6 +48,9 @@ type ReaderRevenueLinksRemoteProps = {
 	pageViewId: string;
 	contributionsServiceUrl: string;
 	pageUrl: string;
+	tagIds?: string[];
+	sectionId?: string;
+	contentType?: string;
 };
 
 const ReaderRevenueLinksRemote = ({
@@ -52,6 +58,9 @@ const ReaderRevenueLinksRemote = ({
 	pageViewId,
 	contributionsServiceUrl,
 	pageUrl,
+	tagIds,
+	sectionId,
+	contentType,
 }: ReaderRevenueLinksRemoteProps) => {
 	const [supportHeaderResponse, setSupportHeaderResponse] =
 		useState<ModuleData<HeaderProps> | null>(null);
@@ -60,7 +69,7 @@ const ReaderRevenueLinksRemote = ({
 	const isSignedIn = useIsSignedIn();
 
 	const { renderingTarget } = useConfig();
-	const abTests = useBetaAB();
+	const abTests = useAB();
 
 	useEffect((): void => {
 		if (isUndefined(countryCode) || isSignedIn === 'Pending') {
@@ -89,6 +98,9 @@ const ReaderRevenueLinksRemote = ({
 						'growth-holdback-group',
 						'control',
 					) ?? false,
+				tagIds,
+				sectionId,
+				contentType,
 			},
 		};
 
@@ -107,13 +119,16 @@ const ReaderRevenueLinksRemote = ({
 				return (
 					module.name === 'SignInPromptHeader'
 						? /* webpackChunkName: "sign-in-prompt-header" */
-						  import('./marketing/header/SignInPromptHeader')
+							import('./marketing/header/SignInPromptHeader')
 						: /* webpackChunkName: "header" */
-						  import('./marketing/header/Header')
+							import('./marketing/header/Header')
 				).then(
-					(headerModule: {
-						[key: string]: React.ElementType<HeaderProps>;
-					}) => {
+					(
+						headerModule: Record<
+							string,
+							React.ElementType<HeaderProps>
+						>,
+					) => {
 						setSupportHeader(
 							() => headerModule[module.name] ?? null,
 						);
@@ -135,6 +150,9 @@ const ReaderRevenueLinksRemote = ({
 		pageViewId,
 		pageUrl,
 		abTests,
+		tagIds,
+		sectionId,
+		contentType,
 	]);
 
 	if (SupportHeader !== null && supportHeaderResponse) {
@@ -177,12 +195,20 @@ const ReaderRevenueLinksRemote = ({
  *
  * (No visual story exists)
  */
-export const TopBarSupport = ({ contributionsServiceUrl, pageUrl }: Props) => {
+export const TopBarSupport = ({
+	contributionsServiceUrl,
+	pageUrl,
+	tagIds,
+	sectionId,
+	contentType,
+}: Props) => {
 	const { renderingTarget } = useConfig();
 	const countryCode = useCountryCode('support-the-Guardian');
 	const pageViewId = usePageViewId(renderingTarget);
 
-	if (isUndefined(countryCode) || isUndefined(pageViewId)) return null;
+	if (isUndefined(countryCode) || isUndefined(pageViewId)) {
+		return null;
+	}
 
 	return (
 		<ReaderRevenueLinksRemote
@@ -190,6 +216,9 @@ export const TopBarSupport = ({ contributionsServiceUrl, pageUrl }: Props) => {
 			pageViewId={pageViewId}
 			contributionsServiceUrl={contributionsServiceUrl}
 			pageUrl={pageUrl}
+			tagIds={tagIds}
+			sectionId={sectionId}
+			contentType={contentType}
 		/>
 	);
 };

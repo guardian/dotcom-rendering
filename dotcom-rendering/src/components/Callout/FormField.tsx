@@ -12,10 +12,10 @@ import { FileInput } from '@guardian/source-development-kitchen/react-components
 import { useEffect, useRef } from 'react';
 import type { CampaignFieldType } from '../../types/content';
 
-type FormDataType = { [key in string]: any };
+type FormDataType = Record<string, any>;
 
 type FormFieldProp = {
-	validationErrors: { [key in string]: string };
+	validationErrors: Record<string, string>;
 	formField: CampaignFieldType;
 	formData: FormDataType;
 	pageId: string;
@@ -56,7 +56,9 @@ export const FormField = ({
 		case 'phone':
 		case 'email':
 		case 'text': {
-			if (formField.hidden) return null;
+			if (formField.hidden) {
+				return null;
+			}
 			return (
 				<TextInput
 					name={name}
@@ -119,6 +121,7 @@ export const FormField = ({
 					onChange={(e): void =>
 						setFieldInFormData(formField.id, e.target.value)
 					}
+					// eslint-disable-next-line react/no-children-prop -- the Select component requires options to be passed as children
 					children={[
 						{
 							value: 'default',

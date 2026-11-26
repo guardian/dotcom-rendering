@@ -113,7 +113,7 @@ export const EditionDropdown = ({
 	];
 
 	const label = showCurrentEdition
-		? activeEdition.shortTitle ?? activeEdition.id
+		? (activeEdition.shortTitle ?? activeEdition.id)
 		: 'Edition';
 
 	return (

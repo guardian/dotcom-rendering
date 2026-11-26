@@ -5,11 +5,9 @@ import { submitComponentEvent } from '../client/ophan/ophan';
 import { type EditionId } from '../lib/edition';
 import { palette as schemePalette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
-import type { TagPagePagination } from '../types/tagPage';
 import { ContainerOverrides } from './ContainerOverrides';
 import { ContainerTitle } from './ContainerTitle';
 import { Footer } from './ExpandableAtom/Footer';
-import { FrontPagination } from './FrontPagination';
 import { FrontSectionTitle } from './FrontSectionTitle';
 import { SvgBetaLabel } from './SvgBetaLabel';
 
@@ -28,9 +26,6 @@ type Props = {
 	/** Used in partnership with `showDateHeader` to localise the date string */
 	editionId: EditionId;
 	isTagPage?: boolean;
-	/** Puts pagination at the bottom of the container allowing the user to navigate to other pages,
-	 * usually used on the last container on a page */
-	pagination?: TagPagePagination;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -73,8 +68,7 @@ const containerStylesUntilLeftCol = css`
 		[headline-start controls-start] auto
 		[controls-end headline-end content-toggleable-start content-start] auto
 		[content-end content-toggleable-end bottom-content-start] auto
-		[bottom-content-end pagination-start] auto
-		[pagination-end];
+		[bottom-content-end];
 
 	grid-template-columns:
 		[decoration-start]
@@ -123,8 +117,7 @@ const containerStylesFromLeftCol = css`
 			[controls-end content-toggleable-start] auto
 			[headline-end treats-start] auto
 			[content-end content-toggleable-end treats-end bottom-content-start] auto
-			[bottom-content-end pagination-start] auto
-			[pagination-end];
+			[bottom-content-end];
 
 		grid-template-columns:
 			minmax(0, 1fr)
@@ -144,8 +137,7 @@ const containerStylesFromLeftCol = css`
 			[controls-end] auto
 			[headline-end treats-start] auto
 			[content-end content-toggleable-end treats-end bottom-content-start] auto
-			[bottom-content-end pagination-start] auto
-			[pagination-end];
+			[bottom-content-end];
 
 		grid-template-columns:
 			minmax(0, 1fr)
@@ -223,34 +215,6 @@ const sideBorders = css`
 
 const topBorder = css`
 	border-top-style: solid;
-`;
-
-const sectionPaginationBackground = css`
-	grid-row: pagination;
-	grid-column: decoration;
-	background-color: white;
-	${from.tablet} {
-		margin: 0 -20px;
-		border-left-style: solid;
-		border-right-style: solid;
-		border-width: 1px;
-		border-color: ${schemePalette('--section-border')};
-	}
-	.hidden > & {
-		display: none;
-	}
-`;
-
-const sectionPagination = css`
-	grid-row: pagination;
-	grid-column: content;
-	.hidden > & {
-		display: none;
-	}
-`;
-
-const bottomPadding = css`
-	padding-bottom: ${space[10]}px;
 `;
 
 /**
@@ -348,7 +312,6 @@ export const StorylinesSection = ({
 	ophanComponentName,
 	url,
 	isTagPage = false,
-	pagination,
 }: Props) => {
 	const sectionId = 'storylines-section';
 
@@ -494,28 +457,6 @@ export const StorylinesSection = ({
 				>
 					{children}
 				</div>
-
-				{pagination && (
-					<>
-						<div css={sectionPaginationBackground} />
-						<div
-							id="pagination"
-							css={[
-								sectionContentHorizontalMargins,
-								sectionPagination,
-								bottomPadding,
-							]}
-						>
-							<FrontPagination
-								sectionName={pagination.sectionName}
-								totalContent={pagination.totalContent}
-								currentPage={pagination.currentPage}
-								lastPage={pagination.lastPage}
-								pageId={pagination.pageId}
-							/>
-						</div>
-					</>
-				)}
 			</section>
 		</ContainerOverrides>
 	);

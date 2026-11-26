@@ -58,6 +58,9 @@
         "webPublicationSecondaryDateDisplay": {
             "type": "string"
         },
+        "firstPublicationDate": {
+            "type": "string"
+        },
         "editionLongForm": {
             "type": "string"
         },
@@ -304,7 +307,15 @@
             "$ref": "#/definitions/CommercialProperties"
         },
         "starRating": {
-            "$ref": "#/definitions/StarRating"
+            "enum": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "type": "number"
         },
         "audioArticleImage": {
             "$ref": "#/definitions/ImageBlockElement"
@@ -375,15 +386,17 @@
             "type": "string"
         },
         "matchType": {
-            "$ref": "#/definitions/MatchType"
+            "description": "General",
+            "enum": [
+                "CricketMatchType",
+                "FootballMatchType"
+            ],
+            "type": "string"
         },
         "isSpecialReport": {
             "type": "boolean"
         },
         "isLegacyInteractive": {
-            "type": "boolean"
-        },
-        "filterKeyEvents": {
             "type": "boolean"
         },
         "mostRecentBlockId": {
@@ -416,10 +429,19 @@
                 "group": {
                     "type": "string"
                 },
+                "category": {
+                    "type": "string"
+                },
                 "regionFocus": {
                     "type": "string"
                 },
                 "illustrationCard": {
+                    "type": "string"
+                },
+                "illustrationSquare": {
+                    "type": "string"
+                },
+                "exampleUrl": {
                     "type": "string"
                 }
             },
@@ -539,6 +561,144 @@
                 "number",
                 "solutionAvailable"
             ]
+        },
+        "moreFromPuzzlesAndGames": {
+            "description": "\"More from Puzzles & games\" rail, only sent for crossword pages.",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "set": {
+                        "type": "string"
+                    },
+                    "cardVariant": {
+                        "$ref": "#/definitions/PuzzleCardVariant"
+                    },
+                    "cadence": {
+                        "type": "string"
+                    },
+                    "url": {
+                        "type": "string"
+                    },
+                    "image": {
+                        "type": "string"
+                    },
+                    "imageAlt": {
+                        "type": "string"
+                    },
+                    "setter": {
+                        "type": "string"
+                    },
+                    "progress": {
+                        "type": "number"
+                    },
+                    "gameStatus": {
+                        "description": "The Puzzles API's state for the reader; absent when it reports nothing.",
+                        "enum": [
+                            "completed",
+                            "in-progress",
+                            "not-started"
+                        ],
+                        "type": "string"
+                    },
+                    "date": {
+                        "type": "string"
+                    },
+                    "slug": {
+                        "type": "string"
+                    },
+                    "index": {
+                        "type": "number"
+                    },
+                    "variant": {
+                        "type": "string"
+                    },
+                    "backgroundColour": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "cardVariant",
+                    "id",
+                    "set",
+                    "title",
+                    "type"
+                ]
+            }
+        },
+        "puzzlesSupporting": {
+            "description": "Useful links and newsletter, only sent for crossword pages.",
+            "type": "object",
+            "properties": {
+                "usefulLinks": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "title": {
+                                "type": "string"
+                            },
+                            "url": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "title",
+                            "url"
+                        ]
+                    }
+                },
+                "newsletter": {
+                    "type": "object",
+                    "properties": {
+                        "identityName": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "frequency": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        },
+                        "illustrationSquare": {
+                            "type": "string"
+                        },
+                        "exampleUrl": {
+                            "description": "Link to a recent edition, from the newsletters tool.",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "description",
+                        "frequency",
+                        "identityName",
+                        "name"
+                    ]
+                }
+            },
+            "required": [
+                "usefulLinks"
+            ]
+        },
+        "puzzleArchivePath": {
+            "description": "Path of the archive page of this crossword's type, if it has one.",
+            "type": "string"
+        },
+        "crosswordRequiresSubscription": {
+            "description": "Only sent, as `true`, for a crossword older than the free window. A hint\nfor the cached page: the Puzzles API decides who has access.",
+            "type": "boolean"
         }
     },
     "required": [
@@ -552,7 +712,6 @@
         "designType",
         "editionId",
         "editionLongForm",
-        "filterKeyEvents",
         "format",
         "guardianBaseURL",
         "hasRelated",
@@ -756,105 +915,10 @@
                     "$ref": "#/definitions/FETimelineBlockElement"
                 },
                 {
-                    "type": "object",
-                    "properties": {
-                        "_type": {
-                            "type": "string",
-                            "const": "model.dotcomrendering.pageElements.DCRTimelineBlockElement"
-                        },
-                        "events": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "date": {
-                                        "type": "string"
-                                    },
-                                    "title": {
-                                        "type": "string"
-                                    },
-                                    "label": {
-                                        "type": "string"
-                                    },
-                                    "main": {
-                                        "$ref": "#/definitions/FEElement"
-                                    },
-                                    "body": {
-                                        "type": "array",
-                                        "items": {
-                                            "$ref": "#/definitions/FEElement"
-                                        }
-                                    }
-                                },
-                                "required": [
-                                    "body",
-                                    "date"
-                                ]
-                            }
-                        }
-                    },
-                    "required": [
-                        "_type",
-                        "events"
-                    ]
+                    "$ref": "#/definitions/DCRTimelineBlockElement"
                 },
                 {
-                    "type": "object",
-                    "properties": {
-                        "_type": {
-                            "type": "string",
-                            "const": "model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement"
-                        },
-                        "sections": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "title": {
-                                        "type": "string"
-                                    },
-                                    "events": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "date": {
-                                                    "type": "string"
-                                                },
-                                                "title": {
-                                                    "type": "string"
-                                                },
-                                                "label": {
-                                                    "type": "string"
-                                                },
-                                                "main": {
-                                                    "$ref": "#/definitions/FEElement"
-                                                },
-                                                "body": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "$ref": "#/definitions/FEElement"
-                                                    }
-                                                }
-                                            },
-                                            "required": [
-                                                "body",
-                                                "date"
-                                            ]
-                                        }
-                                    }
-                                },
-                                "required": [
-                                    "events",
-                                    "title"
-                                ]
-                            }
-                        }
-                    },
-                    "required": [
-                        "_type",
-                        "sections"
-                    ]
+                    "$ref": "#/definitions/DCRSectionedTimelineBlockElement"
                 },
                 {
                     "$ref": "#/definitions/TweetBlockElement"
@@ -887,7 +951,16 @@
                     "$ref": "#/definitions/ProductBlockElement"
                 },
                 {
-                    "$ref": "#/definitions/ProductSummaryElement"
+                    "$ref": "#/definitions/ProductSummaryBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/EnhancedProductSummaryElement"
+                },
+                {
+                    "$ref": "#/definitions/RecipeBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/EventGraphicBlockElement"
                 }
             ]
         },
@@ -936,7 +1009,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -948,18 +1030,6 @@
                 "kicker",
                 "trackUrl"
             ]
-        },
-        "RoleType": {
-            "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
-            "enum": [
-                "halfWidth",
-                "immersive",
-                "inline",
-                "showcase",
-                "supporting",
-                "thumbnail"
-            ],
-            "type": "string"
         },
         "AudioBlockElement": {
             "type": "object",
@@ -1119,7 +1189,16 @@
                     }
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -1512,7 +1591,16 @@
                     }
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "isNonCollapsible": {
                     "type": "boolean"
@@ -1625,7 +1713,16 @@
                     "type": "boolean"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "title": {
                     "type": "string"
@@ -1729,6 +1826,18 @@
                 "variants"
             ]
         },
+        "RoleType": {
+            "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+            "enum": [
+                "halfWidth",
+                "immersive",
+                "inline",
+                "showcase",
+                "supporting",
+                "thumbnail"
+            ],
+            "type": "string"
+        },
         "Image": {
             "type": "object",
             "properties": {
@@ -1808,7 +1917,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "placeholderUrl": {
                     "type": "string"
@@ -1879,7 +1997,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -1927,7 +2054,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -1985,7 +2121,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "isThirdPartyTracking": {
                     "type": "boolean"
@@ -2017,7 +2162,16 @@
                     "type": "boolean"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "alt": {
                     "type": "string"
@@ -2075,7 +2229,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -2150,7 +2313,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -2189,7 +2361,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "imageMedia": {
                     "type": "object",
@@ -2267,6 +2448,9 @@
                             "type": "string"
                         }
                     }
+                },
+                "hasAudio": {
+                    "type": "boolean"
                 }
             },
             "required": [
@@ -2350,7 +2534,15 @@
                     "type": "string"
                 },
                 "starRating": {
-                    "$ref": "#/definitions/StarRating"
+                    "enum": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5
+                    ],
+                    "type": "number"
                 },
                 "isAvatar": {
                     "type": "boolean"
@@ -2414,17 +2606,6 @@
                 "width"
             ]
         },
-        "StarRating": {
-            "enum": [
-                0,
-                1,
-                2,
-                3,
-                4,
-                5
-            ],
-            "type": "number"
-        },
         "InstagramBlockElement": {
             "type": "object",
             "properties": {
@@ -2445,7 +2626,16 @@
                     "type": "boolean"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "isThirdPartyTracking": {
                     "type": "boolean"
@@ -2507,6 +2697,9 @@
                         "supporting",
                         "thumbnail"
                     ],
+                    "type": "string"
+                },
+                "customData": {
                     "type": "string"
                 }
             },
@@ -2587,7 +2780,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "caption": {
                     "type": "string"
@@ -2662,6 +2864,9 @@
                     "type": "string",
                     "const": "model.dotcomrendering.pageElements.LinkBlockElement"
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "url": {
                     "type": "string"
                 },
@@ -2681,10 +2886,26 @@
                         "Tertiary"
                     ],
                     "type": "string"
+                },
+                "latestPrice": {
+                    "type": "object",
+                    "properties": {
+                        "currencySymbol": {
+                            "type": "string"
+                        },
+                        "price": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "currencySymbol",
+                        "price"
+                    ]
                 }
             },
             "required": [
                 "_type",
+                "elementId",
                 "label",
                 "linkType",
                 "url"
@@ -2790,7 +3011,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "isThirdPartyTracking": {
                     "type": "boolean"
@@ -2857,10 +3087,27 @@
                     "type": "number"
                 },
                 "videoPlayerFormat": {
-                    "$ref": "#/definitions/VideoPlayerFormat"
+                    "enum": [
+                        "Cinemagraph",
+                        "Default",
+                        "Loop"
+                    ],
+                    "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
+                },
+                "caption": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -2869,14 +3116,6 @@
                 "elementId",
                 "id"
             ]
-        },
-        "VideoPlayerFormat": {
-            "enum": [
-                "Cinemagraph",
-                "Default",
-                "Loop"
-            ],
-            "type": "string"
         },
         "MiniProfilesBlockElement": {
             "type": "object",
@@ -2995,7 +3234,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -3062,10 +3310,19 @@
                         "group": {
                             "type": "string"
                         },
+                        "category": {
+                            "type": "string"
+                        },
                         "regionFocus": {
                             "type": "string"
                         },
                         "illustrationCard": {
+                            "type": "string"
+                        },
+                        "illustrationSquare": {
+                            "type": "string"
+                        },
+                        "exampleUrl": {
                             "type": "string"
                         }
                     },
@@ -3118,7 +3375,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -3223,7 +3489,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -3434,7 +3709,16 @@
                     "type": "boolean"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "isThirdPartyTracking": {
                     "type": "boolean"
@@ -3482,7 +3766,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "isThirdPartyTracking": {
                     "type": "boolean"
@@ -3524,6 +3817,17 @@
                 "size"
             ]
         },
+        "StarRating": {
+            "enum": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "type": "number"
+        },
         "RatingSizeType": {
             "enum": [
                 "large",
@@ -3549,7 +3853,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -3612,7 +3925,16 @@
                     }
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -3684,7 +4006,215 @@
                                             "type": "string"
                                         },
                                         "main": {
-                                            "$ref": "#/definitions/FEElement"
+                                            "anyOf": [
+                                                {
+                                                    "$ref": "#/definitions/AdPlaceholderBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/AudioAtomBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/AudioBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/BlockquoteBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/CaptionBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/CalloutBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/CalloutBlockElementV2"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/CallToActionAtomBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/ReporterCalloutBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/CartoonBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/ChartAtomBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/CodeBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/CommentBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/ContentAtomBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/DisclaimerBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/DividerBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/DocumentBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/EmbedBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/ExplainerAtomBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/GenericAtomBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/GuideAtomBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/GuVideoBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/HighlightBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/ImageBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/InstagramBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/InteractiveAtomBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/InteractiveContentsBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/InteractiveBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/ItemLinkBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/KeyTakeawaysBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/LinkBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/ListBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/MapBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/MediaAtomBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/MiniProfilesBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/MultiBylinesBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/MultiImageBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/NumberedTitleBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/NewsletterSignupBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/ProfileAtomBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/PullquoteBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/QAndAExplainerBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/QABlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/QuizAtomBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/RichLinkBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/SoundcloudBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/SpotifyBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/StarRatingBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/SubheadingBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/TableBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/TextBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/TimelineAtomBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/FETimelineBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/DCRTimelineBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/DCRSectionedTimelineBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/TweetBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/VideoBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/VideoFacebookBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/VideoVimeoBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/VideoYoutubeBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/VineBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/YoutubeBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/WitnessTypeBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/CrosswordElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/ProductBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/ProductSummaryBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/EnhancedProductSummaryElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/RecipeBlockElement"
+                                                },
+                                                {
+                                                    "$ref": "#/definitions/EventGraphicBlockElement"
+                                                }
+                                            ]
                                         },
                                         "body": {
                                             "type": "array",
@@ -3711,6 +4241,291 @@
                 "sections"
             ]
         },
+        "DCRTimelineBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.DCRTimelineBlockElement"
+                },
+                "events": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DCRTimelineEvent"
+                    }
+                }
+            },
+            "required": [
+                "_type",
+                "events"
+            ]
+        },
+        "DCRTimelineEvent": {
+            "type": "object",
+            "properties": {
+                "date": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "main": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/AdPlaceholderBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/AudioAtomBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/AudioBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/BlockquoteBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/CaptionBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/CalloutBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/CalloutBlockElementV2"
+                        },
+                        {
+                            "$ref": "#/definitions/CallToActionAtomBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/ReporterCalloutBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/CartoonBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/ChartAtomBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/CodeBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/CommentBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/ContentAtomBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/DisclaimerBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/DividerBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/DocumentBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/EmbedBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/ExplainerAtomBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/GenericAtomBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/GuideAtomBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/GuVideoBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/HighlightBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/ImageBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/InstagramBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/InteractiveAtomBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/InteractiveContentsBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/InteractiveBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/ItemLinkBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/KeyTakeawaysBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/LinkBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/ListBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/MapBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/MediaAtomBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/MiniProfilesBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/MultiBylinesBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/MultiImageBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/NumberedTitleBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/NewsletterSignupBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/ProfileAtomBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/PullquoteBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/QAndAExplainerBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/QABlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/QuizAtomBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/RichLinkBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/SoundcloudBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/SpotifyBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/StarRatingBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/SubheadingBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/TableBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/TextBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/TimelineAtomBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/FETimelineBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/DCRTimelineBlockElement"
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "_type": {
+                                    "type": "string",
+                                    "const": "model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement"
+                                },
+                                "sections": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "title": {
+                                                "type": "string"
+                                            },
+                                            "events": {
+                                                "type": "array",
+                                                "items": {
+                                                    "$ref": "#/definitions/DCRTimelineEvent"
+                                                }
+                                            }
+                                        },
+                                        "required": [
+                                            "events",
+                                            "title"
+                                        ]
+                                    }
+                                }
+                            },
+                            "required": [
+                                "_type",
+                                "sections"
+                            ]
+                        },
+                        {
+                            "$ref": "#/definitions/TweetBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/VideoBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/VideoFacebookBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/VideoVimeoBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/VideoYoutubeBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/VineBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/YoutubeBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/WitnessTypeBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/CrosswordElement"
+                        },
+                        {
+                            "$ref": "#/definitions/ProductBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/ProductSummaryBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/EnhancedProductSummaryElement"
+                        },
+                        {
+                            "$ref": "#/definitions/RecipeBlockElement"
+                        },
+                        {
+                            "$ref": "#/definitions/EventGraphicBlockElement"
+                        }
+                    ]
+                },
+                "body": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FEElement"
+                    }
+                }
+            },
+            "required": [
+                "body",
+                "date"
+            ]
+        },
         "TweetBlockElement": {
             "type": "object",
             "properties": {
@@ -3734,7 +4549,16 @@
                     "type": "boolean"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "isThirdPartyTracking": {
                     "type": "boolean"
@@ -3767,7 +4591,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "isThirdPartyTracking": {
                     "type": "boolean"
@@ -3811,7 +4644,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "isThirdPartyTracking": {
                     "type": "boolean"
@@ -3867,7 +4709,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "isThirdPartyTracking": {
                     "type": "boolean"
@@ -3923,7 +4774,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 },
                 "isThirdPartyTracking": {
                     "type": "boolean"
@@ -4044,7 +4904,19 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
+                },
+                "caption": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -4464,6 +5336,11 @@
                         "number",
                         "solutionAvailable"
                     ]
+                },
+                "requiresSubscription": {
+                    "description": "Set, as `true`, only when this crossword is premium and the puzzles hub\nv3 test is on. Absent otherwise, so the element is as it always was.",
+                    "const": true,
+                    "type": "boolean"
                 }
             },
             "required": [
@@ -4659,6 +5536,9 @@
                 "displayType": {
                     "$ref": "#/definitions/ProductDisplayType"
                 },
+                "id": {
+                    "type": "string"
+                },
                 "productCtas": {
                     "type": "array",
                     "items": {
@@ -4675,6 +5555,21 @@
                             },
                             "price": {
                                 "type": "string"
+                            },
+                            "latestPrice": {
+                                "type": "object",
+                                "properties": {
+                                    "currencySymbol": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "currencySymbol",
+                                    "price"
+                                ]
                             }
                         },
                         "required": [
@@ -4696,6 +5591,7 @@
                 "customAttributes",
                 "displayType",
                 "elementId",
+                "id",
                 "primaryHeadingHtml",
                 "productCtas",
                 "productName",
@@ -4738,6 +5634,9 @@
                 },
                 "width": {
                     "type": "number"
+                },
+                "position": {
+                    "type": "number"
                 }
             },
             "required": [
@@ -4758,32 +5657,908 @@
             ],
             "type": "string"
         },
-        "ProductSummaryElement": {
+        "ProductSummaryBlockElement": {
             "type": "object",
             "properties": {
                 "_type": {
                     "type": "string",
-                    "const": "model.dotcomrendering.pageElements.ProductSummaryElement"
+                    "const": "model.dotcomrendering.pageElements.ProductSummaryBlockElement"
                 },
-                "matchedProducts": {
+                "products": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/ProductBlockElement"
+                        "$ref": "#/definitions/SummaryProductRef"
                     }
                 },
-                "variant": {
-                    "enum": [
-                        "carousel",
-                        "stacked-default",
-                        "stacked-expanded"
-                    ],
+                "displayType": {
+                    "$ref": "#/definitions/ProductSummaryDisplayType"
+                },
+                "title": {
                     "type": "string"
                 }
             },
             "required": [
                 "_type",
-                "matchedProducts",
-                "variant"
+                "displayType",
+                "products",
+                "title"
+            ]
+        },
+        "SummaryProductRef": {
+            "type": "object",
+            "properties": {
+                "productId": {
+                    "type": "string"
+                },
+                "ctaIndex": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "ctaIndex",
+                "productId"
+            ]
+        },
+        "ProductSummaryDisplayType": {
+            "enum": [
+                "Carousel",
+                "CtaList",
+                "StackedCard",
+                "StackedCardExpanded"
+            ],
+            "type": "string"
+        },
+        "EnhancedProductSummaryElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.EnhancedProductSummaryElement"
+                },
+                "products": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SummaryProduct"
+                    }
+                },
+                "displayType": {
+                    "$ref": "#/definitions/ProductSummaryDisplayType"
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "displayType",
+                "products",
+                "title"
+            ]
+        },
+        "SummaryProduct": {
+            "type": "object",
+            "properties": {
+                "productBlock": {
+                    "$ref": "#/definitions/ProductBlockElement"
+                },
+                "ctaIndex": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "ctaIndex",
+                "productBlock"
+            ]
+        },
+        "RecipeBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.RecipeBlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "featuredImage": {
+                    "$ref": "#/definitions/RecipeFeaturedImage"
+                }
+            },
+            "required": [
+                "_type",
+                "id"
+            ]
+        },
+        "RecipeFeaturedImage": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string"
+                },
+                "mediaId": {
+                    "type": "string"
+                },
+                "cropId": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "photographer": {
+                    "type": "string"
+                },
+                "imageType": {
+                    "type": "string"
+                },
+                "caption": {
+                    "type": "string"
+                },
+                "width": {
+                    "type": "number"
+                },
+                "height": {
+                    "type": "number"
+                },
+                "mediaApiUri": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "cropId",
+                "mediaId",
+                "url"
+            ]
+        },
+        "EventGraphicBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.EventGraphicBlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "components": {
+                    "$ref": "#/definitions/{components:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"heading\";props:{text:string;};}|{kind:\"onwardLink\";props:{link:string;text:string;description:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};}|{kind:\"sideBySide\";left:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"heading\";props:{text:string;};}|{kind:\"onwardLink\";props:{link:string;text:string;description:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};right:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"heading\";props:{text:string;};}|{kind:\"onwardLink\";props:{link:string;text:string;description:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};})[];}"
+                },
+                "dataUrl": {
+                    "$ref": "#/definitions/URL"
+                }
+            },
+            "required": [
+                "_type",
+                "components",
+                "dataUrl",
+                "elementId"
+            ]
+        },
+        "{components:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"heading\";props:{text:string;};}|{kind:\"onwardLink\";props:{link:string;text:string;description:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};}|{kind:\"sideBySide\";left:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"heading\";props:{text:string;};}|{kind:\"onwardLink\";props:{link:string;text:string;description:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};right:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"heading\";props:{text:string;};}|{kind:\"onwardLink\";props:{link:string;text:string;description:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};})[];}": {
+            "type": "object",
+            "properties": {
+                "components": {
+                    "type": "array",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/{kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"heading\";props:{text:string;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"onwardLink\";props:{link:string;text:string;description:string;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"sideBySide\";left:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"heading\";props:{text:string;};}|{kind:\"onwardLink\";props:{link:string;text:string;description:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};right:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"heading\";props:{text:string;};}|{kind:\"onwardLink\";props:{link:string;text:string;description:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};}"
+                            }
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "components"
+            ]
+        },
+        "{kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "changeBars"
+                },
+                "props": {
+                    "$ref": "#/definitions/{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];}"
+                }
+            },
+            "required": [
+                "kind",
+                "props"
+            ]
+        },
+        "{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];}": {
+            "type": "object",
+            "properties": {
+                "changes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/{name:string;abbreviation:string;change:number;colour:{name:string;};}"
+                    }
+                }
+            },
+            "required": [
+                "changes"
+            ]
+        },
+        "{name:string;abbreviation:string;change:number;colour:{name:string;};}": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "abbreviation": {
+                    "type": "string"
+                },
+                "change": {
+                    "type": "number"
+                },
+                "colour": {
+                    "$ref": "#/definitions/{name:string;}"
+                }
+            },
+            "required": [
+                "abbreviation",
+                "change",
+                "colour",
+                "name"
+            ]
+        },
+        "{name:string;}": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name"
+            ]
+        },
+        "{kind:\"heading\";props:{text:string;};}": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "heading"
+                },
+                "props": {
+                    "$ref": "#/definitions/{text:string;}"
+                }
+            },
+            "required": [
+                "kind",
+                "props"
+            ]
+        },
+        "{text:string;}": {
+            "type": "object",
+            "properties": {
+                "text": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "text"
+            ]
+        },
+        "{kind:\"onwardLink\";props:{link:string;text:string;description:string;};}": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "onwardLink"
+                },
+                "props": {
+                    "$ref": "#/definitions/{link:string;text:string;description:string;}"
+                }
+            },
+            "required": [
+                "kind",
+                "props"
+            ]
+        },
+        "{link:string;text:string;description:string;}": {
+            "type": "object",
+            "properties": {
+                "link": {
+                    "type": "string"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "description",
+                "link",
+                "text"
+            ]
+        },
+        "{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "progressNumber"
+                },
+                "props": {
+                    "$ref": "#/definitions/{progress:number;total:number;copy:string;additionalCopy:string|null;}"
+                }
+            },
+            "required": [
+                "kind",
+                "props"
+            ]
+        },
+        "{progress:number;total:number;copy:string;additionalCopy:string|null;}": {
+            "type": "object",
+            "properties": {
+                "progress": {
+                    "type": "number"
+                },
+                "total": {
+                    "type": "number"
+                },
+                "copy": {
+                    "type": "string"
+                },
+                "additionalCopy": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                }
+            },
+            "required": [
+                "additionalCopy",
+                "copy",
+                "progress",
+                "total"
+            ]
+        },
+        "{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "stackedProgress"
+                },
+                "props": {
+                    "$ref": "#/definitions/{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;}"
+                }
+            },
+            "required": [
+                "kind",
+                "props"
+            ]
+        },
+        "{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;}": {
+            "type": "object",
+            "properties": {
+                "sections": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}"
+                    }
+                },
+                "total": {
+                    "type": "number"
+                },
+                "label": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "calculateWinner": {
+                    "type": "boolean"
+                },
+                "excludedCopy": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                }
+            },
+            "required": [
+                "calculateWinner",
+                "excludedCopy",
+                "label",
+                "sections",
+                "total"
+            ]
+        },
+        "{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}": {
+            "type": "object",
+            "properties": {
+                "colour": {
+                    "$ref": "#/definitions/{name:string;}"
+                },
+                "value": {
+                    "type": "number"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "align": {
+                    "enum": [
+                        "left",
+                        "right"
+                    ],
+                    "type": "string"
+                },
+                "exclude": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "align",
+                "colour",
+                "exclude",
+                "name",
+                "value"
+            ]
+        },
+        "{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "valuesWithChange"
+                },
+                "props": {
+                    "$ref": "#/definitions/{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;}"
+                }
+            },
+            "required": [
+                "kind",
+                "props"
+            ]
+        },
+        "{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;}": {
+            "type": "object",
+            "properties": {
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/{name:string;value:number;change:number;colour:{name:string;};}"
+                    }
+                },
+                "valueDescription": {
+                    "type": "string"
+                },
+                "changeDescription": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "changeDescription",
+                "valueDescription",
+                "values"
+            ]
+        },
+        "{name:string;value:number;change:number;colour:{name:string;};}": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "number"
+                },
+                "change": {
+                    "type": "number"
+                },
+                "colour": {
+                    "$ref": "#/definitions/{name:string;}"
+                }
+            },
+            "required": [
+                "change",
+                "colour",
+                "name",
+                "value"
+            ]
+        },
+        "{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};}": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "versus"
+                },
+                "props": {
+                    "$ref": "#/definitions/{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;}"
+                }
+            },
+            "required": [
+                "kind",
+                "props"
+            ]
+        },
+        "{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;}": {
+            "type": "object",
+            "properties": {
+                "left": {
+                    "anyOf": [
+                        {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}"
+                                },
+                                {
+                                    "$ref": "#/definitions/{change:number;}"
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}"
+                                },
+                                {
+                                    "$ref": "#/definitions/{description:string;}"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "right": {
+                    "anyOf": [
+                        {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}"
+                                },
+                                {
+                                    "$ref": "#/definitions/{change:number;}"
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}"
+                                },
+                                {
+                                    "$ref": "#/definitions/{description:string;}"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "colour": {
+                    "enum": [
+                        "name",
+                        "none",
+                        "value"
+                    ],
+                    "type": "string"
+                },
+                "faded": {
+                    "type": "boolean"
+                },
+                "banner": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                }
+            },
+            "required": [
+                "banner",
+                "colour",
+                "faded",
+                "left",
+                "right"
+            ]
+        },
+        "{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "abbreviation": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "number"
+                },
+                "image": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/{url:string;alt:string;}"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "colour": {
+                    "$ref": "#/definitions/{name:string;}"
+                }
+            },
+            "required": [
+                "abbreviation",
+                "colour",
+                "image",
+                "name",
+                "value"
+            ]
+        },
+        "{url:string;alt:string;}": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string"
+                },
+                "alt": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "alt",
+                "url"
+            ]
+        },
+        "{change:number;}": {
+            "type": "object",
+            "properties": {
+                "change": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "change"
+            ]
+        },
+        "{description:string;}": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "description"
+            ]
+        },
+        "{kind:\"sideBySide\";left:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"heading\";props:{text:string;};}|{kind:\"onwardLink\";props:{link:string;text:string;description:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};right:{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"heading\";props:{text:string;};}|{kind:\"onwardLink\";props:{link:string;text:string;description:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];};}": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "sideBySide"
+                },
+                "left": {
+                    "$ref": "#/definitions/{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"heading\";props:{text:string;};}|{kind:\"onwardLink\";props:{link:string;text:string;description:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];}"
+                },
+                "right": {
+                    "$ref": "#/definitions/{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"heading\";props:{text:string;};}|{kind:\"onwardLink\";props:{link:string;text:string;description:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];}_1"
+                }
+            },
+            "required": [
+                "kind",
+                "left",
+                "right"
+            ]
+        },
+        "{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"heading\";props:{text:string;};}|{kind:\"onwardLink\";props:{link:string;text:string;description:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];}": {
+            "type": "object",
+            "properties": {
+                "heading": {
+                    "type": "string"
+                },
+                "children": {
+                    "type": "array",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/{kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"heading\";props:{text:string;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"onwardLink\";props:{link:string;text:string;description:string;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};}"
+                            }
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "children",
+                "heading"
+            ]
+        },
+        "{heading:string;children:({kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}|{kind:\"heading\";props:{text:string;};}|{kind:\"onwardLink\";props:{link:string;text:string;description:string;};}|{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}|{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}|{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}|{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};})[];}_1": {
+            "type": "object",
+            "properties": {
+                "heading": {
+                    "type": "string"
+                },
+                "children": {
+                    "type": "array",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/{kind:\"changeBars\";props:{changes:{name:string;abbreviation:string;change:number;colour:{name:string;};}[];};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"heading\";props:{text:string;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"onwardLink\";props:{link:string;text:string;description:string;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"progressNumber\";props:{progress:number;total:number;copy:string;additionalCopy:string|null;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"stackedProgress\";props:{sections:{colour:{name:string;};value:number;name:string;align:\"left\"|\"right\";exclude:boolean;}[];total:number;label:string|null;calculateWinner:boolean;excludedCopy:string|null;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"valuesWithChange\";props:{values:{name:string;value:number;change:number;colour:{name:string;};}[];valueDescription:string;changeDescription:string;};}"
+                            },
+                            {
+                                "$ref": "#/definitions/{kind:\"versus\";props:{left:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});right:{name:string;abbreviation:string;value:number;image:{url:string;alt:string;}|null;colour:{name:string;};}&({change:number;}|{description:string;});colour:\"name\"|\"value\"|\"none\";faded:boolean;banner:string|null;};}"
+                            }
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "children",
+                "heading"
+            ]
+        },
+        "URL": {
+            "type": "object",
+            "properties": {
+                "hash": {
+                    "type": "string"
+                },
+                "host": {
+                    "type": "string"
+                },
+                "hostname": {
+                    "type": "string"
+                },
+                "href": {
+                    "type": "string"
+                },
+                "origin": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "pathname": {
+                    "type": "string"
+                },
+                "port": {
+                    "type": "string"
+                },
+                "protocol": {
+                    "type": "string"
+                },
+                "search": {
+                    "type": "string"
+                },
+                "searchParams": {
+                    "$ref": "#/definitions/URLSearchParams"
+                },
+                "username": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "hash",
+                "host",
+                "hostname",
+                "href",
+                "origin",
+                "password",
+                "pathname",
+                "port",
+                "protocol",
+                "search",
+                "searchParams",
+                "username"
+            ]
+        },
+        "URLSearchParams": {
+            "type": "object",
+            "properties": {
+                "size": {
+                    "description": "The total number of parameter entries.",
+                    "type": "number"
+                }
+            },
+            "required": [
+                "size"
+            ]
+        },
+        "DCRSectionedTimelineBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement"
+                },
+                "sections": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DCRTimelineSection"
+                    }
+                }
+            },
+            "required": [
+                "_type",
+                "sections"
+            ]
+        },
+        "DCRTimelineSection": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "events": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DCRTimelineEvent"
+                    }
+                }
+            },
+            "required": [
+                "events",
+                "title"
             ]
         },
         "Block": {
@@ -4979,7 +6754,8 @@
                 "RecipeDesign",
                 "ReviewDesign",
                 "TimelineDesign",
-                "VideoDesign"
+                "VideoDesign",
+                "WeekendEssayDesign"
             ],
             "type": "string"
         },
@@ -5040,7 +6816,15 @@
                     }
                 },
                 "pillar": {
-                    "$ref": "#/definitions/LegacyPillar"
+                    "enum": [
+                        "culture",
+                        "labs",
+                        "lifestyle",
+                        "news",
+                        "opinion",
+                        "sport"
+                    ],
+                    "type": "string"
                 },
                 "more": {
                     "type": "boolean"
@@ -5061,89 +6845,28 @@
             "description": "the config model will contain useful app/site\nlevel data. Although currently derived from the config model\nconstructed in frontend and passed to dotcom-rendering\nthis data could eventually be defined in dotcom-rendering",
             "type": "object",
             "properties": {
-                "dcrCouldRender": {
-                    "type": "boolean"
+                "adUnit": {
+                    "type": "string"
                 },
                 "ajaxUrl": {
                     "type": "string"
                 },
-                "sentryPublicApiKey": {
-                    "type": "string"
-                },
-                "sentryHost": {
-                    "type": "string"
-                },
-                "dcrSentryDsn": {
-                    "type": "string"
-                },
-                "switches": {
-                    "$ref": "#/definitions/Switches"
-                },
-                "abTests": {
-                    "description": "Narrowest representation of the server-side tests\nobject shape, which is [defined in `frontend`](https://github.com/guardian/frontend/blob/23743723030a041e4f4f59fa265ee2be0bb51825/common/app/experiments/ExperimentsDefinition.scala#L24-L26).\n\n**Note:** This type is not support by JSON-schema, it evaluates as `object`",
-                    "type": "object"
-                },
-                "serverSideABTests": {
-                    "$ref": "#/definitions/Record<string,string>"
-                },
-                "dfpAccountId": {
+                "brazeApiKey": {
                     "type": "string"
                 },
                 "commercialBundleUrl": {
                     "type": "string"
                 },
-                "revisionNumber": {
-                    "type": "string"
-                },
-                "shortUrlId": {
-                    "type": "string"
-                },
-                "isDev": {
+                "dcrCouldRender": {
                     "type": "boolean"
                 },
-                "googletagUrl": {
+                "dcrSentryDsn": {
                     "type": "string"
                 },
-                "stage": {
-                    "$ref": "#/definitions/StageType"
-                },
-                "frontendAssetsFullURL": {
+                "dfpAccountId": {
                     "type": "string"
                 },
-                "adUnit": {
-                    "type": "string"
-                },
-                "isSensitive": {
-                    "type": "boolean"
-                },
-                "videoDuration": {
-                    "type": "number"
-                },
-                "edition": {
-                    "$ref": "#/definitions/EditionId"
-                },
-                "section": {
-                    "type": "string"
-                },
-                "source": {
-                    "type": "string"
-                },
-                "sharedAdTargeting": {
-                    "$ref": "#/definitions/SharedAdTargeting"
-                },
-                "isPaidContent": {
-                    "type": "boolean"
-                },
-                "keywordIds": {
-                    "type": "string"
-                },
-                "showRelatedContent": {
-                    "type": "boolean"
-                },
-                "shouldHideReaderRevenue": {
-                    "type": "boolean"
-                },
-                "idApiUrl": {
+                "discussionApiClientHeader": {
                     "type": "string"
                 },
                 "discussionApiUrl": {
@@ -5152,11 +6875,62 @@
                 "discussionD2Uid": {
                     "type": "string"
                 },
-                "discussionApiClientHeader": {
+                "edition": {
+                    "$ref": "#/definitions/EditionId"
+                },
+                "frontendAssetsFullURL": {
                     "type": "string"
+                },
+                "googleRecaptchaSiteKey": {
+                    "type": "string"
+                },
+                "googleRecaptchaSiteKeyVisible": {
+                    "type": "string"
+                },
+                "googletagUrl": {
+                    "type": "string"
+                },
+                "hasPageSkin": {
+                    "type": "boolean"
+                },
+                "host": {
+                    "type": "string"
+                },
+                "idApiUrl": {
+                    "type": "string"
+                },
+                "idUrl": {
+                    "type": "string"
+                },
+                "ipsosTag": {
+                    "type": "string"
+                },
+                "isDev": {
+                    "type": "boolean"
+                },
+                "isLive": {
+                    "type": "boolean"
+                },
+                "isLiveBlog": {
+                    "type": "boolean"
+                },
+                "isPaidContent": {
+                    "type": "boolean"
                 },
                 "isPhotoEssay": {
                     "type": "boolean"
+                },
+                "isPreview": {
+                    "type": "boolean"
+                },
+                "isSensitive": {
+                    "type": "boolean"
+                },
+                "keywordIds": {
+                    "type": "string"
+                },
+                "mmaUrl": {
+                    "type": "string"
                 },
                 "references": {
                     "type": "array",
@@ -5167,35 +6941,47 @@
                         }
                     }
                 },
-                "host": {
+                "revisionNumber": {
                     "type": "string"
                 },
-                "idUrl": {
+                "section": {
                     "type": "string"
                 },
-                "mmaUrl": {
+                "sentryHost": {
                     "type": "string"
                 },
-                "brazeApiKey": {
+                "sentryPublicApiKey": {
                     "type": "string"
                 },
-                "ipsosTag": {
+                "serverSideABTests": {
+                    "$ref": "#/definitions/Record<string,string>"
+                },
+                "sharedAdTargeting": {
+                    "$ref": "#/definitions/SharedAdTargeting"
+                },
+                "shortUrlId": {
                     "type": "string"
                 },
-                "isLiveBlog": {
+                "shouldHideReaderRevenue": {
                     "type": "boolean"
                 },
-                "isLive": {
+                "showRelatedContent": {
                     "type": "boolean"
                 },
-                "isPreview": {
-                    "type": "boolean"
-                },
-                "googleRecaptchaSiteKey": {
+                "source": {
                     "type": "string"
                 },
-                "googleRecaptchaSiteKeyVisible": {
+                "stage": {
+                    "$ref": "#/definitions/StageType"
+                },
+                "switches": {
+                    "$ref": "#/definitions/Switches"
+                },
+                "userBenefitsApiUrl": {
                     "type": "string"
+                },
+                "videoDuration": {
+                    "type": "number"
                 },
                 "pageId": {
                     "type": "string"
@@ -5229,10 +7015,375 @@
                 },
                 "hasSurveyAd": {
                     "type": "boolean"
+                },
+                "a9PublisherId": {
+                    "type": "string"
+                },
+                "allowUserGeneratedContent": {
+                    "type": "boolean"
+                },
+                "assetsPath": {
+                    "type": "string"
+                },
+                "atoms": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "atomTypes": {
+                    "type": "object",
+                    "properties": {
+                        "audio": {
+                            "type": "boolean"
+                        },
+                        "callToAction": {
+                            "type": "boolean"
+                        },
+                        "chart": {
+                            "type": "boolean"
+                        },
+                        "commonsdivision": {
+                            "type": "boolean"
+                        },
+                        "explainer": {
+                            "type": "boolean"
+                        },
+                        "guide": {
+                            "type": "boolean"
+                        },
+                        "interactive": {
+                            "type": "boolean"
+                        },
+                        "media": {
+                            "type": "boolean"
+                        },
+                        "profile": {
+                            "type": "boolean"
+                        },
+                        "qanda": {
+                            "type": "boolean"
+                        },
+                        "quizz": {
+                            "type": "boolean"
+                        },
+                        "review": {
+                            "type": "boolean"
+                        },
+                        "timeline": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "authorIds": {
+                    "type": "string"
+                },
+                "avatarApiUrl": {
+                    "type": "string"
+                },
+                "avatarImagesUrl": {
+                    "type": "string"
+                },
+                "beaconUrl": {
+                    "type": "string"
+                },
+                "blogIds": {
+                    "type": "string"
+                },
+                "blogs": {
+                    "type": "string"
+                },
+                "buildNumber": {
+                    "type": "string"
+                },
+                "byline": {
+                    "type": "string"
+                },
+                "calloutsUrl": {
+                    "type": "string"
+                },
+                "campaigns": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "rules": {
+                                "type": "array",
+                                "items": {}
+                            },
+                            "priority": {
+                                "type": "number"
+                            },
+                            "displayOnSensitive": {
+                                "type": "boolean"
+                            },
+                            "fields": {
+                                "type": "object",
+                                "properties": {
+                                    "campaignId": {
+                                        "type": "string"
+                                    },
+                                    "_type": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "cardStyle": {
+                    "type": "string"
+                },
+                "commentable": {
+                    "type": "boolean"
+                },
+                "commissioningDesks": {
+                    "type": "string"
+                },
+                "contentId": {
+                    "type": "string"
+                },
+                "contributorBio": {
+                    "type": "string"
+                },
+                "dfpAdUnitRoot": {
+                    "type": "string"
+                },
+                "dfpHost": {
+                    "type": "string"
+                },
+                "disableStickyTopBanner": {
+                    "type": "boolean"
+                },
+                "externalEmbedHost": {
+                    "type": "string"
+                },
+                "facebookIaAdUnitRoot": {
+                    "type": "string"
+                },
+                "fbAppId": {
+                    "type": "string"
+                },
+                "forecastsapiurl": {
+                    "type": "string"
+                },
+                "frontendSentryDsn": {
+                    "type": "string"
+                },
+                "googleSearchId": {
+                    "type": "string"
+                },
+                "googleSearchUrl": {
+                    "type": "string"
+                },
+                "googletagJsUrl": {
+                    "type": "string"
+                },
+                "hasMultipleVideosInPage": {
+                    "type": "boolean"
+                },
+                "hasShowcaseMainElement": {
+                    "type": "boolean"
+                },
+                "hasYouTubeAtom": {
+                    "type": "boolean"
+                },
+                "idOAuthUrl": {
+                    "type": "string"
+                },
+                "idWebAppUrl": {
+                    "type": "string"
+                },
+                "inBodyExternalLinkCount": {
+                    "type": "number"
+                },
+                "inBodyInternalLinkCount": {
+                    "type": "number"
+                },
+                "isAdFree": {
+                    "type": "boolean"
+                },
+                "isColumn": {
+                    "type": "boolean"
+                },
+                "isContent": {
+                    "type": "boolean"
+                },
+                "isFront": {
+                    "type": "boolean"
+                },
+                "isHosted": {
+                    "type": "boolean"
+                },
+                "isImmersive": {
+                    "type": "boolean"
+                },
+                "isNumberedList": {
+                    "type": "boolean"
+                },
+                "isProd": {
+                    "type": "boolean"
+                },
+                "isSplash": {
+                    "type": "boolean"
+                },
+                "lightboxImages": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "string"
+                        },
+                        "headline": {
+                            "type": "string"
+                        },
+                        "shouldHideAdverts": {
+                            "type": "boolean"
+                        },
+                        "standfirst": {
+                            "type": "string"
+                        },
+                        "images": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "caption": {
+                                        "type": "string"
+                                    },
+                                    "credit": {
+                                        "type": "string"
+                                    },
+                                    "displayCredit": {
+                                        "type": "boolean"
+                                    },
+                                    "src": {
+                                        "type": "string"
+                                    },
+                                    "srcsets": {
+                                        "type": "string"
+                                    },
+                                    "sizes": {
+                                        "type": "string"
+                                    },
+                                    "ratio": {
+                                        "type": "number"
+                                    },
+                                    "role": {
+                                        "type": "string"
+                                    },
+                                    "parentContentId": {
+                                        "type": "string"
+                                    },
+                                    "id": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "locationapiurl": {
+                    "type": "string"
+                },
+                "membershipAccess": {
+                    "type": "string"
+                },
+                "membershipUrl": {
+                    "type": "string"
+                },
+                "mobileAppsAdUnitRoot": {
+                    "type": "string"
+                },
+                "nonKeywordTagIds": {
+                    "type": "string"
+                },
+                "omnitureAccount": {
+                    "type": "string"
+                },
+                "omnitureAmpAccount": {
+                    "type": "string"
+                },
+                "onwardWebSocket": {
+                    "type": "string"
+                },
+                "ophanEmbedJsUrl": {
+                    "type": "string"
+                },
+                "ophanJsUrl": {
+                    "type": "string"
+                },
+                "optimizeEpicUrl": {
+                    "type": "string"
+                },
+                "pageCode": {
+                    "type": "string"
+                },
+                "pbIndexSites": {},
+                "pillar": {
+                    "type": "string"
+                },
+                "plistaPublicApiKey": {
+                    "type": "string"
+                },
+                "productionOffice": {
+                    "type": "string"
+                },
+                "publication": {
+                    "type": "string"
+                },
+                "requiresMembershipAccess": {
+                    "type": "boolean"
+                },
+                "richLink": {
+                    "type": "string"
+                },
+                "sectionName": {
+                    "type": "string"
+                },
+                "shortUrl": {
+                    "type": "string"
+                },
+                "shouldHideAdverts": {
+                    "type": "boolean"
+                },
+                "sponsorshipType": {
+                    "type": "string"
+                },
+                "stripePublicToken": {
+                    "type": "string"
+                },
+                "supportUrl": {
+                    "type": "string"
+                },
+                "thirdPartyAppsAccount": {
+                    "type": "string"
+                },
+                "thumbnail": {
+                    "type": "string"
+                },
+                "tones": {
+                    "type": "string"
+                },
+                "userAttributesApiUrl": {
+                    "type": "string"
+                },
+                "weatherapiurl": {
+                    "type": "string"
+                },
+                "webTitle": {
+                    "type": "string"
+                },
+                "wordCount": {
+                    "type": "number"
                 }
             },
             "required": [
-                "abTests",
                 "adUnit",
                 "ajaxUrl",
                 "ampIframeUrl",
@@ -5262,13 +7413,10 @@
                 "switches"
             ]
         },
-        "Switches": {
-            "type": "object",
-            "additionalProperties": {
-                "type": "boolean"
-            }
-        },
         "Record<string,string>": {
+            "type": "object"
+        },
+        "SharedAdTargeting": {
             "type": "object"
         },
         "StageType": {
@@ -5279,8 +7427,11 @@
             ],
             "type": "string"
         },
-        "SharedAdTargeting": {
-            "type": "object"
+        "Switches": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "boolean"
+            }
         },
         "FETrailType": {
             "type": "object",
@@ -5360,7 +7511,15 @@
                     "type": "number"
                 },
                 "starRating": {
-                    "$ref": "#/definitions/StarRating"
+                    "enum": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5
+                    ],
+                    "type": "number"
                 },
                 "linkText": {
                     "type": "string"
@@ -5410,7 +7569,21 @@
                     ]
                 },
                 "mainMedia": {
-                    "$ref": "#/definitions/MainMedia"
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/YoutubeVideo",
+                            "description": "For displaying embedded, playable videos directly in cards"
+                        },
+                        {
+                            "$ref": "#/definitions/SelfHostedVideo"
+                        },
+                        {
+                            "$ref": "#/definitions/Audio"
+                        },
+                        {
+                            "$ref": "#/definitions/Gallery"
+                        }
+                    ]
                 },
                 "trailText": {
                     "type": "string"
@@ -5429,7 +7602,44 @@
             "type": "object",
             "properties": {
                 "brandingType": {
-                    "$ref": "#/definitions/BrandingType"
+                    "anyOf": [
+                        {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "const": "paid-content"
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ]
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "const": "foundation"
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ]
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "const": "sponsored"
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ]
+                        }
+                    ]
                 },
                 "sponsorName": {
                     "type": "string"
@@ -5516,63 +7726,6 @@
                 "aboutThisLink",
                 "logo",
                 "sponsorName"
-            ]
-        },
-        "BrandingType": {
-            "anyOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "const": "paid-content"
-                        }
-                    },
-                    "required": [
-                        "name"
-                    ]
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "const": "foundation"
-                        }
-                    },
-                    "required": [
-                        "name"
-                    ]
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "const": "sponsored"
-                        }
-                    },
-                    "required": [
-                        "name"
-                    ]
-                }
-            ]
-        },
-        "MainMedia": {
-            "anyOf": [
-                {
-                    "$ref": "#/definitions/YoutubeVideo",
-                    "description": "For displaying embedded, playable videos directly in cards"
-                },
-                {
-                    "$ref": "#/definitions/SelfHostedVideo"
-                },
-                {
-                    "$ref": "#/definitions/Audio"
-                },
-                {
-                    "$ref": "#/definitions/Gallery"
-                }
             ]
         },
         "YoutubeVideo": {
@@ -5696,11 +7849,15 @@
                                     "width": {
                                         "type": "number"
                                     },
+                                    "hasAudio": {
+                                        "type": "boolean"
+                                    },
                                     "aspectRatio": {
                                         "type": "string"
                                     }
                                 },
                                 "required": [
+                                    "hasAudio",
                                     "height",
                                     "mimeType",
                                     "src",
@@ -5718,19 +7875,39 @@
                             "type": "string"
                         },
                         "image": {
-                            "type": "string"
+                            "type": "object",
+                            "properties": {
+                                "src": {
+                                    "type": "string"
+                                },
+                                "aspectRatio": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "aspectRatio"
+                            ]
                         }
                     },
                     "required": [
                         "aspectRatio",
                         "atomId",
                         "duration",
+                        "image",
                         "sources",
                         "type",
                         "videoStyle"
                     ]
                 }
             ]
+        },
+        "VideoPlayerFormat": {
+            "enum": [
+                "Cinemagraph",
+                "Default",
+                "Loop"
+            ],
+            "type": "string"
         },
         "SupportedVideoFileType": {
             "enum": [
@@ -5967,6 +8144,7 @@
                     }
                 },
                 "currentNavLink": {
+                    "description": "Data types for the API request bodies from clients that require transformation before internal use.\nWhere data types are coming from Frontend we try to use the 'FE' prefix.\nPrior to this we used 'CAPI' as a prefix which wasn't entirely accurate, and some data structures never received the prefix, meaning some are still missing it.",
                     "$ref": "#/definitions/FELinkType"
                 },
                 "currentNavLinkTitle": {
@@ -5979,6 +8157,7 @@
                     "type": "object",
                     "properties": {
                         "parent": {
+                            "description": "Data types for the API request bodies from clients that require transformation before internal use.\nWhere data types are coming from Frontend we try to use the 'FE' prefix.\nPrior to this we used 'CAPI' as a prefix which wasn't entirely accurate, and some data structures never received the prefix, meaning some are still missing it.",
                             "$ref": "#/definitions/FELinkType"
                         },
                         "links": {
@@ -5992,6 +8171,9 @@
                         "links"
                     ]
                 },
+                "customSubnav": {
+                    "$ref": "#/definitions/CustomSubnav"
+                },
                 "readerRevenueLinks": {
                     "$ref": "#/definitions/ReaderRevenuePositions"
                 }
@@ -6003,6 +8185,148 @@
                 "pillars",
                 "readerRevenueLinks"
             ]
+        },
+        "CustomSubnav": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "header": {
+                    "$ref": "#/definitions/CustomSubnavHeader"
+                },
+                "format": {
+                    "enum": [
+                        "compact",
+                        "large"
+                    ],
+                    "type": "string"
+                },
+                "links": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomSubnavLink"
+                    }
+                },
+                "pages": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomSubnavTargetedPage"
+                    }
+                },
+                "images": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomSubnavImage"
+                    }
+                }
+            },
+            "required": [
+                "format",
+                "header",
+                "id",
+                "links"
+            ]
+        },
+        "CustomSubnavHeader": {
+            "type": "object",
+            "properties": {
+                "headerText": {
+                    "type": "string"
+                },
+                "showHeaderText": {
+                    "type": "boolean"
+                },
+                "dotcomPath": {
+                    "type": "string"
+                },
+                "copy": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "copy",
+                "headerText",
+                "showHeaderText"
+            ]
+        },
+        "CustomSubnavLink": {
+            "type": "object",
+            "properties": {
+                "linkText": {
+                    "type": "string"
+                },
+                "dotcomPath": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dotcomPath",
+                "linkText"
+            ]
+        },
+        "CustomSubnavTargetedPage": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "enum": [
+                        "article",
+                        "front",
+                        "hasTag"
+                    ],
+                    "type": "string"
+                },
+                "path": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "path",
+                "type"
+            ]
+        },
+        "CustomSubnavImage": {
+            "type": "object",
+            "properties": {
+                "imageSrc": {
+                    "type": "string"
+                },
+                "breakpoint": {
+                    "$ref": "#/definitions/CustomSubnavImageBreakpoint"
+                },
+                "platforms": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomSubnavImagePlatform"
+                    }
+                }
+            },
+            "required": [
+                "breakpoint",
+                "imageSrc",
+                "platforms"
+            ]
+        },
+        "CustomSubnavImageBreakpoint": {
+            "enum": [
+                "desktop",
+                "leftCol",
+                "mobile",
+                "mobileLandscape",
+                "mobileMedium",
+                "phablet",
+                "tablet",
+                "wide"
+            ],
+            "type": "string"
+        },
+        "CustomSubnavImagePlatform": {
+            "enum": [
+                "android",
+                "ios",
+                "web"
+            ],
+            "type": "string"
         },
         "ReaderRevenuePositions": {
             "type": "object",
@@ -6096,11 +8420,12 @@
                 "url"
             ]
         },
-        "MatchType": {
-            "description": "General",
+        "PuzzleCardVariant": {
             "enum": [
-                "CricketMatchType",
-                "FootballMatchType"
+                "archive",
+                "compact",
+                "large",
+                "primary"
             ],
             "type": "string"
         }

@@ -1,5 +1,9 @@
-import type { ConsentState } from '@guardian/libs';
-import { cmp, getConsentDetailsForOphan, onConsent } from '@guardian/libs';
+import type { ConsentState } from '@guardian/consent-manager';
+import {
+	cmp,
+	getConsentDetailsForOphan,
+	onConsent,
+} from '@guardian/consent-manager';
 import { getCookie, log } from '@guardian/libs';
 import { getLocaleCode } from '../lib/getCountryCode';
 import { isUserLoggedIn } from '../lib/identity';
@@ -54,8 +58,9 @@ export const bootCmp = async (
 ): Promise<void> => {
 	if (!window.guardian.config.switches.consentManagement) return; // CMP turned off!
 
+	// Initalise CMP before attempting to submit consent to Ophan, otherwise the consent state may be empty on first load.
+	await initialiseCmp();
 	await Promise.all([
-		initialiseCmp(),
 		eagerlyImportPrivacySettingsLinkIsland(),
 		submitConsentToOphan(renderingTarget),
 	]);

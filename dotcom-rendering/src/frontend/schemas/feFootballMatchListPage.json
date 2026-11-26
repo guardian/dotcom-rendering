@@ -96,16 +96,16 @@
                                             "items": {
                                                 "anyOf": [
                                                     {
-                                                        "$ref": "#/definitions/{id:string;type:\"LiveMatch\";stage:{stageNumber:string;};date:string;round:{roundNumber:string;name?:string;};leg:string;homeTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};awayTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};status:string;venue?:{name:string;id:string;};comments?:string;attendance?:string;referee?:{name:string;id:string;};}"
+                                                        "$ref": "#/definitions/{type:\"Fixture\";competition?:{id:string;name:string;}|undefined;id:string;date:string;stage:{stageNumber:string;};round:{roundNumber:string;name?:string|undefined;};leg:string;homeTeam:{id:string;name:string;score?:number|undefined;htScore?:number|undefined;aggregateScore?:number|undefined;scorers?:string|undefined;teamUrl?:string|undefined;};awayTeam:{id:string;name:string;score?:number|undefined;htScore?:number|undefined;aggregateScore?:number|undefined;scorers?:string|undefined;teamUrl?:string|undefined;};venue?:{id:string;name:string;}|undefined;comments?:string|undefined;}"
                                                     },
                                                     {
-                                                        "$ref": "#/definitions/{id:string;type:\"Fixture\";stage:{stageNumber:string;};date:string;round:{roundNumber:string;name?:string;};leg:string;homeTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};awayTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};venue?:{name:string;id:string;};comments?:string;competition?:{name:string;id:string;};}"
+                                                        "$ref": "#/definitions/{type:\"MatchDay\";liveMatch:boolean;result:boolean;previewAvailable:boolean;reportAvailable:boolean;lineupsAvailable:boolean;matchStatus:string;attendance?:string|undefined;referee?:{id:string;name:string;}|undefined;competition?:{id:string;name:string;}|undefined;id:string;date:string;stage:{stageNumber:string;};round:{roundNumber:string;name?:string|undefined;};leg:string;homeTeam:{id:string;name:string;score?:number|undefined;htScore?:number|undefined;aggregateScore?:number|undefined;scorers?:string|undefined;teamUrl?:string|undefined;};awayTeam:{id:string;name:string;score?:number|undefined;htScore?:number|undefined;aggregateScore?:number|undefined;scorers?:string|undefined;teamUrl?:string|undefined;};venue?:{id:string;name:string;}|undefined;comments?:string|undefined;}"
                                                     },
                                                     {
-                                                        "$ref": "#/definitions/{id:string;type:\"MatchDay\";stage:{stageNumber:string;};date:string;round:{roundNumber:string;name?:string;};leg:string;homeTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};awayTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};liveMatch:boolean;result:boolean;previewAvailable:boolean;reportAvailable:boolean;lineupsAvailable:boolean;matchStatus:string;venue?:{name:string;id:string;};comments?:string;attendance?:string;referee?:{name:string;id:string;};competition?:{name:string;id:string;};}"
+                                                        "$ref": "#/definitions/{type:\"Result\";reportAvailable:boolean;attendance?:string|undefined;referee?:{id:string;name:string;}|undefined;id:string;date:string;stage:{stageNumber:string;};round:{roundNumber:string;name?:string|undefined;};leg:string;homeTeam:{id:string;name:string;score?:number|undefined;htScore?:number|undefined;aggregateScore?:number|undefined;scorers?:string|undefined;teamUrl?:string|undefined;};awayTeam:{id:string;name:string;score?:number|undefined;htScore?:number|undefined;aggregateScore?:number|undefined;scorers?:string|undefined;teamUrl?:string|undefined;};venue?:{id:string;name:string;}|undefined;comments?:string|undefined;}"
                                                     },
                                                     {
-                                                        "$ref": "#/definitions/{id:string;type:\"Result\";stage:{stageNumber:string;};date:string;round:{roundNumber:string;name?:string;};leg:string;homeTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};awayTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};reportAvailable:boolean;venue?:{name:string;id:string;};comments?:string;attendance?:string;referee?:{name:string;id:string;};}"
+                                                        "$ref": "#/definitions/{type:\"LiveMatch\";status:string;attendance?:string|undefined;referee?:{id:string;name:string;}|undefined;id:string;date:string;stage:{stageNumber:string;};round:{roundNumber:string;name?:string|undefined;};leg:string;homeTeam:{id:string;name:string;score?:number|undefined;htScore?:number|undefined;aggregateScore?:number|undefined;scorers?:string|undefined;teamUrl?:string|undefined;};awayTeam:{id:string;name:string;score?:number|undefined;htScore?:number|undefined;aggregateScore?:number|undefined;scorers?:string|undefined;teamUrl?:string|undefined;};venue?:{id:string;name:string;}|undefined;comments?:string|undefined;}"
                                                     }
                                                 ]
                                             }
@@ -166,6 +166,7 @@
                     }
                 },
                 "currentNavLink": {
+                    "description": "Data types for the API request bodies from clients that require transformation before internal use.\nWhere data types are coming from Frontend we try to use the 'FE' prefix.\nPrior to this we used 'CAPI' as a prefix which wasn't entirely accurate, and some data structures never received the prefix, meaning some are still missing it.",
                     "$ref": "#/definitions/FELinkType"
                 },
                 "currentNavLinkTitle": {
@@ -178,6 +179,7 @@
                     "type": "object",
                     "properties": {
                         "parent": {
+                            "description": "Data types for the API request bodies from clients that require transformation before internal use.\nWhere data types are coming from Frontend we try to use the 'FE' prefix.\nPrior to this we used 'CAPI' as a prefix which wasn't entirely accurate, and some data structures never received the prefix, meaning some are still missing it.",
                             "$ref": "#/definitions/FELinkType"
                         },
                         "links": {
@@ -190,6 +192,9 @@
                     "required": [
                         "links"
                     ]
+                },
+                "customSubnav": {
+                    "$ref": "#/definitions/CustomSubnav"
                 },
                 "readerRevenueLinks": {
                     "$ref": "#/definitions/ReaderRevenuePositions"
@@ -226,7 +231,15 @@
                     }
                 },
                 "pillar": {
-                    "$ref": "#/definitions/LegacyPillar"
+                    "enum": [
+                        "culture",
+                        "labs",
+                        "lifestyle",
+                        "news",
+                        "opinion",
+                        "sport"
+                    ],
+                    "type": "string"
                 },
                 "more": {
                     "type": "boolean"
@@ -243,14 +256,145 @@
                 "url"
             ]
         },
-        "LegacyPillar": {
+        "CustomSubnav": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "header": {
+                    "$ref": "#/definitions/CustomSubnavHeader"
+                },
+                "format": {
+                    "enum": [
+                        "compact",
+                        "large"
+                    ],
+                    "type": "string"
+                },
+                "links": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomSubnavLink"
+                    }
+                },
+                "pages": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomSubnavTargetedPage"
+                    }
+                },
+                "images": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomSubnavImage"
+                    }
+                }
+            },
+            "required": [
+                "format",
+                "header",
+                "id",
+                "links"
+            ]
+        },
+        "CustomSubnavHeader": {
+            "type": "object",
+            "properties": {
+                "headerText": {
+                    "type": "string"
+                },
+                "showHeaderText": {
+                    "type": "boolean"
+                },
+                "dotcomPath": {
+                    "type": "string"
+                },
+                "copy": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "copy",
+                "headerText",
+                "showHeaderText"
+            ]
+        },
+        "CustomSubnavLink": {
+            "type": "object",
+            "properties": {
+                "linkText": {
+                    "type": "string"
+                },
+                "dotcomPath": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dotcomPath",
+                "linkText"
+            ]
+        },
+        "CustomSubnavTargetedPage": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "enum": [
+                        "article",
+                        "front",
+                        "hasTag"
+                    ],
+                    "type": "string"
+                },
+                "path": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "path",
+                "type"
+            ]
+        },
+        "CustomSubnavImage": {
+            "type": "object",
+            "properties": {
+                "imageSrc": {
+                    "type": "string"
+                },
+                "breakpoint": {
+                    "$ref": "#/definitions/CustomSubnavImageBreakpoint"
+                },
+                "platforms": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomSubnavImagePlatform"
+                    }
+                }
+            },
+            "required": [
+                "breakpoint",
+                "imageSrc",
+                "platforms"
+            ]
+        },
+        "CustomSubnavImageBreakpoint": {
             "enum": [
-                "culture",
-                "labs",
-                "lifestyle",
-                "news",
-                "opinion",
-                "sport"
+                "desktop",
+                "leftCol",
+                "mobile",
+                "mobileLandscape",
+                "mobileMedium",
+                "phablet",
+                "tablet",
+                "wide"
+            ],
+            "type": "string"
+        },
+        "CustomSubnavImagePlatform": {
+            "enum": [
+                "android",
+                "ios",
+                "web"
             ],
             "type": "string"
         },
@@ -357,36 +501,191 @@
                 "adUnit": {
                     "type": "string"
                 },
-                "avatarApiUrl": {
-                    "type": "string"
-                },
-                "externalEmbedHost": {
-                    "type": "string"
-                },
                 "ajaxUrl": {
+                    "type": "string"
+                },
+                "brazeApiKey": {
+                    "type": "string"
+                },
+                "commercialBundleUrl": {
+                    "type": "string"
+                },
+                "dcrSentryDsn": {
+                    "type": "string"
+                },
+                "dfpAccountId": {
+                    "type": "string"
+                },
+                "discussionApiClientHeader": {
+                    "type": "string"
+                },
+                "discussionApiUrl": {
+                    "type": "string"
+                },
+                "discussionD2Uid": {
+                    "type": "string"
+                },
+                "frontendAssetsFullURL": {
+                    "type": "string"
+                },
+                "googleRecaptchaSiteKey": {
+                    "type": "string"
+                },
+                "googletagUrl": {
+                    "type": "string"
+                },
+                "hasPageSkin": {
+                    "type": "boolean"
+                },
+                "host": {
+                    "type": "string"
+                },
+                "idApiUrl": {
+                    "type": "string"
+                },
+                "idUrl": {
+                    "type": "string"
+                },
+                "ipsosTag": {
+                    "type": "string"
+                },
+                "isDev": {
+                    "type": "boolean"
+                },
+                "isPaidContent": {
+                    "type": "boolean"
+                },
+                "isPreview": {
+                    "type": "boolean"
+                },
+                "mmaUrl": {
                     "type": "string"
                 },
                 "revisionNumber": {
                     "type": "string"
                 },
-                "isProd": {
-                    "type": "boolean"
+                "sentryHost": {
+                    "type": "string"
+                },
+                "sentryPublicApiKey": {
+                    "type": "string"
+                },
+                "serverSideABTests": {
+                    "$ref": "#/definitions/Record<string,string>"
+                },
+                "stage": {
+                    "$ref": "#/definitions/StageType"
                 },
                 "switches": {
                     "$ref": "#/definitions/Switches"
                 },
-                "locationapiurl": {
+                "pageId": {
+                    "type": "string"
+                },
+                "contentType": {
+                    "type": "string"
+                },
+                "ampIframeUrl": {
+                    "type": "string"
+                },
+                "isProd": {
+                    "type": "boolean"
+                },
+                "supportUrl": {
+                    "type": "string"
+                },
+                "webTitle": {
+                    "type": "string"
+                },
+                "a9PublisherId": {
+                    "type": "string"
+                },
+                "allowUserGeneratedContent": {
+                    "type": "boolean"
+                },
+                "assetsPath": {
+                    "type": "string"
+                },
+                "avatarApiUrl": {
+                    "type": "string"
+                },
+                "avatarImagesUrl": {
+                    "type": "string"
+                },
+                "beaconUrl": {
                     "type": "string"
                 },
                 "buildNumber": {
                     "type": "string"
                 },
-                "abTests": {
-                    "description": "Narrowest representation of the server-side tests\nobject shape, which is [defined in `frontend`](https://github.com/guardian/frontend/blob/23743723030a041e4f4f59fa265ee2be0bb51825/common/app/experiments/ExperimentsDefinition.scala#L24-L26).\n\n**Note:** This type is not support by JSON-schema, it evaluates as `object`",
-                    "type": "object"
+                "calloutsUrl": {
+                    "type": "string"
                 },
-                "serverSideABTests": {
-                    "$ref": "#/definitions/Record<string,string>"
+                "cardStyle": {
+                    "type": "string"
+                },
+                "dfpAdUnitRoot": {
+                    "type": "string"
+                },
+                "dfpHost": {
+                    "type": "string"
+                },
+                "externalEmbedHost": {
+                    "type": "string"
+                },
+                "facebookIaAdUnitRoot": {
+                    "type": "string"
+                },
+                "fbAppId": {
+                    "type": "string"
+                },
+                "forecastsapiurl": {
+                    "type": "string"
+                },
+                "googleSearchId": {
+                    "type": "string"
+                },
+                "googleSearchUrl": {
+                    "type": "string"
+                },
+                "googletagJsUrl": {
+                    "type": "string"
+                },
+                "idOAuthUrl": {
+                    "type": "string"
+                },
+                "idWebAppUrl": {
+                    "type": "string"
+                },
+                "locationapiurl": {
+                    "type": "string"
+                },
+                "membershipAccess": {
+                    "type": "string"
+                },
+                "membershipUrl": {
+                    "type": "string"
+                },
+                "mobileAppsAdUnitRoot": {
+                    "type": "string"
+                },
+                "omnitureAccount": {
+                    "type": "string"
+                },
+                "omnitureAmpAccount": {
+                    "type": "string"
+                },
+                "onwardWebSocket": {
+                    "type": "string"
+                },
+                "ophanEmbedJsUrl": {
+                    "type": "string"
+                },
+                "ophanJsUrl": {
+                    "type": "string"
+                },
+                "optimizeEpicUrl": {
+                    "type": "string"
                 },
                 "pbIndexSites": {
                     "type": "array",
@@ -395,187 +694,27 @@
                         "additionalProperties": {}
                     }
                 },
-                "ampIframeUrl": {
-                    "type": "string"
-                },
-                "beaconUrl": {
-                    "type": "string"
-                },
-                "host": {
-                    "type": "string"
-                },
-                "brazeApiKey": {
-                    "type": "string"
-                },
-                "calloutsUrl": {
-                    "type": "string"
-                },
-                "requiresMembershipAccess": {
-                    "type": "boolean"
-                },
-                "onwardWebSocket": {
-                    "type": "string"
-                },
-                "a9PublisherId": {
-                    "type": "string"
-                },
-                "contentType": {
-                    "type": "string"
-                },
-                "facebookIaAdUnitRoot": {
-                    "type": "string"
-                },
-                "ophanEmbedJsUrl": {
-                    "type": "string"
-                },
-                "idUrl": {
-                    "type": "string"
-                },
-                "dcrSentryDsn": {
-                    "type": "string"
-                },
-                "idWebAppUrl": {
-                    "type": "string"
-                },
-                "discussionApiUrl": {
-                    "type": "string"
-                },
-                "sentryPublicApiKey": {
-                    "type": "string"
-                },
-                "omnitureAccount": {
-                    "type": "string"
-                },
-                "dfpAccountId": {
-                    "type": "string"
-                },
-                "pageId": {
-                    "type": "string"
-                },
-                "forecastsapiurl": {
-                    "type": "string"
-                },
-                "assetsPath": {
-                    "type": "string"
-                },
                 "pillar": {
-                    "type": "string"
-                },
-                "commercialBundleUrl": {
-                    "type": "string"
-                },
-                "discussionApiClientHeader": {
-                    "type": "string"
-                },
-                "membershipUrl": {
-                    "type": "string"
-                },
-                "dfpHost": {
-                    "type": "string"
-                },
-                "cardStyle": {
-                    "type": "string"
-                },
-                "googletagUrl": {
-                    "type": "string"
-                },
-                "sentryHost": {
-                    "type": "string"
-                },
-                "shouldHideAdverts": {
-                    "type": "boolean"
-                },
-                "mmaUrl": {
-                    "type": "string"
-                },
-                "membershipAccess": {
-                    "type": "string"
-                },
-                "isPreview": {
-                    "type": "boolean"
-                },
-                "googletagJsUrl": {
-                    "type": "string"
-                },
-                "supportUrl": {
-                    "type": "string"
-                },
-                "ipsosTag": {
-                    "type": "string"
-                },
-                "ophanJsUrl": {
-                    "type": "string"
-                },
-                "isPaidContent": {
-                    "type": "boolean"
-                },
-                "mobileAppsAdUnitRoot": {
                     "type": "string"
                 },
                 "plistaPublicApiKey": {
                     "type": "string"
                 },
-                "frontendAssetsFullURL": {
-                    "type": "string"
-                },
-                "googleSearchId": {
-                    "type": "string"
-                },
-                "allowUserGeneratedContent": {
+                "requiresMembershipAccess": {
                     "type": "boolean"
                 },
-                "dfpAdUnitRoot": {
-                    "type": "string"
-                },
-                "idApiUrl": {
-                    "type": "string"
-                },
-                "omnitureAmpAccount": {
-                    "type": "string"
-                },
-                "hasPageSkin": {
+                "shouldHideAdverts": {
                     "type": "boolean"
-                },
-                "webTitle": {
-                    "type": "string"
                 },
                 "stripePublicToken": {
                     "type": "string"
                 },
-                "googleRecaptchaSiteKey": {
-                    "type": "string"
-                },
-                "discussionD2Uid": {
-                    "type": "string"
-                },
-                "googleSearchUrl": {
-                    "type": "string"
-                },
-                "optimizeEpicUrl": {
-                    "type": "string"
-                },
-                "stage": {
-                    "$ref": "#/definitions/StageType"
-                },
-                "idOAuthUrl": {
-                    "type": "string"
-                },
-                "isDev": {
-                    "type": "boolean"
-                },
                 "thirdPartyAppsAccount": {
-                    "type": "string"
-                },
-                "avatarImagesUrl": {
-                    "type": "string"
-                },
-                "fbAppId": {
                     "type": "string"
                 }
             },
             "required": [
                 "a9PublisherId",
-                "abTests",
                 "adUnit",
                 "ajaxUrl",
                 "allowUserGeneratedContent",
@@ -650,12 +789,6 @@
         "SharedAdTargeting": {
             "type": "object"
         },
-        "Switches": {
-            "type": "object",
-            "additionalProperties": {
-                "type": "boolean"
-            }
-        },
         "Record<string,string>": {
             "type": "object"
         },
@@ -666,6 +799,12 @@
                 "PROD"
             ],
             "type": "string"
+        },
+        "Switches": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "boolean"
+            }
         },
         "FooterType": {
             "type": "object",
@@ -709,48 +848,42 @@
         "Record<string,FEFootballCompetition[]>": {
             "type": "object"
         },
-        "{id:string;type:\"LiveMatch\";stage:{stageNumber:string;};date:string;round:{roundNumber:string;name?:string;};leg:string;homeTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};awayTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};status:string;venue?:{name:string;id:string;};comments?:string;attendance?:string;referee?:{name:string;id:string;};}": {
+        "{type:\"Fixture\";competition?:{id:string;name:string;}|undefined;id:string;date:string;stage:{stageNumber:string;};round:{roundNumber:string;name?:string|undefined;};leg:string;homeTeam:{id:string;name:string;score?:number|undefined;htScore?:number|undefined;aggregateScore?:number|undefined;scorers?:string|undefined;teamUrl?:string|undefined;};awayTeam:{id:string;name:string;score?:number|undefined;htScore?:number|undefined;aggregateScore?:number|undefined;scorers?:string|undefined;teamUrl?:string|undefined;};venue?:{id:string;name:string;}|undefined;comments?:string|undefined;}": {
             "type": "object",
             "properties": {
-                "id": {
-                    "type": "string"
-                },
                 "type": {
                     "type": "string",
-                    "const": "LiveMatch"
+                    "const": "Fixture"
                 },
-                "stage": {
-                    "$ref": "#/definitions/{stageNumber:string;}"
+                "competition": {
+                    "$ref": "#/definitions/{id:string;name:string;}"
+                },
+                "id": {
+                    "type": "string"
                 },
                 "date": {
                     "type": "string"
                 },
+                "stage": {
+                    "$ref": "#/definitions/{stageNumber:string;}"
+                },
                 "round": {
-                    "$ref": "#/definitions/{roundNumber:string;name?:string;}"
+                    "$ref": "#/definitions/{roundNumber:string;name?:string|undefined;}"
                 },
                 "leg": {
                     "type": "string"
                 },
                 "homeTeam": {
-                    "$ref": "#/definitions/{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;}"
+                    "$ref": "#/definitions/{id:string;name:string;score?:number|undefined;htScore?:number|undefined;aggregateScore?:number|undefined;scorers?:string|undefined;teamUrl?:string|undefined;}"
                 },
                 "awayTeam": {
-                    "$ref": "#/definitions/{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;}"
-                },
-                "status": {
-                    "type": "string"
+                    "$ref": "#/definitions/{id:string;name:string;score?:number|undefined;htScore?:number|undefined;aggregateScore?:number|undefined;scorers?:string|undefined;teamUrl?:string|undefined;}"
                 },
                 "venue": {
-                    "$ref": "#/definitions/{name:string;id:string;}"
+                    "$ref": "#/definitions/{id:string;name:string;}_1"
                 },
                 "comments": {
                     "type": "string"
-                },
-                "attendance": {
-                    "type": "string"
-                },
-                "referee": {
-                    "$ref": "#/definitions/{name:string;id:string;}_1"
                 }
             },
             "required": [
@@ -761,8 +894,22 @@
                 "leg",
                 "round",
                 "stage",
-                "status",
                 "type"
+            ]
+        },
+        "{id:string;name:string;}": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name"
             ]
         },
         "{stageNumber:string;}": {
@@ -776,7 +923,7 @@
                 "stageNumber"
             ]
         },
-        "{roundNumber:string;name?:string;}": {
+        "{roundNumber:string;name?:string|undefined;}": {
             "type": "object",
             "properties": {
                 "roundNumber": {
@@ -790,13 +937,13 @@
                 "roundNumber"
             ]
         },
-        "{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;}": {
+        "{id:string;name:string;score?:number|undefined;htScore?:number|undefined;aggregateScore?:number|undefined;scorers?:string|undefined;teamUrl?:string|undefined;}": {
             "type": "object",
             "properties": {
-                "name": {
+                "id": {
                     "type": "string"
                 },
-                "id": {
+                "name": {
                     "type": "string"
                 },
                 "score": {
@@ -810,6 +957,9 @@
                 },
                 "scorers": {
                     "type": "string"
+                },
+                "teamUrl": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -817,14 +967,14 @@
                 "name"
             ]
         },
-        "{name:string;id:string;}": {
+        "{id:string;name:string;}_1": {
             "type": "object",
             "properties": {
+                "id": {
+                    "type": "string"
+                },
                 "name": {
                     "type": "string"
-                },
-                "id": {
-                    "type": "string"
                 }
             },
             "required": [
@@ -832,112 +982,12 @@
                 "name"
             ]
         },
-        "{name:string;id:string;}_1": {
+        "{type:\"MatchDay\";liveMatch:boolean;result:boolean;previewAvailable:boolean;reportAvailable:boolean;lineupsAvailable:boolean;matchStatus:string;attendance?:string|undefined;referee?:{id:string;name:string;}|undefined;competition?:{id:string;name:string;}|undefined;id:string;date:string;stage:{stageNumber:string;};round:{roundNumber:string;name?:string|undefined;};leg:string;homeTeam:{id:string;name:string;score?:number|undefined;htScore?:number|undefined;aggregateScore?:number|undefined;scorers?:string|undefined;teamUrl?:string|undefined;};awayTeam:{id:string;name:string;score?:number|undefined;htScore?:number|undefined;aggregateScore?:number|undefined;scorers?:string|undefined;teamUrl?:string|undefined;};venue?:{id:string;name:string;}|undefined;comments?:string|undefined;}": {
             "type": "object",
             "properties": {
-                "name": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "id",
-                "name"
-            ]
-        },
-        "{id:string;type:\"Fixture\";stage:{stageNumber:string;};date:string;round:{roundNumber:string;name?:string;};leg:string;homeTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};awayTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};venue?:{name:string;id:string;};comments?:string;competition?:{name:string;id:string;};}": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "string"
-                },
-                "type": {
-                    "type": "string",
-                    "const": "Fixture"
-                },
-                "stage": {
-                    "$ref": "#/definitions/{stageNumber:string;}"
-                },
-                "date": {
-                    "type": "string"
-                },
-                "round": {
-                    "$ref": "#/definitions/{roundNumber:string;name?:string;}"
-                },
-                "leg": {
-                    "type": "string"
-                },
-                "homeTeam": {
-                    "$ref": "#/definitions/{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;}"
-                },
-                "awayTeam": {
-                    "$ref": "#/definitions/{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;}"
-                },
-                "venue": {
-                    "$ref": "#/definitions/{name:string;id:string;}"
-                },
-                "comments": {
-                    "type": "string"
-                },
-                "competition": {
-                    "$ref": "#/definitions/{name:string;id:string;}_2"
-                }
-            },
-            "required": [
-                "awayTeam",
-                "date",
-                "homeTeam",
-                "id",
-                "leg",
-                "round",
-                "stage",
-                "type"
-            ]
-        },
-        "{name:string;id:string;}_2": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "id",
-                "name"
-            ]
-        },
-        "{id:string;type:\"MatchDay\";stage:{stageNumber:string;};date:string;round:{roundNumber:string;name?:string;};leg:string;homeTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};awayTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};liveMatch:boolean;result:boolean;previewAvailable:boolean;reportAvailable:boolean;lineupsAvailable:boolean;matchStatus:string;venue?:{name:string;id:string;};comments?:string;attendance?:string;referee?:{name:string;id:string;};competition?:{name:string;id:string;};}": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "string"
-                },
                 "type": {
                     "type": "string",
                     "const": "MatchDay"
-                },
-                "stage": {
-                    "$ref": "#/definitions/{stageNumber:string;}"
-                },
-                "date": {
-                    "type": "string"
-                },
-                "round": {
-                    "$ref": "#/definitions/{roundNumber:string;name?:string;}"
-                },
-                "leg": {
-                    "type": "string"
-                },
-                "homeTeam": {
-                    "$ref": "#/definitions/{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;}"
-                },
-                "awayTeam": {
-                    "$ref": "#/definitions/{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;}"
                 },
                 "liveMatch": {
                     "type": "boolean"
@@ -957,20 +1007,41 @@
                 "matchStatus": {
                     "type": "string"
                 },
-                "venue": {
-                    "$ref": "#/definitions/{name:string;id:string;}"
-                },
-                "comments": {
-                    "type": "string"
-                },
                 "attendance": {
                     "type": "string"
                 },
                 "referee": {
-                    "$ref": "#/definitions/{name:string;id:string;}_1"
+                    "$ref": "#/definitions/{id:string;name:string;}_2"
                 },
                 "competition": {
-                    "$ref": "#/definitions/{name:string;id:string;}_2"
+                    "$ref": "#/definitions/{id:string;name:string;}"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "stage": {
+                    "$ref": "#/definitions/{stageNumber:string;}"
+                },
+                "round": {
+                    "$ref": "#/definitions/{roundNumber:string;name?:string|undefined;}"
+                },
+                "leg": {
+                    "type": "string"
+                },
+                "homeTeam": {
+                    "$ref": "#/definitions/{id:string;name:string;score?:number|undefined;htScore?:number|undefined;aggregateScore?:number|undefined;scorers?:string|undefined;teamUrl?:string|undefined;}"
+                },
+                "awayTeam": {
+                    "$ref": "#/definitions/{id:string;name:string;score?:number|undefined;htScore?:number|undefined;aggregateScore?:number|undefined;scorers?:string|undefined;teamUrl?:string|undefined;}"
+                },
+                "venue": {
+                    "$ref": "#/definitions/{id:string;name:string;}_1"
+                },
+                "comments": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -990,48 +1061,63 @@
                 "type"
             ]
         },
-        "{id:string;type:\"Result\";stage:{stageNumber:string;};date:string;round:{roundNumber:string;name?:string;};leg:string;homeTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};awayTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};reportAvailable:boolean;venue?:{name:string;id:string;};comments?:string;attendance?:string;referee?:{name:string;id:string;};}": {
+        "{id:string;name:string;}_2": {
             "type": "object",
             "properties": {
                 "id": {
                     "type": "string"
                 },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ]
+        },
+        "{type:\"Result\";reportAvailable:boolean;attendance?:string|undefined;referee?:{id:string;name:string;}|undefined;id:string;date:string;stage:{stageNumber:string;};round:{roundNumber:string;name?:string|undefined;};leg:string;homeTeam:{id:string;name:string;score?:number|undefined;htScore?:number|undefined;aggregateScore?:number|undefined;scorers?:string|undefined;teamUrl?:string|undefined;};awayTeam:{id:string;name:string;score?:number|undefined;htScore?:number|undefined;aggregateScore?:number|undefined;scorers?:string|undefined;teamUrl?:string|undefined;};venue?:{id:string;name:string;}|undefined;comments?:string|undefined;}": {
+            "type": "object",
+            "properties": {
                 "type": {
                     "type": "string",
                     "const": "Result"
                 },
-                "stage": {
-                    "$ref": "#/definitions/{stageNumber:string;}"
-                },
-                "date": {
-                    "type": "string"
-                },
-                "round": {
-                    "$ref": "#/definitions/{roundNumber:string;name?:string;}"
-                },
-                "leg": {
-                    "type": "string"
-                },
-                "homeTeam": {
-                    "$ref": "#/definitions/{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;}"
-                },
-                "awayTeam": {
-                    "$ref": "#/definitions/{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;}"
-                },
                 "reportAvailable": {
                     "type": "boolean"
-                },
-                "venue": {
-                    "$ref": "#/definitions/{name:string;id:string;}"
-                },
-                "comments": {
-                    "type": "string"
                 },
                 "attendance": {
                     "type": "string"
                 },
                 "referee": {
-                    "$ref": "#/definitions/{name:string;id:string;}_1"
+                    "$ref": "#/definitions/{id:string;name:string;}_2"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "stage": {
+                    "$ref": "#/definitions/{stageNumber:string;}"
+                },
+                "round": {
+                    "$ref": "#/definitions/{roundNumber:string;name?:string|undefined;}"
+                },
+                "leg": {
+                    "type": "string"
+                },
+                "homeTeam": {
+                    "$ref": "#/definitions/{id:string;name:string;score?:number|undefined;htScore?:number|undefined;aggregateScore?:number|undefined;scorers?:string|undefined;teamUrl?:string|undefined;}"
+                },
+                "awayTeam": {
+                    "$ref": "#/definitions/{id:string;name:string;score?:number|undefined;htScore?:number|undefined;aggregateScore?:number|undefined;scorers?:string|undefined;teamUrl?:string|undefined;}"
+                },
+                "venue": {
+                    "$ref": "#/definitions/{id:string;name:string;}_1"
+                },
+                "comments": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -1043,6 +1129,62 @@
                 "reportAvailable",
                 "round",
                 "stage",
+                "type"
+            ]
+        },
+        "{type:\"LiveMatch\";status:string;attendance?:string|undefined;referee?:{id:string;name:string;}|undefined;id:string;date:string;stage:{stageNumber:string;};round:{roundNumber:string;name?:string|undefined;};leg:string;homeTeam:{id:string;name:string;score?:number|undefined;htScore?:number|undefined;aggregateScore?:number|undefined;scorers?:string|undefined;teamUrl?:string|undefined;};awayTeam:{id:string;name:string;score?:number|undefined;htScore?:number|undefined;aggregateScore?:number|undefined;scorers?:string|undefined;teamUrl?:string|undefined;};venue?:{id:string;name:string;}|undefined;comments?:string|undefined;}": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "LiveMatch"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "attendance": {
+                    "type": "string"
+                },
+                "referee": {
+                    "$ref": "#/definitions/{id:string;name:string;}_2"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "stage": {
+                    "$ref": "#/definitions/{stageNumber:string;}"
+                },
+                "round": {
+                    "$ref": "#/definitions/{roundNumber:string;name?:string|undefined;}"
+                },
+                "leg": {
+                    "type": "string"
+                },
+                "homeTeam": {
+                    "$ref": "#/definitions/{id:string;name:string;score?:number|undefined;htScore?:number|undefined;aggregateScore?:number|undefined;scorers?:string|undefined;teamUrl?:string|undefined;}"
+                },
+                "awayTeam": {
+                    "$ref": "#/definitions/{id:string;name:string;score?:number|undefined;htScore?:number|undefined;aggregateScore?:number|undefined;scorers?:string|undefined;teamUrl?:string|undefined;}"
+                },
+                "venue": {
+                    "$ref": "#/definitions/{id:string;name:string;}_1"
+                },
+                "comments": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "awayTeam",
+                "date",
+                "homeTeam",
+                "id",
+                "leg",
+                "round",
+                "stage",
+                "status",
                 "type"
             ]
         }

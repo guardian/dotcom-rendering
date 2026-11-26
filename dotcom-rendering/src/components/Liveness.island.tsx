@@ -12,7 +12,6 @@ type Props = {
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
-	filterKeyEvents: boolean;
 	enhanceTweetsSwitch: boolean;
 	onFirstPage: boolean;
 	webURL: string;
@@ -45,7 +44,9 @@ function insert(
 	// Remove duplicates
 	// -----------------
 	for (const article of fragment.querySelectorAll('article')) {
-		if (document.getElementById(article.id)) article.remove();
+		if (document.getElementById(article.id)) {
+			article.remove();
+		}
 	}
 
 	// Hydrate
@@ -61,7 +62,9 @@ function insert(
 	// We're being sent this string by our own backend, not reader input, so we
 	// trust that the tags and attributes it contains are safe and intentional
 	const blogBody = document.querySelector<HTMLElement>('#liveblog-body');
-	if (!blogBody) return;
+	if (!blogBody) {
+		return;
+	}
 	// nextSibling? See: https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore#example_2
 	blogBody.insertBefore(fragment, topOfBlog.nextSibling);
 
@@ -110,7 +113,6 @@ function getKey(
 	pageId: string,
 	ajaxUrl: string,
 	latestBlockId: string,
-	filterKeyEvents: boolean,
 ): string | undefined {
 	try {
 		// Construct the url to poll
@@ -118,10 +120,6 @@ function getKey(
 		url.searchParams.set('lastUpdate', latestBlockId);
 		url.searchParams.set('isLivePage', 'true');
 		url.searchParams.set('dcr', 'true');
-		url.searchParams.set(
-			'filterKeyEvents',
-			filterKeyEvents ? 'true' : 'false',
-		);
 
 		return url.href;
 	} catch {
@@ -150,7 +148,6 @@ export const Liveness = ({
 	pageId,
 	webTitle,
 	ajaxUrl,
-	filterKeyEvents,
 	enhanceTweetsSwitch,
 	onFirstPage,
 	webURL,
@@ -226,8 +223,8 @@ export const Liveness = ({
 	}, [onSuccess]);
 
 	useEffect(() => {
-		setKey(getKey(pageId, ajaxUrl, latestBlockId, filterKeyEvents));
-	}, [pageId, ajaxUrl, latestBlockId, filterKeyEvents]);
+		setKey(getKey(pageId, ajaxUrl, latestBlockId));
+	}, [pageId, ajaxUrl, latestBlockId]);
 
 	// useApi returns { data, loading, error } but we're not using them here
 	useApi(key, {
@@ -242,10 +239,14 @@ export const Liveness = ({
 	}, [numHiddenBlocks, webTitle]);
 
 	useEffect(() => {
-		if (!topOfBlog) return;
+		if (!topOfBlog) {
+			return;
+		}
 
 		const observer = new window.IntersectionObserver(([entry]) => {
-			if (!entry) return;
+			if (!entry) {
+				return;
+			}
 
 			setTopOfBlogVisible(entry.isIntersecting);
 

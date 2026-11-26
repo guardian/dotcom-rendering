@@ -5,8 +5,6 @@ import { MostViewedFooterGrid } from './MostViewedFooterGrid';
 type Props = {
 	tabs: TrailTabType[];
 	selectedColour?: string;
-	abTestCypressDataAttr?: string;
-	variantFromRunnable?: string;
 	sectionId?: string;
 };
 
@@ -23,8 +21,6 @@ type Props = {
  */
 export const MostViewedFooter = ({
 	tabs,
-	abTestCypressDataAttr,
-	variantFromRunnable,
 	sectionId,
 	selectedColour,
 }: Props) => {
@@ -34,8 +30,6 @@ export const MostViewedFooter = ({
 				width: 100%;
 			`}
 			data-testid="mostviewed-footer"
-			data-testid-ab-user-in-variant={abTestCypressDataAttr}
-			data-testid-ab-runnable-test={variantFromRunnable}
 			data-link-name="most popular"
 		>
 			<MostViewedFooterGrid

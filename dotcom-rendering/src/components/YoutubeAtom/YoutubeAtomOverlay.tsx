@@ -1,11 +1,10 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import { space } from '@guardian/source/foundations';
-import type { ArticleFormat } from '../../lib/articleFormat';
+import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
 import { secondsToDuration } from '../../lib/formatTime';
 import { palette } from '../../palette';
 import type { AspectRatio } from '../../types/front';
-import type { PlayButtonSize } from '../Card/components/PlayIcon';
 import { PlayIcon } from '../Card/components/PlayIcon';
 import { FormatBoundary } from '../FormatBoundary';
 import { Pill } from '../Pill';
@@ -63,8 +62,6 @@ type Props = {
 	format: ArticleFormat;
 	alt: string;
 	hidePillOnMobile: boolean;
-	iconSizeOnDesktop: PlayButtonSize;
-	iconSizeOnMobile: PlayButtonSize;
 	title?: string;
 	image?: string;
 	duration?: number; // in seconds
@@ -80,8 +77,6 @@ export const YoutubeAtomOverlay = ({
 	format,
 	alt,
 	hidePillOnMobile,
-	iconSizeOnDesktop,
-	iconSizeOnMobile,
 	title,
 	image,
 	duration,
@@ -90,6 +85,7 @@ export const YoutubeAtomOverlay = ({
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = !isUndefined(duration) && duration > 0;
+	const isHostedVideo = format.design === ArticleDesign.HostedVideo;
 
 	return (
 		<FormatBoundary format={format}>
@@ -107,6 +103,7 @@ export const YoutubeAtomOverlay = ({
 						height={height}
 						width={width}
 						aspectRatio={aspectRatio}
+						isHostedVideo={isHostedVideo}
 					/>
 				)}
 				{isLive ? (
@@ -115,7 +112,7 @@ export const YoutubeAtomOverlay = ({
 							hidePillOnMobile
 								? css`
 										display: none;
-								  `
+									`
 								: pillStyles
 						}
 					>
@@ -130,7 +127,7 @@ export const YoutubeAtomOverlay = ({
 							hidePillOnMobile
 								? css`
 										display: none;
-								  `
+									`
 								: pillStyles
 						}
 					>
@@ -140,11 +137,7 @@ export const YoutubeAtomOverlay = ({
 						/>
 					</div>
 				) : null}
-				<PlayIcon
-					iconWidth="wide"
-					iconSizeOnDesktop={iconSizeOnDesktop}
-					iconSizeOnMobile={iconSizeOnMobile}
-				/>
+				<PlayIcon iconWidth="wide" />
 			</button>
 		</FormatBoundary>
 	);

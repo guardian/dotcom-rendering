@@ -1,6 +1,7 @@
 import { describe, it } from "node:test";
 import { snapshot } from "node:test";
 import { basename } from "path";
+import { TrackingTag } from "@guardian/cdk/lib/constants/tracking-tag.js";
 import { GuRoot } from "@guardian/cdk/lib/constructs/root.js";
 import { Template } from "aws-cdk-lib/assertions";
 import { AbTestingNotificationLambda } from "./notificationLambda.ts";
@@ -13,7 +14,9 @@ snapshot.setResolveSnapshotPath(
 );
 
 void describe("The AB testing notification lambda stack", () => {
-	void it("matches the CODE snapshot", ({ assert }) => {
+	void it("matches the CODE snapshot", ({ assert, mock }) => {
+		mock.property(TrackingTag, "Value", "TEST");
+
 		const app = new GuRoot();
 		const stack = new AbTestingNotificationLambda(
 			app,
@@ -30,7 +33,9 @@ void describe("The AB testing notification lambda stack", () => {
 		assert.snapshot(template.toJSON());
 	});
 
-	void it("matches the PROD snapshot", ({ assert }) => {
+	void it("matches the PROD snapshot", ({ assert, mock }) => {
+		mock.property(TrackingTag, "Value", "TEST");
+
 		const app = new GuRoot();
 		const stack = new AbTestingNotificationLambda(
 			app,

@@ -18,6 +18,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { grid } from '../../src/grid';
+import { type LayoutType } from '../layouts/lib/articleArrangements';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getAgeWarning } from '../lib/age-warning';
 import {
@@ -27,7 +28,6 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '../lib/articleFormat';
-import { getZIndex } from '../lib/getZIndex';
 import { palette as themePalette } from '../palette';
 import type { StarRating as Rating } from '../types/content';
 import type { TagType } from '../types/tag';
@@ -39,6 +39,7 @@ import { StarRating } from './StarRating/StarRating';
 type Props = {
 	headlineString: string;
 	format: ArticleFormat;
+	layoutType?: LayoutType;
 	byline?: string;
 	tags: TagType[];
 	webPublicationDateDeprecated: string;
@@ -79,14 +80,22 @@ const isNewsNotCommentOrRecipeOrGallery = (format: ArticleFormat) =>
 	format.design !== ArticleDesign.Recipe &&
 	format.design !== ArticleDesign.Gallery;
 
+const isImmersiveNonNews = (format: ArticleFormat) =>
+	format.display === ArticleDisplay.Immersive && format.theme !== Pillar.News;
+
 const decideHeadlineFont = (format: ArticleFormat) => {
 	const size =
 		format.display === ArticleDisplay.Immersive ||
 		format.design === ArticleDesign.Gallery
 			? 50
 			: 34;
+
 	if (isNewsNotCommentOrRecipeOrGallery(format)) {
 		return size === 50 ? headlineMedium50 : headlineMedium34;
+	}
+
+	if (isImmersiveNonNews(format)) {
+		return size === 50 ? headlineBold50 : headlineBold34;
 	}
 
 	const fontWeight = getFontWeightByDesign(format.design);
@@ -106,8 +115,13 @@ const decideMobileHeadlineFont = (format: ArticleFormat) => {
 		format.design === ArticleDesign.Gallery
 			? 34
 			: 28;
+
 	if (isNewsNotCommentOrRecipeOrGallery(format)) {
 		return size === 34 ? headlineMedium34 : headlineMedium28;
+	}
+
+	if (isImmersiveNonNews(format)) {
+		return size === 34 ? headlineBold34 : headlineBold28;
 	}
 
 	const fontWeight = getFontWeightByDesign(format.design);
@@ -121,7 +135,7 @@ const decideMobileHeadlineFont = (format: ArticleFormat) => {
 	}
 };
 
-const headlineFont = (format: ArticleFormat) => {
+export const headlineFont = (format: ArticleFormat) => {
 	if (format.design === ArticleDesign.Gallery) {
 		return css`
 			${decideMobileHeadlineFont(format)}
@@ -137,6 +151,13 @@ const headlineFont = (format: ArticleFormat) => {
 		}
 	`;
 };
+
+const weekendReadFont = css`
+	${headlineMedium34}
+	${from.leftCol} {
+		${headlineMedium50}
+	}
+`;
 
 const invertedFontLineHeight = css`
 	line-height: 2.1875rem;
@@ -163,6 +184,15 @@ const labsGalleryFont = css`
 	${from.desktop} {
 		${textSansBold34};
 		font-size: 50px;
+		line-height: 3.125rem;
+	}
+`;
+
+const hostedGalleryFont = css`
+	${textSansBold34};
+	line-height: 2.1875rem;
+
+	${from.desktop} {
 		line-height: 3.125rem;
 	}
 `;
@@ -205,31 +235,59 @@ const invertedStyles = css`
 	box-decoration-break: clone;
 `;
 
-const immersiveStyles = css`
-	min-height: 112px;
-	padding-bottom: ${space[6]}px;
-	padding-left: ${space[1]}px;
-
-	${from.mobileLandscape} {
-		padding-left: ${space[3]}px;
-	}
-
-	${from.tablet} {
-		padding-left: ${space[1]}px;
-	}
-
-	margin-right: ${space[5]}px;
-`;
-
 const darkBackground = css`
 	background-color: ${themePalette('--headline-background')};
 `;
 
 const invertedText = css`
+	color: white;
 	white-space: pre-wrap;
 	padding-bottom: ${space[1]}px;
-	padding-right: ${space[1]}px;
+	padding-left: 12px;
+	padding-right: 18px;
+
+	${from.tablet} {
+		margin-left: -20px;
+		padding-left: 20px;
+		padding-bottom: ${space[6]}px;
+	}
+
+	${from.leftCol} {
+		margin-left: -10px;
+		padding-left: 10px;
+		padding-right: ${space[1]}px;
+	}
 `;
+
+/**
+ * Used by the non-inverted immersive grid layouts, whose headlines sit on a
+ * plain or light blurred background rather than the shared --headline-colour
+ * (used by the legacy immersive layout and the inverted grid layout).
+ */
+const gridHeadlineText = css`
+	color: ${themePalette('--immersive-grid-headline-colour')};
+`;
+
+const gridHeadlineTextBelowDesktop = css`
+	${gridHeadlineText};
+
+	${until.desktop} {
+		color: white;
+		background-color: ${themePalette('--headline-background')};
+		white-space: pre-wrap;
+		padding-bottom: ${space[1]}px;
+		padding-left: 12px;
+		padding-right: 18px;
+	}
+`;
+
+const immersiveHeadlineStyles = (layoutType: LayoutType | undefined) => {
+	if (layoutType === 'immersiveLandscape') {
+		return [invertedText, darkBackground];
+	}
+
+	return gridHeadlineTextBelowDesktop;
+};
 
 const maxWidth = css`
 	${from.desktop} {
@@ -246,96 +304,61 @@ const invertedWrapper = css`
 	margin-left: 6px;
 `;
 
-const immersiveWrapper = css`
-	/*
-        Make sure we vertically align the headline font with the body font
-    */
-	margin-left: 6px;
-
-	${from.tablet} {
-		margin-left: 16px;
-	}
-
-	${from.leftCol} {
-		margin-left: 25px;
-	}
-
-	/*
-        We need this grow to ensure the headline fills the main content column
-    */
-	flex-grow: 1;
-	/*
-        This z-index is what ensures the headline text shows above the pseudo black
-        box that extends the black background to the right
-    */
-	z-index: ${getZIndex('articleHeadline')};
-
-	${until.mobileLandscape} {
-		margin-right: 40px;
-	}
-`;
-
-// Due to MainMedia using position: relative, this seems to effect the rendering order
-// To mitigate we use z-index
-// TODO: find a cleaner solution
-const zIndex = css`
-	z-index: 1;
-`;
-
 const ageWarningMargins = (format: ArticleFormat) => {
-	if (format.design === ArticleDesign.Gallery) {
+	if (
+		format.design === ArticleDesign.Gallery ||
+		format.display === ArticleDisplay.Immersive
+	) {
 		return '';
 	}
-	return format.display === ArticleDisplay.Immersive
-		? css`
-				margin-left: 0px;
-				margin-bottom: 0px;
+	return css`
+		margin-top: 12px;
+		margin-left: -10px;
+		margin-bottom: 6px;
 
-				${from.tablet} {
-					margin-left: 10px;
-				}
+		${from.tablet} {
+			margin-left: -20px;
+		}
 
-				${from.leftCol} {
-					margin-left: 20px;
-				}
-		  `
-		: css`
-				margin-top: 12px;
-				margin-left: -10px;
-				margin-bottom: 6px;
-
-				${from.tablet} {
-					margin-left: -20px;
-				}
-
-				${from.leftCol} {
-					margin-left: -10px;
-					margin-top: 0;
-				}
-		  `;
+		${from.leftCol} {
+			margin-left: -10px;
+			margin-top: 0;
+		}
+	`;
 };
-
-const backgroundStyles = css`
-	background-color: ${themePalette('--age-warning-wrapper-background')};
-`;
 
 const WithAgeWarning = ({
 	tags,
 	webPublicationDateDeprecated,
 	format,
 	children,
+	snapToInverted = false,
 }: {
 	tags: TagType[];
 	webPublicationDateDeprecated: string;
 	format: ArticleFormat;
 	children: React.ReactNode;
+	snapToInverted?: boolean;
 }) => {
 	const age = getAgeWarning(tags, webPublicationDateDeprecated);
 
 	if (age) {
 		return (
 			<>
-				<div css={[backgroundStyles, ageWarningMargins(format)]}>
+				<div
+					css={[
+						ageWarningMargins(format),
+						snapToInverted &&
+							css`
+								${from.tablet} {
+									margin-left: -20px;
+								}
+								${from.leftCol} {
+									margin-left: -10px;
+								}
+							`,
+					]}
+				>
 					<AgeWarning age={age} />
 				</div>
 				{children}
@@ -403,7 +426,7 @@ const decideBottomPadding = ({
 								${from.tablet} {
 									padding-bottom: ${space[9]}px;
 								}
-						  `;
+							`;
 			}
 		}
 	}
@@ -424,6 +447,7 @@ const galleryStyles = css`
 export const ArticleHeadline = ({
 	headlineString,
 	format,
+	layoutType,
 	tags,
 	byline,
 	webPublicationDateDeprecated,
@@ -431,6 +455,31 @@ export const ArticleHeadline = ({
 	isMatch,
 	starRating,
 }: Props) => {
+	const isInverted = layoutType === 'immersiveLandscape';
+	if (
+		layoutType === 'immersivePortrait' &&
+		format.design === ArticleDesign.WeekendEssay
+	) {
+		return (
+			<div css={decideBottomPadding({ format, hasAvatar })}>
+				<WithAgeWarning
+					tags={tags}
+					webPublicationDateDeprecated={webPublicationDateDeprecated}
+					format={format}
+				>
+					<h1 css={weekendReadFont}>{headlineString}</h1>
+				</WithAgeWarning>
+				{!!byline && (
+					<HeadlineByline
+						format={format}
+						byline={byline}
+						tags={tags}
+						layoutType={layoutType}
+					/>
+				)}
+			</div>
+		);
+	}
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {
@@ -456,12 +505,9 @@ export const ArticleHeadline = ({
 										format.theme === ArticleSpecial.Labs
 											? labsFont
 											: headlineFont(format),
-										invertedText,
-										css`
-											color: ${themePalette(
-												'--headline-colour',
-											)};
-										`,
+										isInverted
+											? [invertedText, darkBackground]
+											: gridHeadlineText,
 									]}
 								>
 									{headlineString}
@@ -487,26 +533,15 @@ export const ArticleHeadline = ({
 								webPublicationDateDeprecated
 							}
 							format={format}
+							snapToInverted={isInverted}
 						>
-							<h1
-								css={[
-									immersiveWrapper,
-									darkBackground,
-									css`
-										color: ${themePalette(
-											'--headline-colour',
-										)};
-									`,
-								]}
-							>
+							<h1 css={[immersiveHeadlineStyles(layoutType)]}>
 								<span
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? jumboLabsFont
 											: headlineFont(format),
 										maxWidth,
-										invertedStyles,
-										immersiveStyles,
 										displayBlock,
 									]}
 								>
@@ -518,6 +553,7 @@ export const ArticleHeadline = ({
 									rating={starRating}
 									paddingSize={'large'}
 									size={'large'}
+									layoutType={layoutType}
 								/>
 							)}
 						</WithAgeWarning>
@@ -713,7 +749,6 @@ export const ArticleHeadline = ({
 											: headlineFont(format),
 										invertedWrapper,
 										invertedFontLineHeight,
-										zIndex,
 										css`
 											color: ${themePalette(
 												'--headline-colour',
@@ -808,10 +843,10 @@ export const ArticleHeadline = ({
 											color: ${isMatch
 												? themePalette(
 														'--headline-match-colour',
-												  )
+													)
 												: themePalette(
 														'--headline-colour',
-												  )};
+													)};
 										`,
 									]}
 								>
@@ -865,10 +900,13 @@ export const ArticleHeadline = ({
 				case ArticleDesign.Picture:
 					return (
 						<div
-							css={decideBottomPadding({
-								format,
-								hasAvatar,
-							})}
+							css={[
+								decideBottomPadding({
+									format,
+									hasAvatar,
+								}),
+								maxWidth,
+							]}
 						>
 							<DesignTag format={format} />
 							<h1
@@ -925,6 +963,34 @@ export const ArticleHeadline = ({
 									</span>
 								</h1>
 							</WithAgeWarning>
+						</div>
+					);
+				}
+				case ArticleDesign.HostedGallery: {
+					return (
+						<div css={galleryStyles}>
+							<h1
+								css={[
+									hostedGalleryFont,
+									css`
+										color: ${themePalette(
+											'--headline-colour',
+										)};
+										${darkBackground};
+										padding-bottom: ${space[6]}px;
+										padding-left: ${space[3]}px;
+										padding-right: ${space[3]}px;
+
+										${between.mobileLandscape.and.tablet} {
+											padding-left: ${space[5]}px;
+										}
+									`,
+								]}
+							>
+								<span css={[displayBlock, maxWidth]}>
+									{headlineString}
+								</span>
+							</h1>
 						</div>
 					);
 				}

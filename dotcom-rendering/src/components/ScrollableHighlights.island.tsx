@@ -11,18 +11,35 @@ import { getZIndex } from '../lib/getZIndex';
 import { ophanComponentId } from '../lib/ophan-helpers';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
+import { useConfig } from './ConfigContext';
 import { HighlightsCard } from './Masthead/HighlightsCard';
+import { HighlightsNewsletterCard } from './Masthead/Newsletter/HighlightsNewsletterCard';
 
 type Props = {
 	trails: DCRFrontCard[];
 	frontId?: string;
+	/**
+	 * Indicates if the page has a page skin advert
+	 * When a page skin advert is active:
+	 * - containers are constrained to a max width of 'desktop'
+	 * - media queries above desktop are not applied
+	 */
+	hasPageSkin?: boolean;
 };
 
 const containerStyles = css`
 	padding: ${space[2]}px 0 ${space[3]}px;
+
 	${from.tablet} {
 		padding: ${space[2]}px ${space[5]}px;
 	}
+`;
+
+/**
+ * Reserves space for the page's right gutter above the `wide` breakpoint.
+ * Not applied when the page has a page skin.
+ */
+const containerRightGutterStyles = css`
 	${from.wide} {
 		padding-right: 100px;
 	}
@@ -55,6 +72,23 @@ const carouselStyles = css`
 		scroll-padding-left: 120px;
 		gap: ${space[5]}px;
 	}
+
+	/**
+	* Hide scrollbars
+	* See: https://stackoverflow.com/a/38994837
+	*/
+	::-webkit-scrollbar {
+		display: none; /* Safari and Chrome */
+	}
+	scrollbar-width: none; /* Firefox */
+	position: relative;
+`;
+
+/**
+ * Aligns the carousel with the page's left column from the `desktop`
+ * breakpoint upwards. Not applied when the page has a page skin.
+ */
+const carouselLeftColumnAlignmentStyles = css`
 	${from.desktop} {
 		scroll-padding-left: 240px;
 	}
@@ -66,16 +100,6 @@ const carouselStyles = css`
 		scroll-padding-left: 240px;
 		padding-left: 240px;
 	}
-
-	/**
-	* Hide scrollbars
-	* See: https://stackoverflow.com/a/38994837
-	*/
-	::-webkit-scrollbar {
-		display: none; /* Safari and Chrome */
-	}
-	scrollbar-width: none; /* Firefox */
-	position: relative;
 `;
 
 const itemStyles = css`
@@ -168,7 +192,8 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 								${horizontalPaddingMobile +
 								2 * cardGap +
 								peepingCardWidthMobileMedium}px
-						) / 2
+						) /
+						2
 				)
 			);
 		}
@@ -181,7 +206,8 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 								${horizontalPaddingMobileLandscape +
 								2 * cardGap +
 								peepingCardWidthMobileMedium}px
-						) / 2
+						) /
+						2
 				)
 			);
 		}
@@ -207,15 +233,28 @@ const getOphanInfo = (frontId?: string) => {
 	};
 };
 
-export const ScrollableHighlights = ({ trails, frontId }: Props) => {
+export const ScrollableHighlights = ({
+	trails,
+	frontId,
+	hasPageSkin = false,
+}: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
-	const carouselLength = trails.length;
+
+	const visibleTrails = trails.filter((trail) => {
+		if (trail.isNewsletterSignup !== true) return true;
+		return Boolean(trail.newsletterData);
+	});
+	const carouselLength = visibleTrails.length;
 	const imageLoading = 'eager';
 	const [showPreviousButton, setShowPreviousButton] = useState(false);
 	const [showNextButton, setShowNextButton] = useState(true);
 
+	const { renderingTarget } = useConfig();
+
 	const scrollTo = (direction: 'left' | 'right') => {
-		if (!carouselRef.current) return;
+		if (!carouselRef.current) {
+			return;
+		}
 
 		const cardWidth =
 			carouselRef.current.querySelector('li')?.offsetWidth ?? 0;
@@ -237,7 +276,9 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	 */
 	const updateButtonVisibilityOnScroll = () => {
 		const carouselElement = carouselRef.current;
-		if (!carouselElement) return;
+		if (!carouselElement) {
+			return;
+		}
 
 		const scrollLeft = carouselElement.scrollLeft;
 		const maxScrollLeft =
@@ -249,7 +290,9 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 
 	useEffect(() => {
 		const carouselElement = carouselRef.current;
-		if (!carouselElement) return;
+		if (!carouselElement) {
+			return;
+		}
 
 		carouselElement.addEventListener(
 			'scroll',
@@ -269,7 +312,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 
 	return (
 		<div
-			css={containerStyles}
+			css={[containerStyles, !hasPageSkin && containerRightGutterStyles]}
 			data-link-name={ophanFrontName}
 			role="region"
 			aria-roledescription="carousel"
@@ -280,6 +323,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 				ref={carouselRef}
 				css={[
 					carouselStyles,
+					!hasPageSkin && carouselLeftColumnAlignmentStyles,
 					generateCarouselColumnStyles(carouselLength),
 				]}
 				data-link-name={ophanComponentLink}
@@ -287,7 +331,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 				data-container-name="scrollable/highlights"
 				data-heatphan-type="carousel"
 			>
-				{trails.map((trail) => {
+				{visibleTrails.map((trail) => {
 					return (
 						<li
 							key={trail.url}
@@ -295,22 +339,38 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 							role="group"
 							aria-roledescription="slide"
 						>
-							<HighlightsCard
-								format={trail.format}
-								headlineText={trail.headline}
-								kickerText={trail.kickerText}
-								avatarUrl={trail.avatarUrl}
-								byline={trail.byline}
-								image={trail.image}
-								imageLoading={imageLoading}
-								linkTo={trail.url}
-								dataLinkName={trail.dataLinkName}
-								isExternalLink={trail.isExternalLink}
-								showQuotedHeadline={trail.showQuotedHeadline}
-								mainMedia={trail.mainMedia}
-								starRating={trail.starRating}
-								articleMedia={trail.articleMedia}
-							/>
+							{trail.newsletterData ? (
+								<HighlightsNewsletterCard
+									format={trail.format}
+									newsletter={trail.newsletterData}
+									headlineText={trail.headline}
+									linkTo={trail.url}
+									dataLinkName={trail.dataLinkName}
+									image={trail.image}
+									imageLoading={imageLoading}
+									renderingTarget={renderingTarget}
+								/>
+							) : (
+								<HighlightsCard
+									format={trail.format}
+									headlineText={trail.headline}
+									kickerText={trail.kickerText}
+									avatarUrl={trail.avatarUrl}
+									byline={trail.byline}
+									image={trail.image}
+									imageLoading={imageLoading}
+									linkTo={trail.url}
+									dataLinkName={trail.dataLinkName}
+									isExternalLink={trail.isExternalLink}
+									showQuotedHeadline={
+										trail.showQuotedHeadline
+									}
+									mainMedia={trail.mainMedia}
+									starRating={trail.starRating}
+									articleMedia={trail.articleMedia}
+									headlineTestUuid={trail.headlineTestUuid}
+								/>
+							)}
 						</li>
 					);
 				})}

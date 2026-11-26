@@ -1,6 +1,10 @@
 import { breakpoints } from '@guardian/source/foundations';
 import preview from '../../.storybook/preview';
-import { defaultCard, trails } from '../../fixtures/manual/highlights-trails';
+import {
+	defaultCard,
+	newsletterSignupCard,
+	trails,
+} from '../../fixtures/manual/highlights-trails';
 import { ScrollableHighlights } from './ScrollableHighlights.island';
 import { Section } from './Section';
 
@@ -101,5 +105,22 @@ export const withExcessivleyLongHeadline = meta.story({
 			},
 			...Default.input.args.trails,
 		],
+	},
+});
+
+export const withNewsletterCardVariant = meta.story({
+	...Default.input,
+	name: 'With Newsletter Signup Card',
+	args: {
+		trails: [newsletterSignupCard, ...Default.input.args.trails],
+	},
+});
+
+export const withPageSkinAdvert = meta.story({
+	...Default.input,
+	name: 'With page skin advert',
+	args: {
+		hasPageSkin: true,
+		trails: [...Default.input.args.trails],
 	},
 });

@@ -7,10 +7,10 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { palette } from '../palette';
-import type { ProductBlockElement } from '../types/content';
+import type { SummaryProduct } from '../types/content';
+import { ProductCarouselCard } from './AffiliateProducts/ProductCarouselCard';
 import { CarouselCount } from './CarouselCount';
 import { CarouselNavigationButtons } from './CarouselNavigationButtons';
-import { ProductCarouselCard } from './ProductCarouselCard';
 import { Subheading } from './Subheading';
 
 const carouselHeader = css`
@@ -35,11 +35,12 @@ const countStyles = css`
 
 export type FixedSlideWidth = {
 	defaultWidth: number;
-	widthFromBreakpoints: { breakpoint: Breakpoint; width: number }[];
+	widthFromBreakpoints: Array<{ breakpoint: Breakpoint; width: number }>;
 };
 
 type Props = {
-	products: ProductBlockElement[];
+	title: string;
+	products: SummaryProduct[];
 	format: ArticleFormat;
 };
 
@@ -148,7 +149,7 @@ const generateFixedWidthColumStyles = ({
  * we can move quickly. There will be some work to define a base carousel at some
  * point to see what functionality can be shared.
  */
-export const ScrollableProduct = ({ products, format }: Props) => {
+export const ScrollableProduct = ({ title, products, format }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
 	const [nextButtonEnabled, setNextButtonEnabled] = useState(true);
@@ -174,7 +175,9 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 	 * --- COPIED FROM ScrollableCarousel ---
 	 */
 	const scrollTo = (direction: 'left' | 'right') => {
-		if (!carouselRef.current) return;
+		if (!carouselRef.current) {
+			return;
+		}
 
 		const cardWidth =
 			carouselRef.current.querySelector('li')?.offsetWidth ?? 0;
@@ -212,10 +215,14 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 	 */
 	const updateCardCountOnScroll = useCallback(() => {
 		const carouselElement = carouselRef.current;
-		if (!carouselElement) return;
+		if (!carouselElement) {
+			return;
+		}
 
 		const cardWidth = carouselElement.querySelector('li')?.offsetWidth ?? 0;
-		if (!cardWidth) return;
+		if (!cardWidth) {
+			return;
+		}
 
 		const count = Math.ceil(
 			(carouselElement.scrollLeft + cardWidth / 2) / cardWidth,
@@ -234,7 +241,9 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 	 */
 	const updateButtonVisibilityOnScroll = useCallback(() => {
 		const carouselElement = carouselRef.current;
-		if (!carouselElement) return;
+		if (!carouselElement) {
+			return;
+		}
 
 		const scrollLeft = carouselElement.scrollLeft;
 		const maxScrollLeft =
@@ -256,7 +265,9 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 
 	useEffect(() => {
 		const carouselElement = carouselRef.current;
-		if (!carouselElement) return;
+		if (!carouselElement) {
+			return;
+		}
 
 		carouselElement.addEventListener('scroll', throttledCardCount);
 		carouselElement.addEventListener('scroll', debouncedButtonVisibility);
@@ -273,12 +284,8 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 	return (
 		<>
 			<div css={carouselHeader}>
-				<Subheading
-					format={format}
-					id={'at-a-glance'}
-					topPadding={false}
-				>
-					At a glance
+				<Subheading format={format} id={'heading'} topPadding={false}>
+					{title}
 				</Subheading>
 				<div
 					css={navigationStyles}
@@ -293,25 +300,23 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 					css={carouselStyles}
 					data-heatphan-type="carousel"
 				>
-					{products.map(
-						(product: ProductBlockElement, index: number) => (
-							<li
-								key={
-									product.productCtas[0]?.url ??
-									product.elementId
-								}
-								css={[subgridStyles, leftBorderStyles]}
-								data-component={`at-a-glance-carousel-card-${
-									index + 1
-								}`}
-							>
-								<ProductCarouselCard
-									product={product}
-									format={format}
-								/>
-							</li>
-						),
-					)}
+					{products.map((product: SummaryProduct, index: number) => (
+						<li
+							key={
+								product.productBlock.productCtas[0]?.url ??
+								product.productBlock.elementId
+							}
+							css={[subgridStyles, leftBorderStyles]}
+							data-component={`at-a-glance-carousel-card-${
+								index + 1
+							}`}
+						>
+							<ProductCarouselCard
+								product={product}
+								format={format}
+							/>
+						</li>
+					))}
 				</ul>
 				<CarouselNavigationButtons
 					previousButtonEnabled={previousButtonEnabled}

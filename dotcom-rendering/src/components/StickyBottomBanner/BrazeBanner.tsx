@@ -18,7 +18,7 @@ import type { TagType } from '../../types/tag';
 import { useConfig } from '../ConfigContext';
 
 type Meta = {
-	dataFromBraze: { [key: string]: string };
+	dataFromBraze: Record<string, string>;
 	logImpressionWithBraze: () => void;
 	logButtonClickWithBraze: (id: number) => void;
 };
@@ -146,7 +146,9 @@ const BrazeBannerWithSatisfiedDependencies = ({
 	}, [hasBeenSeen]);
 
 	const componentName = meta.dataFromBraze.componentName;
-	if (!componentName) return null;
+	if (!componentName) {
+		return null;
+	}
 
 	const subscribeToNewsletter = async (newsletterId: string) => {
 		if (authStatus.kind == 'SignedIn') {

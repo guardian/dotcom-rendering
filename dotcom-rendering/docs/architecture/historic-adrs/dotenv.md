@@ -27,8 +27,8 @@ To add a secret to the `.env` file, you should update [secrets.js](../../scripts
 
 For each secret you must specify -
 
--   the `key` in parameter store (prefixed by `dotcom/<dev|code|prod>/`)
--   a `missingMessage` which describes the fallback functionality for somebody who does not have the value in their `.env` file.
+- the `key` in parameter store (prefixed by `dotcom/<dev|code|prod>/`)
+- a `missingMessage` which describes the fallback functionality for somebody who does not have the value in their `.env` file.
 
 Example:
 

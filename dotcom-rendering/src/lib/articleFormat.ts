@@ -1,5 +1,6 @@
 import { isString } from '@guardian/libs';
 import type { FEFormat } from '../frontend/feArticle';
+import type { TagType } from '../types/tag';
 
 export enum ArticleDesign {
 	Standard,
@@ -32,6 +33,7 @@ export enum ArticleDesign {
 	HostedArticle,
 	HostedVideo,
 	HostedGallery,
+	WeekendEssay,
 }
 
 export enum ArticleDisplay {
@@ -62,6 +64,37 @@ export interface ArticleFormat {
 	design: ArticleDesign;
 	display: ArticleDisplay;
 }
+
+export const isOpinionDesign = (design: ArticleDesign): boolean =>
+	[
+		ArticleDesign.Comment,
+		ArticleDesign.Editorial,
+		ArticleDesign.Letter,
+	].includes(design);
+
+export const isImmersiveOpinion = (format: ArticleFormat): boolean =>
+	format.display === ArticleDisplay.Immersive &&
+	(isOpinionDesign(format.design) ||
+		format.design === ArticleDesign.WeekendEssay);
+
+export const containsSeriesTag = (tags: TagType[]): boolean =>
+	tags.some((tag) => tag.type === 'Series');
+
+export const hasImmersiveGridTitle = (
+	format: ArticleFormat,
+	tags: TagType[],
+): boolean =>
+	format.display === ArticleDisplay.Immersive &&
+	(isImmersiveOpinion(format) ||
+		containsSeriesTag(tags) ||
+		format.theme === ArticleSpecial.Labs);
+
+export const hasImmersiveGridTitleRule = (
+	format: ArticleFormat,
+	tags: TagType[],
+): boolean =>
+	format.design !== ArticleDesign.WeekendEssay &&
+	hasImmersiveGridTitle(format, tags);
 
 /**
  * NOTE: Immersive Opinion pieces are not supported,
@@ -127,6 +160,8 @@ export const decideDesign = ({ design }: Partial<FEFormat>): ArticleDesign => {
 			return ArticleDesign.HostedVideo;
 		case 'HostedGalleryDesign':
 			return ArticleDesign.HostedGallery;
+		case 'WeekendEssayDesign':
+			return ArticleDesign.WeekendEssay;
 		default:
 			return ArticleDesign.Standard;
 	}
@@ -192,7 +227,7 @@ const isTheme = (theme: string | ArticleTheme): theme is ArticleTheme =>
 const isDesign = (design: string | ArticleDesign): design is ArticleDesign =>
 	!isString(design);
 
-const isHostedContentDesign = (design: ArticleDesign): boolean =>
+export const isHostedContentDesign = (design: ArticleDesign): boolean =>
 	[
 		ArticleDesign.HostedArticle,
 		ArticleDesign.HostedVideo,

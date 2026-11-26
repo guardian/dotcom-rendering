@@ -1,4 +1,3 @@
-import type { ComponentProps } from 'react';
 import { safeParse } from 'valibot';
 import {
 	type FootballMatch,
@@ -11,18 +10,19 @@ import {
 import { safeParseURL } from '../../lib/parse';
 import { error, fromValibot, ok, type Result } from '../../lib/result';
 import type { RenderingTarget } from '../../types/renderingTarget';
-import type { Tabs } from './Tabs';
+import type { TabName } from './Tabs';
 
 export type HeaderData = {
-	tabs: ComponentProps<typeof Tabs>;
+	tabs: {
+		liveURL?: URL;
+		reportURL?: URL;
+		infoURL?: URL;
+	};
 	match: FootballMatch;
 };
 
 export const parse =
-	(
-		selected: HeaderData['tabs']['selected'],
-		renderingTarget: RenderingTarget,
-	) =>
+	(selected: TabName, renderingTarget: RenderingTarget) =>
 	(json: unknown): Result<string, HeaderData> => {
 		const feData = fromValibot(
 			safeParse(feFootballMatchHeaderSchema, json),
@@ -80,7 +80,7 @@ const getInfoUrl = (
 };
 
 const createTabs = (
-	selected: HeaderData['tabs']['selected'],
+	selected: TabName,
 	feData: FEFootballMatchHeader,
 	matchKind: FootballMatch['kind'],
 	renderingTarget: RenderingTarget,
@@ -105,27 +105,11 @@ const createTabs = (
 		return error({ kind: 'info' });
 	}
 
-	switch (selected) {
-		case 'info':
-			return ok({
-				matchKind,
-				selected,
-				reportURL: reportURL?.value,
-				liveURL: liveURL?.value,
-			});
-		case 'live':
-			return ok({
-				matchKind,
-				selected,
-				reportURL: reportURL?.value,
-				infoURL: infoURL.value,
-			});
-		case 'report':
-			return ok({
-				matchKind,
-				selected,
-				liveURL: liveURL?.value,
-				infoURL: infoURL.value,
-			});
-	}
+	return ok({
+		matchKind,
+		selected,
+		reportURL: reportURL?.value,
+		liveURL: liveURL?.value,
+		infoURL: infoURL.value,
+	});
 };

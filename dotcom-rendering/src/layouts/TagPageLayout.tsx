@@ -1,9 +1,10 @@
-import { isUndefined, joinUrl } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import { palette } from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
 import { Fragment } from 'react';
 import { Accessibility } from '../components/Accessibility.island';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
-import { DirectoryPageNav } from '../components/DirectoryPageNav';
+import { DirectoryPageNavIsland } from '../components/DirectoryPageNavIsland';
 import { Footer } from '../components/Footer';
 import {
 	FrontsBannerAdSlot,
@@ -26,6 +27,7 @@ import {
 	getTagPageBannerAdPositions,
 	getTagPageMobileAdPositions,
 } from '../lib/getTagPageAdPositions';
+import { worldCup2026PageIds } from '../lib/worldCup2026';
 import { enhanceTags } from '../model/enhanceTags';
 import type { NavType } from '../model/extract-nav';
 import type { TagPage as TagPageModel } from '../types/tagPage';
@@ -67,6 +69,8 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 	const isAccessibilityPage =
 		tagPage.config.pageId === 'help/accessibility-help';
 
+	const isWorldCup2026 = worldCup2026PageIds.includes(pageId);
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -92,15 +96,19 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					discussionApiUrl={tagPage.config.discussionApiUrl}
 					idApiUrl={tagPage.config.idApiUrl}
 					contributionsServiceUrl={contributionsServiceUrl}
-					showSubNav={true}
+					showSubNav={!isWorldCup2026}
 					showSlimNav={false}
 					hasPageSkin={hasPageSkin}
 					pageId={pageId}
+					tagIds={tagPage.tags.map((tag) => tag.properties.id)}
+					sectionId={tagPage.config.section}
+					contentType={contentType}
+					canonicalUrl={tagPage.canonicalUrl}
 				/>
 			</div>
 
 			<main data-layout="TagPageLayout" id="maincontent">
-				<DirectoryPageNav pageId={tagPage.pageId} />
+				<DirectoryPageNavIsland pageId={tagPage.pageId} />
 				{isAccessibilityPage && (
 					<Island priority="critical" defer={{ until: 'visible' }}>
 						<Accessibility />
@@ -120,52 +128,31 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 								groupedTrails.day,
 								groupedTrails.month,
 								groupedTrails.year,
-						  ].join(' ');
+							].join(' ');
 
 					const containerId = title
 						.replaceAll(' ', '-')
 						.toLowerCase();
 
-					const url = groupedTrails.day
-						? '/' +
-						  joinUrl(
-								tagPage.pageId,
-								groupedTrails.year,
-								groupedTrails.month.slice(0, 3).toLowerCase(),
-								groupedTrails.day.padStart(2, '0'),
-								'all',
-						  )
-						: undefined;
+					// Temporarily remove links to /all pages
+					const url = undefined;
 
-					// AIStorylines logic to determine where to insert the section
 					const insertStorylinesSection =
 						tagPage.storylinesContent &&
+						/** Only on the first page */
 						(!tagPage.pagination ||
-							tagPage.pagination.currentPage === 1) && // Only on the first page
-						index === 0; // Only after the first section
+							tagPage.pagination.currentPage === 1) &&
+						/** Only after the first section */
+						index === 0;
 
-					/**
-					 * The pagination should appear at the bottom of the page; usually this is done by passing to FrontSection.
-					 * If the storylines section is being inserted when there's only one other container on the page,
-					 * we want to attach the pagination to it instead of the last trails section.
-					 */
 					const isLastGroup =
 						index === tagPage.groupedTrails.length - 1;
 					const hasPagination = !!tagPage.pagination;
-					const isSingleGroup = tagPage.groupedTrails.length === 1;
-					const shouldSuppressPagination =
-						insertStorylinesSection && isSingleGroup;
 
 					const tagPagePagination =
-						isLastGroup &&
-						hasPagination &&
-						!shouldSuppressPagination
+						isLastGroup && hasPagination
 							? tagPage.pagination
 							: undefined;
-
-					const storylinesPagination = isSingleGroup
-						? tagPage.pagination
-						: undefined;
 
 					return (
 						<Fragment key={containerId}>
@@ -202,20 +189,28 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 									aspectRatio="5:4"
 								/>
 							</FrontSection>
-							{insertStorylinesSection &&
-								tagPage.storylinesContent && (
-									<Island priority="critical">
-										<StorylinesSectionContent
-											index={1}
-											editionId={tagPage.editionId}
-											storylinesContent={
-												tagPage.storylinesContent
-											}
-											containerId="storylines"
-											pagination={storylinesPagination}
-										/>
-									</Island>
-								)}
+							<Hide until="tablet">
+								{insertStorylinesSection &&
+									tagPage.storylinesContent && (
+										/* Hydrate only once visible: below tablet the Hide wrapper is display:none, so the island never intersects and never hydrates. Stays critical so adaptSite doesn't disable the tabs on slow devices */
+										<Island
+											priority="critical"
+											defer={{
+												until: 'visible',
+												rootMargin: '300px',
+											}}
+										>
+											<StorylinesSectionContent
+												index={1}
+												editionId={tagPage.editionId}
+												storylinesContent={
+													tagPage.storylinesContent
+												}
+												containerId="storylines"
+											/>
+										</Island>
+									)}
+							</Hide>
 							{mobileAdPositions.includes(index) && (
 								<MobileAdSlot
 									renderAds={renderAds}
@@ -276,6 +271,9 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					editionId={tagPage.editionId}
 				/>
 			</Section>
+			{/* Mount point for the sign-in gate portal, which is not provided by
+			    an article body on tag pages */}
+			<div id="sign-in-gate" data-print-layout="hide" />
 			<BannerWrapper data-print-layout="hide">
 				<Island priority="feature" defer={{ until: 'idle' }}>
 					<StickyBottomBanner

@@ -288,7 +288,6 @@ export const Review: FEArticle = {
 		},
 	],
 	main: '<figure class="element element-image element--showcase" data-media-id="39892d930be2203c5ea452d130772c0279f7dc0c"> <img src="https://media.guim.co.uk/39892d930be2203c5ea452d130772c0279f7dc0c/0_400_6000_3600/1000.jpg" alt="Sex Education." width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">So brilliant you can only boggle ... Ncuti Gatwa as Eric in Sex Education.</span> <span class="element-image__credit">Photograph: Sam Taylor/Netflix</span> </figcaption> </figure>',
-	filterKeyEvents: false,
 	keyEvents: [],
 	blocks: [
 		{
@@ -1093,7 +1092,6 @@ export const Review: FEArticle = {
 		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
-		abTests: {},
 		serverSideABTests: {},
 		edition: 'UK',
 		ipsosTag: 'environment',

@@ -1,0 +1,21 @@
+name: DCR Check Islands
+
+on:
+  workflow_call:
+
+jobs:
+  check_islands:
+    name: DCR Check Islands
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Set up Node environment
+        uses: pnpm/setup@v3
+        with:
+          cache: true
+
+      - name: Validate Islands
+        run: make check-islands
+        working-directory: dotcom-rendering

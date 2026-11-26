@@ -3,14 +3,22 @@ import { breakpoints } from '@guardian/source/foundations';
 import type { Decorator, StoryObj } from '@storybook/react-webpack5';
 import { useEffect } from 'react';
 import { colourSchemeDecorator } from '../../.storybook/decorators/themeDecorator';
+import { AffiliateProductShowcase as AffiliateProductShowcaseFixture } from '../../fixtures/generated/fe-articles/AffiliateProductShowcase';
+import { AffiliateProductStandard as AffiliateProductStandardFixture } from '../../fixtures/generated/fe-articles/AffiliateProductStandard';
 import { Analysis as AnalysisStandardNewsFixture } from '../../fixtures/generated/fe-articles/Analysis';
 import { Comment as CommentStandardOpinionFixture } from '../../fixtures/generated/fe-articles/Comment';
 import { Feature as FeatureStandardCultureFixture } from '../../fixtures/generated/fe-articles/Feature';
 import { Labs as PhotoEssayImmersiveLabsFixture } from '../../fixtures/generated/fe-articles/Labs';
+import { LabsImmersiveFakeSpielberg as LabsImmersiveFakeSpielbergFixture } from '../../fixtures/generated/fe-articles/LabsImmersiveFakeSpielberg';
+import { LabsImmersiveGlobalX as LabsImmersiveGlobalXFixture } from '../../fixtures/generated/fe-articles/LabsImmersiveGlobalX';
+import { LabsImmersiveParrtjima as LabsImmersiveParrtjimaFixture } from '../../fixtures/generated/fe-articles/LabsImmersiveParrtjima';
+import { LabsImmersiveVictorianWater as LabsImmersiveVictorianWaterFixture } from '../../fixtures/generated/fe-articles/LabsImmersiveVictorianWater';
 import { Live as LiveBlogStandardNewsFixture } from '../../fixtures/generated/fe-articles/Live';
 import { LiveBlogSingleContributor as LiveBlogSingleContributorFixture } from '../../fixtures/generated/fe-articles/LiveBlogSingleContributor';
 import { NewsletterSignup as NewsletterSignupStandardSportFixture } from '../../fixtures/generated/fe-articles/NewsletterSignup';
-import { Picture as PictureShowcaseOpinionFixture } from '../../fixtures/generated/fe-articles/Picture';
+import { PictureWithAvatarAndStandfirst } from '../../fixtures/generated/fe-articles/PictureWithAvatarAndStandfirst';
+import { PictureWithAvatarNoStandfirst } from '../../fixtures/generated/fe-articles/PictureWithAvatarNoStandfirst';
+import { PictureWithStandfirstNoAvatar } from '../../fixtures/generated/fe-articles/PictureWithStandfirstNoAvatar';
 import { Recipe as RecipeStandardLifestyleFixture } from '../../fixtures/generated/fe-articles/Recipe';
 import { Standard as StandardStandardNewsFixture } from '../../fixtures/generated/fe-articles/Standard';
 import { Video as VideoStandardNewsFixture } from '../../fixtures/generated/fe-articles/Video';
@@ -25,6 +33,10 @@ import {
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { extractNAV } from '../model/extract-nav';
 import { type Article, enhanceArticleType } from '../types/article';
+import type {
+	ImageBlockElement,
+	MediaAtomBlockElement,
+} from '../types/content';
 import { DecideLayout, type Props as DecideLayoutProps } from './DecideLayout';
 
 export type HydratedLayoutDecoratorArgs = {
@@ -48,11 +60,7 @@ const HydratedLayout: Decorator<
 		display: article.display,
 		theme: article.theme,
 	};
-	const colourScheme =
-		(isObject(context.parameters.config) &&
-		context.parameters.config.renderingTarget === 'Apps'
-			? context.args.colourScheme
-			: 'light') ?? 'light';
+	const colourScheme = context.args.colourScheme ?? 'light';
 	const paletteDecorator = colourSchemeDecorator(
 		colourScheme,
 	)<DecideLayoutProps>([format]);
@@ -62,7 +70,7 @@ const HydratedLayout: Decorator<
 			? {
 					...context.args,
 					renderingTarget: 'Apps',
-			  }
+				}
 			: {
 					...context.args,
 					renderingTarget: 'Web',
@@ -70,7 +78,7 @@ const HydratedLayout: Decorator<
 						...extractNAV(article.frontendData.nav),
 						selectedPillar: getCurrentPillar(article.frontendData),
 					},
-			  };
+				};
 
 	useEffect(() => {
 		embedIframe().catch((e) =>
@@ -85,7 +93,7 @@ const HydratedLayout: Decorator<
 };
 
 export default {
-	title: 'Components/DecideLayout',
+	title: 'Layouts/DecideLayout',
 	component: DecideLayout,
 	parameters: {
 		chromatic: {
@@ -113,6 +121,13 @@ const webParameters = {
 	config: {
 		renderingTarget: 'Web',
 		darkModeAvailable: false,
+	},
+};
+
+const webDarkParameters = {
+	config: {
+		renderingTarget: 'Web',
+		darkModeAvailable: true,
 	},
 };
 
@@ -144,6 +159,203 @@ const standardImmersiveNewsAppsFixture: Article = {
 	display: ArticleDisplay.Immersive,
 };
 
+const immersiveLandscapeFixture = {
+	...StandardStandardNewsFixture,
+	mainMediaElements: StandardStandardNewsFixture.mainMediaElements.map(
+		(element) =>
+			element._type ===
+			'model.dotcomrendering.pageElements.ImageBlockElement'
+				? {
+						...element,
+						media: {
+							...element.media,
+							allImages: element.media.allImages.map((image) => ({
+								...image,
+								fields: { ...image.fields, aspectRatio: '5:3' },
+							})),
+						},
+					}
+				: element,
+	),
+	config: {
+		...StandardStandardNewsFixture.config,
+	},
+};
+
+export const WebStandardImmersiveNewsLight: Story = {
+	args: {
+		article: {
+			...enhanceArticleType(immersiveLandscapeFixture, 'Web'),
+			display: ArticleDisplay.Immersive,
+		},
+		colourScheme: 'light',
+	},
+	parameters: {
+		...webParameters,
+		chromatic: {
+			viewports: [
+				breakpoints.mobile,
+				breakpoints.mobileMedium,
+				breakpoints.mobileLandscape,
+				breakpoints.phablet,
+				breakpoints.tablet,
+				breakpoints.desktop,
+				breakpoints.leftCol,
+				breakpoints.wide,
+			],
+		},
+	},
+};
+
+const fiveByFourMainMedia = AffiliateProductShowcaseFixture.blocks
+	.flatMap((block) => block.elements)
+	.find(
+		(element): element is ImageBlockElement =>
+			element._type ===
+				'model.dotcomrendering.pageElements.ImageBlockElement' &&
+			element.media.allImages[0]?.fields.aspectRatio === '5:4',
+	);
+
+if (fiveByFourMainMedia == null) {
+	throw new Error('The affiliate showcase fixture must contain a 5:4 image');
+}
+
+export const WebStandardImmersiveNewsFiveByFour: Story = {
+	args: {
+		article: {
+			...enhanceArticleType(
+				{
+					...immersiveLandscapeFixture,
+					mainMediaElements: [fiveByFourMainMedia],
+				},
+				'Web',
+			),
+			display: ArticleDisplay.Immersive,
+		},
+		colourScheme: 'light',
+	},
+	parameters: WebStandardImmersiveNewsLight.parameters,
+};
+
+const recentImmersiveNewsFixture = {
+	...immersiveLandscapeFixture,
+	tags: immersiveLandscapeFixture.tags.filter(
+		(tag) =>
+			tag.type !== 'Series' &&
+			tag.type !== 'Blog' &&
+			!(tag.type === 'Publication' && tag.title === 'The Observer'),
+	),
+	webPublicationDate: '2021-12-31T10:00:00.000Z',
+	webPublicationDateDeprecated: '2021-12-31T10:00:00.000Z',
+	webPublicationDateDisplay: 'Fri 31 Dec 2021 10.00 GMT',
+	webPublicationSecondaryDateDisplay: '',
+};
+
+export const WebRecentImmersiveNewsWithoutSeriesFiveByThree: Story = {
+	name: 'Web Recent Immersive News Without Series (5:3)',
+	args: {
+		article: {
+			...enhanceArticleType(recentImmersiveNewsFixture, 'Web'),
+			display: ArticleDisplay.Immersive,
+		},
+		colourScheme: 'light',
+	},
+	parameters: WebStandardImmersiveNewsLight.parameters,
+};
+
+export const WebRecentImmersiveNewsWithoutSeries: Story = {
+	name: 'Web Recent Immersive News Without Series (5:4)',
+	args: {
+		article: {
+			...enhanceArticleType(
+				{
+					...recentImmersiveNewsFixture,
+					mainMediaElements: [fiveByFourMainMedia],
+				},
+				'Web',
+			),
+			display: ArticleDisplay.Immersive,
+		},
+		colourScheme: 'light',
+	},
+	parameters: WebStandardImmersiveNewsLight.parameters,
+};
+
+const titleOnlyCinemagraphMainMedia = {
+	_type: 'model.dotcomrendering.pageElements.MediaAtomBlockElement',
+	elementId: 'mock-cinemagraph-element',
+	id: 'mock-cinemagraph-atom',
+	assets: [
+		{
+			url: 'https://uploads.guim.co.uk/2025%2F06%2F20%2Ftesting+only%2C+please+ignore--3cb22b60-2c3f-48d6-8bce-38c956907cce-3.mp4',
+			mimeType: 'video/mp4',
+			dimensions: {
+				width: 500,
+				height: 400,
+			},
+			aspectRatio: '5:4',
+			hasAudio: false,
+		},
+	],
+	posterImage: [
+		{
+			url: 'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_210_5472_3283/master/5472.jpg',
+			width: 5472,
+		},
+	],
+	title: 'Illustration: Example Studio',
+	duration: 30,
+	videoPlayerFormat: 'Cinemagraph',
+} satisfies MediaAtomBlockElement;
+
+const immersiveTitleOnlyCinemagraphFixture = {
+	...recentImmersiveNewsFixture,
+	headline: 'An immersive feature with a title-only cinemagraph caption',
+	webTitle: 'An immersive feature with a title-only cinemagraph caption',
+	byline: 'Alex Example',
+	author: {
+		byline: 'Alex Example',
+	},
+	tags: recentImmersiveNewsFixture.tags.filter(
+		(tag) => tag.type !== 'Contributor',
+	),
+	mainMediaElements: [titleOnlyCinemagraphMainMedia],
+};
+
+export const WebRecentImmersiveNewsTitleOnlyCinemagraph: Story = {
+	name: 'Web Recent Immersive News With Title-Only Cinemagraph',
+	args: {
+		article: {
+			...enhanceArticleType(immersiveTitleOnlyCinemagraphFixture, 'Web'),
+			display: ArticleDisplay.Immersive,
+		},
+		colourScheme: 'light',
+	},
+	parameters: WebStandardImmersiveNewsLight.parameters,
+};
+
+const weekendEssayArticle: Article = {
+	...WebStandardStandardNewsLight.args.article,
+	design: ArticleDesign.WeekendEssay,
+	display: ArticleDisplay.Standard,
+};
+
+export const WebWeekendEssayWithSeriesAndSection: Story = {
+	args: {
+		article: weekendEssayArticle,
+	},
+	parameters: {
+		...webParameters,
+		chromatic: {
+			viewports: [
+				breakpoints.mobile,
+				breakpoints.tablet,
+				breakpoints.desktop,
+			],
+		},
+	},
+};
+
 export const AppsStandardImmersiveNewsLight: Story = {
 	args: {
 		article: standardImmersiveNewsAppsFixture,
@@ -160,6 +372,38 @@ export const AppsStandardImmersiveNewsDark: Story = {
 	parameters: appsParameters,
 };
 
+const standardShowcaseNewsAppsFixture: Article = {
+	...AppsStandardStandardNewsLight.args.article,
+	display: ArticleDisplay.Showcase,
+};
+
+export const WebStandardShowcaseNewsLight: Story = {
+	args: {
+		article: {
+			...WebStandardStandardNewsLight.args.article,
+			display: ArticleDisplay.Showcase,
+		},
+		colourScheme: 'light',
+	},
+	parameters: webParameters,
+};
+
+export const AppsStandardShowcaseNewsLight: Story = {
+	args: {
+		article: standardShowcaseNewsAppsFixture,
+		colourScheme: 'light',
+	},
+	parameters: appsParameters,
+};
+
+export const AppsStandardShowcaseNewsDark: Story = {
+	args: {
+		article: standardShowcaseNewsAppsFixture,
+		colourScheme: 'dark',
+	},
+	parameters: appsParameters,
+};
+
 export const WebNewsletterSignupStandardSportLight: Story = {
 	args: {
 		article: enhanceArticleType(
@@ -170,9 +414,23 @@ export const WebNewsletterSignupStandardSportLight: Story = {
 	parameters: webParameters,
 };
 
-export const WebPictureShowcaseOpinionLight: Story = {
+export const WebPictureWithAvatarNoStandfirstLight: Story = {
 	args: {
-		article: enhanceArticleType(PictureShowcaseOpinionFixture, 'Web'),
+		article: enhanceArticleType(PictureWithAvatarNoStandfirst, 'Web'),
+	},
+	parameters: webParameters,
+};
+
+export const WebPictureWithAvatarAndStandfirstLight: Story = {
+	args: {
+		article: enhanceArticleType(PictureWithAvatarAndStandfirst, 'Web'),
+	},
+	parameters: webParameters,
+};
+
+export const WebPictureWithStandfirstNoAvatarLight: Story = {
+	args: {
+		article: enhanceArticleType(PictureWithStandfirstNoAvatar, 'Web'),
 	},
 	parameters: webParameters,
 };
@@ -203,38 +461,262 @@ export const WebStandardNewsInterviewLight: Story = {
 	parameters: webParameters,
 };
 
-export const AppsPictureShowcaseOpinionLight = {
+export const AppsPictureWithAvatarNoStandfirstLight = {
 	args: {
-		article: enhanceArticleType(PictureShowcaseOpinionFixture, 'Apps'),
+		article: enhanceArticleType(PictureWithAvatarNoStandfirst, 'Apps'),
 		colourScheme: 'light',
 	},
 	parameters: appsParameters,
 } satisfies Story;
 
-export const AppsPictureShowcaseOpinionDark: Story = {
+export const AppsPictureWithAvatarNoStandfirstDark: Story = {
 	args: {
-		article: AppsPictureShowcaseOpinionLight.args.article,
+		article: AppsPictureWithAvatarNoStandfirstLight.args.article,
+		colourScheme: 'dark',
+	},
+	parameters: appsParameters,
+};
+
+export const AppsPictureWithAvatarAndStandfirstLight = {
+	args: {
+		article: enhanceArticleType(PictureWithAvatarAndStandfirst, 'Apps'),
+		colourScheme: 'light',
+	},
+	parameters: appsParameters,
+} satisfies Story;
+
+export const AppsPictureWithAvatarAndStandfirstDark: Story = {
+	args: {
+		article: AppsPictureWithAvatarAndStandfirstLight.args.article,
+		colourScheme: 'dark',
+	},
+	parameters: appsParameters,
+};
+
+export const AppsPictureWithStandfirstNoAvatarLight = {
+	args: {
+		article: enhanceArticleType(PictureWithStandfirstNoAvatar, 'Apps'),
+		colourScheme: 'light',
+	},
+	parameters: appsParameters,
+} satisfies Story;
+
+export const AppsPictureWithStandfirstNoAvatarDark: Story = {
+	args: {
+		article: AppsPictureWithStandfirstNoAvatarLight.args.article,
 		colourScheme: 'dark',
 	},
 	parameters: appsParameters,
 };
 
 /**
- * Skipped (flaky).
- *
- * This story fails intermittently as an iframe is inserted into the page
- * which is sometimes registered by the snapshot.
- *
- * Example: https://www.chromatic.com/test?appId=63e251470cfbe61776b0ef19&id=675aaa4f3aa384bd64bde3a1
+ * Snapshots using this fixture are skipped because its iframe content causes
+ * intermittent layout shifts.
  */
+const photoEssayImmersiveLabsArticle = enhanceArticleType(
+	PhotoEssayImmersiveLabsFixture,
+	'Web',
+);
+
+const portraitMainMedia = PhotoEssayImmersiveLabsFixture.blocks
+	.flatMap((block) => block.elements)
+	.find(
+		(element): element is ImageBlockElement =>
+			element._type ===
+				'model.dotcomrendering.pageElements.ImageBlockElement' &&
+			element.media.allImages[0]?.fields.aspectRatio === '4:5',
+	);
+
+if (portraitMainMedia == null) {
+	throw new Error('The Labs fixture must contain a portrait image');
+}
+
+export const WebRecentImmersiveNewsWithoutSeriesFourByFive: Story = {
+	name: 'Web Recent Immersive News Without Series (4:5)',
+	args: {
+		article: {
+			...enhanceArticleType(
+				{
+					...recentImmersiveNewsFixture,
+					mainMediaElements: [portraitMainMedia],
+				},
+				'Web',
+			),
+			display: ArticleDisplay.Immersive,
+		},
+		colourScheme: 'light',
+	},
+	parameters: WebStandardImmersiveNewsLight.parameters,
+};
+
+const photoEssayImmersiveLabsPortraitArticle = enhanceArticleType(
+	{
+		...PhotoEssayImmersiveLabsFixture,
+		mainMediaElements: [portraitMainMedia],
+	},
+	'Web',
+);
+
+const labsImmersiveArticle = ({
+	orientation,
+	design,
+}: {
+	orientation: 'portrait' | 'landscape';
+	design: ArticleDesign.PhotoEssay | ArticleDesign.Feature;
+}): Article => {
+	const base =
+		orientation === 'portrait'
+			? photoEssayImmersiveLabsPortraitArticle
+			: photoEssayImmersiveLabsArticle;
+	return { ...base, design };
+};
+
+const immersiveLabsParameters = {
+	...webParameters,
+	chromatic: { disableSnapshot: true },
+};
+
+/** Snapshot real Labs immersive articles at mobile in addition to the default width, to catch small-breakpoint-only regressions */
+const immersiveLabsMobileParameters = {
+	...immersiveLabsParameters,
+	chromatic: { viewports: [breakpoints.mobile, breakpoints.wide] },
+};
+
+const fakeSpielbergMainMedia =
+	LabsImmersiveFakeSpielbergFixture.mainMediaElements[0];
+
+if (
+	fakeSpielbergMainMedia?._type !==
+	'model.dotcomrendering.pageElements.EmbedBlockElement'
+) {
+	throw new Error(
+		'The Fake Spielberg fixture must contain a main media embed',
+	);
+}
+
+const stableFakeSpielbergFixture = {
+	...LabsImmersiveFakeSpielbergFixture,
+	mainMediaElements: [
+		{
+			...fakeSpielbergMainMedia,
+			html: `<style>html, body { margin: 0; height: 100%; } img { display: block; width: 100%; height: 75%; object-fit: cover; } @media (min-width: 600px) { img { height: 100%; } }</style><img src="https://uploads.guim.co.uk/2026/06/29/audible-2-poster.jpg" alt="">`,
+		},
+	],
+};
+
 export const WebPhotoEssayImmersiveLabsLight: Story = {
 	args: {
-		article: enhanceArticleType(PhotoEssayImmersiveLabsFixture, 'Web'),
+		article: labsImmersiveArticle({
+			orientation: 'landscape',
+			design: ArticleDesign.PhotoEssay,
+		}),
+	},
+	parameters: immersiveLabsParameters,
+};
+
+export const WebPhotoEssayImmersiveLabsDark: Story = {
+	args: {
+		article: WebPhotoEssayImmersiveLabsLight.args?.article,
+		colourScheme: 'dark',
 	},
 	parameters: {
-		...webParameters,
-		chromatic: { disableSnapshot: true },
+		...immersiveLabsParameters,
+		...webDarkParameters,
 	},
+};
+
+export const WebPhotoEssayImmersiveLabsPortraitLight: Story = {
+	args: {
+		article: labsImmersiveArticle({
+			orientation: 'portrait',
+			design: ArticleDesign.PhotoEssay,
+		}),
+	},
+	parameters: immersiveLabsParameters,
+};
+
+export const WebPhotoEssayImmersiveLabsPortraitDark: Story = {
+	args: {
+		article: WebPhotoEssayImmersiveLabsPortraitLight.args?.article,
+		colourScheme: 'dark',
+	},
+	parameters: {
+		...immersiveLabsParameters,
+		...webDarkParameters,
+	},
+};
+
+export const WebFeatureImmersiveLabsLandscapeLight: Story = {
+	args: {
+		article: labsImmersiveArticle({
+			orientation: 'landscape',
+			design: ArticleDesign.Feature,
+		}),
+	},
+	parameters: immersiveLabsParameters,
+};
+
+export const WebFeatureImmersiveLabsLandscapeDark: Story = {
+	args: {
+		article: WebFeatureImmersiveLabsLandscapeLight.args?.article,
+		colourScheme: 'dark',
+	},
+	parameters: {
+		...immersiveLabsParameters,
+		...webDarkParameters,
+	},
+};
+
+export const WebFeatureImmersiveLabsPortraitLight: Story = {
+	args: {
+		article: labsImmersiveArticle({
+			orientation: 'portrait',
+			design: ArticleDesign.Feature,
+		}),
+	},
+	parameters: immersiveLabsParameters,
+};
+
+export const WebFeatureImmersiveLabsPortraitDark: Story = {
+	args: {
+		article: WebFeatureImmersiveLabsPortraitLight.args?.article,
+		colourScheme: 'dark',
+	},
+	parameters: {
+		...immersiveLabsParameters,
+		...webDarkParameters,
+	},
+};
+
+/**
+ * Real Labs immersive articles tests.
+ */
+export const WebImmersiveLabsRealParrtjima: Story = {
+	args: {
+		article: enhanceArticleType(LabsImmersiveParrtjimaFixture, 'Web'),
+	},
+	parameters: immersiveLabsMobileParameters,
+};
+
+export const WebImmersiveLabsRealVictorianWater: Story = {
+	args: {
+		article: enhanceArticleType(LabsImmersiveVictorianWaterFixture, 'Web'),
+	},
+	parameters: immersiveLabsMobileParameters,
+};
+
+export const WebImmersiveLabsRealGlobalX: Story = {
+	args: {
+		article: enhanceArticleType(LabsImmersiveGlobalXFixture, 'Web'),
+	},
+	parameters: immersiveLabsMobileParameters,
+};
+
+export const WebImmersiveLabsRealFakeSpielberg: Story = {
+	args: {
+		article: enhanceArticleType(stableFakeSpielbergFixture, 'Web'),
+	},
+	parameters: immersiveLabsMobileParameters,
 };
 
 const standardStandardLabsWebFixture: Article = {
@@ -329,6 +811,20 @@ export const WebLiveBlogStandardLabsLight: Story = {
 			...WebLiveBlogStandardNewsLight.args.article,
 			theme: ArticleSpecial.Labs,
 		},
+	},
+	parameters: webParameters,
+};
+
+export const AffiliateProductStandardLight: Story = {
+	args: {
+		article: enhanceArticleType(AffiliateProductStandardFixture, 'Web'),
+	},
+	parameters: webParameters,
+};
+
+export const AffiliateProductShowcaseLight: Story = {
+	args: {
+		article: enhanceArticleType(AffiliateProductShowcaseFixture, 'Web'),
 	},
 	parameters: webParameters,
 };

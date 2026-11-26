@@ -26,12 +26,12 @@ test.describe('Embeds', () => {
 				.locator('button[data-testid="click-to-view-button"]')
 				.click();
 
-			await expect(
-				await getIframeBody(
-					page,
-					'div[data-testid="embed-block"] > div > iframe',
-				),
-			).toContainText('Radiolab');
+			const iframeBodyLocator = await getIframeBody(
+				page,
+				'div[data-testid="embed-block"] > div > iframe',
+			);
+
+			await expect(iframeBodyLocator.locator('audio')).toBeAttached();
 		});
 
 		test('should render the interactive 1', async ({ page }) => {

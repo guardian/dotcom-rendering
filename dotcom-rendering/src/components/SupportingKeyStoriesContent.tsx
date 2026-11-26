@@ -156,7 +156,7 @@ export const SupportingKeyStoriesContent = ({
 			]}
 		>
 			{supportingContent.map((subLink, index) => {
-				// The model has this property as optional but it is very likely to exist
+				/** The model has this property as optional but it is very likely to exist */
 				if (!subLink.headline) return null;
 
 				/** Force the format design to be Standard to ensure

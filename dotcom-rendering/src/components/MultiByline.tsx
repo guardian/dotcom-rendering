@@ -54,8 +54,8 @@ const fontStyles = ({
 			? headlineLightItalic28
 			: headlineMediumItalic28
 		: fontWeight === 'light'
-		? headlineLightItalic24
-		: headlineMediumItalic24};
+			? headlineLightItalic24
+			: headlineMediumItalic24};
 
 	${from.tablet} {
 		${format.display === ArticleDisplay.Immersive
@@ -63,8 +63,8 @@ const fontStyles = ({
 				? headlineLightItalic34
 				: headlineMediumItalic34
 			: fontWeight === 'light'
-			? headlineLightItalic28
-			: headlineMediumItalic28}
+				? headlineLightItalic28
+				: headlineMediumItalic28}
 	}
 
 	/** Labs uses sans text */

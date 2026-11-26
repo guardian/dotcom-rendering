@@ -72,7 +72,6 @@ const onRecommend = async (commentId: string): Promise<boolean> => {
 		.recommend(commentId)
 		.then((discussionApiResponse) => {
 			if (
-				// eslint-disable-next-line no-underscore-dangle -- we don't have control over this name! It comes from the compiled Thrift models
 				discussionApiResponse.__type !==
 				DiscussionServiceResponseType.DiscussionServiceResponseWithResponse
 			) {
@@ -125,7 +124,9 @@ export const DiscussionApps = (props: Props) => {
 					JSON.parse(userProfile.response),
 				);
 
-				if (!profileResult.ok) return setUser(undefined);
+				if (!profileResult.ok) {
+					return setUser(undefined);
+				}
 
 				setUser({
 					kind: 'Reader',

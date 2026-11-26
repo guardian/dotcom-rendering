@@ -1,7 +1,7 @@
 import { isUndefined } from '@guardian/libs';
 import { type ArticleFormat } from '../lib/articleFormat';
 import type { Block } from '../types/blocks';
-import type { Switches } from '../types/config';
+import type { StageType, Switches } from '../types/config';
 import type {
 	FEElement,
 	ImageBlockElement,
@@ -12,7 +12,6 @@ import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
 import { enhanceBlockquotes } from './enhance-blockquotes';
-import { enhanceDisclaimer } from './enhance-disclaimer';
 import { enhanceDividers } from './enhance-dividers';
 import { enhanceDots } from './enhance-dots';
 import { enhanceEmbeds } from './enhance-embeds';
@@ -24,6 +23,7 @@ import { enhanceNumberedLists } from './enhance-numbered-lists';
 import { enhanceProductSummary } from './enhance-product-summary';
 import { enhanceTweets } from './enhance-tweets';
 import { enhanceGuVideos } from './enhance-videos';
+import { enhanceEventGraphics } from './enhanceEventGraphics';
 import { enhanceLists } from './enhanceLists';
 import { enhanceProductElement } from './enhanceProductElement';
 import { enhanceTimeline } from './enhanceTimeline';
@@ -40,6 +40,7 @@ type Options = {
 	pageId: string;
 	serverSideABTests?: Record<string, string>;
 	switches?: Switches;
+	stage: StageType;
 };
 
 const enhanceNewsletterSignup =
@@ -56,7 +57,7 @@ const enhanceNewsletterSignup =
 					blockId,
 					format,
 					promotedNewsletter,
-			  )
+				)
 			: elements;
 
 // IMPORTANT: the ordering of the enhancer is IMPORTANT to keep in mind
@@ -81,6 +82,8 @@ export const enhanceElements =
 			),
 			enhanceDividers,
 			enhanceH2s,
+			enhanceProductSummary,
+			enhanceEventGraphics(options.stage, format),
 			enhanceInteractiveAtomElements(format),
 			enhanceInteractiveContentsElements,
 			enhanceBlockquotes(format),
@@ -100,13 +103,6 @@ export const enhanceElements =
 				options.renderingTarget,
 				options.shouldHideAds,
 			),
-			enhanceDisclaimer(options.hasAffiliateLinksDisclaimer, isNested),
-			enhanceProductSummary({
-				pageId: options.pageId,
-				serverSideABTests: options.serverSideABTests,
-				renderingTarget: options.renderingTarget,
-				filterAtAGlanceEnabled: !!options.switches?.filterAtAGlance,
-			}),
 		].reduce(
 			(enhancedBlocks, enhancer) => enhancer(enhancedBlocks),
 			elements,

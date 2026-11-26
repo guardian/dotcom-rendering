@@ -2,21 +2,32 @@ const swcConfig = require('./webpack/.swcrc.json');
 
 const esModules = [
 	'@guardian/',
+	'@csstools',
+	'@exodus',
+	'@asamuzakjp',
+	'@bramus',
 	'screenfull',
 	'node-fetch',
 	'data-uri-to-buffer',
 	'fetch-blob',
 	'formdata-polyfill',
 	'storybook',
+	'parse5',
+	'entities',
+	'htmlparser2',
+	'domhandler',
+	'domelementtype',
+	'domutils',
+	'dom-serializer',
 ].join('|');
 
 module.exports = {
 	testEnvironment: 'jsdom',
 	moduleDirectories: ['node_modules', 'src'],
 	transform: {
-		'^.+\\.(js|ts|tsx)$': ['@swc/jest', swcConfig],
+		'^.+\\.(mjs|js|ts|tsx)$': ['@swc/jest', swcConfig],
 	},
-	testMatch: ['**/*.test.+(ts|tsx|js)'],
+	testMatch: ['**/*.test.+(ts|tsx|js|mjs)'],
 	setupFilesAfterEnv: ['<rootDir>/scripts/jest/setup.ts'],
 	moduleNameMapper: {
 		'^svgs/(.*)$': '<rootDir>/__mocks__/svgMock.tsx',

@@ -36,7 +36,9 @@ const MiniCardPicture = ({ image, alt }: MiniCardPictureProps) => {
 		{ breakpoint: breakpoints.desktop, width: 120 },
 	]);
 
-	if (!source) throw new Error('Missing source');
+	if (!source) {
+		throw new Error('Missing source');
+	}
 
 	return (
 		<picture>

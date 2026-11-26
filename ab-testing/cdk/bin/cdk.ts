@@ -1,4 +1,3 @@
-import "source-map-support/register.js";
 import { App } from "aws-cdk-lib";
 import { AbTestingConfig } from "../lib/abTestingConfig.ts";
 import { AbTestingDeploymentLambda } from "../lib/deploymentLambda.ts";
@@ -9,6 +8,7 @@ const app = new App();
 
 const region = "eu-west-1";
 const stack = "frontend";
+const riffRaffProjectName = "dotcom:ab-testing";
 
 new AbTestingDeploymentLambda(app, "AbTestingDeploymentLambdaCode", {
 	stack,
@@ -16,6 +16,7 @@ new AbTestingDeploymentLambda(app, "AbTestingDeploymentLambdaCode", {
 	env: {
 		region,
 	},
+	riffRaffProjectName,
 });
 
 new AbTestingDeploymentLambda(app, "AbTestingDeploymentLambdaProd", {
@@ -24,6 +25,7 @@ new AbTestingDeploymentLambda(app, "AbTestingDeploymentLambdaProd", {
 	env: {
 		region,
 	},
+	riffRaffProjectName,
 });
 
 new AbTestingConfig(app, "AbTestingConfigCode", {
@@ -32,6 +34,7 @@ new AbTestingConfig(app, "AbTestingConfigCode", {
 	env: {
 		region,
 	},
+	riffRaffProjectName,
 });
 
 new AbTestingConfig(app, "AbTestingConfigProd", {
@@ -40,6 +43,7 @@ new AbTestingConfig(app, "AbTestingConfigProd", {
 	env: {
 		region,
 	},
+	riffRaffProjectName,
 });
 
 new AbTestingNotificationLambda(app, "AbTestingNotificationLambdaCode", {
@@ -48,6 +52,7 @@ new AbTestingNotificationLambda(app, "AbTestingNotificationLambdaCode", {
 	env: {
 		region,
 	},
+	riffRaffProjectName,
 });
 
 new AbTestingNotificationLambda(app, "AbTestingNotificationLambdaProd", {
@@ -56,8 +61,9 @@ new AbTestingNotificationLambda(app, "AbTestingNotificationLambdaProd", {
 	env: {
 		region,
 	},
+	riffRaffProjectName,
 });
 
-const riffRaff = riffRaffYamlFile({ app, stack, region });
+const riffRaff = riffRaffYamlFile({ app, stack, region, riffRaffProjectName });
 
 riffRaff.synth();

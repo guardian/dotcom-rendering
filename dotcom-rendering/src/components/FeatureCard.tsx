@@ -13,6 +13,7 @@ import {
 	ArticleSpecial,
 } from '../lib/articleFormat';
 import { secondsToDuration } from '../lib/formatTime';
+import { appendLinkNameMedia } from '../lib/getDataLinkName';
 import { getZIndex } from '../lib/getZIndex';
 import { getOphanComponents } from '../lib/labs';
 import { transparentColour } from '../lib/transparentColour';
@@ -147,7 +148,7 @@ const noPointerEvents = css`
  * reduced.) The following article has more detail on non-linear gradients:
  * https://css-tricks.com/easing-linear-gradients/
  */
-const overlayMaskGradientStyles = (angle: string) => css`
+export const overlayMaskGradientStyles = (angle: string) => css`
 	mask-image: linear-gradient(
 		${angle},
 		transparent 0px,
@@ -169,14 +170,6 @@ const overlayStyles = css`
 	text-align: start;
 	gap: ${space[1]}px;
 	padding: ${space[9]}px ${space[2]}px ${space[2]}px;
-
-	/*
-	 * Ensure the waveform is behind the other elements, e.g. headline, pill.
-	 * Links define their own z-index.
-	 */
-	> :not(.waveform):not(a) {
-		z-index: 1;
-	}
 `;
 
 const immersiveOverlayStyles = css`
@@ -247,7 +240,6 @@ const waveformStyles = css`
 	position: absolute;
 	bottom: 0;
 	left: 0;
-	z-index: 0;
 	height: 40px;
 	max-width: 100%;
 	overflow: hidden;
@@ -265,26 +257,30 @@ const getMedia = ({
 	mainMedia?: MainMedia;
 	showVideo?: boolean;
 }) => {
-	if (mainMedia?.type === 'SelfHostedVideo' && showVideo) {
-		let type: CardMediaType;
+	if (
+		showVideo &&
+		mainMedia?.type === 'SelfHostedVideo' &&
+		(mainMedia.videoStyle === 'Loop' ||
+			mainMedia.videoStyle === 'Cinemagraph')
+	) {
+		let style: CardMediaType;
 		switch (mainMedia.videoStyle) {
 			case 'Loop':
-				type = 'loop-video';
+				style = 'loop-video';
 				break;
 			case 'Cinemagraph':
-				type = 'cinemagraph';
+				style = 'cinemagraph';
 				break;
-			default:
-				type = 'default-video';
 		}
 
 		return {
-			type,
+			type: 'self-hosted-video',
+			style,
 			mainMedia,
 		} as const;
 	}
 
-	if (mainMedia?.type === 'YoutubeVideo' && showVideo) {
+	if (showVideo && mainMedia?.type === 'YoutubeVideo') {
 		return {
 			type: 'youtube-video',
 			mainMedia,
@@ -391,8 +387,9 @@ export type Props = {
 	 * all breakpoints. It also dictates the the card change aspect ratio to 5:3 on desktop and 4:5 on mobile.
 	 */
 	isImmersive?: boolean;
-	isStorylines?: boolean;
 	starRatingSize: RatingSizeType;
+	headlineTestUuid?: string;
+	isStorylines: boolean;
 };
 
 export const FeatureCard = ({
@@ -429,9 +426,10 @@ export const FeatureCard = ({
 	uniqueId,
 	isNewsletter = false,
 	isImmersive = false,
-	isStorylines = false,
 	starRatingSize,
 	articleMedia,
+	headlineTestUuid,
+	isStorylines,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -446,7 +444,16 @@ export const FeatureCard = ({
 		showVideo: showVideo && canPlayInline,
 	});
 
-	if (!media) return null;
+	if (!media) {
+		return null;
+	}
+
+	const mediaType =
+		media.type === 'self-hosted-video' ? media.style : media.type;
+
+	const resolvedDataLinkName = !isUndefined(dataLinkName)
+		? appendLinkNameMedia(dataLinkName, mediaType)
+		: undefined;
 
 	const showCardAge =
 		webPublicationDate !== undefined && showClock !== undefined;
@@ -455,28 +462,27 @@ export const FeatureCard = ({
 
 	const isYoutubeVideo = media.type === 'youtube-video';
 
-	const isSelfHostedVideo =
-		media.type === 'loop-video' ||
-		media.type === 'default-video' ||
-		media.type === 'cinemagraph';
+	const isSelfHostedVideo = media.type === 'self-hosted-video';
 
-	const isSelfHostedVideoWithControls =
-		media.type === 'loop-video' || media.type === 'default-video';
+	const isSelfHostedVideoWithControls = media.style === 'loop-video';
 
 	const labsDataAttributes = branding
 		? getOphanComponents({
 				branding,
 				locationPrefix: 'front-card',
-		  })
+			})
 		: undefined;
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const aspectRatioNumber = isImmersive ? 5 / 3 : 4 / 5;
 
-	/* The whole card is clickable on cinemagraphs and pictures */
+	/** The whole card is clickable for:
+	 * - cinemagraphs
+	 * - pictures
+	 * */
 	const allowLinkThroughOverlay =
-		media.type === 'cinemagraph' || media.type === 'picture';
+		media.style === 'cinemagraph' || media.type === 'picture';
 
 	return (
 		<FormatBoundary format={format}>
@@ -491,8 +497,9 @@ export const FeatureCard = ({
 						<CardLink
 							linkTo={linkTo}
 							headlineText={headlineText}
-							dataLinkName={dataLinkName}
+							dataLinkName={resolvedDataLinkName}
 							isExternalLink={isExternalLink}
+							headlineTestUuid={headlineTestUuid}
 						/>
 					)}
 					<div css={contentStyles}>
@@ -533,8 +540,6 @@ export const FeatureCard = ({
 										kickerText={kickerText}
 										trailText={trailText}
 										hidePillOnMobile={false}
-										iconSizeOnDesktop="large"
-										iconSizeOnMobile="large"
 										headlineSizes={headlineSizes}
 										webPublicationDate={webPublicationDate}
 										showClock={!!showClock}
@@ -577,10 +582,14 @@ export const FeatureCard = ({
 												media.mainMedia.videoStyle
 											}
 											posterImage={
-												media.mainMedia.image ?? ''
+												media.mainMedia.image.src ?? ''
+											}
+											posterImageAspectRatio={
+												media.mainMedia.image
+													.aspectRatio
 											}
 											fallbackImage={
-												media.mainMedia.image ?? ''
+												media.mainMedia.image.src ?? ''
 											}
 											fallbackImageSize={imageSize}
 											fallbackImageLoading={imageLoading}
@@ -591,7 +600,7 @@ export const FeatureCard = ({
 												aspectRatio
 											}
 											linkTo={linkTo}
-											showProgressBar={false}
+											hideProgressBar={true}
 											subtitleSource={
 												media.mainMedia.subtitleSource
 											}
@@ -599,6 +608,7 @@ export const FeatureCard = ({
 											controlsPosition="top"
 											minAspectRatio={aspectRatioNumber}
 											maxAspectRatio={aspectRatioNumber}
+											preventAutoplay={false}
 										/>
 									</Island>
 								)}
@@ -697,6 +707,9 @@ export const FeatureCard = ({
 												headlineText={headlineText}
 												dataLinkName={dataLinkName}
 												isExternalLink={isExternalLink}
+												headlineTestUuid={
+													headlineTestUuid
+												}
 											/>
 										)}
 
@@ -722,11 +735,20 @@ export const FeatureCard = ({
 												</div>
 											)}
 
+										{!isImmersive &&
+											mainMedia?.type === 'Audio' &&
+											renderWaveform(
+												mainMedia.duration,
+												233,
+											)}
+
 										{/**
 										 * Without the wrapping div the headline and byline would have space
 										 * inserted between them due to being direct children of the flex container
+										 *
+										 * relative positioning ensures that the headline appears on top of the absolutely positioned waveform.
 										 */}
-										<div>
+										<div css={{ position: 'relative' }}>
 											<CardHeadline
 												headlineText={headlineText}
 												format={format}
@@ -813,13 +835,6 @@ export const FeatureCard = ({
 											isNewsletter={isNewsletter}
 											media={articleMedia}
 										/>
-
-										{!isImmersive &&
-											mainMedia?.type === 'Audio' &&
-											renderWaveform(
-												mainMedia.duration,
-												233,
-											)}
 									</div>
 								</div>
 

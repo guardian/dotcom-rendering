@@ -13,10 +13,10 @@ import { Hide } from '@guardian/source/react-components';
 import { useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import type { EditionId } from '../lib/edition';
+import { formatStorylinesDateRange } from '../lib/formatStorylinesDateRange';
 import { parseStorylinesContentToStorylines } from '../model/enhanceTagPageStorylinesContent';
 import { palette } from '../palette';
 import type { StorylinesContent } from '../types/storylinesContent';
-import type { TagPagePagination } from '../types/tagPage';
 import { Footer } from './ExpandableAtom/Footer';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { ScrollableCarousel } from './ScrollableCarousel';
@@ -28,7 +28,6 @@ type StorylinesSectionProps = {
 	containerId?: string;
 	editionId: EditionId;
 	storylinesContent: StorylinesContent;
-	pagination?: TagPagePagination;
 };
 
 const selectedTitleStyles = css`
@@ -69,29 +68,30 @@ const tabsContainerStyles = css`
 	display: flex;
 	width: 100%;
 	${from.wide} {
-		width: 110%; /* bit hacky, but looks a touch better on wide. */
 		margin-bottom: ${space[2]}px;
 	}
 	align-items: stretch; /* Makes all tabs the same height */
 	margin-left: -${space[2]}px;
 `;
 
-const tabStyles = (isActive: boolean, isFirst: boolean) => css`
+const tabStyles = css`
 	${textSans17};
 	font-weight: 700;
 	text-align: start;
 	padding: ${space[0]}px ${space[0]}px ${space[0]}px ${space[2]}px;
 	cursor: pointer;
 	border: none;
-	${!isFirst && `border-left: 1px ${palette('--storylines-border')} solid;`}
 	background-color: ${palette('--storylines-background')};
-	color: ${isActive
-		? `${palette('--storylines-active-tab')}`
-		: `${palette('--storylines-inactive-tab')}`};
 	flex: 1;
 	min-width: 0;
 	display: flex;
 	align-items: flex-start; /* Aligns text to the top of each tab */
+`;
+
+const tabTextStyles = (isActive: boolean) => css`
+	color: ${isActive
+		? `${palette('--storylines-active-tab')}`
+		: `${palette('--storylines-inactive-tab')}`};
 `;
 
 const contentStyles = css`
@@ -121,30 +121,6 @@ const footerStyle = css`
 	justify-content: end;
 `;
 
-function formatDateRangeText(
-	earliestArticleTime?: string | null,
-	latestArticleTime?: string | null,
-): string {
-	const earliest = earliestArticleTime ? new Date(earliestArticleTime) : null;
-	const latest = latestArticleTime ? new Date(latestArticleTime) : null;
-	const format = (d?: Date | null) => {
-		if (!d) return '';
-		const day = d.getDate();
-		return `${day} ${d.toLocaleDateString('en-GB', {
-			month: 'long',
-			year: 'numeric',
-		})}`;
-	};
-
-	if (earliest) {
-		return `articles published since ${format(earliest)}`;
-	} else if (latest) {
-		return `articles published up to ${format(latest)}`;
-	} else {
-		return 'recent articles in our archives';
-	}
-}
-
 /**
  * Used to display the content of the storylines section on specific tag pages.
  *
@@ -158,7 +134,6 @@ export const StorylinesSectionContent = ({
 	containerId,
 	storylinesContent,
 	editionId,
-	pagination,
 }: StorylinesSectionProps) => {
 	const parsedStorylines =
 		parseStorylinesContentToStorylines(storylinesContent);
@@ -194,50 +169,55 @@ export const StorylinesSectionContent = ({
 	return (
 		<StorylinesSection
 			title="Storylines"
-			// Feels a bit hacky to hard code the container palette like this, but this provides some styling (notably the greyed background)
-			// Without having to add more palette variations and still sticking to the “container overrides” pattern in a section.
-			// Future improvement would be to add the palette variation specifically for this case.
+			/**
+			 * Feels a bit hacky to hard code the container palette like this, but this provides some styling (notably the greyed background)
+			 * Without having to add more palette variations and still sticking to the “container overrides” pattern in a section.
+			 * Future improvement would be to add the palette variation specifically for this case.
+			 */
 			containerPalette="LongRunningAltPalette"
 			url={url}
 			isTagPage={true}
 			ophanComponentLink={`container | ${containerId}`}
 			ophanComponentName={containerId}
 			editionId={editionId}
-			pagination={pagination}
 		>
 			{/* Storylines tab selector. This is a carousel on mobile. */}
 			<div css={tabsContainerStyles}>
 				<ScrollableCarousel
 					carouselLength={Math.ceil(parsedStorylines.length)}
 					visibleCarouselSlidesOnMobile={2}
-					visibleCarouselSlidesOnTablet={4}
+					visibleCarouselSlidesOnTablet={3}
 					sectionId={'storylines-tabs-carousel'}
 					shouldStackCards={{ desktop: false, mobile: false }}
 					gapSizes={{ column: 'large', row: 'medium' }}
 				>
-					{parsedStorylines.map((storyline, i) => (
-						<button
-							key={storyline.id}
-							css={tabStyles(
-								activeStorylineId === storyline.id,
-								i === 0,
-							)}
-							onClick={() => handleStorylineChange(storyline.id)}
-							type="button"
-						>
-							{activeStorylineId === storyline.id ? (
-								<>
-									<span css={numberStyles}>{i + 1}</span>
-									<span>{storyline.title}</span>
-								</>
-							) : (
-								<>
-									<span css={numberStyles}>{i + 1}</span>
-									<span>{storyline.title}</span>
-								</>
-							)}
-						</button>
-					))}
+					{parsedStorylines.map((storyline, i) => {
+						const isActive = activeStorylineId === storyline.id;
+						return (
+							<ScrollableCarousel.Item key={storyline.id}>
+								<button
+									css={tabStyles}
+									onClick={() =>
+										handleStorylineChange(storyline.id)
+									}
+									aria-pressed={isActive}
+									type="button"
+								>
+									<span
+										css={[
+											numberStyles,
+											tabTextStyles(isActive),
+										]}
+									>
+										{i + 1}
+									</span>
+									<span css={tabTextStyles(isActive)}>
+										{storyline.title}
+									</span>
+								</button>
+							</ScrollableCarousel.Item>
+						);
+					})}
 				</ScrollableCarousel>
 			</div>
 			{/* Active storyline title */}
@@ -253,12 +233,13 @@ export const StorylinesSectionContent = ({
 						)}
 						<FlexibleGeneral
 							groupedTrails={category.groupedTrails}
-							imageLoading="eager"
+							imageLoading="lazy"
 							aspectRatio="5:4"
 							hideAge={false}
 							collectionId={index}
 							containerLevel="Secondary"
 							isStorylines={true}
+							isUserOptedInToMiniNav={false}
 						/>
 					</div>
 				))}
@@ -287,9 +268,10 @@ export const StorylinesSectionContent = ({
 					</div>
 				</Hide>
 				<div>
-					{`These storylines were curated from ${formatDateRangeText(
+					{`These storylines were curated from ${formatStorylinesDateRange(
 						storylinesContent.earliestArticleTime,
 						storylinesContent.latestArticleTime,
+						editionId,
 					)}. Some articles may be older to provide further context.`}
 				</div>
 			</div>

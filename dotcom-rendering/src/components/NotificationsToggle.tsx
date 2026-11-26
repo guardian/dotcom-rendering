@@ -6,31 +6,31 @@ import {
 } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import type { NotificationsClient } from '../lib/bridgetApi';
+import type { ColourName } from '../paletteDeclarations';
 import { ToggleButton } from './ToggleButton';
 
 type Props = {
 	id: string;
 	displayName: string;
-	notificationType: 'content';
+	notificationType: 'content' | 'football-match';
 	notificationsClient: NotificationsClient;
+	colour: ColourName;
+	backgroundColour: ColourName;
+	iconColour: ColourName;
+	className?: string;
 };
 
-export const NotificationsToggle = ({
-	id,
-	displayName,
-	notificationType,
-	notificationsClient,
-}: Props) => {
+export const NotificationsToggle = (props: Props) => {
 	const [isFollowing, setIsFollowing] = useIsFollowing(
-		id,
-		displayName,
-		notificationType,
-		notificationsClient,
+		props.id,
+		props.displayName,
+		props.notificationType,
+		props.notificationsClient,
 	);
 
 	return (
 		<ToggleButton
-			colour="--follow-text"
+			colour={props.colour}
 			icon={
 				isFollowing ? (
 					<SvgNotificationsOn size="xsmall" />
@@ -38,21 +38,21 @@ export const NotificationsToggle = ({
 					<SvgNotificationsOff size="xsmall" />
 				)
 			}
-			iconBackground={isFollowing ? '--follow-icon-fill' : undefined}
-			iconBorder="--follow-icon-fill"
-			iconFill={
-				isFollowing ? '--follow-icon-background' : '--follow-icon-fill'
-			}
+			iconBackground={isFollowing ? props.iconColour : undefined}
+			iconBorder={props.iconColour}
+			iconFill={isFollowing ? props.backgroundColour : props.iconColour}
 			onClick={toggleNotifications(
-				id,
-				displayName,
-				notificationType,
-				notificationsClient,
+				props.id,
+				props.displayName,
+				props.notificationType,
+				props.notificationsClient,
 				isFollowing,
 				setIsFollowing,
 			)}
+			className={props.className}
 		>
-			Notifications {isFollowing ? 'on' : 'off'}
+			<Description notificationType={props.notificationType} />
+			{isFollowing ? ' on' : ' off'}
 		</ToggleButton>
 	);
 };
@@ -128,7 +128,7 @@ const toggleNotifications = (
 						})
 						.catch(handleError('follow'));
 				}
-		  };
+			};
 
 const handleError =
 	(methodName: 'follow' | 'unfollow' | 'isFollowing') =>
@@ -143,3 +143,14 @@ const handleError =
 			error,
 		);
 	};
+
+const Description = (props: {
+	notificationType: Props['notificationType'];
+}) => {
+	switch (props.notificationType) {
+		case 'content':
+			return 'Live blog notifications';
+		case 'football-match':
+			return 'Live match updates';
+	}
+};

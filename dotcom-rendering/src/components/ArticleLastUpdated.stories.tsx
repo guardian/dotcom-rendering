@@ -22,6 +22,7 @@ const meta = preview.meta({
 			modes: {
 				vertical: allModes.splitVertical,
 			},
+			ignoreSelectors: ['.live-pulse-icon'],
 		},
 	},
 });

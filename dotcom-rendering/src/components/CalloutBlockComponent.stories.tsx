@@ -101,7 +101,9 @@ export const SubmissionFailure = {
 		];
 
 		for (const button of buttons) {
-			if (!(button instanceof HTMLButtonElement)) return;
+			if (!(button instanceof HTMLButtonElement)) {
+				return;
+			}
 			button.click();
 		}
 	},

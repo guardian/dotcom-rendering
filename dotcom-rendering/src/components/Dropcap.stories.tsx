@@ -31,7 +31,9 @@ const render = ({
 	format: ArticleFormat;
 	firstSentence: string;
 }) => {
-	if (!firstSentence[0]) return;
+	if (!firstSentence[0]) {
+		return;
+	}
 
 	const dropCapIdx = firstSentence.search(/\w/g) + 1;
 

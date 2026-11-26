@@ -105,7 +105,7 @@ export const CalloutBlock = ({
 							/>
 						),
 					},
-			  ]
+				]
 			: [form]
 	) satisfies TabProps[];
 

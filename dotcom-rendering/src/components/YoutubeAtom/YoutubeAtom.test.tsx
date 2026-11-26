@@ -1,4 +1,4 @@
-import type { ConsentState } from '@guardian/libs';
+import type { ConsentState } from '@guardian/consent-manager';
 import '@testing-library/jest-dom';
 import { fireEvent, render } from '@testing-library/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
@@ -49,8 +49,6 @@ describe('YoutubeAtom', () => {
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
-					iconSizeOnDesktop="large"
-					iconSizeOnMobile="large"
 					hidePillOnMobile={false}
 					renderingTarget="Web"
 				/>
@@ -89,8 +87,6 @@ describe('YoutubeAtom', () => {
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
-					iconSizeOnDesktop="large"
-					iconSizeOnMobile="large"
 					hidePillOnMobile={false}
 					renderingTarget="Web"
 				/>
@@ -107,6 +103,45 @@ describe('YoutubeAtom', () => {
 
 		const [playerDiv] = getAllByTestId(/^youtube-player-c_xtiZNDgGc-\d+$/);
 		expect(playerDiv).toBeInTheDocument();
+	});
+
+	it('uses high-resolution HostedVideo image sources', () => {
+		const { container } = render(
+			<ConfigProvider
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+					editionId: 'UK',
+				}}
+			>
+				<YoutubeAtom
+					atomId="2e9e138b-0a23-4b96-a7f6-0258c0bacc8f"
+					videoId="c_xtiZNDgGc"
+					uniqueId="c_xtiZNDgGc-1"
+					title="My Youtube video!"
+					alt=""
+					adTargeting={{ disableAds: true }}
+					eventEmitters={[]}
+					format={{
+						theme: Pillar.News,
+						design: ArticleDesign.HostedVideo,
+						display: ArticleDisplay.Standard,
+					}}
+					consentState={consentStateCanTarget}
+					image={overlayImage}
+					shouldStick={false}
+					isMainMedia={true}
+					abTestParticipations={{}}
+					hidePillOnMobile={false}
+					renderingTarget="Web"
+				/>
+			</ConfigProvider>,
+		);
+
+		expect(
+			container.querySelector('source')?.getAttribute('srcset'),
+		).toContain('width=980&dpr=2');
 	});
 
 	it('player div has correct title', () => {
@@ -138,8 +173,6 @@ describe('YoutubeAtom', () => {
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
-					iconSizeOnDesktop="large"
-					iconSizeOnMobile="large"
 					hidePillOnMobile={false}
 					renderingTarget="Web"
 				/>
@@ -180,8 +213,6 @@ describe('YoutubeAtom', () => {
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
-					iconSizeOnDesktop="large"
-					iconSizeOnMobile="large"
 					hidePillOnMobile={false}
 					renderingTarget="Web"
 				/>
@@ -220,8 +251,6 @@ describe('YoutubeAtom', () => {
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
-					iconSizeOnDesktop="large"
-					iconSizeOnMobile="large"
 					hidePillOnMobile={false}
 					renderingTarget="Web"
 				/>
@@ -261,8 +290,6 @@ describe('YoutubeAtom', () => {
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
-					iconSizeOnDesktop="large"
-					iconSizeOnMobile="large"
 					hidePillOnMobile={false}
 					renderingTarget="Web"
 				/>
@@ -300,8 +327,6 @@ describe('YoutubeAtom', () => {
 					shouldStick={false}
 					isMainMedia={false}
 					abTestParticipations={{}}
-					iconSizeOnDesktop="large"
-					iconSizeOnMobile="large"
 					hidePillOnMobile={false}
 					renderingTarget="Web"
 				/>
@@ -345,8 +370,6 @@ describe('YoutubeAtom', () => {
 						shouldStick={false}
 						isMainMedia={false}
 						abTestParticipations={{}}
-						iconSizeOnDesktop="small"
-						iconSizeOnMobile="small"
 						hidePillOnMobile={false}
 						renderingTarget="Web"
 					/>
@@ -367,8 +390,6 @@ describe('YoutubeAtom', () => {
 						shouldStick={false}
 						isMainMedia={false}
 						abTestParticipations={{}}
-						iconSizeOnDesktop="small"
-						iconSizeOnMobile="small"
 						hidePillOnMobile={false}
 						renderingTarget="Web"
 					/>

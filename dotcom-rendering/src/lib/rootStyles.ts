@@ -5,7 +5,8 @@ import {
 } from '@guardian/source/foundations';
 import { paletteDeclarations } from '../paletteDeclarations';
 import { rootAdStyles } from './adStyles';
-import type { ArticleFormat } from './articleFormat';
+import { type ArticleFormat, isHostedContentDesign } from './articleFormat';
+import { hostedContentStyleOverrides } from './hostedContentStyles';
 
 /**
  * Global styles for pages:
@@ -16,6 +17,8 @@ import type { ArticleFormat } from './articleFormat';
 export const rootStyles = (
 	format: ArticleFormat,
 	darkModeAvailable: boolean,
+	/** For hosted content only */
+	hostedAccentColour?: string,
 ): SerializedStyles => css`
 	:root {
 		/* Light palette is default on all platforms */
@@ -37,9 +40,14 @@ export const rootStyles = (
 							}
 						}
 					}
-			  `
+				`
+			: ''}
+
+		${isHostedContentDesign(format.design)
+			? hostedContentStyleOverrides(darkModeAvailable, hostedAccentColour)
 			: ''}
 	}
+
 	/* Crude but effective mechanism. Specific components may need to improve on this behaviour. */
 	/* The not(.src...) selector is to work with Source's FocusStyleManager. */
 	*:focus {

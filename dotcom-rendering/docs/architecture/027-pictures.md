@@ -14,9 +14,9 @@ DCR uses the html `<picture>` tag to render images. This offers us a advantage o
 
 They key enabler in this is the [fastly image optimiser](https://developer.fastly.com/reference/io/). This allows us to specify image widths when requesting an image URL. for example for a given image, say `https://i.guim.co.uk/img/media/xxxxx/yyy.jpg`, we are able to specify some important image transformation properties: `width`, `quality` & `dpr` (& others).
 
--   `width` allows us to specify the width of the image in pixels.
--   `quality` allows us to specify how much to compress the image, 0 being very compressed, and 100 preserving the best quality possible.
--   `dpr` or Device Pixel Ratio allows us to scale the size of the image by this number, for example using `?width=300&dpr=2` would return a 600px wide image.
+- `width` allows us to specify the width of the image in pixels.
+- `quality` allows us to specify how much to compress the image, 0 being very compressed, and 100 preserving the best quality possible.
+- `dpr` or Device Pixel Ratio allows us to scale the size of the image by this number, for example using `?width=300&dpr=2` would return a 600px wide image.
 
 ### Media queries (`media="query"`)
 

@@ -9,7 +9,7 @@ import { SvgCross } from '@guardian/source/react-components';
 import detectMobile from 'is-mobile';
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
-import { useIsInView } from '../../lib/useIsInView';
+import { getZIndex } from '../../lib/getZIndex';
 import { useConfig } from '../ConfigContext';
 import type { VideoEventKey } from './YoutubeAtom';
 
@@ -17,7 +17,6 @@ const buttonStyles = css`
 	position: absolute;
 	left: -36px;
 	top: 0;
-	z-index: 22;
 	background-color: ${sourcePalette.neutral[7]};
 	height: 32px;
 	width: 32px;
@@ -78,7 +77,7 @@ const stickyStyles = (showButton: boolean) => css`
 	position: fixed;
 	bottom: 20px;
 	width: 215px;
-	z-index: 21;
+	z-index: ${getZIndex('stickyYoutubePlayer')};
 	animation: fade-in-up 1s ease both;
 
 	${from.tablet} {
@@ -124,6 +123,7 @@ type Props = {
 	isClosed: boolean;
 	setIsClosed: (state: boolean) => void;
 	shouldPauseOutOfView: boolean;
+	isIntersecting: boolean | null;
 };
 
 const isMobile = detectMobile({ tablet: true });
@@ -140,17 +140,12 @@ export const YoutubeAtomSticky = ({
 	isClosed,
 	setIsClosed,
 	shouldPauseOutOfView,
+	isIntersecting,
 }: Props): JSX.Element => {
 	const [isSticky, setIsSticky] = useState<boolean>(false);
 	const [stickEventSent, setStickEventSent] = useState<boolean>(false);
 	const [showOverlay, setShowOverlay] = useState<boolean>(isMobile);
 	const { renderingTarget } = useConfig();
-
-	const [isIntersecting, setRef] = useIsInView({
-		threshold: 0.5,
-		repeat: true,
-		debounce: true,
-	});
 
 	/**
 	 * Click handler for the sticky video close button
@@ -208,7 +203,9 @@ export const YoutubeAtomSticky = ({
 	 * useEffect for the sticky state
 	 */
 	useEffect(() => {
-		if (shouldStick) setIsSticky(isActive && !isIntersecting && !isClosed);
+		if (shouldStick) {
+			setIsSticky(isActive && !isIntersecting && !isClosed);
+		}
 	}, [isIntersecting, isActive, shouldStick, isClosed]);
 
 	/**
@@ -267,7 +264,6 @@ export const YoutubeAtomSticky = ({
 
 	return (
 		<div
-			ref={setRef}
 			css={isSticky && stickyContainerStyles(isMainMedia)}
 			data-testid={`youtube-sticky-${uniqueId}`}
 			data-is-sticky={isSticky}

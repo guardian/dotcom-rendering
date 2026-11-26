@@ -136,6 +136,44 @@ describe('Dropdown', () => {
 		expect(ulElement).toBeVisible();
 	});
 
+	it('should pass the expanded state to a nested trigger and toggle once per click', () => {
+		const renderTrigger = jest.fn(() => (
+			<span>
+				<span>Nested trigger</span>
+			</span>
+		));
+		const { getByRole, getByText } = render(
+			<ConfigProvider
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+					editionId: 'UK',
+				}}
+			>
+				<Dropdown
+					id="abc"
+					label={LABEL}
+					links={links}
+					dataLinkName="linkname"
+					renderTrigger={renderTrigger}
+				/>
+			</ConfigProvider>,
+		);
+
+		const button = getByRole('button');
+		expect(renderTrigger).toHaveBeenLastCalledWith(false);
+		expect(button).toHaveAttribute('aria-expanded', 'false');
+
+		fireEvent.click(getByText('Nested trigger'));
+		expect(renderTrigger).toHaveBeenLastCalledWith(true);
+		expect(button).toHaveAttribute('aria-expanded', 'true');
+
+		fireEvent.click(getByText('Nested trigger'));
+		expect(renderTrigger).toHaveBeenLastCalledWith(false);
+		expect(button).toHaveAttribute('aria-expanded', 'false');
+	});
+
 	it('should close the expanded menu when they click away', () => {
 		const { container, getByRole } = render(
 			<ConfigProvider

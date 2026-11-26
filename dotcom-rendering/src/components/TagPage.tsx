@@ -4,10 +4,8 @@ import { TagPageLayout } from '../layouts/TagPageLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
-import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
 import type { TagPage as TagPageModel } from '../types/tagPage';
-import { AdmiralScript } from './AdmiralScript.island';
 import { AlreadyVisited } from './AlreadyVisited.island';
 import { useConfig } from './ConfigContext';
 import { DarkModeMessage } from './DarkModeMessage';
@@ -60,9 +58,6 @@ export const TagPage = ({ tagPage, NAV }: Props) => {
 				<AlreadyVisited />
 			</Island>
 			<Island priority="feature" defer={{ until: 'idle' }}>
-				<AdmiralScript />
-			</Island>
-			<Island priority="feature" defer={{ until: 'idle' }}>
 				<FocusStyles />
 			</Island>
 			<Island priority="critical">
@@ -70,27 +65,17 @@ export const TagPage = ({ tagPage, NAV }: Props) => {
 					commercialMetricsEnabled={
 						!!tagPage.config.switches.commercialMetrics
 					}
-					tests={tagPage.config.abTests}
 				/>
 			</Island>
 			<Island priority="critical">
 				<SetABTests
-					abTestSwitches={filterABTestSwitches(
-						tagPage.config.switches,
-					)}
-					pageIsSensitive={tagPage.config.isSensitive}
-					isDev={!!tagPage.config.isDev}
-					serverSideTests={tagPage.config.abTests}
 					serverSideABTests={tagPage.config.serverSideABTests}
 				/>
 			</Island>
 			<Island priority="critical">
 				<SetAdTargeting adTargeting={adTargeting} />
 			</Island>
-			{isGoogleOneTapEnabled(
-				tagPage.config.abTests,
-				tagPage.config.switches,
-			) && (
+			{isGoogleOneTapEnabled(tagPage.config.switches) && (
 				<Island priority="enhancement" defer={{ until: 'idle' }}>
 					<GoogleOneTap />
 				</Island>

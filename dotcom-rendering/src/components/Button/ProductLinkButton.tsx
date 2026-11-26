@@ -5,13 +5,21 @@ import type {
 	ThemeButton,
 } from '@guardian/source/react-components';
 import { LinkButton } from '@guardian/source/react-components';
+import { SKIMLINK_REL } from '../../lib/affiliateLinksUtils';
 import { palette } from '../../palette';
+import type { AffiliateProductPrice } from '../../types/content';
+import {
+	createAccessibleProductLabel,
+	createStrikeThroughProductLabel,
+	rewriteLabelWithLatestPrice,
+} from '../AffiliateProducts/livePriceUtils';
 import { heightAutoStyle, wrapButtonTextStyle } from './styles';
 import { getPropsForLinkUrl } from './utils';
 
 type ProductLinkButtonProps = {
 	label: string;
 	url: string;
+	latestPrice?: AffiliateProductPrice;
 	size?: 'default' | 'small';
 	fullwidth?: boolean;
 	fullWidthText?: boolean;
@@ -19,6 +27,7 @@ type ProductLinkButtonProps = {
 	minimisePadding?: boolean;
 	dataComponent?: string;
 	xCustComponentId?: string;
+	themeOverrides?: Partial<ThemeButton>;
 };
 
 const fullWidthStyle = css`
@@ -43,11 +52,15 @@ export const theme: Partial<ThemeButton> = {
 	textPrimary: palette('--product-button-primary-text'),
 	textTertiary: palette('--product-button-primary-background'),
 	borderTertiary: palette('--product-button-primary-background'),
+	backgroundTertiaryHover: palette(
+		'--product-button-tertiary-background-hover',
+	),
 };
 
 export const ProductLinkButton = ({
 	label,
 	url,
+	latestPrice,
 	size = 'default',
 	fullwidth = false,
 	minimisePadding = false,
@@ -55,6 +68,7 @@ export const ProductLinkButton = ({
 	priority = 'primary',
 	dataComponent,
 	xCustComponentId,
+	themeOverrides,
 }: ProductLinkButtonProps) => {
 	const cssOverrides: SerializedStyles[] = [
 		heightAutoStyle,
@@ -62,13 +76,20 @@ export const ProductLinkButton = ({
 		...(minimisePadding ? [minimisePaddingStyle] : []),
 	];
 
+	const labelWithLatestPrice = rewriteLabelWithLatestPrice(
+		latestPrice,
+		label,
+	);
+
 	return (
 		<LinkButton
-			{...getPropsForLinkUrl(label)}
+			{...getPropsForLinkUrl(
+				createAccessibleProductLabel(labelWithLatestPrice),
+			)}
 			href={url}
-			rel="sponsored noreferrer noopener"
+			rel={SKIMLINK_REL}
 			priority={priority}
-			theme={theme}
+			theme={{ ...theme, ...themeOverrides }}
 			data-component={dataComponent}
 			data-ignore="global-link-styling"
 			data-link-name={`product link button ${priority}`}
@@ -79,9 +100,9 @@ export const ProductLinkButton = ({
 		>
 			<span
 				style={fullWidthText ? { width: '100%' } : {}}
-				css={wrapButtonTextStyle}
+				css={[wrapButtonTextStyle]}
 			>
-				{label}
+				{createStrikeThroughProductLabel(labelWithLatestPrice)}
 			</span>
 		</LinkButton>
 	);

@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { adSizes, constants } from '@guardian/commercial-core';
 import { from, textSans12, until } from '@guardian/source/foundations';
 import { palette } from '../palette';
+import { getZIndex } from './getZIndex';
 
 const labelHeight = constants.AD_LABEL_HEIGHT;
 
@@ -30,7 +31,8 @@ const labelStyles = css`
 		position: absolute;
 		left: 268px;
 		top: 1px;
-		z-index: 10;
+		/* Make sure the "clear" link is clickable */
+		z-index: 1;
 		padding: 0;
 		border: 0;
 	}
@@ -111,16 +113,22 @@ const adSlotStyles = css`
 			&[data-label-show='true'] {
 				min-height: calc(250px + ${labelHeight}px);
 			}
+
+			&.ad-slot--reset-height {
+				min-height: auto;
+			}
 		}
 	}
 `;
 
 const spacefinderAdSlotContainerStyles = css`
-	.ad-slot-container {
+	.ad-slot-container-sf {
 		margin: 12px auto;
 		text-align: center;
 		display: flex;
 		justify-content: center;
+		/* TODO: Revisit ads positioning/sizing nicely in interactive body grid */
+		width: 100%;
 		max-width: 620px;
 		margin-left: 0;
 
@@ -137,6 +145,7 @@ const spacefinderAdSlotContainerStyles = css`
 			/* this fixes inter-scrollers stealing mouse events */
 			overflow: hidden;
 			position: relative;
+			z-index: ${getZIndex('interscrollerAd')};
 
 			/* position the iframe absolutely (relative to the slot) so that it is in the correct position to detect viewability */
 			.ad-slot__content {
