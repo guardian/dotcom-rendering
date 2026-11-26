@@ -21,6 +21,16 @@ describe('doNotIndex', () => {
 			tags: undefined,
 		},
 		{
+			description: 'has an empty canonical URL',
+			canonicalUrl: '',
+			tags: undefined,
+		},
+		{
+			description: 'has a relative canonical URL',
+			canonicalUrl: '/uk',
+			tags: undefined,
+		},
+		{
 			description: 'has an ordinary canonical front URL',
 			canonicalUrl: 'https://www.theguardian.com/uk',
 			tags: [otherTag],
@@ -79,6 +89,16 @@ describe('doNotIndex', () => {
 		'https://www.theguardian.com/technology+tracking/commissioningdesk/the-filter',
 	])('does NOT index block-listed Filter front %s', (canonicalUrl) => {
 		expect(doNotIndex('PROD', canonicalUrl, undefined)).toBe(true);
+	});
+
+	it('does NOT index a block-listed Filter front with a relative URL', () => {
+		expect(
+			doNotIndex(
+				'PROD',
+				'/lifeandstyle/sleep+tracking/commissioningdesk/the-filter',
+				undefined,
+			),
+		).toBe(true);
 	});
 
 	it('does NOT index pages in non-production environments', () => {

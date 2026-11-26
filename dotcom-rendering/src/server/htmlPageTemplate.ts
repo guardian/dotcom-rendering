@@ -101,7 +101,7 @@ export const doNotIndex = (
 	// DO index exempted tracking/commissioningdesk pages
 	const isCommissioningDeskAllowListed =
 		!commissioningDeskBlockList.includes(
-			URL.canParse(canonicalUrl) ? new URL(canonicalUrl).pathname : '',
+			new URL(canonicalUrl, 'https://www.theguardian.com').pathname,
 		) &&
 		commissioningDeskAllowList.some((allowed) =>
 			canonicalUrl.includes(allowed),
