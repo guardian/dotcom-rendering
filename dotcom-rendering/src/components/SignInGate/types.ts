@@ -203,6 +203,7 @@ export interface AuxiaProxyGetTreatmentsResponse {
 export interface AuxiaProxyGetTreatmentsProxyResponseData {
 	responseId: string;
 	userTreatment?: AuxiaAPIResponseDataUserTreatment;
+	interactionToken?: string;
 	// Set to true on responses produced by the active Gandalf rules, both
 	// when no gate should display and when the Guardian-managed
 	// non-dismissible popup is returned. When present, the client must not

@@ -151,6 +151,7 @@ interface ShowSignInGateAuxiaProps {
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
 	contributionsServiceUrl: string;
 	browserId: string | undefined;
+	interactionToken?: string;
 	treatmentId: string;
 	renderingTarget: RenderingTarget;
 	isGandalf: boolean;
@@ -181,6 +182,7 @@ const auxiaLogTreatmentInteraction = async (
 	interactionType: AuxiaInteractionInteractionType,
 	actionName: AuxiaInteractionActionName,
 	browserId: string | undefined,
+	interactionToken: string | undefined,
 ): Promise<void> => {
 	// We have two types of gates: the standard Auxia gate and the
 	// gu default gate that is being served from SDC
@@ -198,15 +200,24 @@ const auxiaLogTreatmentInteraction = async (
 	};
 	const microTime = Date.now() * 1000;
 
-	const payload: AuxiaProxyLogTreatmentInteractionPayload = {
-		browserId,
-		treatmentTrackingId: userTreatment.treatmentTrackingId,
-		treatmentId: userTreatment.treatmentId,
-		surface: userTreatment.surface,
-		interactionType,
-		interactionTimeMicros: microTime,
-		actionName,
-	};
+	const payload:
+		| AuxiaProxyLogTreatmentInteractionPayload
+		| {
+				interactionToken: string;
+				interactionType: AuxiaInteractionInteractionType;
+				actionName: AuxiaInteractionActionName;
+		  } =
+		interactionToken != null
+			? { interactionToken, interactionType, actionName }
+			: {
+					browserId,
+					treatmentTrackingId: userTreatment.treatmentTrackingId,
+					treatmentId: userTreatment.treatmentId,
+					surface: userTreatment.surface,
+					interactionType,
+					interactionTimeMicros: microTime,
+					actionName,
+				};
 	const params = {
 		method: 'POST',
 		headers,
@@ -371,6 +382,9 @@ const SignInGateSelectorAuxia = ({
 						}
 						contributionsServiceUrl={contributionsServiceUrl}
 						browserId={auxiaGateDisplayData.browserId}
+						interactionToken={
+							auxiaGateDisplayData.auxiaData.interactionToken
+						}
 						treatmentId={
 							auxiaGateDisplayData.auxiaData.userTreatment
 								.treatmentId
@@ -393,6 +407,7 @@ const SignInGateSelectorAuxia = ({
 								interactionType,
 								actionName ?? '',
 								auxiaGateDisplayData.browserId,
+								auxiaGateDisplayData.auxiaData.interactionToken,
 							).catch((error) => {
 								const errorReport = new Error(
 									`Failed to log treatment interaction`,
@@ -436,6 +451,7 @@ const ShowSignInGateAuxia = ({
 	userTreatment,
 	contributionsServiceUrl,
 	browserId,
+	interactionToken,
 	treatmentId,
 	renderingTarget,
 	isGandalf,
@@ -495,6 +511,7 @@ const ShowSignInGateAuxia = ({
 					'VIEWED',
 					'',
 					browserId,
+					interactionToken,
 				).catch((error) => {
 					const errorReport = new Error(
 						`Failed to log treatment interaction`,
@@ -540,6 +557,7 @@ const ShowSignInGateAuxia = ({
 		hasBeenSeen,
 		shouldShowImmediately,
 		browserId,
+		interactionToken,
 		contributionsServiceUrl,
 		isGandalf,
 		renderingTarget,
