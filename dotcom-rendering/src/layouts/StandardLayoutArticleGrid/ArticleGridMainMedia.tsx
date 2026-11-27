@@ -74,6 +74,20 @@ const portraitImageFill = css`
 	}
 `;
 
+/**
+ * Once the reader starts the main video, hide the headline. DCR removes the
+ * YouTube poster overlay when play is pressed, so "atom present, overlay gone"
+ * means playback has started. This can't detect pausing.
+ */
+const hideHeadlineOnceVideoStarts = css`
+	&:has([data-component='youtube-atom']):not(
+			:has([data-testid^='youtube-overlay-'])
+		)
+		~ [data-gu-name='headline'] {
+		display: none;
+	}
+`;
+
 export const ArticleGridMainMedia = ({
 	article,
 	format,
@@ -92,6 +106,7 @@ export const ArticleGridMainMedia = ({
 		isImmersivePortrait,
 		isImmersiveWeekendRead,
 		isInteractiveTopHat,
+		isDocumentary,
 		layoutType,
 		mainMediaAspectRatio,
 		usesImmersiveImageProportions,
@@ -108,6 +123,7 @@ export const ArticleGridMainMedia = ({
 		layout.isLabs && isImmersivePortrait && usesImmersiveImageProportions;
 	const hideCaptionBeneathMainMedia =
 		layoutType === 'media' ||
+		isDocumentary ||
 		layout.isInteractiveTopHat ||
 		isImmersiveLandscape ||
 		isImmersivePortrait;
@@ -165,6 +181,7 @@ export const ArticleGridMainMedia = ({
 					css`
 						z-index: ${getZIndex('mediaOverlay')};
 					`,
+				isDocumentary && hideHeadlineOnceVideoStarts,
 			]}
 		>
 			<div>

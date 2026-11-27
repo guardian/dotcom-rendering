@@ -262,15 +262,13 @@ const documentaryCss: LayoutCssMap = {
 		tablet: 'grid-row: 3;',
 	},
 	media: {
-		mobile: `grid-row: 1; ${grid.column.all};`,
-		tablet: `grid-row: 1; ${grid.column.centre};`,
-		desktop: `grid-row: 1; ${grid.between('centre-column-start', 'right-column-end')};`,
-		leftCol: `grid-row: 1; ${grid.between('left-column-start', 'right-column-end')};`,
+		mobile: `grid-row: 1 / span 2; ${grid.column.all};`,
+		tablet: `grid-row: 1 / span 2; ${grid.column.all};`,
 	},
 	meta: {
 		mobile: 'grid-row: 4;',
 		tablet: 'grid-row: 4;',
-		desktop: `grid-row: 2 / span 2; ${grid.column.right};`,
+		desktop: `grid-row: 3; ${grid.column.right};`,
 	},
 	body: {
 		mobile: 'display: none;',

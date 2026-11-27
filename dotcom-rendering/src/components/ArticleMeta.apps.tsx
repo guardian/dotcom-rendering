@@ -270,6 +270,7 @@ export const ArticleMetaApps = ({
 	const isGallery = format.design === ArticleDesign.Gallery;
 	const isVideo = format.design === ArticleDesign.Video;
 	const isAudio = format.design === ArticleDesign.Audio;
+	const isDocumentary = layoutType === 'documentary';
 
 	const seriesTag = getSeriesTag(tags);
 	const podcast = getPodcast(tags);
@@ -283,7 +284,8 @@ export const ArticleMetaApps = ({
 		(isAnalysis || isImmersive) && !!byline && isUndefined(soleContributor);
 
 	const showContributor =
-		shouldShowContributor(format, isImmersiveGrid) && !!byline;
+		shouldShowContributor(format, isImmersiveGrid, isDocumentary) &&
+		!!byline;
 
 	const shouldShowListenToArticleButton =
 		!!pageId && !(isLiveBlog || isPicture || isGallery || isVideo);

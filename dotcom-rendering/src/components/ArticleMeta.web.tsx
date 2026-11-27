@@ -360,7 +360,7 @@ export const ArticleMeta = ({
 		? soleContributor?.bylineLargeImageUrl
 		: undefined;
 	const isInteractive = format.design === ArticleDesign.Interactive;
-
+	const isDocumentary = layoutType === 'documentary';
 	const isPictureContent = format.design === ArticleDesign.Picture;
 
 	const isAudio = format.design === ArticleDesign.Audio;
@@ -463,7 +463,11 @@ export const ArticleMeta = ({
 								/>
 							)}
 
-							{shouldShowContributor(format, isImmersiveGrid) && (
+							{shouldShowContributor(
+								format,
+								isImmersiveGrid,
+								isDocumentary,
+							) && (
 								<Contributor
 									byline={byline}
 									tags={tags}
@@ -525,6 +529,7 @@ export const ArticleMeta = ({
 								{shouldShowContributor(
 									format,
 									isImmersiveGrid,
+									isDocumentary,
 								) && (
 									<Contributor
 										byline={byline}

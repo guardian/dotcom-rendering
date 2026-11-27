@@ -23,6 +23,7 @@ export type ArticleGridLayout = {
 	isImmersivePortrait: boolean;
 	isImmersiveWeekendRead: boolean;
 	isInteractiveTopHat: boolean;
+	isDocumentary: boolean;
 	isLabs: boolean;
 	layoutType: LayoutType;
 	mainMediaAspectRatio: string | undefined;
@@ -62,6 +63,7 @@ export const deriveArticleGridLayout = ({
 	const isImmersivePortrait = layoutType === 'immersivePortrait';
 	const isImmersiveLandscape = layoutType === 'immersiveLandscape';
 	const isImmersive = isImmersivePortrait || isImmersiveLandscape;
+	const isDocumentary = layoutType === 'documentary';
 
 	return {
 		hasPageSkin,
@@ -77,6 +79,7 @@ export const deriveArticleGridLayout = ({
 		hasImmersiveAffiliateDisclaimer:
 			isImmersive && article.affiliateLinksDisclaimerRequired,
 		isImmersive,
+		isDocumentary,
 		isImmersiveLandscape,
 		isImmersiveWeekendRead:
 			isImmersivePortrait && format.design === ArticleDesign.WeekendEssay,

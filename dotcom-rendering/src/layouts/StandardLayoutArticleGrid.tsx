@@ -46,6 +46,7 @@ export const StandardLayoutArticleGrid = ({
 		isImmersivePortrait,
 		isInteractiveTopHat,
 		isLabs,
+		isDocumentary,
 	} = layout;
 	const centreRuleStyles = isImmersivePortrait
 		? grid.centreRuleAt('[data-gu-name="standfirst"]')
@@ -53,12 +54,15 @@ export const StandardLayoutArticleGrid = ({
 
 	const articleStyles = [
 		css`
-			background-color: ${themePalette('--article-background')};
+			background-color: ${isDocumentary
+				? '#141414'
+				: themePalette('--article-background')};
 		`,
 		grid.container,
 		hasPageSkin && grid.pageSkinContainer,
-		grid.outerRules(),
+		!isDocumentary && grid.outerRules(),
 		!isLabs &&
+			!isDocumentary &&
 			layoutType !== 'interactiveStandard' &&
 			!isInteractiveTopHat &&
 			css`

@@ -2790,6 +2790,9 @@ const cardHeadlineTextLight: PaletteFunction = (format) => {
 	if (format.design === ArticleDesign.HostedGallery) {
 		return sourcePalette.neutral[97];
 	}
+	if (format.design === ArticleDesign.Video) {
+		return sourcePalette.neutral[86];
+	}
 	return sourcePalette.neutral[7];
 };
 
@@ -2857,7 +2860,10 @@ const cardKickerTextLight: PaletteFunction = (format) => {
 		case Pillar.Culture:
 		case Pillar.Lifestyle:
 		case Pillar.News:
-			return pillarPalette(format.theme, 400);
+			return pillarPalette(
+				format.theme,
+				format.design === ArticleDesign.Video ? 500 : 400,
+			);
 		case ArticleSpecial.Labs:
 			return sourcePalette.labs[200];
 		case ArticleSpecial.SpecialReport:
@@ -3497,8 +3503,14 @@ const articleInnerBackgroundDark: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const articleSectionBackgroundLight: PaletteFunction = () =>
-	sourcePalette.neutral[100];
+const articleSectionBackgroundLight: PaletteFunction = ({ design }) => {
+	switch (design) {
+		case ArticleDesign.Video:
+			return '#141414';
+		default:
+			return sourcePalette.neutral[100];
+	}
+};
 
 const articleSectionBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[10];
@@ -4909,7 +4921,12 @@ const ageWarningText: PaletteFunction = () => sourcePalette.neutral[7];
 const articleTextLight: PaletteFunction = () => sourcePalette.neutral[7];
 const articleTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
-const carouselTextLight: PaletteFunction = () => sourcePalette.neutral[7];
+const carouselTextLight: PaletteFunction = ({ design }) => {
+	if (design === ArticleDesign.Video) {
+		return sourcePalette.neutral[86];
+	}
+	return sourcePalette.neutral[7];
+};
 const carouselTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
 const carouselBorderLight: PaletteFunction = () => sourcePalette.neutral[86];
@@ -4964,6 +4981,9 @@ const carouselTitleHighlightLight: PaletteFunction = ({ theme, design }) => {
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.neutral[7];
 		case Pillar.News:
+			if (design === ArticleDesign.Video) {
+				return pillarPalette(theme, 500);
+			}
 			if (design === ArticleDesign.Analysis) {
 				return sourcePalette.news[300];
 			}
@@ -4973,7 +4993,10 @@ const carouselTitleHighlightLight: PaletteFunction = ({ theme, design }) => {
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[400];
 		default:
-			return pillarPalette(theme, 400);
+			return pillarPalette(
+				theme,
+				design === ArticleDesign.Video ? 500 : 400,
+			);
 	}
 };
 

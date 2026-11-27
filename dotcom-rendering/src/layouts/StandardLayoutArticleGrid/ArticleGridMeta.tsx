@@ -57,6 +57,7 @@ export const ArticleGridMeta = ({
 		isImmersiveLandscape,
 		isImmersivePortrait,
 		isInteractiveTopHat,
+		isDocumentary,
 		layoutType,
 	} = layout;
 	const { branding } = article.commercialProperties[article.editionId];
@@ -122,7 +123,8 @@ export const ArticleGridMeta = ({
 			{format.display !== ArticleDisplay.Immersive &&
 				format.design !== ArticleDesign.Audio &&
 				layoutType !== 'immersivePortrait' &&
-				!isInteractiveTopHat && (
+				!isInteractiveTopHat &&
+				!isDocumentary && (
 					<div
 						css={[
 							(layoutType === 'picture' ||
