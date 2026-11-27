@@ -8,7 +8,6 @@ import {
 	decideFormat,
 } from '../lib/articleFormat';
 import { getPuzzleGroupPalette } from '../lib/puzzleGroupPalette';
-import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
 import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import { appsLightboxImages } from '../model/appsLightboxImages';
 import { buildCrosswordBlock } from '../model/buildCrosswordBlock';
@@ -91,15 +90,11 @@ export const getGalleryMainMedia = (
 
 /**
  * Crosswords take the colour of the crosswords group (news) instead of the
- * theme Frontend sends, but only in editions the Puzzles & Games hub is
- * available in.
+ * theme Frontend sends.
  */
 const decideArticleFormat = (data: FEArticle): ArticleFormat => {
 	const format = decideFormat(data.format);
-	if (
-		format.design === ArticleDesign.Crossword &&
-		isPuzzlesHubAvailable(data.config)
-	) {
+	if (format.design === ArticleDesign.Crossword) {
 		return { ...format, theme: getPuzzleGroupPalette('crosswords').theme };
 	}
 	return format;

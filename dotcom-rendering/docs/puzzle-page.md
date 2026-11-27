@@ -72,9 +72,8 @@ The archive sign-in prompt uses `data-component="puzzles-archive-sign-in"` and
 This measures link activations, not completed authentication; the existing sign-in
 destination and authentication behaviour are unchanged.
 
-Film Reveal and On the Ball are available wherever the Puzzles & Games hub is
-available. Hub cards, game pages and trivia archives do not require experiment
-participation. Local development retains its edition-gate bypass.
+Film Reveal and On the Ball are available to every reader. Hub cards, game pages
+and trivia archives do not require experiment participation.
 
 ## Sponsorship
 
@@ -174,15 +173,6 @@ Readers reach individual puzzles through frontend's dated public URLs, for examp
 `/puzzles-and-games/word-games/word-wheel/YYYY-MM-DD`. Dateless routes redirect to the relevant
 archive. The hub remains at `/puzzles-and-games`; DCR's rendering endpoint is `/PuzzlePage`.
 
-**Access control is enforced on both sides.** `frontend` gates reader
-access to these routes via its `PuzzlesHubAccess` edition check (currently
-every edition) before it ever POSTs to DCR. DCR's own
-`/PuzzlePage` endpoint additionally checks the same edition rule itself
-(via `isPuzzlesHubAvailable`, mirroring
-`/PuzzlesPage`'s hub gate) and returns `404` when it isn't enabled for the
-request, so the endpoint isn't left relying solely on `frontend` never
-calling it (see "Hitting it locally" below).
-
 ### Supported puzzle set
 
 The `PuzzleConfig` registry (`src/model/puzzles/puzzleConfigs.ts`) currently
@@ -268,12 +258,8 @@ This starts webpack-dev-server on `http://localhost:3030`
 (`webpack/webpack.config.dev-server.js`).
 
 `src/server/handler.puzzlePage.web.ts` validates the body
-(`validateAsPuzzlePageType`), checks the request's edition
-via `isPuzzlesHubAvailable` (`404` if not enabled), looks up
-the `PuzzleConfig` for the request's `slug` (`404` if unknown), and only
-then renders. Fixtures generated below keep the Standard article's edition,
-so they only pass this gate with `NODE_ENV=development` (which bypasses it
-locally) or after setting `config.edition` to `'INT'`.
+(`validateAsPuzzlePageType`), looks up the `PuzzleConfig` for the request's
+`slug` (`404` if unknown), and only then renders.
 
 Generate fixture JSON for all 8 slugs using the `tsx` devDependency (no
 extra install needed) and `fixtures/manual/puzzlePage.ts`'s
@@ -753,23 +739,18 @@ darkMode: boolean, puzzleDate: string | null } }` and the
   value is `frontend`'s responsibility at the route level (per its own
   task); true calendar/business-logic validity (e.g. "did this puzzle
   actually exist on this date") is not validated anywhere in the stack yet.
-- **DCR's `/PuzzlePage` endpoint now has its own route-level access
-  control**, checking the request's edition via
-  `isPuzzlesHubAvailable` and returning `404` when it isn't enabled, in
-  addition to (not instead of) `frontend`'s `PuzzlesHubAccess` gate that decides whether a
-  reader ever reaches one of these puzzle-page URLs in the first place.
-  Premium puzzles retain a separate experiment gate, documented below.
 
 ### Puzzles & Games access
 
-`isPuzzlesHubAvailable` gates the hub and its games, archives and navigation by
-edition. The hub is available in `INT`, `EUR`, `AU`, `US` and `UK`; keep
-`PUZZLES_HUB_EDITIONS` in sync with `PuzzlesHubAccess.scala` in Frontend. Film
-Reveal and On the Ball are available in all hub editions, including through
-hub tiles, recommendations, the sitemap and the Trivia & quizzes sub-nav.
+The hub and its games, archives and navigation are available to every reader.
 
-Premium puzzles are independent of this launch. They still require the hub
-and the `puzzles-new-hub-v3` variant; its audience remains at 0%.
+Two server-side A/B tests remain, both with their audience at 0% and both
+always on in local development:
+
+- `puzzles-new-hub-v3` (`isPuzzlesHubV3Enabled`): premium puzzles. It depends
+  on nothing else.
+- `puzzles-new-hub-v4` (`isPuzzlesHubV4Enabled`): the Maxi crossword. It needs
+  both the v3 and the v4 variants.
 
 ### SEO risks to revisit before shipping calendar/archive features
 

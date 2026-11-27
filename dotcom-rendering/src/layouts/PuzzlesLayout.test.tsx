@@ -76,8 +76,23 @@ describe('PuzzlesLayout', () => {
 	it.each([
 		['no assignment', {}, false],
 		['V3 only', { 'puzzles-new-hub-v3': 'variant' }, false],
-		['V4 control', { 'puzzles-new-hub-v4': 'control' }, false],
-		['V4 without V3', { 'puzzles-new-hub-v4': 'variant' }, true],
+		['V4 without V3', { 'puzzles-new-hub-v4': 'variant' }, false],
+		[
+			'V3 with V4 control',
+			{
+				'puzzles-new-hub-v3': 'variant',
+				'puzzles-new-hub-v4': 'control',
+			},
+			false,
+		],
+		[
+			'V3 and V4',
+			{
+				'puzzles-new-hub-v3': 'variant',
+				'puzzles-new-hub-v4': 'variant',
+			},
+			true,
+		],
 	] as const)('filters Maxi for %s', (_, serverSideABTests, visible) => {
 		const quick = {
 			id: 'quick',

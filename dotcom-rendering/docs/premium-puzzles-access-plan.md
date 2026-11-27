@@ -197,21 +197,19 @@ Why:
 ### D9. Everything is behind the `puzzles-new-hub-v3` A/B test
 
 The modal and everything that depends on it only have an effect for readers in
-the `variant` group of `puzzles-new-hub-v3`, and only when the hub is available
-for the reader's edition (`isPuzzlesHubAvailable`). Outside it, every puzzle
-behaves as a free one, whatever `frontend` sends in `instance.requiresSubscription`: the
+the `variant` group of `puzzles-new-hub-v3`. Outside it, every puzzle behaves
+as a free one, whatever `frontend` sends in `instance.requiresSubscription`: the
 game loads at once, no access request is made and ads are rendered as usual.
 
 Why:
 
 - It lets the feature be rolled out, measured and rolled back without a deploy
-  (set the test's `audienceSize` to `0 / 100`, or its `status` to `"OFF"`),
-  like the v1 and v2 tiers.
+  (set the test's `audienceSize` to `0 / 100`, or its `status` to `"OFF"`).
 - `frontend` can send the flag to every reader. The A/B decision is made in the
   layout, from `config.serverSideABTests`, so `frontend` does not need to know
   about the test.
-- In local development every tier is on, like for v1 and v2, so the modal can be
-  seen without opting in.
+- In local development the test is always on, so the modal can be seen without
+  opting in.
 
 The test is defined in `ab-testing/config/abTests.ts` (type `server`, deployed
 to Fastly) and read through `isPuzzlesHubV3Enabled`.
@@ -401,9 +399,9 @@ not gated yet. The investigation below is kept for the follow-up.
   them); they would be treated as free.
 - The puzzle date is `crossword.date` (a UTC date, like the progress identity).
   Around midnight the 7 day boundary can be off by an hour.
-- v2 plans to migrate crosswords to the Puzzle Page template. Since v3 needs v2,
-  the existing gate would then cover them and gating `CrosswordLayout` would be
-  transitional. Is there a date for that migration?
+- If crosswords are migrated to the Puzzle Page template, its existing gate would
+  cover them and gating `CrosswordLayout` would be transitional. Is there a date
+  for that migration?
 
 ## 11. Review feedback (PR #17190 and the pull requests it was split into)
 

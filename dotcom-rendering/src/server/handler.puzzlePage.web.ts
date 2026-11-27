@@ -1,5 +1,4 @@
 import type { RequestHandler } from 'express';
-import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
 import { getPuzzleConfig } from '../model/puzzles/puzzleConfigs';
 import { validateAsPuzzlePageType } from '../model/validate.puzzlePage';
 import { makePrefetchHeader } from './lib/header';
@@ -7,11 +6,6 @@ import { renderPuzzlePage } from './render.puzzlePage.web';
 
 export const handlePuzzlePage: RequestHandler = ({ body }, res) => {
 	const puzzlePage = validateAsPuzzlePageType(body);
-
-	if (!isPuzzlesHubAvailable(puzzlePage.config)) {
-		res.sendStatus(404);
-		return;
-	}
 
 	const puzzleConfig = getPuzzleConfig(puzzlePage.slug);
 

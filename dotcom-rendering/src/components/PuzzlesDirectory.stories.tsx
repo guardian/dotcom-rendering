@@ -6,7 +6,11 @@ import {
 	triviaPuzzlesContainer,
 } from '../../fixtures/manual/puzzlesPage';
 import { PuzzlesLayout } from '../layouts/PuzzlesLayout';
-import { puzzlesHubV4Experiment } from '../lib/puzzlesHubVersionExperiment';
+import {
+	puzzlesHubV3Experiment,
+	puzzlesHubV3Participation,
+	puzzlesHubV4Experiment,
+} from '../lib/puzzlesHubVersionExperiment';
 import { extractNAV } from '../model/extract-nav';
 import type { PuzzleItem, PuzzlesLayoutType } from '../types/puzzlesPage';
 import { PuzzlesDirectory } from './PuzzlesDirectory';
@@ -280,6 +284,9 @@ export const MaxiCrossword = () => {
 				config: {
 					...page.config,
 					serverSideABTests: {
+						...puzzlesHubV3Participation(
+							puzzlesHubV3Experiment.variant,
+						),
 						[puzzlesHubV4Experiment.name]:
 							puzzlesHubV4Experiment.variant,
 					},

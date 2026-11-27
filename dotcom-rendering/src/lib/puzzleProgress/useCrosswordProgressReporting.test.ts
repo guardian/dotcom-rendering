@@ -1,5 +1,4 @@
 import { renderHook } from '@testing-library/react';
-import type { EditionId } from '../edition';
 import { reportPuzzleProgress } from './reporter';
 import {
 	IN_PROGRESS_DEBOUNCE_MS,
@@ -25,16 +24,9 @@ const change = (filledCells: number, isComplete = false) => ({
 	isComplete,
 });
 
-const setEdition = (edition: EditionId) => {
-	window.guardian = {
-		config: { page: { edition } },
-	} as unknown as typeof window.guardian;
-};
-
 beforeEach(() => {
 	jest.useFakeTimers();
 	mockedReport.mockClear();
-	setEdition('INT');
 });
 
 afterEach(() => {
