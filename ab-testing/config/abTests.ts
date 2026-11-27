@@ -135,9 +135,9 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "puzzles-new-hub-v4",
+		name: "puzzles-crosswords-maxi",
 		description:
-			"Independent rollout of the Maxi crossword in Puzzles & Games",
+			"Internal opt-in testing of the Maxi crossword in Puzzles & Games",
 		owners: ["puzzles.team@guardian.co.uk"],
 		status: "ON",
 		expirationDate: "2026-12-31",
