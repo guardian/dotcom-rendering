@@ -213,26 +213,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "commercial-header-bidder-timeouts",
-		description:
-			"Test to measure the impact of changing the Prebid and APS timeout value.",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2027-01-19",
-		type: "client",
-		status: "OFF",
-		audienceSize: 2.1 / 100, // 0.35% in each variant
-		audienceSpace: "A",
-		groups: [
-			"variant-500",
-			"variant-750",
-			"variant-1000",
-			"variant-1250",
-			"control", // 1500ms timeout
-			"variant-1650",
-		],
-		shouldForceMetricsCollection: true,
-	},
-	{
 		name: "commercial-article-end-header-bidding",
 		description:
 			"Test opening up the article-end ad slot in the US region for HeaderBidding",
