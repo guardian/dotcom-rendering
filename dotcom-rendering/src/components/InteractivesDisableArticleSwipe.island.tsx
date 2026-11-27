@@ -2,7 +2,7 @@ import { log } from '@guardian/libs';
 import { useEffect } from 'react';
 import { getInteractionClient } from '../lib/bridgetApi';
 
-export const InteractivesDisableArticleSwipe = () => {
+export const InteractivesDisableArticleSwipeInApps = () => {
 	const onTouchStart = () => {
 		getInteractionClient()
 			.disableArticleSwipe(true)

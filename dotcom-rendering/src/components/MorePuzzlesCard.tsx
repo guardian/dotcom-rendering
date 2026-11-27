@@ -9,11 +9,16 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { SvgCheckmark } from '@guardian/source/react-components';
+import { puzzleTypeForCard } from '../lib/puzzleCardProgress';
 import {
 	getPuzzleGroupPalette,
 	puzzleGroupForItemType,
 	type PuzzleGroupKey,
 } from '../lib/puzzleGroupPalette';
+import {
+	IN_PROGRESS_BAR_PERCENTAGE,
+	showsInProgress,
+} from '../lib/puzzleProgress/inProgressDisplay';
 import { palette as themePalette } from '../palette';
 import type { PuzzleItem } from '../types/puzzlesPage';
 import { useConfig } from './ConfigContext';
@@ -220,6 +225,24 @@ const progressStyles = css`
 	}
 `;
 
+const inProgressStyles = css`
+	flex-direction: column;
+	align-items: flex-start;
+`;
+
+const progressTrackStyles = css`
+	width: 80px;
+	height: 3px;
+	border-radius: 2px;
+	background: color-mix(in srgb, currentColor 20%, transparent);
+	> span {
+		display: block;
+		height: 100%;
+		border-radius: inherit;
+		background: currentColor;
+	}
+`;
+
 const cardImageStyles = css`
 	position: absolute;
 	right: 0;
@@ -249,6 +272,9 @@ const MorePuzzlesCard = ({
 		item.image !== undefined &&
 		item.image.length > 0 &&
 		item.cardVariant !== 'compact';
+	const isInProgress =
+		item.gameStatus === 'in-progress' &&
+		showsInProgress(puzzleTypeForCard(item));
 	const contents = (
 		<>
 			<div css={cardTextStyles}>
@@ -273,6 +299,16 @@ const MorePuzzlesCard = ({
 					css={cardImageStyles}
 					src={item.image}
 				/>
+			)}
+			{isInProgress && (
+				<span css={[progressStyles, inProgressStyles]}>
+					<span css={progressTrackStyles} aria-hidden="true">
+						<span
+							style={{ width: `${IN_PROGRESS_BAR_PERCENTAGE}%` }}
+						/>
+					</span>
+					In progress
+				</span>
 			)}
 			{item.gameStatus === 'completed' && (
 				<span css={progressStyles}>

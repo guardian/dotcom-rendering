@@ -73,6 +73,33 @@ const isNavList = (collection: DCRCollectionType) => {
 const isHighlights = ({ collectionType }: DCRCollectionType) =>
 	collectionType === 'scrollable/highlights';
 
+const NAZAUri =
+	'https://content.guardianapis.com/atom/interactive/interactives/2026/11/2026-naza-doc/naza-launch-premiere';
+
+const isSupportedCollection = ({
+	serverSideABTests,
+	collection,
+}: {
+	serverSideABTests: Record<string, string>;
+	collection: DCRCollectionType;
+}) => {
+	const isUserOptedInToNazaTest =
+		serverSideABTests['fronts-and-curation-card-naza-thrasher'] ===
+		'show-thrasher';
+
+	const isCollectionAThrasher =
+		collection.collectionType === 'fixed/thrasher';
+
+	const hasNazaTrail = collection.curated.some(
+		(trail) => trail.embedUri === NAZAUri,
+	);
+
+	if (!isUserOptedInToNazaTest && isCollectionAThrasher && hasNazaTrail) {
+		return false;
+	}
+	return true;
+};
+
 const isMostPopular = ({ collectionType }: DCRCollectionType) =>
 	collectionType === 'news/most-popular';
 
@@ -135,7 +162,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		!isPaidContent && !isWorldCup2026 && !NAV.customSubNav;
 
 	const filteredCollections = front.pressedPage.collections.filter(
-		(collection) => !isHighlights(collection),
+		(collection) =>
+			!isHighlights(collection) &&
+			isSupportedCollection({
+				serverSideABTests: front.config.serverSideABTests,
+				collection,
+			}),
 	);
 
 	const merchHighAdPosition = getMerchHighPosition(filteredCollections);

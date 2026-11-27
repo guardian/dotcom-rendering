@@ -1,11 +1,14 @@
 import { css, Global } from '@emotion/react';
 import { breakpoints, palette } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import { mocked, spyOn } from 'storybook/test';
 import { createPuzzlesPage } from '../../fixtures/manual/puzzlesPage';
+import { getAuthStatus, type SignedIn } from '../lib/identity';
 import {
 	puzzlesHubV3Experiment,
 	puzzlesHubV3Participation,
 } from '../lib/puzzlesHubVersionExperiment';
+import { useIsSignedIn } from '../lib/useAuthStatus';
 import { extractNAV } from '../model/extract-nav';
 import type { PuzzlesArchive } from '../types/puzzlesPage';
 import { PuzzlesArchiveLayout } from './PuzzlesArchiveLayout';
@@ -177,6 +180,35 @@ export const AdFree = {
 } satisfies Story;
 
 export const PremiumSubscriber = {
+	beforeEach: ({ args }) => {
+		mocked(getAuthStatus).mockResolvedValue({
+			kind: 'SignedIn',
+			accessToken: { accessToken: 'storybook-access-token' },
+			idToken: {},
+		} as SignedIn);
+		mocked(useIsSignedIn).mockReturnValue(true);
+		const originalFetch = globalThis.fetch;
+		const fetchSpy = spyOn(globalThis, 'fetch').mockImplementation(
+			(input, init) => {
+				const url =
+					input instanceof Request ? input.url : input.toString();
+				if (url.includes('/archive-data/')) {
+					return Promise.resolve(
+						new Response(JSON.stringify(args.puzzlesPage.archive), {
+							status: 200,
+							headers: { 'Content-Type': 'application/json' },
+						}),
+					);
+				}
+				return originalFetch(input, init);
+			},
+		);
+		return () => {
+			fetchSpy.mockRestore();
+			mocked(getAuthStatus).mockReset();
+			mocked(useIsSignedIn).mockReset();
+		};
+	},
 	args: {
 		puzzlesPage: createPuzzlesPage({
 			archive: {

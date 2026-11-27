@@ -1,13 +1,11 @@
 import { log } from '@guardian/libs';
-import { useCallback, useEffect, useState } from 'react';
-import type { InferOutput } from 'valibot';
+import { useEffect, useState } from 'react';
 import { literal, number, object, safeParse, variant } from 'valibot';
 
 type Props = {
 	id: string;
 };
 
-type InteractiveMessage = InferOutput<typeof interactiveMessageSchema>;
 const interactiveMessageSchema = variant('kind', [
 	object({
 		kind: literal('interactive:scroll'),
@@ -20,121 +18,66 @@ const interactiveMessageSchema = variant('kind', [
 ]);
 
 /**
- * Send and receive messages from interactive Atoms.
+ * Receives messages from interactive Atoms that want to behave as scrollies.
  *
- * Currently supported messages:
- * - `interactive:scroll`
- * - `interactive:height`
+ * - `interactive:scroll` – the atom opts in to scrolly mode. Its iframe gets
+ *   the `scrolly` class, which pins it to the viewport (see `InteractiveAtom`).
+ * - `interactive:height` – the atom's scroll length. The container is set to
+ *   that height so there is room to scroll past the pinned iframe, and the
+ *   height is echoed back so the atom knows we are listening.
+ *
+ * The atom tracks the page's scroll position itself (its srcdoc iframe is
+ * same-origin), so we don't send it scroll positions.
  *
  * ## Why does this need to be an Island?
  *
- * It needs to send information to an adjoining `InteractiveAtom`
+ * It needs to update an adjoining `InteractiveAtom` in the browser
  */
 export const InteractiveAtomMessenger = ({ id }: Props) => {
-	const [container, setContainer] = useState<HTMLElement>();
 	const [iframe, setIframe] = useState<HTMLIFrameElement>();
-	const [scroll, setScroll] = useState(0);
-	const [height, setHeight] = useState(0);
-
-	const postMessage = useCallback(
-		(message: InteractiveMessage) => {
-			iframe?.contentWindow?.postMessage(message, '*');
-		},
-		[iframe],
-	);
 
 	useEffect(() => {
 		const found = document.querySelector<HTMLIFrameElement>(
 			`iframe[id="${id}"]`,
 		);
-		if (!found) {
-			return;
-		}
-
-		setIframe(found);
+		if (found) setIframe(found);
 	}, [id]);
 
 	useEffect(() => {
-		if (!iframe?.parentElement) {
-			return;
-		}
-
-		setContainer(iframe.parentElement);
-	}, [iframe]);
-
-	useEffect(() => {
-		if (!iframe) {
-			return;
-		}
-		if (!container) {
-			return;
-		}
-
-		let timeout: ReturnType<typeof requestAnimationFrame> | null = null;
-
-		const scrollListener = () => {
-			if (timeout != null) {
-				cancelAnimationFrame(timeout);
-			}
-			timeout = requestAnimationFrame(() => {
-				const rect = container.getBoundingClientRect();
-				if (rect.top > 0) {
-					return setScroll(0);
-				}
-				if (rect.top < -rect.height) {
-					return setScroll(1);
-				}
-				setScroll(-Math.round(rect.top));
-			});
-		};
+		const container = iframe?.parentElement;
+		if (!iframe || !container) return;
 
 		const messageListener = (event: MessageEvent<unknown>) => {
-			if (event.source !== iframe.contentWindow) {
-				return;
-			}
+			if (event.source !== iframe.contentWindow) return;
 
 			const result = safeParse(interactiveMessageSchema, event.data);
-
-			if (!result.success) {
-				return;
-			}
+			if (!result.success) return;
 
 			switch (result.output.kind) {
-				case 'interactive:height': {
-					setHeight(result.output.height);
-					return;
-				}
 				case 'interactive:scroll': {
-					log('dotcom', '📜 scrolly', { container });
-					iframe.classList.add('scrolly');
+					if (!iframe.classList.contains('scrolly')) {
+						log('dotcom', '📜 scrolly', { container });
+						iframe.classList.add('scrolly');
+					}
+					return;
+				}
+				case 'interactive:height': {
+					const { height } = result.output;
+					container.style.height =
+						height > 0 ? `${height}px` : 'auto';
+					// Echo back so the atom knows we are listening
+					iframe.contentWindow?.postMessage(
+						{ kind: 'interactive:height', height },
+						'*',
+					);
 					return;
 				}
 			}
 		};
 
-		window.addEventListener('scroll', scrollListener, { passive: true });
 		window.addEventListener('message', messageListener);
-
-		return () => {
-			if (timeout != null) {
-				cancelAnimationFrame(timeout);
-			}
-			window.removeEventListener('scroll', scrollListener);
-			window.removeEventListener('message', messageListener);
-		};
-	}, [iframe, container]);
-
-	useEffect(() => {
-		postMessage({ kind: 'interactive:scroll', scroll });
-	}, [postMessage, scroll]);
-
-	useEffect(() => {
-		if (!container) {
-			return;
-		}
-		container.style.height = height > 0 ? `${height}px` : 'auto';
-		postMessage({ kind: 'interactive:height', height });
-	}, [postMessage, height, container]);
+		return () => window.removeEventListener('message', messageListener);
+	}, [iframe]);
 
 	return null;
 };

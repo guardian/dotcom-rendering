@@ -43,7 +43,7 @@ import {
 	getPuzzlesSubNavLinks,
 	PUZZLES_SUBNAV_PARENT,
 } from '../lib/puzzlesSubNav';
-import { puzzleAccentStyles } from '../lib/puzzlesTheme';
+import { puzzleAccentStyles, puzzlesPageTheme } from '../lib/puzzlesTheme';
 import { enhanceBranding } from '../model/enhanceCommercialProperties';
 import type { NavType, SubNavType } from '../model/extract-nav';
 import type { PuzzleConfig } from '../model/puzzles/puzzleConfigs';
@@ -895,7 +895,13 @@ export const PuzzlePageLayout = ({
 				)}
 
 				{isV1Enabled && instance.puzzlesSupporting && (
-					<div data-print-layout="hide">
+					<div
+						data-print-layout="hide"
+						// `PuzzlesUsefulLinks` reads the `--puzzles-*` colours,
+						// which only this theme defines (with dark mode when
+						// available). Without it the links stay light in dark mode.
+						css={puzzlesPageTheme(darkModeAvailable)}
+					>
 						<PuzzlesUsefulLinks
 							id="puzzle-page"
 							ophanComponentName="puzzles-useful-links:puzzle-page"

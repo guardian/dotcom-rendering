@@ -146,6 +146,17 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
+		name: "fronts-and-curation-card-naza-thrasher",
+		description: "Opt-in preview of NAZA thrasher on fronts",
+		owners: ["fronts.and.curation@guardian.co.uk"],
+		status: "ON",
+		expirationDate: "2026-12-16",
+		type: "server",
+		audienceSize: 0 / 100,
+		groups: ["show-thrasher"],
+		shouldForceMetricsCollection: false,
+	},
+	{
 		name: "fronts-and-curation-editorial-test",
 		description: "Allow editorial A/B tests to run on web",
 		owners: [

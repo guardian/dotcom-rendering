@@ -11,7 +11,12 @@ import {
 	visuallyHidden,
 } from '@guardian/source/foundations';
 import { SvgCheckmark } from '@guardian/source/react-components';
+import { puzzleTypeForCard } from '../lib/puzzleCardProgress';
 import { getPuzzleGroupPalette } from '../lib/puzzleGroupPalette';
+import {
+	IN_PROGRESS_BAR_PERCENTAGE,
+	showsInProgress,
+} from '../lib/puzzleProgress/inProgressDisplay';
 import type { PuzzleItem } from '../types/puzzlesPage';
 
 /**
@@ -209,6 +214,24 @@ const playedStyles = css`
 	}
 `;
 
+const inProgressStyles = css`
+	flex-direction: column;
+	align-items: flex-start;
+`;
+
+const progressTrackStyles = css`
+	width: 80px;
+	height: 3px;
+	border-radius: 2px;
+	background: color-mix(in srgb, currentColor 20%, transparent);
+	> span {
+		display: block;
+		height: 100%;
+		border-radius: inherit;
+		background: currentColor;
+	}
+`;
+
 const cardImageStyles = (isFeatured: boolean) => css`
 	position: absolute;
 	right: 0;
@@ -253,6 +276,9 @@ export const PuzzleCard = ({
 		item.cardVariant !== 'compact';
 	const needsCrosswordSuffix =
 		item.type === 'crossword' && !/\bcrossword\b/i.test(item.title);
+	const isInProgress =
+		item.gameStatus === 'in-progress' &&
+		showsInProgress(puzzleTypeForCard(item));
 	const contents = (
 		<>
 			<div css={cardTextStyles(isFeatured)}>
@@ -280,6 +306,16 @@ export const PuzzleCard = ({
 					css={cardImageStyles(isFeatured)}
 					src={item.image}
 				/>
+			)}
+			{isInProgress && (
+				<span css={[playedStyles, inProgressStyles]}>
+					<span css={progressTrackStyles} aria-hidden="true">
+						<span
+							style={{ width: `${IN_PROGRESS_BAR_PERCENTAGE}%` }}
+						/>
+					</span>
+					In progress
+				</span>
 			)}
 			{item.gameStatus === 'completed' && (
 				<span css={playedStyles}>
