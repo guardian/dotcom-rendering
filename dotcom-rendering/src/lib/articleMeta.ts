@@ -39,7 +39,8 @@ export const shouldShowContributor = (
 ): boolean => {
 	if (
 		(format.display === ArticleDisplay.Immersive && !isImmersiveGrid) ||
-		(format.design === ArticleDesign.WeekendEssay && isImmersiveGrid)
+		(format.design === ArticleDesign.WeekendEssay && isImmersiveGrid) ||
+		(format.design === ArticleDesign.Interview && !isImmersiveGrid)
 	) {
 		return false;
 	}
