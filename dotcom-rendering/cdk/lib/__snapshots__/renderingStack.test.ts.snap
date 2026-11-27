@@ -4848,8 +4848,8 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering PROD (
         "ManagedInstancesCapacityProviderC2946447",
       ],
       "Properties": {
-        "MaxCapacity": 240,
-        "MinCapacity": 42,
+        "MaxCapacity": 3,
+        "MinCapacity": 1,
         "ResourceId": {
           "Fn::Join": [
             "",
@@ -6082,13 +6082,13 @@ exports[`The RenderingCDKStack matches the snapshot for Article Rendering PROD (
                   "TargetGroupArn": {
                     "Ref": "TargetGroupArticlerendering3605E498",
                   },
-                  "Weight": 99,
+                  "Weight": 1,
                 },
                 {
                   "TargetGroupArn": {
                     "Ref": "ArticlerenderingEcsTargetGroupArticlerenderingD522DD78",
                   },
-                  "Weight": 1,
+                  "Weight": 0,
                 },
               ],
             },

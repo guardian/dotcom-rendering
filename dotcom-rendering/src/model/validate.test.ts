@@ -8,6 +8,7 @@ import { Live } from '../../fixtures/generated/fe-articles/Live';
 import { MatchReport } from '../../fixtures/generated/fe-articles/MatchReport';
 import { Review } from '../../fixtures/generated/fe-articles/Review';
 import { Standard } from '../../fixtures/generated/fe-articles/Standard';
+import { crypticCrossword } from '../../fixtures/manual/editionsCrossword';
 import { hostedArticle } from '../../fixtures/manual/hostedArticle';
 import { hostedGallery } from '../../fixtures/manual/hostedGallery';
 import { hostedVideo } from '../../fixtures/manual/hostedVideo';
@@ -66,6 +67,20 @@ describe('validate', () => {
 			expect(validateAsFEArticle(article.data)).toBe(article.data);
 		});
 	}
+
+	it('accepts a 15×15 Maxi crossword in an article payload', () => {
+		const crossword = {
+			...crypticCrossword,
+			crosswordType: 'maxi',
+			id: 'crosswords/maxi/1',
+			name: 'Maxi crossword No 1',
+			number: 1,
+		} as const;
+
+		expect(
+			validateAsFEArticle({ ...Standard, crossword }).crossword,
+		).toEqual(crossword);
+	});
 
 	for (const hostedItem of hostedContentArticles) {
 		it(`validates data for hosted ${hostedItem.name} content`, () => {
