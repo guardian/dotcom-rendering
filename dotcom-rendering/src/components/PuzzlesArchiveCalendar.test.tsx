@@ -1153,6 +1153,44 @@ describe('PuzzlesArchiveCalendar', () => {
 		).toBeInTheDocument();
 	});
 
+	it('loads Maxi months from the web origin even when the AJAX host is different', async () => {
+		pageConfig.ajaxUrl = 'https://api.nextgen.guardianapps.co.uk';
+		const maxi = {
+			id: 'archive-maxi',
+			title: 'Maxi',
+			puzzleType: 'CROSSWORD_MAXI',
+			set: 'maxi',
+			path: '/puzzles-and-games/crosswords/maxi/archive',
+		};
+		const initialArchive: PuzzlesArchive = {
+			...archive,
+			category: 'crosswords',
+			selectedPuzzle: maxi,
+			puzzles: [maxi],
+			items: [],
+		};
+		const fetchMock = jest.fn().mockResolvedValue({
+			ok: true,
+			json: async () => ({ ...initialArchive, month: 8 }),
+		});
+		Object.defineProperty(global, 'fetch', {
+			configurable: true,
+			value: fetchMock,
+		});
+		render(<PuzzlesArchiveCalendar initialArchive={initialArchive} />);
+		fireEvent.click(screen.getByRole('link', { name: 'Previous month' }));
+
+		await screen.findByText('August 2026');
+		expect(fetchMock).toHaveBeenCalledWith(
+			expect.objectContaining({
+				origin: window.location.origin,
+				pathname:
+					'/puzzles-and-games/crosswords/archive-data/archive-maxi/2026/8',
+			}),
+			expect.objectContaining({ credentials: 'same-origin' }),
+		);
+	});
+
 	it('loads the previous month without navigating or reloading', async () => {
 		const previous = { ...archive, year: 2026, month: 8, items: [] };
 		const fetchMock = jest.fn().mockResolvedValue({

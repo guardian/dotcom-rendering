@@ -892,8 +892,16 @@ export const PuzzlesArchiveCalendar = ({
 			setError(false);
 			try {
 				// Query parameters are stripped by the CDN in CODE/PROD.
+				const puzzle =
+					initialArchive.puzzles.find(({ id }) => id === puzzleId) ??
+					initialArchive.selectedPuzzle;
+				// Use the web origin for Maxi so Fastly applies the reader's V4 assignment.
+				const origin =
+					puzzle.puzzleType === 'CROSSWORD_MAXI'
+						? ''
+						: window.guardian.config.page.ajaxUrl;
 				const url = new URL(
-					`${window.guardian.config.page.ajaxUrl}/puzzles-and-games/${initialArchive.category}/archive-data/${encodeURIComponent(puzzleId)}/${year}/${month}`,
+					`${origin}/puzzles-and-games/${initialArchive.category}/archive-data/${encodeURIComponent(puzzleId)}/${year}/${month}`,
 					window.location.origin,
 				);
 				const authStatus = await getAuthStatus();
@@ -936,7 +944,11 @@ export const PuzzlesArchiveCalendar = ({
 				if (currentRequest === requests.current.id) setLoading(false);
 			}
 		},
-		[initialArchive.category],
+		[
+			initialArchive.category,
+			initialArchive.puzzles,
+			initialArchive.selectedPuzzle,
+		],
 	);
 
 	useEffect(() => {
