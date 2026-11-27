@@ -75,7 +75,7 @@ describe('puzzle sharing', () => {
 			if (method === 'email') {
 				expect(control).toHaveAttribute(
 					'href',
-					`mailto:?subject=Quick crossword&body=${shareUrl}`,
+					`mailto:?subject=${encodeURIComponent('Quick crossword')}&body=${encodeURIComponent(shareUrl)}`,
 				);
 			} else {
 				fireEvent.click(control);

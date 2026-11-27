@@ -18,6 +18,7 @@ import {
 	type PuzzleActionContext,
 	type PuzzleActionSource,
 } from '../lib/puzzleActionTracking';
+import { error, ok, type Result } from '../lib/result';
 import { transparentColour } from '../lib/transparentColour';
 import { useMatchMedia } from '../lib/useMatchMedia';
 import { palette as themePalette } from '../palette';
@@ -176,39 +177,56 @@ export const CopyNativeShareButton = ({
 	);
 };
 
+const mailto = (subject: string, body: string): Result<'URIError', string> => {
+	try {
+		return ok(
+			`mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
+		);
+	} catch (_e) {
+		return error('URIError');
+	}
+};
+
 export const EmailLink = ({
-	href,
+	subject,
+	body,
 	size,
 	isLiveBlogMeta,
 	isNonLabsGalleryMeta,
 	trackingAttributes,
 }: {
-	href: string;
+	subject: string;
+	body: string;
 	size?: Size;
 	isLiveBlogMeta: boolean;
 	isNonLabsGalleryMeta: boolean;
 	trackingAttributes?: TrackingAttributes;
 }) => {
 	const sizeXSmall = size === 'xsmall';
+	const href = mailto(subject, body);
 
-	return (
-		<LinkButton
-			href={href}
-			{...trackingAttributes}
-			size={size}
-			type="button"
-			priority="tertiary"
-			iconSide="left"
-			icon={<SvgShareWeb />}
-			cssOverrides={css([
-				buttonStyles(sizeXSmall),
-				sharedButtonStyles(sizeXSmall, isNonLabsGalleryMeta),
-				isLiveBlogMeta && liveBlogMobileMeta(false),
-			])}
-		>
-			Share
-		</LinkButton>
-	);
+	if (href.ok) {
+		return (
+			<LinkButton
+				href={href.value}
+				{...trackingAttributes}
+				size={size}
+				type="button"
+				priority="tertiary"
+				iconSide="left"
+				icon={<SvgShareWeb />}
+				cssOverrides={css([
+					buttonStyles(sizeXSmall),
+					sharedButtonStyles(sizeXSmall, isNonLabsGalleryMeta),
+					isLiveBlogMeta && liveBlogMobileMeta(false),
+				])}
+			>
+				Share
+			</LinkButton>
+		);
+	}
+
+	return null;
 };
 
 /**
@@ -343,15 +361,17 @@ export const ShareButton = ({
 					isNonLabsGalleryMeta={isNonLabsGalleryMeta}
 				/>
 			);
-		case 'email':
+		case 'email': {
 			return (
 				<EmailLink
-					href={`mailto:?subject=${webTitle}&body=${shareData.url}`}
+					subject={webTitle}
+					body={shareData.url}
 					trackingAttributes={trackingAttributes}
 					size={size}
 					isLiveBlogMeta={isLiveBlogMeta}
 					isNonLabsGalleryMeta={isNonLabsGalleryMeta}
 				/>
 			);
+		}
 	}
 };
