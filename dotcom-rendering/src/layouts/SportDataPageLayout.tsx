@@ -10,7 +10,6 @@ import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
-import { SubNav } from '../components/SubNav.island';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { worldCup2026PageIds } from '../lib/worldCup2026';
@@ -145,26 +144,6 @@ export const SportDataPageLayout = (
 
 			{isWeb && (
 				<>
-					{props.nav.subNavSections && (
-						<Section
-							fullWidth={true}
-							showTopBorder={true}
-							padSides={false}
-							element="aside"
-						>
-							<Island
-								priority="enhancement"
-								defer={{ until: 'visible' }}
-							>
-								<SubNav
-									subNavSections={props.nav.subNavSections}
-									currentNavLink={props.nav.currentNavLink}
-									position="footer"
-								/>
-							</Island>
-						</Section>
-					)}
-
 					<Section
 						fullWidth={true}
 						padSides={false}

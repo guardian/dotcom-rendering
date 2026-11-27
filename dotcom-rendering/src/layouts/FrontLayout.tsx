@@ -27,7 +27,6 @@ import { Section } from '../components/Section';
 import { Snap } from '../components/Snap';
 import { SnapCssSandbox } from '../components/SnapCssSandbox';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
-import { SubNav } from '../components/SubNav.island';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
@@ -636,27 +635,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				renderAds={renderAds}
 				hasPageSkin={hasPageSkin}
 			/>
-
-			{NAV.subNavSections && (
-				<Section
-					fullWidth={true}
-					showTopBorder={hasPageSkin}
-					padSides={false}
-					element="aside"
-					backgroundColour={schemePalette(
-						'--front-container-background',
-					)}
-				>
-					<Island priority="enhancement" defer={{ until: 'visible' }}>
-						<SubNav
-							subNavSections={NAV.subNavSections}
-							currentNavLink={NAV.currentNavLink}
-							position="footer"
-							currentPillarTitle={front.nav.currentPillarTitle}
-						/>
-					</Island>
-				</Section>
-			)}
 
 			<Section
 				fullWidth={true}

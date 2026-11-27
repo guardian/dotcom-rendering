@@ -3916,25 +3916,6 @@ const subNavBorder: PaletteFunction = ({ design, theme }) => {
 			}
 	}
 };
-const subNavLinkHeaderLight: PaletteFunction = (format) => {
-	switch (format.design) {
-		case ArticleDesign.Picture:
-		case ArticleDesign.Video:
-		case ArticleDesign.Audio:
-			return sourcePalette.neutral[100];
-		default:
-			return sourcePalette.neutral[7];
-	}
-};
-const subNavLinkHeaderDark: PaletteFunction = () => sourcePalette.neutral[100];
-const subNavLinkFooterLight: PaletteFunction = () => sourcePalette.neutral[7];
-const subNavLinkFooterDark: PaletteFunction = () => sourcePalette.neutral[100];
-const subNavLinkHoverLight: PaletteFunction = (format) =>
-	articleLinkHoverLight(format);
-const subNavLinkHoverDark: PaletteFunction = (format) =>
-	articleLinkHoverDark(format);
-const subNavMoreLight: PaletteFunction = () => sourcePalette.neutral[60];
-const subNavMoreDark: PaletteFunction = () => sourcePalette.neutral[38];
 
 const navReaderRevenueLinkText: PaletteFunction = () =>
 	sourcePalette.brandAlt[400];
@@ -8718,22 +8699,6 @@ const paletteColours = {
 	'--sub-nav-border': {
 		light: subNavBorder,
 		dark: subNavBorder,
-	},
-	'--sub-nav-link-footer': {
-		light: subNavLinkFooterLight,
-		dark: subNavLinkFooterDark,
-	},
-	'--sub-nav-link-header': {
-		light: subNavLinkHeaderLight,
-		dark: subNavLinkHeaderDark,
-	},
-	'--sub-nav-link-hover': {
-		light: subNavLinkHoverLight,
-		dark: subNavLinkHoverDark,
-	},
-	'--sub-nav-more': {
-		light: subNavMoreLight,
-		dark: subNavMoreDark,
 	},
 	'--subheading-level-3-text': {
 		light: subheadingLevel3TextLight,

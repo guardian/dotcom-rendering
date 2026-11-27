@@ -18,7 +18,6 @@ import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { StorylinesSectionContent } from '../components/StorylinesSectionContent.island';
-import { SubNav } from '../components/SubNav.island';
 import { TagPageHeader } from '../components/TagPageHeader';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
@@ -236,23 +235,6 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 				renderAds={renderAds}
 				hasPageSkin={hasPageSkin}
 			/>
-
-			{NAV.subNavSections && (
-				<Section
-					fullWidth={true}
-					showTopBorder={true}
-					padSides={false}
-					element="aside"
-				>
-					<Island priority="enhancement" defer={{ until: 'visible' }}>
-						<SubNav
-							subNavSections={NAV.subNavSections}
-							currentNavLink={NAV.currentNavLink}
-							position="footer"
-						/>
-					</Island>
-				</Section>
-			)}
 
 			<Section
 				fullWidth={true}
