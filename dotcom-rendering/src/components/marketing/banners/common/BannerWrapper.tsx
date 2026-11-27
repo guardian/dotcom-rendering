@@ -79,15 +79,23 @@ const sendAuxiaInteractionEvent = (
 ) => {
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 	if (browserId) {
+		const interactionToken = (
+			auxiaTracking as AuxiaTracking & { interactionToken?: string }
+		).interactionToken;
 		const params = {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				browserId,
-				interactionType,
-				treatmentTrackingId: auxiaTracking.treatmentTrackingId,
-				treatmentId: auxiaTracking.treatmentId,
-			}),
+			body: JSON.stringify(
+				interactionToken != null
+					? { interactionToken, interactionType }
+					: {
+							browserId,
+							interactionType,
+							treatmentTrackingId:
+								auxiaTracking.treatmentTrackingId,
+							treatmentId: auxiaTracking.treatmentId,
+						},
+			),
 		};
 		fetch(`${contributionsServiceUrl}/banner/interaction`, params).catch(
 			(error) => {
