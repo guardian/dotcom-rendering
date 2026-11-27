@@ -26,3 +26,18 @@ export const puzzlesHubV3Participation = (
 ): Record<string, string> => ({
 	[puzzlesHubV3Experiment.name]: group,
 });
+
+export const puzzlesHubV4Experiment = {
+	name: 'puzzles-new-hub-v4',
+	variant: 'variant',
+	control: 'control',
+} as const;
+
+/** Maxi's rollout is independent of V3 premium access. */
+export const isPuzzlesHubV4Enabled = (
+	config: PuzzlesVersionExperimentConfig,
+): boolean =>
+	isPuzzlesHubAvailable(config) &&
+	(config.serverSideABTests[puzzlesHubV4Experiment.name] ===
+		puzzlesHubV4Experiment.variant ||
+		process.env.NODE_ENV === 'development');

@@ -11,6 +11,8 @@ import {
 	visuallyHidden,
 } from '@guardian/source/foundations';
 import { SvgCheckmark } from '@guardian/source/react-components';
+import { isMaxiCrossword } from '../lib/maxiCrossword';
+import { cadenceForDate } from '../lib/puzzleCadence';
 import { puzzleTypeForCard } from '../lib/puzzleCardProgress';
 import { getPuzzleGroupPalette } from '../lib/puzzleGroupPalette';
 import {
@@ -214,6 +216,46 @@ const playedStyles = css`
 	}
 `;
 
+const maxiCardStyles = css`
+	--puzzles-card-headline-colour: var(
+		--puzzles-maxi-headline-colour,
+		${palette.news[300]}
+	);
+	--puzzles-card-text-colour: var(
+		--puzzles-card-cadence-colour,
+		${palette.neutral[7]}
+	);
+	border-radius: var(--puzzles-maxi-card-radius, 0);
+`;
+
+const newBadgeStyles = css`
+	position: absolute;
+	top: ${space[2]}px;
+	right: ${space[2]}px;
+	padding: ${space[1]}px ${space[2]}px;
+	border-radius: 4px;
+	background: ${palette.brandAlt[400]};
+	color: ${palette.neutral[7]};
+	${textSans14};
+	font-weight: bold;
+	line-height: 1;
+`;
+
+const maxiPlayedStyles = css`
+	.completed-icon {
+		background: var(
+			--puzzles-maxi-played-background,
+			${palette.success[400]}
+		);
+		color: var(--puzzles-maxi-played-check, ${palette.neutral[100]});
+	}
+`;
+
+const maxiArtwork = {
+	featured: 'https://uploads.guim.co.uk/2026/11/19/maxi-featured.svg',
+	primary: 'https://uploads.guim.co.uk/2026/11/19/maxi-primary.svg',
+};
+
 const inProgressStyles = css`
 	flex-direction: column;
 	align-items: flex-start;
@@ -269,10 +311,20 @@ export const PuzzleCard = ({
 }) => {
 	const url = getPuzzleUrl(item);
 	const colours = puzzleColours(item);
-	const setter = item.type === 'crossword' ? item.setter?.trim() : undefined;
+	const isMaxi = isMaxiCrossword(item);
+	const cadence =
+		item.cadence ??
+		(isMaxi && item.date !== undefined
+			? cadenceForDate(item.date)
+			: undefined);
+	const setter =
+		!isMaxi && item.type === 'crossword' ? item.setter?.trim() : undefined;
+	const image = isMaxi
+		? maxiArtwork[isFeatured ? 'featured' : 'primary']
+		: item.image;
 	const hasImage =
-		item.image !== undefined &&
-		item.image.length > 0 &&
+		image !== undefined &&
+		image.length > 0 &&
 		item.cardVariant !== 'compact';
 	const needsCrosswordSuffix =
 		item.type === 'crossword' && !/\bcrossword\b/i.test(item.title);
@@ -294,8 +346,8 @@ export const PuzzleCard = ({
 						</span>
 					)}
 				</h3>
-				{item.cadence !== undefined && item.cadence.length > 0 && (
-					<span css={cadenceStyles}>{item.cadence}</span>
+				{cadence !== undefined && cadence.length > 0 && (
+					<span css={cadenceStyles}>{cadence}</span>
 				)}
 				{setter && <span css={setterStyles}>By: {setter}</span>}
 			</div>
@@ -304,9 +356,10 @@ export const PuzzleCard = ({
 					alt={item.imageAlt?.trim() || `${item.title} illustration`}
 					aria-hidden="true"
 					css={cardImageStyles(isFeatured)}
-					src={item.image}
+					src={image}
 				/>
 			)}
+			{isMaxi && <span css={newBadgeStyles}>New</span>}
 			{isInProgress && (
 				<span css={[playedStyles, inProgressStyles]}>
 					<span css={progressTrackStyles} aria-hidden="true">
@@ -318,7 +371,7 @@ export const PuzzleCard = ({
 				</span>
 			)}
 			{item.gameStatus === 'completed' && (
-				<span css={playedStyles}>
+				<span css={[playedStyles, isMaxi && maxiPlayedStyles]}>
 					Played
 					<span aria-hidden="true" className="completed-icon">
 						<SvgCheckmark />
@@ -330,6 +383,7 @@ export const PuzzleCard = ({
 	const styles = [
 		cardStyles(item.cardVariant, hasImage, isFeatured),
 		cardColourStyles(colours.background),
+		isMaxi && maxiCardStyles,
 	];
 	return url !== undefined ? (
 		<a
