@@ -7,6 +7,7 @@ import {
 } from '@guardian/source/foundations';
 import { getOphanComponents } from '../lib/labs';
 import { puzzlesContainerStyles } from '../lib/puzzlesContainerStyles';
+import { PUZZLES_EDGE_INSET } from '../lib/puzzlesStyles';
 import { palette as themePalette } from '../palette';
 import type { Branding } from '../types/branding';
 
@@ -22,11 +23,11 @@ const overlayStyles = css`
 // Borders are hidden but kept so the text lines up with the directory titles.
 const alignedStyles = css`
 	${puzzlesContainerStyles};
-	padding-right: 10px;
-	padding-left: 10px;
+	padding-right: ${PUZZLES_EDGE_INSET}px;
+	padding-left: ${PUZZLES_EDGE_INSET}px;
 	${from.mobileMedium} {
-		padding-right: 20px;
-		padding-left: 20px;
+		padding-right: ${space[5]}px;
+		padding-left: ${space[5]}px;
 	}
 	${from.desktop} {
 		border-color: transparent;

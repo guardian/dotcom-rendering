@@ -17,11 +17,11 @@ export type RelatedPuzzlesSource = 'puzzle-page' | 'crossword-page' | 'archive';
  */
 const relatedRailStyles = css`
 	display: grid;
-	gap: 16px;
+	gap: ${space[4]}px;
 	padding: ${space[2]}px 0 ${space[4]}px;
 	${from.leftCol} {
 		grid-template-columns: 140px minmax(0, 1fr);
-		gap: 20px;
+		gap: ${space[5]}px;
 	}
 	${from.wide} {
 		grid-template-columns: 220px minmax(0, 1fr);
@@ -51,7 +51,6 @@ const relatedRailStyles = css`
 const relatedRailHeading = css`
 	margin: 0;
 	${headlineBold20};
-	line-height: 1.15;
 	${from.leftCol} {
 		position: relative;
 		::after {

@@ -8,6 +8,8 @@ import {
 	textEgyptian17,
 	textSans14,
 	textSans17,
+	textSansBold14,
+	textSansBold17,
 	until,
 	visuallyHidden,
 } from '@guardian/source/foundations';
@@ -25,6 +27,7 @@ import {
 	IN_PROGRESS_BAR_PERCENTAGE,
 	showsInProgress,
 } from '../lib/puzzleProgress/inProgressDisplay';
+import { PUZZLES_PROGRESS_RADIUS } from '../lib/puzzlesStyles';
 import { palette as themePalette } from '../palette';
 import type { PuzzlesArchive, PuzzlesArchiveItem } from '../types/puzzlesPage';
 
@@ -366,12 +369,11 @@ const tabsStyles = css`
 	}
 	a {
 		flex: none;
-		${textSans14};
+		${textSansBold14};
 		border: 1px solid ${themePalette('--puzzles-primary')};
 		border-radius: 18px;
-		padding: 2px ${space[3]}px;
+		padding: ${space[0]}px ${space[3]}px;
 		color: ${themePalette('--puzzles-primary')};
-		font-weight: bold;
 		line-height: 18px;
 		text-decoration: none;
 	}
@@ -382,7 +384,6 @@ const tabsStyles = css`
 	a[aria-current='page']:hover {
 		background: ${themePalette('--puzzles-primary')};
 		color: ${themePalette('--puzzles-on-primary')};
-		font-weight: bold;
 	}
 `;
 
@@ -397,7 +398,6 @@ const titleStyles = css`
 
 const publicationSubtitleStyles = css`
 	${textEgyptian17};
-	line-height: 1.3;
 	color: ${themePalette('--puzzles-calendar-subtitle')};
 	margin: 0 0 ${space[4]}px;
 `;
@@ -422,7 +422,7 @@ const publicationSubtitle = (category: string, set: string): string => {
 };
 
 const recentStyles = css`
-	--recent-gap: 16px;
+	--recent-gap: ${space[4]}px;
 	display: flex;
 	gap: var(--recent-gap);
 	margin: 0 0 ${space[6]}px;
@@ -432,7 +432,7 @@ const recentStyles = css`
 		display: none;
 	}
 	${from.phablet} {
-		--recent-gap: 24px;
+		--recent-gap: ${space[6]}px;
 		display: grid;
 		grid-template-columns: repeat(3, minmax(0, 1fr));
 		overflow: visible;
@@ -498,7 +498,7 @@ const recentStyles = css`
 		display: block;
 		width: 80px;
 		height: 3px;
-		border-radius: 2px;
+		border-radius: ${PUZZLES_PROGRESS_RADIUS}px;
 		background: color-mix(in srgb, currentColor 20%, transparent);
 		span {
 			display: block;
@@ -562,14 +562,13 @@ const controlsStyles = css`
 	}
 	strong {
 		text-align: center;
-		${textSans17};
+		${textSansBold17};
 		color: ${themePalette('--puzzles-headline-colour')};
-		font-weight: bold;
 	}
 `;
 
 const calendarStyles = css`
-	--calendar-gap: 8px;
+	--calendar-gap: ${space[2]}px;
 	--calendar-day-padding-block: 3px;
 	--calendar-day-padding-inline: 6px;
 	display: grid;
@@ -683,8 +682,8 @@ const calendarStyles = css`
 		}
 	}
 	${from.tablet} {
-		--calendar-day-padding-block: 4px;
-		--calendar-day-padding-inline: 4px;
+		--calendar-day-padding-block: ${space[1]}px;
+		--calendar-day-padding-inline: ${space[1]}px;
 		grid-template-columns: repeat(7, 68px);
 		.day-number {
 			font-size: 12px;
@@ -699,9 +698,9 @@ const calendarStyles = css`
 `;
 
 const premiumCalendarStyles = css`
-	--calendar-gap: 4px;
-	--calendar-day-padding-block: 4px;
-	--calendar-day-padding-inline: 4px;
+	--calendar-gap: ${space[1]}px;
+	--calendar-day-padding-block: ${space[1]}px;
+	--calendar-day-padding-inline: ${space[1]}px;
 	grid-template-columns: repeat(7, minmax(0, 44px));
 	justify-content: space-between;
 	.day {
@@ -727,7 +726,7 @@ const premiumCalendarStyles = css`
 		height: 13.35119px;
 	}
 	${from.mobileMedium} {
-		--calendar-gap: 8px;
+		--calendar-gap: ${space[2]}px;
 	}
 	${from.phablet} {
 		grid-template-columns: repeat(7, 60px);
@@ -841,7 +840,6 @@ const premiumLegendStyles = css`
 const subscriberMessageStyles = css`
 	${textEgyptian17};
 	font-size: 12px;
-	line-height: 1.3;
 	color: ${themePalette('--puzzles-calendar-subtitle')};
 	margin: 0;
 	flex-basis: 100%;

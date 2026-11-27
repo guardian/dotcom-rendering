@@ -4,9 +4,16 @@ import {
 	headlineBold24,
 	headlineBold28,
 	space,
+	until,
 } from '@guardian/source/foundations';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { puzzlesContainerStyles } from '../lib/puzzlesContainerStyles';
+import {
+	PUZZLES_BORDERED_INSET,
+	PUZZLES_COLUMN_INSET,
+	PUZZLES_EDGE_INSET,
+	PUZZLES_ROW_GAP,
+} from '../lib/puzzlesStyles';
 import { palette as themePalette } from '../palette';
 import type { Branding } from '../types/branding';
 import type { PuzzleContainer, PuzzlesLayoutType } from '../types/puzzlesPage';
@@ -29,8 +36,8 @@ type Props = {
 };
 
 const sectionStyles = (hideTopRule: boolean) => css`
-	--puzzles-content-top: 8px;
-	--puzzles-content-bottom: 32px;
+	--puzzles-content-top: ${space[2]}px;
+	--puzzles-content-bottom: ${space[8]}px;
 	position: relative;
 	display: grid;
 	${puzzlesContainerStyles};
@@ -52,18 +59,18 @@ const sectionStyles = (hideTopRule: boolean) => css`
 	`}
 
 	${from.leftCol} {
-		--puzzles-content-top: 8px;
+		--puzzles-content-top: ${space[2]}px;
 		grid-template-columns: 170px minmax(0, 1fr);
 	}
 
 	${from.desktop} {
-		--puzzles-content-bottom: 40px;
+		--puzzles-content-bottom: ${space[10]}px;
 	}
 
 	&:has(details) {
-		--puzzles-content-bottom: 24px;
+		--puzzles-content-bottom: ${space[6]}px;
 		${from.tablet} {
-			--puzzles-content-bottom: 40px;
+			--puzzles-content-bottom: ${space[10]}px;
 		}
 	}
 
@@ -74,15 +81,15 @@ const sectionStyles = (hideTopRule: boolean) => css`
 
 const titleStyles = css`
 	min-width: 0;
-	padding: 6px 10px 12px;
+	padding: 6px ${PUZZLES_EDGE_INSET}px ${space[3]}px;
 	${from.mobileMedium} {
-		padding-right: 20px;
-		padding-left: 20px;
+		padding-right: ${space[5]}px;
+		padding-left: ${space[5]}px;
 	}
 
 	${from.desktop} {
 		/* Include the 1px side border in the 20px inset, as the cards do. */
-		padding-left: 19px;
+		padding-left: ${PUZZLES_BORDERED_INSET}px;
 	}
 
 	${from.leftCol} {
@@ -133,27 +140,28 @@ const headingColumnStyles = css`
 
 const contentStyles = css`
 	min-width: 0;
-	padding: var(--puzzles-content-top) 10px var(--puzzles-content-bottom);
+	padding: var(--puzzles-content-top) ${PUZZLES_EDGE_INSET}px
+		var(--puzzles-content-bottom);
 	${from.mobileMedium} {
-		padding-right: 20px;
-		padding-left: 20px;
+		padding-right: ${space[5]}px;
+		padding-left: ${space[5]}px;
 	}
 	${from.desktop} {
 		/* Include the 1px side borders in the 20px content inset. */
-		padding-right: 19px;
-		padding-left: 19px;
+		padding-right: ${PUZZLES_BORDERED_INSET}px;
+		padding-left: ${PUZZLES_BORDERED_INSET}px;
 	}
 	${from.leftCol} {
 		/* The left-column hairline sits at the centre of the standard gutter. */
-		padding-left: 9px;
+		padding-left: ${PUZZLES_COLUMN_INSET}px;
 	}
-	@media (max-width: 739px) {
+	${until.tablet} {
 		position: relative;
 		::before {
 			position: absolute;
 			top: 0;
-			right: 10px;
-			left: 10px;
+			right: ${PUZZLES_EDGE_INSET}px;
+			left: ${PUZZLES_EDGE_INSET}px;
 			border-top: 1px solid ${themePalette('--puzzles-border-colour')};
 			content: '';
 			pointer-events: none;
@@ -168,20 +176,20 @@ const contentStyles = css`
 `;
 
 const nestedGridStyles = css`
-	--puzzles-gap: 16px;
+	--puzzles-gap: ${space[4]}px;
 	display: grid;
 	grid-template-columns: 1fr;
-	gap: 16px;
+	gap: ${space[4]}px;
 	${from.phablet} {
-		--puzzles-gap: 24px;
-		gap: 24px;
+		--puzzles-gap: ${space[6]}px;
+		gap: ${space[6]}px;
 	}
 
 	${from.tablet} {
 		grid-template-columns: repeat(12, minmax(0, 1fr));
-		column-gap: 20px;
-		row-gap: 26px;
-		--puzzles-gap: 20px;
+		column-gap: ${space[5]}px;
+		row-gap: ${PUZZLES_ROW_GAP}px;
+		--puzzles-gap: ${space[5]}px;
 		max-width: 700px;
 	}
 	${from.desktop} {

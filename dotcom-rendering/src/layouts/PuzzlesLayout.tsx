@@ -81,6 +81,10 @@ const sponsoredImageStyles = css`
 	}
 `;
 
+/** Design width of the largest header artwork. */
+const WIDEST_ARTWORK_WIDTH = 1728;
+const fromWidestArtwork = `@media (min-width: ${WIDEST_ARTWORK_WIDTH}px)`;
+
 const brandPictureStyles = css`
 	display: block;
 	height: 100%;
@@ -89,16 +93,16 @@ const brandPictureStyles = css`
 	${from.leftCol} {
 		/* This asset already includes the 254px trailing artwork margin. */
 		width: 1280px;
-		margin-left: max(0px, calc((100% - 1140px) / 2));
+		margin-left: max(0px, calc((100% - ${breakpoints.leftCol}px) / 2));
 	}
 	${from.wide} {
 		/* The asset's 70px inset aligns the artwork with the 1300px subnav. */
 		width: 1440px;
 		margin-left: calc((100% - 1440px) / 2);
 	}
-	@media (min-width: 1728px) {
-		width: 1728px;
-		margin-left: calc((100% - 1728px) / 2);
+	${fromWidestArtwork} {
+		width: ${WIDEST_ARTWORK_WIDTH}px;
+		margin-left: calc((100% - ${WIDEST_ARTWORK_WIDTH}px) / 2);
 	}
 `;
 
@@ -112,7 +116,7 @@ const defaultHeader = {
 	folder: '2026/09/15',
 	fallback: 'header-mobile-360px',
 	sources: [
-		{ breakpoint: 1728, filename: 'header-desktop-1728px' },
+		{ breakpoint: WIDEST_ARTWORK_WIDTH, filename: 'header-desktop-1728px' },
 		{ breakpoint: breakpoints.wide, filename: 'header-wide-1440px' },
 		{ breakpoint: breakpoints.leftCol, filename: 'header-leftcol-1280px' },
 		{ breakpoint: breakpoints.desktop, filename: 'header-desktop-1024px' },

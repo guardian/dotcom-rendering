@@ -10,6 +10,12 @@ import {
 } from '@guardian/source/foundations';
 import { LinkButton, SvgEye } from '@guardian/source/react-components';
 import { puzzlesContainerStyles } from '../lib/puzzlesContainerStyles';
+import {
+	PUZZLES_BORDERED_INSET,
+	PUZZLES_COLUMN_INSET,
+	PUZZLES_EDGE_INSET,
+	puzzlesFocusOutline,
+} from '../lib/puzzlesStyles';
 import { palette as themePalette } from '../palette';
 import type {
 	PuzzleContainer,
@@ -56,7 +62,7 @@ const sectionStyles = css`
 const sectionTitleStyles = css`
 	min-width: 0;
 	margin: 0;
-	padding: 6px 10px 12px;
+	padding: 6px ${PUZZLES_EDGE_INSET}px ${space[3]}px;
 	border-top: 1px solid ${borderColour};
 	${headlineBold24};
 	color: ${themePalette('--puzzles-headline-colour')};
@@ -64,8 +70,8 @@ const sectionTitleStyles = css`
 	overflow-wrap: break-word;
 
 	${from.mobileMedium} {
-		padding-right: 20px;
-		padding-left: 20px;
+		padding-right: ${space[5]}px;
+		padding-left: ${space[5]}px;
 	}
 
 	${from.tablet} {
@@ -74,7 +80,7 @@ const sectionTitleStyles = css`
 
 	${from.desktop} {
 		/* Include the 1px side border in the 20px inset. */
-		padding-left: 19px;
+		padding-left: ${PUZZLES_BORDERED_INSET}px;
 	}
 
 	${from.leftCol} {
@@ -91,17 +97,17 @@ const usefulContentStyles = (hasNewsletter: boolean) => css`
 	${hasNewsletter &&
 	css`
 		/* Match the puzzle content insets, including the container's side borders. */
-		padding: 8px 10px 0;
+		padding: ${space[2]}px ${PUZZLES_EDGE_INSET}px 0;
 		${from.mobileMedium} {
-			padding-right: 20px;
-			padding-left: 20px;
+			padding-right: ${space[5]}px;
+			padding-left: ${space[5]}px;
 		}
 		${from.desktop} {
-			padding-right: 19px;
-			padding-left: 19px;
+			padding-right: ${PUZZLES_BORDERED_INSET}px;
+			padding-left: ${PUZZLES_BORDERED_INSET}px;
 		}
 		${from.leftCol} {
-			padding-left: 9px;
+			padding-left: ${PUZZLES_COLUMN_INSET}px;
 		}
 	`}
 `;
@@ -113,7 +119,7 @@ const usefulGridStyles = (hasNewsletter: boolean) => css`
 
 	${hasNewsletter &&
 	css`
-		column-gap: 20px;
+		column-gap: ${space[5]}px;
 
 		> a,
 		> a:first-of-type {
@@ -173,15 +179,15 @@ const usefulLinkStyles = css`
 
 	/* Align the first link with the container title and the cards above. */
 	:first-of-type {
-		padding-left: 10px;
+		padding-left: ${PUZZLES_EDGE_INSET}px;
 		${from.mobileMedium} {
-			padding-left: 20px;
+			padding-left: ${space[5]}px;
 		}
 		${from.desktop} {
-			padding-left: 19px;
+			padding-left: ${PUZZLES_BORDERED_INSET}px;
 		}
 		${from.leftCol} {
-			padding-left: 9px;
+			padding-left: ${PUZZLES_COLUMN_INSET}px;
 		}
 	}
 
@@ -190,7 +196,7 @@ const usefulLinkStyles = css`
 	}
 
 	:focus-visible {
-		outline: 3px solid ${themePalette('--puzzles-focus-outline')};
+		outline: ${puzzlesFocusOutline};
 		outline-offset: -3px;
 	}
 `;
@@ -306,7 +312,7 @@ const popularLinkStyles = css`
 	}
 
 	:focus-visible {
-		outline: 3px solid ${themePalette('--puzzles-focus-outline')};
+		outline: ${puzzlesFocusOutline};
 		outline-offset: -3px;
 	}
 

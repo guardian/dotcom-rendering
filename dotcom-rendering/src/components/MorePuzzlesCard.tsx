@@ -5,6 +5,7 @@ import {
 	headlineBold20,
 	space,
 	textSans14,
+	textSansBold14,
 	until,
 } from '@guardian/source/foundations';
 import { SvgCheckmark } from '@guardian/source/react-components';
@@ -18,6 +19,12 @@ import {
 	IN_PROGRESS_BAR_PERCENTAGE,
 	showsInProgress,
 } from '../lib/puzzleProgress/inProgressDisplay';
+import {
+	PUZZLES_EDGE_INSET,
+	PUZZLES_PROGRESS_RADIUS,
+	PUZZLES_ROW_GAP,
+	puzzlesFocusOutline,
+} from '../lib/puzzlesStyles';
 import { palette as themePalette } from '../palette';
 import type { PuzzleItem } from '../types/puzzlesPage';
 import { useConfig } from './ConfigContext';
@@ -166,7 +173,7 @@ const cardStyles = (
 	}
 
 	:focus-visible {
-		outline: 3px solid ${themePalette('--puzzles-focus-outline')};
+		outline: ${puzzlesFocusOutline};
 		outline-offset: 2px;
 	}
 `;
@@ -181,19 +188,16 @@ const cardTextStyles = css`
 
 const cardTitleStyles = css`
 	${headlineBold20};
-	line-height: 1.15;
 `;
 
 const cadenceStyles = css`
 	${textSans14};
-	line-height: 1.3;
 `;
 
 const setterStyles = css`
 	margin-top: ${space[1]}px;
 	color: ${themePalette('--puzzles-rail-setter')};
 	${textSans14};
-	line-height: 1.3;
 `;
 
 const progressStyles = css`
@@ -204,8 +208,7 @@ const progressStyles = css`
 	display: inline-flex;
 	align-items: center;
 	gap: ${space[1]}px;
-	${textSans14};
-	font-weight: bold;
+	${textSansBold14};
 	line-height: 1;
 	.completed-icon {
 		display: inline-flex;
@@ -232,7 +235,7 @@ const inProgressStyles = css`
 const progressTrackStyles = css`
 	width: 80px;
 	height: 3px;
-	border-radius: 2px;
+	border-radius: ${PUZZLES_PROGRESS_RADIUS}px;
 	background: color-mix(in srgb, currentColor 20%, transparent);
 	> span {
 		display: block;
@@ -341,15 +344,15 @@ const rowsStyles = css`
 	position: relative;
 	/* Lets the fades below follow the scroll position of the cards. */
 	timeline-scope: --puzzles-rail-scroll;
-	--puzzles-gap: 16px;
+	--puzzles-gap: ${space[4]}px;
 	display: flex;
 	min-width: 0;
 	flex-direction: column;
 	${from.phablet} {
-		--puzzles-gap: 24px;
+		--puzzles-gap: ${space[6]}px;
 	}
 	${from.tablet} {
-		--puzzles-gap: 20px;
+		--puzzles-gap: ${space[5]}px;
 	}
 `;
 
@@ -437,7 +440,7 @@ const fadeRightStyles = css`
 		position: absolute;
 		top: 0;
 		bottom: 0;
-		right: calc(var(--puzzles-edge-padding, 10px) * -1);
+		right: calc(var(--puzzles-edge-padding, ${PUZZLES_EDGE_INSET}px) * -1);
 		width: ${FADE_WIDTH}px;
 		background: linear-gradient(
 			to right,
@@ -467,7 +470,9 @@ const fadeLeftStyles = css`
 			position: absolute;
 			top: 0;
 			bottom: 0;
-			left: calc(var(--puzzles-edge-padding, 10px) * -1);
+			left: calc(
+				var(--puzzles-edge-padding, ${PUZZLES_EDGE_INSET}px) * -1
+			);
 			width: ${FADE_WIDTH}px;
 			background: linear-gradient(
 				to left,
@@ -501,9 +506,9 @@ const rowStyles = (
 		position: relative;
 		display: grid;
 		${cardGridStyles(mobileColumns)};
-		gap: 16px;
+		gap: ${space[4]}px;
 		${from.phablet} {
-			gap: 24px;
+			gap: ${space[6]}px;
 		}
 		margin: 0;
 		padding: 0;
@@ -511,8 +516,8 @@ const rowStyles = (
 
 		${from.tablet} {
 			${cardGridStyles(tabletColumns)};
-			column-gap: 20px;
-			row-gap: 26px;
+			column-gap: ${space[5]}px;
+			row-gap: ${PUZZLES_ROW_GAP}px;
 			max-width: 700px;
 		}
 		${variant === 'compact' &&
@@ -531,7 +536,7 @@ const rowStyles = (
 			   a divider above the cards, from the first card's left edge to the
 			   last card's right edge. */
 			${until.leftCol} {
-				padding-top: 8px;
+				padding-top: ${space[2]}px;
 			}
 			${between.tablet.and.leftCol} {
 				border-top: 1px solid ${themePalette('--puzzles-rail-divider')};
@@ -548,10 +553,15 @@ const rowStyles = (
 			${until.tablet} {
 				display: flex;
 				/* Bleed to both screen edges: undo the host's side padding. */
-				margin: 0 calc(var(--puzzles-edge-padding, 10px) * -1);
-				padding: 8px ${space[10]}px 0 var(--puzzles-edge-padding, 10px);
+				margin: 0
+					calc(
+						var(--puzzles-edge-padding, ${PUZZLES_EDGE_INSET}px) *
+							-1
+					);
+				padding: ${space[2]}px ${space[10]}px 0
+					var(--puzzles-edge-padding, ${PUZZLES_EDGE_INSET}px);
 				scroll-padding: 0 ${space[10]}px 0
-					var(--puzzles-edge-padding, 10px);
+					var(--puzzles-edge-padding, ${PUZZLES_EDGE_INSET}px);
 				overflow-x: auto;
 				scroll-timeline: --puzzles-rail-scroll inline;
 				scrollbar-width: none;

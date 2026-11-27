@@ -314,8 +314,8 @@ const printOnlyLogoStyles = css`
 `;
 
 const frameContainerStyles = css`
-	margin-top: 16px;
-	margin-bottom: 16px;
+	margin-top: ${space[4]}px;
+	margin-bottom: ${space[4]}px;
 `;
 
 const stretchLines = css`

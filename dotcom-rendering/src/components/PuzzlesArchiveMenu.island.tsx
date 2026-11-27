@@ -41,7 +41,7 @@ const wrapperStyles = css`
 	position: relative;
 	display: block;
 	width: max-content;
-	margin-top: 20px;
+	margin-top: ${space[5]}px;
 	margin-left: auto;
 
 	${from.tablet} {
@@ -50,7 +50,7 @@ const wrapperStyles = css`
 	}
 
 	${from.desktop} {
-		margin-top: 40px;
+		margin-top: ${space[10]}px;
 	}
 `;
 
@@ -138,7 +138,6 @@ const linkStyles = css`
 	color: ${themePalette('--puzzles-menu-text')};
 	text-decoration: none;
 	${textSans15};
-	line-height: 1.3;
 
 	:hover,
 	:focus-visible {

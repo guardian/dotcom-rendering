@@ -6,6 +6,7 @@ import {
 	headlineBold24,
 	space,
 	textSans14,
+	textSansBold14,
 	until,
 	visuallyHidden,
 } from '@guardian/source/foundations';
@@ -19,6 +20,10 @@ import {
 	IN_PROGRESS_BAR_PERCENTAGE,
 	showsInProgress,
 } from '../lib/puzzleProgress/inProgressDisplay';
+import {
+	PUZZLES_PROGRESS_RADIUS,
+	puzzlesFocusOutline,
+} from '../lib/puzzlesStyles';
 import { palette as themePalette } from '../palette';
 import type { PuzzleItem } from '../types/puzzlesPage';
 
@@ -124,7 +129,7 @@ const cardStyles = (
 	}
 
 	:focus-visible {
-		outline: 3px solid ${themePalette('--puzzles-focus-outline')};
+		outline: ${puzzlesFocusOutline};
 		outline-offset: 2px;
 	}
 `;
@@ -154,7 +159,6 @@ const cardTitleStyles = (
 	margin: 0;
 	${variant === 'compact' ? headlineBold20 : headlineBold24};
 	color: var(--puzzles-card-headline-colour, ${lightColour});
-	line-height: 1.15;
 `;
 
 const hiddenCrosswordSuffixStyles = css`
@@ -164,13 +168,11 @@ const hiddenCrosswordSuffixStyles = css`
 const cadenceStyles = css`
 	color: ${themePalette('--puzzles-card-cadence-colour')};
 	${textSans14};
-	line-height: 1.3;
 `;
 
 const setterStyles = css`
 	color: ${themePalette('--puzzles-card-setter-colour')};
 	${textSans14};
-	line-height: 1.3;
 `;
 
 const playedStyles = css`
@@ -181,8 +183,7 @@ const playedStyles = css`
 	display: inline-flex;
 	align-items: center;
 	gap: ${space[1]}px;
-	${textSans14};
-	font-weight: bold;
+	${textSansBold14};
 	line-height: 1;
 	.completed-icon {
 		display: inline-flex;
@@ -209,7 +210,7 @@ const inProgressStyles = css`
 const progressTrackStyles = css`
 	width: 80px;
 	height: 3px;
-	border-radius: 2px;
+	border-radius: ${PUZZLES_PROGRESS_RADIUS}px;
 	background: color-mix(in srgb, currentColor 20%, transparent);
 	> span {
 		display: block;
@@ -346,18 +347,18 @@ const isSmallCard = (variant: PuzzleItem['cardVariant'] | undefined) =>
 	variant === 'compact';
 
 export const rowsStyles = css`
-	--puzzles-gap: 16px;
+	--puzzles-gap: ${space[4]}px;
 	--puzzles-group-above: ${normalSeparator[0]}px;
 	--puzzles-group-below: ${normalSeparator[1]}px;
 	display: flex;
 	min-width: 0;
 	flex-direction: column;
 	${from.phablet} {
-		--puzzles-gap: 24px;
+		--puzzles-gap: ${space[6]}px;
 	}
 
 	${from.tablet} {
-		--puzzles-gap: 20px;
+		--puzzles-gap: ${space[5]}px;
 		--puzzles-group-above: ${tabletSeparator[0]}px;
 		--puzzles-group-below: ${tabletSeparator[1]}px;
 	}
@@ -469,9 +470,9 @@ export const rowStyles = (
 		display: grid;
 		--puzzles-row-below: ${separatorBelow}px;
 		${cardGridStyles(mobileColumns)};
-		gap: ${separatorAbove + separatorBelow}px 16px;
+		gap: ${separatorAbove + separatorBelow}px ${space[4]}px;
 		${from.phablet} {
-			column-gap: 24px;
+			column-gap: ${space[6]}px;
 		}
 		margin: 0;
 		padding: 0;
@@ -483,7 +484,7 @@ export const rowStyles = (
 		${from.tablet} {
 			${cardGridStyles(tabletColumns)};
 			--puzzles-row-below: ${tabletSeparator[1]}px;
-			column-gap: 20px;
+			column-gap: ${space[5]}px;
 			row-gap: ${tabletSeparator[0] + tabletSeparator[1]}px;
 			max-width: 700px;
 		}
