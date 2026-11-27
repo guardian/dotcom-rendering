@@ -27,17 +27,17 @@ export const puzzlesHubV3Participation = (
 	[puzzlesHubV3Experiment.name]: group,
 });
 
-export const puzzlesHubV4Experiment = {
-	name: 'puzzles-new-hub-v4',
+export const maxiCrosswordExperiment = {
+	name: 'puzzles-crosswords-maxi',
 	variant: 'variant',
 	control: 'control',
 } as const;
 
 /** Maxi's rollout is independent of V3 premium access. */
-export const isPuzzlesHubV4Enabled = (
+export const isMaxiCrosswordEnabled = (
 	config: PuzzlesVersionExperimentConfig,
 ): boolean =>
 	isPuzzlesHubAvailable(config) &&
-	(config.serverSideABTests[puzzlesHubV4Experiment.name] ===
-		puzzlesHubV4Experiment.variant ||
+	(config.serverSideABTests[maxiCrosswordExperiment.name] ===
+		maxiCrosswordExperiment.variant ||
 		process.env.NODE_ENV === 'development');

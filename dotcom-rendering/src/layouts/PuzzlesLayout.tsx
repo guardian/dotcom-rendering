@@ -19,7 +19,7 @@ import { Section } from '../components/Section';
 import { has } from '../lib/has-string';
 import { withoutMaxiCards } from '../lib/maxiCrossword';
 import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
-import { isPuzzlesHubV4Enabled } from '../lib/puzzlesHubVersionExperiment';
+import { isMaxiCrosswordEnabled } from '../lib/puzzlesHubVersionExperiment';
 import {
 	getPuzzlesSubNavLinks,
 	PUZZLES_SUBNAV_PARENT,
@@ -265,7 +265,7 @@ export const PuzzlesLayout = ({
 				<Island priority="critical">
 					<PuzzlesDirectoryProgress
 						layout={
-							isPuzzlesHubV4Enabled(puzzlesPage.config)
+							isMaxiCrosswordEnabled(puzzlesPage.config)
 								? puzzlesPage.layout
 								: withoutMaxiCards(puzzlesPage.layout)
 						}
