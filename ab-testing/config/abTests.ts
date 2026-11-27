@@ -108,9 +108,6 @@ const ABTests: ABTest[] = [
 	/**
 	 * Puzzles & Games rollout, tier v3: premium puzzles.
 	 *
-	 * Only takes effect when the Puzzles & Games hub is available for the
-	 * reader’s edition.
-	 *
 	 * This tier activates the premium puzzles access control on
 	 * the Puzzle Page: puzzles older than 7 days need a Supporter Plus or
 	 * Digital Pack subscription, and readers without one see the "unlock
@@ -124,7 +121,7 @@ const ABTests: ABTest[] = [
 	{
 		name: "puzzles-new-hub-v3",
 		description:
-			"Rollout of the premium puzzles access control (modal for puzzles older than 7 days), on top of the edition-gated Puzzles & Games hub",
+			"Rollout of the premium puzzles access control (modal for puzzles older than 7 days)",
 		owners: ["puzzles.team@guardian.co.uk"],
 		status: "ON",
 		expirationDate: "2026-12-31",
@@ -137,7 +134,7 @@ const ABTests: ABTest[] = [
 	{
 		name: "puzzles-new-hub-v4",
 		description:
-			"Independent rollout of the Maxi crossword in Puzzles & Games",
+			"Rollout of the Maxi crossword in Puzzles & Games. Also requires the puzzles-new-hub-v3 variant",
 		owners: ["puzzles.team@guardian.co.uk"],
 		status: "ON",
 		expirationDate: "2026-12-31",

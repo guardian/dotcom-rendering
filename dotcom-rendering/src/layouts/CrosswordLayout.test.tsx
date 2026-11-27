@@ -2,7 +2,6 @@ import { render, screen } from '@testing-library/react';
 import { Standard as StandardFixture } from '../../fixtures/generated/fe-articles/Standard';
 import { ConfigProvider } from '../components/ConfigContext';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import type { EditionId } from '../lib/edition';
 import { PUZZLE_MODAL_ROOT_ID } from '../lib/puzzleAccess';
 import {
 	puzzlesHubV3Experiment,
@@ -70,7 +69,6 @@ const relatedPuzzles: PuzzleItem[] = [
 const renderCrosswordLayout = ({
 	moreFromPuzzlesAndGames,
 	puzzlesSupporting,
-	edition = 'UK',
 	serverSideABTests = {},
 	withQuickSeries = false,
 	crosswordType = 'quick',
@@ -80,7 +78,6 @@ const renderCrosswordLayout = ({
 }: {
 	moreFromPuzzlesAndGames?: PuzzleItem[];
 	puzzlesSupporting?: PuzzleGameSupporting;
-	edition?: EditionId;
 	serverSideABTests?: Record<string, string>;
 	withQuickSeries?: boolean;
 	crosswordType?: string;
@@ -120,7 +117,7 @@ const renderCrosswordLayout = ({
 				} as unknown as typeof StandardFixture.crossword,
 				crosswordRequiresSubscription,
 			}),
-			config: { ...StandardFixture.config, edition, serverSideABTests },
+			config: { ...StandardFixture.config, serverSideABTests },
 		},
 		'Web',
 	);
@@ -174,16 +171,6 @@ it('passes crossword context to the metadata share placement', () => {
 	);
 });
 
-describe('CrosswordLayout app download link', () => {
-	it('does not render the link when the hub is available', () => {
-		renderCrosswordLayout({ edition: 'INT' });
-
-		expect(
-			screen.queryByRole('link', { name: 'Download the Guardian app' }),
-		).not.toBeInTheDocument();
-	});
-});
-
 describe('CrosswordLayout useful links', () => {
 	const puzzlesSupporting: PuzzleGameSupporting = {
 		usefulLinks: [
@@ -200,10 +187,9 @@ describe('CrosswordLayout useful links', () => {
 		},
 	};
 
-	it('renders the links and newsletter when frontend sends them and v1 is enabled', () => {
+	it('renders the links and newsletter when frontend sends them', () => {
 		renderCrosswordLayout({
 			puzzlesSupporting,
-			edition: 'INT',
 		});
 
 		expect(
@@ -225,7 +211,7 @@ describe('CrosswordLayout useful links', () => {
 	});
 
 	it('does not render the section when frontend does not send it', () => {
-		renderCrosswordLayout({ edition: 'INT' });
+		renderCrosswordLayout({});
 
 		expect(
 			screen.queryByRole('heading', { name: 'Useful links' }),
@@ -234,10 +220,9 @@ describe('CrosswordLayout useful links', () => {
 });
 
 describe('CrosswordLayout "More from Puzzles & games" rail', () => {
-	it('renders the rail when data is present and v1 is enabled', () => {
+	it('renders the rail when data is present', () => {
 		const { container } = renderCrosswordLayout({
 			moreFromPuzzlesAndGames: relatedPuzzles,
-			edition: 'INT',
 		});
 
 		expect(
@@ -258,8 +243,8 @@ describe('CrosswordLayout "More from Puzzles & games" rail', () => {
 		);
 	});
 
-	it('does not render the rail when the data is absent, even with v1 enabled', () => {
-		renderCrosswordLayout({ edition: 'INT' });
+	it('does not render the rail when the data is absent', () => {
+		renderCrosswordLayout({});
 
 		expect(
 			screen.queryByRole('heading', {
@@ -268,10 +253,9 @@ describe('CrosswordLayout "More from Puzzles & games" rail', () => {
 		).not.toBeInTheDocument();
 	});
 
-	it('does not render the rail when the data is empty, even with v1 enabled', () => {
+	it('does not render the rail when the data is empty', () => {
 		renderCrosswordLayout({
 			moreFromPuzzlesAndGames: [],
-			edition: 'INT',
 		});
 
 		expect(
@@ -282,25 +266,23 @@ describe('CrosswordLayout "More from Puzzles & games" rail', () => {
 	});
 });
 
-describe('CrosswordLayout Puzzle Page design (v1)', () => {
+describe('CrosswordLayout Puzzle Page design', () => {
 	it('uses the puzzles sub-nav instead of the crosswords one', () => {
-		renderCrosswordLayout({ edition: 'INT' });
+		renderCrosswordLayout({});
 
 		expect(screen.getAllByText('Word games').length).toBeGreaterThan(0);
 		expect(screen.getAllByText('Logic puzzles').length).toBeGreaterThan(0);
 	});
 
 	it('shows Trivia & quizzes in the sub-nav without experiment participation', () => {
-		renderCrosswordLayout({ edition: 'INT' });
+		renderCrosswordLayout({});
 		expect(screen.getAllByText('Trivia & quizzes').length).toBeGreaterThan(
 			0,
 		);
 	});
 
 	it('hides SubMeta (topics, share, reuse) and the footer sub-nav', () => {
-		const { container } = renderCrosswordLayout({
-			edition: 'INT',
-		});
+		const { container } = renderCrosswordLayout({});
 
 		expect(
 			screen.queryByText('Explore more on these topics'),
@@ -312,9 +294,7 @@ describe('CrosswordLayout Puzzle Page design (v1)', () => {
 	});
 
 	it('points the title section link at the relative crosswords archive', () => {
-		const { container } = renderCrosswordLayout({
-			edition: 'INT',
-		});
+		const { container } = renderCrosswordLayout({});
 
 		expect(
 			container.querySelector('a[data-component="section"]'),
@@ -323,7 +303,6 @@ describe('CrosswordLayout Puzzle Page design (v1)', () => {
 
 	it('points the title series link at the archive page frontend sends for the crossword type', () => {
 		const { container } = renderCrosswordLayout({
-			edition: 'INT',
 			withQuickSeries: true,
 			puzzleArchivePath: '/puzzles-and-games/crosswords/quick/archive',
 		});
@@ -346,7 +325,6 @@ describe('CrosswordLayout Puzzle Page design (v1)', () => {
 
 	it('points the title series link at the crosswords archive when frontend sends no archive page', () => {
 		const { container } = renderCrosswordLayout({
-			edition: 'INT',
 			withQuickSeries: true,
 			crosswordType: 'genius',
 		});
@@ -356,8 +334,8 @@ describe('CrosswordLayout Puzzle Page design (v1)', () => {
 		).toHaveAttribute('href', '/puzzles-and-games/crosswords/archive');
 	});
 
-	it('applies the new design even when there is no rail data', () => {
-		renderCrosswordLayout({ edition: 'INT' });
+	it('applies the design even when there is no rail data', () => {
+		renderCrosswordLayout({});
 
 		expect(
 			screen.queryByRole('heading', {
@@ -375,7 +353,6 @@ describe('CrosswordLayout premium crosswords', () => {
 		const { container } = renderCrosswordLayout({
 			withCrossword: true,
 			crosswordRequiresSubscription: true,
-			edition: 'INT',
 			serverSideABTests: v3On,
 		});
 
@@ -398,7 +375,6 @@ describe('CrosswordLayout premium crosswords', () => {
 			const { container } = renderCrosswordLayout({
 				withCrossword: true,
 				crosswordRequiresSubscription: true,
-				edition: 'INT',
 				serverSideABTests,
 			});
 
@@ -413,7 +389,6 @@ describe('CrosswordLayout premium crosswords', () => {
 	it('does not gate a crossword frontend did not flag, with v3 on', () => {
 		const { container } = renderCrosswordLayout({
 			withCrossword: true,
-			edition: 'INT',
 			serverSideABTests: v3On,
 		});
 
@@ -426,7 +401,6 @@ describe('CrosswordLayout premium crosswords', () => {
 		const { container } = renderCrosswordLayout({
 			withCrossword: true,
 			crosswordRequiresSubscription: true,
-			edition: 'INT',
 			serverSideABTests: v3On,
 		});
 
@@ -443,7 +417,6 @@ describe('CrosswordLayout premium crosswords', () => {
 		const gated = renderCrosswordLayout({
 			withCrossword: true,
 			crosswordRequiresSubscription: true,
-			edition: 'INT',
 			serverSideABTests: v3On,
 		});
 		expect(gated.container.querySelector(commentCount)).toBeNull();
@@ -451,7 +424,6 @@ describe('CrosswordLayout premium crosswords', () => {
 
 		const ungated = renderCrosswordLayout({
 			withCrossword: true,
-			edition: 'INT',
 			serverSideABTests: v3On,
 		});
 		expect(ungated.container.querySelector(commentCount)).not.toBeNull();
@@ -463,7 +435,6 @@ describe('CrosswordLayout premium crosswords', () => {
 			withCrossword: true,
 			crosswordType: 'everyman',
 			crosswordRequiresSubscription: true,
-			edition: 'INT',
 			serverSideABTests: v3On,
 		});
 

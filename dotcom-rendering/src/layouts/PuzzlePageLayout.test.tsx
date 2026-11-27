@@ -399,8 +399,8 @@ describe('PuzzlePageLayout', () => {
 		});
 	});
 
-	describe('"More from Puzzles & Games" rail (v1-scoped feature)', () => {
-		it('renders the rail when data is present AND v1 is enabled', () => {
+	describe('"More from Puzzles & Games" rail', () => {
+		it('renders the rail when data is present', () => {
 			const { container } = renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
@@ -426,7 +426,7 @@ describe('PuzzlePageLayout', () => {
 			);
 		});
 
-		it('does not render the rail when moreFromPuzzlesAndGames is empty, even with v1 enabled', () => {
+		it('does not render the rail when moreFromPuzzlesAndGames is empty', () => {
 			renderPuzzlePageLayout('sudoku-easy', {
 				config: {
 					...createPuzzlePage('sudoku-easy').config,
@@ -510,12 +510,11 @@ describe('PuzzlePageLayout', () => {
 		const renderPremiumPuzzle = (
 			serverSideABTests: Record<string, string>,
 			requiresSubscription: boolean | undefined = true,
-			edition: 'INT' | 'UK' = 'INT',
 		) => {
 			const base = createPuzzlePage('sudoku-easy');
 			return renderPuzzlePageLayout('sudoku-easy', {
 				isAdFreeUser: false,
-				config: { ...base.config, edition, serverSideABTests },
+				config: { ...base.config, serverSideABTests },
 				instance: { ...base.instance, requiresSubscription },
 			});
 		};
@@ -558,20 +557,15 @@ describe('PuzzlePageLayout', () => {
 		});
 
 		it.each([
-			['no test participation', {}, 'INT'],
+			['no test participation', {}],
 			[
 				'v3 in control',
 				puzzlesHubV3Participation(puzzlesHubV3Experiment.control),
-				'INT',
 			],
 		] as const)(
 			'treats a premium puzzle as free outside puzzles-new-hub-v3 (%s)',
-			(_label, serverSideABTests, edition) => {
-				const { container } = renderPremiumPuzzle(
-					serverSideABTests,
-					true,
-					edition,
-				);
+			(_label, serverSideABTests) => {
+				const { container } = renderPremiumPuzzle(serverSideABTests);
 
 				expect(
 					container.querySelector('#dfp-ad--merchandising-high'),

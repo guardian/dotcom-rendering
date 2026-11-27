@@ -43,7 +43,7 @@ describe('handlePuzzlesPage', () => {
 				],
 			},
 		});
-		page.config = { ...page.config, edition: 'INT', serverSideABTests: {} };
+		page.config = { ...page.config, serverSideABTests: {} };
 		validate.mockReturnValue(page);
 		const res = response();
 		handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
@@ -51,10 +51,10 @@ describe('handlePuzzlesPage', () => {
 		expect(renderPage).toHaveBeenCalledWith({ puzzlesPage: page });
 	});
 
-	it('renders for the International edition outside development', () => {
+	it('renders the hub without experiment participation', () => {
 		validate.mockReturnValue({
 			layout: { containers: [] },
-			config: { edition: 'INT', serverSideABTests: {} },
+			config: { serverSideABTests: {} },
 		} as never);
 		const res = response();
 		handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
@@ -62,42 +62,16 @@ describe('handlePuzzlesPage', () => {
 		expect(res.status).toHaveBeenCalledWith(200);
 	});
 
-	it.each(['INT', 'EUR', 'AU', 'US', 'UK'])(
-		'renders the trivia archive without participation in %s',
-		(edition) => {
-			const page = {
-				layout: { containers: [] },
-				archive: { category: 'trivia-and-quizzes' },
-				config: { edition, serverSideABTests: {} },
-			};
-			validate.mockReturnValue(page as never);
-			const res = response();
-			handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
-			expect(res.status).toHaveBeenCalledWith(200);
-			expect(renderPage).toHaveBeenCalledWith({ puzzlesPage: page });
-		},
-	);
-
-	it('renders outside the International edition in local development', () => {
-		const previousNodeEnvironment = process.env.NODE_ENV;
-		process.env.NODE_ENV = 'development';
-		validate.mockReturnValue({
+	it('renders the trivia archive without experiment participation', () => {
+		const page = {
 			layout: { containers: [] },
-			config: { edition: 'UK', serverSideABTests: {} },
-		} as never);
+			archive: { category: 'trivia-and-quizzes' },
+			config: { serverSideABTests: {} },
+		};
+		validate.mockReturnValue(page as never);
 		const res = response();
-
-		try {
-			handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
-			expect(renderPage).toHaveBeenCalledTimes(1);
-			expect(res.status).toHaveBeenCalledWith(200);
-			process.env.NODE_ENV = previousNodeEnvironment;
-		} finally {
-			if (previousNodeEnvironment === undefined) {
-				delete process.env.NODE_ENV;
-			} else {
-				process.env.NODE_ENV = previousNodeEnvironment;
-			}
-		}
+		handlePuzzlesPage({ body: {} } as never, res as never, jest.fn());
+		expect(res.status).toHaveBeenCalledWith(200);
+		expect(renderPage).toHaveBeenCalledWith({ puzzlesPage: page });
 	});
 });

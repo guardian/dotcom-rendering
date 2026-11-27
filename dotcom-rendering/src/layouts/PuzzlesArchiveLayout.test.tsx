@@ -5,11 +5,6 @@ import type { ReactNode } from 'react';
 import { createPuzzlesPage } from '../../fixtures/manual/puzzlesPage';
 import { Island } from '../components/Island';
 import { SubNav } from '../components/Masthead/Titlepiece/SubNav';
-import type * as PuzzlesHubAccess from '../lib/puzzlesHubAccess';
-import {
-	isPuzzlesHubAvailable,
-	PUZZLES_HUB_EDITIONS,
-} from '../lib/puzzlesHubAccess';
 import { puzzlesHubV3Participation } from '../lib/puzzlesHubVersionExperiment';
 import { extractNAV, type NavType } from '../model/extract-nav';
 import { PuzzlesArchiveLayout } from './PuzzlesArchiveLayout';
@@ -17,16 +12,6 @@ import archiveStories, {
 	LogicPuzzles,
 	WordGames,
 } from './PuzzlesArchiveLayout.stories';
-
-jest.mock('../lib/puzzlesHubAccess', () => {
-	const actual = jest.requireActual<typeof PuzzlesHubAccess>(
-		'../lib/puzzlesHubAccess',
-	);
-	return {
-		...actual,
-		isPuzzlesHubAvailable: jest.fn(actual.isPuzzlesHubAvailable),
-	};
-});
 
 jest.mock('../components/Masthead/Masthead', () => ({
 	Masthead: ({ nav }: { nav: NavType }) => (
@@ -76,56 +61,42 @@ const slotIds = () =>
 describe('PuzzlesArchiveLayout', () => {
 	const nav = extractNAV(createPuzzlesPage().nav);
 
-	beforeEach(() => {
-		const actual = jest.requireActual<typeof PuzzlesHubAccess>(
-			'../lib/puzzlesHubAccess',
-		);
-		jest.mocked(isPuzzlesHubAvailable).mockImplementation(
-			actual.isPuzzlesHubAvailable,
-		);
-	});
-
 	it.each([
-		['INT', 'variant', true],
-		['INT', 'control', false],
-		['INT', undefined, false],
-		['UK', 'variant', PUZZLES_HUB_EDITIONS.includes('UK')],
-	] as const)(
-		'gates premium indicators for edition=%s, v3=%s',
-		(edition, v3, expected) => {
-			jest.mocked(Island).mockClear();
-			const { puzzlesPage } = archiveStories.args;
-			render(
-				<PuzzlesArchiveLayout
-					NAV={nav}
-					puzzlesPage={{
-						...puzzlesPage,
-						config: {
-							...puzzlesPage.config,
-							edition,
-							serverSideABTests: {
-								...(v3 === undefined
-									? {}
-									: puzzlesHubV3Participation(v3)),
-							},
+		['variant', true],
+		['control', false],
+		[undefined, false],
+	] as const)('gates premium indicators for v3=%s', (v3, expected) => {
+		jest.mocked(Island).mockClear();
+		const { puzzlesPage } = archiveStories.args;
+		render(
+			<PuzzlesArchiveLayout
+				NAV={nav}
+				puzzlesPage={{
+					...puzzlesPage,
+					config: {
+						...puzzlesPage.config,
+						serverSideABTests: {
+							...(v3 === undefined
+								? {}
+								: puzzlesHubV3Participation(v3)),
 						},
-					}}
-				/>,
-			);
+					},
+				}}
+			/>,
+		);
 
-			expect(Island).toHaveBeenCalledWith(
-				expect.objectContaining({
-					children: expect.objectContaining({
-						props: expect.objectContaining({
-							initialArchive: puzzlesPage.archive,
-							showPremiumIndicators: expected,
-						}),
+		expect(Island).toHaveBeenCalledWith(
+			expect.objectContaining({
+				children: expect.objectContaining({
+					props: expect.objectContaining({
+						initialArchive: puzzlesPage.archive,
+						showPremiumIndicators: expected,
 					}),
 				}),
-				expect.anything(),
-			);
-		},
-	);
+			}),
+			expect.anything(),
+		);
+	});
 
 	it.each([
 		['Crosswords', archiveStories.args],
@@ -168,17 +139,6 @@ describe('PuzzlesArchiveLayout', () => {
 			).toHaveTextContent(title);
 		},
 	);
-
-	it('only shows the parent link when the hub is unavailable', () => {
-		jest.mocked(isPuzzlesHubAvailable).mockReturnValue(false);
-		const { puzzlesPage } = archiveStories.args;
-		render(<PuzzlesArchiveLayout NAV={nav} puzzlesPage={puzzlesPage} />);
-		const masthead = within(screen.getByTestId('masthead'));
-		expect(masthead.getAllByRole('link')).toHaveLength(1);
-		expect(
-			masthead.getByRole('link', { name: 'Puzzles & games' }),
-		).toBeInTheDocument();
-	});
 
 	it('renders the trivia archive with its Labs palette', () => {
 		const puzzlesPage = page(true);

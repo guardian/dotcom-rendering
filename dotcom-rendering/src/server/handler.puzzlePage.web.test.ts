@@ -1,7 +1,6 @@
 import type { Request, Response } from 'express';
 import { createPuzzlePage } from '../../fixtures/manual/puzzlePage';
 import { triviaPuzzlesContainer } from '../../fixtures/manual/puzzlesPage';
-import type { EditionId } from '../lib/edition';
 import { handlePuzzlePage } from './handler.puzzlePage.web';
 import { renderPuzzlePage } from './render.puzzlePage.web';
 
@@ -41,16 +40,15 @@ describe('handlePuzzlePage', () => {
 		});
 	});
 
-	const withConfig = (
+	const withoutParticipation = (
 		page: ReturnType<typeof createPuzzlePage>,
-		edition: EditionId,
 	) => ({
 		...page,
-		config: { ...page.config, edition, serverSideABTests: {} },
+		config: { ...page.config, serverSideABTests: {} },
 	});
 
 	it('preserves trivia recommendations on existing puzzle pages without participation', () => {
-		const page = withConfig(createPuzzlePage('sudoku-easy'), 'INT');
+		const page = withoutParticipation(createPuzzlePage('sudoku-easy'));
 		const existing = page.instance.moreFromPuzzlesAndGames!;
 		page.instance.moreFromPuzzlesAndGames = [
 			...existing,
@@ -65,9 +63,9 @@ describe('handlePuzzlePage', () => {
 		).toEqual(page.instance.moreFromPuzzlesAndGames);
 	});
 
-	it('renders the page for a known slug when the edition is International', () => {
+	it('renders the page for a known slug', () => {
 		const res = response();
-		const page = withConfig(createPuzzlePage('sudoku-easy'), 'INT');
+		const page = withoutParticipation(createPuzzlePage('sudoku-easy'));
 
 		invokeHandler(page, res);
 
@@ -94,9 +92,9 @@ describe('handlePuzzlePage', () => {
 		'sudoku-killer',
 		'word-wheel',
 		'wordiply',
-	])('renders iframe-based slug %s in the International edition', (slug) => {
+	])('renders iframe-based slug %s', (slug) => {
 		const res = response();
-		const page = withConfig(createPuzzlePage(slug), 'INT');
+		const page = withoutParticipation(createPuzzlePage(slug));
 
 		invokeHandler(page, res);
 
@@ -105,13 +103,11 @@ describe('handlePuzzlePage', () => {
 	});
 
 	it.each(['film-reveal', 'on-the-ball'])(
-		'renders %s without experiment participation in every hub edition',
+		'renders %s without experiment participation',
 		(slug) => {
-			for (const edition of ['INT', 'EUR', 'AU', 'US', 'UK'] as const) {
-				const res = response();
-				invokeHandler(withConfig(createPuzzlePage(slug), edition), res);
-				expect(res.status).toHaveBeenCalledWith(200);
-			}
+			const res = response();
+			invokeHandler(withoutParticipation(createPuzzlePage(slug)), res);
+			expect(res.status).toHaveBeenCalledWith(200);
 		},
 	);
 
@@ -120,11 +116,10 @@ describe('handlePuzzlePage', () => {
 		(slug) => {
 			for (const gameUrl of [undefined, '', '   ']) {
 				const res = response();
-				const page = withConfig(
+				const page = withoutParticipation(
 					createPuzzlePage(slug, {
 						instance: { title: slug, gameUrl },
 					}),
-					'INT',
 				);
 
 				invokeHandler(page, res);
@@ -135,28 +130,9 @@ describe('handlePuzzlePage', () => {
 		},
 	);
 
-	it('renders outside the International edition in local development', () => {
-		const previousNodeEnvironment = process.env.NODE_ENV;
-		process.env.NODE_ENV = 'development';
+	it('returns 404 for an unknown slug', () => {
 		const res = response();
-		const page = withConfig(createPuzzlePage('sudoku-easy'), 'UK');
-
-		try {
-			invokeHandler(page, res);
-			expect(mockedRenderPuzzlePage).toHaveBeenCalled();
-			expect(res.status).toHaveBeenCalledWith(200);
-		} finally {
-			if (previousNodeEnvironment === undefined) {
-				delete process.env.NODE_ENV;
-			} else {
-				process.env.NODE_ENV = previousNodeEnvironment;
-			}
-		}
-	});
-
-	it('returns 404 for an unknown slug even when in the International edition', () => {
-		const res = response();
-		const page = withConfig(createPuzzlePage('sudoku-easy'), 'INT');
+		const page = withoutParticipation(createPuzzlePage('sudoku-easy'));
 		page.slug = 'not-a-real-puzzle';
 
 		invokeHandler(page, res);

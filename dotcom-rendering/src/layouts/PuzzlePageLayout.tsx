@@ -37,10 +37,9 @@ import { shouldShowMobileAboveNavSlot } from '../lib/commercialMobileAboveNavTes
 import { PUZZLE_MODAL_ROOT_ID } from '../lib/puzzleAccess';
 import type { PuzzleActionContext } from '../lib/puzzleActionTracking';
 import { formatPuzzleDate } from '../lib/puzzleDate';
-import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
 import { isPuzzlesHubV3Enabled } from '../lib/puzzlesHubVersionExperiment';
 import {
-	getPuzzlesSubNavLinks,
+	PUZZLES_SUBNAV_LINKS,
 	PUZZLES_SUBNAV_PARENT,
 } from '../lib/puzzlesSubNav';
 import { puzzleAccentStyles, puzzlesPageTheme } from '../lib/puzzlesTheme';
@@ -396,31 +395,13 @@ export const PuzzlePageLayout = ({
 	// page, so a section the reader cannot reach makes no sense.
 	const showComments = false;
 
-	// The "More from Puzzles & Games" rail is a v1-scoped feature (per the
-	// Puzzles & Games rollout plan - see `isPuzzlesHubAvailable`), not a v0
-	// one - so it must not render just because
-	// instance.moreFromPuzzlesAndGames happens to be non-empty.
-	// if (instance.moreFromPuzzlesAndGames?.length === 0) {
-	//  instance.moreFromPuzzlesAndGames = [
-	//    {
-	//      id: 'placeholder',
-	//      title: 'More puzzles coming soon',
-	//      type: 'Placeholder',
-	//      set: 'placeholder',
-	//      cardVariant: 'primary',
-	//    },
-	//  ];
-	// }
-	const isV1Enabled = isPuzzlesHubAvailable(config);
-
 	// The premium puzzles access control (the unlock modal, the access check
 	// and no ads) only has an effect for readers in `puzzles-new-hub-v3`.
 	// Outside it every puzzle behaves as a free one, whatever `frontend` sends.
 	const requiresSubscription =
 		isPuzzlesHubV3Enabled(config) && instance.requiresSubscription === true;
 
-	const showRelated =
-		!!instance.moreFromPuzzlesAndGames?.length && isV1Enabled;
+	const showRelated = !!instance.moreFromPuzzlesAndGames?.length;
 
 	// `FEPuzzlePageType` now carries `isAdFreeUser` (see that field's doc
 	// comment), so `canRenderAds` (the same shared helper every other
@@ -478,7 +459,7 @@ export const PuzzlePageLayout = ({
 	 * `NAV` (`extractNAV(puzzlePage.nav)`) carries whatever generic
 	 * navigation `frontend` resolved for this request; its
 	 * `subNavSections` has no real Puzzle Page equivalent (see
-	 * `getPuzzlesSubNavLinks`'s doc comment above). `Masthead`/`Titlepiece`
+	 * `PUZZLES_SUBNAV_PARENT`'s doc comment). `Masthead`/`Titlepiece`
 	 * (header) and the footer's own `SubNav.island` both read
 	 * `subNavSections`/`currentNavLink` straight off the `NavType` they're
 	 * given, so this single override is reused for both, rather than
@@ -486,7 +467,7 @@ export const PuzzlePageLayout = ({
 	 */
 	const puzzlesSubNav: SubNavType = {
 		parent: PUZZLES_SUBNAV_PARENT,
-		links: getPuzzlesSubNavLinks(isV1Enabled),
+		links: PUZZLES_SUBNAV_LINKS,
 	};
 
 	const puzzleNAV: NavType = {
@@ -894,7 +875,7 @@ export const PuzzlePageLayout = ({
 					</Section>
 				)}
 
-				{isV1Enabled && instance.puzzlesSupporting && (
+				{instance.puzzlesSupporting && (
 					<div
 						data-print-layout="hide"
 						// `PuzzlesUsefulLinks` reads the `--puzzles-*` colours,
@@ -919,8 +900,8 @@ export const PuzzlePageLayout = ({
 			 * scrollable copy of the same sub-nav row already shown in the
 			 * header (`Masthead`/`Titlepiece`). Per explicit product
 			 * feedback, that duplicate footer row doesn't make sense for
-			 * Puzzle Page's hardcoded sub-nav (see `getPuzzlesSubNavLinks`'s
-			 * doc comment above): the header copy is enough, so this second
+			 * Puzzle Page's hardcoded sub-nav (see `PUZZLES_SUBNAV_PARENT`'s
+			 * doc comment): the header copy is enough, so this second
 			 * rendering is intentionally omitted here rather than blindly
 			 * replicating every `CrosswordLayout` slot.
 			 */}

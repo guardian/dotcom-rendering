@@ -18,10 +18,9 @@ import { PuzzlesDirectoryProgress } from '../components/PuzzlesDirectoryProgress
 import { Section } from '../components/Section';
 import { has } from '../lib/has-string';
 import { withoutMaxiCards } from '../lib/maxiCrossword';
-import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
 import { isPuzzlesHubV4Enabled } from '../lib/puzzlesHubVersionExperiment';
 import {
-	getPuzzlesSubNavLinks,
+	PUZZLES_SUBNAV_LINKS,
 	PUZZLES_SUBNAV_PARENT,
 } from '../lib/puzzlesSubNav';
 import { puzzlesPageTheme } from '../lib/puzzlesTheme';
@@ -186,12 +185,7 @@ export const PuzzlesLayout = ({
 		...NAV,
 		currentNavLink: 'Puzzles & games',
 		subNavSections: {
-			links: [
-				PUZZLES_SUBNAV_PARENT,
-				...getPuzzlesSubNavLinks(
-					isPuzzlesHubAvailable(puzzlesPage.config),
-				),
-			],
+			links: [PUZZLES_SUBNAV_PARENT, ...PUZZLES_SUBNAV_LINKS],
 		},
 	};
 	return (

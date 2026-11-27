@@ -6,15 +6,13 @@ const crossword = { id: 'crosswords/quick/1' };
 const articleWith = ({
 	requiresSubscription,
 	tests,
-	edition = 'INT',
 }: {
 	requiresSubscription?: boolean;
 	tests: Record<string, string>;
-	edition?: string;
 }) =>
 	({
 		crossword,
-		config: { serverSideABTests: tests, edition },
+		config: { serverSideABTests: tests },
 		crosswordRequiresSubscription: requiresSubscription,
 		webPublicationDateDisplay: '',
 		webPublicationSecondaryDateDisplay: '',
@@ -28,7 +26,7 @@ const elementOf = (article: FEArticle) =>
 	buildCrosswordBlock(article)?.elements[0];
 
 describe('buildCrosswordBlock', () => {
-	it('marks the element as premium when the flag is sent, the edition has the hub and the premium variant is on', () => {
+	it('marks the element as premium when the flag is sent and the premium variant is on', () => {
 		expect(
 			elementOf(
 				articleWith({
