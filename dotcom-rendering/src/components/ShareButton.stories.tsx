@@ -97,8 +97,8 @@ LiveBlogMobileMeta.parameters = {
 export const EmailLinkStory = () => {
 	return (
 		<EmailLink
-			href={`mailto:?subject=Everybody%20looks%20after%20each%20other!&body=https://www.theguardian.com/lifeandstyle/2024/feb/20/everybody-looks-after-each-other-fifty-years-of-the-commune-that-began-with-a-guardian-ad
-			`}
+			subject="Everybody looks after each other!"
+			body="https://www.theguardian.com/lifeandstyle/2024/feb/20/everybody-looks-after-each-other-fifty-years-of-the-commune-that-began-with-a-guardian-ad"
 			isLiveBlogMeta={true}
 			size="small"
 			isNonLabsGalleryMeta={false}
