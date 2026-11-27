@@ -11,6 +11,7 @@ import { SvgGuardianLogo } from '@guardian/source/react-components';
 import { LinkButton } from '@guardian/source/react-components';
 import type { Inline1Props } from '@guardian/support-dotcom-components/dist/shared/types/props/inline1';
 import sanitize from 'sanitize-html';
+import { InlineSkipToWrapper } from '../../InlineSkipToWrapper';
 import type { ReactComponent } from '../lib/ReactComponent';
 import { enrichSupportUrl } from '../lib/tracking';
 import type { ImageAttrs } from '../shared/ResponsiveImage';
@@ -181,55 +182,61 @@ export const SupporterRevenue: ReactComponent<Inline1Props> = ({
 	}
 
 	return (
-		<section
-			css={outerContainerStyles}
-			aria-labelledby="supporter-revenue-heading"
-			data-message-type={variant.message.type}
-			data-testid={tracking.campaignCode}
-			ref={setNode}
+		<InlineSkipToWrapper
+			id={`Supporter-Revenue-skip-link`}
+			blockDescription="Guardian promotion"
 		>
-			<div css={innerContainerStyles}>
-				<div css={guardianLogoContainerStyles}>
-					<SvgGuardianLogo width={75} />
-				</div>
-				{image && (
-					<div css={imageWrapperStyles}>
-						<ResponsiveImage
-							cssOverrides={imageStyles}
-							images={images}
-							baseImage={baseImage}
-						></ResponsiveImage>
+			<aside
+				css={outerContainerStyles}
+				aria-labelledby="supporter-revenue-heading"
+				data-message-type={variant.message.type}
+				data-testid={tracking.campaignCode}
+				ref={setNode}
+			>
+				<div css={innerContainerStyles}>
+					<div css={guardianLogoContainerStyles}>
+						<SvgGuardianLogo width={75} aria-hidden="true" />
 					</div>
-				)}
-				<h2
-					id="supporter-revenue-heading"
-					css={headingStyles}
-					dangerouslySetInnerHTML={{
-						__html: sanitize(heading, {
-							allowedTags: allowedHTMLTags,
-						}),
-					}}
-				></h2>
-				<p
-					css={bodyStyles}
-					dangerouslySetInnerHTML={{
-						__html: sanitize(body, {
-							allowedTags: allowedHTMLTags,
-						}),
-					}}
-				></p>
-				<div css={ctaContainerStyles}>
-					<LinkButton
-						cssOverrides={ctaButtonStyles}
-						theme={ctaButtonTheme}
-						href={ctaUrl}
-						data-ignore="global-link-styling"
-						onClick={() => sendEvent('CLICK', 'cta')}
-					>
-						{cta.text}
-					</LinkButton>
+					{image && (
+						<div css={imageWrapperStyles}>
+							<ResponsiveImage
+								cssOverrides={imageStyles}
+								images={images}
+								baseImage={baseImage}
+							></ResponsiveImage>
+						</div>
+					)}
+					<h2
+						id="supporter-revenue-heading"
+						aria-hidden="true"
+						css={headingStyles}
+						dangerouslySetInnerHTML={{
+							__html: sanitize(heading, {
+								allowedTags: allowedHTMLTags,
+							}),
+						}}
+					></h2>
+					<p
+						css={bodyStyles}
+						dangerouslySetInnerHTML={{
+							__html: sanitize(body, {
+								allowedTags: allowedHTMLTags,
+							}),
+						}}
+					></p>
+					<div css={ctaContainerStyles}>
+						<LinkButton
+							cssOverrides={ctaButtonStyles}
+							theme={ctaButtonTheme}
+							href={ctaUrl}
+							data-ignore="global-link-styling"
+							onClick={() => sendEvent('CLICK', 'cta')}
+						>
+							{cta.text}
+						</LinkButton>
+					</div>
 				</div>
-			</div>
-		</section>
+			</aside>
+		</InlineSkipToWrapper>
 	);
 };

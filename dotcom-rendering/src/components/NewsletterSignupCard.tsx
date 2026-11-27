@@ -145,7 +145,7 @@ const NewsletterSignupHeader = (
 				<span css={frequencyLabelStyles}>{props.frequency}</span>
 			</span>
 		</div>
-		<hr css={innerDividerStyles} />
+		<hr css={innerDividerStyles} aria-hidden="true" />
 		<div css={headerStyles}>
 			<div css={titleAndMetaStyles}>
 				<p

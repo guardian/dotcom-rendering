@@ -30,7 +30,7 @@ describe('Puzzles CTA', () => {
 		const { rerender } = render(<Puzzles {...props} />);
 
 		const link = screen.getByRole('link', {
-			name: 'Visit the Guardian puzzles and games hub.',
+			name: 'Play now',
 		});
 		const url = new URL(link.getAttribute('href') ?? '');
 		expect(url.origin).toBe('https://www.theguardian.com');
@@ -59,7 +59,7 @@ describe('Puzzles CTA', () => {
 		const urlWithoutPageViewId = new URL(
 			screen
 				.getByRole('link', {
-					name: 'Visit the Guardian puzzles and games hub.',
+					name: 'Play now',
 				})
 				.getAttribute('href') ?? '',
 		);
