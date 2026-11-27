@@ -248,6 +248,7 @@ const invertedText = css`
 
 	${from.tablet} {
 		margin-left: -20px;
+		padding-top: ${space[1]}px;
 		padding-left: 20px;
 		padding-bottom: ${space[6]}px;
 	}
