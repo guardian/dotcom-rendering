@@ -1,50 +1,66 @@
 import { palette } from '@guardian/source/foundations';
-import { ArticleSpecial, Pillar } from './articleFormat';
+import { paletteDeclarations } from '../paletteDeclarations';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	Pillar,
+} from './articleFormat';
 import {
 	getPuzzleGroupPalette,
 	puzzleGroupForItemType,
 } from './puzzleGroupPalette';
 
-describe('getPuzzleGroupPalette', () => {
-	it('gives trivia the light Labs background and labs.200 headline', () => {
-		expect(getPuzzleGroupPalette('trivia')).toEqual({
-			tint: palette.labs[700],
-			primary: palette.labs[200],
-			accent: palette.labs[400],
-			theme: ArticleSpecial.Labs,
-		});
-	});
-
-	it('gives crosswords the news .300 colour and a news.550 dark accent', () => {
-		expect(getPuzzleGroupPalette('crosswords')).toEqual({
-			tint: palette.news[800],
-			primary: palette.news[300],
-			accent: palette.news[550],
+const declarations = (mode: 'light' | 'dark') =>
+	paletteDeclarations(
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Crossword,
 			theme: Pillar.News,
+		},
+		mode,
+	);
+
+describe('getPuzzleGroupPalette', () => {
+	it.each([
+		['crosswords', Pillar.News],
+		['word-games', Pillar.Opinion],
+		['logic-puzzles', Pillar.Sport],
+		['trivia', ArticleSpecial.Labs],
+	] as const)('points %s at its palette colours', (group, theme) => {
+		expect(getPuzzleGroupPalette(group)).toEqual({
+			tint: `var(--puzzles-${group}-tint)`,
+			primary: `var(--puzzles-${group}-primary)`,
+			accent: `var(--puzzles-${group}-accent)`,
+			themedPrimary: `var(--puzzles-${group}-themed-primary)`,
+			themedHover: `var(--puzzles-${group}-themed-hover)`,
+			theme,
 		});
 	});
 
-	it('gives word games the opinion palette', () => {
-		const { primary, accent, tint, theme } =
-			getPuzzleGroupPalette('word-games');
-		expect([primary, accent, tint, theme]).toEqual([
-			palette.opinion[400],
-			palette.opinion[550],
-			palette.opinion[800],
-			Pillar.Opinion,
-		]);
-	});
+	it.each([
+		['crosswords', palette.news, 800, 300, 550],
+		['word-games', palette.opinion, 800, 400, 550],
+		['logic-puzzles', palette.sport, 800, 400, 500],
+		['trivia', palette.labs, 700, 200, 400],
+	] as const)(
+		'declares the %s colours',
+		(group, hue, tint, primary, accent) => {
+			const shades: Record<number, string> = hue;
 
-	it('gives logic puzzles the sport palette', () => {
-		const { primary, accent, tint, theme } =
-			getPuzzleGroupPalette('logic-puzzles');
-		expect([primary, accent, tint, theme]).toEqual([
-			palette.sport[400],
-			palette.sport[500],
-			palette.sport[800],
-			Pillar.Sport,
-		]);
-	});
+			expect(declarations('light')).toEqual(
+				expect.arrayContaining([
+					`--puzzles-${group}-tint: ${shades[tint]};`,
+					`--puzzles-${group}-primary: ${shades[primary]};`,
+					`--puzzles-${group}-accent: ${shades[accent]};`,
+					`--puzzles-${group}-themed-primary: ${shades[primary]};`,
+				]),
+			);
+			expect(declarations('dark')).toContain(
+				`--puzzles-${group}-themed-primary: ${shades[accent]};`,
+			);
+		},
+	);
 });
 
 describe('puzzleGroupForItemType', () => {

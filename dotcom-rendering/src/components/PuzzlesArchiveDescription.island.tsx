@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
-import { palette } from '@guardian/source/foundations';
 import { getHeaderSignInUrl } from '../lib/headerSignInUrl';
 import { useIsSignedIn } from '../lib/useAuthStatus';
+import { palette as themePalette } from '../palette';
 
 const linkStyles = css`
-	color: var(--puzzles-primary, ${palette.lifestyle[400]});
+	color: ${themePalette('--puzzles-primary')};
 	text-decoration: none;
 	:hover,
 	:focus {

@@ -1,13 +1,13 @@
 import { css, type SerializedStyles } from '@emotion/react';
 import {
 	from,
-	palette,
 	space,
 	textSans12,
 	textSansBold12,
 } from '@guardian/source/foundations';
 import { getOphanComponents } from '../lib/labs';
 import { puzzlesContainerStyles } from '../lib/puzzlesContainerStyles';
+import { palette as themePalette } from '../palette';
 import type { Branding } from '../types/branding';
 
 // Sits in the clear bottom-left area of the sponsored header artwork.
@@ -16,7 +16,7 @@ const overlayStyles = css`
 	right: 0;
 	bottom: 0;
 	left: 0;
-	color: ${palette.neutral[7]};
+	color: ${themePalette('--puzzles-sponsor-overlay-text')};
 `;
 
 // Borders are hidden but kept so the text lines up with the directory titles.
@@ -73,7 +73,7 @@ const aboutStyles = css`
 
 const aboutLinkStyles = css`
 	${textSans12};
-	color: var(--puzzles-text-colour, ${palette.neutral[7]});
+	color: ${themePalette('--puzzles-text-colour')};
 `;
 
 const containerLockupStyles = css`
@@ -81,7 +81,7 @@ const containerLockupStyles = css`
 	align-items: center;
 	gap: 7px;
 	white-space: nowrap;
-	color: var(--puzzles-text-colour, ${palette.neutral[7]});
+	color: ${themePalette('--puzzles-text-colour')};
 	a {
 		text-decoration: none;
 	}

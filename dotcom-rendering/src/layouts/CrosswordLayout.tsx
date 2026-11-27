@@ -45,7 +45,7 @@ import {
 	getPuzzlesSubNavLinks,
 	PUZZLES_SUBNAV_PARENT,
 } from '../lib/puzzlesSubNav';
-import { puzzleAccentStyles } from '../lib/puzzlesTheme';
+import { puzzleAccentStyles, puzzlesLightColours } from '../lib/puzzlesTheme';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
@@ -656,7 +656,7 @@ export const CrosswordLayout = (props: Props) => {
 				)}
 
 				{isPuzzlesHubV1 && article.puzzlesSupporting && (
-					<div data-print-layout="hide">
+					<div data-print-layout="hide" css={puzzlesLightColours}>
 						<PuzzlesUsefulLinks
 							id="crossword"
 							ophanComponentName="puzzles-useful-links:crossword-page"

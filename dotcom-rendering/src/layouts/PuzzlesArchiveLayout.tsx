@@ -3,7 +3,6 @@ import {
 	from,
 	headlineBold24,
 	headlineBold28,
-	palette,
 	space,
 	textEgyptian15,
 	textEgyptian17,
@@ -50,8 +49,8 @@ const pageStyles = css`
 	${center};
 	box-sizing: border-box;
 	padding: 0 ${space[3]}px;
-	border-left: 1px solid var(--puzzles-border-colour);
-	border-right: 1px solid var(--puzzles-border-colour);
+	border-left: 1px solid ${themePalette('--puzzles-border-colour')};
+	border-right: 1px solid ${themePalette('--puzzles-border-colour')};
 	${from.tablet} {
 		padding: 0 ${space[5]}px;
 	}
@@ -74,7 +73,7 @@ const topStyles = css`
 			bottom: 28px;
 			left: 150px;
 			width: 1px;
-			background: var(--puzzles-border-colour);
+			background: ${themePalette('--puzzles-border-colour')};
 			content: '';
 			pointer-events: none;
 		}
@@ -102,7 +101,7 @@ const headingStyles = css`
 	${archiveGridStyles};
 	h1 {
 		${headlineBold24};
-		color: var(--puzzles-headline-colour);
+		color: ${themePalette('--puzzles-headline-colour')};
 		margin: 0;
 		padding-top: ${space[2]}px;
 		overflow-wrap: anywhere;
@@ -115,7 +114,7 @@ const headingStyles = css`
 		max-width: 620px;
 		margin: 0 0 ${space[6]}px;
 		padding-top: 10px;
-		color: var(--puzzles-supporting-text-colour);
+		color: ${themePalette('--puzzles-supporting-text-colour')};
 		${from.tablet} {
 			${textEgyptian17};
 			padding-top: ${space[2]}px;
@@ -174,7 +173,7 @@ const moreStyles = css`
 	--puzzles-edge-padding: ${space[3]}px;
 	margin: 0 -${space[3]}px;
 	padding: 0 ${space[3]}px;
-	border-top: 1px solid var(--puzzles-border-colour);
+	border-top: 1px solid ${themePalette('--puzzles-border-colour')};
 	${from.tablet} {
 		margin: 0 -${space[5]}px;
 		padding: 0 ${space[5]}px;
@@ -183,7 +182,7 @@ const moreStyles = css`
 
 const mobileAdStyles = css`
 	margin: ${space[8]}px 0 ${space[5]}px;
-	background: ${palette.neutral[97]};
+	background: ${themePalette('--puzzles-ad-background')};
 	${from.tablet} {
 		display: none;
 	}
@@ -329,8 +328,8 @@ export const PuzzlesArchiveLayout = ({
 			<Section
 				fullWidth={true}
 				padSides={false}
-				backgroundColour={palette.brand[400]}
-				borderColour={palette.brand[600]}
+				backgroundColour={themePalette('--puzzles-footer-background')}
+				borderColour={themePalette('--puzzles-footer-border')}
 				showSideBorders={false}
 				element="footer"
 			>

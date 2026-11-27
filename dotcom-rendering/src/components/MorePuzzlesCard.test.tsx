@@ -61,13 +61,13 @@ const darkCss = (): string => {
 };
 
 describe('MorePuzzlesCard dark mode', () => {
-	it('gives every card the same #333333 background in dark mode when dark mode is available', () => {
+	it('gives every card the same neutral background in dark mode when dark mode is available', () => {
 		const css = darkCss();
 
 		expect(css).toContain('prefers-color-scheme: dark');
 		// Exactly the dark rule per card, scoped to the card itself (not "<card>:root ... <card>").
 		const darkRules = css.match(
-			/html:not\(\[data-color-scheme='light'\]\) \.css-[\w-]+ \{background-color: #333333;/g,
+			/html:not\(\[data-color-scheme='light'\]\) \.css-[\w-]+ \{background-color: var\(--puzzles-rail-card-background-dark\);/g,
 		);
 		expect(darkRules).toHaveLength(2);
 	});
@@ -75,7 +75,7 @@ describe('MorePuzzlesCard dark mode', () => {
 	it('does not emit any dark mode rule when dark mode is not available', () => {
 		const css = renderedCss(false);
 
-		expect(css).not.toContain('#333333');
+		expect(css).not.toContain('--puzzles-rail-card-background-dark');
 		expect(css).not.toContain('prefers-color-scheme');
 	});
 });
@@ -85,14 +85,16 @@ describe('MorePuzzlesCard dark mode title colours', () => {
 		const css = darkCss();
 		return Array.from(
 			css.matchAll(
-				/html:not\(\[data-color-scheme='light'\]\) \.css-[\w-]+ \{color: (#[0-9A-Fa-f]{6});\}/g,
+				/html:not\(\[data-color-scheme='light'\]\) \.css-[\w-]+ \{color: (var\(--[\w-]+\));\}/g,
 			),
 		).map((match) => match[1] ?? '');
 	};
 
 	it('maps each group title to its lighter dark mode tint', () => {
-		// sudoku: sport[500]; crossword: news[550]
-		expect(titleDarkColours()).toEqual(['#00B2FF', '#FF9081']);
+		expect(titleDarkColours()).toEqual([
+			'var(--puzzles-logic-puzzles-accent)',
+			'var(--puzzles-crosswords-accent)',
+		]);
 	});
 });
 

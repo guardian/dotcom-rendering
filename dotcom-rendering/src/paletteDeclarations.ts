@@ -6807,6 +6807,376 @@ type PaletteColours = Record<
 	}
 >;
 
+// ----- Puzzles & games colours ----- //
+
+/**
+ * Not in `@guardian/source`'s palette yet.
+ * The tick on a played day in dark mode (Utility / success 700 in the design).
+ */
+const successTick = '#99E5BA';
+/**
+ * Not in `@guardian/source`'s palette yet.
+ * Matches the opaque background of the sponsored header artwork.
+ */
+const sponsoredHeaderCream = '#FEF7F1';
+
+/**
+ * Colours of the Puzzles & games pages. Names ending in `-dark` are applied by
+ * components only inside their own dark mode rules, because the light colour
+ * there depends on the page data, so both modes hold the same value.
+ */
+const puzzlesColours = {
+	'--puzzles-accent-byline-dark': {
+		light: () => sourcePalette.neutral[60],
+		dark: () => sourcePalette.neutral[60],
+	},
+	'--puzzles-accent-sign-in-link-dark': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--puzzles-ad-background': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[97],
+	},
+	'--puzzles-ad-border': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--puzzles-border-colour': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[46],
+	},
+	'--puzzles-calendar-day-background': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--puzzles-calendar-nav-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--puzzles-calendar-nav-border': {
+		light: () => sourcePalette.neutral[20],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--puzzles-calendar-nav-disabled': {
+		light: () => sourcePalette.neutral[60],
+		dark: () => sourcePalette.neutral[60],
+	},
+	'--puzzles-calendar-subtitle': {
+		light: () => sourcePalette.neutral[46],
+		dark: () => sourcePalette.neutral[46],
+	},
+	'--puzzles-card-cadence-colour': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[97],
+	},
+	'--puzzles-card-fallback-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--puzzles-card-fallback-title': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[7],
+	},
+	'--puzzles-card-setter-colour': {
+		light: () => sourcePalette.news[300],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--puzzles-card-surface-dark': {
+		light: () => sourcePalette.neutral[20],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--puzzles-card-text-colour': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--puzzles-card-title-dark': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[97],
+	},
+	'--puzzles-completed-day-background': {
+		light: () =>
+			`color-mix(in srgb, ${sourcePalette.success[500]} 9%, ${sourcePalette.neutral[100]})`,
+		dark: () => sourcePalette.success[300],
+	},
+	'--puzzles-completed-day-icon': {
+		light: () => sourcePalette.success[400],
+		dark: () => successTick,
+	},
+	'--puzzles-completed-icon': {
+		light: () => sourcePalette.success[400],
+		dark: () => sourcePalette.success[400],
+	},
+	'--puzzles-crosswords-accent': {
+		light: () => sourcePalette.news[550],
+		dark: () => sourcePalette.news[550],
+	},
+	'--puzzles-crosswords-primary': {
+		light: () => sourcePalette.news[300],
+		dark: () => sourcePalette.news[300],
+	},
+	'--puzzles-crosswords-themed-hover': {
+		light: () => sourcePalette.news[800],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--puzzles-crosswords-themed-primary': {
+		light: () => sourcePalette.news[300],
+		dark: () => sourcePalette.news[550],
+	},
+	'--puzzles-crosswords-tint': {
+		light: () => sourcePalette.news[800],
+		dark: () => sourcePalette.news[800],
+	},
+	'--puzzles-focus-outline': {
+		light: () => sourcePalette.brand[500],
+		dark: () => sourcePalette.brand[500],
+	},
+	'--puzzles-footer-background': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.brand[400],
+	},
+	'--puzzles-footer-border': {
+		light: () => sourcePalette.brand[600],
+		dark: () => sourcePalette.brand[600],
+	},
+	'--puzzles-group-on-primary': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[7],
+	},
+	'--puzzles-header-background': {
+		light: () => sourcePalette.opinion[800],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--puzzles-headline-colour': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[97],
+	},
+	'--puzzles-hover': {
+		light: () => sourcePalette.news[800],
+		dark: () => sourcePalette.news[800],
+	},
+	'--puzzles-in-progress-day-background': {
+		light: () => sourcePalette.opinion[800],
+		dark: () => sourcePalette.opinion[100],
+	},
+	'--puzzles-in-progress-icon': {
+		light: () => sourcePalette.opinion[400],
+		dark: () => sourcePalette.opinion[400],
+	},
+	'--puzzles-info-icon': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.brand[400],
+	},
+	'--puzzles-logic-puzzles-accent': {
+		light: () => sourcePalette.sport[500],
+		dark: () => sourcePalette.sport[500],
+	},
+	'--puzzles-logic-puzzles-primary': {
+		light: () => sourcePalette.sport[400],
+		dark: () => sourcePalette.sport[400],
+	},
+	'--puzzles-logic-puzzles-themed-hover': {
+		light: () => sourcePalette.sport[800],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--puzzles-logic-puzzles-themed-primary': {
+		light: () => sourcePalette.sport[400],
+		dark: () => sourcePalette.sport[500],
+	},
+	'--puzzles-logic-puzzles-tint': {
+		light: () => sourcePalette.sport[800],
+		dark: () => sourcePalette.sport[800],
+	},
+	'--puzzles-menu-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--puzzles-menu-hover': {
+		light: () => sourcePalette.neutral[93],
+		dark: () => sourcePalette.neutral[93],
+	},
+	'--puzzles-menu-text': {
+		light: () => sourcePalette.neutral[0],
+		dark: () => sourcePalette.neutral[97],
+	},
+	'--puzzles-on-primary': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--puzzles-page-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[10],
+	},
+	'--puzzles-played-badge-background': {
+		light: () => sourcePalette.success[400],
+		dark: () => sourcePalette.success[400],
+	},
+	'--puzzles-played-badge-icon': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--puzzles-primary': {
+		light: () => sourcePalette.news[300],
+		dark: () => sourcePalette.news[300],
+	},
+	'--puzzles-print-logo': {
+		light: () => sourcePalette.neutral[0],
+		dark: () => sourcePalette.neutral[0],
+	},
+	'--puzzles-rail-card-background-dark': {
+		light: () => sourcePalette.neutral[20],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--puzzles-rail-card-text': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[7],
+	},
+	'--puzzles-rail-card-text-dark': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--puzzles-rail-card-title-dark': {
+		light: () => sourcePalette.neutral[93],
+		dark: () => sourcePalette.neutral[93],
+	},
+	'--puzzles-rail-divider': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--puzzles-rail-setter': {
+		light: () => sourcePalette.news[300],
+		dark: () => sourcePalette.news[300],
+	},
+	'--puzzles-sign-in-message-background': {
+		light: () => sourcePalette.brand[800],
+		dark: () => sourcePalette.brand[800],
+	},
+	'--puzzles-sign-in-message-text': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[7],
+	},
+	'--puzzles-sponsor-overlay-text': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[7],
+	},
+	'--puzzles-sponsored-header-background': {
+		light: () => sponsoredHeaderCream,
+		dark: () => sponsoredHeaderCream,
+	},
+	'--puzzles-supporter-exclusive-dot': {
+		light: () => sourcePalette.notificationBlue[400],
+		dark: () => sourcePalette.notificationBlue[400],
+	},
+	'--puzzles-supporter-exclusive-star': {
+		light: () => sourcePalette.brandAlt[200],
+		dark: () => sourcePalette.brandAlt[200],
+	},
+	'--puzzles-supporting-text-colour': {
+		light: () => sourcePalette.neutral[46],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--puzzles-text-colour': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--puzzles-tint': {
+		light: () => sourcePalette.news[800],
+		dark: () => sourcePalette.news[800],
+	},
+	'--puzzles-trivia-accent': {
+		light: () => sourcePalette.labs[400],
+		dark: () => sourcePalette.labs[400],
+	},
+	'--puzzles-trivia-primary': {
+		light: () => sourcePalette.labs[200],
+		dark: () => sourcePalette.labs[200],
+	},
+	'--puzzles-trivia-themed-hover': {
+		light: () => sourcePalette.labs[700],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--puzzles-trivia-themed-primary': {
+		light: () => sourcePalette.labs[200],
+		dark: () => sourcePalette.labs[400],
+	},
+	'--puzzles-trivia-tint': {
+		light: () => sourcePalette.labs[700],
+		dark: () => sourcePalette.labs[700],
+	},
+	'--puzzles-unavailable-day-border': {
+		light: () => sourcePalette.neutral[93],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--puzzles-unavailable-day-text': {
+		light: () => sourcePalette.neutral[46],
+		dark: () => sourcePalette.neutral[60],
+	},
+	'--puzzles-word-games-accent': {
+		light: () => sourcePalette.opinion[550],
+		dark: () => sourcePalette.opinion[550],
+	},
+	'--puzzles-word-games-primary': {
+		light: () => sourcePalette.opinion[400],
+		dark: () => sourcePalette.opinion[400],
+	},
+	'--puzzles-word-games-themed-hover': {
+		light: () => sourcePalette.opinion[800],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--puzzles-word-games-themed-primary': {
+		light: () => sourcePalette.opinion[400],
+		dark: () => sourcePalette.opinion[550],
+	},
+	'--puzzles-word-games-tint': {
+		light: () => sourcePalette.opinion[800],
+		dark: () => sourcePalette.opinion[800],
+	},
+	'--unlock-modal-archive-button-hover-dark': {
+		light: () => sourcePalette.neutral[10],
+		dark: () => sourcePalette.neutral[10],
+	},
+	'--unlock-modal-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--unlock-modal-divider': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[46],
+	},
+	'--unlock-modal-footer-shadow': {
+		light: () => transparentColour(sourcePalette.neutral[0], 0.15),
+		dark: () => transparentColour(sourcePalette.neutral[0], 0.15),
+	},
+	'--unlock-modal-footnote': {
+		light: () => sourcePalette.neutral[0],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--unlock-modal-link': {
+		light: () => sourcePalette.brand[500],
+		dark: () => sourcePalette.brand[800],
+	},
+	'--unlock-modal-overlay': {
+		light: () => sourcePalette.neutral[0],
+		dark: () => sourcePalette.neutral[0],
+	},
+	'--unlock-modal-secondary': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[97],
+	},
+	'--unlock-modal-text': {
+		light: () => sourcePalette.neutral[0],
+		dark: () => sourcePalette.neutral[97],
+	},
+	'--unlock-modal-tick': {
+		light: () => sourcePalette.brand[500],
+		dark: () => sourcePalette.brand[800],
+	},
+	'--unlock-modal-title': {
+		light: () => sourcePalette.brand[400],
+		dark: () => sourcePalette.neutral[97],
+	},
+} satisfies Record<`--${string}`, { light: () => string; dark: () => string }>;
+
 /**
  * Maps palette colour names (which are also CSS custom property names) to
  * a pair of palette functions, which can be used to derive both light and dark
@@ -6817,6 +7187,7 @@ type PaletteColours = Record<
  */
 const paletteColours = {
 	...expandingWrapper,
+	...puzzlesColours,
 	...tabs,
 	'--accordion-background': {
 		light: accordionBackgroundLight,

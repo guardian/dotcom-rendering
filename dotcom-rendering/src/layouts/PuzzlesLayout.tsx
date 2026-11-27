@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import {
 	breakpoints,
 	from,
-	palette,
 	space,
 	visuallyHidden,
 } from '@guardian/source/foundations';
@@ -24,6 +23,7 @@ import {
 } from '../lib/puzzlesSubNav';
 import { puzzlesPageTheme } from '../lib/puzzlesTheme';
 import type { NavType } from '../model/extract-nav';
+import { palette as themePalette } from '../palette';
 import type { Branding } from '../types/branding';
 import type { FEPuzzlesPageType } from '../types/puzzlesPage';
 import { Stuck } from './lib/stickiness';
@@ -40,15 +40,14 @@ const brandStyles = css`
 	margin: 0 auto;
 	overflow: hidden;
 	/* The artwork is transparent and uses this illustrated-header background. */
-	background: var(--puzzles-header-background, ${palette.opinion[800]});
+	background: ${themePalette('--puzzles-header-background')};
 `;
 
 // Sponsored artwork heights vary by breakpoint and leave room for the sponsor lockup.
 const sponsoredBrandStyles = css`
 	position: relative;
 	/* Matches the opaque background in the sponsored artwork, in light and dark mode */
-	/* stylelint-disable-next-line color-no-hex */
-	background: #fef7f1;
+	background: ${themePalette('--puzzles-sponsored-header-background')};
 	${from.phablet} {
 		height: 286px;
 	}
@@ -279,8 +278,8 @@ export const PuzzlesLayout = ({
 			<Section
 				fullWidth={true}
 				padSides={false}
-				backgroundColour={palette.brand[400]}
-				borderColour={palette.brand[600]}
+				backgroundColour={themePalette('--puzzles-footer-background')}
+				borderColour={themePalette('--puzzles-footer-border')}
 				showSideBorders={false}
 				element="footer"
 			>

@@ -3,7 +3,6 @@ import {
 	between,
 	from,
 	headlineBold20,
-	palette,
 	space,
 	textSans14,
 	until,
@@ -66,7 +65,7 @@ type PuzzleGroupColours = {
  * (crosswords, logic puzzles, word games, trivia), taken from the shared
  * group palette (`puzzleGroupPalette.ts`). The light-mode title colours are
  * too dark to read on the dark mode card background (see
- * `DARK_MODE_CARD_BACKGROUND`), so each group has its lighter counterpart.
+ * `--puzzles-rail-card-background-dark`), so each group has its lighter counterpart.
  */
 const groupColours = (group: PuzzleGroupKey): PuzzleGroupColours => {
 	const groupPalette = getPuzzleGroupPalette(group);
@@ -82,8 +81,8 @@ const puzzleColours = (item: PuzzleItem): PuzzleGroupColours => {
 	if (group) return groupColours(group);
 	return {
 		background: item.backgroundColour,
-		title: palette.neutral[7],
-		darkTitle: palette.neutral[93],
+		title: themePalette('--puzzles-rail-card-text'),
+		darkTitle: themePalette('--puzzles-rail-card-title-dark'),
 	};
 };
 
@@ -97,8 +96,6 @@ const puzzleColours = (item: PuzzleItem): PuzzleGroupColours => {
  * palette is gated (`rootStyles`), and not when the reader has forced the
  * light scheme.
  */
-const DARK_MODE_CARD_BACKGROUND = '#333333';
-
 const cardColourStyles = (
 	colours: PuzzleGroupColours,
 	darkModeAvailable: boolean,
@@ -108,8 +105,10 @@ const cardColourStyles = (
 	css`
 		@media (prefers-color-scheme: dark) {
 			html:not([data-color-scheme='light']) & {
-				background-color: ${DARK_MODE_CARD_BACKGROUND};
-				color: ${palette.neutral[86]};
+				background-color: ${themePalette(
+					'--puzzles-rail-card-background-dark',
+				)};
+				color: ${themePalette('--puzzles-rail-card-text-dark')};
 			}
 		}
 	`}
@@ -145,7 +144,7 @@ const cardStyles = (
 		padding-right: 181px;
 	`}
 	box-sizing: border-box;
-	color: ${palette.neutral[7]};
+	color: ${themePalette('--puzzles-rail-card-text')};
 	text-decoration: none;
 
 	${from.tablet} {
@@ -167,7 +166,7 @@ const cardStyles = (
 	}
 
 	:focus-visible {
-		outline: 3px solid ${palette.brand[500]};
+		outline: 3px solid ${themePalette('--puzzles-focus-outline')};
 		outline-offset: 2px;
 	}
 `;
@@ -192,7 +191,7 @@ const cadenceStyles = css`
 
 const setterStyles = css`
 	margin-top: ${space[1]}px;
-	color: ${palette.news[300]};
+	color: ${themePalette('--puzzles-rail-setter')};
 	${textSans14};
 	line-height: 1.3;
 `;
@@ -215,8 +214,8 @@ const progressStyles = css`
 		align-items: center;
 		justify-content: center;
 		border-radius: 50%;
-		background: ${palette.success[400]};
-		color: ${palette.neutral[100]};
+		background: ${themePalette('--puzzles-played-badge-background')};
+		color: ${themePalette('--puzzles-played-badge-icon')};
 	}
 	svg {
 		width: 11px;
@@ -385,7 +384,7 @@ const cardGridStyles = (columns: number, tracks = columns) => css`
 			top: 0;
 			bottom: 0;
 			left: calc(var(--puzzles-gap) / -2);
-			border-left: 1px solid ${palette.neutral[86]};
+			border-left: 1px solid ${themePalette('--puzzles-rail-divider')};
 			content: '';
 			pointer-events: none;
 		}
@@ -535,14 +534,14 @@ const rowStyles = (
 				padding-top: 8px;
 			}
 			${between.tablet.and.leftCol} {
-				border-top: 1px solid ${palette.neutral[86]};
+				border-top: 1px solid ${themePalette('--puzzles-rail-divider')};
 			}
 			> li + li::after {
 				position: absolute;
 				top: 0;
 				bottom: 0;
 				left: calc(var(--puzzles-gap) / -2);
-				border-left: 1px solid ${palette.neutral[86]};
+				border-left: 1px solid ${themePalette('--puzzles-rail-divider')};
 				content: '';
 				pointer-events: none;
 			}
@@ -571,7 +570,8 @@ const rowStyles = (
 					top: -8px;
 					left: 0;
 					right: calc(var(--puzzles-gap) * -1);
-					border-top: 1px solid ${palette.neutral[86]};
+					border-top: 1px solid
+						${themePalette('--puzzles-rail-divider')};
 					content: '';
 					pointer-events: none;
 				}

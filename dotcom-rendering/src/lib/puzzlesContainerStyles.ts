@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
-import { from, palette } from '@guardian/source/foundations';
+import { from } from '@guardian/source/foundations';
+import { palette as themePalette } from '../palette';
 
 /** Match the masthead/subnav container at each layout breakpoint. */
 export const puzzlesContainerStyles = css`
@@ -11,10 +12,8 @@ export const puzzlesContainerStyles = css`
 	}
 	${from.desktop} {
 		max-width: 980px;
-		border-right: 1px solid
-			var(--puzzles-border-colour, ${palette.neutral[86]});
-		border-left: 1px solid
-			var(--puzzles-border-colour, ${palette.neutral[86]});
+		border-right: 1px solid ${themePalette('--puzzles-border-colour')};
+		border-left: 1px solid ${themePalette('--puzzles-border-colour')};
 	}
 	${from.leftCol} {
 		max-width: 1140px;

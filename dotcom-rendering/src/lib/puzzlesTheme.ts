@@ -1,25 +1,40 @@
 import { css, type SerializedStyles } from '@emotion/react';
-import { palette } from '@guardian/source/foundations';
+import { palette } from '../palette';
+import { paletteDeclarations } from '../paletteDeclarations';
+import { ArticleDesign, ArticleDisplay, Pillar } from './articleFormat';
 import {
 	getPuzzleGroupPalette,
 	type PuzzleGroupKey,
 } from './puzzleGroupPalette';
 
 /**
- * The tick on a played day in dark mode (Utility / success 700 in the design).
- * It is not in `@guardian/source`'s palette yet.
+ * Wraps content that must keep the light Puzzles & games colours, even when the
+ * page is in dark mode (the useful links on the crosswords page).
  */
-const successTick = '#99E5BA';
+export const puzzlesLightColours: SerializedStyles = css(
+	paletteDeclarations(
+		// The Puzzles & games colours are the same for every format.
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Crossword,
+			theme: Pillar.News,
+		},
+		'light',
+	).filter((declaration) => /^--(puzzles|unlock-modal)-/.test(declaration)),
+);
 
 /**
- * Shared colours for the Puzzles hub and archive pages. Dark-mode overrides
- * are emitted only when the experiment makes dark mode available, matching
- * the gating used by the global page palette.
+ * Shared background and text colour for the Puzzles hub and archive pages. The
+ * colours themselves, light and dark, are in `paletteDeclarations.ts`.
  *
  * When a `group` is given (the archive pages), the page also takes that
  * group's colours: `--puzzles-primary` (chips, titles, setter),
  * `--puzzles-on-primary` (text on a filled chip), `--puzzles-tint` (card
  * background) and `--puzzles-hover` (chip hover fill).
+ *
+ * Hub cards take their light colours from the page data, so their dark colours
+ * are set here, only when the experiment makes dark mode available, matching
+ * the gating used by the global page palette.
  */
 export const puzzlesPageTheme = (
 	darkModeAvailable: boolean,
@@ -28,51 +43,27 @@ export const puzzlesPageTheme = (
 	const groupPalette = group ? getPuzzleGroupPalette(group) : undefined;
 
 	return css`
-		--puzzles-page-background: ${palette.neutral[100]};
-		--puzzles-header-background: ${palette.opinion[800]};
-		--puzzles-headline-colour: ${palette.neutral[7]};
-		--puzzles-text-colour: ${palette.neutral[7]};
-		--puzzles-supporting-text-colour: ${palette.neutral[46]};
-		--puzzles-border-colour: ${palette.neutral[86]};
-
 		${groupPalette &&
 		css`
-			--puzzles-primary: ${groupPalette.primary};
-			--puzzles-on-primary: ${palette.neutral[100]};
+			--puzzles-primary: ${groupPalette.themedPrimary};
+			--puzzles-on-primary: ${palette('--puzzles-group-on-primary')};
 			--puzzles-tint: ${groupPalette.tint};
-			--puzzles-hover: ${groupPalette.tint};
+			--puzzles-hover: ${groupPalette.themedHover};
 		`}
 
-		background: var(--puzzles-page-background);
-		color: var(--puzzles-text-colour);
+		background: ${palette('--puzzles-page-background')};
+		color: ${palette('--puzzles-text-colour')};
 
 		${darkModeAvailable &&
 		css`
 			@media (prefers-color-scheme: dark) {
 				html:not([data-color-scheme='light']) & {
-					--puzzles-page-background: ${palette.neutral[10]};
-					--puzzles-header-background: ${palette.neutral[20]};
-					--puzzles-card-background: ${palette.neutral[20]};
-					--puzzles-card-cadence-colour: ${palette.neutral[97]};
-					--puzzles-card-headline-colour: ${palette.neutral[97]};
-					--puzzles-card-text-colour: ${palette.neutral[86]};
-					--puzzles-headline-colour: ${palette.neutral[97]};
-					--puzzles-text-colour: ${palette.neutral[86]};
-					--puzzles-supporting-text-colour: ${palette.neutral[86]};
-					--puzzles-border-colour: ${palette.neutral[46]};
-					--puzzles-unavailable-day-border: ${palette.neutral[20]};
-					--puzzles-unavailable-day-text: ${palette.neutral[60]};
-					--puzzles-completed-day-background: ${palette.success[300]};
-					--puzzles-completed-day-icon: ${successTick};
-					--puzzles-in-progress-day-background: ${palette
-						.opinion[100]};
-					${groupPalette &&
-					css`
-						--puzzles-primary: ${groupPalette.accent};
-						--puzzles-on-primary: ${palette.neutral[7]};
-						--puzzles-hover: ${palette.neutral[20]};
-						--puzzles-card-headline-colour: ${groupPalette.accent};
-					`}
+					--puzzles-card-background: ${palette(
+						'--puzzles-card-surface-dark',
+					)};
+					--puzzles-card-headline-colour: ${groupPalette
+						? groupPalette.accent
+						: palette('--puzzles-card-title-dark')};
 				}
 			}
 		`}
@@ -127,8 +118,10 @@ export const puzzleAccentStyles = (
 			@media (prefers-color-scheme: dark) {
 				html:not([data-color-scheme='light']) & {
 					${declare(accentVariables, accent)}
-					--byline: ${palette.neutral[60]};
-					--sign-in-link: ${palette.neutral[100]};
+					--byline: ${palette('--puzzles-accent-byline-dark')};
+					--sign-in-link: ${palette(
+						'--puzzles-accent-sign-in-link-dark',
+					)};
 				}
 			}
 		`}

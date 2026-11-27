@@ -335,7 +335,7 @@ describe('PuzzlePageLayout', () => {
 
 			expect(css).toContain('--puzzles-page-background');
 			expect(css).toContain('prefers-color-scheme: dark');
-			expect(css).toContain('--puzzles-text-colour: #DCDCDC');
+			expect(css).toContain('color: var(--puzzles-text-colour)');
 		});
 	});
 

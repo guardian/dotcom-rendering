@@ -1,5 +1,4 @@
 import '@testing-library/jest-dom';
-import { palette } from '@guardian/source/foundations';
 import { render, screen, within } from '@testing-library/react';
 import type { ReactNode } from 'react';
 import { createPuzzlesPage } from '../../fixtures/manual/puzzlesPage';
@@ -202,8 +201,8 @@ describe('PuzzlesArchiveLayout', () => {
 			screen.getByRole('heading', { level: 1, name: 'Trivia & quizzes' }),
 		).toBeInTheDocument();
 		expect(screen.getByRole('main')).toHaveStyle({
-			'--puzzles-primary': palette.labs[200],
-			'--puzzles-tint': palette.labs[700],
+			'--puzzles-primary': 'var(--puzzles-trivia-themed-primary)',
+			'--puzzles-tint': 'var(--puzzles-trivia-tint)',
 		});
 	});
 

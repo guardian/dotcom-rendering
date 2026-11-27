@@ -4,7 +4,6 @@ import {
 	headlineBold20,
 	headlineMedium28,
 	headlineMedium34,
-	palette,
 	space,
 	textEgyptian17,
 	textSans14,
@@ -26,6 +25,7 @@ import {
 	IN_PROGRESS_BAR_PERCENTAGE,
 	showsInProgress,
 } from '../lib/puzzleProgress/inProgressDisplay';
+import { palette as themePalette } from '../palette';
 import type { PuzzlesArchive, PuzzlesArchiveItem } from '../types/puzzlesPage';
 
 export type CalendarCell = {
@@ -46,7 +46,7 @@ const SupporterExclusiveIcon = ({ size = 12 }: { size?: number }) => (
 	>
 		<path
 			d="M5.70703 0L7.05412 4.1459H11.4134L7.88666 6.7082L9.23374 10.8541L5.70703 8.2918L2.18032 10.8541L3.5274 6.7082L0.000692368 4.1459H4.35995L5.70703 0Z"
-			fill="#F3C100"
+			fill={themePalette('--puzzles-supporter-exclusive-star')}
 		/>
 	</svg>
 );
@@ -62,7 +62,7 @@ const ProgressInformationIcon = () => (
 	>
 		<path
 			d="M10 0C4.46667 0 0 4.46667 0 10C0 15.5333 4.46667 20 10 20C15.5333 20 20 15.5333 20 10C20 4.46667 15.5333 0 10 0ZM11.1333 13.9333V14.4222C11.0222 14.5111 10.8667 14.5778 10.7111 14.6667C10.5556 14.7333 10.3778 14.8 10.2 14.8667C10.0222 14.9333 9.84445 14.9778 9.66667 15C9.48889 15.0222 9.31111 15.0444 9.15556 15.0444C8.8 15.0444 8.57778 14.9778 8.44444 14.8444C8.28889 14.7111 8.22222 14.5556 8.22222 14.4C8.22222 14.2222 8.24444 14.0444 8.26667 13.8667C8.28889 13.6889 8.33333 13.5111 8.37778 13.2889L9.31111 9.04445L8.44444 8.84445V8.37778C8.57778 8.33333 8.75556 8.26667 9 8.2C9.22222 8.13333 9.46667 8.08889 9.73333 8.04445C10 8 10.2444 7.95556 10.4889 7.93333C10.7333 7.91111 10.9556 7.88889 11.1556 7.88889L11.4 8.04445L10.1556 13.9333H11.1333ZM11.5556 6.46667C11.3556 6.64445 11.0667 6.73333 10.7333 6.73333C10.4222 6.73333 10.1556 6.64445 9.93333 6.46667C9.73333 6.28889 9.62222 6.06667 9.62222 5.77778C9.62222 5.46667 9.73333 5.22222 9.93333 5.04445C10.1333 4.86667 10.4 4.77778 10.7333 4.77778C11.0889 4.77778 11.3556 4.86667 11.5556 5.04445C11.7556 5.22222 11.8667 5.46667 11.8667 5.77778C11.8444 6.06667 11.7556 6.28889 11.5556 6.46667Z"
-			fill="#052962"
+			fill={themePalette('--puzzles-info-icon')}
 		/>
 	</svg>
 );
@@ -77,7 +77,7 @@ const CalendarCompletedIcon = () => (
 	>
 		<path
 			d="M1.35439 6.91457L5.20392 10.7352L16.6088 0L18 1.40926L5.36046 15H4.59147L0 8.32169L1.35439 6.91457Z"
-			fill="#22874D"
+			fill={themePalette('--puzzles-completed-icon')}
 		/>
 	</svg>
 );
@@ -100,7 +100,7 @@ const PremiumCompletedIcon = ({
 	>
 		<path
 			d="M1.2039 6.15452L4.62571 9.5552L14.7634 0L16 1.25435L4.76485 13.3512H4.08131L0 7.40697L1.2039 6.15452Z"
-			fill="#22874D"
+			fill={themePalette('--puzzles-completed-icon')}
 		/>
 	</svg>
 );
@@ -117,35 +117,35 @@ const InProgressIcon = ({ size = 16 }: { size?: number }) => (
 	>
 		<path
 			d="M8 0C12.4183 0 16 3.58172 16 8C16 12.4183 12.4183 16 8 16V14.8571C11.7871 14.8571 14.8571 11.7871 14.8571 8C14.8571 4.2129 11.7871 1.14286 8 1.14286V0Z"
-			fill={palette.opinion[400]}
+			fill={themePalette('--puzzles-in-progress-icon')}
 		/>
 		<path
 			d="M7.10268 14.7991C7.39577 14.8373 7.69542 14.8571 8 14.8571V16C7.64582 16 7.29737 15.9743 6.95536 15.9297L7.10268 14.7991Z"
-			fill={palette.opinion[400]}
+			fill={themePalette('--puzzles-in-progress-icon')}
 		/>
 		<path
 			d="M3.82589 13.4408C4.29797 13.8036 4.81833 14.1062 5.375 14.3371L4.9375 15.3917C4.28684 15.1219 3.68013 14.7682 3.12946 14.3449L3.82589 13.4408Z"
-			fill={palette.opinion[400]}
+			fill={themePalette('--puzzles-in-progress-icon')}
 		/>
 		<path
 			d="M1.66295 10.625C1.89384 11.1817 2.19638 11.702 2.55915 12.1741L1.65402 12.8694C1.23081 12.3187 0.876893 11.7121 0.607143 11.0614L1.66295 10.625Z"
-			fill={palette.opinion[400]}
+			fill={themePalette('--puzzles-in-progress-icon')}
 		/>
 		<path
 			d="M1.20089 7.10268C1.16266 7.39577 1.14286 7.69542 1.14286 8C1.14286 8.30458 1.16266 8.60423 1.20089 8.89732L0.0691964 9.04353C0.0246848 8.70191 0 8.35375 0 8C0 7.64587 0.0245909 7.29732 0.0691964 6.95536L1.20089 7.10268Z"
-			fill={palette.opinion[400]}
+			fill={themePalette('--puzzles-in-progress-icon')}
 		/>
 		<path
 			d="M2.55915 3.82589C2.19638 4.29797 1.89384 4.81833 1.66295 5.375L0.607143 4.9375C0.876957 4.2869 1.23077 3.6801 1.65402 3.12946L2.55915 3.82589Z"
-			fill={palette.opinion[400]}
+			fill={themePalette('--puzzles-in-progress-icon')}
 		/>
 		<path
 			d="M5.375 1.66295C4.81833 1.89384 4.29797 2.19638 3.82589 2.55915L3.12946 1.65402C3.6801 1.23077 4.2869 0.876957 4.9375 0.607143L5.375 1.66295Z"
-			fill={palette.opinion[400]}
+			fill={themePalette('--puzzles-in-progress-icon')}
 		/>
 		<path
 			d="M8 1.14286C7.69542 1.14286 7.39577 1.16266 7.10268 1.20089L6.95536 0.0691964C7.29732 0.0245909 7.64587 0 8 0V1.14286Z"
-			fill={palette.opinion[400]}
+			fill={themePalette('--puzzles-in-progress-icon')}
 		/>
 	</svg>
 );
@@ -165,12 +165,12 @@ const PlayedLegendIcon = () => (
 		</mask>
 		<path
 			d="M6.65039 0L6.65045 -1H6.65039V0ZM13.2998 6.65039L14.2998 6.65045V6.65039H13.2998ZM6.65039 13.2998V14.2998H6.65045L6.65039 13.2998ZM0 6.65039H-1V6.65045L0 6.65039ZM6.65039 0L6.65033 1C9.77047 1.00018 12.2998 3.52998 12.2998 6.65039H13.2998H14.2998C14.2998 2.42568 10.8753 -0.999757 6.65045 -1L6.65039 0ZM13.2998 6.65039L12.2998 6.65033C12.2996 9.77048 9.77048 12.2996 6.65033 12.2998L6.65039 13.2998L6.65045 14.2998C10.8751 14.2996 14.2996 10.8751 14.2998 6.65045L13.2998 6.65039ZM6.65039 13.2998V12.2998C3.52998 12.2998 1.00018 9.77047 1 6.65033L0 6.65039L-1 6.65045C-0.999757 10.8753 2.42568 14.2998 6.65039 14.2998V13.2998ZM0 6.65039H1C1 3.52998 3.52998 1 6.65039 1V0V-1C2.42541 -1 -1 2.42541 -1 6.65039H0Z"
-			fill="#22874D"
+			fill={themePalette('--puzzles-completed-icon')}
 			mask="url(#puzzles-played-icon-mask)"
 		/>
 		<path
 			d="M10.5 4.56348L5.58496 10H5.28516L3.5 7.3291L4.02637 6.76562L5.52344 8.29395L9.95898 4L10.5 4.56348Z"
-			fill="#22874D"
+			fill={themePalette('--puzzles-completed-icon')}
 		/>
 	</svg>
 );
@@ -262,8 +262,8 @@ const linesStyles = css`
 	margin-bottom: ${space[4]}px;
 	background: repeating-linear-gradient(
 		to bottom,
-		var(--puzzles-border-colour, ${palette.neutral[86]}) 0,
-		var(--puzzles-border-colour, ${palette.neutral[86]}) 1px,
+		${themePalette('--puzzles-border-colour')} 0,
+		${themePalette('--puzzles-border-colour')} 1px,
 		transparent 1px,
 		transparent 4px
 	);
@@ -316,7 +316,7 @@ const chipsFadeRightStyles = css`
 		background: linear-gradient(
 			to right,
 			transparent 0%,
-			var(--puzzles-page-background, ${palette.neutral[100]}) 100%
+			${themePalette('--puzzles-page-background')} 100%
 		);
 	}
 `;
@@ -334,7 +334,7 @@ const chipsFadeLeftStyles = css`
 			background: linear-gradient(
 				to left,
 				transparent 0%,
-				var(--puzzles-page-background, ${palette.neutral[100]}) 100%
+				${themePalette('--puzzles-page-background')} 100%
 			);
 			opacity: 0;
 			animation-name: ${chipsFadeInKeyframes};
@@ -367,21 +367,21 @@ const tabsStyles = css`
 	a {
 		flex: none;
 		${textSans14};
-		border: 1px solid var(--puzzles-primary, ${palette.news[300]});
+		border: 1px solid ${themePalette('--puzzles-primary')};
 		border-radius: 18px;
 		padding: 2px ${space[3]}px;
-		color: var(--puzzles-primary, ${palette.news[300]});
+		color: ${themePalette('--puzzles-primary')};
 		font-weight: bold;
 		line-height: 18px;
 		text-decoration: none;
 	}
 	a:hover {
-		background: var(--puzzles-hover, ${palette.news[800]});
+		background: ${themePalette('--puzzles-hover')};
 	}
 	a[aria-current='page'],
 	a[aria-current='page']:hover {
-		background: var(--puzzles-primary, ${palette.news[300]});
-		color: var(--puzzles-on-primary, ${palette.neutral[100]});
+		background: ${themePalette('--puzzles-primary')};
+		color: ${themePalette('--puzzles-on-primary')};
 		font-weight: bold;
 	}
 `;
@@ -389,7 +389,7 @@ const tabsStyles = css`
 const titleStyles = css`
 	${headlineMedium28};
 	margin: ${space[3]}px 0 ${space[3]}px;
-	color: var(--puzzles-headline-colour, ${palette.neutral[7]});
+	color: ${themePalette('--puzzles-headline-colour')};
 	${from.tablet} {
 		${headlineMedium34};
 	}
@@ -398,7 +398,7 @@ const titleStyles = css`
 const publicationSubtitleStyles = css`
 	${textEgyptian17};
 	line-height: 1.3;
-	color: ${palette.neutral[46]};
+	color: ${themePalette('--puzzles-calendar-subtitle')};
 	margin: 0 0 ${space[4]}px;
 `;
 
@@ -445,9 +445,9 @@ const recentStyles = css`
 		padding: ${space[1]}px ${space[2]}px 30px;
 		background: var(
 			--puzzles-card-background,
-			var(--puzzles-tint, ${palette.news[800]})
+			${themePalette('--puzzles-tint')}
 		);
-		color: var(--puzzles-card-text-colour, ${palette.neutral[7]});
+		color: ${themePalette('--puzzles-card-text-colour')};
 		text-decoration: none;
 		${from.phablet} {
 			min-width: 0;
@@ -455,15 +455,14 @@ const recentStyles = css`
 	}
 	.setter {
 		display: block;
-		color: var(--puzzles-primary, ${palette.news[300]});
+		color: ${themePalette('--puzzles-primary')};
 	}
 	a + a::before {
 		position: absolute;
 		top: 0;
 		bottom: 0;
 		left: calc(var(--recent-gap) / -2);
-		border-left: 1px solid
-			var(--puzzles-border-colour, ${palette.neutral[86]});
+		border-left: 1px solid ${themePalette('--puzzles-border-colour')};
 		content: '';
 		pointer-events: none;
 	}
@@ -471,7 +470,7 @@ const recentStyles = css`
 		display: block;
 		color: var(
 			--puzzles-card-headline-colour,
-			var(--puzzles-primary, ${palette.news[300]})
+			${themePalette('--puzzles-primary')}
 		);
 		${headlineBold20};
 	}
@@ -515,8 +514,8 @@ const recentStyles = css`
 		align-items: center;
 		justify-content: center;
 		border-radius: 50%;
-		background: ${palette.success[400]};
-		color: ${palette.neutral[100]};
+		background: ${themePalette('--puzzles-played-badge-background')};
+		color: ${themePalette('--puzzles-played-badge-icon')};
 		svg {
 			width: 11px;
 			height: 11px;
@@ -529,7 +528,7 @@ const controlsStyles = css`
 	display: grid;
 	grid-template-columns: 44px 1fr 44px;
 	align-items: center;
-	border-top: 1px solid var(--puzzles-border-colour, ${palette.neutral[86]});
+	border-top: 1px solid ${themePalette('--puzzles-border-colour')};
 	padding-top: ${space[3]}px;
 	button,
 	a {
@@ -539,10 +538,10 @@ const controlsStyles = css`
 		align-items: center;
 		justify-content: center;
 		padding: 0;
-		border: 1px solid ${palette.neutral[20]};
+		border: 1px solid ${themePalette('--puzzles-calendar-nav-border')};
 		border-radius: 50%;
-		background: var(--puzzles-card-background, ${palette.neutral[100]});
-		color: var(--puzzles-text-colour, ${palette.neutral[7]});
+		background: ${themePalette('--puzzles-calendar-nav-background')};
+		color: ${themePalette('--puzzles-text-colour')};
 		cursor: pointer;
 		text-decoration: none;
 		svg {
@@ -556,15 +555,15 @@ const controlsStyles = css`
 		}
 		:disabled,
 		&[aria-disabled='true'] {
-			border-color: var(--puzzles-border-colour, ${palette.neutral[86]});
-			color: ${palette.neutral[60]};
+			border-color: ${themePalette('--puzzles-border-colour')};
+			color: ${themePalette('--puzzles-calendar-nav-disabled')};
 			cursor: not-allowed;
 		}
 	}
 	strong {
 		text-align: center;
 		${textSans17};
-		color: var(--puzzles-headline-colour, ${palette.neutral[7]});
+		color: ${themePalette('--puzzles-headline-colour')};
 		font-weight: bold;
 	}
 `;
@@ -597,8 +596,8 @@ const calendarStyles = css`
 		padding: var(--calendar-day-padding-block)
 			var(--calendar-day-padding-inline);
 		border: 1px solid transparent;
-		background: var(--puzzles-card-background, ${palette.neutral[97]});
-		color: var(--puzzles-card-text-colour, ${palette.neutral[7]});
+		background: ${themePalette('--puzzles-calendar-day-background')};
+		color: ${themePalette('--puzzles-card-text-colour')};
 		text-decoration: none;
 		${textSans14};
 	}
@@ -616,7 +615,7 @@ const calendarStyles = css`
 		width: 5px;
 		height: 5px;
 		border-radius: 50%;
-		background: ${palette.notificationBlue[400]};
+		background: ${themePalette('--puzzles-supporter-exclusive-dot')};
 		content: '';
 	}
 	.supporter-exclusive-icon {
@@ -630,20 +629,10 @@ const calendarStyles = css`
 		}
 	}
 	.day[data-status='completed'] {
-		background: var(
-			--puzzles-completed-day-background,
-			color-mix(
-				in srgb,
-				${palette.success[500]} 9%,
-				${palette.neutral[100]}
-			)
-		);
+		background: ${themePalette('--puzzles-completed-day-background')};
 	}
 	.day[data-status='in-progress'] {
-		background: var(
-			--puzzles-in-progress-day-background,
-			${palette.opinion[800]}
-		);
+		background: ${themePalette('--puzzles-in-progress-day-background')};
 	}
 	.setter-name {
 		display: none;
@@ -674,19 +663,16 @@ const calendarStyles = css`
 		}
 	}
 	.completed-icon svg > path {
-		fill: var(--puzzles-completed-day-icon, ${palette.success[400]});
+		fill: ${themePalette('--puzzles-completed-day-icon')};
 	}
 	.in-progress-icon {
 		width: 16px;
 		height: 16px;
 	}
 	.day[data-status='unavailable'] {
-		border-color: var(
-			--puzzles-unavailable-day-border,
-			${palette.neutral[93]}
-		);
-		background: var(--puzzles-page-background, ${palette.neutral[100]});
-		color: var(--puzzles-unavailable-day-text, ${palette.neutral[46]});
+		border-color: ${themePalette('--puzzles-unavailable-day-border')};
+		background: ${themePalette('--puzzles-page-background')};
+		color: ${themePalette('--puzzles-unavailable-day-text')};
 	}
 	${from.phablet} {
 		grid-template-columns: repeat(7, 60px);
@@ -722,8 +708,8 @@ const premiumCalendarStyles = css`
 		border-radius: 3px;
 	}
 	.day[data-status='available'] {
-		background: var(--puzzles-page-background, ${palette.neutral[100]});
-		border-color: var(--puzzles-border-colour, ${palette.neutral[86]});
+		background: ${themePalette('--puzzles-page-background')};
+		border-color: ${themePalette('--puzzles-border-colour')};
 	}
 	.day[data-status='available']:not([data-supporter-exclusive])::after {
 		top: 8px;
@@ -780,7 +766,7 @@ const emptyMonthStyles = css`
 	${textSans14};
 	margin-top: ${space[4]}px;
 	a {
-		color: var(--puzzles-primary, ${palette.news[300]});
+		color: ${themePalette('--puzzles-primary')};
 		text-decoration: underline;
 	}
 `;
@@ -805,14 +791,14 @@ const legendStyles = css`
 		justify-content: center;
 		border-radius: 50%;
 		content: '';
-		background: ${palette.notificationBlue[400]};
+		background: ${themePalette('--puzzles-supporter-exclusive-dot')};
 	}
 	svg {
 		display: block;
 		flex: 0 0 auto;
 	}
 	.completed svg > path {
-		fill: var(--puzzles-completed-day-icon, ${palette.success[400]});
+		fill: ${themePalette('--puzzles-completed-day-icon')};
 	}
 	${from.leftCol} {
 		position: absolute;
@@ -856,7 +842,7 @@ const subscriberMessageStyles = css`
 	${textEgyptian17};
 	font-size: 12px;
 	line-height: 1.3;
-	color: ${palette.neutral[46]};
+	color: ${themePalette('--puzzles-calendar-subtitle')};
 	margin: 0;
 	flex-basis: 100%;
 	${from.leftCol} {
@@ -874,8 +860,8 @@ const signInMessageStyles = css`
 	gap: ${space[3]}px;
 	padding: ${space[3]}px ${space[4]}px;
 	margin-top: ${space[6]}px;
-	background-color: ${palette.brand[800]};
-	color: ${palette.neutral[7]};
+	background-color: ${themePalette('--puzzles-sign-in-message-background')};
+	color: ${themePalette('--puzzles-sign-in-message-text')};
 	svg {
 		flex: 0 0 auto;
 	}

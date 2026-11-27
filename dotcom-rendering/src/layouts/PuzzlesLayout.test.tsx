@@ -213,11 +213,13 @@ describe('PuzzlesLayout', () => {
 		const css = renderedCss();
 
 		expect(css).toContain('prefers-color-scheme: dark');
-		expect(css).toContain('--puzzles-page-background: #1A1A1A');
-		expect(css).toContain('--puzzles-header-background: #333333');
-		expect(css).toContain('--puzzles-card-background: #333333');
-		expect(css).toContain('--puzzles-headline-colour: #F6F6F6');
-		expect(css).toContain('--puzzles-text-colour: #DCDCDC');
+		expect(css).toContain('background: var(--puzzles-page-background)');
+		expect(css).toContain(
+			'--puzzles-card-background: var(--puzzles-card-surface-dark)',
+		);
+		expect(css).toContain(
+			'--puzzles-card-headline-colour: var(--puzzles-card-title-dark)',
+		);
 	});
 
 	it('renders only the desktop header slot and respects ad-free input', () => {

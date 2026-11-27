@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	from,
-	remSpace,
-	palette as sourcePalette,
-	space,
-} from '@guardian/source/foundations';
+import { from, remSpace, space } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
@@ -96,7 +91,7 @@ const merchandisingAdStyles = css`
 		padding-bottom: ${space[6]}px;
 
 		&:not([data-label-show='true']) {
-			border-top: 1px solid ${sourcePalette.neutral[86]};
+			border-top: 1px solid ${themePalette('--puzzles-ad-border')};
 		}
 	}
 `;
@@ -302,7 +297,7 @@ const printOnlyLogoContainerStyles = css`
 
 	svg {
 		width: 180px;
-		fill: ${sourcePalette.neutral[0]};
+		fill: ${themePalette('--puzzles-print-logo')};
 	}
 
 	@media print {
@@ -897,9 +892,8 @@ export const PuzzlePageLayout = ({
 				{isV1Enabled && instance.puzzlesSupporting && (
 					<div
 						data-print-layout="hide"
-						// `PuzzlesUsefulLinks` reads the `--puzzles-*` colours,
-						// which only this theme defines (with dark mode when
-						// available). Without it the links stay light in dark mode.
+						// Gives the useful links the Puzzles & games page
+						// background and text colour.
 						css={puzzlesPageTheme(darkModeAvailable)}
 					>
 						<PuzzlesUsefulLinks
@@ -928,8 +922,8 @@ export const PuzzlePageLayout = ({
 			<Section
 				fullWidth={true}
 				padSides={false}
-				backgroundColour={sourcePalette.brand[400]}
-				borderColour={sourcePalette.brand[600]}
+				backgroundColour={themePalette('--puzzles-footer-background')}
+				borderColour={themePalette('--puzzles-footer-border')}
 				showSideBorders={false}
 				element="footer"
 			>

@@ -1,4 +1,4 @@
-import { palette } from '@guardian/source/foundations';
+import { palette } from '../palette';
 import { ArticleSpecial, type ArticleTheme, Pillar } from './articleFormat';
 
 export type PuzzleGroupKey =
@@ -14,39 +14,52 @@ export type PuzzleGroupPalette = {
 	primary: string;
 	/** Lighter counterpart of `primary`, readable on dark backgrounds. */
 	accent: string;
+	/** `primary` in light mode and `accent` in dark mode. */
+	themedPrimary: string;
+	/** `tint` in light mode and a neutral fill in dark mode. */
+	themedHover: string;
 	/** The page theme whose pillar palette matches this group. */
 	theme: ArticleTheme;
 };
 
 /**
  * Single source of truth for the colour each Puzzles & games group takes.
- * Crosswords use `.300` as their main colour (`news[400]` is too bright for
- * the design), the other groups use `.400`. There is no `sport[550]`, so
- * logic puzzles use `sport[500]` as their dark mode accent.
+ * The values are in `paletteDeclarations.ts`. Crosswords use `.300` as their
+ * main colour (`news[400]` is too bright for the design), the other groups use
+ * `.400`. There is no `sport[550]`, so logic puzzles use `sport[500]` as their
+ * dark mode accent.
  */
 const puzzleGroupPalettes = {
 	crosswords: {
-		tint: palette.news[800],
-		primary: palette.news[300],
-		accent: palette.news[550],
+		tint: palette('--puzzles-crosswords-tint'),
+		primary: palette('--puzzles-crosswords-primary'),
+		accent: palette('--puzzles-crosswords-accent'),
+		themedPrimary: palette('--puzzles-crosswords-themed-primary'),
+		themedHover: palette('--puzzles-crosswords-themed-hover'),
 		theme: Pillar.News,
 	},
 	'word-games': {
-		tint: palette.opinion[800],
-		primary: palette.opinion[400],
-		accent: palette.opinion[550],
+		tint: palette('--puzzles-word-games-tint'),
+		primary: palette('--puzzles-word-games-primary'),
+		accent: palette('--puzzles-word-games-accent'),
+		themedPrimary: palette('--puzzles-word-games-themed-primary'),
+		themedHover: palette('--puzzles-word-games-themed-hover'),
 		theme: Pillar.Opinion,
 	},
 	'logic-puzzles': {
-		tint: palette.sport[800],
-		primary: palette.sport[400],
-		accent: palette.sport[500],
+		tint: palette('--puzzles-logic-puzzles-tint'),
+		primary: palette('--puzzles-logic-puzzles-primary'),
+		accent: palette('--puzzles-logic-puzzles-accent'),
+		themedPrimary: palette('--puzzles-logic-puzzles-themed-primary'),
+		themedHover: palette('--puzzles-logic-puzzles-themed-hover'),
 		theme: Pillar.Sport,
 	},
 	trivia: {
-		tint: palette.labs[700],
-		primary: palette.labs[200],
-		accent: palette.labs[400],
+		tint: palette('--puzzles-trivia-tint'),
+		primary: palette('--puzzles-trivia-primary'),
+		accent: palette('--puzzles-trivia-accent'),
+		themedPrimary: palette('--puzzles-trivia-themed-primary'),
+		themedHover: palette('--puzzles-trivia-themed-hover'),
 		theme: ArticleSpecial.Labs,
 	},
 } satisfies Record<PuzzleGroupKey, PuzzleGroupPalette>;

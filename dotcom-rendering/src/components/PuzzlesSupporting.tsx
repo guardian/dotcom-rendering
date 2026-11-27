@@ -4,13 +4,13 @@ import {
 	headlineBold24,
 	headlineBold28,
 	headlineMedium20,
-	palette,
 	space,
 	textSans12,
 	textSansBold14,
 } from '@guardian/source/foundations';
 import { LinkButton, SvgEye } from '@guardian/source/react-components';
 import { puzzlesContainerStyles } from '../lib/puzzlesContainerStyles';
+import { palette as themePalette } from '../palette';
 import type {
 	PuzzleContainer,
 	PuzzleItem,
@@ -37,12 +37,12 @@ type Props = {
 	supporting: PuzzlesSupportingContent;
 };
 
-const borderColour = `var(--puzzles-border-colour, ${palette.neutral[86]})`;
+const borderColour = themePalette('--puzzles-border-colour');
 
 const sectionStyles = css`
 	display: grid;
 	${puzzlesContainerStyles};
-	background: var(--puzzles-page-background, ${palette.neutral[100]});
+	background: ${themePalette('--puzzles-page-background')};
 
 	${from.leftCol} {
 		grid-template-columns: 170px minmax(0, 1fr);
@@ -59,7 +59,7 @@ const sectionTitleStyles = css`
 	padding: 6px 10px 12px;
 	border-top: 1px solid ${borderColour};
 	${headlineBold24};
-	color: var(--puzzles-headline-colour, ${palette.neutral[7]});
+	color: ${themePalette('--puzzles-headline-colour')};
 	line-height: 1;
 	overflow-wrap: break-word;
 
@@ -167,7 +167,7 @@ const usefulLinkStyles = css`
 	min-height: 44px;
 	padding: ${space[2]}px ${space[3]}px;
 	border-right: 1px solid ${borderColour};
-	color: var(--puzzles-text-colour, ${palette.neutral[7]});
+	color: ${themePalette('--puzzles-text-colour')};
 	text-decoration: none;
 	${headlineMedium20};
 
@@ -190,7 +190,7 @@ const usefulLinkStyles = css`
 	}
 
 	:focus-visible {
-		outline: 3px solid ${palette.brand[500]};
+		outline: 3px solid ${themePalette('--puzzles-focus-outline')};
 		outline-offset: -3px;
 	}
 `;
@@ -268,7 +268,7 @@ const popularGroupTitleStyles = css`
 	padding: ${space[2]}px ${space[3]}px;
 	border-bottom: 1px solid ${borderColour};
 	${textSansBold14};
-	color: var(--puzzles-headline-colour, ${palette.neutral[7]});
+	color: ${themePalette('--puzzles-headline-colour')};
 `;
 
 const popularListStyles = css`
@@ -298,7 +298,7 @@ const popularLinkStyles = css`
 	flex-direction: column;
 	justify-content: center;
 	padding: ${space[1]}px ${space[2]}px;
-	color: var(--puzzles-text-colour, ${palette.neutral[7]});
+	color: ${themePalette('--puzzles-text-colour')};
 	text-decoration: none;
 
 	:hover strong {
@@ -306,7 +306,7 @@ const popularLinkStyles = css`
 	}
 
 	:focus-visible {
-		outline: 3px solid ${palette.brand[500]};
+		outline: 3px solid ${themePalette('--puzzles-focus-outline')};
 		outline-offset: -3px;
 	}
 

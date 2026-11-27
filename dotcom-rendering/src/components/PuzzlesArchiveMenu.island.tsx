@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	palette,
 	space,
 	textSans14,
 	textSans15,
 	until,
 } from '@guardian/source/foundations';
 import { useEffect, useRef } from 'react';
+import { palette as themePalette } from '../palette';
 import type { PuzzleItem } from '../types/puzzlesPage';
 
 type Props = {
@@ -62,8 +62,8 @@ const summaryStyles = css`
 	gap: ${space[2]}px;
 	padding: 0;
 	border: 0;
-	background: var(--puzzles-page-background, ${palette.neutral[100]});
-	color: var(--puzzles-headline-colour, ${palette.neutral[7]});
+	background: ${themePalette('--puzzles-page-background')};
+	color: ${themePalette('--puzzles-headline-colour')};
 	cursor: pointer;
 	list-style: none;
 	${textSans14};
@@ -103,8 +103,8 @@ const menuStyles = css`
 	min-width: 209px;
 	margin: 0;
 	padding: 0;
-	border: 1px solid var(--puzzles-border-colour, ${palette.neutral[86]});
-	background: var(--puzzles-card-background, ${palette.neutral[100]});
+	border: 1px solid ${themePalette('--puzzles-border-colour')};
+	background: ${themePalette('--puzzles-menu-background')};
 	list-style: none;
 
 	/*
@@ -134,16 +134,15 @@ const linkStyles = css`
 	min-height: 45px;
 	align-items: flex-start;
 	padding: ${space[3]}px ${space[4]}px;
-	border-bottom: 1px solid
-		var(--puzzles-border-colour, ${palette.neutral[86]});
-	color: var(--puzzles-headline-colour, ${palette.neutral[0]});
+	border-bottom: 1px solid ${themePalette('--puzzles-border-colour')};
+	color: ${themePalette('--puzzles-menu-text')};
 	text-decoration: none;
 	${textSans15};
 	line-height: 1.3;
 
 	:hover,
 	:focus-visible {
-		background: ${palette.neutral[93]};
+		background: ${themePalette('--puzzles-menu-hover')};
 		text-decoration: underline;
 	}
 

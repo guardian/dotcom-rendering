@@ -1,10 +1,6 @@
 import { css } from '@emotion/react';
-import {
-	from,
-	headlineBold20,
-	palette as sourcePalette,
-	space,
-} from '@guardian/source/foundations';
+import { from, headlineBold20, space } from '@guardian/source/foundations';
+import { palette as themePalette } from '../palette';
 import type { PuzzleItem } from '../types/puzzlesPage';
 import { MorePuzzlesRows } from './MorePuzzlesCard';
 
@@ -63,7 +59,7 @@ const relatedRailHeading = css`
 			top: 0;
 			right: -10px;
 			bottom: 0;
-			border-right: 1px solid ${sourcePalette.neutral[86]};
+			border-right: 1px solid ${themePalette('--puzzles-rail-divider')};
 			content: '';
 			pointer-events: none;
 		}

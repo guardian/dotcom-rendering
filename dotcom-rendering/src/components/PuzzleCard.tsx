@@ -4,7 +4,6 @@ import {
 	from,
 	headlineBold20,
 	headlineBold24,
-	palette,
 	space,
 	textSans14,
 	until,
@@ -12,11 +11,15 @@ import {
 } from '@guardian/source/foundations';
 import { SvgCheckmark } from '@guardian/source/react-components';
 import { puzzleTypeForCard } from '../lib/puzzleCardProgress';
-import { getPuzzleGroupPalette } from '../lib/puzzleGroupPalette';
+import {
+	getPuzzleGroupPalette,
+	puzzleGroupForItemType,
+} from '../lib/puzzleGroupPalette';
 import {
 	IN_PROGRESS_BAR_PERCENTAGE,
 	showsInProgress,
 } from '../lib/puzzleProgress/inProgressDisplay';
+import { palette as themePalette } from '../palette';
 import type { PuzzleItem } from '../types/puzzlesPage';
 
 /**
@@ -63,32 +66,15 @@ export const externalProps = (url: string) =>
 		: {};
 
 const puzzleColours = (item: PuzzleItem) => {
-	switch (item.type) {
-		case 'crossword':
-			return { background: palette.news[800], title: palette.news[300] };
-		case 'sudoku':
-			return {
-				background: palette.sport[800],
-				title: palette.sport[400],
-			};
-		case 'wordiply':
-		case 'word-wheel':
-			return {
-				background: palette.opinion[800],
-				title: palette.opinion[400],
-			};
-		case 'film-reveal':
-		case 'on-the-ball':
-		case 'trivia': {
-			const { tint, primary } = getPuzzleGroupPalette('trivia');
-			return { background: tint, title: primary };
-		}
-		default:
-			return {
-				background: item.backgroundColour,
-				title: palette.neutral[7],
-			};
+	const group = puzzleGroupForItemType(item.type);
+	if (group) {
+		const { tint, primary } = getPuzzleGroupPalette(group);
+		return { background: tint, title: primary };
 	}
+	return {
+		background: item.backgroundColour,
+		title: themePalette('--puzzles-card-fallback-title'),
+	};
 };
 
 const cardStyles = (
@@ -107,7 +93,7 @@ const cardStyles = (
 		padding-right: 181px;
 	`}
 	box-sizing: border-box;
-	color: var(--puzzles-card-text-colour, ${palette.neutral[7]});
+	color: ${themePalette('--puzzles-card-text-colour')};
 	text-decoration: none;
 
 	${from.tablet} {
@@ -138,13 +124,14 @@ const cardStyles = (
 	}
 
 	:focus-visible {
-		outline: 3px solid ${palette.brand[500]};
+		outline: 3px solid ${themePalette('--puzzles-focus-outline')};
 		outline-offset: 2px;
 	}
 `;
 
 const cardColourStyles = (background: string | undefined) => {
-	const lightBackground = background ?? palette.neutral[100];
+	const lightBackground =
+		background ?? themePalette('--puzzles-card-fallback-background');
 	return css`
 		background-color: ${lightBackground};
 		background-color: var(--puzzles-card-background, ${lightBackground});
@@ -175,13 +162,13 @@ const hiddenCrosswordSuffixStyles = css`
 `;
 
 const cadenceStyles = css`
-	color: var(--puzzles-card-cadence-colour, ${palette.neutral[7]});
+	color: ${themePalette('--puzzles-card-cadence-colour')};
 	${textSans14};
 	line-height: 1.3;
 `;
 
 const setterStyles = css`
-	color: var(--puzzles-card-text-colour, ${palette.news[300]});
+	color: ${themePalette('--puzzles-card-setter-colour')};
 	${textSans14};
 	line-height: 1.3;
 `;
@@ -204,8 +191,8 @@ const playedStyles = css`
 		align-items: center;
 		justify-content: center;
 		border-radius: 50%;
-		background: ${palette.success[400]};
-		color: ${palette.neutral[100]};
+		background: ${themePalette('--puzzles-played-badge-background')};
+		color: ${themePalette('--puzzles-played-badge-icon')};
 	}
 	svg {
 		width: 11px;
@@ -397,8 +384,7 @@ export const rowsStyles = css`
 		top: calc(var(--puzzles-group-below) * -1);
 		right: 0;
 		left: 0;
-		border-top: 1px solid
-			var(--puzzles-border-colour, ${palette.neutral[86]});
+		border-top: 1px solid ${themePalette('--puzzles-border-colour')};
 		content: '';
 		pointer-events: none;
 	}
@@ -420,8 +406,7 @@ const cardGridStyles = (columns: number, tracks = columns) => css`
 		top: calc(var(--puzzles-row-below) * -1);
 		right: 0;
 		left: 0;
-		border-top: 1px solid
-			var(--puzzles-border-colour, ${palette.neutral[86]});
+		border-top: 1px solid ${themePalette('--puzzles-border-colour')};
 		content: '';
 		pointer-events: none;
 	}
@@ -432,8 +417,7 @@ const cardGridStyles = (columns: number, tracks = columns) => css`
 			top: 0;
 			bottom: 0;
 			left: calc(var(--puzzles-gap) / -2);
-			border-left: 1px solid
-				var(--puzzles-border-colour, ${palette.neutral[86]});
+			border-left: 1px solid ${themePalette('--puzzles-border-colour')};
 			content: '';
 			pointer-events: none;
 		}

@@ -1,5 +1,7 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import { paletteDeclarations } from '../paletteDeclarations';
 import { UnlockPremiumPuzzlesModal } from './UnlockPremiumPuzzlesModal';
 
 const renderModal = (returnUrl?: string, intcmp?: string) =>
@@ -293,16 +295,40 @@ describe('UnlockPremiumPuzzlesModal', () => {
 				.map((rule) => rule.cssText)
 				.join('\n');
 
-		it('uses the light colours by default', () => {
+		it('takes its colours from the app palette', () => {
 			renderModal();
 			const css = renderedCss();
 
-			expect(css).toContain('--unlock-modal-background: #FFFFFF');
-			expect(css).toContain('--unlock-modal-title: #052962');
-			expect(css).toContain('--unlock-modal-tick: #0077B6');
+			expect(css).toContain('var(--unlock-modal-background)');
+			expect(css).toContain('var(--unlock-modal-title)');
+			expect(css).toContain('var(--unlock-modal-tick)');
 		});
 
-		it('uses the dark colours from the design when dark mode is available', () => {
+		it.each([
+			['--unlock-modal-background', '#FFFFFF', '#333333'],
+			['--unlock-modal-title', '#052962', '#F6F6F6'],
+			['--unlock-modal-text', '#000000', '#F6F6F6'],
+			['--unlock-modal-tick', '#0077B6', '#C1D8FC'],
+			['--unlock-modal-link', '#0077B6', '#C1D8FC'],
+		])(
+			'declares %s with the colours from the design',
+			(name, light, dark) => {
+				const format = {
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Crossword,
+					theme: Pillar.News,
+				};
+
+				expect(paletteDeclarations(format, 'light')).toContain(
+					`${name}: ${light};`,
+				);
+				expect(paletteDeclarations(format, 'dark')).toContain(
+					`${name}: ${dark};`,
+				);
+			},
+		);
+
+		it('styles the archive button hover when dark mode is available', () => {
 			render(
 				<UnlockPremiumPuzzlesModal
 					idUrl="https://profile.theguardian.com"
@@ -313,11 +339,9 @@ describe('UnlockPremiumPuzzlesModal', () => {
 			const css = renderedCss();
 
 			expect(css).toContain('prefers-color-scheme: dark');
-			expect(css).toContain('--unlock-modal-background: #333333');
-			expect(css).toContain('--unlock-modal-title: #F6F6F6');
-			expect(css).toContain('--unlock-modal-text: #F6F6F6');
-			expect(css).toContain('--unlock-modal-tick: #C1D8FC');
-			expect(css).toContain('--unlock-modal-link: #C1D8FC');
+			expect(css).toContain(
+				'var(--unlock-modal-archive-button-hover-dark)',
+			);
 		});
 	});
 });

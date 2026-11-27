@@ -409,7 +409,7 @@ describe('PuzzlesArchiveCalendar', () => {
 		expect(playedIcon?.querySelectorAll('path')).toHaveLength(3);
 		expect(playedIcon?.querySelectorAll('path')[2]).toHaveAttribute(
 			'fill',
-			'#22874D',
+			'var(--puzzles-completed-icon)',
 		);
 	});
 
@@ -1017,7 +1017,7 @@ describe('PuzzlesArchiveCalendar', () => {
 			expect(completedIcon).toHaveAttribute('viewBox', '0 0 18 15');
 			expect(completedIcon?.querySelector('path')).toHaveAttribute(
 				'fill',
-				'#22874D',
+				'var(--puzzles-completed-icon)',
 			);
 			const recentCard = screen.getByRole('link', {
 				name: /Latest Easy sudoku/,
@@ -1842,7 +1842,10 @@ describe('PuzzlesArchiveCalendar in-progress days', () => {
 			expect(icon).toHaveAttribute('height', '16');
 			expect(icon?.querySelectorAll('path')).toHaveLength(8);
 			icon?.querySelectorAll('path').forEach((path) => {
-				expect(path).toHaveAttribute('fill', '#C74600');
+				expect(path).toHaveAttribute(
+					'fill',
+					'var(--puzzles-in-progress-icon)',
+				);
 			});
 			expect(day.querySelector('.completed-icon')).toBeNull();
 		},

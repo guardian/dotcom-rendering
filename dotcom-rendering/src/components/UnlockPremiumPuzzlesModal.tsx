@@ -1,7 +1,6 @@
 import { css, type SerializedStyles } from '@emotion/react';
 import {
 	headlineMedium24,
-	palette as sourcePalette,
 	space,
 	textEgyptian17,
 	textEgyptianBold17,
@@ -31,6 +30,7 @@ import {
 	getPremiumPuzzlesSignInUrl,
 	isSafeInternalPath,
 } from '../lib/premiumPuzzlesUrls';
+import { palette as themePalette } from '../palette';
 
 /**
  * The hero illustration, in its final, already cropped version, served by the
@@ -48,36 +48,19 @@ const HERO_IMAGE_HEIGHT = 207;
 const ARCHIVE_BUTTON_CLASS = 'unlock-modal-archive-button';
 
 /**
- * The modal's colours, as custom properties on the modal itself. The values
- * set here are the light ones. When dark mode is available they are replaced
- * in dark mode, the same way `puzzlesPageTheme` does it for the Puzzles pages
- * (so the modal follows the page, including a page forced to light).
+ * The modal's colours (`--unlock-modal-*`) are in `paletteDeclarations.ts`.
+ * The archive button's hover only differs from the button's own theme in dark
+ * mode, so it is set here, gated the same way as the page's dark palette.
  */
 const modalTheme = (darkModeAvailable: boolean) => css`
-	--unlock-modal-background: ${sourcePalette.neutral[100]};
-	--unlock-modal-title: ${sourcePalette.brand[400]};
-	--unlock-modal-text: ${sourcePalette.neutral[0]};
-	--unlock-modal-footnote: ${sourcePalette.neutral[0]};
-	--unlock-modal-tick: ${sourcePalette.brand[500]};
-	--unlock-modal-link: ${sourcePalette.brand[500]};
-	--unlock-modal-divider: ${sourcePalette.neutral[86]};
-	--unlock-modal-secondary: ${sourcePalette.brand[400]};
-
 	${darkModeAvailable &&
 	css`
 		@media (prefers-color-scheme: dark) {
 			html:not([data-color-scheme='light']) & {
-				--unlock-modal-background: ${sourcePalette.neutral[20]};
-				--unlock-modal-title: ${sourcePalette.neutral[97]};
-				--unlock-modal-text: ${sourcePalette.neutral[97]};
-				--unlock-modal-footnote: ${sourcePalette.neutral[86]};
-				--unlock-modal-tick: ${sourcePalette.brand[800]};
-				--unlock-modal-link: ${sourcePalette.brand[800]};
-				--unlock-modal-divider: ${sourcePalette.neutral[46]};
-				--unlock-modal-secondary: ${sourcePalette.neutral[97]};
-
 				.${ARCHIVE_BUTTON_CLASS}:hover {
-					background-color: ${sourcePalette.neutral[10]};
+					background-color: ${themePalette(
+						'--unlock-modal-archive-button-hover-dark',
+					)};
 				}
 			}
 		}
@@ -119,7 +102,7 @@ const overlayStyles = css`
 	width: 100%;
 	height: 100%;
 	opacity: 0.5;
-	background-color: ${sourcePalette.neutral[0]};
+	background-color: ${themePalette('--unlock-modal-overlay')};
 `;
 
 const modalStyles = css`
@@ -132,7 +115,7 @@ const modalStyles = css`
 	padding-left: ${space[4]}px;
 	padding-right: ${space[4]}px;
 	padding-bottom: ${space[6]}px;
-	background-color: var(--unlock-modal-background);
+	background-color: ${themePalette('--unlock-modal-background')};
 	border-radius: ${space[3]}px;
 
 	${until.phablet} {
@@ -181,7 +164,7 @@ const headerStyles = css`
 	display: flex;
 	justify-content: flex-end;
 	/* The logo is drawn in the current colour */
-	color: var(--unlock-modal-text);
+	color: ${themePalette('--unlock-modal-text')};
 `;
 
 /**
@@ -194,7 +177,7 @@ const inStickySheet = `div:not([${MODAL_FLOW_ATTRIBUTE}='true']) > div > div > &
 
 const dividerStyles = css`
 	border: 0;
-	border-top: 1px solid var(--unlock-modal-divider);
+	border-top: 1px solid ${themePalette('--unlock-modal-divider')};
 	margin-top: ${space[4]}px;
 	margin-bottom: ${space[4]}px;
 	width: 100%;
@@ -235,7 +218,7 @@ const heroStyles = css`
 
 const titleStyles = css`
 	${headlineMedium24};
-	color: var(--unlock-modal-title);
+	color: ${themePalette('--unlock-modal-title')};
 	font-variant-numeric: lining-nums proportional-nums;
 	margin: ${space[4]}px 0;
 
@@ -250,14 +233,14 @@ const titleStyles = css`
 
 const subtitleStyles = css`
 	${textEgyptianBold17};
-	color: var(--unlock-modal-text);
+	color: ${themePalette('--unlock-modal-text')};
 	margin-top: ${space[2]}px;
 	margin-bottom: ${space[3]}px;
 `;
 
 const benefitsStyles = css`
 	${textEgyptian17};
-	color: var(--unlock-modal-text);
+	color: ${themePalette('--unlock-modal-text')};
 	list-style: none;
 	margin: 0 0 ${space[2]}px;
 	padding: 0;
@@ -282,7 +265,7 @@ const benefitsStyles = css`
 
 	svg {
 		flex: none;
-		fill: var(--unlock-modal-tick);
+		fill: ${themePalette('--unlock-modal-tick')};
 	}
 `;
 
@@ -309,7 +292,8 @@ const footerStyles = css`
 		   more to scroll to (see MODAL_MORE_BELOW_ATTRIBUTE). Otherwise it would
 		   suggest there is content that is not there. */
 		[${MODAL_MORE_BELOW_ATTRIBUTE}='true'] + & {
-			box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.15);
+			box-shadow: 0 -4px 8px
+				${themePalette('--unlock-modal-footer-shadow')};
 		}
 	}
 `;
@@ -334,18 +318,18 @@ const subscribeButtonStyles = css`
 
 const archiveButtonStyles = css`
 	border-radius: 40px;
-	border: 2px solid var(--unlock-modal-secondary);
-	color: var(--unlock-modal-secondary);
+	border: 2px solid ${themePalette('--unlock-modal-secondary')};
+	color: ${themePalette('--unlock-modal-secondary')};
 `;
 
 const footnoteStyles = css`
 	${textSans14};
-	color: var(--unlock-modal-footnote);
+	color: ${themePalette('--unlock-modal-footnote')};
 	text-align: center;
 
 	a {
 		${textSansBold14};
-		color: var(--unlock-modal-link);
+		color: ${themePalette('--unlock-modal-link')};
 		text-decoration-line: underline;
 		text-decoration-style: solid;
 		text-decoration-skip-ink: none;

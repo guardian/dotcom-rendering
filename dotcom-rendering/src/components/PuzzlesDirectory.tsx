@@ -3,11 +3,11 @@ import {
 	from,
 	headlineBold24,
 	headlineBold28,
-	palette,
 	space,
 } from '@guardian/source/foundations';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { puzzlesContainerStyles } from '../lib/puzzlesContainerStyles';
+import { palette as themePalette } from '../palette';
 import type { Branding } from '../types/branding';
 import type { PuzzleContainer, PuzzlesLayoutType } from '../types/puzzlesPage';
 import { AdSlot } from './AdSlot.web';
@@ -34,14 +34,13 @@ const sectionStyles = (hideTopRule: boolean) => css`
 	position: relative;
 	display: grid;
 	${puzzlesContainerStyles};
-	background: var(--puzzles-page-background, ${palette.neutral[100]});
+	background: ${themePalette('--puzzles-page-background')};
 	::before {
 		position: absolute;
 		top: 0;
 		left: 50%;
 		width: 100vw;
-		border-top: 2px solid
-			var(--puzzles-headline-colour, ${palette.neutral[7]});
+		border-top: 2px solid ${themePalette('--puzzles-headline-colour')};
 		content: '';
 		transform: translateX(-50%);
 	}
@@ -106,7 +105,7 @@ const headingStyles = css`
 	min-width: 0;
 	margin: 0;
 	${headlineBold24};
-	color: var(--puzzles-headline-colour, ${palette.neutral[7]});
+	color: ${themePalette('--puzzles-headline-colour')};
 	line-height: 1;
 	overflow-wrap: break-word;
 
@@ -125,8 +124,7 @@ const headingColumnStyles = css`
 			top: var(--puzzles-content-top);
 			right: 0;
 			bottom: var(--puzzles-content-bottom);
-			border-right: 1px solid
-				var(--puzzles-border-colour, ${palette.neutral[86]});
+			border-right: 1px solid ${themePalette('--puzzles-border-colour')};
 			content: '';
 			pointer-events: none;
 		}
@@ -156,8 +154,7 @@ const contentStyles = css`
 			top: 0;
 			right: 10px;
 			left: 10px;
-			border-top: 1px solid
-				var(--puzzles-border-colour, ${palette.neutral[86]});
+			border-top: 1px solid ${themePalette('--puzzles-border-colour')};
 			content: '';
 			pointer-events: none;
 		}
@@ -200,8 +197,7 @@ const nestedStyles = (span: number) => css`
 		top: calc(var(--puzzles-gap) / -2);
 		right: 0;
 		left: 0;
-		border-top: 1px solid
-			var(--puzzles-border-colour, ${palette.neutral[86]});
+		border-top: 1px solid ${themePalette('--puzzles-border-colour')};
 		content: '';
 		pointer-events: none;
 	}
@@ -216,11 +212,11 @@ const nestedStyles = (span: number) => css`
 						left: calc(var(--puzzles-gap) / -2);
 						border-top: 0;
 						border-left: 1px solid
-							var(--puzzles-border-colour, ${palette.neutral[86]});
+							${themePalette('--puzzles-border-colour')};
 					`
 				: css`
 						border-top: 1px solid
-							var(--puzzles-border-colour, ${palette.neutral[86]});
+							${themePalette('--puzzles-border-colour')};
 					`}
 		}
 	}
@@ -229,7 +225,7 @@ const nestedStyles = (span: number) => css`
 const adStyles = css`
 	width: 100%;
 	overflow: hidden;
-	background: ${palette.neutral[97]};
+	background: ${themePalette('--puzzles-ad-background')};
 `;
 
 const Archive = ({
