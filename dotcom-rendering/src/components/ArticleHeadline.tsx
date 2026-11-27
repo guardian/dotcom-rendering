@@ -57,6 +57,7 @@ const topPadding = css`
 const getFontWeightByDesign = (
 	design: ArticleDesign,
 ): 'light' | 'medium' | 'bold' => {
+	console.log('design', design);
 	switch (design) {
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Comment:
@@ -68,17 +69,19 @@ const getFontWeightByDesign = (
 		case ArticleDesign.Recipe:
 		case ArticleDesign.Interview:
 		case ArticleDesign.Gallery:
+		case ArticleDesign.Video:
 			return 'bold';
 		default:
 			return 'medium';
 	}
 };
 
-const isNewsNotCommentOrRecipeOrGallery = (format: ArticleFormat) =>
+const isNewsNotCommentOrRecipeOrGalleryOrVideo = (format: ArticleFormat) =>
 	format.theme === Pillar.News &&
 	format.design !== ArticleDesign.Comment &&
 	format.design !== ArticleDesign.Recipe &&
-	format.design !== ArticleDesign.Gallery;
+	format.design !== ArticleDesign.Gallery &&
+	format.design !== ArticleDesign.Video;
 
 const isImmersiveNonNews = (format: ArticleFormat) =>
 	format.display === ArticleDisplay.Immersive && format.theme !== Pillar.News;
@@ -86,11 +89,12 @@ const isImmersiveNonNews = (format: ArticleFormat) =>
 const decideHeadlineFont = (format: ArticleFormat) => {
 	const size =
 		format.display === ArticleDisplay.Immersive ||
-		format.design === ArticleDesign.Gallery
+		format.design === ArticleDesign.Gallery ||
+		format.design === ArticleDesign.Video
 			? 50
 			: 34;
 
-	if (isNewsNotCommentOrRecipeOrGallery(format)) {
+	if (isNewsNotCommentOrRecipeOrGalleryOrVideo(format)) {
 		return size === 50 ? headlineMedium50 : headlineMedium34;
 	}
 
@@ -116,7 +120,7 @@ const decideMobileHeadlineFont = (format: ArticleFormat) => {
 			? 34
 			: 28;
 
-	if (isNewsNotCommentOrRecipeOrGallery(format)) {
+	if (isNewsNotCommentOrRecipeOrGalleryOrVideo(format)) {
 		return size === 34 ? headlineMedium34 : headlineMedium28;
 	}
 
@@ -341,9 +345,12 @@ const WithAgeWarning = ({
 	children: React.ReactNode;
 	snapToInverted?: boolean;
 }) => {
+	const isDocumentariesSeries = tags.some(
+		(tag) => tag.id === 'news/series/the-guardian-documentary',
+	);
 	const age = getAgeWarning(tags, webPublicationDateDeprecated);
 
-	if (age) {
+	if (age && !isDocumentariesSeries) {
 		return (
 			<>
 				<div

@@ -116,49 +116,43 @@ export const Contributor = ({
 	layoutType,
 }: Props) => {
 	const isImmersiveGrid = layoutType?.startsWith('immersive') ?? false;
-	const shouldHide =
-		format.design === ArticleDesign.Interview &&
-		// Hide the contributor for interviews unless it's in the new immersive layout
-		!isImmersiveGrid;
 	return (
 		<address
 			data-component="meta-byline"
 			data-link-name="byline"
 			data-gu-name="byline"
 		>
-			{!shouldHide && (
-				<div
-					className={
-						format.design === ArticleDesign.Interactive
-							? interactiveLegacyClasses.byline
-							: ''
-					}
-					css={[
-						bylineStyles(format),
-						format.theme === ArticleSpecial.Labs &&
-							labsBylineStyles(format.design),
-						format.design === ArticleDesign.LiveBlog &&
-							standfirstColourBelowDesktop,
-						isImmersiveGrid &&
-							getSoleContributor(tags, byline) &&
-							css`
-								${from.leftCol} {
-									> a + span {
-										display: block;
-									}
+			<div
+				className={
+					format.design === ArticleDesign.Interactive
+						? interactiveLegacyClasses.byline
+						: ''
+				}
+				css={[
+					bylineStyles(format),
+					format.theme === ArticleSpecial.Labs &&
+						labsBylineStyles(format.design),
+					format.design === ArticleDesign.LiveBlog &&
+						standfirstColourBelowDesktop,
+					isImmersiveGrid &&
+						getSoleContributor(tags, byline) &&
+						css`
+							${from.leftCol} {
+								> a + span {
+									display: block;
 								}
-							`,
-					]}
-				>
-					<BylineLink
-						byline={byline}
-						tags={tags}
-						source={source}
-						format={format}
-						isHeadline={false}
-					/>
-				</div>
-			)}
+							}
+						`,
+				]}
+			>
+				<BylineLink
+					byline={byline}
+					tags={tags}
+					source={source}
+					format={format}
+					isHeadline={false}
+				/>
+			</div>
 		</address>
 	);
 };

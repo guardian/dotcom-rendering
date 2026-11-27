@@ -145,6 +145,7 @@ export const ArticleGridHeadline = ({
 		isImmersivePortrait,
 		isImmersiveWeekendRead,
 		isInteractiveTopHat,
+		isDocumentary,
 		layoutType,
 	} = layout;
 	const hasImmersivePortraitTitleRule =
@@ -152,11 +153,19 @@ export const ArticleGridHeadline = ({
 	const displayAvatarUrl = avatarUrl != null;
 	const isPictureOrComment =
 		layoutType === 'picture' || layoutType === 'comment';
+
+	// Remove '- documentary' and give title case when isDocumentary
+	const headlineString = isDocumentary
+		? article.headline
+				.replace('- documentary', '')
+				.replace(/\b\w/g, (c) => c.toUpperCase())
+		: article.headline;
+
 	const headline = (
 		<ArticleHeadline
 			format={format}
 			layoutType={layoutType}
-			headlineString={article.headline}
+			headlineString={headlineString}
 			tags={article.tags}
 			byline={article.byline}
 			webPublicationDateDeprecated={article.webPublicationDateDeprecated}
@@ -193,6 +202,10 @@ export const ArticleGridHeadline = ({
 					css`
 						${topHatFurnitureBackgroundStyles}
 						padding-top: ${space[1]}px;
+					`,
+				isDocumentary &&
+					css`
+						z-index: ${getZIndex('articleHeadline')};
 					`,
 			]}
 		>

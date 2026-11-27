@@ -234,9 +234,16 @@ export const OnwardsUpper = ({
 	const tagToFilterBy = firstPopularTag(keywordIds, isPaidContent);
 
 	// In this context, Blog tags are treated the same as Series tags
-	const seriesTag = tags.find(
-		({ type }) => type === 'Series' || type === 'Blog',
-	);
+	// Prioritise "news/series/the-guardian-documentary" if there are multiple series tags
+	const documentariesSeriesTag = 'news/series/the-guardian-documentary';
+	const seriesTag =
+		tags.find(
+			({ type, id }) =>
+				(type === 'Series' || type === 'Blog') &&
+				id === documentariesSeriesTag,
+		) ?? tags.find(({ type }) => type === 'Series' || type === 'Blog');
+
+	const isDocumentariesSeries = seriesTag?.id === documentariesSeriesTag;
 
 	let url: string | undefined;
 	let onwardsSource: OnwardsSource = 'unknown-source';
@@ -343,6 +350,7 @@ export const OnwardsUpper = ({
 						isAdFreeUser={isAdFreeUser}
 						containerPosition="first"
 						webURL={webURL}
+						isDocumentariesSeries={isDocumentariesSeries}
 					/>
 				</Section>
 			)}
@@ -367,6 +375,7 @@ export const OnwardsUpper = ({
 							hasOnwardsContainer ? 'second' : 'first'
 						}
 						webURL={webURL}
+						isDocumentariesSeries={isDocumentariesSeries}
 					/>
 				</Section>
 			)}
