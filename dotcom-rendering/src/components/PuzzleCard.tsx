@@ -21,8 +21,11 @@ import {
 	showsInProgress,
 } from '../lib/puzzleProgress/inProgressDisplay';
 import {
-	PUZZLES_PROGRESS_RADIUS,
+	PUZZLES_CONTENT_MAX_WIDTH,
+	PUZZLES_PLAYED_BADGE,
+	PUZZLES_PROGRESS_BAR,
 	puzzlesFocusOutline,
+	puzzlesProgressTrackBackground,
 } from '../lib/puzzlesStyles';
 import { palette as themePalette } from '../palette';
 import type { PuzzleItem } from '../types/puzzlesPage';
@@ -82,6 +85,12 @@ const puzzleColours = (item: PuzzleItem) => {
 	};
 };
 
+/** Size of the card image. The card is as tall as the image. */
+const IMAGE = { width: 181, height: 145 } as const;
+const DESKTOP_IMAGE = { width: 220, height: 176 } as const;
+const COMPACT_MIN_HEIGHT = 104;
+const FEATURED_HEIGHT = 368;
+
 const cardStyles = (
 	variant: PuzzleItem['cardVariant'],
 	hasImage: boolean,
@@ -91,11 +100,11 @@ const cardStyles = (
 	display: block;
 	width: 100%;
 	min-width: 0;
-	min-height: ${variant === 'compact' ? 104 : 145}px;
-	height: ${variant === 'compact' ? 'auto' : '145px'};
+	min-height: ${variant === 'compact' ? COMPACT_MIN_HEIGHT : IMAGE.height}px;
+	height: ${variant === 'compact' ? 'auto' : `${IMAGE.height}px`};
 	${hasImage &&
 	css`
-		padding-right: 181px;
+		padding-right: ${IMAGE.width}px;
 	`}
 	box-sizing: border-box;
 	color: ${themePalette('--puzzles-card-text-colour')};
@@ -107,19 +116,21 @@ const cardStyles = (
 
 	${from.desktop} {
 		max-width: ${variant === 'compact' ? 'none' : '460px'};
-		min-height: ${variant === 'compact' ? 104 : 176}px;
-		height: ${variant === 'compact' ? 'auto' : '176px'};
+		min-height: ${variant === 'compact'
+			? COMPACT_MIN_HEIGHT
+			: DESKTOP_IMAGE.height}px;
+		height: ${variant === 'compact' ? 'auto' : `${DESKTOP_IMAGE.height}px`};
 		${hasImage &&
 		css`
-			padding-right: 220px;
+			padding-right: ${DESKTOP_IMAGE.width}px;
 		`}
 	}
 
 	${isFeatured &&
 	css`
 		${from.leftCol} {
-			min-height: 368px;
-			height: 368px;
+			min-height: ${FEATURED_HEIGHT}px;
+			height: ${FEATURED_HEIGHT}px;
 			padding-right: 0;
 		}
 	`}
@@ -187,8 +198,8 @@ const playedStyles = css`
 	line-height: 1;
 	.completed-icon {
 		display: inline-flex;
-		width: 14px;
-		height: 14px;
+		width: ${PUZZLES_PLAYED_BADGE.size}px;
+		height: ${PUZZLES_PLAYED_BADGE.size}px;
 		align-items: center;
 		justify-content: center;
 		border-radius: 50%;
@@ -196,8 +207,8 @@ const playedStyles = css`
 		color: ${themePalette('--puzzles-played-badge-icon')};
 	}
 	svg {
-		width: 11px;
-		height: 11px;
+		width: ${PUZZLES_PLAYED_BADGE.icon}px;
+		height: ${PUZZLES_PLAYED_BADGE.icon}px;
 		fill: currentColor;
 	}
 `;
@@ -208,10 +219,10 @@ const inProgressStyles = css`
 `;
 
 const progressTrackStyles = css`
-	width: 80px;
-	height: 3px;
-	border-radius: ${PUZZLES_PROGRESS_RADIUS}px;
-	background: color-mix(in srgb, currentColor 20%, transparent);
+	width: ${PUZZLES_PROGRESS_BAR.width}px;
+	height: ${PUZZLES_PROGRESS_BAR.height}px;
+	border-radius: ${PUZZLES_PROGRESS_BAR.radius}px;
+	background: ${puzzlesProgressTrackBackground};
 	> span {
 		display: block;
 		height: 100%;
@@ -224,13 +235,13 @@ const cardImageStyles = (isFeatured: boolean) => css`
 	position: absolute;
 	right: 0;
 	bottom: 0;
-	width: 181px;
-	height: 145px;
+	width: ${IMAGE.width}px;
+	height: ${IMAGE.height}px;
 	min-height: 0;
 	object-fit: contain;
 	${from.desktop} {
-		width: 220px;
-		height: 176px;
+		width: ${DESKTOP_IMAGE.width}px;
+		height: ${DESKTOP_IMAGE.height}px;
 	}
 
 	${isFeatured &&
@@ -486,7 +497,7 @@ export const rowStyles = (
 			--puzzles-row-below: ${tabletSeparator[1]}px;
 			column-gap: ${space[5]}px;
 			row-gap: ${tabletSeparator[0] + tabletSeparator[1]}px;
-			max-width: 700px;
+			max-width: ${PUZZLES_CONTENT_MAX_WIDTH.tablet}px;
 		}
 		${variant === 'compact' &&
 		css`
@@ -496,7 +507,7 @@ export const rowStyles = (
 		`}
 		${from.desktop} {
 			${cardGridStyles(desktopColumns)};
-			max-width: 940px;
+			max-width: ${PUZZLES_CONTENT_MAX_WIDTH.desktop}px;
 		}
 	`;
 };

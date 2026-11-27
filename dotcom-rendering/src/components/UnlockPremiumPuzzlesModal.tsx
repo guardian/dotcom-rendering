@@ -67,6 +67,9 @@ const modalTheme = (darkModeAvailable: boolean) => css`
 	`}
 `;
 
+/** Makes the buttons pill shaped. */
+const BUTTON_RADIUS = 40;
+
 const blockerStyles = css`
 	position: absolute;
 	top: 0;
@@ -313,11 +316,11 @@ const buttonsStyles = css`
 `;
 
 const subscribeButtonStyles = css`
-	border-radius: 40px;
+	border-radius: ${BUTTON_RADIUS}px;
 `;
 
 const archiveButtonStyles = css`
-	border-radius: 40px;
+	border-radius: ${BUTTON_RADIUS}px;
 	border: 2px solid ${themePalette('--unlock-modal-secondary')};
 	color: ${themePalette('--unlock-modal-secondary')};
 `;

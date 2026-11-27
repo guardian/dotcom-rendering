@@ -11,8 +11,11 @@ import { puzzlesContainerStyles } from '../lib/puzzlesContainerStyles';
 import {
 	PUZZLES_BORDERED_INSET,
 	PUZZLES_COLUMN_INSET,
+	PUZZLES_CONTENT_MAX_WIDTH,
 	PUZZLES_EDGE_INSET,
 	PUZZLES_ROW_GAP,
+	PUZZLES_SECTION_TITLE_TOP,
+	PUZZLES_TITLE_COLUMN,
 } from '../lib/puzzlesStyles';
 import { palette as themePalette } from '../palette';
 import type { Branding } from '../types/branding';
@@ -60,7 +63,7 @@ const sectionStyles = (hideTopRule: boolean) => css`
 
 	${from.leftCol} {
 		--puzzles-content-top: ${space[2]}px;
-		grid-template-columns: 170px minmax(0, 1fr);
+		grid-template-columns: ${PUZZLES_TITLE_COLUMN.leftCol}px minmax(0, 1fr);
 	}
 
 	${from.desktop} {
@@ -75,13 +78,14 @@ const sectionStyles = (hideTopRule: boolean) => css`
 	}
 
 	${from.wide} {
-		grid-template-columns: 250px minmax(0, 1fr);
+		grid-template-columns: ${PUZZLES_TITLE_COLUMN.wide}px minmax(0, 1fr);
 	}
 `;
 
 const titleStyles = css`
 	min-width: 0;
-	padding: 6px ${PUZZLES_EDGE_INSET}px ${space[3]}px;
+	padding: ${PUZZLES_SECTION_TITLE_TOP}px ${PUZZLES_EDGE_INSET}px
+		${space[3]}px;
 	${from.mobileMedium} {
 		padding-right: ${space[5]}px;
 		padding-left: ${space[5]}px;
@@ -190,10 +194,10 @@ const nestedGridStyles = css`
 		column-gap: ${space[5]}px;
 		row-gap: ${PUZZLES_ROW_GAP}px;
 		--puzzles-gap: ${space[5]}px;
-		max-width: 700px;
+		max-width: ${PUZZLES_CONTENT_MAX_WIDTH.tablet}px;
 	}
 	${from.desktop} {
-		max-width: 940px;
+		max-width: ${PUZZLES_CONTENT_MAX_WIDTH.desktop}px;
 	}
 `;
 

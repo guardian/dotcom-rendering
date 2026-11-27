@@ -27,7 +27,12 @@ import {
 	IN_PROGRESS_BAR_PERCENTAGE,
 	showsInProgress,
 } from '../lib/puzzleProgress/inProgressDisplay';
-import { PUZZLES_PROGRESS_RADIUS } from '../lib/puzzlesStyles';
+import {
+	PUZZLES_LEFT_COLUMN,
+	PUZZLES_PLAYED_BADGE,
+	PUZZLES_PROGRESS_BAR,
+	puzzlesProgressTrackBackground,
+} from '../lib/puzzlesStyles';
 import { palette as themePalette } from '../palette';
 import type { PuzzlesArchive, PuzzlesArchiveItem } from '../types/puzzlesPage';
 
@@ -496,10 +501,10 @@ const recentStyles = css`
 	}
 	.progress-track {
 		display: block;
-		width: 80px;
-		height: 3px;
-		border-radius: ${PUZZLES_PROGRESS_RADIUS}px;
-		background: color-mix(in srgb, currentColor 20%, transparent);
+		width: ${PUZZLES_PROGRESS_BAR.width}px;
+		height: ${PUZZLES_PROGRESS_BAR.height}px;
+		border-radius: ${PUZZLES_PROGRESS_BAR.radius}px;
+		background: ${puzzlesProgressTrackBackground};
 		span {
 			display: block;
 			height: 100%;
@@ -509,16 +514,16 @@ const recentStyles = css`
 	}
 	.completed-icon {
 		display: inline-flex;
-		width: 14px;
-		height: 14px;
+		width: ${PUZZLES_PLAYED_BADGE.size}px;
+		height: ${PUZZLES_PLAYED_BADGE.size}px;
 		align-items: center;
 		justify-content: center;
 		border-radius: 50%;
 		background: ${themePalette('--puzzles-played-badge-background')};
 		color: ${themePalette('--puzzles-played-badge-icon')};
 		svg {
-			width: 11px;
-			height: 11px;
+			width: ${PUZZLES_PLAYED_BADGE.icon}px;
+			height: ${PUZZLES_PLAYED_BADGE.icon}px;
 			fill: currentColor;
 		}
 	}
@@ -802,13 +807,13 @@ const legendStyles = css`
 	${from.leftCol} {
 		position: absolute;
 		bottom: 0;
-		left: -160px;
+		left: -${PUZZLES_LEFT_COLUMN.leftCol + space[5]}px;
 		margin-top: 0;
 		flex-direction: column;
 		gap: ${space[1]}px;
 	}
 	${from.wide} {
-		left: -240px;
+		left: -${PUZZLES_LEFT_COLUMN.wide + space[5]}px;
 	}
 `;
 
@@ -844,10 +849,10 @@ const subscriberMessageStyles = css`
 	margin: 0;
 	flex-basis: 100%;
 	${from.leftCol} {
-		max-width: 140px;
+		max-width: ${PUZZLES_LEFT_COLUMN.leftCol}px;
 	}
 	${from.wide} {
-		max-width: 220px;
+		max-width: ${PUZZLES_LEFT_COLUMN.wide}px;
 	}
 `;
 

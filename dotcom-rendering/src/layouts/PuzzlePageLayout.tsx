@@ -34,6 +34,7 @@ import type { PuzzleActionContext } from '../lib/puzzleActionTracking';
 import { formatPuzzleDate } from '../lib/puzzleDate';
 import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
 import { isPuzzlesHubV3Enabled } from '../lib/puzzlesHubVersionExperiment';
+import { PUZZLES_LEFT_COLUMN } from '../lib/puzzlesStyles';
 import {
 	getPuzzlesSubNavLinks,
 	PUZZLES_SUBNAV_PARENT,
@@ -237,8 +238,8 @@ const PuzzleGrid = ({ children }: { children: React.ReactNode }) => (
 				'body';
 
 			${from.leftCol} {
-				grid-column-gap: 20px;
-				grid-template-columns: 140px 1fr;
+				grid-column-gap: ${space[5]}px;
+				grid-template-columns: ${PUZZLES_LEFT_COLUMN.leftCol}px 1fr;
 				grid-template-areas:
 					'title  headline    '
 					'meta   standfirst  '
@@ -247,7 +248,7 @@ const PuzzleGrid = ({ children }: { children: React.ReactNode }) => (
 			}
 
 			${from.wide} {
-				grid-template-columns: 220px 1fr 300px;
+				grid-template-columns: ${PUZZLES_LEFT_COLUMN.wide}px 1fr 300px;
 				grid-template-areas:
 					'title  headline      .'
 					'meta   standfirst    .'

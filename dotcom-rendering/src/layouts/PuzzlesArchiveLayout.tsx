@@ -20,6 +20,7 @@ import { ArticleDisplay } from '../lib/articleFormat';
 import { center } from '../lib/center';
 import { isPuzzlesHubAvailable } from '../lib/puzzlesHubAccess';
 import { isPuzzlesHubV3Enabled } from '../lib/puzzlesHubVersionExperiment';
+import { PUZZLES_LEFT_COLUMN } from '../lib/puzzlesStyles';
 import {
 	getPuzzlesSubNavLinks,
 	PUZZLES_SUBNAV_PARENT,
@@ -29,6 +30,11 @@ import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { FEPuzzlesPageType, PuzzlesArchive } from '../types/puzzlesPage';
 import { Stuck } from './lib/stickiness';
+
+/** Maximum width of the calendar column. */
+const CALENDAR_MAX_WIDTH = 760;
+/** Width of the right column, which holds the side ad. */
+const SIDE_COLUMN_WIDTH = 300;
 
 const mainStyles = (
 	darkModeAvailable: boolean,
@@ -71,7 +77,7 @@ const topStyles = css`
 			position: absolute;
 			top: 6px;
 			bottom: 28px;
-			left: 150px;
+			left: ${PUZZLES_LEFT_COLUMN.leftCol + space[5] / 2}px;
 			width: 1px;
 			background: ${themePalette('--puzzles-border-colour')};
 			content: '';
@@ -80,20 +86,24 @@ const topStyles = css`
 	}
 	${from.wide} {
 		::before {
-			left: 230px;
+			left: ${PUZZLES_LEFT_COLUMN.wide + space[5] / 2}px;
 		}
 	}
 `;
 
 const archiveGridStyles = css`
 	display: grid;
-	grid-template-columns: minmax(0, 760px);
+	grid-template-columns: minmax(0, ${CALENDAR_MAX_WIDTH}px);
 	column-gap: ${space[5]}px;
 	${from.leftCol} {
-		grid-template-columns: 140px minmax(0, 760px) minmax(0, 1fr);
+		grid-template-columns:
+			${PUZZLES_LEFT_COLUMN.leftCol}px minmax(0, ${CALENDAR_MAX_WIDTH}px)
+			minmax(0, 1fr);
 	}
 	${from.wide} {
-		grid-template-columns: 220px minmax(0, 1fr) 300px;
+		grid-template-columns:
+			${PUZZLES_LEFT_COLUMN.wide}px minmax(0, 1fr)
+			${SIDE_COLUMN_WIDTH}px;
 	}
 `;
 
@@ -134,13 +144,17 @@ const headingStyles = css`
 const contentStyles = css`
 	${archiveGridStyles};
 	${from.desktop} {
-		grid-template-columns: minmax(0, 1fr) 300px;
+		grid-template-columns: minmax(0, 1fr) ${SIDE_COLUMN_WIDTH}px;
 	}
 	${from.leftCol} {
-		grid-template-columns: 140px minmax(0, 1fr) 300px;
+		grid-template-columns:
+			${PUZZLES_LEFT_COLUMN.leftCol}px minmax(0, 1fr)
+			${SIDE_COLUMN_WIDTH}px;
 	}
 	${from.wide} {
-		grid-template-columns: 220px minmax(0, 1fr) 300px;
+		grid-template-columns:
+			${PUZZLES_LEFT_COLUMN.wide}px minmax(0, 1fr)
+			${SIDE_COLUMN_WIDTH}px;
 	}
 `;
 

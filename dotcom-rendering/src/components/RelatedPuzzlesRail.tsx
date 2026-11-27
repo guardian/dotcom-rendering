@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { from, headlineBold20, space } from '@guardian/source/foundations';
+import { PUZZLES_LEFT_COLUMN } from '../lib/puzzlesStyles';
 import { palette as themePalette } from '../palette';
 import type { PuzzleItem } from '../types/puzzlesPage';
 import { MorePuzzlesRows } from './MorePuzzlesCard';
@@ -20,11 +21,11 @@ const relatedRailStyles = css`
 	gap: ${space[4]}px;
 	padding: ${space[2]}px 0 ${space[4]}px;
 	${from.leftCol} {
-		grid-template-columns: 140px minmax(0, 1fr);
+		grid-template-columns: ${PUZZLES_LEFT_COLUMN.leftCol}px minmax(0, 1fr);
 		gap: ${space[5]}px;
 	}
 	${from.wide} {
-		grid-template-columns: 220px minmax(0, 1fr);
+		grid-template-columns: ${PUZZLES_LEFT_COLUMN.wide}px minmax(0, 1fr);
 	}
 `;
 

@@ -34,11 +34,15 @@ const alignedStyles = css`
 	}
 `;
 
+/** Space between the sponsor label and logo. */
+const LOCKUP_GAP = 7;
+const LOGO_MAX_SIZE = { width: 100, height: 40 } as const;
+
 const lockupStyles = css`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	gap: 7px;
+	gap: ${LOCKUP_GAP}px;
 	padding-bottom: 15px;
 	white-space: nowrap;
 	${from.desktop} {
@@ -56,8 +60,8 @@ const logoStyles = css`
 	display: block;
 	width: auto;
 	height: auto;
-	max-width: 100px;
-	max-height: 40px;
+	max-width: ${LOGO_MAX_SIZE.width}px;
+	max-height: ${LOGO_MAX_SIZE.height}px;
 	object-fit: contain;
 	object-position: left;
 `;
@@ -80,7 +84,7 @@ const aboutLinkStyles = css`
 const containerLockupStyles = css`
 	display: flex;
 	align-items: center;
-	gap: 7px;
+	gap: ${LOCKUP_GAP}px;
 	white-space: nowrap;
 	color: ${themePalette('--puzzles-text-colour')};
 	a {
@@ -97,8 +101,8 @@ const containerLogoStyles = css`
 	display: block;
 	width: auto;
 	height: auto;
-	max-width: 100px;
-	max-height: 40px;
+	max-width: ${LOGO_MAX_SIZE.width}px;
+	max-height: ${LOGO_MAX_SIZE.height}px;
 	object-fit: contain;
 	${from.leftCol} {
 		max-width: 120px;

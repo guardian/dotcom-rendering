@@ -81,6 +81,8 @@ const sponsoredImageStyles = css`
 	}
 `;
 
+/** Design width of the header artwork from "wide". */
+const WIDE_ARTWORK_WIDTH = 1440;
 /** Design width of the largest header artwork. */
 const WIDEST_ARTWORK_WIDTH = 1728;
 const fromWidestArtwork = `@media (min-width: ${WIDEST_ARTWORK_WIDTH}px)`;
@@ -97,8 +99,8 @@ const brandPictureStyles = css`
 	}
 	${from.wide} {
 		/* The asset's 70px inset aligns the artwork with the 1300px subnav. */
-		width: 1440px;
-		margin-left: calc((100% - 1440px) / 2);
+		width: ${WIDE_ARTWORK_WIDTH}px;
+		margin-left: calc((100% - ${WIDE_ARTWORK_WIDTH}px) / 2);
 	}
 	${fromWidestArtwork} {
 		width: ${WIDEST_ARTWORK_WIDTH}px;

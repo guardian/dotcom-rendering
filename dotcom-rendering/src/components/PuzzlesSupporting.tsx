@@ -13,7 +13,10 @@ import { puzzlesContainerStyles } from '../lib/puzzlesContainerStyles';
 import {
 	PUZZLES_BORDERED_INSET,
 	PUZZLES_COLUMN_INSET,
+	PUZZLES_CONTENT_MAX_WIDTH,
 	PUZZLES_EDGE_INSET,
+	PUZZLES_SECTION_TITLE_TOP,
+	PUZZLES_TITLE_COLUMN,
 	puzzlesFocusOutline,
 } from '../lib/puzzlesStyles';
 import { palette as themePalette } from '../palette';
@@ -43,6 +46,10 @@ type Props = {
 	supporting: PuzzlesSupportingContent;
 };
 
+/** Draws the focus outline inside links that touch their neighbours. */
+const INSET_OUTLINE_OFFSET = -3;
+const MOST_POP_AD_WIDTH = 320;
+
 const borderColour = themePalette('--puzzles-border-colour');
 
 const sectionStyles = css`
@@ -51,18 +58,19 @@ const sectionStyles = css`
 	background: ${themePalette('--puzzles-page-background')};
 
 	${from.leftCol} {
-		grid-template-columns: 170px minmax(0, 1fr);
+		grid-template-columns: ${PUZZLES_TITLE_COLUMN.leftCol}px minmax(0, 1fr);
 	}
 
 	${from.wide} {
-		grid-template-columns: 250px minmax(0, 1fr);
+		grid-template-columns: ${PUZZLES_TITLE_COLUMN.wide}px minmax(0, 1fr);
 	}
 `;
 
 const sectionTitleStyles = css`
 	min-width: 0;
 	margin: 0;
-	padding: 6px ${PUZZLES_EDGE_INSET}px ${space[3]}px;
+	padding: ${PUZZLES_SECTION_TITLE_TOP}px ${PUZZLES_EDGE_INSET}px
+		${space[3]}px;
 	border-top: 1px solid ${borderColour};
 	${headlineBold24};
 	color: ${themePalette('--puzzles-headline-colour')};
@@ -151,10 +159,10 @@ const usefulGridStyles = (hasNewsletter: boolean) => css`
 		}
 
 		${from.tablet} {
-			max-width: 700px;
+			max-width: ${PUZZLES_CONTENT_MAX_WIDTH.tablet}px;
 		}
 		${from.desktop} {
-			max-width: 940px;
+			max-width: ${PUZZLES_CONTENT_MAX_WIDTH.desktop}px;
 		}
 	`}
 
@@ -197,7 +205,7 @@ const usefulLinkStyles = css`
 
 	:focus-visible {
 		outline: ${puzzlesFocusOutline};
-		outline-offset: -3px;
+		outline-offset: ${INSET_OUTLINE_OFFSET}px;
 	}
 `;
 
@@ -238,7 +246,7 @@ const popularContentStyles = css`
 	${from.desktop} {
 		&:has([data-puzzles-ad='mostpop']) {
 			display: grid;
-			grid-template-columns: minmax(0, 1fr) 320px;
+			grid-template-columns: minmax(0, 1fr) ${MOST_POP_AD_WIDTH}px;
 		}
 	}
 `;
@@ -313,7 +321,7 @@ const popularLinkStyles = css`
 
 	:focus-visible {
 		outline: ${puzzlesFocusOutline};
-		outline-offset: -3px;
+		outline-offset: ${INSET_OUTLINE_OFFSET}px;
 	}
 
 	strong {
@@ -330,7 +338,7 @@ const mostPopAdStyles = css`
 
 	${from.desktop} {
 		display: block;
-		width: 320px;
+		width: ${MOST_POP_AD_WIDTH}px;
 		box-sizing: border-box;
 		padding: ${space[6]}px ${space[3]}px;
 	}
