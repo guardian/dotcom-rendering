@@ -18,20 +18,18 @@ If a browser supports [ES6 module script tags](https://caniuse.com/es6-module) *
 
 All browser versions above and including the minimum candidate version are considered recommended browsers.
 
-As of 19th February 2024, our recommended browsers list is:
+As of 27th November 2026, our recommended browsers list is:
 
 | Browser           | Min version |
 | ----------------- | ----------- |
-| Chrome            | 70          |
-| Chrome (Android)  | 119         |
-| Edge              | 109         |
+| Chrome            | 98          |
+| Chrome (Android)  | 151         |
+| Edge              | 131         |
 | Firefox           | 78          |
-| Firefox (Android) | 119         |
-| Opera             | 95          |
-| Opera (mobile)    | 73          |
-| Safari            | 11.1        |
-| Safari (iOS)      | 10.3        |
-| Samsung Internet  | 17          |
+| Firefox (Android) | 153         |
+| Opera (mobile)    | 80          |
+| Safari            | 13.1        |
+| Safari (iOS)      | 12.2        |
 
 The above table was calculated by [@guardian/browserslist-config](https://github.com/guardian/csnx/tree/main/libs/%40guardian/browserslist-config) based on data from Google Analytics.
 
