@@ -1,5 +1,12 @@
 import { JSDOM } from 'jsdom';
 
+/*
+ * On module load, pre-warms the underlying setup that happens lazily on the
+ * first call to `JSDOM.fragment`, to speed up later calls to `fragment` made by
+ * functions like `parseHtml`.
+ */
+JSDOM.fragment('');
+
 export const parseHtml = (html: string): DocumentFragment =>
 	JSDOM.fragment(html);
 
